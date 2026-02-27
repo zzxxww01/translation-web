@@ -1,0 +1,30 @@
+分析以下技术文章，提取关键技术术语并给出翻译建议。
+
+## 文章内容
+{text}
+
+## 要求
+1. 提取文章中的关键技术术语（公司名、产品名、技术概念等）
+2. 为每个术语建议翻译策略：
+   - preserve: 保持英文原文（如品牌名 Apple Silicon）
+   - first_annotate: 首次出现时翻译并标注原文，后续用中文（如 晶圆代工厂(Foundry)）
+   - translate: 直接翻译成中文（如 wafer → 晶圆）
+3. 分析文章的写作风格
+
+请返回 JSON 格式（不要添加 markdown 代码块标记）：
+{{
+  "terms": [
+    {{
+      "original": "术语原文",
+      "translation": "建议翻译（preserve策略可为null）",
+      "strategy": "preserve|first_annotate|translate",
+      "note": "说明（可选）"
+    }}
+  ],
+  "style": {{
+    "tone": "professional|casual|academic",
+    "formality": "formal|informal",
+    "notes": ["其他风格建议"]
+  }},
+  "summary": "文章主题简述（一句话）"
+}}

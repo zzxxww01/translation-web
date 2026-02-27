@@ -1,0 +1,17 @@
+# Translation Agent backend dependency lock
+# Generated on 2026-02-14
+
+pydantic==2.12.5
+pydantic-settings==2.12.0
+PyYAML==6.0.3
+beautifulsoup4==4.14.3
+lxml==6.0.2
+google-genai==1.57.0
+fastapi==0.128.0
+uvicorn==0.40.0
+python-multipart==0.0.22
+typer==0.21.1
+rich==14.2.0
+python-slugify==8.0.4
+python-dotenv==1.2.1
+tzdata==2025.3

@@ -1,0 +1,25 @@
+你是一位资深的技术文章分析专家。请分析以下章节在全文中的作用。
+
+## 全文主题
+{article_theme}
+
+## 全文结构
+{structure_summary}
+
+## 章节列表
+{titles_text}
+
+## 当前章节（第 {current_index} 章）
+标题：{current_title}
+内容：
+{section_content}
+
+请回答以下问题（返回 JSON，不要添加 markdown 代码块标记）：
+
+{{
+  "role_in_article": "这个章节在全文论证中扮演什么角色？（引入/论证/转折/总结/补充等）",
+  "relation_to_previous": "与前一章节是什么逻辑关系？（承接/对比/深入/转换话题等）",
+  "relation_to_next": "与后一章节是什么逻辑关系？",
+  "key_points": ["本章节的核心信息点（3-5 条）"],
+  "translation_notes": ["翻译时需要特别注意什么？（2-3 条）"]
+}}

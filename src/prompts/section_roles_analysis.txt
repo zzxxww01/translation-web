@@ -1,0 +1,31 @@
+你是一位资深的技术文章分析专家。请一次性分析所有章节在全文中的作用。
+
+## 全文主题
+{article_theme}
+
+## 全文结构
+{structure_summary}
+
+## 章节列表和摘要
+{sections_summary}
+
+请分析每个章节在全文论证中的作用（返回 JSON 格式，不要添加 markdown 代码块标记）：
+
+{{
+  "section_roles": {{
+    "section_id_1": {{
+      "role_in_article": "这个章节在全文论证中扮演什么角色？（引入/论证/转折/总结/补充等）",
+      "relation_to_previous": "与前一章节是什么逻辑关系？（承接/对比/深入/转换话题等，首章填'无'）",
+      "relation_to_next": "与后一章节是什么逻辑关系？（末章填'无'）",
+      "key_points": ["本章节的核心信息点（3-5 条）"],
+      "translation_notes": ["翻译时需要特别注意什么？（2-3 条）"]
+    }},
+    "section_id_2": {{...}},
+    ...
+  }}
+}}
+
+注意：
+1. 每个章节的分析要考虑其在全文中的位置和作用
+2. key_points 应该是本章节的核心信息，帮助译者理解重点
+3. translation_notes 应该指出术语、句式、风格等需要注意的地方

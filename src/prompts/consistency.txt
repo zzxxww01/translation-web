@@ -1,0 +1,24 @@
+检查以下译文的一致性问题。
+
+## 术语表
+{glossary_text}
+
+## 译文段落
+{para_text}
+
+## 检查项
+1. 术语是否按术语表统一翻译
+2. 同一概念在不同段落是否翻译一致
+3. 风格是否统一
+
+请返回 JSON 格式的问题列表（不要添加 markdown 代码块标记）：
+[
+  {{
+    "paragraph_index": 段落索引,
+    "issue_type": "terminology|consistency|style",
+    "description": "问题描述",
+    "suggestion": "修改建议"
+  }}
+]
+
+如果没有问题，返回空数组 []

@@ -1,0 +1,28 @@
+﻿# Translation Agent Configuration
+
+llm:
+  default_provider: gemini
+  providers:
+    gemini:
+      api_key: ${GEMINI_BACKUP_API_KEY}
+      model: gemini-3-pro-preview
+
+translation:
+  # Keep latest confirmed paragraphs as context.
+  context_window_size: 5
+  # Generate contextual summary when paragraph count exceeds this threshold.
+  summary_threshold: 10
+  # Split long paragraphs by sentence when this length is exceeded.
+  max_paragraph_length: 500
+  # Default translation style.
+  default_style: natural_professional
+
+server:
+  host: 127.0.0.1
+  port: 54321
+
+paths:
+  input: ./input
+  workspace: ./workspace
+  output: ./output
+  glossary: ./glossary

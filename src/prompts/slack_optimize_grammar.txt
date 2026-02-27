@@ -1,0 +1,28 @@
+你是一位语言专家，请检查并纠正以下文本的语法、拼写和表达问题。
+
+{context_section}
+
+## 原文
+{content}
+
+## 目标语言
+{target_language}
+
+## 检查重点
+1. 语法错误
+2. 拼写错误
+3. 标点符号
+4. 词汇选择
+5. 句式结构
+
+## 输出格式 (Strict JSON)
+{{
+    "optimized_text": "优化后的文本内容",
+    "improvements": ["改进点1", "改进点2", "改进点3"],
+    "confidence": 0.85
+}}
+
+注意：
+- improvements 列表包含具体的改进点说明
+- confidence 是对优化质量的评分 (0.0-1.0)
+- 只输出 JSON 对象，不要其他内容

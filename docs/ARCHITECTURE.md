@@ -1,0 +1,46 @@
+﻿# 系统架构说明
+
+更新时间：2026-02-27
+
+## 分层结构
+- `src/api`：HTTP 接口层（FastAPI 路由、依赖注入、中间件）
+- `src/services`：业务编排层（批量翻译、分段确认、导出流程）
+- `src/core`：核心领域层（项目模型、持久化、解析与导出）
+- `src/agents`：翻译/分析智能体逻辑
+- `src/llm`：模型适配层
+- `web/frontend`：前端页面与交互
+
+## 核心数据流
+1. 请求进入 `src/api/routers/*`。
+2. 路由通过 `src/api/dependencies.py` 注入 `ProjectManager` 与各 Service。
+3. Service 负责跨模块流程编排与状态推进。
+4. `ProjectManager` 将项目元数据与章节数据持久化到 `projects/<project_id>/`。
+5. 前端通过轮询或 SSE 获取翻译进度与结果。
+
+## 持久化布局
+- `projects/<project_id>/meta.json`：项目元信息、状态、进度、确认映射
+- `projects/<project_id>/sections/<section_id>/meta.json`：章节与段落结构
+- `projects/<project_id>/sections/<section_id>/source.md`：章节原文
+- `projects/<project_id>/sections/<section_id>/translation.md`：章节译文
+- `projects/<project_id>/exports/`：导出文件
+
+## 路由组织
+- `projects`：项目管理与段落操作
+- `confirmation`：翻译确认与参考版本
+- `translate`：帖子与项目翻译能力
+- `tools`：翻译/邮件/时区工具
+- `slack`：process / compose / sync / optimize
+- `consistency`、`segmentation`：实验性分析与分段能力
+
+入口文件保持稳定导入路径（例如 `src/api/routers/translate.py`），内部用 `include_router` 聚合子路由，降低后续重构风险。
+
+## 状态一致性约束
+- 项目状态统一使用 `ProjectStatus`（`created/in_progress/reviewing/completed` 等）。
+- 进度优先基于章节段落实时计算，避免仅依赖缓存。
+- 元数据写入统一走 `ProjectManager.save_meta()`，减少重复序列化逻辑。
+- 分段确认后触发项目级缓存失效，避免返回旧数据。
+
+## 协作约束
+- 新增接口优先放入现有子模块，避免路由文件再次膨胀。
+- 新增持久化字段时，同时更新 `src/core/models.py` 与兼容读取逻辑。
+- 进行大改动时，先做行为不变重构，再做编译与回归验证。

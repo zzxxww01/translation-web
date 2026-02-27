@@ -1,0 +1,35 @@
+请以"第一读者"的视角审视以下译文。
+想象你是一位关注半导体行业的中文读者，第一次阅读这篇文章。
+
+## 章节原文与译文
+{pairs_text}
+
+## 翻译原则
+{guidelines_text}
+
+## 术语表
+{terms_text}
+
+请对整个章节进行评估（返回 JSON，不要添加 markdown 代码块标记）：
+
+{{
+  "overall_score": 整体评分（0-10，8.5 以上为优秀）,
+  "readability_score": 可读性评分（0-10），中文是否自然？有无"翻译腔"？,
+  "accuracy_score": 准确性评分（0-10），意思是否准确？有无遗漏？,
+  "is_excellent": 如果整体评分 >= 9，设为 true，否则 false,
+  "issues": [
+    {{
+      "paragraph_index": 段落索引（从 0 开始）,
+      "issue_type": "readability/accuracy/terminology/style",
+      "original_text": "有问题的译文片段",
+      "description": "问题描述",
+      "suggestion": "具体修改建议"
+    }}
+  ]
+}}
+
+评分标准：
+- 9-10: 优秀，读起来像中文原创，无需修改
+- 8-8.9: 良好，个别地方可优化
+- 7-7.9: 合格，有明显可改进之处
+- <7: 需要重新翻译

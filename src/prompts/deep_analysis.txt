@@ -1,0 +1,48 @@
+你是一位资深的半导体行业分析师和翻译专家。请深入分析以下文章：
+
+## 文章结构
+{sections_outline}
+
+## 文章内容
+{text}
+
+请提供以下分析（返回 JSON 格式，不要添加 markdown 代码块标记）：
+
+1. **主题与论点**
+   - theme: 文章的核心主题（一句话）
+   - key_arguments: 主要论点列表（按重要性排序，3-5 条）
+   - structure_summary: 文章的逻辑结构概述
+
+2. **关键术语表**（只提取真正关键的术语，不要泛化）
+   对每个术语说明：
+   - term: 术语原文
+   - context_meaning: 在本文中的具体含义
+   - translation: 建议的翻译（考虑中文读者习惯）
+   - strategy: preserve/first_annotate/translate
+   - first_occurrence_note: 是否需要在首次出现时注释
+   - rationale: 翻译理由
+
+3. **风格分析**
+   - tone: 作者的写作风格
+   - target_audience: 目标读者群体
+   - translation_voice: 翻译时应该保持的语气
+   - data_density: 数据密度 (high/medium/low)
+
+4. **翻译难点预警**
+   - location: 位置描述
+   - issue: 问题描述
+   - suggestion: 处理建议
+
+5. **翻译风格指南**
+   给出 3-5 条翻译时应遵循的原则
+
+返回格式：
+{{
+  "theme": "...",
+  "key_arguments": ["...", "..."],
+  "structure_summary": "...",
+  "terminology": [...],
+  "style": {{...}},
+  "challenges": [...],
+  "guidelines": ["...", "..."]
+}}

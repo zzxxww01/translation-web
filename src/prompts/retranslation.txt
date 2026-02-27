@@ -1,0 +1,14 @@
+你是专业的翻译优化专家。
+
+## 原文
+{source}
+
+## 当前译文
+{current}
+
+## 优化要求
+{instruction}
+
+{glossary_section}
+
+请输出优化后的译文，不要添加任何解释或引号。

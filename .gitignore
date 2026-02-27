@@ -1,0 +1,77 @@
+# ----------------------------
+# Python
+# ----------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# ----------------------------
+# Environment / secrets
+# ----------------------------
+.env
+.env.*
+!.env.example
+
+# ----------------------------
+# Runtime data (DO NOT publish)
+# ----------------------------
+# Keep repository-level project structure trackable, but ignore
+# current in-progress translation projects.
+projects/apple-tsmc/
+projects/clustermaxtm-2-0-the-industry-standard-gpu-cloud-r/
+projects/inferencemaxtm-open-source-inference-benchmarking/
+conversations/
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ----------------------------
+# Frontend build artifacts
+# ----------------------------
+web/frontend/node_modules/
+web/frontend/dist/
+web/frontend/.next/
+web/frontend/out/
+web/frontend/lint-report.json
+
+# ----------------------------
+# Test / temporary artifacts
+# ----------------------------
+tests/
+.pytest_cache/
+.tmp_testdata/
+.coverage
+htmlcov/
+test_*.py
+*_test.py
+
+# ----------------------------
+# IDE / local tooling
+# ----------------------------
+.vscode/
+.idea/
+.claude/
+.antigravity/
+*.sublime-project
+*.sublime-workspace
+
+# ----------------------------
+# Logs / temp
+# ----------------------------
+*.log
+logs/
+*.tmp
+*.swp
+*.swo
+*~
+
+# ----------------------------
+# OS files
+# ----------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
