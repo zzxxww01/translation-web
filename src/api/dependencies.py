@@ -9,6 +9,7 @@ from typing import Annotated
 
 from fastapi import Depends
 
+from src.config import settings
 from src.core.conversation import ConversationManager
 from src.core.project import ProjectManager
 from src.core.glossary import GlossaryManager
@@ -18,61 +19,33 @@ from src.services.batch_translation_service import BatchTranslationService
 from src.services.version_import_service import VersionImportService
 
 
-# ============ 配置 ============
+# ============ 管理器依赖（单例） ============
 
-class AppConfig:
-    """应用配置"""
-    def __init__(self):
-        self.projects_path = "projects"
-        self.conversations_path = "conversations"
-
-
-@lru_cache
-def get_config() -> AppConfig:
-    """获取应用配置（单例）"""
-    return AppConfig()
+@lru_cache(maxsize=1)
+def get_project_manager() -> ProjectManager:
+    """获取 ProjectManager 实例（单例）"""
+    return ProjectManager(projects_path=settings.projects_path)
 
 
-# ============ 管理器依赖 ============
-
-def get_project_manager(
-    config: Annotated[AppConfig, Depends(get_config)]
-) -> ProjectManager:
-    """获取 ProjectManager 实例"""
-    return ProjectManager(projects_path=config.projects_path)
+@lru_cache(maxsize=1)
+def get_glossary_manager() -> GlossaryManager:
+    """获取 GlossaryManager 实例（单例）"""
+    return GlossaryManager(projects_path=settings.projects_path)
 
 
-def get_glossary_manager(
-    config: Annotated[AppConfig, Depends(get_config)]
-) -> GlossaryManager:
-    """获取 GlossaryManager 实例"""
-    return GlossaryManager(projects_path=config.projects_path)
-
-
-def get_conversation_manager(
-    config: Annotated[AppConfig, Depends(get_config)]
-) -> ConversationManager:
-    """获取 ConversationManager 实例"""
-    return ConversationManager(base_path=config.conversations_path)
+@lru_cache(maxsize=1)
+def get_conversation_manager() -> ConversationManager:
+    """获取 ConversationManager 实例（单例）"""
+    return ConversationManager(base_path=settings.conversations_path)
 
 
 # ============ LLM Provider 依赖 ============
 
 def get_llm_provider() -> GeminiProvider:
-    """获取 LLM Provider"""
+    """获取 LLM Provider（单例，通过 lru_cache 的 get_gemini_provider）"""
     from src.api.utils.llm_factory import get_gemini_provider
     try:
         return get_gemini_provider()
-    except ValueError as e:
-        from src.api.middleware import BadRequestException
-        raise BadRequestException(detail=str(e))
-
-
-def get_llm_provider_backup_only() -> GeminiProvider:
-    """获取 LLM Provider（仅使用备用 Key，专用于全文翻译）"""
-    from src.api.utils.llm_factory import get_gemini_provider_backup_only
-    try:
-        return get_gemini_provider_backup_only()
     except ValueError as e:
         from src.api.middleware import BadRequestException
         raise BadRequestException(detail=str(e))
@@ -94,11 +67,11 @@ def get_confirmation_service(
 def get_batch_service(
     pm: ProjectManager = Depends(get_project_manager)
 ) -> BatchTranslationService:
-    """获取 BatchTranslationService 实例（仅使用备用付费 Key）"""
-    from src.api.utils.llm_factory import get_gemini_provider_backup_only
+    """获取 BatchTranslationService 实例"""
+    from src.api.utils.llm_factory import get_gemini_provider
 
     try:
-        llm = get_gemini_provider_backup_only()
+        llm = get_gemini_provider()
     except ValueError as e:
         from src.api.middleware import BadRequestException
         raise BadRequestException(detail=str(e))

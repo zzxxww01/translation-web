@@ -5,6 +5,7 @@ Google Gemini API implementation for translation and analysis.
 Uses Gemini 3 model ids by default (gemini-3-pro-preview / gemini-3-flash-preview).
 """
 
+import logging
 import os
 import json
 import time
@@ -18,6 +19,9 @@ except Exception:
     genai = None
 
 from .base import LLMProvider
+
+
+logger = logging.getLogger(__name__)
 
 
 # Model configurations
@@ -43,7 +47,6 @@ class GeminiProvider(LLMProvider):
     def __init__(
         self,
         api_key: Optional[str] = None,
-        backup_api_key: Optional[str] = None,
         model: str = "gemini-3-pro-preview",
         model_type: str = "reasoning",
     ):
@@ -52,48 +55,47 @@ class GeminiProvider(LLMProvider):
 
         Args:
             api_key: Gemini API Key，如果不提供则从环境变量 GEMINI_API_KEY 获取
-            backup_api_key: 备用 API Key，如果不提供则从环境变量 GEMINI_BACKUP_API_KEY 获取
+                     (GEMINI_BACKUP_API_KEY 作为兼容回退)
             model: 模型名称
             model_type: 模型类型 ("reasoning" 或 "flash")
         """
         super().__init__()
-        self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-        self.backup_api_key = backup_api_key or os.getenv("GEMINI_BACKUP_API_KEY")
-        self.model_type = model_type
+        self.api_key = (
+            api_key
+            or os.getenv("GEMINI_API_KEY")
+            or os.getenv("GEMINI_BACKUP_API_KEY")
+        )
 
-        # 状态标志：是否已经切换到备用 Key
-        self._using_backup = False
-
-        if not self.api_key and not self.backup_api_key:
+        if not self.api_key:
             raise ValueError(
                 "Gemini API key is required. Set GEMINI_API_KEY environment variable or pass api_key parameter."
             )
 
-        # 初始配置：如果由于某种原因已经在备用模式（比如 factory 全局设置），则直接用 backups
-        # 但通常每个实例独立。如果有 api_key，先用 api_key
-        # 如果没有 api_key 但有 backup，直接用 backup
-        current_key = self.api_key if self.api_key else self.backup_api_key
-        # 如果只有 backup，标记为已使用 backup
-        if not self.api_key and self.backup_api_key:
-            self._using_backup = True
+        self.model_type = model_type
 
         # 代理配置支持
         self.proxy_config = self._get_proxy_config()
         if self.proxy_config:
-            print(f"[Gemini] 使用代理配置: {self.proxy_config}")
+            logger.info("[Gemini] 使用代理配置: %s", self.proxy_config)
 
-        # 根据 model_type 选择模型
-        if model_type in MODEL_CONFIG:
+        # 根据 model_type 选择模型，环境变量优先
+        env_model = os.getenv("GEMINI_MODEL")
+        if env_model:
+            self.model_name = env_model
+        elif model_type in MODEL_CONFIG:
             self.model_name = MODEL_CONFIG[model_type]["name"]
         else:
             self.model_name = model
 
-        self.request_timeout = self._get_env_int("GEMINI_TIMEOUT", 30)
+        # 备用模型（用于 high-demand 错误时回退）
+        self.backup_model = os.getenv("GEMINI_BACKUP_MODEL", "gemini-3-flash-preview")
+
+        self.request_timeout = self._get_env_int("GEMINI_TIMEOUT", 120)
         self._client = None
         if not self._use_rest_transport():
             if genai is None:
                 raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
-            self._client = self._create_client(current_key)
+            self._client = self._create_client(self.api_key)
 
     def switch_model(self, model_type: str) -> None:
         """
@@ -160,8 +162,10 @@ class GeminiProvider(LLMProvider):
         timeout: int | None,
         temperature: float = 0.7,
         response_mime_type: Optional[str] = None,
+        model_override: Optional[str] = None,
     ) -> str:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model_name}:generateContent"
+        model = model_override or self.model_name
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
         generation_config = {"temperature": temperature}
         if response_mime_type:
             generation_config["responseMimeType"] = response_mime_type
@@ -184,25 +188,52 @@ class GeminiProvider(LLMProvider):
         except Exception as exc:
             raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
 
-    def _check_connectivity(self, timeout=10):
-        """检查网络连通性"""
-        try:
-            response = requests.get(
-                "https://generativelanguage.googleapis.com/",
-                timeout=timeout,
-                proxies=self.proxy_config if self.proxy_config else None
-            )
-            return True
-        except:
-            return False
+    # ============ 错误分类方法 ============
+
+    @staticmethod
+    def _is_rate_limited(error_str: str) -> bool:
+        return (
+            "429" in error_str
+            or "Too Many Requests" in error_str
+            or "RESOURCE_EXHAUSTED" in error_str
+            or "rate limit" in error_str.lower()
+        )
+
+    @staticmethod
+    def _is_high_demand_unavailable(error_str: str) -> bool:
+        text = error_str.lower()
+        return (
+            "currently experiencing high demand" in text
+            or ('"status": "unavailable"' in text and "high demand" in text)
+            or "status\":\"unavailable" in text
+        )
+
+    @staticmethod
+    def _error_to_text(exc: Exception) -> str:
+        text = str(exc)
+        if isinstance(exc, requests.HTTPError) and exc.response is not None:
+            try:
+                data = exc.response.json()
+                err = data.get("error", {}) if isinstance(data, dict) else {}
+                message = err.get("message")
+                status = err.get("status")
+                if message:
+                    text = f"{text} | {message}"
+                if status:
+                    text = f"{text} | status={status}"
+            except Exception:
+                body = (exc.response.text or "").strip()
+                if body:
+                    text = f"{text} | body={body[:300]}"
+        return text
 
     def generate(
         self,
         prompt: str,
         response_format: Optional[str] = None,
         temperature: float = 0.7,
-        max_retries: int = 3,
-        retry_delay: int = 30,
+        max_retries: int = 5,
+        **_kwargs,
     ) -> str:
         """
         通用文本生成
@@ -212,21 +243,34 @@ class GeminiProvider(LLMProvider):
             response_format: 响应格式，"json" 表示期望 JSON 输出
             temperature: 温度参数
             max_retries: 最大重试次数
-            retry_delay: 重试等待时间（秒），备用模式下不等待
 
         Returns:
             str: 生成的文本
         """
-        for attempt in range(max_retries + 1):
+        current_model = self.model_name
+        switched_to_backup_model = False
+        start_time = time.monotonic()
+
+        logger.info(
+            "[Gemini] generate start len=%s model=%s backup_model=%s timeout=%ss transport=%s",
+            len(prompt),
+            current_model,
+            self.backup_model or "-",
+            self.request_timeout,
+            "rest" if self._use_rest_transport() else "sdk",
+        )
+
+        for attempt in range(max_retries):
             try:
                 response_mime_type = "application/json" if response_format == "json" else None
                 if self._use_rest_transport():
                     text = self._generate_with_rest(
                         prompt=prompt,
-                        api_key=self.backup_api_key if self._using_backup else self.api_key,
+                        api_key=self.api_key,
                         timeout=self.request_timeout,
                         temperature=temperature,
                         response_mime_type=response_mime_type,
+                        model_override=current_model,
                     )
                 else:
                     if self._client is None:
@@ -236,77 +280,80 @@ class GeminiProvider(LLMProvider):
                         config = {"temperature": temperature}
                         if response_mime_type:
                             config["response_mime_type"] = response_mime_type
-                        response = self._client.models.generate_content(
-                            model=self.model_name,
+                        resp = self._client.models.generate_content(
+                            model=current_model,
                             contents=prompt,
                             config=config,
                         )
-                        return response.text
+                        return resp.text
 
                     text = self._generate_with_timeout_fn(_call, self.request_timeout)
+
+                duration = time.monotonic() - start_time
+                logger.info(
+                    "[Gemini] generate success in %.2fs (model=%s attempt=%s/%s)",
+                    duration,
+                    current_model,
+                    attempt + 1,
+                    max_retries,
+                )
                 return text.strip()
-            except Exception as e:
-                error_str = str(e)
+            except FutureTimeoutError:
+                raise TimeoutError(f"Gemini request timed out after {self.request_timeout}s")
+            except Exception as exc:
+                error_text = self._error_to_text(exc)
 
-                # ==== Network Connectivity Check ====
-                # 网络连通性检查 - 优先检查连接问题
-                if "connect" in error_str.lower() or "timeout" in error_str.lower():
-                    if not self._check_connectivity():
-                        if not self._using_backup and self.backup_api_key:
-                            print(f"[Gemini] 网络问题，切换到备用Key...")
-                            self._using_backup = True
-                            if not self._use_rest_transport():
-                                self._client = self._create_client(self.backup_api_key)
-                            continue
-                        else:
-                            raise ConnectionError(f"无法连接到Gemini API。请检查网络连接或配置代理。原始错误: {error_str}")
-
-                # ==== Fallback Logic ====
-                # 如果当前没有在使用 backup，且配置了 backup key，且发生了错误
-                if not self._using_backup and self.backup_api_key:
-                    print(f"[Gemini] 主 Key 失败: {e}. 切换到备用 Key (付费版)")
-                    # 切换状态
-                    self._using_backup = True
-                    if not self._use_rest_transport():
-                        self._client = self._create_client(self.backup_api_key)
-                    # 立即重试，不等待
-                    print("[Gemini] 使用备用 Key 立即重试...")
-                    continue
-                # ========================
-
-                # 如果是最后一次尝试，直接抛出
-                if attempt == max_retries:
-                    raise RuntimeError(
-                        f"Generation failed after {max_retries} retries (Backup active: {self._using_backup}): {e}"
+                # 备用模型回退：high-demand 错误时切换模型
+                if (
+                    self.backup_model
+                    and not switched_to_backup_model
+                    and current_model != self.backup_model
+                    and self._is_high_demand_unavailable(error_text)
+                    and attempt < max_retries - 1
+                ):
+                    switched_to_backup_model = True
+                    current_model = self.backup_model
+                    logger.warning(
+                        "[Gemini] model '%s' is overloaded; switch to backup model '%s' (%s/%s).",
+                        self.model_name,
+                        self.backup_model,
+                        attempt + 1,
+                        max_retries,
                     )
-
-                # ==== 关键改进：备用模式下快速重试 ====
-                if self._using_backup:
-                    # 备用 key 是付费版，不应有配额限制
-                    # 快速重试，不等待
-                    print(
-                        f"[Gemini] 备用 Key 请求失败，快速重试 ({attempt + 1}/{max_retries})..."
-                    )
-                    time.sleep(0.5)  # 仅短暂等待 0.5 秒
                     continue
 
-                # ==== 主 Key 下的配额限制处理 ====
-                if "429" in error_str or "quota" in error_str.lower():
-                    # 动态等待时间：基础时间 * (重试次数 + 1)
-                    wait_time = (attempt + 1) * retry_delay
-                    print(f"主 Key 配额限制，等待 {wait_time} 秒后切换到备用 Key...")
-                    time.sleep(wait_time)
-                    # 强制切换到备用 key
-                    if self.backup_api_key:
-                        print(f"[Gemini] 主动切换到备用 Key")
-                        self._using_backup = True
-                        if not self._use_rest_transport():
-                            self._client = self._create_client(self.backup_api_key)
+                if attempt < max_retries - 1:
+                    if self._is_rate_limited(error_text):
+                        retry_delay = min(2 ** attempt, 16)
+                        logger.warning(
+                            "[Gemini] rate limited on '%s'; retry in %.1fs (%s/%s). err=%s",
+                            current_model,
+                            retry_delay,
+                            attempt + 1,
+                            max_retries,
+                            error_text,
+                        )
+                        time.sleep(retry_delay)
+                    else:
+                        logger.warning(
+                            "[Gemini] request failed on '%s'; quick retry (%s/%s). err=%s",
+                            current_model,
+                            attempt + 1,
+                            max_retries,
+                            error_text,
+                        )
+                        time.sleep(0.3)
                     continue
 
-                # 其他错误，短暂等待后重试
-                time.sleep(2)
-                continue
+                duration = time.monotonic() - start_time
+                logger.error(
+                    "[Gemini] generate failed in %.2fs after %s attempts (model=%s). err=%s",
+                    duration,
+                    max_retries,
+                    current_model,
+                    error_text,
+                )
+                raise
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
         """
@@ -459,7 +506,7 @@ class GeminiProvider(LLMProvider):
                 return [{"id": pid, "translation": ""} for pid in paragraph_ids]
 
         except Exception as e:
-            print(f"[Gemini] Batch translation failed: {e}")
+            logger.error("[Gemini] Batch translation failed: %s", e)
             # 返回空翻译列表
             return [{"id": pid, "translation": ""} for pid in paragraph_ids]
 
@@ -655,7 +702,6 @@ class GeminiProvider(LLMProvider):
 
 def create_gemini_provider(
     api_key: Optional[str] = None,
-    backup_api_key: Optional[str] = None,
     model: str = "gemini-3-pro-preview",
     model_type: str = "reasoning",
 ) -> GeminiProvider:
@@ -664,7 +710,6 @@ def create_gemini_provider(
 
     Args:
         api_key: API Key
-        backup_api_key: 备用 API Key
         model: 模型名称
         model_type: 模型类型 ("reasoning" 或 "flash")
 
@@ -673,7 +718,6 @@ def create_gemini_provider(
     """
     return GeminiProvider(
         api_key=api_key,
-        backup_api_key=backup_api_key,
         model=model,
         model_type=model_type,
     )

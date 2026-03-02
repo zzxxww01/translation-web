@@ -4,6 +4,8 @@ Translation Agent - Data Models
 Pydantic models for project, section, paragraph, glossary, etc.
 """
 
+from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
 from typing import Optional, Dict, List

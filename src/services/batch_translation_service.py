@@ -10,6 +10,8 @@
 """
 
 import asyncio
+import threading
+import time as _time
 from typing import List, Optional, Dict, Callable
 from datetime import datetime
 import logging
@@ -35,6 +37,8 @@ class BatchTranslationService:
 
     # 类变量，用于存储翻译进度（单例模式）
     _progress_cache: Dict[str, TranslationProgress] = {}
+    _progress_lock = threading.Lock()
+    _PROGRESS_TTL_SECONDS = 3600  # 1 hour
 
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
@@ -64,6 +68,17 @@ class BatchTranslationService:
             context_manager=self.context_manager
         )
         self.consistency_reviewer = ConsistencyReviewer(llm_provider)
+
+    @classmethod
+    def _evict_stale_progress(cls) -> None:
+        """Remove progress entries older than TTL (call while holding _progress_lock)."""
+        now = _time.monotonic()
+        stale = [
+            pid for pid, p in cls._progress_cache.items()
+            if hasattr(p, '_mono_ts') and now - p._mono_ts > cls._PROGRESS_TTL_SECONDS
+        ]
+        for pid in stale:
+            del cls._progress_cache[pid]
 
     def _load_project_with_sections(self, project_id: str) -> ProjectMeta:
         """Load project and attach sections."""
@@ -143,7 +158,10 @@ class BatchTranslationService:
             total_paragraphs=total_paragraphs,
             original_status=original_status,
         )
-        self._progress_cache[project_id] = progress
+        progress._mono_ts = _time.monotonic()
+        with self._progress_lock:
+            self._evict_stale_progress()
+            self._progress_cache[project_id] = progress
 
         # 更新项目状态为"分析中"
         self._set_active_status(project_id, project, ProjectStatus.ANALYZING)
@@ -566,7 +584,9 @@ class BatchTranslationService:
         Returns:
             Dict: 进度信息
         """
-        progress = self._progress_cache.get(project_id)
+        with self._progress_lock:
+            self._evict_stale_progress()
+            progress = self._progress_cache.get(project_id)
 
         if not progress:
             # 如果没有缓存进度，从项目状态推断
@@ -607,13 +627,12 @@ class BatchTranslationService:
         Returns:
             Dict: 取消结果
         """
-        if project_id in self._progress_cache:
-            progress = self._progress_cache[project_id]
+        with self._progress_lock:
+            progress = self._progress_cache.pop(project_id, None)
+
+        if progress is not None:
             progress.finished_at = datetime.now()
             progress.current_step = "已取消"
-
-            # 清除缓存
-            del self._progress_cache[project_id]
 
             # 更新项目状态
             project = self._load_project_with_sections(project_id)

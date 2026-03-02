@@ -31,17 +31,13 @@ class Settings(BaseSettings):
     # Gemini
     gemini_api_key: str = ""
     gemini_backup_api_key: str = ""  # legacy compatibility
-    gemini_model: str = "gemini-1.5-pro"
-    gemini_backup_model: str = "gemini-flash-latest"
+    gemini_model: str = "gemini-3-pro-preview"
+    gemini_backup_model: str = "gemini-3-flash-preview"
     gemini_temperature: float = 0.7
     gemini_max_tokens: int = 8192
     gemini_retry_count: int = 3
     gemini_retry_delay: float = 1.0
-    gemini_timeout: int = 60
-
-    # OpenAI (reserved)
-    openai_api_key: Optional[str] = None
-    openai_model: str = "gpt-4"
+    gemini_timeout: int = 120
 
     # Storage
     projects_path: str = "projects"
@@ -53,35 +49,10 @@ class Settings(BaseSettings):
     default_translation_style: str = "natural_professional"
     default_segment_level: str = "h2"
 
-    # Cache
-    cache_enabled: bool = False
-    cache_backend: str = "memory"
-    cache_ttl: int = 86400
-    redis_url: Optional[str] = None
-
-    # Rate limit
-    rate_limit_enabled: bool = False
-    rate_limit_per_minute: int = 60
-    rate_limit_per_hour: int = 1000
-
     # Logging
     log_level: str = "INFO"
     log_format: str = "json"
     log_file: Optional[str] = None
-
-    # Database (reserved)
-    database_url: Optional[str] = None
-    database_pool_size: int = 5
-    database_max_overflow: int = 10
-
-    # Auth (reserved)
-    jwt_secret_key: Optional[str] = None
-    jwt_algorithm: str = "HS256"
-    jwt_expire_minutes: int = 1440
-
-    # Monitoring
-    sentry_dsn: Optional[str] = None
-    enable_metrics: bool = False
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -102,11 +73,6 @@ class Settings(BaseSettings):
                 "retry_delay": self.gemini_retry_delay,
                 "timeout": self.gemini_timeout,
             }
-        if provider == "openai":
-            return {
-                "api_key": self.openai_api_key,
-                "model": self.openai_model,
-            }
         raise ValueError(f"Unsupported LLM provider: {provider}")
 
     def validate_required_settings(self):
@@ -114,9 +80,6 @@ class Settings(BaseSettings):
 
         if not (self.gemini_api_key or self.gemini_backup_api_key):
             errors.append("GEMINI_API_KEY is not set. Please configure it in .env.")
-
-        if self.cache_enabled and self.cache_backend == "redis" and not self.redis_url:
-            errors.append("REDIS_URL is required when CACHE_BACKEND=redis.")
 
         if errors:
             raise ValueError("\n".join(errors))
