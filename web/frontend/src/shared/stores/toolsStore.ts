@@ -27,7 +27,7 @@ interface ToolsState {
 }
 
 const initialState = {
-  currentTool: 'tasks' as CurrentTool,
+  currentTool: 'timezone' as CurrentTool,
   tasks: [
     { id: '1', text: '示例任务 1', completed: false },
     { id: '2', text: '示例任务 2', completed: false },

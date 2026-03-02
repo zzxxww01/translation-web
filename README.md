@@ -29,7 +29,8 @@ start.bat
 
 ## 基础配置
 1. 复制 `.env.example` 为 `.env`
-2. 至少配置：`GEMINI_BACKUP_API_KEY`
+2. 至少配置：`GEMINI_API_KEY`
+3. 可选配置备用模型：`GEMINI_BACKUP_MODEL=gemini-flash-latest`
 
 ## 运行脚本说明
 - `start.bat` / `stop.bat` 保持原样，不在本次重构中改动。

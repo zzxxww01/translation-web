@@ -1,8 +1,10 @@
 """
-Translation Agent - 统一配置管理
+Application settings.
 
-使用 Pydantic Settings 管理所有配置项，支持环境变量和 .env 文件。
+Centralized configuration loaded from environment variables and `.env`.
 """
+
+from __future__ import annotations
 
 from typing import Optional
 
@@ -10,92 +12,90 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """应用配置"""
-
-    # ============ 应用配置 ============
+    # App
     app_name: str = "Translation Agent"
     app_version: str = "1.0.0"
     debug: bool = False
 
-    # ============ 服务器配置 ============
+    # Server
     api_host: str = "127.0.0.1"
     api_port: int = 54321
-    api_reload: bool = False  # 开发模式下自动重载
+    api_reload: bool = False
 
-    # ============ CORS 配置 ============
+    # CORS
     cors_origins: list[str] = ["*"]
     cors_credentials: bool = True
     cors_methods: list[str] = ["*"]
     cors_headers: list[str] = ["*"]
 
-    # ============ LLM 配置 ============
     # Gemini
-    gemini_api_key: str = ""  # 必须通过环境变量设置
-    gemini_backup_api_key: str = ""  # 备用付费 Key（当前默认使用）
+    gemini_api_key: str = ""
+    gemini_backup_api_key: str = ""  # legacy compatibility
     gemini_model: str = "gemini-1.5-pro"
+    gemini_backup_model: str = "gemini-flash-latest"
     gemini_temperature: float = 0.7
     gemini_max_tokens: int = 8192
     gemini_retry_count: int = 3
     gemini_retry_delay: float = 1.0
-    gemini_timeout: int = 60  # 超时时间（秒）
+    gemini_timeout: int = 60
 
-    # OpenAI（预留，暂未实现）
+    # OpenAI (reserved)
     openai_api_key: Optional[str] = None
     openai_model: str = "gpt-4"
 
-    # ============ 存储配置 ============
+    # Storage
     projects_path: str = "projects"
     conversations_path: str = "conversations"
     glossary_path: str = "glossary"
 
-    # ============ 翻译配置 ============
-    default_context_window: int = 5  # 上下文窗口大小
+    # Translation
+    default_context_window: int = 5
     default_translation_style: str = "natural_professional"
-    default_segment_level: str = "h2"  # 章节分割级别
+    default_segment_level: str = "h2"
 
-    # ============ 缓存配置 ============
+    # Cache
     cache_enabled: bool = False
-    cache_backend: str = "memory"  # memory/redis/file
-    cache_ttl: int = 86400  # 缓存有效期（秒，默认 1 天）
-    redis_url: Optional[str] = None  # 如果使用 Redis
+    cache_backend: str = "memory"
+    cache_ttl: int = 86400
+    redis_url: Optional[str] = None
 
-    # ============ 限流配置 ============
+    # Rate limit
     rate_limit_enabled: bool = False
     rate_limit_per_minute: int = 60
     rate_limit_per_hour: int = 1000
 
-    # ============ 日志配置 ============
-    log_level: str = "INFO"  # DEBUG/INFO/WARNING/ERROR
-    log_format: str = "json"  # json/text
-    log_file: Optional[str] = None  # 日志文件路径，None 表示仅输出到控制台
+    # Logging
+    log_level: str = "INFO"
+    log_format: str = "json"
+    log_file: Optional[str] = None
 
-    # ============ 数据库配置（预留） ============
+    # Database (reserved)
     database_url: Optional[str] = None
     database_pool_size: int = 5
     database_max_overflow: int = 10
 
-    # ============ 认证配置（预留） ============
+    # Auth (reserved)
     jwt_secret_key: Optional[str] = None
     jwt_algorithm: str = "HS256"
-    jwt_expire_minutes: int = 1440  # 24 小时
+    jwt_expire_minutes: int = 1440
 
-    # ============ 监控配置 ============
-    sentry_dsn: Optional[str] = None  # Sentry 错误监控
-    enable_metrics: bool = False  # 是否启用指标收集
+    # Monitoring
+    sentry_dsn: Optional[str] = None
+    enable_metrics: bool = False
 
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
-        extra="ignore",  # 忽略未定义的环境变量
+        extra="ignore",
     )
 
     def get_llm_config(self, provider: str = "gemini") -> dict:
-        """获取 LLM 配置"""
         if provider == "gemini":
             return {
-                "api_key": self.gemini_backup_api_key or self.gemini_api_key,
+                "api_key": self.gemini_api_key or self.gemini_backup_api_key,
                 "model": self.gemini_model,
+                "backup_model": self.gemini_backup_model,
                 "temperature": self.gemini_temperature,
                 "max_tokens": self.gemini_max_tokens,
                 "retry_count": self.gemini_retry_count,
@@ -110,30 +110,27 @@ class Settings(BaseSettings):
         raise ValueError(f"Unsupported LLM provider: {provider}")
 
     def validate_required_settings(self):
-        """验证必需的配置项"""
         errors = []
 
-        if not self.gemini_backup_api_key:
-            errors.append("GEMINI_BACKUP_API_KEY 未设置，请在 .env 文件中配置")
+        if not (self.gemini_api_key or self.gemini_backup_api_key):
+            errors.append("GEMINI_API_KEY is not set. Please configure it in .env.")
 
         if self.cache_enabled and self.cache_backend == "redis" and not self.redis_url:
-            errors.append("启用 Redis 缓存时必须设置 REDIS_URL")
+            errors.append("REDIS_URL is required when CACHE_BACKEND=redis.")
 
         if errors:
             raise ValueError("\n".join(errors))
 
     @property
     def is_production(self) -> bool:
-        """是否为生产环境"""
         return not self.debug
 
 
-# 全局配置实例
 settings = Settings()
 
-# 启动时验证配置
 try:
     settings.validate_required_settings()
 except ValueError as e:
-    print(f"配置验证失败:\n{e}")
-    print("\n提示: 请确认 .env 文件中配置了所有必需的环境变量")
+    print(f"Configuration validation failed:\n{e}")
+    print("\nHint: make sure required variables are present in your .env file.")
+

@@ -4,7 +4,7 @@ llm:
   default_provider: gemini
   providers:
     gemini:
-      api_key: ${GEMINI_BACKUP_API_KEY}
+      api_key: ${GEMINI_API_KEY}
       model: gemini-3-pro-preview
 
 translation:

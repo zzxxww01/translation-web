@@ -28,10 +28,10 @@ import type { TimezoneConvertResult } from '../../shared/types';
 type ToolTab = 'tasks' | 'translator' | 'email' | 'timezone';
 
 const toolTabs = [
-  { id: 'tasks', label: '任务管理', icon: <CheckSquare className="h-5 w-5" /> },
+  { id: 'timezone', label: '时区转换', icon: <Clock className="h-5 w-5" /> },
   { id: 'translator', label: '文本翻译', icon: <Languages className="h-5 w-5" /> },
   { id: 'email', label: '邮件回复', icon: <Mail className="h-5 w-5" /> },
-  { id: 'timezone', label: '时区转换', icon: <Clock className="h-5 w-5" /> },
+  { id: 'tasks', label: '任务管理', icon: <CheckSquare className="h-5 w-5" /> },
 ];
 
 /**

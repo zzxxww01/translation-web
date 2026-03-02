@@ -59,9 +59,9 @@ def get_project_manager() -> ProjectManager:
 
 def get_llm_provider() -> GeminiProvider:
     """获取 LLM Provider"""
-    api_key = os.getenv("GEMINI_BACKUP_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GEMINI_BACKUP_API_KEY")
     if not api_key:
-        console.print("[red]错误: 请设置 GEMINI_BACKUP_API_KEY 环境变量[/red]")
+        console.print("[red]错误: 请设置 GEMINI_API_KEY 环境变量[/red]")
         raise typer.Exit(1)
     return GeminiProvider(api_key=None, backup_api_key=api_key)
 
