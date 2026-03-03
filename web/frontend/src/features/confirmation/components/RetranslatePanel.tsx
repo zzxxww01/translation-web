@@ -30,25 +30,25 @@ interface ModelOption {
 
 const quickInstructions: QuickInstruction[] = [
   {
-    id: 'concise',
-    label: '更简洁',
-    description: '精简冗余表达',
+    id: 'readable',
+    label: '可读性',
+    description: '消除翻译腔',
     icon: <Zap className="h-4 w-4" />,
-    instruction: '请更简洁地翻译这段文字，删除冗余表达，使译文更加精炼。',
+    instruction: '请从句法结构层面优化译文：拆长句（控制在15-30字）、去被动语态改主动、删多余连接词（"此外""然而"）、调整为中文语序、直接用动词不要"对……进行……"、连续三个"的"必须拆句。',
+  },
+  {
+    id: 'idiomatic',
+    label: '更地道',
+    description: '自然流畅表达',
+    icon: <MessageCircle className="h-4 w-4" />,
+    instruction: '请从表达层面优化译文：用具体事实代替空泛描述、用简单结构代替复杂绕行、不要公式化段落和同义词循环、把"基于""鉴于""旨在"换成"根据""考虑到""为了"等自然表达。',
   },
   {
     id: 'professional',
     label: '更专业',
-    description: '使用专业术语',
+    description: '科技媒体风格',
     icon: <Briefcase className="h-4 w-4" />,
-    instruction: '请使用更专业的技术术语和行业表达来翻译这段文字。',
-  },
-  {
-    id: 'colloquial',
-    label: '更口语化',
-    description: '自然流畅表达',
-    icon: <MessageCircle className="h-4 w-4" />,
-    instruction: '请使用更口语化、更自然的中文表达来翻译这段文字，使其读起来更流畅。',
+    instruction: '请优化译文的专业表达，体现semiAnalysis分析师水准：保留原文观点和判断力度不要弱化、产品/技术代号保留英文（CoWoS、HBM、EUV）行业术语用中文（晶圆代工、良率）金融术语用中文（营收、毛利率）、删除口水话和宣传腔、数据密集段落拆分重组。',
   },
 ];
 

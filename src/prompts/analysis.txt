@@ -1,15 +1,15 @@
-分析以下技术文章，提取关键技术术语并给出翻译建议。
+分析以下semiAnalysis技术文章，提取关键术语并给出翻译建议。
 
 ## 文章内容
 {text}
 
 ## 要求
-1. 提取文章中的关键技术术语（公司名、产品名、技术概念等）
+1. 提取文章中的关键术语（公司名、产品名、技术概念、金融术语等）
 2. 为每个术语建议翻译策略：
-   - preserve: 保持英文原文（如品牌名 Apple Silicon）
+   - preserve: 保持英文原文（产品/技术代号如 CoWoS、HBM、EUV、GAA；公司名如 TSMC、ASML、NVIDIA）
    - first_annotate: 首次出现时翻译并标注原文，后续用中文（如 晶圆代工厂(Foundry)）
-   - translate: 直接翻译成中文（如 wafer → 晶圆）
-3. 分析文章的写作风格
+   - translate: 直接翻译成中文（行业术语如 wafer→晶圆、yield→良率、fab→晶圆厂、node→制程节点；金融术语如 capex→资本支出、gross margin→毛利率、revenue→营收、YoY→同比）
+3. 分析文章的写作风格（特别注意：semiAnalysis是否有强观点和判断需要保留）
 
 请返回 JSON 格式（不要添加 markdown 代码块标记）：
 {{

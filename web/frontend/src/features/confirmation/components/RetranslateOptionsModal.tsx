@@ -60,21 +60,21 @@ export function RetranslateOptionsModal({
       setOptions([
         {
           id: 'fluent',
-          label: '更流畅',
-          description: '使译文更加自然流畅，减少机翻痕迹',
-          instruction: '请重新翻译这段文字，使其更加自然流畅，避免机器翻译的生硬感。'
+          label: '可读性',
+          description: '消除翻译腔，优化句法结构',
+          instruction: '请从句法结构层面优化译文：拆长句（控制在15-30字）、去被动语态改主动、删多余连接词、调整为中文语序、直接用动词、连续三个"的"必须拆句。'
+        },
+        {
+          id: 'concise',
+          label: '更地道',
+          description: '自然流畅的中文表达',
+          instruction: '请从表达层面优化译文：用具体事实代替空泛描述、用简单结构代替复杂绕行、不要公式化段落和同义词循环、把"基于""鉴于""旨在"换成自然表达。'
         },
         {
           id: 'professional',
           label: '更专业',
-          description: '使用更专业的术语和表达',
-          instruction: '请使用更专业的技术术语和行业表达来重新翻译这段文字。'
-        },
-        {
-          id: 'concise',
-          label: '更简洁',
-          description: '精简冗余表达，使译文更简洁',
-          instruction: '请更简洁地翻译这段文字，删除冗余表达，使译文更加精炼。'
+          description: '分析师水准，保留判断力度',
+          instruction: '请优化译文的专业表达，体现semiAnalysis分析师水准：保留原文观点和判断力度不要弱化、产品/技术代号保留英文行业术语用中文、删除口水话和宣传腔、数据密集段落拆分重组。'
         },
       ]);
     } finally {

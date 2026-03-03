@@ -4,6 +4,14 @@ title Translation Agent
 
 rem ========== Environment checks ==========
 
+rem Activate virtual environment if available
+if exist ".venv\Scripts\activate.bat" (
+    call .venv\Scripts\activate.bat
+    echo [INFO] Using virtual environment: .venv
+) else (
+    echo [WARNING] No .venv found, using global Python.
+)
+
 rem Check for Python
 python --version >nul 2>&1
 if %errorlevel% neq 0 (

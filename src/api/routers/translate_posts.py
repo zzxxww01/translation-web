@@ -37,7 +37,7 @@ async def translate_post(request: PostTranslateRequest):
         prompt = request.custom_prompt.replace("{content}", request.content)
         prompt = prompt.replace("{glossary}", glossary_context)
     else:
-        prompt_builder = get_prompt_builder(style="original")
+        prompt_builder = get_prompt_builder(style="post")
         prompt = prompt_builder.template.format(
             text=request.content,
             dynamic_sections=glossary_context.strip(),
@@ -74,22 +74,26 @@ async def optimize_post_translation(request: PostOptimizeRequest):
                 content = msg.get("content", "")
                 context += f"{role}: {content}\n"
 
-    prompt = f"""You are a professional translation editor.
-Improve the translation based on the user's instruction.
+    prompt = f"""你是semiAnalysis的中文编辑，优化semiAnalysis帖子的翻译质量。
 
-Original:
+## 原文
 {request.original_text}
 
-Current Translation:
+## 当前译文
 {request.current_translation}
-
 {context}
-
-Instruction:
+## 优化要求
 {request.instruction}
 
-Do not use any Markdown tags or formatting (no headings, lists, code blocks, or bold markers).
-Output only the improved translation.
+## 优化原则
+1. 以原文为准对照校对，发现与原文不一致或错误之处必须纠正
+2. 保留分析师语气：原文的观点、判断、锐度不要弱化或磨平
+3. 消除翻译腔：拆长句、去被动、减连接词、调中文语序、直接用动词
+4. 术语处理：产品/技术代号保留英文（CoWoS、HBM、EUV），行业术语用中文（晶圆代工、良率、制程节点），金融术语用中文（营收、毛利率、资本支出）
+5. 译文不要比原文更长，保持帖子的简洁和冲击力
+6. 不要口水话、不要宣传腔、不遗漏信息
+
+严禁使用任何Markdown语法标记。直接输出优化后的完整译文，不要任何解释。
 """
 
     timeout_s = int(os.getenv("POST_OPTIMIZE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60")))

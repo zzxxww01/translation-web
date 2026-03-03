@@ -26,6 +26,8 @@ class TranslationPromptBuilder:
 
         if prompt_style == "simplified":
             template_file = os.path.join(prompts_dir, "translation_simplified.txt")
+        elif prompt_style == "post":
+            template_file = os.path.join(prompts_dir, "post_translation.txt")
         else:
             template_file = os.path.join(prompts_dir, "translation.txt")
 
