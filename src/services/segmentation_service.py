@@ -25,7 +25,7 @@ class SegmentationService:
         self,
         sections: List[Section],
         context: TranslationContext,
-        model_name: str = "gemini",
+        model_name: str = "pro",
     ) -> List[Section]:
         """
         按翻译单元批量翻译

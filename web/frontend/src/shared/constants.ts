@@ -239,26 +239,26 @@ export interface ModelOption {
  */
 export const MODEL_OPTIONS: ModelOption[] = [
   {
-    id: 'gemini-3-pro-preview',
-    name: 'Gemini 3 Pro',
-    description: '最新旗舰模型，最强性能',
+    id: 'preview',
+    name: 'Gemini Preview',
+    description: '前沿能力模型，质量优先',
   },
   {
-    id: 'gemini-3-flash-preview',
-    name: 'Gemini 3 Flash',
-    description: '最新快速模型，性价比高',
+    id: 'pro',
+    name: 'Gemini Pro',
+    description: '通用主力模型，质量与速度平衡',
   },
   {
-    id: 'gemini-2.5-pro',
-    name: 'Gemini 2.5 Pro',
-    description: '稳定版本，均衡性能',
+    id: 'flash',
+    name: 'Gemini Flash',
+    description: '快速低成本模型，适合批量场景',
   },
 ];
 
 /**
  * 默认翻译模型
  */
-export const DEFAULT_MODEL = 'gemini-3-pro-preview';
+export const DEFAULT_MODEL = 'pro';
 
 // ============ 翻译方法相关 ============
 

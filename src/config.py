@@ -31,8 +31,11 @@ class Settings(BaseSettings):
     # Gemini
     gemini_api_key: str = ""
     gemini_backup_api_key: str = ""  # legacy compatibility
-    gemini_model: str = "gemini-3-pro-preview"
-    gemini_backup_model: str = "gemini-3-flash-preview"
+    gemini_flash_model: str = "gemini-flash-latest"
+    gemini_pro_model: str = "gemini-3-pro-preview"
+    gemini_preview_model: str = "gemini-3.1-pro-preview"
+    gemini_model: str = "pro"  # selector/alias: flash/pro/preview or concrete model id
+    gemini_backup_model: str = "flash"  # selector/alias or concrete model id
     gemini_temperature: float = 0.7
     gemini_max_tokens: int = 8192
     gemini_retry_count: int = 3
@@ -65,6 +68,9 @@ class Settings(BaseSettings):
         if provider == "gemini":
             return {
                 "api_key": self.gemini_api_key or self.gemini_backup_api_key,
+                "flash_model": self.gemini_flash_model,
+                "pro_model": self.gemini_pro_model,
+                "preview_model": self.gemini_preview_model,
                 "model": self.gemini_model,
                 "backup_model": self.gemini_backup_model,
                 "temperature": self.gemini_temperature,
@@ -96,4 +102,3 @@ try:
 except ValueError as e:
     print(f"Configuration validation failed:\n{e}")
     print("\nHint: make sure required variables are present in your .env file.")
-

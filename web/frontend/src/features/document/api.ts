@@ -56,7 +56,7 @@ export const documentApi = {
   ) =>
     apiClient.post<{ translation: string }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/translate`,
-      { model: model || 'gemini', instruction }
+      { model: model || 'pro', instruction }
     ),
 
   /**
@@ -73,7 +73,7 @@ export const documentApi = {
   ) =>
     apiClient.post<{ answer: string }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/word-meaning`,
-      { word, query, history, model: model || 'gemini' }
+      { word, query, history, model: model || 'pro' }
     ),
 
   /**

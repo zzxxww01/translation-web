@@ -162,7 +162,7 @@ async def retranslate_paragraph(
         ]
 
         instruction = request.instruction or ""
-        model_name = request.model or "claude"
+        model_name = request.model or "pro"
 
         # 记录重翻前的译文
         old_translation = None

@@ -110,7 +110,7 @@ class TranslationAgent:
         self,
         paragraph: Paragraph,
         context: TranslationContext,
-        model_name: str = "gemini",
+        model_name: str = "pro",
     ) -> str:
         """
         翻译单个段落（增强版：支持内联元素保留）
@@ -153,6 +153,7 @@ class TranslationAgent:
             )
 
         # Step 5: 调用 LLM 翻译
+        llm_context["model"] = model_name
         translation = self.llm.translate(text_with_placeholders, llm_context)
 
         # Step 6: 还原内联元素
@@ -172,7 +173,7 @@ class TranslationAgent:
         self,
         section: Section,
         context: TranslationContext,
-        model_name: str = "gemini",
+        model_name: str = "pro",
         on_progress: Optional[Callable[[int, int, Paragraph], None]] = None,
     ) -> Section:
         """
@@ -222,7 +223,7 @@ class TranslationAgent:
         paragraph: Paragraph,
         context: TranslationContext,
         instruction: Optional[str] = None,
-        model_name: str = "gemini",
+        model_name: str = "pro",
     ) -> str:
         """
         重新翻译段落（可附加指令）
@@ -252,6 +253,7 @@ class TranslationAgent:
             llm_context["previous_translation"] = prev_trans.text
 
         # 调用 LLM 翻译
+        llm_context["model"] = model_name
         translation = self.llm.translate(paragraph.source, llm_context)
 
         # 记录翻译结果

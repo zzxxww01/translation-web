@@ -54,24 +54,19 @@ const quickInstructions: QuickInstruction[] = [
 
 const modelOptions: ModelOption[] = [
   {
-    id: 'gemini-3-pro',
-    name: 'Gemini 3 Pro',
-    description: '最强性能，适合复杂翻译任务',
+    id: 'preview',
+    name: 'Gemini Preview',
+    description: '前沿能力模型，质量优先',
   },
   {
-    id: 'gemini-3-pro-image',
-    name: 'Gemini 3 Pro Image',
-    description: '图像理解增强版',
+    id: 'pro',
+    name: 'Gemini Pro',
+    description: '通用主力模型，质量与速度平衡',
   },
   {
-    id: 'gemini-3-flash',
-    name: 'Gemini 3 Flash',
-    description: '快速响应版本',
-  },
-  {
-    id: 'gemini',
-    name: 'Gemini (默认)',
-    description: '标准翻译模型',
+    id: 'flash',
+    name: 'Gemini Flash',
+    description: '快速低成本模型，适合批量场景',
   },
 ];
 
@@ -82,7 +77,7 @@ export function RetranslatePanel({
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('gemini-3-pro');
+  const [selectedModel, setSelectedModel] = useState<string>('pro');
   const [showModelSelection, setShowModelSelection] = useState(false);
 
   const handleQuickInstruction = useCallback(

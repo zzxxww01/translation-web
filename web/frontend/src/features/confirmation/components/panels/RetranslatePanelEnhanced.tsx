@@ -4,7 +4,7 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import { RefreshCw, Zap, Briefcase, MessageCircle, X, Cpu, Sparkles, Clock, Image } from 'lucide-react';
+import { RefreshCw, Zap, Briefcase, MessageCircle, X, Cpu, Sparkles, Clock } from 'lucide-react';
 import { Button } from '../../../../components/ui';
 import { cn } from '../../../../shared/utils';
 
@@ -57,25 +57,25 @@ const quickInstructions: QuickInstruction[] = [
 
 const modelOptions: ModelOption[] = [
   {
-    id: 'gemini-3-pro',
-    name: 'Gemini 3 Pro',
-    description: '最强性能，适合复杂翻译任务',
+    id: 'preview',
+    name: 'Gemini Preview',
+    description: '前沿能力模型，质量优先',
     icon: <Sparkles className="h-4 w-4" />,
-    recommended_for: ['complex_translation', 'academic_text', 'professional_document'],
+    recommended_for: ['high_quality_translation', 'academic_text', 'professional_document'],
     max_tokens: 32768,
   },
   {
-    id: 'gemini-3-pro-image',
-    name: 'Gemini 3 Pro Image',
-    description: '图像理解增强版，适合含图表的文档',
-    icon: <Image className="h-4 w-4" />,
-    recommended_for: ['multimodal_content', 'scientific_paper', 'presentation'],
+    id: 'pro',
+    name: 'Gemini Pro',
+    description: '通用主力模型，质量与速度平衡',
+    icon: <Sparkles className="h-4 w-4" />,
+    recommended_for: ['general_translation', 'article_translation', 'daily_workflow'],
     max_tokens: 32768,
   },
   {
-    id: 'gemini-3-flash',
-    name: 'Gemini 3 Flash',
-    description: '快速响应版本，适合批量处理',
+    id: 'flash',
+    name: 'Gemini Flash',
+    description: '快速低成本模型，适合批量处理',
     icon: <Clock className="h-4 w-4" />,
     recommended_for: ['batch_processing', 'real_time_translation', 'simple_content'],
     max_tokens: 8192,
@@ -89,7 +89,7 @@ export function RetranslatePanel({
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('gemini-3-pro');
+  const [selectedModel, setSelectedModel] = useState<string>('pro');
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
 
   // 获取可用模型列表（模拟API调用）

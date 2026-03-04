@@ -112,7 +112,7 @@ class FullTranslationService {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ model: model || 'gemini' }),
+        body: JSON.stringify({ model: model || 'pro' }),
         signal: controller.signal,
       });
 

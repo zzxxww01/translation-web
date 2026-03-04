@@ -13,12 +13,12 @@ class CreateProjectRequest(BaseModel):
 
 
 class TranslateRequest(BaseModel):
-    model: str = "gemini"
+    model: str = "pro"
     instruction: Optional[str] = None
 
 
 class DirectTranslateRequest(BaseModel):
-    model: str = "gemini"
+    model: str = "pro"
 
 
 class ConfirmRequest(BaseModel):
@@ -34,7 +34,7 @@ class WordMeaningRequest(BaseModel):
     word: str
     query: str
     history: List[WordMeaningMessage] = Field(default_factory=list)
-    model: str = "gemini"
+    model: str = "pro"
 
 
 class WordMeaningResponse(BaseModel):

@@ -29,8 +29,8 @@ class ProjectProgress(BaseModel):
 class ProjectConfig(BaseModel):
     """项目配置"""
 
-    ai_model: str = "gemini-3-pro-preview"
-    model_type: str = "reasoning"
+    ai_model: str = "pro"
+    model_type: str = "pro"
     translation_style: str = "natural_professional"
     segment_level: str = "h2"
     max_paragraph_length: int = 800

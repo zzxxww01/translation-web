@@ -48,7 +48,7 @@ class PostOptimizeResponse(BaseModel):
 
 
 class FullTranslateRequest(BaseModel):
-    model: str = "gemini"
+    model: str = "pro"
 
 
 class ResolveConflictRequest(BaseModel):

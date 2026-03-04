@@ -473,7 +473,7 @@ class BatchTranslationService:
 
             paragraph = paragraph_map.get(para_id)
             if paragraph:
-                paragraph.add_translation(translation, "gemini")
+                paragraph.add_translation(translation, "pro")
                 paragraph.status = ParagraphStatus.TRANSLATED
 
         return collected
@@ -485,7 +485,7 @@ class BatchTranslationService:
                 continue
 
             paragraph = section.paragraphs[index]
-            paragraph.add_translation(translation, "gemini")
+            paragraph.add_translation(translation, "pro")
             paragraph.status = ParagraphStatus.TRANSLATED
 
             if not hasattr(paragraph, "ai_insight"):

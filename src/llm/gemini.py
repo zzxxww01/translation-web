@@ -2,13 +2,15 @@
 Translation Agent - Gemini LLM Provider
 
 Google Gemini API implementation for translation and analysis.
-Uses Gemini 3 model ids by default (gemini-3-pro-preview / gemini-3-flash-preview).
+Uses env-driven model aliases (flash/pro/preview) to resolve concrete model ids.
 """
 
 import logging
 import os
 import json
 import time
+from contextlib import contextmanager
+from contextvars import ContextVar
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from typing import Optional, Dict, Any, List
@@ -24,20 +26,38 @@ from .base import LLMProvider
 logger = logging.getLogger(__name__)
 
 
-# Model configurations
+# Model catalog. Concrete model ids come from env vars.
 MODEL_CONFIG = {
-    "reasoning": {
-        "name": "gemini-3-pro-preview",
-        "description": "推理模型，质量更高但更慢",
-        "max_output_tokens": 65536,
-        "supports_thinking": True,
-    },
     "flash": {
-        "name": "gemini-3-flash-preview",
+        "env_var": "GEMINI_FLASH_MODEL",
+        "default": "gemini-flash-latest",
         "description": "快速模型，速度快成本低",
         "max_output_tokens": 65536,
         "supports_thinking": False,
     },
+    "pro": {
+        "env_var": "GEMINI_PRO_MODEL",
+        "default": "gemini-3-pro-preview",
+        "description": "标准专业模型，质量与成本平衡",
+        "max_output_tokens": 65536,
+        "supports_thinking": True,
+    },
+    "preview": {
+        "env_var": "GEMINI_PREVIEW_MODEL",
+        "default": "gemini-3.1-pro-preview",
+        "description": "前沿预览模型，能力更强但可能更不稳定",
+        "max_output_tokens": 65536,
+        "supports_thinking": True,
+    },
+}
+
+MODEL_ALIASES = {
+    "default": "pro",
+    "gemini": "pro",
+    "reasoning": "pro",
+    "flash": "flash",
+    "pro": "pro",
+    "preview": "preview",
 }
 
 
@@ -47,8 +67,8 @@ class GeminiProvider(LLMProvider):
     def __init__(
         self,
         api_key: Optional[str] = None,
-        model: str = "gemini-3-pro-preview",
-        model_type: str = "reasoning",
+        model: str = "pro",
+        model_type: str = "pro",
     ):
         """
         初始化 Gemini Provider
@@ -56,8 +76,8 @@ class GeminiProvider(LLMProvider):
         Args:
             api_key: Gemini API Key，如果不提供则从环境变量 GEMINI_API_KEY 获取
                      (GEMINI_BACKUP_API_KEY 作为兼容回退)
-            model: 模型名称
-            model_type: 模型类型 ("reasoning" 或 "flash")
+            model: 模型名称或别名（flash/pro/preview）
+            model_type: 模型类型别名（flash/pro/preview，兼容 reasoning）
         """
         super().__init__()
         self.api_key = (
@@ -71,24 +91,31 @@ class GeminiProvider(LLMProvider):
                 "Gemini API key is required. Set GEMINI_API_KEY environment variable or pass api_key parameter."
             )
 
-        self.model_type = model_type
+        # Request-scoped model selector for async concurrency safety.
+        self._active_model_selector: ContextVar[Optional[str]] = ContextVar(
+            "gemini_active_model_selector",
+            default=None,
+        )
+        self.model_catalog = self._load_model_catalog()
+        self.model_type = self._normalize_model_selector(model_type) or "pro"
 
         # 代理配置支持
         self.proxy_config = self._get_proxy_config()
         if self.proxy_config:
             logger.info("[Gemini] 使用代理配置: %s", self.proxy_config)
 
-        # 根据 model_type 选择模型，环境变量优先
-        env_model = os.getenv("GEMINI_MODEL")
-        if env_model:
-            self.model_name = env_model
-        elif model_type in MODEL_CONFIG:
-            self.model_name = MODEL_CONFIG[model_type]["name"]
-        else:
-            self.model_name = model
+        # Default model selector priority:
+        # GEMINI_MODEL (legacy/global selector) > constructor model > model_type
+        default_selector = (
+            os.getenv("GEMINI_MODEL")
+            or model
+            or self.model_type
+        )
+        self.model_name = self.resolve_model_name(default_selector)
 
         # 备用模型（用于 high-demand 错误时回退）
-        self.backup_model = os.getenv("GEMINI_BACKUP_MODEL", "gemini-3-flash-preview")
+        backup_selector = os.getenv("GEMINI_BACKUP_MODEL", "flash")
+        self.backup_model = self.resolve_model_name(backup_selector)
 
         self.request_timeout = self._get_env_int("GEMINI_TIMEOUT", 120)
         self._client = None
@@ -102,16 +129,54 @@ class GeminiProvider(LLMProvider):
         切换模型类型
 
         Args:
-            model_type: 模型类型 ("reasoning" 或 "flash")
+            model_type: 模型类型（flash/pro/preview，兼容 reasoning）
         """
-        if model_type not in MODEL_CONFIG:
+        normalized = self._normalize_model_selector(model_type)
+        if normalized not in MODEL_CONFIG:
             raise ValueError(
                 f"Unknown model type: {model_type}. Available: {list(MODEL_CONFIG.keys())}"
             )
 
-        self.model_type = model_type
-        self.model_name = MODEL_CONFIG[model_type]["name"]
+        self.model_type = normalized
+        self.model_name = self.model_catalog[normalized]
         # Client is stateless for model choice; no need to recreate.
+
+    def _load_model_catalog(self) -> Dict[str, str]:
+        catalog: Dict[str, str] = {}
+        for model_key, cfg in MODEL_CONFIG.items():
+            env_var = cfg["env_var"]
+            default = cfg["default"]
+            catalog[model_key] = os.getenv(env_var, default)
+        return catalog
+
+    def _normalize_model_selector(self, selector: Optional[str]) -> Optional[str]:
+        if selector is None:
+            return None
+        key = selector.strip().lower()
+        if not key:
+            return None
+        return MODEL_ALIASES.get(key, key if key in MODEL_CONFIG else None)
+
+    def resolve_model_name(self, selector: Optional[str]) -> str:
+        normalized = self._normalize_model_selector(selector)
+        if normalized and normalized in self.model_catalog:
+            return self.model_catalog[normalized]
+        if selector and selector.strip():
+            # Allow passing a concrete model id directly for compatibility.
+            return selector.strip()
+        return self.model_catalog["pro"]
+
+    @contextmanager
+    def use_model(self, model_selector: Optional[str]):
+        """Temporarily route all generation calls to a selected model alias/id."""
+        if not model_selector:
+            yield
+            return
+        token = self._active_model_selector.set(model_selector)
+        try:
+            yield
+        finally:
+            self._active_model_selector.reset(token)
 
     def _get_env_int(self, name: str, default: int) -> int:
         try:
@@ -233,6 +298,7 @@ class GeminiProvider(LLMProvider):
         response_format: Optional[str] = None,
         temperature: float = 0.7,
         max_retries: int = 5,
+        model: Optional[str] = None,
         **_kwargs,
     ) -> str:
         """
@@ -247,7 +313,8 @@ class GeminiProvider(LLMProvider):
         Returns:
             str: 生成的文本
         """
-        current_model = self.model_name
+        requested_selector = model or self._active_model_selector.get()
+        current_model = self.resolve_model_name(requested_selector) if requested_selector else self.model_name
         switched_to_backup_model = False
         start_time = time.monotonic()
 
@@ -366,8 +433,10 @@ class GeminiProvider(LLMProvider):
         Returns:
             str: 翻译结果
         """
-        prompt = self._build_translation_prompt(text, context or {})
-        return self.generate(prompt, temperature=0.5)
+        context_data = dict(context or {})
+        model_selector = context_data.pop("model", None)
+        prompt = self._build_translation_prompt(text, context_data)
+        return self.generate(prompt, temperature=0.5, model=model_selector)
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """
@@ -704,8 +773,8 @@ class GeminiProvider(LLMProvider):
 
 def create_gemini_provider(
     api_key: Optional[str] = None,
-    model: str = "gemini-3-pro-preview",
-    model_type: str = "reasoning",
+    model: str = "pro",
+    model_type: str = "pro",
 ) -> GeminiProvider:
     """
     便捷函数：创建 Gemini Provider
@@ -713,7 +782,7 @@ def create_gemini_provider(
     Args:
         api_key: API Key
         model: 模型名称
-        model_type: 模型类型 ("reasoning" 或 "flash")
+        model_type: 模型类型（flash/pro/preview，兼容 reasoning）
 
     Returns:
         GeminiProvider: Gemini Provider 实例

@@ -5,7 +5,7 @@ Translate project-level endpoints.
 import asyncio
 import json
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 from fastapi.responses import StreamingResponse
 
 from src.agents.translation import TranslationAgent, TranslationContext
@@ -131,7 +131,6 @@ async def batch_translate_section(
 
             try:
                 translated = agent.translate_paragraph(paragraph, context)
-                paragraph.add_translation(translated, "batch_gemini")
                 pm.save_section(project_id, section)
                 translated_count += 1
             except Exception as e:
@@ -208,7 +207,6 @@ async def translate_full_document(
                         translated = agent.translate_paragraph(
                             paragraph, context, request.model
                         )
-                        paragraph.add_translation(translated, "batch_gemini")
                         pm.save_section(project_id, section_full)
                         translated_count += 1
 
@@ -274,6 +272,7 @@ async def translate_with_four_steps(
     project_id: str,
     pm: ProjectManagerDep,
     llm: LLMProviderDep,
+    request: FullTranslateRequest = Body(default_factory=FullTranslateRequest),
 ):
     """
     使用四步法翻译整个项目（优化版）。
@@ -311,10 +310,11 @@ async def translate_with_four_steps(
                     },
                 )
 
-            result = await batch_service.translate_project(
-                project_id,
-                on_progress=on_progress,
-            )
+            with llm.use_model(request.model):
+                result = await batch_service.translate_project(
+                    project_id,
+                    on_progress=on_progress,
+                )
             await progress_queue.put(
                 {
                     "type": "complete",

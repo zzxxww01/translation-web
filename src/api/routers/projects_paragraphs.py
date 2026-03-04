@@ -134,7 +134,12 @@ async def direct_translate_paragraph(
 
 请直接输出中文翻译，不要添加任何解释或说明："""
 
-        translation = llm.generate(simple_prompt, temperature=0.5, max_retries=2)
+        translation = llm.generate(
+            simple_prompt,
+            temperature=0.5,
+            max_retries=2,
+            model=request.model,
+        )
         paragraph.add_translation(translation, request.model + "-direct")
         pm.save_section(project_id, section)
 
@@ -214,7 +219,12 @@ async def query_word_meaning(
                 f"用户最新问题：\n{query}"
             )
 
-        answer = llm.generate(prompt, temperature=0.3, max_retries=2)
+        answer = llm.generate(
+            prompt,
+            temperature=0.3,
+            max_retries=2,
+            model=request.model,
+        )
         return WordMeaningResponse(answer=answer.strip())
     except NotFoundException:
         raise

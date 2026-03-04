@@ -74,7 +74,8 @@ class LLMProvider(ABC):
         self,
         prompt: str,
         response_format: Optional[str] = None,
-        temperature: float = 0.7
+        temperature: float = 0.7,
+        model: Optional[str] = None,
     ) -> str:
         """
         通用文本生成（用于四步法的各个步骤）
@@ -83,6 +84,7 @@ class LLMProvider(ABC):
             prompt: 提示词
             response_format: 响应格式，"json" 表示期望 JSON 输出
             temperature: 温度参数
+            model: 可选模型选择器（如 flash/pro/preview 或具体模型 id）
 
         Returns:
             str: 生成的文本
@@ -338,4 +340,3 @@ class LLMProvider(ABC):
         except json.JSONDecodeError:
             # 返回空结果
             return {}
-
