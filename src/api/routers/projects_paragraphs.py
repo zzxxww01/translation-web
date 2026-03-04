@@ -9,7 +9,7 @@ from fastapi import APIRouter
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.models import ParagraphStatus
 
-from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
+from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep, MemoryServiceDep
 from ..middleware import BadRequestException, NotFoundException
 from .projects_models import (
     ConfirmRequest,
@@ -33,6 +33,7 @@ async def translate_paragraph(
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LLMProviderDep,
+    memory_service: MemoryServiceDep,
 ):
     try:
         section = pm.get_section(project_id, section_id)
@@ -50,7 +51,14 @@ async def translate_paragraph(
             raise NotFoundException(detail="Paragraph not found")
 
         glossary = gm.load_project(project_id)
-        context = TranslationContext(glossary=glossary)
+
+        # 加载已学习的翻译规则
+        learned_rules = memory_service.get_relevant_rules(
+            paragraph.source,
+            project_id=project_id,
+        )
+
+        context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
         context.previous_paragraphs = [
             (p.source, p.confirmed) for p in section.paragraphs[:para_index] if p.confirmed
         ][-5:]

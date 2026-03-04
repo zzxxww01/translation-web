@@ -4,12 +4,12 @@
  */
 
 import { useState } from 'react';
-import { cn } from '../../../shared/utils';
-import { VersionCard } from './VersionCard';
-import { EditCard } from './EditCard';
+import { cn } from '../../../../shared/utils';
+import { VersionCard } from '../cards/VersionCard';
+import { EditCard } from '../cards/EditCard';
 import { RetranslatePanel } from './RetranslatePanel';
-import { useConfirmationStore } from '../stores/confirmationStore';
-import type { ParagraphVersion } from '../types';
+import { useConfirmationStore } from '../../stores/confirmationStore';
+import type { ParagraphVersion } from '../../types';
 
 interface VersionsPanelProps {
   className?: string;
@@ -98,7 +98,7 @@ export function VersionsPanel({
         {/* 编辑卡片 */}
         <EditCard
           value={customTranslation}
-          onChange={(value) => useConfirmationStore.getState().setCustomTranslation(value)}
+          onChange={(value: string) => useConfirmationStore.getState().setCustomTranslation(value)}
           onConfirm={onConfirm}
         />
       </div>

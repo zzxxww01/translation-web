@@ -5,9 +5,9 @@
 
 import { useState } from 'react';
 import { BookOpen } from 'lucide-react';
-import { cn } from '../../../shared/utils';
-import type { Paragraph } from '../types';
-import { GlossaryModal } from './GlossaryModal';
+import { cn } from '../../../../shared/utils';
+import type { Paragraph } from '../../types';
+import { GlossaryModal } from '../modals/GlossaryModal';
 
 interface SourcePanelProps {
   paragraph: Paragraph | null;

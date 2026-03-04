@@ -4,16 +4,20 @@ Translate project-level endpoints.
 
 import asyncio
 import json
-import os
 
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.models import ParagraphStatus
+from src.services.analysis_service import AnalysisService
 
 from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
-from ..middleware import BadRequestException, NotFoundException, ServiceUnavailableException
+from ..middleware import (
+    BadRequestException,
+    NotFoundException,
+    ServiceUnavailableException,
+)
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .translate_models import (
@@ -27,6 +31,7 @@ from .translate_utils import validate_path_component
 
 
 router = APIRouter()
+analysis_service = AnalysisService()
 
 
 def _get_best_translation_text(paragraph) -> str:
@@ -41,13 +46,15 @@ def _build_translation_context(section, index: int, glossary):
     context = TranslationContext(glossary=glossary)
     prev_context = []
 
-    for prev_para in section.paragraphs[max(0, index - 5): index]:
+    for prev_para in section.paragraphs[max(0, index - 5) : index]:
         text = _get_best_translation_text(prev_para)
         if text:
             prev_context.append((prev_para.source, text))
 
     context.previous_paragraphs = prev_context
-    context.next_preview = [next_para.source for next_para in section.paragraphs[index + 1: index + 3]]
+    context.next_preview = [
+        next_para.source for next_para in section.paragraphs[index + 1 : index + 3]
+    ]
     return context
 
 
@@ -58,47 +65,14 @@ async def analyze_project(project_id: str):
         raise BadRequestException(detail="Invalid project_id")
 
     try:
-        project_dir = f"projects/{project_id}"
-        source_path = f"{project_dir}/source.md"
-        if not os.path.exists(source_path):
-            raise NotFoundException(detail="Source file not found")
-
-        with open(source_path, "r", encoding="utf-8") as file:
-            content = file.read()
-
-        preview_content = content[:8000]
-        prompt = f"""You are a senior technical editor. Analyze the following article content and provide a translation guide.
-
-## Content Preview
-{preview_content}
-
-## Task
-1. **Summary**: A concise abstract of the article (in Chinese).
-2. **Translation Notes**: 3-5 bullet points on tone, audience, or potential translation pitfalls (in Chinese).
-3. **Key Terms**: Extract 5-10 key technical terms that need consistent translation (keep English).
-
-## Output Format (Strict JSON)
-{{
-    "summary": "文章摘要...",
-    "notes": ["注意...", "语气..."],
-    "key_terms": ["Wafer", "Lithography"]
-}}
-"""
-
-        response_text = generate_with_fallback(prompt)
-        data = parse_llm_json_response(response_text)
-
-        analysis_path = f"{project_dir}/analysis.json"
-        with open(analysis_path, "w", encoding="utf-8") as file:
-            json.dump(data, file, ensure_ascii=False, indent=2)
-
+        data = analysis_service.analyze_project(project_id)
         return ProjectAnalysisResponse(
             summary=data.get("summary", ""),
             notes=data.get("notes", []),
             key_terms=data.get("key_terms", []),
         )
-    except NotFoundException:
-        raise
+    except FileNotFoundError:
+        raise NotFoundException(detail="Source file not found")
     except Exception as e:
         raise ServiceUnavailableException(detail=f"分析失败: {str(e)}")
 
@@ -109,47 +83,19 @@ async def analyze_project(project_id: str):
 )
 async def analyze_section(project_id: str, section_id: str):
     """分析章节内容，生成摘要和注意事项。"""
-    if not validate_path_component(project_id) or not validate_path_component(section_id):
+    if not validate_path_component(project_id) or not validate_path_component(
+        section_id
+    ):
         raise BadRequestException(detail="Invalid project_id or section_id")
 
     try:
-        section_dir = f"projects/{project_id}/sections/{section_id}"
-        source_path = f"{section_dir}/source.md"
-        if not os.path.exists(source_path):
-            raise NotFoundException(detail="Section source file not found")
-
-        with open(source_path, "r", encoding="utf-8") as file:
-            content = file.read()
-
-        prompt = f"""You are a technical translator. Analyze the following section content.
-
-## Section Content
-{content[:5000]}
-
-## Task
-1. **Summary**: A very concise summary of this section (in Chinese, 2-3 sentences).
-2. **Translation Tips**: 2-3 specific tips for translating this section (e.g., specific terms, complex sentence structure).
-
-## Output Format (Strict JSON)
-{{
-    "summary": "本章主要讨论...",
-    "tips": ["注意...", "处理..."]
-}}
-"""
-
-        response_text = generate_with_fallback(prompt)
-        data = parse_llm_json_response(response_text)
-
-        analysis_path = f"{section_dir}/analysis.json"
-        with open(analysis_path, "w", encoding="utf-8") as file:
-            json.dump(data, file, ensure_ascii=False, indent=2)
-
+        data = analysis_service.analyze_section(project_id, section_id)
         return SectionAnalysisResponse(
             summary=data.get("summary", ""),
             tips=data.get("tips", []),
         )
-    except NotFoundException:
-        raise
+    except FileNotFoundError:
+        raise NotFoundException(detail="Section source file not found")
     except Exception as e:
         raise ServiceUnavailableException(detail=f"章节分析失败: {str(e)}")
 
@@ -163,7 +109,9 @@ async def batch_translate_section(
     llm: LLMProviderDep,
 ):
     """批量翻译章节中所有非 APPROVED 状态段落。"""
-    if not validate_path_component(project_id) or not validate_path_component(section_id):
+    if not validate_path_component(project_id) or not validate_path_component(
+        section_id
+    ):
         raise BadRequestException(detail="Invalid project_id or section_id")
 
     try:
@@ -235,7 +183,9 @@ async def translate_full_document(
                     continue
 
                 for index, paragraph in enumerate(section_full.paragraphs):
-                    has_translation = bool(paragraph.confirmed) or bool(paragraph.translations)
+                    has_translation = bool(paragraph.confirmed) or bool(
+                        paragraph.translations
+                    )
                     if has_translation:
                         translated_count += 1
                         yield (
@@ -255,7 +205,9 @@ async def translate_full_document(
                     context = _build_translation_context(section_full, index, glossary)
 
                     try:
-                        translated = agent.translate_paragraph(paragraph, context, request.model)
+                        translated = agent.translate_paragraph(
+                            paragraph, context, request.model
+                        )
                         paragraph.add_translation(translated, "batch_gemini")
                         pm.save_section(project_id, section_full)
                         translated_count += 1
@@ -332,7 +284,9 @@ async def translate_with_four_steps(
     from src.services.batch_translation_service import BatchTranslationService
 
     sections = pm.get_sections(project_id)
-    total_paragraphs = sum(len(section.paragraphs) for section in sections) if sections else 0
+    total_paragraphs = (
+        sum(len(section.paragraphs) for section in sections) if sections else 0
+    )
     total_sections = len(sections) if sections else 0
 
     batch_service = BatchTranslationService(
@@ -344,6 +298,7 @@ async def translate_with_four_steps(
     async def run_translation():
         """在后台运行翻译任务。"""
         try:
+
             def on_progress(step: str, current: int, total: int):
                 asyncio.get_event_loop().call_soon_threadsafe(
                     progress_queue.put_nowait,
@@ -363,7 +318,9 @@ async def translate_with_four_steps(
             await progress_queue.put(
                 {
                     "type": "complete",
-                    "translated_count": result.get("translated_paragraphs", total_paragraphs),
+                    "translated_count": result.get(
+                        "translated_paragraphs", total_paragraphs
+                    ),
                     "total": total_paragraphs,
                     "result": result,
                 }
@@ -428,7 +385,9 @@ async def translate_with_four_steps(
     )
 
 
-@router.post("/projects/{project_id}/resolve-conflict", response_model=ResolveConflictResponse)
+@router.post(
+    "/projects/{project_id}/resolve-conflict", response_model=ResolveConflictResponse
+)
 async def resolve_term_conflict(
     project_id: str,
     request: ResolveConflictRequest,
@@ -452,7 +411,10 @@ async def resolve_term_conflict(
             for section in sections:
                 section_modified = False
                 for paragraph in section.paragraphs:
-                    if term_lower in paragraph.source.lower() and paragraph.translations:
+                    if (
+                        term_lower in paragraph.source.lower()
+                        and paragraph.translations
+                    ):
                         affected_count += 1
                         section_modified = True
 

@@ -4,7 +4,7 @@
 """
 
 from typing import Dict, Any, List, Tuple, Optional
-from ..core.models import Glossary
+from ..core.models import Glossary, TranslationRule
 
 
 class TranslationPromptBuilder:
@@ -43,6 +43,7 @@ class TranslationPromptBuilder:
         article_title: Optional[str] = None,
         current_section_title: Optional[str] = None,
         heading_chain: Optional[List[str]] = None,
+        learned_rules: Optional[List[TranslationRule]] = None,
         **kwargs,
     ) -> str:
         """
@@ -56,6 +57,7 @@ class TranslationPromptBuilder:
             article_title: 文章标题
             current_section_title: 当前章节标题
             heading_chain: 标题链 ["# 主标题", "## 二级标题", ...]
+            learned_rules: 自学习翻译规则列表
             **kwargs: 其他上下文参数
 
         Returns:
@@ -68,7 +70,13 @@ class TranslationPromptBuilder:
             glossary_text = self._build_glossary_section(glossary)
             dynamic_sections.append(glossary_text)
 
-        # 2. 上下文部分
+        # 2. 历史纠错规则（术语表之后、上下文之前）
+        if learned_rules:
+            rules_text = self._build_rules_section(learned_rules)
+            if rules_text:
+                dynamic_sections.append(rules_text)
+
+        # 3. 上下文部分
         context_text = self._build_context_section(
             article_title=article_title,
             current_section_title=current_section_title,
@@ -112,6 +120,28 @@ class TranslationPromptBuilder:
                     lines.append(f"- {original} → {translation}")
 
         return "\n".join(lines)
+
+    def _build_rules_section(self, rules: List[TranslationRule]) -> str:
+        """
+        构建历史纠错规则部分
+
+        Token 预算控制：最多 5 条规则，总计 ≤150 字符
+        """
+        if not rules:
+            return ""
+
+        lines = ["## 历史纠错（严格遵循）"]
+        total_chars = 0
+        max_chars = 150
+
+        for rule in rules[:5]:
+            line = f'- ❌ "{rule.wrong}" → ✅ "{rule.right}"（{rule.instruction}）'
+            total_chars += len(line)
+            if total_chars > max_chars:
+                break
+            lines.append(line)
+
+        return "\n".join(lines) if len(lines) > 1 else ""
 
     def _build_context_section(
         self,

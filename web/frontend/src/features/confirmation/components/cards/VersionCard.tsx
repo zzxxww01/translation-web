@@ -4,10 +4,10 @@
  */
 
 import { Check } from 'lucide-react';
-import { cn } from '../../../shared/utils';
-import { Button } from '../../../components/ui';
-import type { VersionCardProps } from '../types';
-import { AIInsightPanel } from './AIInsightPanel';
+import { cn } from '../../../../shared/utils';
+import { Button } from '../../../../components/ui';
+import type { VersionCardProps } from '../../types';
+import { AIInsightPanel } from '../panels/AIInsightPanel';
 
 export function VersionCard({
   version,

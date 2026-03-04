@@ -5,10 +5,10 @@
 
 import { useState, useCallback, useRef } from 'react';
 import { Upload, FileText, X } from 'lucide-react';
-import { Modal } from '../../../components/ui/Modal';
-import { Button } from '../../../components/ui';
-import { Textarea } from '../../../components/ui/Textarea';
-import { cn } from '../../../shared/utils';
+import { Modal } from '../../../../components/ui/Modal';
+import { Button } from '../../../../components/ui';
+import { Textarea } from '../../../../components/ui/Textarea';
+import { cn } from '../../../../shared/utils';
 
 interface ImportVersionModalProps {
   isOpen: boolean;

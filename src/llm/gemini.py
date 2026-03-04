@@ -429,6 +429,7 @@ class GeminiProvider(LLMProvider):
         article_title = context.get("article_title")
         current_section_title = context.get("current_section_title")
         heading_chain = context.get("heading_chain")
+        learned_rules = context.get("learned_rules")
 
         # 使用Prompt构建器生成完整Prompt
         prompt = builder.build_prompt(
@@ -439,6 +440,7 @@ class GeminiProvider(LLMProvider):
             article_title=article_title,
             current_section_title=current_section_title,
             heading_chain=heading_chain,
+            learned_rules=learned_rules,
         )
 
         return prompt

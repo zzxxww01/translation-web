@@ -3,7 +3,7 @@
  * 显示翻译进度并支持点击跳转
  */
 
-import { cn } from '../../../shared/utils';
+import { cn } from '../../../../shared/utils';
 
 interface ProgressBarProps {
   current: number;

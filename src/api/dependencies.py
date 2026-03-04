@@ -17,6 +17,7 @@ from src.llm.gemini import GeminiProvider
 from src.services.confirmation_service import ConfirmationService
 from src.services.batch_translation_service import BatchTranslationService
 from src.services.version_import_service import VersionImportService
+from src.services.memory_service import TranslationMemoryService
 
 
 # ============ 管理器依赖（单例） ============
@@ -64,9 +65,8 @@ def get_confirmation_service(
     )
 
 
-def get_batch_service(
-    pm: ProjectManager = Depends(get_project_manager)
-) -> BatchTranslationService:
+@lru_cache(maxsize=1)
+def get_batch_service() -> BatchTranslationService:
     """获取 BatchTranslationService 实例"""
     from src.api.utils.llm_factory import get_gemini_provider
 
@@ -75,6 +75,7 @@ def get_batch_service(
     except ValueError as e:
         from src.api.middleware import BadRequestException
         raise BadRequestException(detail=str(e))
+    pm = get_project_manager()
     return BatchTranslationService(
         llm_provider=llm,
         project_manager=pm
@@ -88,6 +89,12 @@ def get_version_service(
     return VersionImportService(project_manager=pm)
 
 
+@lru_cache(maxsize=1)
+def get_memory_service() -> TranslationMemoryService:
+    """获取 TranslationMemoryService 实例（单例）"""
+    return TranslationMemoryService()
+
+
 # ============ 类型别名 ============
 
 ProjectManagerDep = Annotated[ProjectManager, Depends(get_project_manager)]
@@ -97,3 +104,4 @@ LLMProviderDep = Annotated[GeminiProvider, Depends(get_llm_provider)]
 ConfirmationServiceDep = Annotated[ConfirmationService, Depends(get_confirmation_service)]
 BatchServiceDep = Annotated[BatchTranslationService, Depends(get_batch_service)]
 VersionServiceDep = Annotated[VersionImportService, Depends(get_version_service)]
+MemoryServiceDep = Annotated[TranslationMemoryService, Depends(get_memory_service)]

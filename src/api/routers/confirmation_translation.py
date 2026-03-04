@@ -2,6 +2,7 @@
 Confirmation translation/review endpoints.
 """
 
+import asyncio
 from datetime import datetime
 import uuid
 
@@ -15,6 +16,7 @@ from ..dependencies import (
     LLMProviderDep,
     BatchServiceDep,
     ConfirmationServiceDep,
+    MemoryServiceDep,
 )
 from ..middleware import NotFoundException, BadRequestException
 from .confirmation_models import (
@@ -119,6 +121,7 @@ async def retranslate_paragraph(
     request: RetranslateRequest,
     pm: ProjectManagerDep,
     llm: LLMProviderDep,
+    memory_service: MemoryServiceDep,
 ):
     try:
         sections = pm.get_sections(project_id)
@@ -141,7 +144,13 @@ async def retranslate_paragraph(
 
         glossary = get_combined_glossary(project_id)
 
-        context = TranslationContext(glossary=glossary)
+        # 加载已学习的翻译规则
+        learned_rules = memory_service.get_relevant_rules(
+            target_paragraph.source,
+            project_id=project_id,
+        )
+
+        context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
         context.previous_paragraphs = [
             (p.source, p.confirmed)
             for p in target_section.paragraphs[:target_local_index]
@@ -155,6 +164,12 @@ async def retranslate_paragraph(
         instruction = request.instruction or ""
         model_name = request.model or "claude"
 
+        # 记录重翻前的译文
+        old_translation = None
+        if target_paragraph.translations:
+            latest = max(target_paragraph.translations.values(), key=lambda t: t.created_at)
+            old_translation = latest.text
+
         agent = TranslationAgent(llm)
         translation = agent.retranslate_paragraph(
             target_paragraph,
@@ -164,6 +179,18 @@ async def retranslate_paragraph(
         )
 
         pm.save_section(project_id, target_section)
+
+        # 自学习：从重翻指令中后台提取风格偏好规则
+        if instruction and old_translation:
+            asyncio.create_task(
+                memory_service.process_retranslation_instruction(
+                    instruction,
+                    target_paragraph.source,
+                    old_translation,
+                    translation,
+                    project_id=project_id,
+                )
+            )
 
         new_version_id = f"retranslate_{uuid.uuid4().hex[:8]}"
         version_obj = target_paragraph.translations.get(model_name)
@@ -284,3 +311,46 @@ async def run_consistency_review(
 
     except Exception as e:
         raise BadRequestException(detail=f"Failed to run review: {str(e)}")
+
+
+# ============ 翻译规则管理 API ============
+
+
+@router.get("/{project_id}/translation-rules")
+async def get_translation_rules(
+    project_id: str,
+    memory_service: MemoryServiceDep,
+):
+    """查看已学习的翻译规则"""
+    rules = memory_service.get_all_rules(project_id=project_id)
+    return {
+        "rules": [
+            {
+                "id": r.id,
+                "wrong": r.wrong,
+                "right": r.right,
+                "instruction": r.instruction,
+                "rule_type": r.rule_type.value,
+                "category": r.category.value,
+                "source_context": r.source_context,
+                "created_at": r.created_at.isoformat(),
+                "hit_count": r.hit_count,
+                "confidence": r.confidence,
+            }
+            for r in rules
+        ],
+        "total": len(rules),
+    }
+
+
+@router.delete("/{project_id}/translation-rules/{rule_id}")
+async def delete_translation_rule(
+    project_id: str,
+    rule_id: str,
+    memory_service: MemoryServiceDep,
+):
+    """删除指定的翻译规则"""
+    deleted = memory_service.delete_rule(rule_id, project_id=project_id)
+    if not deleted:
+        raise NotFoundException(detail=f"Rule {rule_id} not found")
+    return {"deleted": True, "rule_id": rule_id}

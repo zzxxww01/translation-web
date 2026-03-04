@@ -3,7 +3,7 @@
  * 用于段落版本加载时的占位符
  */
 
-import { cn } from '../../../shared/utils';
+import { cn } from '../../../../shared/utils';
 
 interface SkeletonProps {
   className?: string;

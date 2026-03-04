@@ -1,0 +1,65 @@
+"""Enum types shared across the translation agent domain."""
+
+from enum import Enum
+
+
+class TranslationStrategy(str, Enum):
+    """术语翻译策略"""
+
+    PRESERVE = "preserve"  # 全文保持英文原文
+    FIRST_ANNOTATE = "first_annotate"  # 首次出现翻译+括号注明，后续用中文
+    TRANSLATE = "translate"  # 全文直接使用中文
+
+
+class ParagraphStatus(str, Enum):
+    """段落翻译状态"""
+
+    PENDING = "pending"  # 待翻译
+    TRANSLATING = "translating"  # 翻译中
+    TRANSLATED = "translated"  # 已翻译，待审阅
+    REVIEWING = "reviewing"  # 审阅中
+    MODIFIED = "modified"  # 已修改，待确认
+    APPROVED = "approved"  # 已确认
+
+
+class ProjectStatus(str, Enum):
+    """项目状态"""
+
+    CREATED = "created"  # 刚创建
+    ANALYZING = "analyzing"  # 分析中
+    IN_PROGRESS = "in_progress"  # 翻译进行中
+    REVIEWING = "reviewing"  # 全文审阅中
+    COMPLETED = "completed"  # 已完成
+
+
+class ElementType(str, Enum):
+    """HTML 元素类型"""
+
+    H1 = "h1"
+    H2 = "h2"
+    H3 = "h3"
+    H4 = "h4"
+    P = "p"
+    LI = "li"
+    BLOCKQUOTE = "blockquote"
+    CODE = "code"
+    TABLE = "table"
+    IMAGE = "image"
+
+
+class RuleType(str, Enum):
+    """翻译规则类型"""
+
+    HARD_RULE = "hard_rule"  # 必须遵守（术语、准确性）
+    SOFT_PREFERENCE = "soft_preference"  # 风格偏好
+    STRICT_PROHIBITION = "strict_prohibition"  # 绝对禁止
+
+
+class ErrorCategory(str, Enum):
+    """错误分类（基于 MQM 标准）"""
+
+    TERMINOLOGY = "terminology"  # 术语错误
+    ACCURACY = "accuracy"  # 语义偏差
+    FLUENCY = "fluency"  # 翻译腔
+    STYLE = "style"  # 语气/风格
+    LOCALE = "locale"  # 数字/单位格式

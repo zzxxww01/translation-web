@@ -5,8 +5,8 @@
 
 import { useState, useCallback } from 'react';
 import { RefreshCw, Zap, Briefcase, MessageCircle, X, Cpu } from 'lucide-react';
-import { Button } from '../../../components/ui';
-import { cn } from '../../../shared/utils';
+import { Button } from '../../../../components/ui';
+import { cn } from '../../../../shared/utils';
 
 interface RetranslatePanelProps {
   onRetranslate: (instruction: string, model?: string) => Promise<void>;

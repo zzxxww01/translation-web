@@ -4,9 +4,9 @@
  */
 
 import { useState } from 'react';
-import { cn } from '../../../shared/utils';
-import { Button } from '../../../components/ui';
-import { Textarea } from '../../../components/ui/Textarea';
+import { cn } from '../../../../shared/utils';
+import { Button } from '../../../../components/ui';
+import { Textarea } from '../../../../components/ui/Textarea';
 
 interface EditCardProps {
   value: string;

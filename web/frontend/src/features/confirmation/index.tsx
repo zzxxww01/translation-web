@@ -28,17 +28,17 @@ import { useConfirmationStore } from './stores/confirmationStore';
 
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 
-import { SourcePanel } from './components/SourcePanel';
+import { SourcePanel } from './components/panels/SourcePanel';
 
-import { VersionsPanel } from './components/VersionsPanel';
+import { VersionsPanel } from './components/panels/VersionsPanel';
 
-import { ProgressBar } from './components/ProgressBar';
+import { ProgressBar } from './components/common/ProgressBar';
 
-import { NavigationControls } from './components/NavigationControls';
+import { NavigationControls } from './components/common/NavigationControls';
 
-import { ImportVersionModal } from './components/ImportVersionModal';
+import { ImportVersionModal } from './components/modals/ImportVersionModal';
 
-import { AlignmentModal } from './components/AlignmentModal';
+import { AlignmentModal } from './components/modals/AlignmentModal';
 
 import { Button } from '../../components/ui';
 

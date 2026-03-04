@@ -10,13 +10,13 @@ import { useState } from 'react';
 
 import { Check, XCircle, ChevronRight } from 'lucide-react';
 
-import { Modal } from '../../../components/ui/Modal';
+import { Modal } from '../../../../components/ui/Modal';
 
-import { Button } from '../../../components/ui';
+import { Button } from '../../../../components/ui';
 
-import { cn } from '../../../shared/utils';
+import { cn } from '../../../../shared/utils';
 
-import type { UnalignedItem } from '../types';
+import type { UnalignedItem } from '../../types';
 
 
 

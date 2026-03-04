@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sparkles, BookOpen } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
-import { GlossaryModal } from '../../features/confirmation/components/GlossaryModal';
+import { GlossaryModal } from '../../features/confirmation/components/modals/GlossaryModal';
 
 export function AppLayout() {
   const [isGlossaryOpen, setIsGlossaryOpen] = useState(false);

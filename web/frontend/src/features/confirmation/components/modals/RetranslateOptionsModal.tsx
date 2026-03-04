@@ -5,10 +5,10 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { RefreshCw, Zap, Briefcase, MessageCircle, FileText, Sparkles, Check } from 'lucide-react';
-import { Modal } from '../../../components/ui/Modal';
-import { Button } from '../../../components/ui';
-import { cn } from '../../../shared/utils';
-import { confirmationApi } from '../api/confirmationApi';
+import { Modal } from '../../../../components/ui/Modal';
+import { Button } from '../../../../components/ui';
+import { cn } from '../../../../shared/utils';
+import { confirmationApi } from '../../api/confirmationApi';
 
 interface RetranslateOption {
   id: string;

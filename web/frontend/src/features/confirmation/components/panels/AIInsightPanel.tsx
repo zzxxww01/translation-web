@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { cn } from '../../../shared/utils';
-import type { AIInsight } from '../types';
+import { cn } from '../../../../shared/utils';
+import type { AIInsight } from '../../types';
 
 interface AIInsightPanelProps {
   insight: AIInsight;

@@ -36,7 +36,8 @@ class ConfirmationService:
     def __init__(
         self,
         project_manager: ProjectManager,
-        glossary_manager: GlossaryManager
+        glossary_manager: GlossaryManager,
+        memory_service=None
     ):
         """
         初始化分段确认服务
@@ -44,9 +45,11 @@ class ConfirmationService:
         Args:
             project_manager: 项目管理器
             glossary_manager: 术语表管理器
+            memory_service: 翻译记忆服务（可选，用于自学习）
         """
         self.project_manager = project_manager
         self.glossary_manager = glossary_manager
+        self._memory_service = memory_service
 
         # 实例级性能监控
         self.performance_stats = {
@@ -55,6 +58,14 @@ class ConfirmationService:
             "cache_hits": 0,
             "avg_response_time": 0.0
         }
+
+    @property
+    def memory_service(self):
+        """懒加载翻译记忆服务"""
+        if self._memory_service is None:
+            from src.services.memory_service import TranslationMemoryService
+            self._memory_service = TranslationMemoryService()
+        return self._memory_service
 
     def _load_project_with_sections(self, project_id: str) -> ProjectMeta:
         """加载项目及其章节。"""
@@ -210,6 +221,18 @@ class ConfirmationService:
 
         if not confirmed_paragraph:
             raise ValueError(f"Paragraph {paragraph_id} not found")
+
+        # 自学习：如果用户修改了 AI 译文，后台提取翻译规则
+        ai_translation = self._get_ai_translation_text(confirmed_paragraph)
+        if ai_translation and translation != ai_translation:
+            asyncio.create_task(
+                self._extract_rules_background(
+                    project_id,
+                    confirmed_paragraph.source,
+                    ai_translation,
+                    translation,
+                )
+            )
 
         # 更新确认映射
         confirmation = ParagraphConfirmation(
@@ -666,3 +689,34 @@ class ConfirmationService:
                 self.performance_stats["cache_hits"] / max(self.performance_stats["get_paragraph_calls"], 1) * 100
             )
         }
+
+    def _get_ai_translation_text(self, paragraph) -> Optional[str]:
+        """获取段落最新的 AI 翻译文本"""
+        if not paragraph.translations:
+            return None
+        try:
+            latest = max(
+                paragraph.translations.values(),
+                key=lambda t: t.created_at
+            )
+            return latest.text
+        except Exception:
+            return None
+
+    async def _extract_rules_background(
+        self,
+        project_id: str,
+        source: str,
+        ai_translation: str,
+        user_translation: str,
+    ) -> None:
+        """后台异步提取翻译规则（不阻塞确认流程）"""
+        try:
+            await self.memory_service.process_correction(
+                source,
+                ai_translation,
+                user_translation,
+                project_id=project_id,
+            )
+        except Exception as e:
+            logger.warning("Background rule extraction failed: %s", e)

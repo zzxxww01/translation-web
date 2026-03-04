@@ -5,12 +5,12 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { Search, Plus, Edit, BookOpen, X, Check } from 'lucide-react';
-import { Modal } from '../../../components/ui/Modal';
-import { Button } from '../../../components/ui';
-import { Input } from '../../../components/ui/Input/Input';
-import { glossaryApi } from '../api/glossaryApi';
-import { cn } from '../../../shared/utils';
-import type { GlossaryTerm, TranslationStrategy } from '../types';
+import { Modal } from '../../../../components/ui/Modal';
+import { Button } from '../../../../components/ui';
+import { Input } from '../../../../components/ui/Input/Input';
+import { glossaryApi } from '../../api/glossaryApi';
+import { cn } from '../../../../shared/utils';
+import type { GlossaryTerm, TranslationStrategy } from '../../types';
 
 interface GlossaryModalProps {
   isOpen: boolean;

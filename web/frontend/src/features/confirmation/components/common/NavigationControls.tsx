@@ -4,8 +4,8 @@
  */
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '../../../shared/utils';
-import { Button } from '../../../components/ui';
+import { cn } from '../../../../shared/utils';
+import { Button } from '../../../../components/ui';
 
 interface NavigationControlsProps {
   currentIndex: number;

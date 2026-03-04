@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { Keyboard, X } from 'lucide-react';
-import { cn } from '../../../shared/utils';
-import { DEFAULT_SHORTCUTS } from '../types';
+import { cn } from '../../../../shared/utils';
+import { DEFAULT_SHORTCUTS } from '../../types';
 
 interface KeyboardShortcutsHelpProps {
   shortcuts?: Partial<typeof DEFAULT_SHORTCUTS>;

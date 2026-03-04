@@ -3,17 +3,26 @@
  */
 
 export { ConfirmationFeature } from '../index';
-export { SourcePanel } from './SourcePanel';
-export { VersionsPanel } from './VersionsPanel';
-export { VersionCard } from './VersionCard';
-export { EditCard } from './EditCard';
-export { AIInsightPanel } from './AIInsightPanel';
-export { ProgressBar } from './ProgressBar';
-export { NavigationControls } from './NavigationControls';
-export { ImportVersionModal } from './ImportVersionModal';
-export { AlignmentModal } from './AlignmentModal';
-export { KeyboardShortcutsHelp } from './KeyboardShortcutsHelp';
-export { ConfirmationErrorBoundary } from './ConfirmationErrorBoundary';
-export { Skeleton, VersionCardSkeleton, ParagraphSkeleton } from './Skeleton';
-export { GlossaryModal } from './GlossaryModal';
-export { RetranslatePanel } from './RetranslatePanel';
+
+// Panels
+export { SourcePanel } from './panels/SourcePanel';
+export { VersionsPanel } from './panels/VersionsPanel';
+export { AIInsightPanel } from './panels/AIInsightPanel';
+export { RetranslatePanel } from './panels/RetranslatePanel';
+
+// Cards
+export { VersionCard } from './cards/VersionCard';
+export { EditCard } from './cards/EditCard';
+
+// Modals
+export { ImportVersionModal } from './modals/ImportVersionModal';
+export { AlignmentModal } from './modals/AlignmentModal';
+export { GlossaryModal } from './modals/GlossaryModal';
+export { RetranslateOptionsModal } from './modals/RetranslateOptionsModal';
+
+// Common
+export { ProgressBar } from './common/ProgressBar';
+export { NavigationControls } from './common/NavigationControls';
+export { KeyboardShortcutsHelp } from './common/KeyboardShortcutsHelp';
+export { ConfirmationErrorBoundary } from './common/ConfirmationErrorBoundary';
+export { Skeleton, VersionCardSkeleton, ParagraphSkeleton } from './common/Skeleton';

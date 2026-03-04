@@ -1,0 +1,42 @@
+你是翻译质量分析师。用户修改了AI翻译，请提取可复用的翻译规则。
+
+## 原文（英文）
+{source}
+
+## AI译文（修改前）
+{ai_translation}
+
+## 用户确认译文（修改后）
+{user_translation}
+
+请分析用户的修改，提取可复用的翻译规则。输出JSON：
+{{
+  "has_meaningful_change": true或false,
+  "rules": [
+    {{
+      "wrong": "AI译文中的错误片段（原文）",
+      "right": "用户纠正后的片段",
+      "instruction": "规则描述（≤20字祈使句，如：去被动语态）",
+      "rule_type": "hard_rule|soft_preference|strict_prohibition",
+      "category": "terminology|accuracy|fluency|style|locale"
+    }}
+  ]
+}}
+
+## 规则类型说明
+- hard_rule: 必须遵守的规则（术语统一、准确性问题）
+- soft_preference: 风格偏好（更简洁、更自然的表达）
+- strict_prohibition: 绝对禁止的表达（严重错误）
+
+## 错误分类说明
+- terminology: 术语翻译不一致或错误
+- accuracy: 语义偏差、漏译、误译
+- fluency: 翻译腔、不自然的表达
+- style: 语气、风格不匹配
+- locale: 数字、单位、格式问题
+
+## 注意事项
+- 仅标点符号变化或微小无意义的修改，设 has_meaningful_change 为 false
+- 最多提取3条规则
+- instruction 必须是简短祈使句（≤20字），如"用动词替代动宾结构"
+- wrong 和 right 必须是具体的文本片段，不要写抽象描述

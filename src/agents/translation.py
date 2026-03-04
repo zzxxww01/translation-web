@@ -14,6 +14,7 @@ from ..core.models import (
     Glossary,
     GlossaryTerm,
     StyleGuide,
+    TranslationRule,
 )
 from ..llm.base import LLMProvider
 from ..core.inline_handler import InlineElementExtractor, PlaceholderHandler
@@ -36,6 +37,9 @@ class TranslationContext:
         None  # 父级：标题链 ["# 主标题", "## 二级标题"]
     )
 
+    # 【新增】自学习翻译规则
+    learned_rules: Optional[List[TranslationRule]] = None
+
     def __post_init__(self):
         if self.previous_paragraphs is None:
             self.previous_paragraphs = []
@@ -43,6 +47,8 @@ class TranslationContext:
             self.next_preview = []
         if self.heading_chain is None:
             self.heading_chain = []
+        if self.learned_rules is None:
+            self.learned_rules = []
 
 
 class ContextWindow:
@@ -318,6 +324,10 @@ class TranslationAgent:
         # 3. 父级上下文：标题链
         if hasattr(context, "heading_chain") and context.heading_chain:
             llm_context["heading_chain"] = context.heading_chain
+
+        # 4. 自学习翻译规则
+        if hasattr(context, "learned_rules") and context.learned_rules:
+            llm_context["learned_rules"] = context.learned_rules
 
         return llm_context
 

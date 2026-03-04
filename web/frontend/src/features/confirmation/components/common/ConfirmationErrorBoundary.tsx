@@ -5,7 +5,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { AlertTriangle, RefreshCw } from 'lucide-react';
-import { cn } from '../../../shared/utils';
+import { cn } from '../../../../shared/utils';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
