@@ -77,7 +77,7 @@ export function RetranslatePanel({
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('pro');
+  const [selectedModel, setSelectedModel] = useState<string>('preview');
   const [showModelSelection, setShowModelSelection] = useState(false);
 
   const handleQuickInstruction = useCallback(

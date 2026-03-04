@@ -89,7 +89,7 @@ export function RetranslatePanel({
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('pro');
+  const [selectedModel, setSelectedModel] = useState<string>('preview');
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
 
   // 获取可用模型列表（模拟API调用）

@@ -258,7 +258,7 @@ export const MODEL_OPTIONS: ModelOption[] = [
 /**
  * 默认翻译模型
  */
-export const DEFAULT_MODEL = 'pro';
+export const DEFAULT_MODEL = 'preview';
 
 // ============ 翻译方法相关 ============
 
