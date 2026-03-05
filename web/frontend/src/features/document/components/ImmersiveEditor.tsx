@@ -1,4 +1,4 @@
-import { CheckSquare, RotateCw, Save, X } from 'lucide-react';
+import { Check, CheckSquare, RotateCw, X } from 'lucide-react';
 import { type UIEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '../../../components/ui';
 import { DEFAULT_MODEL, MODEL_OPTIONS, ParagraphStatus } from '../../../shared/constants';
@@ -74,14 +74,13 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
     saveErrorMap,
     retranslatingMap,
     retranslateErrorMap,
-    dirtyCount,
     savingCount,
     retranslatingCount,
     hasPendingWork,
     updateDraft,
-    saveAllNow,
     queueRetranslate,
     confirmParagraph,
+    batchConfirmSelected,
     selectedIds,
     isSelectionMode,
     toggleSelectionMode,
@@ -145,13 +144,6 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      const isSaveShortcut = (event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's';
-      if (isSaveShortcut) {
-        event.preventDefault();
-        void saveAllNow();
-        return;
-      }
-
       if (event.key === 'Escape') {
         event.preventDefault();
         handleClose();
@@ -160,7 +152,7 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [handleClose, saveAllNow]);
+  }, [handleClose]);
 
   const handleBatchRetranslate = useCallback(
     (template: RetranslateTemplate) => {
@@ -205,6 +197,14 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
                   {isAllFilteredSelected ? '取消全选' : '全选'}
                 </button>
                 <button
+                  onClick={() => void batchConfirmSelected()}
+                  disabled={selectedIds.size === 0 || retranslatingCount > 0 || savingCount > 0}
+                  className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
+                  title="批量确认"
+                >
+                  <Check className="h-5 w-5" />
+                </button>
+                <button
                   onClick={() => setShowBatchRetranslateDialog(true)}
                   disabled={selectedIds.size === 0 || retranslatingCount > 0}
                   className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
@@ -214,16 +214,6 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
                 </button>
               </div>
             )}
-
-            <button
-              onClick={() => void saveAllNow()}
-              disabled={dirtyCount === 0}
-              className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
-              title="保存全部"
-            >
-              <Save className="h-5 w-5" />
-            </button>
-
             <select
               value={selectedModel}
               onChange={event => setSelectedModel(event.target.value)}

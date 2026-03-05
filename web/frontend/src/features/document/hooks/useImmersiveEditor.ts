@@ -483,6 +483,99 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     [projectId, queryClient, sectionId, showToast, updateParagraphInSection, updateSectionQueryCache]
   );
 
+  const batchConfirmSelected = useCallback(async () => {
+    if (!projectId || !sectionId || selectedIds.size === 0) return;
+
+    const ids = Array.from(selectedIds);
+    const failedIds = new Set<string>();
+    let successCount = 0;
+
+    setSavingMap(previous => {
+      const next = { ...previous };
+      ids.forEach(id => {
+        next[id] = true;
+      });
+      return next;
+    });
+
+    try {
+      for (const paragraphId of ids) {
+        const paragraph = paragraphsByIdRef.current[paragraphId];
+        if (!paragraph) {
+          failedIds.add(paragraphId);
+          continue;
+        }
+
+        const translation = (draftsRef.current[paragraphId] ?? paragraph.translation ?? '').trim();
+        if (!translation) {
+          failedIds.add(paragraphId);
+          setSaveErrorMap(previous => ({
+            ...previous,
+            [paragraphId]: 'Translation cannot be empty',
+          }));
+          continue;
+        }
+
+        try {
+          await documentApi.confirmParagraph(projectId, sectionId, paragraphId, translation);
+
+          updateParagraphInSection(sectionId, paragraphId, {
+            translation,
+            status: ParagraphStatus.APPROVED,
+            confirmed: translation,
+          });
+          updateSectionQueryCache(paragraphId, {
+            translation,
+            status: ParagraphStatus.APPROVED,
+            confirmed: translation,
+          });
+
+          setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
+          setSaveErrorMap(previous => {
+            const next = { ...previous };
+            delete next[paragraphId];
+            return next;
+          });
+          successCount += 1;
+        } catch (error) {
+          failedIds.add(paragraphId);
+          setSaveErrorMap(previous => ({
+            ...previous,
+            [paragraphId]: toErrorMessage(error),
+          }));
+        }
+      }
+
+      if (successCount > 0) {
+        showToast(`Confirmed ${successCount} paragraphs`, 'success');
+        void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
+        void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
+        void queryClient.invalidateQueries({ queryKey: ['projects'] });
+      }
+      if (failedIds.size > 0) {
+        showToast(`${failedIds.size} paragraphs failed to confirm`, 'error');
+      }
+
+      setSelectedIds(new Set(Array.from(failedIds)));
+    } finally {
+      setSavingMap(previous => {
+        const next = { ...previous };
+        ids.forEach(id => {
+          next[id] = false;
+        });
+        return next;
+      });
+    }
+  }, [
+    projectId,
+    queryClient,
+    sectionId,
+    selectedIds,
+    showToast,
+    updateParagraphInSection,
+    updateSectionQueryCache,
+  ]);
+
   const dirtyCount = useMemo(() => Object.values(dirtyMap).filter(Boolean).length, [dirtyMap]);
   const savingCount = useMemo(() => Object.values(savingMap).filter(Boolean).length, [savingMap]);
   const retranslatingCount = useMemo(
@@ -506,6 +599,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     saveAllNow,
     queueRetranslate,
     confirmParagraph,
+    batchConfirmSelected,
     selectedIds,
     isSelectionMode,
     toggleSelectionMode,
