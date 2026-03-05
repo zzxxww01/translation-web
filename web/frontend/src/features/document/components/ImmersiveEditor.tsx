@@ -111,6 +111,13 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
     () => (isChunkMode ? filteredParagraphs.slice(0, visibleCount) : filteredParagraphs),
     [filteredParagraphs, isChunkMode, visibleCount]
   );
+  const approvedCount = useMemo(
+    () =>
+      paragraphs.filter(
+        paragraph => paragraph.status === ParagraphStatus.APPROVED || Boolean(paragraph.confirmed)
+      ).length,
+    [paragraphs]
+  );
 
   const selectableFilteredIds = useMemo(
     () => filteredParagraphs.slice(0, MAX_BATCH_SELECTION).map(paragraph => paragraph.id),
@@ -170,6 +177,7 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-medium text-text-primary">{latestSection.title}</h2>
+            <span className="text-sm text-text-muted">已确认 {approvedCount}/{paragraphs.length} 段</span>
           </div>
           <div className="flex items-center gap-2">
             <button
