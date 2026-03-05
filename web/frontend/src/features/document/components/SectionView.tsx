@@ -3,9 +3,10 @@
  * 显示选中章节的段落列表
  */
 
-import { Loader2 } from 'lucide-react';
+import { Loader2, Maximize2 } from 'lucide-react';
 import { ParagraphItem } from './ParagraphItem';
 import { SectionNavigation } from './SectionNavigation';
+import { Button } from '../../../components/ui';
 import type { Section, Paragraph } from '../../../shared/types';
 
 interface SectionViewProps {
@@ -16,6 +17,7 @@ interface SectionViewProps {
   isRefetching?: boolean;
   onSectionChange: (section: Section) => void;
   onParagraphSelect: (paragraph: Paragraph) => void;
+  onEnterImmersive?: () => void;
 }
 
 export function SectionView({
@@ -26,6 +28,7 @@ export function SectionView({
   isRefetching = false,
   onSectionChange,
   onParagraphSelect,
+  onEnterImmersive,
 }: SectionViewProps) {
   if (!currentSection || isLoading) {
     return (
@@ -46,10 +49,22 @@ export function SectionView({
       )}
 
       {/* 章节标题 */}
-      <div className="mb-6">
-        <h2 className="text-xl font-bold">{currentSection.title}</h2>
-        {currentSection.title_translation && (
-          <p className="text-text-muted">{currentSection.title_translation}</p>
+      <div className="mb-6 flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-bold">{currentSection.title}</h2>
+          {currentSection.title_translation && (
+            <p className="text-text-muted">{currentSection.title_translation}</p>
+          )}
+        </div>
+        {onEnterImmersive && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={onEnterImmersive}
+            leftIcon={<Maximize2 className="h-4 w-4" />}
+          >
+            沉浸编辑
+          </Button>
         )}
       </div>
 

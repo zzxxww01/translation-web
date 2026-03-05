@@ -6,10 +6,18 @@ import type {
   AnalysisResult,
   SectionAnalysis,
 } from '../../shared/types';
+import { ParagraphStatus } from '../../shared/constants';
 
 export interface WordMeaningMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+export interface UpdateParagraphPayload {
+  translation?: string;
+  status?: ParagraphStatus;
+  edit_source?: string;
+  source_text?: string;
 }
 
 /**
@@ -88,6 +96,17 @@ export const documentApi = {
     apiClient.put(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/confirm`,
       { translation }
+    ),
+
+  updateParagraph: (
+    projectId: string,
+    sectionId: string,
+    paragraphId: string,
+    data: UpdateParagraphPayload
+  ) =>
+    apiClient.put<{ id: string; translation?: string; status: ParagraphStatus }>(
+      `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}`,
+      data
     ),
 
   /**

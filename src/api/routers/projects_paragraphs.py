@@ -2,7 +2,8 @@
 Paragraph translation/update endpoints.
 """
 
-from typing import List
+import asyncio
+from typing import List, Optional
 
 from fastapi import APIRouter
 
@@ -22,6 +23,48 @@ from .projects_models import (
 
 
 router = APIRouter()
+
+
+def _get_latest_translation_text(paragraph) -> Optional[str]:
+    if paragraph.confirmed:
+        return paragraph.confirmed
+    if paragraph.translations:
+        return max(
+            paragraph.translations.values(),
+            key=lambda item: item.created_at,
+        ).text
+    return None
+
+
+def _build_retranslate_instruction(
+    user_instruction: str,
+    source_text: str,
+    current_translation: Optional[str],
+) -> str:
+    """Build a full retranslation prompt so short user input can stay on context."""
+    instruction = user_instruction.strip()
+    if not instruction:
+        return ""
+
+    # Avoid double-wrapping if caller already sends a fully-structured prompt.
+    if "【原文】" in instruction and "【固定要求】" in instruction:
+        return instruction
+
+    _ = source_text
+    _ = current_translation
+    return f"""【重译目标】
+请在不偏离原文的前提下，基于当前段落上下文重写译文。
+
+【用户要求】
+{instruction}
+
+【固定要求】
+1. 以原文为准：信息、事实、逻辑关系不能丢失或改写错误。
+2. 先纠错再优化：若当前译文有误，必须优先修正，再执行用户要求。
+3. 术语一致：专有名词、技术术语、数字和单位保持一致且准确。
+4. 长文风格：表达自然、清晰、可读，避免翻译腔和空洞套话。
+5. 输出约束：仅输出“新的完整译文”，不要解释、不要Markdown。
+"""
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/translate")
@@ -67,11 +110,17 @@ async def translate_paragraph(
         ]
 
         agent = TranslationAgent(llm)
-        if request.instruction:
+        instruction = (request.instruction or "").strip()
+        if instruction:
+            formatted_instruction = _build_retranslate_instruction(
+                instruction,
+                paragraph.source,
+                _get_latest_translation_text(paragraph),
+            )
             translation = agent.retranslate_paragraph(
                 paragraph,
                 context,
-                request.instruction,
+                formatted_instruction,
                 request.model,
             )
         else:
@@ -270,8 +319,27 @@ async def update_paragraph(
     paragraph_id: str,
     request: UpdateParagraphRequest,
     pm: ProjectManagerDep,
+    memory_service: MemoryServiceDep,
 ):
     try:
+        section = pm.get_section(project_id, section_id)
+        if not section:
+            raise FileNotFoundError(f"Section not found: {section_id}")
+
+        existing_paragraph = next(
+            (paragraph for paragraph in section.paragraphs if paragraph.id == paragraph_id),
+            None,
+        )
+        if not existing_paragraph:
+            raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
+
+        previous_translation = existing_paragraph.confirmed
+        if not previous_translation and existing_paragraph.translations:
+            previous_translation = max(
+                existing_paragraph.translations.values(),
+                key=lambda item: item.created_at,
+            ).text
+
         status = ParagraphStatus(request.status) if request.status else None
         paragraph = pm.update_paragraph(
             project_id,
@@ -280,9 +348,32 @@ async def update_paragraph(
             translation=request.translation,
             status=status,
         )
+
+        if (
+            request.translation is not None
+            and request.edit_source == "immersive_auto_save"
+            and previous_translation
+            and previous_translation != request.translation
+        ):
+            asyncio.create_task(
+                memory_service.process_correction(
+                    request.source_text or existing_paragraph.source,
+                    previous_translation,
+                    request.translation,
+                    project_id=project_id,
+                )
+            )
+
+        latest_translation = paragraph.confirmed
+        if not latest_translation and paragraph.translations:
+            latest_translation = max(
+                paragraph.translations.values(),
+                key=lambda item: item.created_at,
+            ).text
+
         return {
             "id": paragraph.id,
-            "translation": paragraph.confirmed,
+            "translation": latest_translation,
             "status": paragraph.status.value,
         }
     except FileNotFoundError as e:

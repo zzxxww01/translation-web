@@ -173,6 +173,7 @@ export const EditPanel: FC<EditPanelProps> = ({
 
   // 重新翻译选项
   const [showRetranslateOptions, setShowRetranslateOptions] = useState(false);
+  const [customRetranslateInstruction, setCustomRetranslateInstruction] = useState('');
 
   // 选中的翻译模型
   const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL);
@@ -192,9 +193,27 @@ export const EditPanel: FC<EditPanelProps> = ({
 
   // 快捷指令
   const quickInstructions = [
-    { id: 'concise', label: '更简洁', icon: <Zap className="h-3 w-3" />, instruction: '请更简洁地翻译，去除冗余表达' },
-    { id: 'professional', label: '更专业', icon: <Briefcase className="h-3 w-3" />, instruction: '请使用更专业的技术术语和行业表达' },
-    { id: 'colloquial', label: '更口语化', icon: <MessageCircle className="h-3 w-3" />, instruction: '请使用更自然流畅的口语化表达' },
+    {
+      id: 'readable',
+      label: '可读性',
+      icon: <Zap className="h-3 w-3" />,
+      instruction:
+        '请提升可读性：拆分过长句，优化语序，减少冗余连接词，保持信息完整和逻辑清晰。',
+    },
+    {
+      id: 'professional',
+      label: '专业化',
+      icon: <Briefcase className="h-3 w-3" />,
+      instruction:
+        '请提升专业表达：术语更准确、行业表述更规范，保留技术细节和判断力度。',
+    },
+    {
+      id: 'idiomatic',
+      label: '更地道',
+      icon: <MessageCircle className="h-3 w-3" />,
+      instruction:
+        '请使中文更地道自然：避免翻译腔，改为符合中文读者习惯的表达，但不改变原意。',
+    },
   ];
 
   useEffect(() => {
@@ -206,6 +225,7 @@ export const EditPanel: FC<EditPanelProps> = ({
     setAssistantInput('');
     setIsAskingWordMeaning(false);
     setWordMenuPosition(null);
+    setCustomRetranslateInstruction('');
     lastSelectedWordRef.current = '';
     lastSelectedAtRef.current = 0;
   }, [paragraph]);
@@ -241,6 +261,13 @@ export const EditPanel: FC<EditPanelProps> = ({
       setIsTranslating(false);
     }
   }, [projectId, sectionId, paragraph, selectedModel, translateMutation, updateParagraph]);
+
+  const handleCustomRetranslate = useCallback(() => {
+    const instruction = customRetranslateInstruction.trim();
+    if (!instruction || isTranslating) return;
+    setCustomRetranslateInstruction('');
+    void handleTranslate(instruction);
+  }, [customRetranslateInstruction, handleTranslate, isTranslating]);
 
   const handleConfirm = useCallback(async () => {
     if (!translation.trim()) {
@@ -612,8 +639,8 @@ export const EditPanel: FC<EditPanelProps> = ({
                 {paragraph.translation && (
                   <div className="relative">
                     {showRetranslateOptions && (
-                      <div className="absolute bottom-full right-0 mb-2 w-48 rounded-lg border border-border bg-bg-primary shadow-lg z-10">
-                        <div className="p-2 space-y-1">
+                      <div className="absolute bottom-full right-0 mb-2 w-80 rounded-lg border border-border bg-bg-primary shadow-lg z-10">
+                        <div className="p-2 space-y-2">
                           <div className="px-3 py-1.5 text-xs text-text-muted font-medium">快捷指令</div>
                           {quickInstructions.map((item) => (
                             <button
@@ -626,6 +653,26 @@ export const EditPanel: FC<EditPanelProps> = ({
                               <span>{item.label}</span>
                             </button>
                           ))}
+                          <div className="border-t border-border-subtle pt-2">
+                            <div className="px-3 py-1 text-xs text-text-muted font-medium">手动输入</div>
+                            <textarea
+                              value={customRetranslateInstruction}
+                              onChange={event => setCustomRetranslateInstruction(event.target.value)}
+                              placeholder="输入重译要求（例如：保留“生态位”含义，语气更克制）"
+                              className="h-20 w-full resize-none rounded border border-border-subtle bg-bg-secondary px-2 py-1.5 text-sm text-text-primary outline-none focus:border-primary-500"
+                              disabled={isTranslating}
+                            />
+                            <div className="mt-2 flex justify-end">
+                              <Button
+                                variant="secondary"
+                                size="sm"
+                                onClick={handleCustomRetranslate}
+                                disabled={!customRetranslateInstruction.trim() || isTranslating}
+                              >
+                                发送并重译
+                              </Button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}

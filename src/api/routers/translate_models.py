@@ -19,6 +19,7 @@ class PostTranslateResponse(BaseModel):
 
 class GenerateTitleRequest(BaseModel):
     content: str
+    instruction: Optional[str] = None
 
 
 class GenerateTitleResponse(BaseModel):

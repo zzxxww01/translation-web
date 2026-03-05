@@ -25,6 +25,35 @@ from .translate_models import (
 router = APIRouter()
 
 
+def _build_title_prompt(content: str, instruction: str) -> str:
+    normalized_instruction = instruction.strip() or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
+    return f"""你是semiAnalysis中文编辑，负责生成高质量中文标题。
+
+【内容】
+{content}
+
+【用户要求】
+{normalized_instruction}
+
+【固定要求】
+1. 忠实原文：不能虚构事实、不能改变结论、不能夸张误导。
+2. 长度约束：每个标题必须 <= 20 个汉字，建议 12-18 个字。
+3. 风格约束：简洁有信息量，避免空泛口号和模板化措辞。
+4. 表达要求：可适度增强可读性与吸引力，但不能偏离内容核心。
+5. 禁止项：不要输出解释，不要输出Markdown，不要加编号前缀。
+
+请返回严格 JSON，包含以下键：
+{{
+  "suspense": "...",
+  "data": "...",
+  "counter_intuitive": "...",
+  "pain_point": "...",
+  "minimal": "...",
+  "metaphor": "..."
+}}
+"""
+
+
 @router.post("/translate/post", response_model=PostTranslateResponse)
 async def translate_post(request: PostTranslateRequest):
     """Translate a post to Chinese."""
@@ -115,15 +144,7 @@ async def generate_title(request: GenerateTitleRequest):
     if not request.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
-    prompt = f"""You are a professional editor. Generate 6 distinct Chinese titles for the content.
-Hard constraint: each title must be no more than 20 Chinese characters (20字以内). If a title exceeds 20 Chinese characters, it is invalid and must be rewritten to fit.
-Keep them concise (prefer 12-18 characters), avoid long clauses, and avoid extra punctuation.
-Titles should be more interesting and engaging. Prefer vivid, specific wording, curiosity gap, and light wordplay; avoid bland or generic titles.
-Return strict JSON with keys: suspense, data, counter_intuitive, pain_point, minimal, metaphor. Do not use Markdown tags, code fences, or extra text.
-
-Content:
-{request.content}
-"""
+    prompt = _build_title_prompt(request.content, request.instruction or "")
 
     timeout_s = int(os.getenv("POST_TITLE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "30")))
     try:

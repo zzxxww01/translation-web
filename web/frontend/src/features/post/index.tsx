@@ -95,6 +95,7 @@ export function PostFeature() {
 
   // 状态
   const [customInstruction, setCustomInstruction] = useState('');
+  const [titleInstruction, setTitleInstruction] = useState('');
   const [showMoreInstructions, setShowMoreInstructions] = useState(false);
   const [generatedTitles, setGeneratedTitles] = useState<string[]>([]);
 
@@ -196,7 +197,10 @@ export function PostFeature() {
 
     setLoading(true);
     try {
-      const result = await generateTitleMutation.mutateAsync({ content });
+      const result = await generateTitleMutation.mutateAsync({
+        content,
+        instruction: titleInstruction.trim() || undefined,
+      });
       // 解析标题（按行分割）
       const titles = result.title.split('\n').filter(t => t.trim()).slice(0, 6);
       setGeneratedTitles(titles);
@@ -210,6 +214,7 @@ export function PostFeature() {
     setOriginalText('');
     clear();
     setGeneratedTitles([]);
+    setTitleInstruction('');
   };
 
   // 当前版本内容
@@ -463,6 +468,20 @@ export function PostFeature() {
                 >
                   ✨ 生成
                 </Button>
+              </div>
+
+              <div className="mb-3">
+                <input
+                  type="text"
+                  value={titleInstruction}
+                  onChange={(e) => setTitleInstruction(e.target.value)}
+                  placeholder="标题要求（可选），例如：突出“生态位”含义，语气克制"
+                  className="w-full rounded-lg border border-border bg-bg-primary px-4 py-2.5 text-sm text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  disabled={isLoading}
+                />
+                <p className="mt-1 text-xs text-text-muted">
+                  你可只写一两个词，系统会自动补全为完整标题生成约束 prompt。
+                </p>
               </div>
 
               {generatedTitles.length > 0 ? (

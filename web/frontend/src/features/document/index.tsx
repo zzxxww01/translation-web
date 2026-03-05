@@ -1,4 +1,5 @@
 ﻿import { useState, useCallback, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDocumentStore } from '../../shared/stores';
 import { useSection, useFullTranslate, useProject } from './hooks';
 import { documentApi } from './api';
@@ -6,11 +7,13 @@ import { DocumentSidebar } from './components/DocumentSidebar';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { SectionView } from './components/SectionView';
 import { EditPanel } from './components/EditPanel';
+import { ImmersiveEditor } from './components/ImmersiveEditor';
 import { NewProjectModal } from './components/NewProjectModal';
 import { TranslationMethod } from '../../shared/constants';
 import type { Paragraph, Section } from '../../shared/types';
 
 export function DocumentFeature() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const {
     currentProject,
     setCurrentProject,
@@ -44,15 +47,30 @@ export function DocumentFeature() {
   } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
 
   const { startTranslation, stopTranslation } = useFullTranslate();
+  const isImmersiveMode = searchParams.get('immersive') === '1';
 
   const displaySection = useMemo(() => sectionData || currentSection, [sectionData, currentSection]);
+
+  const setImmersiveMode = useCallback(
+    (enabled: boolean) => {
+      const next = new URLSearchParams(searchParams);
+      if (enabled) {
+        next.set('immersive', '1');
+      } else {
+        next.delete('immersive');
+      }
+      setSearchParams(next);
+    },
+    [searchParams, setSearchParams]
+  );
 
   const handleSelectSection = useCallback(
     (section: Section) => {
       setSelectedSectionId(section.section_id);
       setCurrentParagraph(null);
+      setImmersiveMode(false);
     },
-    [setCurrentParagraph]
+    [setCurrentParagraph, setImmersiveMode]
   );
 
   const handleSelectSectionById = useCallback(
@@ -71,6 +89,15 @@ export function DocumentFeature() {
     },
     [setCurrentParagraph]
   );
+
+  const handleEnterImmersive = useCallback(() => {
+    setCurrentParagraph(null);
+    setImmersiveMode(true);
+  }, [setCurrentParagraph, setImmersiveMode]);
+
+  const handleExitImmersive = useCallback(() => {
+    setImmersiveMode(false);
+  }, [setImmersiveMode]);
 
   const getCurrentParagraphIndex = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return -1;
@@ -211,6 +238,7 @@ export function DocumentFeature() {
         isRefetching={sectionLoading}
         onSectionChange={handleSelectSection}
         onParagraphSelect={handleSelectParagraph}
+        onEnterImmersive={handleEnterImmersive}
       />
     );
   };
@@ -247,6 +275,14 @@ export function DocumentFeature() {
         />
       )}
 
+      {isImmersiveMode && currentProject && displaySection && (
+        <ImmersiveEditor
+          projectId={currentProject.id}
+          section={displaySection}
+          onClose={handleExitImmersive}
+        />
+      )}
+
       <NewProjectModal
         isOpen={isNewProjectModalOpen}
         onClose={() => setIsNewProjectModalOpen(false)}
@@ -255,4 +291,3 @@ export function DocumentFeature() {
     </div>
   );
 }
-

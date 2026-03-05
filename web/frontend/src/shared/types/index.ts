@@ -159,6 +159,7 @@ export interface OptimizePostResult {
 
 export interface GenerateTitleDto {
   content: string;
+  instruction?: string;
 }
 
 export interface GenerateTitleResult {

@@ -44,6 +44,8 @@ class WordMeaningResponse(BaseModel):
 class UpdateParagraphRequest(BaseModel):
     translation: Optional[str] = None
     status: Optional[str] = None
+    edit_source: Optional[str] = None
+    source_text: Optional[str] = None
 
 
 class ProjectResponse(BaseModel):
