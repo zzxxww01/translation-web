@@ -36,36 +36,36 @@ export const SectionList: FC<SectionListProps> = ({
             key={section.section_id}
             onClick={() => onSelectSection(section.section_id)}
             className={cn(
-              'w-full rounded-lg p-3.5 text-left transition-colors',
+              'relative w-full rounded-lg p-2.5 text-left transition-all border-l-2 border-transparent',
               isActive
-                ? 'bg-primary-50 text-primary-700'
-                : 'hover:bg-bg-tertiary'
+                ? 'border-l-primary-500 bg-primary-50/50 text-primary-700'
+                : 'hover:bg-bg-tertiary hover:shadow-sm'
             )}
           >
-            <div className="flex items-start gap-2">
+            <div className="flex items-start gap-1.5">
               {/* 状态图标 */}
               <div className="mt-0.5 flex-shrink-0">
                 {section.is_complete ? (
-                  <CheckCircle className="h-5 w-5 text-success" />
+                  <CheckCircle className="h-4 w-4 text-success" />
                 ) : (
-                  <Clock className="h-5 w-5 text-text-muted" />
+                  <Clock className="h-4 w-4 text-text-muted" />
                 )}
               </div>
 
               {/* 章节信息 */}
               <div className="min-w-0 flex-1">
-                <div className="truncate text-base font-medium">
+                <div className="truncate text-sm font-medium">
                   {section.title}
                 </div>
                 {section.title_translation && (
-                  <div className="truncate text-sm text-text-muted">
+                  <div className="truncate text-xs text-text-muted">
                     {section.title_translation}
                   </div>
                 )}
-                <div className="mt-1.5 flex items-center gap-2 text-sm text-text-muted">
-                  <span>{section.approved_count}/{section.total_paragraphs} 已确认</span>
+                <div className="mt-1 flex items-center gap-1.5 text-xs text-text-muted">
+                  <span>{section.approved_count}/{section.total_paragraphs}</span>
                   {/* 进度条 */}
-                  <div className="h-1.5 w-20 flex-1 rounded-full bg-border">
+                  <div className="h-1 w-16 rounded-full bg-border">
                     <div
                       className="h-full rounded-full bg-primary-500"
                       style={{ width: `${percent}%` }}

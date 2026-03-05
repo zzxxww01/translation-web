@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { BookOpen, Zap, Download, Cpu, Layers } from 'lucide-react';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
-import { Button } from '../../../components/ui';
+import { Button, CollapsibleSection } from '../../../components/ui';
 import { useExportProject } from '../hooks';
 import {
   MODEL_OPTIONS,
@@ -67,15 +67,15 @@ export function DocumentSidebar({
   return (
     <aside className="flex h-full w-72 flex-col border-r border-border-subtle bg-bg-secondary">
       {/* 项目选择 */}
-      <div className="border-b border-border-subtle p-4">
+      <div className="border-b border-border-subtle p-3">
         <ProjectSelector onNewProject={onNewProject} />
       </div>
 
       {/* 章节列表 */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div className="flex-1 overflow-y-auto p-3">
         {sections.length > 0 ? (
           <>
-            <h3 className="mb-3 text-sm font-bold text-text-secondary">章节列表</h3>
+            <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-text-muted">章节列表</h3>
             <SectionList
               sections={sections}
               activeSectionId={activeSectionId || undefined}
@@ -92,7 +92,7 @@ export function DocumentSidebar({
 
       {/* 进度条和操作按钮 */}
       {totalParagraphs > 0 && (
-        <div className="border-t border-border-subtle p-4 space-y-3">
+        <div className="border-t border-border-subtle p-3 space-y-3">
           <div>
             <div className="mb-2 flex justify-between text-sm">
               <span className="text-text-secondary font-medium">翻译进度</span>
@@ -139,47 +139,7 @@ export function DocumentSidebar({
           {/* 全文一键翻译按钮 */}
           {onFullTranslate && projectId && (
             <div className="space-y-2">
-              {/* 翻译方法选择 */}
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-text-muted" />
-                  <select
-                    value={selectedMethod}
-                    onChange={(e) => setSelectedMethod(e.target.value as TranslationMethod)}
-                    className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-sm"
-                    disabled={isFullTranslating}
-                  >
-                    {TRANSLATION_METHOD_OPTIONS.map((method) => (
-                      <option key={method.id} value={method.id}>
-                        {method.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {selectedMethodOption && (
-                  <p className="text-xs text-text-muted pl-6">
-                    {selectedMethodOption.description}
-                  </p>
-                )}
-              </div>
-
-              {/* 模型选择 */}
-              <div className="flex items-center gap-2">
-                <Cpu className="h-4 w-4 text-text-muted" />
-                <select
-                  value={selectedModel}
-                  onChange={(e) => setSelectedModel(e.target.value)}
-                  className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-sm"
-                  disabled={isFullTranslating}
-                >
-                  {MODEL_OPTIONS.map((model) => (
-                    <option key={model.id} value={model.id}>
-                      {model.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
+              {/* 全文一键翻译按钮 - 始终可见 */}
               <Button
                 variant="primary"
                 size="md"
@@ -190,35 +150,72 @@ export function DocumentSidebar({
               >
                 {isFullTranslating ? '翻译中...' : '全文一键翻译'}
               </Button>
+
+              {/* 高级选项 - 可折叠 */}
+              <CollapsibleSection title="高级选项" defaultOpen={false}>
+                {/* 翻译方法和模型 - 合并为一行 */}
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <Layers className="h-3.5 w-3.5 text-text-muted flex-shrink-0" />
+                    <select
+                      value={selectedMethod}
+                      onChange={(e) => setSelectedMethod(e.target.value as TranslationMethod)}
+                      className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
+                      disabled={isFullTranslating}
+                      title={selectedMethodOption?.description}
+                    >
+                      {TRANSLATION_METHOD_OPTIONS.map((method) => (
+                        <option key={method.id} value={method.id}>
+                          {method.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <Cpu className="h-3.5 w-3.5 text-text-muted flex-shrink-0" />
+                    <select
+                      value={selectedModel}
+                      onChange={(e) => setSelectedModel(e.target.value)}
+                      className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
+                      disabled={isFullTranslating}
+                    >
+                      {MODEL_OPTIONS.map((model) => (
+                        <option key={model.id} value={model.id}>
+                          {model.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </CollapsibleSection>
             </div>
           )}
 
           {/* 导出按钮 */}
           {projectId && (
-            <div className="space-y-2">
+            <CollapsibleSection title="导出文章" defaultOpen={false}>
               <div className="flex items-center gap-2">
-                <label className="text-xs text-text-muted">导出格式:</label>
                 <select
                   value={exportFormat}
                   onChange={(e) => setExportFormat(e.target.value as 'markdown' | 'html')}
-                  className="flex-1 rounded-md border border-border bg-bg-primary px-3 py-1.5 text-sm"
+                  className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
                   disabled={exportMutation.isPending}
                 >
-                  <option value="markdown">Markdown (.md)</option>
-                  <option value="html">HTML (.html)</option>
+                  <option value="markdown">Markdown</option>
+                  <option value="html">HTML</option>
                 </select>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={handleExport}
+                  disabled={exportMutation.isPending}
+                  leftIcon={<Download className="h-4 w-4" />}
+                >
+                  {exportMutation.isPending ? '导出中...' : '导出'}
+                </Button>
               </div>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleExport}
-                disabled={exportMutation.isPending}
-                leftIcon={<Download className="h-5 w-5" />}
-                className="w-full"
-              >
-                {exportMutation.isPending ? '导出中...' : '导出文章'}
-              </Button>
-            </div>
+            </CollapsibleSection>
           )}
         </div>
       )}

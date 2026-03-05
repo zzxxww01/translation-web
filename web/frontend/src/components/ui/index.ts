@@ -14,6 +14,7 @@ export { Tabs, TabsWithPanel } from './Tabs';
 export { ToastProvider, useToast, showToast } from './Toast';
 export { ErrorBoundary } from './ErrorBoundary';
 export { ConfirmDialog, useConfirmDialog } from './ConfirmDialog';
+export { CollapsibleSection } from './CollapsibleSection';
 
 export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
 export type { BadgeProps, BadgeVariant } from './Badge';

@@ -21,7 +21,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-1.5">
       <select
         value={currentProject?.id || ''}
         onChange={(e) => handleProjectChange(e.target.value)}
@@ -50,7 +50,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
           className="flex-1"
           title="新建项目"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-3.5 w-3.5" />
           新建
         </Button>
       </div>
