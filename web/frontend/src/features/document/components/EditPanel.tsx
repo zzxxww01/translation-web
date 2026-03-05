@@ -1,5 +1,5 @@
 import { type FC, useEffect, useState, useCallback, useRef, type MouseEvent as ReactMouseEvent } from 'react';
-import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, ChevronDown, Cpu } from 'lucide-react';
+import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, ChevronDown, Cpu, Maximize2 } from 'lucide-react';
 import { useDocumentStore } from '../../../shared/stores';
 import { useTranslateParagraph, useConfirmParagraph, useQueryWordMeaning } from '../hooks';
 import { Button } from '../../../components/ui';
@@ -15,6 +15,7 @@ interface EditPanelProps {
   onPrev?: () => void;
   currentIndex?: number;
   totalCount?: number;
+  onEnterImmersive?: () => void;
 }
 
 type AssistantChatMessage = {
@@ -163,6 +164,7 @@ export const EditPanel: FC<EditPanelProps> = ({
   onPrev,
   currentIndex = 0,
   totalCount = 0,
+  onEnterImmersive,
 }) => {
   const { updateParagraph } = useDocumentStore();
   const translateMutation = useTranslateParagraph();
@@ -558,6 +560,19 @@ export const EditPanel: FC<EditPanelProps> = ({
               >
                 下一段
               </Button>
+              {onEnterImmersive && (
+                <>
+                  <div className="mx-2 h-8 w-px bg-border-subtle" />
+                  <Button
+                    variant="secondary"
+                    size="md"
+                    onClick={onEnterImmersive}
+                    leftIcon={<Maximize2 className="h-4 w-4" />}
+                  >
+                    沉浸编辑
+                  </Button>
+                </>
+              )}
               <div className="mx-3 h-8 w-px bg-border-subtle" />
               <button
                 onClick={onClose}

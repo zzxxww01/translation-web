@@ -3,7 +3,6 @@
   Filter,
   Minimize2,
   Save,
-  Search,
 } from 'lucide-react';
 import { type UIEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '../../../components/ui';
@@ -61,12 +60,9 @@ function matchesFilter(mode: FilterMode, paragraph: Paragraph, isDirty: boolean)
 
 export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditorProps) {
   const paragraphs = section.paragraphs ?? [];
-  const [searchKeyword, setSearchKeyword] = useState('');
   const [filterMode, setFilterMode] = useState<FilterMode>('all');
   const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
   const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK_SIZE);
-  const [selectedTemplate, setSelectedTemplate] = useState<RetranslateTemplate>('readable');
-  const [customRetranslateInstruction, setCustomRetranslateInstruction] = useState('');
 
   const {
     drafts,
@@ -89,26 +85,12 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
     paragraphs,
   });
 
-  const resolvedRetranslateInstruction = useMemo(() => {
-    const custom = customRetranslateInstruction.trim();
-    if (custom) {
-      return custom;
-    }
-    return RETRANSLATE_TEMPLATES.find(item => item.id === selectedTemplate)?.instruction;
-  }, [customRetranslateInstruction, selectedTemplate]);
-
   const filteredParagraphs = useMemo(() => {
-    const keyword = searchKeyword.trim().toLowerCase();
     return paragraphs.filter(paragraph => {
-      const draft = drafts[paragraph.id] ?? paragraph.translation ?? '';
-      const matchesKeyword =
-        !keyword ||
-        paragraph.source.toLowerCase().includes(keyword) ||
-        draft.toLowerCase().includes(keyword);
       const matchesStatus = matchesFilter(filterMode, paragraph, Boolean(dirtyMap[paragraph.id]));
-      return matchesKeyword && matchesStatus;
+      return matchesStatus;
     });
-  }, [drafts, dirtyMap, filterMode, paragraphs, searchKeyword]);
+  }, [dirtyMap, filterMode, paragraphs]);
 
   const isChunkMode = filteredParagraphs.length > CHUNK_THRESHOLD;
 
@@ -161,16 +143,44 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-bg-primary">
-      <div className="border-b border-border-subtle bg-bg-primary/95 px-6 py-4 backdrop-blur">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
+      <div className="border-b border-border-subtle bg-bg-primary/95 px-6 py-3 backdrop-blur">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-4">
             <h2 className="text-lg font-semibold text-text-primary">沉浸编辑 · {section.title}</h2>
-            <p className="text-sm text-text-muted">
-              共 {paragraphs.length} 段 · 已筛选 {filteredParagraphs.length} 段 ·
-              未保存 {dirtyCount} · 保存中 {savingCount} · 重译中 {retranslatingCount}
-            </p>
+            <span className="text-sm text-text-muted">
+              共 {paragraphs.length} 段 · 未保存 {dirtyCount} · 保存中 {savingCount} · 重译中 {retranslatingCount}
+            </span>
           </div>
           <div className="flex items-center gap-2">
+            <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-1.5">
+              <Filter className="h-4 w-4 text-text-muted" />
+              <select
+                value={filterMode}
+                onChange={event => setFilterMode(event.target.value as FilterMode)}
+                className="bg-transparent text-sm text-text-primary outline-none"
+              >
+                <option value="all">全部</option>
+                <option value="translated">已翻译</option>
+                <option value="approved">已确认</option>
+                <option value="modified">已修改</option>
+              </select>
+            </label>
+
+            <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-1.5">
+              <Cpu className="h-4 w-4 text-text-muted" />
+              <select
+                value={selectedModel}
+                onChange={event => setSelectedModel(event.target.value)}
+                className="bg-transparent text-sm text-text-primary outline-none"
+              >
+                {MODEL_OPTIONS.map(model => (
+                  <option key={model.id} value={model.id}>
+                    {model.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
             <Button
               variant="secondary"
               size="sm"
@@ -190,75 +200,10 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
             </Button>
           </div>
         </div>
-
-        <div className="mt-3 grid gap-2 lg:grid-cols-[minmax(220px,1fr)_200px_220px]">
-          <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-2">
-            <Search className="h-4 w-4 text-text-muted" />
-            <input
-              value={searchKeyword}
-              onChange={event => setSearchKeyword(event.target.value)}
-              placeholder="搜索原文或译文"
-              className="w-full bg-transparent text-sm text-text-primary outline-none placeholder:text-text-muted"
-            />
-          </label>
-
-          <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-2">
-            <Filter className="h-4 w-4 text-text-muted" />
-            <select
-              value={filterMode}
-              onChange={event => setFilterMode(event.target.value as FilterMode)}
-              className="w-full bg-transparent text-sm text-text-primary outline-none"
-            >
-              <option value="all">全部</option>
-              <option value="translated">已翻译</option>
-              <option value="approved">已确认</option>
-              <option value="modified">已修改</option>
-            </select>
-          </label>
-
-          <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-2">
-            <Cpu className="h-4 w-4 text-text-muted" />
-            <select
-              value={selectedModel}
-              onChange={event => setSelectedModel(event.target.value)}
-              className="w-full bg-transparent text-sm text-text-primary outline-none"
-            >
-              {MODEL_OPTIONS.map(model => (
-                <option key={model.id} value={model.id}>
-                  {model.name}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <div className="mt-2 grid gap-2 lg:grid-cols-[260px_1fr]">
-          <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-2">
-            <span className="text-xs text-text-muted">重译模板</span>
-            <select
-              value={selectedTemplate}
-              onChange={event => setSelectedTemplate(event.target.value as RetranslateTemplate)}
-              className="w-full bg-transparent text-sm text-text-primary outline-none"
-            >
-              {RETRANSLATE_TEMPLATES.map(item => (
-                <option key={item.id} value={item.id}>
-                  {item.label}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <input
-            value={customRetranslateInstruction}
-            onChange={event => setCustomRetranslateInstruction(event.target.value)}
-            placeholder="手动输入重译要求（填写后会覆盖模板）"
-            className="rounded-lg border border-border-subtle bg-bg-secondary px-3 py-2 text-sm text-text-primary outline-none placeholder:text-text-muted focus:border-primary-500"
-          />
-        </div>
       </div>
 
-      <div className="flex-1 overflow-auto px-6 py-4" onScroll={handleListScroll}>
-        <div className="space-y-4">
+      <div className="flex-1 overflow-auto px-6 py-2" onScroll={handleListScroll}>
+        <div className="space-y-1">
           {displayedParagraphs.map(paragraph => (
             <ImmersiveRow
               key={paragraph.id}
@@ -271,7 +216,8 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
               retranslateError={retranslateErrorMap[paragraph.id]}
               onChange={value => updateDraft(paragraph.id, value)}
               onSaveNow={() => void saveNow(paragraph.id)}
-              onRetranslate={() => queueRetranslate(paragraph.id, selectedModel, resolvedRetranslateInstruction)}
+              onRetranslate={(instruction?: string) => queueRetranslate(paragraph.id, selectedModel, instruction)}
+              selectedModel={selectedModel}
             />
           ))}
         </div>

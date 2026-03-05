@@ -272,6 +272,7 @@ export function DocumentFeature() {
           onPrev={handlePrevParagraph}
           currentIndex={currentIndex}
           totalCount={totalCount}
+          onEnterImmersive={handleEnterImmersive}
         />
       )}
 
