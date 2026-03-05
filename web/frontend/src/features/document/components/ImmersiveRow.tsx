@@ -151,7 +151,7 @@ export function ImmersiveRow({
         </div>
       )}
 
-      <div className="grid gap-3 lg:grid-cols-2" onClick={event => event.stopPropagation()}>
+      <div className="grid gap-3 lg:grid-cols-2">
         <div className={`min-h-20 overflow-auto rounded p-2 ${isApproved ? 'bg-green-50' : 'bg-bg-secondary'}`}>
           {renderSource(paragraph, isApproved)}
         </div>
@@ -159,6 +159,7 @@ export function ImmersiveRow({
         <textarea
           value={draft}
           onChange={event => onChange(event.target.value)}
+          onClick={event => event.stopPropagation()}
           rows={calculateRows(draft)}
           className={`min-h-20 w-full resize-y rounded border border-border p-2 text-base leading-7 text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-1 focus:ring-primary-500 ${
             isApproved ? 'bg-green-50' : 'bg-bg-secondary'
