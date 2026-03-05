@@ -1,12 +1,14 @@
-﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDocumentStore } from '../../../shared/stores';
-import { DEFAULT_MODEL, ParagraphStatus } from '../../../shared/constants';
+import { useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useToast } from '../../../components/ui';
-import type { Paragraph } from '../../../shared/types';
+import { DEFAULT_MODEL, ParagraphStatus } from '../../../shared/constants';
+import { useDocumentStore } from '../../../shared/stores';
+import type { Paragraph, Section } from '../../../shared/types';
 import { documentApi } from '../api';
 
 const AUTO_SAVE_DELAY_MS = 800;
 const MAX_PARALLEL_RETRANSLATE = 3;
+const MAX_BATCH_SELECTION = 50;
 
 type BooleanStateMap = Record<string, boolean>;
 type ErrorStateMap = Record<string, string | null>;
@@ -27,7 +29,7 @@ function toErrorMessage(error: unknown): string {
   if (error instanceof Error && error.message) {
     return error.message;
   }
-  return '操作失败，请稍后重试';
+  return 'Request failed. Please retry.';
 }
 
 function pruneMapByIds<T>(input: Record<string, T>, validIds: Set<string>): Record<string, T> {
@@ -42,6 +44,7 @@ function pruneMapByIds<T>(input: Record<string, T>, validIds: Set<string>): Reco
 
 export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImmersiveEditorOptions) {
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
   const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
 
   const [drafts, setDrafts] = useState<Record<string, string>>({});
@@ -50,6 +53,8 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   const [saveErrorMap, setSaveErrorMap] = useState<ErrorStateMap>({});
   const [retranslatingMap, setRetranslatingMap] = useState<BooleanStateMap>({});
   const [retranslateErrorMap, setRetranslateErrorMap] = useState<ErrorStateMap>({});
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const saveTimersRef = useRef<Record<string, ReturnType<typeof setTimeout>>>({});
   const retranslateQueueRef = useRef<RetranslateTask[]>([]);
@@ -108,6 +113,25 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     };
   }, []);
 
+  const updateSectionQueryCache = useCallback(
+    (paragraphId: string, updates: Partial<Paragraph>) => {
+      if (!projectId || !sectionId) return;
+      queryClient.setQueryData<Section | undefined>(
+        ['section', projectId, sectionId],
+        previous => {
+          if (!previous?.paragraphs) return previous;
+          return {
+            ...previous,
+            paragraphs: previous.paragraphs.map(paragraph =>
+              paragraph.id === paragraphId ? { ...paragraph, ...updates } : paragraph
+            ),
+          };
+        }
+      );
+    },
+    [projectId, queryClient, sectionId]
+  );
+
   const scheduleAutoSave = useCallback((paragraphId: string) => {
     const existingTimer = saveTimersRef.current[paragraphId];
     if (existingTimer) {
@@ -148,6 +172,10 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           translation: persistedTranslation,
           status: persistedStatus,
         });
+        updateSectionQueryCache(paragraphId, {
+          translation: persistedTranslation,
+          status: persistedStatus,
+        });
 
         setSaveErrorMap(previous => {
           const next = { ...previous };
@@ -170,7 +198,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
       }
     },
-    [projectId, scheduleAutoSave, sectionId, updateParagraphInSection]
+    [projectId, scheduleAutoSave, sectionId, updateParagraphInSection, updateSectionQueryCache]
   );
 
   useEffect(() => {
@@ -258,9 +286,13 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             translation,
             status: ParagraphStatus.TRANSLATED,
           });
+          updateSectionQueryCache(paragraphId, {
+            translation,
+            status: ParagraphStatus.TRANSLATED,
+          });
 
           if (wasDirty && previousDraft !== translation) {
-            showToast(`段落 #${paragraph.index} 已使用重译结果覆盖当前编辑`, 'info');
+            showToast(`Paragraph #${paragraph.index} was replaced by retranslation`, 'info');
           }
         })
         .catch(error => {
@@ -268,7 +300,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             ...previous,
             [paragraphId]: toErrorMessage(error),
           }));
-          showToast('重新翻译失败，请稍后重试', 'error');
+          showToast('Retranslate failed. Please retry.', 'error');
         })
         .finally(() => {
           activeRetranslateRef.current -= 1;
@@ -276,7 +308,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           processRetranslateQueueRef.current();
         });
     }
-  }, [projectId, sectionId, showToast, updateParagraphInSection]);
+  }, [projectId, sectionId, showToast, updateParagraphInSection, updateSectionQueryCache]);
 
   useEffect(() => {
     processRetranslateQueueRef.current = processRetranslateQueue;
@@ -284,9 +316,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
   const queueRetranslate = useCallback(
     (paragraphId: string, model = DEFAULT_MODEL, instruction?: string) => {
-      const isAlreadyQueued = retranslateQueueRef.current.some(
-        task => task.paragraphId === paragraphId
-      );
+      const isAlreadyQueued = retranslateQueueRef.current.some(task => task.paragraphId === paragraphId);
       if (isAlreadyQueued || retranslatingMapRef.current[paragraphId]) {
         return;
       }
@@ -295,6 +325,162 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       processRetranslateQueueRef.current();
     },
     []
+  );
+
+  const toggleSelectionMode = useCallback(() => {
+    setIsSelectionMode(previous => {
+      if (previous) {
+        setSelectedIds(new Set());
+      }
+      return !previous;
+    });
+  }, []);
+
+  const toggleSelection = useCallback((paragraphId: string) => {
+    setSelectedIds(previous => {
+      const next = new Set(previous);
+      if (next.has(paragraphId)) {
+        next.delete(paragraphId);
+      } else {
+        if (next.size >= MAX_BATCH_SELECTION) {
+          return previous;
+        }
+        next.add(paragraphId);
+      }
+      return next;
+    });
+  }, []);
+
+  const toggleSelectAll = useCallback(
+    (candidateIds?: string[]) => {
+      const baseIds = candidateIds ?? paragraphs.map(paragraph => paragraph.id);
+      const idsToSelect = baseIds.slice(0, MAX_BATCH_SELECTION);
+      const hasSelectedAll = idsToSelect.length > 0 && idsToSelect.every(id => selectedIds.has(id));
+      setSelectedIds(hasSelectedAll ? new Set() : new Set(idsToSelect));
+    },
+    [paragraphs, selectedIds]
+  );
+
+  const batchRetranslate = useCallback(
+    async (model = DEFAULT_MODEL, instruction?: string) => {
+      if (selectedIds.size === 0) return;
+
+      const ids = Array.from(selectedIds);
+      setRetranslatingMap(previous => {
+        const next = { ...previous };
+        ids.forEach(id => {
+          next[id] = true;
+        });
+        return next;
+      });
+
+      try {
+        const result = await documentApi.batchTranslateParagraphs(
+          projectId,
+          sectionId,
+          ids,
+          instruction,
+          model
+        );
+
+        result.translations.forEach(({ id, translation }) => {
+          const existingTimer = saveTimersRef.current[id];
+          if (existingTimer) {
+            clearTimeout(existingTimer);
+            delete saveTimersRef.current[id];
+          }
+
+          setDrafts(previous => ({ ...previous, [id]: translation }));
+          setDirtyMap(previous => ({ ...previous, [id]: false }));
+          setSaveErrorMap(previous => {
+            const next = { ...previous };
+            delete next[id];
+            return next;
+          });
+
+          updateParagraphInSection(sectionId, id, {
+            translation,
+            status: ParagraphStatus.TRANSLATED,
+          });
+          updateSectionQueryCache(id, {
+            translation,
+            status: ParagraphStatus.TRANSLATED,
+          });
+        });
+
+        showToast(`Batch translated ${result.success_count} paragraphs`, 'success');
+
+        if (result.error_count > 0) {
+          showToast(`${result.error_count} paragraphs failed`, 'error');
+        }
+
+        setSelectedIds(new Set());
+      } catch (_error) {
+        showToast('Batch retranslate failed', 'error');
+      } finally {
+        setRetranslatingMap(previous => {
+          const next = { ...previous };
+          ids.forEach(id => {
+            next[id] = false;
+          });
+          return next;
+        });
+      }
+    },
+    [projectId, sectionId, selectedIds, showToast, updateParagraphInSection, updateSectionQueryCache]
+  );
+
+  const confirmParagraph = useCallback(
+    async (paragraphId: string) => {
+      if (!projectId || !sectionId) return;
+
+      const paragraph = paragraphsByIdRef.current[paragraphId];
+      if (!paragraph) return;
+
+      const translation = draftsRef.current[paragraphId] ?? paragraph.translation ?? '';
+      if (!translation.trim()) {
+        showToast('Translation cannot be empty', 'error');
+        return;
+      }
+
+      setSavingMap(previous => ({ ...previous, [paragraphId]: true }));
+
+      try {
+        await documentApi.confirmParagraph(projectId, sectionId, paragraphId, translation);
+
+        updateParagraphInSection(sectionId, paragraphId, {
+          translation,
+          status: ParagraphStatus.APPROVED,
+          confirmed: translation,
+        });
+        updateSectionQueryCache(paragraphId, {
+          translation,
+          status: ParagraphStatus.APPROVED,
+          confirmed: translation,
+        });
+
+        setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
+        setSaveErrorMap(previous => {
+          const next = { ...previous };
+          delete next[paragraphId];
+          return next;
+        });
+
+        showToast('Paragraph confirmed', 'success');
+        void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
+        void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
+        void queryClient.invalidateQueries({ queryKey: ['projects'] });
+      } catch (error) {
+        setSaveErrorMap(previous => ({
+          ...previous,
+          [paragraphId]: toErrorMessage(error),
+        }));
+        showToast('Confirm failed', 'error');
+      } finally {
+        setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
+      }
+    },
+    [projectId, queryClient, sectionId, showToast, updateParagraphInSection, updateSectionQueryCache]
   );
 
   const dirtyCount = useMemo(() => Object.values(dirtyMap).filter(Boolean).length, [dirtyMap]);
@@ -319,5 +505,12 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     saveNow,
     saveAllNow,
     queueRetranslate,
+    confirmParagraph,
+    selectedIds,
+    isSelectionMode,
+    toggleSelectionMode,
+    toggleSelection,
+    toggleSelectAll,
+    batchRetranslate,
   };
 }

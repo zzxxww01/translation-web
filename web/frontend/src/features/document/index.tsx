@@ -1,4 +1,4 @@
-﻿import { useState, useCallback, useMemo } from 'react';
+﻿import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDocumentStore } from '../../shared/stores';
 import { useSection, useFullTranslate, useProject } from './hooks';
@@ -18,6 +18,7 @@ export function DocumentFeature() {
     currentProject,
     setCurrentProject,
     currentSection,
+    setCurrentSection,
     currentParagraph,
     sections,
     setSections,
@@ -51,6 +52,20 @@ export function DocumentFeature() {
 
   const displaySection = useMemo(() => sectionData || currentSection, [sectionData, currentSection]);
 
+  // 同步 selectedSectionId 和 currentSection，确保沉浸模式下有正确的 section
+  useEffect(() => {
+    if (isImmersiveMode && currentSection && !selectedSectionId) {
+      setSelectedSectionId(currentSection.section_id);
+    }
+    // 当 selectedSectionId 变化时，更新 currentSection
+    if (selectedSectionId && sections.length > 0) {
+      const section = sections.find(s => s.section_id === selectedSectionId);
+      if (section && section !== currentSection) {
+        setCurrentSection(section);
+      }
+    }
+  }, [isImmersiveMode, currentSection, selectedSectionId, sections, setCurrentSection]);
+
   const setImmersiveMode = useCallback(
     (enabled: boolean) => {
       const next = new URLSearchParams(searchParams);
@@ -67,10 +82,11 @@ export function DocumentFeature() {
   const handleSelectSection = useCallback(
     (section: Section) => {
       setSelectedSectionId(section.section_id);
+      setCurrentSection(section);
       setCurrentParagraph(null);
       setImmersiveMode(false);
     },
-    [setCurrentParagraph, setImmersiveMode]
+    [setCurrentSection, setCurrentParagraph, setImmersiveMode]
   );
 
   const handleSelectSectionById = useCallback(
@@ -91,9 +107,14 @@ export function DocumentFeature() {
   );
 
   const handleEnterImmersive = useCallback(() => {
+    // ��保使用 displaySection（可能来自 sectionData 或 currentSection）
+    if (displaySection) {
+      setSelectedSectionId(displaySection.section_id);
+      setCurrentSection(displaySection);
+    }
     setCurrentParagraph(null);
     setImmersiveMode(true);
-  }, [setCurrentParagraph, setImmersiveMode]);
+  }, [displaySection, setCurrentSection, setCurrentParagraph, setImmersiveMode]);
 
   const handleExitImmersive = useCallback(() => {
     setImmersiveMode(false);

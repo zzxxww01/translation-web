@@ -142,6 +142,30 @@ export const documentApi = {
     ),
 
   /**
+   * 批量翻译指定段落
+   */
+  batchTranslateParagraphs: (
+    projectId: string,
+    sectionId: string,
+    paragraphIds: string[],
+    instruction?: string,
+    model?: string
+  ) =>
+    apiClient.post<{
+      translations: Array<{ id: string; translation: string }>;
+      success_count: number;
+      error_count: number;
+      errors: Array<{ id: string; error: string }>;
+    }>(
+      `/projects/${projectId}/sections/${sectionId}/translate_batch`,
+      {
+        paragraph_ids: paragraphIds,
+        instruction,
+        model: model || 'preview',
+      }
+    ),
+
+  /**
    * 全文一键翻译 (SSE 流式)
    * 返回 EventSource 的 URL
    */

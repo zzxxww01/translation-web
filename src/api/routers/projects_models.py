@@ -48,6 +48,19 @@ class UpdateParagraphRequest(BaseModel):
     source_text: Optional[str] = None
 
 
+class BatchTranslateRequest(BaseModel):
+    paragraph_ids: List[str]
+    instruction: Optional[str] = None
+    model: str = "pro"
+
+
+class BatchTranslateResponse(BaseModel):
+    translations: List[dict]
+    success_count: int
+    error_count: int
+    errors: List[dict] = Field(default_factory=list)
+
+
 class ProjectResponse(BaseModel):
     id: str
     title: str

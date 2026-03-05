@@ -186,26 +186,35 @@ export const useDocumentStore = create<DocumentStore>()(
         updateParagraphInSection: (sectionId, paragraphId, updates) =>
           set(
             state => {
-              // 更新 sections 中的段落
+              const mergeParagraph = (paragraph: Paragraph) =>
+                paragraph.id === paragraphId ? { ...paragraph, ...updates } : paragraph;
+
+              // 更新 sections 中已加载 paragraphs 的 section
               const updatedSections = state.sections.map(section => {
-                if (section.section_id === sectionId && section.paragraphs) {
-                  return {
-                    ...section,
-                    paragraphs: section.paragraphs.map(p =>
-                      p.id === paragraphId ? { ...p, ...updates } : p
-                    ),
-                  };
+                if (section.section_id !== sectionId || !section.paragraphs) {
+                  return section;
                 }
-                return section;
+                return {
+                  ...section,
+                  paragraphs: section.paragraphs.map(mergeParagraph),
+                };
               });
 
-              // 更新当前选中的章节
-              const updatedCurrentSection =
-                state.currentSection?.section_id === sectionId
-                  ? updatedSections.find(s => s.section_id === sectionId)
+              // 优先更新 currentSection，避免被 sections 里的“摘要 section”覆盖
+              const updatedCurrentSectionWithParagraphs =
+                state.currentSection?.section_id === sectionId && state.currentSection.paragraphs
+                  ? {
+                      ...state.currentSection,
+                      paragraphs: state.currentSection.paragraphs.map(mergeParagraph),
+                    }
                   : state.currentSection;
 
-              // 更新当前选中的段落
+              const updatedCurrentSection =
+                state.currentSection?.section_id === sectionId && !state.currentSection.paragraphs
+                  ? updatedSections.find(section => section.section_id === sectionId) ||
+                    state.currentSection
+                  : updatedCurrentSectionWithParagraphs;
+
               const updatedCurrentParagraph =
                 state.currentParagraph?.id === paragraphId
                   ? { ...state.currentParagraph, ...updates }
@@ -213,7 +222,7 @@ export const useDocumentStore = create<DocumentStore>()(
 
               return {
                 sections: updatedSections,
-                currentSection: updatedCurrentSection || state.currentSection,
+                currentSection: updatedCurrentSection,
                 currentParagraph: updatedCurrentParagraph,
               };
             },

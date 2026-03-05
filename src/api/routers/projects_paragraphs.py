@@ -13,6 +13,8 @@ from src.core.models import ParagraphStatus
 from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep, MemoryServiceDep
 from ..middleware import BadRequestException, NotFoundException
 from .projects_models import (
+    BatchTranslateRequest,
+    BatchTranslateResponse,
     ConfirmRequest,
     DirectTranslateRequest,
     TranslateRequest,
@@ -380,3 +382,111 @@ async def update_paragraph(
         raise NotFoundException(detail=str(e))
     except ValueError as e:
         raise BadRequestException(detail=str(e))
+
+
+@router.post(
+    "/projects/{project_id}/sections/{section_id}/translate_batch",
+    response_model=BatchTranslateResponse,
+)
+async def batch_translate_paragraphs(
+    project_id: str,
+    section_id: str,
+    request: BatchTranslateRequest,
+    pm: ProjectManagerDep,
+    gm: GlossaryManagerDep,
+    llm: LLMProviderDep,
+    memory_service: MemoryServiceDep,
+):
+    try:
+        section = pm.get_section(project_id, section_id)
+        if not section:
+            raise NotFoundException(detail="Section not found")
+
+        if not request.paragraph_ids:
+            raise BadRequestException(detail="段落ID列表不能为空")
+
+        glossary = gm.load_project(project_id)
+        agent = TranslationAgent(llm)
+
+        paragraph_map = {p.id: (i, p) for i, p in enumerate(section.paragraphs)}
+
+        translations = []
+        errors = []
+        success_count = 0
+        error_count = 0
+
+        for paragraph_id in request.paragraph_ids:
+            if paragraph_id not in paragraph_map:
+                errors.append({"id": paragraph_id, "error": "段落不存在"})
+                error_count += 1
+                continue
+
+            para_index, paragraph = paragraph_map[paragraph_id]
+
+            try:
+                learned_rules = memory_service.get_relevant_rules(
+                    paragraph.source,
+                    project_id=project_id,
+                )
+
+                context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
+                context.previous_paragraphs = [
+                    (p.source, p.confirmed)
+                    for p in section.paragraphs[:para_index]
+                    if p.confirmed
+                ][-5:]
+                context.next_preview = [
+                    p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
+                ]
+
+                instruction = (request.instruction or "").strip()
+                if instruction:
+                    formatted_instruction = _build_retranslate_instruction(
+                        instruction,
+                        paragraph.source,
+                        _get_latest_translation_text(paragraph),
+                    )
+                    translation = agent.retranslate_paragraph(
+                        paragraph,
+                        context,
+                        formatted_instruction,
+                        request.model,
+                    )
+                else:
+                    translation = agent.translate_paragraph(paragraph, context, request.model)
+
+                translations.append({"id": paragraph.id, "translation": translation})
+                success_count += 1
+
+            except Exception as e:
+                error_msg = _to_error_message(e)
+                errors.append({"id": paragraph_id, "error": error_msg})
+                error_count += 1
+
+        pm.save_section(project_id, section)
+
+        return BatchTranslateResponse(
+            translations=translations,
+            success_count=success_count,
+            error_count=error_count,
+            errors=errors,
+        )
+
+    except NotFoundException:
+        raise
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+    except BadRequestException:
+        raise
+    except Exception as e:
+        raise BadRequestException(detail=f"批量翻译失败：{str(e)}")
+
+
+def _to_error_message(error: Exception) -> str:
+    error_msg = str(error)
+    if "429" in error_msg or "Too Many Requests" in error_msg:
+        return "API请求频率限制，请稍后再试"
+    elif "Generation failed after" in error_msg and "retries" in error_msg:
+        return "翻译服务暂时不可用，请稍后再试"
+    else:
+        return f"翻译失败：{error_msg}"

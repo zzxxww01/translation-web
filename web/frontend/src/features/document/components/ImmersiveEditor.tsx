@@ -1,16 +1,8 @@
-﻿import {
-  Cpu,
-  Filter,
-  Minimize2,
-  Save,
-} from 'lucide-react';
+import { CheckSquare, RotateCw, Save, X } from 'lucide-react';
 import { type UIEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '../../../components/ui';
-import {
-  DEFAULT_MODEL,
-  MODEL_OPTIONS,
-  ParagraphStatus,
-} from '../../../shared/constants';
+import { DEFAULT_MODEL, MODEL_OPTIONS, ParagraphStatus } from '../../../shared/constants';
+import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
 import { useImmersiveEditor } from '../hooks/useImmersiveEditor';
 import { ImmersiveRow } from './ImmersiveRow';
@@ -18,6 +10,7 @@ import { ImmersiveRow } from './ImmersiveRow';
 const CHUNK_THRESHOLD = 300;
 const INITIAL_CHUNK_SIZE = 80;
 const CHUNK_SIZE = 40;
+const MAX_BATCH_SELECTION = 50;
 
 type FilterMode = 'all' | 'translated' | 'approved' | 'modified';
 type RetranslateTemplate = 'none' | 'readable' | 'professional' | 'idiomatic';
@@ -59,10 +52,20 @@ function matchesFilter(mode: FilterMode, paragraph: Paragraph, isDirty: boolean)
 }
 
 export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditorProps) {
-  const paragraphs = section.paragraphs ?? [];
-  const [filterMode, setFilterMode] = useState<FilterMode>('all');
+  const sections = useDocumentStore(state => state.sections);
+  const latestSection = useMemo(() => {
+    const storeSection = sections.find(item => item.section_id === section.section_id);
+    if (storeSection?.paragraphs?.length) {
+      return storeSection;
+    }
+    return section;
+  }, [sections, section]);
+  const paragraphs = latestSection.paragraphs ?? [];
+
+  const [filterMode] = useState<FilterMode>('all');
   const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
   const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK_SIZE);
+  const [showBatchRetranslateDialog, setShowBatchRetranslateDialog] = useState(false);
 
   const {
     drafts,
@@ -76,21 +79,28 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
     retranslatingCount,
     hasPendingWork,
     updateDraft,
-    saveNow,
     saveAllNow,
     queueRetranslate,
+    confirmParagraph,
+    selectedIds,
+    isSelectionMode,
+    toggleSelectionMode,
+    toggleSelection,
+    toggleSelectAll,
+    batchRetranslate,
   } = useImmersiveEditor({
     projectId,
     sectionId: section.section_id,
     paragraphs,
   });
 
-  const filteredParagraphs = useMemo(() => {
-    return paragraphs.filter(paragraph => {
-      const matchesStatus = matchesFilter(filterMode, paragraph, Boolean(dirtyMap[paragraph.id]));
-      return matchesStatus;
-    });
-  }, [dirtyMap, filterMode, paragraphs]);
+  const filteredParagraphs = useMemo(
+    () =>
+      paragraphs.filter(paragraph =>
+        matchesFilter(filterMode, paragraph, Boolean(dirtyMap[paragraph.id]))
+      ),
+    [dirtyMap, filterMode, paragraphs]
+  );
 
   const isChunkMode = filteredParagraphs.length > CHUNK_THRESHOLD;
 
@@ -101,6 +111,17 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
   const displayedParagraphs = useMemo(
     () => (isChunkMode ? filteredParagraphs.slice(0, visibleCount) : filteredParagraphs),
     [filteredParagraphs, isChunkMode, visibleCount]
+  );
+
+  const selectableFilteredIds = useMemo(
+    () => filteredParagraphs.slice(0, MAX_BATCH_SELECTION).map(paragraph => paragraph.id),
+    [filteredParagraphs]
+  );
+  const isAllFilteredSelected = useMemo(
+    () =>
+      selectableFilteredIds.length > 0 &&
+      selectableFilteredIds.every(paragraphId => selectedIds.has(paragraphId)),
+    [selectableFilteredIds, selectedIds]
   );
 
   const handleListScroll = useCallback(
@@ -141,63 +162,88 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [handleClose, saveAllNow]);
 
+  const handleBatchRetranslate = useCallback(
+    (template: RetranslateTemplate) => {
+      const templateData = RETRANSLATE_TEMPLATES.find(item => item.id === template);
+      const instruction = templateData?.instruction;
+      void batchRetranslate(selectedModel, instruction);
+      setShowBatchRetranslateDialog(false);
+    },
+    [batchRetranslate, selectedModel]
+  );
+
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-bg-primary">
       <div className="border-b border-border-subtle bg-bg-primary/95 px-6 py-3 backdrop-blur">
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-4">
-            <h2 className="text-lg font-semibold text-text-primary">沉浸编辑 · {section.title}</h2>
-            <span className="text-sm text-text-muted">
-              共 {paragraphs.length} 段 · 未保存 {dirtyCount} · 保存中 {savingCount} · 重译中 {retranslatingCount}
-            </span>
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-medium text-text-primary">{latestSection.title}</h2>
           </div>
           <div className="flex items-center gap-2">
-            <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-1.5">
-              <Filter className="h-4 w-4 text-text-muted" />
-              <select
-                value={filterMode}
-                onChange={event => setFilterMode(event.target.value as FilterMode)}
-                className="bg-transparent text-sm text-text-primary outline-none"
-              >
-                <option value="all">全部</option>
-                <option value="translated">已翻译</option>
-                <option value="approved">已确认</option>
-                <option value="modified">已修改</option>
-              </select>
-            </label>
+            <button
+              onClick={toggleSelectionMode}
+              className={`flex items-center justify-center rounded-lg border p-2 transition-colors ${
+                isSelectionMode
+                  ? 'border-primary-500 bg-primary-500 text-white hover:bg-primary-600'
+                  : 'border-border bg-bg-secondary text-text-primary hover:bg-bg-tertiary'
+              }`}
+              title={isSelectionMode ? '退出选择' : '批量选择'}
+            >
+              <CheckSquare className="h-5 w-5" />
+            </button>
 
-            <label className="flex items-center gap-2 rounded-lg border border-border-subtle bg-bg-secondary px-3 py-1.5">
-              <Cpu className="h-4 w-4 text-text-muted" />
-              <select
-                value={selectedModel}
-                onChange={event => setSelectedModel(event.target.value)}
-                className="bg-transparent text-sm text-text-primary outline-none"
-              >
-                {MODEL_OPTIONS.map(model => (
-                  <option key={model.id} value={model.id}>
-                    {model.name}
-                  </option>
-                ))}
-              </select>
-            </label>
+            {isSelectionMode && (
+              <div className="flex items-center gap-2 border-l border-border-subtle pl-2">
+                <span className="text-sm text-text-muted">
+                  已选 {selectedIds.size}/{MAX_BATCH_SELECTION}
+                </span>
+                <button
+                  onClick={() => toggleSelectAll(filteredParagraphs.map(paragraph => paragraph.id))}
+                  className="rounded-lg border border-border bg-bg-secondary px-3 py-1.5 text-sm text-text-primary hover:bg-bg-tertiary"
+                  title={isAllFilteredSelected ? '取消全选' : '全选'}
+                >
+                  {isAllFilteredSelected ? '取消全选' : '全选'}
+                </button>
+                <button
+                  onClick={() => setShowBatchRetranslateDialog(true)}
+                  disabled={selectedIds.size === 0 || retranslatingCount > 0}
+                  className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
+                  title="批量重译"
+                >
+                  <RotateCw className="h-5 w-5" />
+                </button>
+              </div>
+            )}
 
-            <Button
-              variant="secondary"
-              size="sm"
+            <button
               onClick={() => void saveAllNow()}
               disabled={dirtyCount === 0}
-              leftIcon={<Save className="h-4 w-4" />}
+              className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary disabled:cursor-not-allowed disabled:opacity-50"
+              title="保存全部"
             >
-              保存全部
-            </Button>
-            <Button
-              variant="secondary"
-              size="sm"
+              <Save className="h-5 w-5" />
+            </button>
+
+            <select
+              value={selectedModel}
+              onChange={event => setSelectedModel(event.target.value)}
+              className="rounded-lg border border-border bg-bg-secondary px-3 py-2 text-sm text-text-primary outline-none hover:bg-bg-tertiary"
+              title="选择模型"
+            >
+              {MODEL_OPTIONS.map(model => (
+                <option key={model.id} value={model.id}>
+                  {model.name}
+                </option>
+              ))}
+            </select>
+
+            <button
               onClick={handleClose}
-              leftIcon={<Minimize2 className="h-4 w-4" />}
+              className="flex items-center justify-center rounded-lg border border-border bg-bg-secondary p-2 text-text-primary hover:bg-bg-tertiary"
+              title="退出沉浸编辑"
             >
-              退出沉浸
-            </Button>
+              <X className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>
@@ -209,15 +255,18 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
               key={paragraph.id}
               paragraph={paragraph}
               draft={drafts[paragraph.id] ?? paragraph.translation ?? ''}
-              isDirty={Boolean(dirtyMap[paragraph.id])}
               isSaving={Boolean(savingMap[paragraph.id])}
               saveError={saveErrorMap[paragraph.id]}
               isRetranslating={Boolean(retranslatingMap[paragraph.id])}
               retranslateError={retranslateErrorMap[paragraph.id]}
               onChange={value => updateDraft(paragraph.id, value)}
-              onSaveNow={() => void saveNow(paragraph.id)}
-              onRetranslate={(instruction?: string) => queueRetranslate(paragraph.id, selectedModel, instruction)}
-              selectedModel={selectedModel}
+              onRetranslate={(instruction?: string) =>
+                queueRetranslate(paragraph.id, selectedModel, instruction)
+              }
+              onConfirm={() => void confirmParagraph(paragraph.id)}
+              isSelectionMode={isSelectionMode}
+              isSelected={selectedIds.has(paragraph.id)}
+              onToggleSelection={() => toggleSelection(paragraph.id)}
             />
           ))}
         </div>
@@ -232,6 +281,36 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
           </div>
         )}
       </div>
+
+      {showBatchRetranslateDialog && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/50">
+          <div className="w-full max-w-md rounded-lg border border-border bg-bg-primary p-6 shadow-xl">
+            <h3 className="mb-4 text-lg font-semibold text-text-primary">
+              批量重译 {selectedIds.size} 个段落
+            </h3>
+            <div className="space-y-3">
+              {RETRANSLATE_TEMPLATES.map(template => (
+                <button
+                  key={template.id}
+                  onClick={() => handleBatchRetranslate(template.id)}
+                  disabled={retranslatingCount > 0}
+                  className="w-full rounded-lg border border-border bg-bg-secondary px-4 py-3 text-left text-sm text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
+                >
+                  <div className="font-medium">{template.label}</div>
+                  {template.instruction && (
+                    <div className="mt-1 text-xs text-text-muted">{template.instruction}</div>
+                  )}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 flex justify-end gap-2">
+              <Button variant="secondary" size="sm" onClick={() => setShowBatchRetranslateDialog(false)}>
+                取消
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
