@@ -1,17 +1,15 @@
 /**
- * 全局类型定义
- * 统一管理应用中的 TypeScript 类型
+ * 閸忋劌鐪猾璇茬€风€规矮绠?
+ * 缂佺喍绔寸粻锛勬倞鎼存梻鏁ゆ稉顓犳畱 TypeScript 缁鐎?
  */
 
 import type {
   ParagraphStatus,
-  ConversationStyle,
-  MessageRole,
   EmailStyle,
   TranslationVersionType,
 } from '../constants';
 
-// ============ 项目相关类型 ============
+// ============ 妞ゅ湱娲伴惄绋垮彠缁鐎?============
 
 export interface Project {
   id: string;
@@ -68,65 +66,32 @@ export interface SectionAnalysis {
   tips: string[];
 }
 
-// ============ 对话相关类型 ============
-
-export interface Conversation {
-  id: string;
-  name: string;
-  style: ConversationStyle;
-  system_prompt?: string;
-  is_pinned?: boolean;
-  history?: Message[];
-}
-
-export interface Message {
-  role: MessageRole;
-  content_en?: string;
-  content_cn?: string;
-}
-
-export interface CreateConversationDto {
-  id: string;
-  name: string;
-  style: ConversationStyle;
-  system_prompt?: string;
-}
-
-export interface AddMessageDto {
-  role: MessageRole;
-  content_en: string;
-  content_cn?: string;
-}
+// ============ 鐎电鐦介惄绋垮彠缁鐎?============
 
 export interface ProcessMessageDto {
   message: string;
-  conversation_id?: string;
+}
+
+export interface SlackReplyVariant {
+  version: string;
+  english: string;
+  chinese?: string;
 }
 
 export interface ProcessResult {
   translation: string;
-  // 三种轻松职场风格的回复建议
-  super_casual: string;      // 超随意，像熟朋友
-  super_casual_cn: string;
-  friendly_pro: string;      // 标准轻松职场
-  friendly_pro_cn: string;
-  polite_casual: string;     // 稍礼貌（对上级）
-  polite_casual_cn: string;
+  suggested_replies: SlackReplyVariant[];
 }
 
 export interface ComposeDto {
   content: string;
-  conversation_id?: string;
-  tone?: string;
 }
 
 export interface ComposeResult {
-  casual: string;
-  professional: string;
-  formal: string;
+  versions: SlackReplyVariant[];
 }
 
-// ============ 翻译相关类型 ============
+// ============ 缂堟槒鐦ч惄绋垮彠缁鐎?============
 
 export interface TranslationVersion {
   id: string;
@@ -166,7 +131,7 @@ export interface GenerateTitleResult {
   title: string;
 }
 
-// ============ 工具相关类型 ============
+// ============ 瀹搞儱鍙块惄绋垮彠缁鐎?============
 
 export interface Task {
   id: string;
@@ -214,7 +179,7 @@ export interface TimezoneConvertResult {
   original: string;
 }
 
-// ============ 通用类型 ============
+// ============ 闁氨鏁ょ猾璇茬€?============
 
 export interface ApiError {
   detail: string;
@@ -233,7 +198,7 @@ export interface PaginatedResponse<T> {
   limit: number;
 }
 
-// ============ 组件相关类型 ============
+// ============ 缂佸嫪娆㈤惄绋垮彠缁鐎?============
 
 export interface BaseComponentProps {
   className?: string;

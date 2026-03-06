@@ -1,400 +1,238 @@
-import { useState, useCallback, useRef } from 'react';
-import { Send, User, MessageCircle, Plus, Edit3, Pin, Trash2 } from 'lucide-react';
-import { useSlackStore } from '../../shared/stores';
-import { useConversations } from './hooks';
-import { slackApi } from './api';
-import { Button } from '../../components/ui';
-import { Textarea } from '../../components/ui';
-import { Input } from '../../components/ui';
-import { Modal } from '../../components/ui';
-import { useToast } from '../../components/ui';
-import { ChatBubble } from './components/ChatBubble';
-import { NewConversationModal } from './components/NewConversationModal';
-import { ContextMenu } from './components/ContextMenu';
-import { detectLanguage, generateId } from '../../shared/utils';
-import { MessageRole, ConversationStyle } from '../../shared/constants';
+import { useMemo } from 'react';
+import { Lightbulb, RefreshCw, Send, User } from 'lucide-react';
+import { Button, Textarea, useToast } from '../../components/ui';
+import type { SlackReplyVariant } from '../../shared/types';
+import { copyToClipboard, detectLanguage } from '../../shared/utils';
+import { ReplySuggestions } from './components/ReplySuggestions';
+import { useComposeReply, useGenerateReply } from './hooks';
+import { useSlackWorkspaceStore } from './store';
 
-// 预设模板 IDs
-const TEMPLATE_IDS = ['__template_michelle__', '__template_public_channel__', '__template_quick__'];
-
-/**
- * Slack 回复功能模块
- */
 export function SlackFeature() {
+  const { showError, showSuccess } = useToast();
+  const analyzeMutation = useGenerateReply();
+  const composeMutation = useComposeReply();
+
   const {
-    currentConversation,
-    conversations,
-    messages,
-    setCurrentConversation,
-    setConversations,
-    addMessage,
-  } = useSlackStore();
+    incomingText,
+    incomingTranslation,
+    incomingSuggestions,
+    draftText,
+    draftVersions,
+    setIncomingText,
+    setIncomingResult,
+    clearIncoming,
+    setDraftText,
+    setDraftVersions,
+    clearDraft,
+  } = useSlackWorkspaceStore();
 
-  const { showSuccess } = useToast();
-  const [isNewConvModalOpen, setIsNewConvModalOpen] = useState(false);
-  const [inputThem, setInputThem] = useState('');
-  const [inputMe, setInputMe] = useState('');
-  const themInputRef = useRef<HTMLTextAreaElement>(null);
-  const meInputRef = useRef<HTMLTextAreaElement>(null);
+  const draftLanguage = useMemo(() => detectLanguage(draftText.trim()), [draftText]);
 
-  // 右键菜单状态
-  const [contextMenu, setContextMenu] = useState<{ x: number; y: number; convId: string } | null>(null);
-  
-  // 重命名弹窗状态
-  const [renameModal, setRenameModal] = useState<{ convId: string; name: string } | null>(null);
+  const copyEnglishVersion = async (contentEn: string, successMessage: string) => {
+    const copied = await copyToClipboard(contentEn);
+    if (copied) {
+      showSuccess(successMessage);
+      return;
+    }
+    showError('复制失败');
+  };
 
-  useConversations();
-
-  // 分离模板和历史对话
-  const templates = conversations.filter(c => TEMPLATE_IDS.includes(c.id));
-  const historyConversations = conversations.filter(c => !TEMPLATE_IDS.includes(c.id));
-
-  // 点击模板 -> 创建新对话
-  const handleClickTemplate = async (templateId: string) => {
-    const template = conversations.find(c => c.id === templateId);
-    if (!template) return;
-
-    // 生成新对话 ID 和名称
-    const newId = generateId('conv');
-    const timestamp = new Date().toLocaleString('zh-CN', { 
-      month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' 
-    });
-    const baseName = template.name.replace(' (Guide/上司)', '').replace('Slack ', '');
-    const newName = `${baseName} - (${timestamp})`;
+  const handleAnalyzeIncoming = async () => {
+    const content = incomingText.trim();
+    if (!content || analyzeMutation.isPending) {
+      return;
+    }
 
     try {
-      const newConv = await slackApi.createConversation({
-        id: newId,
-        name: newName,
-        style: ConversationStyle.CASUAL,
-        system_prompt: template.system_prompt,
-      });
-      
-      // 切换到新对话并刷新列表
-      setCurrentConversation({ ...newConv, history: [] });
-      const updatedList = await slackApi.getConversations();
-      setConversations(updatedList);
-    } catch (e) {
-      console.error('创建对话失败:', e);
+      const result = await analyzeMutation.mutateAsync({ message: content });
+      setIncomingResult(result.translation, result.suggested_replies ?? []);
+    } catch {
+      // Error handled in mutation.
     }
   };
 
-  // 选择历史对话 -> 加载完整历史
-  const handleSelectConversation = useCallback(async (convId: string) => {
-    try {
-      const fullConv = await slackApi.getConversation(convId);
-      setCurrentConversation(fullConv);
-    } catch (_error) {
-      const conv = conversations.find(c => c.id === convId);
-      if (conv) setCurrentConversation(conv);
-    }
-  }, [conversations, setCurrentConversation]);
-
-  // 右键菜单
-  const handleContextMenu = (e: React.MouseEvent, convId: string) => {
-    e.preventDefault();
-    setContextMenu({ x: e.clientX, y: e.clientY, convId });
-  };
-
-  // 重命名对话
-  const handleRename = async () => {
-    if (!renameModal) return;
-    try {
-      await slackApi.updateConversation(renameModal.convId, { name: renameModal.name });
-      const updatedList = await slackApi.getConversations();
-      setConversations(updatedList);
-      showSuccess('已重命名');
-    } catch (e) {
-      console.error('重命名失败:', e);
-    }
-    setRenameModal(null);
-  };
-
-  // 置顶/取消置顶
-  const handleTogglePin = async (convId: string) => {
-    const conv = conversations.find(c => c.id === convId);
-    if (!conv) return;
-    try {
-      await slackApi.updateConversation(convId, { is_pinned: !conv.is_pinned });
-      const updatedList = await slackApi.getConversations();
-      setConversations(updatedList);
-    } catch (e) {
-      console.error('置顶操作失败:', e);
-    }
-  };
-
-  // 删除对话
-  const handleDelete = async (convId: string) => {
-    if (!confirm('确定删除此对话？')) return;
-    try {
-      await slackApi.deleteConversation(convId);
-      const updatedList = await slackApi.getConversations();
-      setConversations(updatedList);
-      if (currentConversation?.id === convId) {
-        setCurrentConversation(null);
-      }
-      showSuccess('已删除');
-    } catch (e) {
-      console.error('删除对话失败:', e);
-    }
-  };
-
-  // 发送对方消息
-  const handleSendThem = async () => {
-    const content = inputThem.trim();
-    if (!content || !currentConversation) return;
-
-    setInputThem('');
-    if (themInputRef.current) themInputRef.current.style.height = 'auto';
-
-    addMessage({ role: MessageRole.THEM, content_en: content });
-
-    // 如果是新对话且第一条消息，自动重命名
-    if (messages.length === 0 && currentConversation.name.includes(' - (')) {
-      const namePreview = content.substring(0, 15) + (content.length > 15 ? '...' : '');
-      const newName = currentConversation.name.replace(' - (', ` - ${namePreview} (`);
-      try {
-        await slackApi.updateConversation(currentConversation.id, { name: newName });
-        setCurrentConversation({ ...currentConversation, name: newName });
-        const updatedList = await slackApi.getConversations();
-        setConversations(updatedList);
-      } catch (e) {
-        console.error('更新对话名称失败:', e);
-      }
+  const handleTranslateDraft = async () => {
+    const content = draftText.trim();
+    if (!content || composeMutation.isPending) {
+      return;
     }
 
-    // 同步到后端
-    try {
-      await slackApi.addMessage(currentConversation.id, {
-        role: MessageRole.THEM,
-        content_en: content,
-      });
-    } catch (e) {
-      console.error('添加消息失败:', e);
+    if (draftLanguage === 'en') {
+      showError('这里用于中文草稿。英文内容直接复制即可。');
+      return;
     }
-  };
-
-  // 发送我的消息
-  const handleSendMe = async () => {
-    const content = inputMe.trim();
-    if (!content || !currentConversation) return;
-
-    setInputMe('');
-    if (meInputRef.current) meInputRef.current.style.height = 'auto';
-
-    const isChinese = detectLanguage(content) === 'zh';
-    addMessage({
-      role: MessageRole.ME,
-      content_en: isChinese ? '' : content,
-      content_cn: isChinese ? content : '',
-    });
 
     try {
-      await slackApi.addMessage(currentConversation.id, {
-        role: MessageRole.ME,
-        content_en: isChinese ? '' : content,
-        content_cn: isChinese ? content : '',
-      });
-    } catch (e) {
-      console.error('添加消息失败:', e);
+      const result = await composeMutation.mutateAsync({ content });
+      setDraftVersions(
+        result.versions.map((version: SlackReplyVariant) => ({
+          ...version,
+          chinese: version.chinese || content,
+        }))
+      );
+    } catch {
+      // Error handled in mutation.
     }
-  };
-
-  // 自动调整文本框高度
-  const autoResize = (el: HTMLTextAreaElement) => {
-    el.style.height = 'auto';
-    el.style.height = Math.min(Math.max(el.scrollHeight, 48), 150) + 'px';
   };
 
   return (
-    <div className="flex h-full overflow-auto">
-      {/* 侧边栏 */}
-      <aside className="w-60 border-r border-border-subtle bg-bg-secondary flex flex-col">
-        {/* 开始新对话区 */}
-        <div className="p-3 border-b border-border-subtle">
-          <div className="text-sm font-semibold text-text-secondary mb-2.5">开始新对话</div>
-          <div className="space-y-1">
-            {templates.map(t => (
-              <button
-                key={t.id}
-                onClick={() => handleClickTemplate(t.id)}
-                className="w-full rounded-lg px-4 py-2.5 text-left text-base hover:bg-bg-tertiary transition-colors flex items-center gap-2"
-              >
-                <span>📌</span>
-                <span className="truncate">{t.name}</span>
-              </button>
-            ))}
-            <button
-              onClick={() => setIsNewConvModalOpen(true)}
-              className="w-full rounded-lg px-4 py-2.5 text-left text-base hover:bg-bg-tertiary transition-colors flex items-center gap-2 text-primary-600"
-            >
-              <Plus className="h-5 w-5" />
-              <span>新增联系人</span>
-            </button>
+    <div className="mx-auto grid h-full w-full max-w-7xl gap-6 p-6 xl:grid-cols-2">
+      <section className="flex min-h-0 flex-col rounded-3xl border border-border-subtle bg-bg-card p-6 shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-sm font-semibold text-text-secondary">
+              <User className="h-4 w-4" />
+              对方的话
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold text-text-primary">英译中 + 建议回复</h2>
+            <p className="mt-2 text-sm leading-6 text-text-muted">
+              粘贴对方发来的英文消息，系统会给出中文理解和 A/B/C 三档英文建议回复。
+            </p>
           </div>
-        </div>
-
-        {/* 历史对话区 */}
-        <div className="flex-1 overflow-y-auto p-3">
-          <div className="text-sm font-semibold text-text-secondary mb-2.5">历史对话</div>
-          {historyConversations.length === 0 ? (
-            <div className="text-center text-text-muted text-sm py-6">暂无历史</div>
-          ) : (
-            <div className="space-y-1">
-              {historyConversations.map(conv => (
-                <button
-                  key={conv.id}
-                  onClick={() => handleSelectConversation(conv.id)}
-                  onContextMenu={(e) => handleContextMenu(e, conv.id)}
-                  className={`w-full rounded-md px-3 py-2 text-left text-sm transition-colors ${
-                    currentConversation?.id === conv.id
-                      ? 'bg-primary-50 text-primary-700'
-                      : 'hover:bg-bg-tertiary'
-                  }`}
-                >
-                  <div className="flex items-center gap-2">
-                    {conv.is_pinned && <span className="text-xs">📌</span>}
-                    <User className="h-5 w-5 flex-shrink-0" />
-                    <span className="truncate">{conv.name}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </aside>
-
-      {/* 主内容区 */}
-      <main className="flex-1 flex flex-col">
-        {/* 对话标题 */}
-        <div className="border-b border-border-subtle px-6 py-4">
-          <h3 className="text-lg font-semibold">
-            {currentConversation?.name || '💬 Slack 回复助手'}
-          </h3>
-        </div>
-
-        {/* 消息列表 */}
-        <div className="flex-1 overflow-y-auto p-6">
-          {!currentConversation ? (
-            <div className="flex h-full items-center justify-center text-center">
-              <div className="text-text-muted">
-                <MessageCircle className="mx-auto mb-4 h-12 w-12 opacity-50" />
-                <p>选择或创建对话开始</p>
-              </div>
-            </div>
-          ) : messages.length === 0 ? (
-            <div className="flex h-full items-center justify-center text-center">
-              <div className="text-text-muted">
-                <MessageCircle className="mx-auto mb-4 h-12 w-12 opacity-50" />
-                <p>暂无消息</p>
-                <p className="mt-2 text-sm">在下方输入开始对话</p>
-              </div>
-            </div>
-          ) : (
-            <div className="mx-auto max-w-3xl space-y-4">
-              {messages.map((msg, index) => (
-                <div key={index} className={`flex ${msg.role === 'me' ? 'justify-end' : 'justify-start'}`}>
-                  <ChatBubble message={msg} index={index} conversationId={currentConversation?.id || ''} />
-                </div>
-              ))}
-            </div>
+          {(incomingTranslation || incomingSuggestions.length > 0) && (
+            <button
+              onClick={clearIncoming}
+              className="text-sm text-text-muted transition-colors hover:text-text-primary"
+              title="清空结果"
+            >
+              清空
+            </button>
           )}
         </div>
 
-        {/* 输入区 */}
-        {currentConversation && (
-          <div className="border-t border-border-subtle bg-bg-secondary p-4">
-            <div className="mx-auto max-w-3xl grid grid-cols-2 gap-4">
-              {/* 对方输入 */}
-              <div>
-                <label className="mb-2 flex items-center gap-2 text-base font-medium text-text-primary">
-                  <User className="h-5 w-5 text-text-muted" />
-                  对方消息
-                </label>
-                <Textarea
-                  ref={themInputRef}
-                  value={inputThem}
-                  onChange={(e) => { setInputThem(e.target.value); if (themInputRef.current) autoResize(themInputRef.current); }}
-                  placeholder="对方发来的消息..."
-                  className="min-h-[100px] max-h-[180px]"
-                  showCharCount={false}
-                />
-                <Button size="md" variant="secondary" onClick={handleSendThem} disabled={!inputThem.trim()} className="mt-3 w-full">
-                  发送对方消息
-                </Button>
-              </div>
+        <div className="mt-5 flex-1">
+          <Textarea
+            value={incomingText}
+            onChange={event => setIncomingText(event.target.value)}
+            placeholder="Paste the incoming English message here..."
+            className="min-h-[260px]"
+            showCharCount={false}
+          />
+        </div>
 
-              {/* 我的输入 */}
-              <div>
-                <label className="mb-2 flex items-center gap-2 text-base font-medium text-text-primary">
-                  <Send className="h-5 w-5 text-text-muted" />
-                  我的回复
-                </label>
-                <Textarea
-                  ref={meInputRef}
-                  value={inputMe}
-                  onChange={(e) => { setInputMe(e.target.value); if (meInputRef.current) autoResize(meInputRef.current); }}
-                  placeholder="记录我发送的内容..."
-                  className="min-h-[80px] max-h-[150px]"
-                  showCharCount={false}
-                />
-                <Button size="md" variant="primary" onClick={handleSendMe} disabled={!inputMe.trim()} className="mt-3 w-full">
-                  发送我的消息
-                </Button>
+        <div className="mt-4 flex gap-3">
+          <Button
+            size="md"
+            variant="primary"
+            onClick={handleAnalyzeIncoming}
+            disabled={!incomingText.trim() || analyzeMutation.isPending}
+            isLoading={analyzeMutation.isPending}
+            className="flex-1"
+          >
+            <Lightbulb className="mr-2 h-4 w-4" />
+            英译中 + 建议回复
+          </Button>
+          <Button
+            size="md"
+            variant="secondary"
+            onClick={clearIncoming}
+            disabled={!incomingText && !incomingTranslation && incomingSuggestions.length === 0}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            重置
+          </Button>
+        </div>
+
+        {(incomingTranslation || incomingSuggestions.length > 0) && (
+          <div className="mt-6 space-y-4">
+            <div className="rounded-2xl border border-border-subtle bg-bg-secondary p-4">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-text-muted">
+                中文理解
+              </div>
+              <div className="whitespace-pre-wrap text-base leading-7 text-text-primary">
+                {incomingTranslation || '暂无翻译结果'}
               </div>
             </div>
+
+            <ReplySuggestions
+              title="建议回复"
+              options={incomingSuggestions}
+              confirmLabel="复制这个版本"
+              onSelectReply={contentEn => {
+                void copyEnglishVersion(contentEn, '建议回复已复制');
+              }}
+              onClose={() => setIncomingResult(incomingTranslation, [])}
+            />
           </div>
         )}
-      </main>
+      </section>
 
-      {/* 右键菜单 */}
-      {contextMenu && (
-        <ContextMenu
-          x={contextMenu.x}
-          y={contextMenu.y}
-          onClose={() => setContextMenu(null)}
-          items={[
-            {
-              label: '重命名',
-              icon: <Edit3 className="h-4 w-4" />,
-              onClick: () => {
-                const conv = conversations.find(c => c.id === contextMenu.convId);
-                if (conv) setRenameModal({ convId: conv.id, name: conv.name });
-              },
-            },
-            {
-              label: conversations.find(c => c.id === contextMenu.convId)?.is_pinned ? '取消置顶' : '置顶',
-              icon: <Pin className="h-4 w-4" />,
-              onClick: () => handleTogglePin(contextMenu.convId),
-            },
-            {
-              label: '删除',
-              icon: <Trash2 className="h-4 w-4" />,
-              onClick: () => handleDelete(contextMenu.convId),
-              danger: true,
-            },
-          ]}
-        />
-      )}
-
-      {/* 重命名弹窗 */}
-      <Modal isOpen={!!renameModal} onClose={() => setRenameModal(null)} title="重命名对话" size="sm">
-        <div className="space-y-4">
-          <Input
-            label="对话名称"
-            value={renameModal?.name || ''}
-            onChange={(e) => renameModal && setRenameModal({ ...renameModal, name: e.target.value })}
-            autoFocus
-          />
-          <div className="flex justify-end gap-2">
-            <Button variant="secondary" onClick={() => setRenameModal(null)}>取消</Button>
-            <Button variant="primary" onClick={handleRename}>保存</Button>
+      <section className="flex min-h-0 flex-col rounded-3xl border border-border-subtle bg-bg-card p-6 shadow-sm">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-sm font-semibold text-text-secondary">
+              <Send className="h-4 w-4" />
+              我想回复的话
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold text-text-primary">中译英</h2>
+            <p className="mt-2 text-sm leading-6 text-text-muted">
+              输入你的中文草稿，系统按 A/B/C 三档正式程度给出可直接发送的英文版本。
+            </p>
           </div>
+          {draftVersions.length > 0 && (
+            <button
+              onClick={clearDraft}
+              className="text-sm text-text-muted transition-colors hover:text-text-primary"
+              title="清空结果"
+            >
+              清空
+            </button>
+          )}
         </div>
-      </Modal>
 
-      {/* 新增联系人弹窗 */}
-      <NewConversationModal isOpen={isNewConvModalOpen} onClose={() => setIsNewConvModalOpen(false)} />
+        <div className="mt-5 flex-1">
+          <Textarea
+            value={draftText}
+            onChange={event => setDraftText(event.target.value)}
+            placeholder="输入你想回复的中文内容..."
+            className="min-h-[260px]"
+            showCharCount={false}
+          />
+        </div>
+
+        <div className="mt-3 text-xs text-text-muted">
+          {draftLanguage === 'en'
+            ? '当前看起来已经是英文了，这里主要用于中文草稿。'
+            : '支持中文或中英混合草稿，建议先把意思写清楚再生成版本。'}
+        </div>
+
+        <div className="mt-4 flex gap-3">
+          <Button
+            size="md"
+            variant="primary"
+            onClick={handleTranslateDraft}
+            disabled={!draftText.trim() || composeMutation.isPending}
+            isLoading={composeMutation.isPending}
+            className="flex-1"
+          >
+            <Send className="mr-2 h-4 w-4" />
+            中译英
+          </Button>
+          <Button
+            size="md"
+            variant="secondary"
+            onClick={clearDraft}
+            disabled={!draftText && draftVersions.length === 0}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            重置
+          </Button>
+        </div>
+
+        {draftVersions.length > 0 && (
+          <div className="mt-6">
+            <ReplySuggestions
+              title="英文版本"
+              options={draftVersions}
+              confirmLabel="复制这个版本"
+              onSelectReply={contentEn => {
+                void copyEnglishVersion(contentEn, '英文版本已复制');
+              }}
+              onClose={() => setDraftVersions([])}
+            />
+          </div>
+        )}
+      </section>
     </div>
   );
 }

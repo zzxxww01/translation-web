@@ -183,7 +183,7 @@ export function ImmersiveRow({
                     <button
                       key={item.id}
                       onClick={() => handleQuickRetranslate(item.instruction)}
-                      disabled={isRetranslating}
+                      disabled={isRetranslating || isSaving}
                       className="flex-1 rounded-lg border border-border bg-bg-secondary px-3 py-2 text-sm text-text-primary transition-colors hover:bg-bg-tertiary disabled:opacity-50"
                     >
                       {item.label}
@@ -198,14 +198,14 @@ export function ImmersiveRow({
                     onChange={event => setCustomInstruction(event.target.value)}
                     placeholder="输入重译要求..."
                     className="h-20 w-full resize-none rounded border border-border-subtle bg-bg-secondary px-3 py-2 text-sm text-text-primary outline-none focus:border-primary-500"
-                    disabled={isRetranslating}
+                    disabled={isRetranslating || isSaving}
                   />
                   <div className="mt-2 flex justify-end">
                     <Button
                       variant="secondary"
                       size="sm"
                       onClick={handleCustomRetranslate}
-                      disabled={!customInstruction.trim() || isRetranslating}
+                      disabled={!customInstruction.trim() || isRetranslating || isSaving}
                     >
                       重译
                     </Button>
@@ -221,6 +221,7 @@ export function ImmersiveRow({
               size="sm"
               onClick={() => onRetranslate()}
               isLoading={isRetranslating}
+              disabled={isSaving}
               leftIcon={<RotateCw className="h-4 w-4" />}
               className="rounded-r-none border-r-0"
             >
@@ -228,7 +229,7 @@ export function ImmersiveRow({
             </Button>
             <button
               onClick={handleToggleMenu}
-              disabled={isRetranslating}
+              disabled={isRetranslating || isSaving}
               className="flex items-center justify-center rounded-r-lg border border-border bg-bg-secondary px-2 hover:bg-bg-tertiary disabled:opacity-50"
             >
               <ChevronDown className={`h-4 w-4 transition-transform ${showRetranslateMenu ? 'rotate-180' : ''}`} />

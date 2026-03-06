@@ -44,7 +44,6 @@ class Settings(BaseSettings):
 
     # Storage
     projects_path: str = "projects"
-    conversations_path: str = "conversations"
     glossary_path: str = "glossary"
 
     # Translation

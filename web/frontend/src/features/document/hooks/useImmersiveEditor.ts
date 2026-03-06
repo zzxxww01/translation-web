@@ -61,6 +61,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   const activeRetranslateRef = useRef(0);
   const processRetranslateQueueRef = useRef<() => void>(() => {});
   const saveParagraphRef = useRef<(paragraphId: string) => Promise<void>>(async () => {});
+  const paragraphOperationRef = useRef<Record<string, Promise<unknown>>>({});
 
   const draftsRef = useRef(drafts);
   const dirtyMapRef = useRef(dirtyMap);
@@ -132,6 +133,31 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     [projectId, queryClient, sectionId]
   );
 
+  const cancelPendingSave = useCallback((paragraphId: string) => {
+    const existingTimer = saveTimersRef.current[paragraphId];
+    if (!existingTimer) return;
+    clearTimeout(existingTimer);
+    delete saveTimersRef.current[paragraphId];
+  }, []);
+
+  const runParagraphOperation = useCallback(
+    <T,>(paragraphId: string, operation: () => Promise<T>): Promise<T> => {
+      const previous = paragraphOperationRef.current[paragraphId] ?? Promise.resolve();
+      const next = previous.catch(() => undefined).then(() => operation());
+
+      let tracked: Promise<unknown>;
+      tracked = next.finally(() => {
+        if (paragraphOperationRef.current[paragraphId] === tracked) {
+          delete paragraphOperationRef.current[paragraphId];
+        }
+      });
+
+      paragraphOperationRef.current[paragraphId] = tracked;
+      return next;
+    },
+    []
+  );
+
   const scheduleAutoSave = useCallback((paragraphId: string) => {
     const existingTimer = saveTimersRef.current[paragraphId];
     if (existingTimer) {
@@ -142,7 +168,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     }, AUTO_SAVE_DELAY_MS);
   }, []);
 
-  const saveParagraph = useCallback(
+  const performSaveParagraph = useCallback(
     async (paragraphId: string) => {
       if (!projectId || !sectionId) return;
       if (!dirtyMapRef.current[paragraphId]) return;
@@ -201,6 +227,12 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     [projectId, scheduleAutoSave, sectionId, updateParagraphInSection, updateSectionQueryCache]
   );
 
+  const saveParagraph = useCallback(
+    async (paragraphId: string) =>
+      runParagraphOperation(paragraphId, () => performSaveParagraph(paragraphId)),
+    [performSaveParagraph, runParagraphOperation]
+  );
+
   useEffect(() => {
     saveParagraphRef.current = saveParagraph;
   }, [saveParagraph]);
@@ -221,14 +253,10 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
   const saveNow = useCallback(
     async (paragraphId: string) => {
-      const existingTimer = saveTimersRef.current[paragraphId];
-      if (existingTimer) {
-        clearTimeout(existingTimer);
-        delete saveTimersRef.current[paragraphId];
-      }
+      cancelPendingSave(paragraphId);
       await saveParagraph(paragraphId);
     },
-    [saveParagraph]
+    [cancelPendingSave, saveParagraph]
   );
 
   const saveAllNow = useCallback(async () => {
@@ -254,6 +282,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       if (!paragraph) continue;
 
       activeRetranslateRef.current += 1;
+      cancelPendingSave(paragraphId);
       setRetranslatingMap(previous => ({ ...previous, [paragraphId]: true }));
       setRetranslateErrorMap(previous => {
         const next = { ...previous };
@@ -264,37 +293,38 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       const wasDirty = dirtyMapRef.current[paragraphId];
       const previousDraft = draftsRef.current[paragraphId] ?? '';
 
-      void documentApi
-        .translateParagraph(projectId, sectionId, paragraphId, instruction, model)
-        .then(result => {
-          const translation = result.translation ?? '';
-          const existingTimer = saveTimersRef.current[paragraphId];
-          if (existingTimer) {
-            clearTimeout(existingTimer);
-            delete saveTimersRef.current[paragraphId];
-          }
+      void runParagraphOperation(paragraphId, async () => {
+        const result = await documentApi.translateParagraph(
+          projectId,
+          sectionId,
+          paragraphId,
+          instruction,
+          model
+        );
+        const translation = result.translation ?? '';
+        const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
 
-          setDrafts(previous => ({ ...previous, [paragraphId]: translation }));
-          setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
-          setSaveErrorMap(previous => {
-            const next = { ...previous };
-            delete next[paragraphId];
-            return next;
-          });
+        setDrafts(previous => ({ ...previous, [paragraphId]: translation }));
+        setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
+        setSaveErrorMap(previous => {
+          const next = { ...previous };
+          delete next[paragraphId];
+          return next;
+        });
 
-          updateParagraphInSection(sectionId, paragraphId, {
-            translation,
-            status: ParagraphStatus.TRANSLATED,
-          });
-          updateSectionQueryCache(paragraphId, {
-            translation,
-            status: ParagraphStatus.TRANSLATED,
-          });
+        updateParagraphInSection(sectionId, paragraphId, {
+          translation,
+          status: persistedStatus,
+        });
+        updateSectionQueryCache(paragraphId, {
+          translation,
+          status: persistedStatus,
+        });
 
-          if (wasDirty && previousDraft !== translation) {
-            showToast(`Paragraph #${paragraph.index} was replaced by retranslation`, 'info');
-          }
-        })
+        if (wasDirty && previousDraft !== translation) {
+          showToast(`Paragraph #${paragraph.index} was replaced by retranslation`, 'info');
+        }
+      })
         .catch(error => {
           setRetranslateErrorMap(previous => ({
             ...previous,
@@ -308,7 +338,15 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           processRetranslateQueueRef.current();
         });
     }
-  }, [projectId, sectionId, showToast, updateParagraphInSection, updateSectionQueryCache]);
+  }, [
+    cancelPendingSave,
+    projectId,
+    runParagraphOperation,
+    sectionId,
+    showToast,
+    updateParagraphInSection,
+    updateSectionQueryCache,
+  ]);
 
   useEffect(() => {
     processRetranslateQueueRef.current = processRetranslateQueue;
@@ -321,10 +359,11 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         return;
       }
 
+      cancelPendingSave(paragraphId);
       retranslateQueueRef.current.push({ paragraphId, model, instruction });
       processRetranslateQueueRef.current();
     },
-    []
+    [cancelPendingSave]
   );
 
   const toggleSelectionMode = useCallback(() => {
@@ -366,6 +405,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       if (selectedIds.size === 0) return;
 
       const ids = Array.from(selectedIds);
+      ids.forEach(cancelPendingSave);
       setRetranslatingMap(previous => {
         const next = { ...previous };
         ids.forEach(id => {
@@ -383,13 +423,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           model
         );
 
-        result.translations.forEach(({ id, translation }) => {
-          const existingTimer = saveTimersRef.current[id];
-          if (existingTimer) {
-            clearTimeout(existingTimer);
-            delete saveTimersRef.current[id];
-          }
-
+        result.translations.forEach(({ id, translation, status }) => {
           setDrafts(previous => ({ ...previous, [id]: translation }));
           setDirtyMap(previous => ({ ...previous, [id]: false }));
           setSaveErrorMap(previous => {
@@ -400,11 +434,11 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
           updateParagraphInSection(sectionId, id, {
             translation,
-            status: ParagraphStatus.TRANSLATED,
+            status,
           });
           updateSectionQueryCache(id, {
             translation,
-            status: ParagraphStatus.TRANSLATED,
+            status,
           });
         });
 
@@ -427,12 +461,22 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         });
       }
     },
-    [projectId, sectionId, selectedIds, showToast, updateParagraphInSection, updateSectionQueryCache]
+    [
+      cancelPendingSave,
+      projectId,
+      sectionId,
+      selectedIds,
+      showToast,
+      updateParagraphInSection,
+      updateSectionQueryCache,
+    ]
   );
 
   const confirmParagraph = useCallback(
     async (paragraphId: string) => {
       if (!projectId || !sectionId) return;
+
+      cancelPendingSave(paragraphId);
 
       const paragraph = paragraphsByIdRef.current[paragraphId];
       if (!paragraph) return;
@@ -443,44 +487,55 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         return;
       }
 
-      setSavingMap(previous => ({ ...previous, [paragraphId]: true }));
+      await runParagraphOperation(paragraphId, async () => {
+        setSavingMap(previous => ({ ...previous, [paragraphId]: true }));
 
-      try {
-        await documentApi.confirmParagraph(projectId, sectionId, paragraphId, translation);
+        try {
+          await documentApi.confirmParagraph(projectId, sectionId, paragraphId, translation);
 
-        updateParagraphInSection(sectionId, paragraphId, {
-          translation,
-          status: ParagraphStatus.APPROVED,
-          confirmed: translation,
-        });
-        updateSectionQueryCache(paragraphId, {
-          translation,
-          status: ParagraphStatus.APPROVED,
-          confirmed: translation,
-        });
+          updateParagraphInSection(sectionId, paragraphId, {
+            translation,
+            status: ParagraphStatus.APPROVED,
+            confirmed: translation,
+          });
+          updateSectionQueryCache(paragraphId, {
+            translation,
+            status: ParagraphStatus.APPROVED,
+            confirmed: translation,
+          });
 
-        setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
-        setSaveErrorMap(previous => {
-          const next = { ...previous };
-          delete next[paragraphId];
-          return next;
-        });
+          setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
+          setSaveErrorMap(previous => {
+            const next = { ...previous };
+            delete next[paragraphId];
+            return next;
+          });
 
-        showToast('Paragraph confirmed', 'success');
-        void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
-        void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
-        void queryClient.invalidateQueries({ queryKey: ['projects'] });
-      } catch (error) {
-        setSaveErrorMap(previous => ({
-          ...previous,
-          [paragraphId]: toErrorMessage(error),
-        }));
-        showToast('Confirm failed', 'error');
-      } finally {
-        setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
-      }
+          showToast('Paragraph confirmed', 'success');
+          void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
+          void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
+          void queryClient.invalidateQueries({ queryKey: ['projects'] });
+        } catch (error) {
+          setSaveErrorMap(previous => ({
+            ...previous,
+            [paragraphId]: toErrorMessage(error),
+          }));
+          showToast('Confirm failed', 'error');
+        } finally {
+          setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
+        }
+      });
     },
-    [projectId, queryClient, sectionId, showToast, updateParagraphInSection, updateSectionQueryCache]
+    [
+      cancelPendingSave,
+      projectId,
+      queryClient,
+      runParagraphOperation,
+      sectionId,
+      showToast,
+      updateParagraphInSection,
+      updateSectionQueryCache,
+    ]
   );
 
   const batchConfirmSelected = useCallback(async () => {
@@ -500,6 +555,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
     try {
       for (const paragraphId of ids) {
+        cancelPendingSave(paragraphId);
         const paragraph = paragraphsByIdRef.current[paragraphId];
         if (!paragraph) {
           failedIds.add(paragraphId);
@@ -567,6 +623,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       });
     }
   }, [
+    cancelPendingSave,
     projectId,
     queryClient,
     sectionId,

@@ -128,12 +128,18 @@ async def translate_paragraph(
         else:
             translation = agent.translate_paragraph(paragraph, context, request.model)
 
-        pm.save_section(project_id, section)
+        persisted_paragraph = pm.update_paragraph_locked(
+            project_id,
+            section_id,
+            paragraph_id,
+            translation=translation,
+            model=request.model,
+        )
         return {
-            "id": paragraph.id,
-            "source": paragraph.source,
+            "id": persisted_paragraph.id,
+            "source": persisted_paragraph.source,
             "translation": translation,
-            "status": paragraph.status.value,
+            "status": persisted_paragraph.status.value,
         }
     except NotFoundException:
         raise
@@ -191,14 +197,19 @@ async def direct_translate_paragraph(
             max_retries=2,
             model=request.model,
         )
-        paragraph.add_translation(translation, request.model + "-direct")
-        pm.save_section(project_id, section)
+        persisted_paragraph = pm.update_paragraph_locked(
+            project_id,
+            section_id,
+            paragraph_id,
+            translation=translation,
+            model=request.model + "-direct",
+        )
 
         return {
-            "id": paragraph.id,
-            "source": paragraph.source,
+            "id": persisted_paragraph.id,
+            "source": persisted_paragraph.source,
             "translation": translation,
-            "status": paragraph.status.value,
+            "status": persisted_paragraph.status.value,
             "method": "direct",
         }
     except NotFoundException:
@@ -304,7 +315,14 @@ async def confirm_paragraph(
     pm: ProjectManagerDep,
 ):
     try:
-        paragraph = pm.confirm_paragraph(project_id, section_id, paragraph_id, request.translation)
+        paragraph = pm.update_paragraph_locked(
+            project_id,
+            section_id,
+            paragraph_id,
+            translation=request.translation,
+            status=ParagraphStatus.APPROVED,
+            model="manual",
+        )
         return {
             "id": paragraph.id,
             "translation": paragraph.confirmed,
@@ -343,7 +361,7 @@ async def update_paragraph(
             ).text
 
         status = ParagraphStatus(request.status) if request.status else None
-        paragraph = pm.update_paragraph(
+        paragraph = pm.update_paragraph_locked(
             project_id,
             section_id,
             paragraph_id,
@@ -415,55 +433,67 @@ async def batch_translate_paragraphs(
         success_count = 0
         error_count = 0
 
-        for paragraph_id in request.paragraph_ids:
-            if paragraph_id not in paragraph_map:
-                errors.append({"id": paragraph_id, "error": "段落不存在"})
-                error_count += 1
-                continue
+        with pm.section_lock(project_id, section_id):
+            for paragraph_id in request.paragraph_ids:
+                if paragraph_id not in paragraph_map:
+                    errors.append({"id": paragraph_id, "error": "段落不存在"})
+                    error_count += 1
+                    continue
 
-            para_index, paragraph = paragraph_map[paragraph_id]
+                para_index, paragraph = paragraph_map[paragraph_id]
 
-            try:
-                learned_rules = memory_service.get_relevant_rules(
-                    paragraph.source,
-                    project_id=project_id,
-                )
-
-                context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
-                context.previous_paragraphs = [
-                    (p.source, p.confirmed)
-                    for p in section.paragraphs[:para_index]
-                    if p.confirmed
-                ][-5:]
-                context.next_preview = [
-                    p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
-                ]
-
-                instruction = (request.instruction or "").strip()
-                if instruction:
-                    formatted_instruction = _build_retranslate_instruction(
-                        instruction,
+                try:
+                    learned_rules = memory_service.get_relevant_rules(
                         paragraph.source,
-                        _get_latest_translation_text(paragraph),
+                        project_id=project_id,
                     )
-                    translation = agent.retranslate_paragraph(
-                        paragraph,
-                        context,
-                        formatted_instruction,
-                        request.model,
+
+                    context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
+                    context.previous_paragraphs = [
+                        (p.source, p.confirmed)
+                        for p in section.paragraphs[:para_index]
+                        if p.confirmed
+                    ][-5:]
+                    context.next_preview = [
+                        p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
+                    ]
+
+                    instruction = (request.instruction or "").strip()
+                    if instruction:
+                        formatted_instruction = _build_retranslate_instruction(
+                            instruction,
+                            paragraph.source,
+                            _get_latest_translation_text(paragraph),
+                        )
+                        translation = agent.retranslate_paragraph(
+                            paragraph,
+                            context,
+                            formatted_instruction,
+                            request.model,
+                        )
+                    else:
+                        translation = agent.translate_paragraph(paragraph, context, request.model)
+
+                    persisted_paragraph = pm.update_paragraph(
+                        project_id,
+                        section_id,
+                        paragraph_id,
+                        translation=translation,
+                        model=request.model,
                     )
-                else:
-                    translation = agent.translate_paragraph(paragraph, context, request.model)
+                    translations.append(
+                        {
+                            "id": paragraph.id,
+                            "translation": translation,
+                            "status": persisted_paragraph.status.value,
+                        }
+                    )
+                    success_count += 1
 
-                translations.append({"id": paragraph.id, "translation": translation})
-                success_count += 1
-
-            except Exception as e:
-                error_msg = _to_error_message(e)
-                errors.append({"id": paragraph_id, "error": error_msg})
-                error_count += 1
-
-        pm.save_section(project_id, section)
+                except Exception as e:
+                    error_msg = _to_error_message(e)
+                    errors.append({"id": paragraph_id, "error": error_msg})
+                    error_count += 1
 
         return BatchTranslateResponse(
             translations=translations,

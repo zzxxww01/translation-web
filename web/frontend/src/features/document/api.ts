@@ -62,7 +62,7 @@ export const documentApi = {
     instruction?: string,
     model?: string
   ) =>
-    apiClient.post<{ translation: string }>(
+    apiClient.post<{ id: string; translation: string; status: ParagraphStatus }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/translate`,
       { model: model || 'preview', instruction }
     ),
@@ -152,7 +152,7 @@ export const documentApi = {
     model?: string
   ) =>
     apiClient.post<{
-      translations: Array<{ id: string; translation: string }>;
+      translations: Array<{ id: string; translation: string; status: ParagraphStatus }>;
       success_count: number;
       error_count: number;
       errors: Array<{ id: string; error: string }>;

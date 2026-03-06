@@ -5,10 +5,15 @@ Manage translation projects: create, read, update, delete.
 """
 
 import json
+import os
 import shutil
+import threading
+from collections import OrderedDict
+from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
 from typing import Any, List, Optional
+from uuid import uuid4
 
 from slugify import slugify
 
@@ -34,14 +39,19 @@ class ProjectManager:
         self.projects_path.mkdir(parents=True, exist_ok=True)
         self.parser = HTMLParser()
         self.glossary_manager = GlossaryManager(projects_path=projects_path)
+        self._section_locks: OrderedDict[str, threading.RLock] = OrderedDict()
+        self._section_locks_guard = threading.Lock()
+        self._section_locks_max = 256
 
     def _project_dir(self, project_id: str) -> Path:
         return self.projects_path / project_id
 
     def _write_text(self, path: Path, content: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+        tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
+        with open(tmp_path, "w", encoding="utf-8") as f:
             f.write(content)
+        os.replace(tmp_path, path)
 
     def _read_json(self, path: Path) -> Any:
         with open(path, "r", encoding="utf-8") as f:
@@ -49,8 +59,27 @@ class ProjectManager:
 
     def _write_json(self, path: Path, payload: Any) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w", encoding="utf-8") as f:
+        tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
+        with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2, default=str)
+        os.replace(tmp_path, path)
+
+    def _section_lock_key(self, project_id: str, section_id: str) -> str:
+        return f"{project_id}:{section_id}"
+
+    def _get_section_lock(self, project_id: str, section_id: str) -> threading.RLock:
+        lock_key = self._section_lock_key(project_id, section_id)
+        with self._section_locks_guard:
+            existing_lock = self._section_locks.get(lock_key)
+            if existing_lock is not None:
+                self._section_locks.move_to_end(lock_key)
+                return existing_lock
+            new_lock = threading.RLock()
+            self._section_locks[lock_key] = new_lock
+            # Evict oldest entries when exceeding the cap
+            while len(self._section_locks) > self._section_locks_max:
+                self._section_locks.popitem(last=False)
+            return new_lock
 
     def _best_translation_text(self, paragraph: Paragraph, fallback_to_source: bool = True) -> str:
         """Get best available translation text for a paragraph."""
@@ -299,8 +328,10 @@ class ProjectManager:
             project_id: 项目 ID
             section: 章节
         """
-        self._save_section(project_id, section)
-        self._update_progress(project_id)
+        section_lock = self._get_section_lock(project_id, section.section_id)
+        with section_lock:
+            self._save_section(project_id, section)
+            self._update_progress(project_id)
 
     def update_paragraph(
         self,
@@ -339,6 +370,11 @@ class ProjectManager:
         if not paragraph:
             raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
 
+        # Don't downgrade an already-approved paragraph back to TRANSLATED
+        # (e.g. when a retranslation API returns TRANSLATED as the default status).
+        if paragraph.status == ParagraphStatus.APPROVED and status == ParagraphStatus.TRANSLATED:
+            status = None
+
         # 更新译文
         if translation is not None:
             paragraph.add_translation(translation, model)
@@ -354,6 +390,34 @@ class ProjectManager:
         self._update_progress(project_id)
 
         return paragraph
+
+    def update_paragraph_locked(
+        self,
+        project_id: str,
+        section_id: str,
+        paragraph_id: str,
+        translation: Optional[str] = None,
+        status: Optional[ParagraphStatus] = None,
+        model: str = "manual"
+    ) -> Paragraph:
+        """Update one paragraph while holding the section write lock."""
+        section_lock = self._get_section_lock(project_id, section_id)
+        with section_lock:
+            return self.update_paragraph(
+                project_id,
+                section_id,
+                paragraph_id,
+                translation=translation,
+                status=status,
+                model=model,
+            )
+
+    @contextmanager
+    def section_lock(self, project_id: str, section_id: str):
+        """Acquire the section-level write lock as a context manager."""
+        lock = self._get_section_lock(project_id, section_id)
+        with lock:
+            yield
 
     def confirm_paragraph(
         self,
@@ -374,7 +438,7 @@ class ProjectManager:
         Returns:
             Paragraph: 更新后的段落
         """
-        return self.update_paragraph(
+        return self.update_paragraph_locked(
             project_id, section_id, paragraph_id,
             translation=translation,
             status=ParagraphStatus.APPROVED,
