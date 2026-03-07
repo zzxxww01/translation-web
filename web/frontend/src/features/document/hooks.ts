@@ -10,7 +10,7 @@ import { useDocumentStore } from '../../shared/stores';
 import { useToast } from '../../components/ui';
 import { useErrorHandler } from '../../shared/hooks/useErrorHandler';
 import { DEFAULT_STALE_TIME, ParagraphStatus } from '../../shared/constants';
-import type { CreateProjectDto } from '../../shared/types';
+import type { CreateProjectDto, Section } from '../../shared/types';
 import { fullTranslationService, type TranslationMethodType } from './services/fullTranslationService';
 
 /**
@@ -117,6 +117,8 @@ export function useSection(projectId: string, sectionId: string) {
  * 翻译段落
  */
 export function useTranslateParagraph() {
+  const queryClient = useQueryClient();
+  const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
   const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
@@ -134,7 +136,29 @@ export function useTranslateParagraph() {
       instruction?: string;
       model?: string;
     }) => documentApi.translateParagraph(projectId, sectionId, paragraphId, instruction, model),
-    onSuccess: result => {
+    onSuccess: (result, variables) => {
+      const updates = {
+        translation: result.translation,
+        status: result.status ?? ParagraphStatus.TRANSLATED,
+        confirmed:
+          result.confirmed ??
+          (result.status === ParagraphStatus.APPROVED ? result.translation : undefined),
+      };
+
+      updateParagraphInSection(variables.sectionId, variables.paragraphId, updates);
+      queryClient.setQueryData<Section | undefined>(
+        ['section', variables.projectId, variables.sectionId],
+        previous => {
+          if (!previous?.paragraphs) return previous;
+          return {
+            ...previous,
+            paragraphs: previous.paragraphs.map(paragraph =>
+              paragraph.id === variables.paragraphId ? { ...paragraph, ...updates } : paragraph
+            ),
+          };
+        }
+      );
+
       showSuccess('翻译完成！');
       return result;
     },

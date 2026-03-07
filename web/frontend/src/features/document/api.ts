@@ -62,7 +62,7 @@ export const documentApi = {
     instruction?: string,
     model?: string
   ) =>
-    apiClient.post<{ id: string; translation: string; status: ParagraphStatus }>(
+    apiClient.post<{ id: string; translation: string; status: ParagraphStatus; confirmed?: string | null }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/translate`,
       { model: model || 'preview', instruction }
     ),
@@ -104,7 +104,7 @@ export const documentApi = {
     paragraphId: string,
     data: UpdateParagraphPayload
   ) =>
-    apiClient.put<{ id: string; translation?: string; status: ParagraphStatus }>(
+    apiClient.put<{ id: string; translation?: string; status: ParagraphStatus; confirmed?: string | null }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}`,
       data
     ),
@@ -152,7 +152,12 @@ export const documentApi = {
     model?: string
   ) =>
     apiClient.post<{
-      translations: Array<{ id: string; translation: string; status: ParagraphStatus }>;
+      translations: Array<{
+        id: string;
+        translation: string;
+        status: ParagraphStatus;
+        confirmed?: string | null;
+      }>;
       success_count: number;
       error_count: number;
       errors: Array<{ id: string; error: string }>;

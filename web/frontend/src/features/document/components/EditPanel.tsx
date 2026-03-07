@@ -255,14 +255,17 @@ export const EditPanel: FC<EditPanelProps> = ({
         model: selectedModel,
       });
       setTranslation(result.translation);
+      const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
       updateParagraph(paragraph.id, {
         translation: result.translation,
-        status: ParagraphStatus.TRANSLATED,
+        status: persistedStatus,
+        confirmed:
+          result.confirmed ?? (persistedStatus === ParagraphStatus.APPROVED ? result.translation : undefined),
       });
     } finally {
       setIsTranslating(false);
     }
-  }, [projectId, sectionId, paragraph, selectedModel, translateMutation, updateParagraph]);
+  }, [projectId, sectionId, paragraph, selectedModel, translateMutation, translation, updateParagraph]);
 
   const handleCustomRetranslate = useCallback(() => {
     const instruction = customRetranslateInstruction.trim();

@@ -66,6 +66,38 @@ class Paragraph(BaseModel):
         if self.status == ParagraphStatus.PENDING:
             self.status = ParagraphStatus.TRANSLATED
 
+    def latest_translation(self) -> Optional[TranslationRecord]:
+        """Return the most recently saved translation record."""
+        if not self.translations:
+            return None
+        return max(self.translations.values(), key=lambda item: item.created_at)
+
+    def latest_translation_text(self) -> Optional[str]:
+        """Return the most recent translation text, if any."""
+        latest = self.latest_translation()
+        return latest.text if latest else None
+
+    def best_translation_text(self, fallback_to_source: bool = False) -> str:
+        """Prefer confirmed text, otherwise fall back to the latest draft translation."""
+        if self.confirmed:
+            return self.confirmed
+        latest = self.latest_translation_text()
+        if latest:
+            return latest
+        return self.source if fallback_to_source else ""
+
+    def unconfirm(
+        self,
+        next_status: ParagraphStatus = ParagraphStatus.MODIFIED,
+        source: str = "manual",
+    ) -> None:
+        """Drop the confirmed translation so the paragraph returns to review."""
+        if self.confirmed:
+            self.history.append(HistoryRecord(text=self.confirmed, source=source))
+            self.confirmed = None
+        if self.status == ParagraphStatus.APPROVED:
+            self.status = next_status
+
     def confirm(self, text: str, source: str = "manual") -> None:
         """确认译文"""
         if self.confirmed and self.confirmed != text:

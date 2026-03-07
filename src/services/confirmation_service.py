@@ -680,6 +680,10 @@ class ConfirmationService:
                 del self._cache[key]
             logger.debug(f"[{project_id}] Invalidated {len(keys_to_delete)} cache entries")
 
+    async def invalidate_project_cache(self, project_id: str) -> None:
+        """Public wrapper for clearing cached confirmation data."""
+        await self._invalidate_cache_for_project(project_id)
+
     def get_performance_stats(self) -> Dict:
         """获取性能统计"""
         return {

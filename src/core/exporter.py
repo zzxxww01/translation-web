@@ -165,9 +165,7 @@ class MarkdownExporter:
         """
         # 获取文本
         if use_translation:
-            text = paragraph.confirmed
-            if not text and paragraph.translations:
-                text = list(paragraph.translations.values())[0].text
+            text = paragraph.best_translation_text()
             if not text:
                 text = paragraph.source
         else:
@@ -343,9 +341,7 @@ class MarkdownExporter:
 
             for p in section.paragraphs:
                 # 译文
-                text = p.confirmed
-                if not text and p.translations:
-                    text = list(p.translations.values())[0].text
+                text = p.best_translation_text()
 
                 if text:
                     lines.append(text)

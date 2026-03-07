@@ -10,7 +10,13 @@ from fastapi import APIRouter
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.models import ParagraphStatus
 
-from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep, MemoryServiceDep
+from ..dependencies import (
+    GlossaryManagerDep,
+    LLMProviderDep,
+    ProjectManagerDep,
+    MemoryServiceDep,
+    ConfirmationServiceDep,
+)
 from ..middleware import BadRequestException, NotFoundException
 from .projects_models import (
     BatchTranslateRequest,
@@ -78,6 +84,7 @@ async def translate_paragraph(
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LLMProviderDep,
+    service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
     try:
@@ -133,13 +140,16 @@ async def translate_paragraph(
             section_id,
             paragraph_id,
             translation=translation,
+            status=ParagraphStatus.TRANSLATED,
             model=request.model,
         )
+        await service.invalidate_project_cache(project_id)
         return {
             "id": persisted_paragraph.id,
             "source": persisted_paragraph.source,
             "translation": translation,
             "status": persisted_paragraph.status.value,
+            "confirmed": persisted_paragraph.confirmed,
         }
     except NotFoundException:
         raise
@@ -171,6 +181,7 @@ async def direct_translate_paragraph(
     request: DirectTranslateRequest,
     pm: ProjectManagerDep,
     llm: LLMProviderDep,
+    service: ConfirmationServiceDep,
 ):
     try:
         section = pm.get_section(project_id, section_id)
@@ -202,14 +213,17 @@ async def direct_translate_paragraph(
             section_id,
             paragraph_id,
             translation=translation,
+            status=ParagraphStatus.TRANSLATED,
             model=request.model + "-direct",
         )
+        await service.invalidate_project_cache(project_id)
 
         return {
             "id": persisted_paragraph.id,
             "source": persisted_paragraph.source,
             "translation": translation,
             "status": persisted_paragraph.status.value,
+            "confirmed": persisted_paragraph.confirmed,
             "method": "direct",
         }
     except NotFoundException:
@@ -313,6 +327,7 @@ async def confirm_paragraph(
     paragraph_id: str,
     request: ConfirmRequest,
     pm: ProjectManagerDep,
+    service: ConfirmationServiceDep,
 ):
     try:
         paragraph = pm.update_paragraph_locked(
@@ -323,10 +338,12 @@ async def confirm_paragraph(
             status=ParagraphStatus.APPROVED,
             model="manual",
         )
+        await service.invalidate_project_cache(project_id)
         return {
             "id": paragraph.id,
             "translation": paragraph.confirmed,
             "status": paragraph.status.value,
+            "confirmed": paragraph.confirmed,
         }
     except FileNotFoundError as e:
         raise NotFoundException(detail=str(e))
@@ -339,6 +356,7 @@ async def update_paragraph(
     paragraph_id: str,
     request: UpdateParagraphRequest,
     pm: ProjectManagerDep,
+    service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
     try:
@@ -361,6 +379,16 @@ async def update_paragraph(
             ).text
 
         status = ParagraphStatus(request.status) if request.status else None
+        current_translation = _get_latest_translation_text(existing_paragraph)
+        if request.translation is not None and status is None:
+            if existing_paragraph.status == ParagraphStatus.PENDING and request.translation.strip():
+                status = ParagraphStatus.TRANSLATED
+            elif current_translation != request.translation:
+                status = (
+                    ParagraphStatus.MODIFIED
+                    if current_translation
+                    else ParagraphStatus.TRANSLATED
+                )
         paragraph = pm.update_paragraph_locked(
             project_id,
             section_id,
@@ -368,6 +396,7 @@ async def update_paragraph(
             translation=request.translation,
             status=status,
         )
+        await service.invalidate_project_cache(project_id)
 
         if (
             request.translation is not None
@@ -384,17 +413,13 @@ async def update_paragraph(
                 )
             )
 
-        latest_translation = paragraph.confirmed
-        if not latest_translation and paragraph.translations:
-            latest_translation = max(
-                paragraph.translations.values(),
-                key=lambda item: item.created_at,
-            ).text
+        latest_translation = paragraph.best_translation_text()
 
         return {
             "id": paragraph.id,
             "translation": latest_translation,
             "status": paragraph.status.value,
+            "confirmed": paragraph.confirmed,
         }
     except FileNotFoundError as e:
         raise NotFoundException(detail=str(e))
@@ -413,6 +438,7 @@ async def batch_translate_paragraphs(
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LLMProviderDep,
+    service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
     try:
@@ -479,6 +505,7 @@ async def batch_translate_paragraphs(
                         section_id,
                         paragraph_id,
                         translation=translation,
+                        status=ParagraphStatus.TRANSLATED,
                         model=request.model,
                     )
                     translations.append(
@@ -486,6 +513,7 @@ async def batch_translate_paragraphs(
                             "id": paragraph.id,
                             "translation": translation,
                             "status": persisted_paragraph.status.value,
+                            "confirmed": persisted_paragraph.confirmed,
                         }
                     )
                     success_count += 1
@@ -494,6 +522,8 @@ async def batch_translate_paragraphs(
                     error_msg = _to_error_message(e)
                     errors.append({"id": paragraph_id, "error": error_msg})
                     error_count += 1
+
+        await service.invalidate_project_cache(project_id)
 
         return BatchTranslateResponse(
             translations=translations,

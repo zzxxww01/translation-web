@@ -494,12 +494,7 @@ class BatchTranslationService:
     def _collect_section_translations(self, section: Section) -> List[str]:
         """Collect best-effort translation text for a section."""
         return [
-            paragraph.confirmed
-            or (
-                list(paragraph.translations.values())[0].text
-                if paragraph.translations
-                else ""
-            )
+            paragraph.best_translation_text()
             for paragraph in section.paragraphs
         ]
 

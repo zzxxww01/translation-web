@@ -47,6 +47,9 @@ import { cn } from '../../shared/utils';
 import { confirmationApi } from './api/confirmationApi';
 import type { UnalignedItem } from './types';
 
+const RETRANSLATE_SYNC_RETRIES = 6;
+const RETRANSLATE_SYNC_DELAY_MS = 250;
+
 
 
 interface ConfirmationFeatureProps {
@@ -208,6 +211,60 @@ export function ConfirmationFeature({
 
 
 
+  const waitForRetranslateSync = useCallback(
+
+    async (expectedTranslation: string, expectedCreatedAt: string) => {
+
+      const expectedTime = Date.parse(expectedCreatedAt);
+
+
+
+      for (let attempt = 0; attempt < RETRANSLATE_SYNC_RETRIES; attempt += 1) {
+
+        const data = await loadParagraph(currentIndex);
+
+        const matched = data?.versions.some(version => {
+
+          if (version.translation !== expectedTranslation) {
+
+            return false;
+
+          }
+
+
+
+          const versionTime = Date.parse(version.created_at);
+
+          return Number.isNaN(expectedTime) || Number.isNaN(versionTime) || versionTime >= expectedTime;
+
+        });
+
+
+
+        if (matched) {
+
+          return true;
+
+        }
+
+
+
+        await new Promise(resolve => setTimeout(resolve, RETRANSLATE_SYNC_DELAY_MS));
+
+      }
+
+
+
+      return false;
+
+    },
+
+    [currentIndex, loadParagraph]
+
+  );
+
+
+
   // 重新翻译段落
 
   const handleRetranslate = useCallback(
@@ -222,7 +279,7 @@ export function ConfirmationFeature({
 
       try {
 
-        await confirmationApi.retranslateParagraph(
+        const result = await confirmationApi.retranslateParagraph(
 
           projectId,
 
@@ -234,9 +291,13 @@ export function ConfirmationFeature({
 
 
 
-        // 重新加载当前段落以获取新版本
+        const synced = await waitForRetranslateSync(result.translation, result.created_at);
 
-        await loadParagraph(currentIndex);
+        if (!synced) {
+
+          await loadParagraph(currentIndex);
+
+        }
 
       } catch (error) {
 
@@ -250,7 +311,7 @@ export function ConfirmationFeature({
 
     },
 
-    [currentParagraph, currentIndex, loadParagraph, projectId]
+    [currentParagraph, currentIndex, loadParagraph, projectId, waitForRetranslateSync]
 
   );
 

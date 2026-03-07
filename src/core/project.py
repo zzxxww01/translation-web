@@ -83,11 +83,7 @@ class ProjectManager:
 
     def _best_translation_text(self, paragraph: Paragraph, fallback_to_source: bool = True) -> str:
         """Get best available translation text for a paragraph."""
-        if paragraph.confirmed:
-            return paragraph.confirmed
-        if paragraph.translations:
-            return list(paragraph.translations.values())[0].text
-        return paragraph.source if fallback_to_source else ""
+        return paragraph.best_translation_text(fallback_to_source=fallback_to_source)
 
     def _format_markdown_line(self, element_type: ElementType, text: str) -> str:
         """Format one markdown line based on paragraph element type."""
@@ -370,15 +366,28 @@ class ProjectManager:
         if not paragraph:
             raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
 
-        # Don't downgrade an already-approved paragraph back to TRANSLATED
-        # (e.g. when a retranslation API returns TRANSLATED as the default status).
-        if paragraph.status == ParagraphStatus.APPROVED and status == ParagraphStatus.TRANSLATED:
-            status = None
+        # Clear confirmation as soon as an approved paragraph is retranslated or edited.
+        should_confirm = status == ParagraphStatus.APPROVED
+        should_unconfirm = (
+            paragraph.confirmed is not None
+            and status is not None
+            and status != ParagraphStatus.APPROVED
+        )
+
+        if translation is not None and not should_confirm:
+            translation_changed = paragraph.best_translation_text() != translation
+            should_unconfirm = should_unconfirm or translation_changed
+
+        if should_unconfirm:
+            paragraph.unconfirm(
+                next_status=status or ParagraphStatus.MODIFIED,
+                source=model,
+            )
 
         # 更新译文
         if translation is not None:
             paragraph.add_translation(translation, model)
-            if status == ParagraphStatus.APPROVED:
+            if should_confirm:
                 paragraph.confirm(translation, model)
 
         # 更新状态

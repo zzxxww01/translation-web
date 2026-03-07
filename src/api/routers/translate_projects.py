@@ -35,11 +35,7 @@ analysis_service = AnalysisService()
 
 
 def _get_best_translation_text(paragraph) -> str:
-    if paragraph.confirmed:
-        return paragraph.confirmed
-    if paragraph.translations:
-        return list(paragraph.translations.values())[0].text
-    return ""
+    return paragraph.best_translation_text()
 
 
 def _build_translation_context(section, index: int, glossary):

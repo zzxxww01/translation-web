@@ -121,6 +121,7 @@ async def retranslate_paragraph(
     request: RetranslateRequest,
     pm: ProjectManagerDep,
     llm: LLMProviderDep,
+    service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
     try:
@@ -179,6 +180,7 @@ async def retranslate_paragraph(
         )
 
         pm.save_section(project_id, target_section)
+        await service.invalidate_project_cache(project_id)
 
         # 自学习：从重翻指令中后台提取风格偏好规则
         if instruction and old_translation:
@@ -280,7 +282,7 @@ async def run_consistency_review(
                 if para.confirmed:
                     trans_list.append(para.confirmed)
                 elif para.translations:
-                    trans_list.append(list(para.translations.values())[0].text)
+                    trans_list.append(para.latest_translation_text() or "")
                 else:
                     trans_list.append("")
             translations[section.section_id] = trans_list

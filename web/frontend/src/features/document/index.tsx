@@ -28,6 +28,7 @@ export function DocumentFeature() {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<string | null>(null);
+  const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
@@ -112,11 +113,13 @@ export function DocumentFeature() {
       setSelectedSectionId(displaySection.section_id);
       setCurrentSection(displaySection);
     }
+    setImmersiveTargetParagraphId(currentParagraph?.id ?? null);
     setCurrentParagraph(null);
     setImmersiveMode(true);
-  }, [displaySection, setCurrentSection, setCurrentParagraph, setImmersiveMode]);
+  }, [currentParagraph, displaySection, setCurrentSection, setCurrentParagraph, setImmersiveMode]);
 
   const handleExitImmersive = useCallback(() => {
+    setImmersiveTargetParagraphId(null);
     setImmersiveMode(false);
   }, [setImmersiveMode]);
 
@@ -301,6 +304,7 @@ export function DocumentFeature() {
         <ImmersiveEditor
           projectId={currentProject.id}
           section={displaySection}
+          initialParagraphId={immersiveTargetParagraphId}
           onClose={handleExitImmersive}
         />
       )}

@@ -1,5 +1,5 @@
 import { Check, CheckSquare, RotateCw, X } from 'lucide-react';
-import { type UIEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import { type UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../../components/ui';
 import { DEFAULT_MODEL, MODEL_OPTIONS, ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
@@ -41,6 +41,7 @@ const RETRANSLATE_TEMPLATES: Array<{
 interface ImmersiveEditorProps {
   projectId: string;
   section: Section;
+  initialParagraphId?: string | null;
   onClose: () => void;
 }
 
@@ -51,7 +52,12 @@ function matchesFilter(mode: FilterMode, paragraph: Paragraph, isDirty: boolean)
   return paragraph.status === ParagraphStatus.MODIFIED || isDirty;
 }
 
-export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditorProps) {
+export function ImmersiveEditor({
+  projectId,
+  section,
+  initialParagraphId = null,
+  onClose,
+}: ImmersiveEditorProps) {
   const sections = useDocumentStore(state => state.sections);
   const latestSection = useMemo(() => {
     const storeSection = sections.find(item => item.section_id === section.section_id);
@@ -66,6 +72,9 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
   const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
   const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK_SIZE);
   const [showBatchRetranslateDialog, setShowBatchRetranslateDialog] = useState(false);
+  const listContainerRef = useRef<HTMLDivElement>(null);
+  const targetParagraphRef = useRef<HTMLDivElement | null>(null);
+  const hasAutoScrolledRef = useRef(false);
 
   const {
     drafts,
@@ -100,17 +109,50 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
       ),
     [dirtyMap, filterMode, paragraphs]
   );
+  const targetParagraphIndex = useMemo(
+    () =>
+      initialParagraphId
+        ? filteredParagraphs.findIndex(paragraph => paragraph.id === initialParagraphId)
+        : -1,
+    [filteredParagraphs, initialParagraphId]
+  );
 
   const isChunkMode = filteredParagraphs.length > CHUNK_THRESHOLD;
 
   useEffect(() => {
-    setVisibleCount(isChunkMode ? INITIAL_CHUNK_SIZE : filteredParagraphs.length);
-  }, [filteredParagraphs.length, isChunkMode]);
+    const nextVisibleCount = isChunkMode
+      ? Math.min(
+          filteredParagraphs.length,
+          Math.max(INITIAL_CHUNK_SIZE, targetParagraphIndex >= 0 ? targetParagraphIndex + 1 : 0)
+        )
+      : filteredParagraphs.length;
+    setVisibleCount(nextVisibleCount);
+    hasAutoScrolledRef.current = false;
+  }, [filteredParagraphs.length, isChunkMode, targetParagraphIndex]);
 
   const displayedParagraphs = useMemo(
     () => (isChunkMode ? filteredParagraphs.slice(0, visibleCount) : filteredParagraphs),
     [filteredParagraphs, isChunkMode, visibleCount]
   );
+
+  useEffect(() => {
+    if (!initialParagraphId || hasAutoScrolledRef.current) {
+      return;
+    }
+    if (!displayedParagraphs.some(paragraph => paragraph.id === initialParagraphId)) {
+      return;
+    }
+    if (!targetParagraphRef.current || !listContainerRef.current) {
+      return;
+    }
+
+    targetParagraphRef.current.scrollIntoView({
+      block: 'center',
+      behavior: 'smooth',
+    });
+    hasAutoScrolledRef.current = true;
+  }, [displayedParagraphs, initialParagraphId]);
+
   const approvedCount = useMemo(
     () =>
       paragraphs.filter(
@@ -246,26 +288,34 @@ export function ImmersiveEditor({ projectId, section, onClose }: ImmersiveEditor
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto px-6 py-2" onScroll={handleListScroll}>
+      <div ref={listContainerRef} className="flex-1 overflow-auto px-6 py-2" onScroll={handleListScroll}>
         <div className="space-y-1">
           {displayedParagraphs.map(paragraph => (
-            <ImmersiveRow
+            <div
               key={paragraph.id}
-              paragraph={paragraph}
-              draft={drafts[paragraph.id] ?? paragraph.translation ?? ''}
-              isSaving={Boolean(savingMap[paragraph.id])}
-              saveError={saveErrorMap[paragraph.id]}
-              isRetranslating={Boolean(retranslatingMap[paragraph.id])}
-              retranslateError={retranslateErrorMap[paragraph.id]}
-              onChange={value => updateDraft(paragraph.id, value)}
-              onRetranslate={(instruction?: string) =>
-                queueRetranslate(paragraph.id, selectedModel, instruction)
-              }
-              onConfirm={() => void confirmParagraph(paragraph.id)}
-              isSelectionMode={isSelectionMode}
-              isSelected={selectedIds.has(paragraph.id)}
-              onToggleSelection={() => toggleSelection(paragraph.id)}
-            />
+              ref={node => {
+                if (paragraph.id === initialParagraphId) {
+                  targetParagraphRef.current = node;
+                }
+              }}
+            >
+              <ImmersiveRow
+                paragraph={paragraph}
+                draft={drafts[paragraph.id] ?? paragraph.translation ?? ''}
+                isSaving={Boolean(savingMap[paragraph.id])}
+                saveError={saveErrorMap[paragraph.id]}
+                isRetranslating={Boolean(retranslatingMap[paragraph.id])}
+                retranslateError={retranslateErrorMap[paragraph.id]}
+                onChange={value => updateDraft(paragraph.id, value)}
+                onRetranslate={(instruction?: string) =>
+                  queueRetranslate(paragraph.id, selectedModel, instruction)
+                }
+                onConfirm={() => void confirmParagraph(paragraph.id)}
+                isSelectionMode={isSelectionMode}
+                isSelected={selectedIds.has(paragraph.id)}
+                onToggleSelection={() => toggleSelection(paragraph.id)}
+              />
+            </div>
           ))}
         </div>
 

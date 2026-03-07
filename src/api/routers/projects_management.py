@@ -242,9 +242,9 @@ async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
                     "index": p.index,
                     "source": _normalize_image_source(p),
                     "source_html": _normalize_image_html(p),
-                    "translation": p.confirmed
-                    or (list(p.translations.values())[0].text if p.translations else None),
+                    "translation": p.best_translation_text() or None,
                     "status": p.status.value,
+                    "confirmed": p.confirmed,
                     "element_type": p.element_type.value,
                 }
                 for p in section.paragraphs

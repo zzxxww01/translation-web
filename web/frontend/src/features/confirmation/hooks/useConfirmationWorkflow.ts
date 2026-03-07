@@ -5,7 +5,11 @@
 import { useCallback, useEffect } from 'react';
 import { useConfirmationStore } from '../stores/confirmationStore';
 import { confirmationApi } from '../api/confirmationApi';
-import type { ConfirmParagraphRequest, TermChange } from '../types';
+import type {
+  ConfirmParagraphRequest,
+  ParagraphConfirmationResponse,
+  TermChange,
+} from '../types';
 
 export function useConfirmationWorkflow() {
   const {
@@ -82,7 +86,7 @@ export function useConfirmationWorkflow() {
   }, [projectId, workflowStatus, setWorkflowStatus, setError]);
 
   // 加载段落
-  const loadParagraph = useCallback(async (index: number) => {
+  const loadParagraph = useCallback(async (index: number): Promise<ParagraphConfirmationResponse | undefined> => {
     if (!projectId) {
       setError('未选择项目');
       return;
@@ -95,9 +99,11 @@ export function useConfirmationWorkflow() {
       const data = await confirmationApi.getParagraphConfirmation(projectId, index);
       setCurrentParagraph(data.paragraph, data.versions);
       jumpTo(index);
+      return data;
     } catch (error) {
       const message = error instanceof Error ? error.message : '加载段落失败';
       setError(message);
+      return undefined;
     } finally {
       setLoading(false);
     }
