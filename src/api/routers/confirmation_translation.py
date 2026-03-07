@@ -167,8 +167,8 @@ async def retranslate_paragraph(
 
         # 记录重翻前的译文
         old_translation = None
-        if target_paragraph.translations:
-            latest = max(target_paragraph.translations.values(), key=lambda t: t.created_at)
+        latest = target_paragraph.latest_translation(non_empty=True)
+        if latest is not None:
             old_translation = latest.text
 
         agent = TranslationAgent(llm)
@@ -196,11 +196,8 @@ async def retranslate_paragraph(
 
         new_version_id = f"retranslate_{uuid.uuid4().hex[:8]}"
         version_obj = target_paragraph.translations.get(model_name)
-        if version_obj is None and target_paragraph.translations:
-            version_obj = max(
-                target_paragraph.translations.values(),
-                key=lambda t: t.created_at,
-            )
+        if version_obj is None:
+            version_obj = target_paragraph.latest_translation(non_empty=True)
         created_at = version_obj.created_at if version_obj else datetime.now()
 
         return {
@@ -281,8 +278,8 @@ async def run_consistency_review(
             for para in section.paragraphs:
                 if para.confirmed:
                     trans_list.append(para.confirmed)
-                elif para.translations:
-                    trans_list.append(para.latest_translation_text() or "")
+                elif para.has_draft_translation():
+                    trans_list.append(para.latest_translation_text(non_empty=True) or "")
                 else:
                     trans_list.append("")
             translations[section.section_id] = trans_list

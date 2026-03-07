@@ -248,8 +248,8 @@ class TranslationAgent:
             llm_context["instruction"] = instruction
 
         # 如果有之前的翻译，也传入作为参考
-        if paragraph.translations:
-            prev_trans = list(paragraph.translations.values())[-1]
+        prev_trans = paragraph.latest_translation(non_empty=True)
+        if prev_trans is not None:
             llm_context["previous_translation"] = prev_trans.text
 
         # 调用 LLM 翻译

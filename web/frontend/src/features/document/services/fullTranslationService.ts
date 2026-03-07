@@ -273,6 +273,18 @@ class FullTranslationService {
         this.onProgressCallback(data);
       }
       return true;
+    } else if (data.type === 'incomplete') {
+      if (data.translated_count !== undefined && data.total !== undefined) {
+        this.state.progress = {
+          current: data.translated_count,
+          total: data.total,
+        };
+      }
+      this.finalizeTranslation(false);
+      if (this.onProgressCallback) {
+        this.onProgressCallback(data);
+      }
+      return true;
     }
 
     if (this.onProgressCallback) {

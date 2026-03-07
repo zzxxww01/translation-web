@@ -27,6 +27,7 @@ class TranslationProgress:
         self.errors: List[Dict] = []
         self.started_at = datetime.now()
         self.finished_at: Optional[datetime] = None
+        self.final_status: Optional[str] = None
 
     @property
     def progress_percent(self) -> float:
@@ -55,4 +56,5 @@ class TranslationProgress:
             "is_complete": self.is_complete,
             "started_at": self.started_at.isoformat(),
             "finished_at": self.finished_at.isoformat() if self.finished_at else None,
+            "final_status": self.final_status,
         }

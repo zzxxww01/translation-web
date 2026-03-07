@@ -60,28 +60,57 @@ class Paragraph(BaseModel):
 
     history: List[HistoryRecord] = Field(default_factory=list)
 
+    @staticmethod
+    def _has_text(text: Optional[str]) -> bool:
+        return isinstance(text, str) and bool(text.strip())
+
+    def has_confirmed_translation(self) -> bool:
+        """Return True when the confirmed translation contains usable text."""
+        return self._has_text(self.confirmed)
+
     def add_translation(self, text: str, model: str) -> None:
         """添加翻译结果"""
-        self.translations[model] = TranslationRecord(text=text, model=model)
+        normalized = text.strip() if isinstance(text, str) else ""
+        if not normalized:
+            raise ValueError("Translation text cannot be empty")
+
+        self.translations[model] = TranslationRecord(text=normalized, model=model)
         if self.status == ParagraphStatus.PENDING:
             self.status = ParagraphStatus.TRANSLATED
 
-    def latest_translation(self) -> Optional[TranslationRecord]:
+    def latest_translation(
+        self, non_empty: bool = False
+    ) -> Optional[TranslationRecord]:
         """Return the most recently saved translation record."""
         if not self.translations:
             return None
-        return max(self.translations.values(), key=lambda item: item.created_at)
+        candidates = list(self.translations.values())
+        if non_empty:
+            candidates = [
+                item for item in candidates if self._has_text(item.text)
+            ]
+        if not candidates:
+            return None
+        return max(candidates, key=lambda item: item.created_at)
 
-    def latest_translation_text(self) -> Optional[str]:
+    def latest_translation_text(self, non_empty: bool = False) -> Optional[str]:
         """Return the most recent translation text, if any."""
-        latest = self.latest_translation()
+        latest = self.latest_translation(non_empty=non_empty)
         return latest.text if latest else None
+
+    def has_draft_translation(self) -> bool:
+        """Return True when there is at least one non-empty draft translation."""
+        return self.latest_translation(non_empty=True) is not None
+
+    def has_usable_translation(self) -> bool:
+        """Return True when paragraph has either confirmed or draft translation text."""
+        return self.has_confirmed_translation() or self.has_draft_translation()
 
     def best_translation_text(self, fallback_to_source: bool = False) -> str:
         """Prefer confirmed text, otherwise fall back to the latest draft translation."""
-        if self.confirmed:
-            return self.confirmed
-        latest = self.latest_translation_text()
+        if self.has_confirmed_translation():
+            return self.confirmed.strip()
+        latest = self.latest_translation_text(non_empty=True)
         if latest:
             return latest
         return self.source if fallback_to_source else ""
@@ -100,9 +129,13 @@ class Paragraph(BaseModel):
 
     def confirm(self, text: str, source: str = "manual") -> None:
         """确认译文"""
-        if self.confirmed and self.confirmed != text:
+        normalized = text.strip() if isinstance(text, str) else ""
+        if not normalized:
+            raise ValueError("Confirmed translation cannot be empty")
+
+        if self.confirmed and self.confirmed != normalized:
             self.history.append(HistoryRecord(text=self.confirmed, source=source))
-        self.confirmed = text
+        self.confirmed = normalized
         self.status = ParagraphStatus.APPROVED
 
 

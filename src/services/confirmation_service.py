@@ -370,7 +370,7 @@ class ConfirmationService:
         paragraph_count = sum(
             1 for s in project.sections
             for p in s.paragraphs
-            if p.confirmed or p.translations
+            if p.has_usable_translation()
         )
 
         # 生成文件名
@@ -421,7 +421,7 @@ class ConfirmationService:
         translated_paragraphs = sum(
             1 for s in project.sections
             for p in s.paragraphs
-            if p.translations
+            if p.has_draft_translation()
         )
 
         return {
@@ -456,14 +456,12 @@ class ConfirmationService:
 
     def _get_latest_translation(self, paragraph: Paragraph):
         """获取最新的翻译记录"""
-        if not paragraph.translations:
+        latest = paragraph.latest_translation(non_empty=True)
+        if latest is None:
             raise ValueError("No translations available")
 
         # 返回最新的翻译（按created_at排序）
-        return max(
-            paragraph.translations.values(),
-            key=lambda t: t.created_at
-        )
+        return latest
 
     def _build_ai_insight(self, paragraph: Paragraph) -> Optional[Dict]:
         """
@@ -476,7 +474,7 @@ class ConfirmationService:
             return paragraph.ai_insight
 
         # 否则返回基础信息
-        if paragraph.translations:
+        if paragraph.has_draft_translation():
             latest = self._get_latest_translation(paragraph)
             return {
                 "overall_score": 8.0,  # 默认分数
@@ -510,7 +508,7 @@ class ConfirmationService:
         versions = []
 
         # AI翻译版本
-        if paragraph.translations:
+        if paragraph.has_draft_translation():
             ai_translation = self._get_latest_translation(paragraph)
             ai_insight = self._build_ai_insight(paragraph)
 
@@ -696,16 +694,10 @@ class ConfirmationService:
 
     def _get_ai_translation_text(self, paragraph) -> Optional[str]:
         """获取段落最新的 AI 翻译文本"""
-        if not paragraph.translations:
+        latest = paragraph.latest_translation(non_empty=True)
+        if latest is None:
             return None
-        try:
-            latest = max(
-                paragraph.translations.values(),
-                key=lambda t: t.created_at
-            )
-            return latest.text
-        except Exception:
-            return None
+        return latest.text
 
     async def _extract_rules_background(
         self,

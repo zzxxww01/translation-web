@@ -27,6 +27,20 @@ export function useConfirmationWorkflow() {
     setError,
   } = useConfirmationStore();
 
+  const getCompletionState = useCallback(
+    (status: {
+      translated_paragraphs?: number;
+      total_paragraphs?: number;
+      is_complete?: boolean;
+    }) => {
+      const translated = status.translated_paragraphs ?? 0;
+      const total = status.total_paragraphs ?? 0;
+      const isComplete = status.is_complete ?? (total > 0 && translated >= total);
+      return { translated, total, isComplete };
+    },
+    []
+  );
+
   // 初始化工作流
   const initialize = useCallback(async (id: string) => {
     setProjectId(id);
@@ -37,29 +51,27 @@ export function useConfirmationWorkflow() {
       // 检查翻译状态
       const status = await confirmationApi.getTranslationStatus(id);
 
-      if (status.status === 'completed' || status.status === 'not_started') {
-        // 翻译已完成或未开始
-        if (status.translated_paragraphs === 0) {
-          // 需要启动翻译
-          await confirmationApi.startTranslation(id);
-          setWorkflowStatus('translating');
-        } else {
-          setWorkflowStatus('ready');
-        }
-      } else if (status.status === 'processing') {
+      const { isComplete } = getCompletionState(status);
+
+      if (status.status === 'processing') {
         setWorkflowStatus('translating');
       } else if (status.status === 'failed') {
         setError('翻译失败，请重试');
-        setWorkflowStatus('loading');
+        setWorkflowStatus('ready');
+      } else if (!isComplete) {
+        await confirmationApi.startTranslation(id);
+        setWorkflowStatus('translating');
+      } else {
+        setWorkflowStatus('ready');
       }
     } catch (error) {
       const message = error instanceof Error ? error.message : '初始化失败';
       setError(message);
-      setWorkflowStatus('loading');
+      setWorkflowStatus('ready');
     } finally {
       setLoading(false);
     }
-  }, [setProjectId, setLoading, setError, setWorkflowStatus]);
+  }, [getCompletionState, setProjectId, setLoading, setError, setWorkflowStatus]);
 
   // 轮询翻译状态
   useEffect(() => {
@@ -68,13 +80,22 @@ export function useConfirmationWorkflow() {
     const interval = setInterval(async () => {
       try {
         const status = await confirmationApi.getTranslationStatus(projectId);
+        const { isComplete } = getCompletionState(status);
 
-        if (status.status === 'completed') {
+        if (status.status === 'processing') {
+          return;
+        }
+
+        if (status.status === 'failed') {
+          setError('翻译失败，请重试');
           setWorkflowStatus('ready');
           clearInterval(interval);
-        } else if (status.status === 'failed') {
-          setError('翻译失败，请重试');
-          setWorkflowStatus('loading');
+        } else if (isComplete) {
+          setWorkflowStatus('ready');
+          clearInterval(interval);
+        } else {
+          setError('翻译未完成，请点击重试继续翻译');
+          setWorkflowStatus('ready');
           clearInterval(interval);
         }
       } catch (error) {
@@ -83,7 +104,7 @@ export function useConfirmationWorkflow() {
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [projectId, workflowStatus, setWorkflowStatus, setError]);
+  }, [getCompletionState, projectId, workflowStatus, setWorkflowStatus, setError]);
 
   // 加载段落
   const loadParagraph = useCallback(async (index: number): Promise<ParagraphConfirmationResponse | undefined> => {

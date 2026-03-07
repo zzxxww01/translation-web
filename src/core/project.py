@@ -636,10 +636,10 @@ class ProjectManager:
 
             for p in section.paragraphs:
                 # 优先使用确认的译文，其次是任意翻译，最后是原文
-                if p.confirmed:
+                if p.has_confirmed_translation():
                     text = p.confirmed
                     status_mark = "✅"
-                elif p.translations:
+                elif p.has_draft_translation():
                     text = self._best_translation_text(p, fallback_to_source=False)
                     status_mark = "🔄"
                 else:

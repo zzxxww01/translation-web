@@ -36,12 +36,7 @@ router = APIRouter()
 def _get_latest_translation_text(paragraph) -> Optional[str]:
     if paragraph.confirmed:
         return paragraph.confirmed
-    if paragraph.translations:
-        return max(
-            paragraph.translations.values(),
-            key=lambda item: item.created_at,
-        ).text
-    return None
+    return paragraph.latest_translation_text(non_empty=True)
 
 
 def _build_retranslate_instruction(
@@ -372,11 +367,10 @@ async def update_paragraph(
             raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
 
         previous_translation = existing_paragraph.confirmed
-        if not previous_translation and existing_paragraph.translations:
-            previous_translation = max(
-                existing_paragraph.translations.values(),
-                key=lambda item: item.created_at,
-            ).text
+        if not previous_translation:
+            previous_translation = existing_paragraph.latest_translation_text(
+                non_empty=True
+            )
 
         status = ParagraphStatus(request.status) if request.status else None
         current_translation = _get_latest_translation_text(existing_paragraph)

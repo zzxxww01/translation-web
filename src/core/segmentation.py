@@ -224,15 +224,7 @@ class SegmentationStrategy:
                 merged_paragraph_ids=[p.id for p in merge_paras],
                 source="\n\n".join([p.source for p in merge_paras]),
                 translation="\n\n".join(
-                    [
-                        (
-                            p.confirmed
-                            or p.translations.get(list(p.translations.keys())[-1]).text
-                            if p.translations
-                            else ""
-                        )
-                        for p in merge_paras
-                    ]
+                    [p.best_translation_text() for p in merge_paras]
                 ),
                 is_merged=should_merge and len(merge_paras) > 1,
             )

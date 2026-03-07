@@ -168,7 +168,8 @@ async def translate_full_document(
             glossary = gm.load_project(project_id)
             agent = TranslationAgent(llm)
             total_paragraphs = sum(len(section.paragraphs) for section in sections)
-            translated_count = 0
+            processed_count = 0
+            error_count = 0
 
             yield f"data: {json.dumps({'type': 'start', 'total': total_paragraphs})}\n\n"
 
@@ -178,18 +179,16 @@ async def translate_full_document(
                     continue
 
                 for index, paragraph in enumerate(section_full.paragraphs):
-                    has_translation = bool(paragraph.confirmed) or bool(
-                        paragraph.translations
-                    )
+                    has_translation = paragraph.has_usable_translation()
                     if has_translation:
-                        translated_count += 1
+                        processed_count += 1
                         yield (
                             "data: "
                             + json.dumps(
                                 {
                                     "type": "skip",
                                     "paragraph_id": paragraph.id,
-                                    "current": translated_count,
+                                    "current": processed_count,
                                     "total": total_paragraphs,
                                 }
                             )
@@ -204,7 +203,7 @@ async def translate_full_document(
                             paragraph, context, request.model
                         )
                         pm.save_section(project_id, section_full)
-                        translated_count += 1
+                        processed_count += 1
 
                         yield (
                             "data: "
@@ -214,14 +213,15 @@ async def translate_full_document(
                                     "paragraph_id": paragraph.id,
                                     "section_id": section.section_id,
                                     "translation": translated,
-                                    "current": translated_count,
+                                    "current": processed_count,
                                     "total": total_paragraphs,
                                 }
                             )
                             + "\n\n"
                         )
                     except Exception as e:
-                        translated_count += 1
+                        processed_count += 1
+                        error_count += 1
                         yield (
                             "data: "
                             + json.dumps(
@@ -229,7 +229,7 @@ async def translate_full_document(
                                     "type": "error",
                                     "paragraph_id": paragraph.id,
                                     "error": str(e),
-                                    "current": translated_count,
+                                    "current": processed_count,
                                     "total": total_paragraphs,
                                 }
                             )
@@ -239,17 +239,43 @@ async def translate_full_document(
 
                     await asyncio.sleep(0.1)
 
-            yield (
-                "data: "
-                + json.dumps(
-                    {
-                        "type": "complete",
-                        "translated_count": translated_count,
-                        "total": total_paragraphs,
-                    }
-                )
-                + "\n\n"
+            actual_translated = sum(
+                1
+                for section in pm.get_sections(project_id)
+                for paragraph in section.paragraphs
+                if paragraph.has_usable_translation()
             )
+
+            if error_count > 0 or actual_translated < total_paragraphs:
+                yield (
+                    "data: "
+                    + json.dumps(
+                        {
+                            "type": "incomplete",
+                            "current": processed_count,
+                            "total": total_paragraphs,
+                            "translated_count": actual_translated,
+                            "error_count": error_count,
+                            "message": (
+                                f"Translation incomplete: "
+                                f"{actual_translated}/{total_paragraphs} paragraphs usable"
+                            ),
+                        }
+                    )
+                    + "\n\n"
+                )
+            else:
+                yield (
+                    "data: "
+                    + json.dumps(
+                        {
+                            "type": "complete",
+                            "translated_count": actual_translated,
+                            "total": total_paragraphs,
+                        }
+                    )
+                    + "\n\n"
+                )
         except Exception as e:
             yield f"data: {json.dumps({'type': 'error', 'error': str(e)})}\n\n"
 
@@ -311,14 +337,21 @@ async def translate_with_four_steps(
                     project_id,
                     on_progress=on_progress,
                 )
+            event_type = "complete" if result.get("status") == "completed" else "incomplete"
             await progress_queue.put(
                 {
-                    "type": "complete",
+                    "type": event_type,
                     "translated_count": result.get(
-                        "translated_paragraphs", total_paragraphs
+                        "translated_paragraphs", 0
                     ),
                     "total": total_paragraphs,
                     "result": result,
+                    "message": result.get(
+                        "error"
+                    ) or (
+                        f"Translation incomplete: "
+                        f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
+                    ),
                 }
             )
         except Exception as e:
@@ -350,7 +383,7 @@ async def translate_with_four_steps(
                 try:
                     event = await asyncio.wait_for(progress_queue.get(), timeout=1.0)
                     yield f"data: {json.dumps(event)}\n\n"
-                    if event.get("type") in ("complete", "error"):
+                    if event.get("type") in ("complete", "error", "incomplete"):
                         break
                 except asyncio.TimeoutError:
                     yield f"data: {json.dumps({'type': 'heartbeat'})}\n\n"

@@ -263,9 +263,9 @@ class BatchTranslationService:
                             on_progress=self._create_section_callback(
                                 section.title,
                                 on_progress,
-                                translated_count,
+                                translated_count + translated_in_section,
                                 total_paragraphs,
-                                section_paragraph_count,
+                                max(section_paragraph_count - translated_in_section, 0),
                             ),
                         )
 
@@ -276,9 +276,18 @@ class BatchTranslationService:
                     self.project_manager.save_section(project_id, section)
 
                     # 更新进度
-                    progress.translated_sections += 1
-                    translated_count += len(section.paragraphs)
-                    progress.translated_paragraphs += len(section.paragraphs)
+                    translated_after_section = self._count_translated_paragraphs(section)
+                    translated_delta = max(
+                        translated_after_section - translated_in_section,
+                        0,
+                    )
+                    if (
+                        translated_after_section == section_paragraph_count
+                        and section_paragraph_count > 0
+                    ):
+                        progress.translated_sections += 1
+                    translated_count += translated_delta
+                    progress.translated_paragraphs += translated_delta
 
                     # 发送章节完成进度
                     self._notify_progress(
@@ -350,23 +359,46 @@ class BatchTranslationService:
                 # 一致性审查失败不影响翻译完成状态
 
             # 翻译完成
+            actual_translated = self._count_project_translated_paragraphs(
+                project.sections
+            )
+            is_complete = total_paragraphs > 0 and actual_translated >= total_paragraphs
+
             progress.finished_at = datetime.now()
+            progress.translated_paragraphs = actual_translated
+            progress.translated_sections = sum(
+                1
+                for section in project.sections
+                if self._count_translated_paragraphs(section) == len(section.paragraphs)
+                and len(section.paragraphs) > 0
+            )
             progress.current_step = "翻译完成"
 
-            # 更新项目状态为"已完成"
-            project.status = self._final_status_after_success(original_status)
+            # 更新项目状态，未完成时保留为可继续状态
+            progress.final_status = "completed" if is_complete else "not_started"
+            progress.current_step = "翻译完成" if is_complete else "翻译未完成"
+            project.status = (
+                self._final_status_after_success(original_status)
+                if is_complete
+                else ProjectStatus.IN_PROGRESS
+            )
             self._save_meta(project_id, project)
 
             logger.info(f"[{project_id}] Translation completed")
+            if not is_complete:
+                logger.warning(
+                    f"[{project_id}] Translation incomplete: "
+                    f"{actual_translated}/{total_paragraphs} paragraphs usable"
+                )
 
             # 构建返回结果（包含一致性报告）
             result = {
                 "project_id": project_id,
-                "status": "completed",
+                "status": "completed" if is_complete else "incomplete",
                 "total_sections": progress.total_sections,
                 "translated_sections": progress.translated_sections,
                 "total_paragraphs": progress.total_paragraphs,
-                "translated_paragraphs": progress.translated_paragraphs,
+                "translated_paragraphs": actual_translated,
                 "error_count": len(progress.errors),
                 "errors": progress.errors,
                 "started_at": progress.started_at.isoformat(),
@@ -400,6 +432,7 @@ class BatchTranslationService:
             logger.error(f"[{project_id}] Translation failed: {str(e)}")
             self._progress_tracker.record_error(progress, str(e))
             progress.finished_at = datetime.now()
+            progress.final_status = "failed"
 
             # 更新项目状态为失败
             project.status = original_status
@@ -451,10 +484,14 @@ class BatchTranslationService:
         return sum(
             1
             for paragraph in section.paragraphs
-            if paragraph.status
-            in (ParagraphStatus.TRANSLATED, ParagraphStatus.APPROVED)
-            or bool(paragraph.confirmed)
-            or bool(paragraph.translations)
+            if paragraph.has_usable_translation()
+        )
+
+    def _count_project_translated_paragraphs(self, sections: List[Section]) -> int:
+        """Count paragraphs with usable translations across the whole project."""
+        return sum(
+            self._count_translated_paragraphs(section)
+            for section in sections
         )
 
     def _apply_section_batch_translations(
@@ -469,12 +506,14 @@ class BatchTranslationService:
         for trans_item in translations:
             para_id = trans_item.get("id")
             translation = trans_item.get("translation", "")
-            collected.append(translation)
+            if not isinstance(translation, str) or not translation.strip():
+                raise ValueError(f"Empty translation returned for paragraph {para_id}")
 
             paragraph = paragraph_map.get(para_id)
             if paragraph:
                 paragraph.add_translation(translation, "pro")
                 paragraph.status = ParagraphStatus.TRANSLATED
+                collected.append(translation)
 
         return collected
 
@@ -601,39 +640,43 @@ class BatchTranslationService:
         """
         progress = self._progress_tracker.get(project_id)
 
-        if not progress:
-            # 如果没有缓存进度，从项目状态推断
-            project = self._load_project_with_sections(project_id)
-
-            if project.status == ProjectStatus.REVIEWING:
-                # 已完成
-                total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
-                translated = sum(
-                    1
-                    for s in project.sections
-                    for p in s.paragraphs
-                    if p.status == ParagraphStatus.TRANSLATED
-                    or p.status == ParagraphStatus.APPROVED
-                )
-
+        if progress:
+            if progress.final_status:
                 return {
-                    "status": "completed",
-                    "progress_percent": (
-                        (translated / total_paragraphs * 100)
-                        if total_paragraphs > 0
-                        else 0
-                    ),
-                    "translated_paragraphs": translated,
-                    "total_paragraphs": total_paragraphs,
+                    "status": progress.final_status,
+                    **progress.to_dict(),
                 }
-            elif project.status == ProjectStatus.IN_PROGRESS:
-                return {"status": "processing"}
-            else:
-                return {"status": "not_started"}
+
+            return {
+                "status": "completed" if progress.is_complete else "processing",
+                **progress.to_dict(),
+            }
+
+        project = self._load_project_with_sections(project_id)
+        total_paragraphs = sum(len(section.paragraphs) for section in project.sections)
+        translated = self._count_project_translated_paragraphs(project.sections)
+        is_complete = total_paragraphs > 0 and translated >= total_paragraphs
+
+        if is_complete and project.status in (
+            ProjectStatus.REVIEWING,
+            ProjectStatus.COMPLETED,
+        ):
+            status = "completed"
+        elif project.status == ProjectStatus.ANALYZING:
+            status = "processing"
+        else:
+            status = "not_started"
 
         return {
-            "status": "completed" if progress.is_complete else "processing",
-            **progress.to_dict(),
+            "status": status,
+            "progress_percent": (
+                (translated / total_paragraphs * 100)
+                if total_paragraphs > 0
+                else 0
+            ),
+            "translated_paragraphs": translated,
+            "total_paragraphs": total_paragraphs,
+            "is_complete": is_complete,
         }
 
     async def cancel_translation(self, project_id: str) -> Dict:

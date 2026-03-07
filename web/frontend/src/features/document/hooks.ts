@@ -394,6 +394,13 @@ export function useFullTranslate() {
             }
           }
 
+          if (data.type === 'complete' || data.type === 'incomplete') {
+            const finalCount = data.translated_count ?? data.current ?? 0;
+            if (data.total !== undefined) {
+              setFullTranslateProgress({ current: finalCount, total: data.total });
+            }
+          }
+
           // 调用外部进度回调
           onProgress(data);
 
@@ -404,9 +411,14 @@ export function useFullTranslate() {
             // 刷新查询以确保数据同步
             queryClient.invalidateQueries({ queryKey: ['section'] });
             queryClient.invalidateQueries({ queryKey: ['project'] });
-            // 结束翻译状态
-            endFullTranslate();
-            onComplete();
+          }
+
+          if (data.type === 'incomplete') {
+            const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
+            const message = data.message || '翻译未完成，可以继续翻译';
+            showToast(`${methodLabel}未完成：${message}`, 'warning');
+            queryClient.invalidateQueries({ queryKey: ['section'] });
+            queryClient.invalidateQueries({ queryKey: ['project'] });
           }
         },
         () => {
