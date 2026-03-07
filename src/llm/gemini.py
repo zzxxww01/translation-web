@@ -9,21 +9,41 @@ import logging
 import os
 import json
 import time
+import importlib
+import warnings
 from contextlib import contextmanager
 from contextvars import ContextVar
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from typing import Optional, Dict, Any, List
-
-try:
-    from google import genai
-except Exception:
-    genai = None
+from types import ModuleType
 
 from .base import LLMProvider
 
 
 logger = logging.getLogger(__name__)
+_genai_module: ModuleType | None = None
+
+
+def _load_genai_module() -> ModuleType | None:
+    """Import google.genai lazily and suppress its known Python 3.14 deprecation warning."""
+    global _genai_module
+    if _genai_module is not None:
+        return _genai_module
+
+    try:
+        with warnings.catch_warnings():
+            warnings.filterwarnings(
+                "ignore",
+                message=r"'.*_UnionGenericAlias' is deprecated and slated for removal in Python 3\.17",
+                category=DeprecationWarning,
+                module=r"google\.genai\.types",
+            )
+            _genai_module = importlib.import_module("google.genai")
+    except ModuleNotFoundError:
+        return None
+
+    return _genai_module
 
 
 # Model catalog. Concrete model ids come from env vars.
@@ -120,9 +140,10 @@ class GeminiProvider(LLMProvider):
         self.request_timeout = self._get_env_int("GEMINI_TIMEOUT", 120)
         self._client = None
         if not self._use_rest_transport():
-            if genai is None:
+            genai_module = _load_genai_module()
+            if genai_module is None:
                 raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
-            self._client = self._create_client(self.api_key)
+            self._client = self._create_client(genai_module, self.api_key)
 
     def switch_model(self, model_type: str) -> None:
         """
@@ -200,12 +221,12 @@ class GeminiProvider(LLMProvider):
             return override.strip().lower() in {"1", "true", "yes", "y"}
         return self.proxy_config is not None
 
-    def _create_client(self, api_key: str):
+    def _create_client(self, genai_module: ModuleType, api_key: str):
         try:
-            return genai.Client(api_key=api_key)
+            return genai_module.Client(api_key=api_key)
         except TypeError:
             os.environ["GEMINI_API_KEY"] = api_key
-            return genai.Client()
+            return genai_module.Client()
 
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:

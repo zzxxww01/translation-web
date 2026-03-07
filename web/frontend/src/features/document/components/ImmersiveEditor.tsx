@@ -11,6 +11,7 @@ const CHUNK_THRESHOLD = 300;
 const INITIAL_CHUNK_SIZE = 80;
 const CHUNK_SIZE = 40;
 const MAX_BATCH_SELECTION = 50;
+const EMPTY_PARAGRAPHS: Paragraph[] = [];
 
 type FilterMode = 'all' | 'translated' | 'approved' | 'modified';
 type RetranslateTemplate = 'none' | 'readable' | 'professional' | 'idiomatic';
@@ -66,11 +67,11 @@ export function ImmersiveEditor({
     }
     return section;
   }, [sections, section]);
-  const paragraphs = latestSection.paragraphs ?? [];
+  const paragraphs = latestSection.paragraphs ?? EMPTY_PARAGRAPHS;
 
   const [filterMode] = useState<FilterMode>('all');
   const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
-  const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK_SIZE);
+  const [chunkState, setChunkState] = useState({ key: '', extra: 0 });
   const [showBatchRetranslateDialog, setShowBatchRetranslateDialog] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const targetParagraphRef = useRef<HTMLDivElement | null>(null);
@@ -118,17 +119,35 @@ export function ImmersiveEditor({
   );
 
   const isChunkMode = filteredParagraphs.length > CHUNK_THRESHOLD;
+  const chunkResetKey = `${section.section_id}:${filterMode}:${initialParagraphId ?? ''}:${filteredParagraphs.length}:${targetParagraphIndex}:${Number(isChunkMode)}`;
+  const baseVisibleCount = useMemo(
+    () =>
+      isChunkMode
+        ? Math.min(
+            filteredParagraphs.length,
+            Math.max(INITIAL_CHUNK_SIZE, targetParagraphIndex >= 0 ? targetParagraphIndex + 1 : 0)
+          )
+        : filteredParagraphs.length,
+    [filteredParagraphs.length, isChunkMode, targetParagraphIndex]
+  );
 
   useEffect(() => {
-    const nextVisibleCount = isChunkMode
-      ? Math.min(
-          filteredParagraphs.length,
-          Math.max(INITIAL_CHUNK_SIZE, targetParagraphIndex >= 0 ? targetParagraphIndex + 1 : 0)
-        )
-      : filteredParagraphs.length;
-    setVisibleCount(nextVisibleCount);
     hasAutoScrolledRef.current = false;
-  }, [filteredParagraphs.length, isChunkMode, targetParagraphIndex]);
+  }, [chunkResetKey]);
+
+  const visibleCount = useMemo(() => {
+    const extraVisibleCount = chunkState.key === chunkResetKey ? chunkState.extra : 0;
+    return isChunkMode
+      ? Math.min(filteredParagraphs.length, baseVisibleCount + extraVisibleCount)
+      : filteredParagraphs.length;
+  }, [
+    baseVisibleCount,
+    chunkResetKey,
+    chunkState.extra,
+    chunkState.key,
+    filteredParagraphs.length,
+    isChunkMode,
+  ]);
 
   const displayedParagraphs = useMemo(
     () => (isChunkMode ? filteredParagraphs.slice(0, visibleCount) : filteredParagraphs),
@@ -176,11 +195,21 @@ export function ImmersiveEditor({
     (event: UIEvent<HTMLDivElement>) => {
       if (!isChunkMode) return;
       const container = event.currentTarget;
-      if (container.scrollTop + container.clientHeight >= container.scrollHeight - 240) {
-        setVisibleCount(current => Math.min(filteredParagraphs.length, current + CHUNK_SIZE));
-      }
+      if (container.scrollTop + container.clientHeight < container.scrollHeight - 240) return;
+
+      setChunkState(current => {
+        const currentExtra = current.key === chunkResetKey ? current.extra : 0;
+        const nextExtra = Math.min(
+          Math.max(0, filteredParagraphs.length - baseVisibleCount),
+          currentExtra + CHUNK_SIZE
+        );
+        if (current.key === chunkResetKey && nextExtra === currentExtra) {
+          return current;
+        }
+        return { key: chunkResetKey, extra: nextExtra };
+      });
     },
-    [filteredParagraphs.length, isChunkMode]
+    [baseVisibleCount, chunkResetKey, filteredParagraphs.length, isChunkMode]
   );
 
   const handleClose = useCallback(() => {

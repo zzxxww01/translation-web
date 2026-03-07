@@ -1,4 +1,4 @@
-﻿import { useState, useCallback, useMemo, useEffect } from 'react';
+﻿import { useState, useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useDocumentStore } from '../../shared/stores';
 import { useSection, useFullTranslate, useProject } from './hooks';
@@ -34,13 +34,17 @@ export function DocumentFeature() {
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
 
   useProject(currentProject?.id ?? '');
+  const isImmersiveMode = searchParams.get('immersive') === '1';
 
   const activeSectionId = useMemo(() => {
-    if (!selectedSectionId) return null;
-    return sections.some(section => section.section_id === selectedSectionId)
-      ? selectedSectionId
+    const fallbackSectionId = isImmersiveMode ? currentSection?.section_id ?? null : null;
+    const candidateSectionId = selectedSectionId ?? fallbackSectionId;
+    if (!candidateSectionId) return null;
+    return sections.some(section => section.section_id === candidateSectionId) ||
+      candidateSectionId === currentSection?.section_id
+      ? candidateSectionId
       : null;
-  }, [selectedSectionId, sections]);
+  }, [currentSection, isImmersiveMode, selectedSectionId, sections]);
 
   const {
     isLoading: sectionLoading,
@@ -49,23 +53,15 @@ export function DocumentFeature() {
   } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
 
   const { startTranslation, stopTranslation } = useFullTranslate();
-  const isImmersiveMode = searchParams.get('immersive') === '1';
+  const selectedSection = useMemo(() => {
+    if (!activeSectionId) return null;
+    return (
+      sections.find(section => section.section_id === activeSectionId) ??
+      (currentSection?.section_id === activeSectionId ? currentSection : null)
+    );
+  }, [activeSectionId, currentSection, sections]);
 
-  const displaySection = useMemo(() => sectionData || currentSection, [sectionData, currentSection]);
-
-  // 同步 selectedSectionId 和 currentSection，确保沉浸模式下有正确的 section
-  useEffect(() => {
-    if (isImmersiveMode && currentSection && !selectedSectionId) {
-      setSelectedSectionId(currentSection.section_id);
-    }
-    // 当 selectedSectionId 变化时，更新 currentSection
-    if (selectedSectionId && sections.length > 0) {
-      const section = sections.find(s => s.section_id === selectedSectionId);
-      if (section && section !== currentSection) {
-        setCurrentSection(section);
-      }
-    }
-  }, [isImmersiveMode, currentSection, selectedSectionId, sections, setCurrentSection]);
+  const displaySection = useMemo(() => sectionData || selectedSection, [sectionData, selectedSection]);
 
   const setImmersiveMode = useCallback(
     (enabled: boolean) => {

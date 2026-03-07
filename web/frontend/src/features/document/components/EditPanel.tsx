@@ -265,7 +265,7 @@ export const EditPanel: FC<EditPanelProps> = ({
     } finally {
       setIsTranslating(false);
     }
-  }, [projectId, sectionId, paragraph, selectedModel, translateMutation, translation, updateParagraph]);
+  }, [projectId, sectionId, paragraph, selectedModel, translateMutation, updateParagraph]);
 
   const handleCustomRetranslate = useCallback(() => {
     const instruction = customRetranslateInstruction.trim();

@@ -109,8 +109,9 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   }, [paragraphIds, paragraphs]);
 
   useEffect(() => {
+    const saveTimers = saveTimersRef.current;
     return () => {
-      Object.values(saveTimersRef.current).forEach(timerId => clearTimeout(timerId));
+      Object.values(saveTimers).forEach(timerId => clearTimeout(timerId));
     };
   }, []);
 
@@ -153,8 +154,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       const previous = paragraphOperationRef.current[paragraphId] ?? Promise.resolve();
       const next = previous.catch(() => undefined).then(() => operation());
 
-      let tracked: Promise<unknown>;
-      tracked = next.finally(() => {
+      const tracked: Promise<unknown> = next.finally(() => {
         if (paragraphOperationRef.current[paragraphId] === tracked) {
           delete paragraphOperationRef.current[paragraphId];
         }
@@ -233,7 +233,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
       }
     },
-    [applyParagraphUpdate, projectId, scheduleAutoSave]
+    [applyParagraphUpdate, projectId, scheduleAutoSave, sectionId]
   );
 
   const saveParagraph = useCallback(
