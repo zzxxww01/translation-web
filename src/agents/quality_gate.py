@@ -206,7 +206,7 @@ class QualityGate:
         """
         style_issues = [
             issue for issue in reflection.issues
-            if issue.issue_type == "style"
+            if issue.issue_type in {"style", "tone", "readability", "annotation"}
         ]
 
         if not style_issues:
@@ -222,8 +222,10 @@ class QualityGate:
         关键错误包括：
         - 准确性问题（accuracy）
         - 术语错误（terminology）
+        - 判断力度保真问题（tone）
+        - 数据表达错误（data）
         """
-        critical_types = {"accuracy", "terminology"}
+        critical_types = {"accuracy", "terminology", "tone", "data"}
         return sum(1 for issue in issues if issue.issue_type in critical_types)
 
     def _determine_action(

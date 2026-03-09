@@ -1,5 +1,6 @@
 """Glossary models."""
 
+from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, Field
 
@@ -14,6 +15,10 @@ class GlossaryTerm(BaseModel):
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
     note: Optional[str] = None
     first_occurrence: Optional[str] = None
+    scope: str = "project"
+    source: str = "manual"
+    status: str = "active"
+    updated_at: datetime = Field(default_factory=datetime.now)
 
 
 class Glossary(BaseModel):

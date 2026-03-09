@@ -1,16 +1,28 @@
-﻿import { useState, useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useToast } from '../../components/ui';
+import { glossaryApi } from '../confirmation/api/glossaryApi';
+import type { TermReviewDecision, TermReviewPayload } from '../confirmation/types';
 import { useDocumentStore } from '../../shared/stores';
-import { useSection, useFullTranslate, useProject } from './hooks';
-import { documentApi } from './api';
-import { DocumentSidebar } from './components/DocumentSidebar';
-import { WelcomeScreen } from './components/WelcomeScreen';
-import { SectionView } from './components/SectionView';
-import { EditPanel } from './components/EditPanel';
-import { ImmersiveEditor } from './components/ImmersiveEditor';
-import { NewProjectModal } from './components/NewProjectModal';
 import { TranslationMethod } from '../../shared/constants';
 import type { Paragraph, Section } from '../../shared/types';
+import { documentApi } from './api';
+import { DocumentSidebar } from './components/DocumentSidebar';
+import { EditPanel } from './components/EditPanel';
+import { GlossaryManagementPage } from './components/GlossaryManagementPage';
+import { ImmersiveEditor } from './components/ImmersiveEditor';
+import { NewProjectModal } from './components/NewProjectModal';
+import { SectionView } from './components/SectionView';
+import { TerminologyReviewPage } from './components/TerminologyReviewPage';
+import { WelcomeScreen } from './components/WelcomeScreen';
+import { useFullTranslate, useProject, useSection } from './hooks';
+
+type DocumentView = 'glossary' | 'term-review' | null;
+
+interface PendingTranslationRequest {
+  model?: string;
+  method: TranslationMethod;
+}
 
 export function DocumentFeature() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,17 +36,48 @@ export function DocumentFeature() {
     setSections,
     setCurrentParagraph,
   } = useDocumentStore();
+  const { showToast } = useToast();
 
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<string | null>(null);
   const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
+  const [pendingTermReview, setPendingTermReview] = useState<TermReviewPayload | null>(null);
+  const [pendingTranslationRequest, setPendingTranslationRequest] =
+    useState<PendingTranslationRequest | null>(null);
+  const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
 
   useProject(currentProject?.id ?? '');
+
   const isImmersiveMode = searchParams.get('immersive') === '1';
+  const activeView = (searchParams.get('view') as DocumentView) || null;
+
+  const setView = useCallback(
+    (view: DocumentView) => {
+      const next = new URLSearchParams(searchParams);
+      if (view) {
+        next.set('view', view);
+      } else {
+        next.delete('view');
+      }
+      setSearchParams(next);
+    },
+    [searchParams, setSearchParams]
+  );
+
+  useEffect(() => {
+    setPendingTermReview(null);
+    setPendingTranslationRequest(null);
+  }, [currentProject?.id]);
+
+  useEffect(() => {
+    if (activeView === 'term-review' && !pendingTermReview) {
+      setView(null);
+    }
+  }, [activeView, pendingTermReview, setView]);
 
   const activeSectionId = useMemo(() => {
     const fallbackSectionId = isImmersiveMode ? currentSection?.section_id ?? null : null;
@@ -53,15 +96,21 @@ export function DocumentFeature() {
   } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
 
   const { startTranslation, stopTranslation } = useFullTranslate();
+
   const selectedSection = useMemo(() => {
-    if (!activeSectionId) return null;
+    if (!activeSectionId) {
+      return null;
+    }
     return (
       sections.find(section => section.section_id === activeSectionId) ??
       (currentSection?.section_id === activeSectionId ? currentSection : null)
     );
   }, [activeSectionId, currentSection, sections]);
 
-  const displaySection = useMemo(() => sectionData || selectedSection, [sectionData, selectedSection]);
+  const displaySection = useMemo(
+    () => sectionData || selectedSection,
+    [sectionData, selectedSection]
+  );
 
   const setImmersiveMode = useCallback(
     (enabled: boolean) => {
@@ -82,18 +131,21 @@ export function DocumentFeature() {
       setCurrentSection(section);
       setCurrentParagraph(null);
       setImmersiveMode(false);
+      if (activeView) {
+        setView(null);
+      }
     },
-    [setCurrentSection, setCurrentParagraph, setImmersiveMode]
+    [activeView, setCurrentParagraph, setCurrentSection, setImmersiveMode, setView]
   );
 
   const handleSelectSectionById = useCallback(
     (sectionId: string) => {
-      const section = sections.find(s => s.section_id === sectionId);
+      const section = sections.find(item => item.section_id === sectionId);
       if (section) {
         handleSelectSection(section);
       }
     },
-    [sections, handleSelectSection]
+    [handleSelectSection, sections]
   );
 
   const handleSelectParagraph = useCallback(
@@ -104,7 +156,6 @@ export function DocumentFeature() {
   );
 
   const handleEnterImmersive = useCallback(() => {
-    // ��保使用 displaySection（可能来自 sectionData 或 currentSection）
     if (displaySection) {
       setSelectedSectionId(displaySection.section_id);
       setCurrentSection(displaySection);
@@ -112,7 +163,7 @@ export function DocumentFeature() {
     setImmersiveTargetParagraphId(currentParagraph?.id ?? null);
     setCurrentParagraph(null);
     setImmersiveMode(true);
-  }, [currentParagraph, displaySection, setCurrentSection, setCurrentParagraph, setImmersiveMode]);
+  }, [currentParagraph, displaySection, setCurrentParagraph, setCurrentSection, setImmersiveMode]);
 
   const handleExitImmersive = useCallback(() => {
     setImmersiveTargetParagraphId(null);
@@ -121,56 +172,33 @@ export function DocumentFeature() {
 
   const getCurrentParagraphIndex = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return -1;
-    return displaySection.paragraphs.findIndex(p => p.id === currentParagraph.id);
+    return displaySection.paragraphs.findIndex(paragraph => paragraph.id === currentParagraph.id);
   }, [displaySection, currentParagraph]);
 
   const handleNextParagraph = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return;
 
     const currentIndex = getCurrentParagraphIndex();
-
     if (currentIndex < displaySection.paragraphs.length - 1) {
-      const nextParagraph = displaySection.paragraphs[currentIndex + 1];
-      setCurrentParagraph(nextParagraph);
+      setCurrentParagraph(displaySection.paragraphs[currentIndex + 1]);
       return;
     }
 
     setCurrentParagraph(null);
-  }, [displaySection, currentParagraph, getCurrentParagraphIndex, setCurrentParagraph]);
+  }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
 
   const handlePrevParagraph = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return;
 
     const currentIndex = getCurrentParagraphIndex();
     if (currentIndex > 0) {
-      const prevParagraph = displaySection.paragraphs[currentIndex - 1];
-      setCurrentParagraph(prevParagraph);
+      setCurrentParagraph(displaySection.paragraphs[currentIndex - 1]);
     }
-  }, [displaySection, currentParagraph, getCurrentParagraphIndex, setCurrentParagraph]);
+  }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
 
-  const handleFullTranslate = useCallback(
-    async (model?: string, method?: TranslationMethod) => {
+  const runFullTranslate = useCallback(
+    async (model?: string, method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
       if (!currentProject) return;
-
-      if (isFullTranslating) {
-        if (!confirm('翻译正在进行中，确定要停止吗？')) {
-          return;
-        }
-        stopTranslation();
-        setCurrentStep(null);
-        return;
-      }
-
-      const confirmMessage =
-        method === TranslationMethod.FOUR_STEP
-          ? '确定要使用四步法翻译全文吗？\n\n四步法会进行深度分析、反思和润色，质量更高但耗时更长。'
-          : '确定要一键翻译全文吗？这可能需要较长时间。';
-
-      if (!confirm(confirmMessage)) {
-        return;
-      }
-
-      setCurrentStep(null);
 
       const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
       await startTranslation(
@@ -190,15 +218,97 @@ export function DocumentFeature() {
         methodType
       );
     },
+    [activeSectionId, currentProject, refetchSection, startTranslation]
+  );
+
+  const prepareTermReviewIfNeeded = useCallback(
+    async (model?: string, method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
+      if (!currentProject) return false;
+
+      const review = await glossaryApi.prepareTermReview(currentProject.id);
+      if (review.review_required && review.total_candidates > 0) {
+        setPendingTermReview(review);
+        setPendingTranslationRequest({ model, method });
+        setView('term-review');
+        showToast(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`, 'info');
+        return true;
+      }
+
+      return false;
+    },
+    [currentProject, setView, showToast]
+  );
+
+  const handleFullTranslate = useCallback(
+    async (model?: string, method?: TranslationMethod) => {
+      if (!currentProject) return;
+
+      if (isFullTranslating) {
+        if (!window.confirm('翻译正在进行中，确定要停止吗？')) {
+          return;
+        }
+        stopTranslation();
+        setCurrentStep(null);
+        return;
+      }
+
+      const selectedMethod = method ?? TranslationMethod.FOUR_STEP;
+      const confirmMessage =
+        selectedMethod === TranslationMethod.FOUR_STEP
+          ? '确定要使用四步法翻译全文吗？\n\n系统会先做术语预检，再进行分析、初稿、批评和修订。'
+          : '确定要开始全文翻译吗？\n\n系统会先做术语预检，再进行普通全文翻译。';
+
+      if (!window.confirm(confirmMessage)) {
+        return;
+      }
+
+      setCurrentStep(null);
+      const intercepted = await prepareTermReviewIfNeeded(model, selectedMethod);
+      if (!intercepted) {
+        await runFullTranslate(model, selectedMethod);
+      }
+    },
     [
       currentProject,
       isFullTranslating,
+      prepareTermReviewIfNeeded,
+      runFullTranslate,
       stopTranslation,
-      startTranslation,
-      activeSectionId,
-      refetchSection,
     ]
   );
+
+  const handleSubmitTermReview = useCallback(
+    async (decisions: TermReviewDecision[]) => {
+      if (!currentProject || !pendingTranslationRequest) {
+        return;
+      }
+
+      setIsSubmittingTermReview(true);
+      try {
+        await glossaryApi.submitTermReview(currentProject.id, decisions);
+        await glossaryApi.getProjectGlossary(currentProject.id);
+        setPendingTermReview(null);
+        setView(null);
+        showToast('术语预检已保存，开始全文翻译', 'success');
+        await runFullTranslate(
+          pendingTranslationRequest.model,
+          pendingTranslationRequest.method
+        );
+      } catch (error) {
+        console.error('Failed to submit term review:', error);
+        showToast('保存术语预检失败', 'error');
+      } finally {
+        setIsSubmittingTermReview(false);
+      }
+    },
+    [currentProject, pendingTranslationRequest, runFullTranslate, setView, showToast]
+  );
+
+  const handleCancelTermReview = useCallback(() => {
+    setPendingTermReview(null);
+    setPendingTranslationRequest(null);
+    setView(null);
+  }, [setView]);
 
   const handleProjectCreated = useCallback(
     async (projectId: string) => {
@@ -206,16 +316,38 @@ export function DocumentFeature() {
         const projectData = await documentApi.getProject(projectId);
         setCurrentProject(projectData);
         setSections(projectData.sections ?? []);
+        setView(null);
       } catch (error) {
         console.error('Failed to load project:', error);
       }
     },
-    [setCurrentProject, setSections]
+    [setCurrentProject, setSections, setView]
   );
 
   const renderMainContent = () => {
     if (!currentProject) {
       return <WelcomeScreen />;
+    }
+
+    if (activeView === 'glossary') {
+      return (
+        <GlossaryManagementPage
+          projectId={currentProject.id}
+          projectTitle={currentProject.title}
+          onBack={() => setView(null)}
+        />
+      );
+    }
+
+    if (activeView === 'term-review' && pendingTermReview) {
+      return (
+        <TerminologyReviewPage
+          review={pendingTermReview}
+          isSubmitting={isSubmittingTermReview}
+          onSubmit={handleSubmitTermReview}
+          onCancel={handleCancelTermReview}
+        />
+      );
     }
 
     if (!activeSectionId) {
@@ -265,6 +397,7 @@ export function DocumentFeature() {
 
   const currentIndex = getCurrentParagraphIndex();
   const totalCount = displaySection?.paragraphs?.length ?? 0;
+  const showEditingPanels = !activeView;
 
   return (
     <div className="flex h-full overflow-auto">
@@ -274,6 +407,7 @@ export function DocumentFeature() {
         onSectionSelect={handleSelectSectionById}
         onNewProject={() => setIsNewProjectModalOpen(true)}
         onFullTranslate={handleFullTranslate}
+        onOpenGlossaryManagement={() => setView('glossary')}
         isFullTranslating={isFullTranslating}
         fullTranslateProgress={fullTranslateProgress}
         currentStep={currentStep}
@@ -282,7 +416,7 @@ export function DocumentFeature() {
 
       <main className="flex-1 overflow-y-auto">{renderMainContent()}</main>
 
-      {currentParagraph && currentProject && activeSectionId && displaySection && (
+      {showEditingPanels && currentParagraph && currentProject && activeSectionId && displaySection && (
         <EditPanel
           paragraph={currentParagraph}
           projectId={currentProject.id}
@@ -296,7 +430,7 @@ export function DocumentFeature() {
         />
       )}
 
-      {isImmersiveMode && currentProject && displaySection && (
+      {showEditingPanels && isImmersiveMode && currentProject && displaySection && (
         <ImmersiveEditor
           projectId={currentProject.id}
           section={displaySection}

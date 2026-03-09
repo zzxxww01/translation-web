@@ -275,17 +275,24 @@ class TranslationAgent:
 
         # 术语表 - 智能筛选相关术语
         if context.glossary and context.glossary.terms:
+            active_terms = [
+                term
+                for term in context.glossary.terms
+                if getattr(term, "status", "active") == "active"
+            ]
             # 如果有源文本，筛选相关术语
             if context.source_text:
                 from ..core.term_matcher import TermMatcher
 
-                matcher = TermMatcher(context.glossary)
+                matcher = TermMatcher(
+                    Glossary(version=context.glossary.version, terms=active_terms)
+                )
                 relevant_terms = matcher.get_term_context(
                     context.source_text, max_terms=20
                 )
                 llm_context["glossary"] = relevant_terms
                 llm_context["glossary_size"] = len(relevant_terms)
-                llm_context["total_glossary_terms"] = len(context.glossary.terms)
+                llm_context["total_glossary_terms"] = len(active_terms)
             else:
                 # 没有源文本时，使用所有术语（限制数量）
                 llm_context["glossary"] = [
@@ -295,7 +302,7 @@ class TranslationAgent:
                         "strategy": term.strategy.value,
                         "note": term.note,
                     }
-                    for term in context.glossary.terms[:30]
+                    for term in active_terms[:30]
                 ]
 
         # 风格指南

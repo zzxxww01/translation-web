@@ -8,7 +8,7 @@ from fastapi import Depends
 from src.config import settings
 from src.core.glossary import GlossaryManager
 from src.core.project import ProjectManager
-from src.llm.gemini import GeminiProvider
+from src.llm.base import LLMProvider
 from src.services.batch_translation_service import BatchTranslationService
 from src.services.confirmation_service import ConfirmationService
 from src.services.memory_service import TranslationMemoryService
@@ -27,13 +27,13 @@ def get_glossary_manager() -> GlossaryManager:
     return GlossaryManager(projects_path=settings.projects_path)
 
 
-def get_llm_provider() -> GeminiProvider:
-    """Return the configured Gemini provider."""
+def get_llm_provider() -> LLMProvider:
+    """Return the configured LLM provider."""
     from src.api.middleware import BadRequestException
-    from src.api.utils.llm_factory import get_gemini_provider
+    from src.api.utils.llm_factory import get_llm_provider as get_cached_llm_provider
 
     try:
-        return get_gemini_provider()
+        return get_cached_llm_provider()
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
 
@@ -50,10 +50,10 @@ def get_confirmation_service(
 def get_batch_service() -> BatchTranslationService:
     """Return the batch translation service."""
     from src.api.middleware import BadRequestException
-    from src.api.utils.llm_factory import get_gemini_provider
+    from src.api.utils.llm_factory import get_llm_provider as get_cached_llm_provider
 
     try:
-        llm = get_gemini_provider()
+        llm = get_cached_llm_provider()
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
 
@@ -76,7 +76,7 @@ def get_memory_service() -> TranslationMemoryService:
 
 ProjectManagerDep = Annotated[ProjectManager, Depends(get_project_manager)]
 GlossaryManagerDep = Annotated[GlossaryManager, Depends(get_glossary_manager)]
-LLMProviderDep = Annotated[GeminiProvider, Depends(get_llm_provider)]
+LLMProviderDep = Annotated[LLMProvider, Depends(get_llm_provider)]
 ConfirmationServiceDep = Annotated[ConfirmationService, Depends(get_confirmation_service)]
 BatchServiceDep = Annotated[BatchTranslationService, Depends(get_batch_service)]
 VersionServiceDep = Annotated[VersionImportService, Depends(get_version_service)]

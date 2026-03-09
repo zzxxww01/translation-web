@@ -54,10 +54,10 @@ class TranslationMemoryService:
     def llm(self):
         """懒加载规则提取专用 LLM provider。"""
         if self._llm is None:
-            from src.llm.gemini import create_gemini_provider
+            from src.llm.factory import create_llm_provider
 
             # 使用独立实例，避免切换共享 provider 的模型状态。
-            self._llm = create_gemini_provider(model_type="flash")
+            self._llm = create_llm_provider(model_type="flash")
         return self._llm
 
     # ============ 主入口方法 ============

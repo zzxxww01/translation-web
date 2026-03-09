@@ -6,6 +6,7 @@ Manage translation projects: create, read, update, delete.
 
 import json
 import os
+import re
 import shutil
 import threading
 from collections import OrderedDict
@@ -19,10 +20,10 @@ from slugify import slugify
 
 from .models import (
     ProjectMeta, ProjectStatus, ProjectProgress, ProjectConfig,
-    Section, Paragraph, ParagraphStatus, ElementType
+    Section, Paragraph, ParagraphStatus, ElementType, Glossary
 )
 from .parser import HTMLParser
-from .glossary import GlossaryManager, create_default_semiconductor_glossary
+from .glossary import GlossaryManager
 
 
 class ProjectManager:
@@ -96,6 +97,35 @@ class ProjectManager:
         if element_type == ElementType.BLOCKQUOTE:
             return f"> {text}"
         return text
+
+    def _preferred_export_title(self, meta: ProjectMeta) -> str:
+        """Use translated article title for exports when available."""
+        preferred_title = (meta.title_translation or meta.title or "").strip()
+        return preferred_title or meta.id
+
+    def _sanitize_export_filename_component(self, value: str, fallback: str) -> str:
+        """Keep the original title readable while removing invalid filename chars."""
+        sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', "_", value)
+        sanitized = re.sub(r"\s+", " ", sanitized).strip().rstrip(".")
+        return sanitized or fallback
+
+    def _build_export_filename(self, meta: ProjectMeta, format: str = "markdown") -> str:
+        file_ext = "html" if format == "html" else "md"
+        title = self._sanitize_export_filename_component(
+            self._preferred_export_title(meta),
+            meta.id,
+        )
+        return f"{title}_zn.{file_ext}"
+
+    def get_export_filename(self, project_id: str, format: str = "markdown") -> str:
+        """Return the user-facing export filename for a project."""
+        meta = self.get(project_id)
+        return self._build_export_filename(meta, format=format)
+
+    def get_export_path(self, project_id: str, format: str = "markdown") -> Path:
+        """Return the export file path for a project."""
+        filename = self.get_export_filename(project_id, format=format)
+        return self._project_dir(project_id) / filename
 
     def create(
         self,
@@ -174,8 +204,7 @@ class ProjectManager:
         self._copy_assets_directory(html_source, project_dir)
 
         # 初始化项目术语表（合并全局术语表）
-        global_glossary = create_default_semiconductor_glossary()
-        self.glossary_manager.save_project(project_id, global_glossary)
+        self.glossary_manager.save_project(project_id, Glossary())
 
         return meta
 
@@ -484,7 +513,8 @@ class ProjectManager:
         meta = self.get(project_id)
         sections = self.get_sections(project_id)
 
-        lines = [f"# {meta.title}", ""]
+        article_title = self._preferred_export_title(meta)
+        lines = [f"# {article_title}", ""]
 
         for section in sections:
             # 章节标题
@@ -523,7 +553,10 @@ class ProjectManager:
         content = "\n".join(lines)
 
         # 保存到文件
-        output_path = self._project_dir(project_id) / "output.md"
+        output_path = self._project_dir(project_id) / self._build_export_filename(
+            meta,
+            format="markdown",
+        )
         self._write_text(output_path, content)
 
         return content
@@ -559,12 +592,16 @@ class ProjectManager:
             if head:
                 html_parts.append(str(head))
             else:
-                html_parts.append('<head><meta charset="utf-8"><title>' + meta.title + '</title></head>')
+                html_parts.append(
+                    '<head><meta charset="utf-8"><title>'
+                    + self._preferred_export_title(meta)
+                    + '</title></head>'
+                )
 
             html_parts.append('<body>')
 
             # 添加标题
-            html_parts.append(f'<h1>{meta.title}</h1>')
+            html_parts.append(f'<h1>{self._preferred_export_title(meta)}</h1>')
 
             # 遍历章节和段落
             for section in sections:
@@ -609,7 +646,10 @@ class ProjectManager:
             content = self.export_markdown(project_id, include_source=False)
 
         # 保存到文件
-        output_path = self._project_dir(project_id) / "output.html"
+        output_path = self._project_dir(project_id) / self._build_export_filename(
+            meta,
+            format="html",
+        )
         self._write_text(output_path, content)
 
         return content

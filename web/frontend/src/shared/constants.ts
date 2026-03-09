@@ -94,6 +94,9 @@ export const REQUEST_TIMEOUTS = {
   POST_TRANSLATE: 180000,
   POST_OPTIMIZE: 180000,
   POST_TITLE: 180000,
+  PARAGRAPH_TRANSLATE: 180000,
+  PARAGRAPH_BATCH_TRANSLATE: 600000,
+  PARAGRAPH_WORD_MEANING: 120000,
 } as const;
 
 export interface ModelOption {
@@ -149,4 +152,4 @@ export const TRANSLATION_METHOD_OPTIONS: TranslationMethodOption[] = [
   },
 ];
 
-export const DEFAULT_TRANSLATION_METHOD = TranslationMethod.NORMAL;
+export const DEFAULT_TRANSLATION_METHOD = TranslationMethod.FOUR_STEP;

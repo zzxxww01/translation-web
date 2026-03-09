@@ -312,11 +312,13 @@ export function useExportProject() {
       documentApi.exportProject(projectId, format),
     onSuccess: (result) => {
       // 创建下载链接
-      const blob = new Blob([result.content], { type: 'text/plain;charset=utf-8' });
+      const mimeType =
+        result.format === 'html' ? 'text/html;charset=utf-8' : 'text/markdown;charset=utf-8';
+      const blob = new Blob([result.content], { type: mimeType });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `output.${result.format === 'html' ? 'html' : 'md'}`;
+      link.download = result.filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -362,7 +364,7 @@ export function useFullTranslate() {
     }) => void,
     onComplete: () => void,
     model?: string,
-    method: TranslationMethodType = 'normal'
+    method: TranslationMethodType = 'four-step'
   ) => {
     // 开始翻译，设置初始状态
     setFullTranslateProjectId(projectId);

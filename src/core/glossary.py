@@ -55,7 +55,7 @@ class GlossaryManager:
         """
         file_path = self.global_path / f"{domain}.json"
         with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(glossary.model_dump(), f, ensure_ascii=False, indent=2)
+            json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
 
     def load_project(self, project_id: str) -> Glossary:
         """
@@ -89,7 +89,7 @@ class GlossaryManager:
 
         file_path = project_dir / "glossary.json"
         with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(glossary.model_dump(), f, ensure_ascii=False, indent=2)
+            json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
 
     def merge(self, global_glossary: Glossary, project_glossary: Glossary) -> Glossary:
         """
@@ -113,6 +113,13 @@ class GlossaryManager:
             merged.add_term(term)
 
         return merged
+
+    def load_merged(self, project_id: str, domain: str = "semiconductor") -> Glossary:
+        """Load merged glossary with project terms overriding global terms."""
+        return self.merge(
+            self.load_global(domain),
+            self.load_project(project_id),
+        )
 
     def add_term(
         self,
@@ -139,7 +146,7 @@ class GlossaryManager:
             original=original,
             translation=translation,
             strategy=strategy,
-            note=note
+            note=note,
         )
         glossary.add_term(term)
         return term
@@ -198,6 +205,8 @@ class GlossaryManager:
         """
         result = {}
         for term in glossary.terms:
+            if getattr(term, "status", "active") != "active":
+                continue
             if term.strategy == TranslationStrategy.PRESERVE:
                 result[term.original] = f"[保持原文] {term.original}"
             elif term.strategy == TranslationStrategy.FIRST_ANNOTATE:
@@ -216,7 +225,11 @@ class GlossaryManager:
         Returns:
             List[Dict]: 术语列表
         """
-        return [term.model_dump() for term in glossary.terms]
+        return [
+            term.model_dump(mode="json")
+            for term in glossary.terms
+            if getattr(term, "status", "active") == "active"
+        ]
 
     def import_from_file(self, file_path: str) -> Glossary:
         """
@@ -271,7 +284,7 @@ class GlossaryManager:
 
         if path.suffix == '.json':
             with open(path, 'w', encoding='utf-8') as f:
-                json.dump(glossary.model_dump(), f, ensure_ascii=False, indent=2)
+                json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
 
         elif path.suffix == '.csv':
             import csv

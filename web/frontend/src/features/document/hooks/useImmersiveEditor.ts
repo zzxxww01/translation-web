@@ -25,6 +25,12 @@ interface UseImmersiveEditorOptions {
   paragraphs: Paragraph[];
 }
 
+interface ParagraphSnapshot {
+  translation: string;
+  confirmed: string;
+  status: ParagraphStatus;
+}
+
 function toErrorMessage(error: unknown): string {
   if (error instanceof Error && error.message) {
     return error.message;
@@ -67,6 +73,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   const dirtyMapRef = useRef(dirtyMap);
   const retranslatingMapRef = useRef(retranslatingMap);
   const paragraphsByIdRef = useRef<Record<string, Paragraph>>({});
+  const paragraphSnapshotsRef = useRef<Record<string, ParagraphSnapshot>>({});
 
   const paragraphIds = useMemo(() => new Set(paragraphs.map(paragraph => paragraph.id)), [paragraphs]);
 
@@ -84,10 +91,32 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
   useEffect(() => {
     const paragraphMap: Record<string, Paragraph> = {};
+    const nextSnapshots: Record<string, ParagraphSnapshot> = {};
+    const changedParagraphIds = new Set<string>();
+
     paragraphs.forEach(paragraph => {
       paragraphMap[paragraph.id] = paragraph;
+
+      const nextSnapshot: ParagraphSnapshot = {
+        translation: paragraph.translation ?? '',
+        confirmed: paragraph.confirmed ?? '',
+        status: paragraph.status,
+      };
+      const previousSnapshot = paragraphSnapshotsRef.current[paragraph.id];
+      if (
+        previousSnapshot &&
+        (
+          previousSnapshot.translation !== nextSnapshot.translation ||
+          previousSnapshot.confirmed !== nextSnapshot.confirmed ||
+          previousSnapshot.status !== nextSnapshot.status
+        )
+      ) {
+        changedParagraphIds.add(paragraph.id);
+      }
+      nextSnapshots[paragraph.id] = nextSnapshot;
     });
     paragraphsByIdRef.current = paragraphMap;
+    paragraphSnapshotsRef.current = nextSnapshots;
 
     setDrafts(previous => {
       const next = { ...previous };
@@ -103,9 +132,21 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
     setDirtyMap(previous => pruneMapByIds(previous, paragraphIds));
     setSavingMap(previous => pruneMapByIds(previous, paragraphIds));
-    setSaveErrorMap(previous => pruneMapByIds(previous, paragraphIds));
+    setSaveErrorMap(previous => {
+      const next = pruneMapByIds(previous, paragraphIds);
+      changedParagraphIds.forEach(paragraphId => {
+        delete next[paragraphId];
+      });
+      return next;
+    });
     setRetranslatingMap(previous => pruneMapByIds(previous, paragraphIds));
-    setRetranslateErrorMap(previous => pruneMapByIds(previous, paragraphIds));
+    setRetranslateErrorMap(previous => {
+      const next = pruneMapByIds(previous, paragraphIds);
+      changedParagraphIds.forEach(paragraphId => {
+        delete next[paragraphId];
+      });
+      return next;
+    });
   }, [paragraphIds, paragraphs]);
 
   useEffect(() => {
@@ -416,6 +457,13 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         const next = { ...previous };
         ids.forEach(id => {
           next[id] = true;
+        });
+        return next;
+      });
+      setRetranslateErrorMap(previous => {
+        const next = { ...previous };
+        ids.forEach(id => {
+          delete next[id];
         });
         return next;
       });

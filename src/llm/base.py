@@ -5,6 +5,7 @@ Abstract base class for LLM providers.
 """
 
 from abc import ABC, abstractmethod
+from contextlib import contextmanager
 from typing import Optional, List, Dict, Any
 
 
@@ -76,6 +77,7 @@ class LLMProvider(ABC):
         response_format: Optional[str] = None,
         temperature: float = 0.7,
         model: Optional[str] = None,
+        **kwargs,
     ) -> str:
         """
         通用文本生成（用于四步法的各个步骤）
@@ -90,6 +92,11 @@ class LLMProvider(ABC):
             str: 生成的文本
         """
         pass
+
+    @contextmanager
+    def use_model(self, model_selector: Optional[str]):
+        """Temporarily route requests to a specific model when supported."""
+        yield
 
     def deep_analyze(self, text: str, sections_outline: str) -> Dict[str, Any]:
         """
@@ -140,7 +147,8 @@ class LLMProvider(ABC):
         source_paragraphs: List[str],
         translations: List[str],
         guidelines: List[str],
-        terminology: List[Dict]
+        terminology: List[Dict],
+        context: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
         反思翻译质量（四步法 Step 3）
@@ -154,7 +162,11 @@ class LLMProvider(ABC):
                    Dict: 反思结果
         """
         prompt = self._build_reflection_prompt(
-            source_paragraphs, translations, guidelines, terminology
+            source_paragraphs,
+            translations,
+            guidelines,
+            terminology,
+            context=context,
         )
         response = self.generate(prompt, response_format="json")
         return self._parse_json_response(response)
@@ -165,7 +177,8 @@ class LLMProvider(ABC):
         current_translation: str,
         issue_type: str,
         description: str,
-        suggestion: str
+        suggestion: str,
+        context: Optional[Dict[str, Any]] = None
     ) -> str:
         """
         润色翻译（四步法 Step 4）
@@ -181,7 +194,12 @@ class LLMProvider(ABC):
             str: 润色后的译文
         """
         prompt = self._build_refine_prompt(
-            source, current_translation, issue_type, description, suggestion
+            source,
+            current_translation,
+            issue_type,
+            description,
+            suggestion,
+            context=context,
         )
         return self.generate(prompt, temperature=0.3)
 
@@ -260,7 +278,8 @@ class LLMProvider(ABC):
         source_paragraphs: List[str],
         translations: List[str],
         guidelines: List[str],
-        terminology: List[Dict]
+        terminology: List[Dict],
+        context: Optional[Dict[str, Any]] = None
     ) -> str:
         """构建反思 Prompt"""
         # 构建原文和译文对照
@@ -278,12 +297,17 @@ class LLMProvider(ABC):
         # 构建指南
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
-        return self.prompt_manager.get(
+        base_prompt = self.prompt_manager.get(
             "reflection",
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text
         )
+
+        context_blocks = self._build_reflection_context_blocks(context or {})
+        if context_blocks:
+            return "\n\n".join(context_blocks + [base_prompt])
+        return base_prompt
 
     def _build_refine_prompt(
         self,
@@ -291,10 +315,11 @@ class LLMProvider(ABC):
         current_translation: str,
         issue_type: str,
         description: str,
-        suggestion: str
+        suggestion: str,
+        context: Optional[Dict[str, Any]] = None
     ) -> str:
         """构建润色 Prompt"""
-        return self.prompt_manager.get(
+        base_prompt = self.prompt_manager.get(
             "refine",
             source=source,
             current_translation=current_translation,
@@ -302,6 +327,137 @@ class LLMProvider(ABC):
             description=description,
             suggestion=suggestion
         )
+        context_blocks = self._build_refine_context_blocks(context or {})
+        if context_blocks:
+            return "\n\n".join(context_blocks + [base_prompt])
+        return base_prompt
+
+    def _build_reflection_context_blocks(
+        self,
+        context: Dict[str, Any],
+    ) -> List[str]:
+        """Attach article and section review context ahead of critique prompts."""
+        if not context:
+            return []
+
+        blocks: List[str] = []
+
+        article_lines: List[str] = []
+        if context.get("article_theme"):
+            article_lines.append(f"文章主题：{context['article_theme']}")
+        if context.get("structure_summary"):
+            article_lines.append(f"结构摘要：{context['structure_summary']}")
+        if context.get("target_audience"):
+            article_lines.append(f"目标读者：{context['target_audience']}")
+        if context.get("translation_voice"):
+            article_lines.append(f"建议中文声线：{context['translation_voice']}")
+        if article_lines:
+            blocks.append("## 全文背景\n" + "\n".join(article_lines))
+
+        section_lines: List[str] = []
+        if context.get("section_title"):
+            section_lines.append(f"当前章节：{context['section_title']}")
+        if context.get("section_role"):
+            section_lines.append(f"章节角色：{context['section_role']}")
+        if context.get("relation_to_previous"):
+            section_lines.append(f"与前文关系：{context['relation_to_previous']}")
+        if context.get("relation_to_next"):
+            section_lines.append(f"与后文关系：{context['relation_to_next']}")
+        if section_lines:
+            blocks.append("## 篇章位置\n" + "\n".join(section_lines))
+
+        notes = context.get("translation_notes") or []
+        if notes:
+            blocks.append(
+                "## 本章翻译注意点\n" + "\n".join(f"- {note}" for note in notes[:6])
+            )
+
+        challenges = context.get("article_challenges") or []
+        if challenges:
+            challenge_lines = []
+            for challenge in challenges[:5]:
+                if isinstance(challenge, dict):
+                    location = str(challenge.get("location", "")).strip()
+                    issue = str(challenge.get("issue", "")).strip()
+                    suggestion = str(challenge.get("suggestion", "")).strip()
+                    line = issue
+                    if location:
+                        line = f"[{location}] {line}"
+                    if suggestion:
+                        line = f"{line}；建议：{suggestion}"
+                    if line:
+                        challenge_lines.append(f"- {line}")
+            if challenge_lines:
+                blocks.append("## 全文高风险点\n" + "\n".join(challenge_lines))
+
+        priorities = context.get("review_priorities") or []
+        if priorities:
+            blocks.append(
+                "## 本轮批评优先级\n"
+                + "\n".join(f"- {item}" for item in priorities[:6])
+            )
+
+        return blocks
+
+    def _build_refine_context_blocks(
+        self,
+        context: Dict[str, Any],
+    ) -> List[str]:
+        """Attach section-level guardrails to targeted revision prompts."""
+        if not context:
+            return []
+
+        blocks: List[str] = []
+
+        section_lines: List[str] = []
+        if context.get("section_title"):
+            section_lines.append(f"当前章节：{context['section_title']}")
+        if context.get("section_role"):
+            section_lines.append(f"章节角色：{context['section_role']}")
+        if context.get("target_audience"):
+            section_lines.append(f"目标读者：{context['target_audience']}")
+        if context.get("translation_voice"):
+            section_lines.append(f"目标语气：{context['translation_voice']}")
+        if section_lines:
+            blocks.append("## 修订上下文\n" + "\n".join(section_lines))
+
+        guidelines = context.get("guidelines") or []
+        if guidelines:
+            blocks.append(
+                "## 修订时仍需遵守\n" + "\n".join(f"- {item}" for item in guidelines[:8])
+            )
+
+        terminology = context.get("terminology") or []
+        if terminology:
+            term_lines = []
+            for term in terminology[:12]:
+                original = term.get("term") or term.get("original") or ""
+                translation = term.get("translation") or ""
+                if original and translation:
+                    term_lines.append(f"- {original} -> {translation}")
+            if term_lines:
+                blocks.append("## 关键术语\n" + "\n".join(term_lines))
+
+        challenges = context.get("article_challenges") or []
+        if challenges:
+            challenge_lines = []
+            for challenge in challenges[:4]:
+                if not isinstance(challenge, dict):
+                    continue
+                location = str(challenge.get("location", "")).strip()
+                issue = str(challenge.get("issue", "")).strip()
+                suggestion = str(challenge.get("suggestion", "")).strip()
+                line = issue
+                if location:
+                    line = f"[{location}] {line}"
+                if suggestion:
+                    line = f"{line}；建议：{suggestion}"
+                if line:
+                    challenge_lines.append(f"- {line}")
+            if challenge_lines:
+                blocks.append("## 全文高风险点\n" + "\n".join(challenge_lines))
+
+        return blocks
 
     def _build_prescan_prompt(
         self,

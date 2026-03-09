@@ -10,7 +10,9 @@
 """
 
 import asyncio
-from typing import List, Optional, Dict, Callable
+import json
+from pathlib import Path
+from typing import Any, List, Optional, Dict, Callable
 from datetime import datetime
 import logging
 
@@ -21,6 +23,8 @@ from src.core.models import (
     ParagraphStatus,
     ProjectStatus,
     ArticleAnalysis,
+    EnhancedTerm,
+    TranslationStrategy,
 )
 from src.core.project import ProjectManager
 from src.agents.deep_analyzer import DeepAnalyzer
@@ -87,6 +91,236 @@ class BatchTranslationService:
         project.sections = self.project_manager.get_sections(project_id)
         return project
 
+    def _artifacts_root(self, project_id: str) -> Path:
+        return self.project_manager.projects_path / project_id / "artifacts" / "runs"
+
+    def _create_run_artifact_dir(self, project_id: str) -> tuple[str, Path]:
+        run_id = datetime.now().strftime("%Y%m%d-%H%M%S-%f")
+        run_dir = self._artifacts_root(project_id) / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+        return run_id, run_dir
+
+    def _normalize_artifact_payload(self, payload: Any) -> Any:
+        if hasattr(payload, "model_dump"):
+            return payload.model_dump(mode="json")
+        if isinstance(payload, dict):
+            return {
+                key: self._normalize_artifact_payload(value)
+                for key, value in payload.items()
+            }
+        if isinstance(payload, list):
+            return [self._normalize_artifact_payload(item) for item in payload]
+        return payload
+
+    def _write_artifact_json(self, path: Path, payload: Any) -> None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as handle:
+            json.dump(
+                self._normalize_artifact_payload(payload),
+                handle,
+                ensure_ascii=False,
+                indent=2,
+                default=str,
+            )
+
+    def _build_source_manifest(
+        self,
+        project: ProjectMeta,
+        project_id: str,
+    ) -> Dict[str, Any]:
+        return {
+            "project_id": project_id,
+            "title": project.title,
+            "title_translation": project.title_translation,
+            "source_file": project.source_file,
+            "workflow_mode": self.translation_mode,
+            "section_count": len(project.sections),
+            "paragraph_count": sum(len(section.paragraphs) for section in project.sections),
+            "generated_at": datetime.now().isoformat(),
+        }
+
+    def _build_structure_map(self, project: ProjectMeta) -> Dict[str, Any]:
+        return {
+            "sections": [
+                {
+                    "section_id": section.section_id,
+                    "title": section.title,
+                    "title_translation": section.title_translation,
+                    "paragraph_count": len(section.paragraphs),
+                    "paragraphs": [
+                        {
+                            "id": paragraph.id,
+                            "index": paragraph.index,
+                            "element_type": paragraph.element_type.value,
+                            "heading_level": paragraph.heading_level,
+                            "heading_chain": paragraph.heading_chain,
+                            "source_preview": paragraph.source[:160],
+                        }
+                        for paragraph in section.paragraphs
+                    ],
+                }
+                for section in project.sections
+            ]
+        }
+
+    def _build_section_plan(
+        self,
+        project: ProjectMeta,
+        analysis: ArticleAnalysis,
+    ) -> Dict[str, Any]:
+        section_roles = analysis.section_roles or {}
+        sections_payload = []
+        total_sections = len(project.sections)
+        for index, section in enumerate(project.sections):
+            understanding = section_roles.get(section.section_id)
+            sections_payload.append(
+                {
+                    "section_id": section.section_id,
+                    "title": section.title,
+                    "position": f"{index + 1}/{total_sections}",
+                    "paragraph_count": len(section.paragraphs),
+                    "previous_section_title": (
+                        project.sections[index - 1].title if index > 0 else ""
+                    ),
+                    "next_section_title": (
+                        project.sections[index + 1].title
+                        if index < total_sections - 1
+                        else ""
+                    ),
+                    "section_role": (
+                        understanding.role_in_article if understanding else ""
+                    ),
+                    "translation_notes": (
+                        understanding.translation_notes if understanding else []
+                    ),
+                }
+            )
+
+        return {
+            "article_theme": analysis.theme,
+            "structure_summary": analysis.structure_summary,
+            "translation_mode": self.translation_mode,
+            "sections": sections_payload,
+        }
+
+    def _build_prompt_context_snapshot(
+        self,
+        analysis: ArticleAnalysis,
+    ) -> Dict[str, Any]:
+        return {
+            "article_theme": analysis.theme,
+            "structure_summary": analysis.structure_summary,
+            "style": self._normalize_artifact_payload(analysis.style),
+            "guidelines": analysis.guidelines,
+            "challenges": self._normalize_artifact_payload(analysis.challenges),
+            "terminology": [
+                {
+                    "term": term.term,
+                    "translation": term.translation,
+                    "strategy": term.strategy.value,
+                    "first_occurrence_note": term.first_occurrence_note,
+                    "rationale": term.rationale,
+                }
+                for term in analysis.terminology
+            ],
+        }
+
+    def _enhanced_term_from_glossary(self, glossary_term) -> EnhancedTerm:
+        return EnhancedTerm(
+            term=glossary_term.original,
+            translation=glossary_term.translation,
+            context_meaning=glossary_term.note or "",
+            strategy=glossary_term.strategy,
+            first_occurrence_note=(
+                glossary_term.strategy == TranslationStrategy.FIRST_ANNOTATE
+            ),
+        )
+
+    def _merge_analysis_with_project_glossary(
+        self,
+        project_id: str,
+        analysis: ArticleAnalysis,
+    ) -> ArticleAnalysis:
+        merged_glossary = self.project_manager.glossary_manager.load_merged(project_id)
+        merged_terms: Dict[str, EnhancedTerm] = {
+            term.term.lower(): term.model_copy()
+            for term in analysis.terminology
+        }
+
+        for glossary_term in merged_glossary.terms:
+            if glossary_term.status != "active":
+                continue
+            merged_terms[glossary_term.original.lower()] = (
+                self._enhanced_term_from_glossary(glossary_term)
+            )
+
+        analysis.terminology = list(merged_terms.values())
+        return analysis
+
+    def _build_section_prompt_context(
+        self,
+        project: ProjectMeta,
+        section: Section,
+        section_index: int,
+        analysis: ArticleAnalysis,
+    ) -> Dict[str, Any]:
+        understanding = analysis.section_roles.get(section.section_id)
+        total_sections = len(project.sections)
+        return {
+            "section_id": section.section_id,
+            "section_title": section.title,
+            "section_title_translation": section.title_translation,
+            "section_position": f"{section_index + 1}/{total_sections}",
+            "article_theme": analysis.theme,
+            "structure_summary": analysis.structure_summary,
+            "target_audience": analysis.style.target_audience,
+            "translation_voice": analysis.style.translation_voice,
+            "previous_section_title": (
+                project.sections[section_index - 1].title if section_index > 0 else ""
+            ),
+            "next_section_title": (
+                project.sections[section_index + 1].title
+                if section_index < total_sections - 1
+                else ""
+            ),
+            "section_role": understanding.role_in_article if understanding else "",
+            "translation_notes": (
+                understanding.translation_notes if understanding else []
+            ),
+            "key_points": understanding.key_points if understanding else [],
+            "guidelines": analysis.guidelines,
+            "article_challenges": [
+                {
+                    "location": challenge.location,
+                    "issue": challenge.issue,
+                    "suggestion": challenge.suggestion or "",
+                }
+                for challenge in analysis.challenges[:6]
+            ],
+            "terminology": [
+                {
+                    "term": term.term,
+                    "translation": term.translation,
+                    "strategy": term.strategy.value,
+                    "first_occurrence_note": term.first_occurrence_note,
+                    "note": term.context_meaning,
+                }
+                for term in analysis.terminology
+                if term.translation or term.strategy.value == "preserve"
+            ],
+        }
+
+    def _persist_section_artifact(
+        self,
+        run_dir: Optional[Path],
+        category: str,
+        section_id: str,
+        payload: Any,
+    ) -> None:
+        if run_dir is None:
+            return
+        self._write_artifact_json(run_dir / category / f"{section_id}.json", payload)
+
     def _notify_progress(
         self,
         callback: Optional[Callable[[str, int, int], None]],
@@ -133,6 +367,7 @@ class BatchTranslationService:
         # 加载项目
         project = self._load_project_with_sections(project_id)
         original_status = project.status
+        self.context_manager.reset_all()
 
         # 统计总数
         total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
@@ -144,6 +379,16 @@ class BatchTranslationService:
             total_sections=total_sections,
             total_paragraphs=total_paragraphs,
             original_status=original_status,
+        )
+
+        run_id, run_dir = self._create_run_artifact_dir(project_id)
+        self._write_artifact_json(
+            run_dir / "source-manifest.json",
+            self._build_source_manifest(project, project_id),
+        )
+        self._write_artifact_json(
+            run_dir / "structure-map.json",
+            self._build_structure_map(project),
         )
 
         # 更新项目状态为"分析中"
@@ -161,9 +406,20 @@ class BatchTranslationService:
             )
 
             analysis = self.deep_analyzer.analyze(project.sections)
+            analysis = self._merge_analysis_with_project_glossary(project_id, analysis)
 
             # 设置分析结果到上下文管理器
             self.context_manager.set_article_analysis(analysis)
+            self.context_manager.add_terms_from_analysis(analysis.terminology)
+            self._write_artifact_json(run_dir / "analysis.json", analysis)
+            self._write_artifact_json(
+                run_dir / "section-plan.json",
+                self._build_section_plan(project, analysis),
+            )
+            self._write_artifact_json(
+                run_dir / "prompt-context.json",
+                self._build_prompt_context_snapshot(analysis),
+            )
 
             # 翻译标题和元信息
             logger.info(f"[{project_id}] Translating title and metadata")
@@ -195,7 +451,26 @@ class BatchTranslationService:
             for i, section in enumerate(project.sections):
                 progress.current_section = section.title
                 progress.current_step = f"翻译章节 {i+1}/{total_sections}"
-                self._run_section_prescan(project_id, section, progress)
+                section_prompt_context = self._build_section_prompt_context(
+                    project,
+                    section,
+                    i,
+                    analysis,
+                )
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-context",
+                    section.section_id,
+                    section_prompt_context,
+                )
+                prescan_result = self._run_section_prescan(project_id, section, progress)
+                if prescan_result:
+                    self._persist_section_artifact(
+                        run_dir,
+                        "section-prescan",
+                        section.section_id,
+                        prescan_result,
+                    )
 
                 # 断点续传：检查章节是否已全部翻译
                 section_paragraph_count = len(section.paragraphs)
@@ -253,6 +528,17 @@ class BatchTranslationService:
                                 translations,
                             )
                         )
+                        self._persist_section_artifact(
+                            run_dir,
+                            "section-draft",
+                            section.section_id,
+                            {
+                                "section_id": section.section_id,
+                                "mode": self.translation_mode,
+                                "prompt_context": section_prompt_context,
+                                "translations": translations,
+                            },
+                        )
 
                     else:
                         # 四步法翻译（细粒度）
@@ -271,6 +557,37 @@ class BatchTranslationService:
 
                         self._apply_four_step_translations(section, result)
                         all_translations[section.section_id] = result.translations
+                        self._persist_section_artifact(
+                            run_dir,
+                            "section-draft",
+                            section.section_id,
+                            {
+                                "section_id": section.section_id,
+                                "mode": self.translation_mode,
+                                "prompt_context": section_prompt_context,
+                                "understanding": result.understanding,
+                                "translations": result.draft_translations,
+                            },
+                        )
+                        self._persist_section_artifact(
+                            run_dir,
+                            "section-critique",
+                            section.section_id,
+                            {
+                                "section_id": section.section_id,
+                                "reflection": result.reflection,
+                            },
+                        )
+                        self._persist_section_artifact(
+                            run_dir,
+                            "section-revision",
+                            section.section_id,
+                            {
+                                "section_id": section.section_id,
+                                "assessment": result.assessment,
+                                "translations": result.revised_translations,
+                            },
+                        )
 
                     # 保存章节
                     self.project_manager.save_section(project_id, section)
@@ -354,8 +671,20 @@ class BatchTranslationService:
                                     para.add_translation(translation, "gemini_refined")
                             self.project_manager.save_section(project_id, section)
 
+                self._write_artifact_json(
+                    run_dir / "consistency.json",
+                    {
+                        "report": consistency_report,
+                        "translations_after_consistency": all_translations,
+                    },
+                )
+
             except Exception as e:
                 logger.error(f"[{project_id}] Consistency review failed: {str(e)}")
+                self._write_artifact_json(
+                    run_dir / "consistency.json",
+                    {"error": str(e)},
+                )
                 # 一致性审查失败不影响翻译完成状态
 
             # 翻译完成
@@ -384,6 +713,42 @@ class BatchTranslationService:
             )
             self._save_meta(project_id, project)
 
+            markdown_output = self.project_manager.export_markdown(
+                project_id, include_source=False
+            )
+            export_report = {
+                "generated_at": datetime.now().isoformat(),
+                "translation_mode": self.translation_mode,
+                "markdown": {
+                    "path": str(
+                        self.project_manager.get_export_path(
+                            project_id,
+                            format="markdown",
+                        )
+                    ),
+                    "bytes": len(markdown_output.encode("utf-8")),
+                },
+                "html": {
+                    "path": str(
+                        self.project_manager.get_export_path(
+                            project_id,
+                            format="html",
+                        )
+                    ),
+                    "generated": False,
+                },
+            }
+            try:
+                self.project_manager.export_html(project_id)
+                export_report["html"]["generated"] = True
+            except Exception as export_exc:
+                export_report["html"]["error"] = str(export_exc)
+
+            self._write_artifact_json(
+                run_dir / "markdown-export-report.json",
+                export_report,
+            )
+
             logger.info(f"[{project_id}] Translation completed")
             if not is_complete:
                 logger.warning(
@@ -403,6 +768,9 @@ class BatchTranslationService:
                 "errors": progress.errors,
                 "started_at": progress.started_at.isoformat(),
                 "finished_at": progress.finished_at.isoformat(),
+                "run_id": run_id,
+                "artifacts_path": str(run_dir),
+                "export": export_report,
             }
 
             # 添加一致性审查报告
@@ -426,6 +794,8 @@ class BatchTranslationService:
                     ],
                 }
 
+            self._write_artifact_json(run_dir / "run-summary.json", result)
+
             return result
 
         except Exception as e:
@@ -438,22 +808,26 @@ class BatchTranslationService:
             project.status = original_status
             self._save_meta(project_id, project)
 
-            return {
+            failure_result = {
                 "project_id": project_id,
                 "status": "failed",
                 "error": str(e),
                 "errors": progress.errors,
+                "run_id": run_id,
+                "artifacts_path": str(run_dir),
             }
+            self._write_artifact_json(run_dir / "run-summary.json", failure_result)
+            return failure_result
 
     def _run_section_prescan(
         self,
         project_id: str,
         section: Section,
         progress: TranslationProgress,
-    ) -> None:
+    ) -> Optional[Any]:
         """Run optional section prescan and record terminology conflicts."""
         if not hasattr(self.translator, "prescan_section"):
-            return
+            return None
 
         try:
             prescan_result = self.translator.prescan_section(
@@ -474,10 +848,12 @@ class BatchTranslationService:
                     f"[{project_id}] Section {section.section_id} prescan: "
                     f"{len(prescan_result.new_terms)} new terms found"
                 )
+            return prescan_result
         except Exception as exc:
             logger.warning(
                 f"[{project_id}] Section {section.section_id} prescan skipped due to error: {exc}"
             )
+            return None
 
     def _count_translated_paragraphs(self, section: Section) -> int:
         """Count paragraphs that already have a usable translation."""
@@ -838,9 +1214,13 @@ class BatchTranslationService:
 
         section_text = "\n\n".join(section_lines)
 
+        understanding = analysis.section_roles.get(section.section_id)
+
         # 构建上下文
         context = {
             "article_theme": analysis.theme,
+            "target_audience": analysis.style.target_audience,
+            "translation_voice": analysis.style.translation_voice,
             "section_position": f"第 {section_index + 1}/{total_sections} 章节",
             "previous_section_title": (
                 all_sections[section_index - 1].title if section_index > 0 else "无"
@@ -851,11 +1231,29 @@ class BatchTranslationService:
                 else "无"
             ),
             "glossary": [
-                {"original": term.term, "translation": term.translation}
+                {
+                    "original": term.term,
+                    "translation": term.translation,
+                    "strategy": term.strategy.value,
+                    "first_occurrence_note": term.first_occurrence_note,
+                    "note": term.context_meaning,
+                }
                 for term in analysis.terminology[:20]
-                if term.translation
+                if term.translation or term.strategy.value == "preserve"
             ],
             "guidelines": analysis.guidelines,
+            "section_role": understanding.role_in_article if understanding else "",
+            "translation_notes": (
+                understanding.translation_notes if understanding else []
+            ),
+            "article_challenges": [
+                {
+                    "location": challenge.location,
+                    "issue": challenge.issue,
+                    "suggestion": challenge.suggestion or "",
+                }
+                for challenge in analysis.challenges[:6]
+            ],
         }
 
         # 检查 LLM 是否有 translate_section 方法

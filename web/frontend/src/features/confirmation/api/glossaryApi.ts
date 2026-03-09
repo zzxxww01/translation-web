@@ -4,7 +4,13 @@
  */
 
 import { apiClient } from '../../../shared/api/client';
-import type { GlossaryTerm, TranslationStrategy } from '../types';
+import type {
+  GlossaryRecommendation,
+  GlossaryTerm,
+  TermReviewDecision,
+  TermReviewPayload,
+  TranslationStrategy,
+} from '../types';
 
 /**
  * 术语表
@@ -43,6 +49,7 @@ export interface AddTermRequest {
   translation?: string | null;
   strategy?: TranslationStrategy;
   note?: string | null;
+  status?: 'active' | 'disabled' | string;
 }
 
 /**
@@ -108,6 +115,9 @@ export const glossaryApi = {
     if (updates.note !== undefined && updates.note !== null) {
       params.append('note', updates.note);
     }
+    if (updates.status !== undefined && updates.status !== null) {
+      params.append('status', updates.status);
+    }
 
     const encodedOriginal = encodeURIComponent(original);
 
@@ -148,6 +158,9 @@ export const glossaryApi = {
     if (updates.note !== undefined && updates.note !== null) {
       params.append('note', updates.note);
     }
+    if (updates.status !== undefined && updates.status !== null) {
+      params.append('status', updates.status);
+    }
 
     const encodedOriginal = encodeURIComponent(original);
 
@@ -182,5 +195,38 @@ export const glossaryApi = {
       `/projects/${projectId}/glossary/match`,
       { paragraph, max_terms: maxTerms }
     );
+  },
+
+  async prepareTermReview(projectId: string): Promise<TermReviewPayload> {
+    return apiClient.post<TermReviewPayload>(`/projects/${projectId}/term-review/prepare`);
+  },
+
+  async submitTermReview(
+    projectId: string,
+    decisions: TermReviewDecision[]
+  ): Promise<{
+    project_id: string;
+    applied_count: number;
+    skipped_count: number;
+    applied_terms: GlossaryTerm[];
+    skipped_terms: string[];
+  }> {
+    return apiClient.post(`/projects/${projectId}/term-review/submit`, {
+      decisions,
+    });
+  },
+
+  async getProjectRecommendations(
+    projectId: string
+  ): Promise<{ project_id: string; recommendations: GlossaryRecommendation[] }> {
+    return apiClient.get(`/projects/${projectId}/glossary/recommendations`);
+  },
+
+  async promoteProjectTerm(
+    projectId: string,
+    original: string
+  ): Promise<{ message: string; term: GlossaryTerm }> {
+    const encodedOriginal = encodeURIComponent(original);
+    return apiClient.post(`/projects/${projectId}/glossary/terms/${encodedOriginal}/promote`);
   },
 };

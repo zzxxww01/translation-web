@@ -186,11 +186,17 @@ class FourStepTranslator:
                 )
                 translations.extend(batch_translations)
 
+        draft_translations = list(translations)
+
         if on_progress:
             on_progress("反思", 2, 4)
 
         # Step 3: 批量反思
-        reflection = self._step_reflect(section, translations)
+        reflection = self._step_reflect(
+            section,
+            translations,
+            understanding,
+        )
 
         # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则
         if (
@@ -216,7 +222,14 @@ class FourStepTranslator:
 
         # Step 4: 润色（如果需要）
         if not reflection.is_excellent and reflection.issues:
-            translations = self._step_refine(section, translations, reflection)
+            translations = self._step_refine(
+                section,
+                translations,
+                reflection,
+                understanding,
+            )
+
+        revised_translations = list(translations)
 
         # 质量门禁检查
         assessment = self.quality_gate.assess(section, translations, reflection)
@@ -250,6 +263,8 @@ class FourStepTranslator:
         return SectionTranslationResult(
             section_id=section.section_id,
             translations=translations,
+            draft_translations=draft_translations,
+            revised_translations=revised_translations,
             understanding=understanding,
             reflection=reflection,
             assessment=assessment
@@ -417,6 +432,8 @@ class FourStepTranslator:
         """构建 LLM 翻译上下文"""
         llm_context = {}
 
+        article_analysis = self.context_manager.article_analysis
+
         # 术语表
         if context.terminology:
             llm_context["glossary"] = [
@@ -424,7 +441,8 @@ class FourStepTranslator:
                     "original": term.term,
                     "translation": term.translation,
                     "strategy": term.strategy.value if hasattr(term.strategy, 'value') else term.strategy,
-                    "note": term.context_meaning
+                    "note": term.context_meaning,
+                    "first_occurrence_note": term.first_occurrence_note,
                 }
                 for term in context.terminology
             ]
@@ -449,6 +467,22 @@ class FourStepTranslator:
             llm_context["article_theme"] = context.article_theme
         if context.article_structure:
             llm_context["article_structure"] = context.article_structure
+        if article_analysis:
+            if article_analysis.style.target_audience:
+                llm_context["target_audience"] = article_analysis.style.target_audience
+            if article_analysis.style.translation_voice:
+                llm_context["translation_voice"] = (
+                    article_analysis.style.translation_voice
+                )
+            if article_analysis.challenges:
+                llm_context["article_challenges"] = [
+                    {
+                        "location": challenge.location,
+                        "issue": challenge.issue,
+                        "suggestion": challenge.suggestion or "",
+                    }
+                    for challenge in article_analysis.challenges[:6]
+                ]
 
         # 前文上下文
         if context.previous_paragraphs:
@@ -462,10 +496,84 @@ class FourStepTranslator:
 
     # ============ Step 3: 反思 ============
 
+    def _build_review_context(
+        self,
+        section: Section,
+        understanding: SectionUnderstanding,
+    ) -> Dict[str, Any]:
+        """Build critique-time context so reflection focuses on article-level quality."""
+        article_theme = ""
+        structure_summary = ""
+        guidelines: List[str] = []
+        terminology: List[Dict[str, str]] = []
+        translation_voice = ""
+        target_audience = ""
+        article_challenges: List[Dict[str, str]] = []
+
+        if self.context_manager.article_analysis:
+            article_theme = self.context_manager.article_analysis.theme
+            structure_summary = self.context_manager.article_analysis.structure_summary
+            guidelines = list(self.context_manager.article_analysis.guidelines)
+            target_audience = (
+                self.context_manager.article_analysis.style.target_audience
+            )
+            translation_voice = (
+                self.context_manager.article_analysis.style.translation_voice
+            )
+            article_challenges = [
+                {
+                    "location": challenge.location,
+                    "issue": challenge.issue,
+                    "suggestion": challenge.suggestion or "",
+                }
+                for challenge in self.context_manager.article_analysis.challenges[:6]
+            ]
+            terminology = [
+                {
+                    "term": term.term,
+                    "translation": term.translation or "",
+                }
+                for term in self.context_manager.article_analysis.terminology
+                if term.translation
+            ]
+
+        review_priorities = [
+            "先检查是否误译、漏译或削弱原文判断。",
+            "再检查术语是否前后一致，首现是否适合中文加英文括注。",
+            "再检查是否对真正有理解门槛的术语漏注，或对常见术语过度加注。",
+            "再检查中文是否有翻译腔、英文句法投影或机械名词串。",
+            "标题、图注和数据密集段优先保证信息密度与判断力度。",
+        ]
+
+        return {
+            "article_theme": article_theme,
+            "structure_summary": structure_summary,
+            "target_audience": target_audience,
+            "section_title": section.title,
+            "section_role": understanding.role_in_article,
+            "relation_to_previous": understanding.relation_to_previous,
+            "relation_to_next": understanding.relation_to_next,
+            "translation_notes": understanding.translation_notes,
+            "article_challenges": article_challenges,
+            "review_priorities": review_priorities,
+            "guidelines": guidelines,
+            "terminology": terminology,
+            "translation_voice": translation_voice,
+        }
+
+    def _build_refine_context(
+        self,
+        section: Section,
+        understanding: SectionUnderstanding,
+    ) -> Dict[str, Any]:
+        """Build section-level guardrails for targeted revision."""
+        return self._build_review_context(section, understanding)
+
     def _step_reflect(
         self,
         section: Section,
-        translations: List[str]
+        translations: List[str],
+        understanding: SectionUnderstanding,
     ) -> ReflectionResult:
         """Step 3: 批量反思"""
         # 获取原文列表
@@ -490,7 +598,8 @@ class FourStepTranslator:
             source_paragraphs=source_paragraphs,
             translations=translations,
             guidelines=guidelines,
-            terminology=terminology
+            terminology=terminology,
+            context=self._build_review_context(section, understanding),
         )
 
         # 解析问题列表
@@ -499,8 +608,10 @@ class FourStepTranslator:
             issues.append(TranslationIssue(
                 paragraph_index=issue_data.get("paragraph_index", 0),
                 issue_type=issue_data.get("issue_type", "readability"),
+                severity=issue_data.get("severity", "medium"),
                 original_text=issue_data.get("original_text", ""),
                 description=issue_data.get("description", ""),
+                why_it_matters=issue_data.get("why_it_matters", ""),
                 suggestion=issue_data.get("suggestion", "")
             ))
 
@@ -518,7 +629,8 @@ class FourStepTranslator:
         self,
         section: Section,
         translations: List[str],
-        reflection: ReflectionResult
+        reflection: ReflectionResult,
+        understanding: SectionUnderstanding,
     ) -> List[str]:
         """Step 4: 针对性润色"""
         refined = translations.copy()
@@ -535,7 +647,8 @@ class FourStepTranslator:
                     current_translation=refined[idx],
                     issue_type=issue.issue_type,
                     description=issue.description,
-                    suggestion=issue.suggestion
+                    suggestion=issue.suggestion,
+                    context=self._build_refine_context(section, understanding),
                 )
 
                 refined[idx] = refined_text.strip()

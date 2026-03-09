@@ -92,8 +92,10 @@ class TranslationIssue(BaseModel):
 
     paragraph_index: int
     issue_type: str
+    severity: str = "medium"
     original_text: str = ""
     description: str
+    why_it_matters: str = ""
     suggestion: str = ""
 
 
@@ -122,6 +124,8 @@ class SectionTranslationResult(BaseModel):
 
     section_id: str
     translations: List[str] = Field(default_factory=list)
+    draft_translations: List[str] = Field(default_factory=list)
+    revised_translations: List[str] = Field(default_factory=list)
     understanding: Optional[SectionUnderstanding] = None
     reflection: Optional[ReflectionResult] = None
     assessment: Optional[QualityAssessment] = None

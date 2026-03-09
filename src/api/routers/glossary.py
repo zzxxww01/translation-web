@@ -3,9 +3,11 @@
 提供术语库的增删改查功能
 """
 
+from datetime import datetime
+from typing import Optional, List
+
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
-from typing import Optional, List
 
 from src.core.glossary import GlossaryManager
 from src.core.models import GlossaryTerm, TranslationStrategy
@@ -23,6 +25,7 @@ class TermRequest(BaseModel):
     translation: Optional[str] = None
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
     note: Optional[str] = None
+    status: str = "active"
 
 
 class TermResponse(BaseModel):
@@ -31,6 +34,9 @@ class TermResponse(BaseModel):
     translation: Optional[str] = None
     strategy: str
     note: Optional[str] = None
+    scope: str
+    source: Optional[str] = None
+    status: str
 
 
 class GlossaryResponse(BaseModel):
@@ -50,7 +56,10 @@ async def get_global_glossary():
                 original=term.original,
                 translation=term.translation,
                 strategy=term.strategy.value,
-                note=term.note
+                note=term.note,
+                scope="global",
+                source=term.source or "manual",
+                status=term.status or "active",
             )
             for term in glossary.terms
         ]
@@ -72,7 +81,10 @@ async def add_global_term(request: TermRequest):
         original=request.original,
         translation=request.translation,
         strategy=request.strategy,
-        note=request.note
+        note=request.note,
+        scope="global",
+        source="manual",
+        status=request.status,
     )
     glossary.add_term(term)
     _gm.save_global(glossary, DEFAULT_DOMAIN)
@@ -83,7 +95,11 @@ async def add_global_term(request: TermRequest):
             "original": term.original,
             "translation": term.translation,
             "strategy": term.strategy.value,
-            "note": term.note
+            "note": term.note,
+            "scope": term.scope,
+            "source": term.source,
+            "status": term.status,
+            "updated_at": term.updated_at.isoformat(),
         }
     }
 
@@ -93,7 +109,8 @@ async def update_global_term(
     original: str,
     translation: Optional[str] = Query(None),
     strategy: Optional[TranslationStrategy] = Query(None),
-    note: Optional[str] = Query(None)
+    note: Optional[str] = Query(None),
+    status: Optional[str] = Query(None),
 ):
     """更新全局术语"""
     glossary = _gm.load_global(DEFAULT_DOMAIN)
@@ -110,6 +127,11 @@ async def update_global_term(
         existing.strategy = strategy
     if note is not None:
         existing.note = note
+    if status is not None:
+        existing.status = status
+    existing.scope = "global"
+    existing.source = existing.source or "manual"
+    existing.updated_at = datetime.now()
 
     _gm.save_global(glossary, DEFAULT_DOMAIN)
 
@@ -119,7 +141,11 @@ async def update_global_term(
             "original": existing.original,
             "translation": existing.translation,
             "strategy": existing.strategy.value,
-            "note": existing.note
+            "note": existing.note,
+            "scope": "global",
+            "source": existing.source,
+            "status": existing.status,
+            "updated_at": existing.updated_at.isoformat(),
         }
     }
 

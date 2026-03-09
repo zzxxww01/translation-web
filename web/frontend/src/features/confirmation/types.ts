@@ -16,6 +16,66 @@ export interface GlossaryTerm {
   strategy: TranslationStrategy;
   note?: string | null;
   first_occurrence?: string | null;
+  scope?: 'global' | 'project' | string;
+  source?: string | null;
+  status?: 'active' | 'disabled' | string;
+  updated_at?: string | null;
+}
+
+export interface SimilarGlossaryTerm {
+  original: string;
+  translation?: string | null;
+  strategy: TranslationStrategy;
+  scope: 'global' | 'project' | string;
+  note?: string | null;
+  similarity: number;
+}
+
+export interface TermReviewCandidate {
+  term: string;
+  suggested_translation: string;
+  reasons: string[];
+  occurrence_count: number;
+  first_occurrence?: string | null;
+  related_sections: Array<{
+    section_id: string;
+    section_title: string;
+  }>;
+  contexts: string[];
+  similar_terms: SimilarGlossaryTerm[];
+}
+
+export interface TermReviewSectionGroup {
+  section_id: string;
+  section_title: string;
+  candidates: TermReviewCandidate[];
+}
+
+export interface TermReviewPayload {
+  project_id: string;
+  project_title: string;
+  review_required: boolean;
+  generated_at: string;
+  total_candidates: number;
+  sections: TermReviewSectionGroup[];
+}
+
+export interface TermReviewDecision {
+  term: string;
+  action: 'accept' | 'custom' | 'skip';
+  translation?: string | null;
+  note?: string | null;
+  first_occurrence?: string | null;
+}
+
+export interface GlossaryRecommendation extends GlossaryTerm {
+  usage_count: number;
+  section_ids: string[];
+  section_titles: Array<{
+    section_id: string;
+    title: string;
+  }>;
+  recommended_reason: string;
 }
 
 /**

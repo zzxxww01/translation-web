@@ -4,12 +4,15 @@
 {text}
 
 ## 要求
-1. 提取文章中的关键术语（公司名、产品名、技术概念、金融术语等）
+1. 提取真正关键的术语（公司名、产品名、技术概念、金融术语、关键缩写）
 2. 为每个术语建议翻译策略：
    - preserve: 保持英文原文（产品/技术代号如 CoWoS、HBM、EUV、GAA；公司名如 TSMC、ASML、NVIDIA）
-   - first_annotate: 首次出现时翻译并标注原文，后续用中文（如 晶圆代工厂(Foundry)）
-   - translate: 直接翻译成中文（行业术语如 wafer→晶圆、yield→良率、fab→晶圆厂、node→制程节点；金融术语如 capex→资本支出、gross margin→毛利率、revenue→营收、YoY→同比）
-3. 分析文章的写作风格（特别注意：semiAnalysis是否有强观点和判断需要保留）
+   - first_annotate: 首次出现时使用 `中文（English）`，后续直接用中文或常用写法
+   - translate: 直接翻译成中文（行业术语如 wafer -> 晶圆、yield -> 良率、fab -> 晶圆厂、node -> 制程节点；金融术语如 capex -> 资本支出、gross margin -> 毛利率、revenue -> 营收、YoY -> 同比）
+3. 分析文章的写作风格，特别注意：
+   - 是否有强观点和判断需要保留
+   - 默认目标读者大概懂什么、不懂什么
+   - 哪些术语可能需要首次轻注释
 
 请返回 JSON 格式（不要添加 markdown 代码块标记）：
 {{
@@ -18,13 +21,13 @@
       "original": "术语原文",
       "translation": "建议翻译（preserve策略可为null）",
       "strategy": "preserve|first_annotate|translate",
-      "note": "说明（可选）"
+      "note": "上下文含义或首现策略说明（可选）"
     }}
   ],
   "style": {{
     "tone": "professional|casual|academic",
     "formality": "formal|informal",
-    "notes": ["其他风格建议"]
+    "notes": ["风格建议，至少指出如何保留判断力度、避免翻译腔、控制注释密度"]
   }},
   "summary": "文章主题简述（一句话）"
 }}

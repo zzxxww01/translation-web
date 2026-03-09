@@ -166,10 +166,11 @@ async def export_project(
 ):
     try:
         content = pm.export(project_id, include_source=include_source, format=format)
-        file_ext = "html" if format == "html" else "md"
+        filename = pm.get_export_filename(project_id, format=format)
         return {
             "content": content,
-            "path": f"projects/{project_id}/output.{file_ext}",
+            "path": f"projects/{project_id}/{filename}",
+            "filename": filename,
             "format": format,
         }
     except FileNotFoundError:

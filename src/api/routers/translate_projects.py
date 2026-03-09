@@ -115,7 +115,7 @@ async def batch_translate_section(
         if not section:
             raise NotFoundException(detail="Section not found")
 
-        glossary = gm.load_project(project_id)
+        glossary = gm.load_merged(project_id)
         agent = TranslationAgent(llm)
         translated_count = 0
 
@@ -165,7 +165,7 @@ async def translate_full_document(
                 yield f"data: {json.dumps({'error': 'No sections found'})}\n\n"
                 return
 
-            glossary = gm.load_project(project_id)
+            glossary = gm.load_merged(project_id)
             agent = TranslationAgent(llm)
             total_paragraphs = sum(len(section.paragraphs) for section in sections)
             processed_count = 0
@@ -313,6 +313,7 @@ async def translate_with_four_steps(
     batch_service = BatchTranslationService(
         llm_provider=llm,
         project_manager=pm,
+        translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
     )
     progress_queue = asyncio.Queue()
 

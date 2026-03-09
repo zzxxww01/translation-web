@@ -77,7 +77,7 @@ class FullTranslationService {
     onProgress: TranslationProgressCallback,
     onComplete: TranslationCompleteCallback,
     model?: string,
-    method: TranslationMethodType = 'normal'
+    method: TranslationMethodType = 'four-step'
   ): Promise<void> {
     if (this.state.isTranslating && this.state.projectId === projectId) {
       return;

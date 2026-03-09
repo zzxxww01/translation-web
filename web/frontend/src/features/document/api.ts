@@ -6,7 +6,7 @@ import type {
   AnalysisResult,
   SectionAnalysis,
 } from '../../shared/types';
-import { ParagraphStatus } from '../../shared/constants';
+import { ParagraphStatus, REQUEST_TIMEOUTS } from '../../shared/constants';
 
 export interface WordMeaningMessage {
   role: 'user' | 'assistant';
@@ -64,7 +64,11 @@ export const documentApi = {
   ) =>
     apiClient.post<{ id: string; translation: string; status: ParagraphStatus; confirmed?: string | null }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/translate`,
-      { model: model || 'preview', instruction }
+      { model: model || 'preview', instruction },
+      {
+        timeout: REQUEST_TIMEOUTS.PARAGRAPH_TRANSLATE,
+        retry: false,
+      }
     ),
 
   /**
@@ -81,7 +85,11 @@ export const documentApi = {
   ) =>
     apiClient.post<{ answer: string }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/word-meaning`,
-      { word, query, history, model: model || 'preview' }
+      { word, query, history, model: model || 'preview' },
+      {
+        timeout: REQUEST_TIMEOUTS.PARAGRAPH_WORD_MEANING,
+        retry: false,
+      }
     ),
 
   /**
@@ -135,7 +143,7 @@ export const documentApi = {
    * 导出项目
    */
   exportProject: (projectId: string, format: 'markdown' | 'html' = 'markdown') =>
-    apiClient.post<{ content: string; path: string; format: string }>(
+    apiClient.post<{ content: string; path: string; filename: string; format: string }>(
       `/projects/${projectId}/export`,
       undefined,
       { params: { format } }
@@ -167,6 +175,10 @@ export const documentApi = {
         paragraph_ids: paragraphIds,
         instruction,
         model: model || 'preview',
+      },
+      {
+        timeout: REQUEST_TIMEOUTS.PARAGRAPH_BATCH_TRANSLATE,
+        retry: false,
       }
     ),
 

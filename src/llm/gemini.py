@@ -11,18 +11,23 @@ import json
 import time
 import importlib
 import warnings
+from dataclasses import dataclass
 from contextlib import contextmanager
 from contextvars import ContextVar
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
+from threading import Lock
 from typing import Optional, Dict, Any, List
 from types import ModuleType
+
+from src.config import settings
 
 from .base import LLMProvider
 
 
 logger = logging.getLogger(__name__)
 _genai_module: ModuleType | None = None
+_client_env_lock = Lock()
 
 
 def _load_genai_module() -> ModuleType | None:
@@ -81,12 +86,21 @@ MODEL_ALIASES = {
 }
 
 
+@dataclass(frozen=True)
+class GeminiAttempt:
+    api_key: str
+    key_role: str
+    model_name: str
+    uses_backup_model: bool
+
+
 class GeminiProvider(LLMProvider):
     """Google Gemini API Provider"""
 
     def __init__(
         self,
         api_key: Optional[str] = None,
+        backup_api_key: Optional[str] = None,
         model: str = "pro",
         model_type: str = "pro",
     ):
@@ -100,15 +114,16 @@ class GeminiProvider(LLMProvider):
             model_type: 模型类型别名（flash/pro/preview，兼容 reasoning）
         """
         super().__init__()
-        self.api_key = (
-            api_key
-            or os.getenv("GEMINI_API_KEY")
-            or os.getenv("GEMINI_BACKUP_API_KEY")
+        self.api_keys = self._load_api_keys(
+            primary_key=api_key,
+            backup_key=backup_api_key,
         )
+        self.api_key = self.api_keys[0] if self.api_keys else ""
+        self.backup_api_key = self.api_keys[1] if len(self.api_keys) > 1 else ""
 
-        if not self.api_key:
+        if not self.api_keys:
             raise ValueError(
-                "Gemini API key is required. Set GEMINI_API_KEY environment variable or pass api_key parameter."
+                "Gemini API key is required. Set GEMINI_API_KEY or GEMINI_BACKUP_API_KEY environment variable, or pass api_key."
             )
 
         # Request-scoped model selector for async concurrency safety.
@@ -116,6 +131,8 @@ class GeminiProvider(LLMProvider):
             "gemini_active_model_selector",
             default=None,
         )
+        self._client_cache: Dict[str, Any] = {}
+        self._client_cache_lock = Lock()
         self.model_catalog = self._load_model_catalog()
         self.model_type = self._normalize_model_selector(model_type) or "pro"
 
@@ -127,23 +144,24 @@ class GeminiProvider(LLMProvider):
         # Default model selector priority:
         # GEMINI_MODEL (legacy/global selector) > constructor model > model_type
         default_selector = (
-            os.getenv("GEMINI_MODEL")
+            settings.gemini_model
             or model
             or self.model_type
         )
         self.model_name = self.resolve_model_name(default_selector)
 
         # 备用模型（用于 high-demand 错误时回退）
-        backup_selector = os.getenv("GEMINI_BACKUP_MODEL", "flash")
+        backup_selector = settings.gemini_backup_model or os.getenv("GEMINI_BACKUP_MODEL", "flash")
         self.backup_model = self.resolve_model_name(backup_selector)
 
-        self.request_timeout = self._get_env_int("GEMINI_TIMEOUT", 120)
-        self._client = None
+        self.request_timeout = settings.gemini_timeout
+        self.max_attempts = settings.gemini_max_retries or settings.gemini_retry_count or 5
+        self.retry_delay = settings.gemini_retry_delay or 0.5
         if not self._use_rest_transport():
             genai_module = _load_genai_module()
             if genai_module is None:
                 raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
-            self._client = self._create_client(genai_module, self.api_key)
+            self._client_cache[self.api_key] = self._create_client(genai_module, self.api_key)
 
     def switch_model(self, model_type: str) -> None:
         """
@@ -163,12 +181,11 @@ class GeminiProvider(LLMProvider):
         # Client is stateless for model choice; no need to recreate.
 
     def _load_model_catalog(self) -> Dict[str, str]:
-        catalog: Dict[str, str] = {}
-        for model_key, cfg in MODEL_CONFIG.items():
-            env_var = cfg["env_var"]
-            default = cfg["default"]
-            catalog[model_key] = os.getenv(env_var, default)
-        return catalog
+        return {
+            "flash": settings.gemini_flash_model,
+            "pro": settings.gemini_pro_model,
+            "preview": settings.gemini_preview_model,
+        }
 
     def _normalize_model_selector(self, selector: Optional[str]) -> Optional[str]:
         if selector is None:
@@ -199,9 +216,39 @@ class GeminiProvider(LLMProvider):
         finally:
             self._active_model_selector.reset(token)
 
+    def _load_api_keys(
+        self,
+        primary_key: Optional[str] = None,
+        backup_key: Optional[str] = None,
+    ) -> List[str]:
+        keys: List[str] = []
+        if primary_key or backup_key:
+            candidates = [primary_key, backup_key]
+        else:
+            candidates = [
+                settings.gemini_api_key,
+                settings.gemini_backup_api_key,
+                os.getenv("GEMINI_API_KEY"),
+                os.getenv("GEMINI_BACKUP_API_KEY"),
+            ]
+
+        for candidate in candidates:
+            if not candidate:
+                continue
+            normalized = candidate.strip()
+            if normalized and normalized not in keys:
+                keys.append(normalized)
+        return keys
+
     def _get_env_int(self, name: str, default: int) -> int:
         try:
             return int(os.getenv(name, str(default)))
+        except (TypeError, ValueError):
+            return default
+
+    def _get_env_float(self, name: str, default: float) -> float:
+        try:
+            return float(os.getenv(name, str(default)))
         except (TypeError, ValueError):
             return default
 
@@ -225,8 +272,34 @@ class GeminiProvider(LLMProvider):
         try:
             return genai_module.Client(api_key=api_key)
         except TypeError:
-            os.environ["GEMINI_API_KEY"] = api_key
-            return genai_module.Client()
+            with _client_env_lock:
+                previous = os.environ.get("GEMINI_API_KEY")
+                os.environ["GEMINI_API_KEY"] = api_key
+                try:
+                    return genai_module.Client()
+                finally:
+                    if previous is None:
+                        os.environ.pop("GEMINI_API_KEY", None)
+                    else:
+                        os.environ["GEMINI_API_KEY"] = previous
+
+    def _get_client(self, api_key: str):
+        client = self._client_cache.get(api_key)
+        if client is not None:
+            return client
+
+        with self._client_cache_lock:
+            client = self._client_cache.get(api_key)
+            if client is not None:
+                return client
+
+            genai_module = _load_genai_module()
+            if genai_module is None:
+                raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
+
+            client = self._create_client(genai_module, api_key)
+            self._client_cache[api_key] = client
+            return client
 
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
@@ -313,135 +386,233 @@ class GeminiProvider(LLMProvider):
                     text = f"{text} | body={body[:300]}"
         return text
 
+    @staticmethod
+    def _is_auth_error(error_str: str) -> bool:
+        text = error_str.lower()
+        return (
+            "401" in text
+            or "403" in text
+            or "api key not valid" in text
+            or "invalid api key" in text
+            or "permission denied" in text
+            or "unauthenticated" in text
+            or "forbidden" in text
+        )
+
+    @staticmethod
+    def _is_retryable_error(error_str: str) -> bool:
+        text = error_str.lower()
+        return (
+            GeminiProvider._is_auth_error(error_str)
+            or GeminiProvider._is_rate_limited(error_str)
+            or GeminiProvider._is_high_demand_unavailable(error_str)
+            or "quota" in text
+            or "500" in text
+            or "502" in text
+            or "503" in text
+            or "504" in text
+            or "deadline exceeded" in text
+            or "timed out" in text
+            or "timeout" in text
+            or "connection aborted" in text
+            or "connection reset" in text
+            or "temporarily unavailable" in text
+            or "internal server error" in text
+            or "service unavailable" in text
+            or "bad gateway" in text
+        )
+
+    @staticmethod
+    def _is_non_retryable_error(error_str: str) -> bool:
+        text = error_str.lower()
+        return (
+            "invalid argument" in text
+            or "request contains an invalid argument" in text
+            or "unsupported response mime type" in text
+            or "candidate was blocked" in text
+            or "safety" in text and "blocked" in text
+            or "prompt is too long" in text
+            or "too many tokens" in text
+            or "context length" in text
+        )
+
+    def _build_attempt_plan(self, primary_model: str) -> List[GeminiAttempt]:
+        models = [primary_model]
+        if self.backup_model and self.backup_model != primary_model:
+            models.append(self.backup_model)
+
+        attempts: List[GeminiAttempt] = []
+        for model_name in models:
+            for index, api_key in enumerate(self.api_keys):
+                key_role = "primary" if index == 0 else ("backup" if index == 1 else f"backup{index}")
+                attempts.append(
+                    GeminiAttempt(
+                        api_key=api_key,
+                        key_role=key_role,
+                        model_name=model_name,
+                        uses_backup_model=model_name != primary_model,
+                    )
+                )
+        return attempts
+
+    def _retry_delay_for_error(self, error_str: str, retry_index: int) -> float:
+        if self._is_rate_limited(error_str):
+            return min(self.retry_delay * (2 ** retry_index), 16.0)
+        return max(self.retry_delay, 0.2)
+
+    def _generate_once(
+        self,
+        prompt: str,
+        attempt: GeminiAttempt,
+        temperature: float,
+        response_mime_type: Optional[str],
+    ) -> str:
+        if self._use_rest_transport():
+            return self._generate_with_rest(
+                prompt=prompt,
+                api_key=attempt.api_key,
+                timeout=self.request_timeout,
+                temperature=temperature,
+                response_mime_type=response_mime_type,
+                model_override=attempt.model_name,
+            )
+
+        client = self._get_client(attempt.api_key)
+
+        def _call():
+            config = {"temperature": temperature}
+            if response_mime_type:
+                config["response_mime_type"] = response_mime_type
+            resp = client.models.generate_content(
+                model=attempt.model_name,
+                contents=prompt,
+                config=config,
+            )
+            return resp.text
+
+        return self._generate_with_timeout_fn(_call, self.request_timeout)
+
     def generate(
         self,
         prompt: str,
         response_format: Optional[str] = None,
         temperature: float = 0.7,
-        max_retries: int = 5,
+        max_retries: Optional[int] = None,
         model: Optional[str] = None,
         **_kwargs,
     ) -> str:
         """
-        通用文本生成
+        ?????????
 
         Args:
-            prompt: 提示词
-            response_format: 响应格式，"json" 表示期望 JSON 输出
-            temperature: 温度参数
-            max_retries: 最大重试次数
-
+            prompt: ?????            response_format: ????????json" ?????? JSON ???
+            temperature: ??????
+            max_retries: ??????????
         Returns:
-            str: 生成的文本
-        """
+            str: ????????        """
         requested_selector = model or self._active_model_selector.get()
-        current_model = self.resolve_model_name(requested_selector) if requested_selector else self.model_name
-        switched_to_backup_model = False
+        primary_model = self.resolve_model_name(requested_selector) if requested_selector else self.model_name
+        attempt_plan = self._build_attempt_plan(primary_model)
+        max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
         start_time = time.monotonic()
 
         logger.info(
-            "[Gemini] generate start len=%s model=%s backup_model=%s timeout=%ss transport=%s",
+            "[Gemini] generate start len=%s model=%s backup_model=%s keys=%s timeout=%ss transport=%s",
             len(prompt),
-            current_model,
+            primary_model,
             self.backup_model or "-",
+            len(self.api_keys),
             self.request_timeout,
             "rest" if self._use_rest_transport() else "sdk",
         )
 
-        for attempt in range(max_retries):
+        extra_retry_index = 0
+        last_exception: Exception | None = None
+        response_mime_type = "application/json" if response_format == "json" else None
+
+        for attempt_index in range(max_attempts):
+            plan_index = min(attempt_index, len(attempt_plan) - 1)
+            attempt = attempt_plan[plan_index]
             try:
-                response_mime_type = "application/json" if response_format == "json" else None
-                if self._use_rest_transport():
-                    text = self._generate_with_rest(
-                        prompt=prompt,
-                        api_key=self.api_key,
-                        timeout=self.request_timeout,
-                        temperature=temperature,
-                        response_mime_type=response_mime_type,
-                        model_override=current_model,
-                    )
-                else:
-                    if self._client is None:
-                        raise RuntimeError("google-genai is not available.")
-
-                    def _call():
-                        config = {"temperature": temperature}
-                        if response_mime_type:
-                            config["response_mime_type"] = response_mime_type
-                        resp = self._client.models.generate_content(
-                            model=current_model,
-                            contents=prompt,
-                            config=config,
-                        )
-                        return resp.text
-
-                    text = self._generate_with_timeout_fn(_call, self.request_timeout)
-
+                text = self._generate_once(
+                    prompt=prompt,
+                    attempt=attempt,
+                    temperature=temperature,
+                    response_mime_type=response_mime_type,
+                )
                 duration = time.monotonic() - start_time
                 logger.info(
-                    "[Gemini] generate success in %.2fs (model=%s attempt=%s/%s)",
+                    "[Gemini] generate success in %.2fs (model=%s key=%s attempt=%s/%s)",
                     duration,
-                    current_model,
-                    attempt + 1,
-                    max_retries,
+                    attempt.model_name,
+                    attempt.key_role,
+                    attempt_index + 1,
+                    max_attempts,
                 )
                 return text.strip()
-            except FutureTimeoutError:
-                raise TimeoutError(f"Gemini request timed out after {self.request_timeout}s")
             except Exception as exc:
-                error_text = self._error_to_text(exc)
+                if isinstance(exc, FutureTimeoutError):
+                    exc = TimeoutError(f"Gemini request timed out after {self.request_timeout}s")
 
-                # 备用模型回退：high-demand 错误时切换模型
-                if (
-                    self.backup_model
-                    and not switched_to_backup_model
-                    and current_model != self.backup_model
-                    and self._is_high_demand_unavailable(error_text)
-                    and attempt < max_retries - 1
-                ):
-                    switched_to_backup_model = True
-                    current_model = self.backup_model
+                error_text = self._error_to_text(exc)
+                last_exception = exc
+
+                if self._is_non_retryable_error(error_text):
+                    duration = time.monotonic() - start_time
+                    logger.error(
+                        "[Gemini] generate aborted in %.2fs on non-retryable error (model=%s key=%s). err=%s",
+                        duration,
+                        attempt.model_name,
+                        attempt.key_role,
+                        error_text,
+                    )
+                    raise exc
+
+                has_fresh_attempt = plan_index < len(attempt_plan) - 1
+                if has_fresh_attempt and self._is_retryable_error(error_text):
+                    next_attempt = attempt_plan[plan_index + 1]
                     logger.warning(
-                        "[Gemini] model '%s' is overloaded; switch to backup model '%s' (%s/%s).",
-                        self.model_name,
-                        self.backup_model,
-                        attempt + 1,
-                        max_retries,
+                        "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
+                        attempt.model_name,
+                        attempt.key_role,
+                        next_attempt.model_name,
+                        next_attempt.key_role,
+                        attempt_index + 1,
+                        max_attempts,
+                        error_text,
                     )
                     continue
 
-                if attempt < max_retries - 1:
-                    if self._is_rate_limited(error_text):
-                        retry_delay = min(2 ** attempt, 16)
-                        logger.warning(
-                            "[Gemini] rate limited on '%s'; retry in %.1fs (%s/%s). err=%s",
-                            current_model,
-                            retry_delay,
-                            attempt + 1,
-                            max_retries,
-                            error_text,
-                        )
-                        time.sleep(retry_delay)
-                    else:
-                        logger.warning(
-                            "[Gemini] request failed on '%s'; quick retry (%s/%s). err=%s",
-                            current_model,
-                            attempt + 1,
-                            max_retries,
-                            error_text,
-                        )
-                        time.sleep(0.3)
+                if attempt_index < max_attempts - 1 and self._is_retryable_error(error_text):
+                    retry_delay = self._retry_delay_for_error(error_text, extra_retry_index)
+                    extra_retry_index += 1
+                    logger.warning(
+                        "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
+                        attempt.model_name,
+                        attempt.key_role,
+                        retry_delay,
+                        attempt_index + 1,
+                        max_attempts,
+                        error_text,
+                    )
+                    time.sleep(retry_delay)
                     continue
 
                 duration = time.monotonic() - start_time
                 logger.error(
-                    "[Gemini] generate failed in %.2fs after %s attempts (model=%s). err=%s",
+                    "[Gemini] generate failed in %.2fs after %s attempts (model=%s key=%s). err=%s",
                     duration,
-                    max_retries,
-                    current_model,
+                    attempt_index + 1,
+                    attempt.model_name,
+                    attempt.key_role,
                     error_text,
                 )
-                raise
+                raise exc
+
+        if last_exception is not None:
+            raise last_exception
+
+        raise RuntimeError("Gemini generate failed without an exception.")
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
         """
@@ -517,8 +688,15 @@ class GeminiProvider(LLMProvider):
         previous_paragraphs = context.get("previous_paragraphs", [])
         next_preview = context.get("next_preview", [])
         article_title = context.get("article_title")
+        article_theme = context.get("article_theme")
+        article_structure = context.get("article_structure")
         current_section_title = context.get("current_section_title")
         heading_chain = context.get("heading_chain")
+        target_audience = context.get("target_audience")
+        translation_voice = context.get("translation_voice")
+        article_challenges = context.get("article_challenges")
+        style_guide = context.get("style_guide")
+        section_context = context.get("section_context")
         learned_rules = context.get("learned_rules")
         instruction = context.get("instruction")
         previous_translation = context.get("previous_translation")
@@ -530,8 +708,15 @@ class GeminiProvider(LLMProvider):
             previous_paragraphs=previous_paragraphs,
             next_preview=next_preview,
             article_title=article_title,
+            article_theme=article_theme,
+            article_structure=article_structure,
             current_section_title=current_section_title,
             heading_chain=heading_chain,
+            target_audience=target_audience,
+            translation_voice=translation_voice,
+            article_challenges=article_challenges,
+            style_guide=style_guide,
+            section_context=section_context,
             learned_rules=learned_rules,
             instruction=instruction,
             previous_translation=previous_translation,
@@ -670,6 +855,20 @@ class GeminiProvider(LLMProvider):
     ) -> str:
         """构建批量翻译 prompt"""
         # 尝试使用专用的 batch_translation prompt，如果不存在则使用通用模板
+        enhanced_guidelines = list(context.get("guidelines", []))
+        section_role = context.get("section_role")
+        if section_role:
+            enhanced_guidelines.insert(0, f"本章角色：{section_role}")
+        translation_voice = context.get("translation_voice")
+        if translation_voice:
+            enhanced_guidelines.insert(1, f"目标语气：{translation_voice}")
+        target_audience = context.get("target_audience")
+        if target_audience:
+            enhanced_guidelines.insert(2, f"目标读者：{target_audience}")
+        translation_notes = context.get("translation_notes") or []
+        for note in reversed(translation_notes[:4]):
+            enhanced_guidelines.insert(3, f"本章注意：{note}")
+
         try:
             return self.prompt_manager.get(
                 "batch_translation",
@@ -680,8 +879,13 @@ class GeminiProvider(LLMProvider):
                 section_position=context.get("section_position", ""),
                 previous_section=context.get("previous_section_title", ""),
                 next_section=context.get("next_section_title", ""),
+                target_audience=context.get("target_audience", ""),
+                translation_voice=context.get("translation_voice", ""),
+                article_challenges=self._format_challenges_for_prompt(
+                    context.get("article_challenges", [])
+                ),
                 glossary=self._format_glossary_for_prompt(context.get("glossary", [])),
-                guidelines="\n".join(context.get("guidelines", [])),
+                guidelines="\n".join(enhanced_guidelines),
             )
         except KeyError:
             # 如果 batch_translation prompt 不存在，使用简化版本
@@ -689,7 +893,7 @@ class GeminiProvider(LLMProvider):
                 context.get("glossary", [])
             )
             guidelines_text = "\n".join(
-                [f"- {g}" for g in context.get("guidelines", [])]
+                [f"- {g}" for g in enhanced_guidelines]
             )
 
             return f"""你是一位顶级的中英文技术翻译专家。请将以下章节的所有段落翻译成中文。
@@ -703,8 +907,14 @@ class GeminiProvider(LLMProvider):
 ## 文章主题
 {context.get("article_theme", "技术类文章")}
 
+## 目标读者
+{context.get("target_audience", "关注科技产业的中文读者")}
+
 ## 术语参考
 {glossary_text}
+
+## 高风险提示
+{self._format_challenges_for_prompt(context.get("article_challenges", []))}
 
 ## 翻译指南
 {guidelines_text}
@@ -747,8 +957,46 @@ class GeminiProvider(LLMProvider):
                 if isinstance(item, dict):
                     original = item.get("original", item.get("term", ""))
                     translation = item.get("translation", "")
-                    if original and translation:
-                        lines.append(f"- {original} → {translation}")
+                    strategy = item.get("strategy", "")
+                    note = item.get("note") or item.get("context_meaning", "")
+                    first_occurrence_note = item.get("first_occurrence_note", False)
+                    if original and (translation or strategy == "preserve"):
+                        extras = []
+                        if strategy == "preserve":
+                            extras.append("保留英文")
+                        elif strategy == "first_annotate" or first_occurrence_note:
+                            extras.append("首次建议中文加英文括注")
+                        if note:
+                            extras.append(str(note))
+                        suffix = f"（{'；'.join(extras)}）" if extras else ""
+                        rendered_translation = translation or "保留英文"
+                        lines.append(f"- {original} → {rendered_translation}{suffix}")
+
+        return "\n".join(lines) if lines else "无"
+
+    def _format_challenges_for_prompt(self, challenges: Any) -> str:
+        """格式化翻译难点为 prompt 文本。"""
+        if not challenges:
+            return "无"
+
+        lines = []
+        if isinstance(challenges, list):
+            for item in challenges[:6]:
+                if isinstance(item, dict):
+                    location = item.get("location", "")
+                    issue = item.get("issue", "")
+                    suggestion = item.get("suggestion", "")
+                    line = str(issue).strip()
+                    if location:
+                        line = f"[{location}] {line}"
+                    if suggestion:
+                        line = f"{line}；建议：{suggestion}"
+                    if line:
+                        lines.append(f"- {line}")
+                else:
+                    text = str(item).strip()
+                    if text:
+                        lines.append(f"- {text}")
 
         return "\n".join(lines) if lines else "无"
 
@@ -798,6 +1046,7 @@ class GeminiProvider(LLMProvider):
 
 def create_gemini_provider(
     api_key: Optional[str] = None,
+    backup_api_key: Optional[str] = None,
     model: str = "pro",
     model_type: str = "pro",
 ) -> GeminiProvider:
@@ -814,6 +1063,7 @@ def create_gemini_provider(
     """
     return GeminiProvider(
         api_key=api_key,
+        backup_api_key=backup_api_key,
         model=model,
         model_type=model_type,
     )
