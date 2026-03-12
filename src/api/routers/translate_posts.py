@@ -7,11 +7,11 @@ import os
 
 from fastapi import APIRouter
 
+from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException, ServiceUnavailableException
 from ..utils.glossary import build_glossary_context
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
-from src.prompts.prompt_builder import get_prompt_builder
 from .translate_models import (
     GenerateTitleRequest,
     GenerateTitleResponse,
@@ -23,6 +23,7 @@ from .translate_models import (
 
 
 router = APIRouter()
+prompt_manager = get_prompt_manager()
 
 
 def _build_title_prompt(content: str, instruction: str) -> str:
@@ -66,8 +67,8 @@ async def translate_post(request: PostTranslateRequest):
         prompt = request.custom_prompt.replace("{content}", request.content)
         prompt = prompt.replace("{glossary}", glossary_context)
     else:
-        prompt_builder = get_prompt_builder(style="post")
-        prompt = prompt_builder.template.format(
+        prompt = prompt_manager.get(
+            "post_translation",
             text=request.content,
             dynamic_sections=glossary_context.strip(),
         )
