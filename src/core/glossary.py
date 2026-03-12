@@ -53,6 +53,7 @@ class GlossaryManager:
             glossary: 术语表
             domain: 领域名称
         """
+        glossary.version += 1
         file_path = self.global_path / f"{domain}.json"
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
@@ -84,6 +85,7 @@ class GlossaryManager:
             project_id: 项目 ID
             glossary: 术语表
         """
+        glossary.version += 1
         project_dir = self.projects_path / project_id
         project_dir.mkdir(parents=True, exist_ok=True)
 

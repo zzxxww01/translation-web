@@ -229,4 +229,26 @@ export const glossaryApi = {
     const encodedOriginal = encodeURIComponent(original);
     return apiClient.post(`/projects/${projectId}/glossary/terms/${encodedOriginal}/promote`);
   },
+
+  /**
+   * 检查术语是否与项目/全局术语库存在冲突
+   */
+  async checkTermConflict(
+    projectId: string,
+    original: string,
+    translation?: string | null
+  ): Promise<{
+    has_conflict: boolean;
+    conflicts: Array<{
+      scope: string;
+      existing_translation: string | null;
+      existing_strategy: string;
+      existing_note: string | null;
+    }>;
+  }> {
+    return apiClient.post(`/projects/${projectId}/glossary/check-conflict`, {
+      original,
+      translation,
+    });
+  },
 };

@@ -1,10 +1,7 @@
-import { type FC, useState, useRef } from 'react';
-import { Sparkles, Upload, FileText } from 'lucide-react';
-import { Button } from '../../../components/ui';
-import { Input } from '../../../components/ui';
-import { Modal } from '../../../components/ui';
+import { type FC, useRef, useState } from 'react';
+import { FileText, Sparkles, Upload } from 'lucide-react';
+import { Button, Input, Modal, useToast } from '../../../components/ui';
 import { useCreateProject } from '../hooks';
-import { useToast } from '../../../components/ui';
 
 interface NewProjectModalProps {
   isOpen: boolean;
@@ -12,40 +9,67 @@ interface NewProjectModalProps {
   onProjectCreated?: (projectId: string) => void;
 }
 
-export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onProjectCreated }) => {
+const HTML_FILE_RE = /\.(html?|xhtml)$/i;
+const MARKDOWN_FILE_RE = /\.(md|markdown)$/i;
+const SOURCE_FILE_RE = /\.(html?|xhtml|md|markdown)$/i;
+
+const isHtmlFile = (name: string) => HTML_FILE_RE.test(name);
+const isMarkdownFile = (name: string) => MARKDOWN_FILE_RE.test(name);
+const isSupportedSourceFile = (name: string) => SOURCE_FILE_RE.test(name);
+const stripSourceExt = (name: string) => name.replace(SOURCE_FILE_RE, '');
+
+export const NewProjectModal: FC<NewProjectModalProps> = ({
+  isOpen,
+  onClose,
+  onProjectCreated,
+}) => {
   const [name, setName] = useState('');
   const [path, setPath] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [assets, setAssets] = useState<File[]>([]);
   const [assetsFolderName, setAssetsFolderName] = useState('');
   const [isDragging, setIsDragging] = useState(false);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const assetsInputRef = useRef<HTMLInputElement>(null);
+
   const createMutation = useCreateProject();
   const { showError } = useToast();
+
+  const currentFileIsHtml = !!file && isHtmlFile(file.name);
+
+  const resetAssets = () => {
+    setAssets([]);
+    setAssetsFolderName('');
+    if (assetsInputRef.current) {
+      assetsInputRef.current.value = '';
+    }
+  };
 
   const handleFileSelect = (selectedFile: File) => {
     if (!selectedFile) return;
 
-    if (!selectedFile.type.includes('html') && !selectedFile.name.endsWith('.html')) {
-      showError('请选择HTML文件');
+    if (!isSupportedSourceFile(selectedFile.name)) {
+      showError('请选择 HTML 或 Markdown 文件');
       return;
     }
 
     setFile(selectedFile);
-    setAssets([]);
-    setAssetsFolderName('');
+    resetAssets();
 
-    const fileName = selectedFile.name.replace(/\.html$/i, '');
     if (!name) {
-      setName(fileName);
+      setName(stripSourceExt(selectedFile.name));
     }
   };
 
   const handleAssetsSelect = (selectedFiles: FileList | null) => {
     if (!selectedFiles || selectedFiles.length === 0) {
-      setAssets([]);
-      setAssetsFolderName('');
+      resetAssets();
+      return;
+    }
+
+    if (!file || !isHtmlFile(file.name)) {
+      showError('只有 HTML 文件需要选择 *_files 资源目录');
       return;
     }
 
@@ -59,12 +83,10 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
       return;
     }
 
-    if (file) {
-      const stem = file.name.replace(/\.html$/i, '');
-      if (!topFolder.startsWith(stem)) {
-        showError('资源文件夹与HTML文件不匹配');
-        return;
-      }
+    const stem = stripSourceExt(file.name);
+    if (!topFolder.startsWith(stem)) {
+      showError('资源文件夹与 HTML 文件不匹配');
+      return;
     }
 
     setAssets(files);
@@ -121,9 +143,12 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
         const formData = new FormData();
         formData.append('name', name.trim());
         formData.append('file', file);
-        if (assets.length > 0) {
-          assets.forEach(asset => {
-            const relPath = (asset as File & { webkitRelativePath?: string }).webkitRelativePath || asset.name;
+
+        if (currentFileIsHtml && assets.length > 0) {
+          assets.forEach((asset) => {
+            const relPath =
+              (asset as File & { webkitRelativePath?: string }).webkitRelativePath ||
+              asset.name;
             formData.append('assets', asset, relPath);
           });
         }
@@ -150,13 +175,9 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
       setName('');
       setPath('');
       setFile(null);
-      setAssets([]);
-      setAssetsFolderName('');
+      resetAssets();
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
-      }
-      if (assetsInputRef.current) {
-        assetsInputRef.current.value = '';
       }
       onClose();
     }
@@ -165,7 +186,6 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="新建项目" size="md">
       <form onSubmit={handleSubmit} className="space-y-5">
-        {/* 项目名称 */}
         <Input
           label="项目名称"
           placeholder="例如: apple-tsmc-analysis"
@@ -174,13 +194,11 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
           required
         />
 
-        {/* 文件方式 */}
         <div>
           <label className="mb-2 block text-sm font-medium text-text-primary">
-            选择HTML文件
+            选择 HTML 或 Markdown 文件
           </label>
 
-          {/* 拖拽区域 */}
           <div
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
@@ -189,9 +207,10 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
             className={`
               relative flex cursor-pointer flex-col items-center justify-center
               rounded-lg border-2 border-dashed p-8 transition-all
-              ${isDragging
-                ? 'border-primary bg-primary/5'
-                : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
+              ${
+                isDragging
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
               }
               ${file ? 'border-success bg-success/5' : ''}
             `}
@@ -199,7 +218,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
             <input
               ref={fileInputRef}
               type="file"
-              accept=".html,text/html"
+              accept=".html,.htm,.md,.markdown,text/html,text/markdown,text/plain"
               onChange={handleFileInputChange}
               className="hidden"
             />
@@ -208,14 +227,13 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
               <>
                 <FileText className="mb-3 h-12 w-12 text-success" />
                 <p className="font-medium text-text-primary">{file.name}</p>
-                <p className="text-sm text-text-muted">
-                  {(file.size / 1024).toFixed(1)} KB
-                </p>
+                <p className="text-sm text-text-muted">{(file.size / 1024).toFixed(1)} KB</p>
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setFile(null);
+                    resetAssets();
                     if (fileInputRef.current) {
                       fileInputRef.current.value = '';
                     }
@@ -229,70 +247,74 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
               <>
                 <Upload className="mb-3 h-12 w-12 text-text-muted" />
                 <p className="font-medium text-text-primary">
-                  {isDragging ? '释放文件' : '点击或拖拽HTML文件到此处'}
+                  {isDragging ? '释放文件' : '点击或拖拽 HTML/Markdown 文件到此处'}
                 </p>
-                <p className="mt-1 text-sm text-text-muted">支持HTML格式</p>
+                <p className="mt-1 text-sm text-text-muted">支持 HTML 与 Markdown 格式</p>
               </>
             )}
           </div>
         </div>
 
-        {/* 资源目录选择 */}
-        <div>
-          <label className="mb-2 block text-sm font-medium text-text-primary">
-            选择对应*_files资源目录
-          </label>
-          <div
-            onClick={() => assetsInputRef.current?.click()}
-            className={`
-              relative flex cursor-pointer flex-col items-center justify-center
-              rounded-lg border-2 border-dashed p-6 transition-all
-              ${assets.length > 0 ? 'border-success bg-success/5' : 'border-border hover:border-primary/50 hover:bg-bg-secondary'}
-            `}
-          >
-            <input
-              ref={assetsInputRef}
-              type="file"
-              multiple
-              // @ts-expect-error - webkitdirectory is supported by Chromium browsers
-              webkitdirectory=""
-              onChange={handleAssetsInputChange}
-              className="hidden"
-            />
+        {currentFileIsHtml && (
+          <div>
+            <label className="mb-2 block text-sm font-medium text-text-primary">
+              选择对应 *_files 资源目录（可选）
+            </label>
+            <div
+              onClick={() => assetsInputRef.current?.click()}
+              className={`
+                relative flex cursor-pointer flex-col items-center justify-center
+                rounded-lg border-2 border-dashed p-6 transition-all
+                ${
+                  assets.length > 0
+                    ? 'border-success bg-success/5'
+                    : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
+                }
+              `}
+            >
+              <input
+                ref={assetsInputRef}
+                type="file"
+                multiple
+                // @ts-expect-error - webkitdirectory is supported by Chromium browsers
+                webkitdirectory=""
+                onChange={handleAssetsInputChange}
+                className="hidden"
+              />
 
-            {assets.length > 0 ? (
-              <>
-                <FileText className="mb-2 h-8 w-8 text-success" />
-                <p className="font-medium text-text-primary">
-                  {assetsFolderName || '已选择资源目录'}
-                </p>
-                <p className="text-sm text-text-muted">{assets.length} 个文件</p>
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setAssets([]);
-                    setAssetsFolderName('');
-                    if (assetsInputRef.current) {
-                      assetsInputRef.current.value = '';
-                    }
-                  }}
-                  className="mt-2 text-sm text-primary hover:text-primary/80"
-                >
-                  重新选择
-                </button>
-              </>
-            ) : (
-              <>
-                <Upload className="mb-2 h-8 w-8 text-text-muted" />
-                <p className="font-medium text-text-primary">选择 *_files 目录</p>
-                <p className="mt-1 text-sm text-text-muted">包含网页相关资源文件</p>
-              </>
-            )}
+              {assets.length > 0 ? (
+                <>
+                  <FileText className="mb-2 h-8 w-8 text-success" />
+                  <p className="font-medium text-text-primary">
+                    {assetsFolderName || '已选择资源目录'}
+                  </p>
+                  <p className="text-sm text-text-muted">{assets.length} 个文件</p>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      resetAssets();
+                    }}
+                    className="mt-2 text-sm text-primary hover:text-primary/80"
+                  >
+                    重新选择
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Upload className="mb-2 h-8 w-8 text-text-muted" />
+                  <p className="font-medium text-text-primary">选择 *_files 目录</p>
+                  <p className="mt-1 text-sm text-text-muted">用于 HTML 关联图片等资源</p>
+                </>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* 或者使用路径 */}
+        {file && isMarkdownFile(file.name) && (
+          <p className="text-sm text-text-muted">Markdown 文件无需选择 *_files 资源目录。</p>
+        )}
+
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-border" />
@@ -303,12 +325,13 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
         </div>
 
         <Input
-          label="HTML 文件路径"
-          placeholder="例如: ./articles/article.html"
+          label="HTML/Markdown 文件路径"
+          placeholder="例如: ./articles/article.html 或 ./articles/article.md"
           value={path}
           onChange={(e) => {
             setPath(e.target.value);
             setFile(null);
+            resetAssets();
           }}
           disabled={!!file}
         />
@@ -322,11 +345,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({ isOpen, onClose, onP
           >
             取消
           </Button>
-          <Button
-            type="submit"
-            variant="primary"
-            isLoading={createMutation.isPending}
-          >
+          <Button type="submit" variant="primary" isLoading={createMutation.isPending}>
             <Sparkles className="h-4 w-4" />
             创建项目
           </Button>

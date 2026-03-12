@@ -19,6 +19,8 @@ from .projects_models import CreateProjectRequest, ProjectResponse
 
 
 router = APIRouter()
+SUPPORTED_SOURCE_EXTENSIONS = {".html", ".htm", ".md", ".markdown"}
+HTML_SOURCE_EXTENSIONS = {".html", ".htm"}
 
 
 def _build_project_response(meta) -> ProjectResponse:
@@ -80,18 +82,24 @@ async def upload_project(
         return dest_path
 
     try:
-        if not file.filename or not file.filename.endswith(".html"):
-            raise BadRequestException(detail="Please upload an HTML file")
+        if not file.filename:
+            raise BadRequestException(detail="Please upload a source file")
+
+        source_suffix = Path(file.filename).suffix.lower()
+        if source_suffix not in SUPPORTED_SOURCE_EXTENSIONS:
+            raise BadRequestException(detail="Please upload an HTML or Markdown file")
+        is_html_source = source_suffix in HTML_SOURCE_EXTENSIONS
 
         with tempfile.TemporaryDirectory() as temp_dir:
             temp_dir_path = Path(temp_dir)
-            safe_html_name = Path(file.filename).name
-            temp_html_path = temp_dir_path / safe_html_name
+            safe_source_name = Path(file.filename).name
+            temp_source_path = temp_dir_path / safe_source_name
 
-            with open(temp_html_path, "wb") as out_file:
+            with open(temp_source_path, "wb") as out_file:
                 shutil.copyfileobj(file.file, out_file)
 
-            if assets:
+            # Keep existing HTML assets upload behavior unchanged.
+            if assets and is_html_source:
                 for asset in assets:
                     if not asset.filename:
                         continue
@@ -102,11 +110,13 @@ async def upload_project(
                     with open(dest_path, "wb") as out_file:
                         shutil.copyfileobj(asset.file, out_file)
 
-            meta = pm.create(name, str(temp_html_path))
+            meta = pm.create(name, str(temp_source_path))
 
         return _build_project_response(meta)
     except ValueError as e:
         raise BadRequestException(detail=str(e))
+    except BadRequestException:
+        raise
     except Exception as e:
         raise BadRequestException(detail=f"Upload failed: {str(e)}")
     finally:
@@ -173,6 +183,8 @@ async def export_project(
             "filename": filename,
             "format": format,
         }
+    except ValueError as error:
+        raise BadRequestException(detail=str(error))
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -247,6 +259,9 @@ async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
                     "status": p.status.value,
                     "confirmed": p.confirmed,
                     "element_type": p.element_type.value,
+                    "parent_block_id": p.parent_block_id,
+                    "format_recovery_status": p.format_recovery_status,
+                    "format_errors": p.format_errors,
                 }
                 for p in section.paragraphs
             ],

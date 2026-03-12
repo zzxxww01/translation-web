@@ -12,8 +12,6 @@ import time
 import importlib
 import warnings
 from dataclasses import dataclass
-from contextlib import contextmanager
-from contextvars import ContextVar
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from threading import Lock
@@ -126,11 +124,6 @@ class GeminiProvider(LLMProvider):
                 "Gemini API key is required. Set GEMINI_API_KEY or GEMINI_BACKUP_API_KEY environment variable, or pass api_key."
             )
 
-        # Request-scoped model selector for async concurrency safety.
-        self._active_model_selector: ContextVar[Optional[str]] = ContextVar(
-            "gemini_active_model_selector",
-            default=None,
-        )
         self._client_cache: Dict[str, Any] = {}
         self._client_cache_lock = Lock()
         self.model_catalog = self._load_model_catalog()
@@ -163,23 +156,6 @@ class GeminiProvider(LLMProvider):
                 raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
             self._client_cache[self.api_key] = self._create_client(genai_module, self.api_key)
 
-    def switch_model(self, model_type: str) -> None:
-        """
-        切换模型类型
-
-        Args:
-            model_type: 模型类型（flash/pro/preview，兼容 reasoning）
-        """
-        normalized = self._normalize_model_selector(model_type)
-        if normalized not in MODEL_CONFIG:
-            raise ValueError(
-                f"Unknown model type: {model_type}. Available: {list(MODEL_CONFIG.keys())}"
-            )
-
-        self.model_type = normalized
-        self.model_name = self.model_catalog[normalized]
-        # Client is stateless for model choice; no need to recreate.
-
     def _load_model_catalog(self) -> Dict[str, str]:
         return {
             "flash": settings.gemini_flash_model,
@@ -203,18 +179,6 @@ class GeminiProvider(LLMProvider):
             # Allow passing a concrete model id directly for compatibility.
             return selector.strip()
         return self.model_catalog["pro"]
-
-    @contextmanager
-    def use_model(self, model_selector: Optional[str]):
-        """Temporarily route all generation calls to a selected model alias/id."""
-        if not model_selector:
-            yield
-            return
-        token = self._active_model_selector.set(model_selector)
-        try:
-            yield
-        finally:
-            self._active_model_selector.reset(token)
 
     def _load_api_keys(
         self,
@@ -414,8 +378,14 @@ class GeminiProvider(LLMProvider):
             or "deadline exceeded" in text
             or "timed out" in text
             or "timeout" in text
+            or "connecterror" in text
+            or "connection error" in text
             or "connection aborted" in text
             or "connection reset" in text
+            or "max retries exceeded with url" in text
+            or "sslerror" in text
+            or "ssleoferror" in text
+            or "unexpected eof while reading" in text
             or "temporarily unavailable" in text
             or "internal server error" in text
             or "service unavailable" in text
@@ -502,16 +472,18 @@ class GeminiProvider(LLMProvider):
         **_kwargs,
     ) -> str:
         """
-        ?????????
+        生成文本
 
         Args:
-            prompt: ?????            response_format: ????????json" ?????? JSON ???
-            temperature: ??????
-            max_retries: ??????????
+            prompt: 提示词
+            response_format: 响应格式，"json" 表示期望 JSON 输出
+            temperature: 温度参数
+            max_retries: 最大重试次数
+            model: 可选模型覆盖（仅供内部方法指定，如 prescan 使用 flash）
         Returns:
-            str: ????????        """
-        requested_selector = model or self._active_model_selector.get()
-        primary_model = self.resolve_model_name(requested_selector) if requested_selector else self.model_name
+            str: 生成的文本
+        """
+        primary_model = self.resolve_model_name(model) if model else self.model_name
         attempt_plan = self._build_attempt_plan(primary_model)
         max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
         start_time = time.monotonic()
@@ -626,9 +598,23 @@ class GeminiProvider(LLMProvider):
             str: 翻译结果
         """
         context_data = dict(context or {})
-        model_selector = context_data.pop("model", None)
         prompt = self._build_translation_prompt(text, context_data)
-        return self.generate(prompt, temperature=0.5, model=model_selector)
+        return self.generate(prompt, temperature=0.5)
+
+    def retranslate(
+        self,
+        source_text: str,
+        current_translation: str,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Retranslate one paragraph with the dedicated longform retranslation prompt."""
+        context_data = dict(context or {})
+        prompt = self._build_retranslation_prompt(
+            source_text,
+            current_translation,
+            context_data,
+        )
+        return self.generate(prompt, temperature=0.4)
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """
@@ -676,12 +662,11 @@ class GeminiProvider(LLMProvider):
             return []
 
     def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
-        """构建翻译 prompt（增强版：使用新的Prompt构建器）"""
-        # 使用新的Prompt构建器
+        """构建翻译 prompt（统一走 longform paragraph prompt builder）。"""
         from ..prompts.prompt_builder import get_prompt_builder
 
-        # 获取原始版Prompt构建器
-        builder = get_prompt_builder(style="original")
+        prompt_style = self._resolve_translation_prompt_style()
+        builder = get_prompt_builder(style=prompt_style)
 
         # 提取上下文信息
         glossary = context.get("glossary", [])
@@ -700,6 +685,8 @@ class GeminiProvider(LLMProvider):
         learned_rules = context.get("learned_rules")
         instruction = context.get("instruction")
         previous_translation = context.get("previous_translation")
+        format_tokens = context.get("format_tokens", [])
+        term_usage = context.get("term_usage")
 
         # 使用Prompt构建器生成完整Prompt
         prompt = builder.build_prompt(
@@ -720,9 +707,49 @@ class GeminiProvider(LLMProvider):
             learned_rules=learned_rules,
             instruction=instruction,
             previous_translation=previous_translation,
+            format_tokens=format_tokens,
+            term_usage=term_usage,
         )
 
         return prompt
+
+    def _build_retranslation_prompt(
+        self,
+        source_text: str,
+        current_translation: str,
+        context: Dict[str, Any],
+    ) -> str:
+        """构建重译 prompt（统一走 dedicated paragraph retranslation template）。"""
+        from ..prompts.prompt_builder import get_prompt_builder
+
+        builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
+        return builder.build_retranslation_prompt(
+            source_text=source_text,
+            current_translation=current_translation,
+            glossary=context.get("glossary", []),
+            previous_paragraphs=context.get("previous_paragraphs", []),
+            next_preview=context.get("next_preview", []),
+            article_title=context.get("article_title"),
+            article_theme=context.get("article_theme"),
+            article_structure=context.get("article_structure"),
+            current_section_title=context.get("current_section_title"),
+            heading_chain=context.get("heading_chain"),
+            target_audience=context.get("target_audience"),
+            translation_voice=context.get("translation_voice"),
+            article_challenges=context.get("article_challenges"),
+            style_guide=context.get("style_guide"),
+            section_context=context.get("section_context"),
+            learned_rules=context.get("learned_rules"),
+            instruction=context.get("instruction"),
+            format_tokens=context.get("format_tokens", []),
+            term_usage=context.get("term_usage"),
+        )
+
+    def _resolve_translation_prompt_style(self) -> str:
+        style = settings.translation_prompt_style.strip().lower()
+        if style not in {"original", "simplified"}:
+            return "original"
+        return style
 
     def _build_analysis_prompt(self, text: str) -> str:
         """构建分析 prompt"""
@@ -776,75 +803,91 @@ class GeminiProvider(LLMProvider):
         try:
             response = self.generate(prompt, response_format="json", temperature=0.5)
             result = self._parse_json_response(response)
+        except Exception as exc:
+            logger.error("[Gemini] Batch translation failed: %s", exc)
+            raise
 
-            # 验证结果格式
-            if isinstance(result, dict) and "translations" in result:
-                return result["translations"]
-            elif isinstance(result, list):
-                return result
-            else:
-                # 如果返回格式不正确，尝试解析为单个翻译
-                return [{"id": pid, "translation": ""} for pid in paragraph_ids]
+        if isinstance(result, dict) and "translations" in result:
+            return result["translations"]
+        if isinstance(result, list):
+            return result
 
-        except Exception as e:
-            logger.error("[Gemini] Batch translation failed: %s", e)
-            # 返回空翻译列表
-            return [{"id": pid, "translation": ""} for pid in paragraph_ids]
+        raise ValueError("Batch translation response does not satisfy the JSON contract.")
 
     def translate_title(
-        self, title: str, context: Optional[Dict[str, Any]] = None
-    ) -> str:
-        """
-        翻译标题
-
-        Args:
-            title: 原文标题
-            context: 上下文信息
+        self,
+        title: str,
+        context: Optional[Dict[str, Any]] = None,
+        subtitle: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """Translate article title and optional subtitle in one call.
 
         Returns:
-            str: 翻译后的标题
+            dict with keys "title" and optionally "subtitle".
         """
-        prompt = f"""请将以下标题翻译成中文。要求：
-1. 保持标题的简洁性
-2. 准确传达原文含义
-3. 符合中文标题的表达习惯
+        context_lines: List[str] = []
+        if context:
+            if context.get("article_theme"):
+                context_lines.append(f"- Article theme: {context['article_theme']}")
+            if context.get("structure_summary"):
+                context_lines.append(
+                    f"- Structure summary: {context['structure_summary']}"
+                )
+            if context.get("target_audience"):
+                context_lines.append(
+                    f"- Target audience: {context['target_audience']}"
+                )
 
-原文标题：{title}
+        prompt = self.prompt_manager.get(
+            "longform/auxiliary/title_translate.v2",
+            context_block="\n".join(context_lines) if context_lines else "- None",
+            title=title,
+            subtitle=subtitle or "(无)",
+        )
+        raw = self.generate(prompt, temperature=0.3)
 
-请直接输出翻译后的标题，不要添加任何解释："""
+        result: Dict[str, str] = {}
+        for line in raw.strip().splitlines():
+            line = line.strip()
+            if line.startswith("标题:") or line.startswith("标题："):
+                result["title"] = line.split(":", 1)[-1].split("：", 1)[-1].strip()
+            elif line.startswith("副标题:") or line.startswith("副标题："):
+                val = line.split(":", 1)[-1].split("：", 1)[-1].strip()
+                if val:
+                    result["subtitle"] = val
 
-        return self.generate(prompt, temperature=0.3)
-
-    def translate_metadata(
-        self, authors: List[str], date: Optional[str], subtitle: Optional[str]
-    ) -> Dict[str, Any]:
-        """
-        翻译元信息（保留人名原文）
-
-        Args:
-            authors: 作者列表
-            date: 发布日期
-            subtitle: 副标题
-
-        Returns:
-            Dict: 翻译后的元信息
-        """
-        result = {
-            "authors": authors,  # 人名保持原文
-            "date": date,  # 日期保持原样
-            "subtitle": None,
-        }
-
-        # 只翻译副标题
-        if subtitle:
-            prompt = f"""请将以下副标题翻译成中文：
-
-原文：{subtitle}
-
-请直接输出翻译，不要添加任何解释："""
-            result["subtitle"] = self.generate(prompt, temperature=0.3)
+        if not result.get("title"):
+            result["title"] = raw.strip().splitlines()[0].strip()
 
         return result
+
+    def translate_section_title(
+        self,
+        title: str,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Translate a section title with section-aware context."""
+        context_lines: List[str] = []
+        if context:
+            if context.get("article_theme"):
+                context_lines.append(f"- Article theme: {context['article_theme']}")
+            if context.get("context"):
+                context_lines.append(f"- Context: {context['context']}")
+            if context.get("previous_section_title"):
+                context_lines.append(
+                    f"- Previous section: {context['previous_section_title']}"
+                )
+            if context.get("next_section_title"):
+                context_lines.append(
+                    f"- Next section: {context['next_section_title']}"
+                )
+
+        prompt = self.prompt_manager.get(
+            "longform/auxiliary/section_title_translate.v2",
+            context_block="\n".join(context_lines) if context_lines else "- None",
+            title=title,
+        )
+        return self.generate(prompt, temperature=0.3)
 
     def _build_batch_translation_prompt(
         self,
@@ -853,8 +896,7 @@ class GeminiProvider(LLMProvider):
         context: Dict[str, Any],
         paragraph_ids: List[str],
     ) -> str:
-        """构建批量翻译 prompt"""
-        # 尝试使用专用的 batch_translation prompt，如果不存在则使用通用模板
+        """构建批量翻译 prompt。"""
         enhanced_guidelines = list(context.get("guidelines", []))
         section_role = context.get("section_role")
         if section_role:
@@ -868,116 +910,95 @@ class GeminiProvider(LLMProvider):
         translation_notes = context.get("translation_notes") or []
         for note in reversed(translation_notes[:4]):
             enhanced_guidelines.insert(3, f"本章注意：{note}")
+        format_token_rules = self._format_token_rules_for_prompt(
+            context.get("format_tokens", []),
+            context.get("format_token_count", 0),
+        )
+        if format_token_rules:
+            enhanced_guidelines.insert(0, format_token_rules)
 
-        try:
-            return self.prompt_manager.get(
-                "batch_translation",
-                section_title=section_title,
-                section_text=section_text,
-                paragraph_ids=json.dumps(paragraph_ids),
-                article_theme=context.get("article_theme", ""),
-                section_position=context.get("section_position", ""),
-                previous_section=context.get("previous_section_title", ""),
-                next_section=context.get("next_section_title", ""),
-                target_audience=context.get("target_audience", ""),
-                translation_voice=context.get("translation_voice", ""),
-                article_challenges=self._format_challenges_for_prompt(
-                    context.get("article_challenges", [])
-                ),
-                glossary=self._format_glossary_for_prompt(context.get("glossary", [])),
-                guidelines="\n".join(enhanced_guidelines),
-            )
-        except KeyError:
-            # 如果 batch_translation prompt 不存在，使用简化版本
-            glossary_text = self._format_glossary_for_prompt(
-                context.get("glossary", [])
-            )
-            guidelines_text = "\n".join(
-                [f"- {g}" for g in enhanced_guidelines]
-            )
-
-            return f"""你是一位顶级的中英文技术翻译专家。请将以下章节的所有段落翻译成中文。
-
-## 章节信息
-- 标题：{section_title}
-- 在全文中的位置：{context.get("section_position", "未知")}
-- 前一章节：{context.get("previous_section_title", "无")}
-- 后一章节：{context.get("next_section_title", "无")}
-
-## 文章主题
-{context.get("article_theme", "技术类文章")}
-
-## 目标读者
-{context.get("target_audience", "关注科技产业的中文读者")}
-
-## 术语参考
-{glossary_text}
-
-## 高风险提示
-{self._format_challenges_for_prompt(context.get("article_challenges", []))}
-
-## 翻译指南
-{guidelines_text}
-
-## 待翻译内容
-以下是章节中的所有段落，每个段落都有唯一ID：
-
-{section_text}
-
-## 输出要求
-请以 JSON 格式返回翻译结果：
-{{
-    "translations": [
-        {{"id": "段落ID", "translation": "翻译内容"}},
-        ...
-    ]
-}}
-
-段落ID列表：{json.dumps(paragraph_ids)}
-
-请确保：
-1. 每个段落都有对应的翻译
-2. 保持段落之间的逻辑连贯性
-3. 术语使用保持一致
-4. 译文自然流畅，不要有机翻痕迹
-
-请输出 JSON："""
+        return self.prompt_manager.get(
+            "longform/translation/section_batch_translate.v2",
+            section_title=section_title,
+            section_text=section_text,
+            paragraph_ids=json.dumps(paragraph_ids),
+            article_theme=context.get("article_theme", ""),
+            section_position=context.get("section_position", ""),
+            previous_section=context.get("previous_section_title", ""),
+            next_section=context.get("next_section_title", ""),
+            target_audience=context.get("target_audience", ""),
+            translation_voice=context.get("translation_voice", ""),
+            article_challenges=self._format_challenges_for_prompt(
+                context.get("article_challenges", [])
+            ),
+            glossary=self._format_glossary_for_prompt(context.get("glossary", [])),
+            guidelines="\n".join(enhanced_guidelines),
+        )
 
     def _format_glossary_for_prompt(self, glossary: Any) -> str:
-        """格式化术语表为 prompt 格式"""
+        """Render glossary context into prompt-friendly text."""
         if not glossary:
-            return "无"
+            return "None"
 
         lines = []
         if isinstance(glossary, dict):
             for term, trans in glossary.items():
-                lines.append(f"- {term} → {trans}")
+                lines.append(f"- {term} -> {trans}")
         elif isinstance(glossary, list):
-            for item in glossary[:20]:  # 限制数量
-                if isinstance(item, dict):
-                    original = item.get("original", item.get("term", ""))
-                    translation = item.get("translation", "")
-                    strategy = item.get("strategy", "")
-                    note = item.get("note") or item.get("context_meaning", "")
-                    first_occurrence_note = item.get("first_occurrence_note", False)
-                    if original and (translation or strategy == "preserve"):
-                        extras = []
-                        if strategy == "preserve":
-                            extras.append("保留英文")
-                        elif strategy == "first_annotate" or first_occurrence_note:
-                            extras.append("首次建议中文加英文括注")
-                        if note:
-                            extras.append(str(note))
-                        suffix = f"（{'；'.join(extras)}）" if extras else ""
-                        rendered_translation = translation or "保留英文"
-                        lines.append(f"- {original} → {rendered_translation}{suffix}")
+            for item in glossary[:20]:
+                if not isinstance(item, dict):
+                    continue
+                original = item.get("original", item.get("term", ""))
+                translation = item.get("translation", "")
+                strategy = item.get("strategy", "")
+                note = item.get("note") or item.get("context_meaning", "")
+                first_occurrence_note = item.get("first_occurrence_note", False)
+                if not original or not (translation or strategy == "preserve"):
+                    continue
+                extras = []
+                if strategy == "preserve":
+                    extras.append("keep in English")
+                elif strategy == "first_annotate" or first_occurrence_note:
+                    extras.append("annotate on first mention")
+                if note:
+                    extras.append(str(note))
+                suffix = f" ({'; '.join(extras)})" if extras else ""
+                rendered_translation = translation or "keep in English"
+                lines.append(f"- {original} -> {rendered_translation}{suffix}")
 
-        return "\n".join(lines) if lines else "无"
+        return "\n".join(lines) if lines else "None"
+
+    def _format_token_rules_for_prompt(self, tokens: Any, token_count: int = 0) -> str:
+        """Render one compact rule block for hidden formatting tokens."""
+        if not tokens and not token_count:
+            return ""
+
+        lines = [
+            "Hidden token rule: `[[[TYPE_N|...]]]` is a backend control token, not Markdown.",
+            "Keep the wrapper, token type, and token id exactly unchanged.",
+            "Only translate the text after `|`.",
+            "Do not delete, duplicate, renumber, or move tokens to another paragraph.",
+        ]
+        preview_items = []
+        if isinstance(tokens, list):
+            for item in tokens[:6]:
+                if not isinstance(item, dict):
+                    continue
+                token_id = item.get("id", "")
+                token_text = item.get("text", "")
+                token_type = item.get("type", "")
+                if token_id and token_text:
+                    preview_items.append(f"{token_id}({token_type}): {token_text}")
+        if preview_items:
+            lines.append("Tokens in this request: " + "; ".join(preview_items))
+        elif token_count:
+            lines.append(f"This request contains {token_count} hidden format tokens.")
+        return " ".join(lines)
 
     def _format_challenges_for_prompt(self, challenges: Any) -> str:
-        """格式化翻译难点为 prompt 文本。"""
+        """Render article translation risks into prompt-friendly text."""
         if not challenges:
-            return "无"
+            return "None"
 
         lines = []
         if isinstance(challenges, list):
@@ -990,7 +1011,7 @@ class GeminiProvider(LLMProvider):
                     if location:
                         line = f"[{location}] {line}"
                     if suggestion:
-                        line = f"{line}；建议：{suggestion}"
+                        line = f"{line}; suggestion: {suggestion}"
                     if line:
                         lines.append(f"- {line}")
                 else:
@@ -998,7 +1019,7 @@ class GeminiProvider(LLMProvider):
                     if text:
                         lines.append(f"- {text}")
 
-        return "\n".join(lines) if lines else "无"
+        return "\n".join(lines) if lines else "None"
 
     def prescan_section_with_flash(
         self,
@@ -1007,41 +1028,14 @@ class GeminiProvider(LLMProvider):
         section_content: str,
         existing_terms: Dict[str, str]
     ) -> Dict[str, Any]:
-        """
-        使用 Flash 模型进行章节预扫描（方案 C 新增）
-
-        自动切换到 Flash 模型执行预扫描，然后切回原模型
-
-        Args:
-            section_id: 章节 ID
-            section_title: 章节标题
-            section_content: 章节内容
-            existing_terms: 已有术语表
-
-        Returns:
-            Dict: 预扫描结果
-        """
-        # 保存当前模型
-        original_model_type = self.model_type
-        original_model_name = self.model_name
-
-        try:
-            # 切换到 Flash 模型
-            self.switch_model("flash")
-
-            # 执行预扫描
-            result = self.prescan_section(
-                section_id=section_id,
-                section_title=section_title,
-                section_content=section_content,
-                existing_terms=existing_terms
-            )
-
-            return result
-        finally:
-            # 恢复原模型
-            self.model_type = original_model_type
-            self.model_name = original_model_name
+        """使用 Flash 模型进行章节预扫描。"""
+        return self.prescan_section(
+            section_id=section_id,
+            section_title=section_title,
+            section_content=section_content,
+            existing_terms=existing_terms,
+            model="flash",
+        )
 
 
 def create_gemini_provider(

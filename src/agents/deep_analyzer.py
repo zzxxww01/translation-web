@@ -160,8 +160,7 @@ class DeepAnalyzer:
         style = ArticleStyle(
             tone=style_data.get("tone", "professional"),
             target_audience=style_data.get("target_audience", ""),
-            translation_voice=style_data.get("translation_voice", ""),
-            data_density=style_data.get("data_density", "medium")
+            translation_voice=style_data.get("translation_voice", "")
         )
 
         # 解析翻译难点
@@ -293,7 +292,7 @@ class DeepAnalyzer:
             str: 完整的 prompt
         """
         return self.llm.prompt_manager.get(
-            "section_roles_analysis",
+            "longform/analysis/section_role_map.v2",
             article_theme=article_theme,
             structure_summary=structure_summary,
             sections_summary=sections_summary[:10000]  # 限制长度
@@ -332,7 +331,6 @@ class DeepAnalyzer:
             f"  - 语气: {analysis.style.tone}",
             f"  - 目标读者: {analysis.style.target_audience}",
             f"  - 翻译语气: {analysis.style.translation_voice}",
-            f"  - 数据密度: {analysis.style.data_density}",
             "",
             f"## 关键术语 ({len(analysis.terminology)} 个)",
         ])

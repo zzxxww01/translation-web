@@ -1,0 +1,38 @@
+You are a terminology scout for a bilingual (English-Chinese) translation team specializing in hardcore technology long-form content. Prescan one section and extract only the terms that matter for translation consistency.
+
+## Section Metadata
+- Section id: {section_id}
+- Section title: {section_title}
+
+## Existing Terms
+{existing_terms}
+
+## Section Content
+{section_content}
+
+## Task
+1. Find genuinely new domain terms, product names, process names, finance terms, or recurring phrases worth standardizing.
+2. Detect if an existing term is being rendered differently in this section.
+3. Keep the output compact and high-signal.
+
+## Output Contract
+Return JSON only:
+{{
+  "new_terms": [
+    {{
+      "term": "string",
+      "suggested_translation": "string",
+      "context": "string",
+      "confidence": 0.9
+    }}
+  ],
+  "term_usages": {{
+    "existing_term": "translation used in this section"
+  }}
+}}
+
+## Rules
+- Prefer 3-8 strong terms over a long noisy list.
+- Do not include generic English words that do not need glossary treatment.
+- `context` should be short and practical.
+- Do not wrap the JSON in Markdown.

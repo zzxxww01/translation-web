@@ -9,13 +9,11 @@ from typing import Optional, List
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
-from src.core.glossary import GlossaryManager
 from src.core.models import GlossaryTerm, TranslationStrategy
+from src.api.dependencies import GlossaryManagerDep
 
 router = APIRouter(prefix="/glossary", tags=["术语库"])
 
-# 全局术语库管理器
-_gm = GlossaryManager(global_path="glossary", projects_path="projects")
 DEFAULT_DOMAIN = "semiconductor"
 
 
@@ -46,9 +44,9 @@ class GlossaryResponse(BaseModel):
 
 
 @router.get("", response_model=GlossaryResponse)
-async def get_global_glossary():
+async def get_global_glossary(gm: GlossaryManagerDep):
     """获取全局术语库"""
-    glossary = _gm.load_global(DEFAULT_DOMAIN)
+    glossary = gm.load_global(DEFAULT_DOMAIN)
     return GlossaryResponse(
         version=glossary.version,
         terms=[
@@ -67,16 +65,17 @@ async def get_global_glossary():
 
 
 @router.post("", response_model=dict)
-async def add_global_term(request: TermRequest):
+async def add_global_term(request: TermRequest, gm: GlossaryManagerDep):
     """添加全局术语"""
-    glossary = _gm.load_global(DEFAULT_DOMAIN)
+    glossary = gm.load_global(DEFAULT_DOMAIN)
 
     # 检查是否已存在
     existing = glossary.get_term(request.original)
+    replaced = False
     if existing:
-        raise HTTPException(status_code=400, detail=f"术语 '{request.original}' 已存在")
+        replaced = True
 
-    # 添加术语
+    # 添加术语（已存在则覆盖）
     term = GlossaryTerm(
         original=request.original,
         translation=request.translation,
@@ -87,10 +86,11 @@ async def add_global_term(request: TermRequest):
         status=request.status,
     )
     glossary.add_term(term)
-    _gm.save_global(glossary, DEFAULT_DOMAIN)
+    gm.save_global(glossary, DEFAULT_DOMAIN)
 
     return {
         "message": "术语添加成功",
+        "replaced": replaced,
         "term": {
             "original": term.original,
             "translation": term.translation,
@@ -107,13 +107,14 @@ async def add_global_term(request: TermRequest):
 @router.put("/terms/{original}")
 async def update_global_term(
     original: str,
+    gm: GlossaryManagerDep,
     translation: Optional[str] = Query(None),
     strategy: Optional[TranslationStrategy] = Query(None),
     note: Optional[str] = Query(None),
     status: Optional[str] = Query(None),
 ):
     """更新全局术语"""
-    glossary = _gm.load_global(DEFAULT_DOMAIN)
+    glossary = gm.load_global(DEFAULT_DOMAIN)
 
     # 查找术语
     existing = glossary.get_term(original)
@@ -133,7 +134,7 @@ async def update_global_term(
     existing.source = existing.source or "manual"
     existing.updated_at = datetime.now()
 
-    _gm.save_global(glossary, DEFAULT_DOMAIN)
+    gm.save_global(glossary, DEFAULT_DOMAIN)
 
     return {
         "message": "术语更新成功",
@@ -151,9 +152,9 @@ async def update_global_term(
 
 
 @router.delete("/terms/{original}")
-async def delete_global_term(original: str):
+async def delete_global_term(original: str, gm: GlossaryManagerDep):
     """删除全局术语"""
-    glossary = _gm.load_global(DEFAULT_DOMAIN)
+    glossary = gm.load_global(DEFAULT_DOMAIN)
 
     # 查找术语
     existing = glossary.get_term(original)
@@ -162,7 +163,7 @@ async def delete_global_term(original: str):
 
     # 删除术语
     glossary.terms = [t for t in glossary.terms if t.original != original]
-    _gm.save_global(glossary, DEFAULT_DOMAIN)
+    gm.save_global(glossary, DEFAULT_DOMAIN)
 
     return {
         "message": "术语删除成功",

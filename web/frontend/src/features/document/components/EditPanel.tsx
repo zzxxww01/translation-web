@@ -1,9 +1,9 @@
 import { type FC, useEffect, useState, useCallback, useRef, type MouseEvent as ReactMouseEvent } from 'react';
-import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, ChevronDown, Cpu, Maximize2 } from 'lucide-react';
+import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, ChevronDown, Maximize2 } from 'lucide-react';
 import { useDocumentStore } from '../../../shared/stores';
 import { useTranslateParagraph, useConfirmParagraph, useQueryWordMeaning } from '../hooks';
 import { Button } from '../../../components/ui';
-import { ParagraphStatus, MODEL_OPTIONS, DEFAULT_MODEL } from '../../../shared/constants';
+import { ParagraphStatus } from '../../../shared/constants';
 import type { Paragraph } from '../../../shared/types';
 
 interface EditPanelProps {
@@ -177,8 +177,6 @@ export const EditPanel: FC<EditPanelProps> = ({
   const [showRetranslateOptions, setShowRetranslateOptions] = useState(false);
   const [customRetranslateInstruction, setCustomRetranslateInstruction] = useState('');
 
-  // 选中的翻译模型
-  const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL);
   const sourceSelectionContainerRef = useRef<HTMLDivElement | null>(null);
   const assistantBottomRef = useRef<HTMLDivElement | null>(null);
   const lastSelectedWordRef = useRef('');
@@ -252,7 +250,6 @@ export const EditPanel: FC<EditPanelProps> = ({
         sectionId,
         paragraphId: paragraph.id,
         instruction,
-        model: selectedModel,
       });
       setTranslation(result.translation);
       const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
@@ -265,7 +262,7 @@ export const EditPanel: FC<EditPanelProps> = ({
     } finally {
       setIsTranslating(false);
     }
-  }, [projectId, sectionId, paragraph, selectedModel, translateMutation, updateParagraph]);
+  }, [projectId, sectionId, paragraph, translateMutation, updateParagraph]);
 
   const handleCustomRetranslate = useCallback(() => {
     const instruction = customRetranslateInstruction.trim();
@@ -371,7 +368,6 @@ export const EditPanel: FC<EditPanelProps> = ({
           word: trimmedWord,
           query: trimmedQuestion,
           history: nextHistory,
-          model: selectedModel,
         });
 
         setAssistantMessages([
@@ -382,7 +378,7 @@ export const EditPanel: FC<EditPanelProps> = ({
         setIsAskingWordMeaning(false);
       }
     },
-    [projectId, sectionId, paragraph, queryWordMeaningMutation, selectedModel]
+    [projectId, sectionId, paragraph, queryWordMeaningMutation]
   );
 
   const handleLookupWordMeaning = useCallback(() => {
@@ -632,22 +628,6 @@ export const EditPanel: FC<EditPanelProps> = ({
                   <span>Ctrl+T 翻译</span>
                   <span>Ctrl+Enter 确认</span>
                   <span>Esc 关闭</span>
-                </div>
-                {/* 模型选择 */}
-                <div className="flex items-center gap-2">
-                  <Cpu className="h-4 w-4 text-text-muted" />
-                  <select
-                    value={selectedModel}
-                    onChange={(e) => setSelectedModel(e.target.value)}
-                    className="rounded-md border border-border bg-bg-secondary px-2 py-1 text-sm"
-                    disabled={isLoading}
-                  >
-                    {MODEL_OPTIONS.map((model) => (
-                      <option key={model.id} value={model.id}>
-                        {model.name}
-                      </option>
-                    ))}
-                  </select>
                 </div>
               </div>
 

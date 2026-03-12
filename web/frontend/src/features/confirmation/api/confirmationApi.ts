@@ -202,7 +202,6 @@ export const confirmationApi = {
     paragraph_id: string;
     translation: string;
     instruction: string;
-    model: string;
     created_at: string;
   }> {
     return apiClient.post<{
@@ -210,7 +209,6 @@ export const confirmationApi = {
       paragraph_id: string;
       translation: string;
       instruction: string;
-      model: string;
       created_at: string;
     }>(
       `/projects/${projectId}/paragraph/${paragraphId}/retranslate`,

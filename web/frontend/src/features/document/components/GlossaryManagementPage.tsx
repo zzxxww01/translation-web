@@ -128,6 +128,34 @@ export function GlossaryManagementPage({
 
     setIsSaving(true);
     try {
+      // 新增术语时检查冲突
+      if (!editingTerm && activeScope === 'project') {
+        try {
+          const conflictResult = await glossaryApi.checkTermConflict(
+            projectId,
+            editor.original,
+            editor.translation,
+          );
+          if (conflictResult.has_conflict) {
+            const conflictMessages = conflictResult.conflicts
+              .map(
+                (c) =>
+                  `${c.scope === 'global' ? '全局' : '项目'}术语库已有: "${c.existing_translation}"`,
+              )
+              .join('\n');
+            const proceed = window.confirm(
+              `术语 "${editor.original}" 存在冲突:\n${conflictMessages}\n\n是否仍要保存？`,
+            );
+            if (!proceed) {
+              setIsSaving(false);
+              return;
+            }
+          }
+        } catch {
+          // 冲突检查失败不阻塞保存
+        }
+      }
+
       if (activeScope === 'project') {
         if (editingTerm) {
           await glossaryApi.updateProjectTerm(projectId, editingTerm.original, editor);

@@ -95,7 +95,7 @@ async def update_glossary_term(
     original: str,
     gm: GlossaryManagerDep,
     translation: Optional[str] = None,
-    strategy: str = "translate",
+    strategy: Optional[str] = None,
     note: Optional[str] = None,
     status: Optional[str] = None,
 ):
@@ -147,6 +147,41 @@ async def delete_glossary_term(
         return {"message": "Term deleted", "original": original_decoded}
     except NotFoundException:
         raise
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+
+
+class CheckConflictRequest(BaseModel):
+    original: str
+    translation: Optional[str] = None
+
+
+@router.post("/projects/{project_id}/glossary/check-conflict")
+async def check_term_conflict(
+    project_id: str,
+    request: CheckConflictRequest,
+    gm: GlossaryManagerDep,
+):
+    """检查术语是否与项目/全局术语库存在冲突"""
+    try:
+        project_glossary = gm.load_project(project_id)
+        global_glossary = gm.load_global("semiconductor")
+
+        conflicts = []
+        for scope, glossary in [("project", project_glossary), ("global", global_glossary)]:
+            existing = glossary.get_term(request.original)
+            if existing and existing.translation != request.translation:
+                conflicts.append({
+                    "scope": scope,
+                    "existing_translation": existing.translation,
+                    "existing_strategy": existing.strategy.value,
+                    "existing_note": existing.note,
+                })
+
+        return {
+            "has_conflict": len(conflicts) > 0,
+            "conflicts": conflicts,
+        }
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 

@@ -13,12 +13,11 @@ class CreateProjectRequest(BaseModel):
 
 
 class TranslateRequest(BaseModel):
-    model: str = "pro"
     instruction: Optional[str] = None
 
 
 class DirectTranslateRequest(BaseModel):
-    model: str = "pro"
+    pass
 
 
 class ConfirmRequest(BaseModel):
@@ -34,7 +33,6 @@ class WordMeaningRequest(BaseModel):
     word: str
     query: str
     history: List[WordMeaningMessage] = Field(default_factory=list)
-    model: str = "pro"
 
 
 class WordMeaningResponse(BaseModel):
@@ -51,7 +49,6 @@ class UpdateParagraphRequest(BaseModel):
 class BatchTranslateRequest(BaseModel):
     paragraph_ids: List[str]
     instruction: Optional[str] = None
-    model: str = "pro"
 
 
 class BatchTranslateResponse(BaseModel):

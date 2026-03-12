@@ -22,8 +22,18 @@ from .models import (
     ProjectMeta, ProjectStatus, ProjectProgress, ProjectConfig,
     Section, Paragraph, ParagraphStatus, ElementType, Glossary
 )
-from .parser import HTMLParser
 from .glossary import GlossaryManager
+from .format_tokens import (
+    assign_span_ids,
+    group_paragraphs_by_parent_block,
+    reconstruct_block_tokenized_text,
+    require_valid_reconstruction,
+    restore_markdown_from_tokenized,
+    sorted_block_groups,
+    tokenize_text,
+)
+from .markdown_project_parser import MarkdownProjectParser
+from ..html2md import convert_html_to_markdown_text
 
 
 class ProjectManager:
@@ -38,7 +48,7 @@ class ProjectManager:
         """
         self.projects_path = Path(projects_path)
         self.projects_path.mkdir(parents=True, exist_ok=True)
-        self.parser = HTMLParser()
+        self.markdown_parser = MarkdownProjectParser()
         self.glossary_manager = GlossaryManager(projects_path=projects_path)
         self._section_locks: OrderedDict[str, threading.RLock] = OrderedDict()
         self._section_locks_guard = threading.Lock()
@@ -98,6 +108,49 @@ class ProjectManager:
             return f"> {text}"
         return text
 
+    def _group_section_blocks(self, section: Section) -> list[list[Paragraph]]:
+        return sorted_block_groups(section.paragraphs)
+
+    def _render_source_block_markdown(self, paragraphs: list[Paragraph]) -> str:
+        first = paragraphs[0]
+        if first.parent_block_markdown:
+            return first.parent_block_markdown
+        if first.source_html and first.element_type in {ElementType.IMAGE, ElementType.TABLE}:
+            return first.source_html
+        if first.inline_elements:
+            tokenized = tokenize_text(first.source, first.inline_elements)
+            return restore_markdown_from_tokenized(tokenized, first.inline_elements)
+        return self._format_markdown_line(first.element_type, first.source)
+
+    def _render_block_markdown(
+        self,
+        paragraphs: list[Paragraph],
+        fallback_to_source: bool = True,
+    ) -> str:
+        first = paragraphs[0]
+        block_type = first.parent_block_type or first.element_type
+
+        if block_type == ElementType.IMAGE:
+            return first.parent_block_markdown or first.source_html or f"![image]({first.source})"
+        if block_type == ElementType.TABLE:
+            return first.parent_block_markdown or first.parent_source_html or first.source
+        if block_type == ElementType.CODE:
+            text = reconstruct_block_tokenized_text(
+                paragraphs,
+                fallback_to_source=fallback_to_source,
+            ).text
+            return f"```\n{text}\n```"
+
+        payload = require_valid_reconstruction(paragraphs, fallback_to_source=fallback_to_source)
+        if first.parent_inline_elements:
+            text = restore_markdown_from_tokenized(
+                payload.tokenized_text or payload.text,
+                first.parent_inline_elements,
+            )
+        else:
+            text = payload.text
+        return self._format_markdown_line(block_type, text)
+
     def _preferred_export_title(self, meta: ProjectMeta) -> str:
         """Use translated article title for exports when available."""
         preferred_title = (meta.title_translation or meta.title or "").strip()
@@ -109,13 +162,19 @@ class ProjectManager:
         sanitized = re.sub(r"\s+", " ", sanitized).strip().rstrip(".")
         return sanitized or fallback
 
+    def _normalize_export_format(self, format: str = "markdown") -> str:
+        normalized = (format or "markdown").strip().lower()
+        if normalized != "markdown":
+            raise ValueError("Only markdown export is supported")
+        return normalized
+
     def _build_export_filename(self, meta: ProjectMeta, format: str = "markdown") -> str:
-        file_ext = "html" if format == "html" else "md"
+        self._normalize_export_format(format)
         title = self._sanitize_export_filename_component(
             self._preferred_export_title(meta),
             meta.id,
         )
-        return f"{title}_zn.{file_ext}"
+        return f"{title}_zn.md"
 
     def get_export_filename(self, project_id: str, format: str = "markdown") -> str:
         """Return the user-facing export filename for a project."""
@@ -157,29 +216,41 @@ class ProjectManager:
         sections_dir = project_dir / "sections"
         sections_dir.mkdir()
 
-        # 复制 HTML 文件
-        html_source = Path(html_path)
-        if not html_source.exists():
-            raise FileNotFoundError(f"HTML file not found: {html_path}")
+        source_path = Path(html_path)
+        if not source_path.exists():
+            raise FileNotFoundError(f"Source file not found: {html_path}")
 
-        shutil.copy(html_source, project_dir / "source.html")
+        source_suffix = source_path.suffix.lower()
+        is_html_source = source_suffix in {".html", ".htm"}
+        is_markdown_source = source_suffix in {".md", ".markdown"}
+        if not (is_html_source or is_markdown_source):
+            raise ValueError("Only .html/.htm/.md/.markdown files are supported")
 
-        # 解析 HTML
-        parser = HTMLParser(
+        markdown_parser = MarkdownProjectParser(
             max_paragraph_length=(config.max_paragraph_length if config else 800),
             merge_short_paragraphs=(config.merge_short_paragraphs if config else True),
-            download_images=True,
-            images_dir=str(project_dir / "images"),
         )
-        title, sections, metadata = parser.parse_file(html_path)
+        source_file = "source.md"
+        metadata = None
+
+        if is_html_source:
+            # 保持现有 HTML 链路不变：先转 Markdown，再进入解析与翻译流程
+            shutil.copy(source_path, project_dir / "source.html")
+            source_file = "source.html"
+            source_md, metadata = convert_html_to_markdown_text(
+                html_path=html_path,
+                output_dir=project_dir,
+                copy_images=True,
+            )
+        else:
+            # Markdown 输入：跳过 HTML 转换，直接进入解析流程
+            source_md = source_path.read_text(encoding="utf-8-sig")
+
+        parsed_project = markdown_parser.parse(source_md, metadata=metadata)
+        title = parsed_project.title
+        sections = parsed_project.sections
 
         # 保存完整原文 Markdown
-        source_md = parser.to_markdown(
-            sections,
-            include_translation=False,
-            title=title,
-            metadata=metadata,
-        )
         self._write_text(project_dir / "source.md", source_md)
 
         # 保存各章节
@@ -190,7 +261,7 @@ class ProjectManager:
         meta = ProjectMeta(
             id=project_id,
             title=title,
-            source_file="source.html",
+            source_file=source_file,
             status=ProjectStatus.CREATED,
             config=config or ProjectConfig(),
             metadata=metadata,
@@ -201,7 +272,8 @@ class ProjectManager:
         self._save_meta(project_id, meta)
 
         # Copy related assets directory (e.g., *_files from saved HTML)
-        self._copy_assets_directory(html_source, project_dir)
+        if is_html_source:
+            self._copy_assets_directory(source_path, project_dir)
 
         # 初始化项目术语表（合并全局术语表）
         self.glossary_manager.save_project(project_id, Glossary())
@@ -364,6 +436,8 @@ class ProjectManager:
         section_id: str,
         paragraph_id: str,
         translation: Optional[str] = None,
+        tokenized_text: Optional[str] = None,
+        format_issues: Optional[List[str]] = None,
         status: Optional[ParagraphStatus] = None,
         model: str = "manual"
     ) -> Paragraph:
@@ -415,9 +489,31 @@ class ProjectManager:
 
         # 更新译文
         if translation is not None:
-            paragraph.add_translation(translation, model)
+            latest_record = paragraph.latest_translation(non_empty=True)
+            resolved_tokenized = tokenized_text
+            resolved_issues = list(format_issues or [])
+            if (
+                resolved_tokenized is None
+                and latest_record is not None
+                and latest_record.text == translation
+            ):
+                resolved_tokenized = latest_record.tokenized_text
+                if not resolved_issues:
+                    resolved_issues = list(latest_record.format_issues)
+
+            paragraph.add_translation(
+                translation,
+                model,
+                tokenized_text=resolved_tokenized,
+                format_issues=resolved_issues,
+            )
             if should_confirm:
-                paragraph.confirm(translation, model)
+                paragraph.confirm(
+                    translation,
+                    model,
+                    tokenized_text=resolved_tokenized,
+                    format_issues=resolved_issues,
+                )
 
         # 更新状态
         if status is not None:
@@ -435,6 +531,8 @@ class ProjectManager:
         section_id: str,
         paragraph_id: str,
         translation: Optional[str] = None,
+        tokenized_text: Optional[str] = None,
+        format_issues: Optional[List[str]] = None,
         status: Optional[ParagraphStatus] = None,
         model: str = "manual"
     ) -> Paragraph:
@@ -446,6 +544,8 @@ class ProjectManager:
                 section_id,
                 paragraph_id,
                 translation=translation,
+                tokenized_text=tokenized_text,
+                format_issues=format_issues,
                 status=status,
                 model=model,
             )
@@ -490,26 +590,16 @@ class ProjectManager:
         Args:
             project_id: 项目 ID
             include_source: 是否包含原文
-            format: 输出格式 ('markdown' 或 'html')
+            format: 输出格式 ('markdown')
 
         Returns:
             str: 导出内容
         """
-        if format == 'html':
-            return self.export_html(project_id)
+        self._normalize_export_format(format)
         return self.export_markdown(project_id, include_source)
 
     def export_markdown(self, project_id: str, include_source: bool = False) -> str:
-        """
-        导出项目为 Markdown
-
-        Args:
-            project_id: 项目 ID
-            include_source: 是否包含原文
-
-        Returns:
-            str: Markdown 内容
-        """
+        """Export one project as markdown using parent-block reconstruction."""
         meta = self.get(project_id)
         sections = self.get_sections(project_id)
 
@@ -522,32 +612,13 @@ class ProjectManager:
             lines.append(f"## {title}")
             lines.append("")
 
-            for p in section.paragraphs:
-                # 图片使用原始 HTML
-                if p.element_type == ElementType.IMAGE:
-                    if p.source_html:
-                        lines.append(p.source_html)
-                    lines.append("")
-                    continue
-
-                # 使用确认的译文，如果没有则使用原文
-                text = self._best_translation_text(p, fallback_to_source=True)
-
-                if include_source and p.confirmed:
-                    lines.append(f"<!-- {p.source} -->")
-
-                # 根据元素类型格式化
-                if p.element_type == ElementType.CODE:
-                    lines.append(f"```\n{text}\n```")
-                elif p.element_type == ElementType.TABLE:
-                    # 表格使用原始 HTML（Markdown 表格支持有限）
-                    if p.source_html:
-                        lines.append(p.source_html)
-                    else:
-                        lines.append(text)
-                else:
-                    lines.append(self._format_markdown_line(p.element_type, text))
-
+            for block in self._group_section_blocks(section):
+                if include_source and any(p.confirmed for p in block):
+                    source_comment = block[0].parent_block_plain_text or " ".join(
+                        p.source for p in block
+                    )
+                    lines.append(f"<!-- {source_comment} -->")
+                lines.append(self._render_block_markdown(block, fallback_to_source=True))
                 lines.append("")
 
         content = "\n".join(lines)
@@ -556,99 +627,6 @@ class ProjectManager:
         output_path = self._project_dir(project_id) / self._build_export_filename(
             meta,
             format="markdown",
-        )
-        self._write_text(output_path, content)
-
-        return content
-
-    def export_html(self, project_id: str) -> str:
-        """
-        导出项目为 HTML（保持原始格式）
-
-        Args:
-            project_id: 项目 ID
-
-        Returns:
-            str: HTML 内容
-        """
-        meta = self.get(project_id)
-        sections = self.get_sections(project_id)
-
-        # 读取原始 HTML 作为模板
-        source_html_path = self._project_dir(project_id) / "source.html"
-        if source_html_path.exists():
-            with open(source_html_path, "r", encoding="utf-8") as f:
-                original_html = f.read()
-
-            # 尝试从原始 HTML 中提取 body 内容
-            from bs4 import BeautifulSoup
-            soup = BeautifulSoup(original_html, 'lxml')
-
-            # 构建新的 HTML
-            html_parts = []
-
-            # 保留 head
-            head = soup.find('head')
-            if head:
-                html_parts.append(str(head))
-            else:
-                html_parts.append(
-                    '<head><meta charset="utf-8"><title>'
-                    + self._preferred_export_title(meta)
-                    + '</title></head>'
-                )
-
-            html_parts.append('<body>')
-
-            # 添加标题
-            html_parts.append(f'<h1>{self._preferred_export_title(meta)}</h1>')
-
-            # 遍历章节和段落
-            for section in sections:
-                # 章节标题
-                title = section.title_translation or section.title
-                html_parts.append(f'<h2>{title}</h2>')
-
-                for p in section.paragraphs:
-                    # 图片使用原始 HTML
-                    if p.element_type == ElementType.IMAGE and p.source_html:
-                        html_parts.append(p.source_html)
-                        continue
-
-                    # 表格使用原始 HTML
-                    if p.element_type == ElementType.TABLE and p.source_html:
-                        html_parts.append(p.source_html)
-                        continue
-
-                    # 获取要显示的文本
-                    text = self._best_translation_text(p, fallback_to_source=True)
-
-                    # 根据元素类型生成 HTML
-                    if p.element_type == ElementType.H3:
-                        html_parts.append(f'<h3>{text}</h3>')
-                    elif p.element_type == ElementType.H4:
-                        html_parts.append(f'<h4>{text}</h4>')
-                    elif p.element_type == ElementType.LI:
-                        html_parts.append(f'<li>{text}</li>')
-                    elif p.element_type == ElementType.BLOCKQUOTE:
-                        html_parts.append(f'<blockquote>{text}</blockquote>')
-                    elif p.element_type == ElementType.CODE:
-                        html_parts.append(f'<pre><code>{text}</code></pre>')
-                    else:
-                        # 普通段落
-                        html_parts.append(f'<p>{text}</p>')
-
-            html_parts.append('</body>')
-
-            content = '<!DOCTYPE html>\n<html>' + '\n'.join(html_parts) + '</html>'
-        else:
-            # 如果没有原始 HTML，回退到 Markdown
-            content = self.export_markdown(project_id, include_source=False)
-
-        # 保存到文件
-        output_path = self._project_dir(project_id) / self._build_export_filename(
-            meta,
-            format="html",
         )
         self._write_text(output_path, content)
 
@@ -715,8 +693,8 @@ class ProjectManager:
 
         # 保存原文
         source_lines = []
-        for p in section.paragraphs:
-            source_lines.append(self._format_markdown_line(p.element_type, p.source))
+        for block in self._group_section_blocks(section):
+            source_lines.append(self._render_source_block_markdown(block))
             source_lines.append("")
 
         self._write_text(section_dir / "source.md", "\n".join(source_lines))
@@ -754,7 +732,30 @@ class ProjectManager:
             paragraphs = []
             for p in data.get("paragraphs", []):
                 try:
-                    paragraphs.append(Paragraph(**p))
+                    paragraph = Paragraph(**p)
+                    if paragraph.inline_elements and not paragraph.expected_tokens:
+                        paragraph.expected_tokens = [
+                            element.span_id
+                            for element in assign_span_ids(paragraph.inline_elements)
+                            if element.span_id
+                        ]
+                    if paragraph.inline_elements and not paragraph.parent_inline_elements:
+                        paragraph.parent_inline_elements = assign_span_ids(
+                            paragraph.inline_elements
+                        )
+                    if paragraph.parent_block_id is None:
+                        paragraph.parent_block_id = paragraph.id
+                    if paragraph.parent_block_index is None:
+                        paragraph.parent_block_index = paragraph.index
+                    if paragraph.parent_block_type is None:
+                        paragraph.parent_block_type = paragraph.element_type
+                    if paragraph.parent_block_plain_text is None:
+                        paragraph.parent_block_plain_text = paragraph.source
+                    if paragraph.parent_block_markdown is None:
+                        paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
+                    if paragraph.segment_end is None:
+                        paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
+                    paragraphs.append(paragraph)
                 except (TypeError, ValueError):
                     # 跳过损坏的段落数据
                     continue

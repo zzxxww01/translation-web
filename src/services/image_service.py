@@ -1,19 +1,31 @@
-"""
-Image Processing Service - 图片处理服务
+"""Image processing and caption translation helpers."""
 
-提供图片下载、本地化和图注翻译的完整服务
-"""
+from __future__ import annotations
 
-from typing import List, Dict, Any, Optional
 import asyncio
+import html
+import re
+import threading
+from typing import Any, Dict, List, Optional
 
-from ..core.models import Paragraph, Section
-from ..core.image_processor import ImageProcessor, CaptionTranslator, ImageInfo
+from ..core.format_tokens import (
+    apply_translation_payload,
+    build_translation_input,
+    build_translation_payload,
+    format_token_context,
+)
+from ..core.image_processor import CaptionTranslator, ImageProcessor
+from ..core.models import ElementType, Paragraph, Section
 from ..llm.base import LLMProvider
 
 
+IMAGE_PATTERN = re.compile(
+    r'!\[(?P<alt>[^\]]*)\]\((?P<src><[^>]+>|[^)"]+?)(?:\s+"(?P<title>[^"]*)")?\)$'
+)
+
+
 class ImageProcessingService:
-    """图片处理服务"""
+    """Download images, localize URLs, and translate captions."""
 
     def __init__(
         self,
@@ -21,14 +33,6 @@ class ImageProcessingService:
         llm_provider: Optional[LLMProvider] = None,
         base_dir: str = "projects",
     ):
-        """
-        初始化图片处理服务
-
-        Args:
-            project_id: 项目ID
-            llm_provider: LLM Provider（用于图注翻译）
-            base_dir: 项目基础目录
-        """
         self.project_id = project_id
         self.processor = ImageProcessor(project_id, base_dir)
         self.caption_translator = (
@@ -41,58 +45,36 @@ class ImageProcessingService:
         download_images: bool = True,
         translate_captions: bool = True,
     ) -> Dict[str, Any]:
-        """
-        处理所有章节中的图片
-
-        Args:
-            sections: 章节列表
-            download_images: 是否下载图片
-            translate_captions: 是否翻译图注
-
-        Returns:
-            {
-                "total_images": int,
-                "downloaded": int,
-                "failed": int,
-                "images": {...}
-            }
-        """
+        """Process all images and captions across the given sections."""
         all_images = []
 
-        # 1. 扫描所有段落，提取图片
         for section in sections:
             for paragraph in section.paragraphs:
-                images = self.processor.extract_images_from_markdown(paragraph.source)
+                markdown_source = self._image_markdown_source(paragraph)
+                if not markdown_source:
+                    continue
+                images = self.processor.extract_images_from_markdown(markdown_source)
                 all_images.extend(images)
 
-        # 2. 下载图片（如果需要）
         if download_images and all_images:
-            # 收集所有URL
-            urls = list(set(img_info.original_url for _, img_info in all_images))
-
-            # 并发下载
+            urls = list({img_info.original_url for _, img_info in all_images})
             tasks = [self.processor.download_image(url) for url in urls]
             await asyncio.gather(*tasks, return_exceptions=True)
 
-        # 3. 更新段落中的图片URL
         for section in sections:
             for paragraph in section.paragraphs:
-                if "![" in paragraph.source:
-                    # 替换图片URL
-                    updated_source = self.processor.replace_image_urls(paragraph.source)
-                    paragraph.source = updated_source
+                markdown_source = self._image_markdown_source(paragraph)
+                if markdown_source:
+                    updated_markdown = self.processor.replace_image_urls(markdown_source)
+                    self._apply_image_markdown(paragraph, updated_markdown)
 
-                # 4. 检测并翻译图注（如果是下一段）
-                if translate_captions and self.caption_translator:
-                    if self.caption_translator.detect_caption(paragraph.source):
-                        caption_translation = self.caption_translator.translate_caption(
-                            paragraph.source
-                        )
-                        # 记录翻译
-                        paragraph.add_translation(caption_translation, "auto_caption")
-                        paragraph.confirm(caption_translation, "auto_caption")
+                if (
+                    translate_captions
+                    and self.caption_translator
+                    and self.caption_translator.detect_caption(paragraph.source)
+                ):
+                    self._translate_caption(paragraph)
 
-        # 5. 统计
         downloaded = sum(
             1
             for img_info in self.processor.images.values()
@@ -111,18 +93,77 @@ class ImageProcessingService:
             "images": self.processor.images,
         }
 
-    def get_image_report(self) -> Dict[str, Any]:
-        """
-        获取图片处理报告
+    def _image_markdown_source(self, paragraph: Paragraph) -> str:
+        block_type = paragraph.parent_block_type or paragraph.element_type
+        if block_type == ElementType.IMAGE:
+            return paragraph.parent_block_markdown or f"![image]({paragraph.source})"
+        if "![" in paragraph.source:
+            return paragraph.source
+        return ""
 
-        Returns:
-            {
-                "total": int,
-                "success": int,
-                "failed": int,
-                "details": [...]
-            }
-        """
+    def _apply_image_markdown(self, paragraph: Paragraph, markdown_text: str) -> None:
+        block_type = paragraph.parent_block_type or paragraph.element_type
+        if block_type != ElementType.IMAGE:
+            paragraph.source = markdown_text
+            return
+
+        match = IMAGE_PATTERN.match(markdown_text.strip())
+        if not match:
+            paragraph.parent_block_markdown = markdown_text
+            paragraph.source = markdown_text
+            return
+
+        src = match.group("src").strip()
+        if src.startswith("<") and src.endswith(">"):
+            src = src[1:-1].strip()
+        alt = (match.group("alt") or "").strip()
+        title = (match.group("title") or "").strip()
+
+        paragraph.source = src
+        paragraph.parent_block_markdown = markdown_text.strip()
+        paragraph.source_html = self._build_image_html(src, alt, title)
+        paragraph.parent_source_html = paragraph.source_html
+
+    def _build_image_html(self, src: str, alt: str, title: str) -> str:
+        attrs = [f'src="{html.escape(src, quote=True)}"']
+        if alt:
+            attrs.append(f'alt="{html.escape(alt, quote=True)}"')
+        if title:
+            attrs.append(f'title="{html.escape(title, quote=True)}"')
+        return f"<img {' '.join(attrs)} />"
+
+    def _translate_caption(self, paragraph: Paragraph) -> None:
+        if self.caption_translator is None:
+            return
+
+        if paragraph.inline_elements and getattr(self.caption_translator, "llm", None):
+            prepared = build_translation_input(paragraph)
+            translated = self.caption_translator.llm.translate(
+                prepared.tokenized_text or prepared.text,
+                context={
+                    "instruction": (
+                        "Translate this image caption into concise Chinese. "
+                        "Preserve hidden format tokens exactly."
+                    ),
+                    "format_tokens": format_token_context(paragraph),
+                },
+            )
+            payload = build_translation_payload(paragraph, translated)
+            apply_translation_payload(paragraph, payload, "auto_caption")
+            paragraph.confirm(
+                payload.text,
+                "auto_caption",
+                tokenized_text=payload.tokenized_text,
+                format_issues=payload.format_issues,
+            )
+            return
+
+        caption_translation = self.caption_translator.translate_caption(paragraph.source)
+        paragraph.add_translation(caption_translation, "auto_caption")
+        paragraph.confirm(caption_translation, "auto_caption")
+
+    def get_image_report(self) -> Dict[str, Any]:
+        """Return one summary of image download results."""
         details = []
         for url, img_info in self.processor.images.items():
             details.append(
@@ -151,9 +192,8 @@ class ImageProcessingService:
         }
 
 
-# 同步版本（用于非async环境）
 class SyncImageProcessingService:
-    """同步版图片处理服务"""
+    """Synchronous wrapper for image processing."""
 
     def __init__(
         self,
@@ -169,20 +209,32 @@ class SyncImageProcessingService:
         download_images: bool = True,
         translate_captions: bool = True,
     ) -> Dict[str, Any]:
-        """同步处理章节中的图片"""
-        # 在新的事件循环中运行
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        coroutine = self.async_service.process_sections(
+            sections,
+            download_images,
+            translate_captions,
+        )
         try:
-            result = loop.run_until_complete(
-                self.async_service.process_sections(
-                    sections, download_images, translate_captions
-                )
-            )
-            return result
-        finally:
-            loop.close()
+            asyncio.get_running_loop()
+        except RuntimeError:
+            return asyncio.run(coroutine)
+
+        result: Dict[str, Any] = {}
+        error: Optional[BaseException] = None
+
+        def _runner() -> None:
+            nonlocal result, error
+            try:
+                result = asyncio.run(coroutine)
+            except BaseException as exc:  # pragma: no cover - thread bridge
+                error = exc
+
+        worker = threading.Thread(target=_runner, daemon=True)
+        worker.start()
+        worker.join()
+        if error is not None:
+            raise error
+        return result
 
     def get_image_report(self) -> Dict[str, Any]:
-        """获取图片处理报告"""
         return self.async_service.get_image_report()

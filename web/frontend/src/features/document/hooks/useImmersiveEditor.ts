@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useToast } from '../../../components/ui';
-import { DEFAULT_MODEL, ParagraphStatus } from '../../../shared/constants';
+import { ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
 import { documentApi } from '../api';
@@ -15,7 +15,6 @@ type ErrorStateMap = Record<string, string | null>;
 
 interface RetranslateTask {
   paragraphId: string;
-  model?: string;
   instruction?: string;
 }
 
@@ -328,7 +327,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       const task = retranslateQueueRef.current.shift();
       if (!task) break;
 
-      const { paragraphId, instruction, model } = task;
+      const { paragraphId, instruction } = task;
       const paragraph = paragraphsByIdRef.current[paragraphId];
       if (!paragraph) continue;
 
@@ -349,8 +348,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           projectId,
           sectionId,
           paragraphId,
-          instruction,
-          model
+          instruction
         );
         const translation = result.translation ?? '';
         const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
@@ -400,14 +398,14 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   }, [processRetranslateQueue]);
 
   const queueRetranslate = useCallback(
-    (paragraphId: string, model = DEFAULT_MODEL, instruction?: string) => {
+    (paragraphId: string, instruction?: string) => {
       const isAlreadyQueued = retranslateQueueRef.current.some(task => task.paragraphId === paragraphId);
       if (isAlreadyQueued || retranslatingMapRef.current[paragraphId]) {
         return;
       }
 
       cancelPendingSave(paragraphId);
-      retranslateQueueRef.current.push({ paragraphId, model, instruction });
+      retranslateQueueRef.current.push({ paragraphId, instruction });
       processRetranslateQueueRef.current();
     },
     [cancelPendingSave]
@@ -448,7 +446,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   );
 
   const batchRetranslate = useCallback(
-    async (model = DEFAULT_MODEL, instruction?: string) => {
+    async (instruction?: string) => {
       if (selectedIds.size === 0) return;
 
       const ids = Array.from(selectedIds);
@@ -473,8 +471,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           projectId,
           sectionId,
           ids,
-          instruction,
-          model
+          instruction
         );
 
         result.translations.forEach(({ id, translation, status, confirmed }) => {

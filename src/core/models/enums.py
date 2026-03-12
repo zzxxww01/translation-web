@@ -46,20 +46,3 @@ class ElementType(str, Enum):
     TABLE = "table"
     IMAGE = "image"
 
-
-class RuleType(str, Enum):
-    """翻译规则类型"""
-
-    HARD_RULE = "hard_rule"  # 必须遵守（术语、准确性）
-    SOFT_PREFERENCE = "soft_preference"  # 风格偏好
-    STRICT_PROHIBITION = "strict_prohibition"  # 绝对禁止
-
-
-class ErrorCategory(str, Enum):
-    """错误分类（基于 MQM 标准）"""
-
-    TERMINOLOGY = "terminology"  # 术语错误
-    ACCURACY = "accuracy"  # 语义偏差
-    FLUENCY = "fluency"  # 翻译腔
-    STYLE = "style"  # 语气/风格
-    LOCALE = "locale"  # 数字/单位格式

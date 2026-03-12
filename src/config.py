@@ -54,6 +54,7 @@ class Settings(BaseSettings):
     default_context_window: int = 5
     default_translation_style: str = "natural_professional"
     default_segment_level: str = "h2"
+    translation_prompt_style: str = "original"
 
     # Logging
     log_level: str = "INFO"

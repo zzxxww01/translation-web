@@ -49,7 +49,7 @@ class PostOptimizeResponse(BaseModel):
 
 
 class FullTranslateRequest(BaseModel):
-    model: str = "pro"
+    pass
 
 
 class ResolveConflictRequest(BaseModel):

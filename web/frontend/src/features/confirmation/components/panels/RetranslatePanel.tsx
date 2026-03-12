@@ -1,15 +1,15 @@
 /**
  * 重新翻译面板组件 - 简化增强版
- * 提供快捷指令、自定义指令输入和基础模型选择功能
+ * 提供快捷指令和自定义指令输入功能
  */
 
 import { useState, useCallback } from 'react';
-import { RefreshCw, Zap, Briefcase, MessageCircle, X, Cpu } from 'lucide-react';
+import { RefreshCw, Zap, Briefcase, MessageCircle, X } from 'lucide-react';
 import { Button } from '../../../../components/ui';
 import { cn } from '../../../../shared/utils';
 
 interface RetranslatePanelProps {
-  onRetranslate: (instruction: string, model?: string) => Promise<void>;
+  onRetranslate: (instruction: string) => Promise<void>;
   isRetranslating?: boolean;
   className?: string;
 }
@@ -20,12 +20,6 @@ interface QuickInstruction {
   description: string;
   icon: React.ReactNode;
   instruction: string;
-}
-
-interface ModelOption {
-  id: string;
-  name: string;
-  description: string;
 }
 
 const quickInstructions: QuickInstruction[] = [
@@ -52,24 +46,6 @@ const quickInstructions: QuickInstruction[] = [
   },
 ];
 
-const modelOptions: ModelOption[] = [
-  {
-    id: 'preview',
-    name: 'Gemini Preview',
-    description: '前沿能力模型，质量优先',
-  },
-  {
-    id: 'pro',
-    name: 'Gemini Pro',
-    description: '通用主力模型，质量与速度平衡',
-  },
-  {
-    id: 'flash',
-    name: 'Gemini Flash',
-    description: '快速低成本模型，适合批量场景',
-  },
-];
-
 export function RetranslatePanel({
   onRetranslate,
   isRetranslating = false,
@@ -77,19 +53,17 @@ export function RetranslatePanel({
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('preview');
-  const [showModelSelection, setShowModelSelection] = useState(false);
 
   const handleQuickInstruction = useCallback(
     async (instruction: QuickInstruction) => {
       setSelectedInstruction(instruction.id);
       try {
-        await onRetranslate(instruction.instruction, selectedModel);
+        await onRetranslate(instruction.instruction);
       } finally {
         setSelectedInstruction(null);
       }
     },
-    [onRetranslate, selectedModel]
+    [onRetranslate]
   );
 
   const handleCustomInstruction = useCallback(async () => {
@@ -97,74 +71,19 @@ export function RetranslatePanel({
       return;
     }
     try {
-      await onRetranslate(customInstruction.trim(), selectedModel);
+      await onRetranslate(customInstruction.trim());
     } finally {
       setCustomInstruction('');
     }
-  }, [customInstruction, onRetranslate, selectedModel]);
-
-  const selectedModelInfo = modelOptions.find(m => m.id === selectedModel);
+  }, [customInstruction, onRetranslate]);
 
   return (
     <div className={cn('rounded-xl border border-border bg-bg-tertiary/50 p-4', className)}>
       {/* 标题 */}
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <RefreshCw className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold text-text-primary">重新翻译</h3>
-        </div>
-        <button
-          onClick={() => setShowModelSelection(!showModelSelection)}
-          className="text-xs text-primary hover:text-primary/80 transition-colors"
-        >
-          {showModelSelection ? '隐藏模型' : '选择模型'}
-        </button>
+      <div className="mb-3 flex items-center gap-2">
+        <RefreshCw className="h-4 w-4 text-primary" />
+        <h3 className="text-sm font-semibold text-text-primary">重新翻译</h3>
       </div>
-
-      {/* 模型选择面板 */}
-      {showModelSelection && (
-        <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-          <div className="mb-2 text-xs font-medium text-gray-700 flex items-center gap-2">
-            <Cpu className="h-3 w-3" />
-            翻译模型选择
-          </div>
-          <div className="space-y-2">
-            {modelOptions.map((model) => (
-              <label
-                key={model.id}
-                className={cn(
-                  'flex items-center gap-2 p-2 rounded border cursor-pointer transition-colors',
-                  selectedModel === model.id
-                    ? 'border-blue-300 bg-blue-50'
-                    : 'border-gray-200 hover:border-gray-300'
-                )}
-              >
-                <input
-                  type="radio"
-                  name="model"
-                  value={model.id}
-                  checked={selectedModel === model.id}
-                  onChange={(e) => setSelectedModel(e.target.value)}
-                  className="text-blue-600"
-                />
-                <div>
-                  <div className="text-sm font-medium text-gray-900">
-                    {model.name}
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    {model.description}
-                  </div>
-                </div>
-              </label>
-            ))}
-          </div>
-          {selectedModelInfo && (
-            <div className="mt-2 p-2 bg-blue-50 rounded text-xs text-blue-700">
-              当前选择: <strong>{selectedModelInfo.name}</strong> - {selectedModelInfo.description}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* 快捷指令 */}
       <div className="mb-3">
@@ -249,13 +168,7 @@ export function RetranslatePanel({
       {/* 提示信息 */}
       <div className="mt-3 rounded-lg bg-info/10 p-2">
         <p className="text-[10px] text-info">
-          💡 重新翻译会生成一个新的翻译版本，您可以在版本列表中选择最合适的译文。
-          {selectedModelInfo && (
-            <>
-              <br />
-              🤖 当前模型: <strong>{selectedModelInfo.name}</strong>
-            </>
-          )}
+          重新翻译会生成一个新的翻译版本，您可以在版本列表中选择最合适的译文。
         </p>
       </div>
     </div>

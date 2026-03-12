@@ -44,7 +44,6 @@ interface TranslationState {
   projectId: string | null;
   progress: { current: number; total: number } | null;
   controller: AbortController | null;
-  model: string | null;
   method: TranslationMethodType | null;
   currentStep: string | null;
   isPaused: boolean;
@@ -57,7 +56,6 @@ class FullTranslationService {
     projectId: null,
     progress: null,
     controller: null,
-    model: null,
     method: null,
     currentStep: null,
     isPaused: false,
@@ -76,7 +74,6 @@ class FullTranslationService {
     projectId: string,
     onProgress: TranslationProgressCallback,
     onComplete: TranslationCompleteCallback,
-    model?: string,
     method: TranslationMethodType = 'four-step'
   ): Promise<void> {
     if (this.state.isTranslating && this.state.projectId === projectId) {
@@ -90,7 +87,6 @@ class FullTranslationService {
     this.state.isTranslating = true;
     this.state.projectId = projectId;
     this.state.progress = { current: 0, total: 0 };
-    this.state.model = model || null;
     this.state.method = method;
     this.state.currentStep = null;
     this.state.isPaused = false;
@@ -112,7 +108,7 @@ class FullTranslationService {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ model: model || 'preview' }),
+        body: JSON.stringify({}),
         signal: controller.signal,
       });
 
@@ -315,7 +311,7 @@ class FullTranslationService {
     term: string,
     resolution: { chosenTranslation: string; applyToAll: boolean }
   ): Promise<void> {
-    const response = await fetch(`/api/projects/${projectId}/resolve-conflict`, {
+    const response = await fetch(`/api/projects/${projectId}/resolve-conflict-live`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -367,10 +363,6 @@ class FullTranslationService {
 
   getProgress(): { current: number; total: number } | null {
     return this.state.progress;
-  }
-
-  getModel(): string | null {
-    return this.state.model;
   }
 
   getMethod(): TranslationMethodType | null {

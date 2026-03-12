@@ -1,0 +1,38 @@
+You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Map each section to its role in the article's overall argument.
+
+## Article Theme
+{article_theme}
+
+## Structure Summary
+{structure_summary}
+
+## Section Summaries
+{sections_summary}
+
+## Task
+For every section, explain:
+- what job it does in the article,
+- how it connects to the previous section,
+- how it sets up the next section,
+- which points a translator must not weaken,
+- and which translation risks are specific to that section.
+
+## Output Contract
+Return JSON only:
+{{
+  "section_roles": {{
+    "section_id": {{
+      "role_in_article": "string",
+      "relation_to_previous": "string",
+      "relation_to_next": "string",
+      "key_points": ["string"],
+      "translation_notes": ["string"]
+    }}
+  }}
+}}
+
+## Rules
+- Cover every section id that appears in the summaries.
+- Keep `key_points` focused on the section's argument payload, not generic topic labels.
+- Keep `translation_notes` operational: terminology, tone preservation, annotation strategy, or likely translationese risks.
+- Do not wrap the JSON in Markdown.

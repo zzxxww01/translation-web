@@ -99,32 +99,6 @@ export const REQUEST_TIMEOUTS = {
   PARAGRAPH_WORD_MEANING: 120000,
 } as const;
 
-export interface ModelOption {
-  id: string;
-  name: string;
-  description: string;
-}
-
-export const MODEL_OPTIONS: ModelOption[] = [
-  {
-    id: 'preview',
-    name: 'Gemini Preview',
-    description: '前沿能力模型，质量优先',
-  },
-  {
-    id: 'pro',
-    name: 'Gemini Pro',
-    description: '通用主力模型，质量与速度平衡',
-  },
-  {
-    id: 'flash',
-    name: 'Gemini Flash',
-    description: '低成本快速模型，适合批量任务',
-  },
-];
-
-export const DEFAULT_MODEL = 'preview';
-
 export enum TranslationMethod {
   NORMAL = 'normal',
   FOUR_STEP = 'four-step',

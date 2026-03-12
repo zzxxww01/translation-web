@@ -128,14 +128,12 @@ export function useTranslateParagraph() {
       sectionId,
       paragraphId,
       instruction,
-      model,
     }: {
       projectId: string;
       sectionId: string;
       paragraphId: string;
       instruction?: string;
-      model?: string;
-    }) => documentApi.translateParagraph(projectId, sectionId, paragraphId, instruction, model),
+    }) => documentApi.translateParagraph(projectId, sectionId, paragraphId, instruction),
     onSuccess: (result, variables) => {
       const updates = {
         translation: result.translation,
@@ -182,7 +180,6 @@ export function useQueryWordMeaning() {
       word,
       query,
       history,
-      model,
     }: {
       projectId: string;
       sectionId: string;
@@ -190,7 +187,6 @@ export function useQueryWordMeaning() {
       word: string;
       query: string;
       history?: WordMeaningMessage[];
-      model?: string;
     }) =>
       documentApi.queryWordMeaning(
         projectId,
@@ -198,8 +194,7 @@ export function useQueryWordMeaning() {
         paragraphId,
         word,
         query,
-        history ?? [],
-        model
+        history ?? []
       ),
     onError: error => {
       handleError(error, '词义查询失败');
@@ -363,7 +358,6 @@ export function useFullTranslate() {
       message?: string;
     }) => void,
     onComplete: () => void,
-    model?: string,
     method: TranslationMethodType = 'four-step'
   ) => {
     // 开始翻译，设置初始状态
@@ -372,7 +366,6 @@ export function useFullTranslate() {
     setFullTranslateProgress({ current: 0, total: 0 });
 
     try {
-      // 使用单例服务启动翻译
       await fullTranslationService.startTranslation(
         projectId,
         (data) => {
@@ -428,7 +421,6 @@ export function useFullTranslate() {
           endFullTranslate();
           onComplete();
         },
-        model,
         method
       );
     } catch (error) {
@@ -446,11 +438,9 @@ export function useFullTranslate() {
   return {
     startTranslation,
     stopTranslation,
-    // 获取当前翻译状态
     isTranslating: () => fullTranslationService.isTranslating(),
     getProjectId: () => fullTranslationService.getProjectId(),
     getProgress: () => fullTranslationService.getProgress(),
-    getModel: () => fullTranslationService.getModel(),
     getMethod: () => fullTranslationService.getMethod(),
   };
 }

@@ -16,6 +16,7 @@ from typing import List, Optional, Callable, Dict, Any
 import asyncio
 import logging
 
+from ..core.format_tokens import TranslationPayload, build_translation_input, build_translation_payload, format_token_context
 from ..core.models import (
     Section, Paragraph,
     ArticleAnalysis, SectionUnderstanding,
@@ -86,20 +87,12 @@ class FourStepTranslator:
 
         # 调用 LLM 预扫描（使用 Flash 模型）
         try:
-            if hasattr(self.llm, "prescan_section_with_flash"):
-                result = self.llm.prescan_section_with_flash(
-                    section_id=section.section_id,
-                    section_title=section.title,
-                    section_content=section_content,
-                    existing_terms=existing_terms
-                )
-            else:
-                result = self.llm.prescan_section(
-                    section_id=section.section_id,
-                    section_title=section.title,
-                    section_content=section_content,
-                    existing_terms=existing_terms
-                )
+            result = self.llm.prescan_section_with_flash(
+                section_id=section.section_id,
+                section_title=section.title,
+                section_content=section_content,
+                existing_terms=existing_terms
+            )
         except Exception as e:
             # 预扫描失败不阻塞翻译流程
             logging.warning(f"Section prescan failed: {e}")
@@ -172,19 +165,21 @@ class FourStepTranslator:
         # Step 2: 初译（混合模式）
         if len(section.paragraphs) <= self.paragraph_threshold:
             # 短章节：整体翻译
-            translations = self._translate_batch(
+            translation_outputs = self._translate_batch(
                 section, section.paragraphs, understanding, all_sections
             )
         else:
             # 长章节：分批翻译
-            translations = []
+            translation_outputs = []
             batches = self._split_into_batches(section.paragraphs)
             for batch_idx, batch in enumerate(batches):
-                batch_translations = self._translate_batch(
+                batch_outputs = self._translate_batch(
                     section, batch, understanding, all_sections,
                     batch_index=batch_idx
                 )
-                translations.extend(batch_translations)
+                translation_outputs.extend(batch_outputs)
+
+        translations = [item.text for item in translation_outputs]
 
         draft_translations = list(translations)
 
@@ -222,12 +217,13 @@ class FourStepTranslator:
 
         # Step 4: 润色（如果需要）
         if not reflection.is_excellent and reflection.issues:
-            translations = self._step_refine(
+            translation_outputs = self._step_refine(
                 section,
-                translations,
+                translation_outputs,
                 reflection,
                 understanding,
             )
+            translations = [item.text for item in translation_outputs]
 
         revised_translations = list(translations)
 
@@ -265,6 +261,14 @@ class FourStepTranslator:
             translations=translations,
             draft_translations=draft_translations,
             revised_translations=revised_translations,
+            translation_outputs=[
+                {
+                    "text": item.text,
+                    "tokenized_text": item.tokenized_text,
+                    "format_issues": list(item.format_issues),
+                }
+                for item in translation_outputs
+            ],
             understanding=understanding,
             reflection=reflection,
             assessment=assessment
@@ -312,17 +316,17 @@ class FourStepTranslator:
         context.section_understanding = understanding
 
         # 翻译
-        translation = self._translate_single_paragraph(paragraph, context)
+        payload = self._translate_single_paragraph(paragraph, context)
 
         # 记录
         self.context_manager.record_translation(
             section.section_id,
             paragraph.source,
-            translation,
-            self._extract_terms_used(paragraph.source, translation)
+            payload.text,
+            self._extract_terms_used(paragraph.source, payload.text)
         )
 
-        return translation
+        return payload.text
 
     # ============ Step 1: 理解 ============
 
@@ -331,50 +335,17 @@ class FourStepTranslator:
         section: Section,
         all_sections: List[Section]
     ) -> SectionUnderstanding:
-        """Step 1: 理解章节（优化：优先使用预分析结果）"""
-        # 优化：优先使用 Phase 0 中预分析的章节角色
+        """Step 1: 从预分析结果中读取章节理解。"""
         if (
             self.context_manager.article_analysis and
             self.context_manager.article_analysis.section_roles and
             section.section_id in self.context_manager.article_analysis.section_roles
         ):
-            # 直接使用预分析结果，跳过 LLM 调用
             return self.context_manager.article_analysis.section_roles[section.section_id]
 
-        # 回退：如果没有预分析结果，调用 LLM 分析
-        section_content = "\n\n".join([p.source for p in section.paragraphs])
-
-        # 获取全文分析信息
-        article_theme = ""
-        structure_summary = ""
-        if self.context_manager.article_analysis:
-            article_theme = self.context_manager.article_analysis.theme
-            structure_summary = self.context_manager.article_analysis.structure_summary
-
-        # 获取章节标题列表
-        section_titles = [s.title for s in all_sections]
-
-        # 获取当前章节索引
-        current_index = next(
-            (i for i, s in enumerate(all_sections) if s.section_id == section.section_id),
-            0
-        )
-
-        # 调用 LLM 理解章节
-        result = self.llm.understand_section(
-            section_content=section_content,
-            article_theme=article_theme,
-            structure_summary=structure_summary,
-            section_titles=section_titles,
-            current_index=current_index
-        )
-
-        return SectionUnderstanding(
-            role_in_article=result.get("role_in_article", ""),
-            relation_to_previous=result.get("relation_to_previous", ""),
-            relation_to_next=result.get("relation_to_next", ""),
-            key_points=result.get("key_points", []),
-            translation_notes=result.get("translation_notes", [])
+        raise RuntimeError(
+            "Missing precomputed section role context. "
+            "The unified longform flow now requires deep analysis before four-step translation."
         )
 
     # ============ Step 2: 初译 ============
@@ -386,9 +357,9 @@ class FourStepTranslator:
         understanding: SectionUnderstanding,
         all_sections: List[Section],
         batch_index: int = 0
-    ) -> List[str]:
+    ) -> List[TranslationPayload]:
         """Step 2: 批量初译"""
-        translations = []
+        translations: List[TranslationPayload] = []
 
         for i, paragraph in enumerate(paragraphs):
             # 计算全局索引
@@ -401,15 +372,15 @@ class FourStepTranslator:
             context.section_understanding = understanding
 
             # 翻译单个段落
-            translation = self._translate_single_paragraph(paragraph, context)
-            translations.append(translation)
+            payload = self._translate_single_paragraph(paragraph, context)
+            translations.append(payload)
 
             # 临时记录到上下文（用于后续段落的前文参考）
             self.context_manager.record_translation(
                 section.section_id,
                 paragraph.source,
-                translation,
-                self._extract_terms_used(paragraph.source, translation)
+                payload.text,
+                self._extract_terms_used(paragraph.source, payload.text)
             )
 
         return translations
@@ -418,15 +389,19 @@ class FourStepTranslator:
         self,
         paragraph: Paragraph,
         context: LayeredContext
-    ) -> str:
+    ) -> TranslationPayload:
         """翻译单个段落"""
         # 构建翻译上下文
         llm_context = self._build_translation_context(context)
+        if paragraph.inline_elements:
+            llm_context["format_tokens"] = format_token_context(paragraph)
 
         # 调用 LLM 翻译
-        translation = self.llm.translate(paragraph.source, llm_context)
+        prepared = build_translation_input(paragraph)
+        prompt_text = prepared.tokenized_text or prepared.text
+        translation = self.llm.translate(prompt_text, llm_context)
 
-        return translation.strip()
+        return build_translation_payload(paragraph, translation.strip())
 
     def _build_translation_context(self, context: LayeredContext) -> Dict[str, Any]:
         """构建 LLM 翻译上下文"""
@@ -446,6 +421,10 @@ class FourStepTranslator:
                 }
                 for term in context.terminology
             ]
+
+        # 术语使用记录（用于 FIRST_ANNOTATE 动态调整）
+        if context.term_usage:
+            llm_context["term_usage"] = context.term_usage
 
         # 风格指南
         if context.guidelines:
@@ -628,30 +607,60 @@ class FourStepTranslator:
     def _step_refine(
         self,
         section: Section,
-        translations: List[str],
+        translations: List[TranslationPayload],
         reflection: ReflectionResult,
         understanding: SectionUnderstanding,
-    ) -> List[str]:
+    ) -> List[TranslationPayload]:
         """Step 4: 针对性润色"""
-        refined = translations.copy()
+        refined = [
+            TranslationPayload(
+                text=item.text,
+                tokenized_text=item.tokenized_text,
+                format_issues=list(item.format_issues),
+            )
+            for item in translations
+        ]
 
         for issue in reflection.issues:
             idx = issue.paragraph_index
             if 0 <= idx < len(refined):
                 # 获取原文
-                source = section.paragraphs[idx].source
+                paragraph = section.paragraphs[idx]
+                current_payload = refined[idx]
+                refine_context = self._build_refine_context(section, understanding)
+                source = paragraph.source
+                current_translation = current_payload.text
+
+                if paragraph.inline_elements:
+                    prepared = build_translation_input(paragraph)
+                    source = prepared.tokenized_text or prepared.text
+                    current_translation = (
+                        current_payload.tokenized_text or current_payload.text
+                    )
+                    refine_context = {
+                        **refine_context,
+                        "format_tokens": format_token_context(paragraph),
+                    }
 
                 # 调用 LLM 润色
                 refined_text = self.llm.refine_translation(
                     source=source,
-                    current_translation=refined[idx],
+                    current_translation=current_translation,
                     issue_type=issue.issue_type,
                     description=issue.description,
                     suggestion=issue.suggestion,
-                    context=self._build_refine_context(section, understanding),
+                    context=refine_context,
                 )
 
-                refined[idx] = refined_text.strip()
+                stripped = refined_text.strip()
+
+                if paragraph.inline_elements:
+                    candidate = build_translation_payload(paragraph, stripped)
+                    if candidate.format_valid:
+                        refined[idx] = candidate
+                    continue
+
+                refined[idx] = TranslationPayload(text=stripped)
 
         return refined
 

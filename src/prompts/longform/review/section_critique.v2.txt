@@ -1,0 +1,44 @@
+Review the translated section as a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Diagnose issues that materially affect accuracy, analyst tone, terminology control, readability, or structure.
+
+## Source and Translation Pairs
+{pairs_text}
+
+## Translation Guidelines
+{guidelines_text}
+
+## Glossary
+{terms_text}
+
+## Review Priorities
+1. Accuracy first: mistranslations, omissions, broken logic, lost conditions, wrong comparisons, wrong time references.
+2. Preserve analyst force: do not let strong judgments become bland description.
+3. Terminology and first-mention strategy: consistent, helpful, and not over-annotated.
+4. Remove translationese: English syntax projection, dead noun stacks, passive overload, mechanical transitions.
+5. Keep dense passages readable without dropping information.
+6. Check paragraph-to-paragraph flow inside the section.
+
+## Output Contract
+Return JSON only:
+{{
+  "overall_score": 8.6,
+  "readability_score": 8.2,
+  "accuracy_score": 9.1,
+  "is_excellent": false,
+  "issues": [
+    {{
+      "paragraph_index": 2,
+      "issue_type": "accuracy|terminology|tone|readability|annotation|data|structure",
+      "severity": "critical|high|medium|low",
+      "original_text": "string",
+      "description": "string",
+      "why_it_matters": "string",
+      "suggestion": "string"
+    }}
+  ]
+}}
+
+## Rules
+- Only report issues that should drive an actual revision.
+- Prioritize high-severity issues first.
+- If the section is already strong, keep `issues` as an empty list instead of inventing minor noise.
+- Do not wrap the JSON in Markdown.

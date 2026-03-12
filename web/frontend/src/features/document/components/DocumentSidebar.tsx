@@ -3,12 +3,10 @@
  */
 
 import { useState } from 'react';
-import { BookOpen, Cpu, Download, Languages, Layers, Zap } from 'lucide-react';
+import { BookOpen, Download, Languages, Layers, Zap } from 'lucide-react';
 import { Button, CollapsibleSection } from '../../../components/ui';
 import {
-  DEFAULT_MODEL,
   DEFAULT_TRANSLATION_METHOD,
-  MODEL_OPTIONS,
   TRANSLATION_METHOD_OPTIONS,
   TranslationMethod,
 } from '../../../shared/constants';
@@ -22,7 +20,7 @@ interface DocumentSidebarProps {
   activeSectionId: string | null;
   onSectionSelect: (sectionId: string) => void;
   onNewProject: () => void;
-  onFullTranslate?: (model?: string, method?: TranslationMethod) => void;
+  onFullTranslate?: (method?: TranslationMethod) => void;
   onOpenGlossaryManagement?: () => void;
   isFullTranslating?: boolean;
   fullTranslateProgress?: { current: number; total: number } | null;
@@ -43,7 +41,6 @@ export function DocumentSidebar({
   projectId,
 }: DocumentSidebarProps) {
   const [exportFormat, setExportFormat] = useState<'markdown' | 'html'>('markdown');
-  const [selectedModel, setSelectedModel] = useState<string>(DEFAULT_MODEL);
   const [selectedMethod, setSelectedMethod] = useState<TranslationMethod>(
     DEFAULT_TRANSLATION_METHOD
   );
@@ -140,7 +137,7 @@ export function DocumentSidebar({
               <Button
                 variant="primary"
                 size="md"
-                onClick={() => onFullTranslate(selectedModel, selectedMethod)}
+                onClick={() => onFullTranslate(selectedMethod)}
                 disabled={isFullTranslating}
                 leftIcon={<Zap className="h-5 w-5" />}
                 className="w-full"
@@ -149,41 +146,23 @@ export function DocumentSidebar({
               </Button>
 
               <CollapsibleSection title="高级选项" defaultOpen={false}>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
-                    <select
-                      value={selectedMethod}
-                      onChange={event =>
-                        setSelectedMethod(event.target.value as TranslationMethod)
-                      }
-                      className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
-                      disabled={isFullTranslating}
-                      title={selectedMethodOption?.description}
-                    >
-                      {TRANSLATION_METHOD_OPTIONS.map(method => (
-                        <option key={method.id} value={method.id}>
-                          {method.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <Cpu className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
-                    <select
-                      value={selectedModel}
-                      onChange={event => setSelectedModel(event.target.value)}
-                      className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
-                      disabled={isFullTranslating}
-                    >
-                      {MODEL_OPTIONS.map(model => (
-                        <option key={model.id} value={model.id}>
-                          {model.name}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                <div className="flex items-center gap-1.5">
+                  <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
+                  <select
+                    value={selectedMethod}
+                    onChange={event =>
+                      setSelectedMethod(event.target.value as TranslationMethod)
+                    }
+                    className="flex-1 rounded-md border border-border bg-bg-primary px-2 py-1.5 text-xs"
+                    disabled={isFullTranslating}
+                    title={selectedMethodOption?.description}
+                  >
+                    {TRANSLATION_METHOD_OPTIONS.map(method => (
+                      <option key={method.id} value={method.id}>
+                        {method.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </CollapsibleSection>
             </div>

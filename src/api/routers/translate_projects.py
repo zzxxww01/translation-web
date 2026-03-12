@@ -4,13 +4,14 @@ Translate project-level endpoints.
 
 import asyncio
 import json
+from typing import Dict
 
 from fastapi import APIRouter, Body
 from fastapi.responses import StreamingResponse
 
 from src.agents.translation import TranslationAgent, TranslationContext
+from src.core.format_tokens import apply_translation_payload
 from src.core.models import ParagraphStatus
-from src.services.analysis_service import AnalysisService
 
 from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
 from ..middleware import (
@@ -31,7 +32,10 @@ from .translate_utils import validate_path_component
 
 
 router = APIRouter()
-analysis_service = AnalysisService()
+
+# 活跃的四步法翻译会话冲突状态 {project_id: {term: Event}}
+_pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
+_conflict_resolutions: Dict[str, Dict[str, str]] = {}
 
 
 def _get_best_translation_text(paragraph) -> str:
@@ -57,11 +61,13 @@ def _build_translation_context(section, index: int, glossary):
 @router.post("/projects/{project_id}/analyze", response_model=ProjectAnalysisResponse)
 async def analyze_project(project_id: str):
     """分析项目原文，生成摘要和翻译指南。"""
+    from src.services.analysis_service import AnalysisService
+
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
     try:
-        data = analysis_service.analyze_project(project_id)
+        data = AnalysisService().analyze_project(project_id)
         return ProjectAnalysisResponse(
             summary=data.get("summary", ""),
             notes=data.get("notes", []),
@@ -79,13 +85,15 @@ async def analyze_project(project_id: str):
 )
 async def analyze_section(project_id: str, section_id: str):
     """分析章节内容，生成摘要和注意事项。"""
+    from src.services.analysis_service import AnalysisService
+
     if not validate_path_component(project_id) or not validate_path_component(
         section_id
     ):
         raise BadRequestException(detail="Invalid project_id or section_id")
 
     try:
-        data = analysis_service.analyze_section(project_id, section_id)
+        data = AnalysisService().analyze_section(project_id, section_id)
         return SectionAnalysisResponse(
             summary=data.get("summary", ""),
             tips=data.get("tips", []),
@@ -126,7 +134,8 @@ async def batch_translate_section(
             context = _build_translation_context(section, index, glossary)
 
             try:
-                translated = agent.translate_paragraph(paragraph, context)
+                payload = agent.translate_paragraph(paragraph, context)
+                apply_translation_payload(paragraph, payload, "pro")
                 pm.save_section(project_id, section)
                 translated_count += 1
             except Exception as e:
@@ -199,9 +208,10 @@ async def translate_full_document(
                     context = _build_translation_context(section_full, index, glossary)
 
                     try:
-                        translated = agent.translate_paragraph(
-                            paragraph, context, request.model
+                        payload = agent.translate_paragraph(
+                            paragraph, context
                         )
+                        apply_translation_payload(paragraph, payload, "default")
                         pm.save_section(project_id, section_full)
                         processed_count += 1
 
@@ -212,7 +222,7 @@ async def translate_full_document(
                                     "type": "translated",
                                     "paragraph_id": paragraph.id,
                                     "section_id": section.section_id,
-                                    "translation": translated,
+                                    "translation": payload.text,
                                     "current": processed_count,
                                     "total": total_paragraphs,
                                 }
@@ -317,6 +327,10 @@ async def translate_with_four_steps(
     )
     progress_queue = asyncio.Queue()
 
+    # 初始化冲突状态
+    _pending_conflict_events[project_id] = {}
+    _conflict_resolutions[project_id] = {}
+
     async def run_translation():
         """在后台运行翻译任务。"""
         try:
@@ -333,12 +347,23 @@ async def translate_with_four_steps(
                     },
                 )
 
-            with llm.use_model(request.model):
-                result = await batch_service.translate_project(
+            result = await batch_service.translate_project(
                     project_id,
                     on_progress=on_progress,
                 )
-            event_type = "complete" if result.get("status") == "completed" else "incomplete"
+            event_type = (
+                "complete" if result.get("status") == "completed" else "incomplete"
+            )
+            if event_type == "complete":
+                message = (
+                    f"Translation complete: "
+                    f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
+                )
+            else:
+                message = result.get("error") or (
+                    f"Translation incomplete: "
+                    f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
+                )
             await progress_queue.put(
                 {
                     "type": event_type,
@@ -347,12 +372,7 @@ async def translate_with_four_steps(
                     ),
                     "total": total_paragraphs,
                     "result": result,
-                    "message": result.get(
-                        "error"
-                    ) or (
-                        f"Translation incomplete: "
-                        f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
-                    ),
+                    "message": message,
                 }
             )
         except Exception as e:
@@ -362,6 +382,10 @@ async def translate_with_four_steps(
                     "error": str(e),
                 }
             )
+        finally:
+            # 清理冲突状态
+            _pending_conflict_events.pop(project_id, None)
+            _conflict_resolutions.pop(project_id, None)
 
     async def generate_progress():
         try:
@@ -457,3 +481,29 @@ async def resolve_term_conflict(
         )
     except Exception as e:
         raise ServiceUnavailableException(detail=f"解决冲突失败: {str(e)}")
+
+
+@router.post("/projects/{project_id}/resolve-conflict-live")
+async def resolve_term_conflict_live(
+    project_id: str,
+    request: ResolveConflictRequest,
+):
+    """
+    实时解决翻译过程中的术语冲突（配合四步法 SSE 使用）。
+    前端收到 term_conflict SSE 事件后，通过此端点返回用户选择。
+    """
+    if not validate_path_component(project_id):
+        raise BadRequestException(detail="Invalid project_id")
+
+    events = _pending_conflict_events.get(project_id, {})
+    resolutions = _conflict_resolutions.setdefault(project_id, {})
+
+    term_key = request.term.lower()
+    resolutions[term_key] = request.chosen_translation
+
+    # 唤醒等待的翻译线程
+    event = events.get(term_key)
+    if event:
+        event.set()
+
+    return {"status": "resolved", "term": request.term, "chosen": request.chosen_translation}

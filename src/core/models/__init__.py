@@ -11,8 +11,6 @@ from .enums import (
     ParagraphStatus,
     ProjectStatus,
     ElementType,
-    RuleType,
-    ErrorCategory,
 )
 
 # --- Glossary ---
@@ -71,8 +69,6 @@ from .confirmation import (
 
 # --- Translation Memory & Prescan ---
 from .memory import (
-    TranslationRule,
-    TranslationMemory,
     PrescanTerm,
     SectionPrescanResult,
     TermConflict,
@@ -86,8 +82,6 @@ __all__ = [
     "ParagraphStatus",
     "ProjectStatus",
     "ElementType",
-    "RuleType",
-    "ErrorCategory",
     # Glossary
     "GlossaryTerm",
     "Glossary",
@@ -128,8 +122,6 @@ __all__ = [
     "AIInsight",
     "RetranslateOption",
     # Memory
-    "TranslationRule",
-    "TranslationMemory",
     "PrescanTerm",
     "SectionPrescanResult",
     "TermConflict",

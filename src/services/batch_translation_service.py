@@ -26,6 +26,12 @@ from src.core.models import (
     EnhancedTerm,
     TranslationStrategy,
 )
+from src.core.format_tokens import (
+    TranslationPayload,
+    apply_translation_payload,
+    build_translation_input,
+    build_translation_payload,
+)
 from src.core.project import ProjectManager
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.agents.four_step_translator import FourStepTranslator
@@ -427,7 +433,7 @@ class BatchTranslationService:
             self._notify_progress(
                 on_progress, "翻译标题", translated_count, total_paragraphs
             )
-            await self._translate_title_and_metadata(project)
+            await self._translate_title_and_metadata(project, analysis)
             self._save_meta(project_id, project)
 
             # 翻译章节标题
@@ -656,20 +662,39 @@ class BatchTranslationService:
                     logger.info(
                         f"[{project_id}] Applying {len(consistency_report.auto_fixable)} auto-fixes..."
                     )
-                    all_translations = self.consistency_reviewer.auto_fix(
+                    auto_fixed_translations = self.consistency_reviewer.auto_fix(
                         all_translations, consistency_report.auto_fixable
                     )
 
-                    # 更新段落翻译
+                    # Update paragraph translations, but never overwrite tokenized segments.
                     for section in project.sections:
-                        if section.section_id in all_translations:
+                        if section.section_id in auto_fixed_translations:
                             for j, translation in enumerate(
-                                all_translations[section.section_id]
+                                auto_fixed_translations[section.section_id]
                             ):
                                 if j < len(section.paragraphs):
                                     para = section.paragraphs[j]
+                                    if para.expected_tokens:
+                                        auto_fixed_translations[section.section_id][j] = (
+                                            para.best_translation_text()
+                                        )
+                                        if translation != para.best_translation_text():
+                                            progress.errors.append(
+                                                {
+                                                    "type": "consistency_autofix_skipped",
+                                                    "section_id": section.section_id,
+                                                    "paragraph_id": para.id,
+                                                    "message": (
+                                                        "Skipped auto-fix for a formatted paragraph "
+                                                        "to preserve hidden token reconstruction."
+                                                    ),
+                                                    "timestamp": datetime.now().isoformat(),
+                                                }
+                                            )
+                                        continue
                                     para.add_translation(translation, "gemini_refined")
                             self.project_manager.save_section(project_id, section)
+                    all_translations = auto_fixed_translations
 
                 self._write_artifact_json(
                     run_dir / "consistency.json",
@@ -691,31 +716,10 @@ class BatchTranslationService:
             actual_translated = self._count_project_translated_paragraphs(
                 project.sections
             )
-            is_complete = total_paragraphs > 0 and actual_translated >= total_paragraphs
-
-            progress.finished_at = datetime.now()
-            progress.translated_paragraphs = actual_translated
-            progress.translated_sections = sum(
-                1
-                for section in project.sections
-                if self._count_translated_paragraphs(section) == len(section.paragraphs)
-                and len(section.paragraphs) > 0
+            translation_complete = (
+                total_paragraphs > 0 and actual_translated >= total_paragraphs
             )
-            progress.current_step = "翻译完成"
 
-            # 更新项目状态，未完成时保留为可继续状态
-            progress.final_status = "completed" if is_complete else "not_started"
-            progress.current_step = "翻译完成" if is_complete else "翻译未完成"
-            project.status = (
-                self._final_status_after_success(original_status)
-                if is_complete
-                else ProjectStatus.IN_PROGRESS
-            )
-            self._save_meta(project_id, project)
-
-            markdown_output = self.project_manager.export_markdown(
-                project_id, include_source=False
-            )
             export_report = {
                 "generated_at": datetime.now().isoformat(),
                 "translation_mode": self.translation_mode,
@@ -726,23 +730,36 @@ class BatchTranslationService:
                             format="markdown",
                         )
                     ),
-                    "bytes": len(markdown_output.encode("utf-8")),
-                },
-                "html": {
-                    "path": str(
-                        self.project_manager.get_export_path(
-                            project_id,
-                            format="html",
-                        )
-                    ),
                     "generated": False,
                 },
             }
             try:
-                self.project_manager.export_html(project_id)
-                export_report["html"]["generated"] = True
+                markdown_output = self.project_manager.export_markdown(
+                    project_id, include_source=False
+                )
+                export_report["markdown"]["generated"] = True
+                export_report["markdown"]["bytes"] = len(markdown_output.encode("utf-8"))
             except Exception as export_exc:
-                export_report["html"]["error"] = str(export_exc)
+                export_report["markdown"]["error"] = str(export_exc)
+
+            is_complete = translation_complete and export_report["markdown"]["generated"]
+
+            progress.finished_at = datetime.now()
+            progress.translated_paragraphs = actual_translated
+            progress.translated_sections = sum(
+                1
+                for section in project.sections
+                if self._count_translated_paragraphs(section) == len(section.paragraphs)
+                and len(section.paragraphs) > 0
+            )
+            progress.current_step = "completed" if is_complete else "incomplete"
+            progress.final_status = "completed" if is_complete else "not_started"
+            project.status = (
+                self._final_status_after_success(original_status)
+                if is_complete
+                else ProjectStatus.IN_PROGRESS
+            )
+            self._save_meta(project_id, project)
 
             self._write_artifact_json(
                 run_dir / "markdown-export-report.json",
@@ -887,20 +904,36 @@ class BatchTranslationService:
 
             paragraph = paragraph_map.get(para_id)
             if paragraph:
-                paragraph.add_translation(translation, "pro")
+                payload = build_translation_payload(paragraph, translation)
+                apply_translation_payload(paragraph, payload, "pro")
                 paragraph.status = ParagraphStatus.TRANSLATED
-                collected.append(translation)
+                collected.append(payload.text)
 
         return collected
 
     def _apply_four_step_translations(self, section: Section, result) -> None:
         """Apply four-step translations and optional AI insight to section paragraphs."""
+        outputs = getattr(result, "translation_outputs", None) or []
         for index, translation in enumerate(result.translations):
             if index >= len(section.paragraphs):
                 continue
 
             paragraph = section.paragraphs[index]
-            paragraph.add_translation(translation, "pro")
+            payload = outputs[index] if index < len(outputs) else None
+            translation_payload = (
+                TranslationPayload(
+                    text=translation,
+                    tokenized_text=payload.get("tokenized_text"),
+                    format_issues=list(payload.get("format_issues") or []),
+                )
+                if payload
+                else build_translation_payload(paragraph, translation)
+            )
+            apply_translation_payload(
+                paragraph,
+                translation_payload,
+                "pro",
+            )
             paragraph.status = ParagraphStatus.TRANSLATED
 
             if not hasattr(paragraph, "ai_insight"):
@@ -1098,50 +1131,41 @@ class BatchTranslationService:
             raise ValueError(f"Project id mismatch: {project_id} != {meta.id}")
         self.project_manager.save_meta(meta)
 
-    async def _translate_title_and_metadata(self, project: ProjectMeta) -> None:
+    async def _translate_title_and_metadata(
+        self,
+        project: ProjectMeta,
+        analysis: ArticleAnalysis,
+    ) -> None:
         """
-        翻译文章标题和元信息
+        翻译文章标题和副标题（合并为一次 API 调用）
 
         Args:
             project: 项目元信息
+            analysis: 文章分析结果
         """
-        # 翻译文章标题
-        if project.title and not project.title_translation:
-            try:
-                # 检查 LLM 是否有 translate_title 方法
-                if hasattr(self.llm, "translate_title"):
-                    project.title_translation = self.llm.translate_title(project.title)
-                else:
-                    # 使用通用翻译
-                    prompt = f"请将以下标题翻译成中文，保持简洁：\n\n{project.title}\n\n请直接输出翻译，不要添加任何解释："
-                    project.title_translation = self.llm.generate(
-                        prompt, temperature=0.3
-                    )
-                logger.info(
-                    f"Title translated: {project.title} -> {project.title_translation}"
-                )
-            except Exception as e:
-                logger.error(f"Failed to translate title: {e}")
+        if not project.title or project.title_translation:
+            return
 
-        # 翻译元信息
-        if project.metadata:
-            try:
-                if hasattr(self.llm, "translate_metadata"):
-                    result = self.llm.translate_metadata(
-                        authors=project.metadata.authors,
-                        date=project.metadata.published_date,
-                        subtitle=project.metadata.subtitle,
-                    )
-                    if result.get("subtitle"):
-                        project.metadata.subtitle = result["subtitle"]
-                elif project.metadata.subtitle:
-                    # 使用通用翻译
-                    prompt = f"请将以下副标题翻译成中文：\n\n{project.metadata.subtitle}\n\n请直接输出翻译："
-                    project.metadata.subtitle = self.llm.generate(
-                        prompt, temperature=0.3
-                    )
-            except Exception as e:
-                logger.error(f"Failed to translate metadata: {e}")
+        try:
+            subtitle = project.metadata.subtitle if project.metadata else None
+            result = self.llm.translate_title(
+                project.title,
+                context={
+                    "article_theme": analysis.theme,
+                    "structure_summary": analysis.structure_summary,
+                    "target_audience": analysis.style.target_audience,
+                },
+                subtitle=subtitle,
+            )
+            project.title_translation = result.get("title", "")
+            logger.info(
+                f"Title translated: {project.title} -> {project.title_translation}"
+            )
+            if result.get("subtitle") and project.metadata:
+                project.metadata.subtitle = result["subtitle"]
+                logger.info(f"Subtitle translated: {result['subtitle']}")
+        except Exception as e:
+            logger.error(f"Failed to translate title/subtitle: {e}")
 
     async def _translate_section_titles(
         self, project: ProjectMeta, analysis: ArticleAnalysis
@@ -1153,28 +1177,26 @@ class BatchTranslationService:
             project: 项目元信息
             analysis: 文章分析结果
         """
-        for section in project.sections:
+        for section_index, section in enumerate(project.sections):
             if section.title and not section.title_translation:
                 try:
-                    # 构建上下文
-                    context = f"这是一篇关于 {analysis.theme} 的文章中的章节标题。"
-
-                    if hasattr(self.llm, "translate_title"):
-                        section.title_translation = self.llm.translate_title(
-                            section.title, context={"article_theme": analysis.theme}
-                        )
-                    else:
-                        prompt = f"""请将以下章节标题翻译成中文。
-
-{context}
-
-原文标题：{section.title}
-
-请直接输出翻译，不要添加任何解释："""
-                        section.title_translation = self.llm.generate(
-                            prompt, temperature=0.3
-                        )
-
+                    section.title_translation = self.llm.translate_section_title(
+                        section.title,
+                        context={
+                            "article_theme": analysis.theme,
+                            "context": "Section heading inside a long-form article",
+                            "previous_section_title": (
+                                project.sections[section_index - 1].title
+                                if section_index > 0
+                                else ""
+                            ),
+                            "next_section_title": (
+                                project.sections[section_index + 1].title
+                                if section_index < len(project.sections) - 1
+                                else ""
+                            ),
+                        },
+                    )
                     logger.info(
                         f"Section title translated: {section.title} -> {section.title_translation}"
                     )
@@ -1208,9 +1230,27 @@ class BatchTranslationService:
         section_lines = []
         paragraph_ids = []
 
+        format_tokens = []
+        token_count = 0
         for para in section.paragraphs:
-            section_lines.append(f"[{para.id}] {para.source}")
+            prepared = build_translation_input(para)
+            prompt_text = prepared.tokenized_text or prepared.text
+            section_lines.append(f"[{para.id}] {prompt_text}")
             paragraph_ids.append(para.id)
+            if para.inline_elements:
+                format_tokens.extend(
+                    [
+                        {
+                            "id": element.span_id,
+                            "type": element.type,
+                            "text": element.text,
+                            "paragraph_id": para.id,
+                        }
+                        for element in para.inline_elements
+                        if element.span_id
+                    ]
+                )
+                token_count += len(para.inline_elements)
 
         section_text = "\n\n".join(section_lines)
 
@@ -1254,20 +1294,13 @@ class BatchTranslationService:
                 }
                 for challenge in analysis.challenges[:6]
             ],
+            "format_tokens": format_tokens,
+            "format_token_count": token_count,
         }
 
-        # 检查 LLM 是否有 translate_section 方法
-        if hasattr(self.llm, "translate_section"):
-            return self.llm.translate_section(
-                section_text=section_text,
-                section_title=section.title,
-                context=context,
-                paragraph_ids=paragraph_ids,
-            )
-        else:
-            # 使用通用翻译（降级方案）
-            translations = []
-            for para in section.paragraphs:
-                translation = self.llm.translate(para.source, context=context)
-                translations.append({"id": para.id, "translation": translation})
-            return translations
+        return self.llm.translate_section(
+            section_text=section_text,
+            section_title=section.title,
+            context=context,
+            paragraph_ids=paragraph_ids,
+        )

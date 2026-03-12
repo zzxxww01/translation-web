@@ -16,7 +16,7 @@ interface VersionsPanelProps {
   onSelectVersion: (versionId: string) => void;
   onEditVersion: (version: ParagraphVersion) => void;
   onConfirm: (translation: string) => void;
-  onRetranslate?: (instruction: string, model?: string) => Promise<void>;
+  onRetranslate?: (instruction: string) => Promise<void>;
   isRetranslating?: boolean;
 }
 
@@ -33,9 +33,9 @@ export function VersionsPanel({
 
   const [showRetranslate, setShowRetranslate] = useState(false);
 
-  const handleRetranslate = async (instruction: string, model?: string) => {
+  const handleRetranslate = async (instruction: string) => {
     if (onRetranslate) {
-      await onRetranslate(instruction, model);
+      await onRetranslate(instruction);
       setShowRetranslate(false);
     }
   };

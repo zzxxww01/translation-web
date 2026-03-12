@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Dict, List
+from typing import Any, Optional, Dict, List
 from pydantic import BaseModel, Field
 
 from .enums import TranslationStrategy
@@ -47,7 +47,6 @@ class ArticleStyle(BaseModel):
     tone: str = "professional"
     target_audience: str = ""
     translation_voice: str = ""
-    data_density: str = "medium"
 
 
 class TranslationChallenge(BaseModel):
@@ -126,6 +125,7 @@ class SectionTranslationResult(BaseModel):
     translations: List[str] = Field(default_factory=list)
     draft_translations: List[str] = Field(default_factory=list)
     revised_translations: List[str] = Field(default_factory=list)
+    translation_outputs: List[Dict[str, Any]] = Field(default_factory=list)
     understanding: Optional[SectionUnderstanding] = None
     reflection: Optional[ReflectionResult] = None
     assessment: Optional[QualityAssessment] = None
@@ -139,15 +139,16 @@ class TermUsageTracker(BaseModel):
 
     def record_usage(self, term: str, translation: str, section_id: str) -> None:
         """记录术语使用"""
-        if term not in self.used_translations:
-            self.used_translations[term] = []
-            self.first_occurrences[term] = section_id
-        if translation not in self.used_translations[term]:
-            self.used_translations[term].append(translation)
+        key = term.lower()
+        if key not in self.used_translations:
+            self.used_translations[key] = []
+            self.first_occurrences[key] = section_id
+        if translation not in self.used_translations[key]:
+            self.used_translations[key].append(translation)
 
     def get_preferred_translation(self, term: str) -> Optional[str]:
         """获取首选翻译（首次使用的译法）"""
-        translations = self.used_translations.get(term, [])
+        translations = self.used_translations.get(term.lower(), [])
         return translations[0] if translations else None
 
 

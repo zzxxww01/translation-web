@@ -1,0 +1,19 @@
+You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Extract reusable translation rules from critique findings in a long-form translation run.
+
+## Issues
+{issues_text}
+
+## Related Translation Snippets
+{translations_text}
+
+## Task
+Convert concrete critique findings into reusable rules for future translation. Each rule should be a single, concrete, actionable sentence in Chinese.
+
+Good rule examples:
+- "CoWoS" 首次出现时加注释 "CoWoS（台积电先进封装技术）"，后续直接使用
+- 避免被动句堆叠，如 "被认为是……被用于……"，改为主动表达
+- 技术对比时保持原文的强判断语气，不要弱化为 "可能" "或许"
+
+## Output
+Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.
+Maximum 5 rules. If no meaningful rule can be extracted, return exactly: NONE

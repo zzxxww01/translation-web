@@ -6,31 +6,7 @@ from datetime import datetime
 from typing import Optional, Dict, List
 from pydantic import BaseModel, Field
 
-from .enums import RuleType, ErrorCategory
 from .analysis import EnhancedTerm
-
-
-class TranslationRule(BaseModel):
-    """可复用的翻译规则"""
-
-    id: str
-    wrong: str
-    right: str
-    instruction: str
-    rule_type: RuleType
-    category: ErrorCategory
-    source_context: str = ""
-    created_at: datetime = Field(default_factory=datetime.now)
-    hit_count: int = 0
-    confidence: float = 0.5
-
-
-class TranslationMemory(BaseModel):
-    """翻译记忆存储"""
-
-    version: int = 1
-    rules: List[TranslationRule] = Field(default_factory=list)
-    last_updated: datetime = Field(default_factory=datetime.now)
 
 
 class PrescanTerm(BaseModel):

@@ -1,62 +1,51 @@
 """
 翻译记忆服务 - 自学习翻译规则管理
 
-功能:
-1. 从用户纠正中提取可复用翻译规则
-2. 从重翻指令中提取风格偏好规则
-3. 从反思评分中提取质量规则
-4. 为翻译提供相关规则注入
+规则以自然语言 markdown 条目存储，每条是一句可操作的翻译指令。
+存储路径：
+  - 项目级：data/memory/{project_id}.md
+  - 全局：data/global_memory.md
 """
 
 import asyncio
 import difflib
-import json
 import logging
+import random
 import threading
-import uuid
-from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional
-
-from src.core.models import (
-    TranslationRule,
-    TranslationMemory,
-    RuleType,
-    ErrorCategory,
-)
+from typing import List, Optional
 
 logger = logging.getLogger(__name__)
 
 # 全局记忆文件路径
-GLOBAL_MEMORY_PATH = Path("data/global_memory.json")
+GLOBAL_MEMORY_PATH = Path("data/global_memory.md")
 PROJECT_MEMORY_DIR = Path("data/memory")
 
 # diff 变化率阈值，低于此值跳过 LLM 提取
 MIN_DIFF_RATIO = 0.05
+
+# 每次成功保存规则后，以此概率触发规则库梳理
+CONSOLIDATION_PROBABILITY = 0.05
+
+# 注入 prompt 时的规则上限
+MAX_RULES_IN_PROMPT = 15
+MAX_RULES_CHARS = 600
 
 
 class TranslationMemoryService:
     """翻译记忆服务 - 管理自学习翻译规则"""
 
     def __init__(self, llm_provider=None):
-        """
-        初始化翻译记忆服务
-
-        Args:
-            llm_provider: LLM Provider（用于规则提取，使用 Flash 模型）
-        """
         self._llm = llm_provider
-        self._memory_cache: Dict[str, TranslationMemory] = {}
-        self._memory_lock = threading.RLock()
+        self._cache: dict[str, list[str]] = {}
+        self._lock = threading.RLock()
         self._llm_lock = threading.Lock()
 
     @property
     def llm(self):
-        """懒加载规则提取专用 LLM provider。"""
+        """懒加载规则提取专用 LLM provider（Flash 模型）。"""
         if self._llm is None:
             from src.llm.factory import create_llm_provider
-
-            # 使用独立实例，避免切换共享 provider 的模型状态。
             self._llm = create_llm_provider(model_type="flash")
         return self._llm
 
@@ -68,43 +57,25 @@ class TranslationMemoryService:
         ai_translation: str,
         user_translation: str,
         project_id: Optional[str] = None,
-    ) -> List[TranslationRule]:
-        """
-        处理用户纠正，提取翻译规则
-
-        Args:
-            source: 英文原文
-            ai_translation: AI 译文
-            user_translation: 用户确认的译文
-
-        Returns:
-            提取的规则列表
-        """
-        # 预过滤：diff 变化率太小则跳过
+    ) -> List[str]:
+        """从用户纠正中提取翻译规则。"""
         diff_ratio = self._compute_diff_ratio(ai_translation, user_translation)
         if diff_ratio < MIN_DIFF_RATIO:
-            logger.debug("Diff ratio %.3f < threshold %.3f, skipping rule extraction", diff_ratio, MIN_DIFF_RATIO)
+            logger.debug("Diff ratio %.3f < threshold, skipping", diff_ratio)
             return []
 
         try:
-            rules = await self._extract_rules_with_llm(
-                "rule_extraction",
+            new_rules = await self._extract_rules(
+                "longform/learning/correction_rule_extraction.v2",
                 source=source,
                 ai_translation=ai_translation,
                 user_translation=user_translation,
             )
-
-            if rules:
-                with self._memory_lock:
-                    memory = self._load_memory(project_id)
-                    for rule in rules:
-                        rule.source_context = source[:200]
-                        self._deduplicate_and_add(memory, rule)
-                    self._save_memory(memory, project_id)
-                logger.info("Extracted %d rules from correction", len(rules))
-
-            return rules
-
+            if new_rules:
+                self._append_rules(new_rules, project_id)
+                logger.info("Extracted %d rules from correction", len(new_rules))
+                self._maybe_consolidate(project_id)
+            return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from correction: %s", e)
             return []
@@ -116,43 +87,25 @@ class TranslationMemoryService:
         before: str,
         after: str,
         project_id: Optional[str] = None,
-    ) -> List[TranslationRule]:
-        """
-        从重翻指令中提取风格偏好规则
-
-        Args:
-            instruction: 用户的重翻指令（如"更简洁"、"去翻译腔"）
-            source: 英文原文
-            before: 重翻前译文
-            after: 重翻后译文
-
-        Returns:
-            提取的规则列表
-        """
+    ) -> List[str]:
+        """从重翻指令中提取风格偏好规则。"""
         diff_ratio = self._compute_diff_ratio(before, after)
         if diff_ratio < MIN_DIFF_RATIO:
             return []
 
         try:
-            rules = await self._extract_rules_with_llm(
-                "retranslation_rule_extraction",
+            new_rules = await self._extract_rules(
+                "longform/learning/retranslation_rule_extraction.v2",
                 instruction=instruction,
                 source=source,
                 before=before,
                 after=after,
             )
-
-            if rules:
-                with self._memory_lock:
-                    memory = self._load_memory(project_id)
-                    for rule in rules:
-                        rule.source_context = source[:200]
-                        self._deduplicate_and_add(memory, rule)
-                    self._save_memory(memory, project_id)
-                logger.info("Extracted %d rules from retranslation instruction", len(rules))
-
-            return rules
-
+            if new_rules:
+                self._append_rules(new_rules, project_id)
+                logger.info("Extracted %d rules from retranslation", len(new_rules))
+                self._maybe_consolidate(project_id)
+            return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from retranslation: %s", e)
             return []
@@ -162,309 +115,271 @@ class TranslationMemoryService:
         issues: list,
         translations: List[str],
         project_id: Optional[str] = None,
-    ) -> List[TranslationRule]:
-        """
-        从四步法反思评分的 issues 中提取规则
-
-        Args:
-            issues: TranslationIssue 列表
-            translations: 对应的译文列表
-
-        Returns:
-            提取的规则列表
-        """
+    ) -> List[str]:
+        """从四步法 critique 的 issues 中提取规则。"""
         if not issues:
             return []
 
-        # 构建 issues 文本
         issues_text = "\n".join(
             f"- [{issue.issue_type}] 段落{issue.paragraph_index}: {issue.description}"
             + (f" 建议: {issue.suggestion}" if issue.suggestion else "")
             for issue in issues
         )
-
-        # 构建相关译文文本
         translations_text = "\n".join(
             f"段落{i}: {t[:200]}"
             for i, t in enumerate(translations)
             if any(issue.paragraph_index == i for issue in issues)
         )
-
         if not translations_text:
             return []
 
         try:
-            rules = await self._extract_rules_with_llm(
-                "reflection_rule_extraction",
+            new_rules = await self._extract_rules(
+                "longform/learning/reflection_rule_extraction.v2",
                 issues_text=issues_text,
                 translations_text=translations_text,
             )
-
-            if rules:
-                with self._memory_lock:
-                    memory = self._load_memory(project_id)
-                    for rule in rules:
-                        self._deduplicate_and_add(memory, rule)
-                    self._save_memory(memory, project_id)
-                logger.info("Extracted %d rules from reflection issues", len(rules))
-
-            return rules
-
+            if new_rules:
+                self._append_rules(new_rules, project_id)
+                logger.info("Extracted %d rules from reflection", len(new_rules))
+                self._maybe_consolidate(project_id)
+            return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from reflection: %s", e)
             return []
 
-    # ============ 规则选取 ============
+    # ============ 规则读取 ============
 
-    def get_relevant_rules(
+    def get_rules_for_prompt(
         self,
-        source_text: str,
-        max_rules: int = 5,
         project_id: Optional[str] = None,
-    ) -> List[TranslationRule]:
-        """
-        为当前段落选取最相关的规则
-
-        使用关键词子串匹配 + 置信度排序
-
-        Args:
-            source_text: 当前段落英文原文
-            max_rules: 最大返回规则数
-
-        Returns:
-            相关规则列表
-        """
-        with self._memory_lock:
-            memory = self._load_memory(project_id)
-            if not memory.rules:
+    ) -> List[str]:
+        """获取用于注入翻译 prompt 的规则列表（截断到上限）。"""
+        with self._lock:
+            rules = self._load_rules(project_id)
+            if not rules:
                 return []
-
-            scored_rules = []
-            source_lower = source_text.lower()
-
-            for rule in memory.rules:
-                score = rule.confidence
-
-                # 规则的英文上下文与当前原文有词汇重叠 → 加分
-                if rule.source_context:
-                    context_words = set(rule.source_context.lower().split())
-                    source_words = set(source_lower.split())
-                    overlap = len(context_words & source_words)
-                    if overlap > 0:
-                        score += min(overlap * 0.1, 0.3)
-
-                # 命中次数加分（经验证的规则更可靠）
-                score += min(rule.hit_count * 0.05, 0.2)
-
-                # HARD_RULE 和 STRICT_PROHIBITION 优先
-                if rule.rule_type in (RuleType.HARD_RULE, RuleType.STRICT_PROHIBITION):
-                    score += 0.1
-
-                scored_rules.append((score, rule))
-
-            # 按分数降序排列
-            scored_rules.sort(key=lambda x: x[0], reverse=True)
-
-            # 返回 top N，并更新命中次数
             selected = []
-            for _score, rule in scored_rules[:max_rules]:
-                rule.hit_count += 1
+            total_chars = 0
+            for rule in rules[:MAX_RULES_IN_PROMPT]:
+                total_chars += len(rule)
+                if total_chars > MAX_RULES_CHARS:
+                    break
                 selected.append(rule)
-
-            # 保存命中计数更新
-            if selected:
-                self._save_memory(memory, project_id)
-
             return selected
 
-    def get_all_rules(self, project_id: Optional[str] = None) -> List[TranslationRule]:
-        """获取所有已学习的规则"""
-        with self._memory_lock:
-            memory = self._load_memory(project_id)
-            return list(memory.rules)
+    def get_all_rules(self, project_id: Optional[str] = None) -> List[str]:
+        """获取所有规则（API 用）。"""
+        with self._lock:
+            return list(self._load_rules(project_id))
 
-    def delete_rule(self, rule_id: str, project_id: Optional[str] = None) -> bool:
-        """删除指定规则"""
-        with self._memory_lock:
-            memory = self._load_memory(project_id)
-            original_count = len(memory.rules)
-            memory.rules = [r for r in memory.rules if r.id != rule_id]
-            if len(memory.rules) < original_count:
-                self._save_memory(memory, project_id)
+    def delete_rule(self, rule_text: str, project_id: Optional[str] = None) -> bool:
+        """删除匹配的规则。"""
+        with self._lock:
+            rules = self._load_rules(project_id)
+            original_count = len(rules)
+            rules = [r for r in rules if r.strip() != rule_text.strip()]
+            if len(rules) < original_count:
+                self._save_rules(rules, project_id)
                 return True
             return False
 
-    def add_rule_manually(
-        self,
-        rule: TranslationRule,
-        project_id: Optional[str] = None,
-    ) -> TranslationRule:
-        """手动添加规则"""
-        with self._memory_lock:
-            memory = self._load_memory(project_id)
-            self._deduplicate_and_add(memory, rule)
-            self._save_memory(memory, project_id)
-            return rule
+    def delete_rule_by_index(self, index: int, project_id: Optional[str] = None) -> bool:
+        """按索引删除规则。"""
+        with self._lock:
+            rules = self._load_rules(project_id)
+            if 0 <= index < len(rules):
+                rules.pop(index)
+                self._save_rules(rules, project_id)
+                return True
+            return False
+
+    def add_rule_manually(self, rule_text: str, project_id: Optional[str] = None) -> None:
+        """手动添加一条规则。"""
+        rule = rule_text.strip().lstrip("- ").strip()
+        if not rule:
+            return
+        self._append_rules([rule], project_id)
 
     # ============ 内部方法 ============
 
-    async def _extract_rules_with_llm(
-        self,
-        template_name: str,
-        **kwargs,
-    ) -> List[TranslationRule]:
-        """
-        使用 LLM 从对比中提取结构化规则
-
-        Args:
-            template_name: prompt 模板名称
-            **kwargs: 模板变量
-
-        Returns:
-            提取的规则列表
-        """
+    async def _extract_rules(self, template_name: str, **kwargs) -> List[str]:
+        """使用 LLM 提取规则，返回纯文本规则列表。"""
         from src.prompts import get_prompt_manager
 
         pm = get_prompt_manager()
         prompt = pm.get(template_name, **kwargs)
 
-        # 同步 SDK 调用放入线程池，避免阻塞事件循环。
-        response = await asyncio.to_thread(self._generate_rules_json, prompt)
+        response = await asyncio.to_thread(self._generate, prompt)
+        return self._parse_bullet_list(response)
 
-        # 解析 JSON 响应
-        result = self._parse_json_response(response)
-
-        if not result.get("has_meaningful_change", False):
-            return []
-
-        rules = []
-        for rule_data in result.get("rules", []):
-            try:
-                rule = TranslationRule(
-                    id=uuid.uuid4().hex[:12],
-                    wrong=rule_data["wrong"],
-                    right=rule_data["right"],
-                    instruction=rule_data["instruction"][:20],
-                    rule_type=RuleType(rule_data.get("rule_type", "soft_preference")),
-                    category=ErrorCategory(rule_data.get("category", "fluency")),
-                    created_at=datetime.now(),
-                    confidence=0.5,
-                )
-                rules.append(rule)
-            except (KeyError, ValueError) as e:
-                logger.debug("Skipping invalid rule data: %s (%s)", rule_data, e)
-                continue
-
-        return rules
-
-    def _generate_rules_json(self, prompt: str) -> str:
-        """Thread-safe JSON rule generation."""
+    def _generate(self, prompt: str) -> str:
+        """Thread-safe LLM 调用。"""
         with self._llm_lock:
-            return self.llm.generate(prompt, response_format="json", temperature=0.3)
+            return self.llm.generate(prompt, temperature=0.3)
 
-    def _deduplicate_and_add(self, memory: TranslationMemory, new_rule: TranslationRule) -> None:
-        """
-        去重并添加规则
+    def _append_rules(self, new_rules: List[str], project_id: Optional[str] = None) -> None:
+        """追加规则，跳过精确重复。"""
+        with self._lock:
+            existing = self._load_rules(project_id)
+            existing_set = {r.strip() for r in existing}
+            added = 0
+            for rule in new_rules:
+                rule = rule.strip()
+                if rule and rule not in existing_set:
+                    existing.append(rule)
+                    existing_set.add(rule)
+                    added += 1
+            if added:
+                self._save_rules(existing, project_id)
 
-        相同 wrong+right 的规则合并，增加 confidence
-        """
-        for existing in memory.rules:
-            if existing.wrong == new_rule.wrong and existing.right == new_rule.right:
-                # 合并：提升置信度
-                existing.confidence = min(existing.confidence + 0.15, 1.0)
-                existing.hit_count += 1
-                logger.debug("Merged duplicate rule: %s → %s (confidence=%.2f)",
-                           existing.wrong, existing.right, existing.confidence)
+        # 规则保存后尝试提取术语候选
+        if project_id and new_rules:
+            self._extract_term_candidates_from_rules(new_rules, project_id)
+
+    def _extract_term_candidates_from_rules(self, rules: List[str], project_id: str) -> None:
+        """从规则文本中用正则提取术语候选，保存到候选文件。"""
+        import json
+        import re
+
+        patterns = [
+            r'"(.+?)"\s*(?:翻译为|应译为|译为|统一翻译为)\s*"(.+?)"',
+            r'(?:将|把)\s*"(.+?)"\s*(?:翻译为|译为)\s*"(.+?)"',
+        ]
+        candidates = []
+        for rule in rules:
+            for pat in patterns:
+                for m in re.finditer(pat, rule):
+                    candidates.append({
+                        "term": m.group(1),
+                        "translation": m.group(2),
+                        "source_rule": rule,
+                    })
+
+        if not candidates:
+            return
+
+        candidates_path = PROJECT_MEMORY_DIR / f"{project_id}_term_candidates.json"
+        existing = []
+        if candidates_path.exists():
+            try:
+                existing = json.loads(candidates_path.read_text("utf-8"))
+            except Exception:
+                existing = []
+
+        existing_keys = {c["term"].lower() for c in existing}
+        for c in candidates:
+            if c["term"].lower() not in existing_keys:
+                existing.append(c)
+                existing_keys.add(c["term"].lower())
+
+        candidates_path.parent.mkdir(parents=True, exist_ok=True)
+        candidates_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), "utf-8")
+
+    def _maybe_consolidate(self, project_id: Optional[str] = None) -> None:
+        """以 CONSOLIDATION_PROBABILITY 概率触发规则库梳理（异步非阻塞）。"""
+        with self._lock:
+            rules = self._load_rules(project_id)
+            if len(rules) < 8:
+                return
+        if random.random() < CONSOLIDATION_PROBABILITY:
+            logger.info("Triggering rule consolidation (%.0f%% chance) for project=%s",
+                       CONSOLIDATION_PROBABILITY * 100, project_id)
+            asyncio.create_task(self._consolidate_rules(project_id))
+
+    async def _consolidate_rules(self, project_id: Optional[str] = None) -> None:
+        """使用 LLM 梳理规则库：合并重复、解决矛盾、删除模糊规则。"""
+        try:
+            with self._lock:
+                rules = self._load_rules(project_id)
+                if not rules:
+                    return
+                rules_text = "\n".join(f"- {r}" for r in rules)
+
+            from src.prompts import get_prompt_manager
+            pm = get_prompt_manager()
+            prompt = pm.get(
+                "longform/learning/rules_consolidation.v2",
+                rules_text=rules_text,
+            )
+
+            response = await asyncio.to_thread(self._generate, prompt)
+            consolidated = self._parse_bullet_list(response)
+
+            if not consolidated:
+                logger.warning("Consolidation returned empty, skipping")
                 return
 
-        # 新规则，直接添加
-        memory.rules.append(new_rule)
-        memory.last_updated = datetime.now()
+            with self._lock:
+                old_rules = self._load_rules(project_id)
+                old_count = len(old_rules)
+                self._save_rules(consolidated, project_id)
+
+            logger.info("Consolidation complete: %d → %d rules", old_count, len(consolidated))
+
+        except Exception as e:
+            logger.warning("Rule consolidation failed: %s", e)
+
+    # ============ 存储 ============
+
+    def _memory_path(self, project_id: Optional[str] = None) -> Path:
+        if not project_id:
+            return GLOBAL_MEMORY_PATH
+        cleaned = "".join(
+            char if (char.isalnum() or char in ("-", "_")) else "_"
+            for char in project_id.strip()
+        )
+        return PROJECT_MEMORY_DIR / f"{cleaned or 'global'}.md"
+
+    def _load_rules(self, project_id: Optional[str] = None) -> List[str]:
+        """加载规则列表（从缓存或磁盘）。"""
+        path = self._memory_path(project_id)
+        cache_key = str(path)
+        if cache_key in self._cache:
+            return self._cache[cache_key]
+
+        rules: List[str] = []
+        if path.exists():
+            try:
+                text = path.read_text(encoding="utf-8")
+                rules = self._parse_bullet_list(text)
+            except Exception as e:
+                logger.warning("Failed to load rules from %s: %s", path, e)
+
+        self._cache[cache_key] = rules
+        return rules
+
+    def _save_rules(self, rules: List[str], project_id: Optional[str] = None) -> None:
+        """原子写入规则到 markdown 文件。"""
+        path = self._memory_path(project_id)
+        cache_key = str(path)
+        self._cache[cache_key] = rules
+
+        path.parent.mkdir(parents=True, exist_ok=True)
+        content = "\n".join(f"- {r}" for r in rules) + "\n" if rules else ""
+        temp_path = path.with_suffix(".md.tmp")
+        temp_path.write_text(content, encoding="utf-8")
+        temp_path.replace(path)
+
+    # ============ 工具方法 ============
 
     @staticmethod
     def _compute_diff_ratio(text_a: str, text_b: str) -> float:
-        """计算两段文本的差异率"""
         if not text_a or not text_b:
             return 1.0
         matcher = difflib.SequenceMatcher(None, text_a, text_b)
         return 1.0 - matcher.ratio()
 
-    def _namespace(self, project_id: Optional[str]) -> str:
-        """Resolve storage namespace."""
-        if not project_id:
-            return "global"
-        cleaned = "".join(
-            char if (char.isalnum() or char in ("-", "_")) else "_"
-            for char in project_id.strip()
-        )
-        return cleaned or "global"
-
-    def _memory_path(self, project_id: Optional[str]) -> Path:
-        """Resolve on-disk memory path for a project namespace."""
-        namespace = self._namespace(project_id)
-        if namespace == "global":
-            return GLOBAL_MEMORY_PATH
-        return PROJECT_MEMORY_DIR / f"{namespace}.json"
-
-    def _load_memory(self, project_id: Optional[str] = None) -> TranslationMemory:
-        """加载翻译记忆（按项目隔离）。"""
-        namespace = self._namespace(project_id)
-        cached = self._memory_cache.get(namespace)
-        if cached is not None:
-            return cached
-
-        memory_path = self._memory_path(project_id)
-        if memory_path.exists():
-            try:
-                with open(memory_path, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                memory = TranslationMemory.model_validate(data)
-            except Exception as e:
-                logger.warning("Failed to load memory from %s: %s", memory_path, e)
-                memory = TranslationMemory(last_updated=datetime.now())
-        else:
-            memory = TranslationMemory(last_updated=datetime.now())
-
-        self._memory_cache[namespace] = memory
-        return memory
-
-    def _save_memory(
-        self,
-        memory: TranslationMemory,
-        project_id: Optional[str] = None,
-    ) -> None:
-        """保存翻译记忆（按项目隔离，原子写入）。"""
-        namespace = self._namespace(project_id)
-        memory.last_updated = datetime.now()
-        self._memory_cache[namespace] = memory
-
-        memory_path = self._memory_path(project_id)
-        memory_path.parent.mkdir(parents=True, exist_ok=True)
-        temp_path = memory_path.with_suffix(memory_path.suffix + ".tmp")
-
-        with open(temp_path, "w", encoding="utf-8") as f:
-            json.dump(
-                memory.model_dump(mode="json"),
-                f,
-                ensure_ascii=False,
-                indent=2,
-                default=str,
-            )
-
-        temp_path.replace(memory_path)
-
     @staticmethod
-    def _parse_json_response(response: str) -> dict:
-        """解析 JSON 响应"""
-        text = response.strip()
-        if text.startswith("```"):
-            lines = text.split("\n")
-            if lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            text = "\n".join(lines)
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            return {}
+    def _parse_bullet_list(text: str) -> List[str]:
+        """从 LLM 响应或 markdown 文件中解析 bullet list。"""
+        if not text or text.strip() == "NONE":
+            return []
+        rules = []
+        for line in text.strip().splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                rule = line[2:].strip()
+                if rule:
+                    rules.append(rule)
+        return rules

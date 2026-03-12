@@ -5,7 +5,6 @@ Abstract base class for LLM providers.
 """
 
 from abc import ABC, abstractmethod
-from contextlib import contextmanager
 from typing import Optional, List, Dict, Any
 
 
@@ -86,17 +85,48 @@ class LLMProvider(ABC):
             prompt: 提示词
             response_format: 响应格式，"json" 表示期望 JSON 输出
             temperature: 温度参数
-            model: 可选模型选择器（如 flash/pro/preview 或具体模型 id）
+            model: 可选模型选择器（仅供内部方法覆盖默认模型，如 prescan 使用 flash）
 
         Returns:
             str: 生成的文本
         """
         pass
 
-    @contextmanager
-    def use_model(self, model_selector: Optional[str]):
-        """Temporarily route requests to a specific model when supported."""
-        yield
+    def retranslate(
+        self,
+        source_text: str,
+        current_translation: str,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Retranslate one paragraph with the dedicated longform retranslation prompt."""
+        raise NotImplementedError("This provider does not implement paragraph retranslation.")
+
+    def translate_section(
+        self,
+        section_text: str,
+        section_title: str,
+        context: Dict[str, Any],
+        paragraph_ids: List[str],
+    ) -> List[Dict[str, str]]:
+        """Translate one full section with the dedicated section-batch prompt."""
+        raise NotImplementedError("This provider does not implement section batch translation.")
+
+    def translate_title(
+        self,
+        title: str,
+        context: Optional[Dict[str, Any]] = None,
+        subtitle: Optional[str] = None,
+    ) -> Dict[str, str]:
+        """Translate article title and optional subtitle in one call."""
+        raise NotImplementedError("This provider does not implement article title translation.")
+
+    def translate_section_title(
+        self,
+        title: str,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Translate a section title."""
+        raise NotImplementedError("This provider does not implement section title translation.")
 
     def deep_analyze(self, text: str, sections_outline: str) -> Dict[str, Any]:
         """
@@ -111,34 +141,6 @@ class LLMProvider(ABC):
         """
         # 默认实现调用 generate，子类可以覆盖
         prompt = self._build_deep_analysis_prompt(text, sections_outline)
-        response = self.generate(prompt, response_format="json")
-        return self._parse_json_response(response)
-
-    def understand_section(
-        self,
-        section_content: str,
-        article_theme: str,
-        structure_summary: str,
-        section_titles: List[str],
-        current_index: int
-    ) -> Dict[str, Any]:
-        """
-        理解章节（四步法 Step 1）
-
-        Args:
-            section_content: 章节内容
-            article_theme: 文章主题
-            structure_summary: 结构概述
-            section_titles: 所有章节标题
-            current_index: 当前章节索引
-
-        Returns:
-            Dict: 章节理解结果
-        """
-        prompt = self._build_understanding_prompt(
-            section_content, article_theme, structure_summary,
-            section_titles, current_index
-        )
         response = self.generate(prompt, response_format="json")
         return self._parse_json_response(response)
 
@@ -208,18 +210,21 @@ class LLMProvider(ABC):
         section_id: str,
         section_title: str,
         section_content: str,
-        existing_terms: Dict[str, str]
+        existing_terms: Dict[str, str],
+        model: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
         章节预扫描（方案 C - Phase 1 Step 1）
 
-        使用 Flash 模型快速扫描章节，提取新术语
+        使用 Flash 模型快速扫描章节，提取新术语。
+        长章节自动分段调用并合并去重。
 
         Args:
             section_id: 章节 ID
             section_title: 章节标题
             section_content: 章节内容
             existing_terms: 已有术语表 {term: translation}
+            model: 可选模型覆盖（如 "flash"）
 
         Returns:
             Dict: 预扫描结果
@@ -234,43 +239,84 @@ class LLMProvider(ABC):
             for term, trans in existing_terms.items()
         ]) if existing_terms else "无"
 
-        prompt = self._build_prescan_prompt(
+        if len(section_content) <= 7000:
+            prompt = self._build_prescan_prompt(
+                section_id=section_id,
+                section_title=section_title,
+                section_content=section_content,
+                existing_terms=existing_terms_text
+            )
+            response = self.generate(prompt, response_format="json", temperature=0.3, model=model)
+            return self._parse_json_response(response)
+
+        # 分段处理
+        chunks = self._split_content_for_prescan(section_content, max_chars=6000)
+        all_new_terms: Dict[str, Dict] = {}
+        all_term_usages: Dict[str, list] = {}
+        for i, chunk in enumerate(chunks):
+            prompt = self._build_prescan_prompt(
+                section_id=f"{section_id}_chunk{i}",
+                section_title=section_title,
+                section_content=chunk,
+                existing_terms=existing_terms_text
+            )
+            result = self._parse_json_response(
+                self.generate(prompt, response_format="json", temperature=0.3, model=model)
+            )
+            for t in result.get("new_terms", []):
+                term_key = (t.get("term") or "").lower()
+                if term_key and term_key not in all_new_terms:
+                    all_new_terms[term_key] = t
+            for k, v in result.get("term_usages", {}).items():
+                all_term_usages.setdefault(k, []).extend(v if isinstance(v, list) else [v])
+
+        return {"new_terms": list(all_new_terms.values()), "term_usages": all_term_usages}
+
+    def _split_content_for_prescan(self, content: str, max_chars: int = 6000) -> List[str]:
+        """按段落边界分割内容用于 prescan"""
+        paragraphs = content.split("\n\n")
+        chunks: List[str] = []
+        current_chunk: List[str] = []
+        current_len = 0
+
+        for para in paragraphs:
+            para_len = len(para)
+            if current_len + para_len > max_chars and current_chunk:
+                chunks.append("\n\n".join(current_chunk))
+                current_chunk = []
+                current_len = 0
+            current_chunk.append(para)
+            current_len += para_len + 2  # +2 for "\n\n"
+
+        if current_chunk:
+            chunks.append("\n\n".join(current_chunk))
+
+        return chunks if chunks else [content[:max_chars]]
+
+    def prescan_section_with_flash(
+        self,
+        section_id: str,
+        section_title: str,
+        section_content: str,
+        existing_terms: Dict[str, str],
+    ) -> Dict[str, Any]:
+        """Prescan one section using the flash model for speed."""
+        return self.prescan_section(
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,
-            existing_terms=existing_terms_text
+            existing_terms=existing_terms,
+            model="flash",
         )
-        response = self.generate(prompt, response_format="json", temperature=0.3)
-        return self._parse_json_response(response)
 
     # ============ Prompt Building Methods ============
 
     def _build_deep_analysis_prompt(self, text: str, sections_outline: str) -> str:
         """构建深度分析 Prompt（方案 C：增加到 30000 字符）"""
-        return self.prompt_manager.get("deep_analysis", sections_outline=sections_outline, text=text[:30000])
-
-    def _build_understanding_prompt(
-        self,
-        section_content: str,
-        article_theme: str,
-        structure_summary: str,
-        section_titles: List[str],
-        current_index: int
-    ) -> str:
-        """构建章节理解 Prompt"""
-        titles_text = "\n".join([
-            f"{i+1}. {title}" for i, title in enumerate(section_titles)
-        ])
-        current_title = section_titles[current_index] if current_index < len(section_titles) else ""
-
         return self.prompt_manager.get(
-            "understanding",
-            article_theme=article_theme,
-            structure_summary=structure_summary,
-            titles_text=titles_text,
-            current_index=current_index + 1,
-            current_title=current_title,
-            section_content=section_content[:5000]
+            "longform/analysis/article_analysis.v2",
+            sections_outline=sections_outline,
+            text=text[:30000],
         )
 
     def _build_reflection_prompt(
@@ -298,7 +344,7 @@ class LLMProvider(ABC):
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
         base_prompt = self.prompt_manager.get(
-            "reflection",
+            "longform/review/section_critique.v2",
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text
@@ -320,7 +366,7 @@ class LLMProvider(ABC):
     ) -> str:
         """构建润色 Prompt"""
         base_prompt = self.prompt_manager.get(
-            "refine",
+            "longform/review/paragraph_revision.v2",
             source=source,
             current_translation=current_translation,
             issue_type=issue_type,
@@ -408,6 +454,22 @@ class LLMProvider(ABC):
             return []
 
         blocks: List[str] = []
+        format_tokens = context.get("format_tokens") or []
+        if format_tokens:
+            token_lines = [
+                "## Hidden Format Tokens",
+                "- Source and current translation may contain backend tokens like `[[[LINK_1|...]]]`.",
+                "- Keep the token wrapper, token id, and token order exactly unchanged.",
+                "- Only revise the text after `|`.",
+                "- Do not convert these tokens into Markdown syntax.",
+            ]
+            for token in format_tokens[:8]:
+                token_id = token.get("id", "")
+                token_type = token.get("type", "")
+                token_text = token.get("text", "")
+                if token_id and token_text:
+                    token_lines.append(f"- {token_id} ({token_type}): {token_text}")
+            blocks.append("\n".join(token_lines))
 
         section_lines: List[str] = []
         if context.get("section_title"):
@@ -468,10 +530,10 @@ class LLMProvider(ABC):
     ) -> str:
         """构建章节预扫描 Prompt（方案 C 新增）"""
         return self.prompt_manager.get(
-            "section_prescan",
+            "longform/terminology/section_prescan.v2",
             section_id=section_id,
             section_title=section_title,
-            section_content=section_content[:8000],
+            section_content=section_content,
             existing_terms=existing_terms
         )
 

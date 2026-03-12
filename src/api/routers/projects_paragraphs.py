@@ -1,9 +1,7 @@
-"""
-Paragraph translation/update endpoints.
-"""
+"""Paragraph translation/update endpoints."""
 
 import asyncio
-from typing import List, Optional
+from typing import List
 
 from fastapi import APIRouter
 
@@ -28,16 +26,10 @@ from .projects_models import (
     WordMeaningRequest,
     WordMeaningResponse,
 )
+from .translate_utils import build_retranslate_instruction, get_latest_translation_text
 
 
 router = APIRouter()
-
-
-def _get_latest_translation_text(paragraph) -> Optional[str]:
-    if paragraph.confirmed:
-        return paragraph.confirmed
-    return paragraph.latest_translation_text(non_empty=True)
-
 
 def _find_paragraph(section, paragraph_id: str):
     for index, paragraph in enumerate(section.paragraphs):
@@ -55,36 +47,6 @@ def _build_translation_context(section, para_index: int, glossary, learned_rules
         p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
     ]
     return context
-
-
-def _build_retranslate_instruction(
-    user_instruction: str,
-    source_text: str,
-    current_translation: Optional[str],
-) -> str:
-    """Build a full retranslation prompt so short user input can stay on context."""
-    instruction = user_instruction.strip()
-    if not instruction:
-        return ""
-
-    if "【原文】" in instruction and "【固定要求】" in instruction:
-        return instruction
-
-    _ = source_text
-    _ = current_translation
-    return f"""【重译目标】
-请在不偏离原文的前提下，基于当前段落上下文重写译文。
-
-【用户要求】
-{instruction}
-
-【固定要求】
-1. 以原文为准：信息、事实、逻辑关系不能丢失或改写错误。
-2. 先纠错再优化：若当前译文有误，必须优先修正，再执行用户要求。
-3. 术语一致：专有名词、技术术语、数字和单位保持一致且准确。
-4. 长文风格：表达自然、清晰、可读，避免翻译腔和空洞套话。
-5. 输出约束：仅输出新的完整译文，不要解释，不要 Markdown。"""
-
 
 def _translate_paragraph_sync(
     project_id: str,
@@ -105,8 +67,7 @@ def _translate_paragraph_sync(
         raise NotFoundException(detail="Paragraph not found")
 
     glossary = gm.load_merged(project_id)
-    learned_rules = memory_service.get_relevant_rules(
-        paragraph.source,
+    learned_rules = memory_service.get_rules_for_prompt(
         project_id=project_id,
     )
     context = _build_translation_context(section, para_index, glossary, learned_rules)
@@ -114,32 +75,33 @@ def _translate_paragraph_sync(
     agent = TranslationAgent(llm)
     instruction = (request.instruction or "").strip()
     if instruction:
-        formatted_instruction = _build_retranslate_instruction(
+        formatted_instruction = build_retranslate_instruction(
             instruction,
             paragraph.source,
-            _get_latest_translation_text(paragraph),
+            get_latest_translation_text(paragraph),
         )
-        translation = agent.retranslate_paragraph(
+        payload = agent.retranslate_paragraph(
             paragraph,
             context,
             formatted_instruction,
-            request.model,
         )
     else:
-        translation = agent.translate_paragraph(paragraph, context, request.model)
+        payload = agent.translate_paragraph(paragraph, context)
 
     persisted_paragraph = pm.update_paragraph_locked(
         project_id,
         section_id,
         paragraph_id,
-        translation=translation,
+        translation=payload.text,
+        tokenized_text=payload.tokenized_text,
+        format_issues=payload.format_issues,
         status=ParagraphStatus.TRANSLATED,
-        model=request.model,
+        model="default",
     )
     return {
         "id": persisted_paragraph.id,
         "source": persisted_paragraph.source,
-        "translation": translation,
+        "translation": payload.text,
         "status": persisted_paragraph.status.value,
         "confirmed": persisted_paragraph.confirmed,
     }
@@ -161,30 +123,25 @@ def _direct_translate_paragraph_sync(
     if paragraph is None:
         raise NotFoundException(detail="Paragraph not found")
 
-    simple_prompt = (
-        "请将以下英文翻译成中文：\n\n"
-        f"{paragraph.source}\n\n"
-        "请直接输出中文翻译，不要添加任何解释或说明。"
-    )
-
-    translation = llm.generate(
-        simple_prompt,
-        temperature=0.5,
-        max_retries=2,
-        model=request.model,
+    agent = TranslationAgent(llm)
+    payload = agent.translate_paragraph(
+        paragraph,
+        TranslationContext(),
     )
     persisted_paragraph = pm.update_paragraph_locked(
         project_id,
         section_id,
         paragraph_id,
-        translation=translation,
+        translation=payload.text,
+        tokenized_text=payload.tokenized_text,
+        format_issues=payload.format_issues,
         status=ParagraphStatus.TRANSLATED,
-        model=request.model + "-direct",
+        model="default-direct",
     )
     return {
         "id": persisted_paragraph.id,
         "source": persisted_paragraph.source,
-        "translation": translation,
+        "translation": payload.text,
         "status": persisted_paragraph.status.value,
         "confirmed": persisted_paragraph.confirmed,
         "method": "direct",
@@ -235,7 +192,6 @@ def _query_word_meaning_sync(
         prompt,
         temperature=0.3,
         max_retries=2,
-        model=request.model,
     )
     return WordMeaningResponse(answer=answer.strip())
 
@@ -283,7 +239,7 @@ def _update_paragraph_sync(
         previous_translation = existing_paragraph.latest_translation_text(non_empty=True)
 
     status = ParagraphStatus(request.status) if request.status else None
-    current_translation = _get_latest_translation_text(existing_paragraph)
+    current_translation = get_latest_translation_text(existing_paragraph)
     if request.translation is not None and status is None:
         if existing_paragraph.status == ParagraphStatus.PENDING and request.translation.strip():
             status = ParagraphStatus.TRANSLATED
@@ -360,40 +316,40 @@ def _batch_translate_paragraphs_sync(
         para_index, paragraph = paragraph_map[paragraph_id]
 
         try:
-            learned_rules = memory_service.get_relevant_rules(
-                paragraph.source,
+            learned_rules = memory_service.get_rules_for_prompt(
                 project_id=project_id,
             )
             context = _build_translation_context(section, para_index, glossary, learned_rules)
 
             instruction = (request.instruction or "").strip()
             if instruction:
-                formatted_instruction = _build_retranslate_instruction(
+                formatted_instruction = build_retranslate_instruction(
                     instruction,
                     paragraph.source,
-                    _get_latest_translation_text(paragraph),
+                    get_latest_translation_text(paragraph),
                 )
-                translation = agent.retranslate_paragraph(
+                payload = agent.retranslate_paragraph(
                     paragraph,
                     context,
                     formatted_instruction,
-                    request.model,
                 )
             else:
-                translation = agent.translate_paragraph(paragraph, context, request.model)
+                payload = agent.translate_paragraph(paragraph, context)
 
             persisted_paragraph = pm.update_paragraph_locked(
                 project_id,
                 section_id,
                 paragraph_id,
-                translation=translation,
+                translation=payload.text,
+                tokenized_text=payload.tokenized_text,
+                format_issues=payload.format_issues,
                 status=ParagraphStatus.TRANSLATED,
-                model=request.model,
+                model="default",
             )
             translations.append(
                 {
                     "id": paragraph.id,
-                    "translation": translation,
+                    "translation": payload.text,
                     "status": persisted_paragraph.status.value,
                     "confirmed": persisted_paragraph.confirmed,
                 }

@@ -16,11 +16,12 @@ import { SectionView } from './components/SectionView';
 import { TerminologyReviewPage } from './components/TerminologyReviewPage';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { useFullTranslate, useProject, useSection } from './hooks';
+import { fullTranslationService } from './services/fullTranslationService';
+import type { TermConflictData } from './services/fullTranslationService';
 
 type DocumentView = 'glossary' | 'term-review' | null;
 
 interface PendingTranslationRequest {
-  model?: string;
   method: TranslationMethod;
 }
 
@@ -46,6 +47,27 @@ export function DocumentFeature() {
   const [pendingTranslationRequest, setPendingTranslationRequest] =
     useState<PendingTranslationRequest | null>(null);
   const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
+
+  // 术语冲突对话框状态
+  const [conflictDialogOpen, setConflictDialogOpen] = useState(false);
+  const [currentConflict, setCurrentConflict] = useState<TermConflictData | null>(null);
+  const [conflictResolver, setConflictResolver] = useState<{
+    resolve: (value: { chosenTranslation: string; applyToAll: boolean }) => void;
+  } | null>(null);
+
+  // 注册术语冲突回调
+  useEffect(() => {
+    fullTranslationService.setTermConflictCallback(async (conflict) => {
+      return new Promise((resolve) => {
+        setCurrentConflict(conflict);
+        setConflictDialogOpen(true);
+        setConflictResolver({ resolve });
+      });
+    });
+    return () => {
+      fullTranslationService.setTermConflictCallback(null);
+    };
+  }, []);
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
@@ -197,7 +219,7 @@ export function DocumentFeature() {
   }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
 
   const runFullTranslate = useCallback(
-    async (model?: string, method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
+    async (method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
       if (!currentProject) return;
 
       const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
@@ -214,7 +236,6 @@ export function DocumentFeature() {
             refetchSection();
           }
         },
-        model,
         methodType
       );
     },
@@ -222,13 +243,13 @@ export function DocumentFeature() {
   );
 
   const prepareTermReviewIfNeeded = useCallback(
-    async (model?: string, method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
+    async (method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
       if (!currentProject) return false;
 
       const review = await glossaryApi.prepareTermReview(currentProject.id);
       if (review.review_required && review.total_candidates > 0) {
         setPendingTermReview(review);
-        setPendingTranslationRequest({ model, method });
+        setPendingTranslationRequest({ method });
         setView('term-review');
         showToast(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`, 'info');
         return true;
@@ -240,7 +261,7 @@ export function DocumentFeature() {
   );
 
   const handleFullTranslate = useCallback(
-    async (model?: string, method?: TranslationMethod) => {
+    async (method?: TranslationMethod) => {
       if (!currentProject) return;
 
       if (isFullTranslating) {
@@ -263,9 +284,9 @@ export function DocumentFeature() {
       }
 
       setCurrentStep(null);
-      const intercepted = await prepareTermReviewIfNeeded(model, selectedMethod);
+      const intercepted = await prepareTermReviewIfNeeded(selectedMethod);
       if (!intercepted) {
-        await runFullTranslate(model, selectedMethod);
+        await runFullTranslate(selectedMethod);
       }
     },
     [
@@ -291,7 +312,6 @@ export function DocumentFeature() {
         setView(null);
         showToast('术语预检已保存，开始全文翻译', 'success');
         await runFullTranslate(
-          pendingTranslationRequest.model,
           pendingTranslationRequest.method
         );
       } catch (error) {
@@ -444,6 +464,54 @@ export function DocumentFeature() {
         onClose={() => setIsNewProjectModalOpen(false)}
         onProjectCreated={handleProjectCreated}
       />
+
+      {/* 术语冲突对话框 */}
+      {conflictDialogOpen && currentConflict && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
+            <h3 className="text-lg font-semibold mb-3">术语冲突</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+              术语 <strong>&ldquo;{currentConflict.term}&rdquo;</strong> 存在不同翻译：
+            </p>
+            <div className="space-y-2 mb-4">
+              <button
+                className="w-full text-left p-3 border rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
+                onClick={() => {
+                  conflictResolver?.resolve({
+                    chosenTranslation: currentConflict.existing_translation,
+                    applyToAll: true,
+                  });
+                  setConflictDialogOpen(false);
+                  setCurrentConflict(null);
+                  setConflictResolver(null);
+                }}
+              >
+                <div className="font-medium">保留现有：{currentConflict.existing_translation}</div>
+                {currentConflict.existing_context && (
+                  <div className="text-xs text-gray-500 mt-1">{currentConflict.existing_context}</div>
+                )}
+              </button>
+              <button
+                className="w-full text-left p-3 border rounded hover:bg-green-50 dark:hover:bg-green-900/30"
+                onClick={() => {
+                  conflictResolver?.resolve({
+                    chosenTranslation: currentConflict.new_translation,
+                    applyToAll: true,
+                  });
+                  setConflictDialogOpen(false);
+                  setCurrentConflict(null);
+                  setConflictResolver(null);
+                }}
+              >
+                <div className="font-medium">使用新翻译：{currentConflict.new_translation}</div>
+                {currentConflict.new_context && (
+                  <div className="text-xs text-gray-500 mt-1">{currentConflict.new_context}</div>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

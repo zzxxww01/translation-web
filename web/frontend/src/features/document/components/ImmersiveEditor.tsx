@@ -1,7 +1,7 @@
 import { Check, CheckSquare, RotateCw, X } from 'lucide-react';
 import { type UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '../../../components/ui';
-import { DEFAULT_MODEL, MODEL_OPTIONS, ParagraphStatus } from '../../../shared/constants';
+import { ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
 import { useImmersiveEditor } from '../hooks/useImmersiveEditor';
@@ -70,7 +70,6 @@ export function ImmersiveEditor({
   const paragraphs = latestSection.paragraphs ?? EMPTY_PARAGRAPHS;
 
   const [filterMode] = useState<FilterMode>('all');
-  const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
   const [chunkState, setChunkState] = useState({ key: '', extra: 0 });
   const [showBatchRetranslateDialog, setShowBatchRetranslateDialog] = useState(false);
   const listContainerRef = useRef<HTMLDivElement>(null);
@@ -236,10 +235,10 @@ export function ImmersiveEditor({
     (template: RetranslateTemplate) => {
       const templateData = RETRANSLATE_TEMPLATES.find(item => item.id === template);
       const instruction = templateData?.instruction;
-      void batchRetranslate(selectedModel, instruction);
+      void batchRetranslate(instruction);
       setShowBatchRetranslateDialog(false);
     },
-    [batchRetranslate, selectedModel]
+    [batchRetranslate]
   );
 
   return (
@@ -293,18 +292,6 @@ export function ImmersiveEditor({
                 </button>
               </div>
             )}
-            <select
-              value={selectedModel}
-              onChange={event => setSelectedModel(event.target.value)}
-              className="rounded-lg border border-border bg-bg-secondary px-3 py-2 text-sm text-text-primary outline-none hover:bg-bg-tertiary"
-              title="选择模型"
-            >
-              {MODEL_OPTIONS.map(model => (
-                <option key={model.id} value={model.id}>
-                  {model.name}
-                </option>
-              ))}
-            </select>
 
             <button
               onClick={handleClose}
@@ -337,7 +324,7 @@ export function ImmersiveEditor({
                 retranslateError={retranslateErrorMap[paragraph.id]}
                 onChange={value => updateDraft(paragraph.id, value)}
                 onRetranslate={(instruction?: string) =>
-                  queueRetranslate(paragraph.id, selectedModel, instruction)
+                  queueRetranslate(paragraph.id, instruction)
                 }
                 onConfirm={() => void confirmParagraph(paragraph.id)}
                 isSelectionMode={isSelectionMode}

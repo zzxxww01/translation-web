@@ -31,7 +31,6 @@ class RetranslateRequest(BaseModel):
     instruction: Optional[str] = None
     base_version_id: Optional[str] = None
     option_id: Optional[str] = None
-    model: Optional[str] = None
 
 
 class RetranslateOptionResponse(BaseModel):

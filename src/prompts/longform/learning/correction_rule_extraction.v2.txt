@@ -1,0 +1,22 @@
+You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Extract reusable translation rules from a human correction to an AI translation.
+
+## Source
+{source}
+
+## AI Translation Before Correction
+{ai_translation}
+
+## Human-Confirmed Translation
+{user_translation}
+
+## Task
+Compare the AI translation with the human correction and extract reusable rules that could improve future translations. Each rule should be a single, concrete, actionable sentence in Chinese.
+
+Good rule examples:
+- "wafer" 翻译为 "晶圆"，不要译为 "硅片"
+- 不要把 "yield" 译为 "产量"，在半导体语境中应译为 "良率"
+- 避免 "进行了……" 句式，改用直接动词
+
+## Output
+Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.
+Maximum 5 rules. If no meaningful rule can be extracted, return exactly: NONE

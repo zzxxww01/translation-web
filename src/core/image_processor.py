@@ -4,14 +4,18 @@ Image Processor - 图片处理器
 处理文档中的图片：下载、本地化、alt文本生成、图注翻译
 """
 
-from typing import Optional, Dict, Any, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 import os
 import re
 import hashlib
 from pathlib import Path
 from dataclasses import dataclass
-import aiohttp
 import asyncio
+
+try:
+    import aiohttp
+except ImportError:  # pragma: no cover - optional dependency in some test envs
+    aiohttp: Any = None
 
 
 @dataclass
@@ -99,6 +103,11 @@ class ImageProcessor:
         if not image_info:
             image_info = ImageInfo(original_url=url)
             self.images[url] = image_info
+
+        if aiohttp is None:
+            image_info.download_status = "failed"
+            image_info.error_message = "aiohttp is not installed"
+            return image_info
 
         try:
             # 生成本地文件名

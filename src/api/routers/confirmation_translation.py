@@ -9,6 +9,7 @@ import uuid
 from fastapi import APIRouter
 
 from src.agents.translation import TranslationAgent, TranslationContext
+from src.core.format_tokens import apply_translation_payload
 from src.api.utils.glossary import get_combined_glossary
 
 from ..dependencies import (
@@ -25,6 +26,7 @@ from .confirmation_models import (
     RetranslateRequest,
     RETRANSLATE_OPTIONS,
 )
+from .translate_utils import build_retranslate_instruction, get_latest_translation_text
 
 
 router = APIRouter()
@@ -146,8 +148,7 @@ async def retranslate_paragraph(
         glossary = get_combined_glossary(project_id)
 
         # 加载已学习的翻译规则
-        learned_rules = memory_service.get_relevant_rules(
-            target_paragraph.source,
+        learned_rules = memory_service.get_rules_for_prompt(
             project_id=project_id,
         )
 
@@ -163,7 +164,6 @@ async def retranslate_paragraph(
         ]
 
         instruction = request.instruction or ""
-        model_name = request.model or "pro"
 
         # 记录重翻前的译文
         old_translation = None
@@ -172,12 +172,17 @@ async def retranslate_paragraph(
             old_translation = latest.text
 
         agent = TranslationAgent(llm)
-        translation = agent.retranslate_paragraph(
+        formatted_instruction = build_retranslate_instruction(
+            instruction,
+            target_paragraph.source,
+            get_latest_translation_text(target_paragraph),
+        )
+        payload = agent.retranslate_paragraph(
             target_paragraph,
             context,
-            instruction=instruction,
-            model_name=model_name,
+            instruction=formatted_instruction,
         )
+        apply_translation_payload(target_paragraph, payload, "default")
 
         pm.save_section(project_id, target_section)
         await service.invalidate_project_cache(project_id)
@@ -189,23 +194,20 @@ async def retranslate_paragraph(
                     instruction,
                     target_paragraph.source,
                     old_translation,
-                    translation,
+                    payload.text,
                     project_id=project_id,
                 )
             )
 
         new_version_id = f"retranslate_{uuid.uuid4().hex[:8]}"
-        version_obj = target_paragraph.translations.get(model_name)
-        if version_obj is None:
-            version_obj = target_paragraph.latest_translation(non_empty=True)
+        version_obj = target_paragraph.latest_translation(non_empty=True)
         created_at = version_obj.created_at if version_obj else datetime.now()
 
         return {
             "version_id": new_version_id,
             "paragraph_id": paragraph_id,
-            "translation": translation,
+            "translation": payload.text,
             "instruction": instruction,
-            "model": model_name,
             "created_at": created_at.isoformat(),
         }
 
@@ -324,32 +326,21 @@ async def get_translation_rules(
     rules = memory_service.get_all_rules(project_id=project_id)
     return {
         "rules": [
-            {
-                "id": r.id,
-                "wrong": r.wrong,
-                "right": r.right,
-                "instruction": r.instruction,
-                "rule_type": r.rule_type.value,
-                "category": r.category.value,
-                "source_context": r.source_context,
-                "created_at": r.created_at.isoformat(),
-                "hit_count": r.hit_count,
-                "confidence": r.confidence,
-            }
-            for r in rules
+            {"index": i, "text": r}
+            for i, r in enumerate(rules)
         ],
         "total": len(rules),
     }
 
 
-@router.delete("/{project_id}/translation-rules/{rule_id}")
+@router.delete("/{project_id}/translation-rules/{rule_index}")
 async def delete_translation_rule(
     project_id: str,
-    rule_id: str,
+    rule_index: int,
     memory_service: MemoryServiceDep,
 ):
-    """删除指定的翻译规则"""
-    deleted = memory_service.delete_rule(rule_id, project_id=project_id)
+    """删除指定索引的翻译规则"""
+    deleted = memory_service.delete_rule_by_index(rule_index, project_id=project_id)
     if not deleted:
-        raise NotFoundException(detail=f"Rule {rule_id} not found")
-    return {"deleted": True, "rule_id": rule_id}
+        raise NotFoundException(detail=f"Rule at index {rule_index} not found")
+    return {"deleted": True, "index": rule_index}

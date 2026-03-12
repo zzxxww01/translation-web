@@ -98,7 +98,11 @@ class LayeredContextManager:
             context.article_theme = self.article_analysis.theme
             context.article_structure = self.article_analysis.structure_summary
             context.guidelines = self.article_analysis.guidelines
-            context.terminology = self._get_relevant_terms(current_section)
+            # 获取当前段落文本用于段落级过滤
+            paragraph_text = ""
+            if 0 <= current_paragraph_index < len(current_section.paragraphs):
+                paragraph_text = current_section.paragraphs[current_paragraph_index].source
+            context.terminology = self._get_relevant_terms(current_section, paragraph_text)
 
         # Layer 2: 章节级上下文
         section_index = self._get_section_index(current_section, all_sections)
@@ -271,6 +275,11 @@ class LayeredContextManager:
                 # 记录首次出现
                 if prescan_term.term.lower() not in self.term_tracker.first_occurrences:
                     self.term_tracker.first_occurrences[prescan_term.term.lower()] = section_id
+                # 回流到 article_analysis.terminology
+                if self.article_analysis:
+                    existing_terms_lower = {t.term.lower() for t in self.article_analysis.terminology}
+                    if enhanced_term.term.lower() not in existing_terms_lower:
+                        self.article_analysis.terminology.append(enhanced_term)
 
         return conflicts
 
@@ -371,30 +380,39 @@ class LayeredContextManager:
                 return i
         return 0
 
-    def _get_relevant_terms(self, section: Section) -> List[EnhancedTerm]:
+    def _get_relevant_terms(self, section: Section, paragraph_text: str = "") -> List[EnhancedTerm]:
         """
-        获取与当前章节相关的术语
+        获取与当前段落相关的术语
 
-        优先返回：
-        1. 在当前章节首次出现的术语
-        2. 之前章节已使用过的术语
+        合并 article_analysis.terminology 和 terminology_version 中的术语，
+        有段落文本时只保留出现在段落中的术语。
         """
         if not self.article_analysis:
             return []
 
+        # 合并 article_analysis.terminology + terminology_version 中的术语
+        all_terms: List[EnhancedTerm] = list(self.article_analysis.terminology)
+        seen_keys = {t.term.lower() for t in all_terms}
+        for key, enhanced in self.terminology_version.terms.items():
+            if key not in seen_keys:
+                all_terms.append(enhanced)
+
+        para_lower = paragraph_text.lower() if paragraph_text else ""
         relevant = []
-        for term in self.article_analysis.terminology:
-            # 检查是否已使用过
-            if term.term in self.term_tracker.used_translations:
-                # 已使用过，添加实际使用的翻译
+
+        for term in all_terms:
+            # 检查是否已使用过，用 .lower() 统一查询
+            if term.term.lower() in self.term_tracker.used_translations:
                 used_trans = self.term_tracker.get_preferred_translation(term.term)
                 if used_trans:
-                    term_copy = term.model_copy()
-                    term_copy.translation = used_trans
-                    relevant.append(term_copy)
-            else:
-                # 未使用过，使用建议翻译
-                relevant.append(term)
+                    term = term.model_copy()
+                    term.translation = used_trans
+
+            # 段落级过滤：有段落文本时只保留出现在段落中的术语
+            if para_lower and term.term.lower() not in para_lower:
+                continue
+
+            relevant.append(term)
 
         return relevant
 
