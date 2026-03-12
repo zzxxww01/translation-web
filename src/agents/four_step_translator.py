@@ -24,7 +24,13 @@ from ..core.longform_context import (
     build_section_context_payload,
     build_translation_guidelines,
 )
-from ..core.format_tokens import TranslationPayload, build_translation_input, build_translation_payload, format_token_context
+from ..core.format_tokens import (
+    TranslationPayload,
+    build_dehydrated_link_payload,
+    build_translation_input,
+    build_translation_payload,
+    format_token_context,
+)
 from ..core.models import (
     Section, Paragraph,
     ArticleAnalysis, SectionUnderstanding,
@@ -398,7 +404,10 @@ class FourStepTranslator:
         paragraph: Paragraph,
         context: LayeredContext
     ) -> TranslationPayload:
-        """翻译单个段落"""
+        dehydrated_payload = build_dehydrated_link_payload(paragraph)
+        if dehydrated_payload is not None:
+            return dehydrated_payload
+
         # 构建翻译上下文
         llm_context = self._build_translation_context(context)
         if paragraph.inline_elements:
@@ -409,7 +418,11 @@ class FourStepTranslator:
         prompt_text = prepared.tokenized_text or prepared.text
         translation = self.llm.translate(prompt_text, llm_context)
 
-        return build_translation_payload(paragraph, translation.strip())
+        return build_translation_payload(
+            paragraph,
+            translation.strip(),
+            token_repairer=self._repair_format_tokens,
+        )
 
     def _build_translation_context(self, context: LayeredContext) -> Dict[str, Any]:
         """构建 LLM 翻译上下文"""
@@ -608,6 +621,10 @@ class FourStepTranslator:
             if 0 <= idx < len(refined):
                 # 获取原文
                 paragraph = section.paragraphs[idx]
+                dehydrated_payload = build_dehydrated_link_payload(paragraph)
+                if dehydrated_payload is not None:
+                    refined[idx] = dehydrated_payload
+                    continue
                 current_payload = refined[idx]
                 refine_context = self._build_refine_context(section, understanding)
                 source = paragraph.source
@@ -637,7 +654,11 @@ class FourStepTranslator:
                 stripped = refined_text.strip()
 
                 if paragraph.inline_elements:
-                    candidate = build_translation_payload(paragraph, stripped)
+                    candidate = build_translation_payload(
+                        paragraph,
+                        stripped,
+                        token_repairer=self._repair_format_tokens,
+                    )
                     if candidate.format_valid:
                         refined[idx] = candidate
                     continue
@@ -676,6 +697,24 @@ class FourStepTranslator:
                     terms_used[term.term] = term.translation
 
         return terms_used
+
+    def _repair_format_tokens(
+        self,
+        paragraph: Paragraph,
+        translated_tokenized_text: str,
+        issues: List[str],
+    ) -> Optional[str]:
+        if not paragraph.inline_elements:
+            return None
+
+        prepared = build_translation_input(paragraph)
+        return self.llm.repair_format_tokens(
+            source_text=prepared.tokenized_text or prepared.text,
+            translated_text=translated_tokenized_text,
+            format_tokens=format_token_context(paragraph),
+            issues=issues,
+            model="flash",
+        )
 
 
 def create_four_step_translator(

@@ -8,6 +8,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple
 from ..core.format_tokens import (
     TranslationPayload,
     apply_translation_payload,
+    build_dehydrated_link_payload,
     build_translation_input,
     build_translation_payload,
     format_token_context,
@@ -77,13 +78,21 @@ class TranslationAgent:
         paragraph: Paragraph,
         context: TranslationContext,
     ) -> TranslationPayload:
+        dehydrated_payload = build_dehydrated_link_payload(paragraph)
+        if dehydrated_payload is not None:
+            return dehydrated_payload
+
         translation_input = build_translation_input(paragraph)
         context.source_text = paragraph.source
         llm_context = self._build_llm_context(context, paragraph)
 
         prompt_text = translation_input.tokenized_text or translation_input.text
         translated = self.llm.translate(prompt_text, llm_context)
-        payload = build_translation_payload(paragraph, translated)
+        payload = build_translation_payload(
+            paragraph,
+            translated,
+            token_repairer=self._repair_format_tokens,
+        )
         return payload
 
     def translate_section(
@@ -121,6 +130,10 @@ class TranslationAgent:
         context: TranslationContext,
         instruction: Optional[str] = None,
     ) -> TranslationPayload:
+        dehydrated_payload = build_dehydrated_link_payload(paragraph)
+        if dehydrated_payload is not None:
+            return dehydrated_payload
+
         translation_input = build_translation_input(paragraph)
         context.source_text = paragraph.source
         llm_context = self._build_llm_context(context, paragraph)
@@ -139,7 +152,11 @@ class TranslationAgent:
             current_translation=current_translation,
             context=llm_context,
         )
-        return build_translation_payload(paragraph, translated)
+        return build_translation_payload(
+            paragraph,
+            translated,
+            token_repairer=self._repair_format_tokens,
+        )
 
     def _build_llm_context(
         self,
@@ -188,6 +205,24 @@ class TranslationAgent:
         for paragraph in paragraphs:
             if paragraph.status == ParagraphStatus.APPROVED and paragraph.confirmed:
                 self.context_window.add_confirmed(paragraph.source, paragraph.confirmed)
+
+    def _repair_format_tokens(
+        self,
+        paragraph: Paragraph,
+        translated_tokenized_text: str,
+        issues: List[str],
+    ) -> Optional[str]:
+        if not paragraph.inline_elements:
+            return None
+
+        prepared = build_translation_input(paragraph)
+        return self.llm.repair_format_tokens(
+            source_text=prepared.tokenized_text or prepared.text,
+            translated_text=translated_tokenized_text,
+            format_tokens=format_token_context(paragraph),
+            issues=issues,
+            model="flash",
+        )
 
 
 def create_translation_agent(

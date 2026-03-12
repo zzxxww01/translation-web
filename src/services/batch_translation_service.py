@@ -37,6 +37,7 @@ from src.core.models import (
 from src.core.format_tokens import (
     TranslationPayload,
     apply_translation_payload,
+    build_dehydrated_link_payload,
     build_translation_input,
     build_translation_payload,
 )
@@ -937,7 +938,11 @@ class BatchTranslationService:
 
             paragraph = paragraph_map.get(para_id)
             if paragraph:
-                payload = build_translation_payload(paragraph, translation)
+                payload = build_translation_payload(
+                    paragraph,
+                    translation,
+                    token_repairer=self._repair_format_tokens,
+                )
                 apply_translation_payload(paragraph, payload, "pro")
                 paragraph.status = ParagraphStatus.TRANSLATED
                 collected.append(payload.text)
@@ -953,15 +958,27 @@ class BatchTranslationService:
 
             paragraph = section.paragraphs[index]
             payload = outputs[index] if index < len(outputs) else None
-            translation_payload = (
-                TranslationPayload(
-                    text=translation,
-                    tokenized_text=payload.get("tokenized_text"),
-                    format_issues=list(payload.get("format_issues") or []),
+            if paragraph.inline_elements:
+                candidate_text = (
+                    payload.get("tokenized_text")
+                    if payload and isinstance(payload.get("tokenized_text"), str)
+                    else translation
                 )
-                if payload
-                else build_translation_payload(paragraph, translation)
-            )
+                translation_payload = build_translation_payload(
+                    paragraph,
+                    candidate_text,
+                    token_repairer=self._repair_format_tokens,
+                )
+            else:
+                translation_payload = (
+                    TranslationPayload(
+                        text=translation,
+                        tokenized_text=payload.get("tokenized_text"),
+                        format_issues=list(payload.get("format_issues") or []),
+                    )
+                    if payload
+                    else build_translation_payload(paragraph, translation)
+                )
             apply_translation_payload(
                 paragraph,
                 translation_payload,
@@ -971,6 +988,32 @@ class BatchTranslationService:
 
             if not hasattr(paragraph, "ai_insight"):
                 paragraph.ai_insight = self._build_ai_insight(result, paragraph, index)
+
+    def _repair_format_tokens(
+        self,
+        paragraph: Paragraph,
+        translated_tokenized_text: str,
+        issues: List[str],
+    ) -> Optional[str]:
+        if not paragraph.inline_elements:
+            return None
+
+        prepared = build_translation_input(paragraph)
+        return self.llm.repair_format_tokens(
+            source_text=prepared.tokenized_text or prepared.text,
+            translated_text=translated_tokenized_text,
+            format_tokens=[
+                {
+                    "id": element.span_id,
+                    "type": element.type,
+                    "text": element.text,
+                }
+                for element in (paragraph.inline_elements or [])
+                if element.span_id
+            ],
+            issues=issues,
+            model="flash",
+        )
 
     def _collect_section_translations(self, section: Section) -> List[str]:
         """Collect best-effort translation text for a section."""
@@ -1210,31 +1253,76 @@ class BatchTranslationService:
             project: 项目元信息
             analysis: 文章分析结果
         """
+        pending: List[Dict[str, Any]] = []
         for section_index, section in enumerate(project.sections):
             if section.title and not section.title_translation:
-                try:
-                    section.title_translation = self.llm.translate_section_title(
-                        section.title,
-                        context={
-                            "article_theme": analysis.theme,
-                            "context": "Section heading inside a long-form article",
-                            "previous_section_title": (
-                                project.sections[section_index - 1].title
-                                if section_index > 0
-                                else ""
-                            ),
-                            "next_section_title": (
-                                project.sections[section_index + 1].title
-                                if section_index < len(project.sections) - 1
-                                else ""
-                            ),
-                        },
-                    )
-                    logger.info(
-                        f"Section title translated: {section.title} -> {section.title_translation}"
-                    )
-                except Exception as e:
-                    logger.error(f"Failed to translate section title: {e}")
+                pending.append(
+                    {
+                        "id": section.section_id,
+                        "title": section.title,
+                        "prev": (
+                            project.sections[section_index - 1].title
+                            if section_index > 0
+                            else ""
+                        ),
+                        "next": (
+                            project.sections[section_index + 1].title
+                            if section_index < len(project.sections) - 1
+                            else ""
+                        ),
+                    }
+                )
+
+        if not pending:
+            return
+
+        try:
+            translated_map = self.llm.translate_all_section_titles(
+                pending,
+                article_theme=analysis.theme,
+            )
+        except Exception as exc:
+            logger.error("Failed to batch translate section titles: %s", exc)
+            translated_map = {}
+
+        for section_index, section in enumerate(project.sections):
+            if not section.title or section.title_translation:
+                continue
+            translated_title = str(translated_map.get(section.section_id, "")).strip()
+            if translated_title:
+                section.title_translation = translated_title
+                logger.info(
+                    "Section title translated (batch): %s -> %s",
+                    section.title,
+                    section.title_translation,
+                )
+                continue
+
+            try:
+                section.title_translation = self.llm.translate_section_title(
+                    section.title,
+                    context={
+                        "article_theme": analysis.theme,
+                        "context": "Section heading inside a long-form article",
+                        "previous_section_title": (
+                            project.sections[section_index - 1].title
+                            if section_index > 0
+                            else ""
+                        ),
+                        "next_section_title": (
+                            project.sections[section_index + 1].title
+                            if section_index < len(project.sections) - 1
+                            else ""
+                        ),
+                    },
+                )
+                logger.info(
+                    "Section title translated (fallback): %s -> %s",
+                    section.title,
+                    section.title_translation,
+                )
+            except Exception as exc:
+                logger.error("Failed to fallback translate section title: %s", exc)
 
     async def _translate_section_batch(
         self,
@@ -1262,10 +1350,21 @@ class BatchTranslationService:
         # 构建章节文本（带段落ID）
         section_lines = []
         paragraph_ids = []
+        dehydrated_translations: List[Dict[str, str]] = []
 
         format_tokens = []
         token_count = 0
         for para in section.paragraphs:
+            dehydrated_payload = build_dehydrated_link_payload(para)
+            if dehydrated_payload is not None and dehydrated_payload.tokenized_text:
+                dehydrated_translations.append(
+                    {
+                        "id": para.id,
+                        "translation": dehydrated_payload.tokenized_text,
+                    }
+                )
+                continue
+
             prepared = build_translation_input(para)
             prompt_text = prepared.tokenized_text or prepared.text
             section_lines.append(f"[{para.id}] {prompt_text}")
@@ -1322,9 +1421,13 @@ class BatchTranslationService:
             "format_token_count": token_count,
         }
 
-        return self.llm.translate_section(
+        if not section_lines:
+            return dehydrated_translations
+
+        translated = self.llm.translate_section(
             section_text=section_text,
             section_title=section.title,
             context=context,
             paragraph_ids=paragraph_ids,
         )
+        return [*translated, *dehydrated_translations]

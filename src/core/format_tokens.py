@@ -1,11 +1,11 @@
-"""Helpers for hidden format-token translation and export reconstruction."""
+﻿"""Helpers for hidden format-token translation and export reconstruction."""
 
 from __future__ import annotations
 
 import html
 import re
 from dataclasses import dataclass, field
-from typing import Iterable, List, Optional, Sequence
+from typing import Callable, Iterable, List, Optional, Sequence
 
 from .models import InlineElement, Paragraph
 
@@ -21,6 +21,21 @@ TOKEN_TYPE_MAP = {
 TOKEN_PATTERN = re.compile(
     r"\[\[\[(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\|(?P<text>.*?)\]\]\]",
     re.DOTALL,
+)
+# Re-assign using ASCII + Unicode escapes so source encoding issues do not break these patterns.
+LOOSE_TOKEN_PATTERN = re.compile(
+    r"\[{2,}\s*(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\s*(?:\||\uFF5C)(?P<text>.*?)\]{2,}",
+    re.DOTALL,
+)
+LINK_SEPARATOR_PATTERN = re.compile(
+    r"^[\s,.;:|/\\\-+&()\[\]{}<>!\?\u3001\u3002\uFF0C\uFF1B\uFF1A\u00B7\u2022\uFF01\uFF1F\u2014\u2013]*$"
+)
+FULLWIDTH_TOKEN_TRANSLATION = str.maketrans(
+    {
+        "\uFF3B": "[",
+        "\uFF3D": "]",
+        "\uFF5C": "|",
+    }
 )
 
 
@@ -39,6 +54,9 @@ class TranslationPayload:
     @property
     def format_valid(self) -> bool:
         return not self.format_issues
+
+
+TokenRepairer = Callable[[Paragraph, str, List[str]], Optional[str]]
 
 
 def assign_span_ids(elements: Optional[Sequence[InlineElement]]) -> List[InlineElement]:
@@ -94,6 +112,65 @@ def strip_token_markup(tokenized_text: str) -> str:
     if not tokenized_text:
         return tokenized_text
     return TOKEN_PATTERN.sub(lambda match: match.group("text"), tokenized_text)
+
+
+def canonicalize_tokenized_markup(tokenized_text: str) -> str:
+    """Normalize near-miss token wrappers into canonical `[[[TOKEN|text]]]` form."""
+    if not tokenized_text:
+        return tokenized_text
+    normalized = tokenized_text.translate(FULLWIDTH_TOKEN_TRANSLATION)
+    return LOOSE_TOKEN_PATTERN.sub(
+        lambda match: f"[[[{match.group('token')}|{match.group('text')}]]]",
+        normalized,
+    )
+
+
+def is_dehydratable_link_cluster(paragraph: Paragraph) -> bool:
+    """Whether one segment is a pure link cluster that can skip LLM translation."""
+    if not paragraph.inline_elements:
+        return False
+
+    assigned = assign_span_ids(paragraph.inline_elements)
+    if len(assigned) < 2:
+        return False
+    if any(element.type != "link" for element in assigned):
+        return False
+
+    text = paragraph.source or ""
+    ordered = sorted(assigned, key=lambda item: item.start)
+    cursor = 0
+    for element in ordered:
+        if element.start < cursor or element.end > len(text) or element.start >= element.end:
+            return False
+
+        separator = text[cursor : element.start]
+        if not LINK_SEPARATOR_PATTERN.fullmatch(separator):
+            return False
+
+        # Ignore empty/blank anchors, they are unsafe to dehydrate.
+        if not element.text.strip():
+            return False
+        cursor = element.end
+
+    tail = text[cursor:]
+    return LINK_SEPARATOR_PATTERN.fullmatch(tail) is not None
+
+
+def build_dehydrated_link_payload(paragraph: Paragraph) -> Optional[TranslationPayload]:
+    """Build a stable payload for pure link clusters without sending text to the LLM."""
+    if not is_dehydratable_link_cluster(paragraph):
+        return None
+
+    tokenized_source = tokenize_text(paragraph.source, paragraph.inline_elements)
+    issues = validate_tokenized_text(tokenized_source, paragraph.inline_elements)
+    if issues:
+        return None
+
+    return TranslationPayload(
+        text=paragraph.source,
+        tokenized_text=tokenized_source,
+        format_issues=[],
+    )
 
 
 def validate_tokenized_text(
@@ -220,18 +297,38 @@ def restore_html_from_tokenized(
 def build_translation_payload(
     paragraph: Paragraph,
     translated_tokenized_text: str,
+    token_repairer: Optional[TokenRepairer] = None,
 ) -> TranslationPayload:
     """Normalize model output into a saved translation payload."""
+    candidate = (translated_tokenized_text or "").strip()
     if not paragraph.inline_elements:
         return TranslationPayload(
-            text=translated_tokenized_text,
+            text=candidate,
             tokenized_text=None,
             format_issues=[],
         )
-    issues = validate_tokenized_text(translated_tokenized_text, paragraph.inline_elements)
+
+    candidate = canonicalize_tokenized_markup(candidate)
+    issues = validate_tokenized_text(candidate, paragraph.inline_elements)
+
+    if issues and token_repairer:
+        try:
+            repaired_text = token_repairer(paragraph, candidate, list(issues))
+        except Exception:
+            repaired_text = None
+        if isinstance(repaired_text, str) and repaired_text.strip():
+            repaired_candidate = canonicalize_tokenized_markup(repaired_text.strip())
+            repaired_issues = validate_tokenized_text(
+                repaired_candidate,
+                paragraph.inline_elements,
+            )
+            if len(repaired_issues) < len(issues):
+                candidate = repaired_candidate
+                issues = repaired_issues
+
     return TranslationPayload(
-        text=strip_token_markup(translated_tokenized_text),
-        tokenized_text=translated_tokenized_text if not issues else None,
+        text=strip_token_markup(candidate),
+        tokenized_text=candidate if not issues else None,
         format_issues=issues,
     )
 

@@ -14,14 +14,11 @@ class LLMProvider(ABC):
     def __init__(self):
         """初始化Prompt管理器"""
         from ..prompts import get_prompt_manager
+
         self.prompt_manager = get_prompt_manager()
 
     @abstractmethod
-    def translate(
-        self,
-        text: str,
-        context: Optional[Dict[str, Any]] = None
-    ) -> str:
+    def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
         """
         翻译文本
 
@@ -53,9 +50,7 @@ class LLMProvider(ABC):
 
     @abstractmethod
     def check_consistency(
-        self,
-        paragraphs: List[Dict[str, str]],
-        glossary: Dict[str, str]
+        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
     ) -> List[Dict[str, Any]]:
         """
         检查译文一致性
@@ -99,7 +94,20 @@ class LLMProvider(ABC):
         context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Retranslate one paragraph with the dedicated longform retranslation prompt."""
-        raise NotImplementedError("This provider does not implement paragraph retranslation.")
+        raise NotImplementedError(
+            "This provider does not implement paragraph retranslation."
+        )
+
+    def repair_format_tokens(
+        self,
+        source_text: str,
+        translated_text: str,
+        format_tokens: List[Dict[str, Any]],
+        issues: Optional[List[str]] = None,
+        model: str = "flash",
+    ) -> Optional[str]:
+        """Try to repair broken hidden format tokens after validation fails."""
+        return None
 
     def translate_section(
         self,
@@ -109,7 +117,9 @@ class LLMProvider(ABC):
         paragraph_ids: List[str],
     ) -> List[Dict[str, str]]:
         """Translate one full section with the dedicated section-batch prompt."""
-        raise NotImplementedError("This provider does not implement section batch translation.")
+        raise NotImplementedError(
+            "This provider does not implement section batch translation."
+        )
 
     def translate_title(
         self,
@@ -118,7 +128,9 @@ class LLMProvider(ABC):
         subtitle: Optional[str] = None,
     ) -> Dict[str, str]:
         """Translate article title and optional subtitle in one call."""
-        raise NotImplementedError("This provider does not implement article title translation.")
+        raise NotImplementedError(
+            "This provider does not implement article title translation."
+        )
 
     def translate_section_title(
         self,
@@ -126,7 +138,48 @@ class LLMProvider(ABC):
         context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Translate a section title."""
-        raise NotImplementedError("This provider does not implement section title translation.")
+        raise NotImplementedError(
+            "This provider does not implement section title translation."
+        )
+
+    def translate_all_section_titles(
+        self,
+        sections: List[Dict[str, Any]],
+        article_theme: str = "",
+    ) -> Dict[str, str]:
+        """Translate all section titles in a single API call.
+
+        Args:
+            sections: list of dicts with keys:
+                - id (str): section identifier
+                - title (str): original English title
+                - prev (str): previous section title (may be empty)
+                - next (str): next section title (may be empty)
+            article_theme: article theme from deep analysis
+
+        Returns:
+            Dict mapping section_id -> translated Chinese title.
+            If a section_id is missing from the result, callers should fall
+            back to the per-title ``translate_section_title`` method.
+        """
+        # Default fallback: call translate_section_title one by one.
+        results: Dict[str, str] = {}
+        for sec in sections:
+            sec_id = sec.get("id", "")
+            title = sec.get("title", "")
+            if not title:
+                continue
+            context = {
+                "article_theme": article_theme,
+                "context": "Section heading inside a long-form article",
+                "previous_section_title": sec.get("prev", ""),
+                "next_section_title": sec.get("next", ""),
+            }
+            try:
+                results[sec_id] = self.translate_section_title(title, context=context)
+            except Exception:
+                results[sec_id] = title  # keep original on failure
+        return results
 
     def deep_analyze(self, text: str, sections_outline: str) -> Dict[str, Any]:
         """
@@ -150,7 +203,7 @@ class LLMProvider(ABC):
         translations: List[str],
         guidelines: List[str],
         terminology: List[Dict],
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         反思翻译质量（四步法 Step 3）
@@ -180,7 +233,7 @@ class LLMProvider(ABC):
         issue_type: str,
         description: str,
         suggestion: str,
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """
         润色翻译（四步法 Step 4）
@@ -234,19 +287,22 @@ class LLMProvider(ABC):
             }
         """
         # 格式化已有术语
-        existing_terms_text = "\n".join([
-            f"- {term} → {trans}"
-            for term, trans in existing_terms.items()
-        ]) if existing_terms else "无"
+        existing_terms_text = (
+            "\n".join([f"- {term} → {trans}" for term, trans in existing_terms.items()])
+            if existing_terms
+            else "无"
+        )
 
         if len(section_content) <= 7000:
             prompt = self._build_prescan_prompt(
                 section_id=section_id,
                 section_title=section_title,
                 section_content=section_content,
-                existing_terms=existing_terms_text
+                existing_terms=existing_terms_text,
             )
-            response = self.generate(prompt, response_format="json", temperature=0.3, model=model)
+            response = self.generate(
+                prompt, response_format="json", temperature=0.3, model=model
+            )
             return self._parse_json_response(response)
 
         # 分段处理
@@ -258,21 +314,30 @@ class LLMProvider(ABC):
                 section_id=f"{section_id}_chunk{i}",
                 section_title=section_title,
                 section_content=chunk,
-                existing_terms=existing_terms_text
+                existing_terms=existing_terms_text,
             )
             result = self._parse_json_response(
-                self.generate(prompt, response_format="json", temperature=0.3, model=model)
+                self.generate(
+                    prompt, response_format="json", temperature=0.3, model=model
+                )
             )
             for t in result.get("new_terms", []):
                 term_key = (t.get("term") or "").lower()
                 if term_key and term_key not in all_new_terms:
                     all_new_terms[term_key] = t
             for k, v in result.get("term_usages", {}).items():
-                all_term_usages.setdefault(k, []).extend(v if isinstance(v, list) else [v])
+                all_term_usages.setdefault(k, []).extend(
+                    v if isinstance(v, list) else [v]
+                )
 
-        return {"new_terms": list(all_new_terms.values()), "term_usages": all_term_usages}
+        return {
+            "new_terms": list(all_new_terms.values()),
+            "term_usages": all_term_usages,
+        }
 
-    def _split_content_for_prescan(self, content: str, max_chars: int = 6000) -> List[str]:
+    def _split_content_for_prescan(
+        self, content: str, max_chars: int = 6000
+    ) -> List[str]:
         """按段落边界分割内容用于 prescan"""
         paragraphs = content.split("\n\n")
         chunks: List[str] = []
@@ -325,7 +390,7 @@ class LLMProvider(ABC):
         translations: List[str],
         guidelines: List[str],
         terminology: List[Dict],
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """构建反思 Prompt"""
         # 构建原文和译文对照
@@ -335,10 +400,12 @@ class LLMProvider(ABC):
         pairs_text = "\n\n".join(pairs)
 
         # 构建术语表
-        terms_text = "\n".join([
-            f"- {t.get('term', t.get('original', ''))} → {t.get('translation', '')}"
-            for t in terminology
-        ])
+        terms_text = "\n".join(
+            [
+                f"- {t.get('term', t.get('original', ''))} → {t.get('translation', '')}"
+                for t in terminology
+            ]
+        )
 
         # 构建指南
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
@@ -347,7 +414,7 @@ class LLMProvider(ABC):
             "longform/review/section_critique.v2",
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
-            terms_text=terms_text
+            terms_text=terms_text,
         )
 
         context_blocks = self._build_reflection_context_blocks(context or {})
@@ -362,7 +429,7 @@ class LLMProvider(ABC):
         issue_type: str,
         description: str,
         suggestion: str,
-        context: Optional[Dict[str, Any]] = None
+        context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """构建润色 Prompt"""
         base_prompt = self.prompt_manager.get(
@@ -371,7 +438,7 @@ class LLMProvider(ABC):
             current_translation=current_translation,
             issue_type=issue_type,
             description=description,
-            suggestion=suggestion
+            suggestion=suggestion,
         )
         context_blocks = self._build_refine_context_blocks(context or {})
         if context_blocks:
@@ -445,8 +512,7 @@ class LLMProvider(ABC):
         priorities = build_review_priorities(context.get("review_priorities"))
         if priorities:
             blocks.append(
-                "## 本轮批评优先级\n"
-                + "\n".join(f"- {item}" for item in priorities)
+                "## 本轮批评优先级\n" + "\n".join(f"- {item}" for item in priorities)
             )
 
         return blocks
@@ -539,7 +605,7 @@ class LLMProvider(ABC):
         section_id: str,
         section_title: str,
         section_content: str,
-        existing_terms: str
+        existing_terms: str,
     ) -> str:
         """构建章节预扫描 Prompt（方案 C 新增）"""
         return self.prompt_manager.get(
@@ -547,7 +613,7 @@ class LLMProvider(ABC):
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,
-            existing_terms=existing_terms
+            existing_terms=existing_terms,
         )
 
     def _parse_json_response(self, response: str) -> Dict[str, Any]:

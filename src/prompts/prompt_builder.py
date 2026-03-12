@@ -14,7 +14,10 @@ from src.core.constants import (
     MAX_STYLE_NOTES_IN_PROMPT,
 )
 from src.core.glossary_prompt import render_glossary_prompt_block
-from src.core.longform_context import build_article_challenge_payload, limit_non_empty_strings
+from src.core.longform_context import (
+    build_article_challenge_payload,
+    limit_non_empty_strings,
+)
 from . import get_prompt_manager
 
 
@@ -170,10 +173,7 @@ class TranslationPromptBuilder:
             RETRANSLATION_TEMPLATE_NAME,
             source=source_text,
             current=current_translation,
-            instruction=(
-                instruction or
-                "先纠正前次译文中的错误，再给出最佳中文译文。"
-            ),
+            instruction=(instruction or "先纠正前次译文中的错误，再给出最佳中文译文。"),
             dynamic_sections="\n\n".join(dynamic_sections),
         )
 
@@ -243,9 +243,26 @@ class TranslationPromptBuilder:
         if not rules:
             return ""
 
+        from src.core.constants import (
+            MAX_LEARNED_RULES_IN_PROMPT,
+            MAX_LEARNED_RULES_CHARS,
+        )
+
         lines = ["## 已学习的翻译规则"]
+        total_chars = 0
+        included = 0
         for rule in rules:
-            lines.append(f"- {rule}")
+            if included >= MAX_LEARNED_RULES_IN_PROMPT:
+                break
+            rule_text = f"- {rule}"
+            if total_chars + len(rule_text) > MAX_LEARNED_RULES_CHARS:
+                break
+            lines.append(rule_text)
+            total_chars += len(rule_text)
+            included += 1
+
+        if included < len(rules):
+            lines.append(f"（仅展示前 {included} 条，共 {len(rules)} 条）")
 
         return "\n".join(lines)
 
@@ -430,7 +447,9 @@ class TranslationPromptBuilder:
             )
             style_notes.extend(notes)
         if style_notes:
-            sections.append("## 风格约束\n" + "\n".join(f"- {item}" for item in style_notes))
+            sections.append(
+                "## 风格约束\n" + "\n".join(f"- {item}" for item in style_notes)
+            )
 
         if article_challenges:
             challenge_lines = ["## 翻译风险"]
@@ -484,4 +503,3 @@ def get_prompt_builder(style: str = "simplified") -> TranslationPromptBuilder:
         builder = TranslationPromptBuilder(prompt_style=style_key)
         _builders[style_key] = builder
     return builder
-

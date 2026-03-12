@@ -142,25 +142,29 @@ class GeminiProvider(LLMProvider):
 
         # Default model selector priority:
         # GEMINI_MODEL (legacy/global selector) > constructor model > model_type
-        default_selector = (
-            settings.gemini_model
-            or model
-            or self.model_type
-        )
+        default_selector = settings.gemini_model or model or self.model_type
         self.model_name = self.resolve_model_name(default_selector)
 
         # Backup model used when the primary model is temporarily unavailable.
-        backup_selector = settings.gemini_backup_model or os.getenv("GEMINI_BACKUP_MODEL", "flash")
+        backup_selector = settings.gemini_backup_model or os.getenv(
+            "GEMINI_BACKUP_MODEL", "flash"
+        )
         self.backup_model = self.resolve_model_name(backup_selector)
 
         self.request_timeout = settings.gemini_timeout
-        self.max_attempts = settings.gemini_max_retries or settings.gemini_retry_count or 5
+        self.max_attempts = (
+            settings.gemini_max_retries or settings.gemini_retry_count or 5
+        )
         self.retry_delay = settings.gemini_retry_delay or 0.5
         if not self._use_rest_transport():
             genai_module = _load_genai_module()
             if genai_module is None:
-                raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
-            self._client_cache[self.api_key] = self._create_client(genai_module, self.api_key)
+                raise RuntimeError(
+                    "google-genai is not installed. Run: pip install google-genai"
+                )
+            self._client_cache[self.api_key] = self._create_client(
+                genai_module, self.api_key
+            )
 
     def _load_model_catalog(self) -> Dict[str, str]:
         return {
@@ -265,7 +269,9 @@ class GeminiProvider(LLMProvider):
 
             genai_module = _load_genai_module()
             if genai_module is None:
-                raise RuntimeError("google-genai is not installed. Run: pip install google-genai")
+                raise RuntimeError(
+                    "google-genai is not installed. Run: pip install google-genai"
+                )
 
             client = self._create_client(genai_module, api_key)
             self._client_cache[api_key] = client
@@ -334,7 +340,7 @@ class GeminiProvider(LLMProvider):
         return (
             "currently experiencing high demand" in text
             or ('"status": "unavailable"' in text and "high demand" in text)
-            or "status\":\"unavailable" in text
+            or 'status":"unavailable' in text
         )
 
     @staticmethod
@@ -406,7 +412,8 @@ class GeminiProvider(LLMProvider):
             or "request contains an invalid argument" in text
             or "unsupported response mime type" in text
             or "candidate was blocked" in text
-            or "safety" in text and "blocked" in text
+            or "safety" in text
+            and "blocked" in text
             or "prompt is too long" in text
             or "too many tokens" in text
             or "context length" in text
@@ -420,7 +427,11 @@ class GeminiProvider(LLMProvider):
         attempts: List[GeminiAttempt] = []
         for model_name in models:
             for index, api_key in enumerate(self.api_keys):
-                key_role = "primary" if index == 0 else ("backup" if index == 1 else f"backup{index}")
+                key_role = (
+                    "primary"
+                    if index == 0
+                    else ("backup" if index == 1 else f"backup{index}")
+                )
                 attempts.append(
                     GeminiAttempt(
                         api_key=api_key,
@@ -433,7 +444,7 @@ class GeminiProvider(LLMProvider):
 
     def _retry_delay_for_error(self, error_str: str, retry_index: int) -> float:
         if self._is_rate_limited(error_str):
-            return min(self.retry_delay * (2 ** retry_index), 16.0)
+            return min(self.retry_delay * (2**retry_index), 16.0)
         return max(self.retry_delay, 0.2)
 
     def _generate_once(
@@ -530,7 +541,9 @@ class GeminiProvider(LLMProvider):
                 return text.strip()
             except Exception as exc:
                 if isinstance(exc, FutureTimeoutError):
-                    exc = TimeoutError(f"Gemini request timed out after {self.request_timeout}s")
+                    exc = TimeoutError(
+                        f"Gemini request timed out after {self.request_timeout}s"
+                    )
 
                 error_text = self._error_to_text(exc)
                 last_exception = exc
@@ -561,8 +574,12 @@ class GeminiProvider(LLMProvider):
                     )
                     continue
 
-                if attempt_index < max_attempts - 1 and self._is_retryable_error(error_text):
-                    retry_delay = self._retry_delay_for_error(error_text, extra_retry_index)
+                if attempt_index < max_attempts - 1 and self._is_retryable_error(
+                    error_text
+                ):
+                    retry_delay = self._retry_delay_for_error(
+                        error_text, extra_retry_index
+                    )
                     extra_retry_index += 1
                     logger.warning(
                         "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
@@ -621,6 +638,69 @@ class GeminiProvider(LLMProvider):
             context_data,
         )
         return self.generate(prompt, temperature=0.4)
+
+    def repair_format_tokens(
+        self,
+        source_text: str,
+        translated_text: str,
+        format_tokens: List[Dict[str, Any]],
+        issues: Optional[List[str]] = None,
+        model: str = "flash",
+    ) -> Optional[str]:
+        """Run a lightweight repair pass to restore hidden token wrappers."""
+        preview_tokens = limit_format_tokens(format_tokens)
+        if not preview_tokens:
+            return None
+
+        token_lines: List[str] = []
+        for token in preview_tokens:
+            if not isinstance(token, dict):
+                continue
+            token_id = str(token.get("id", "")).strip()
+            token_type = str(token.get("type", "")).strip()
+            token_text = str(token.get("text", "")).strip()
+            if token_id:
+                token_lines.append(f"- {token_id} ({token_type}): {token_text}")
+
+        issue_lines = [f"- {item}" for item in (issues or []) if str(item).strip()]
+        issue_block = "\n".join(issue_lines) if issue_lines else "- (not provided)"
+        token_block = "\n".join(token_lines) if token_lines else "- (empty)"
+
+        prompt = "\n".join(
+            [
+                "You are a token repair engine for long-form translation.",
+                "Task: repair hidden backend tokens only.",
+                "",
+                "Rules:",
+                "1. Keep meaning and wording unchanged as much as possible.",
+                "2. Restore missing or malformed `[[[TYPE_N|...]]]` wrappers.",
+                "3. Keep token ids exactly from the token list.",
+                "4. Do not add extra commentary.",
+                "5. Output ONLY the repaired translation text.",
+                "",
+                "Expected tokens:",
+                token_block,
+                "",
+                "Validation issues:",
+                issue_block,
+                "",
+                "Source (tokenized):",
+                source_text,
+                "",
+                "Broken translation:",
+                translated_text,
+            ]
+        )
+
+        repaired = self.generate(prompt, temperature=0.1, model=model).strip()
+        if repaired.startswith("```"):
+            lines = repaired.splitlines()
+            if lines and lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines and lines[-1].strip() == "```":
+                lines = lines[:-1]
+            repaired = "\n".join(lines).strip()
+        return repaired or None
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """
@@ -804,7 +884,9 @@ class GeminiProvider(LLMProvider):
         if isinstance(result, list):
             return result
 
-        raise ValueError("Batch translation response does not satisfy the JSON contract.")
+        raise ValueError(
+            "Batch translation response does not satisfy the JSON contract."
+        )
 
     def translate_title(
         self,
@@ -826,9 +908,7 @@ class GeminiProvider(LLMProvider):
                     f"- Structure summary: {context['structure_summary']}"
                 )
             if context.get("target_audience"):
-                context_lines.append(
-                    f"- Target audience: {context['target_audience']}"
-                )
+                context_lines.append(f"- Target audience: {context['target_audience']}")
 
         prompt = self.prompt_manager.get(
             "longform/auxiliary/title_translate.v2",
@@ -870,9 +950,7 @@ class GeminiProvider(LLMProvider):
                     f"- Previous section: {context['previous_section_title']}"
                 )
             if context.get("next_section_title"):
-                context_lines.append(
-                    f"- Next section: {context['next_section_title']}"
-                )
+                context_lines.append(f"- Next section: {context['next_section_title']}")
 
         prompt = self.prompt_manager.get(
             "longform/auxiliary/section_title_translate.v2",
@@ -880,6 +958,76 @@ class GeminiProvider(LLMProvider):
             title=title,
         )
         return self.generate(prompt, temperature=0.3)
+
+    def translate_all_section_titles(
+        self,
+        sections: List[Dict[str, Any]],
+        article_theme: str = "",
+    ) -> Dict[str, str]:
+        """Translate all section titles in a single JSON API call.
+
+        Builds one prompt listing all section titles and their neighbours,
+        requests a JSON response ``{"translations": {"<id>": "<中文标题>"}}``,
+        and returns the mapping.  If parsing fails or a section is missing,
+        callers should fall back to ``translate_section_title`` per-entry.
+        """
+        if not sections:
+            return {}
+
+        chapter_lines: List[str] = []
+        for i, sec in enumerate(sections, 1):
+            sec_id = sec.get("id", f"s{i:02d}")
+            title = sec.get("title", "")
+            prev_t = sec.get("prev", "")
+            next_t = sec.get("next", "")
+            parts = [f'{i}. id={sec_id}, title="{title}"']
+            if prev_t:
+                parts.append(f'prev="{prev_t}"')
+            if next_t:
+                parts.append(f'next="{next_t}"')
+            chapter_lines.append(", ".join(parts))
+
+        theme_line = f"文章主题：{article_theme}" if article_theme else ""
+        prompt = "\n".join(
+            filter(
+                None,
+                [
+                    "你是一位资深中英双语编辑，尤其擅长硬核科技长文领域。"
+                    "请将下面所有章节标题翻译为简洁、自然、契合文章上下文的中文。",
+                    "",
+                    theme_line,
+                    "",
+                    "## 章节列表（id, 原标题, 前后章节供参考）",
+                    "\n".join(chapter_lines),
+                    "",
+                    "## 输出规则",
+                    '以 JSON 返回，格式：{"translations": {"<id>": "<中文标题>", ...}}',
+                    "只输出 JSON，不要解释，不要额外文字。",
+                ],
+            )
+        )
+
+        try:
+            raw = self.generate(prompt, response_format="json", temperature=0.3)
+            result = self._parse_json_response(raw)
+            translations = result.get("translations", {})
+            if isinstance(translations, dict):
+                logger.info(
+                    "[Gemini] Batch section title translation: %d/%d titles returned",
+                    len(translations),
+                    len(sections),
+                )
+                return {str(k): str(v) for k, v in translations.items()}
+        except Exception as exc:
+            logger.warning(
+                "[Gemini] Batch section title translation failed, will use per-title fallback: %s",
+                exc,
+            )
+
+        # Fallback: delegate to base class (loops over translate_section_title)
+        return super().translate_all_section_titles(
+            sections, article_theme=article_theme
+        )
 
     def _build_batch_translation_prompt(
         self,
@@ -981,7 +1129,7 @@ class GeminiProvider(LLMProvider):
         section_id: str,
         section_title: str,
         section_content: str,
-        existing_terms: Dict[str, str]
+        existing_terms: Dict[str, str],
     ) -> Dict[str, Any]:
         """Run section prescan with the Flash model."""
         return self.prescan_section(
@@ -1006,7 +1154,3 @@ def create_gemini_provider(
         model=model,
         model_type=model_type,
     )
-
-
-
-

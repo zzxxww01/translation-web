@@ -22,8 +22,10 @@ DEFAULT_RETRY_DELAY = 30  # 默认重试延迟（秒）
 BATCH_PARAGRAPH_SIZE = 8  # 批量翻译时每批段落数
 
 # ============ 术语表配置 ============
-MAX_GLOSSARY_TERMS_IN_PROMPT = 15  # Prompt 中最大术语数量
+MAX_GLOSSARY_TERMS_IN_PROMPT = 30  # Prompt 中最大术语数量
 MAX_REVIEW_TERMS_IN_PROMPT = 10  # 反思/润色阶段的关键术语数量
+MAX_LEARNED_RULES_IN_PROMPT = 20  # Prompt 中最大已学习规则条数
+MAX_LEARNED_RULES_CHARS = 600  # Prompt 中已学习规则的总字符上限
 
 # ============ 长文上下文配置 ============
 MAX_ARTICLE_GUIDELINES_IN_PROMPT = 6  # 长文翻译阶段注入的全局指南数量

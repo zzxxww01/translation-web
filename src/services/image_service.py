@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional
 
 from ..core.format_tokens import (
     apply_translation_payload,
+    build_dehydrated_link_payload,
     build_translation_input,
     build_translation_payload,
     format_token_context,
@@ -137,18 +138,26 @@ class ImageProcessingService:
             return
 
         if paragraph.inline_elements and getattr(self.caption_translator, "llm", None):
-            prepared = build_translation_input(paragraph)
-            translated = self.caption_translator.llm.translate(
-                prepared.tokenized_text or prepared.text,
-                context={
-                    "instruction": (
-                        "Translate this image caption into concise Chinese. "
-                        "Preserve hidden format tokens exactly."
-                    ),
-                    "format_tokens": format_token_context(paragraph),
-                },
-            )
-            payload = build_translation_payload(paragraph, translated)
+            dehydrated_payload = build_dehydrated_link_payload(paragraph)
+            if dehydrated_payload is not None:
+                payload = dehydrated_payload
+            else:
+                prepared = build_translation_input(paragraph)
+                translated = self.caption_translator.llm.translate(
+                    prepared.tokenized_text or prepared.text,
+                    context={
+                        "instruction": (
+                            "Translate this image caption into concise Chinese. "
+                            "Preserve hidden format tokens exactly."
+                        ),
+                        "format_tokens": format_token_context(paragraph),
+                    },
+                )
+                payload = build_translation_payload(
+                    paragraph,
+                    translated,
+                    token_repairer=self._repair_format_tokens,
+                )
             apply_translation_payload(paragraph, payload, "auto_caption")
             paragraph.confirm(
                 payload.text,
@@ -161,6 +170,25 @@ class ImageProcessingService:
         caption_translation = self.caption_translator.translate_caption(paragraph.source)
         paragraph.add_translation(caption_translation, "auto_caption")
         paragraph.confirm(caption_translation, "auto_caption")
+
+    def _repair_format_tokens(
+        self,
+        paragraph: Paragraph,
+        translated_tokenized_text: str,
+        issues: List[str],
+    ) -> Optional[str]:
+        llm = getattr(self.caption_translator, "llm", None)
+        if llm is None or not paragraph.inline_elements:
+            return None
+
+        prepared = build_translation_input(paragraph)
+        return llm.repair_format_tokens(
+            source_text=prepared.tokenized_text or prepared.text,
+            translated_text=translated_tokenized_text,
+            format_tokens=format_token_context(paragraph),
+            issues=issues,
+            model="flash",
+        )
 
     def get_image_report(self) -> Dict[str, Any]:
         """Return one summary of image download results."""
