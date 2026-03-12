@@ -14,6 +14,7 @@ class GlossaryTerm(BaseModel):
     translation: Optional[str] = None
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
     note: Optional[str] = None
+    tags: List[str] = Field(default_factory=list)
     first_occurrence: Optional[str] = None
     scope: str = "project"
     source: str = "manual"

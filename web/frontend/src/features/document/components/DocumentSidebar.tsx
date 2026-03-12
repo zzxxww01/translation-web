@@ -3,7 +3,7 @@
  */
 
 import { useState } from 'react';
-import { BookOpen, Download, Languages, Layers, Zap } from 'lucide-react';
+import { BookOpen, Download, Layers, Zap } from 'lucide-react';
 import { Button, CollapsibleSection } from '../../../components/ui';
 import {
   DEFAULT_TRANSLATION_METHOD,
@@ -21,7 +21,6 @@ interface DocumentSidebarProps {
   onSectionSelect: (sectionId: string) => void;
   onNewProject: () => void;
   onFullTranslate?: (method?: TranslationMethod) => void;
-  onOpenGlossaryManagement?: () => void;
   isFullTranslating?: boolean;
   fullTranslateProgress?: { current: number; total: number } | null;
   currentStep?: string | null;
@@ -34,7 +33,6 @@ export function DocumentSidebar({
   onSectionSelect,
   onNewProject,
   onFullTranslate,
-  onOpenGlossaryManagement,
   isFullTranslating,
   fullTranslateProgress,
   currentStep,
@@ -74,7 +72,7 @@ export function DocumentSidebar({
         {sections.length > 0 ? (
           <>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-text-muted">
-              章节列表
+              {'\u7AE0\u8282\u5217\u8868'}
             </h3>
             <SectionList
               sections={sections}
@@ -85,7 +83,7 @@ export function DocumentSidebar({
         ) : (
           <div className="flex flex-col items-center py-8 text-center text-text-muted">
             <BookOpen className="mb-2 h-10 w-10 opacity-50" />
-            <p className="text-sm">选择项目查看章节</p>
+            <p className="text-sm">{'\u9009\u62E9\u9879\u76EE\u67E5\u770B\u7AE0\u8282'}</p>
           </div>
         )}
       </div>
@@ -94,7 +92,7 @@ export function DocumentSidebar({
         <div className="space-y-3 border-t border-border-subtle p-3">
           <div>
             <div className="mb-2 flex justify-between text-sm">
-              <span className="font-medium text-text-secondary">翻译进度</span>
+              <span className="font-medium text-text-secondary">{'\u7FFB\u8BD1\u8FDB\u5EA6'}</span>
               <span className="font-medium">
                 {approvedParagraphs}/{totalParagraphs}
               </span>
@@ -112,7 +110,7 @@ export function DocumentSidebar({
             <div className="rounded-md bg-primary-500/10 p-3">
               <div className="mb-2 flex justify-between text-sm">
                 <span className="font-medium text-primary-500">
-                  {currentStep || '正在翻译...'}
+                  {currentStep || '\u6B63\u5728\u7FFB\u8BD1...'}
                 </span>
                 <span className="text-primary-500">
                   {fullTranslateProgress.current}/{fullTranslateProgress.total}
@@ -142,10 +140,12 @@ export function DocumentSidebar({
                 leftIcon={<Zap className="h-5 w-5" />}
                 className="w-full"
               >
-                {isFullTranslating ? '翻译中...' : '全文一键翻译'}
+                {isFullTranslating
+                  ? '\u7FFB\u8BD1\u4E2D...'
+                  : '\u5168\u6587\u4E00\u952E\u7FFB\u8BD1'}
               </Button>
 
-              <CollapsibleSection title="高级选项" defaultOpen={false}>
+              <CollapsibleSection title={'\u9AD8\u7EA7\u9009\u9879'} defaultOpen={false}>
                 <div className="flex items-center gap-1.5">
                   <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
                   <select
@@ -168,20 +168,8 @@ export function DocumentSidebar({
             </div>
           )}
 
-          {projectId && onOpenGlossaryManagement && (
-            <Button
-              variant="secondary"
-              size="md"
-              onClick={onOpenGlossaryManagement}
-              leftIcon={<Languages className="h-4 w-4" />}
-              className="w-full"
-            >
-              术语管理
-            </Button>
-          )}
-
           {projectId && (
-            <CollapsibleSection title="导出文章" defaultOpen={false}>
+            <CollapsibleSection title={'\u5BFC\u51FA\u6587\u7AE0'} defaultOpen={false}>
               <div className="flex items-center gap-2">
                 <select
                   value={exportFormat}
@@ -201,7 +189,7 @@ export function DocumentSidebar({
                   disabled={exportMutation.isPending}
                   leftIcon={<Download className="h-4 w-4" />}
                 >
-                  {exportMutation.isPending ? '导出中...' : '导出'}
+                  {exportMutation.isPending ? '\u5BFC\u51FA\u4E2D...' : '\u5BFC\u51FA'}
                 </Button>
               </div>
             </CollapsibleSection>

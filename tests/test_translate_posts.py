@@ -12,7 +12,7 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
         with patch(
             "src.api.routers.translate_posts.build_glossary_context",
             return_value="term: glossary-term",
-        ), patch.object(
+        ) as mock_glossary, patch.object(
             translate_posts.prompt_manager,
             "get",
             return_value="rendered-prompt",
@@ -23,6 +23,7 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
             response = await translate_posts.translate_post(request)
 
         self.assertEqual(response.translation, "translated-result")
+        mock_glossary.assert_called_once_with("Hello world")
         mock_prompt_get.assert_called_once_with(
             "post_translation",
             text="Hello world",
@@ -39,7 +40,7 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
         with patch(
             "src.api.routers.translate_posts.build_glossary_context",
             return_value="term: glossary-term",
-        ), patch.object(
+        ) as mock_glossary, patch.object(
             translate_posts.prompt_manager,
             "get",
             side_effect=AssertionError("prompt_manager.get should not be called"),
@@ -50,6 +51,7 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
             response = await translate_posts.translate_post(request)
 
         self.assertEqual(response.translation, "translated-result")
+        mock_glossary.assert_called_once_with("Hello world")
         mock_generate.assert_called_once_with("Translate: Hello world\nterm: glossary-term")
 
 

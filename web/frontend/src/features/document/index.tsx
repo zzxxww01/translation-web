@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useToast } from '../../components/ui';
 import { glossaryApi } from '../confirmation/api/glossaryApi';
@@ -9,20 +9,37 @@ import type { Paragraph, Section } from '../../shared/types';
 import { documentApi } from './api';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
-import { GlossaryManagementPage } from './components/GlossaryManagementPage';
-import { ImmersiveEditor } from './components/ImmersiveEditor';
 import { NewProjectModal } from './components/NewProjectModal';
 import { SectionView } from './components/SectionView';
-import { TerminologyReviewPage } from './components/TerminologyReviewPage';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { useFullTranslate, useProject, useSection } from './hooks';
 import { fullTranslationService } from './services/fullTranslationService';
 import type { TermConflictData } from './services/fullTranslationService';
 
+const GlossaryCenter = lazy(() =>
+  import('../GlossaryFeature').then(module => ({ default: module.GlossaryCenter }))
+);
+const ImmersiveEditor = lazy(() =>
+  import('./components/ImmersiveEditor').then(module => ({ default: module.ImmersiveEditor }))
+);
+const TerminologyReviewPage = lazy(() =>
+  import('./components/TerminologyReviewPage').then(module => ({
+    default: module.TerminologyReviewPage,
+  }))
+);
+
 type DocumentView = 'glossary' | 'term-review' | null;
 
 interface PendingTranslationRequest {
   method: TranslationMethod;
+}
+
+function LazyPanelFallback() {
+  return (
+    <div className="flex min-h-[220px] items-center justify-center">
+      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-500 border-t-transparent" />
+    </div>
+  );
 }
 
 export function DocumentFeature() {
@@ -351,22 +368,27 @@ export function DocumentFeature() {
 
     if (activeView === 'glossary') {
       return (
-        <GlossaryManagementPage
-          projectId={currentProject.id}
-          projectTitle={currentProject.title}
-          onBack={() => setView(null)}
-        />
+        <Suspense fallback={<LazyPanelFallback />}>
+          <GlossaryCenter
+            projectId={currentProject.id}
+            projectTitle={currentProject.title}
+            defaultScope="project"
+            onBack={() => setView(null)}
+          />
+        </Suspense>
       );
     }
 
     if (activeView === 'term-review' && pendingTermReview) {
       return (
-        <TerminologyReviewPage
-          review={pendingTermReview}
-          isSubmitting={isSubmittingTermReview}
-          onSubmit={handleSubmitTermReview}
-          onCancel={handleCancelTermReview}
-        />
+        <Suspense fallback={<LazyPanelFallback />}>
+          <TerminologyReviewPage
+            review={pendingTermReview}
+            isSubmitting={isSubmittingTermReview}
+            onSubmit={handleSubmitTermReview}
+            onCancel={handleCancelTermReview}
+          />
+        </Suspense>
       );
     }
 
@@ -427,7 +449,6 @@ export function DocumentFeature() {
         onSectionSelect={handleSelectSectionById}
         onNewProject={() => setIsNewProjectModalOpen(true)}
         onFullTranslate={handleFullTranslate}
-        onOpenGlossaryManagement={() => setView('glossary')}
         isFullTranslating={isFullTranslating}
         fullTranslateProgress={fullTranslateProgress}
         currentStep={currentStep}
@@ -451,12 +472,14 @@ export function DocumentFeature() {
       )}
 
       {showEditingPanels && isImmersiveMode && currentProject && displaySection && (
-        <ImmersiveEditor
-          projectId={currentProject.id}
-          section={displaySection}
-          initialParagraphId={immersiveTargetParagraphId}
-          onClose={handleExitImmersive}
-        />
+        <Suspense fallback={<LazyPanelFallback />}>
+          <ImmersiveEditor
+            projectId={currentProject.id}
+            section={displaySection}
+            initialParagraphId={immersiveTargetParagraphId}
+            onClose={handleExitImmersive}
+          />
+        </Suspense>
       )}
 
       <NewProjectModal
@@ -487,8 +510,15 @@ export function DocumentFeature() {
                 }}
               >
                 <div className="font-medium">保留现有：{currentConflict.existing_translation}</div>
+                {currentConflict.existing_note && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    词义说明：{currentConflict.existing_note}
+                  </div>
+                )}
                 {currentConflict.existing_context && (
-                  <div className="text-xs text-gray-500 mt-1">{currentConflict.existing_context}</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    上下文：{currentConflict.existing_context}
+                  </div>
                 )}
               </button>
               <button
@@ -504,8 +534,15 @@ export function DocumentFeature() {
                 }}
               >
                 <div className="font-medium">使用新翻译：{currentConflict.new_translation}</div>
+                {currentConflict.new_note && (
+                  <div className="text-xs text-gray-500 mt-1">
+                    词义说明：{currentConflict.new_note}
+                  </div>
+                )}
                 {currentConflict.new_context && (
-                  <div className="text-xs text-gray-500 mt-1">{currentConflict.new_context}</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    上下文：{currentConflict.new_context}
+                  </div>
                 )}
               </button>
             </div>

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Translation Agent - Glossary Manager
 
 Manage global and project-specific glossaries.
@@ -9,6 +9,9 @@ from pathlib import Path
 from typing import Optional, List, Dict
 
 from .models import Glossary, GlossaryTerm, TranslationStrategy
+
+
+DEFAULT_GLOBAL_GLOSSARY_FILENAME = "global_glossary_semi.json"
 
 
 class GlossaryManager:
@@ -26,35 +29,36 @@ class GlossaryManager:
         self.projects_path = Path(projects_path)
         self.global_path.mkdir(parents=True, exist_ok=True)
 
-    def load_global(self, domain: str = "semiconductor") -> Glossary:
+    def _get_global_glossary_file_path(self) -> Path:
+        return self.global_path / DEFAULT_GLOBAL_GLOSSARY_FILENAME
+
+    def load_global(self) -> Glossary:
         """
         加载全局术语表
-
-        Args:
-            domain: 领域名称（对应 glossary/{domain}.json）
 
         Returns:
             Glossary: 术语表
         """
-        file_path = self.global_path / f"{domain}.json"
+        file_path = self._get_global_glossary_file_path()
         if not file_path.exists():
             return Glossary()
 
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
-        return Glossary(**data)
+        glossary = Glossary(**data)
+        return normalize_glossary(glossary, default_scope="global")
 
-    def save_global(self, glossary: Glossary, domain: str = "semiconductor") -> None:
+    def save_global(self, glossary: Glossary) -> None:
         """
         保存全局术语表
 
         Args:
             glossary: 术语表
-            domain: 领域名称
         """
+        glossary = normalize_glossary(glossary, default_scope="global")
         glossary.version += 1
-        file_path = self.global_path / f"{domain}.json"
+        file_path = self._get_global_glossary_file_path()
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
 
@@ -75,7 +79,8 @@ class GlossaryManager:
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
 
-        return Glossary(**data)
+        glossary = Glossary(**data)
+        return normalize_glossary(glossary, default_scope="project")
 
     def save_project(self, project_id: str, glossary: Glossary) -> None:
         """
@@ -85,6 +90,7 @@ class GlossaryManager:
             project_id: 项目 ID
             glossary: 术语表
         """
+        glossary = normalize_glossary(glossary, default_scope="project")
         glossary.version += 1
         project_dir = self.projects_path / project_id
         project_dir.mkdir(parents=True, exist_ok=True)
@@ -116,10 +122,10 @@ class GlossaryManager:
 
         return merged
 
-    def load_merged(self, project_id: str, domain: str = "semiconductor") -> Glossary:
+    def load_merged(self, project_id: str) -> Glossary:
         """Load merged glossary with project terms overriding global terms."""
         return self.merge(
-            self.load_global(domain),
+            self.load_global(),
             self.load_project(project_id),
         )
 
@@ -139,7 +145,7 @@ class GlossaryManager:
             original: 原文
             translation: 翻译
             strategy: 翻译策略
-            note: 备注
+            note: 词义说明
 
         Returns:
             GlossaryTerm: 添加的术语
@@ -254,7 +260,10 @@ class GlossaryManager:
         if path.suffix == '.json':
             with open(path, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            return Glossary(**data)
+            return normalize_glossary(
+                Glossary(**data),
+                default_scope="project",
+            )
 
         elif path.suffix == '.csv':
             import csv
@@ -263,13 +272,18 @@ class GlossaryManager:
                 reader = csv.DictReader(f)
                 for row in reader:
                     term = GlossaryTerm(
-                        original=row.get('original', ''),
+                        original=(row.get('original') or ''),
                         translation=row.get('translation'),
                         strategy=TranslationStrategy(row.get('strategy', 'translate')),
-                        note=row.get('note')
+                        note=row.get('note'),
+                        tags=[
+                            tag.strip()
+                            for tag in (row.get('tags') or '').split(',')
+                            if tag.strip()
+                        ],
                     )
                     glossary.add_term(term)
-            return glossary
+            return normalize_glossary(glossary, default_scope="project")
 
         else:
             raise ValueError(f"Unsupported file format: {path.suffix}")
@@ -291,36 +305,223 @@ class GlossaryManager:
         elif path.suffix == '.csv':
             import csv
             with open(path, 'w', encoding='utf-8', newline='') as f:
-                writer = csv.DictWriter(f, fieldnames=['original', 'translation', 'strategy', 'note'])
+                writer = csv.DictWriter(
+                    f,
+                    fieldnames=['original', 'translation', 'strategy', 'note', 'tags'],
+                )
                 writer.writeheader()
                 for term in glossary.terms:
                     writer.writerow({
                         'original': term.original,
                         'translation': term.translation or '',
                         'strategy': term.strategy.value,
-                        'note': term.note or ''
+                        'note': term.note or '',
+                        'tags': ','.join(term.tags),
                     })
 
         else:
             raise ValueError(f"Unsupported file format: {path.suffix}")
 
+DEFAULT_GLOSSARY_TAG_GROUPS: Dict[str, set[str]] = {
+    "company": {
+        "TSMC",
+        "Apple Silicon",
+        "NVIDIA",
+        "AMD",
+        "Intel",
+        "Qualcomm",
+        "MediaTek",
+        "Samsung",
+        "SK Hynix",
+        "Micron",
+    },
+    "manufacturing": {
+        "foundry",
+        "wafer",
+        "fab",
+        "node",
+        "process",
+        "EUV",
+        "EUV lithography",
+        "DUV",
+        "photolithography",
+        "etching",
+        "deposition",
+        "CMP",
+    },
+    "chip": {
+        "Apple Silicon",
+        "SoC",
+        "GPU",
+        "CPU",
+        "NPU",
+        "TPU",
+        "chiplet",
+        "logic chip",
+        "memory chip",
+        "analog chip",
+        "RF chip",
+        "semiconductor",
+        "integrated circuit",
+        "transistor",
+    },
+    "packaging": {
+        "packaging",
+        "CoWoS",
+        "InFO",
+    },
+    "memory": {
+        "HBM",
+        "SRAM",
+        "DRAM",
+        "NAND flash",
+        "memory chip",
+    },
+    "ai": {
+        "AI",
+        "LLM",
+        "token",
+        "context window",
+        "inference",
+        "training",
+        "fine-tuning",
+        "RLHF",
+        "transformer",
+        "attention",
+        "self-attention",
+        "parameter",
+        "weights",
+        "model architecture",
+        "neural network",
+        "deep learning",
+        "machine learning",
+        "GPU cluster",
+        "data center",
+        "cloud computing",
+        "edge computing",
+    },
+    "performance": {
+        "throughput",
+        "latency",
+        "bandwidth",
+        "yield",
+        "utilization rate",
+        "efficiency",
+        "performance",
+        "benchmark",
+        "FLOPS",
+        "TOPS",
+        "HPC",
+        "Moore's Law",
+        "scalability",
+    },
+    "business": {
+        "capex",
+        "opex",
+        "R&D",
+        "IDM",
+        "fabless",
+        "anchor tenant",
+        "gross margin",
+        "revenue",
+        "net income",
+        "market share",
+        "supply chain",
+        "bottleneck",
+        "lead time",
+    },
+    "general": {
+        "IoT",
+        "5G",
+        "virtualization",
+    },
+}
 
-def create_default_semiconductor_glossary() -> Glossary:
-    """创建默认的半导体领域术语表"""
+
+def normalize_glossary_tags(tags: Optional[List[str]]) -> List[str]:
+    normalized: List[str] = []
+    seen = set()
+    for raw in tags or []:
+        tag = raw.strip()
+        if not tag:
+            continue
+        key = tag.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        normalized.append(tag)
+    return normalized
+
+
+def infer_glossary_tags(original: str) -> List[str]:
+    normalized = original.strip()
+    if not normalized:
+        return []
+    return [
+        tag
+        for tag, terms in DEFAULT_GLOSSARY_TAG_GROUPS.items()
+        if normalized in terms
+    ]
+
+
+def normalize_glossary_term(
+    term: GlossaryTerm,
+    *,
+    default_scope: Optional[str] = None,
+) -> GlossaryTerm:
+    original = term.original.strip()
+    translation = term.translation.strip() if isinstance(term.translation, str) else term.translation
+    note = term.note.strip() if isinstance(term.note, str) else term.note
+    first_occurrence = (
+        term.first_occurrence.strip()
+        if isinstance(term.first_occurrence, str) and term.first_occurrence.strip()
+        else None
+    )
+    tags = normalize_glossary_tags(term.tags)
+    if not tags:
+        tags = infer_glossary_tags(original)
+
+    return term.model_copy(
+        update={
+            "original": original,
+            "translation": translation,
+            "note": note,
+            "tags": tags,
+            "first_occurrence": first_occurrence,
+            "scope": default_scope or term.scope or "project",
+            "source": term.source or "manual",
+            "status": term.status or "active",
+        }
+    )
+
+
+def normalize_glossary(
+    glossary: Glossary,
+    *,
+    default_scope: Optional[str] = None,
+) -> Glossary:
+    normalized = Glossary(version=glossary.version)
+    for term in glossary.terms:
+        normalized.add_term(normalize_glossary_term(term, default_scope=default_scope))
+    return normalized
+
+
+def create_default_global_glossary() -> Glossary:
+    """创建默认全局术语表。当前默认内容仍以半导体术语为主。"""
     glossary = Glossary(version=1)
 
     default_terms = [
         # ========== 公司与品牌 ==========
-        ("TSMC", "台积电", TranslationStrategy.PRESERVE, "Taiwan Semiconductor Manufacturing Company"),
+        ("TSMC", "台积电", TranslationStrategy.FIRST_ANNOTATE, "Taiwan Semiconductor Manufacturing Company"),
         ("Apple Silicon", None, TranslationStrategy.PRESERVE, "苹果自研芯片品牌"),
-        ("NVIDIA", "英伟达", TranslationStrategy.PRESERVE, None),
+        ("NVIDIA", "英伟达", TranslationStrategy.FIRST_ANNOTATE, None),
         ("AMD", "AMD", TranslationStrategy.PRESERVE, "超微半导体"),
-        ("Intel", "英特尔", TranslationStrategy.PRESERVE, None),
-        ("Qualcomm", "高通", TranslationStrategy.PRESERVE, None),
-        ("MediaTek", "联发科", TranslationStrategy.PRESERVE, None),
-        ("Samsung", "三星", TranslationStrategy.PRESERVE, None),
-        ("SK Hynix", "SK海力士", TranslationStrategy.PRESERVE, None),
-        ("Micron", "美光", TranslationStrategy.PRESERVE, None),
+        ("Intel", "英特尔", TranslationStrategy.FIRST_ANNOTATE, None),
+        ("Qualcomm", "高通", TranslationStrategy.FIRST_ANNOTATE, None),
+        ("MediaTek", "联发科", TranslationStrategy.FIRST_ANNOTATE, None),
+        ("Samsung", "三星", TranslationStrategy.FIRST_ANNOTATE, None),
+        ("SK Hynix", "SK海力士", TranslationStrategy.FIRST_ANNOTATE, None),
+        ("Micron", "美光", TranslationStrategy.FIRST_ANNOTATE, None),
 
         # ========== 芯片制造相关 ==========
         ("foundry", "晶圆代工厂", TranslationStrategy.FIRST_ANNOTATE, "后续可简称'代工厂'"),
@@ -412,17 +613,21 @@ def create_default_semiconductor_glossary() -> Glossary:
         ("semiconductor", "半导体", TranslationStrategy.TRANSLATE, None),
         ("integrated circuit", "集成电路", TranslationStrategy.FIRST_ANNOTATE, "IC"),
         ("transistor", "晶体管", TranslationStrategy.TRANSLATE, None),
-        (" Moore's Law", "摩尔定律", TranslationStrategy.PRESERVE, None),
+        ("Moore's Law", "摩尔定律", TranslationStrategy.PRESERVE, None),
         ("virtualization", "虚拟化", TranslationStrategy.TRANSLATE, None),
         ("scalability", "可扩展性", TranslationStrategy.TRANSLATE, None),
     ]
 
     for original, translation, strategy, note in default_terms:
+        normalized_original = original.strip()
         glossary.add_term(GlossaryTerm(
-            original=original,
-            translation=translation,
+            original=normalized_original,
+            translation=translation.strip() if isinstance(translation, str) else translation,
             strategy=strategy,
-            note=note
+            note=note.strip() if isinstance(note, str) else note,
+            tags=infer_glossary_tags(normalized_original),
+            scope="global",
         ))
 
     return glossary
+

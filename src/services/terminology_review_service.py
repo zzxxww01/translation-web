@@ -11,7 +11,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from src.core.glossary import GlossaryManager
+from src.core.glossary import GlossaryManager, infer_glossary_tags
 from src.core.models import (
     ElementType,
     Glossary,
@@ -68,17 +68,15 @@ class TerminologyReviewService:
         project_manager: ProjectManager,
         glossary_manager: GlossaryManager,
         llm_provider: Optional[LLMProvider] = None,
-        domain: str = "semiconductor",
     ) -> None:
         self.llm = llm_provider
         self.project_manager = project_manager
         self.glossary_manager = glossary_manager
-        self.domain = domain
 
     def prepare_review(self, project_id: str) -> Dict[str, Any]:
         project = self.project_manager.get(project_id)
         sections = self.project_manager.get_sections(project_id)
-        merged_glossary = self.glossary_manager.load_merged(project_id, self.domain)
+        merged_glossary = self.glossary_manager.load_merged(project_id)
         existing_terms = self.glossary_manager.to_dict(merged_glossary)
         aggregated: Dict[str, AggregatedCandidate] = {}
 
@@ -165,6 +163,7 @@ class TerminologyReviewService:
                 translation=translation,
                 strategy=existing.strategy if existing else self._infer_strategy(term, translation),
                 note=note if note is not None else (existing.note if existing else None),
+                tags=list(existing.tags) if existing and existing.tags else infer_glossary_tags(term),
                 first_occurrence=first_occurrence or (existing.first_occurrence if existing else None),
                 scope="project",
                 source="term_review",
@@ -184,7 +183,7 @@ class TerminologyReviewService:
 
     def get_project_recommendations(self, project_id: str) -> Dict[str, Any]:
         project_glossary = self.glossary_manager.load_project(project_id)
-        global_glossary = self.glossary_manager.load_global(self.domain)
+        global_glossary = self.glossary_manager.load_global()
         project = self.project_manager.get(project_id)
         sections = self.project_manager.get_sections(project_id)
         recommendations: List[Dict[str, Any]] = []
@@ -234,7 +233,7 @@ class TerminologyReviewService:
 
     def promote_project_term(self, project_id: str, original: str) -> Dict[str, Any]:
         project_glossary = self.glossary_manager.load_project(project_id)
-        global_glossary = self.glossary_manager.load_global(self.domain)
+        global_glossary = self.glossary_manager.load_global()
         project_term = project_glossary.get_term(original)
         if not project_term:
             raise FileNotFoundError(f"Project term not found: {original}")
@@ -244,13 +243,14 @@ class TerminologyReviewService:
             translation=project_term.translation,
             strategy=project_term.strategy,
             note=project_term.note,
+            tags=list(project_term.tags),
             first_occurrence=project_term.first_occurrence,
             scope="global",
             source="promoted_from_project",
             status=project_term.status,
         )
         global_glossary.add_term(promoted)
-        self.glossary_manager.save_global(global_glossary, self.domain)
+        self.glossary_manager.save_global(global_glossary)
         return {
             "message": "Term promoted to global glossary",
             "term": promoted.model_dump(mode="json"),

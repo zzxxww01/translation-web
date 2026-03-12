@@ -383,6 +383,12 @@ class LLMProvider(ABC):
         context: Dict[str, Any],
     ) -> List[str]:
         """Attach article and section review context ahead of critique prompts."""
+        from src.core.longform_context import (
+            build_article_challenge_payload,
+            build_review_priorities,
+            limit_non_empty_strings,
+        )
+
         if not context:
             return []
 
@@ -412,16 +418,16 @@ class LLMProvider(ABC):
         if section_lines:
             blocks.append("## 篇章位置\n" + "\n".join(section_lines))
 
-        notes = context.get("translation_notes") or []
+        notes = limit_non_empty_strings(context.get("translation_notes"), 4)
         if notes:
             blocks.append(
-                "## 本章翻译注意点\n" + "\n".join(f"- {note}" for note in notes[:6])
+                "## 本章翻译注意点\n" + "\n".join(f"- {note}" for note in notes)
             )
 
-        challenges = context.get("article_challenges") or []
+        challenges = build_article_challenge_payload(context.get("article_challenges"))
         if challenges:
             challenge_lines = []
-            for challenge in challenges[:5]:
+            for challenge in challenges:
                 if isinstance(challenge, dict):
                     location = str(challenge.get("location", "")).strip()
                     issue = str(challenge.get("issue", "")).strip()
@@ -436,11 +442,11 @@ class LLMProvider(ABC):
             if challenge_lines:
                 blocks.append("## 全文高风险点\n" + "\n".join(challenge_lines))
 
-        priorities = context.get("review_priorities") or []
+        priorities = build_review_priorities(context.get("review_priorities"))
         if priorities:
             blocks.append(
                 "## 本轮批评优先级\n"
-                + "\n".join(f"- {item}" for item in priorities[:6])
+                + "\n".join(f"- {item}" for item in priorities)
             )
 
         return blocks
@@ -450,11 +456,18 @@ class LLMProvider(ABC):
         context: Dict[str, Any],
     ) -> List[str]:
         """Attach section-level guardrails to targeted revision prompts."""
+        from src.core.longform_context import (
+            build_article_challenge_payload,
+            build_review_term_entries,
+            build_translation_guidelines,
+            limit_format_tokens,
+        )
+
         if not context:
             return []
 
         blocks: List[str] = []
-        format_tokens = context.get("format_tokens") or []
+        format_tokens = limit_format_tokens(context.get("format_tokens"))
         if format_tokens:
             token_lines = [
                 "## Hidden Format Tokens",
@@ -463,7 +476,7 @@ class LLMProvider(ABC):
                 "- Only revise the text after `|`.",
                 "- Do not convert these tokens into Markdown syntax.",
             ]
-            for token in format_tokens[:8]:
+            for token in format_tokens:
                 token_id = token.get("id", "")
                 token_type = token.get("type", "")
                 token_text = token.get("text", "")
@@ -483,16 +496,16 @@ class LLMProvider(ABC):
         if section_lines:
             blocks.append("## 修订上下文\n" + "\n".join(section_lines))
 
-        guidelines = context.get("guidelines") or []
+        guidelines = build_translation_guidelines(context.get("guidelines"))
         if guidelines:
             blocks.append(
-                "## 修订时仍需遵守\n" + "\n".join(f"- {item}" for item in guidelines[:8])
+                "## 修订时仍需遵守\n" + "\n".join(f"- {item}" for item in guidelines)
             )
 
-        terminology = context.get("terminology") or []
+        terminology = build_review_term_entries(context.get("terminology"))
         if terminology:
             term_lines = []
-            for term in terminology[:12]:
+            for term in terminology:
                 original = term.get("term") or term.get("original") or ""
                 translation = term.get("translation") or ""
                 if original and translation:
@@ -500,10 +513,10 @@ class LLMProvider(ABC):
             if term_lines:
                 blocks.append("## 关键术语\n" + "\n".join(term_lines))
 
-        challenges = context.get("article_challenges") or []
+        challenges = build_article_challenge_payload(context.get("article_challenges"))
         if challenges:
             challenge_lines = []
-            for challenge in challenges[:4]:
+            for challenge in challenges:
                 if not isinstance(challenge, dict):
                     continue
                 location = str(challenge.get("location", "")).strip()

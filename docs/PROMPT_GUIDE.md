@@ -1,4 +1,4 @@
-# 长文翻译系统技术手册
+﻿# 长文翻译系统技术手册
 
 更新时间：2026-03-12
 
@@ -71,11 +71,11 @@ GEMINI_BACKUP_MODEL=pro                        # 触发限制时的降级模型
 
 | 模型 | 文件 | 用途 |
 |---|---|---|
-| `GlossaryTerm` | `core/models/glossary.py` | 持久化术语条目（original / translation / strategy / note / scope / source / status） |
+| `GlossaryTerm` | `core/models/glossary.py` | 持久化术语条目（original / translation / strategy / note[前端显示为“词义说明”] / scope / source / status） |
 | `Glossary` | `core/models/glossary.py` | 术语表容器（`List[GlossaryTerm]`），支持 `get_term()` / `add_term()` |
 | `EnhancedTerm` | `core/models/analysis.py` | LLM 分析产出的术语（term / context_meaning / translation / strategy / first_occurrence_note / rationale） |
 | `PrescanTerm` | `core/models/memory.py` | Flash 预扫描发现的术语（term / suggested_translation / context / confidence） |
-| `TermConflict` | `core/models/memory.py` | 术语冲突（已有翻译 vs 新翻译） |
+| `TermConflict` | `core/models/memory.py` | 术语冲突（已有翻译 vs 新翻译，含上下文和词义说明） |
 | `TerminologyVersion` | `core/models/memory.py` | 运行时术语版本管理（含冲突检测和解决） |
 
 ### 翻译策略（`TranslationStrategy`）
@@ -91,7 +91,7 @@ GEMINI_BACKUP_MODEL=pro                        # 触发限制时的降级模型
 ```
 project_root/
 ├── glossary/                               # 全局术语表
-│   └── semiconductor.json                 # 领域术语（scope=global）
+│   └── global_glossary_semi.json           # 全局术语（scope=global）
 ├── projects/{project_id}/
 │   ├── glossary.json                      # 项目级术语（scope=project，覆盖全局）
 │   └── artifacts/
@@ -101,10 +101,10 @@ project_root/
 
 ## 2.3 术语加载与合并
 
-**入口：** `GlossaryManager.load_merged(project_id, domain)` → `core/glossary.py`
+**入口：** `GlossaryManager.load_merged(project_id)` → `core/glossary.py`
 
 ```
-全局术语表 (glossary/{domain}.json)
+全局术语表（glossary/global_glossary_semi.json）
     ↓ 加载
 项目术语表 (projects/{project_id}/glossary.json)
     ↓ 合并（项目覆盖全局，case-insensitive）
@@ -121,13 +121,22 @@ batch_translation_service._merge_analysis_with_project_glossary()
 
 **文件：** `core/term_matcher.py`
 
-当段落翻译时，`TermMatcher.get_term_context(paragraph, max_terms=20)` 从合并后的术语表中筛选与当前段落相关的术语：
+当前真正用于 prompt 注入的统一入口是：
+- `src/core/glossary_prompt.py` → `select_glossary_terms_for_text()`
+- `src/core/glossary_prompt.py` → `render_glossary_prompt_block()`
+
+它内部仍然复用 `TermMatcher.match_paragraph()` 做排序，但在进入 prompt 前会再做一次“真实出现校验”：
+1. 只保留当前待翻译文本里实际命中的术语
+2. 英文/缩写术语按词边界校验，避免 `AI` 这类短词误命中普通单词片段
+3. 统一按 `MAX_GLOSSARY_TERMS_IN_PROMPT = 15` 截断
+
+`TermMatcher` 自身的匹配逻辑仍然是：
 
 1. **精确匹配**（score 1.0-1.5）：术语原文在段落中出现，出现次数越多分越高，短术语（<5 字符）打折
 2. **部分匹配**（score ≤ 0.7）：多词术语的部分词汇匹配
 3. 按分数排序取 top 20，过滤 min_score < 0.3
 
-**仅链路 A 使用 TermMatcher 做段落级匹配**。链路 B/C 在 `LayeredContextManager` 中直接取全文分析的术语列表。
+**链路 A** 通过 `select_glossary_terms_for_text()` 注入术语；**链路 B/C** 通过 `LayeredContextManager._get_relevant_terms()` 做段落级过滤，并同样受 `MAX_GLOSSARY_TERMS_IN_PROMPT = 15` 限制。
 
 ## 2.5 术语预扫描（Prescan）
 
@@ -141,6 +150,8 @@ batch_translation_service._merge_analysis_with_project_glossary()
 3. `context_manager.add_terms_from_prescan()` 合入运行时术语版本
 4. 如果新术语与已有术语翻译冲突 → 生成 `TermConflict`
 
+**链路 B 的实时冲突处理：** 四步法全篇翻译会把 `TermConflict` 通过 SSE 发给前端。payload 除了已有译法和新译法，还会带 `existing_note / new_note` 作为“词义说明”，以及 `existing_context / new_context` 作为“上下文”。
+
 ## 2.6 术语审阅服务
 
 **文件：** `services/terminology_review_service.py`
@@ -151,6 +162,8 @@ batch_translation_service._merge_analysis_with_project_glossary()
 2. **apply_review**：用户在前端逐条决策（accept / skip / custom）→ 写入项目术语表
 3. **promote_project_term**：将项目级术语提升为全局术语（`scope=global, source=promoted_from_project`）
 4. **get_project_recommendations**：找出高频项目术语推荐提升为全局
+
+**前端显示约定：** 相似术语推荐和推荐提升卡片里，如果术语带 `note`，会显示为“词义说明”。
 
 ---
 
@@ -364,18 +377,18 @@ batch_translation_service._merge_analysis_with_project_glossary()
 ##### 6.3.1 隐藏格式 Token（`_build_format_token_section`）
 - **触发场景：** 段落含有行内格式（链接、粗体、斜体、行内代码）时。纯文本段落不触发。
 - **数据来源：** `paragraph.inline_elements` → `format_token_context()` → `context["format_tokens"]`
-- **生成内容：** 5 条 token 操作规则 + 本段 token 列表（最多 8 个，格式：`LINK_1 (link): 原文文本`）
+- **生成内容：** 5 条 token 操作规则 + 本段 token 列表（最多 6 个，格式：`LINK_1 (link): 原文文本`）
 
 ##### 6.3.2 术语表（`_build_glossary_section`）
 - **触发场景：**
-  - **链路 A：** `TermMatcher.get_term_context` 从项目术语表匹配当前段落。有命中术语时触发。
-  - **链路 B / C：** 全文分析术语 + 项目术语合并后传入。几乎总是触发。
+  - **链路 A：** `select_glossary_terms_for_text()` 从项目+全局合并术语表里只选当前段落命中的条目。
+  - **链路 B / C：** `LayeredContextManager._get_relevant_terms()` 从全文分析术语 + prescan + 项目术语覆盖结果中，只保留当前段落命中的条目。
 - **数据来源：** `context["glossary"]`
-- **生成内容：** 最多 20 个术语，格式取决于 strategy：
-  - `preserve` → `TSMC -> 保留英文`
-  - `first_annotate` → `CoWoS -> CoWoS（首次出现时加注释）`
-  - 有 note → `wafer -> 晶圆（note 内容）`
-  - 其他 → `chiplet -> 小芯片`
+- **生成内容：** 最多 15 个术语，统一格式为 `原文 / 标准写法 / 要求 / 词义`：
+  - `preserve` → `原文：HBM；标准写法：HBM；要求：保留英文原文`
+  - `first_annotate` → `原文：TSMC；标准写法：台积电；要求：首次出现写“台积电（TSMC）”，后文写“台积电”`
+  - 有 `note` → `原文：wafer；标准写法：晶圆；要求：直接使用该写法；词义：这里指芯片制造中的硅片基底`
+  - 其他 → `原文：chiplet；标准写法：小芯片；要求：直接使用该写法`
 
 ##### 6.3.3 已学习的翻译规则（`_build_rules_section`）
 - **触发场景：** 项目有历史翻译规则时触发。新项目不触发。
@@ -400,13 +413,16 @@ batch_translation_service._merge_analysis_with_project_glossary()
 
 ##### 6.3.7 章节角色（第三部分）
 - 仅 B / C 触发（需要 section role 分析结果）。
-- 内容：角色、与上一章节关系、核心论点、翻译注意事项
+- 内容：角色、与上一章节关系、核心论点、翻译注意事项。
+- 当前统一限额：核心论点最多 4 条，翻译注意事项最多 4 条。
 
 ##### 6.3.8 风格约束（第四部分）
 - B / C 总是触发（`style.translation_voice`）；A 不触发。
+- 当前统一限额：附加 style notes 最多 4 条。
 
 ##### 6.3.9 翻译风险（第五部分）
 - 仅 B / C 触发（全文分析 `challenges`）。
+- 当前统一限额：高风险挑战最多 4 条。
 
 ##### 6.3.10 前文已确认译文（第六部分）
 - **链路 A / B：** 当前段落不是 section 第一段时触发。C 不走此区块。
@@ -445,6 +461,12 @@ batch_translation_service._merge_analysis_with_project_glossary()
 **输出 JSON：** `{"translations": [{"id": "p001", "translation": "中文译文"}]}`
 
 **与 #6 的区别：** #6 逐段、走 builder 动态拼装；#7 整 section 一次发、上下文写在模板占位符里。
+
+**当前统一预算：** section batch translate 现在和段落级 prompt 共用同一组上下文裁剪规则，定义在：
+- `src/core/constants.py`
+- `src/core/longform_context.py`
+
+其中术语、guidelines、translation notes、article challenges 都会先经过统一裁剪，再进入 `gemini.py` 的 `section_batch_translate` prompt。
 
 ---
 
@@ -626,3 +648,4 @@ Phase 0:
 规则库梳理:
   └─ 后台异步: #14 rules_consolidation（flash，5% 概率）
 ```
+

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { AlertTriangle, ArrowLeft, CheckCircle2, Languages, Sparkles } from 'lucide-react';
 import { Button } from '../../../components/ui';
 import type {
@@ -210,6 +210,11 @@ export function TerminologyReviewPage({
                               <div className="font-medium text-text-primary">
                                 {term.original} → {term.translation || '保留原文'}
                               </div>
+                              {term.note ? (
+                                <div className="mt-1 text-text-muted">
+                                  词义说明：{term.note}
+                                </div>
+                              ) : null}
                               <div className="mt-1 text-text-muted">
                                 {term.scope === 'global' ? '全局术语' : '项目术语'} · 相似度 {term.similarity}
                               </div>

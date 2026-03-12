@@ -1,4 +1,4 @@
-"""
+﻿"""
 Translation Agent - Gemini LLM Provider
 
 Google Gemini API implementation for translation and analysis.
@@ -19,6 +19,12 @@ from typing import Optional, Dict, Any, List
 from types import ModuleType
 
 from src.config import settings
+from src.core.longform_context import (
+    build_article_challenge_payload,
+    build_section_guideline_lines,
+    limit_format_tokens,
+)
+from src.core.glossary_prompt import render_glossary_prompt_block
 
 from .base import LLMProvider
 
@@ -54,21 +60,21 @@ MODEL_CONFIG = {
     "flash": {
         "env_var": "GEMINI_FLASH_MODEL",
         "default": "gemini-flash-latest",
-        "description": "快速模型，速度快成本低",
+        "description": "Fast model with lower cost",
         "max_output_tokens": 65536,
         "supports_thinking": False,
     },
     "pro": {
         "env_var": "GEMINI_PRO_MODEL",
         "default": "gemini-3-pro-preview",
-        "description": "标准专业模型，质量与成本平衡",
+        "description": "Balanced quality and cost",
         "max_output_tokens": 65536,
         "supports_thinking": True,
     },
     "preview": {
         "env_var": "GEMINI_PREVIEW_MODEL",
         "default": "gemini-3.1-pro-preview",
-        "description": "前沿预览模型，能力更强但可能更不稳定",
+        "description": "Preview model with stronger capability but less stability",
         "max_output_tokens": 65536,
         "supports_thinking": True,
     },
@@ -103,13 +109,13 @@ class GeminiProvider(LLMProvider):
         model_type: str = "pro",
     ):
         """
-        初始化 Gemini Provider
+        鍒濆鍖?Gemini Provider
 
         Args:
-            api_key: Gemini API Key，如果不提供则从环境变量 GEMINI_API_KEY 获取
-                     (GEMINI_BACKUP_API_KEY 作为兼容回退)
-            model: 模型名称或别名（flash/pro/preview）
-            model_type: 模型类型别名（flash/pro/preview，兼容 reasoning）
+            api_key: Gemini API Key锛屽鏋滀笉鎻愪緵鍒欎粠鐜鍙橀噺 GEMINI_API_KEY 鑾峰彇
+                     (GEMINI_BACKUP_API_KEY 浣滀负鍏煎鍥為€€)
+            model: 妯″瀷鍚嶇О鎴栧埆鍚嶏紙flash/pro/preview锛?
+            model_type: 妯″瀷绫诲瀷鍒悕锛坒lash/pro/preview锛屽吋瀹?reasoning锛?
         """
         super().__init__()
         self.api_keys = self._load_api_keys(
@@ -129,10 +135,10 @@ class GeminiProvider(LLMProvider):
         self.model_catalog = self._load_model_catalog()
         self.model_type = self._normalize_model_selector(model_type) or "pro"
 
-        # 代理配置支持
+        # Proxy configuration support.
         self.proxy_config = self._get_proxy_config()
         if self.proxy_config:
-            logger.info("[Gemini] 使用代理配置: %s", self.proxy_config)
+            logger.info("[Gemini] Using proxy config: %s", self.proxy_config)
 
         # Default model selector priority:
         # GEMINI_MODEL (legacy/global selector) > constructor model > model_type
@@ -143,7 +149,7 @@ class GeminiProvider(LLMProvider):
         )
         self.model_name = self.resolve_model_name(default_selector)
 
-        # 备用模型（用于 high-demand 错误时回退）
+        # Backup model used when the primary model is temporarily unavailable.
         backup_selector = settings.gemini_backup_model or os.getenv("GEMINI_BACKUP_MODEL", "flash")
         self.backup_model = self.resolve_model_name(backup_selector)
 
@@ -311,7 +317,7 @@ class GeminiProvider(LLMProvider):
         except Exception as exc:
             raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
 
-    # ============ 错误分类方法 ============
+    # ============ 閿欒鍒嗙被鏂规硶 ============
 
     @staticmethod
     def _is_rate_limited(error_str: str) -> bool:
@@ -472,16 +478,16 @@ class GeminiProvider(LLMProvider):
         **_kwargs,
     ) -> str:
         """
-        生成文本
+        鐢熸垚鏂囨湰
 
         Args:
-            prompt: 提示词
-            response_format: 响应格式，"json" 表示期望 JSON 输出
-            temperature: 温度参数
-            max_retries: 最大重试次数
-            model: 可选模型覆盖（仅供内部方法指定，如 prescan 使用 flash）
+            prompt: 鎻愮ず璇?
+            response_format: 鍝嶅簲鏍煎紡锛?json" 琛ㄧず鏈熸湜 JSON 杈撳嚭
+            temperature: 娓╁害鍙傛暟
+            max_retries: 鏈€澶ч噸璇曟鏁?
+            model: 鍙€夋ā鍨嬭鐩栵紙浠呬緵鍐呴儴鏂规硶鎸囧畾锛屽 prescan 浣跨敤 flash锛?
         Returns:
-            str: 生成的文本
+            str: 鐢熸垚鐨勬枃鏈?
         """
         primary_model = self.resolve_model_name(model) if model else self.model_name
         attempt_plan = self._build_attempt_plan(primary_model)
@@ -588,14 +594,14 @@ class GeminiProvider(LLMProvider):
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
         """
-        翻译文本
+        缈昏瘧鏂囨湰
 
         Args:
-            text: 要翻译的原文
-            context: 上下文信息
+            text: 瑕佺炕璇戠殑鍘熸枃
+            context: 涓婁笅鏂囦俊鎭?
 
         Returns:
-            str: 翻译结果
+            str: 缈昏瘧缁撴灉
         """
         context_data = dict(context or {})
         prompt = self._build_translation_prompt(text, context_data)
@@ -618,13 +624,13 @@ class GeminiProvider(LLMProvider):
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """
-        分析文本，提取术语和风格
+        鍒嗘瀽鏂囨湰锛屾彁鍙栨湳璇拰椋庢牸
 
         Args:
-            text: 要分析的文本（通常是全文或摘要）
+            text: 瑕佸垎鏋愮殑鏂囨湰锛堥€氬父鏄叏鏂囨垨鎽樿锛?
 
         Returns:
-            Dict: 分析结果
+            Dict: 鍒嗘瀽缁撴灉
         """
         prompt = self._build_analysis_prompt(text)
 
@@ -643,14 +649,14 @@ class GeminiProvider(LLMProvider):
         self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
     ) -> List[Dict[str, Any]]:
         """
-        检查译文一致性
+        妫€鏌ヨ瘧鏂囦竴鑷存€?
 
         Args:
-            paragraphs: 段落列表 [{"source": ..., "translation": ...}, ...]
-            glossary: 术语表 {term: translation, ...}
+            paragraphs: 娈佃惤鍒楄〃 [{"source": ..., "translation": ...}, ...]
+            glossary: 鏈琛?{term: translation, ...}
 
         Returns:
-            List[Dict]: 问题列表
+            List[Dict]: 闂鍒楄〃
         """
         prompt = self._build_consistency_prompt(paragraphs, glossary)
 
@@ -662,13 +668,13 @@ class GeminiProvider(LLMProvider):
             return []
 
     def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
-        """构建翻译 prompt（统一走 longform paragraph prompt builder）。"""
+        """Build the paragraph translation prompt via the shared prompt builder."""
         from ..prompts.prompt_builder import get_prompt_builder
 
         prompt_style = self._resolve_translation_prompt_style()
         builder = get_prompt_builder(style=prompt_style)
 
-        # 提取上下文信息
+        # Extract runtime context for the paragraph prompt builder.
         glossary = context.get("glossary", [])
         previous_paragraphs = context.get("previous_paragraphs", [])
         next_preview = context.get("next_preview", [])
@@ -688,7 +694,7 @@ class GeminiProvider(LLMProvider):
         format_tokens = context.get("format_tokens", [])
         term_usage = context.get("term_usage")
 
-        # 使用Prompt构建器生成完整Prompt
+        # Delegate prompt assembly to the long-form prompt builder.
         prompt = builder.build_prompt(
             source_text=text,
             glossary=glossary,
@@ -719,7 +725,7 @@ class GeminiProvider(LLMProvider):
         current_translation: str,
         context: Dict[str, Any],
     ) -> str:
-        """构建重译 prompt（统一走 dedicated paragraph retranslation template）。"""
+        """Build the paragraph retranslation prompt via the shared prompt builder."""
         from ..prompts.prompt_builder import get_prompt_builder
 
         builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
@@ -752,13 +758,13 @@ class GeminiProvider(LLMProvider):
         return style
 
     def _build_analysis_prompt(self, text: str) -> str:
-        """构建分析 prompt"""
+        """Build the analysis prompt."""
         return self.prompt_manager.get("analysis", text=text[:8000])
 
     def _build_consistency_prompt(
         self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
     ) -> str:
-        """构建一致性检查 prompt"""
+        """Build the consistency review prompt."""
         para_text = "\n\n".join(
             [
                 f"[段落 {i+1}]\n原文：{p['source']}\n译文：{p['translation']}"
@@ -767,7 +773,7 @@ class GeminiProvider(LLMProvider):
         )
 
         glossary_text = "\n".join(
-            [f"- {term} → {trans}" for term, trans in glossary.items()]
+            [f"- {term} -> {trans}" for term, trans in glossary.items()]
         )
 
         return self.prompt_manager.get(
@@ -781,21 +787,7 @@ class GeminiProvider(LLMProvider):
         context: Dict[str, Any],
         paragraph_ids: List[str],
     ) -> List[Dict[str, str]]:
-        """
-        章节级批量翻译（粗粒度翻译模式）
-
-        一次性翻译整个章节的所有段落，然后自动切分回原始段落。
-
-        Args:
-            section_text: 章节完整文本（所有段落用换行分隔）
-            section_title: 章节标题
-            context: 翻译上下文信息
-            paragraph_ids: 段落ID列表，用于标识每个段落
-
-        Returns:
-            List[Dict[str, str]]: 翻译结果列表 [{"id": "p001", "translation": "..."}, ...]
-        """
-        # 构建批量翻译 prompt
+        """Translate one full section in batch mode and return paragraph-aligned results."""
         prompt = self._build_batch_translation_prompt(
             section_text, section_title, context, paragraph_ids
         )
@@ -896,26 +888,19 @@ class GeminiProvider(LLMProvider):
         context: Dict[str, Any],
         paragraph_ids: List[str],
     ) -> str:
-        """构建批量翻译 prompt。"""
-        enhanced_guidelines = list(context.get("guidelines", []))
-        section_role = context.get("section_role")
-        if section_role:
-            enhanced_guidelines.insert(0, f"本章角色：{section_role}")
-        translation_voice = context.get("translation_voice")
-        if translation_voice:
-            enhanced_guidelines.insert(1, f"目标语气：{translation_voice}")
-        target_audience = context.get("target_audience")
-        if target_audience:
-            enhanced_guidelines.insert(2, f"目标读者：{target_audience}")
-        translation_notes = context.get("translation_notes") or []
-        for note in reversed(translation_notes[:4]):
-            enhanced_guidelines.insert(3, f"本章注意：{note}")
+        """Build the batch translation prompt."""
         format_token_rules = self._format_token_rules_for_prompt(
             context.get("format_tokens", []),
             context.get("format_token_count", 0),
         )
-        if format_token_rules:
-            enhanced_guidelines.insert(0, format_token_rules)
+        enhanced_guidelines = build_section_guideline_lines(
+            context.get("guidelines", []),
+            section_role=context.get("section_role", ""),
+            translation_voice=context.get("translation_voice", ""),
+            target_audience=context.get("target_audience", ""),
+            translation_notes=context.get("translation_notes"),
+            format_token_rules=format_token_rules,
+        )
 
         return self.prompt_manager.get(
             "longform/translation/section_batch_translate.v2",
@@ -937,40 +922,16 @@ class GeminiProvider(LLMProvider):
 
     def _format_glossary_for_prompt(self, glossary: Any) -> str:
         """Render glossary context into prompt-friendly text."""
-        if not glossary:
-            return "None"
-
-        lines = []
-        if isinstance(glossary, dict):
-            for term, trans in glossary.items():
-                lines.append(f"- {term} -> {trans}")
-        elif isinstance(glossary, list):
-            for item in glossary[:20]:
-                if not isinstance(item, dict):
-                    continue
-                original = item.get("original", item.get("term", ""))
-                translation = item.get("translation", "")
-                strategy = item.get("strategy", "")
-                note = item.get("note") or item.get("context_meaning", "")
-                first_occurrence_note = item.get("first_occurrence_note", False)
-                if not original or not (translation or strategy == "preserve"):
-                    continue
-                extras = []
-                if strategy == "preserve":
-                    extras.append("keep in English")
-                elif strategy == "first_annotate" or first_occurrence_note:
-                    extras.append("annotate on first mention")
-                if note:
-                    extras.append(str(note))
-                suffix = f" ({'; '.join(extras)})" if extras else ""
-                rendered_translation = translation or "keep in English"
-                lines.append(f"- {original} -> {rendered_translation}{suffix}")
-
-        return "\n".join(lines) if lines else "None"
+        return render_glossary_prompt_block(
+            glossary,
+            include_title=False,
+            empty_text="无",
+        )
 
     def _format_token_rules_for_prompt(self, tokens: Any, token_count: int = 0) -> str:
         """Render one compact rule block for hidden formatting tokens."""
-        if not tokens and not token_count:
+        preview_tokens = limit_format_tokens(tokens)
+        if not preview_tokens and not token_count:
             return ""
 
         lines = [
@@ -980,15 +941,14 @@ class GeminiProvider(LLMProvider):
             "Do not delete, duplicate, renumber, or move tokens to another paragraph.",
         ]
         preview_items = []
-        if isinstance(tokens, list):
-            for item in tokens[:6]:
-                if not isinstance(item, dict):
-                    continue
-                token_id = item.get("id", "")
-                token_text = item.get("text", "")
-                token_type = item.get("type", "")
-                if token_id and token_text:
-                    preview_items.append(f"{token_id}({token_type}): {token_text}")
+        for item in preview_tokens:
+            if not isinstance(item, dict):
+                continue
+            token_id = item.get("id", "")
+            token_text = item.get("text", "")
+            token_type = item.get("type", "")
+            if token_id and token_text:
+                preview_items.append(f"{token_id}({token_type}): {token_text}")
         if preview_items:
             lines.append("Tokens in this request: " + "; ".join(preview_items))
         elif token_count:
@@ -997,27 +957,22 @@ class GeminiProvider(LLMProvider):
 
     def _format_challenges_for_prompt(self, challenges: Any) -> str:
         """Render article translation risks into prompt-friendly text."""
-        if not challenges:
+        normalized_challenges = build_article_challenge_payload(challenges)
+        if not normalized_challenges:
             return "None"
 
         lines = []
-        if isinstance(challenges, list):
-            for item in challenges[:6]:
-                if isinstance(item, dict):
-                    location = item.get("location", "")
-                    issue = item.get("issue", "")
-                    suggestion = item.get("suggestion", "")
-                    line = str(issue).strip()
-                    if location:
-                        line = f"[{location}] {line}"
-                    if suggestion:
-                        line = f"{line}; suggestion: {suggestion}"
-                    if line:
-                        lines.append(f"- {line}")
-                else:
-                    text = str(item).strip()
-                    if text:
-                        lines.append(f"- {text}")
+        for item in normalized_challenges:
+            location = item.get("location", "")
+            issue = item.get("issue", "")
+            suggestion = item.get("suggestion", "")
+            line = str(issue).strip()
+            if location:
+                line = f"[{location}] {line}"
+            if suggestion:
+                line = f"{line}; suggestion: {suggestion}"
+            if line:
+                lines.append(f"- {line}")
 
         return "\n".join(lines) if lines else "None"
 
@@ -1028,7 +983,7 @@ class GeminiProvider(LLMProvider):
         section_content: str,
         existing_terms: Dict[str, str]
     ) -> Dict[str, Any]:
-        """使用 Flash 模型进行章节预扫描。"""
+        """Run section prescan with the Flash model."""
         return self.prescan_section(
             section_id=section_id,
             section_title=section_title,
@@ -1044,20 +999,14 @@ def create_gemini_provider(
     model: str = "pro",
     model_type: str = "pro",
 ) -> GeminiProvider:
-    """
-    便捷函数：创建 Gemini Provider
-
-    Args:
-        api_key: API Key
-        model: 模型名称
-        model_type: 模型类型（flash/pro/preview，兼容 reasoning）
-
-    Returns:
-        GeminiProvider: Gemini Provider 实例
-    """
+    """Convenience helper to create a Gemini provider."""
     return GeminiProvider(
         api_key=api_key,
         backup_api_key=backup_api_key,
         model=model,
         model_type=model_type,
     )
+
+
+
+

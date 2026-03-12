@@ -1,22 +1,28 @@
-"""Translation prompt builder for long-form paragraph translation."""
+﻿"""Translation prompt builder for long-form paragraph translation."""
 
 from __future__ import annotations
 
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
+from src.core.constants import (
+    MAX_ARTICLE_CHALLENGES_IN_PROMPT,
+    MAX_FORMAT_TOKENS_IN_PROMPT,
+    MAX_HEADING_CHAIN_IN_PROMPT,
+    MAX_SECTION_KEY_POINTS_IN_PROMPT,
+    MAX_SECTION_NOTES_IN_PROMPT,
+    MAX_STYLE_NOTES_IN_PROMPT,
+)
+from src.core.glossary_prompt import render_glossary_prompt_block
+from src.core.longform_context import build_article_challenge_payload, limit_non_empty_strings
 from . import get_prompt_manager
 
 
-_SENTENCE_SPLIT_RE = re.compile(r'(?<=[.!?。！？])\s+')
+_SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?。！？])\s+")
 
 
 def _truncate_by_sentence(text: str, max_chars: int = 120) -> str:
-    """按句子截断文本。
-
-    如果整段未超限直接返回。超限时保留开头和结尾的句子，
-    中间省略的部分用 "……" 代替。
-    """
+    """Truncate text by sentence while keeping the start and end when possible."""
     if len(text) <= max_chars:
         return text
 
@@ -28,15 +34,15 @@ def _truncate_by_sentence(text: str, max_chars: int = 120) -> str:
     result_parts: List[str] = []
     used = len(last)
 
-    for s in sentences[:-1]:
-        if used + len(s) + 2 > max_chars:
+    for sentence in sentences[:-1]:
+        if used + len(sentence) + 2 > max_chars:
             break
-        result_parts.append(s)
-        used += len(s) + 1
+        result_parts.append(sentence)
+        used += len(sentence) + 1
 
     if result_parts:
         return " ".join(result_parts) + " …… " + last
-    return sentences[0][:max_chars - len(last) - 4] + " …… " + last
+    return sentences[0][: max_chars - len(last) - 4] + " …… " + last
 
 
 TRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_translate.v2"
@@ -210,7 +216,7 @@ class TranslationPromptBuilder:
         ]
 
         preview: List[str] = []
-        for token in format_tokens[:8]:
+        for token in format_tokens[:MAX_FORMAT_TOKENS_IN_PROMPT]:
             token_id = token.get("id", "")
             token_type = token.get("type", "")
             token_text = token.get("text", "")
@@ -221,32 +227,17 @@ class TranslationPromptBuilder:
 
         return "\n".join(lines)
 
-    def _build_glossary_section(self, glossary: List[Dict], term_usage: Dict[str, List[str]] = None) -> str:
-        if not glossary:
-            return ""
-
-        term_usage = term_usage or {}
-        used_keys = {k.lower() for k in term_usage}
-        lines = ["## 术语表"]
-        for term in glossary[:20]:
-            original = term.get("term") or term.get("original", "")
-            translation = term.get("translation", "")
-            strategy = term.get("strategy", "translate")
-            note = term.get("note") or term.get("context_meaning", "")
-            first_occurrence_note = term.get("first_occurrence_note", False)
-
-            already_used = original.lower() in used_keys
-
-            if strategy == "preserve":
-                lines.append(f"- {original} -> 保留英文")
-            elif (strategy == "first_annotate" or first_occurrence_note) and not already_used:
-                lines.append(f"- {original} -> {translation}（首次出现时加注释）")
-            elif note:
-                lines.append(f"- {original} -> {translation}（{note}）")
-            else:
-                lines.append(f"- {original} -> {translation}")
-
-        return "\n".join(lines)
+    def _build_glossary_section(
+        self,
+        glossary: List[Dict],
+        term_usage: Dict[str, List[str]] = None,
+    ) -> str:
+        return render_glossary_prompt_block(
+            glossary,
+            include_title=True,
+            term_usage=term_usage,
+            empty_text="",
+        )
 
     def _build_rules_section(self, rules: List[str]) -> str:
         if not rules:
@@ -390,7 +381,9 @@ class TranslationPromptBuilder:
         if current_section_title:
             overview_lines.append(f"当前章节：{current_section_title}")
         if heading_chain:
-            overview_lines.append(f"标题链：{' -> '.join(heading_chain)}")
+            overview_lines.append(
+                f"标题链：{' -> '.join(heading_chain[-MAX_HEADING_CHAIN_IN_PROMPT:])}"
+            )
         if target_audience:
             overview_lines.append(f"目标读者：{target_audience}")
         if len(overview_lines) > 1:
@@ -407,14 +400,20 @@ class TranslationPromptBuilder:
             relation_to_previous = section_context.get("relation_to_previous")
             if relation_to_previous:
                 section_lines.append(f"与上一章节的关系：{relation_to_previous}")
-            key_points = section_context.get("key_points") or []
+            key_points = limit_non_empty_strings(
+                section_context.get("key_points"),
+                MAX_SECTION_KEY_POINTS_IN_PROMPT,
+            )
             if key_points:
                 section_lines.append("核心论点：")
-                section_lines.extend(f"- {point}" for point in key_points[:5])
-            translation_notes = section_context.get("translation_notes") or []
+                section_lines.extend(f"- {point}" for point in key_points)
+            translation_notes = limit_non_empty_strings(
+                section_context.get("translation_notes"),
+                MAX_SECTION_NOTES_IN_PROMPT,
+            )
             if translation_notes:
                 section_lines.append("翻译注意事项：")
-                section_lines.extend(f"- {note}" for note in translation_notes[:5])
+                section_lines.extend(f"- {note}" for note in translation_notes)
             if len(section_lines) > 1:
                 sections.append("\n".join(section_lines))
 
@@ -425,14 +424,20 @@ class TranslationPromptBuilder:
             tone = style_guide.get("tone")
             if tone:
                 style_notes.append(f"语调：{tone}")
-            notes = style_guide.get("notes") or []
-            style_notes.extend(str(note) for note in notes[:5])
+            notes = limit_non_empty_strings(
+                style_guide.get("notes"),
+                MAX_STYLE_NOTES_IN_PROMPT,
+            )
+            style_notes.extend(notes)
         if style_notes:
             sections.append("## 风格约束\n" + "\n".join(f"- {item}" for item in style_notes))
 
         if article_challenges:
             challenge_lines = ["## 翻译风险"]
-            for challenge in article_challenges[:5]:
+            for challenge in build_article_challenge_payload(
+                article_challenges,
+                MAX_ARTICLE_CHALLENGES_IN_PROMPT,
+            ):
                 if isinstance(challenge, dict):
                     location = str(challenge.get("location", "")).strip()
                     issue = str(challenge.get("issue", "")).strip()
@@ -479,3 +484,4 @@ def get_prompt_builder(style: str = "simplified") -> TranslationPromptBuilder:
         builder = TranslationPromptBuilder(prompt_style=style_key)
         _builders[style_key] = builder
     return builder
+

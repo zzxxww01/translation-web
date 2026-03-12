@@ -61,7 +61,7 @@ async def translate_post(request: PostTranslateRequest):
     if not request.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
-    glossary_context = build_glossary_context()
+    glossary_context = build_glossary_context(request.content)
 
     if request.custom_prompt:
         prompt = request.custom_prompt.replace("{content}", request.content)

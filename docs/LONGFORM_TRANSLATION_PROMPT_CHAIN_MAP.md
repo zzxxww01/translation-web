@@ -261,6 +261,7 @@ sequenceDiagram
 
 Builder 关键规则：
 
+- glossary 统一通过 `src/core/glossary_prompt.py` 的 `select_glossary_terms_for_text()` 按当前段落筛选，只注入真正命中的术语，默认上限 `15`
 - 只有 `instruction` 时，插入 `Extra Instruction`
 - 同时存在 `previous_translation + instruction` 时，插入 `Revision Task`
 - 普通翻译绝不再落回旧 prompt 文件
@@ -412,6 +413,7 @@ sequenceDiagram
 - 已不再存在独立的 `section_understanding_fallback` prompt。
 - prescan 固定走 `prescan_section_with_flash`。
 - 没有 runtime fallback prompt。
+- 四步法 draft / critique / revision / section batch translate 现在统一通过 `src/core/longform_context.py` 收口上下文预算，统一裁剪术语、guidelines、translation notes、article challenges。
 
 ## 9. 链路 C：确认流项目级翻译
 

@@ -11,6 +11,8 @@ Layer 4: 动态累积上下文
 
 from typing import List, Dict, Optional, Tuple
 
+from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
+from ..core.longform_context import build_translation_guidelines
 from ..core.models import (
     Section, Paragraph,
     ArticleAnalysis, EnhancedTerm,
@@ -97,7 +99,9 @@ class LayeredContextManager:
         if self.article_analysis:
             context.article_theme = self.article_analysis.theme
             context.article_structure = self.article_analysis.structure_summary
-            context.guidelines = self.article_analysis.guidelines
+            context.guidelines = build_translation_guidelines(
+                self.article_analysis.guidelines
+            )
             # 获取当前段落文本用于段落级过滤
             paragraph_text = ""
             if 0 <= current_paragraph_index < len(current_section.paragraphs):
@@ -258,6 +262,8 @@ class LayeredContextManager:
                     new_translation=prescan_term.suggested_translation,
                     existing_context=existing.context_meaning,
                     new_context=prescan_term.context,
+                    existing_note=existing.context_meaning,
+                    new_note=prescan_term.context,
                     existing_section_id=self.term_tracker.first_occurrences.get(
                         prescan_term.term.lower(), ""
                     ),
@@ -310,6 +316,8 @@ class LayeredContextManager:
                 new_translation=new_translation,
                 existing_context=existing.context_meaning,
                 new_context=new_context,
+                existing_note=existing.context_meaning,
+                new_note=new_context,
                 existing_section_id=self.term_tracker.first_occurrences.get(
                     term.lower(), ""
                 ),
@@ -413,6 +421,8 @@ class LayeredContextManager:
                 continue
 
             relevant.append(term)
+            if len(relevant) >= MAX_GLOSSARY_TERMS_IN_PROMPT:
+                break
 
         return relevant
 

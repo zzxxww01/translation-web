@@ -4,6 +4,8 @@
   new_translation: string;
   existing_context: string;
   new_context: string;
+  existing_note?: string;
+  new_note?: string;
   existing_section_id?: string;
   new_section_id: string;
 }

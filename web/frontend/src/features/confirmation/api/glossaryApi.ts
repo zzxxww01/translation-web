@@ -5,6 +5,7 @@
 
 import { apiClient } from '../../../shared/api/client';
 import type {
+  GlossaryBatchAction,
   GlossaryRecommendation,
   GlossaryTerm,
   TermReviewDecision,
@@ -49,7 +50,16 @@ export interface AddTermRequest {
   translation?: string | null;
   strategy?: TranslationStrategy;
   note?: string | null;
+  tags?: string[] | null;
   status?: 'active' | 'disabled' | string;
+}
+
+export interface BatchGlossaryRequest {
+  originals: string[];
+  action: GlossaryBatchAction;
+  status?: 'active' | 'disabled' | string;
+  strategy?: TranslationStrategy;
+  tags?: string[] | null;
 }
 
 /**
@@ -104,25 +114,10 @@ export const glossaryApi = {
     original: string,
     updates: Partial<AddTermRequest>
   ): Promise<{ message: string; term: GlossaryTerm }> {
-    const params = new URLSearchParams();
-
-    if (updates.translation !== undefined && updates.translation !== null) {
-      params.append('translation', updates.translation);
-    }
-    if (updates.strategy !== undefined) {
-      params.append('strategy', updates.strategy);
-    }
-    if (updates.note !== undefined && updates.note !== null) {
-      params.append('note', updates.note);
-    }
-    if (updates.status !== undefined && updates.status !== null) {
-      params.append('status', updates.status);
-    }
-
     const encodedOriginal = encodeURIComponent(original);
-
     return apiClient.put<{ message: string; term: GlossaryTerm }>(
-      `/glossary/terms/${encodedOriginal}?${params.toString()}`
+      `/glossary/terms/${encodedOriginal}`,
+      updates
     );
   },
 
@@ -147,25 +142,10 @@ export const glossaryApi = {
     original: string,
     updates: Partial<AddTermRequest>
   ): Promise<{ message: string; term: GlossaryTerm }> {
-    const params = new URLSearchParams();
-
-    if (updates.translation !== undefined && updates.translation !== null) {
-      params.append('translation', updates.translation);
-    }
-    if (updates.strategy !== undefined) {
-      params.append('strategy', updates.strategy);
-    }
-    if (updates.note !== undefined && updates.note !== null) {
-      params.append('note', updates.note);
-    }
-    if (updates.status !== undefined && updates.status !== null) {
-      params.append('status', updates.status);
-    }
-
     const encodedOriginal = encodeURIComponent(original);
-
     return apiClient.put<{ message: string; term: GlossaryTerm }>(
-      `/projects/${projectId}/glossary/terms/${encodedOriginal}?${params.toString()}`
+      `/projects/${projectId}/glossary/terms/${encodedOriginal}`,
+      updates
     );
   },
 
@@ -181,6 +161,33 @@ export const glossaryApi = {
     return apiClient.delete<{ message: string; original: string }>(
       `/projects/${projectId}/glossary/terms/${encodedOriginal}`
     );
+  },
+
+  async batchUpdateGlobalGlossary(
+    request: BatchGlossaryRequest
+  ): Promise<{
+    message: string;
+    action: GlossaryBatchAction;
+    matched_count: number;
+    updated_count: number;
+    terms: GlossaryTerm[];
+    originals: string[];
+  }> {
+    return apiClient.post('/glossary/batch', request);
+  },
+
+  async batchUpdateProjectGlossary(
+    projectId: string,
+    request: BatchGlossaryRequest
+  ): Promise<{
+    message: string;
+    action: GlossaryBatchAction;
+    matched_count: number;
+    updated_count: number;
+    terms: GlossaryTerm[];
+    originals: string[];
+  }> {
+    return apiClient.post(`/projects/${projectId}/glossary/batch`, request);
   },
 
   /**

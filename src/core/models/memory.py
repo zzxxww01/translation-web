@@ -36,6 +36,8 @@ class TermConflict(BaseModel):
     new_translation: str
     existing_context: str = ""
     new_context: str = ""
+    existing_note: str = ""
+    new_note: str = ""
     existing_section_id: str = ""
     new_section_id: str = ""
     created_at: datetime = Field(default_factory=datetime.now)
@@ -73,6 +75,8 @@ class TerminologyVersion(BaseModel):
                     new_translation=term.translation or "",
                     existing_context=existing.context_meaning,
                     new_context=term.context_meaning,
+                    existing_note=existing.context_meaning,
+                    new_note=term.context_meaning,
                 )
                 self.conflicts.append(conflict)
                 return conflict

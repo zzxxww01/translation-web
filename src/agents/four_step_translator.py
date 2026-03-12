@@ -16,6 +16,14 @@ from typing import List, Optional, Callable, Dict, Any
 import asyncio
 import logging
 
+from ..core.longform_context import (
+    build_article_challenge_payload,
+    build_glossary_entries_from_terms,
+    build_review_priorities,
+    build_review_term_entries,
+    build_section_context_payload,
+    build_translation_guidelines,
+)
 from ..core.format_tokens import TranslationPayload, build_translation_input, build_translation_payload, format_token_context
 from ..core.models import (
     Section, Paragraph,
@@ -411,16 +419,7 @@ class FourStepTranslator:
 
         # 术语表
         if context.terminology:
-            llm_context["glossary"] = [
-                {
-                    "original": term.term,
-                    "translation": term.translation,
-                    "strategy": term.strategy.value if hasattr(term.strategy, 'value') else term.strategy,
-                    "note": term.context_meaning,
-                    "first_occurrence_note": term.first_occurrence_note,
-                }
-                for term in context.terminology
-            ]
+            llm_context["glossary"] = build_glossary_entries_from_terms(context.terminology)
 
         # 术语使用记录（用于 FIRST_ANNOTATE 动态调整）
         if context.term_usage:
@@ -429,17 +428,14 @@ class FourStepTranslator:
         # 风格指南
         if context.guidelines:
             llm_context["style_guide"] = {
-                "notes": context.guidelines
+                "notes": build_translation_guidelines(context.guidelines)
             }
 
         # 章节理解
         if context.section_understanding:
-            llm_context["section_context"] = {
-                "role": context.section_understanding.role_in_article,
-                "relation_to_previous": context.section_understanding.relation_to_previous,
-                "key_points": context.section_understanding.key_points,
-                "translation_notes": context.section_understanding.translation_notes
-            }
+            llm_context["section_context"] = build_section_context_payload(
+                context.section_understanding
+            )
 
         # 全文背景
         if context.article_theme:
@@ -454,14 +450,9 @@ class FourStepTranslator:
                     article_analysis.style.translation_voice
                 )
             if article_analysis.challenges:
-                llm_context["article_challenges"] = [
-                    {
-                        "location": challenge.location,
-                        "issue": challenge.issue,
-                        "suggestion": challenge.suggestion or "",
-                    }
-                    for challenge in article_analysis.challenges[:6]
-                ]
+                llm_context["article_challenges"] = build_article_challenge_payload(
+                    article_analysis.challenges
+                )
 
         # 前文上下文
         if context.previous_paragraphs:
@@ -492,47 +483,41 @@ class FourStepTranslator:
         if self.context_manager.article_analysis:
             article_theme = self.context_manager.article_analysis.theme
             structure_summary = self.context_manager.article_analysis.structure_summary
-            guidelines = list(self.context_manager.article_analysis.guidelines)
+            guidelines = build_translation_guidelines(
+                self.context_manager.article_analysis.guidelines
+            )
             target_audience = (
                 self.context_manager.article_analysis.style.target_audience
             )
             translation_voice = (
                 self.context_manager.article_analysis.style.translation_voice
             )
-            article_challenges = [
-                {
-                    "location": challenge.location,
-                    "issue": challenge.issue,
-                    "suggestion": challenge.suggestion or "",
-                }
-                for challenge in self.context_manager.article_analysis.challenges[:6]
-            ]
-            terminology = [
-                {
-                    "term": term.term,
-                    "translation": term.translation or "",
-                }
-                for term in self.context_manager.article_analysis.terminology
-                if term.translation
-            ]
+            article_challenges = build_article_challenge_payload(
+                self.context_manager.article_analysis.challenges
+            )
+            terminology = build_review_term_entries(
+                self.context_manager.article_analysis.terminology
+            )
 
-        review_priorities = [
+        review_priorities = build_review_priorities([
             "先检查是否误译、漏译或削弱原文判断。",
             "再检查术语是否前后一致，首现是否适合中文加英文括注。",
             "再检查是否对真正有理解门槛的术语漏注，或对常见术语过度加注。",
             "再检查中文是否有翻译腔、英文句法投影或机械名词串。",
             "标题、图注和数据密集段优先保证信息密度与判断力度。",
-        ]
+        ])
+
+        section_payload = build_section_context_payload(understanding)
 
         return {
             "article_theme": article_theme,
             "structure_summary": structure_summary,
             "target_audience": target_audience,
             "section_title": section.title,
-            "section_role": understanding.role_in_article,
-            "relation_to_previous": understanding.relation_to_previous,
+            "section_role": section_payload.get("role", ""),
+            "relation_to_previous": section_payload.get("relation_to_previous", ""),
             "relation_to_next": understanding.relation_to_next,
-            "translation_notes": understanding.translation_notes,
+            "translation_notes": section_payload.get("translation_notes", []),
             "article_challenges": article_challenges,
             "review_priorities": review_priorities,
             "guidelines": guidelines,
@@ -562,15 +547,12 @@ class FourStepTranslator:
         guidelines = []
         terminology = []
         if self.context_manager.article_analysis:
-            guidelines = self.context_manager.article_analysis.guidelines
-            terminology = [
-                {
-                    "term": t.term,
-                    "translation": t.translation,
-                    "context_meaning": t.context_meaning
-                }
-                for t in self.context_manager.article_analysis.terminology
-            ]
+            guidelines = build_translation_guidelines(
+                self.context_manager.article_analysis.guidelines
+            )
+            terminology = build_review_term_entries(
+                self.context_manager.article_analysis.terminology
+            )
 
         # 调用 LLM 反思
         result = self.llm.reflect_on_translation(

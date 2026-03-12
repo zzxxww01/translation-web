@@ -15,12 +15,21 @@ export interface GlossaryTerm {
   translation?: string | null;
   strategy: TranslationStrategy;
   note?: string | null;
+  tags?: string[] | null;
   first_occurrence?: string | null;
   scope?: 'global' | 'project' | string;
   source?: string | null;
   status?: 'active' | 'disabled' | string;
   updated_at?: string | null;
 }
+
+export type GlossaryBatchAction =
+  | 'delete'
+  | 'set_status'
+  | 'set_strategy'
+  | 'add_tags'
+  | 'replace_tags'
+  | 'remove_tags';
 
 export interface SimilarGlossaryTerm {
   original: string;

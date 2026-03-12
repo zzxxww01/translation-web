@@ -17,7 +17,6 @@ export { EditCard } from './cards/EditCard';
 // Modals
 export { ImportVersionModal } from './modals/ImportVersionModal';
 export { AlignmentModal } from './modals/AlignmentModal';
-export { GlossaryModal } from './modals/GlossaryModal';
 export { RetranslateOptionsModal } from './modals/RetranslateOptionsModal';
 
 // Common

@@ -1,4 +1,4 @@
-"""Markdown exporter built on parent-block reconstruction."""
+﻿"""Markdown exporter built on parent-block reconstruction."""
 
 from __future__ import annotations
 
@@ -183,12 +183,12 @@ class MarkdownExporter:
 
     def export_glossary(self, glossary: Glossary) -> str:
         lines = ["## 术语表", ""]
-        lines.append("| 原文 | 翻译 | 策略 | 备注 |")
+        lines.append("| 原文 | 翻译 | 策略 | 词义说明 |")
         lines.append("|------|------|------|------|")
 
         for term in glossary.terms:
             strategy_map = {
-                "preserve": "保持原文",
+                "preserve": "保留原文",
                 "first_annotate": "首次标注",
                 "translate": "翻译",
             }
@@ -243,3 +243,4 @@ def export_to_markdown(
         Path(output_path).write_text(content, encoding="utf-8")
 
     return content
+

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * 分段确认工作流 - 常量配置
  */
 
@@ -94,7 +94,7 @@ export const TEXT_LIMITS = {
   // 版本名称最大长度
   MAX_VERSION_NAME_LENGTH: 100,
 
-  // 备注最大长度
+  // 词义说明最大长度
   MAX_NOTE_LENGTH: 500,
 } as const;
 

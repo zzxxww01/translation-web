@@ -12,8 +12,9 @@ from ..core.format_tokens import (
     build_translation_payload,
     format_token_context,
 )
+from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
+from ..core.glossary_prompt import build_glossary_prompt_entries
 from ..core.models import (
-    Glossary,
     Paragraph,
     ParagraphStatus,
     Section,
@@ -148,31 +149,11 @@ class TranslationAgent:
         llm_context: Dict[str, Any] = {}
 
         if context.glossary and context.glossary.terms:
-            active_terms = [
-                term
-                for term in context.glossary.terms
-                if getattr(term, "status", "active") == "active"
-            ]
-            if context.source_text:
-                from ..core.term_matcher import TermMatcher
-
-                matcher = TermMatcher(
-                    Glossary(version=context.glossary.version, terms=active_terms)
-                )
-                llm_context["glossary"] = matcher.get_term_context(
-                    context.source_text,
-                    max_terms=20,
-                )
-            else:
-                llm_context["glossary"] = [
-                    {
-                        "original": term.original,
-                        "translation": term.translation,
-                        "strategy": term.strategy.value,
-                        "note": term.note,
-                    }
-                    for term in active_terms[:30]
-                ]
+            llm_context["glossary"] = build_glossary_prompt_entries(
+                context.glossary,
+                context.source_text,
+                max_terms=MAX_GLOSSARY_TERMS_IN_PROMPT,
+            )
 
         if context.style_guide:
             llm_context["style_guide"] = {

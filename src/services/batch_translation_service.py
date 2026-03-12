@@ -12,10 +12,16 @@
 import asyncio
 import json
 from pathlib import Path
-from typing import Any, List, Optional, Dict, Callable
+from typing import Any, Awaitable, List, Optional, Dict, Callable
 from datetime import datetime
 import logging
 
+from src.core.longform_context import (
+    build_article_challenge_payload,
+    build_glossary_entries_from_terms,
+    build_section_context_payload,
+    build_translation_guidelines,
+)
 from src.core.models import (
     ProjectMeta,
     Section,
@@ -24,6 +30,8 @@ from src.core.models import (
     ProjectStatus,
     ArticleAnalysis,
     EnhancedTerm,
+    TermConflict,
+    TermConflictResolution,
     TranslationStrategy,
 )
 from src.core.format_tokens import (
@@ -289,31 +297,24 @@ class BatchTranslationService:
                 if section_index < total_sections - 1
                 else ""
             ),
-            "section_role": understanding.role_in_article if understanding else "",
-            "translation_notes": (
-                understanding.translation_notes if understanding else []
+            "section_role": (
+                build_section_context_payload(understanding).get("role", "")
+                if understanding
+                else ""
             ),
-            "key_points": understanding.key_points if understanding else [],
-            "guidelines": analysis.guidelines,
-            "article_challenges": [
-                {
-                    "location": challenge.location,
-                    "issue": challenge.issue,
-                    "suggestion": challenge.suggestion or "",
-                }
-                for challenge in analysis.challenges[:6]
-            ],
-            "terminology": [
-                {
-                    "term": term.term,
-                    "translation": term.translation,
-                    "strategy": term.strategy.value,
-                    "first_occurrence_note": term.first_occurrence_note,
-                    "note": term.context_meaning,
-                }
-                for term in analysis.terminology
-                if term.translation or term.strategy.value == "preserve"
-            ],
+            "translation_notes": (
+                build_section_context_payload(understanding).get("translation_notes", [])
+                if understanding
+                else []
+            ),
+            "key_points": (
+                build_section_context_payload(understanding).get("key_points", [])
+                if understanding
+                else []
+            ),
+            "guidelines": build_translation_guidelines(analysis.guidelines),
+            "article_challenges": build_article_challenge_payload(analysis.challenges),
+            "terminology": build_glossary_entries_from_terms(analysis.terminology),
         }
 
     def _persist_section_artifact(
@@ -353,6 +354,9 @@ class BatchTranslationService:
         self,
         project_id: str,
         on_progress: Optional[Callable[[str, int, int], None]] = None,
+        on_term_conflict: Optional[
+            Callable[[TermConflict], Awaitable[Dict[str, Any]]]
+        ] = None,
     ) -> Dict:
         """
         翻译整个项目
@@ -469,7 +473,12 @@ class BatchTranslationService:
                     section.section_id,
                     section_prompt_context,
                 )
-                prescan_result = self._run_section_prescan(project_id, section, progress)
+                prescan_result = await self._run_section_prescan(
+                    project_id,
+                    section,
+                    progress,
+                    on_term_conflict=on_term_conflict,
+                )
                 if prescan_result:
                     self._persist_section_artifact(
                         run_dir,
@@ -836,30 +845,54 @@ class BatchTranslationService:
             self._write_artifact_json(run_dir / "run-summary.json", failure_result)
             return failure_result
 
-    def _run_section_prescan(
+    async def _run_section_prescan(
         self,
         project_id: str,
         section: Section,
         progress: TranslationProgress,
+        on_term_conflict: Optional[
+            Callable[[TermConflict], Awaitable[Dict[str, Any]]]
+        ] = None,
     ) -> Optional[Any]:
         """Run optional section prescan and record terminology conflicts."""
         if not hasattr(self.translator, "prescan_section"):
             return None
 
         try:
-            prescan_result = self.translator.prescan_section(
-                section=section,
-                on_conflict=lambda conflict: progress.errors.append(
+            conflicts: List[TermConflict] = []
+
+            def record_conflict(conflict: TermConflict) -> None:
+                conflicts.append(conflict)
+                progress.errors.append(
                     {
                         "type": "term_conflict",
                         "term": conflict.term,
                         "existing": conflict.existing_translation,
                         "new": conflict.new_translation,
+                        "existing_note": conflict.existing_note,
+                        "new_note": conflict.new_note,
                         "section_id": section.section_id,
                         "timestamp": datetime.now().isoformat(),
                     }
-                ),
+                )
+
+            prescan_result = self.translator.prescan_section(
+                section=section,
+                on_conflict=record_conflict,
             )
+            if on_term_conflict:
+                for conflict in conflicts:
+                    resolution_data = await on_term_conflict(conflict)
+                    resolution = TermConflictResolution(
+                        term=conflict.term,
+                        chosen_translation=(
+                            resolution_data.get("chosen_translation")
+                            or conflict.existing_translation
+                            or conflict.new_translation
+                        ),
+                        apply_to_all=resolution_data.get("apply_to_all", True),
+                    )
+                    self.context_manager.resolve_conflict(resolution)
             if prescan_result:
                 logger.info(
                     f"[{project_id}] Section {section.section_id} prescan: "
@@ -1271,29 +1304,20 @@ class BatchTranslationService:
                 else "无"
             ),
             "glossary": [
-                {
-                    "original": term.term,
-                    "translation": term.translation,
-                    "strategy": term.strategy.value,
-                    "first_occurrence_note": term.first_occurrence_note,
-                    "note": term.context_meaning,
-                }
-                for term in analysis.terminology[:20]
-                if term.translation or term.strategy.value == "preserve"
+                *build_glossary_entries_from_terms(analysis.terminology)
             ],
-            "guidelines": analysis.guidelines,
-            "section_role": understanding.role_in_article if understanding else "",
-            "translation_notes": (
-                understanding.translation_notes if understanding else []
+            "guidelines": build_translation_guidelines(analysis.guidelines),
+            "section_role": (
+                build_section_context_payload(understanding).get("role", "")
+                if understanding
+                else ""
             ),
-            "article_challenges": [
-                {
-                    "location": challenge.location,
-                    "issue": challenge.issue,
-                    "suggestion": challenge.suggestion or "",
-                }
-                for challenge in analysis.challenges[:6]
-            ],
+            "translation_notes": (
+                build_section_context_payload(understanding).get("translation_notes", [])
+                if understanding
+                else []
+            ),
+            "article_challenges": build_article_challenge_payload(analysis.challenges),
             "format_tokens": format_tokens,
             "format_token_count": token_count,
         }

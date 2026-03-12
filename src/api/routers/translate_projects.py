@@ -4,7 +4,7 @@ Translate project-level endpoints.
 
 import asyncio
 import json
-from typing import Dict
+from typing import Any, Dict
 
 from fastapi import APIRouter, Body
 from fastapi.responses import StreamingResponse
@@ -25,7 +25,6 @@ from .translate_models import (
     FullTranslateRequest,
     ProjectAnalysisResponse,
     ResolveConflictRequest,
-    ResolveConflictResponse,
     SectionAnalysisResponse,
 )
 from .translate_utils import validate_path_component
@@ -35,7 +34,7 @@ router = APIRouter()
 
 # 活跃的四步法翻译会话冲突状态 {project_id: {term: Event}}
 _pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
-_conflict_resolutions: Dict[str, Dict[str, str]] = {}
+_conflict_resolutions: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
 
 def _get_best_translation_text(paragraph) -> str:
@@ -347,10 +346,36 @@ async def translate_with_four_steps(
                     },
                 )
 
-            result = await batch_service.translate_project(
-                    project_id,
-                    on_progress=on_progress,
+            async def on_term_conflict(conflict) -> Dict[str, Any]:
+                term_key = conflict.term.lower()
+                event = asyncio.Event()
+                _pending_conflict_events[project_id][term_key] = event
+                await progress_queue.put(
+                    {
+                        "type": "term_conflict",
+                        "conflict": conflict.model_dump(mode="json"),
+                    }
                 )
+                try:
+                    await event.wait()
+                    resolution = _conflict_resolutions.get(project_id, {}).get(
+                        term_key, {}
+                    )
+                    return {
+                        "chosen_translation": resolution.get("chosen_translation")
+                        or conflict.existing_translation
+                        or conflict.new_translation,
+                        "apply_to_all": resolution.get("apply_to_all", True),
+                    }
+                finally:
+                    _pending_conflict_events.get(project_id, {}).pop(term_key, None)
+                    _conflict_resolutions.get(project_id, {}).pop(term_key, None)
+
+            result = await batch_service.translate_project(
+                project_id,
+                on_progress=on_progress,
+                on_term_conflict=on_term_conflict,
+            )
             event_type = (
                 "complete" if result.get("status") == "completed" else "incomplete"
             )
@@ -439,50 +464,6 @@ async def translate_with_four_steps(
     )
 
 
-@router.post(
-    "/projects/{project_id}/resolve-conflict", response_model=ResolveConflictResponse
-)
-async def resolve_term_conflict(
-    project_id: str,
-    request: ResolveConflictRequest,
-    pm: ProjectManagerDep,
-):
-    """
-    解决术语冲突。
-    当检测到同一术语有不同翻译建议时，用户通过此 API 选择使用的翻译。
-    """
-    if not validate_path_component(project_id):
-        raise BadRequestException(detail="Invalid project_id")
-
-    try:
-        pm.get(project_id)
-        sections = pm.get_sections(project_id)
-        affected_count = 0
-
-        if request.apply_to_all:
-            term_lower = request.term.lower()
-
-            for section in sections:
-                section_modified = False
-                for paragraph in section.paragraphs:
-                    if (
-                        term_lower in paragraph.source.lower()
-                        and paragraph.translations
-                    ):
-                        affected_count += 1
-                        section_modified = True
-
-                if section_modified:
-                    pm.save_section(project_id, section)
-
-        return ResolveConflictResponse(
-            status="resolved",
-            affected_paragraphs=affected_count,
-        )
-    except Exception as e:
-        raise ServiceUnavailableException(detail=f"解决冲突失败: {str(e)}")
-
-
 @router.post("/projects/{project_id}/resolve-conflict-live")
 async def resolve_term_conflict_live(
     project_id: str,
@@ -499,11 +480,18 @@ async def resolve_term_conflict_live(
     resolutions = _conflict_resolutions.setdefault(project_id, {})
 
     term_key = request.term.lower()
-    resolutions[term_key] = request.chosen_translation
+    resolutions[term_key] = {
+        "chosen_translation": request.chosen_translation,
+        "apply_to_all": request.apply_to_all,
+    }
 
     # 唤醒等待的翻译线程
     event = events.get(term_key)
     if event:
         event.set()
 
-    return {"status": "resolved", "term": request.term, "chosen": request.chosen_translation}
+    return {
+        "status": "resolved",
+        "term": request.term,
+        "chosen": request.chosen_translation,
+    }

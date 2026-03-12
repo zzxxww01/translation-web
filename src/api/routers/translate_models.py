@@ -56,8 +56,3 @@ class ResolveConflictRequest(BaseModel):
     term: str
     chosen_translation: str
     apply_to_all: bool = True
-
-
-class ResolveConflictResponse(BaseModel):
-    status: str
-    affected_paragraphs: int
