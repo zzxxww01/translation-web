@@ -30,9 +30,47 @@ class SemiAnalysisMarkdownConverter(MarkdownConverter):
         return f"\n\n*{text}*\n\n"
 
     def convert_img(self, el, text, parent_tags):
-        src = collapse_ws(el.get("src"))
+        # 1. 优先尝试获取懒加载原图地址
+        src = collapse_ws(el.get("data-src")) or collapse_ws(el.get("data-original"))
+
+        # 2. 如果没有，尝试解析 srcset (从图片本身或父级 picture)
+        if not src:
+            srcset = collapse_ws(el.get("srcset"))
+            if not srcset and el.parent and el.parent.name == "picture":
+                sources = el.parent.find_all("source")
+                for source in sources:
+                    if collapse_ws(source.get("srcset")):
+                        srcset = collapse_ws(source.get("srcset"))
+                        break
+
+            if srcset:
+                best_url = None
+                max_width = -1
+                for part in srcset.split(","):
+                    part = part.strip()
+                    if not part:
+                        continue
+                    tokens = part.split()
+                    url = tokens[0]
+                    width = 0
+                    if len(tokens) >= 2 and tokens[1].endswith("w"):
+                        try:
+                            width = int(tokens[1][:-1])
+                        except ValueError:
+                            pass
+                    if width >= max_width:
+                        max_width = width
+                        best_url = url
+                if best_url:
+                    src = best_url
+
+        # 3. 最后回退到普通的 src 属性
+        if not src:
+            src = collapse_ws(el.get("src"))
+
         if not src:
             return ""
+
         alt = collapse_ws(el.get("alt"))
         title = collapse_ws(el.get("title"))
         title_part = f' "{title}"' if title else ""
@@ -87,7 +125,7 @@ def _postprocess_markdown(markdown: str) -> str:
     return markdown.strip()
 
 
-_PROTECTED_TOKEN = "\uFFF0"
+_PROTECTED_TOKEN = "\ufff0"
 _URL_TRAILING_PUNCTUATION = ".,;:!?\"'”’"
 _BARE_URL_RE = re.compile(
     rf"(?P<url>(?:https?://|mailto:)[^\s<>\"{_PROTECTED_TOKEN}]+|www\.[^\s<>\"{_PROTECTED_TOKEN}]+)"
@@ -99,7 +137,7 @@ def _normalize_markdown_links(markdown: str) -> str:
         label = match.group(1)
         url = match.group(2)
         trimmed = url.rstrip(_URL_TRAILING_PUNCTUATION)
-        trailing = url[len(trimmed):]
+        trailing = url[len(trimmed) :]
         if not trimmed:
             return match.group(0)
         return f"[{label}]({trimmed}){trailing}"
@@ -122,14 +160,16 @@ def _linkify_bare_urls(markdown: str) -> str:
         raw_url = match.group("url")
         prefix = "https://" if raw_url.startswith("www.") else ""
         trimmed = raw_url.rstrip(_URL_TRAILING_PUNCTUATION)
-        trailing = raw_url[len(trimmed):]
+        trailing = raw_url[len(trimmed) :]
         if not trimmed:
             return raw_url
         return f"[{trimmed}]({prefix}{trimmed}){trailing}"
 
     markdown = _BARE_URL_RE.sub(replace, markdown)
     for index, value in enumerate(protected):
-        markdown = markdown.replace(f"{_PROTECTED_TOKEN}{index}{_PROTECTED_TOKEN}", value)
+        markdown = markdown.replace(
+            f"{_PROTECTED_TOKEN}{index}{_PROTECTED_TOKEN}", value
+        )
     return markdown
 
 
