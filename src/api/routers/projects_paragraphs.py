@@ -16,6 +16,7 @@ from ..dependencies import (
     ProjectManagerDep,
 )
 from ..middleware import BadRequestException, NotFoundException
+from .confirmation_models import resolve_retranslate_instruction
 from .projects_models import (
     BatchTranslateRequest,
     BatchTranslateResponse,
@@ -73,7 +74,7 @@ def _translate_paragraph_sync(
     context = _build_translation_context(section, para_index, glossary, learned_rules)
 
     agent = TranslationAgent(llm)
-    instruction = (request.instruction or "").strip()
+    instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
     if instruction:
         formatted_instruction = build_retranslate_instruction(
             instruction,
@@ -321,7 +322,7 @@ def _batch_translate_paragraphs_sync(
             )
             context = _build_translation_context(section, para_index, glossary, learned_rules)
 
-            instruction = (request.instruction or "").strip()
+            instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
             if instruction:
                 formatted_instruction = build_retranslate_instruction(
                     instruction,

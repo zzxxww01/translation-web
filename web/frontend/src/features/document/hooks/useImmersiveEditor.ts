@@ -16,6 +16,7 @@ type ErrorStateMap = Record<string, string | null>;
 interface RetranslateTask {
   paragraphId: string;
   instruction?: string;
+  optionId?: string;
 }
 
 interface UseImmersiveEditorOptions {
@@ -327,7 +328,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       const task = retranslateQueueRef.current.shift();
       if (!task) break;
 
-      const { paragraphId, instruction } = task;
+      const { paragraphId, instruction, optionId } = task;
       const paragraph = paragraphsByIdRef.current[paragraphId];
       if (!paragraph) continue;
 
@@ -348,7 +349,8 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           projectId,
           sectionId,
           paragraphId,
-          instruction
+          instruction,
+          optionId
         );
         const translation = result.translation ?? '';
         const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
@@ -398,14 +400,14 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   }, [processRetranslateQueue]);
 
   const queueRetranslate = useCallback(
-    (paragraphId: string, instruction?: string) => {
+    (paragraphId: string, instruction?: string, optionId?: string) => {
       const isAlreadyQueued = retranslateQueueRef.current.some(task => task.paragraphId === paragraphId);
       if (isAlreadyQueued || retranslatingMapRef.current[paragraphId]) {
         return;
       }
 
       cancelPendingSave(paragraphId);
-      retranslateQueueRef.current.push({ paragraphId, instruction });
+      retranslateQueueRef.current.push({ paragraphId, instruction, optionId });
       processRetranslateQueueRef.current();
     },
     [cancelPendingSave]
@@ -446,7 +448,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   );
 
   const batchRetranslate = useCallback(
-    async (instruction?: string) => {
+    async (instruction?: string, optionId?: string) => {
       if (selectedIds.size === 0) return;
 
       const ids = Array.from(selectedIds);
@@ -471,7 +473,8 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           projectId,
           sectionId,
           ids,
-          instruction
+          instruction,
+          optionId
         );
 
         result.translations.forEach(({ id, translation, status, confirmed }) => {

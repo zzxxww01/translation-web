@@ -25,6 +25,7 @@ from .confirmation_models import (
     UpdateTermsRequest,
     RetranslateRequest,
     RETRANSLATE_OPTIONS,
+    resolve_retranslate_instruction,
 )
 from .translate_utils import build_retranslate_instruction, get_latest_translation_text
 
@@ -163,7 +164,7 @@ async def retranslate_paragraph(
             for p in target_section.paragraphs[target_local_index + 1 : target_local_index + 3]
         ]
 
-        instruction = request.instruction or ""
+        instruction = resolve_retranslate_instruction(request.instruction, request.option_id)
 
         # 记录重翻前的译文
         old_translation = None

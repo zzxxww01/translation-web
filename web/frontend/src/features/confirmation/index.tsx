@@ -269,7 +269,7 @@ export function ConfirmationFeature({
 
   const handleRetranslate = useCallback(
 
-    async (instruction: string) => {
+    async (instruction: string, optionId?: string) => {
 
       if (!currentParagraph) return;
 
@@ -285,7 +285,9 @@ export function ConfirmationFeature({
 
           currentParagraph.id,
 
-          instruction
+          instruction,
+
+          optionId
 
         );
 
@@ -718,6 +720,7 @@ export function ConfirmationFeature({
         {/* 版本列表 */}
 
         <VersionsPanel
+          projectId={projectId}
           onSelectVersion={handleSelectVersion}
 
           onEditVersion={handleEditVersion}

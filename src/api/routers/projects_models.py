@@ -14,6 +14,7 @@ class CreateProjectRequest(BaseModel):
 
 class TranslateRequest(BaseModel):
     instruction: Optional[str] = None
+    option_id: Optional[str] = None
 
 
 class DirectTranslateRequest(BaseModel):
@@ -49,6 +50,7 @@ class UpdateParagraphRequest(BaseModel):
 class BatchTranslateRequest(BaseModel):
     paragraph_ids: List[str]
     instruction: Optional[str] = None
+    option_id: Optional[str] = None
 
 
 class BatchTranslateResponse(BaseModel):

@@ -20,39 +20,10 @@ import { copyToClipboard, getCharCount } from '../../shared/utils';
 import { TranslationVersionType } from '../../shared/constants';
 import type { Instruction } from './types';
 
-/**
- * 优化指令模板（与原生 JS 版本一致）
- */
-const instructionTemplates: Record<string, string> = {
-  readable: `请从句法结构层面优化译文，消除翻译腔：
-1. 拆长句：超过30字的句子拆成2-3个短句，中文句子控制在15-30字
-2. 去被动：被动语态一律改为主动表达
-3. 减连接词：删掉多余的"此外""然而""值得注意的是"，中文靠语义衔接
-4. 调语序：条件、原因、时间状语放到句首，按中文思维重新组织
-5. 用动词：把"对……进行……""做出了……"改为直接动词
-6. 消除"的"堆砌：连续出现三个"的"必须拆句重组`,
-
-  idiomatic: `请从表达层面优化译文，让中文更地道自然：
-1. 用具体数据和事实替代空泛描述，删掉"突破性""革命性"等宣传词
-2. 用简单结构（是/有/能）代替复杂绕行（"作为……的体现""充当……的角色"）
-3. 不要公式化段落（"尽管……但仍……""展望未来""综上所述"）
-4. 不要同义词循环替换，同一个概念前后用同一个词
-5. 模糊归因要么给出具体来源，要么删掉（不要"业界专家普遍认为"）
-6. 口语化替换：把"基于""鉴于""旨在"换成"根据""考虑到""为了"等自然表达`,
-
-  professional: `请优化译文的专业表达，使其体现semiAnalysis的分析师水准：
-1. 保留原文的观点和判断力度，不要弱化成中性表述（"We believe" → "我们认为"，不是"据分析"）
-2. 使用标准的半导体/科技术语，产品代号保留英文（CoWoS、HBM、EUV），行业术语用中文（晶圆代工、良率、制程节点），金融术语用中文（营收、毛利率、资本支出）
-3. 删除口水话：去掉不提供信息的形容词和空洞的总结性段落
-4. 不要宣传腔（"令人兴奋""开创性""无缝集成"），也不要黑话和圈子用语
-5. 每句话都要有实质内容，没有信息量的句子直接删掉
-6. 数据密集段落：一句话超过3个数据点拆成多句，金额统一为"亿美元"格式`,
-};
-
 const quickInstructions: Instruction[] = [
-  { id: 'readable', label: '可读性', icon: '✨', instruction: instructionTemplates.readable },
-  { id: 'idiomatic', label: '更地道', icon: '💬', instruction: instructionTemplates.idiomatic },
-  { id: 'professional', label: '专业化', icon: '👔', instruction: instructionTemplates.professional },
+  { id: 'readable', label: '可读性', icon: '✨', instruction: '' },
+  { id: 'idiomatic', label: '更地道', icon: '💬', instruction: '' },
+  { id: 'professional', label: '专业化', icon: '👔', instruction: '' },
   { id: 'custom', label: '自定义', icon: '🔧', instruction: '' },
 ];
 
@@ -64,12 +35,6 @@ const moreInstructions: Instruction[] = [
   { id: 'qa', label: 'Q&A格式', icon: '❓', instruction: '请将译文转换为问答形式，先列出问题，然后给出答案。' },
   { id: 'social', label: '社交媒体', icon: '💬', instruction: '请将译文改写为适合社交媒体传播的风格，使用轻松活泼的表达，添加emoji。' },
 ];
-
-const buildOptimizeInstruction = (
-  instruction: string,
-  original: string,
-  currentTranslation: string,
-) => `【原文】\n${original}\n\n【当前译文】\n${currentTranslation}\n\n【优化要求】\n${instruction}\n\n【固定要求】\n1. 以【原文】为准对照校对，发现与原文不一致或错误之处必须纠正。\n2. 基于原文重写，不是仅润色中文。\n3. 保留semiAnalysis的分析师语气：原文的观点、判断、锐度不要弱化。\n4. 消除翻译腔：拆长句、去被动、减连接词、调整中文语序、直接用动词。\n5. 术语处理：产品/技术代号保留英文，行业术语和金融术语用中文通用译法。\n6. 译文不要比原文更长，不要口水话、不要宣传腔。\n7. 不要使用任何 Markdown 标签或格式。\n\n请在不遗漏信息、不改变事实的前提下，根据优化要求重写译文。仅输出优化后的完整译文。`;
 
 export function PostFeature() {
   const {
@@ -124,7 +89,7 @@ export function PostFeature() {
   }, [originalText, setLoading, translateMutation, addVersion]);
 
   // 优化
-  const handleOptimize = useCallback(async (instruction: string) => {
+  const handleOptimize = useCallback(async (options: { instruction?: string; optionId?: string }) => {
     if (!originalText) {
       return;
     }
@@ -137,15 +102,11 @@ export function PostFeature() {
 
     setLoading(true);
     try {
-      const formattedInstruction = buildOptimizeInstruction(
-        instruction,
-        originalText,
-        currentVersion.content,
-      );
       const result = await optimizeMutation.mutateAsync({
         original_text: originalText,
         current_translation: currentVersion.content,
-        instruction: formattedInstruction,
+        instruction: options.instruction,
+        option_id: options.optionId,
         conversation_history: versions
           .filter(v => v.instruction)
           .slice(-3)
@@ -157,7 +118,11 @@ export function PostFeature() {
         return;
       }
 
-      addVersion(result.optimized_translation, TranslationVersionType.OPTIMIZATION, instruction);
+      addVersion(
+        result.optimized_translation,
+        TranslationVersionType.OPTIMIZATION,
+        options.optionId ? `[${options.optionId}]` : options.instruction
+      );
     } catch (error) {
       console.error('优化失败:', error);
     } finally {
@@ -171,10 +136,7 @@ export function PostFeature() {
       // 聚焦到自定义输入框
       document.getElementById('customInstructionInput')?.focus();
     } else {
-      const instruction = instructionTemplates[instructionKey];
-      if (instruction) {
-        handleOptimize(instruction);
-      }
+      handleOptimize({ optionId: instructionKey });
     }
   };
 
@@ -235,13 +197,13 @@ export function PostFeature() {
           handleTranslate();
         }
       }
-      // Ctrl+K: 发送优化指令
+        // Ctrl+K: 发送优化指令
       if (e.ctrlKey && e.key === 'k') {
         const activeElement = document.activeElement as HTMLElement;
         if (activeElement?.id === 'customInstructionInput' || activeElement?.id === 'translationEditor') {
           e.preventDefault();
           if (customInstruction.trim()) {
-            handleOptimize(customInstruction);
+            handleOptimize({ instruction: customInstruction });
             setCustomInstruction('');
           } else {
             document.getElementById('customInstructionInput')?.focus();
@@ -425,7 +387,7 @@ export function PostFeature() {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       if (customInstruction.trim()) {
-                        handleOptimize(customInstruction);
+                        handleOptimize({ instruction: customInstruction });
                         setCustomInstruction('');
                       }
                     }
@@ -437,7 +399,7 @@ export function PostFeature() {
                   size="sm"
                   onClick={() => {
                     if (customInstruction.trim()) {
-                      handleOptimize(customInstruction);
+                      handleOptimize({ instruction: customInstruction });
                       setCustomInstruction('');
                     }
                   }}
@@ -524,7 +486,7 @@ export function PostFeature() {
               key={inst.id}
               onClick={() => {
                 setShowMoreInstructions(false);
-                handleOptimize(inst.instruction);
+                handleOptimize({ instruction: inst.instruction });
               }}
               disabled={isLoading}
               className="flex flex-col items-center gap-3 rounded-xl border border-border bg-bg-secondary p-5 text-center transition-all hover:border-primary-300 hover:bg-primary-50 hover:shadow-md disabled:opacity-50 disabled:hover:border-border disabled:hover:bg-bg-secondary"

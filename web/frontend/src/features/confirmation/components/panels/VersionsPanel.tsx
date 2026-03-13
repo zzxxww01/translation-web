@@ -12,15 +12,17 @@ import { useConfirmationStore } from '../../stores/confirmationStore';
 import type { ParagraphVersion } from '../../types';
 
 interface VersionsPanelProps {
+  projectId: string;
   className?: string;
   onSelectVersion: (versionId: string) => void;
   onEditVersion: (version: ParagraphVersion) => void;
   onConfirm: (translation: string) => void;
-  onRetranslate?: (instruction: string) => Promise<void>;
+  onRetranslate?: (instruction: string, optionId?: string) => Promise<void>;
   isRetranslating?: boolean;
 }
 
 export function VersionsPanel({
+  projectId,
   className,
   onSelectVersion,
   onEditVersion,
@@ -33,9 +35,9 @@ export function VersionsPanel({
 
   const [showRetranslate, setShowRetranslate] = useState(false);
 
-  const handleRetranslate = async (instruction: string) => {
+  const handleRetranslate = async (instruction: string, optionId?: string) => {
     if (onRetranslate) {
-      await onRetranslate(instruction);
+      await onRetranslate(instruction, optionId);
       setShowRetranslate(false);
     }
   };
@@ -77,6 +79,7 @@ export function VersionsPanel({
       {showRetranslate && onRetranslate && (
         <div className="mb-4">
           <RetranslatePanel
+            projectId={projectId}
             onRetranslate={handleRetranslate}
             isRetranslating={isRetranslating}
           />

@@ -19,6 +19,7 @@ from .translate_models import (
     PostOptimizeResponse,
     PostTranslateRequest,
     PostTranslateResponse,
+    resolve_post_optimize_instruction,
 )
 
 
@@ -27,7 +28,9 @@ prompt_manager = get_prompt_manager()
 
 
 def _build_title_prompt(content: str, instruction: str) -> str:
-    normalized_instruction = instruction.strip() or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
+    normalized_instruction = (
+        instruction.strip() or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
+    )
     return f"""你是semiAnalysis中文编辑，负责生成高质量中文标题。
 
 【内容】
@@ -73,7 +76,9 @@ async def translate_post(request: PostTranslateRequest):
             dynamic_sections=glossary_context.strip(),
         )
 
-    timeout_s = int(os.getenv("POST_TRANSLATE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60")))
+    timeout_s = int(
+        os.getenv("POST_TRANSLATE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60"))
+    )
     try:
         translation = await asyncio.wait_for(
             asyncio.to_thread(generate_with_fallback, prompt),
@@ -81,7 +86,9 @@ async def translate_post(request: PostTranslateRequest):
         )
         return PostTranslateResponse(translation=translation.strip())
     except asyncio.TimeoutError:
-        raise ServiceUnavailableException(detail=f"Translation timed out after {timeout_s}s")
+        raise ServiceUnavailableException(
+            detail=f"Translation timed out after {timeout_s}s"
+        )
     except Exception as e:
         raise ServiceUnavailableException(detail=f"Translation failed: {str(e)}")
 
@@ -91,8 +98,14 @@ async def optimize_post_translation(request: PostOptimizeRequest):
     """Optimize an existing translation."""
     if not request.current_translation.strip():
         raise BadRequestException(detail="Current translation cannot be empty")
-    if not request.instruction.strip():
-        raise BadRequestException(detail="Instruction cannot be empty")
+
+    resolved_instruction = resolve_post_optimize_instruction(
+        request.instruction, request.option_id
+    )
+    if not resolved_instruction:
+        raise BadRequestException(
+            detail="Either instruction or a valid option_id must be provided"
+        )
 
     context = ""
     if request.conversation_history:
@@ -113,7 +126,7 @@ async def optimize_post_translation(request: PostOptimizeRequest):
 {request.current_translation}
 {context}
 ## 优化要求
-{request.instruction}
+{resolved_instruction}
 
 ## 优化原则
 1. 以原文为准对照校对，发现与原文不一致或错误之处必须纠正
@@ -126,7 +139,9 @@ async def optimize_post_translation(request: PostOptimizeRequest):
 严禁使用任何Markdown语法标记。直接输出优化后的完整译文，不要任何解释。
 """
 
-    timeout_s = int(os.getenv("POST_OPTIMIZE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60")))
+    timeout_s = int(
+        os.getenv("POST_OPTIMIZE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60"))
+    )
     try:
         optimized = await asyncio.wait_for(
             asyncio.to_thread(generate_with_fallback, prompt),
@@ -134,7 +149,9 @@ async def optimize_post_translation(request: PostOptimizeRequest):
         )
         return PostOptimizeResponse(optimized_translation=optimized.strip())
     except asyncio.TimeoutError:
-        raise ServiceUnavailableException(detail=f"Optimization timed out after {timeout_s}s")
+        raise ServiceUnavailableException(
+            detail=f"Optimization timed out after {timeout_s}s"
+        )
     except Exception as e:
         raise ServiceUnavailableException(detail=f"Optimization failed: {str(e)}")
 
@@ -165,6 +182,8 @@ async def generate_title(request: GenerateTitleRequest):
         titles = [title for title in titles if title]
         return GenerateTitleResponse(title="\n".join(titles))
     except asyncio.TimeoutError:
-        raise ServiceUnavailableException(detail=f"Title generation timed out after {timeout_s}s")
+        raise ServiceUnavailableException(
+            detail=f"Title generation timed out after {timeout_s}s"
+        )
     except Exception as e:
         raise ServiceUnavailableException(detail=f"Title generation failed: {str(e)}")

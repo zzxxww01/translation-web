@@ -60,10 +60,11 @@ export const documentApi = {
     sectionId: string,
     paragraphId: string,
     instruction?: string,
+    optionId?: string,
   ) =>
     apiClient.post<{ id: string; translation: string; status: ParagraphStatus; confirmed?: string | null }>(
       `/projects/${projectId}/sections/${sectionId}/paragraphs/${paragraphId}/translate`,
-      { instruction },
+      { instruction, option_id: optionId },
       {
         timeout: REQUEST_TIMEOUTS.PARAGRAPH_TRANSLATE,
         retry: false,
@@ -155,6 +156,7 @@ export const documentApi = {
     sectionId: string,
     paragraphIds: string[],
     instruction?: string,
+    optionId?: string,
   ) =>
     apiClient.post<{
       translations: Array<{
@@ -171,6 +173,7 @@ export const documentApi = {
       {
         paragraph_ids: paragraphIds,
         instruction,
+        option_id: optionId,
       },
       {
         timeout: REQUEST_TIMEOUTS.PARAGRAPH_BATCH_TRANSLATE,

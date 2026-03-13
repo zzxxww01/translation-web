@@ -1,64 +1,63 @@
 /**
- * 重新翻译面板组件 - 简化增强版
+ * 重新翻译面板组件 - 从后端拉取快捷指令选项
  * 提供快捷指令和自定义指令输入功能
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { RefreshCw, Zap, Briefcase, MessageCircle, X } from 'lucide-react';
 import { Button } from '../../../../components/ui';
 import { cn } from '../../../../shared/utils';
+import { confirmationApi } from '../../api/confirmationApi';
 
 interface RetranslatePanelProps {
-  onRetranslate: (instruction: string) => Promise<void>;
+  projectId: string;
+  onRetranslate: (instruction: string, optionId?: string) => Promise<void>;
   isRetranslating?: boolean;
   className?: string;
 }
 
-interface QuickInstruction {
+interface RetranslateOption {
   id: string;
   label: string;
   description: string;
-  icon: React.ReactNode;
   instruction: string;
 }
 
-const quickInstructions: QuickInstruction[] = [
-  {
-    id: 'readable',
-    label: '可读性',
-    description: '消除翻译腔',
-    icon: <Zap className="h-4 w-4" />,
-    instruction: '请从句法结构层面优化译文：拆长句（控制在15-30字）、去被动语态改主动、删多余连接词（"此外""然而"）、调整为中文语序、直接用动词不要"对……进行……"、连续三个"的"必须拆句。',
-  },
-  {
-    id: 'idiomatic',
-    label: '更地道',
-    description: '自然流畅表达',
-    icon: <MessageCircle className="h-4 w-4" />,
-    instruction: '请从表达层面优化译文：用具体事实代替空泛描述、用简单结构代替复杂绕行、不要公式化段落和同义词循环、把"基于""鉴于""旨在"换成"根据""考虑到""为了"等自然表达。',
-  },
-  {
-    id: 'professional',
-    label: '更专业',
-    description: '科技媒体风格',
-    icon: <Briefcase className="h-4 w-4" />,
-    instruction: '请优化译文的专业表达，体现semiAnalysis分析师水准：保留原文观点和判断力度不要弱化、产品/技术代号保留英文（CoWoS、HBM、EUV）行业术语用中文（晶圆代工、良率）金融术语用中文（营收、毛利率）、删除口水话和宣传腔、数据密集段落拆分重组。',
-  },
-];
+const iconMap: Record<string, React.ReactNode> = {
+  readable: <Zap className="h-4 w-4" />,
+  idiomatic: <MessageCircle className="h-4 w-4" />,
+  professional: <Briefcase className="h-4 w-4" />,
+};
+
+const defaultIcon = <RefreshCw className="h-4 w-4" />;
 
 export function RetranslatePanel({
+  projectId,
   onRetranslate,
   isRetranslating = false,
   className,
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
+  const [options, setOptions] = useState<RetranslateOption[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    confirmationApi.getRetranslateOptions(projectId).then(data => {
+      if (!cancelled) {
+        setOptions(data.options);
+      }
+    }).catch(() => {
+      // Silently ignore — options will remain empty
+    });
+    return () => { cancelled = true; };
+  }, [projectId]);
 
   const handleQuickInstruction = useCallback(
-    async (instruction: QuickInstruction) => {
-      setSelectedInstruction(instruction.id);
+    async (option: RetranslateOption) => {
+      setSelectedInstruction(option.id);
       try {
-        await onRetranslate(instruction.instruction);
+        await onRetranslate('', option.id);
       } finally {
         setSelectedInstruction(null);
       }
@@ -86,37 +85,39 @@ export function RetranslatePanel({
       </div>
 
       {/* 快捷指令 */}
-      <div className="mb-3">
-        <div className="mb-2 text-xs font-medium text-text-secondary">快捷指令</div>
-        <div className="grid grid-cols-3 gap-2">
-          {quickInstructions.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleQuickInstruction(item)}
-              disabled={isRetranslating}
-              className={cn(
-                'flex flex-col items-center gap-1 rounded-lg border p-2 transition-all',
-                'hover:border-primary/50 hover:bg-primary/5',
-                'disabled:opacity-50 disabled:cursor-not-allowed',
-                selectedInstruction === item.id && isRetranslating
-                  ? 'border-primary bg-primary/10'
-                  : 'border-border'
-              )}
-            >
-              <div className={cn(
-                'rounded-full p-1.5',
-                selectedInstruction === item.id && isRetranslating
-                  ? 'bg-primary text-white'
-                  : 'bg-bg-hover text-text-secondary'
-              )}>
-                {item.icon}
-              </div>
-              <span className="text-xs font-medium text-text-primary">{item.label}</span>
-              <span className="text-[10px] text-text-muted">{item.description}</span>
-            </button>
-          ))}
+      {options.length > 0 && (
+        <div className="mb-3">
+          <div className="mb-2 text-xs font-medium text-text-secondary">快捷指令</div>
+          <div className="grid grid-cols-3 gap-2">
+            {options.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleQuickInstruction(item)}
+                disabled={isRetranslating}
+                className={cn(
+                  'flex flex-col items-center gap-1 rounded-lg border p-2 transition-all',
+                  'hover:border-primary/50 hover:bg-primary/5',
+                  'disabled:opacity-50 disabled:cursor-not-allowed',
+                  selectedInstruction === item.id && isRetranslating
+                    ? 'border-primary bg-primary/10'
+                    : 'border-border'
+                )}
+              >
+                <div className={cn(
+                  'rounded-full p-1.5',
+                  selectedInstruction === item.id && isRetranslating
+                    ? 'bg-primary text-white'
+                    : 'bg-bg-hover text-text-secondary'
+                )}>
+                  {iconMap[item.id] ?? defaultIcon}
+                </div>
+                <span className="text-xs font-medium text-text-primary">{item.label}</span>
+                <span className="text-[10px] text-text-muted">{item.description}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 自定义指令 */}
       <div>

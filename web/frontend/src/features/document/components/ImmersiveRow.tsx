@@ -5,6 +5,8 @@ import { ParagraphStatus } from '../../../shared/constants';
 import type { Paragraph } from '../../../shared/types';
 import { cn } from '../../../shared/utils';
 
+import type { RetranslateOption } from './ImmersiveEditor';
+
 interface ImmersiveRowProps {
   paragraph: Paragraph;
   draft: string;
@@ -13,11 +15,12 @@ interface ImmersiveRowProps {
   isRetranslating: boolean;
   retranslateError?: string | null;
   onChange: (value: string) => void;
-  onRetranslate: (instruction?: string) => void;
+  onRetranslate: (instruction?: string, optionId?: string) => void;
   onConfirm: () => void;
   isSelectionMode: boolean;
   isSelected: boolean;
   onToggleSelection: () => void;
+  retranslateOptions: RetranslateOption[];
 }
 
 function renderSource(paragraph: Paragraph, isApproved: boolean) {
@@ -68,6 +71,7 @@ export function ImmersiveRow({
   isSelectionMode,
   isSelected,
   onToggleSelection,
+  retranslateOptions,
 }: ImmersiveRowProps) {
   const status = paragraph.status ?? ParagraphStatus.PENDING;
   const isApproved = status === ParagraphStatus.APPROVED;
@@ -78,27 +82,9 @@ export function ImmersiveRow({
   const [menuPosition, setMenuPosition] = useState<'top' | 'bottom'>('top');
   const menuButtonRef = useRef<HTMLDivElement>(null);
 
-  const quickInstructions = [
-    {
-      id: 'readable',
-      label: '可读性',
-      instruction: '请提升可读性：拆分过长句，优化语序，减少冗余连接词，保持信息完整和逻辑清晰。',
-    },
-    {
-      id: 'professional',
-      label: '专业化',
-      instruction: '请提升专业表达：术语更准确、行业表述更规范，保留技术细节和判断力度。',
-    },
-    {
-      id: 'idiomatic',
-      label: '更地道',
-      instruction: '请使中文更地道自然：避免翻译腔，改为符合中文读者习惯的表达，但不改变原意。',
-    },
-  ];
-
-  const handleQuickRetranslate = (instruction: string) => {
+  const handleQuickRetranslate = (optionId: string) => {
     setShowRetranslateMenu(false);
-    onRetranslate(instruction);
+    onRetranslate(undefined, optionId);
   };
 
   const handleCustomRetranslate = () => {
@@ -179,10 +165,10 @@ export function ImmersiveRow({
             >
               <div className="space-y-3 p-3">
                 <div className="flex gap-2">
-                  {quickInstructions.map(item => (
+                  {retranslateOptions.map(item => (
                     <button
                       key={item.id}
-                      onClick={() => handleQuickRetranslate(item.instruction)}
+                      onClick={() => handleQuickRetranslate(item.id)}
                       disabled={isRetranslating || isSaving}
                       className="flex-1 rounded-lg border border-border bg-bg-secondary px-3 py-2 text-sm text-text-primary transition-colors hover:bg-bg-tertiary disabled:opacity-50"
                     >

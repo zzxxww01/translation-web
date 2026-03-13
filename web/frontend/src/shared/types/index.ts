@@ -114,7 +114,8 @@ export interface TranslatePostResult {
 export interface OptimizePostDto {
   original_text: string;
   current_translation: string;
-  instruction: string;
+  instruction?: string;
+  option_id?: string;
   conversation_history?: Array<{ role: string; content: string }>;
 }
 

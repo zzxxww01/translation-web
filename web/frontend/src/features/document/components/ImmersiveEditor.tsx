@@ -4,6 +4,7 @@ import { Button } from '../../../components/ui';
 import { ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
+import { confirmationApi } from '../../confirmation/api/confirmationApi';
 import { useImmersiveEditor } from '../hooks/useImmersiveEditor';
 import { ImmersiveRow } from './ImmersiveRow';
 
@@ -14,30 +15,13 @@ const MAX_BATCH_SELECTION = 50;
 const EMPTY_PARAGRAPHS: Paragraph[] = [];
 
 type FilterMode = 'all' | 'translated' | 'approved' | 'modified';
-type RetranslateTemplate = 'none' | 'readable' | 'professional' | 'idiomatic';
 
-const RETRANSLATE_TEMPLATES: Array<{
-  id: RetranslateTemplate;
+export interface RetranslateOption {
+  id: string;
   label: string;
-  instruction?: string;
-}> = [
-  { id: 'none', label: '仅重译（无额外要求）' },
-  {
-    id: 'readable',
-    label: '可读性',
-    instruction: '请提升可读性：拆分过长句，优化语序，减少冗余连接词，保持信息完整和逻辑清晰。',
-  },
-  {
-    id: 'professional',
-    label: '专业化',
-    instruction: '请提升专业表达：术语更准确、行业表述更规范，保留技术细节和判断力度。',
-  },
-  {
-    id: 'idiomatic',
-    label: '更地道',
-    instruction: '请使中文更地道自然：避免翻译腔，改为符合中文读者习惯的表达，但不改变原意。',
-  },
-];
+  description: string;
+  instruction: string;
+}
 
 interface ImmersiveEditorProps {
   projectId: string;
@@ -72,9 +56,22 @@ export function ImmersiveEditor({
   const [filterMode] = useState<FilterMode>('all');
   const [chunkState, setChunkState] = useState({ key: '', extra: 0 });
   const [showBatchRetranslateDialog, setShowBatchRetranslateDialog] = useState(false);
+  const [retranslateOptions, setRetranslateOptions] = useState<RetranslateOption[]>([]);
   const listContainerRef = useRef<HTMLDivElement>(null);
   const targetParagraphRef = useRef<HTMLDivElement | null>(null);
   const hasAutoScrolledRef = useRef(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    confirmationApi.getRetranslateOptions(projectId).then(data => {
+      if (!cancelled) {
+        setRetranslateOptions(data.options);
+      }
+    }).catch(() => {
+      // Silently ignore
+    });
+    return () => { cancelled = true; };
+  }, [projectId]);
 
   const {
     drafts,
@@ -231,11 +228,16 @@ export function ImmersiveEditor({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [handleClose]);
 
+  const batchRetranslateMenuOptions = useMemo(() => {
+    const noneOption = { id: 'none', label: '仅重译（无额外要求）', description: '', instruction: '' };
+    return [noneOption, ...retranslateOptions];
+  }, [retranslateOptions]);
+
   const handleBatchRetranslate = useCallback(
-    (template: RetranslateTemplate) => {
-      const templateData = RETRANSLATE_TEMPLATES.find(item => item.id === template);
-      const instruction = templateData?.instruction;
-      void batchRetranslate(instruction);
+    (optionId: string) => {
+      const instruction = optionId === 'none' ? undefined : undefined;
+      const effectiveOptionId = optionId === 'none' ? undefined : optionId;
+      void batchRetranslate(instruction, effectiveOptionId);
       setShowBatchRetranslateDialog(false);
     },
     [batchRetranslate]
@@ -323,13 +325,14 @@ export function ImmersiveEditor({
                 isRetranslating={Boolean(retranslatingMap[paragraph.id])}
                 retranslateError={retranslateErrorMap[paragraph.id]}
                 onChange={value => updateDraft(paragraph.id, value)}
-                onRetranslate={(instruction?: string) =>
-                  queueRetranslate(paragraph.id, instruction)
+                onRetranslate={(instruction?: string, optionId?: string) =>
+                  queueRetranslate(paragraph.id, instruction, optionId)
                 }
                 onConfirm={() => void confirmParagraph(paragraph.id)}
                 isSelectionMode={isSelectionMode}
                 isSelected={selectedIds.has(paragraph.id)}
                 onToggleSelection={() => toggleSelection(paragraph.id)}
+                retranslateOptions={retranslateOptions}
               />
             </div>
           ))}
@@ -353,16 +356,16 @@ export function ImmersiveEditor({
               批量重译 {selectedIds.size} 个段落
             </h3>
             <div className="space-y-3">
-              {RETRANSLATE_TEMPLATES.map(template => (
+              {batchRetranslateMenuOptions.map(option => (
                 <button
-                  key={template.id}
-                  onClick={() => handleBatchRetranslate(template.id)}
+                  key={option.id}
+                  onClick={() => handleBatchRetranslate(option.id)}
                   disabled={retranslatingCount > 0}
                   className="w-full rounded-lg border border-border bg-bg-secondary px-4 py-3 text-left text-sm text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
                 >
-                  <div className="font-medium">{template.label}</div>
-                  {template.instruction && (
-                    <div className="mt-1 text-xs text-text-muted">{template.instruction}</div>
+                  <div className="font-medium">{option.label}</div>
+                  {option.description && (
+                    <div className="mt-1 text-xs text-text-muted">{option.description}</div>
                   )}
                 </button>
               ))}

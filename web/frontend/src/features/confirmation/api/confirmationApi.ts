@@ -196,7 +196,8 @@ export const confirmationApi = {
   async retranslateParagraph(
     projectId: string,
     paragraphId: string,
-    instruction?: string
+    instruction?: string,
+    optionId?: string
   ): Promise<{
     version_id: string;
     paragraph_id: string;
@@ -212,7 +213,7 @@ export const confirmationApi = {
       created_at: string;
     }>(
       `/projects/${projectId}/paragraph/${paragraphId}/retranslate`,
-      { instruction }
+      { instruction, option_id: optionId }
     );
   },
 
