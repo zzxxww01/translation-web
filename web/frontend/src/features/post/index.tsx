@@ -164,7 +164,7 @@ export function PostFeature() {
         instruction: titleInstruction.trim() || undefined,
       });
       // 解析标题（按行分割）
-      const titles = result.title.split('\n').filter(t => t.trim()).slice(0, 6);
+      const titles = result.title.split('\n').filter(t => t.trim()).slice(0, 8);
       setGeneratedTitles(titles);
     } finally {
       setLoading(false);

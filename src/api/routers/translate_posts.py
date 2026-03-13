@@ -27,37 +27,6 @@ router = APIRouter()
 prompt_manager = get_prompt_manager()
 
 
-def _build_title_prompt(content: str, instruction: str) -> str:
-    normalized_instruction = (
-        instruction.strip() or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
-    )
-    return f"""你是semiAnalysis中文编辑，负责生成高质量中文标题。
-
-【内容】
-{content}
-
-【用户要求】
-{normalized_instruction}
-
-【固定要求】
-1. 忠实原文：不能虚构事实、不能改变结论、不能夸张误导。
-2. 长度约束：每个标题必须 <= 20 个汉字，建议 12-18 个字。
-3. 风格约束：简洁有信息量，避免空泛口号和模板化措辞。
-4. 表达要求：可适度增强可读性与吸引力，但不能偏离内容核心。
-5. 禁止项：不要输出解释，不要输出Markdown，不要加编号前缀。
-
-请返回严格 JSON，包含以下键：
-{{
-  "suspense": "...",
-  "data": "...",
-  "counter_intuitive": "...",
-  "pain_point": "...",
-  "minimal": "...",
-  "metaphor": "..."
-}}
-"""
-
-
 @router.post("/translate/post", response_model=PostTranslateResponse)
 async def translate_post(request: PostTranslateRequest):
     """Translate a post to Chinese."""
@@ -107,37 +76,15 @@ async def optimize_post_translation(request: PostOptimizeRequest):
             detail="Either instruction or a valid option_id must be provided"
         )
 
-    context = ""
-    if request.conversation_history:
-        recent_history = request.conversation_history[-3:]
-        if recent_history:
-            context = "\n\nConversation History:\n"
-            for msg in recent_history:
-                role = "User" if msg.get("role") == "user" else "AI"
-                content = msg.get("content", "")
-                context += f"{role}: {content}\n"
+    glossary_context = build_glossary_context(request.original_text)
 
-    prompt = f"""你是semiAnalysis的中文编辑，优化semiAnalysis帖子的翻译质量。
-
-## 原文
-{request.original_text}
-
-## 当前译文
-{request.current_translation}
-{context}
-## 优化要求
-{resolved_instruction}
-
-## 优化原则
-1. 以原文为准对照校对，发现与原文不一致或错误之处必须纠正
-2. 保留分析师语气：原文的观点、判断、锐度不要弱化或磨平
-3. 消除翻译腔：拆长句、去被动、减连接词、调中文语序、直接用动词
-4. 术语处理：产品/技术代号保留英文（CoWoS、HBM、EUV），行业术语用中文（晶圆代工、良率、制程节点），金融术语用中文（营收、毛利率、资本支出）
-5. 译文不要比原文更长，保持帖子的简洁和冲击力
-6. 不要口水话、不要宣传腔、不遗漏信息
-
-严禁使用任何Markdown语法标记。直接输出优化后的完整译文，不要任何解释。
-"""
+    prompt = prompt_manager.get(
+        "post_optimize",
+        glossary_section=glossary_context.strip(),
+        original_text=request.original_text,
+        current_translation=request.current_translation,
+        instruction=resolved_instruction,
+    )
 
     timeout_s = int(
         os.getenv("POST_OPTIMIZE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60"))
@@ -162,7 +109,15 @@ async def generate_title(request: GenerateTitleRequest):
     if not request.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
-    prompt = _build_title_prompt(request.content, request.instruction or "")
+    normalized_instruction = (
+        (request.instruction or "").strip()
+        or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
+    )
+    prompt = prompt_manager.get(
+        "post_title",
+        content=request.content,
+        instruction=normalized_instruction,
+    )
 
     timeout_s = int(os.getenv("POST_TITLE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "30")))
     try:
@@ -177,7 +132,9 @@ async def generate_title(request: GenerateTitleRequest):
             data.get("counter_intuitive", ""),
             data.get("pain_point", ""),
             data.get("minimal", ""),
-            data.get("metaphor", ""),
+            data.get("contrast", ""),
+            data.get("free_1", ""),
+            data.get("free_2", ""),
         ]
         titles = [title for title in titles if title]
         return GenerateTitleResponse(title="\n".join(titles))
