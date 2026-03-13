@@ -7,12 +7,20 @@ You are a senior bilingual (English-Chinese) editor specializing in hardcore tec
 {translations_text}
 
 ## Task
-Convert concrete critique findings into reusable rules for future translation. Each rule should be a single, concrete, actionable sentence in Chinese.
+Convert concrete critique findings into reusable **style / sentence-structure / tone** rules for future translation. Each rule should be a single, concrete, actionable sentence in Chinese.
+
+IMPORTANT constraints:
+- Do NOT extract terminology translation rules (e.g. `"X" 翻译为 "Y"` or `"X" 首次出现时加注释`). Terminology belongs to the glossary, not the rule library.
+- Only extract rules that generalize across projects: sentence patterns, voice preferences, tone calibration, formatting habits, etc.
 
 Good rule examples:
-- "CoWoS" 首次出现时加注释 "CoWoS（台积电先进封装技术）"，后续直接使用
 - 避免被动句堆叠，如 "被认为是……被用于……"，改为主动表达
 - 技术对比时保持原文的强判断语气，不要弱化为 "可能" "或许"
+- 长定语从句拆分为短句，避免中文读者理解困难
+
+Bad rule examples (DO NOT extract these):
+- "CoWoS" 首次出现时加注释 "CoWoS（台积电先进封装技术）"（← 这是术语，不是规则）
+- "bandwidth" 应译为 "带宽"（← 这是术语，不是规则）
 
 ## Output
 Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.

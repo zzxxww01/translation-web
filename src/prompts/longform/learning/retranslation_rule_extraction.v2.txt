@@ -13,7 +13,11 @@ You are a senior bilingual (English-Chinese) editor specializing in hardcore tec
 {after}
 
 ## Task
-Infer reusable style or fluency preferences from the instruction and the before/after delta. Each rule should be a single, concrete, actionable sentence in Chinese. Only extract rules that generalize beyond this single sentence.
+Infer reusable **style / sentence-structure / tone / fluency** preferences from the instruction and the before/after delta. Each rule should be a single, concrete, actionable sentence in Chinese. Only extract rules that generalize beyond this single sentence.
+
+IMPORTANT constraints:
+- Do NOT extract terminology translation rules (e.g. `"X" 翻译为 "Y"`). Terminology belongs to the glossary, not the rule library.
+- Only extract rules that generalize across projects: sentence patterns, voice preferences, tone calibration, formatting habits, etc.
 
 ## Output
 Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.

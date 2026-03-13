@@ -125,9 +125,6 @@ class TerminologyReviewService:
                     1,
                 )
 
-        # 合并规则中提取的术语候选
-        self._merge_rule_candidates(project_id, aggregated, merged_glossary)
-
         payload = self._build_review_payload(
             project=project,
             merged_glossary=merged_glossary,
@@ -255,48 +252,6 @@ class TerminologyReviewService:
             "message": "Term promoted to global glossary",
             "term": promoted.model_dump(mode="json"),
         }
-
-    def _merge_rule_candidates(
-        self,
-        project_id: str,
-        aggregated: Dict[str, "AggregatedCandidate"],
-        merged_glossary,
-    ) -> None:
-        """合并从规则中提取的术语候选到 aggregated 中。"""
-        import json
-        from pathlib import Path
-
-        candidates_path = Path(f"data/memory/{project_id}_term_candidates.json")
-        if not candidates_path.exists():
-            return
-
-        try:
-            candidates = json.loads(candidates_path.read_text("utf-8"))
-        except Exception:
-            return
-
-        for c in candidates:
-            term = (c.get("term") or "").strip()
-            translation = (c.get("translation") or "").strip()
-            if not term:
-                continue
-            normalized = _normalize_term(term)
-            if not normalized:
-                continue
-            if merged_glossary.get_term(term):
-                continue
-            if normalized in aggregated:
-                # 已经在 prescan 中发现，补充翻译建议
-                if translation:
-                    aggregated[normalized].suggested_translations[translation] += 1
-                continue
-
-            candidate = AggregatedCandidate(term=term)
-            if translation:
-                candidate.suggested_translations[translation] = 1
-            candidate.contexts.append(f"来源：翻译规则 - {c.get('source_rule', '')[:80]}")
-            candidate.total_occurrences = 1
-            aggregated[normalized] = candidate
 
     def _prescan_section(
         self,

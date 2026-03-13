@@ -149,9 +149,7 @@ async def retranslate_paragraph(
         glossary = get_combined_glossary(project_id)
 
         # 加载已学习的翻译规则
-        learned_rules = memory_service.get_rules_for_prompt(
-            project_id=project_id,
-        )
+        learned_rules = memory_service.get_rules_for_prompt()
 
         context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
         context.previous_paragraphs = [
@@ -196,7 +194,6 @@ async def retranslate_paragraph(
                     target_paragraph.source,
                     old_translation,
                     payload.text,
-                    project_id=project_id,
                 )
             )
 
@@ -315,16 +312,22 @@ async def run_consistency_review(
         raise BadRequestException(detail=f"Failed to run review: {str(e)}")
 
 
-# ============ 翻译规则管理 API ============
+# ============ 翻译规则管理 API（全局） ============
 
 
-@router.get("/{project_id}/translation-rules")
+from pydantic import BaseModel
+
+
+class AddRuleRequest(BaseModel):
+    text: str
+
+
+@router.get("/translation-rules")
 async def get_translation_rules(
-    project_id: str,
     memory_service: MemoryServiceDep,
 ):
-    """查看已学习的翻译规则"""
-    rules = memory_service.get_all_rules(project_id=project_id)
+    """查看所有全局翻译规则"""
+    rules = memory_service.get_all_rules()
     return {
         "rules": [
             {"index": i, "text": r}
@@ -334,14 +337,26 @@ async def get_translation_rules(
     }
 
 
-@router.delete("/{project_id}/translation-rules/{rule_index}")
+@router.delete("/translation-rules/{rule_index}")
 async def delete_translation_rule(
-    project_id: str,
     rule_index: int,
     memory_service: MemoryServiceDep,
 ):
-    """删除指定索引的翻译规则"""
-    deleted = memory_service.delete_rule_by_index(rule_index, project_id=project_id)
+    """删除指定索引的全局翻译规则"""
+    deleted = memory_service.delete_rule_by_index(rule_index)
     if not deleted:
         raise NotFoundException(detail=f"Rule at index {rule_index} not found")
     return {"deleted": True, "index": rule_index}
+
+
+@router.post("/translation-rules")
+async def add_translation_rule(
+    request: AddRuleRequest,
+    memory_service: MemoryServiceDep,
+):
+    """手动添加一条全局翻译规则"""
+    text = request.text.strip()
+    if not text:
+        raise BadRequestException(detail="Rule text cannot be empty")
+    memory_service.add_rule_manually(text)
+    return {"added": True, "text": text}

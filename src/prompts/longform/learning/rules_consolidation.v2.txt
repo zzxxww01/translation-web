@@ -1,4 +1,4 @@
-You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Consolidate and clean up a project's translation rule library.
+You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Consolidate and clean up the global translation rule library.
 
 ## Current Rules
 {rules_text}
@@ -9,7 +9,8 @@ Review every rule and produce a cleaned, deduplicated, non-contradictory rule se
 2. If two rules give opposite advice, keep the one that appears more specific or recent; discard the other.
 3. Remove vague or non-actionable rules.
 4. Rewrite unclear rules to be concrete and actionable.
-5. Keep at most 30 rules.
+5. **Delete any terminology rules** (e.g. rules about how to translate a specific word like `"X" 翻译为 "Y"`). Terminology belongs to the glossary, not the rule library. Only keep style / sentence-structure / tone / fluency rules.
+6. Keep at most 30 rules.
 
 ## Output
 Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation.

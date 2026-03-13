@@ -10,12 +10,20 @@ You are a senior bilingual (English-Chinese) editor specializing in hardcore tec
 {user_translation}
 
 ## Task
-Compare the AI translation with the human correction and extract reusable rules that could improve future translations. Each rule should be a single, concrete, actionable sentence in Chinese.
+Compare the AI translation with the human correction and extract reusable **style / sentence-structure / tone** rules that could improve future translations. Each rule should be a single, concrete, actionable sentence in Chinese.
+
+IMPORTANT constraints:
+- Do NOT extract terminology translation rules (e.g. `"X" 翻译为 "Y"`). Terminology belongs to the glossary, not the rule library.
+- Only extract rules that generalize across projects: sentence patterns, voice preferences, tone calibration, formatting habits, etc.
 
 Good rule examples:
-- "wafer" 翻译为 "晶圆"，不要译为 "硅片"
-- 不要把 "yield" 译为 "产量"，在半导体语境中应译为 "良率"
 - 避免 "进行了……" 句式，改用直接动词
+- 技术对比时保持原文的强判断语气，不要弱化为 "可能" "或许"
+- 避免被动句堆叠，如 "被认为是……被用于……"，改为主动表达
+
+Bad rule examples (DO NOT extract these):
+- "wafer" 翻译为 "晶圆"，不要译为 "硅片"（← 这是术语，不是规则）
+- "yield" 在半导体语境中应译为 "良率"（← 这是术语，不是规则）
 
 ## Output
 Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.

@@ -227,7 +227,6 @@ class ConfirmationService:
         if ai_translation and translation != ai_translation:
             asyncio.create_task(
                 self._extract_rules_background(
-                    project_id,
                     confirmed_paragraph.source,
                     ai_translation,
                     translation,
@@ -701,7 +700,6 @@ class ConfirmationService:
 
     async def _extract_rules_background(
         self,
-        project_id: str,
         source: str,
         ai_translation: str,
         user_translation: str,
@@ -712,7 +710,6 @@ class ConfirmationService:
                 source,
                 ai_translation,
                 user_translation,
-                project_id=project_id,
             )
         except Exception as e:
             logger.warning("Background rule extraction failed: %s", e)

@@ -68,9 +68,7 @@ def _translate_paragraph_sync(
         raise NotFoundException(detail="Paragraph not found")
 
     glossary = gm.load_merged(project_id)
-    learned_rules = memory_service.get_rules_for_prompt(
-        project_id=project_id,
-    )
+    learned_rules = memory_service.get_rules_for_prompt()
     context = _build_translation_context(section, para_index, glossary, learned_rules)
 
     agent = TranslationAgent(llm)
@@ -317,9 +315,7 @@ def _batch_translate_paragraphs_sync(
         para_index, paragraph = paragraph_map[paragraph_id]
 
         try:
-            learned_rules = memory_service.get_rules_for_prompt(
-                project_id=project_id,
-            )
+            learned_rules = memory_service.get_rules_for_prompt()
             context = _build_translation_context(section, para_index, glossary, learned_rules)
 
             instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
@@ -530,7 +526,6 @@ async def update_paragraph(
                     correction_payload["source_text"],
                     correction_payload["previous_translation"],
                     correction_payload["updated_translation"],
-                    project_id=project_id,
                 )
             )
 

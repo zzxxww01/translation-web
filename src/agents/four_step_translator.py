@@ -220,7 +220,6 @@ class FourStepTranslator:
                         self.memory_service.process_reflection_issues(
                             reflection.issues,
                             translations,
-                            project_id=project_id,
                         )
                     )
             except Exception as e:
