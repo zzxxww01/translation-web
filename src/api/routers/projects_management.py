@@ -7,6 +7,7 @@ import shutil
 import tempfile
 from pathlib import Path
 from typing import List, Optional
+from urllib.parse import urlsplit
 
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 
@@ -21,6 +22,39 @@ from .projects_models import CreateProjectRequest, ProjectResponse
 router = APIRouter()
 SUPPORTED_SOURCE_EXTENSIONS = {".html", ".htm", ".md", ".markdown"}
 HTML_SOURCE_EXTENSIONS = {".html", ".htm"}
+
+
+def _is_external_asset_url(path: str) -> bool:
+    value = path.strip()
+    if not value:
+        return False
+    if value.startswith("//"):
+        return True
+    if value.startswith(("data:", "blob:")):
+        return True
+    parsed = urlsplit(value)
+    return bool(parsed.scheme and parsed.netloc)
+
+
+def _project_asset_url(project_id: str, path: Optional[str]) -> Optional[str]:
+    if not path:
+        return path
+
+    value = path.strip()
+    if not value:
+        return value
+    if _is_external_asset_url(value):
+        return value
+
+    normalized = value.replace("\\", "/")
+    if normalized.startswith("./"):
+        normalized = normalized[2:]
+    normalized = normalized.lstrip("/")
+    while normalized.startswith("../"):
+        normalized = normalized[3:]
+    if not normalized:
+        return None
+    return f"/projects/{project_id}/{normalized}"
 
 
 def _build_project_response(meta) -> ProjectResponse:
@@ -172,7 +206,7 @@ async def export_project(
     project_id: str,
     pm: ProjectManagerDep,
     include_source: bool = False,
-    format: str = "markdown",
+    format: str = "zh",
 ):
     try:
         content = pm.export(project_id, include_source=include_source, format=format)
@@ -210,16 +244,10 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
 
 @router.get("/projects/{project_id}/sections/{section_id}")
 async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
-    def _project_asset_url(path: Optional[str]) -> Optional[str]:
-        if not path:
-            return path
-        normalized = path.lstrip("./")
-        return f"/projects/{project_id}/{normalized}"
-
     def _normalize_image_source(paragraph) -> str:
         if paragraph.element_type != ElementType.IMAGE:
             return paragraph.source
-        return _project_asset_url(paragraph.source) or paragraph.source
+        return _project_asset_url(project_id, paragraph.source) or paragraph.source
 
     def _normalize_image_html(paragraph) -> Optional[str]:
         if not paragraph.source_html:

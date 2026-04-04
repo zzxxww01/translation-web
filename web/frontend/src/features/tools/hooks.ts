@@ -1,13 +1,9 @@
-/**
- * Tools React Query hooks.
- */
-
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { toast } from 'sonner';
 import { toolsApi } from './api';
-import { useToolsStore } from '../../shared/stores';
-import { useToast } from '../../components/ui';
-import { useErrorHandler } from '../../shared/hooks/useErrorHandler';
+import { useToolsStore } from '@/shared/stores';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 
 export function useLoadTasks() {
   const { setTasks } = useToolsStore();
@@ -34,13 +30,12 @@ export function useLoadTasks() {
 }
 
 export function useSaveTasks() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: toolsApi.saveTasks,
     onSuccess: () => {
-      showSuccess('Tasks saved');
+      toast.success('任务已保存');
     },
     onError: (error) => {
       handleError(error, 'Save tasks failed');
@@ -49,13 +44,12 @@ export function useSaveTasks() {
 }
 
 export function useTranslateText() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: toolsApi.translateText,
     onSuccess: () => {
-      showSuccess('Translation complete');
+      toast.success('翻译完成');
     },
     onError: (error) => {
       handleError(error, 'Translation failed');
@@ -64,13 +58,12 @@ export function useTranslateText() {
 }
 
 export function useGenerateEmailReply() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: toolsApi.generateEmailReply,
     onSuccess: () => {
-      showSuccess('Reply generated');
+      toast.success('回复已生成');
     },
     onError: (error) => {
       handleError(error, 'Generate reply failed');
@@ -79,13 +72,12 @@ export function useGenerateEmailReply() {
 }
 
 export function useConvertTimezone() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: toolsApi.convertTimezone,
     onSuccess: () => {
-      showSuccess('Conversion complete');
+      toast.success('转换完成');
     },
     onError: (error) => {
       handleError(error, 'Timezone conversion failed');

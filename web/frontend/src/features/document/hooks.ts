@@ -3,14 +3,15 @@
  * 提供统一的数据获取和状态管理
  */
 
+import { useCallback } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { documentApi } from './api';
 import type { WordMeaningMessage } from './api';
-import { useDocumentStore } from '../../shared/stores';
-import { useToast } from '../../components/ui';
-import { useErrorHandler } from '../../shared/hooks/useErrorHandler';
-import { DEFAULT_STALE_TIME, ParagraphStatus } from '../../shared/constants';
-import type { CreateProjectDto, Section } from '../../shared/types';
+import { useDocumentStore } from '@/shared/stores';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
+import { DEFAULT_STALE_TIME, ParagraphStatus } from '@/shared/constants';
+import type { CreateProjectDto, Section } from '@/shared/types';
 import { fullTranslationService, type TranslationMethodType } from './services/fullTranslationService';
 
 /**
@@ -62,26 +63,20 @@ export function useProject(projectId: string) {
  */
 export function useCreateProject() {
   const queryClient = useQueryClient();
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: async (data: CreateProjectDto | FormData) => {
-      try {
-        // 如果是FormData，使用文件上传
-        if (data instanceof FormData) {
-          return await documentApi.uploadProject(data);
-        }
-        // 否则使用普通创建
-        return await documentApi.createProject(data);
-      } catch (error) {
-        handleError(error, '创建项目失败');
-        throw error;
+      // 如果是FormData，使用文件上传
+      if (data instanceof FormData) {
+        return await documentApi.uploadProject(data);
       }
+      // 否则使用普通创建
+      return await documentApi.createProject(data);
     },
     onSuccess: result => {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
-      showSuccess('项目创建成功！');
+      toast.success('项目创建成功！');
       return result;
     },
     onError: error => {
@@ -119,7 +114,6 @@ export function useSection(projectId: string, sectionId: string) {
 export function useTranslateParagraph() {
   const queryClient = useQueryClient();
   const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
@@ -157,7 +151,7 @@ export function useTranslateParagraph() {
         }
       );
 
-      showSuccess('翻译完成！');
+      toast.success('翻译完成！');
       return result;
     },
     onError: error => {
@@ -207,7 +201,6 @@ export function useQueryWordMeaning() {
  */
 export function useConfirmParagraph() {
   const queryClient = useQueryClient();
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
@@ -229,7 +222,7 @@ export function useConfirmParagraph() {
       queryClient.invalidateQueries({ queryKey: ['projects'] });
       // 刷新当前项目详情
       queryClient.invalidateQueries({ queryKey: ['project', variables.projectId] });
-      showSuccess('译文已确认 ✓');
+      toast.success('译文已确认');
     },
     onError: error => {
       handleError(error, '确认翻译失败');
@@ -241,13 +234,12 @@ export function useConfirmParagraph() {
  * 分析项目
  */
 export function useAnalyzeProject() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: (projectId: string) => documentApi.analyzeProject(projectId),
     onSuccess: () => {
-      showSuccess('分析完成');
+      toast.success('分析完成');
     },
     onError: error => {
       handleError(error, '项目分析失败');
@@ -259,14 +251,13 @@ export function useAnalyzeProject() {
  * 分析章节
  */
 export function useAnalyzeSection() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: ({ projectId, sectionId }: { projectId: string; sectionId: string }) =>
       documentApi.analyzeSection(projectId, sectionId),
     onSuccess: () => {
-      showSuccess('分析完成');
+      toast.success('分析完成');
     },
     onError: error => {
       handleError(error, '章节分析失败');
@@ -279,14 +270,13 @@ export function useAnalyzeSection() {
  */
 export function useBatchTranslate() {
   const queryClient = useQueryClient();
-  const { showToast } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
     mutationFn: ({ projectId, sectionId }: { projectId: string; sectionId: string }) =>
       documentApi.batchTranslate(projectId, sectionId),
     onSuccess: result => {
-      showToast(`翻译完成！共翻译 ${result.translated_count} 个段落`, 'success');
+      toast.success(`翻译完成！共翻译 ${result.translated_count} 个段落`);
       queryClient.invalidateQueries({ queryKey: ['section'] });
     },
     onError: error => {
@@ -299,17 +289,14 @@ export function useBatchTranslate() {
  * 导出项目
  */
 export function useExportProject() {
-  const { showSuccess } = useToast();
   const { handleError } = useErrorHandler();
 
   return useMutation({
-    mutationFn: ({ projectId, format }: { projectId: string; format?: 'markdown' | 'html' }) =>
+    mutationFn: ({ projectId, format }: { projectId: string; format?: 'en' | 'zh' }) =>
       documentApi.exportProject(projectId, format),
     onSuccess: (result) => {
       // 创建下载链接
-      const mimeType =
-        result.format === 'html' ? 'text/html;charset=utf-8' : 'text/markdown;charset=utf-8';
-      const blob = new Blob([result.content], { type: mimeType });
+      const blob = new Blob([result.content], { type: 'text/markdown;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -319,7 +306,8 @@ export function useExportProject() {
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
 
-      showSuccess(`已导出 ${result.format === 'html' ? 'HTML' : 'Markdown'} 文件`);
+      const label = result.format === 'en' ? '英文' : '中文';
+      toast.success(`已导出${label} Markdown 文件`);
     },
     onError: error => {
       handleError(error, '导出失败');
@@ -332,7 +320,6 @@ export function useExportProject() {
  * 支持选择翻译方法：普通翻译或四步法翻译
  */
 export function useFullTranslate() {
-  const { showToast } = useToast();
   const { handleError } = useErrorHandler();
   const queryClient = useQueryClient();
   const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
@@ -343,7 +330,7 @@ export function useFullTranslate() {
   const setFullTranslateProjectId = useDocumentStore(state => state.setFullTranslateProjectId);
   const endFullTranslate = useDocumentStore(state => state.endFullTranslate);
 
-  const startTranslation = async (
+  const startTranslation = useCallback(async (
     projectId: string,
     onProgress: (data: {
       type: string;
@@ -402,7 +389,7 @@ export function useFullTranslate() {
           if (data.type === 'complete') {
             const translatedCount = (data as { translated_count?: number }).translated_count || 0;
             const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
-            showToast(`${methodLabel}完成！共翻译 ${translatedCount} 个段落`, 'success');
+            toast.success(`${methodLabel}完成！共翻译 ${translatedCount} 个段落`);
             // 刷新查询以确保数据同步
             queryClient.invalidateQueries({ queryKey: ['section'] });
             queryClient.invalidateQueries({ queryKey: ['project'] });
@@ -411,7 +398,14 @@ export function useFullTranslate() {
           if (data.type === 'incomplete') {
             const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
             const message = data.message || '翻译未完成，可以继续翻译';
-            showToast(`${methodLabel}未完成：${message}`, 'warning');
+            toast.warning(`${methodLabel}未完成：${message}`);
+            queryClient.invalidateQueries({ queryKey: ['section'] });
+            queryClient.invalidateQueries({ queryKey: ['project'] });
+          }
+
+          if (data.type === 'cancelled') {
+            const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
+            toast.info(`${methodLabel}已取消`);
             queryClient.invalidateQueries({ queryKey: ['section'] });
             queryClient.invalidateQueries({ queryKey: ['project'] });
           }
@@ -428,12 +422,12 @@ export function useFullTranslate() {
       endFullTranslate();
       onComplete();
     }
-  };
+  }, [handleError, queryClient, updateParagraphInSection, setFullTranslateProjectId, setFullTranslating, setFullTranslateProgress, endFullTranslate]);
 
-  const stopTranslation = () => {
-    fullTranslationService.stopTranslation();
+  const stopTranslation = useCallback(async () => {
     endFullTranslate();
-  };
+    await fullTranslationService.stopTranslation();
+  }, [endFullTranslate]);
 
   return {
     startTranslation,

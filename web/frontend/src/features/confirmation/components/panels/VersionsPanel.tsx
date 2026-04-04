@@ -82,6 +82,7 @@ export function VersionsPanel({
             projectId={projectId}
             onRetranslate={handleRetranslate}
             isRetranslating={isRetranslating}
+            onClose={() => setShowRetranslate(false)}
           />
         </div>
       )}

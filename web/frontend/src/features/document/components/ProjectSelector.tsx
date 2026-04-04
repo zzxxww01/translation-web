@@ -1,9 +1,10 @@
 import { type FC } from 'react';
-import { useDocumentStore } from '../../../shared/stores';
+import { useDocumentStore } from '@/shared/stores';
 import { useProjects } from '../hooks';
-import { Button } from '../../../components/ui';
+import { Button } from '@/components/ui/button-extended';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus } from 'lucide-react';
-import type { Project } from '../../../shared/types';
+import type { Project } from '@/shared/types';
 
 interface ProjectSelectorProps {
   onNewProject: () => void;
@@ -22,29 +23,29 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
 
   return (
     <div className="space-y-1.5">
-      <select
-        value={currentProject?.id || ''}
-        onChange={(e) => handleProjectChange(e.target.value)}
-        className="w-full rounded-md border border-border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
-      >
-        <option value="">选择项目...</option>
-        {projects?.map((project: Project) => {
-          const title =
-            project.title.length > 25
-              ? project.title.substring(0, 25) + '...'
-              : project.title;
-          const percent = project.progress?.percent?.toFixed(0) || 0;
-          return (
-            <option key={project.id} value={project.id}>
-              {title} ({percent}%)
-            </option>
-          );
-        })}
-      </select>
+      <Select value={currentProject?.id || ''} onValueChange={handleProjectChange}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder="选择项目..." />
+        </SelectTrigger>
+        <SelectContent>
+          {projects?.map((project: Project) => {
+            const title =
+              project.title.length > 25
+                ? project.title.substring(0, 25) + '...'
+                : project.title;
+            const percent = project.progress?.percent?.toFixed(0) || 0;
+            return (
+              <SelectItem key={project.id} value={project.id}>
+                {title} ({percent}%)
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
 
       <div className="flex gap-2">
         <Button
-          variant="primary"
+          variant="default"
           size="sm"
           onClick={onNewProject}
           className="flex-1"

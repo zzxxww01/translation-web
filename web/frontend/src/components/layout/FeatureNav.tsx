@@ -1,11 +1,6 @@
-/**
- * 功能导航组件
- * 使用 React Router 的 NavLink 实现路由导航
- */
-
 import { NavLink } from 'react-router-dom';
 import { BookOpen, MessageSquare, MessageCircle, Wrench } from 'lucide-react';
-import { cn } from '../../shared/utils';
+import { cn } from '@/lib/utils';
 
 interface NavItem {
   path: string;
@@ -14,25 +9,37 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { path: '/document', label: '长文翻译', icon: <BookOpen className="h-5 w-5" /> },
-  { path: '/post', label: '帖子翻译', icon: <MessageSquare className="h-5 w-5" /> },
-  { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-5 w-5" /> },
-  { path: '/tools', label: '工具箱', icon: <Wrench className="h-5 w-5" /> },
+  { path: '/document', label: '长文翻译', icon: <BookOpen className="h-4 w-4" /> },
+  { path: '/post', label: '帖子翻译', icon: <MessageSquare className="h-4 w-4" /> },
+  { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-4 w-4" /> },
+  { path: '/tools', label: '工具箱', icon: <Wrench className="h-4 w-4" /> },
 ];
 
-export function FeatureNav() {
+interface FeatureNavProps {
+  orientation?: 'horizontal' | 'vertical';
+  onNavigate?: () => void;
+}
+
+export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNavProps) {
+  const isVertical = orientation === 'vertical';
+
   return (
-    <nav className="flex items-center gap-1">
+    <nav className={cn(
+      'flex gap-1',
+      isVertical ? 'flex-col' : 'items-center'
+    )}>
       {navItems.map((item) => (
         <NavLink
           key={item.path}
           to={item.path}
+          onClick={onNavigate}
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-2.5 rounded-xl px-5 py-2.5 text-base font-medium transition-all duration-200',
+              'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors',
+              isVertical && 'w-full',
               isActive
-                ? 'bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/30'
-                : 'text-text-secondary hover:text-text-primary hover:bg-bg-tertiary'
+                ? 'bg-primary text-primary-foreground shadow-sm'
+                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
             )
           }
         >
@@ -44,5 +51,4 @@ export function FeatureNav() {
   );
 }
 
-// 保持向后兼容的导出
 export type FeatureTab = 'document' | 'post' | 'slack' | 'tools';

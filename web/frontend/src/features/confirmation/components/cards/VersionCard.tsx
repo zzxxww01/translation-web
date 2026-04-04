@@ -4,8 +4,8 @@
  */
 
 import { Check } from 'lucide-react';
-import { cn } from '../../../../shared/utils';
-import { Button } from '../../../../components/ui';
+import { cn } from '@/shared/utils';
+import { Button } from '@/components/ui/button-extended';
 import type { VersionCardProps } from '../../types';
 import { AIInsightPanel } from '../panels/AIInsightPanel';
 
@@ -20,8 +20,8 @@ export function VersionCard({
   return (
     <div
       className={cn(
-        'group relative rounded-2xl border-2 bg-card p-4 transition-all',
-        'hover:shadow-lg hover:-translate-y-0.5',
+        'group relative rounded-2xl border-2 bg-card p-4 transition-all duration-200 shadow-soft',
+        'hover:shadow-hover hover:-translate-y-0.5',
         isAI ? 'border-l-4 border-l-primary' : 'border-l-4 border-l-success',
         isSelected
           ? 'ring-2 ring-primary ring-offset-2 border-primary'
@@ -57,7 +57,7 @@ export function VersionCard({
       {/* 操作按钮 */}
       <div className="flex gap-2">
         <Button
-          variant={isSelected ? 'primary' : 'secondary'}
+          variant={isSelected ? 'default' : 'outline'}
           size="sm"
           onClick={() => onSelect(version.id)}
           className="flex-1"
@@ -65,7 +65,7 @@ export function VersionCard({
           {isSelected ? '已选择' : '采用此版本'}
         </Button>
         <Button
-          variant="secondary"
+          variant="outline"
           size="sm"
           onClick={() => onEdit(version)}
         >

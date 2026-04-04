@@ -1,8 +1,3 @@
-/**
- * 路由配置
- * 使用 React Router DOM 实现客户端路由
- */
-
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider, useParams } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
@@ -12,7 +7,7 @@ const DocumentFeature = lazy(() =>
   import('./features/document/index.tsx').then(module => ({ default: module.DocumentFeature }))
 );
 const GlossaryFeature = lazy(() =>
-  import('./features/GlossaryFeature.tsx').then(module => ({ default: module.GlossaryFeature }))
+  import('./features/glossary/index.tsx').then(module => ({ default: module.GlossaryFeature }))
 );
 const PostFeature = lazy(() =>
   import('./features/post/index.tsx').then(module => ({ default: module.PostFeature }))
@@ -32,7 +27,9 @@ const ConfirmationFeature = lazy(() =>
 function RouteFallback() {
   return (
     <div className="flex min-h-[40vh] items-center justify-center">
-      <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-500 border-t-transparent" />
+      <div className="flex flex-col items-center gap-4">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
     </div>
   );
 }
@@ -41,7 +38,6 @@ function LazyPage({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<RouteFallback />}>{children}</Suspense>;
 }
 
-// 分段确认工作流路由包装组件
 function ConfirmationRoute() {
   const { projectId = '' } = useParams<{ projectId: string }>();
   return (
@@ -51,9 +47,6 @@ function ConfirmationRoute() {
   );
 }
 
-/**
- * 应用路由配置
- */
 const router = createBrowserRouter([
   {
     path: '/',
@@ -70,6 +63,10 @@ const router = createBrowserRouter([
             <DocumentFeature />
           </LazyPage>
         ),
+      },
+      {
+        path: 'document/:projectId/confirmation',
+        element: <ConfirmationRoute />,
       },
       {
         path: 'post',
@@ -103,6 +100,7 @@ const router = createBrowserRouter([
           </LazyPage>
         ),
       },
+      // Legacy route — redirect to new nested route
       {
         path: 'confirmation/:projectId',
         element: <ConfirmationRoute />,

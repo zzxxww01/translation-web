@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/Dialog';
-import { Button } from '../ui/Button';
-import { Textarea } from '../ui/Textarea';
-import { RadioGroup, RadioGroupItem } from '../ui/RadioGroup';
-import { Label } from '../ui/Label';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button-extended';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 
 interface RetranslateDialogProps {
   isOpen: boolean;
@@ -55,7 +55,7 @@ export const RetranslateDialog: React.FC<RetranslateDialogProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>重新翻译</DialogTitle>
@@ -64,23 +64,23 @@ export const RetranslateDialog: React.FC<RetranslateDialogProps> = ({
         <div className="space-y-6 py-4">
           {/* 原文预览 */}
           <div>
-            <Label className="text-sm font-medium text-gray-700">原文</Label>
-            <div className="mt-2 p-3 bg-gray-50 rounded-md text-sm text-gray-600 max-h-24 overflow-y-auto">
+            <Label className="text-sm font-medium">原文</Label>
+            <div className="mt-2 p-3 bg-muted rounded-md text-sm text-muted-foreground max-h-24 overflow-y-auto">
               {sourceText}
             </div>
           </div>
 
           {/* 当前译文 */}
           <div>
-            <Label className="text-sm font-medium text-gray-700">当前译文</Label>
-            <div className="mt-2 p-3 bg-blue-50 rounded-md text-sm text-gray-800 max-h-24 overflow-y-auto">
+            <Label className="text-sm font-medium">当前译文</Label>
+            <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-md text-sm text-foreground max-h-24 overflow-y-auto">
               {currentTranslation}
             </div>
           </div>
 
           {/* 翻译选项 */}
           <div>
-            <Label className="text-sm font-medium text-gray-700 mb-3 block">
+            <Label className="text-sm font-medium mb-3 block">
               选择优化方式
             </Label>
             <RadioGroup value={selectedOption} onValueChange={setSelectedOption}>
@@ -88,20 +88,20 @@ export const RetranslateDialog: React.FC<RetranslateDialogProps> = ({
                 {options.map((option) => (
                   <div
                     key={option.value}
-                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex items-start space-x-3 p-3 rounded-lg hover:bg-accent transition-colors"
                   >
                     <RadioGroupItem value={option.value} id={option.value} className="mt-1" />
                     <div className="flex-1">
                       <Label
                         htmlFor={option.value}
-                        className="text-sm font-medium text-gray-900 cursor-pointer"
+                        className="text-sm font-medium cursor-pointer"
                       >
                         {option.label}
                         {option.isDefault && (
                           <span className="ml-2 text-xs text-blue-600">（默认）</span>
                         )}
                       </Label>
-                      <p className="text-xs text-gray-500 mt-1">{option.description}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{option.description}</p>
                     </div>
                   </div>
                 ))}
@@ -111,7 +111,7 @@ export const RetranslateDialog: React.FC<RetranslateDialogProps> = ({
 
           {/* 自定义说明 */}
           <div>
-            <Label htmlFor="custom-instruction" className="text-sm font-medium text-gray-700">
+            <Label htmlFor="custom-instruction" className="text-sm font-medium">
               或补充说明（可选）
             </Label>
             <Textarea
@@ -122,14 +122,14 @@ export const RetranslateDialog: React.FC<RetranslateDialogProps> = ({
               className="mt-2"
               rows={3}
             />
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-muted-foreground">
               自定义说明会在所选方式的基础上额外应用
             </p>
           </div>
         </div>
 
         <DialogFooter>
-          <Button variant="secondary" onClick={onClose} disabled={isLoading}>
+          <Button variant="outline" onClick={onClose} disabled={isLoading}>
             取消
           </Button>
           <Button onClick={handleRetranslate} disabled={isLoading}>

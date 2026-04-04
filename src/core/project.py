@@ -5,6 +5,7 @@ Manage translation projects: create, read, update, delete.
 """
 
 import json
+import logging
 import os
 import re
 import shutil
@@ -18,12 +19,15 @@ from uuid import uuid4
 
 from slugify import slugify
 
+logger = logging.getLogger(__name__)
+
 from .models import (
     ProjectMeta, ProjectStatus, ProjectProgress, ProjectConfig,
     Section, Paragraph, ParagraphStatus, ElementType, Glossary
 )
 from .glossary import GlossaryManager
 from .format_tokens import (
+    FormatRecoveryError,
     assign_span_ids,
     group_paragraphs_by_parent_block,
     reconstruct_block_tokenized_text,
@@ -87,9 +91,15 @@ class ProjectManager:
                 return existing_lock
             new_lock = threading.RLock()
             self._section_locks[lock_key] = new_lock
-            # Evict oldest entries when exceeding the cap
+            # Evict oldest entries when exceeding the cap, but only if not held
             while len(self._section_locks) > self._section_locks_max:
-                self._section_locks.popitem(last=False)
+                oldest_key, oldest_lock = next(iter(self._section_locks.items()))
+                # Try to acquire non-blocking to check if the lock is free
+                if not oldest_lock.acquire(blocking=False):
+                    logger.debug("Skipping eviction of held lock: %s", oldest_key)
+                    break
+                oldest_lock.release()
+                self._section_locks.pop(oldest_key)
             return new_lock
 
     def _best_translation_text(self, paragraph: Paragraph, fallback_to_source: bool = True) -> str:
@@ -135,20 +145,45 @@ class ProjectManager:
         if block_type == ElementType.TABLE:
             return first.parent_block_markdown or first.parent_source_html or first.source
         if block_type == ElementType.CODE:
+            try:
+                text = require_valid_reconstruction(
+                    paragraphs,
+                    fallback_to_source=fallback_to_source,
+                ).text
+            except FormatRecoveryError as error:
+                logger.warning(
+                    "Format recovery failed for code block %s, fallback to plain export: %s",
+                    first.parent_block_id or first.id,
+                    error,
+                )
+                text = reconstruct_block_tokenized_text(
+                    paragraphs,
+                    fallback_to_source=fallback_to_source,
+                ).text
+            return f"```\n{text}\n```"
+
+        try:
+            payload = require_valid_reconstruction(
+                paragraphs, fallback_to_source=fallback_to_source
+            )
+            if first.parent_inline_elements:
+                text = restore_markdown_from_tokenized(
+                    payload.tokenized_text or payload.text,
+                    first.parent_inline_elements,
+                )
+            else:
+                text = payload.text
+        except FormatRecoveryError as error:
+            logger.warning(
+                "Format recovery failed for block %s, fallback to plain export: %s",
+                first.parent_block_id or first.id,
+                error,
+            )
+            # Best-effort export: keep translated plain text and avoid aborting the full document export.
             text = reconstruct_block_tokenized_text(
                 paragraphs,
                 fallback_to_source=fallback_to_source,
             ).text
-            return f"```\n{text}\n```"
-
-        payload = require_valid_reconstruction(paragraphs, fallback_to_source=fallback_to_source)
-        if first.parent_inline_elements:
-            text = restore_markdown_from_tokenized(
-                payload.tokenized_text or payload.text,
-                first.parent_inline_elements,
-            )
-        else:
-            text = payload.text
         return self._format_markdown_line(block_type, text)
 
     def _preferred_export_title(self, meta: ProjectMeta) -> str:
@@ -162,26 +197,29 @@ class ProjectManager:
         sanitized = re.sub(r"\s+", " ", sanitized).strip().rstrip(".")
         return sanitized or fallback
 
-    def _normalize_export_format(self, format: str = "markdown") -> str:
-        normalized = (format or "markdown").strip().lower()
-        if normalized != "markdown":
-            raise ValueError("Only markdown export is supported")
+    _VALID_EXPORT_FORMATS = {"en", "zh"}
+
+    def _normalize_export_format(self, format: str = "zh") -> str:
+        normalized = (format or "zh").strip().lower()
+        if normalized not in self._VALID_EXPORT_FORMATS:
+            raise ValueError(f"Unsupported export format: {format!r}. Use 'en' or 'zh'.")
         return normalized
 
-    def _build_export_filename(self, meta: ProjectMeta, format: str = "markdown") -> str:
-        self._normalize_export_format(format)
+    def _build_export_filename(self, meta: ProjectMeta, format: str = "zh") -> str:
+        normalized = self._normalize_export_format(format)
         title = self._sanitize_export_filename_component(
             self._preferred_export_title(meta),
             meta.id,
         )
-        return f"{title}_zn.md"
+        suffix = "_en.md" if normalized == "en" else "_zh.md"
+        return f"{title}{suffix}"
 
-    def get_export_filename(self, project_id: str, format: str = "markdown") -> str:
+    def get_export_filename(self, project_id: str, format: str = "zh") -> str:
         """Return the user-facing export filename for a project."""
         meta = self.get(project_id)
         return self._build_export_filename(meta, format=format)
 
-    def get_export_path(self, project_id: str, format: str = "markdown") -> Path:
+    def get_export_path(self, project_id: str, format: str = "zh") -> Path:
         """Return the export file path for a project."""
         filename = self.get_export_filename(project_id, format=format)
         return self._project_dir(project_id) / filename
@@ -234,13 +272,13 @@ class ProjectManager:
         metadata = None
 
         if is_html_source:
-            # 保持现有 HTML 链路不变：先转 Markdown，再进入解析与翻译流程
+            # HTML 链路：转 Markdown，保留原始远程图片 URL
             shutil.copy(source_path, project_dir / "source.html")
             source_file = "source.html"
             source_md, metadata = convert_html_to_markdown_text(
                 html_path=html_path,
                 output_dir=project_dir,
-                copy_images=True,
+                copy_images=False,
             )
         else:
             # Markdown 输入：跳过 HTML 转换，直接进入解析流程
@@ -249,6 +287,15 @@ class ProjectManager:
         parsed_project = markdown_parser.parse(source_md, metadata=metadata)
         title = parsed_project.title
         sections = parsed_project.sections
+
+        # 自动批准 metadata 段落（图片等）；source metadata 走专用批翻链路
+        for section in sections:
+            for paragraph in section.paragraphs:
+                if paragraph.is_metadata:
+                    if paragraph.metadata_type == "source":
+                        continue
+                    paragraph.status = ParagraphStatus.APPROVED
+                    paragraph.confirmed = paragraph.source
 
         # 保存完整原文 Markdown
         self._write_text(project_dir / "source.md", source_md)
@@ -293,7 +340,7 @@ class ProjectManager:
             shutil.copytree(assets_dir, dest_dir)
         except Exception as e:
             # Non-fatal: assets copy failure should not block project creation
-            print(f"[Project] Warning: Failed to copy assets directory: {e}")
+            logger.warning("Failed to copy assets directory: %s", e)
 
     def _find_assets_directory(self, html_source: Path) -> Optional[Path]:
         """Find related assets directory next to the HTML file."""
@@ -330,7 +377,7 @@ class ProjectManager:
             meta = ProjectMeta(**data)
         except (TypeError, ValueError) as e:
             # meta.json 损坏，返回默认项目元信息
-            print(f"Warning: Project {project_id} meta.json is corrupted: {e}")
+            logger.warning("Project %s meta.json is corrupted: %s", project_id, e)
             raise FileNotFoundError(f"Project meta is corrupted: {e}")
 
         # 修复进度显示问题：如果 total_paragraphs 为 0，尝试从 sections 重新计算
@@ -342,7 +389,7 @@ class ProjectManager:
                     # 仅在内存中更新，不保存到文件（避免文件锁问题）
             except Exception as e:
                 # 静默忽略，返回原始数据
-                print(f"Warning: Failed to recalculate progress for {project_id}: {e}")
+                logger.warning("Failed to recalculate progress for %s: %s", project_id, e)
 
         return meta
 
@@ -583,20 +630,42 @@ class ProjectManager:
             model="manual"
         )
 
-    def export(self, project_id: str, include_source: bool = False, format: str = 'markdown') -> str:
+    def export(self, project_id: str, include_source: bool = False, format: str = 'zh') -> str:
         """
         导出项目
 
         Args:
             project_id: 项目 ID
             include_source: 是否包含原文
-            format: 输出格式 ('markdown')
+            format: 输出格式 ('en' 英文原文, 'zh' 中文译文)
 
         Returns:
             str: 导出内容
         """
-        self._normalize_export_format(format)
+        normalized = self._normalize_export_format(format)
+        if normalized == "en":
+            return self.export_source_markdown(project_id)
         return self.export_markdown(project_id, include_source)
+
+    def export_source_markdown(self, project_id: str) -> str:
+        """Export the original English source markdown with original remote image URLs."""
+        project_dir = self._project_dir(project_id)
+
+        # 新项目直接用 source.md（已保留远程 URL），兼容旧项目的 source_en.md
+        for name in ("source_en.md", "source.md"):
+            path = project_dir / name
+            if path.exists():
+                content = path.read_text(encoding="utf-8")
+                break
+        else:
+            raise FileNotFoundError(f"Source markdown not found for project {project_id}")
+
+        # 保存一份带英文后缀的导出文件
+        meta = self.get(project_id)
+        output_path = project_dir / self._build_export_filename(meta, format="en")
+        self._write_text(output_path, content)
+
+        return content
 
     def export_markdown(self, project_id: str, include_source: bool = False) -> str:
         """Export one project as markdown using parent-block reconstruction."""
@@ -626,7 +695,7 @@ class ProjectManager:
         # 保存到文件
         output_path = self._project_dir(project_id) / self._build_export_filename(
             meta,
-            format="markdown",
+            format="zh",
         )
         self._write_text(output_path, content)
 
@@ -771,7 +840,7 @@ class ProjectManager:
             )
         except (json.JSONDecodeError, KeyError, TypeError, IOError) as e:
             # 元数据文件损坏，返回 None
-            print(f"Warning: Failed to load section {section_id}: {e}")
+            logger.warning("Failed to load section %s: %s", section_id, e)
             return None
 
     def _update_progress(self, project_id: str) -> None:

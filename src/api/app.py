@@ -62,6 +62,18 @@ class OptimizedStaticFiles(StaticFiles):
         return super().lookup_path(path)
 
 
+class SafeStaticFiles(StaticFiles):
+    """StaticFiles that gracefully ignore invalid paths on Windows."""
+
+    def lookup_path(self, path: str):
+        try:
+            return super().lookup_path(path)
+        except OSError as exc:
+            import logging
+            logging.getLogger(__name__).debug("SafeStaticFiles: ignoring OSError for path %r: %s", path, exc)
+            return "", None
+
+
 if frontend_dist_path.exists():
     app.mount(
         "/assets",
@@ -72,7 +84,7 @@ if frontend_dist_path.exists():
 
 projects_path = Path(__file__).parent.parent.parent / "projects"
 if projects_path.exists():
-    app.mount("/projects", StaticFiles(directory=str(projects_path)), name="projects")
+    app.mount("/projects", SafeStaticFiles(directory=str(projects_path)), name="projects")
 
 
 @app.get(

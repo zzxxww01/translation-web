@@ -212,7 +212,17 @@ class ConfirmationService:
                 if para.id == paragraph_id:
                     # 确认译文
                     source = "manual" if custom_edit else (version_id or "ai")
-                    para.confirm(translation, source=source)
+                    tokenized_text, format_issues = self._resolve_confirmation_payload(
+                        para,
+                        translation,
+                        version_id=version_id,
+                    )
+                    para.confirm(
+                        translation,
+                        source=source,
+                        tokenized_text=tokenized_text,
+                        format_issues=format_issues,
+                    )
                     confirmed_paragraph = para
                     confirmed_section = section
                     break
@@ -611,7 +621,17 @@ class ConfirmationService:
                 paragraph = paragraph_map[paragraph_id]
                 section = section_map[paragraph_id]
                 source = "manual" if custom_edit else (version_id or "ai")
-                paragraph.confirm(translation, source=source)
+                tokenized_text, format_issues = self._resolve_confirmation_payload(
+                    paragraph,
+                    translation,
+                    version_id=version_id,
+                )
+                paragraph.confirm(
+                    translation,
+                    source=source,
+                    tokenized_text=tokenized_text,
+                    format_issues=format_issues,
+                )
 
                 # 更新确认映射
                 project.confirmation_map[paragraph_id] = ParagraphConfirmation(
@@ -668,6 +688,46 @@ class ConfirmationService:
         except Exception as e:
             logger.error(f"[{project_id}] Batch confirmation failed: {e}")
             raise
+
+    def _resolve_confirmation_payload(
+        self,
+        paragraph: Paragraph,
+        translation: str,
+        version_id: Optional[str] = None,
+    ) -> tuple[Optional[str], List[str]]:
+        """
+        Try to preserve tokenized/format metadata when a user confirms a translation.
+        Priority:
+        1) explicitly selected version
+        2) exact text match in existing versions
+        3) latest version if text matches
+        """
+        normalized = (translation or "").strip()
+
+        def _pick_from_record(record) -> Optional[tuple[Optional[str], List[str]]]:
+            if record is None:
+                return None
+            if (record.text or "").strip() != normalized:
+                return None
+            return record.tokenized_text, list(record.format_issues or [])
+
+        if version_id:
+            selected = paragraph.translations.get(version_id)
+            picked = _pick_from_record(selected)
+            if picked is not None:
+                return picked
+
+        for record in paragraph.translations.values():
+            picked = _pick_from_record(record)
+            if picked is not None:
+                return picked
+
+        latest = paragraph.latest_translation(non_empty=True)
+        picked = _pick_from_record(latest)
+        if picked is not None:
+            return picked
+
+        return None, []
 
     async def _invalidate_cache_for_project(self, project_id: str) -> None:
         """清理指定项目的缓存"""

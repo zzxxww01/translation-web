@@ -10,6 +10,7 @@ from fastapi import APIRouter
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.format_tokens import apply_translation_payload
+from src.core.glossary_prompt import build_term_usage_from_project
 from src.api.utils.glossary import get_combined_glossary
 
 from ..dependencies import (
@@ -161,6 +162,14 @@ async def retranslate_paragraph(
             p.source
             for p in target_section.paragraphs[target_local_index + 1 : target_local_index + 3]
         ]
+
+        # 构建术语使用记录，避免 first_annotate/preserve_annotate 术语重复加注
+        context.term_usage = build_term_usage_from_project(
+            sections,
+            glossary,
+            current_section_id=target_section.section_id,
+            current_paragraph_id=paragraph_id,
+        )
 
         instruction = resolve_retranslate_instruction(request.instruction, request.option_id)
 

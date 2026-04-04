@@ -48,8 +48,8 @@ def _truncate_by_sentence(text: str, max_chars: int = 120) -> str:
     return sentences[0][: max_chars - len(last) - 4] + " …… " + last
 
 
-TRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_translate.v2"
-RETRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_retranslate.v2"
+TRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_translate"
+RETRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_retranslate"
 
 STYLE_CONFIG: Dict[str, Dict[str, str]] = {
     "original": {"profile": "standard"},

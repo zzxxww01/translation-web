@@ -27,6 +27,61 @@ router = APIRouter()
 prompt_manager = get_prompt_manager()
 
 
+def _format_generation_error(exc: Exception, operation: str, timeout_s: int) -> str:
+    text = str(exc).strip()
+    lower = text.lower()
+    exc_name = exc.__class__.__name__
+
+    if isinstance(exc, asyncio.TimeoutError):
+        return (
+            f"{operation} timed out after {timeout_s}s. "
+            "The upstream model did not complete in time."
+        )
+
+    if "unable to connect to proxy" in lower or "proxyerror" in lower:
+        return (
+            f"{operation} failed: local proxy connection failed. "
+            "Check Clash/mihomo status, proxy port, and current outbound node. "
+            f"Root error: {exc_name}: {text}"
+        )
+
+    if "ssl" in lower or "ssleoferror" in lower or "unexpected eof while reading" in lower:
+        return (
+            f"{operation} failed: TLS handshake with the Gemini upstream was interrupted. "
+            "This is usually a proxy or outbound node issue. "
+            f"Root error: {exc_name}: {text}"
+        )
+
+    if "read timed out" in lower or "connect timed out" in lower or "timed out" in lower:
+        return (
+            f"{operation} failed: upstream request timed out after {timeout_s}s. "
+            "The model route is reachable but responded too slowly. "
+            f"Root error: {exc_name}: {text}"
+        )
+
+    if "winerror 10013" in lower:
+        return (
+            f"{operation} failed: local socket access was denied by Windows networking. "
+            "This is usually caused by a blocked local outbound connection, security software, "
+            "or an invalid transport path. "
+            f"Root error: {exc_name}: {text}"
+        )
+
+    if "503" in lower or "service unavailable" in lower:
+        return (
+            f"{operation} failed: upstream service was unavailable. "
+            f"Root error: {exc_name}: {text}"
+        )
+
+    return f"{operation} failed. Root error: {exc_name}: {text}"
+
+
+def _raise_generation_failure(operation: str, exc: Exception, timeout_s: int) -> None:
+    raise ServiceUnavailableException(
+        detail=_format_generation_error(exc, operation=operation, timeout_s=timeout_s)
+    )
+
+
 @router.post("/translate/post", response_model=PostTranslateResponse)
 async def translate_post(request: PostTranslateRequest):
     """Translate a post to Chinese."""
@@ -54,12 +109,10 @@ async def translate_post(request: PostTranslateRequest):
             timeout=timeout_s,
         )
         return PostTranslateResponse(translation=translation.strip())
-    except asyncio.TimeoutError:
-        raise ServiceUnavailableException(
-            detail=f"Translation timed out after {timeout_s}s"
-        )
+    except asyncio.TimeoutError as e:
+        _raise_generation_failure("Translation", exc=e, timeout_s=timeout_s)
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"Translation failed: {str(e)}")
+        _raise_generation_failure("Translation", exc=e, timeout_s=timeout_s)
 
 
 @router.post("/translate/post/optimize", response_model=PostOptimizeResponse)
@@ -95,12 +148,10 @@ async def optimize_post_translation(request: PostOptimizeRequest):
             timeout=timeout_s,
         )
         return PostOptimizeResponse(optimized_translation=optimized.strip())
-    except asyncio.TimeoutError:
-        raise ServiceUnavailableException(
-            detail=f"Optimization timed out after {timeout_s}s"
-        )
+    except asyncio.TimeoutError as e:
+        _raise_generation_failure("Optimization", exc=e, timeout_s=timeout_s)
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"Optimization failed: {str(e)}")
+        _raise_generation_failure("Optimization", exc=e, timeout_s=timeout_s)
 
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
@@ -138,9 +189,7 @@ async def generate_title(request: GenerateTitleRequest):
         ]
         titles = [title for title in titles if title]
         return GenerateTitleResponse(title="\n".join(titles))
-    except asyncio.TimeoutError:
-        raise ServiceUnavailableException(
-            detail=f"Title generation timed out after {timeout_s}s"
-        )
+    except asyncio.TimeoutError as e:
+        _raise_generation_failure("Title generation", exc=e, timeout_s=timeout_s)
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"Title generation failed: {str(e)}")
+        _raise_generation_failure("Title generation", exc=e, timeout_s=timeout_s)

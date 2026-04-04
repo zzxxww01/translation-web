@@ -65,7 +65,7 @@ class TranslationMemoryService:
 
         try:
             new_rules = await self._extract_rules(
-                "longform/learning/correction_rule_extraction.v2",
+                "longform/learning/correction_rule_extraction",
                 source=source,
                 ai_translation=ai_translation,
                 user_translation=user_translation,
@@ -93,7 +93,7 @@ class TranslationMemoryService:
 
         try:
             new_rules = await self._extract_rules(
-                "longform/learning/retranslation_rule_extraction.v2",
+                "longform/learning/retranslation_rule_extraction",
                 instruction=instruction,
                 source=source,
                 before=before,
@@ -132,7 +132,7 @@ class TranslationMemoryService:
 
         try:
             new_rules = await self._extract_rules(
-                "longform/learning/reflection_rule_extraction.v2",
+                "longform/learning/reflection_rule_extraction",
                 issues_text=issues_text,
                 translations_text=translations_text,
             )
@@ -239,7 +239,7 @@ class TranslationMemoryService:
             from src.prompts import get_prompt_manager
             pm = get_prompt_manager()
             prompt = pm.get(
-                "longform/learning/rules_consolidation.v2",
+                "longform/learning/rules_consolidation",
                 rules_text=rules_text,
             )
 

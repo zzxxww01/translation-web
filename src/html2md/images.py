@@ -4,13 +4,19 @@ import re
 import shutil
 import urllib.request
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 from .utils import sanitize_basename
 
 
 IMAGE_PATTERN = re.compile(
     r'!\[(?P<alt>[^\]]*)\]\((?P<src><[^>]+>|[^)"]+?)(?:\s+"(?P<title>[^"]*)")?\)'
+)
+
+# Substack CDN proxy URL pattern:
+# https://substackcdn.com/image/fetch/$s_!TOKEN!,params.../https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2F...
+_SUBSTACK_CDN_PATTERN = re.compile(
+    r"https?://substackcdn\.com/image/fetch/[^/]*/(?P<encoded_url>https?%3A%2F%2F.+)"
 )
 
 
@@ -79,6 +85,25 @@ def _detect_suffix(src: str) -> str:
     return suffix if suffix and len(suffix) <= 5 else ""
 
 
+def _resolve_substack_cdn_url(url: str) -> str:
+    """Extract the direct S3 URL from a Substack CDN proxy URL.
+
+    Substack wraps S3 image URLs in a CDN proxy with signature tokens that
+    expire.  The embedded S3 URL is public and permanent.
+
+    Example input:
+      https://substackcdn.com/image/fetch/$s_!eHLl!,w_1456,.../https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F...png
+    Output:
+      https://substack-post-media.s3.amazonaws.com/public/images/...png
+    """
+    m = _SUBSTACK_CDN_PATTERN.match(url)
+    if not m:
+        return url
+    return unquote(m.group("encoded_url"))
+
+
 def _normalize_src(src: str) -> str:
     src = src.strip()
-    return src[1:-1].strip() if src.startswith("<") and src.endswith(">") else src
+    if src.startswith("<") and src.endswith(">"):
+        src = src[1:-1].strip()
+    return _resolve_substack_cdn_url(src)

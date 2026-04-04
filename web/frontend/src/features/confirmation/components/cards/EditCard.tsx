@@ -4,9 +4,9 @@
  */
 
 import { useState } from 'react';
-import { cn } from '../../../../shared/utils';
-import { Button } from '../../../../components/ui';
-import { Textarea } from '../../../../components/ui/Textarea';
+import { cn } from '@/shared/utils';
+import { Button } from '@/components/ui/button-extended';
+import { Textarea } from '@/components/ui/textarea';
 
 interface EditCardProps {
   value: string;
@@ -55,7 +55,7 @@ export function EditCard({ value, onChange, onConfirm, className }: EditCardProp
       {/* 操作按钮 */}
       <div className="flex gap-2">
         <Button
-          variant="primary"
+          variant="default"
           size="sm"
           onClick={handleConfirm}
           disabled={!value.trim()}
@@ -64,7 +64,7 @@ export function EditCard({ value, onChange, onConfirm, className }: EditCardProp
           确认并保存
         </Button>
         <Button
-          variant="secondary"
+          variant="outline"
           size="sm"
           onClick={() => onChange('')}
           disabled={!value}

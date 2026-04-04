@@ -5,8 +5,8 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { RefreshCw, Zap, Briefcase, MessageCircle, X } from 'lucide-react';
-import { Button } from '../../../../components/ui';
-import { cn } from '../../../../shared/utils';
+import { Button } from '@/components/ui/button-extended';
+import { cn } from '@/shared/utils';
 import { confirmationApi } from '../../api/confirmationApi';
 
 interface RetranslatePanelProps {
@@ -14,6 +14,7 @@ interface RetranslatePanelProps {
   onRetranslate: (instruction: string, optionId?: string) => Promise<void>;
   isRetranslating?: boolean;
   className?: string;
+  onClose?: () => void;
 }
 
 interface RetranslateOption {
@@ -36,6 +37,7 @@ export function RetranslatePanel({
   onRetranslate,
   isRetranslating = false,
   className,
+  onClose,
 }: RetranslatePanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [selectedInstruction, setSelectedInstruction] = useState<string | null>(null);
@@ -79,9 +81,20 @@ export function RetranslatePanel({
   return (
     <div className={cn('rounded-xl border border-border bg-bg-tertiary/50 p-4', className)}>
       {/* 标题 */}
-      <div className="mb-3 flex items-center gap-2">
-        <RefreshCw className="h-4 w-4 text-primary" />
-        <h3 className="text-sm font-semibold text-text-primary">重新翻译</h3>
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <RefreshCw className="h-4 w-4 text-primary" />
+          <h3 className="text-sm font-semibold text-text-primary">重新翻译</h3>
+        </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="rounded-sm opacity-70 hover:opacity-100 transition-opacity"
+            title="关闭"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       {/* 快捷指令 */}
@@ -154,8 +167,8 @@ export function RetranslatePanel({
             )}
           </div>
           <Button
-            variant="primary"
-            size="md"
+            variant="default"
+            size="default"
             onClick={handleCustomInstruction}
             disabled={!customInstruction.trim() || isRetranslating}
             isLoading={isRetranslating && !selectedInstruction}

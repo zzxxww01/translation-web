@@ -1,6 +1,10 @@
 import { Check, CheckSquare, RotateCw, X } from 'lucide-react';
 import { type UIEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Button } from '../../../components/ui';
+import { Button } from '@/components/ui/button-extended';
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
@@ -208,10 +212,12 @@ export function ImmersiveEditor({
     [baseVisibleCount, chunkResetKey, filteredParagraphs.length, isChunkMode]
   );
 
+  const [showExitDialog, setShowExitDialog] = useState(false);
+
   const handleClose = useCallback(() => {
     if (hasPendingWork) {
-      const shouldClose = window.confirm('仍有未完成的保存或重译任务，确定强制退出沉浸编辑吗？');
-      if (!shouldClose) return;
+      setShowExitDialog(true);
+      return;
     }
     onClose();
   }, [hasPendingWork, onClose]);
@@ -235,17 +241,18 @@ export function ImmersiveEditor({
 
   const handleBatchRetranslate = useCallback(
     (optionId: string) => {
-      const instruction = optionId === 'none' ? undefined : undefined;
+      const option = retranslateOptions.find(opt => opt.id === optionId);
+      const instruction = option?.instruction || undefined;
       const effectiveOptionId = optionId === 'none' ? undefined : optionId;
       void batchRetranslate(instruction, effectiveOptionId);
       setShowBatchRetranslateDialog(false);
     },
-    [batchRetranslate]
+    [batchRetranslate, retranslateOptions]
   );
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-bg-primary">
-      <div className="border-b border-border-subtle bg-bg-primary/95 px-6 py-3 backdrop-blur">
+      <div className="border-b border-border-subtle bg-white px-6 py-3 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <h2 className="text-base font-medium text-text-primary">{latestSection.title}</h2>
@@ -371,13 +378,26 @@ export function ImmersiveEditor({
               ))}
             </div>
             <div className="mt-4 flex justify-end gap-2">
-              <Button variant="secondary" size="sm" onClick={() => setShowBatchRetranslateDialog(false)}>
+              <Button variant="outline" size="sm" onClick={() => setShowBatchRetranslateDialog(false)}>
                 取消
               </Button>
             </div>
           </div>
         </div>
       )}
+
+      <AlertDialog open={showExitDialog} onOpenChange={setShowExitDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>退出沉浸编辑</AlertDialogTitle>
+            <AlertDialogDescription>仍有未完成的保存或重译任务，确定强制退出沉浸编辑吗？</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogAction onClick={onClose}>确定退出</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

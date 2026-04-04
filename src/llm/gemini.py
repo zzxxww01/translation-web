@@ -101,6 +101,11 @@ class GeminiAttempt:
 class GeminiProvider(LLMProvider):
     """Google Gemini API Provider"""
 
+    # 类级别 API 调用计数器
+    _api_call_count = 0
+    _api_call_count_lock = Lock()
+    _api_call_start_time: float | None = None
+
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -277,18 +282,18 @@ class GeminiProvider(LLMProvider):
             self._client_cache[api_key] = client
             return client
 
+    # Shared thread pool for timeout-guarded LLM calls
+    _timeout_executor = ThreadPoolExecutor(max_workers=4)
+
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
             return fn()
-        executor = ThreadPoolExecutor(max_workers=1)
-        future = executor.submit(fn)
+        future = self._timeout_executor.submit(fn)
         try:
             return future.result(timeout=timeout)
         except FutureTimeoutError:
             future.cancel()
             raise
-        finally:
-            executor.shutdown(wait=False, cancel_futures=True)
 
     def _generate_with_rest(
         self,
@@ -309,11 +314,18 @@ class GeminiProvider(LLMProvider):
             "generationConfig": generation_config,
         }
         headers = {"x-goog-api-key": api_key}
+        request_timeout: float | tuple[float, float] | None = None
+        if timeout and timeout > 0:
+            # Keep connect timeout short so proxy/TLS issues fail fast,
+            # while preserving a longer read timeout for valid long responses.
+            connect_timeout = min(max(float(timeout) * 0.2, 5.0), 15.0)
+            request_timeout = (connect_timeout, float(timeout))
+
         response = requests.post(
             url,
             json=payload,
             headers=headers,
-            timeout=timeout if timeout and timeout > 0 else None,
+            timeout=request_timeout,
             proxies=self.proxy_config,
         )
         response.raise_for_status()
@@ -412,8 +424,7 @@ class GeminiProvider(LLMProvider):
             or "request contains an invalid argument" in text
             or "unsupported response mime type" in text
             or "candidate was blocked" in text
-            or "safety" in text
-            and "blocked" in text
+            or ("safety" in text and "blocked" in text)
             or "prompt is too long" in text
             or "too many tokens" in text
             or "context length" in text
@@ -530,10 +541,14 @@ class GeminiProvider(LLMProvider):
                     response_mime_type=response_mime_type,
                 )
                 duration = time.monotonic() - start_time
+                with GeminiProvider._api_call_count_lock:
+                    GeminiProvider._api_call_count += 1
+                    call_number = GeminiProvider._api_call_count
                 logger.info(
-                    "[Gemini] generate success in %.2fs (model=%s key=%s attempt=%s/%s)",
-                    duration,
+                    "[API #%d] model=%s duration=%.1fs (key=%s attempt=%s/%s)",
+                    call_number,
                     attempt.model_name,
+                    duration,
                     attempt.key_role,
                     attempt_index + 1,
                     max_attempts,
@@ -860,6 +875,21 @@ class GeminiProvider(LLMProvider):
             "consistency", para_text=para_text, glossary_text=glossary_text
         )
 
+    def _build_source_metadata_batch_prompt(
+        self,
+        entries: List[Dict[str, str]],
+        context: Dict[str, Any],
+    ) -> str:
+        """Build the dedicated batch prompt for source/citation metadata."""
+        glossary_block = str(context.get("glossary_block", "")).strip() or "(无命中术语)"
+        entries_json = json.dumps(entries, ensure_ascii=False, indent=2)
+        return self.prompt_manager.get(
+            "longform/metadata/source_batch_translate",
+            glossary_block=glossary_block,
+            entry_count=len(entries),
+            entries_json=entries_json,
+        )
+
     def translate_section(
         self,
         section_text: str,
@@ -888,6 +918,30 @@ class GeminiProvider(LLMProvider):
             "Batch translation response does not satisfy the JSON contract."
         )
 
+    def translate_source_metadata_batch(
+        self,
+        entries: List[Dict[str, str]],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[Dict[str, str]]:
+        """Translate source/citation metadata entries in one JSON batch."""
+        prompt = self._build_source_metadata_batch_prompt(entries, context or {})
+
+        try:
+            response = self.generate(prompt, response_format="json", temperature=0.2)
+            result = self._parse_json_response(response)
+        except Exception as exc:
+            logger.error("[Gemini] Source metadata batch translation failed: %s", exc)
+            raise
+
+        if isinstance(result, dict) and "translations" in result:
+            return result["translations"]
+        if isinstance(result, list):
+            return result
+
+        raise ValueError(
+            "Source metadata translation response does not satisfy the JSON contract."
+        )
+
     def translate_title(
         self,
         title: str,
@@ -911,7 +965,7 @@ class GeminiProvider(LLMProvider):
                 context_lines.append(f"- Target audience: {context['target_audience']}")
 
         prompt = self.prompt_manager.get(
-            "longform/auxiliary/title_translate.v2",
+            "longform/auxiliary/title_translate",
             context_block="\n".join(context_lines) if context_lines else "- None",
             title=title,
             subtitle=subtitle or "(无)",
@@ -953,7 +1007,7 @@ class GeminiProvider(LLMProvider):
                 context_lines.append(f"- Next section: {context['next_section_title']}")
 
         prompt = self.prompt_manager.get(
-            "longform/auxiliary/section_title_translate.v2",
+            "longform/auxiliary/section_title_translate",
             context_block="\n".join(context_lines) if context_lines else "- None",
             title=title,
         )
@@ -1050,8 +1104,20 @@ class GeminiProvider(LLMProvider):
             format_token_rules=format_token_rules,
         )
 
+        # Build previous translations context
+        prev_trans = context.get("previous_translations", [])
+        if prev_trans:
+            prev_lines = []
+            for pair in prev_trans[-5:]:
+                src_preview = pair.get("source", "")[:80]
+                trans_preview = pair.get("translation", "")[:80]
+                prev_lines.append(f"- EN: {src_preview}…\n  ZH: {trans_preview}…")
+            previous_translations_block = "\n".join(prev_lines)
+        else:
+            previous_translations_block = "无"
+
         return self.prompt_manager.get(
-            "longform/translation/section_batch_translate.v2",
+            "longform/translation/section_batch_translate",
             section_title=section_title,
             section_text=section_text,
             paragraph_ids=json.dumps(paragraph_ids),
@@ -1064,15 +1130,24 @@ class GeminiProvider(LLMProvider):
             article_challenges=self._format_challenges_for_prompt(
                 context.get("article_challenges", [])
             ),
-            glossary=self._format_glossary_for_prompt(context.get("glossary", [])),
+            glossary=self._format_glossary_for_prompt(
+                context.get("glossary", []),
+                term_usage=context.get("term_usage"),
+            ),
             guidelines="\n".join(enhanced_guidelines),
+            previous_translations=previous_translations_block,
         )
 
-    def _format_glossary_for_prompt(self, glossary: Any) -> str:
+    def _format_glossary_for_prompt(
+        self,
+        glossary: Any,
+        term_usage: Optional[Dict[str, List[str]]] = None,
+    ) -> str:
         """Render glossary context into prompt-friendly text."""
         return render_glossary_prompt_block(
             glossary,
             include_title=False,
+            term_usage=term_usage,
             empty_text="无",
         )
 

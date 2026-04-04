@@ -6,8 +6,8 @@
 import { Loader2, Maximize2 } from 'lucide-react';
 import { ParagraphItem } from './ParagraphItem';
 import { SectionNavigation } from './SectionNavigation';
-import { Button } from '../../../components/ui';
-import type { Section, Paragraph } from '../../../shared/types';
+import { Button } from '@/components/ui/button-extended';
+import type { Section, Paragraph } from '@/shared/types';
 
 interface SectionViewProps {
   sections: Section[];
@@ -58,7 +58,7 @@ export function SectionView({
         </div>
         {onEnterImmersive && (
           <Button
-            variant="secondary"
+            variant="outline"
             size="sm"
             onClick={onEnterImmersive}
             leftIcon={<Maximize2 className="h-4 w-4" />}

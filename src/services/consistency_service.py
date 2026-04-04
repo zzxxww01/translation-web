@@ -2,7 +2,7 @@
 Consistency review service.
 
 This module provides a lightweight, file-based consistency check implementation
-for terminology and style signals.
+for terminology signals plus a reserved style score field.
 """
 
 from collections import Counter, defaultdict
@@ -73,51 +73,11 @@ class TermConsistencyChecker:
 
 
 class StyleConsistencyChecker:
-    """Check simple punctuation style consistency in confirmed translations."""
+    """Placeholder style checker. Style-specific checks are currently disabled."""
 
     def check_style_consistency(self, sections: List[Section]) -> Tuple[List[ConsistencyIssue], float]:
-        issues: List[ConsistencyIssue] = []
-        english_punct = 0
-        chinese_punct = 0
-        first_mixed_location: Optional[Tuple[str, int]] = None
-
-        for section in sections:
-            for para in section.paragraphs:
-                if not para.confirmed:
-                    continue
-                text = para.confirmed
-                has_cn_char = any("\u4e00" <= c <= "\u9fff" for c in text)
-                has_en_punct = "," in text or "." in text
-                has_cn_punct = "，" in text or "。" in text
-
-                if has_en_punct:
-                    english_punct += 1
-                if has_cn_punct:
-                    chinese_punct += 1
-
-                if has_cn_char and has_en_punct and first_mixed_location is None:
-                    first_mixed_location = (section.section_id, para.index)
-
-        if first_mixed_location and chinese_punct > 0:
-            issues.append(
-                ConsistencyIssue(
-                    section_id=first_mixed_location[0],
-                    paragraph_index=first_mixed_location[1],
-                    issue_type="style",
-                    description="检测到中文语句内可能混用英文标点",
-                    auto_fixable=False,
-                    fix_suggestion="中文语句建议统一使用中文标点（，。）",
-                )
-            )
-
-        total_punct = english_punct + chinese_punct
-        if total_punct == 0:
-            style_score = 100.0
-        else:
-            dominant = max(english_punct, chinese_punct)
-            style_score = round((dominant / total_punct) * 100, 2)
-
-        return issues, style_score
+        """保留兼容字段，当前不执行额外风格检查。"""
+        return [], 100.0
 
 
 class ConsistencyReviewer:

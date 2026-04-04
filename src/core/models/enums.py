@@ -6,9 +6,10 @@ from enum import Enum
 class TranslationStrategy(str, Enum):
     """术语翻译策略"""
 
-    PRESERVE = "preserve"  # 全文保持英文原文
+    PRESERVE = "preserve"  # 全文保持英文原文，不加注释
     FIRST_ANNOTATE = "first_annotate"  # 首次出现翻译+括号注明，后续用中文
     TRANSLATE = "translate"  # 全文直接使用中文
+    PRESERVE_ANNOTATE = "preserve_annotate"  # 首次出现保留原文+括号注中文，后续只保留原文
 
 
 class ParagraphStatus(str, Enum):

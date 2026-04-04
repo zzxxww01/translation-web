@@ -14,7 +14,7 @@ export function SourcePanel({
 }: SourcePanelProps) {
   if (!paragraph) {
     return (
-      <div className={cn('w-[30%] border-r border-border bg-muted/30 p-6', className)}>
+      <div className={cn('w-[30%] border-r border-border bg-gray-50 p-6', className)}>
         <div className="flex h-full items-center justify-center text-text-secondary">
           加载中...
         </div>
@@ -25,7 +25,7 @@ export function SourcePanel({
   return (
     <div
       className={cn(
-        'relative w-[30%] overflow-y-auto border-r border-border bg-muted/30 p-6',
+        'relative w-[30%] overflow-y-auto border-r border-border bg-gray-50 p-6',
         className
       )}
     >
@@ -57,7 +57,7 @@ export function SourcePanel({
       </div>
 
       <div className="mt-6 border-t border-border pt-4">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1">
+        <div className="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1">
           <div
             className={cn(
               'h-2 w-2 rounded-full',

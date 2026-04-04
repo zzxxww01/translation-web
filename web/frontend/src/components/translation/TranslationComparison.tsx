@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/Dialog';
-import { Button } from '../ui/Button';
-import { Tabs } from '../ui/Tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button-extended';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 interface DiffOperation {
   type: 'equal' | 'delete' | 'insert';
@@ -31,10 +31,6 @@ export const TranslationComparison: React.FC<TranslationComparisonProps> = ({
   diffData,
 }) => {
   const [selectedVersion, setSelectedVersion] = useState<'original' | 'new'>('new');
-  const tabs = [
-    { id: 'original', label: 'Current version' },
-    { id: 'new', label: 'New version ?' },
-  ];
 
   const handleConfirm = () => {
     const selected = selectedVersion === 'original' ? originalTranslation : newTranslation;
@@ -43,69 +39,67 @@ export const TranslationComparison: React.FC<TranslationComparisonProps> = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
       <DialogContent className="max-w-4xl max-h-[80vh]">
         <DialogHeader>
           <DialogTitle>Choose translation version</DialogTitle>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-sm text-muted-foreground mt-1">
             Change rate: {diffData.change_percentage.toFixed(1)}%
           </p>
         </DialogHeader>
 
         <div className="space-y-4 py-4 overflow-y-auto">
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Source</p>
-            <div className="p-3 bg-gray-50 rounded-md text-sm text-gray-600">
+            <p className="text-sm font-medium text-foreground mb-2">Source</p>
+            <div className="p-3 bg-muted rounded-md text-sm text-muted-foreground">
               {sourceText}
             </div>
           </div>
 
-          <Tabs
-            tabs={tabs}
-            activeTab={selectedVersion}
-            onChange={(v) => setSelectedVersion(v as 'original' | 'new')}
-            variant="segmented"
-            size="sm"
-            className="w-full"
-          />
+          <Tabs value={selectedVersion} onValueChange={(v) => setSelectedVersion(v as 'original' | 'new')}>
+            <TabsList className="w-full">
+              <TabsTrigger value="original" className="flex-1">Current version</TabsTrigger>
+              <TabsTrigger value="new" className="flex-1">New version</TabsTrigger>
+            </TabsList>
 
-          {selectedVersion === 'original' && (
-            <div className="mt-4 p-4 bg-white border-2 border-blue-200 rounded-lg">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-blue-600">Current version</span>
+            <TabsContent value="original">
+              <div className="p-4 bg-background border-2 border-blue-200 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-medium text-blue-600">Current version</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  {originalTranslation}
+                </p>
               </div>
-              <p className="text-sm text-gray-800 leading-relaxed">
-                {originalTranslation}
-              </p>
-            </div>
-          )}
+            </TabsContent>
 
-          {selectedVersion === 'new' && (
-            <div className="mt-4 p-4 bg-white border-2 border-green-200 rounded-lg">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-medium text-green-600">New version</span>
+            <TabsContent value="new">
+              <div className="p-4 bg-background border-2 border-green-200 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-medium text-green-600">New version</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">
+                  {newTranslation}
+                </p>
               </div>
-              <p className="text-sm text-gray-800 leading-relaxed">
-                {newTranslation}
-              </p>
-            </div>
-          )}
+            </TabsContent>
+          </Tabs>
 
           <div>
-            <p className="text-sm font-medium text-gray-700 mb-2">Diff</p>
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <p className="text-sm font-medium text-foreground mb-2">Diff</p>
+            <div className="p-4 bg-muted rounded-lg">
               <DiffView operations={diffData.operations} />
             </div>
           </div>
         </div>
 
         <DialogFooter>
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
           <Button
             onClick={handleConfirm}
-            variant={selectedVersion === 'new' ? 'primary' : 'secondary'}
+            variant={selectedVersion === 'new' ? 'default' : 'outline'}
           >
             {selectedVersion === 'original' ? 'Keep current version' : 'Use new version'}
           </Button>
@@ -121,7 +115,7 @@ const DiffView: React.FC<{ operations: DiffOperation[] }> = ({ operations }) => 
       {operations.map((op, index) => {
         if (op.type === 'equal') {
           return (
-            <span key={index} className="text-gray-800">
+            <span key={index} className="text-foreground">
               {op.text}
             </span>
           );

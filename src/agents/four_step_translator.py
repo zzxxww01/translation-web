@@ -12,9 +12,12 @@ Step 4: 润色 (Refine) - 针对问题优化译文（仅在需要时）
 Step 0: 预扫描 (Prescan) - 使用 Flash 模型快速扫描章节，提取术语并检测冲突
 """
 
+from collections import defaultdict
 from typing import List, Optional, Callable, Dict, Any
 import asyncio
 import logging
+
+logger = logging.getLogger(__name__)
 
 from ..core.longform_context import (
     build_article_challenge_payload,
@@ -53,7 +56,7 @@ class FourStepTranslator:
         context_manager: LayeredContextManager,
         quality_gate: Optional[QualityGate] = None,
         paragraph_threshold: int = 8,
-        max_retries: int = 2,
+        max_retries: int = 1,
         memory_service=None
     ):
         """
@@ -69,7 +72,7 @@ class FourStepTranslator:
         """
         self.llm = llm_provider
         self.context_manager = context_manager
-        self.quality_gate = quality_gate or QualityGate(mode="strict")
+        self.quality_gate = quality_gate or QualityGate(mode="standard")
         self.paragraph_threshold = paragraph_threshold
         self.max_retries = max_retries
         self.memory_service = memory_service
@@ -371,32 +374,181 @@ class FourStepTranslator:
         all_sections: List[Section],
         batch_index: int = 0
     ) -> List[TranslationPayload]:
-        """Step 2: 批量初译"""
+        """Step 2: 批量初译 — 使用 translate_section 一次翻译整批段落"""
+        section_lines = []
+        paragraph_ids = []
+        dehydrated_results: Dict[str, TranslationPayload] = {}
+        format_tokens = []
+        token_count = 0
+
+        for para in paragraphs:
+            dehydrated_payload = build_dehydrated_link_payload(para)
+            if dehydrated_payload is not None:
+                dehydrated_results[para.id] = dehydrated_payload
+                continue
+
+            prepared = build_translation_input(para)
+            prompt_text = prepared.tokenized_text or prepared.text
+            section_lines.append(f"[{para.id}] {prompt_text}")
+            paragraph_ids.append(para.id)
+            if para.inline_elements:
+                format_tokens.extend(
+                    [
+                        {
+                            "id": element.span_id,
+                            "type": element.type,
+                            "text": element.text,
+                            "paragraph_id": para.id,
+                        }
+                        for element in para.inline_elements
+                        if element.span_id
+                    ]
+                )
+                token_count += len(para.inline_elements)
+
+        # 如果所有段落都是 dehydrated，直接返回
+        if not section_lines:
+            return [dehydrated_results[p.id] for p in paragraphs if p.id in dehydrated_results]
+
+        # 构建批量翻译上下文
+        context = self._build_batch_context(
+            section, understanding, all_sections, format_tokens, token_count
+        )
+
+        # 单次 API 调用翻译整批段落
+        section_text = "\n\n".join(section_lines)
+        translated = self.llm.translate_section(
+            section_text, section.title, context, paragraph_ids
+        )
+
+        # 将 JSON 结果映射回 TranslationPayload
+        trans_map = {item["id"]: item["translation"] for item in translated}
+
         translations: List[TranslationPayload] = []
-
-        for i, paragraph in enumerate(paragraphs):
-            # 计算全局索引
-            global_index = batch_index * self.paragraph_threshold + i
-
-            # 构建分层上下文
-            context = self.context_manager.build_context(
-                section, global_index, all_sections
-            )
-            context.section_understanding = understanding
-
-            # 翻译单个段落
-            payload = self._translate_single_paragraph(paragraph, context)
-            translations.append(payload)
-
-            # 临时记录到上下文（用于后续段落的前文参考）
-            self.context_manager.record_translation(
-                section.section_id,
-                paragraph.source,
-                payload.text,
-                self._extract_terms_used(paragraph.source, payload.text)
-            )
+        for para in paragraphs:
+            if para.id in dehydrated_results:
+                translations.append(dehydrated_results[para.id])
+            elif para.id in trans_map:
+                payload = build_translation_payload(
+                    para,
+                    trans_map[para.id].strip(),
+                    token_repairer=self._repair_format_tokens,
+                )
+                translations.append(payload)
+                self.context_manager.record_translation(
+                    section.section_id,
+                    para.source,
+                    payload.text,
+                    self._extract_terms_used(para.source, payload.text),
+                )
+            else:
+                # 回退：translate_section 遗漏了此段落，使用单段翻译
+                logger.warning(
+                    "Batch translation missing paragraph %s, falling back to single",
+                    para.id,
+                )
+                global_index = batch_index * self.paragraph_threshold + paragraphs.index(para)
+                ctx = self.context_manager.build_context(section, global_index, all_sections)
+                ctx.section_understanding = understanding
+                payload = self._translate_single_paragraph(para, ctx)
+                translations.append(payload)
+                self.context_manager.record_translation(
+                    section.section_id,
+                    para.source,
+                    payload.text,
+                    self._extract_terms_used(para.source, payload.text),
+                )
 
         return translations
+
+    def _build_batch_context(
+        self,
+        section: Section,
+        understanding: SectionUnderstanding,
+        all_sections: List[Section],
+        format_tokens: List[Dict[str, Any]],
+        token_count: int = 0,
+    ) -> Dict[str, Any]:
+        """构建批量翻译的上下文，复用 _build_section_prompt_context 的逻辑并注入四步法特有信息"""
+        article_analysis = self.context_manager.article_analysis
+
+        section_index = next(
+            (i for i, s in enumerate(all_sections) if s.section_id == section.section_id),
+            0,
+        )
+        total_sections = len(all_sections)
+
+        context: Dict[str, Any] = {
+            "article_theme": article_analysis.theme if article_analysis else "",
+            "target_audience": (
+                article_analysis.style.target_audience if article_analysis else ""
+            ),
+            "translation_voice": (
+                article_analysis.style.translation_voice if article_analysis else ""
+            ),
+            "section_position": f"第 {section_index + 1}/{total_sections} 章节",
+            "previous_section_title": (
+                all_sections[section_index - 1].title if section_index > 0 else "无"
+            ),
+            "next_section_title": (
+                all_sections[section_index + 1].title
+                if section_index < total_sections - 1
+                else "无"
+            ),
+            "glossary": (
+                build_glossary_entries_from_terms(article_analysis.terminology)
+                if article_analysis
+                else []
+            ),
+            "guidelines": (
+                build_translation_guidelines(article_analysis.guidelines)
+                if article_analysis
+                else []
+            ),
+            "section_role": (
+                build_section_context_payload(understanding).get("role", "")
+            ),
+            "translation_notes": (
+                build_section_context_payload(understanding).get("translation_notes", [])
+            ),
+            "article_challenges": (
+                build_article_challenge_payload(article_analysis.challenges)
+                if article_analysis
+                else []
+            ),
+            "format_tokens": format_tokens,
+            "format_token_count": token_count,
+        }
+
+        # 注入前文译文：优先使用当前章节已完成批次的译文，不足时再回退到上一章节。
+        previous_context_pairs: List[tuple[str, str]] = []
+
+        current_section_translations = self.context_manager.get_section_translations(
+            section.section_id
+        )
+        if current_section_translations:
+            previous_context_pairs.extend(current_section_translations[-5:])
+
+        if len(previous_context_pairs) < 5 and section_index > 0:
+            prev_section_id = all_sections[section_index - 1].section_id
+            prev_translations = self.context_manager.get_section_translations(
+                prev_section_id
+            )
+            if prev_translations:
+                needed = 5 - len(previous_context_pairs)
+                previous_context_pairs = prev_translations[-needed:] + previous_context_pairs
+
+        if previous_context_pairs:
+            context["previous_translations"] = [
+                {"source": src, "translation": trans}
+                for src, trans in previous_context_pairs
+            ]
+
+        # 注入术语使用记录
+        if self.context_manager.term_tracker.used_translations:
+            context["term_usage"] = self.context_manager.term_tracker.used_translations.copy()
+
+        return context
 
     def _translate_single_paragraph(
         self,
@@ -605,7 +757,7 @@ class FourStepTranslator:
         reflection: ReflectionResult,
         understanding: SectionUnderstanding,
     ) -> List[TranslationPayload]:
-        """Step 4: 针对性润色"""
+        """Step 4: 针对性润色 — 按段落合并问题，每个有问题的段落只调用一次"""
         refined = [
             TranslationPayload(
                 text=item.text,
@@ -615,54 +767,75 @@ class FourStepTranslator:
             for item in translations
         ]
 
+        # 按段落索引分组 issues
+        issues_by_paragraph: Dict[int, List[TranslationIssue]] = defaultdict(list)
         for issue in reflection.issues:
-            idx = issue.paragraph_index
-            if 0 <= idx < len(refined):
-                # 获取原文
-                paragraph = section.paragraphs[idx]
-                dehydrated_payload = build_dehydrated_link_payload(paragraph)
-                if dehydrated_payload is not None:
-                    refined[idx] = dehydrated_payload
-                    continue
-                current_payload = refined[idx]
-                refine_context = self._build_refine_context(section, understanding)
-                source = paragraph.source
-                current_translation = current_payload.text
+            issues_by_paragraph[issue.paragraph_index].append(issue)
 
-                if paragraph.inline_elements:
-                    prepared = build_translation_input(paragraph)
-                    source = prepared.tokenized_text or prepared.text
-                    current_translation = (
-                        current_payload.tokenized_text or current_payload.text
-                    )
-                    refine_context = {
-                        **refine_context,
-                        "format_tokens": format_token_context(paragraph),
-                    }
+        # 每个有问题的段落只调用一次
+        for idx, issues in issues_by_paragraph.items():
+            if not (0 <= idx < len(refined)):
+                continue
 
-                # 调用 LLM 润色
-                refined_text = self.llm.refine_translation(
-                    source=source,
-                    current_translation=current_translation,
-                    issue_type=issue.issue_type,
-                    description=issue.description,
-                    suggestion=issue.suggestion,
-                    context=refine_context,
+            paragraph = section.paragraphs[idx]
+            dehydrated_payload = build_dehydrated_link_payload(paragraph)
+            if dehydrated_payload is not None:
+                refined[idx] = dehydrated_payload
+                continue
+
+            current_payload = refined[idx]
+            refine_context = self._build_refine_context(section, understanding)
+            source = paragraph.source
+            current_translation = current_payload.text
+
+            if paragraph.inline_elements:
+                prepared = build_translation_input(paragraph)
+                source = prepared.tokenized_text or prepared.text
+                current_translation = (
+                    current_payload.tokenized_text or current_payload.text
                 )
+                refine_context = {
+                    **refine_context,
+                    "format_tokens": format_token_context(paragraph),
+                }
 
-                stripped = refined_text.strip()
+            # 合并同一段落的多个问题为一个描述
+            if len(issues) == 1:
+                issue = issues[0]
+                issue_type = issue.issue_type
+                description = issue.description
+                suggestion = issue.suggestion
+            else:
+                issue_type = "multiple"
+                description = "\n".join(
+                    f"- [{issue.issue_type}] {issue.description}（建议：{issue.suggestion}）"
+                    for issue in issues
+                )
+                suggestion = "请综合以上问题一并修订"
 
-                if paragraph.inline_elements:
-                    candidate = build_translation_payload(
-                        paragraph,
-                        stripped,
-                        token_repairer=self._repair_format_tokens,
-                    )
-                    if candidate.format_valid:
-                        refined[idx] = candidate
-                    continue
+            # 调用 LLM 润色
+            refined_text = self.llm.refine_translation(
+                source=source,
+                current_translation=current_translation,
+                issue_type=issue_type,
+                description=description,
+                suggestion=suggestion,
+                context=refine_context,
+            )
 
-                refined[idx] = TranslationPayload(text=stripped)
+            stripped = refined_text.strip()
+
+            if paragraph.inline_elements:
+                candidate = build_translation_payload(
+                    paragraph,
+                    stripped,
+                    token_repairer=self._repair_format_tokens,
+                )
+                if candidate.format_valid:
+                    refined[idx] = candidate
+                continue
+
+            refined[idx] = TranslationPayload(text=stripped)
 
         return refined
 
@@ -721,7 +894,7 @@ def create_four_step_translator(
     context_manager: LayeredContextManager,
     quality_gate: Optional[QualityGate] = None,
     paragraph_threshold: int = 8,
-    max_retries: int = 2,
+    max_retries: int = 1,
     memory_service=None
 ) -> FourStepTranslator:
     """

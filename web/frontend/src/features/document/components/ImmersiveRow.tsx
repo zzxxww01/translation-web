@@ -1,6 +1,6 @@
 import { Check, ChevronDown, RotateCw } from 'lucide-react';
 import { useRef, useState } from 'react';
-import { Button } from '../../../components/ui';
+import { Button } from '@/components/ui/button-extended';
 import { ParagraphStatus } from '../../../shared/constants';
 import type { Paragraph } from '../../../shared/types';
 import { cn } from '../../../shared/utils';
@@ -188,7 +188,7 @@ export function ImmersiveRow({
                   />
                   <div className="mt-2 flex justify-end">
                     <Button
-                      variant="secondary"
+                      variant="outline"
                       size="sm"
                       onClick={handleCustomRetranslate}
                       disabled={!customInstruction.trim() || isRetranslating || isSaving}
@@ -203,7 +203,7 @@ export function ImmersiveRow({
 
           <div className="flex">
             <Button
-              variant="secondary"
+              variant="outline"
               size="sm"
               onClick={() => onRetranslate()}
               isLoading={isRetranslating}
@@ -224,7 +224,7 @@ export function ImmersiveRow({
         </div>
 
         <Button
-          variant="primary"
+          variant="default"
           size="sm"
           onClick={onConfirm}
           isLoading={isSaving}

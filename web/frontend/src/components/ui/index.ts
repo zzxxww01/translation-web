@@ -1,35 +1,97 @@
 /**
- * UI 组件库统一导出
+ * UI 组件库统一导出 (shadcn/ui)
  */
-export { Button } from './Button';
-export { Badge } from './Badge';
-export { Card } from './Card';
-export { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from './Dialog';
-export { Label } from './Label';
-export { RadioGroup, RadioGroupItem } from './RadioGroup';
-export { Input } from './Input';
-export { Textarea } from './Textarea';
-export { Modal } from './Modal';
-export { Tabs, TabsWithPanel } from './Tabs';
-export { ToastProvider, useToast, showToast } from './Toast';
-export { ErrorBoundary } from './ErrorBoundary';
-export { ConfirmDialog, useConfirmDialog } from './ConfirmDialog';
-export { CollapsibleSection } from './CollapsibleSection';
 
-export type { ButtonProps, ButtonVariant, ButtonSize } from './Button';
-export type { BadgeProps, BadgeVariant } from './Badge';
-export type { CardProps } from './Card';
-export type {
-  DialogProps,
-  DialogContentProps,
-  DialogHeaderProps,
-  DialogTitleProps,
-  DialogFooterProps,
-} from './Dialog';
-export type { LabelProps } from './Label';
-export type { RadioGroupProps, RadioGroupItemProps } from './RadioGroup';
-export type { InputProps } from './Input';
-export type { TextareaProps } from './Textarea';
-export type { ModalProps } from './Modal';
-export type { Tab, TabsProps, TabsWithPanelProps } from './Tabs';
-export type { Toast, ToastType } from './Toast';
+export { Button, buttonVariants } from './button'
+export type { ButtonProps } from './button'
+export { ButtonExtended, ButtonExtended as ButtonLoading } from './button-extended'
+export { Badge, badgeVariants } from './badge'
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './card'
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogClose,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './dialog'
+export {
+  AlertDialog,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from './alert-dialog'
+export { Label } from './label'
+export { RadioGroup, RadioGroupItem } from './radio-group'
+export { Input } from './input'
+export { Textarea } from './textarea'
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs'
+export { Progress } from './progress'
+export { Separator } from './separator'
+export { Skeleton } from './skeleton'
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './select'
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+} from './dropdown-menu'
+export {
+  Table,
+  TableHeader,
+  TableBody,
+  TableFooter,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableCaption,
+} from './table'
+export { Collapsible, CollapsibleTrigger, CollapsibleContent } from './collapsible'
+export { ScrollArea, ScrollBar } from './scroll-area'
+export {
+  Sheet,
+  SheetPortal,
+  SheetOverlay,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from './sheet'
+export { Popover, PopoverTrigger, PopoverContent } from './popover'
+export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip'

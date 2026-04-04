@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useToast } from '../../../components/ui';
+import { toast } from 'sonner';
 import { ParagraphStatus } from '../../../shared/constants';
 import { useDocumentStore } from '../../../shared/stores';
 import type { Paragraph, Section } from '../../../shared/types';
@@ -49,7 +49,6 @@ function pruneMapByIds<T>(input: Record<string, T>, validIds: Set<string>): Reco
 }
 
 export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImmersiveEditorOptions) {
-  const { showToast } = useToast();
   const queryClient = useQueryClient();
   const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
 
@@ -370,7 +369,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         });
 
         if (wasDirty && previousDraft !== translation) {
-          showToast(`Paragraph #${paragraph.index} was replaced by retranslation`, 'info');
+          toast.info(`段落 #${paragraph.index} 已被重译结果替换`);
         }
       })
         .catch(error => {
@@ -378,7 +377,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             ...previous,
             [paragraphId]: toErrorMessage(error),
           }));
-          showToast('Retranslate failed. Please retry.', 'error');
+          toast.error('重译失败，请重试');
         })
         .finally(() => {
           activeRetranslateRef.current -= 1;
@@ -392,7 +391,6 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     projectId,
     runParagraphOperation,
     sectionId,
-    showToast,
   ]);
 
   useEffect(() => {
@@ -493,15 +491,15 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           });
         });
 
-        showToast(`Batch translated ${result.success_count} paragraphs`, 'success');
+        toast.success(`批量重译完成：${result.success_count} 段`);
 
         if (result.error_count > 0) {
-          showToast(`${result.error_count} paragraphs failed`, 'error');
+          toast.error(`${result.error_count} 段重译失败`);
         }
 
         setSelectedIds(new Set());
       } catch (_error) {
-        showToast('Batch retranslate failed', 'error');
+        toast.error('批量重译失败');
       } finally {
         setRetranslatingMap(previous => {
           const next = { ...previous };
@@ -518,7 +516,6 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       projectId,
       sectionId,
       selectedIds,
-      showToast,
     ]
   );
 
@@ -533,7 +530,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
 
       const translation = draftsRef.current[paragraphId] ?? paragraph.translation ?? '';
       if (!translation.trim()) {
-        showToast('Translation cannot be empty', 'error');
+        toast.error('译文不能为空');
         return;
       }
 
@@ -556,7 +553,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             return next;
           });
 
-          showToast('Paragraph confirmed', 'success');
+          toast.success('段落已确认');
           void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
           void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
           void queryClient.invalidateQueries({ queryKey: ['projects'] });
@@ -565,7 +562,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             ...previous,
             [paragraphId]: toErrorMessage(error),
           }));
-          showToast('Confirm failed', 'error');
+          toast.error('确认失败');
         } finally {
           setSavingMap(previous => ({ ...previous, [paragraphId]: false }));
         }
@@ -578,7 +575,6 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       queryClient,
       runParagraphOperation,
       sectionId,
-      showToast,
     ]
   );
 
@@ -642,13 +638,13 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
       }
 
       if (successCount > 0) {
-        showToast(`Confirmed ${successCount} paragraphs`, 'success');
+        toast.success(`已确认 ${successCount} 段`);
         void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
         void queryClient.invalidateQueries({ queryKey: ['project', projectId] });
         void queryClient.invalidateQueries({ queryKey: ['projects'] });
       }
       if (failedIds.size > 0) {
-        showToast(`${failedIds.size} paragraphs failed to confirm`, 'error');
+        toast.error(`${failedIds.size} 段确认失败`);
       }
 
       setSelectedIds(new Set(Array.from(failedIds)));
@@ -668,7 +664,6 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     queryClient,
     sectionId,
     selectedIds,
-    showToast,
   ]);
 
   const dirtyCount = useMemo(() => Object.values(dirtyMap).filter(Boolean).length, [dirtyMap]);

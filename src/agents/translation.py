@@ -37,6 +37,7 @@ class TranslationContext:
     current_section_title: Optional[str] = None
     heading_chain: Optional[List[str]] = None
     learned_rules: Optional[List[str]] = None
+    term_usage: Optional[Dict[str, List[str]]] = None
 
     def __post_init__(self):
         if self.previous_paragraphs is None:
@@ -191,6 +192,9 @@ class TranslationAgent:
             llm_context["heading_chain"] = context.heading_chain
         if context.learned_rules:
             llm_context["learned_rules"] = context.learned_rules
+
+        if context.term_usage:
+            llm_context["term_usage"] = context.term_usage
 
         if paragraph.inline_elements:
             llm_context["format_tokens"] = format_token_context(paragraph)

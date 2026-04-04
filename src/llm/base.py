@@ -121,6 +121,16 @@ class LLMProvider(ABC):
             "This provider does not implement section batch translation."
         )
 
+    def translate_source_metadata_batch(
+        self,
+        entries: List[Dict[str, str]],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[Dict[str, str]]:
+        """Translate source/citation metadata entries in one batch."""
+        raise NotImplementedError(
+            "This provider does not implement source metadata batch translation."
+        )
+
     def translate_title(
         self,
         title: str,
@@ -293,7 +303,7 @@ class LLMProvider(ABC):
             else "无"
         )
 
-        if len(section_content) <= 7000:
+        if len(section_content) <= 15000:
             prompt = self._build_prescan_prompt(
                 section_id=section_id,
                 section_title=section_title,
@@ -306,9 +316,9 @@ class LLMProvider(ABC):
             return self._parse_json_response(response)
 
         # 分段处理
-        chunks = self._split_content_for_prescan(section_content, max_chars=6000)
+        chunks = self._split_content_for_prescan(section_content, max_chars=12000)
         all_new_terms: Dict[str, Dict] = {}
-        all_term_usages: Dict[str, list] = {}
+        all_term_usages: Dict[str, str] = {}
         for i, chunk in enumerate(chunks):
             prompt = self._build_prescan_prompt(
                 section_id=f"{section_id}_chunk{i}",
@@ -326,9 +336,8 @@ class LLMProvider(ABC):
                 if term_key and term_key not in all_new_terms:
                     all_new_terms[term_key] = t
             for k, v in result.get("term_usages", {}).items():
-                all_term_usages.setdefault(k, []).extend(
-                    v if isinstance(v, list) else [v]
-                )
+                if k not in all_term_usages:
+                    all_term_usages[k] = v
 
         return {
             "new_terms": list(all_new_terms.values()),
@@ -336,7 +345,7 @@ class LLMProvider(ABC):
         }
 
     def _split_content_for_prescan(
-        self, content: str, max_chars: int = 6000
+        self, content: str, max_chars: int = 12000
     ) -> List[str]:
         """按段落边界分割内容用于 prescan"""
         paragraphs = content.split("\n\n")
@@ -379,7 +388,7 @@ class LLMProvider(ABC):
     def _build_deep_analysis_prompt(self, text: str, sections_outline: str) -> str:
         """构建深度分析 Prompt（方案 C：增加到 30000 字符）"""
         return self.prompt_manager.get(
-            "longform/analysis/article_analysis.v2",
+            "longform/analysis/article_analysis",
             sections_outline=sections_outline,
             text=text[:30000],
         )
@@ -411,7 +420,7 @@ class LLMProvider(ABC):
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
         base_prompt = self.prompt_manager.get(
-            "longform/review/section_critique.v2",
+            "longform/review/section_critique",
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text,
@@ -433,7 +442,7 @@ class LLMProvider(ABC):
     ) -> str:
         """构建润色 Prompt"""
         base_prompt = self.prompt_manager.get(
-            "longform/review/paragraph_revision.v2",
+            "longform/review/paragraph_revision",
             source=source,
             current_translation=current_translation,
             issue_type=issue_type,
@@ -609,7 +618,7 @@ class LLMProvider(ABC):
     ) -> str:
         """构建章节预扫描 Prompt（方案 C 新增）"""
         return self.prompt_manager.get(
-            "longform/terminology/section_prescan.v2",
+            "longform/terminology/section_prescan",
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,

@@ -1,0 +1,59 @@
+Review the translated section as a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Diagnose issues that materially affect accuracy, analyst tone, terminology control, readability, or structure.
+
+## Source and Translation Pairs
+{pairs_text}
+
+## Translation Guidelines
+{guidelines_text}
+
+## Glossary
+{terms_text}
+
+## Review Priorities
+1. Accuracy first: mistranslations, omissions, broken logic, lost conditions, wrong comparisons, wrong time references.
+2. Preserve analyst force: do not let strong judgments become bland description.
+3. Terminology and first-mention strategy: consistent, helpful, and not over-annotated.
+4. Remove translationese — check for these patterns:
+   - Abstract noun shells: "存在……" "进行……" "实现……的提升"
+   - Late main clause: reader must reach the second half to know the point
+   - Trailing English post-modifiers dragged to sentence end
+   - Tone inflation: translation stronger than the original judgment
+   - Over-splitting: dense but readable sentences broken into fragments
+   - Multi-layer modifier stacking: "越来越高度依赖", "可能成为导致……的潜在原因"
+   - "通过X来Y从而Z" triple causation chains — should be split into separate sentences
+   - English prepositional phrase calques: "对软件可见", "对性能敏感" without Chinese rewriting
+   - Sentences over 50 Chinese characters with 2+ nested clauses that need splitting
+5. Keep dense passages readable without dropping information. Flag paragraphs stuffing 5+ independent conclusions into a single block — suggest splitting into sub-paragraphs or bullet lists.
+6. Check paragraph-to-paragraph flow inside the section.
+7. Degree fidelity: check that adjectives, adverbs, and verbs in the translation carry the same intensity as the source. Flag cases where the translation inflates (e.g., "interesting" → "极具挑战") or deflates (e.g., "urge" → "呼吁") the original.
+8. Abbreviation hygiene: flag triple annotations like "中文全称 (ENG)（English Full Name (ENG)）" or repeated full expansions of abbreviations already defined earlier in the text.
+9. List structure preservation: flag cases where source numbered/bulleted lists were collapsed into a single paragraph or joined by semicolons. Also flag inline numbering (e.g., "1. xxx; 2. xxx") that should be rendered as a proper list.
+10. Domain terminology precision: flag CUDA/GPU/semiconductor term mistranslations. Common errors include kernel≠算子 (算子 is operator), latent≠潜在的 (should be 潜变量), floorplan≠布局 (should be 版图), singleton≠零散的.
+11. Causal chain accuracy: check if because/since/so/therefore chains in the translation correctly reflect the source's causation direction. Flag reversed causation, missing intermediate steps, or "从而" bridging unrelated clauses.
+12. CJK-Latin spacing: flag missing spaces between Chinese characters and adjacent English letters or digits (e.g., "NCU性能" should be "NCU 性能").
+
+## Output Contract
+Return JSON only:
+{{
+  "overall_score": 8.6,
+  "readability_score": 8.2,
+  "accuracy_score": 9.1,
+  "is_excellent": false,
+  "issues": [
+    {{
+      "paragraph_index": 2,
+      "issue_type": "accuracy|terminology|tone|readability|annotation|data|structure",
+      "severity": "critical|high|medium|low",
+      "original_text": "string",
+      "description": "string",
+      "why_it_matters": "string",
+      "suggestion": "string"
+    }}
+  ]
+}}
+
+## Rules
+- Only report issues that should drive an actual revision.
+- Prioritize high-severity issues first.
+- If the section is already strong, keep `issues` as an empty list instead of inventing minor noise.
+- Do not wrap the JSON in Markdown.

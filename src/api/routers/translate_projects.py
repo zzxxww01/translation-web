@@ -4,23 +4,27 @@ Translate project-level endpoints.
 
 import asyncio
 import json
+import logging
 from typing import Any, Dict
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Request
 from fastapi.responses import StreamingResponse
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.format_tokens import apply_translation_payload
 from src.core.models import ParagraphStatus
+from src.services.source_metadata_service import SourceMetadataTranslationService
 
 from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
+
+logger = logging.getLogger(__name__)
+
 from ..middleware import (
     BadRequestException,
     NotFoundException,
     ServiceUnavailableException,
 )
 from ..utils.json_utils import parse_llm_json_response
-from ..utils.llm_factory import generate_with_fallback
 from .translate_models import (
     FullTranslateRequest,
     ProjectAnalysisResponse,
@@ -122,9 +126,14 @@ async def batch_translate_section(
         if not section:
             raise NotFoundException(detail="Section not found")
 
+        source_metadata_result = SourceMetadataTranslationService(pm, llm).translate_project_sources(
+            project_id,
+            sections=[section],
+        )
+
         glossary = gm.load_merged(project_id)
         agent = TranslationAgent(llm)
-        translated_count = 0
+        translated_count = source_metadata_result.get("translated", 0)
 
         for index, paragraph in enumerate(section.paragraphs):
             if paragraph.status == ParagraphStatus.APPROVED:
@@ -135,11 +144,13 @@ async def batch_translate_section(
             try:
                 payload = agent.translate_paragraph(paragraph, context)
                 apply_translation_payload(paragraph, payload, "pro")
-                pm.save_section(project_id, section)
                 translated_count += 1
             except Exception as e:
-                print(f"Error translating paragraph {paragraph.id}: {e}")
+                logger.error(f"Error translating paragraph {paragraph.id}: {e}")
                 continue
+
+        # 循环结束后统一保存，减少磁盘 IO
+        pm.save_section(project_id, section)
 
         return {
             "message": "Batch translation complete",
@@ -172,6 +183,11 @@ async def translate_full_document(
             if not sections:
                 yield f"data: {json.dumps({'error': 'No sections found'})}\n\n"
                 return
+
+            SourceMetadataTranslationService(pm, llm).translate_project_sources(
+                project_id,
+                sections=sections,
+            )
 
             glossary = gm.load_merged(project_id)
             agent = TranslationAgent(llm)
@@ -301,9 +317,10 @@ async def translate_full_document(
 @router.post("/projects/{project_id}/translate-four-step")
 async def translate_with_four_steps(
     project_id: str,
+    http_request: Request,
     pm: ProjectManagerDep,
     llm: LLMProviderDep,
-    request: FullTranslateRequest = Body(default_factory=FullTranslateRequest),
+    _body: FullTranslateRequest = Body(default_factory=FullTranslateRequest),
 ):
     """
     使用四步法翻译整个项目（优化版）。
@@ -324,18 +341,42 @@ async def translate_with_four_steps(
         project_manager=pm,
         translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
     )
-    progress_queue = asyncio.Queue()
+    progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
+    event_loop = asyncio.get_running_loop()
 
     # 初始化冲突状态
     _pending_conflict_events[project_id] = {}
     _conflict_resolutions[project_id] = {}
+
+    async def _handle_term_conflict_on_main(conflict) -> Dict[str, Any]:
+        term_key = conflict.term.lower()
+        event = asyncio.Event()
+        _pending_conflict_events[project_id][term_key] = event
+        await progress_queue.put(
+            {
+                "type": "term_conflict",
+                "conflict": conflict.model_dump(mode="json"),
+            }
+        )
+        try:
+            await event.wait()
+            resolution = _conflict_resolutions.get(project_id, {}).get(term_key, {})
+            return {
+                "chosen_translation": resolution.get("chosen_translation")
+                or conflict.existing_translation
+                or conflict.new_translation,
+                "apply_to_all": resolution.get("apply_to_all", True),
+            }
+        finally:
+            _pending_conflict_events.get(project_id, {}).pop(term_key, None)
+            _conflict_resolutions.get(project_id, {}).pop(term_key, None)
 
     async def run_translation():
         """在后台运行翻译任务。"""
         try:
 
             def on_progress(step: str, current: int, total: int):
-                asyncio.get_event_loop().call_soon_threadsafe(
+                event_loop.call_soon_threadsafe(
                     progress_queue.put_nowait,
                     {
                         "type": "progress",
@@ -347,43 +388,36 @@ async def translate_with_four_steps(
                 )
 
             async def on_term_conflict(conflict) -> Dict[str, Any]:
-                term_key = conflict.term.lower()
-                event = asyncio.Event()
-                _pending_conflict_events[project_id][term_key] = event
-                await progress_queue.put(
-                    {
-                        "type": "term_conflict",
-                        "conflict": conflict.model_dump(mode="json"),
-                    }
+                future = asyncio.run_coroutine_threadsafe(
+                    _handle_term_conflict_on_main(conflict), event_loop
                 )
-                try:
-                    await event.wait()
-                    resolution = _conflict_resolutions.get(project_id, {}).get(
-                        term_key, {}
-                    )
-                    return {
-                        "chosen_translation": resolution.get("chosen_translation")
-                        or conflict.existing_translation
-                        or conflict.new_translation,
-                        "apply_to_all": resolution.get("apply_to_all", True),
-                    }
-                finally:
-                    _pending_conflict_events.get(project_id, {}).pop(term_key, None)
-                    _conflict_resolutions.get(project_id, {}).pop(term_key, None)
+                return await asyncio.wrap_future(future)
 
-            result = await batch_service.translate_project(
-                project_id,
-                on_progress=on_progress,
-                on_term_conflict=on_term_conflict,
-            )
-            event_type = (
-                "complete" if result.get("status") == "completed" else "incomplete"
-            )
+            def _run_translation_in_thread() -> Dict[str, Any]:
+                async def _runner() -> Dict[str, Any]:
+                    return await batch_service.translate_project(
+                        project_id,
+                        on_progress=on_progress,
+                        on_term_conflict=on_term_conflict,
+                    )
+
+                return asyncio.run(_runner())
+
+            result = await asyncio.to_thread(_run_translation_in_thread)
+            status = result.get("status")
+            if status == "completed":
+                event_type = "complete"
+            elif status == "cancelled":
+                event_type = "cancelled"
+            else:
+                event_type = "incomplete"
             if event_type == "complete":
                 message = (
                     f"Translation complete: "
                     f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
                 )
+            elif event_type == "cancelled":
+                message = result.get("message") or "Translation cancelled"
             else:
                 message = result.get("error") or (
                     f"Translation incomplete: "
@@ -413,6 +447,21 @@ async def translate_with_four_steps(
             _conflict_resolutions.pop(project_id, None)
 
     async def generate_progress():
+        translation_task: asyncio.Task | None = None
+        translation_finished = False
+        cancel_requested = False
+
+        async def request_cancel(reason: str) -> None:
+            nonlocal cancel_requested
+            if cancel_requested:
+                return
+            cancel_requested = True
+            logger.info("[%s] Requesting translation cancellation: %s", project_id, reason)
+            try:
+                await batch_service.cancel_translation(project_id)
+            except Exception as cancel_exc:
+                logger.warning("[%s] Failed to cancel translation: %s", project_id, cancel_exc)
+
         try:
             yield (
                 "data: "
@@ -430,12 +479,19 @@ async def translate_with_four_steps(
             translation_task = asyncio.create_task(run_translation())
 
             while True:
+                if await http_request.is_disconnected():
+                    await request_cancel("client disconnected")
+                    break
                 try:
                     event = await asyncio.wait_for(progress_queue.get(), timeout=1.0)
                     yield f"data: {json.dumps(event)}\n\n"
-                    if event.get("type") in ("complete", "error", "incomplete"):
+                    if event.get("type") in ("complete", "error", "incomplete", "cancelled"):
+                        translation_finished = True
                         break
                 except asyncio.TimeoutError:
+                    if await http_request.is_disconnected():
+                        await request_cancel("client disconnected during heartbeat")
+                        break
                     yield f"data: {json.dumps({'type': 'heartbeat'})}\n\n"
 
                     if translation_task.done():
@@ -450,9 +506,20 @@ async def translate_with_four_steps(
                                 )
                                 + "\n\n"
                             )
+                        translation_finished = True
                         break
+        except asyncio.CancelledError:
+            await request_cancel("stream task cancelled")
+            raise
         except Exception as e:
             yield f"data: {json.dumps({'type': 'error', 'error': str(e)})}\n\n"
+        finally:
+            if (
+                not translation_finished
+                and translation_task is not None
+                and not translation_task.done()
+            ):
+                await request_cancel("stream closed before translation finished")
 
     return StreamingResponse(
         generate_progress(),

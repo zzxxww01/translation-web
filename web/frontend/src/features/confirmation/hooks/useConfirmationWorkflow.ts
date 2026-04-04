@@ -55,6 +55,9 @@ export function useConfirmationWorkflow() {
 
       if (status.status === 'processing') {
         setWorkflowStatus('translating');
+      } else if (status.status === 'cancelled') {
+        setError('翻译已取消，可重新开始');
+        setWorkflowStatus('ready');
       } else if (status.status === 'failed') {
         setError('翻译失败，请重试');
         setWorkflowStatus('ready');
@@ -86,7 +89,11 @@ export function useConfirmationWorkflow() {
           return;
         }
 
-        if (status.status === 'failed') {
+        if (status.status === 'cancelled') {
+          setError('翻译已取消，可重新开始');
+          setWorkflowStatus('ready');
+          clearInterval(interval);
+        } else if (status.status === 'failed') {
           setError('翻译失败，请重试');
           setWorkflowStatus('ready');
           clearInterval(interval);

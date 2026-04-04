@@ -4,7 +4,7 @@
  */
 
 import { useCallback } from 'react';
-import { useToast } from '../../components/ui';
+import { toast } from 'sonner';
 
 /**
  * API 错误接口
@@ -77,8 +77,6 @@ function getErrorMessageByStatus(status: number | undefined): string | null {
  * 错误处理 Hook
  */
 export function useErrorHandler() {
-  const { showError } = useToast();
-
   /**
    * 处理错误并显示 Toast
    */
@@ -91,19 +89,23 @@ export function useErrorHandler() {
         ? getErrorMessageByStatus(error.status)
         : null;
 
-      const displayMessage = statusMessage || errorMessage;
+      // 400 常带有后端提供的可操作细节，不要用固定文案覆盖。
+      const displayMessage =
+        isApiError(error) && error.status === 400
+          ? errorMessage
+          : statusMessage || errorMessage;
 
       // 添加上下文信息
       const fullMessage = context ? `${context}: ${displayMessage}` : displayMessage;
 
-      showError(fullMessage);
+      toast.error(fullMessage);
 
       // 在开发环境打印错误详情
       if (import.meta.env.DEV) {
         console.error('[Error Handler]', error);
       }
     },
-    [showError]
+    []
   );
 
   /**

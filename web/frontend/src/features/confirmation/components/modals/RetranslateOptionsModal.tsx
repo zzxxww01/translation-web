@@ -5,9 +5,11 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { RefreshCw, Zap, Briefcase, MessageCircle, FileText, Sparkles, Check } from 'lucide-react';
-import { Modal } from '../../../../components/ui/Modal';
-import { Button } from '../../../../components/ui';
-import { cn } from '../../../../shared/utils';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button-extended';
+import { cn } from '@/shared/utils';
 import { confirmationApi } from '../../api/confirmationApi';
 
 interface RetranslateOption {
@@ -56,7 +58,6 @@ export function RetranslateOptionsModal({
       setOptions(response.options || []);
     } catch (error) {
       console.error('Failed to load retranslate options:', error);
-      // 使用默认选项
       setOptions([
         {
           id: 'fluent',
@@ -82,7 +83,6 @@ export function RetranslateOptionsModal({
     }
   }, [projectId]);
 
-  // 加载选项列表
   useEffect(() => {
     if (isOpen) {
       loadOptions();
@@ -108,132 +108,137 @@ export function RetranslateOptionsModal({
   }, [useCustom, customInstruction, selectedOption, options, onSelect, onClose]);
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="选择重翻策略">
-      <div className="space-y-4 p-6">
-        {/* 选项列表 */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-text-primary">
-            选择一个改进方向
-          </label>
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
+      <DialogContent className="sm:max-w-lg">
+        <DialogHeader>
+          <DialogTitle>选择重翻策略</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          {/* 选项列表 */}
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">
+              选择一个改进方向
+            </label>
 
-          {isLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-2 gap-3">
-              {options.map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleSelectOption(option.id)}
-                  disabled={isRetranslating}
-                  className={cn(
-                    'flex flex-col items-start gap-2 rounded-xl border p-4 text-left transition-all',
-                    'hover:border-primary/50 hover:bg-primary/5',
-                    'disabled:opacity-50 disabled:cursor-not-allowed',
-                    selectedOption === option.id && !useCustom
-                      ? 'border-primary bg-primary/10 ring-2 ring-primary/20'
-                      : 'border-border'
-                  )}
-                >
-                  <div className="flex w-full items-center justify-between">
-                    <div className={cn(
-                      'rounded-lg p-2',
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {options.map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => handleSelectOption(option.id)}
+                    disabled={isRetranslating}
+                    className={cn(
+                      'flex flex-col items-start gap-2 rounded-xl border p-4 text-left transition-all',
+                      'hover:border-primary/50 hover:bg-primary/5',
+                      'disabled:opacity-50 disabled:cursor-not-allowed',
                       selectedOption === option.id && !useCustom
-                        ? 'bg-primary text-white'
-                        : 'bg-bg-hover text-text-secondary'
-                    )}>
-                      {iconMap[option.id] || <RefreshCw className="h-5 w-5" />}
-                    </div>
-                    {selectedOption === option.id && !useCustom && (
-                      <Check className="h-5 w-5 text-primary" />
+                        ? 'border-primary bg-primary/10 ring-2 ring-primary/20'
+                        : 'border-border'
                     )}
-                  </div>
-                  <div>
-                    <div className="font-medium text-text-primary">{option.label}</div>
-                    <div className="mt-1 text-xs text-text-muted">{option.description}</div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* 分隔线 */}
-        <div className="flex items-center gap-3">
-          <div className="h-px flex-1 bg-border" />
-          <span className="text-xs text-text-muted">或</span>
-          <div className="h-px flex-1 bg-border" />
-        </div>
-
-        {/* 自定义指令 */}
-        <div>
-          <button
-            onClick={() => {
-              setUseCustom(true);
-              setSelectedOption(null);
-            }}
-            className={cn(
-              'mb-2 w-full rounded-lg border p-3 text-left transition-all',
-              'hover:border-primary/50',
-              useCustom ? 'border-primary bg-primary/5' : 'border-border'
+                  >
+                    <div className="flex w-full items-center justify-between">
+                      <div className={cn(
+                        'rounded-lg p-2',
+                        selectedOption === option.id && !useCustom
+                          ? 'bg-primary text-white'
+                          : 'bg-muted text-muted-foreground'
+                      )}>
+                        {iconMap[option.id] || <RefreshCw className="h-5 w-5" />}
+                      </div>
+                      {selectedOption === option.id && !useCustom && (
+                        <Check className="h-5 w-5 text-primary" />
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-medium text-foreground">{option.label}</div>
+                      <div className="mt-1 text-xs text-muted-foreground">{option.description}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
             )}
-          >
-            <div className="flex items-center gap-2">
-              <MessageCircle className="h-4 w-4 text-text-secondary" />
-              <span className="text-sm font-medium text-text-primary">自定义指令</span>
-            </div>
-          </button>
+          </div>
 
-          {useCustom && (
-            <textarea
-              value={customInstruction}
-              onChange={(e) => setCustomInstruction(e.target.value)}
-              placeholder="输入你的翻译指令，例如：请用更通俗易懂的方式翻译..."
+          {/* 分隔线 */}
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-xs text-muted-foreground">或</span>
+            <div className="h-px flex-1 bg-border" />
+          </div>
+
+          {/* 自定义指令 */}
+          <div>
+            <button
+              onClick={() => {
+                setUseCustom(true);
+                setSelectedOption(null);
+              }}
               className={cn(
-                'w-full rounded-lg border border-border px-4 py-3',
-                'bg-bg-tertiary text-text-primary text-sm',
-                'focus:outline-none focus:ring-2 focus:ring-primary-500',
-                'placeholder:text-text-muted',
-                'min-h-[100px] resize-none'
+                'mb-2 w-full rounded-lg border p-3 text-left transition-all',
+                'hover:border-primary/50',
+                useCustom ? 'border-primary bg-primary/5' : 'border-border'
               )}
-            />
-          )}
-        </div>
+            >
+              <div className="flex items-center gap-2">
+                <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-foreground">自定义指令</span>
+              </div>
+            </button>
 
-        {/* 操作按钮 */}
-        <div className="flex gap-3 pt-2">
-          <Button
-            variant="secondary"
-            onClick={onClose}
-            className="flex-1"
-            disabled={isRetranslating}
-          >
-            取消
-          </Button>
-          <Button
-            variant="primary"
-            onClick={handleConfirm}
-            disabled={
-              (!selectedOption && !useCustom) ||
-              (useCustom && !customInstruction.trim()) ||
-              isRetranslating
-            }
-            isLoading={isRetranslating}
-            leftIcon={<RefreshCw className="h-4 w-4" />}
-            className="flex-1"
-          >
-            {isRetranslating ? '翻译中...' : '开始重翻'}
-          </Button>
-        </div>
+            {useCustom && (
+              <textarea
+                value={customInstruction}
+                onChange={(e) => setCustomInstruction(e.target.value)}
+                placeholder="输入你的翻译指令，例如：请用更通俗易懂的方式翻译..."
+                className={cn(
+                  'w-full rounded-lg border border-input px-4 py-3',
+                  'bg-background text-foreground text-sm',
+                  'focus:outline-none focus:ring-2 focus:ring-ring',
+                  'placeholder:text-muted-foreground',
+                  'min-h-[100px] resize-none'
+                )}
+              />
+            )}
+          </div>
 
-        {/* 提示信息 */}
-        <div className="rounded-lg bg-info/10 p-3">
-          <p className="text-xs text-info">
-            重新翻译会生成一个新的翻译版本，您可以在版本列表中对比选择最合适的译文。
-          </p>
+          {/* 操作按钮 */}
+          <div className="flex gap-3 pt-2">
+            <Button
+              variant="outline"
+              onClick={onClose}
+              className="flex-1"
+              disabled={isRetranslating}
+            >
+              取消
+            </Button>
+            <Button
+              variant="default"
+              onClick={handleConfirm}
+              disabled={
+                (!selectedOption && !useCustom) ||
+                (useCustom && !customInstruction.trim()) ||
+                isRetranslating
+              }
+              isLoading={isRetranslating}
+              leftIcon={<RefreshCw className="h-4 w-4" />}
+              className="flex-1"
+            >
+              {isRetranslating ? '翻译中...' : '开始重翻'}
+            </Button>
+          </div>
+
+          {/* 提示信息 */}
+          <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-950/30">
+            <p className="text-xs text-blue-600 dark:text-blue-400">
+              重新翻译会生成一个新的翻译版本，您可以在版本列表中对比选择最合适的译文。
+            </p>
+          </div>
         </div>
-      </div>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }

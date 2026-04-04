@@ -40,9 +40,9 @@ import { ImportVersionModal } from './components/modals/ImportVersionModal';
 
 import { AlignmentModal } from './components/modals/AlignmentModal';
 
-import { Button } from '../../components/ui';
+import { Button } from '@/components/ui/button-extended';
 
-import { cn } from '../../shared/utils';
+import { cn } from '@/shared/utils';
 
 import { confirmationApi } from './api/confirmationApi';
 import type { UnalignedItem } from './types';
@@ -605,13 +605,13 @@ export function ConfirmationFeature({
 
           <div className="flex gap-3 justify-center">
 
-            <Button variant="primary" onClick={handleExport}>
+            <Button variant="default" onClick={handleExport}>
 
               导出译文
 
             </Button>
 
-            <Button variant="secondary" onClick={onComplete}>
+            <Button variant="outline" onClick={onComplete}>
 
               返回
 
@@ -685,7 +685,7 @@ export function ConfirmationFeature({
 
               <Button
 
-                variant="secondary"
+                variant="outline"
 
                 onClick={() => setIsImportModalOpen(true)}
 
@@ -697,13 +697,13 @@ export function ConfirmationFeature({
 
               </Button>
 
-              <Button variant="secondary" onClick={onComplete}>
+              <Button variant="outline" onClick={onComplete}>
 
                 返回
 
               </Button>
 
-              <Button variant="primary" onClick={handleExport}>
+              <Button variant="default" onClick={handleExport}>
 
                 导出译文
 

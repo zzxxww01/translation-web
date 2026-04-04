@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import List, Optional
 
 from .format_tokens import (
+    FormatRecoveryError,
+    reconstruct_block_tokenized_text,
     require_valid_reconstruction,
     restore_markdown_from_tokenized,
     sorted_block_groups,
@@ -128,17 +130,23 @@ class MarkdownExporter:
         if block_type == ElementType.TABLE:
             return first.parent_block_markdown or first.parent_source_html or first.source
         if block_type == ElementType.CODE:
-            payload = require_valid_reconstruction(paragraphs, fallback_to_source=True)
+            try:
+                payload = require_valid_reconstruction(paragraphs, fallback_to_source=True)
+            except FormatRecoveryError:
+                payload = reconstruct_block_tokenized_text(paragraphs, fallback_to_source=True)
             return f"```\n{payload.text}\n```"
 
-        payload = require_valid_reconstruction(paragraphs, fallback_to_source=True)
-        if first.parent_inline_elements:
-            text = restore_markdown_from_tokenized(
-                payload.tokenized_text or payload.text,
-                first.parent_inline_elements,
-            )
-        else:
-            text = payload.text
+        try:
+            payload = require_valid_reconstruction(paragraphs, fallback_to_source=True)
+            if first.parent_inline_elements:
+                text = restore_markdown_from_tokenized(
+                    payload.tokenized_text or payload.text,
+                    first.parent_inline_elements,
+                )
+            else:
+                text = payload.text
+        except FormatRecoveryError:
+            text = reconstruct_block_tokenized_text(paragraphs, fallback_to_source=True).text
         return self._format_by_element_type(block_type, text)
 
     def _render_source_block_markdown(self, paragraph: Paragraph) -> str:

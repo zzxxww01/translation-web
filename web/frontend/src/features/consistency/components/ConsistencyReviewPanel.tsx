@@ -14,7 +14,7 @@ import {
   Eye,
   RefreshCw,
 } from 'lucide-react';
-import { Button } from '../../../components/ui';
+import { Button } from '@/components/ui/button-extended';
 import { cn } from '../../../shared/utils';
 
 interface ConsistencyIssue {
@@ -68,7 +68,6 @@ const ISSUE_TYPE_LABELS: Record<string, string> = {
   style: '风格一致性',
   reference: '交叉引用',
   data: '数据一致性',
-  punctuation: '标点符号',
   proper_noun: '专有名词',
 };
 
@@ -77,7 +76,6 @@ const ISSUE_TYPE_ICONS: Record<string, React.ReactNode> = {
   style: <AlertTriangle className="h-4 w-4" />,
   reference: <AlertTriangle className="h-4 w-4" />,
   data: <XCircle className="h-4 w-4" />,
-  punctuation: <AlertTriangle className="h-4 w-4" />,
   proper_noun: <AlertTriangle className="h-4 w-4" />,
 };
 
@@ -129,7 +127,7 @@ export function ConsistencyReviewPanel({
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-semibold text-text-primary">一致性审查</h3>
           <Button
-            variant="primary"
+            variant="default"
             size="sm"
             onClick={onRunReview}
             isLoading={isLoading}

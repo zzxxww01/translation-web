@@ -74,9 +74,6 @@ class MarkdownProjectParser:
                 continue
             if stripped.startswith("## "):
                 break
-            if stripped.startswith("### ") and index == start:
-                index += 1
-                continue
             if stripped.startswith("By "):
                 index += 1
                 continue
@@ -95,6 +92,11 @@ class MarkdownProjectParser:
             line = lines[index]
             stripped = line.strip()
             if not stripped:
+                index += 1
+                continue
+
+            # 跳过水平线
+            if re.match(r'^[-*_]{3,}\s*$', stripped):
                 index += 1
                 continue
 
@@ -370,7 +372,25 @@ class MarkdownProjectParser:
 
         if current_section.paragraphs or not sections:
             sections.append(current_section)
+
+        self._mark_source_metadata(sections)
         return sections
+
+    _SOURCE_PATTERN = re.compile(
+        r'^(?:Sources?|Data)\s*:\s',
+        re.IGNORECASE,
+    )
+
+    def _mark_source_metadata(self, sections: list[Section]) -> None:
+        """Mark 'Source: ...' paragraphs as metadata."""
+        for section in sections:
+            for paragraph in section.paragraphs:
+                if paragraph.is_metadata:
+                    continue
+                if paragraph.element_type in {ElementType.P, ElementType.LI}:
+                    if self._SOURCE_PATTERN.match(paragraph.source):
+                        paragraph.is_metadata = True
+                        paragraph.metadata_type = "source"
 
     def _segments_from_block(
         self,
@@ -415,6 +435,8 @@ class MarkdownProjectParser:
         local_inline_elements: list[InlineElement],
     ) -> Paragraph:
         text = block.plain_text[segment_start:segment_end]
+        is_metadata = block.element_type == ElementType.IMAGE
+        metadata_type = "image" if is_metadata else None
         return Paragraph(
             id=f"p{paragraph_index:03d}",
             index=paragraph_index,
@@ -434,6 +456,8 @@ class MarkdownProjectParser:
             expected_tokens=expected_token_ids(local_inline_elements),
             is_heading=block.is_heading,
             heading_level=block.heading_level,
+            is_metadata=is_metadata,
+            metadata_type=metadata_type,
         )
 
     def _split_block_ranges(self, block: MarkdownBlock) -> list[tuple[int, int]]:

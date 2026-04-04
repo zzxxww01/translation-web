@@ -1,11 +1,69 @@
 @import "tailwindcss";
 
+/* ============ shadcn/ui CSS Variables ============ */
+@layer base {
+  :root {
+    /* 背景层次系统 */
+    --background: 0 0% 99%;
+    --background-elevated: 0 0% 100%;
+    --background-subtle: 220 14% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 238.7 83.5% 66.7%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 238.7 83.5% 66.7%;
+
+    /* 圆角系统 */
+    --radius: 0.75rem;
+    --radius-sm: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+  }
+}
+
+/* ============ tailwindcss-animate utilities ============ */
+@theme inline {
+  --animate-in: enter 0.2s ease-out;
+  --animate-out: exit 0.2s ease-in;
+}
+
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+      scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1))
+      rotate(var(--tw-enter-rotate, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+      scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1))
+      rotate(var(--tw-exit-rotate, 0));
+  }
+}
+
 /* ============ 全局样式 ============ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   * {
-    @apply box-border;
+    @apply border-[hsl(var(--border))] box-border;
   }
 
   html {
@@ -13,7 +71,7 @@
   }
 
   body {
-    @apply h-full m-0 font-sans text-text-primary bg-gradient-to-br from-slate-50 via-white to-indigo-50/30 antialiased;
+    @apply h-full m-0 font-sans bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
     font-feature-settings: 'cv11' on, 'ss01' on;
   }
 
@@ -24,176 +82,37 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: var(--color-bg-tertiary);
+    background-color: hsl(var(--muted));
     border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--color-primary-400), var(--color-primary-600));
+    background: hsl(var(--primary));
     border-radius: 9999px;
+    opacity: 0.7;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--color-primary-500), var(--color-primary-700));
+    opacity: 1;
   }
 }
 
 @layer components {
-  /* ============ 按钮组件 ============ */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-medium
-           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
-           disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden;
-  }
-
-  .btn::before {
-    content: '';
-    @apply absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 transition-opacity duration-300;
-  }
-
-  .btn:hover::before {
-    @apply opacity-100;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
-    color: white;
-    box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
-  }
-
-  .btn-primary:hover {
-    background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-700));
-    box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5);
-    transform: translateY(-1px);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px 0 rgba(99, 102, 241, 0.3);
-  }
-
-  .btn-secondary {
-    background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-hover));
-    color: var(--color-text-primary);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
-
-  .btn-secondary:hover {
-    background: linear-gradient(135deg, var(--color-bg-hover), var(--color-bg-tertiary));
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  }
-
-  .btn-outline {
-    border: 1.5px solid var(--color-border);
-    color: var(--color-text-primary);
-    background: transparent;
-  }
-
-  .btn-outline:hover {
-    border-color: var(--color-primary-400);
-    color: var(--color-primary-600);
-    background: linear-gradient(135deg, var(--color-primary-50), rgba(99, 102, 241, 0.05));
-  }
-
-  .btn-ghost {
-    color: var(--color-text-secondary);
-    background: transparent;
-  }
-
-  .btn-ghost:hover {
-    color: var(--color-text-primary);
-    background: linear-gradient(135deg, var(--color-bg-tertiary), rgba(99, 102, 241, 0.08));
-  }
-
-  .btn-sm {
-    @apply px-3.5 py-2 text-[15px] rounded-lg min-h-[36px];
-  }
-
-  .btn-md {
-    @apply px-5 py-2.5 text-[17px] rounded-xl min-h-[44px];
-  }
-
-  .btn-lg {
-    @apply px-7 py-3.5 text-[19px] rounded-2xl min-h-[52px];
-  }
-
-  /* ============ 输入框组件 ============ */
-  .input {
-    @apply w-full px-4 py-2.5 border border-border rounded-xl
-           focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500
-           disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200;
-    border-color: var(--color-border);
-    background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.9));
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .input:focus {
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .textarea {
-    @apply w-full px-4 py-3 border border-border rounded-xl resize-none
-           focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500
-           disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200;
-    border-color: var(--color-border);
-    background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.9));
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .textarea:focus {
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  /* ============ 卡片组件 ============ */
-  .card {
-    background: linear-gradient(135deg, #ffffff, rgba(255, 255, 255, 0.95));
-    border: 1px solid var(--color-border-subtle);
-    @apply rounded-xl shadow-md;
-    box-shadow:
-      0 1px 3px rgba(0, 0, 0, 0.05),
-      0 10px 40px -10px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .card:hover {
-    box-shadow:
-      0 4px 6px rgba(0, 0, 0, 0.05),
-      0 20px 50px -12px rgba(99, 102, 241, 0.15);
-    transform: translateY(-2px);
-  }
-
-  /* ============ 徽章组件 ============ */
-  .badge {
-    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold;
-  }
-
-  .badge-primary {
-    background: linear-gradient(135deg, var(--color-primary-100), var(--color-primary-200));
-    color: var(--color-primary-700);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
-  }
-
-  .badge-success {
-    background: linear-gradient(135deg, var(--color-success-light), #a7f3d0);
-    color: #065f46;
-    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
-  }
-
-  .badge-warning {
-    background: linear-gradient(135deg, var(--color-warning-light), #fde68a);
-    color: #92400e;
-    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
-  }
-
-  .badge-error {
-    background: linear-gradient(135deg, var(--color-error-light), #fecaca);
-    color: #991b1b;
-    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
-  }
-
   /* ============ 动画类 ============ */
   .animate-fade-in {
     animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-fade-in-down {
+    animation: fadeInDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .animate-slide-up {
@@ -204,55 +123,125 @@
     animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  .animate-scale-in-center {
+    animation: scaleInCenter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .animate-bounce-in {
     animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
+  .animate-bounce-subtle {
+    animation: bounceSubtle 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-breathing {
+    animation: breathing 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+  }
+
   @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
     from {
       opacity: 0;
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 
   @keyframes slideUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 
   @keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes scaleInCenter {
     from {
-      transform: scale(0.95);
       opacity: 0;
+      transform: scale(0.9);
     }
     to {
-      transform: scale(1);
       opacity: 1;
+      transform: scale(1);
     }
   }
 
   @keyframes bounceIn {
-    0% {
-      transform: scale(0.3);
-      opacity: 0;
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes bounceSubtle {
+    0%, 100% {
+      transform: scale(1);
     }
     50% {
-      transform: scale(1.05);
+      transform: scale(0.95);
     }
-    70% {
-      transform: scale(0.9);
+  }
+
+  @keyframes breathing {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
     }
     100% {
-      transform: scale(1);
-      opacity: 1;
+      background-position: 200% 0;
     }
   }
 
@@ -262,12 +251,8 @@
   }
 
   @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   /* ============ 脉冲动画 ============ */
@@ -276,65 +261,12 @@
   }
 
   @keyframes pulseSubtle {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
 }
 
 /* ============ 工具类 ============ */
-.glass-effect {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.9),
-    rgba(255, 255, 255, 0.7)
-  );
-  backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.02),
-    0 1px 3px rgba(0, 0, 0, 0.03),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.glass-card {
-  background: linear-gradient(135deg,
-    rgba(255, 255, 255, 0.85),
-    rgba(255, 255, 255, 0.65)
-  );
-  backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.06),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-
-.gradient-primary {
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-600));
-}
-
-.gradient-success {
-  background: linear-gradient(135deg, var(--color-success, #10b981), var(--color-success-dark, #059669));
-}
-
-.gradient-warning {
-  background: linear-gradient(135deg, var(--color-warning, #f59e0b), var(--color-warning-dark, #d97706));
-}
-
-.gradient-error {
-  background: linear-gradient(135deg, var(--color-error, #ef4444), var(--color-error-dark, #dc2626));
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-400));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 .truncate-2-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -342,30 +274,98 @@
   overflow: hidden;
 }
 
-/* ============ 光晕效果 ============ */
-.glow-primary {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .gradient-mesh {
+    background:
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(168, 85, 247, 0.1) 0px, transparent 50%);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-colored {
+    box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+  }
 }
 
-.glow-success {
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+/* ============ tailwindcss-animate support utilities ============ */
+@utility fade-in-* {
+  --tw-enter-opacity: calc(--value(integer) * 1%);
 }
 
-.glow-warning {
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+@utility fade-out-* {
+  --tw-exit-opacity: calc(--value(integer) * 1%);
 }
 
-/* ============ 悬浮提升效果 ============ */
-.hover-lift {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@utility zoom-in-* {
+  --tw-enter-scale: calc(--value(integer) * 0.01);
 }
 
-.hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+@utility zoom-out-* {
+  --tw-exit-scale: calc(--value(integer) * 0.01);
 }
 
-/* ============ 自定义颜色变量 ============ */
+@utility slide-in-from-top-* {
+  --tw-enter-translate-y: calc(--value([*]) * -1);
+}
+
+@utility slide-in-from-bottom-* {
+  --tw-enter-translate-y: --value([*]);
+}
+
+@utility slide-in-from-left-* {
+  --tw-enter-translate-x: calc(--value([*]) * -1);
+}
+
+@utility slide-in-from-right-* {
+  --tw-enter-translate-x: --value([*]);
+}
+
+@utility slide-out-to-top {
+  --tw-exit-translate-y: -100%;
+}
+
+@utility slide-out-to-top-* {
+  --tw-exit-translate-y: calc(--value([*]) * -1);
+}
+
+@utility slide-out-to-bottom {
+  --tw-exit-translate-y: 100%;
+}
+
+@utility slide-out-to-bottom-* {
+  --tw-exit-translate-y: --value([*]);
+}
+
+@utility slide-out-to-left {
+  --tw-exit-translate-x: -100%;
+}
+
+@utility slide-out-to-left-* {
+  --tw-exit-translate-x: calc(--value([*]) * -1);
+}
+
+@utility slide-out-to-right {
+  --tw-exit-translate-x: 100%;
+}
+
+@utility slide-out-to-right-* {
+  --tw-exit-translate-x: --value([*]);
+}
+
+/* ============ 自定义颜色变量（保留用于渐变等场景） ============ */
 @theme {
   /* 品牌色 */
   --color-primary-50: #eef2ff;
@@ -379,6 +379,16 @@
   --color-primary-800: #3730a3;
   --color-primary-900: #312e81;
   --color-primary-950: #1e1b4b;
+
+  /* 灰色系 */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+
+  /* 靛蓝色系 */
+  --color-indigo-25: #f5f6ff;
+  --color-indigo-50: #eef2ff;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
 
   /* 语义色 */
   --color-success: #10b981;

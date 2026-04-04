@@ -100,10 +100,6 @@ class ConsistencyReviewer:
         data_issues = self._check_data_consistency(sections, translations)
         all_issues.extend(data_issues)
 
-        # 5. 新增：标点符号一致性检查
-        punctuation_issues = self._check_punctuation_consistency(sections, translations)
-        all_issues.extend(punctuation_issues)
-
         # 6. 新增：专有名词一致性检查
         proper_noun_issues = self._check_proper_nouns(sections, translations)
         all_issues.extend(proper_noun_issues)
@@ -614,47 +610,6 @@ class ConsistencyReviewer:
 
         return issues
 
-    def _check_punctuation_consistency(
-        self,
-        sections: List[Section],
-        translations: Dict[str, List[str]]
-    ) -> List[ConsistencyIssue]:
-        """
-        检查标点符号一致性
-
-        检查中英文标点混用等问题
-        """
-        issues = []
-
-        # 中英文标点对照
-        chinese_punct = '，。！？；：""''（）'
-        english_punct = ',.!?;:"\''
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            for para_idx, trans in enumerate(translations[section_id]):
-                # 检查是否混用中英文标点
-                has_chinese = any(p in trans for p in chinese_punct)
-                has_english = any(p in trans for p in english_punct)
-
-                if has_chinese and has_english:
-                    # 检测具体的英文标点
-                    english_found = [p for p in english_punct if p in trans]
-                    if english_found:
-                        issues.append(ConsistencyIssue(
-                            section_id=section_id,
-                            paragraph_index=para_idx,
-                            issue_type="punctuation",
-                            description=f"中英文标点混用: 发现英文标点 {', '.join(english_found[:3])}",
-                            auto_fixable=True,
-                            fix_suggestion="建议统一使用中文标点"
-                        ))
-
-        return issues
-
     def _check_proper_nouns(
         self,
         sections: List[Section],
@@ -727,9 +682,8 @@ class ConsistencyReviewer:
             "terminology": 1,
             "proper_noun": 2,
             "data": 3,
-            "punctuation": 4,
-            "style": 5,
-            "reference": 6
+            "style": 4,
+            "reference": 5
         }
 
         sorted_issues = sorted(
@@ -797,7 +751,6 @@ class ConsistencyReviewer:
                 "reference": "交叉引用",
                 "data": "数据一致性",
                 "coherence": "逻辑连贯性",
-                "punctuation": "标点符号",
                 "proper_noun": "专有名词"
             }
 

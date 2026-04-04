@@ -249,11 +249,11 @@ export function validateTermChanges(changes: Array<{
  */
 export function validateExportOptions(options: {
   includeSource: boolean;
-  format: 'markdown' | 'html' | 'pdf';
+  format: 'en' | 'zh';
 }): ValidationResult {
   const errors: string[] = [];
 
-  if (!['markdown', 'html', 'pdf'].includes(options.format)) {
+  if (!['en', 'zh'].includes(options.format)) {
     errors.push('不支持的导出格式');
   }
 

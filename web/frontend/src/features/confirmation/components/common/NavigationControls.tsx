@@ -4,8 +4,8 @@
  */
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { cn } from '../../../../shared/utils';
-import { Button } from '../../../../components/ui';
+import { cn } from '@/shared/utils';
+import { Button } from '@/components/ui/button-extended';
 
 interface NavigationControlsProps {
   currentIndex: number;
@@ -25,7 +25,7 @@ export function NavigationControls({
   return (
     <div className={cn('flex items-center gap-2', className)}>
       <Button
-        variant="secondary"
+        variant="outline"
         size="sm"
         onClick={onPrev}
         disabled={currentIndex <= 0}
@@ -34,7 +34,7 @@ export function NavigationControls({
         上一段
       </Button>
       <Button
-        variant="secondary"
+        variant="outline"
         size="sm"
         onClick={onNext}
         disabled={currentIndex >= total - 1}

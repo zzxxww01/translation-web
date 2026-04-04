@@ -6,7 +6,8 @@ import re
 from typing import Any, Dict, Iterable, List, Optional
 
 from .constants import MAX_GLOSSARY_TERMS_IN_PROMPT
-from .models import Glossary, GlossaryTerm
+from .models import Glossary, GlossaryTerm, Section
+from .models.enums import TranslationStrategy
 from .term_matcher import TermMatcher
 
 DEFAULT_GLOSSARY_PROMPT_TITLE = "## 术语约束（仅列出当前文本命中的术语，必须优先遵守）"
@@ -97,14 +98,21 @@ def _build_requirement_text(
     already_used: bool = False,
 ) -> str:
     if strategy == "preserve":
-        return "保留英文原文"
+        return "保留英文原文，不加注释"
+
+    if strategy == "preserve_annotate":
+        if already_used:
+            return f"本段直接写\u201c{original}\u201d"
+        if translation and translation != original:
+            return f"首次出现写\u201c{original}（{translation}）\u201d，后文写\u201c{original}\u201d"
+        return f"首次出现时加简短中文注释，后文继续写\u201c{original}\u201d"
 
     if strategy == "first_annotate" or first_occurrence_note:
         if already_used:
-            return f"本段直接写“{translation}”"
+            return f"本段直接写\u201c{translation}\u201d"
         if translation != original:
-            return f"首次出现写“{translation}（{original}）”，后文写“{translation}”"
-        return f"首次出现时加简短注释，后文继续写“{translation}”"
+            return f"首次出现写\u201c{translation}（{original}）\u201d，后文写\u201c{translation}\u201d"
+        return f"首次出现时加简短注释，后文继续写\u201c{translation}\u201d"
 
     return "直接使用该写法"
 
@@ -229,3 +237,67 @@ def render_glossary_prompt_block(
     if include_title:
         return "\n".join([title, *lines])
     return "\n".join(lines)
+
+
+def build_term_usage_from_project(
+    sections: List[Section],
+    glossary: Glossary,
+    current_section_id: str,
+    current_paragraph_id: str,
+) -> Dict[str, List[str]]:
+    """Scan all translated paragraphs before the current one to build term usage.
+
+    Only tracks terms with ``first_annotate`` or ``preserve_annotate`` strategy.
+    Iterates sections in order and stops when reaching the current paragraph.
+    For each paragraph that already has a translation, checks whether its
+    source text contains any tracked terms.
+
+    Returns a dict ``{term_original_lower: [translation]}`` compatible with
+    :func:`render_glossary_prompt_block`'s *term_usage* parameter.
+    """
+    if not glossary or not glossary.terms:
+        return {}
+
+    # Collect terms that need first-occurrence tracking
+    tracked: List[GlossaryTerm] = [
+        t
+        for t in glossary.terms
+        if getattr(t, "status", "active") == "active"
+        and t.strategy
+        in (TranslationStrategy.FIRST_ANNOTATE, TranslationStrategy.PRESERVE_ANNOTATE)
+    ]
+    if not tracked:
+        return {}
+
+    usage: Dict[str, List[str]] = {}
+
+    for section in sections:
+        for para in section.paragraphs:
+            # Stop when we reach the current paragraph
+            if (
+                section.section_id == current_section_id
+                and para.id == current_paragraph_id
+            ):
+                return usage
+
+            # Only consider paragraphs that have a translation
+            translation = para.confirmed or (
+                para.latest_translation_text(non_empty=True)
+                if hasattr(para, "latest_translation_text")
+                else None
+            )
+            if not translation:
+                continue
+
+            source = para.source or ""
+            if not source:
+                continue
+
+            for term in tracked:
+                key = term.original.lower()
+                if key in usage:
+                    continue  # already recorded
+                if _count_term_occurrences(source, term.original) > 0:
+                    usage[key] = [term.translation or term.original]
+
+    return usage

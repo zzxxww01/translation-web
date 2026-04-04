@@ -1,10 +1,19 @@
 import { type FC, useEffect, useState, useCallback, useRef, type MouseEvent as ReactMouseEvent } from 'react';
-import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, ChevronDown, Maximize2 } from 'lucide-react';
-import { useDocumentStore } from '../../../shared/stores';
+import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, Maximize2 } from 'lucide-react';
+import { useDocumentStore } from '@/shared/stores';
 import { useTranslateParagraph, useConfirmParagraph, useQueryWordMeaning } from '../hooks';
-import { Button } from '../../../components/ui';
-import { ParagraphStatus } from '../../../shared/constants';
-import type { Paragraph } from '../../../shared/types';
+import { Button } from '@/components/ui/button-extended';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+} from '@/components/ui/dropdown-menu';
+import { ParagraphStatus } from '@/shared/constants';
+import type { Paragraph } from '@/shared/types';
 
 interface EditPanelProps {
   paragraph: Paragraph | null;
@@ -174,7 +183,6 @@ export const EditPanel: FC<EditPanelProps> = ({
   const [isTranslating, setIsTranslating] = useState(false);
 
   // 重新翻译选项
-  const [showRetranslateOptions, setShowRetranslateOptions] = useState(false);
   const [customRetranslateInstruction, setCustomRetranslateInstruction] = useState('');
 
   const sourceSelectionContainerRef = useRef<HTMLDivElement | null>(null);
@@ -243,7 +251,6 @@ export const EditPanel: FC<EditPanelProps> = ({
     if (!projectId || !sectionId || !paragraph) return;
 
     setIsTranslating(true);
-    setShowRetranslateOptions(false);
     try {
       const result = await translateMutation.mutateAsync({
         projectId,
@@ -542,8 +549,8 @@ export const EditPanel: FC<EditPanelProps> = ({
             {/* 导航按钮 */}
             <div className="flex items-center gap-2">
               <Button
-                variant="secondary"
-                size="md"
+                variant="outline"
+                size="default"
                 onClick={onPrev}
                 disabled={currentIndex <= 0 || isLoading}
                 leftIcon={<ChevronLeft className="h-5 w-5" />}
@@ -551,8 +558,8 @@ export const EditPanel: FC<EditPanelProps> = ({
                 上一段
               </Button>
               <Button
-                variant="secondary"
-                size="md"
+                variant="outline"
+                size="default"
                 onClick={onNext}
                 disabled={currentIndex >= totalCount - 1 || isLoading}
                 rightIcon={<ChevronRight className="h-5 w-5" />}
@@ -563,8 +570,8 @@ export const EditPanel: FC<EditPanelProps> = ({
                 <>
                   <div className="mx-2 h-8 w-px bg-border-subtle" />
                   <Button
-                    variant="secondary"
-                    size="md"
+                    variant="outline"
+                    size="default"
                     onClick={onEnterImmersive}
                     leftIcon={<Maximize2 className="h-4 w-4" />}
                   >
@@ -633,77 +640,87 @@ export const EditPanel: FC<EditPanelProps> = ({
 
               {/* 操作按钮 */}
               <div className="flex gap-3 items-center">
-                {/* 快捷指令下拉菜单 - 仅在已有翻译时显示 */}
-                {paragraph.translation && (
-                  <div className="relative">
-                    {showRetranslateOptions && (
-                      <div className="absolute bottom-full right-0 mb-2 w-80 rounded-lg border border-border bg-bg-primary shadow-lg z-10">
-                        <div className="p-2 space-y-2">
-                          <div className="px-3 py-1.5 text-xs text-text-muted font-medium">快捷指令</div>
-                          {quickInstructions.map((item) => (
-                            <button
-                              key={item.id}
-                              onClick={() => handleTranslate(item.instruction)}
-                              disabled={isTranslating}
-                              className="flex w-full items-center gap-2 rounded px-3 py-2 text-sm text-text-primary hover:bg-bg-tertiary disabled:opacity-50"
-                            >
-                              {item.icon}
-                              <span>{item.label}</span>
-                            </button>
-                          ))}
-                          <div className="border-t border-border-subtle pt-2">
-                            <div className="px-3 py-1 text-xs text-text-muted font-medium">手动输入</div>
-                            <textarea
-                              value={customRetranslateInstruction}
-                              onChange={event => setCustomRetranslateInstruction(event.target.value)}
-                              placeholder="输入重译要求（例如：保留“生态位”含义，语气更克制）"
-                              className="h-20 w-full resize-none rounded border border-border-subtle bg-bg-secondary px-2 py-1.5 text-sm text-text-primary outline-none focus:border-primary-500"
-                              disabled={isTranslating}
-                            />
-                            <div className="mt-2 flex justify-end">
-                              <Button
-                                variant="secondary"
-                                size="sm"
-                                onClick={handleCustomRetranslate}
-                                disabled={!customRetranslateInstruction.trim() || isTranslating}
-                              >
-                                发送并重译
-                              </Button>
-                            </div>
-                          </div>
+                {/* 翻译/重新翻译按钮组 */}
+                {paragraph.translation ? (
+                  <DropdownMenu>
+                    <div className="flex">
+                      <Button
+                        variant="outline"
+                        onClick={() => handleTranslate()}
+                        isLoading={isTranslating}
+                        disabled={isLoading}
+                        leftIcon={<RotateCw className="h-5 w-5" />}
+                        className="rounded-r-none border-r-0"
+                      >
+                        重新翻译
+                      </Button>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          disabled={isLoading}
+                          className="rounded-l-none"
+                        >
+                          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M6 9l6 6 6-6" />
+                          </svg>
+                        </Button>
+                      </DropdownMenuTrigger>
+                    </div>
+                    <DropdownMenuContent align="end" className="w-80">
+                      <DropdownMenuLabel>快捷指令</DropdownMenuLabel>
+                      {quickInstructions.map((item) => (
+                        <DropdownMenuItem
+                          key={item.id}
+                          onClick={() => handleTranslate(item.instruction)}
+                          disabled={isTranslating}
+                        >
+                          {item.icon}
+                          <span>{item.label}</span>
+                        </DropdownMenuItem>
+                      ))}
+                      <DropdownMenuSeparator />
+                      <div className="p-2">
+                        <div className="px-1 py-1 text-xs text-text-muted font-medium">手动输入</div>
+                        <textarea
+                          value={customRetranslateInstruction}
+                          onChange={event => setCustomRetranslateInstruction(event.target.value)}
+                          placeholder={'输入重译要求（例如：保留"生态位"含义，语气更克制）'}
+                          className="h-20 w-full resize-none rounded border border-border-subtle bg-bg-secondary px-2 py-1.5 text-sm text-text-primary outline-none focus:border-primary-500"
+                          disabled={isTranslating}
+                          onClick={(e) => e.stopPropagation()}
+                          onKeyDown={(e) => e.stopPropagation()}
+                        />
+                        <div className="mt-2 flex justify-end">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleCustomRetranslate();
+                            }}
+                            disabled={!customRetranslateInstruction.trim() || isTranslating}
+                          >
+                            发送并重译
+                          </Button>
                         </div>
                       </div>
-                    )}
-                  </div>
-                )}
-
-                {/* 翻译/重新翻译按钮组 */}
-                <div className="flex">
-                  {/* 主按钮：直接翻译 */}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
                   <Button
-                    variant="secondary"
+                    variant="outline"
                     onClick={() => handleTranslate()}
                     isLoading={isTranslating}
                     disabled={isLoading}
                     leftIcon={<RotateCw className="h-5 w-5" />}
-                    className={paragraph.translation ? 'rounded-r-none border-r-0' : ''}
                   >
-                    {paragraph.translation ? '重新翻译' : '翻译'}
+                    翻译
                   </Button>
-                  {/* 下拉箭头：展开快捷指令（仅在已有翻译时显示） */}
-                  {paragraph.translation && (
-                    <button
-                      onClick={() => setShowRetranslateOptions(!showRetranslateOptions)}
-                      disabled={isLoading}
-                      className="flex items-center justify-center px-2 rounded-r-lg border border-border bg-bg-secondary hover:bg-bg-tertiary disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <ChevronDown className={`h-4 w-4 transition-transform ${showRetranslateOptions ? 'rotate-180' : ''}`} />
-                    </button>
-                  )}
-                </div>
+                )}
 
                 <Button
-                  variant="primary"
+                  variant="default"
                   onClick={handleConfirm}
                   disabled={!translation.trim() || isLoading}
                   isLoading={confirmMutation.isPending}
@@ -729,101 +746,87 @@ export const EditPanel: FC<EditPanelProps> = ({
             disabled={isLoading || isAskingWordMeaning}
             className="rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-sm text-text-primary shadow-xl transition-colors hover:bg-bg-secondary disabled:opacity-50"
           >
-            查询“{selectedWord.length > 24 ? `${selectedWord.slice(0, 24)}...` : selectedWord}”的意思
+            查询"{selectedWord.length > 24 ? `${selectedWord.slice(0, 24)}...` : selectedWord}"的意思
           </button>
         </div>
       )}
 
       {/* 词义助手弹窗 */}
-      {isWordAssistantOpen && (
-        <>
-          <div
-            className="fixed inset-0 z-[60] bg-black/45"
-            onClick={closeWordAssistant}
-          />
-          <div className="fixed left-1/2 top-1/2 z-[61] w-[min(760px,92vw)] -translate-x-1/2 -translate-y-1/2 rounded-xl border border-border-subtle bg-bg-primary shadow-2xl">
-            <div className="flex items-center justify-between border-b border-border-subtle px-5 py-4">
-              <div>
-                <h4 className="text-lg font-semibold text-text-primary">词义助手</h4>
-                <p className="text-sm text-text-muted">
-                  当前词语：{activeWord}
-                </p>
+      <Dialog open={isWordAssistantOpen} onOpenChange={(open) => { if (!open) closeWordAssistant(); }}>
+        <DialogContent className="sm:max-w-[760px]">
+          <DialogHeader>
+            <DialogTitle>词义助手</DialogTitle>
+            <DialogDescription>
+              当前词语：{activeWord}
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="max-h-[46vh] min-h-[260px] space-y-3 overflow-auto">
+            {assistantMessages.length === 0 && !isAskingWordMeaning && (
+              <div className="rounded-lg bg-bg-secondary px-3 py-2 text-sm text-text-muted">
+                选中词语后将自动提问"xxx是什么意思"，你也可以继续追问语境、词性和用法。
               </div>
-              <button
-                onClick={closeWordAssistant}
-                className="rounded p-2 text-text-muted transition-colors hover:bg-bg-tertiary hover:text-text-primary"
+            )}
+
+            {assistantMessages.map((message, index) => (
+              <div
+                key={`word-assistant-${index}`}
+                className={
+                  message.role === 'user'
+                    ? 'ml-12 rounded-lg bg-primary-50 px-3 py-2 text-sm leading-6 text-text-primary'
+                    : 'mr-12 rounded-lg bg-bg-secondary px-3 py-2 text-sm leading-6 text-text-primary'
+                }
               >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
-            <div className="max-h-[46vh] min-h-[260px] space-y-3 overflow-auto px-5 py-4">
-              {assistantMessages.length === 0 && !isAskingWordMeaning && (
-                <div className="rounded-lg bg-bg-secondary px-3 py-2 text-sm text-text-muted">
-                  选中词语后将自动提问“xxx是什么意思”，你也可以继续追问语境、词性和用法。
+                <div className="mb-1 text-xs text-text-muted">
+                  {message.role === 'user' ? '你' : '词义助手'}
                 </div>
-              )}
-
-              {assistantMessages.map((message, index) => (
-                <div
-                  key={`word-assistant-${index}`}
-                  className={
-                    message.role === 'user'
-                      ? 'ml-12 rounded-lg bg-primary-50 px-3 py-2 text-sm leading-6 text-text-primary'
-                      : 'mr-12 rounded-lg bg-bg-secondary px-3 py-2 text-sm leading-6 text-text-primary'
-                  }
-                >
-                  <div className="mb-1 text-xs text-text-muted">
-                    {message.role === 'user' ? '你' : '词义助手'}
-                  </div>
-                  {message.role === 'assistant' ? (
-                    <div
-                      className="space-y-1 text-sm leading-6"
-                      dangerouslySetInnerHTML={{ __html: markdownToSafeHtml(message.content) }}
-                    />
-                  ) : (
-                    <div className="whitespace-pre-wrap">{message.content}</div>
-                  )}
-                </div>
-              ))}
-
-              {isAskingWordMeaning && (
-                <div className="mr-12 rounded-lg bg-bg-secondary px-3 py-2 text-sm text-text-muted">
-                  正在思考...
-                </div>
-              )}
-
-              <div ref={assistantBottomRef} />
-            </div>
-
-            <div className="border-t border-border-subtle px-5 py-4">
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={assistantInput}
-                  onChange={(e) => setAssistantInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSendAssistantMessage();
-                    }
-                  }}
-                  placeholder="继续追问，例如：这个词在这里是褒义还是中性？"
-                  className="h-11 flex-1 rounded-lg border border-border bg-bg-secondary px-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500"
-                />
-                <Button
-                  variant="primary"
-                  onClick={handleSendAssistantMessage}
-                  disabled={!assistantInput.trim() || isAskingWordMeaning}
-                  isLoading={isAskingWordMeaning}
-                >
-                  发送
-                </Button>
+                {message.role === 'assistant' ? (
+                  <div
+                    className="space-y-1 text-sm leading-6"
+                    dangerouslySetInnerHTML={{ __html: markdownToSafeHtml(message.content) }}
+                  />
+                ) : (
+                  <div className="whitespace-pre-wrap">{message.content}</div>
+                )}
               </div>
+            ))}
+
+            {isAskingWordMeaning && (
+              <div className="mr-12 rounded-lg bg-bg-secondary px-3 py-2 text-sm text-text-muted">
+                正在思考...
+              </div>
+            )}
+
+            <div ref={assistantBottomRef} />
+          </div>
+
+          <div className="border-t border-border-subtle pt-4">
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={assistantInput}
+                onChange={(e) => setAssistantInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSendAssistantMessage();
+                  }
+                }}
+                placeholder="继续追问，例如：这个词在这里是褒义还是中性？"
+                className="h-11 flex-1 rounded-lg border border-border bg-bg-secondary px-3 text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500"
+              />
+              <Button
+                variant="default"
+                onClick={handleSendAssistantMessage}
+                disabled={!assistantInput.trim() || isAskingWordMeaning}
+                isLoading={isAskingWordMeaning}
+              >
+                发送
+              </Button>
             </div>
           </div>
-        </>
-      )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

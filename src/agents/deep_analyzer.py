@@ -292,7 +292,7 @@ class DeepAnalyzer:
             str: 完整的 prompt
         """
         return self.llm.prompt_manager.get(
-            "longform/analysis/section_role_map.v2",
+            "longform/analysis/section_role_map",
             article_theme=article_theme,
             structure_summary=structure_summary,
             sections_summary=sections_summary[:10000]  # 限制长度

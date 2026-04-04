@@ -141,7 +141,7 @@ export const documentApi = {
   /**
    * 导出项目
    */
-  exportProject: (projectId: string, format: 'markdown' | 'html' = 'markdown') =>
+  exportProject: (projectId: string, format: 'en' | 'zh' = 'zh') =>
     apiClient.post<{ content: string; path: string; filename: string; format: string }>(
       `/projects/${projectId}/export`,
       undefined,

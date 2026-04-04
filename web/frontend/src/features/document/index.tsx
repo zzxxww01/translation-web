@@ -1,12 +1,20 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useToast } from '../../components/ui';
+import { toast } from 'sonner';
 import { glossaryApi } from '../confirmation/api/glossaryApi';
 import type { TermReviewDecision, TermReviewPayload } from '../confirmation/types';
-import { useDocumentStore } from '../../shared/stores';
-import { TranslationMethod } from '../../shared/constants';
-import type { Paragraph, Section } from '../../shared/types';
+import { useDocumentStore } from '@/shared/stores';
+import { TranslationMethod } from '@/shared/constants';
+import type { Paragraph, Section } from '@/shared/types';
 import { documentApi } from './api';
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle,
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button-extended';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
@@ -17,7 +25,7 @@ import { fullTranslationService } from './services/fullTranslationService';
 import type { TermConflictData } from './services/fullTranslationService';
 
 const GlossaryCenter = lazy(() =>
-  import('../GlossaryFeature').then(module => ({ default: module.GlossaryCenter }))
+  import('../glossary/GlossaryCenter').then(module => ({ default: module.GlossaryCenter }))
 );
 const ImmersiveEditor = lazy(() =>
   import('./components/ImmersiveEditor').then(module => ({ default: module.ImmersiveEditor }))
@@ -54,7 +62,6 @@ export function DocumentFeature() {
     setSections,
     setCurrentParagraph,
   } = useDocumentStore();
-  const { showToast } = useToast();
 
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
@@ -64,6 +71,12 @@ export function DocumentFeature() {
   const [pendingTranslationRequest, setPendingTranslationRequest] =
     useState<PendingTranslationRequest | null>(null);
   const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
+  const [isPreparingFullTranslate, setIsPreparingFullTranslate] = useState(false);
+
+  // AlertDialog 状态
+  const [showStopDialog, setShowStopDialog] = useState(false);
+  const [showStartDialog, setShowStartDialog] = useState(false);
+  const [pendingStartMethod, setPendingStartMethod] = useState<TranslationMethod>(TranslationMethod.FOUR_STEP);
 
   // 术语冲突对话框状态
   const [conflictDialogOpen, setConflictDialogOpen] = useState(false);
@@ -110,6 +123,7 @@ export function DocumentFeature() {
   useEffect(() => {
     setPendingTermReview(null);
     setPendingTranslationRequest(null);
+    setIsPreparingFullTranslate(false);
   }, [currentProject?.id]);
 
   useEffect(() => {
@@ -263,52 +277,47 @@ export function DocumentFeature() {
     async (method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
       if (!currentProject) return false;
 
-      const review = await glossaryApi.prepareTermReview(currentProject.id);
-      if (review.review_required && review.total_candidates > 0) {
-        setPendingTermReview(review);
-        setPendingTranslationRequest({ method });
-        setView('term-review');
-        showToast(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`, 'info');
-        return true;
+      try {
+        const review = await glossaryApi.prepareTermReview(currentProject.id);
+        if (review.review_required && review.total_candidates > 0) {
+          setPendingTermReview(review);
+          setPendingTranslationRequest({ method });
+          setView('term-review');
+          toast.info(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`);
+          return true;
+        }
+      } catch (error) {
+        console.error('Failed to prepare term review:', error);
+        toast.warning('术语预检失败，已跳过并直接开始全文翻译');
       }
 
       return false;
     },
-    [currentProject, setView, showToast]
+    [currentProject, setView]
   );
 
   const handleFullTranslate = useCallback(
     async (method?: TranslationMethod) => {
       if (!currentProject) return;
 
+      if (isPreparingFullTranslate) {
+        toast.info('术语预检进行中，请稍候');
+        return;
+      }
+
       if (isFullTranslating) {
-        if (!window.confirm('翻译正在进行中，确定要停止吗？')) {
-          return;
-        }
-        stopTranslation();
-        setCurrentStep(null);
+        setShowStopDialog(true);
         return;
       }
 
       const selectedMethod = method ?? TranslationMethod.FOUR_STEP;
-      const confirmMessage =
-        selectedMethod === TranslationMethod.FOUR_STEP
-          ? '确定要使用四步法翻译全文吗？\n\n系统会先做术语预检，再进行分析、初稿、批评和修订。'
-          : '确定要开始全文翻译吗？\n\n系统会先做术语预检，再进行普通全文翻译。';
-
-      if (!window.confirm(confirmMessage)) {
-        return;
-      }
-
-      setCurrentStep(null);
-      const intercepted = await prepareTermReviewIfNeeded(selectedMethod);
-      if (!intercepted) {
-        await runFullTranslate(selectedMethod);
-      }
+      setPendingStartMethod(selectedMethod);
+      setShowStartDialog(true);
     },
     [
       currentProject,
       isFullTranslating,
+      isPreparingFullTranslate,
       prepareTermReviewIfNeeded,
       runFullTranslate,
       stopTranslation,
@@ -327,18 +336,18 @@ export function DocumentFeature() {
         await glossaryApi.getProjectGlossary(currentProject.id);
         setPendingTermReview(null);
         setView(null);
-        showToast('术语预检已保存，开始全文翻译', 'success');
+        toast.success('术语预检已保存，开始全文翻译');
         await runFullTranslate(
           pendingTranslationRequest.method
         );
       } catch (error) {
         console.error('Failed to submit term review:', error);
-        showToast('保存术语预检失败', 'error');
+        toast.error('保存术语预检失败');
       } finally {
         setIsSubmittingTermReview(false);
       }
     },
-    [currentProject, pendingTranslationRequest, runFullTranslate, setView, showToast]
+    [currentProject, pendingTranslationRequest, runFullTranslate, setView]
   );
 
   const handleCancelTermReview = useCallback(() => {
@@ -450,6 +459,7 @@ export function DocumentFeature() {
         onNewProject={() => setIsNewProjectModalOpen(true)}
         onFullTranslate={handleFullTranslate}
         isFullTranslating={isFullTranslating}
+        isPreparingFullTranslate={isPreparingFullTranslate}
         fullTranslateProgress={fullTranslateProgress}
         currentStep={currentStep}
         projectId={currentProject?.id}
@@ -489,66 +499,133 @@ export function DocumentFeature() {
       />
 
       {/* 术语冲突对话框 */}
-      {conflictDialogOpen && currentConflict && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-md w-full mx-4 shadow-xl">
-            <h3 className="text-lg font-semibold mb-3">术语冲突</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-              术语 <strong>&ldquo;{currentConflict.term}&rdquo;</strong> 存在不同翻译：
-            </p>
-            <div className="space-y-2 mb-4">
-              <button
-                className="w-full text-left p-3 border rounded hover:bg-blue-50 dark:hover:bg-blue-900/30"
-                onClick={() => {
-                  conflictResolver?.resolve({
-                    chosenTranslation: currentConflict.existing_translation,
-                    applyToAll: true,
-                  });
-                  setConflictDialogOpen(false);
-                  setCurrentConflict(null);
-                  setConflictResolver(null);
-                }}
-              >
-                <div className="font-medium">保留现有：{currentConflict.existing_translation}</div>
-                {currentConflict.existing_note && (
-                  <div className="text-xs text-gray-500 mt-1">
-                    词义说明：{currentConflict.existing_note}
-                  </div>
-                )}
-                {currentConflict.existing_context && (
-                  <div className="text-xs text-gray-500 mt-1">
-                    上下文：{currentConflict.existing_context}
-                  </div>
-                )}
-              </button>
-              <button
-                className="w-full text-left p-3 border rounded hover:bg-green-50 dark:hover:bg-green-900/30"
-                onClick={() => {
-                  conflictResolver?.resolve({
-                    chosenTranslation: currentConflict.new_translation,
-                    applyToAll: true,
-                  });
-                  setConflictDialogOpen(false);
-                  setCurrentConflict(null);
-                  setConflictResolver(null);
-                }}
-              >
-                <div className="font-medium">使用新翻译：{currentConflict.new_translation}</div>
-                {currentConflict.new_note && (
-                  <div className="text-xs text-gray-500 mt-1">
-                    词义说明：{currentConflict.new_note}
-                  </div>
-                )}
-                {currentConflict.new_context && (
-                  <div className="text-xs text-gray-500 mt-1">
-                    上下文：{currentConflict.new_context}
-                  </div>
-                )}
-              </button>
+      <Dialog open={conflictDialogOpen} onOpenChange={(open) => {
+        if (!open) {
+          // 用户点遮罩/Escape 关闭时，默认保留现有翻译以避免 Promise 永远挂起
+          if (conflictResolver && currentConflict) {
+            conflictResolver.resolve({
+              chosenTranslation: currentConflict.existing_translation,
+              applyToAll: true,
+            });
+          }
+          setConflictDialogOpen(false);
+          setCurrentConflict(null);
+          setConflictResolver(null);
+        }
+      }}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>术语冲突</DialogTitle>
+          </DialogHeader>
+          {currentConflict && (
+            <div className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                术语 <strong>&ldquo;{currentConflict.term}&rdquo;</strong> 存在不同翻译：
+              </p>
+              <div className="space-y-2">
+                <button
+                  className="w-full text-left p-3 border rounded-lg hover:bg-accent transition-colors"
+                  onClick={() => {
+                    conflictResolver?.resolve({
+                      chosenTranslation: currentConflict.existing_translation,
+                      applyToAll: true,
+                    });
+                    setConflictDialogOpen(false);
+                    setCurrentConflict(null);
+                    setConflictResolver(null);
+                  }}
+                >
+                  <div className="font-medium">保留现有：{currentConflict.existing_translation}</div>
+                  {currentConflict.existing_note && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      词义说明：{currentConflict.existing_note}
+                    </div>
+                  )}
+                  {currentConflict.existing_context && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      上下文：{currentConflict.existing_context}
+                    </div>
+                  )}
+                </button>
+                <button
+                  className="w-full text-left p-3 border rounded-lg hover:bg-accent transition-colors"
+                  onClick={() => {
+                    conflictResolver?.resolve({
+                      chosenTranslation: currentConflict.new_translation,
+                      applyToAll: true,
+                    });
+                    setConflictDialogOpen(false);
+                    setCurrentConflict(null);
+                    setConflictResolver(null);
+                  }}
+                >
+                  <div className="font-medium">使用新翻译：{currentConflict.new_translation}</div>
+                  {currentConflict.new_note && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      词义说明：{currentConflict.new_note}
+                    </div>
+                  )}
+                  {currentConflict.new_context && (
+                    <div className="text-xs text-muted-foreground mt-1">
+                      上下文：{currentConflict.new_context}
+                    </div>
+                  )}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          )}
+        </DialogContent>
+      </Dialog>
+
+      {/* 停止翻译确认对话框 */}
+      <AlertDialog open={showStopDialog} onOpenChange={setShowStopDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>停止翻译</AlertDialogTitle>
+            <AlertDialogDescription>翻译正在进行中，确定要停止吗？</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogAction onClick={() => { stopTranslation(); setCurrentStep(null); }}>
+              确定停止
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* 开始全文翻译确认对话框 */}
+      <AlertDialog open={showStartDialog} onOpenChange={setShowStartDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>开始全文翻译</AlertDialogTitle>
+            <AlertDialogDescription>
+              {pendingStartMethod === TranslationMethod.FOUR_STEP
+                ? '确定要使用四步法翻译全文吗？系统会先做术语预检，再进行分析、初稿、批评和修订。'
+                : '确定要开始全文翻译吗？系统会先做术语预检，再进行普通全文翻译。'}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogAction onClick={async () => {
+              setCurrentStep('术语预检中...');
+              setIsPreparingFullTranslate(true);
+              try {
+                const intercepted = await prepareTermReviewIfNeeded(pendingStartMethod);
+                setIsPreparingFullTranslate(false);
+                if (intercepted) { setCurrentStep(null); return; }
+                await runFullTranslate(pendingStartMethod);
+              } catch (error) {
+                console.error('Failed to start full translation:', error);
+                toast.error('启动全文翻译失败，请重试');
+                setCurrentStep(null);
+                setIsPreparingFullTranslate(false);
+              }
+            }}>
+              开始翻译
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

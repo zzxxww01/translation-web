@@ -1,6 +1,6 @@
 ﻿import { useMemo, useState } from 'react';
 import { AlertTriangle, ArrowLeft, CheckCircle2, Languages, Sparkles } from 'lucide-react';
-import { Button } from '../../../components/ui';
+import { Button } from '@/components/ui/button-extended';
 import type {
   TermReviewDecision,
   TermReviewPayload,
@@ -107,7 +107,7 @@ export function TerminologyReviewPage({
             正式开始全文四步法翻译前，先确认高优先级新术语。系统只拦截标题命中、高频和明显歧义的术语。
           </p>
         </div>
-        <Button variant="secondary" onClick={onCancel} leftIcon={<ArrowLeft className="h-4 w-4" />}>
+        <Button variant="outline" onClick={onCancel} leftIcon={<ArrowLeft className="h-4 w-4" />}>
           暂不翻译
         </Button>
       </div>
@@ -312,16 +312,16 @@ export function TerminologyReviewPage({
         ))}
       </div>
 
-      <div className="sticky bottom-0 mt-6 flex items-center justify-between rounded-2xl border border-border-subtle bg-bg-secondary/95 px-5 py-4 backdrop-blur">
+      <div className="sticky bottom-0 mt-6 flex items-center justify-between rounded-2xl border border-border-subtle bg-white px-5 py-4 shadow-sm">
         <div className="text-sm text-text-muted">
           确认结果会优先写入项目术语库，后续你可以在术语管理页里再提升到全局。
         </div>
         <div className="flex gap-3">
-          <Button variant="secondary" onClick={onCancel}>
+          <Button variant="outline" onClick={onCancel}>
             取消
           </Button>
           <Button
-            variant="primary"
+            variant="default"
             onClick={handleSubmit}
             isLoading={isSubmitting}
             disabled={hasInvalidCustom}

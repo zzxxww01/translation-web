@@ -5,7 +5,7 @@
 /**
  * 翻译策略
  */
-export type TranslationStrategy = 'preserve' | 'first_annotate' | 'translate';
+export type TranslationStrategy = 'preserve' | 'first_annotate' | 'translate' | 'preserve_annotate';
 
 /**
  * 术语条目
@@ -256,7 +256,7 @@ export interface ManualAlignRequest {
  * 翻译状态
  */
 export interface TranslationStatus {
-  status: 'processing' | 'completed' | 'failed' | 'not_started';
+  status: 'processing' | 'completed' | 'failed' | 'cancelled' | 'not_started';
   progress_percent?: number;
   translated_paragraphs?: number;
   total_paragraphs?: number;

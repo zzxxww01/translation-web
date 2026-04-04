@@ -11,8 +11,10 @@
 
 import asyncio
 import json
+import threading
+import time
 from pathlib import Path
-from typing import Any, Awaitable, List, Optional, Dict, Callable
+from typing import Any, Awaitable, List, Optional, Dict, Callable, Set
 from datetime import datetime
 import logging
 
@@ -41,6 +43,7 @@ from src.core.format_tokens import (
     build_translation_input,
     build_translation_payload,
 )
+from src.core.glossary_prompt import _count_term_occurrences
 from src.core.project import ProjectManager
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.agents.four_step_translator import FourStepTranslator
@@ -49,6 +52,7 @@ from src.agents.consistency_reviewer import ConsistencyReviewer
 from src.llm.base import LLMProvider
 from src.services.batch_translation_types import TranslationProgress
 from src.services.progress_tracker import ProgressTracker
+from src.services.source_metadata_service import SourceMetadataTranslationService
 
 
 logger = logging.getLogger(__name__)
@@ -58,6 +62,8 @@ class BatchTranslationService:
     """批量翻译服务"""
 
     _shared_progress_tracker = ProgressTracker()
+    _cancelled_projects: Set[str] = set()
+    _cancelled_lock = threading.Lock()
 
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
@@ -90,8 +96,8 @@ class BatchTranslationService:
             from src.services.memory_service import TranslationMemoryService
 
             memory_service = TranslationMemoryService()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning("Failed to load TranslationMemoryService: %s", e)
 
         self.translator = FourStepTranslator(
             llm_provider=llm_provider,
@@ -99,6 +105,18 @@ class BatchTranslationService:
             memory_service=memory_service,
         )
         self.consistency_reviewer = ConsistencyReviewer(llm_provider)
+
+    def _is_cancelled(self, project_id: str) -> bool:
+        with self._cancelled_lock:
+            return project_id in self._cancelled_projects
+
+    def _mark_cancelled(self, project_id: str) -> None:
+        with self._cancelled_lock:
+            self._cancelled_projects.add(project_id)
+
+    def _clear_cancelled(self, project_id: str) -> None:
+        with self._cancelled_lock:
+            self._cancelled_projects.discard(project_id)
 
     def _load_project_with_sections(self, project_id: str) -> ProjectMeta:
         """Load project and attach sections."""
@@ -281,6 +299,16 @@ class BatchTranslationService:
     ) -> Dict[str, Any]:
         understanding = analysis.section_roles.get(section.section_id)
         total_sections = len(project.sections)
+
+        section_role = ""
+        translation_notes: list = []
+        key_points: list = []
+        if understanding:
+            ctx = build_section_context_payload(understanding)
+            section_role = ctx.get("role", "")
+            translation_notes = ctx.get("translation_notes", [])
+            key_points = ctx.get("key_points", [])
+
         return {
             "section_id": section.section_id,
             "section_title": section.title,
@@ -298,21 +326,9 @@ class BatchTranslationService:
                 if section_index < total_sections - 1
                 else ""
             ),
-            "section_role": (
-                build_section_context_payload(understanding).get("role", "")
-                if understanding
-                else ""
-            ),
-            "translation_notes": (
-                build_section_context_payload(understanding).get("translation_notes", [])
-                if understanding
-                else []
-            ),
-            "key_points": (
-                build_section_context_payload(understanding).get("key_points", [])
-                if understanding
-                else []
-            ),
+            "section_role": section_role,
+            "translation_notes": translation_notes,
+            "key_points": key_points,
             "guidelines": build_translation_guidelines(analysis.guidelines),
             "article_challenges": build_article_challenge_payload(analysis.challenges),
             "terminology": build_glossary_entries_from_terms(analysis.terminology),
@@ -376,9 +392,15 @@ class BatchTranslationService:
             Dict: 翻译结果统计
         """
         # 加载项目
+        self._clear_cancelled(project_id)
         project = self._load_project_with_sections(project_id)
         original_status = project.status
         self.context_manager.reset_all()
+
+        # 重置 API 调用计数器
+        from src.llm.gemini import GeminiProvider
+        GeminiProvider._api_call_count = 0
+        project_start_time = time.monotonic()
 
         # 统计总数
         total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
@@ -408,6 +430,46 @@ class BatchTranslationService:
         # 已翻译的段落计数器
         translated_count = 0
 
+        def finalize_cancelled_result(
+            message: str = "Translation cancelled by user",
+        ) -> Dict[str, Any]:
+            actual_translated = self._count_project_translated_paragraphs(
+                project.sections
+            )
+            progress.finished_at = datetime.now()
+            progress.translated_paragraphs = actual_translated
+            progress.translated_sections = sum(
+                1
+                for section in project.sections
+                if self._count_translated_paragraphs(section) == len(section.paragraphs)
+                and len(section.paragraphs) > 0
+            )
+            progress.current_step = "已取消"
+            progress.final_status = "cancelled"
+            project.status = original_status
+            self._save_meta(project_id, project)
+
+            result = {
+                "project_id": project_id,
+                "status": "cancelled",
+                "message": message,
+                "total_sections": progress.total_sections,
+                "translated_sections": progress.translated_sections,
+                "total_paragraphs": progress.total_paragraphs,
+                "translated_paragraphs": actual_translated,
+                "error_count": len(progress.errors),
+                "errors": progress.errors,
+                "started_at": progress.started_at.isoformat(),
+                "finished_at": progress.finished_at.isoformat(),
+                "run_id": run_id,
+                "artifacts_path": str(run_dir),
+                "api_calls": GeminiProvider._api_call_count,
+                "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
+            }
+            self._write_artifact_json(run_dir / "run-summary.json", result)
+            self._clear_cancelled(project_id)
+            return result
+
         try:
             # Phase 0: 深度分析全文
             logger.info(f"[{project_id}] Starting Phase 0: Deep Analysis")
@@ -422,6 +484,13 @@ class BatchTranslationService:
             # 设置分析结果到上下文管理器
             self.context_manager.set_article_analysis(analysis)
             self.context_manager.add_terms_from_analysis(analysis.terminology)
+
+            # 断点续传：预填充术语使用记录，让已译章节的术语不被重复加注
+            self._prepopulate_term_tracker(project)
+
+            if self._is_cancelled(project_id):
+                return finalize_cancelled_result()
+
             self._write_artifact_json(run_dir / "analysis.json", analysis)
             self._write_artifact_json(
                 run_dir / "section-plan.json",
@@ -441,13 +510,33 @@ class BatchTranslationService:
             await self._translate_title_and_metadata(project, analysis)
             self._save_meta(project_id, project)
 
+            if self._is_cancelled(project_id):
+                return finalize_cancelled_result()
+
             # 翻译章节标题
             logger.info(f"[{project_id}] Translating section titles")
             progress.current_step = "翻译章节标题"
             self._notify_progress(
                 on_progress, "翻译章节标题", translated_count, total_paragraphs
             )
-            await self._translate_section_titles(project, analysis)
+            await self._translate_section_titles(project_id, project, analysis)
+
+            if self._is_cancelled(project_id):
+                return finalize_cancelled_result()
+
+            logger.info(f"[{project_id}] Translating source metadata")
+            progress.current_step = "翻译来源说明"
+            self._notify_progress(
+                on_progress, "翻译来源说明", translated_count, total_paragraphs
+            )
+            SourceMetadataTranslationService(
+                self.project_manager,
+                self.llm,
+            ).translate_project_sources(
+                project_id,
+                sections=project.sections,
+                artifact_dir=run_dir,
+            )
 
             # 更新项目状态为"翻译中"
             self._set_active_status(project_id, project, ProjectStatus.IN_PROGRESS)
@@ -460,6 +549,11 @@ class BatchTranslationService:
             # 收集所有翻译结果用于一致性审查
             all_translations = {}
             for i, section in enumerate(project.sections):
+                # 取消检查
+                if self._is_cancelled(project_id):
+                    logger.info(f"[{project_id}] Translation cancelled by user")
+                    return finalize_cancelled_result()
+
                 progress.current_section = section.title
                 progress.current_step = f"翻译章节 {i+1}/{total_sections}"
                 section_prompt_context = self._build_section_prompt_context(
@@ -544,6 +638,7 @@ class BatchTranslationService:
                                 translations,
                             )
                         )
+                        self._record_section_batch_term_usage(section, analysis)
                         self._persist_section_artifact(
                             run_dir,
                             "section-draft",
@@ -644,6 +739,9 @@ class BatchTranslationService:
                         progress, error_msg, section.section_id
                     )
 
+            if self._is_cancelled(project_id):
+                return finalize_cancelled_result()
+
             # Phase 2: 一致性审查（优化：新增）
             logger.info(f"[{project_id}] Starting Phase 2: Consistency Review")
             progress.current_step = "一致性审查"
@@ -722,6 +820,9 @@ class BatchTranslationService:
                 )
                 # 一致性审查失败不影响翻译完成状态
 
+            if self._is_cancelled(project_id):
+                return finalize_cancelled_result()
+
             # 翻译完成
             actual_translated = self._count_project_translated_paragraphs(
                 project.sections
@@ -737,7 +838,7 @@ class BatchTranslationService:
                     "path": str(
                         self.project_manager.get_export_path(
                             project_id,
-                            format="markdown",
+                            format="zh",
                         )
                     ),
                     "generated": False,
@@ -776,7 +877,12 @@ class BatchTranslationService:
                 export_report,
             )
 
-            logger.info(f"[{project_id}] Translation completed")
+            logger.info(
+                "[%s] Translation completed: %d API calls, %.0fs elapsed",
+                project_id,
+                GeminiProvider._api_call_count,
+                time.monotonic() - project_start_time,
+            )
             if not is_complete:
                 logger.warning(
                     f"[{project_id}] Translation incomplete: "
@@ -798,6 +904,8 @@ class BatchTranslationService:
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
                 "export": export_report,
+                "api_calls": GeminiProvider._api_call_count,
+                "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
 
             # 添加一致性审查报告
@@ -823,6 +931,7 @@ class BatchTranslationService:
 
             self._write_artifact_json(run_dir / "run-summary.json", result)
 
+            self._clear_cancelled(project_id)
             return result
 
         except Exception as e:
@@ -844,6 +953,7 @@ class BatchTranslationService:
                 "artifacts_path": str(run_dir),
             }
             self._write_artifact_json(run_dir / "run-summary.json", failure_result)
+            self._clear_cancelled(project_id)
             return failure_result
 
     async def _run_section_prescan(
@@ -921,6 +1031,45 @@ class BatchTranslationService:
             for section in sections
         )
 
+    def _prepopulate_term_tracker(self, project: ProjectMeta) -> None:
+        """Scan already-translated paragraphs to pre-fill the term usage tracker.
+
+        This ensures that when resuming a partially translated project,
+        ``first_annotate`` / ``preserve_annotate`` terms from previously
+        translated sections are correctly marked as already used.
+        """
+        analysis = self.context_manager.article_analysis
+        if not analysis:
+            return
+
+        # Collect terms that need first-occurrence tracking
+        tracked = [
+            t
+            for t in analysis.terminology
+            if t.strategy
+            in (TranslationStrategy.FIRST_ANNOTATE, TranslationStrategy.PRESERVE_ANNOTATE)
+        ]
+        if not tracked:
+            return
+
+        for section in project.sections:
+            for para in section.paragraphs:
+                if not para.has_usable_translation():
+                    continue
+                source = para.source or ""
+                if not source:
+                    continue
+                for term in tracked:
+                    key = term.term.lower()
+                    if key in self.context_manager.term_tracker.used_translations:
+                        continue  # already recorded
+                    if _count_term_occurrences(source, term.term) > 0:
+                        self.context_manager.term_tracker.record_usage(
+                            term.term,
+                            term.translation or term.term,
+                            section.section_id,
+                        )
+
     def _apply_section_batch_translations(
         self,
         section: Section,
@@ -948,6 +1097,43 @@ class BatchTranslationService:
                 collected.append(payload.text)
 
         return collected
+
+    def _record_section_batch_term_usage(
+        self,
+        section: Section,
+        analysis: ArticleAnalysis,
+    ) -> None:
+        """Update the tracker after section-batch translation for article-wide first-use logic."""
+        tracked_terms = [
+            term
+            for term in analysis.terminology
+            if term.strategy
+            in (
+                TranslationStrategy.FIRST_ANNOTATE,
+                TranslationStrategy.PRESERVE_ANNOTATE,
+            )
+        ]
+        if not tracked_terms:
+            return
+
+        for paragraph in section.paragraphs:
+            if not paragraph.has_usable_translation():
+                continue
+
+            source = paragraph.source or ""
+            if not source:
+                continue
+
+            for term in tracked_terms:
+                key = term.term.lower()
+                if key in self.context_manager.term_tracker.used_translations:
+                    continue
+                if _count_term_occurrences(source, term.term) > 0:
+                    self.context_manager.term_tracker.record_usage(
+                        term.term,
+                        term.translation or term.term,
+                        section.section_id,
+                    )
 
     def _apply_four_step_translations(self, section: Section, result) -> None:
         """Apply four-step translations and optional AI insight to section paragraphs."""
@@ -986,7 +1172,7 @@ class BatchTranslationService:
             )
             paragraph.status = ParagraphStatus.TRANSLATED
 
-            if not hasattr(paragraph, "ai_insight"):
+            if paragraph.ai_insight is None:
                 paragraph.ai_insight = self._build_ai_insight(result, paragraph, index)
 
     def _repair_format_tokens(
@@ -1174,19 +1360,16 @@ class BatchTranslationService:
         Returns:
             Dict: 取消结果
         """
-        progress = self._progress_tracker.remove(project_id)
+        # 设置取消标记，让翻译循环在下一个 section 迭代时退出
+        self._mark_cancelled(project_id)
+
+        progress = self._progress_tracker.get(project_id)
 
         if progress is not None:
-            progress.finished_at = datetime.now()
-            progress.current_step = "已取消"
+            progress.current_step = "取消中"
+            return {"status": "cancelling", "project_id": project_id}
 
-            # 更新项目状态
-            project = self._load_project_with_sections(project_id)
-            project.status = progress.original_status
-            self._save_meta(project_id, project)
-
-            return {"status": "cancelled", "project_id": project_id}
-
+        self._clear_cancelled(project_id)
         return {"status": "not_found", "project_id": project_id}
 
     def _can_transition_to_active_status(self, status: ProjectStatus) -> bool:
@@ -1244,7 +1427,7 @@ class BatchTranslationService:
             logger.error(f"Failed to translate title/subtitle: {e}")
 
     async def _translate_section_titles(
-        self, project: ProjectMeta, analysis: ArticleAnalysis
+        self, project_id: str, project: ProjectMeta, analysis: ArticleAnalysis
     ) -> None:
         """
         翻译所有章节标题
@@ -1291,6 +1474,7 @@ class BatchTranslationService:
             translated_title = str(translated_map.get(section.section_id, "")).strip()
             if translated_title:
                 section.title_translation = translated_title
+                self.project_manager.save_section(project_id, section)
                 logger.info(
                     "Section title translated (batch): %s -> %s",
                     section.title,
@@ -1316,6 +1500,7 @@ class BatchTranslationService:
                         ),
                     },
                 )
+                self.project_manager.save_section(project_id, section)
                 logger.info(
                     "Section title translated (fallback): %s -> %s",
                     section.title,
@@ -1419,6 +1604,7 @@ class BatchTranslationService:
             "article_challenges": build_article_challenge_payload(analysis.challenges),
             "format_tokens": format_tokens,
             "format_token_count": token_count,
+            "term_usage": self.context_manager.term_tracker.used_translations.copy(),
         }
 
         if not section_lines:

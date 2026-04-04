@@ -4,16 +4,17 @@ title Translation Agent
 
 rem ========== Environment checks ==========
 
-rem Activate virtual environment if available
-if exist ".venv\Scripts\activate.bat" (
-    call .venv\Scripts\activate.bat
-    echo [INFO] Using virtual environment: .venv
+rem Prefer project-local Python executable from .venv
+set "PYTHON_CMD=python"
+if exist "%~dp0.venv\Scripts\python.exe" (
+    set "PYTHON_CMD=%~dp0.venv\Scripts\python.exe"
+    echo [INFO] Using virtual environment Python: %~dp0.venv\Scripts\python.exe
 ) else (
-    echo [WARNING] No .venv found, using global Python.
+    echo [WARNING] No local .venv Python found, using global Python.
 )
 
 rem Check for Python
-python --version >nul 2>&1
+%PYTHON_CMD% --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Python not found!
     echo Please install Python from https://www.python.org/
@@ -22,11 +23,11 @@ if %errorlevel% neq 0 (
 )
 
 rem Check for uvicorn
-python -c "import uvicorn" 2>nul
+%PYTHON_CMD% -c "import uvicorn" 2>nul
 if errorlevel 1 (
     echo [ERROR] uvicorn not installed
-    echo Installing: pip install uvicorn
-    pip install uvicorn
+    echo Installing: %PYTHON_CMD% -m pip install uvicorn
+    %PYTHON_CMD% -m pip install uvicorn
 )
 
 rem Check .env file
@@ -199,6 +200,5 @@ echo A new server window will open. Press Ctrl+C there to stop.
 echo ========================================
 echo(
 
-set "UVICORN_CMD=python -m uvicorn src.api.app:app --host 0.0.0.0 --port %PORT% --timeout-keep-alive 5 --timeout-graceful-shutdown 10 --limit-concurrency 100 --limit-max-requests 1000 %RELOAD_ARGS%"
-start "Translation Agent Server" cmd /c "%UVICORN_CMD%"
+start "Translation Agent Server" "%PYTHON_CMD%" -m uvicorn src.api.app:app --host 0.0.0.0 --port %PORT% --timeout-keep-alive 5 --timeout-graceful-shutdown 10 --limit-concurrency 100 --limit-max-requests 1000 %RELOAD_ARGS%
 exit /b 0

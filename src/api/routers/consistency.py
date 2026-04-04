@@ -25,7 +25,6 @@ class ReviewRequest(BaseModel):
 
     project_id: str
     include_terminology: bool = True
-    include_style: bool = True
 
 
 class ReviewResponse(BaseModel):
@@ -149,13 +148,6 @@ async def get_consistency_settings() -> Dict[str, Any]:
                 "description": "检查同一术语的翻译是否一致",
                 "enabled": True,
                 "severity": "medium",
-            },
-            {
-                "id": "punctuation",
-                "name": "标点符号",
-                "description": "检查中英文标点使用是否一致",
-                "enabled": True,
-                "severity": "low",
             },
             {
                 "id": "number_format",

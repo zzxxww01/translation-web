@@ -83,7 +83,7 @@ class FullTranslationService {
     }
 
     if (this.state.isTranslating) {
-      this.stopTranslation();
+      await this.stopTranslation();
     }
 
     this.state.isTranslating = true;
@@ -283,6 +283,18 @@ class FullTranslationService {
         this.onProgressCallback(data);
       }
       return true;
+    } else if (data.type === 'cancelled') {
+      if (data.translated_count !== undefined && data.total !== undefined) {
+        this.state.progress = {
+          current: data.translated_count,
+          total: data.total,
+        };
+      }
+      this.finalizeTranslation(false);
+      if (this.onProgressCallback) {
+        this.onProgressCallback(data);
+      }
+      return true;
     }
 
     if (this.onProgressCallback) {
@@ -330,7 +342,30 @@ class FullTranslationService {
     }
   }
 
-  stopTranslation(): void {
+  private async requestServerCancel(
+    projectId: string,
+    method: TranslationMethodType | null
+  ): Promise<void> {
+    if (method !== 'four-step') {
+      return;
+    }
+
+    try {
+      await fetch(`/api/projects/${projectId}/translation-cancel`, {
+        method: 'POST',
+      });
+    } catch (error) {
+      console.warn('Failed to request server-side cancellation:', error);
+    }
+  }
+
+  async stopTranslation(): Promise<void> {
+    const projectId = this.state.projectId;
+    const method = this.state.method;
+    const cancelPromise = projectId
+      ? this.requestServerCancel(projectId, method)
+      : Promise.resolve();
+
     if (this.state.controller) {
       this.state.controller.abort();
       this.state.controller = null;
@@ -341,6 +376,8 @@ class FullTranslationService {
     this.state.currentStep = null;
     this.state.isPaused = false;
     this.state.pendingConflict = null;
+
+    await cancelPromise;
   }
 
   getState(): TranslationState {
