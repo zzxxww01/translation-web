@@ -13,6 +13,7 @@ from .format_tokens import (
     sorted_block_groups,
     tokenize_text,
 )
+from .markdown_postprocess import postprocess_markdown
 from .models import ArticleMetadata, ElementType, Glossary, Paragraph, Section
 
 
@@ -53,7 +54,7 @@ class MarkdownExporter:
                 )
             )
 
-        return "\n".join(lines)
+        return postprocess_markdown("\n".join(lines))
 
     def _format_metadata(
         self,
@@ -231,7 +232,7 @@ class MarkdownExporter:
                 lines.append("---")
                 lines.append("")
 
-        return "\n".join(lines)
+        return postprocess_markdown("\n".join(lines))
 
 
 def export_to_markdown(

@@ -52,6 +52,7 @@ class ArticleStyle(BaseModel):
 class TranslationChallenge(BaseModel):
     """翻译难点"""
 
+    type: str = "accuracy"  # terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy
     location: str
     issue: str
     suggestion: Optional[str] = None
@@ -104,6 +105,7 @@ class ReflectionResult(BaseModel):
     overall_score: float = 0.0
     readability_score: float = 0.0
     accuracy_score: float = 0.0
+    conciseness_score: float = 0.0
     is_excellent: bool = False
     issues: List[TranslationIssue] = Field(default_factory=list)
 

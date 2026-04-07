@@ -24,6 +24,7 @@
   },
   "challenges": [
     {
+      "type": "terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy",
       "location": "string",
       "issue": "string",
       "suggestion": "string"
@@ -95,6 +96,7 @@ Plain Chinese text only.
   "overall_score": 8.6,
   "readability_score": 8.2,
   "accuracy_score": 9.1,
+  "conciseness_score": 8.0,
   "is_excellent": false,
   "issues": [
     {

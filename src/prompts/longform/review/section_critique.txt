@@ -31,6 +31,12 @@ Review the translated section as a senior bilingual (English-Chinese) editor spe
 10. Domain terminology precision: flag CUDA/GPU/semiconductor term mistranslations. Common errors include kernel≠算子 (算子 is operator), latent≠潜在的 (should be 潜变量), floorplan≠布局 (should be 版图), singleton≠零散的.
 11. Causal chain accuracy: check if because/since/so/therefore chains in the translation correctly reflect the source's causation direction. Flag reversed causation, missing intermediate steps, or "从而" bridging unrelated clauses.
 12. CJK-Latin spacing: flag missing spaces between Chinese characters and adjacent English letters or digits (e.g., "NCU性能" should be "NCU 性能").
+13. Chinese-native expression density: flag wordy direct translations where a 四字格, idiom, or concise Chinese expression would be more natural. Examples: "面临断崖式下跌" → "一路陡降"; "随着时间的推移" as filler; "势必将" (semantic overlap). Also flag weak trailing words ("一样", "一般") at the end of simile/metaphor sentences.
+14. Metaphor coherence: flag mixed metaphors (two incompatible image directions in one sentence, e.g., "无底洞" + "狂潮") and culturally opaque references that lack translator notes for Chinese readers (e.g., Monaco Grand Prix rental analogy, NPR without explanation).
+15. Cross-domain terminology precision: flag terms translated with wrong-domain conventions. Common errors: "出租率" for utilization rate (cloud computing), "代币" for token (AI context), "财务建模" for financial modeling (investment context), "算力" for capacity, "资产折旧年限" for useful economic life.
+16. Intensity matching: flag cases where a vivid original expression was flattened to a bland academic word. Examples: "frozen" → "搁置" should be "冻结"; "barometer" → "指标" should be "晴雨表"; "convinced" with overconfidence nuance → "认定" should be "笃定".
+17. Weak trailing words: specifically flag unnecessary "一样", "一般", "之类的" at the end of simile or metaphor sentences that dilute impact.
+18. Formatting conventions: flag comma used between parallel items where 顿号（、）is correct; Arabic numerals for approximate time spans that should use Chinese numerals (e.g., "6 月到 7 月" → "六七月份"); independent arguments crammed into one paragraph that should be split.
 
 ## Output Contract
 Return JSON only:
@@ -38,6 +44,7 @@ Return JSON only:
   "overall_score": 8.6,
   "readability_score": 8.2,
   "accuracy_score": 9.1,
+  "conciseness_score": 8.0,
   "is_excellent": false,
   "issues": [
     {{

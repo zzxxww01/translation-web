@@ -692,6 +692,10 @@ class ProjectManager:
 
         content = "\n".join(lines)
 
+        # Markdown 安全后处理：转义 $ 等特殊字符，注入 CJK-Latin 空格
+        from .markdown_postprocess import postprocess_markdown
+        content = postprocess_markdown(content)
+
         # 保存到文件
         output_path = self._project_dir(project_id) / self._build_export_filename(
             meta,
@@ -743,6 +747,10 @@ class ProjectManager:
                 lines.append("")
 
         content = "\n".join(lines)
+
+        # Markdown 安全后处理
+        from .markdown_postprocess import postprocess_markdown
+        content = postprocess_markdown(content)
 
         # 保存到文件
         preview_path = self._project_dir(project_id) / "preview.md"

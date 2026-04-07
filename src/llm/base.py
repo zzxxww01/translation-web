@@ -268,6 +268,31 @@ class LLMProvider(ABC):
         )
         return self.generate(prompt, temperature=0.3)
 
+    def style_polish(
+        self,
+        source: str,
+        current_translation: str,
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """
+        风格润色（四步法 Step 5 - 可选）
+
+        针对简洁性、四字格、隐喻一致性、语气力度做最终打磨。
+
+        Args:
+            source: 原文
+            current_translation: 当前译文
+
+        Returns:
+            str: 润色后的译文
+        """
+        prompt = self.prompt_manager.get(
+            "longform/review/style_polish",
+            source=source,
+            current_translation=current_translation,
+        )
+        return self.generate(prompt, temperature=0.3)
+
     def prescan_section(
         self,
         section_id: str,

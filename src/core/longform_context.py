@@ -44,26 +44,31 @@ def build_article_challenge_payload(
         location = ""
         issue = ""
         suggestion = ""
+        challenge_type = ""
 
         if isinstance(challenge, dict):
             location = str(challenge.get("location", "")).strip()
             issue = str(challenge.get("issue", "")).strip()
             suggestion = str(challenge.get("suggestion", "")).strip()
+            challenge_type = str(challenge.get("type", "")).strip()
         else:
             location = str(getattr(challenge, "location", "")).strip()
             issue = str(getattr(challenge, "issue", "")).strip()
             suggestion = str(getattr(challenge, "suggestion", "")).strip()
+            challenge_type = str(getattr(challenge, "type", "")).strip()
 
         if not issue:
             continue
 
-        result.append(
-            {
-                "location": location,
-                "issue": issue,
-                "suggestion": suggestion,
-            }
-        )
+        entry: Dict[str, str] = {
+            "location": location,
+            "issue": issue,
+            "suggestion": suggestion,
+        }
+        if challenge_type:
+            entry["type"] = challenge_type
+
+        result.append(entry)
         if len(result) >= limit:
             break
 

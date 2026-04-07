@@ -57,7 +57,8 @@ class FourStepTranslator:
         quality_gate: Optional[QualityGate] = None,
         paragraph_threshold: int = 8,
         max_retries: int = 1,
-        memory_service=None
+        memory_service=None,
+        style_polish_threshold: float = 8.0
     ):
         """
         初始化四步法翻译器
@@ -69,6 +70,7 @@ class FourStepTranslator:
             paragraph_threshold: 混合模式阈值，超过此数量的段落分批翻译
             max_retries: 最大重试次数
             memory_service: 翻译记忆服务（可选，用于反思评分学习）
+            style_polish_threshold: 简洁性评分低于此阈值时触发 Style Polish（设为 0 关闭）
         """
         self.llm = llm_provider
         self.context_manager = context_manager
@@ -76,6 +78,7 @@ class FourStepTranslator:
         self.paragraph_threshold = paragraph_threshold
         self.max_retries = max_retries
         self.memory_service = memory_service
+        self.style_polish_threshold = style_polish_threshold
 
     # ============ 方案 C 新增：章节预扫描 ============
 
@@ -238,6 +241,17 @@ class FourStepTranslator:
                 translation_outputs,
                 reflection,
                 understanding,
+            )
+            translations = [item.text for item in translation_outputs]
+
+        # Step 5: 风格润色（可选，conciseness_score 低于阈值时触发）
+        if (
+            self.style_polish_threshold > 0
+            and reflection.conciseness_score > 0
+            and reflection.conciseness_score < self.style_polish_threshold
+        ):
+            translation_outputs = self._step_style_polish(
+                section, translation_outputs
             )
             translations = [item.text for item in translation_outputs]
 
@@ -744,6 +758,7 @@ class FourStepTranslator:
             overall_score=float(result.get("overall_score", 0)),
             readability_score=float(result.get("readability_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
+            conciseness_score=float(result.get("conciseness_score", 0)),
             is_excellent=result.get("is_excellent", False),
             issues=issues
         )
@@ -838,6 +853,60 @@ class FourStepTranslator:
             refined[idx] = TranslationPayload(text=stripped)
 
         return refined
+
+    # ============ Step 5: 风格润色（可选） ============
+
+    def _step_style_polish(
+        self,
+        section: Section,
+        translations: List[TranslationPayload],
+    ) -> List[TranslationPayload]:
+        """Step 5: 风格润色 — 逐段调用 style_polish，压缩冗长表达、统一隐喻、提升语气力度"""
+        polished = [
+            TranslationPayload(
+                text=item.text,
+                tokenized_text=item.tokenized_text,
+                format_issues=list(item.format_issues),
+            )
+            for item in translations
+        ]
+
+        for idx, (para, payload) in enumerate(zip(section.paragraphs, polished)):
+            # 跳过脱水链接段落
+            dehydrated_payload = build_dehydrated_link_payload(para)
+            if dehydrated_payload is not None:
+                polished[idx] = dehydrated_payload
+                continue
+
+            source = para.source
+            current_translation = payload.text
+
+            # 如果有 format tokens，用 tokenized 版本
+            if para.inline_elements:
+                prepared = build_translation_input(para)
+                source = prepared.tokenized_text or prepared.text
+                current_translation = payload.tokenized_text or payload.text
+
+            polished_text = self.llm.style_polish(
+                source=source,
+                current_translation=current_translation,
+            )
+
+            stripped = polished_text.strip()
+
+            if para.inline_elements:
+                candidate = build_translation_payload(
+                    para,
+                    stripped,
+                    token_repairer=self._repair_format_tokens,
+                )
+                if candidate.format_valid:
+                    polished[idx] = candidate
+                continue
+
+            polished[idx] = TranslationPayload(text=stripped)
+
+        return polished
 
     # ============ Helper Methods ============
 
