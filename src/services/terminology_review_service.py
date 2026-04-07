@@ -77,7 +77,10 @@ class TerminologyReviewService:
         project = self.project_manager.get(project_id)
         sections = self.project_manager.get_sections(project_id)
         merged_glossary = self.glossary_manager.load_merged(project_id)
-        existing_terms = self.glossary_manager.to_dict(merged_glossary)
+        existing_terms = self.glossary_manager.to_dict(
+            merged_glossary,
+            include_strategy_notes=False,
+        )
         aggregated: Dict[str, AggregatedCandidate] = {}
 
         for section in sections:
@@ -343,6 +346,8 @@ class TerminologyReviewService:
     def _find_similar_terms(self, term: str, glossary: Glossary) -> List[Dict[str, Any]]:
         suggestions: List[Dict[str, Any]] = []
         for item in glossary.terms:
+            if _normalize_term(item.original) == _normalize_term(term):
+                continue
             score = _similarity(term, item.original)
             if score < self.SIMILARITY_THRESHOLD and _normalize_term(term) not in _normalize_term(item.original) and _normalize_term(item.original) not in _normalize_term(term):
                 continue

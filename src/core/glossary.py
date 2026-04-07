@@ -192,6 +192,12 @@ class GlossaryManager:
         if term.strategy == TranslationStrategy.PRESERVE:
             return text  # 保持原文
 
+        if term.strategy == TranslationStrategy.PRESERVE_ANNOTATE:
+            if is_first_occurrence and term.translation:
+                return f"{text}（{term.translation}）"
+            else:
+                return text  # 后续保持原文
+
         if term.strategy == TranslationStrategy.FIRST_ANNOTATE:
             if is_first_occurrence and term.translation:
                 return f"{term.translation}（{text}）"
@@ -201,7 +207,12 @@ class GlossaryManager:
         # TRANSLATE 策略
         return term.translation or text
 
-    def to_dict(self, glossary: Glossary) -> Dict[str, str]:
+    def to_dict(
+        self,
+        glossary: Glossary,
+        *,
+        include_strategy_notes: bool = False,
+    ) -> Dict[str, str]:
         """
         将术语表转换为简单字典（用于 prompt）
 
@@ -215,9 +226,12 @@ class GlossaryManager:
         for term in glossary.terms:
             if getattr(term, "status", "active") != "active":
                 continue
-            if term.strategy == TranslationStrategy.PRESERVE:
+            if include_strategy_notes and term.strategy == TranslationStrategy.PRESERVE:
                 result[term.original] = f"[保持原文] {term.original}"
-            elif term.strategy == TranslationStrategy.FIRST_ANNOTATE:
+            elif (
+                include_strategy_notes
+                and term.strategy == TranslationStrategy.FIRST_ANNOTATE
+            ):
                 result[term.original] = f"{term.translation}（首次标注原文）"
             else:
                 result[term.original] = term.translation or term.original

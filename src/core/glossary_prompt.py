@@ -8,7 +8,6 @@ from typing import Any, Dict, Iterable, List, Optional
 from .constants import MAX_GLOSSARY_TERMS_IN_PROMPT
 from .models import Glossary, GlossaryTerm, Section
 from .models.enums import TranslationStrategy
-from .term_matcher import TermMatcher
 
 DEFAULT_GLOSSARY_PROMPT_TITLE = "## 术语约束（仅列出当前文本命中的术语，必须优先遵守）"
 MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT = 48
@@ -50,6 +49,43 @@ def _iter_prompt_terms(terms: Optional[Iterable[Any]]) -> Iterable[Any]:
 
     for term in terms or []:
         yield term
+
+
+def select_prompt_terms_for_text(
+    terms: Optional[Iterable[Any]],
+    source_text: Optional[str],
+    max_terms: int = MAX_GLOSSARY_TERMS_IN_PROMPT,
+) -> List[Any]:
+    """Select prompt terms whose originals are actually present in the source text."""
+    if not terms or max_terms <= 0:
+        return []
+
+    normalized_source = _normalize_whitespace(source_text)
+    candidates: List[tuple[int, int, int, Any]] = []
+    fallback: List[Any] = []
+
+    for index, term in enumerate(_iter_prompt_terms(terms)):
+        payload = _normalize_prompt_term(term)
+        if not payload:
+            continue
+
+        if not normalized_source:
+            fallback.append(term)
+            if len(fallback) >= max_terms:
+                break
+            continue
+
+        occurrences = _count_term_occurrences(normalized_source, payload["original"])
+        if occurrences <= 0:
+            continue
+
+        candidates.append((occurrences, len(payload["original"]), index, term))
+
+    if not normalized_source:
+        return fallback
+
+    candidates.sort(key=lambda item: (-item[0], -item[1], item[2]))
+    return [term for _, _, _, term in candidates[:max_terms]]
 
 
 def _normalize_prompt_term(term: Any) -> Optional[Dict[str, Any]]:
@@ -167,13 +203,18 @@ def select_glossary_terms_for_text(
     if not source_text or not source_text.strip():
         return active_terms[:max_terms]
 
-    matcher = TermMatcher(Glossary(version=glossary.version, terms=active_terms))
-    matches = matcher.match_paragraph(source_text, max_terms)
-    return [
-        match.term
-        for match in matches
-        if _count_term_occurrences(source_text, match.term.original) > 0
-    ]
+    # 使用 _count_term_occurrences（带边界匹配）作为统一标准筛选命中术语
+    candidates: List[tuple[int, int, int, GlossaryTerm]] = []
+    for index, term in enumerate(active_terms):
+        occurrences = _count_term_occurrences(source_text, term.original)
+        if occurrences > 0:
+            candidates.append((occurrences, len(term.original), index, term))
+
+    if not candidates:
+        return []
+
+    candidates.sort(key=lambda item: (-item[0], -item[1], item[2]))
+    return [term for _, _, _, term in candidates[:max_terms]]
 
 
 def build_glossary_prompt_entries(

@@ -27,6 +27,7 @@ from ..core.longform_context import (
     build_section_context_payload,
     build_translation_guidelines,
 )
+from ..core.glossary_prompt import select_prompt_terms_for_text, _count_term_occurrences
 from ..core.format_tokens import (
     TranslationPayload,
     build_dehydrated_link_payload,
@@ -277,15 +278,6 @@ class FourStepTranslator:
         if on_progress:
             on_progress("完成", 4, 4)
 
-        # 记录翻译结果到上下文管理器
-        for i, (para, trans) in enumerate(zip(section.paragraphs, translations)):
-            self.context_manager.record_translation(
-                section.section_id,
-                para.source,
-                trans,
-                self._extract_terms_used(para.source, trans)
-            )
-
         return SectionTranslationResult(
             section_id=section.section_id,
             translations=translations,
@@ -394,6 +386,7 @@ class FourStepTranslator:
         dehydrated_results: Dict[str, TranslationPayload] = {}
         format_tokens = []
         token_count = 0
+        batch_source_text_parts: List[str] = []
 
         for para in paragraphs:
             dehydrated_payload = build_dehydrated_link_payload(para)
@@ -405,6 +398,7 @@ class FourStepTranslator:
             prompt_text = prepared.tokenized_text or prepared.text
             section_lines.append(f"[{para.id}] {prompt_text}")
             paragraph_ids.append(para.id)
+            batch_source_text_parts.append(para.source)
             if para.inline_elements:
                 format_tokens.extend(
                     [
@@ -425,8 +419,14 @@ class FourStepTranslator:
             return [dehydrated_results[p.id] for p in paragraphs if p.id in dehydrated_results]
 
         # 构建批量翻译上下文
+        batch_source_text = "\n\n".join(batch_source_text_parts)
         context = self._build_batch_context(
-            section, understanding, all_sections, format_tokens, token_count
+            section,
+            batch_source_text,
+            understanding,
+            all_sections,
+            format_tokens,
+            token_count,
         )
 
         # 单次 API 调用翻译整批段落
@@ -478,6 +478,7 @@ class FourStepTranslator:
     def _build_batch_context(
         self,
         section: Section,
+        batch_source_text: str,
         understanding: SectionUnderstanding,
         all_sections: List[Section],
         format_tokens: List[Dict[str, Any]],
@@ -510,7 +511,14 @@ class FourStepTranslator:
                 else "无"
             ),
             "glossary": (
-                build_glossary_entries_from_terms(article_analysis.terminology)
+                build_glossary_entries_from_terms(
+                    select_prompt_terms_for_text(
+                        self._apply_term_tracker_corrections(
+                            article_analysis.terminology
+                        ),
+                        batch_source_text,
+                    )
+                )
                 if article_analysis
                 else []
             ),
@@ -917,6 +925,20 @@ class FourStepTranslator:
             batches.append(paragraphs[i:i + self.paragraph_threshold])
         return batches
 
+    def _apply_term_tracker_corrections(
+        self, terms: List[EnhancedTerm]
+    ) -> List[EnhancedTerm]:
+        """根据 term_tracker 已有的使用记录修正术语翻译，与单段翻译路径对齐。"""
+        tracker = self.context_manager.term_tracker
+        corrected: List[EnhancedTerm] = []
+        for term in terms:
+            if term.term.lower() in tracker.used_translations:
+                preferred = tracker.get_preferred_translation(term.term)
+                if preferred:
+                    term = term.model_copy(update={"translation": preferred})
+            corrected.append(term)
+        return corrected
+
     def _extract_terms_used(self, source: str, translation: str) -> Dict[str, str]:
         """
         从翻译结果中提取使用的术语
@@ -929,10 +951,8 @@ class FourStepTranslator:
         if not self.context_manager.article_analysis:
             return terms_used
 
-        source_lower = source.lower()
-
         for term in self.context_manager.article_analysis.terminology:
-            if term.term.lower() in source_lower:
+            if _count_term_occurrences(source, term.term) > 0:
                 # 术语出现在原文中，记录翻译
                 if term.translation:
                     terms_used[term.term] = term.translation

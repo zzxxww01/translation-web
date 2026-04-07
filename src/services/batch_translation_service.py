@@ -44,6 +44,7 @@ from src.core.format_tokens import (
     build_translation_payload,
 )
 from src.core.glossary_prompt import _count_term_occurrences
+from src.core.glossary_prompt import select_prompt_terms_for_text
 from src.core.project import ProjectManager
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.agents.four_step_translator import FourStepTranslator
@@ -283,9 +284,24 @@ class BatchTranslationService:
         for glossary_term in merged_glossary.terms:
             if glossary_term.status != "active":
                 continue
-            merged_terms[glossary_term.original.lower()] = (
-                self._enhanced_term_from_glossary(glossary_term)
-            )
+            key = glossary_term.original.lower()
+            existing = merged_terms.get(key)
+            if existing:
+                # Glossary 只覆盖 translation/strategy/first_occurrence_note，
+                # 保留 analysis 提供的 context_meaning 和 rationale
+                merged_terms[key] = existing.model_copy(
+                    update={
+                        "translation": glossary_term.translation or existing.translation,
+                        "strategy": glossary_term.strategy,
+                        "first_occurrence_note": (
+                            glossary_term.strategy == TranslationStrategy.FIRST_ANNOTATE
+                        ),
+                    }
+                )
+            else:
+                merged_terms[key] = (
+                    self._enhanced_term_from_glossary(glossary_term)
+                )
 
         analysis.terminology = list(merged_terms.values())
         return analysis
@@ -1536,6 +1552,7 @@ class BatchTranslationService:
         section_lines = []
         paragraph_ids = []
         dehydrated_translations: List[Dict[str, str]] = []
+        batch_source_text_parts: List[str] = []
 
         format_tokens = []
         token_count = 0
@@ -1554,6 +1571,7 @@ class BatchTranslationService:
             prompt_text = prepared.tokenized_text or prepared.text
             section_lines.append(f"[{para.id}] {prompt_text}")
             paragraph_ids.append(para.id)
+            batch_source_text_parts.append(para.source)
             if para.inline_elements:
                 format_tokens.extend(
                     [
@@ -1570,6 +1588,7 @@ class BatchTranslationService:
                 token_count += len(para.inline_elements)
 
         section_text = "\n\n".join(section_lines)
+        batch_source_text = "\n\n".join(batch_source_text_parts)
 
         understanding = analysis.section_roles.get(section.section_id)
 
@@ -1588,7 +1607,12 @@ class BatchTranslationService:
                 else "无"
             ),
             "glossary": [
-                *build_glossary_entries_from_terms(analysis.terminology)
+                *build_glossary_entries_from_terms(
+                    select_prompt_terms_for_text(
+                        analysis.terminology,
+                        batch_source_text,
+                    )
+                )
             ],
             "guidelines": build_translation_guidelines(analysis.guidelines),
             "section_role": (
