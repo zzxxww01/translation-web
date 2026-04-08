@@ -1,0 +1,293 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": null,
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+      "parent_block_plain_text": "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 85,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "subtitle",
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Dylan Patel, Ray Wang, Myron Xie, and 2 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Ray Wang",
+          "start": 16,
+          "end": 24,
+          "href": "https://substack.com/@rwang07semis",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 26,
+          "end": 35,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Dylan Patel](https://substack.com/@semianalysis), [Ray Wang](https://substack.com/@rwang07semis), [Myron Xie](https://substack.com/@myronxie), and 2 others",
+      "parent_block_plain_text": "By Dylan Patel, Ray Wang, Myron Xie, and 2 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Ray Wang",
+          "start": 16,
+          "end": 24,
+          "href": "https://substack.com/@rwang07semis",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 26,
+          "end": 35,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 49,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "byline",
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Feb 06, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feb 06, 2026 · Paid",
+      "parent_block_plain_text": "Feb 06, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "date_access",
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Prices of memory are going crazy. SemiAnalysis has been calling this out for over a year since late 2024. The scariest thing is that we aren't even close to the peak. We go through fab by fab production and expansion versus detailed end market demand by memory type to forecast memory revenue, pricing, and margin better than anyone else. This has all been detailed in the SemiAnalysis memory model for a while, but we will share it more publicly today. First some background.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "fab by fab production",
+          "start": 181,
+          "end": 202,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "expansion",
+          "start": 207,
+          "end": 216,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "detailed end market demand",
+          "start": 224,
+          "end": 250,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "forecast memory revenue, pricing, and margin",
+          "start": 269,
+          "end": 313,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_4"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis memory model",
+          "start": 373,
+          "end": 398,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_5"
+        }
+      ],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Prices of memory are going crazy. SemiAnalysis has been calling this out for over a year since late 2024. The scariest thing is that we aren't even close to the peak. We go through [fab by fab production](https://semianalysis.com/memory-model/) and [expansion](https://semianalysis.com/memory-model/) versus [detailed end market demand](https://semianalysis.com/memory-model/) by memory type to [forecast memory revenue, pricing, and margin](https://semianalysis.com/memory-model/) better than anyone else. This has all been detailed in the [SemiAnalysis memory model](https://semianalysis.com/memory-model/) for a while, but we will share it more publicly today. First some background.",
+      "parent_block_plain_text": "Prices of memory are going crazy. SemiAnalysis has been calling this out for over a year since late 2024. The scariest thing is that we aren't even close to the peak. We go through fab by fab production and expansion versus detailed end market demand by memory type to forecast memory revenue, pricing, and margin better than anyone else. This has all been detailed in the SemiAnalysis memory model for a while, but we will share it more publicly today. First some background.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "fab by fab production",
+          "start": 181,
+          "end": 202,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "expansion",
+          "start": 207,
+          "end": 216,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "detailed end market demand",
+          "start": 224,
+          "end": 250,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "forecast memory revenue, pricing, and margin",
+          "start": 269,
+          "end": 313,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_4"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis memory model",
+          "start": 373,
+          "end": 398,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_5"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 476,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3",
+        "LINK_4",
+        "LINK_5"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

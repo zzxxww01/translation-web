@@ -1,0 +1,43 @@
+{
+  "id": "memory-mania-how-a-once-in-four-decades-shortage-i",
+  "title": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom",
+  "title_translation": null,
+  "source_file": "source.html",
+  "created_at": "2026-04-09T02:36:52.527268",
+  "updated_at": "2026-04-09T02:36:52.528059",
+  "status": "created",
+  "progress": {
+    "total_sections": 7,
+    "total_paragraphs": 162,
+    "approved": 22,
+    "reviewing": 0,
+    "pending": 140
+  },
+  "config": {
+    "ai_model": "pro",
+    "model_type": "pro",
+    "translation_style": "natural_professional",
+    "segment_level": "h2",
+    "max_paragraph_length": 800,
+    "merge_short_paragraphs": true
+  },
+  "metadata": {
+    "authors": [
+      "Dylan Patel",
+      "Ray Wang",
+      "Myron Xie"
+    ],
+    "byline_markdown": "[Dylan Patel](https://substack.com/@semianalysis), [Ray Wang](https://substack.com/@rwang07semis), [Myron Xie](https://substack.com/@myronxie), and 2 others",
+    "access_text": "Paid",
+    "published_date": "Feb 06, 2026",
+    "subtitle": "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+    "publication": null,
+    "original_url": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+    "cover_image": "https://substackcdn.com/image/fetch/$s_!y26P!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f3c4da6-44fb-4b45-934b-bc4c04fde566_1536x1024.png",
+    "raw_metadata_html": null
+  },
+  "sections": [],
+  "versions": [],
+  "confirmation_map": {},
+  "workflow_mode": "paragraph_confirmation"
+}
