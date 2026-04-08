@@ -1,0 +1,43 @@
+{
+  "section_id": "04-ercot-same-load-growth-no-pr",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.225,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.0,
+      "terminology": 10.0,
+      "completeness": 8.5,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "德克萨斯州电力可靠性委员会（ERCOT）的市场机制要简单易懂得多。它采用统一的市场机制，基于实时电价来平衡供需。ERCOT 并没有设立两个独立的市场，也不会做出直接左右市场需求的预测。",
+    "稀缺定价而非容量拍卖",
+    "ERCOT没有采用由年度拍卖驱动的容量市场，而是采用了基于运行备用需求曲线 (ORDC) 的实时稀缺价格加成机制。当电力供需平衡变得过于紧张时——例如所有人的空调都在同一时间运转——实时电价就会飙升，从每兆瓦时10至50美元的正常水平，飙升至每兆瓦时5000美元的上限，并在输电受限地区产生额外的价格加成。",
+    "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+    "这种稀缺定价结构使得每年运行时间不足100小时的容量资源（燃气调峰电厂、电池等）能够收回成本，因为这屈指可数的运行时间，依然能为一座50兆瓦的电厂或电池系统创造数百万美元的年营收。",
+    "换言之：在PJM，中央调度机构负责分析系统、确定容量需求，并保证向提供容量的电厂所有者支付费用。而在ERCOT，没有任何保底承诺，资产所有者必须自行分析并判断市场容量是否充足。实时价格信号就是反映市场供需瓶颈的直接证据。",
+    "ERCOT的需求预测：规模惊人——却大多被忽视",
+    "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的《2025年长期负荷预测》指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+    "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+    "来源：ERCOT",
+    "若按字面理解，该预测意味着一场结构性的需求冲击，其量级相当于在当前的负荷曲线上叠加一个全新的ERCOT系统。但实际上，没有人相信这些数字，市场也基本将其无视。",
+    "甚至连ERCOT也承认其预测并未兑现，并随之调整了方向。在2025年5月的《容量、需求与储备报告》中，他们主动采用了风险折减：常规申请被折减至49.8%，有高管签字确认的申请被折减至55.4%，且所有项目的投运日期均被推迟了180天。ERCOT的内部电网分析师实际上是在表明，除非项目真正破土动工，否则他们绝不会按照开发商声称的规模进行100%的规划。",
+    "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+    "资料来源：ERCOT",
+    "但这里的区别在于，ERCOT的负荷预测和并网队列约束并不直接决定电价。PJM的预测则用于生成一条模拟的供需曲线，进而直接决定系统容量成本的边界。相比之下，ERCOT仅将其需求预测用于指导系统规划、输电网扩建以及资源充裕度研究——而非作为直接的定价输入变量。ERCOT的机制内置了审慎原则，能够在投机性需求影响市场结果之前将其有效过滤。",
+    "数据中心负荷增加，电力稀缺性反而下降",
+    "物理系统的实际运行证实了ERCOT的机制行之有效。该电网在2024年夏季已经历了超过90 GW的创纪录用电峰值，并在2025年5月创下了78.4 GW的春季历史新高。德克萨斯州超大规模数据中心的电力需求增长已然极为庞大，但此后并未发生过欠压供电/局部限电。",
+    "能源交易员所看到的电价同样没有出现暴涨。远期价格——尤其是2026年、2028年和2030年的合约——在过去一年中上涨了11%至17%，这一涨幅虽然显著且与PJM大致相当，但并未出现容量价格飙升9倍的现象。",
+    "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+    "资料来源：彭博",
+    "《2024年ORDC双年报告》指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+    "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+    "资料来源：ERCOT，SemiAnalysis标注",
+    "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及SB 6限电权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+    "ERCOT的行动速度也要快得多：相较于PJM，其关键优势之一在于仅覆盖单一州，且不受FERC管辖。相比之下，PJM则必须应对FERC以及13个州。"
+  ]
+}

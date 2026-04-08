@@ -1,0 +1,1295 @@
+{
+  "section_id": "09-intels-ring-bus",
+  "title": "Intel’s Ring Bus",
+  "title_translation": "英特尔环形总线",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0074",
+      "parent_block_index": 74,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419353",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Intel Nehalem-EX Ring Interconnect. Source: Intel, Hot Chips 2009",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Nehalem-EX Ring Interconnect. Source: Intel, Hot Chips 2009",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Nehalem-EX Ring Interconnect. Source: Intel, Hot Chips 2009*",
+      "parent_block_plain_text": "Intel Nehalem-EX Ring Interconnect. Source: Intel, Hot Chips 2009",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Nehalem-EX Ring Interconnect. Source: Intel, Hot Chips 2009",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 65,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 Nehalem-EX 环形互连架构。来源：英特尔，Hot Chips 2009",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419508",
+          "tokenized_text": "[[[EM_1|英特尔 Nehalem-EX 环形互连架构。来源：英特尔，Hot Chips 2009]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "To scale past this limit, Intel implemented a ring bus architecture with their Nehalem-EX (Beckton) Xeons in 2010, bringing 8 cores with integrated memory controllers and inter-socket QPI links into a single die. Implemented in earlier years within ATi Radeon GPUs and the IBM Cell processor, the ring bus arranges all nodes into a loop, with ring stops integrated into the L3 cache slices and wiring in the metal layers above the cache. Caching and Home agents deal with memory snooping between cores and coherence with the memory controller.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To scale past this limit, Intel implemented a ring bus architecture with their Nehalem-EX (Beckton) Xeons in 2010, bringing 8 cores with integrated memory controllers and inter-socket QPI links into a single die. Implemented in earlier years within ATi Radeon GPUs and the IBM Cell processor, the ring bus arranges all nodes into a loop, with ring stops integrated into the L3 cache slices and wiring in the metal layers above the cache. Caching and Home agents deal with memory snooping between cores and coherence with the memory controller.",
+      "parent_block_plain_text": "To scale past this limit, Intel implemented a ring bus architecture with their Nehalem-EX (Beckton) Xeons in 2010, bringing 8 cores with integrated memory controllers and inter-socket QPI links into a single die. Implemented in earlier years within ATi Radeon GPUs and the IBM Cell processor, the ring bus arranges all nodes into a loop, with ring stops integrated into the L3 cache slices and wiring in the metal layers above the cache. Caching and Home agents deal with memory snooping between cores and coherence with the memory controller.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 543,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了突破这一极限，英特尔于 2010 年在其 Nehalem-EX (Beckton) 至强处理器中引入了环形总线架构，将 8 个核心、集成内存控制器以及跨插槽 QPI 链路整合到了单一裸片中。环形总线早年曾应用于 ATi Radeon GPU 与 IBM Cell 处理器中。该架构将所有节点排布成一个环路，环形站点直接集成在 L3 缓存切片内，布线则走缓存上方的金属层。缓存与归属代理负责处理核心间的内存嗅探，并维护与内存控制器的一致性。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419542",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Data from each ring stop’s core and L3 cache slice is queued and injected into the ring, with data advancing one stop per clock to its target destination. This means core to core access latency is no longer uniform, with cores on opposite sides of the ring having to wait additional cycles compared to directly adjacent cores. To help with latency and congestion, two counter rotating rings are implemented, with the optimal direction of travel chosen based on address and ring loading. With wiring complexity now moderated, Intel could scale core counts to 8 on Nehalem-EX and 10 for Westmere-EX. However, scaling beyond that with a single ring would lead to problems with coherence and latency as the ring gets too long.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Data from each ring stop’s core and L3 cache slice is queued and injected into the ring, with data advancing one stop per clock to its target destination. This means core to core access latency is no longer uniform, with cores on opposite sides of the ring having to wait additional cycles compared to directly adjacent cores. To help with latency and congestion, two counter rotating rings are implemented, with the optimal direction of travel chosen based on address and ring loading. With wiring complexity now moderated, Intel could scale core counts to 8 on Nehalem-EX and 10 for Westmere-EX. However, scaling beyond that with a single ring would lead to problems with coherence and latency as the ring gets too long.",
+      "parent_block_plain_text": "Data from each ring stop’s core and L3 cache slice is queued and injected into the ring, with data advancing one stop per clock to its target destination. This means core to core access latency is no longer uniform, with cores on opposite sides of the ring having to wait additional cycles compared to directly adjacent cores. To help with latency and congestion, two counter rotating rings are implemented, with the optimal direction of travel chosen based on address and ring loading. With wiring complexity now moderated, Intel could scale core counts to 8 on Nehalem-EX and 10 for Westmere-EX. However, scaling beyond that with a single ring would lead to problems with coherence and latency as the ring gets too long.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 722,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "来自每个环形站点的核心与 L3缓存切片的数据经排队后注入环路，数据每个时钟周期向前推进一个站点，直至抵达目标位置。这意味着核心间的访问延迟不再均衡：相比紧邻的核心，位于环路相对两侧的核心需要等待更多周期。为缓解延迟与拥堵，设计中引入了两个反向旋转的环路，并根据地址与环路负载选择最优传输方向。随着布线复杂度得到有效控制，英特尔得以将 Nehalem-EX 的核心数扩展至 8 个，并在 Westmere-EX 上进一步增至 10 个。然而，若继续沿用单环架构进一步扩充核心，过长的环路必将引发一致性与延迟问题。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419569",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Ivy Bridge-EX Virtual Rings",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Ivy Bridge-EX Virtual Rings",
+      "parent_block_plain_text": "Ivy Bridge-EX Virtual Rings",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 27,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Ivy Bridge-EX 虚拟环",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419594",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419617",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Intel Ivytown Virtual Rings. Source: Intel, Hot Chips 2014",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Ivytown Virtual Rings. Source: Intel, Hot Chips 2014",
+          "start": 0,
+          "end": 58,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Ivytown Virtual Rings. Source: Intel, Hot Chips 2014*",
+      "parent_block_plain_text": "Intel Ivytown Virtual Rings. Source: Intel, Hot Chips 2014",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Ivytown Virtual Rings. Source: Intel, Hot Chips 2014",
+          "start": 0,
+          "end": 58,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 58,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 Ivytown 虚拟环。来源：英特尔，Hot Chips 2014",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419684",
+          "tokenized_text": "[[[EM_1|英特尔 Ivytown 虚拟环。来源：英特尔，Hot Chips 2014]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "To scale core count to 15 for the Ivy Bridge generation, Intel had to get clever with the routing topology. The cores are arranged in three columns of five, with three ‘virtual rings’ looping around the columns. Switches in the ring stops controlled the direction of travel along the half rings, creating a “virtual” triple ring configuration.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To scale core count to 15 for the Ivy Bridge generation, Intel had to get clever with the routing topology. The cores are arranged in three columns of five, with three ‘virtual rings’ looping around the columns. Switches in the ring stops controlled the direction of travel along the half rings, creating a “virtual” triple ring configuration.",
+      "parent_block_plain_text": "To scale core count to 15 for the Ivy Bridge generation, Intel had to get clever with the routing topology. The cores are arranged in three columns of five, with three ‘virtual rings’ looping around the columns. Switches in the ring stops controlled the direction of travel along the half rings, creating a “virtual” triple ring configuration.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 343,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了在 Ivy Bridge 世代将核心数扩展至 15 个，英特尔必须在路由拓扑上巧妙布局。核心被排布为 3 列（每列 5 个），并由 3 个“虚拟环”环绕这三列核心。环形站点内的交换机负责控制数据在半环上的传输方向，由此构建出一种“虚拟”的三环架构。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419709",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Haswell and Broadwell Dual Rings",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Haswell and Broadwell Dual Rings",
+      "parent_block_plain_text": "Haswell and Broadwell Dual Rings",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Haswell 与 Broadwell 双环形总线",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419732",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419750",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Haswell HCC Dual Ring Bus. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Haswell HCC Dual Ring Bus. Source: Intel",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Haswell HCC Dual Ring Bus. Source: Intel*",
+      "parent_block_plain_text": "Haswell HCC Dual Ring Bus. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Haswell HCC Dual Ring Bus. Source: Intel",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Haswell 高核心数 (HCC) 双环形总线。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419802",
+          "tokenized_text": "[[[EM_1|Haswell 高核心数 (HCC) 双环形总线。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "In 2014, Intel changed topologies yet again with the 18-core Haswell HCC die featuring dual independent counter rotating ring buses connected with a pair of bi-directional buffered switches. Memory controllers were split amongst the two rings, with the 8-core ring also housing the IO ring stops. The MCC die variant wrapped a single half-ring back on itself. Broadwell HCC, released in 2015, brought core counts up to 24 with dual 12-core ring buses.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In 2014, Intel changed topologies yet again with the 18-core Haswell HCC die featuring dual independent counter rotating ring buses connected with a pair of bi-directional buffered switches. Memory controllers were split amongst the two rings, with the 8-core ring also housing the IO ring stops. The MCC die variant wrapped a single half-ring back on itself. Broadwell HCC, released in 2015, brought core counts up to 24 with dual 12-core ring buses.",
+      "parent_block_plain_text": "In 2014, Intel changed topologies yet again with the 18-core Haswell HCC die featuring dual independent counter rotating ring buses connected with a pair of bi-directional buffered switches. Memory controllers were split amongst the two rings, with the 8-core ring also housing the IO ring stops. The MCC die variant wrapped a single half-ring back on itself. Broadwell HCC, released in 2015, brought core counts up to 24 with dual 12-core ring buses.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 451,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2014 年，英特尔在 18 核的 Haswell 高核心数 (HCC) 裸片上再次更改了拓扑结构，引入了双独立反向旋转环形总线，两者通过一对双向缓冲交换机相连。内存控制器被分置于两个环形总线中，其中 8 核的环形总线还容纳了 IO 环形站点。中等核心数 (MCC) 裸片变体则将单个半环自身折返相连。2015 年发布的 Broadwell HCC 将核心数提升至 24 个，配备了双 12 核环形总线。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419826",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The downside to stitching multiple rings together is the increased variability in core to core and memory access latency, especially so when cores on one ring are accessing the memory of the other ring. This Non Uniform Memory Access (NUMA) was detrimental to system performance for programs that are latency sensitive with high core to core interactivity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The downside to stitching multiple rings together is the increased variability in core to core and memory access latency, especially so when cores on one ring are accessing the memory of the other ring. This Non Uniform Memory Access (NUMA) was detrimental to system performance for programs that are latency sensitive with high core to core interactivity.",
+      "parent_block_plain_text": "The downside to stitching multiple rings together is the increased variability in core to core and memory access latency, especially so when cores on one ring are accessing the memory of the other ring. This Non Uniform Memory Access (NUMA) was detrimental to system performance for programs that are latency sensitive with high core to core interactivity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 356,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "将多个环形总线拼接在一起的缺点在于，核心间通信与内存访问的延迟差异增大，当一个环上的核心访问另一个环的内存时尤为明显。对于那些对延迟敏感且核心间交互频繁的程序而言，这种非均匀内存访问 (NUMA) 对系统性能极为不利。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419846",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "To help with this, Intel offered a “Cluster on Die” configuration option in the BIOS that treated the two rings as independent processors. The operating system would show the CPU being split into two NUMA nodes, each with direct access to half the local memory and L3 cache. Testing in CoD mode showed that latency within each ring stayed under 50ns while access to the other ring took over 100ns, illustrating the latency penalty of going through the buffered switches.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Testing in CoD mode",
+          "start": 275,
+          "end": 294,
+          "href": "https://old.chipsandcheese.com/2023/11/07/core-to-core-latency-data-on-large-systems/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To help with this, Intel offered a “Cluster on Die” configuration option in the BIOS that treated the two rings as independent processors. The operating system would show the CPU being split into two NUMA nodes, each with direct access to half the local memory and L3 cache. [Testing in CoD mode](https://old.chipsandcheese.com/2023/11/07/core-to-core-latency-data-on-large-systems/) showed that latency within each ring stayed under 50ns while access to the other ring took over 100ns, illustrating the latency penalty of going through the buffered switches.",
+      "parent_block_plain_text": "To help with this, Intel offered a “Cluster on Die” configuration option in the BIOS that treated the two rings as independent processors. The operating system would show the CPU being split into two NUMA nodes, each with direct access to half the local memory and L3 cache. Testing in CoD mode showed that latency within each ring stayed under 50ns while access to the other ring took over 100ns, illustrating the latency penalty of going through the buffered switches.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Testing in CoD mode",
+          "start": 275,
+          "end": 294,
+          "href": "https://old.chipsandcheese.com/2023/11/07/core-to-core-latency-data-on-large-systems/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 470,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了缓解这一问题，英特尔在 BIOS 中提供了一个“片上集群 (CoD)”配置选项，将两个环形总线视为独立的处理器。操作系统会显示 CPU 被拆分为两个 NUMA 节点，每个节点可直接访问一半的本地内存和 L3缓存。在 CoD 模式下的测试表明，每个环内的延迟保持在 50ns 以下，而跨环访问则超过 100ns，这凸显了经过缓冲交换机所带来的延迟惩罚。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419920",
+          "tokenized_text": "为了缓解这一问题，英特尔在 BIOS 中提供了一个“片上集群 (CoD)”配置选项，将两个环形总线视为独立的处理器。操作系统会显示 CPU 被拆分为两个 NUMA 节点，每个节点可直接访问一半的本地内存和 L3缓存。[[[LINK_1|在 CoD 模式下的测试]]]表明，每个环内的延迟保持在 50ns 以下，而跨环访问则超过 100ns，这凸显了经过缓冲交换机所带来的延迟惩罚。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "While these methods helped Intel increase core counts to 24, it was not an elegant nor scalable solution. Adding a third ring and two more sets of buffered switches would be too complicated and impractical, creating many NUMA clusters. A new interconnect architecture was required for more cores.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While these methods helped Intel increase core counts to 24, it was not an elegant nor scalable solution. Adding a third ring and two more sets of buffered switches would be too complicated and impractical, creating many NUMA clusters. A new interconnect architecture was required for more cores.",
+      "parent_block_plain_text": "While these methods helped Intel increase core counts to 24, it was not an elegant nor scalable solution. Adding a third ring and two more sets of buffered switches would be too complicated and impractical, creating many NUMA clusters. A new interconnect architecture was required for more cores.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 296,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然这些方法帮助英特尔将核心数增加到了 24 个，但这既不优雅，也缺乏可扩展性。增加第三个环形总线和另外两组缓冲交换机会过于复杂且不切实际，还会产生过多的 NUMA 集群。要支持更多核心，必须采用全新的互连架构。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:00:07.419946",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.835,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“Home agents” 在计算机体系结构（特别是英特尔的 NUMA/一致性协议中）的标准译法是“归属代理”或“主节点代理”。译为“主代理”不够精确，容易引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "“counter rotating” 意为两个环的数据传输方向相反。此处译为“双向反转环”略显生硬且容易引发误解。此外，在第11段中同词被译为“反向旋转”，前后术语不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "“Non Uniform Memory Access” 的业界标准中文术语是“非一致性内存访问”或“非均匀内存访问”，“非统一内存访问”不符合国内硬件工程师的惯用表达。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“L3缓存切片”中，英文字母与中文字符之间缺少空格（CJK-Latin spacing）。此问题在第3段和第13段中也有出现。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

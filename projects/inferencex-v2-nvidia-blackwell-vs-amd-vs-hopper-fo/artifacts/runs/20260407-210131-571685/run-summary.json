@@ -1,0 +1,28 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "cancelled",
+  "message": "Translation cancelled by user",
+  "total_sections": 36,
+  "translated_sections": 8,
+  "total_paragraphs": 358,
+  "translated_paragraphs": 200,
+  "error_count": 1,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "...helping to validate and optimize Blackwell & Hopper configurations.",
+      "section_id": "03-acknowledgments-and-inferencex",
+      "timestamp": "2026-04-07T21:05:35.166688"
+    }
+  ],
+  "started_at": "2026-04-07T21:01:31.571668",
+  "finished_at": "2026-04-07T21:06:08.036188",
+  "run_id": "20260407-210131-571685",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260407-210131-571685",
+  "api_calls": 7,
+  "elapsed_seconds": 276.5
+}

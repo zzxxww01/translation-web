@@ -1,0 +1,317 @@
+{
+  "section_id": "05-logical-vs-physical-gpc",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "05-logical-vs-physical-gpc",
+    "section_title": "Logical vs. Physical GPC",
+    "section_title_translation": "逻辑 GPC 与物理 GPC",
+    "section_position": "6/19",
+    "article_theme": "An in-depth microbenchmarking analysis of Nvidia's Blackwell GPU architecture, revealing the performance characteristics of its new memory subsystems, cluster configurations, and 5th-generation Tensor Core MMA instructions for AI workloads.",
+    "structure_summary": "The article begins with an introduction and acknowledgments, setting the context of Blackwell's microarchitecture. It then details high-level architectural features (Clusters, GPCs, Floorsweeping) before diving deep into the memory subsystem (Async Copy, TMA, DSMEM). The core of the article analyzes computation instructions (5th Gen MMA, throughput, latency), and concludes by tying these microbenchmarking findings to real-world use cases (CUTLASS, Multicast) and the physical chip floorplan.",
+    "target_audience": "AI system engineers, GPU optimization researchers, hardware architects, and low-level kernel programmers.",
+    "translation_voice": "Professional and precise Chinese engineering voice. Emphasize clarity in technical logic over literary flair. Use industry-standard GPU and semiconductor terminology natively.",
+    "previous_section_title": "Clusters, GPCs, and Floorsweeping",
+    "next_section_title": "Memory Subsystem",
+    "section_role": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+    "translation_notes": [
+      "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+      "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+    ],
+    "key_points": [
+      "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+      "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+    ],
+    "guidelines": [
+      "Maintain English for all PTX and SASS instructions (e.g., cp.async, LDGSTS, tcgen05.mma), formatting them as inline code where appropriate.",
+      "For niche hardware terms like 'Floorsweeping' or 'Speed of Light (SoL)', provide a brief Chinese annotation on the first occurrence (e.g., '核心屏蔽 (Floorsweeping)', '理论极限性能 (SoL)'), then use the English abbreviation or standard Chinese term.",
+      "Ensure strict consistency for memory hierarchy terms: Global Memory (全局内存), Shared Memory / SMEM (共享内存), Tensor Memory / TMEM (张量内存), and Distributed Shared Memory / DSMEM (分布式共享内存).",
+      "Restructure complex, long-winded English sentences into shorter, cohesive Chinese clauses. Use active voice where possible and ensure logical connectors (e.g., '因此', '然而', '具体而言') are explicitly added for natural Chinese paragraph flow.",
+      "Preserve the analytical and authoritative tone of the original text. Avoid overly marketing-driven language; stick to objective, engineering-focused phrasing.",
+      "When discussing matrix dimensions and MMA shapes (e.g., 'M=128', 'N < 128'), keep the mathematical notations exactly as they are without adding unnecessary spaces between letters and numbers."
+    ],
+    "article_challenges": [
+      {
+        "location": "Clusters, GPCs, and Floorsweeping",
+        "issue": "The term 'Floorsweeping' and the distinction between logical and physical GPCs can be confusing if translated literally.",
+        "suggestion": "Translate 'Floorsweeping' as '核心屏蔽' or '良率屏蔽' and explicitly clarify that it refers to the physical enabling/disabling of SMs based on silicon yield."
+      },
+      {
+        "location": "Throughput at Different In-Flight Instruction Count",
+        "issue": "Phrases like 'Speed-of-Light (SoL)' and 'in-flight instructions' are highly specific to GPU profiling.",
+        "suggestion": "Translate 'in-flight instructions' as '飞行中指令' or '执行中指令' and 'SoL' as '理论极限性能 (SoL)'. Ensure the mathematical relationships (e.g., N sizes, percentages) are conveyed accurately."
+      },
+      {
+        "location": "Throughout the text (Instruction names)",
+        "issue": "Instructions like 'cp.async.bulk.tensor', 'ld.shared::cluster', and 'tcgen05.mma' have complex syntax.",
+        "suggestion": "Do not alter or translate any PTX/SASS instruction syntax. Keep them exactly as written in the source, preferably formatted as code."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Floorsweeping",
+        "term": "Floorsweeping",
+        "translation": "核心屏蔽 (Floorsweeping)",
+        "strategy": "first_annotate",
+        "note": "A semiconductor manufacturing practice where partially defective chips are sold with faulty cores disabled to improve yield.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Speed of Light (SoL)",
+        "term": "Speed of Light (SoL)",
+        "translation": "理论极限性能 (Speed of Light, SoL)",
+        "strategy": "first_annotate",
+        "note": "In Nvidia Nsight Compute (NCU) profiling, this refers to the theoretical maximum achievable performance of a hardware unit.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Cooperative Thread Array (CTA)",
+        "term": "Cooperative Thread Array (CTA)",
+        "translation": "协作线程阵列 (CTA)",
+        "strategy": "first_annotate",
+        "note": "Nvidia's terminology for a thread block.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Tensor Memory Accelerator (TMA)",
+        "term": "Tensor Memory Accelerator (TMA)",
+        "translation": "张量内存加速器 (TMA)",
+        "strategy": "first_annotate",
+        "note": "A specialized asynchronous data copy engine introduced in Hopper.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Shared Memory (SMEM)",
+        "term": "Shared Memory (SMEM)",
+        "translation": "共享内存 (SMEM)",
+        "strategy": "translate",
+        "note": "On-chip memory shared within a CTA.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tensor Memory (TMEM)",
+        "term": "Tensor Memory (TMEM)",
+        "translation": "张量内存 (TMEM)",
+        "strategy": "translate",
+        "note": "A new memory type in Blackwell to hold MMA accumulators.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Distributed Shared Memory (DSMEM)",
+        "term": "Distributed Shared Memory (DSMEM)",
+        "translation": "分布式共享内存 (DSMEM)",
+        "strategy": "translate",
+        "note": "Allows CTAs within a cluster to access each other's shared memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "PTX and SASS",
+        "term": "PTX and SASS",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "Nvidia's intermediate and low-level assembly instruction sets.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+    "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+    "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+    "key_points": [
+      "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+      "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+    ],
+    "translation_notes": [
+      "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+      "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+    ]
+  },
+  "translations": [
+    "前文介绍的将 TPC 划分到 GPC 的方式属于逻辑分组。它们代表了软件视角下的 GPC，并未提供每个 GPC 中 20 个实际物理 SM 到底有哪些被启用，也没有指明每个物理 GPC 在两个裸片（Die）上的具体位置。实际上，具有相同逻辑配置的 B200 芯片，其每个 GPC 中实际产出的物理 SM 未必完全相同。对于在软件视角下看似相同的 GPU，这可能成为导致性能非确定性的潜在原因。此外，将 SM 划分到 GPC 的逻辑分组方式，也无法说明 B200 封装内的两个裸片上分别承载了哪些 GPC。",
+    "为了探究有关 SM 物理布局的更多信息，我们让每个 SM 遍历一个填满 L2 缓存的指针追踪数组，并测量每次加载的延迟。针对每个地址，我们将各个 SM 观察到的延迟与其他所有 SM 观察到的延迟进行对比，从而生成一个 SM<->SM 距离矩阵。X 轴和 Y 轴均为 SM ID。",
+    "https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png",
+    "我们可以看到两组界线分明的 SM，它们访问 L2 缓存的平均延迟相差超过 300 个周期；这必然是跨裸片 (die-to-die) 通信所致。我们还根据上一节确定的逻辑 GPC 分组对这些 SM 进行了标注；有趣的是，在此基准测试中，那些零散的 TPC 彼此距离很近，并且似乎与 GPC0 表现出很强的相关性，因此可以推测这些 TPC 在物理上位于 GPC0 内。",
+    "基于这些信息，我们可以进一步细化每个 GPC 中实际产出的 TPC 列表，尽管其中的“5+3”组合仍然只是推测。",
+    "Die A: [10, 10, 10, 9]",
+    "Die B: [9, 9, 9, 5+3]",
+    "此外，尽管过程有些间接，但我们可以得出结论：跨裸片通信的延迟开销约为 300 个周期。观察该基准测试中单个 SM 的延迟分布（其中也包含了大量 L2 拥塞），这一点同样显而易见：",
+    "https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png",
+    "我们在此感谢 Decart AI 的 Orian 为本次基准测试提供灵感。"
+  ]
+}

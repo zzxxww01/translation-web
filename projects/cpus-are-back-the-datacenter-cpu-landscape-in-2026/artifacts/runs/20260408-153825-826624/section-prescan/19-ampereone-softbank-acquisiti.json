@@ -1,0 +1,67 @@
+{
+  "section_id": "19-ampereone-softbank-acquisiti",
+  "new_terms": [
+    {
+      "term": "OEM",
+      "suggested_translation": "原始设备制造商 (OEM)",
+      "context": "3rd silicon provider for OEM server builds",
+      "confidence": 1.0
+    },
+    {
+      "term": "interposer",
+      "suggested_translation": "中介层",
+      "context": "an MCM configuration that does not require use of an interposer",
+      "confidence": 1.0
+    },
+    {
+      "term": "noisy neighbors",
+      "suggested_translation": "吵闹的邻居",
+      "context": "minimize performance penalties from noisy neighbors where other VMs running on adjacent cores hog traffic",
+      "confidence": 0.95
+    },
+    {
+      "term": "delidded",
+      "suggested_translation": "开盖",
+      "context": "Delidded AmpereOne CPU",
+      "confidence": 0.95
+    },
+    {
+      "term": "Oracle",
+      "suggested_translation": "甲骨文 (Oracle)",
+      "context": "With a strong partnership with Oracle",
+      "confidence": 1.0
+    },
+    {
+      "term": "Masayoshi Son",
+      "suggested_translation": "孙正义",
+      "context": "Masayoshi Son wanted Ampere’s CPU design talent",
+      "confidence": 1.0
+    },
+    {
+      "term": "Stargate venture",
+      "suggested_translation": "星际之门 (Stargate) 项目",
+      "context": "shore up their CPU designs for the Stargate venture",
+      "confidence": 0.9
+    },
+    {
+      "term": "Ampere Computing",
+      "suggested_translation": "Ampere Computing (安培计算)",
+      "context": "Ampere Computing was the original champion for merchant ARM silicon",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云厂商",
+    "mesh architecture": "网格架构",
+    "tsmc": "台积电",
+    "amd": "AMD",
+    "intel": "英特尔",
+    "chiplet": "芯粒",
+    "multi-chip module (mcm)": "MCM",
+    "l2 cache": "L2缓存",
+    "virtual machines (vms)": "VM",
+    "merchant silicon": "商用芯片"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:35:33.713601"
+}

@@ -1,0 +1,47 @@
+{
+  "section_id": "05-compute-tray-thermal",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.2,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 6,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "two Rubin GPUs, one Vera CPU... The cold plate of the Rubin GPU",
+        "description": "将代号“Rubin”和“Vera”直接音译为“鲁宾”和“维拉”，在面向硬核科技读者的文章中显得不够专业。业内通常直接使用其英文代号或采用“中英双语（如：Rubin）”的形式。",
+        "why_it_matters": "保留英文原名词能提升文章在专业技术圈层中的权威感与辨识度。",
+        "suggestion": "修改为“两颗 Rubin GPU、一颗 Vera CPU”和“Rubin GPU 的冷板”。"
+      },
+      {
+        "paragraph_index": 6,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "liquid metal Indium TIM2",
+        "description": "译文“液态金属铟第二层热界面材料”存在机械名词串叠的问题。“TIM2”作为一个行业标准缩写（Thermal Interface Material 2），全译反而会使硬核读者产生阅读停顿。",
+        "why_it_matters": "过长的名词修饰语会导致翻译腔重，影响阅读流畅度，且掩盖了 TIM2 这个核心技术术语。",
+        "suggestion": "修改为“液态金属铟（TIM2）”或“作为 TIM2 的液态金属铟”。"
+      },
+      {
+        "paragraph_index": 9,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "the transceiver cages",
+        "description": "“收发器笼”是字面直译。在硬件和网络设备语境中，cage 通常指用于插拔光模块的金属屏蔽罩（如 QSFP cage）。",
+        "why_it_matters": "使用更贴近硬件工程的术语能增强文章的专业质感。",
+        "suggestion": "建议修改为“光模块笼”或“收发器屏蔽罩”。"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+        "description": "第2、5、8、11段为相同的图表来源说明，但译文存在不一致的情况（如“资料来源”与“来源”，“及”与“与”）。",
+        "why_it_matters": "图注格式前后不统一会降低文章的编辑严谨度。",
+        "suggestion": "建议全文统一为：“资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型”。"
+      }
+    ]
+  }
+}

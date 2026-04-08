@@ -1,0 +1,1009 @@
+{
+  "section_id": "09-gpt-oss-120b",
+  "title": "GPT-OSS 120B",
+  "title_translation": "GPT-OSS 120B",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "For MI300X and MI325X, we have seen marginal improvements across the board. Some AITER optimizations helped MI300X performance across all interactivities, and switching to the upstream vLLM ROCm image led to improvements.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For MI300X and MI325X, we have seen marginal improvements across the board. Some AITER optimizations helped MI300X performance across all interactivities, and switching to the upstream vLLM ROCm image led to improvements.",
+      "parent_block_plain_text": "For MI300X and MI325X, we have seen marginal improvements across the board. Some AITER optimizations helped MI300X performance across all interactivities, and switching to the upstream vLLM ROCm image led to improvements.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "针对 MI300X 和 MI325X，我们观察到整体性能实现了全面小幅提升。部分 AITER 优化改善了 MI300X 在所有交互性下的性能，而切换到上游 vLLM ROCm 镜像也带来了进一步提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495104",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis InferenceX 是一款由读者支持的免费开源软件。想要接收最新文章并支持我们的工作，欢迎成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495163",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495190",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10e95c72-6372-415e-8e51-d8021815182c_2142x1784.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386916",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495271",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "In the case of the MI325X, it appears that not all performance enhancements that were present in the downstream ROCm fork image (used during the October 5th, 2025 run) have made it into the official vLLM ROCm image. Unfortunately, the MI355X literally still uses a fork of the vLLM 0.10.1 build rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1). We would love to have seen it updated it by now, but unfortunately the current official image (0.15.1, at the time this article was written) is not yet optimized for the MI355X and runs into hard errors. We had also run into hard errors crashes on Mi355 for vLLM 0.14. Word on the street is that vLLM 0.16.0 will finally deliver all the changes needed for better MI355X performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1",
+          "start": 295,
+          "end": 358,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In the case of the MI325X, it appears that not all performance enhancements that were present in the downstream ROCm fork image (used during the October 5th, 2025 run) have made it into the official vLLM ROCm image. Unfortunately, the MI355X literally still uses a fork of the vLLM 0.10.1 build `rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1`). We would love to have seen it updated it by now, but unfortunately the current official image (0.15.1, at the time this article was written) is not yet optimized for the MI355X and runs into hard errors. We had also run into hard errors crashes on Mi355 for vLLM 0.14. Word on the street is that vLLM 0.16.0 will finally deliver all the changes needed for better MI355X performance.",
+      "parent_block_plain_text": "In the case of the MI325X, it appears that not all performance enhancements that were present in the downstream ROCm fork image (used during the October 5th, 2025 run) have made it into the official vLLM ROCm image. Unfortunately, the MI355X literally still uses a fork of the vLLM 0.10.1 build rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1). We would love to have seen it updated it by now, but unfortunately the current official image (0.15.1, at the time this article was written) is not yet optimized for the MI355X and runs into hard errors. We had also run into hard errors crashes on Mi355 for vLLM 0.14. Word on the street is that vLLM 0.16.0 will finally deliver all the changes needed for better MI355X performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1",
+          "start": 295,
+          "end": 358,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 743,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至于 MI325X，似乎并非所有存在于下游 ROCm fork 镜像（在 2025 年 10 月 5 日测试中使用）中的性能增强，都已合入官方 vLLM ROCm 镜像。更离谱的是，MI355X 居然还在用 vLLM 0.10.1 版本的 fork rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1)。我们本期望现在能看到它更新，但遗憾的是，当前的官方镜像（撰写本文时的 0.15.1 版本）尚未针对 MI355X 进行优化，并且会遇到严重错误。之前我们在 vLLM 0.14 版本的 MI355X 测试中也曾遭遇严重错误导致的崩溃。坊间传闻，vLLM 0.16.0 终于将实装所有必要改动，以提升 MI355X 的性能表现。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495363",
+          "tokenized_text": "至于 MI325X，似乎并非所有存在于下游 ROCm fork 镜像（在 2025 年 10 月 5 日测试中使用）中的性能增强，都已合入官方 vLLM ROCm 镜像。更离谱的是，MI355X 居然还在用 vLLM 0.10.1 版本的 fork [[[CODE_1|rocm/7.0:rocm7.0_ubuntu_22.04_vllm_0.10.1_instinct_20250927_rc1]]])。我们本期望现在能看到它更新，但遗憾的是，当前的官方镜像（撰写本文时的 0.15.1 版本）尚未针对 MI355X 进行优化，并且会遇到严重错误。之前我们在 vLLM 0.14 版本的 MI355X 测试中也曾遭遇严重错误导致的崩溃。坊间传闻，vLLM 0.16.0 终于将实装所有必要改动，以提升 MI355X 的性能表现。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495389",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1755b498-ab4d-4c02-b6fd-152ee538a34d_2126x1788.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386927",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495448",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Turning back to Nvidia’s systems, both Hopper and Blackwell saw a steady performance increase between vLLM 0.11.2 and 0.13.0. Soon, we will update recipes for Nvidia GPUs to use the latest vLLM version and we expect even greater performance gains after making the switch. We also observed a performance bump in the latest 1.2.0 version of TRT-LLM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Turning back to Nvidia’s systems, both Hopper and Blackwell saw a steady performance increase between vLLM 0.11.2 and 0.13.0. Soon, we will update recipes for Nvidia GPUs to use the latest vLLM version and we expect even greater performance gains after making the switch. We also observed a performance bump in the latest 1.2.0 version of TRT-LLM.",
+      "parent_block_plain_text": "Turning back to Nvidia’s systems, both Hopper and Blackwell saw a steady performance increase between vLLM 0.11.2 and 0.13.0. Soon, we will update recipes for Nvidia GPUs to use the latest vLLM version and we expect even greater performance gains after making the switch. We also observed a performance bump in the latest 1.2.0 version of TRT-LLM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 347,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "将目光转回英伟达的系统，Hopper 和 Blackwell 在 vLLM 0.11.2 到 0.13.0 版本之间均实现了稳步的性能提升。我们很快将更新英伟达 GPU 的配置方案，以适配最新版本的 vLLM，并预计在切换后将获得更显著的性能飞跃。我们同样观察到，最新 1.2.0 版本的 TRT-LLM 也带来了性能提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495472",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495493",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F53a95093-3d25-4d01-9d64-64ea9e113749_2376x1760.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386937",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495550",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495572",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F77c591fb-74ef-46ce-bba2-9f82a52f5f6f_2362x1752.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386959",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:20:43.495625",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.184999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

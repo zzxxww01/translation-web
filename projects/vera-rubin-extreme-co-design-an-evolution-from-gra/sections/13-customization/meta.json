@@ -1,0 +1,485 @@
+{
+  "section_id": "13-customization",
+  "title": "Customization",
+  "title_translation": "定制化",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "For GB300, although the reference design has four ConnectX-8 NICs for the backend network and one Bluefield-3 for frontend network, most hyperscalers have their own design and alternative networking configurations, especially for Bluefield-3. Beside networking configuration, the power delivery modules, the local NVMe storage, and the management module are also highly customized and differentiated across customers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0393",
+      "parent_block_index": 393,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For GB300, although the reference design has four ConnectX-8 NICs for the backend network and one Bluefield-3 for frontend network, most hyperscalers have their own design and alternative networking configurations, especially for Bluefield-3. Beside networking configuration, the power delivery modules, the local NVMe storage, and the management module are also highly customized and differentiated across customers.",
+      "parent_block_plain_text": "For GB300, although the reference design has four ConnectX-8 NICs for the backend network and one Bluefield-3 for frontend network, most hyperscalers have their own design and alternative networking configurations, especially for Bluefield-3. Beside networking configuration, the power delivery modules, the local NVMe storage, and the management module are also highly customized and differentiated across customers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 417,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于 GB300，尽管参考设计配备了四个用于后端网络的 ConnectX-8 网卡（NIC）和一个用于前端网络的 Bluefield-3，但大多数超大规模云厂商（hyperscalers）都有自己的设计和替代网络配置，特别是针对 Bluefield-3。除了网络配置外，供电模块、本地 NVMe 存储和管理模块在不同客户之间也具有高度的定制化和差异化。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288320",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "For example, for some racks, even Amazon is deploying ConnectX-8 in GB300s in many cases. Also, most hyperscalers are deploying their in-house DPU instead of Bluefield-3 for frontend networking. The power delivery module and management modules in GB300 are also highly customized as every customer has differing preferences for these modules. As such, the front half of GB300 is highly customizable with each hyperscalers’ design differing from each other significantly.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0394",
+      "parent_block_index": 394,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For example, for some racks, even Amazon is deploying ConnectX-8 in GB300s in many cases. Also, most hyperscalers are deploying their in-house DPU instead of Bluefield-3 for frontend networking. The power delivery module and management modules in GB300 are also highly customized as every customer has differing preferences for these modules. As such, the front half of GB300 is highly customizable with each hyperscalers’ design differing from each other significantly.",
+      "parent_block_plain_text": "For example, for some racks, even Amazon is deploying ConnectX-8 in GB300s in many cases. Also, most hyperscalers are deploying their in-house DPU instead of Bluefield-3 for frontend networking. The power delivery module and management modules in GB300 are also highly customized as every customer has differing preferences for these modules. As such, the front half of GB300 is highly customizable with each hyperscalers’ design differing from each other significantly.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 470,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "例如，在某些机柜中，甚至亚马逊（Amazon）在许多情况下也会在 GB300 中部署 ConnectX-8。此外，大多数超大规模云厂商在前端网络中部署的是其自研 DPU，而非 Bluefield-3。由于每家客户对这些模块的偏好不同，GB300 中的供电模块和管理模块也经过了高度定制。因此，GB300 的前半部分具有极高的可定制性，各家超大规模云厂商的设计之间存在显著差异。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288375",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0395",
+      "parent_block_index": 395,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288388",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!RjLj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe84cedc7-fe5c-4781-99f8-1bf9cd135df9_2806x2341.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0396",
+      "parent_block_index": 396,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达（NVIDIA） VR NVL72 组件物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288452",
+          "tokenized_text": "来源：[[[LINK_1|英伟达（NVIDIA） VR NVL72 组件物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "For VR NVL72, although some level of customization is still available, there are a lot more limitations on the form factor. Given the modular and the cableless design of VR NVl72, the customized modules at the front of the chassis must match the form factor and dimension of Nvidia’s reference design. The modules available for customization are power delivery, Bluefield-4, and management modules. We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4. For the power delivery modules and management, some customers are also looking to combine them.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0397",
+      "parent_block_index": 397,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For VR NVL72, although some level of customization is still available, there are a lot more limitations on the form factor. Given the modular and the cableless design of VR NVl72, the customized modules at the front of the chassis must match the form factor and dimension of Nvidia’s reference design. The modules available for customization are power delivery, Bluefield-4, and management modules. We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4. For the power delivery modules and management, some customers are also looking to combine them. Amazon does have a JBOK / Nitro Box NIC version for VR NVL72",
+      "parent_block_plain_text": "For VR NVL72, although some level of customization is still available, there are a lot more limitations on the form factor. Given the modular and the cableless design of VR NVl72, the customized modules at the front of the chassis must match the form factor and dimension of Nvidia’s reference design. The modules available for customization are power delivery, Bluefield-4, and management modules. We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4. For the power delivery modules and management, some customers are also looking to combine them. Amazon does have a JBOK / Nitro Box NIC version for VR NVL72",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 756,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于 VR NVL72，虽然仍保留了一定程度的定制化空间，但在外形规格（form factor）上存在更多限制。鉴于 VR NVL72 采用模块化和无线缆设计，机箱前端的定制模块必须符合英伟达参考设计的外形规格和尺寸。可供定制的模块包括供电模块、Bluefield-4 和管理模块。我们预计大多数超大规模云厂商客户将采用其自研 DSP 而非 Bluefield-4。考虑到外形规格和尺寸的限制，超大规模云厂商正在重新设计其自研 DPU 的电路板布局和模块外形，以匹配 Bluefield-4。对于供电模块和管理模块，一些客户还计划将二者合二为一。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288468",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Amazon does have a JBOK / Nitro Box NIC version for VR NVL72",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0397",
+      "parent_block_index": 397,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For VR NVL72, although some level of customization is still available, there are a lot more limitations on the form factor. Given the modular and the cableless design of VR NVl72, the customized modules at the front of the chassis must match the form factor and dimension of Nvidia’s reference design. The modules available for customization are power delivery, Bluefield-4, and management modules. We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4. For the power delivery modules and management, some customers are also looking to combine them. Amazon does have a JBOK / Nitro Box NIC version for VR NVL72",
+      "parent_block_plain_text": "For VR NVL72, although some level of customization is still available, there are a lot more limitations on the form factor. Given the modular and the cableless design of VR NVl72, the customized modules at the front of the chassis must match the form factor and dimension of Nvidia’s reference design. The modules available for customization are power delivery, Bluefield-4, and management modules. We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4. For the power delivery modules and management, some customers are also looking to combine them. Amazon does have a JBOK / Nitro Box NIC version for VR NVL72",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 757,
+      "segment_end": 817,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "亚马逊确实为 VR NVL72 提供了一个 JBOK / Nitro Box 网卡版本。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:06.288481",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.01,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。"
+          },
+          {
+            "type": "terminology",
+            "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

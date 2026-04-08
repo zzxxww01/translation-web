@@ -1,0 +1,34 @@
+{
+  "section_id": "06-memory-subsystem",
+  "new_terms": [
+    {
+      "term": "LDGSTS",
+      "suggested_translation": "LDGSTS 指令",
+      "context": "A specific variant of asynchronous copy instruction (Load Global Store Shared) used in GPU memory subsystems",
+      "confidence": 0.98
+    },
+    {
+      "term": "memory copy instructions",
+      "suggested_translation": "内存拷贝指令",
+      "context": "Operations that utilize the memory subsystem to move data between units",
+      "confidence": 0.95
+    },
+    {
+      "term": "asynchronous copy instructions",
+      "suggested_translation": "异步拷贝指令",
+      "context": "Instructions that decouple data movement from the execution pipeline, including LDGSTS and TMA",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory subsystem",
+      "suggested_translation": "内存子系统",
+      "context": "The hardware units responsible for data movement between computation units",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tensor memory accelerator (tma)": "TMA"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:20:18.223217"
+}

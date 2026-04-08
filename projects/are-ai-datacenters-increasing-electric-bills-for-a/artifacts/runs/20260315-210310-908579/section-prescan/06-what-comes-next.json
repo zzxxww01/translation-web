@@ -1,0 +1,49 @@
+{
+  "section_id": "06-what-comes-next",
+  "new_terms": [
+    {
+      "term": "Non-Capacity-Backed Load (NCBL)",
+      "suggested_translation": "非容量保障负荷",
+      "context": "PJM rule mechanism to curtail large loads that haven't secured their own capacity.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Advance Notice of Proposed Rulemaking (ANOPR)",
+      "suggested_translation": "拟议规则制定预告",
+      "context": "A formal regulatory step by FERC signaling future rule changes.",
+      "confidence": 0.98
+    },
+    {
+      "term": "SB 6",
+      "suggested_translation": "第6号参议院法案 (SB 6)",
+      "context": "Specific Texas legislation regarding power grid curtailment and backup generation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "regulatory asymmetry",
+      "suggested_translation": "监管不对称性",
+      "context": "The structural difference in speed and authority between ERCOT and PJM regulatory frameworks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "curtailment authority",
+      "suggested_translation": "负荷削减权限",
+      "context": "The legal power to force large energy users to reduce consumption.",
+      "confidence": 0.92
+    },
+    {
+      "term": "temporary collar",
+      "suggested_translation": "临时价格区间限制",
+      "context": "A regulatory mechanism to limit price spikes in capacity auctions.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "price cap": "价格上限",
+    "reserve margin": "备用容量率",
+    "delivery years": "交付年",
+    "vrr curve": "VRR曲线"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T22:43:51.140222"
+}

@@ -1,0 +1,56 @@
+{
+  "section_id": "04-ercot-same-load-growth-no-pr",
+  "new_terms": [
+    {
+      "term": "Operating Reserve Demand Curve (ORDC)",
+      "suggested_translation": "运行备用需求曲线 (ORDC)",
+      "context": "A mechanism used by ERCOT to calculate real-time scarcity price adders.",
+      "confidence": 0.98
+    },
+    {
+      "term": "scarcity price adder",
+      "suggested_translation": "稀缺价格加成",
+      "context": "An additional price component in ERCOT's energy-only market during tight supply.",
+      "confidence": 0.95
+    },
+    {
+      "term": "gas peaker plants",
+      "suggested_translation": "燃气调峰电厂",
+      "context": "Power plants that generally run only when there is high demand.",
+      "confidence": 0.92
+    },
+    {
+      "term": "haircut",
+      "suggested_translation": "风险折减 / 估值折扣",
+      "context": "A deliberate reduction or discount applied to forecasts or asset values to account for risk.",
+      "confidence": 0.9
+    },
+    {
+      "term": "resource adequacy",
+      "suggested_translation": "资源充裕度",
+      "context": "The ability of the electric system to supply the aggregate electrical demand and energy requirements at all times.",
+      "confidence": 0.96
+    },
+    {
+      "term": "brownouts",
+      "suggested_translation": "欠压供电 / 局部限电",
+      "context": "A drop in voltage in an electrical power supply system, often used to prevent a total blackout.",
+      "confidence": 0.88
+    },
+    {
+      "term": "forward prices",
+      "suggested_translation": "远期价格",
+      "context": "The predetermined price for an energy contract to be delivered in the future.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "capacity market": "容量市场",
+    "scarcity pricing": "稀缺定价",
+    "load growth": "负荷增长",
+    "interconnection queue": "并网队列",
+    "hyperscalers": "超大规模云厂商"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T22:16:06.414852"
+}

@@ -1,0 +1,67 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "Dynamo TRTLLM",
+      "suggested_translation": "Dynamo TRT-LLM",
+      "context": "Refers to the integration of PyTorch Dynamo with the TensorRT-LLM engine.",
+      "confidence": 0.95
+    },
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "聚合式服务",
+      "context": "The opposite of disaggregated serving, where prefill and decode happen on the same node.",
+      "confidence": 0.9
+    },
+    {
+      "term": "picoJoules per token",
+      "suggested_translation": "每 Token 皮焦耳 (pJ/token)",
+      "context": "A metric for energy efficiency in LLM inference.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "SOTA / 最先进",
+      "context": "Abbreviation for State of the Art, referring to top-tier inference optimizations.",
+      "confidence": 1.0
+    },
+    {
+      "term": "MTP",
+      "suggested_translation": "MTP (多 Token 预测)",
+      "context": "Likely Multi-Token Prediction, used as a baseline optimization technique.",
+      "confidence": 0.85
+    },
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学",
+      "context": "An industry meme/term referring to Jensen Huang's aggressive performance claims.",
+      "confidence": 0.95
+    },
+    {
+      "term": "InferenceX",
+      "suggested_translation": "InferenceX",
+      "context": "SemiAnalysis's proprietary open-source inference benchmarking software.",
+      "confidence": 1.0
+    },
+    {
+      "term": "B200",
+      "suggested_translation": "B200",
+      "context": "NVIDIA Blackwell architecture GPU.",
+      "confidence": 1.0
+    },
+    {
+      "term": "H100",
+      "suggested_translation": "H100",
+      "context": "NVIDIA Hopper architecture GPU.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "disagg prefill",
+    "wide expert parallelism (wideep)": "wideEP",
+    "framemog": "framemogging",
+    "jestermaxing": "jestermaxxing"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:36:38.477374"
+}

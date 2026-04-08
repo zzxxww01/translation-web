@@ -1,0 +1,142 @@
+{
+  "section_id": "03-compute-tray-redesign",
+  "new_terms": [
+    {
+      "term": "cableless design",
+      "suggested_translation": "免线缆设计",
+      "context": "The cableless design reduces the compute tray assembly time from 2 hours to 5 minutes.",
+      "confidence": 0.95
+    },
+    {
+      "term": "board-to-board connectors",
+      "suggested_translation": "板对板连接器",
+      "context": "The modules connecting to each via board-to-board connectors.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Strata Module",
+      "suggested_translation": "Strata 模块",
+      "context": "The Strata module of VR NVL72 is the equivalent of the Bianca board of GB200/300.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Orchid Module",
+      "suggested_translation": "Orchid 模块",
+      "context": "The Orchid Module houses two ConnectX-9 NICs, two 800G transceiver cages, and one E1.S module slot.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Compute Tray Midplane",
+      "suggested_translation": "计算托盘中板",
+      "context": "The midplane acts as a bridge for the PCIe signal between the two Strata modules.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Paladin HD2",
+      "suggested_translation": "Paladin HD2",
+      "context": "Replaced by Paladin HD2 board-to-board connectors at the bottom of the module.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bianca board",
+      "suggested_translation": "Bianca 板卡",
+      "context": "The Strata module is the equivalent of the Bianca board of GB200/300.",
+      "confidence": 0.85
+    },
+    {
+      "term": "front end networking",
+      "suggested_translation": "前端网络",
+      "context": "BlueField-4 acts as a DPU providing up to 800Gb/s of front end networking capability.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ICMS / CMX",
+      "suggested_translation": "推理上下文存储内存 / CMX",
+      "context": "Inference Context Memory Storage, a platform for storing KV cache in LLM inference.",
+      "confidence": 0.95
+    },
+    {
+      "term": "KV cache fabric",
+      "suggested_translation": "KV 缓存织网",
+      "context": "A purpose-built network architecture dedicated to KV cache traffic.",
+      "confidence": 0.9
+    },
+    {
+      "term": "DC-SCM",
+      "suggested_translation": "数据中心安全控制模块",
+      "context": "Datacenter Secure Control Module, an OCP standard for management and security.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DPU",
+      "suggested_translation": "DPU",
+      "context": "Data Processing Unit, used for offloading networking and storage tasks from the CPU.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NVMe-oF",
+      "suggested_translation": "NVMe over Fabrics",
+      "context": "A storage protocol used to access NVMe storage over a network fabric.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Busbar",
+      "suggested_translation": "汇流排",
+      "context": "A metallic strip or bar used for high-current power distribution within the tray.",
+      "confidence": 0.9
+    },
+    {
+      "term": "BlueField-4",
+      "suggested_translation": "BlueField-4",
+      "context": "Nvidia's next-generation DPU acting as the controller for the context memory fabric.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Advanced Secure Trusted Resource Architecture (Astra)",
+      "suggested_translation": "Astra (高级安全可信资源架构)",
+      "context": "A system for unified management of front-end and back-end networks, offloading host CPU tasks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "midplane module",
+      "suggested_translation": "中板模块",
+      "context": "A new component introduced to eliminate internal cables from the compute tray.",
+      "confidence": 0.95
+    },
+    {
+      "term": "daughter modules",
+      "suggested_translation": "子模块",
+      "context": "Modules at the front of the chassis used to connect signals from the midplane to front I/O ports.",
+      "confidence": 0.9
+    },
+    {
+      "term": "north-south network",
+      "suggested_translation": "南北向网络",
+      "context": "Refers to front-end traffic entering or leaving the data center/cluster.",
+      "confidence": 0.95
+    },
+    {
+      "term": "East-West networks",
+      "suggested_translation": "东西向网络",
+      "context": "Refers to back-end high-speed traffic between servers within the cluster.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "compute tray": "计算托盘",
+    "bom": "物料清单",
+    "socamm": "SOCAMM",
+    "rubin": "鲁宾",
+    "vera": "维拉",
+    "vr nvl72": "VR NVL72",
+    "serdes": "SerDes",
+    "blackwell": "布莱克威尔",
+    "hbm": "HBM",
+    "dram": "DRAM",
+    "context window": "上下文窗口",
+    "inference": "推理",
+    "token": "token"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T21:45:55.107195"
+}

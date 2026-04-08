@@ -1,0 +1,1105 @@
+{
+  "section_id": "05-interactivity-vs-throughput-tr",
+  "title": "Interactivity vs Throughput Tradeoff",
+  "title_translation": "交互性与吞吐量的权衡",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The fundamental tradeoff with LLM inference is throughput versus latency. Interactivity (tok/s/user) describes how fast each user of a system receives tokens – it is the inverse of time per output token (TPOT). Throughput (tok/s) describes how many total tokens a system can crank out across all users. One can achieve higher total throughput by batching requests, but each request will be allocated less FLOPs and thus complete slower. This is analogous to the choice of riding a metro bus vs a race car. The metro bus serves many riders, but also makes frequent stops which takes time, but the cost of the metro bus can be amortized across many passengers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Interactivity",
+          "start": 74,
+          "end": 87,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "Throughput",
+          "start": 211,
+          "end": 221,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        }
+      ],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The fundamental tradeoff with LLM inference is throughput versus latency. *Interactivity* (tok/s/user) describes how fast each user of a system receives tokens – it is the inverse of time per output token (TPOT). *Throughput* (tok/s) describes how many total tokens a system can crank out across all users. One can achieve higher total throughput by batching requests, but each request will be allocated less FLOPs and thus complete slower. This is analogous to the choice of riding a metro bus vs a race car. The metro bus serves many riders, but also makes frequent stops which takes time, but the cost of the metro bus can be amortized across many passengers. The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expensive to ride per passenger. The metro bus might make more sense for people heading to the park on a weekend, while the race car might be better for bringing a celebrity to their destination. There is no one size fits all solution.",
+      "parent_block_plain_text": "The fundamental tradeoff with LLM inference is throughput versus latency. Interactivity (tok/s/user) describes how fast each user of a system receives tokens – it is the inverse of time per output token (TPOT). Throughput (tok/s) describes how many total tokens a system can crank out across all users. One can achieve higher total throughput by batching requests, but each request will be allocated less FLOPs and thus complete slower. This is analogous to the choice of riding a metro bus vs a race car. The metro bus serves many riders, but also makes frequent stops which takes time, but the cost of the metro bus can be amortized across many passengers. The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expensive to ride per passenger. The metro bus might make more sense for people heading to the park on a weekend, while the race car might be better for bringing a celebrity to their destination. There is no one size fits all solution.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Interactivity",
+          "start": 74,
+          "end": 87,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "Throughput",
+          "start": 211,
+          "end": 221,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 658,
+      "expected_tokens": [
+        "EM_1",
+        "EM_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "LLM 推理的根本权衡在于吞吐量与延迟。交互性 (tok/s/user) 衡量系统向每位用户返回 token 的快慢，它是每个输出Token的时间 (TPOT) 的倒数。吞吐量 (tok/s) 则衡量系统在所有用户中总共能产出多少 token。通过批处理请求可以实现更高的总吞吐量，但分配给每个请求的 FLOPS 会减少，导致完成速度变慢。这就像是在乘坐公交车和赛车之间做选择。公交车能服务众多乘客，但频繁停靠会耗费时间，不过其成本可以分摊到众多乘客身上。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.362626",
+          "tokenized_text": "LLM 推理的根本权衡在于吞吐量与延迟。[[[EM_1|交互性]]] (tok/s/user) 衡量系统向每位用户返回 token 的快慢，它是每个输出Token的时间 (TPOT) 的倒数。[[[EM_2|吞吐量]]] (tok/s) 则衡量系统在所有用户中总共能产出多少 token。通过批处理请求可以实现更高的总吞吐量，但分配给每个请求的 FLOPS 会减少，导致完成速度变慢。这就像是在乘坐公交车和赛车之间做选择。公交车能服务众多乘客，但频繁停靠会耗费时间，不过其成本可以分摊到众多乘客身上。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expensive to ride per passenger. The metro bus might make more sense for people heading to the park on a weekend, while the race car might be better for bringing a celebrity to their destination. There is no one size fits all solution.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The fundamental tradeoff with LLM inference is throughput versus latency. *Interactivity* (tok/s/user) describes how fast each user of a system receives tokens – it is the inverse of time per output token (TPOT). *Throughput* (tok/s) describes how many total tokens a system can crank out across all users. One can achieve higher total throughput by batching requests, but each request will be allocated less FLOPs and thus complete slower. This is analogous to the choice of riding a metro bus vs a race car. The metro bus serves many riders, but also makes frequent stops which takes time, but the cost of the metro bus can be amortized across many passengers. The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expensive to ride per passenger. The metro bus might make more sense for people heading to the park on a weekend, while the race car might be better for bringing a celebrity to their destination. There is no one size fits all solution.",
+      "parent_block_plain_text": "The fundamental tradeoff with LLM inference is throughput versus latency. Interactivity (tok/s/user) describes how fast each user of a system receives tokens – it is the inverse of time per output token (TPOT). Throughput (tok/s) describes how many total tokens a system can crank out across all users. One can achieve higher total throughput by batching requests, but each request will be allocated less FLOPs and thus complete slower. This is analogous to the choice of riding a metro bus vs a race car. The metro bus serves many riders, but also makes frequent stops which takes time, but the cost of the metro bus can be amortized across many passengers. The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expensive to ride per passenger. The metro bus might make more sense for people heading to the park on a weekend, while the race car might be better for bringing a celebrity to their destination. There is no one size fits all solution.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Interactivity",
+          "start": 74,
+          "end": 87,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "Throughput",
+          "start": 211,
+          "end": 221,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        }
+      ],
+      "segment_start": 659,
+      "segment_end": 1048,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "赛车只能搭载一两名乘客，但几乎中途不停，整体行程更快，不过单客乘坐成本要高得多。周末去公园游玩的人可能更适合坐公交车，而护送名人前往目的地则更适合用赛车。这里没有放之四海而皆准的解决方案。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.362750",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.362886",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0037",
+      "parent_block_index": 37,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427648",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.362944",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Most benchmark results we will show in this article are InferenceX is a curve. It is important to analyze throughput at various levels of interactivity/latency instead of just looking at maximum achieved throughput (which normally can only be achieved at a single low interactivity). With inference, there is no one size fits all use case. The level of interactivity and throughput needed depends on the use case. For instance, real-time speech models require extremely low latency so that the end user can maintain a natural “conversation” with the LLM, whereas a basic QA chatbot may allow for higher latency. We leave it up to the reader to look at the curve and apply this principle to identify where their use case falls on the throughput-interactivity curve.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Most benchmark results we will show in this article are InferenceX is a curve. It is important to analyze throughput at various levels of interactivity/latency instead of just looking at maximum achieved throughput (which normally can only be achieved at a single low interactivity). With inference, there is no one size fits all use case. The level of interactivity and throughput needed depends on the use case. For instance, real-time speech models require extremely low latency so that the end user can maintain a natural “conversation” with the LLM, whereas a basic QA chatbot may allow for higher latency. We leave it up to the reader to look at the curve and apply this principle to identify where their use case falls on the throughput-interactivity curve.",
+      "parent_block_plain_text": "Most benchmark results we will show in this article are InferenceX is a curve. It is important to analyze throughput at various levels of interactivity/latency instead of just looking at maximum achieved throughput (which normally can only be achieved at a single low interactivity). With inference, there is no one size fits all use case. The level of interactivity and throughput needed depends on the use case. For instance, real-time speech models require extremely low latency so that the end user can maintain a natural “conversation” with the LLM, whereas a basic QA chatbot may allow for higher latency. We leave it up to the reader to look at the curve and apply this principle to identify where their use case falls on the throughput-interactivity curve.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 764,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本文展示的大多数 InferenceX 基准测试结果都呈一条曲线。必须分析不同交互性/延迟水平下的吞吐量，而非仅仅盯着最高吞吐量（通常只能在单一的低交互性下实现）。推理领域不存在万能的用例。所需的交互性和吞吐量水平取决于具体应用场景。例如，实时语音模型要求极低的延迟，确保最终用户能与 LLM 保持自然的“对话”；而基础的问答聊天机器人则可以容忍较高的延迟。读者可以自行查看曲线，并运用这一原则来确定自己的用例在吞吐量-交互性曲线上的具体位置。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.362989",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The Cost/Perf per TCO vs Interactivity/End-to-End Latency curve mostly follows the Throughput vs Interactivity/End-to-End Latency Curve: More tokens/hour leads to a lower cost per token as fixed $/hour costs are amortized over more tokens produced.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Cost/Perf per TCO vs Interactivity/End-to-End Latency curve mostly follows the Throughput vs Interactivity/End-to-End Latency Curve: More tokens/hour leads to a lower cost per token as fixed $/hour costs are amortized over more tokens produced.",
+      "parent_block_plain_text": "The Cost/Perf per TCO vs Interactivity/End-to-End Latency curve mostly follows the Throughput vs Interactivity/End-to-End Latency Curve: More tokens/hour leads to a lower cost per token as fixed $/hour costs are amortized over more tokens produced.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 248,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "单位 TCO 性价比与交互性/端到端延迟曲线，基本与吞吐量与交互性/端到端延迟曲线走势一致：每小时生成的 token 越多，分摊到每个 token 上的固定小时成本就越低，从而降低了单 token 成本。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363042",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Prefill and Decode Phases",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0040",
+      "parent_block_index": 40,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Prefill and Decode Phases",
+      "parent_block_plain_text": "Prefill and Decode Phases",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 25,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "预填充与解码阶段",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363091",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Inference contains two main phases: prefill and decode. Prefill occurs during the first forward pass of a request’s lifetime. It is computationally intensive since all tokens in the request are processed in parallel. This phase is responsible for “filling up” the KV cache for a sequence. After prefill, responses are generated (or decoded) one token at a time. Each forward pass loads the entire KV cache for a sequence from HBM, while only performing the computation for a single token, making decode memory (bandwidth) intensive.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Prefill",
+          "start": 56,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "decoded",
+          "start": 332,
+          "end": 339,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        }
+      ],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Inference contains two main phases: prefill and decode. *Prefill* occurs during the first forward pass of a request’s lifetime. It is computationally intensive since all tokens in the request are processed in parallel. This phase is responsible for “filling up” the KV cache for a sequence. After prefill, responses are generated (or *decoded*) one token at a time. Each forward pass loads the entire KV cache for a sequence from HBM, while only performing the computation for a single token, making decode memory (bandwidth) intensive.",
+      "parent_block_plain_text": "Inference contains two main phases: prefill and decode. Prefill occurs during the first forward pass of a request’s lifetime. It is computationally intensive since all tokens in the request are processed in parallel. This phase is responsible for “filling up” the KV cache for a sequence. After prefill, responses are generated (or decoded) one token at a time. Each forward pass loads the entire KV cache for a sequence from HBM, while only performing the computation for a single token, making decode memory (bandwidth) intensive.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Prefill",
+          "start": 56,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "decoded",
+          "start": 332,
+          "end": 339,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 532,
+      "expected_tokens": [
+        "EM_1",
+        "EM_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "推理包含两个主要阶段：预填充和解码。预填充发生在请求生命周期的首次前向传播期间。由于请求中的所有 token 都在并行处理，该阶段属于计算密集型。此阶段负责为序列“填满”KV 缓存。预填充结束后，系统会逐个 token 地生成（或解码）响应。每次前向传播都会从 HBM 加载该序列的完整 KV 缓存，却只执行单个 token 的计算，这使得解码成为内存（带宽）密集型操作。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363330",
+          "tokenized_text": "推理包含两个主要阶段：预填充和解码。[[[EM_1|预填充]]]发生在请求生命周期的首次前向传播期间。由于请求中的所有 token 都在并行处理，该阶段属于计算密集型。此阶段负责为序列“填满”KV 缓存。预填充结束后，系统会逐个 token 地生成（或[[[EM_2|解码]]]）响应。每次前向传播都会从 HBM 加载该序列的完整 KV 缓存，却只执行单个 token 的计算，这使得解码成为内存（带宽）密集型操作。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "When prefill and decode performed on the same engine, prefill constantly disrupts decode batches leading to worse overall performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "p",
+      "parent_block_markdown": "When prefill and decode performed on the same engine, prefill constantly disrupts decode batches leading to worse overall performance.",
+      "parent_block_plain_text": "When prefill and decode performed on the same engine, prefill constantly disrupts decode batches leading to worse overall performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 134,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "若预填充与解码在同一引擎上执行，预填充会频繁打断解码批次，拖累整体性能。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363390",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Disaggregated Prefill",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Disaggregated Prefill",
+      "parent_block_plain_text": "Disaggregated Prefill",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 21,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分离式预填充",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363446",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Disaggregated prefill (aka PD disaggregation or simply “disagg”) is the practice of separating the prefill and decode phases across separate pools of GPUs or clusters. These separate prefill and decode pools can be tuned independently and scaled to match the needs of workloads.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0044",
+      "parent_block_index": 44,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Disaggregated prefill (aka PD disaggregation or simply “disagg”) is the practice of separating the prefill and decode phases across separate pools of GPUs or clusters. These separate prefill and decode pools can be tuned independently and scaled to match the needs of workloads.",
+      "parent_block_plain_text": "Disaggregated prefill (aka PD disaggregation or simply “disagg”) is the practice of separating the prefill and decode phases across separate pools of GPUs or clusters. These separate prefill and decode pools can be tuned independently and scaled to match the needs of workloads.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 278,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分离式预填充（又称 PD分离 (预填充-解码分离)，或简称“分离”）是指将预填充与解码阶段拆分，分别交由独立的 GPU 资源池或集群来处理。这些相互独立的预填充池与解码池可进行独立调优，并弹性缩放以适配工作负载需求。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:03:16.363499",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.674999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+          "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+          "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+          "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+          "key_points": [
+            "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+            "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+            "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+          ],
+          "translation_notes": [
+            "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+            "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The original text uses 'FLOPs' (floating-point operations, representing a compute budget/amount of work), but the translation uses 'FLOPS' (floating-point operations per second, representing a rate/throughput). This is a subtle but important distinction in hardware and AI contexts."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "Missing CJK-Latin spacing between '输出' and 'Token'."
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "In the context of GPUs and HBM (High Bandwidth Memory), 'memory' should be translated as '显存' rather than '内存'."
+          },
+          {
+            "type": "readability|formatting",
+            "description": "The translation '（又称 PD分离 (预填充-解码分离)，或简称“分离”）' uses nested half-width parentheses inside full-width parentheses, and lacks spacing around 'PD'."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

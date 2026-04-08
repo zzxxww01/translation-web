@@ -1,0 +1,52 @@
+{
+  "section_id": "03-introducing-the-semianalysis-1",
+  "new_terms": [
+    {
+      "term": "agentic evals",
+      "suggested_translation": "智能体评估",
+      "context": "Benchmarking comparisons across coding, reasoning, math and agentic evals.",
+      "confidence": 0.95
+    },
+    {
+      "term": "take-up rates",
+      "suggested_translation": "认购率 / 采用率",
+      "context": "On-demand operates by fixing price at a constant level with take-up rates or utilization rates the variable.",
+      "confidence": 0.85
+    },
+    {
+      "term": "bilateral basis",
+      "suggested_translation": "双边协商",
+      "context": "These prices are negotiated on a bilateral basis and such quotes are not typically posted.",
+      "confidence": 0.9
+    },
+    {
+      "term": "frontier AI model",
+      "suggested_translation": "前沿AI模型",
+      "context": "A tool for tracking and understanding the frontier AI model landscape.",
+      "confidence": 0.95
+    },
+    {
+      "term": "AMD complex",
+      "suggested_translation": "AMD产品系列",
+      "context": "Selected data available for the AMD complex as well (MI300, MI325, MI355).",
+      "confidence": 0.8
+    },
+    {
+      "term": "representative range",
+      "suggested_translation": "代表性区间",
+      "context": "Determine a representative range (25th to 75th percentile) for GPU rental contracts.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "neocloud": "新兴算力云厂商",
+    "hyperscaler": "超大规模云厂商",
+    "offtake": "包销协议",
+    "tenor": "合同期限",
+    "term structure": "期限结构",
+    "on-demand": "按需",
+    "tokenomics": "Token经济学"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:05:13.781984"
+}

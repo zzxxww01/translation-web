@@ -1,0 +1,43 @@
+{
+  "section_id": "08-tensor-memory-accelerator-tma",
+  "new_terms": [
+    {
+      "term": "global memory",
+      "suggested_translation": "全局内存",
+      "context": "moving large amounts of data from global memory to shared memory",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory swizzling",
+      "suggested_translation": "内存重排 (Swizzling)",
+      "context": "TMA to perform address generation, memory swizzling, and out-of-bounds handling",
+      "confidence": 0.9
+    },
+    {
+      "term": "out-of-bounds handling",
+      "suggested_translation": "越界处理",
+      "context": "TMA handles address generation and out-of-bounds handling in hardware",
+      "confidence": 0.9
+    },
+    {
+      "term": "box dimensions",
+      "suggested_translation": "框维度 (Box Dimensions)",
+      "context": "TMA box dimensions: 2D shapes increasing from size 32x8 to 128x128",
+      "confidence": 0.85
+    },
+    {
+      "term": "address generation",
+      "suggested_translation": "地址生成",
+      "context": "freeing up other threads to execute independent work by offloading address generation",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tensor memory accelerator (tma)": "TMA",
+    "shared memory (smem)": "shared memory",
+    "cooperative thread array (cta)": "CTA",
+    "sm": "SM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:24:03.694866"
+}

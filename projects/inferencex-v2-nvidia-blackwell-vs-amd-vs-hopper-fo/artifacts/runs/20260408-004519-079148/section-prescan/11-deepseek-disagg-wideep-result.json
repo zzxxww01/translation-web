@@ -1,0 +1,53 @@
+{
+  "section_id": "11-deepseek-disagg-wideep-result",
+  "new_terms": [
+    {
+      "term": "aggregated inference",
+      "suggested_translation": "聚合推理",
+      "context": "disagg outperform aggregated inference (grey lines) in terms of total token throughput",
+      "confidence": 0.95
+    },
+    {
+      "term": "TogetherAI",
+      "suggested_translation": "TogetherAI",
+      "context": "serves billions of tokens per hour globally across providers like TogetherAI",
+      "confidence": 0.95
+    },
+    {
+      "term": "world size",
+      "suggested_translation": "World Size",
+      "context": "The benefits delivered from the larger world size of the NVL72 family",
+      "confidence": 0.9
+    },
+    {
+      "term": "HGX",
+      "suggested_translation": "HGX",
+      "context": "fit within a single HGX node’s NVLink domain",
+      "confidence": 1.0
+    },
+    {
+      "term": "NVLink domain",
+      "suggested_translation": "NVLink 域",
+      "context": "fit within a single HGX node’s NVLink domain (i.e. 8 GPUs)",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-out",
+      "suggested_translation": "横向扩展 (Scale-out)",
+      "context": "the GB200 NVL72’s larger scale-out advantage starts to disappear",
+      "confidence": 0.95
+    },
+    {
+      "term": "NVL",
+      "suggested_translation": "NVL",
+      "context": "each GB200 NVL GPU produces slightly less than triple the number of tokens/s",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tensorrt-llm": "TensorRT LLM",
+    "wide expert parallelism (wideep)": "wideEP"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:50:08.588650"
+}

@@ -1,0 +1,718 @@
+{
+  "section_id": "03-the-tsmc-n3-shortage",
+  "title": "The TSMC N3 Shortage",
+  "title_translation": "台积电 N3 产能短缺",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "One of, if not the, biggest constraints is TSMC’s N3 logic wafer capacity. TSMC’s N3 family started shipping for revenue in 2023, with demand initially driven primarily by smartphones and PCs. N3 got off to a shaky start, with the first variant “N3B” having yield issues and being too expensive relative to the density improvement. Greater adoption came with the refined N3E process, a relaxed variant with far fewer EUV layers and therefore lower cost. Key smartphone and PC customers include Apple, which uses N3 variants for its M3 to M5 Mac chips and A17 to A19 iPhone processors, Qualcomm for its Snapdragon 8 Elite series, MediaTek for its Dimensity smartphone SoCs as well as select automotive and PC chips, and Intel for its Lunar Lake and Arrow Lake client processors.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "N3 got off to a shaky start, with the first variant “N3B” having yield issues and being too expensive relative to the density improvement.",
+          "start": 193,
+          "end": 331,
+          "href": "https://newsletter.semianalysis.com/i/175660907/tsmc-3nm-fab-costs",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One of, if not the, biggest constraints is TSMC’s N3 logic wafer capacity. TSMC’s N3 family started shipping for revenue in 2023, with demand initially driven primarily by smartphones and PCs. [N3 got off to a shaky start, with the first variant “N3B” having yield issues and being too expensive relative to the density improvement.](https://newsletter.semianalysis.com/i/175660907/tsmc-3nm-fab-costs) Greater adoption came with the refined N3E process, a relaxed variant with far fewer EUV layers and therefore lower cost. Key smartphone and PC customers include Apple, which uses N3 variants for its M3 to M5 Mac chips and A17 to A19 iPhone processors, Qualcomm for its Snapdragon 8 Elite series, MediaTek for its Dimensity smartphone SoCs as well as select automotive and PC chips, and Intel for its Lunar Lake and Arrow Lake client processors.",
+      "parent_block_plain_text": "One of, if not the, biggest constraints is TSMC’s N3 logic wafer capacity. TSMC’s N3 family started shipping for revenue in 2023, with demand initially driven primarily by smartphones and PCs. N3 got off to a shaky start, with the first variant “N3B” having yield issues and being too expensive relative to the density improvement. Greater adoption came with the refined N3E process, a relaxed variant with far fewer EUV layers and therefore lower cost. Key smartphone and PC customers include Apple, which uses N3 variants for its M3 to M5 Mac chips and A17 to A19 iPhone processors, Qualcomm for its Snapdragon 8 Elite series, MediaTek for its Dimensity smartphone SoCs as well as select automotive and PC chips, and Intel for its Lunar Lake and Arrow Lake client processors.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "N3 got off to a shaky start, with the first variant “N3B” having yield issues and being too expensive relative to the density improvement.",
+          "start": 193,
+          "end": 331,
+          "href": "https://newsletter.semianalysis.com/i/175660907/tsmc-3nm-fab-costs",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 777,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N3制程的逻辑晶圆产能是最大的制约因素之一，甚至可能就是最大的瓶颈所在。台积电的N3制程系列于2023年开始出货贡献营收，其初期需求主要由智能手机和PC驱动。N3制程的开局可谓步履维艰，其首个版本“N3B”不仅存在良率问题，且相对于其带来的密度提升而言，成本过于高昂。随着改进版N3E工艺的推出，该制程才迎来了更广泛的采用。N3E是一个放宽了设计规则的版本，大幅减少了EUV光刻层数，从而降低了成本。在智能手机和PC领域，其核心客户包括：苹果（将N3制程各版本用于M3至M5系列Mac芯片及A17至A19系列iPhone处理器）、高通（用于骁龙8至尊版系列）、联发科（用于Dimensity系列智能手机SoC以及部分汽车和PC芯片），以及英特尔（用于Lunar Lake和Arrow Lake客户端处理器）。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.681516",
+          "tokenized_text": "台积电N3制程的逻辑晶圆产能是最大的制约因素之一，甚至可能就是最大的瓶颈所在。台积电的N3制程系列于2023年开始出货贡献营收，其初期需求主要由智能手机和PC驱动。[[[LINK_1|N3制程的开局可谓步履维艰，其首个版本“N3B”不仅存在良率问题，且相对于其带来的密度提升而言，成本过于高昂。]]]随着改进版N3E工艺的推出，该制程才迎来了更广泛的采用。N3E是一个放宽了设计规则的版本，大幅减少了EUV光刻层数，从而降低了成本。在智能手机和PC领域，其核心客户包括：苹果（将N3制程各版本用于M3至M5系列Mac芯片及A17至A19系列iPhone处理器）、高通（用于骁龙8至尊版系列）、联发科（用于Dimensity系列智能手机SoC以及部分汽车和PC芯片），以及英特尔（用于Lunar Lake和Arrow Lake客户端处理器）。",
+          "format_issues": []
+        },
+        "default": {
+          "text": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电（TSMC）的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通（Qualcomm）、联发科（MediaTek）以及英特尔（Intel）。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+          "model": "default",
+          "created_at": "2026-03-14T21:33:17.825818",
+          "tokenized_text": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电（TSMC）的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。[[[LINK_1|N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。]]]改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通（Qualcomm）、联发科（MediaTek）以及英特尔（Intel）。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通、联发科以及英特尔。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:33:45.319886",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通、联发科以及英特尔。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+      "confirmed_tokenized": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电（TSMC）的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。[[[LINK_1|N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。]]]改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通（Qualcomm）、联发科（MediaTek）以及英特尔（Intel）。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "最大的制约因素之一（甚至可以说是首要瓶颈），就是台积电的N3逻辑晶圆产能。台积电N3系列于2023年开始出货并贡献营收，最初的需求主要由智能手机和PC驱动。N3起步并不顺利，首个版本“N3B”存在良率问题，且相对于密度提升而言成本过于昂贵。改进版N3E工艺推出后，N3系列的采用率才大幅提升。作为放宽设计规则的版本，N3E大幅减少了EUV层数，从而降低了成本。核心的智能手机和PC客户包括苹果、高通（Qualcomm）、联发科（MediaTek）以及英特尔（Intel）。其中，苹果的M3至M5 Mac芯片和A17至A19 iPhone处理器采用了N3系列工艺；高通将其用于骁龙8至尊版系列；联发科将其用于天玑智能手机SoC及部分汽车和PC芯片；英特尔则用于Lunar Lake和Arrow Lake客户端处理器。",
+          "timestamp": "2026-03-14T21:33:39.360653",
+          "source": "manual"
+        }
+      ]
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.683102",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:29:31.047842",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis Foundry Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Foundry Model](https://semianalysis.com/foundry-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Foundry Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis 晶圆代工厂模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.683626",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 晶圆代工厂模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Foundry Model",
+          "model": "manual",
+          "created_at": "2026-03-14T21:29:32.864992",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Foundry Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Foundry Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Up until today, N3 demand has been driven primarily by consumer electronics. In 2026, all the main AI accelerator families are transitioning to N3, and AI will account for the majority of N3 demand before transitioning to N2 and beyond.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Up until today, N3 demand has been driven primarily by consumer electronics. In 2026, all the main AI accelerator families are transitioning to N3, and AI will account for the majority of N3 demand before transitioning to N2 and beyond.",
+      "parent_block_plain_text": "Up until today, N3 demand has been driven primarily by consumer electronics. In 2026, all the main AI accelerator families are transitioning to N3, and AI will account for the majority of N3 demand before transitioning to N2 and beyond.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 236,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "时至今日，N3制程的需求仍主要由消费电子驱动。到2026年，所有主流AI加速器系列都将向N3制程过渡；在向N2及更先进制程演进之前，AI将占据N3制程的绝大部分需求。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.683772",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "时至今日，N3制程的需求仍主要由消费电子驱动。到2026年，所有主流AI加速器系列都将向N3制程过渡；在向N2及更先进制程演进之前，AI将占据N3制程的绝大部分需求。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:33:49.455141",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "时至今日，N3制程的需求仍主要由消费电子驱动。到2026年，所有主流AI加速器系列都将向N3制程过渡；在向N2及更先进制程演进之前，AI将占据N3制程的绝大部分需求。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "We can see in the table below the industry-wide convergence toward TSMC’s N3 family as the leading process node for AI accelerators heading into 2026. NVIDIA transitions from 4NP with Blackwell to 3NP with Rubin. AMD, typically the earlier adopter of new nodes, has already adopted N3 for MI350X and will stay on N3 for the AID and MID tiles for MI400 (XCD is N2). Google’s TPU roadmap shifts fully to N3E starting with TPU v7, with TPU seeing a huge upsize in program volumes this year. AWS also transitions to N3P with Trainium3. Meta’s MTIA follows a similar path, though it will be at much lower volumes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We can see in the table below the industry-wide convergence toward TSMC’s N3 family as the leading process node for AI accelerators heading into 2026. NVIDIA transitions from 4NP with Blackwell to 3NP with Rubin. AMD, typically the earlier adopter of new nodes, has already adopted N3 for MI350X and will stay on N3 for the AID and MID tiles for MI400 (XCD is N2). Google’s TPU roadmap shifts fully to N3E starting with TPU v7, with TPU seeing a huge upsize in program volumes this year. AWS also transitions to N3P with Trainium3. Meta’s MTIA follows a similar path, though it will be at much lower volumes.",
+      "parent_block_plain_text": "We can see in the table below the industry-wide convergence toward TSMC’s N3 family as the leading process node for AI accelerators heading into 2026. NVIDIA transitions from 4NP with Blackwell to 3NP with Rubin. AMD, typically the earlier adopter of new nodes, has already adopted N3 for MI350X and will stay on N3 for the AID and MID tiles for MI400 (XCD is N2). Google’s TPU roadmap shifts fully to N3E starting with TPU v7, with TPU seeing a huge upsize in program volumes this year. AWS also transitions to N3P with Trainium3. Meta’s MTIA follows a similar path, though it will be at much lower volumes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 608,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从下表可以看出，在迈向2026年之际，整个行业正向台积电的N3制程家族集中，使其成为AI加速器的领先制程节点。英伟达正从Blackwell的4NP过渡至Rubin的3NP。作为新制程节点一贯的早期采用者，AMD已在MI350X上采用N3制程，并在MI400的AID和MID芯粒上继续沿用N3制程（XCD则采用N2）。谷歌的TPU路线图从TPU v7起全面转向N3E，且今年TPU项目的规划产量大幅上调。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似的发展路径，尽管其产量规模要小得多。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.683852",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "从下表可以看出，迈向2026年，整个行业正向台积电的N3系列靠拢，使其成为AI加速器领先的工艺制程节点。英伟达将从Blackwell架构的4NP过渡至Rubin架构的3NP。AMD通常更早采用新制程节点，其MI350X已采用N3，且MI400的AID和MID模块也将继续沿用N3（XCD模块则采用N2）。谷歌的TPU路线图从TPU v7开始全面转向N3E，且今年TPU的项目产量大幅攀升。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似路径，不过其产量要低得多。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:42:14.993050",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "从下表可以看出，迈向2026年，整个行业正向台积电（TSMC）的N3系列靠拢，使其成为AI加速器领先的工艺制程节点。英伟达（NVIDIA）将从Blackwell架构的4NP过渡至Rubin架构的3NP。AMD通常更早采用新制程节点，其MI350X已采用N3，且MI400的AID和MID模块也将继续沿用N3（XCD模块则采用N2）。谷歌的TPU（张量处理器，Tensor Processing Unit）路线图从TPU v7开始全面转向N3E，且今年TPU的项目产量大幅攀升。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似路径，不过其产量要低得多。",
+          "model": "default",
+          "created_at": "2026-03-14T21:41:05.751501",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "从下表可以看出，迈向2026年，整个行业正向台积电的N3系列靠拢，使其成为AI加速器领先的工艺制程节点。英伟达将从Blackwell架构的4NP过渡至Rubin架构的3NP。AMD通常更早采用新制程节点，其MI350X已采用N3，且MI400的AID和MID模块也将继续沿用N3（XCD模块则采用N2）。谷歌的TPU路线图从TPU v7开始全面转向N3E，且今年TPU的项目产量大幅攀升。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似路径，不过其产量要低得多。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "从下表可以看出，在迈向2026年之际，整个行业正向台积电的N3制程家族集中，使其成为AI加速器的领先制程节点。英伟达正从Blackwell的4NP过渡至Rubin的3NP。作为新制程节点一贯的早期采用者，AMD已在MI350X上采用N3制程，并在MI400的AID和MID芯粒上继续沿用N3制程（XCD则采用N2）。谷歌的TPU路线图从TPU v7起全面转向N3E，且今年TPU项目的规划产量大幅上调。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似的发展路径，尽管其产量规模要小得多。",
+          "timestamp": "2026-03-14T21:41:05.751480",
+          "source": "default"
+        },
+        {
+          "text": "从下表可以看出，迈向2026年，整个行业正向台积电的N3系列靠拢，使其成为AI加速器领先的工艺制程节点。英伟达将从Blackwell架构的4NP过渡至Rubin架构的3NP。AMD通常更早采用新制程节点，其MI350X已采用N3，且MI400的AID和MID模块也将继续沿用N3（XCD模块则采用N2）。谷歌的TPU（Tensor Processing Unit）路线图从TPU v7开始全面转向N3E，且今年TPU的项目产量大幅攀升。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似路径，不过其产量要低得多。",
+          "timestamp": "2026-03-14T21:42:14.029205",
+          "source": "manual"
+        }
+      ]
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684255",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:30:51.276090",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis 加速器模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684408",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 加速器模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Accelerator Model",
+          "model": "manual",
+          "created_at": "2026-03-14T21:33:17.658723",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Accelerator Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Accelerator Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "This shift is not limited to XPU silicon. The Vera CPU used in VR racks uses N3P for all its silicon. There is also networking silicon in the form of the NVLink 6 switch, as well as scale out switches like Tomahawk 6 and Spectrum 6. With Rubin offering 1.6T of scale out network per GPU, Rubin kicks off the adoption of 3nm 200G optical DSPs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This shift is not limited to XPU silicon. The Vera CPU used in VR racks uses N3P for all its silicon. There is also networking silicon in the form of the NVLink 6 switch, as well as scale out switches like Tomahawk 6 and Spectrum 6. With Rubin offering 1.6T of scale out network per GPU, Rubin kicks off the adoption of 3nm 200G optical DSPs.",
+      "parent_block_plain_text": "This shift is not limited to XPU silicon. The Vera CPU used in VR racks uses N3P for all its silicon. There is also networking silicon in the form of the NVLink 6 switch, as well as scale out switches like Tomahawk 6 and Spectrum 6. With Rubin offering 1.6T of scale out network per GPU, Rubin kicks off the adoption of 3nm 200G optical DSPs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 342,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种转变并不局限于XPU芯片。用于VR（Vera Rubin）机架的Vera CPU，其所有芯片均采用N3P制程。此外还有网络芯片，如NVLink 6交换机，以及Tomahawk 6和Spectrum 6等横向扩展交换机。随着Rubin为每个GPU提供1.6T的横向扩展网络带宽，Rubin开启了3nm 200G光DSP的应用。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684449",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这种转变不仅限于XPU芯片。VR机架搭载的Vera CPU，其所有芯片均采用N3P工艺。此外还包括网络芯片，例如NVLink 6交换芯片，以及Tomahawk 6和Spectrum 6等横向扩展交换芯片。Rubin为每颗GPU提供了1.6T的横向扩展网络带宽，由此拉开了3nm 200G光DSP的应用序幕。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:43:30.719458",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "这种转变不仅限于XPU芯片。VR机架搭载的Vera CPU，其所有芯片均采用N3P工艺。此外还包括网络芯片，例如NVLink 6交换芯片，以及Tomahawk 6和Spectrum 6等横向扩展交换芯片。Rubin为每颗GPU提供了1.6T的横向扩展网络带宽，由此拉开了3nm 200G光DSP的应用序幕。",
+          "model": "default",
+          "created_at": "2026-03-14T21:43:10.975420",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这种转变不仅限于XPU芯片。VR机架搭载的Vera CPU，其所有芯片均采用N3P工艺。此外还包括网络芯片，例如NVLink 6交换芯片，以及Tomahawk 6和Spectrum 6等横向扩展交换芯片。Rubin为每颗GPU提供了1.6T的横向扩展网络带宽，由此拉开了3nm 200G光DSP的应用序幕。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "这种转变并不局限于XPU芯片。用于VR（Vera Rubin）机架的Vera CPU，其所有芯片均采用N3P制程。此外还有网络芯片，如NVLink 6交换机，以及Tomahawk 6和Spectrum 6等横向扩展交换机。随着Rubin为每个GPU提供1.6T的横向扩展网络带宽，Rubin开启了3nm 200G光DSP的应用。",
+          "timestamp": "2026-03-14T21:43:10.975396",
+          "source": "default"
+        }
+      ]
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This sudden convergence of N3 adoption coupled with the continued growth of AI compute demand has resulted in a huge demand shock for N3 wafer capacity. TSMC has been caught flat-footed, with wafer capacity expansion failing to keep pace with surging AI demand. How did this happen? Although the greatest compute buildout in history began in late 2022, TSMC’s capex only exceeded its previous peak in 2025. This year, TSMC is going to smash through last year’s record Capex, because they have realized how far customer demand is exceeding their capacity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This sudden convergence of N3 adoption coupled with the continued growth of AI compute demand has resulted in a huge demand shock for N3 wafer capacity. TSMC has been caught flat-footed, with wafer capacity expansion failing to keep pace with surging AI demand. How did this happen? Although the greatest compute buildout in history began in late 2022, TSMC’s capex only exceeded its previous peak in 2025. This year, TSMC is going to smash through last year’s record Capex, because they have realized how far customer demand is exceeding their capacity.",
+      "parent_block_plain_text": "This sudden convergence of N3 adoption coupled with the continued growth of AI compute demand has resulted in a huge demand shock for N3 wafer capacity. TSMC has been caught flat-footed, with wafer capacity expansion failing to keep pace with surging AI demand. How did this happen? Although the greatest compute buildout in history began in late 2022, TSMC’s capex only exceeded its previous peak in 2025. This year, TSMC is going to smash through last year’s record Capex, because they have realized how far customer demand is exceeding their capacity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 554,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种突然集中采用N3制程的趋势，叠加AI算力需求的持续增长，对N3制程晶圆产能造成了巨大的需求冲击。台积电对此猝不及防，其晶圆产能的扩张速度未能跟上激增的AI需求。这究竟是如何发生的？尽管史上最大规模的算力建设始于2022年底，但台积电的资本支出直到2025年才突破前期峰值。今年，台积电将大幅刷新去年的资本支出纪录，因为他们已经意识到，客户需求已远远超出其现有产能。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684468",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这种突然集中采用N3制程的趋势，叠加AI算力需求的持续增长，对N3制程晶圆产能造成了巨大的需求冲击。台积电对此猝不及防，其晶圆产能的扩张速度未能跟上激增的AI需求。这究竟是如何发生的？尽管史上最大规模的算力建设始于2022年底，但台积电的资本支出直到2025年才突破前期峰值。今年，台积电将大幅刷新去年的资本支出纪录，因为他们已经意识到，客户需求已远远超出其现有产能。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:43:24.715330",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这种突然集中采用N3制程的趋势，叠加AI算力需求的持续增长，对N3制程晶圆产能造成了巨大的需求冲击。台积电对此猝不及防，其晶圆产能的扩张速度未能跟上激增的AI需求。这究竟是如何发生的？尽管史上最大规模的算力建设始于2022年底，但台积电的资本支出直到2025年才突破前期峰值。今年，台积电将大幅刷新去年的资本支出纪录，因为他们已经意识到，客户需求已远远超出其现有产能。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684482",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:30:55.572066",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: Company Filings",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Company Filings",
+      "parent_block_plain_text": "Source: Company Filings",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：公司公告",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684500",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： Company Filings",
+          "model": "manual",
+          "created_at": "2026-03-14T21:30:57.432364",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Company Filings",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "While TSMC maintains a clear technology lead over its only competitors, Intel and Samsung, that advantage matters less if customers cannot secure sufficient wafer supply to support their businesses. Capacity constraints may therefore push customers to explore greater foundry diversification. Intel, for example, has the administration’s backing and any outsourcing towards Intel Foundry will earn brownie points from the US government. Meanwhile, momentum is beginning to build at Samsung Foundry as well, with some recent design wins. First off, Samsung has secured some Tesla chip programs, such as AI5 and AI6, although they are dual-tracked with TSMC. Samsung Foundry has also entered Nvidia’s Datacenter supply chain, a development we discussed in our Foundry Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Samsung Foundry has also entered Nvidia’s Datacenter supply chain",
+          "start": 657,
+          "end": 722,
+          "href": "https://semianalysis.com/institutional/samsung-foundry-finds-its-way-into-nvidias-ai-supply-chain/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While TSMC maintains a clear technology lead over its only competitors, Intel and Samsung, that advantage matters less if customers cannot secure sufficient wafer supply to support their businesses. Capacity constraints may therefore push customers to explore greater foundry diversification. Intel, for example, has the administration’s backing and any outsourcing towards Intel Foundry will earn brownie points from the US government. Meanwhile, momentum is beginning to build at Samsung Foundry as well, with some recent design wins. First off, Samsung has secured some Tesla chip programs, such as AI5 and AI6, although they are dual-tracked with TSMC. [Samsung Foundry has also entered Nvidia’s Datacenter supply chain](https://semianalysis.com/institutional/samsung-foundry-finds-its-way-into-nvidias-ai-supply-chain/), a development we discussed in our Foundry Model.",
+      "parent_block_plain_text": "While TSMC maintains a clear technology lead over its only competitors, Intel and Samsung, that advantage matters less if customers cannot secure sufficient wafer supply to support their businesses. Capacity constraints may therefore push customers to explore greater foundry diversification. Intel, for example, has the administration’s backing and any outsourcing towards Intel Foundry will earn brownie points from the US government. Meanwhile, momentum is beginning to build at Samsung Foundry as well, with some recent design wins. First off, Samsung has secured some Tesla chip programs, such as AI5 and AI6, although they are dual-tracked with TSMC. Samsung Foundry has also entered Nvidia’s Datacenter supply chain, a development we discussed in our Foundry Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Samsung Foundry has also entered Nvidia’s Datacenter supply chain",
+          "start": 657,
+          "end": 722,
+          "href": "https://semianalysis.com/institutional/samsung-foundry-finds-its-way-into-nvidias-ai-supply-chain/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 772,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管台积电相对于其仅有的竞争对手英特尔和三星保持着明显的技术领先优势，但如果客户无法获得充足的晶圆供应来支撑其业务，这种优势的意义就会大打折扣。因此，产能限制可能会促使客户进一步探索代工厂多元化。例如，英特尔拥有美国政府的背书，任何将订单外包给英特尔晶圆代工厂的举动，都将博得美国政府的政治加分。与此同时，随着近期赢得设计订单，三星晶圆代工厂也开始积聚动能。首先，三星已经拿下了特斯拉的部分芯片项目（如 AI5 和 AI6），尽管这些项目采取了与台积电双轨并行的策略。三星晶圆代工厂也已打入英伟达的数据中心供应链，我们在之前的晶圆代工厂模型中探讨过这一进展。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:29:29.684585",
+          "tokenized_text": "尽管台积电相对于其仅有的竞争对手英特尔和三星保持着明显的技术领先优势，但如果客户无法获得充足的晶圆供应来支撑其业务，这种优势的意义就会大打折扣。因此，产能限制可能会促使客户进一步探索代工厂多元化。例如，英特尔拥有美国政府的背书，任何将订单外包给英特尔晶圆代工厂的举动，都将博得美国政府的政治加分。与此同时，随着近期赢得设计订单，三星晶圆代工厂也开始积聚动能。首先，三星已经拿下了特斯拉的部分芯片项目（如 AI5 和 AI6），尽管这些项目采取了与台积电双轨并行的策略。[[[LINK_1|三星晶圆代工厂也已打入英伟达的数据中心供应链]]]，我们在之前的晶圆代工厂模型中探讨过这一进展。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "尽管台积电对其仅有的竞争对手英特尔和三星保持着明显的技术领先，但如果客户无法获得充足的晶圆供应来支撑自身业务，这种优势的意义就会大打折扣。产能瓶颈因此可能迫使客户寻求更多元的晶圆代工厂布局。例如，英特尔背后有美国政府撑腰，任何将订单外包给英特尔代工厂的举动，都能在美国政府那里赢得政治加分。与此同时，凭借近期拿下的一些设计订单，三星代工厂的发展势头也开始显现。首先，三星拿下了特斯拉的AI5和AI6等部分芯片项目，尽管这些项目采取了与台积电双线并行的代工策略。三星代工厂也已打入英伟达的数据中心供应链，我们在之前的晶圆代工模型中曾探讨过这一进展。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:51:19.959744",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        },
+        "default": {
+          "text": "尽管台积电（TSMC）对其仅有的竞争对手英特尔（Intel）和三星（Samsung）保持着明显的技术领先，但如果客户无法获得充足的晶圆供应来支撑自身业务，这种优势的意义就会大打折扣。产能瓶颈因此可能迫使客户寻求更多元的晶圆代工厂（foundry）布局。例如，英特尔背后有美国政府撑腰，任何将订单外包给英特尔代工厂的举动，都能在美国政府那里赢得政治加分。与此同时，凭借近期拿下的一些设计订单，三星代工厂的发展势头也开始显现。首先，三星拿下了特斯拉的AI5和AI6等部分芯片项目，尽管这些项目采取了与台积电双线并行的代工策略。三星代工厂也已打入英伟达（NVIDIA）的数据中心供应链，我们在之前的晶圆代工模型中曾探讨过这一进展。",
+          "model": "default",
+          "created_at": "2026-03-14T21:44:50.005353",
+          "tokenized_text": "尽管台积电（TSMC）对其仅有的竞争对手英特尔（Intel）和三星（Samsung）保持着明显的技术领先，但如果客户无法获得充足的晶圆供应来支撑自身业务，这种优势的意义就会大打折扣。产能瓶颈因此可能迫使客户寻求更多元的晶圆代工厂（foundry）布局。例如，英特尔背后有美国政府撑腰，任何将订单外包给英特尔代工厂的举动，都能在美国政府那里赢得政治加分。与此同时，凭借近期拿下的一些设计订单，三星代工厂的发展势头也开始显现。首先，三星拿下了特斯拉的AI5和AI6等部分芯片项目，尽管这些项目采取了与台积电双线并行的代工策略。[[[LINK_1|三星代工厂也已打入英伟达（NVIDIA）的数据中心供应链]]]，我们在之前的晶圆代工模型中曾探讨过这一进展。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "尽管台积电对其仅有的竞争对手英特尔和三星保持着明显的技术领先，但如果客户无法获得充足的晶圆供应来支撑自身业务，这种优势的意义就会大打折扣。产能瓶颈因此可能迫使客户寻求更多元的晶圆代工厂布局。例如，英特尔背后有美国政府撑腰，任何将订单外包给英特尔代工厂的举动，都能在美国政府那里赢得政治加分。与此同时，凭借近期拿下的一些设计订单，三星代工厂的发展势头也开始显现。首先，三星拿下了特斯拉的AI5和AI6等部分芯片项目，尽管这些项目采取了与台积电双线并行的代工策略。三星代工厂也已打入英伟达的数据中心供应链，我们在之前的晶圆代工模型中曾探讨过这一进展。",
+      "confirmed_tokenized": "尽管台积电（TSMC）对其仅有的竞争对手英特尔（Intel）和三星（Samsung）保持着明显的技术领先，但如果客户无法获得充足的晶圆供应来支撑自身业务，这种优势的意义就会大打折扣。产能瓶颈因此可能迫使客户寻求更多元的晶圆代工厂（foundry）布局。例如，英特尔背后有美国政府撑腰，任何将订单外包给英特尔代工厂的举动，都能在美国政府那里赢得政治加分。与此同时，凭借近期拿下的一些设计订单，三星代工厂的发展势头也开始显现。首先，三星拿下了特斯拉的AI5和AI6等部分芯片项目，尽管这些项目采取了与台积电双线并行的代工策略。[[[LINK_1|三星代工厂也已打入英伟达（NVIDIA）的数据中心供应链]]]，我们在之前的晶圆代工模型中曾探讨过这一进展。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

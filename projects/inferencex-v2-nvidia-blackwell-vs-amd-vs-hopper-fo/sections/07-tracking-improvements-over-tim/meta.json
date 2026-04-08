@@ -1,0 +1,76 @@
+{
+  "section_id": "07-tracking-improvements-over-tim",
+  "title": "Tracking Improvements Over Time",
+  "title_translation": "性能演进追踪",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "One of the main goals of InferenceX is to visualize performance improvements over time. While new chips are released on an O(yearly) cadence, software releases happen on an O(weekly) cadence. Our goal is to constantly update recipes with the latest and greatest software improvements and benchmark the configurations.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0048",
+      "parent_block_index": 48,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One of the main goals of InferenceX is to visualize performance improvements over time. While new chips are released on an O(yearly) cadence, software releases happen on an O(weekly) cadence. Our goal is to constantly update recipes with the latest and greatest software improvements and benchmark the configurations.",
+      "parent_block_plain_text": "One of the main goals of InferenceX is to visualize performance improvements over time. While new chips are released on an O(yearly) cadence, software releases happen on an O(weekly) cadence. Our goal is to constantly update recipes with the latest and greatest software improvements and benchmark the configurations.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 317,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "InferenceX 的主要目标之一，是直观呈现性能随时间推移的提升轨迹。尽管新芯片按 O(年)级别周期发布，但软件的发布却遵循 O(周)级别周期。我们的目标是，持续将最新、最优的软件改进融入配置方案 (Recipes) 中，并对这些配置进行基准测试。",
+          "model": "pro",
+          "created_at": "2026-04-07T20:04:31.206579",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.93,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'O(yearly) cadence' and 'O(weekly) cadence' as 'O(年)级别周期' and 'O(周)级别周期'. Ensure the Big O notation context is preserved for a hardcore tech audience."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines the methodology of the benchmark: tracking rapid software evolution against static hardware.",
+          "relation_to_previous": "Transitions from static technical definitions to the dynamic methodology used in the InferenceXv2 benchmark.",
+          "relation_to_next": "Applies this specific temporal tracking methodology to evaluate AMD's progress on DeepSeek R1.",
+          "key_points": [
+            "Software improves on a weekly cadence, whereas hardware improves on a yearly cadence.",
+            "InferenceX continuously updates its recipes to capture the latest software optimizations."
+          ],
+          "translation_notes": [
+            "Translate 'O(yearly) cadence' and 'O(weekly) cadence' as 'O(年)级别周期' and 'O(周)级别周期'. Ensure the Big O notation context is preserved for a hardcore tech audience."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 10.0
+        }
+      },
+      "history": []
+    }
+  ]
+}

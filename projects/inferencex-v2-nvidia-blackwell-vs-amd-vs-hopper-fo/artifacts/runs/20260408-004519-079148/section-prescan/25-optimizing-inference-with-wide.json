@@ -1,0 +1,54 @@
+{
+  "section_id": "25-optimizing-inference-with-wide",
+  "new_terms": [
+    {
+      "term": "TEP",
+      "suggested_translation": "张量-专家并行 (TEP)",
+      "context": "Configurations in this range use TEP: tensor parallelism for attention, expert parallelism for MoE layers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DEP",
+      "suggested_translation": "数据-专家并行 (DEP)",
+      "context": "configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP",
+      "confidence": 0.95
+    },
+    {
+      "term": "expert activation density",
+      "suggested_translation": "专家激活密度",
+      "context": "driven primarily by batch size and its effect on expert activation density.",
+      "confidence": 0.9
+    },
+    {
+      "term": "expert activation ratio",
+      "suggested_translation": "专家激活率",
+      "context": "We collected expert activation ratio versus batch size data while profiling DeepSeek R1",
+      "confidence": 0.9
+    },
+    {
+      "term": "Pareto optimal",
+      "suggested_translation": "帕累托最优",
+      "context": "often used together to achieve Pareto optimal performance.",
+      "confidence": 0.95
+    },
+    {
+      "term": "4P1D",
+      "suggested_translation": "4P1D (4个Prefill节点，1个Decode节点)",
+      "context": "Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 Prefill",
+    "interactivity": "交互速度",
+    "throughput": "吞吐量",
+    "all-reduce": "全归约 (All-reduce)",
+    "all-to-all": "全对全 (All-to-all)",
+    "tp": "张量并行 (TP)",
+    "ep": "专家并行 (EP)",
+    "moe": "混合专家 (MoE)",
+    "ranks": "Rank"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:03:40.349331"
+}

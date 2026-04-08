@@ -1,0 +1,1173 @@
+{
+  "section_id": "13-amd-venice-architecture-change",
+  "title": "AMD Venice Architecture Changes",
+  "title_translation": "AMD Venice架构变革",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0164",
+      "parent_block_index": 164,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.603991",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AMD Venice die layout. Source: @HighYieldYT",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Venice die layout. Source: @HighYieldYT",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0165",
+      "parent_block_index": 165,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Venice die layout. Source: @HighYieldYT*",
+      "parent_block_plain_text": "AMD Venice die layout. Source: @HighYieldYT",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Venice die layout. Source: @HighYieldYT",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 43,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Venice 裸片布局。来源：@HighYieldYT",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.604466",
+          "tokenized_text": "[[[EM_1|AMD Venice 裸片布局。来源：@HighYieldYT]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "While Intel went away from EMIB, AMD finally adopts the equivalent advanced packaging technology for Venice, with high-speed short reach links connecting the CCDs to the I/O die. We have the volumes for this in our Accelerator, HBM, and Advanced Packaging Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator, HBM, and Advanced Packaging Model.",
+          "start": 215,
+          "end": 262,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0166",
+      "parent_block_index": 166,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While Intel went away from EMIB, AMD finally adopts the equivalent advanced packaging technology for Venice, with high-speed short reach links connecting the CCDs to the I/O die. We have the volumes for this in our [Accelerator, HBM, and Advanced Packaging Model.](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "While Intel went away from EMIB, AMD finally adopts the equivalent advanced packaging technology for Venice, with high-speed short reach links connecting the CCDs to the I/O die. We have the volumes for this in our Accelerator, HBM, and Advanced Packaging Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator, HBM, and Advanced Packaging Model.",
+          "start": 215,
+          "end": 262,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 262,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管英特尔放弃了 EMIB (嵌入式多芯片互连桥接)，AMD 却终于在 Venice 处理器上采用了同等的高级封装技术，通过高速短距链路将 CCD 与 I/O 裸片相连。我们在加速器、HBM 与高级封装模型中提供了相关的出货量数据。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.604793",
+          "tokenized_text": "尽管英特尔放弃了 EMIB (嵌入式多芯片互连桥接)，AMD 却终于在 Venice 处理器上采用了同等的高级封装技术，通过高速短距链路将 CCD 与 I/O 裸片相连。我们在[[[LINK_1|加速器、HBM 与高级封装模型]]]中提供了相关的出货量数据。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The additional shoreline required for the CCD links takes up additional width, necessitating the central I/O hub to be split into 2 dies. This creates another die to die hop to cross the different halves of the chip, forming another NUMA domain that Intel’s solution avoids. The I/O dies now feature 16 memory channels in total, up from 12 in 2022’s Genoa. AMD also catches up to Intel in finally supporting Multiplexed memory for higher bandwidth, where 16-channel MRDIMM-12800 gives 1.64TB/s, 2.67x Turin.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0167",
+      "parent_block_index": 167,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The additional shoreline required for the CCD links takes up additional width, necessitating the central I/O hub to be split into 2 dies. This creates another die to die hop to cross the different halves of the chip, forming another NUMA domain that Intel’s solution avoids. The I/O dies now feature 16 memory channels in total, up from 12 in 2022’s Genoa. AMD also catches up to Intel in finally supporting Multiplexed memory for higher bandwidth, where 16-channel MRDIMM-12800 gives 1.64TB/s, 2.67x Turin.",
+      "parent_block_plain_text": "The additional shoreline required for the CCD links takes up additional width, necessitating the central I/O hub to be split into 2 dies. This creates another die to die hop to cross the different halves of the chip, forming another NUMA domain that Intel’s solution avoids. The I/O dies now feature 16 memory channels in total, up from 12 in 2022’s Genoa. AMD also catches up to Intel in finally supporting Multiplexed memory for higher bandwidth, where 16-channel MRDIMM-12800 gives 1.64TB/s, 2.67x Turin.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 507,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "CCD 链路所需的额外边缘布线空间 (Shoreline) 占据了更多宽度，迫使中央 I/O 枢纽必须拆分为两块裸片。这导致在芯片的两半之间通信时，会增加一次裸片间跳转，进而形成了一个英特尔方案所能避免的新 NUMA 域。目前，I/O 裸片总共配备 16 个内存通道，多于 2022 年 Genoa 架构的 12 个。AMD 也终于追平英特尔，开始支持多路复用内存以获取更高带宽；其 16 通道多路复用双列直插式内存模块 (MRDIMM)-12800 可提供 1.64TB/s 的带宽，达到 Turin 的 2.67 倍。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.604892",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "AMD has also moved to a mesh network within the CCD, with 32 Zen6c cores in a 4x8 grid, although there may be an additional spare core included for yield recovery. Eight TSMC N2 CCDs bring core counts to 256, a one-third increase from the 192-core Turin-Dense 3nm EPYC 9965. Zen6c receives the full 4MB L3 cache per core that was previously halved on Zen5c, creating large 128MB cache regions per CCD.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0168",
+      "parent_block_index": 168,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD has also moved to a mesh network within the CCD, with 32 Zen6c cores in a 4x8 grid, although there may be an additional spare core included for yield recovery. Eight TSMC N2 CCDs bring core counts to 256, a one-third increase from the 192-core Turin-Dense 3nm EPYC 9965. Zen6c receives the full 4MB L3 cache per core that was previously halved on Zen5c, creating large 128MB cache regions per CCD.",
+      "parent_block_plain_text": "AMD has also moved to a mesh network within the CCD, with 32 Zen6c cores in a 4x8 grid, although there may be an additional spare core included for yield recovery. Eight TSMC N2 CCDs bring core counts to 256, a one-third increase from the 192-core Turin-Dense 3nm EPYC 9965. Zen6c receives the full 4MB L3 cache per core that was previously halved on Zen5c, creating large 128MB cache regions per CCD.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 401,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 还在 CCD 内部转向了 Mesh 网络，采用 4x8 网格布局容纳 32 个 Zen6c 核心，不过可能还会包含一个额外的备用核心以提升良率。8 个台积电 N2 工艺的 CCD 将总核心数提升至 256 个，相比 192 核的 Turin-Dense 3nm 霄龙 (EPYC) 9965 增加了三分之一。Zen6c 为每个核心配备了完整的 4MB L3 缓存 (此前在 Zen5c 上该容量被减半)，从而在每个 CCD 上形成了 128MB 的大容量缓存区。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.604977",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Lower core count and frequency optimized “-F” SKUs for AI head nodes will employ the same 12-core Zen6 CCD design used in their consumer desktop and mobile PC line for up to 96 cores across 8 CCDs. While this is a regression from the 128-core Turin-Classic 4nm EPYC 9755, it does bring 50% more cores than the high frequency 64-core EPYC 9575F.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0169",
+      "parent_block_index": 169,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lower core count and frequency optimized “-F” SKUs for AI head nodes will employ the same 12-core Zen6 CCD design used in their consumer desktop and mobile PC line for up to 96 cores across 8 CCDs. While this is a regression from the 128-core Turin-Classic 4nm EPYC 9755, it does bring 50% more cores than the high frequency 64-core EPYC 9575F.",
+      "parent_block_plain_text": "Lower core count and frequency optimized “-F” SKUs for AI head nodes will employ the same 12-core Zen6 CCD design used in their consumer desktop and mobile PC line for up to 96 cores across 8 CCDs. While this is a regression from the 128-core Turin-Classic 4nm EPYC 9755, it does bring 50% more cores than the high frequency 64-core EPYC 9575F.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 344,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "针对 AI 头节点优化、核心数较少且主频更高的“-F”系列 SKU，将采用与其消费级桌面和移动 PC 产品线相同的 12 核 Zen6 CCD 设计，通过 8 个 CCD 实现最多 96 个核心。尽管相比 128 核的 Turin-Classic 4nm 霄龙 (EPYC) 9755 出现倒退，但与高频版的 64 核 EPYC 9575F 相比，其核心数依然增加了 50%。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.605061",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Lastly, 8 small dies can be seen beside the I/O dies next to where the DDR5 interface exits. These are Integrated Passive Devices (IPD) that help smooth power delivery to the chip in the heavily I/O dense area, where the SP7 package routing is saturated with memory channel fanout.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0170",
+      "parent_block_index": 170,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, 8 small dies can be seen beside the I/O dies next to where the DDR5 interface exits. These are Integrated Passive Devices (IPD) that help smooth power delivery to the chip in the heavily I/O dense area, where the SP7 package routing is saturated with memory channel fanout.",
+      "parent_block_plain_text": "Lastly, 8 small dies can be seen beside the I/O dies next to where the DDR5 interface exits. These are Integrated Passive Devices (IPD) that help smooth power delivery to the chip in the heavily I/O dense area, where the SP7 package routing is saturated with memory channel fanout.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 281,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后，在 I/O 裸片旁边、DDR5 接口引出处，可以看到 8 个小裸片。这些是集成无源器件 (IPD)，有助于在 I/O 极度密集的区域为芯片平稳供电；在该区域，SP7 (插槽) 的封装布线已被内存通道的扇出完全占满。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.605153",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0171",
+      "parent_block_index": 171,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.605226",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "AMD Venice Performance Claims. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Venice Performance Claims. Source: AMD",
+          "start": 0,
+          "end": 42,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0172",
+      "parent_block_index": 172,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Venice Performance Claims. Source: AMD*",
+      "parent_block_plain_text": "AMD Venice Performance Claims. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Venice Performance Claims. Source: AMD",
+          "start": 0,
+          "end": 42,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 42,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Venice 性能声明。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.605441",
+          "tokenized_text": "[[[EM_1|AMD Venice 性能声明。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "On the performance front, AMD claims the top 256-core variant is over 1.7x better in performance per watt than the top 192-core Turin in SPECrate®2017\\int\\base, meaning an even higher performance per core thanks to the new Zen 6 core microarchitecture with higher Instructions per Clock (IPC). Zen 6 also introduces new instructions for AI datatypes including AVX512\\FP16, AVX\\VVNI\\INT8 and a new AVX512\\BMM instruction for Bit Matrix Multiplication and bit reversal operations on the CPU’s floating point unit.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "int\\",
+          "start": 151,
+          "end": 155,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "FP16, AVX\\",
+          "start": 367,
+          "end": 377,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "em",
+          "text": "INT8 and a new AVX512\\",
+          "start": 382,
+          "end": 404,
+          "href": null,
+          "title": null,
+          "span_id": "EM_3"
+        }
+      ],
+      "parent_block_id": "b0173",
+      "parent_block_index": 173,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the performance front, AMD claims the top 256-core variant is over 1.7x better in performance per watt than the top 192-core Turin in SPECrate®2017\\_int\\_base, meaning an even higher performance per core thanks to the new Zen 6 core microarchitecture with higher Instructions per Clock (IPC). Zen 6 also introduces new instructions for AI datatypes including AVX512\\_FP16, AVX\\_VVNI\\_INT8 and a new AVX512\\_BMM instruction for Bit Matrix Multiplication and bit reversal operations on the CPU’s floating point unit.",
+      "parent_block_plain_text": "On the performance front, AMD claims the top 256-core variant is over 1.7x better in performance per watt than the top 192-core Turin in SPECrate®2017\\int\\base, meaning an even higher performance per core thanks to the new Zen 6 core microarchitecture with higher Instructions per Clock (IPC). Zen 6 also introduces new instructions for AI datatypes including AVX512\\FP16, AVX\\VVNI\\INT8 and a new AVX512\\BMM instruction for Bit Matrix Multiplication and bit reversal operations on the CPU’s floating point unit.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "int\\",
+          "start": 151,
+          "end": 155,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "FP16, AVX\\",
+          "start": 367,
+          "end": 377,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "em",
+          "text": "INT8 and a new AVX512\\",
+          "start": 382,
+          "end": 404,
+          "href": null,
+          "title": null,
+          "span_id": "EM_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 511,
+      "expected_tokens": [
+        "EM_1",
+        "EM_2",
+        "EM_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在性能方面，AMD 声称在 SPECrate®2017_int_base 测试中，顶配 256 核版本的每瓦性能比顶配 192 核 Turin 高出 1.7 倍以上。得益于具备更高每时钟周期指令数 (IPC) 的全新 Zen 6 核心微架构，这意味着其单核性能实现了进一步跃升。Zen 6 还针对 AI 数据类型引入了新指令，包括 AVX-512_FP16、AVX_VNNI_INT8，以及一种全新的 AVX-512_BMM 指令，用于在 CPU 浮点单元上执行位矩阵乘法和位反转操作。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.605986",
+          "tokenized_text": "在性能方面，AMD 声称在 SPECrate®2017_[[[EM_1|int]]]_base 测试中，顶配 256 核版本的每瓦性能比顶配 192 核 Turin 高出 1.7 倍以上。得益于具备更高每时钟周期指令数 (IPC) 的全新 Zen 6 核心微架构，这意味着其单核性能实现了进一步跃升。Zen 6 还针对 AI 数据类型引入了新指令，包括 AVX-512_[[[EM_2|FP16、AVX_]]]VNNI_[[[EM_3|INT8，以及一种全新的 AVX-512_]]]BMM 指令，用于在 CPU 浮点单元上执行位矩阵乘法和位反转操作。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "For BMM, the FPU registers store 16x16 binary matrices and computes BMM accumulates using OR and XOR operations. Binary matrices are far easier to compute than floating point matrices, and could offer large efficiency gains for software that can make use of it such as Verilog simulations. However, BMMs do not have sufficient precision for LLMs, and so we believe adoption of this instruction will be limited.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0174",
+      "parent_block_index": 174,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For BMM, the FPU registers store 16x16 binary matrices and computes BMM accumulates using OR and XOR operations. Binary matrices are far easier to compute than floating point matrices, and could offer large efficiency gains for software that can make use of it such as Verilog simulations. However, BMMs do not have sufficient precision for LLMs, and so we believe adoption of this instruction will be limited.",
+      "parent_block_plain_text": "For BMM, the FPU registers store 16x16 binary matrices and computes BMM accumulates using OR and XOR operations. Binary matrices are far easier to compute than floating point matrices, and could offer large efficiency gains for software that can make use of it such as Verilog simulations. However, BMMs do not have sufficient precision for LLMs, and so we believe adoption of this instruction will be limited.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 410,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于 BMM 指令，FPU 寄存器会存储 16x16 二进制矩阵，并利用 OR（或）与 XOR（异或）运算来计算 BMM 累加结果。二进制矩阵的计算难度远低于浮点矩阵。对于能够利用该特性的软件（如 Verilog 仿真），它能带来大幅效率提升。然而，BMM 缺乏大语言模型 (LLM) 所需的足够精度，因此我们认为该指令的实际采用率将非常有限。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.606091",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "As AMD already enjoys significantly higher performance per core than Intel (96c Turin matches 128c Granite Rapids), the performance gap between AMD Venice and Intel Diamond Rapids will widen even more in the 2026 to 2028 generation of datacenter CPUs. Core to core latency on Venice should improve over Turin thanks to the new die to die interconnect and larger core domains.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0175",
+      "parent_block_index": 175,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As AMD already enjoys significantly higher performance per core than Intel (96c Turin matches 128c Granite Rapids), the performance gap between AMD Venice and Intel Diamond Rapids will widen even more in the 2026 to 2028 generation of datacenter CPUs. Core to core latency on Venice should improve over Turin thanks to the new die to die interconnect and larger core domains.",
+      "parent_block_plain_text": "As AMD already enjoys significantly higher performance per core than Intel (96c Turin matches 128c Granite Rapids), the performance gap between AMD Venice and Intel Diamond Rapids will widen even more in the 2026 to 2028 generation of datacenter CPUs. Core to core latency on Venice should improve over Turin thanks to the new die to die interconnect and larger core domains.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 375,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "鉴于 AMD 的单核性能已显著领先于英特尔（96 核 Turin 可匹敌 128 核 Granite Rapids），在 2026 至 2028 年这一代数据中心 CPU 中，AMD Venice 与 Intel Diamond Rapids 之间的性能差距将进一步拉大。得益于全新的裸片间互连技术和更大的核心域，Venice 的核心间延迟预计将优于 Turin。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.606173",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "AMD is also doubling down where Intel is pulling out. While Intel cancels its 8-channel processor, AMD will introduce a new 8-channel Venice SP8 platform as a successor to the EPYC 8004 Siena line of low power, smaller socket offerings, while still bringing up to 128 dense Zen 6c cores to the table. With this, AMD will see large share gains in the enterprise markets, a traditional Intel stronghold.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0176",
+      "parent_block_index": 176,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD is also doubling down where Intel is pulling out. While Intel cancels its 8-channel processor, AMD will introduce a new 8-channel Venice SP8 platform as a successor to the EPYC 8004 Siena line of low power, smaller socket offerings, while still bringing up to 128 dense Zen 6c cores to the table. With this, AMD will see large share gains in the enterprise markets, a traditional Intel stronghold.",
+      "parent_block_plain_text": "AMD is also doubling down where Intel is pulling out. While Intel cancels its 8-channel processor, AMD will introduce a new 8-channel Venice SP8 platform as a successor to the EPYC 8004 Siena line of low power, smaller socket offerings, while still bringing up to 128 dense Zen 6c cores to the table. With this, AMD will see large share gains in the enterprise markets, a traditional Intel stronghold.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 401,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在英特尔抽身退出的领域，AMD 正在持续加码。英特尔直接砍掉了其 8 通道处理器，而 AMD 则将推出全新的 8 通道 Venice SP8 平台。该平台将作为低功耗、小插槽 霄龙 (EPYC) 8004 Siena 系列的继任者，同时仍能提供多达 128 个高密度 Zen 6c 核心。借此，AMD 必将在企业级市场这一英特尔的传统腹地中，斩获大量市场份额。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:22:46.606247",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.89,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。"
+          },
+          {
+            "type": "readability",
+            "description": "“L3缓存”之间缺少中英文空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

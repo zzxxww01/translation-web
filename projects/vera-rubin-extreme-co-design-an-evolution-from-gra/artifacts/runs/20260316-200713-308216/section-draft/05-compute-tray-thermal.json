@@ -1,0 +1,301 @@
+{
+  "section_id": "05-compute-tray-thermal",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "05-compute-tray-thermal",
+    "section_title": "Compute Tray: Thermal",
+    "section_title_translation": "计算托盘：散热",
+    "section_position": "6/17",
+    "article_theme": "",
+    "structure_summary": "",
+    "target_audience": "",
+    "translation_voice": "",
+    "previous_section_title": "Compute Tray Cableless Design",
+    "next_section_title": "Compute Tray: Power Delivery",
+    "section_role": "Details the 100% liquid cooling architecture required by the dense, fanless compute tray and the resulting changes to assembly processes.",
+    "translation_notes": [
+      "Clearly distinguish 'L6 assembly' (L6级组装) and 'L10 assembly' (L10级组装).",
+      "Translate 'micro-channel cold plate (MCCP)' as 微通道冷板.",
+      "Translate 'quick disconnects' as 快速接头 or 盲插快速接头 depending on exact context."
+    ],
+    "key_points": [
+      "The tray is 100% liquid-cooled and fanless, utilizing an internal manifold.",
+      "The micro-channel cold plate (MCCP) pitch is reduced to 100 microns to increase surface area and cooling capacity.",
+      "Cold plates are now attached at the L6 assembly level rather than L10, increasing overall assembly efficiency."
+    ],
+    "guidelines": [],
+    "article_challenges": [],
+    "terminology": [
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "GPU",
+        "term": "GPU",
+        "translation": "GPU",
+        "strategy": "preserve",
+        "note": "图形处理器",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CPU",
+        "term": "CPU",
+        "translation": "CPU",
+        "strategy": "preserve",
+        "note": "中央处理器",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NPU",
+        "term": "NPU",
+        "translation": "NPU",
+        "strategy": "first_annotate",
+        "note": "神经网络处理器",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TPU",
+        "term": "TPU",
+        "translation": "TPU",
+        "strategy": "first_annotate",
+        "note": "张量处理器 (Tensor Processing Unit)",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "chiplet",
+        "term": "chiplet",
+        "translation": "芯粒",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "packaging",
+        "term": "packaging",
+        "translation": "封装",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip on Wafer on Substrate",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "InFO",
+        "term": "InFO",
+        "translation": "InFO",
+        "strategy": "preserve",
+        "note": "Integrated Fan-Out",
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Details the 100% liquid cooling architecture required by the dense, fanless compute tray and the resulting changes to assembly processes.",
+    "relation_to_previous": "Addresses the thermal consequences of the dense, cableless PCB design discussed previously.",
+    "relation_to_next": "Transitions from thermal management to power delivery, the other critical infrastructure pillar of the tray.",
+    "key_points": [
+      "The tray is 100% liquid-cooled and fanless, utilizing an internal manifold.",
+      "The micro-channel cold plate (MCCP) pitch is reduced to 100 microns to increase surface area and cooling capacity.",
+      "Cold plates are now attached at the L6 assembly level rather than L10, increasing overall assembly efficiency."
+    ],
+    "translation_notes": [
+      "Clearly distinguish 'L6 assembly' (L6级组装) and 'L10 assembly' (L10级组装).",
+      "Translate 'micro-channel cold plate (MCCP)' as 微通道冷板.",
+      "Translate 'quick disconnects' as 快速接头 or 盲插快速接头 depending on exact context."
+    ]
+  },
+  "translations": [
+    "VR NVL72 将液冷技术推向了新高度。VR NVL72 计算托盘实现了 100% 液冷，而 GB200 和 GB300 计算托盘则采用 85% 液冷与 15% 风冷的混合散热方案。因此，计算托盘彻底移除了风扇，并扩大了冷板的覆盖范围，以带走机箱前半部分的热量。机箱中部将设置内部歧管，用于向各个模块分配进水冷却液，并收集回水冷却液。计算托盘内的每个模块均将贴附冷板模块。各冷板模块通过 MQD（英伟达针对计算托盘内紧凑空间应用而制定的较小尺寸快速接头规范标准）与内部歧管相连。",
+    "https://substackcdn.com/image/fetch/$s_!Ra3T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2397b285-cb78-4081-8813-51a223db97bb_1354x2343.png",
+    "资料来源：英伟达 VR NVL72 组件物料清单及功耗预算模型",
+    "冷却液从机箱左后侧通过 UQD 快速接头进入计算托盘。随后，冷却液经由管道进入内部歧管，并在此被分配至所有模块。冷却液在吸收不同模块的热量后，重新流回内部歧管。最后，冷却液从机箱右后侧通过 UQD 快速接头流出计算托盘。",
+    "https://substackcdn.com/image/fetch/$s_!DhHR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce22913e-61af-49e3-9487-fad91f7a8af7_2012x722.png",
+    "来源：英伟达VR NVL72组件物料清单及功耗预算模型",
+    "VR NVL72的冷板也进行了多项升级。对于每个Strata 模块，冷板将作为单一模块提供，覆盖整块Strata主板，包括两颗鲁宾GPU、一颗维拉CPU、SOCAMM以及各种电压调节模块组件。鲁宾GPU的冷板升级为“微通道冷板”（MCCP）。本质上，冷板内部通道的间距从150微米缩小至100微米。这增加了表面积，从而提升了冷板的散热能力。此外，在与鲁宾GPU接触的表面将镀有一层金。这样做的原因是防止液态金属铟第二层热界面材料对铜造成腐蚀。",
+    "https://substackcdn.com/image/fetch/$s_!P-4a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78fa8a53-ba67-4917-96be-3d5da6051095_1876x584.png",
+    "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+    "除了 Strata 模块，机箱前端的模块也将安装冷板模块。每个 Orchid 模块都将配备一个冷板模块，以覆盖 CX-9、E1.S SSD、收发器笼以及各类电压调节模块。由于两个 Orchid 模块在 1U 机箱内上下堆叠，其冷板与电路板的总高度将不到 0.5U。每对 Orchid 模块仅共享来自歧管的一对快速接头。系统内还会设置另一组歧管，负责将冷却液分配至这对 Orchid 模块的顶部与底部冷板。在我们的 VR NVL72 组件物料清单与功耗预算模型 中，我们详细列出了所有散热组件的具体内容，包括冷板模块、歧管以及快速接头。",
+    "https://substackcdn.com/image/fetch/$s_!Z-zU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8e1b96be-6742-4679-8180-275aaad0521d_3164x999.png",
+    "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+    "此前，冷板通常在L10级组装阶段进行安装，即在该阶段将各类组件装配至机箱内。鉴于目前的模块化设计，冷板需要与模块本身实现更紧密的集成。因此，冷板将在PCBA流程之后的L6级组装阶段直接进行安装。这提升了整体的组装效率，因为L10级组装由此被简化为只需将成品模块插入对应的连接器与快速接头即可。"
+  ]
+}

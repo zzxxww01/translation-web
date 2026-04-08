@@ -1,0 +1,2454 @@
+{
+  "section_id": "04-ercot-same-load-growth-no-pr",
+  "title": "ERCOT: Same Load Growth, No Price Shock",
+  "title_translation": "ERCOT：同等负载增长，无价格冲击",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The Electric Reliability Council of Texas (ERCOT) is a much simpler market to understand. It runs a unified market mechanism balancing supply and demand based on real-time prices. ERCOT does not have two separate markets, and does not make forecasts that impacts directly market needs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Electric Reliability Council of Texas (ERCOT) is a much simpler market to understand. It runs a unified market mechanism balancing supply and demand based on real-time prices. ERCOT does not have two separate markets, and does not make forecasts that impacts directly market needs.",
+      "parent_block_plain_text": "The Electric Reliability Council of Texas (ERCOT) is a much simpler market to understand. It runs a unified market mechanism balancing supply and demand based on real-time prices. ERCOT does not have two separate markets, and does not make forecasts that impacts directly market needs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 285,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "德克萨斯州电力可靠性委员会（ERCOT）的市场机制要简单易懂得多。它采用统一的市场机制，基于实时电价来平衡供需。ERCOT 并没有设立两个独立的市场，也不会做出直接左右市场需求的预测。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786706",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "德克萨斯州电力可靠性委员会（ERCOT）的市场机制要简单易懂得多。它采用统一的市场机制，基于实时电价来平衡供需。ERCOT 并没有设立两个独立的市场，也不会做出直接左右市场需求的预测。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143287",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "德克萨斯州电力可靠性委员会（ERCOT）的市场机制要简单易懂得多。它采用统一的市场机制，基于实时电价来平衡供需。ERCOT 并没有设立两个独立的市场，也不会做出直接左右市场需求的预测。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:49:11.784948",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "德克萨斯州电力可靠性委员会（ERCOT）的市场机制要简单易懂得多。它采用统一的市场机制，基于实时电价来平衡供需。ERCOT 并没有设立两个独立的市场，也不会做出直接左右市场需求的预测。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Scarcity Pricing Instead of a Capacity Auction",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Scarcity Pricing Instead of a Capacity Auction",
+      "parent_block_plain_text": "Scarcity Pricing Instead of a Capacity Auction",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 46,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "稀缺定价而非容量拍卖",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786755",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "稀缺定价而非容量拍卖",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143319",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "稀缺定价而非容量拍卖",
+          "model": "manual",
+          "created_at": "2026-03-16T18:19:06.092133",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "稀缺定价而非容量拍卖",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Instead of a capacity market driven by a once-a-year auction, ERCOT uses a real-time scarcity price adder based on an Operating Reserve Demand Curve (ORDC). When the balance between electric supply and demand gets too tight -- when everyone’s air conditioner runs at the same time -- the real-time energy price spikes, from normal prices of $10-50/MWh to a cap of $5,000/MWh, with additional adders in transmission-constrained areas.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Instead of a capacity market driven by a once-a-year auction, ERCOT uses a real-time scarcity price adder based on an Operating Reserve Demand Curve (ORDC). When the balance between electric supply and demand gets too tight -- when everyone’s air conditioner runs at the same time -- the real-time energy price spikes, from normal prices of $10-50/MWh to a cap of $5,000/MWh, with additional adders in transmission-constrained areas.",
+      "parent_block_plain_text": "Instead of a capacity market driven by a once-a-year auction, ERCOT uses a real-time scarcity price adder based on an Operating Reserve Demand Curve (ORDC). When the balance between electric supply and demand gets too tight -- when everyone’s air conditioner runs at the same time -- the real-time energy price spikes, from normal prices of $10-50/MWh to a cap of $5,000/MWh, with additional adders in transmission-constrained areas.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 433,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ERCOT没有采用由年度拍卖驱动的容量市场，而是采用了基于运行备用需求曲线 (ORDC) 的实时稀缺价格加成机制。当电力供需平衡变得过于紧张时——例如所有人的空调都在同一时间运转——实时电价就会飙升，从每兆瓦时10至50美元的正常水平，飙升至每兆瓦时5000美元的上限，并在输电受限地区产生额外的价格加成。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786767",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "ERCOT没有采用由年度拍卖驱动的容量市场，而是采用了基于运行备用需求曲线 (ORDC) 的实时稀缺价格加成机制。当电力供需平衡变得过于紧张时——例如所有人的空调都在同一时间运转——实时电价就会飙升，从每兆瓦时10至50美元的正常水平，飙升至每兆瓦时5000美元的上限，并在输电受限地区产生额外的价格加成。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143331",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "ERCOT没有采用由年度拍卖驱动的容量市场，而是采用了基于运行备用需求曲线 (ORDC) 的实时稀缺价格加成机制。当电力供需平衡变得过于紧张时——例如所有人的空调都在同一时间运转——实时电价就会飙升，从每兆瓦时10至50美元的正常水平，飙升至每兆瓦时5000美元的上限，并在输电受限地区产生额外的价格加成。",
+          "model": "manual",
+          "created_at": "2026-03-16T18:19:12.399568",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "ERCOT没有采用由年度拍卖驱动的容量市场，而是采用了基于运行备用需求曲线 (ORDC) 的实时稀缺价格加成机制。当电力供需平衡变得过于紧张时——例如所有人的空调都在同一时间运转——实时电价就会飙升，从每兆瓦时10至50美元的正常水平，飙升至每兆瓦时5000美元的上限，并在输电受限地区产生额外的价格加成。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786777",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143341",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:19.312396",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7c2ea8ff-d1ba-4c7b-b934-26a53ba74b88_1799x1114.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "This scarcity-price structure allows capacity resources that run fewer than 100 hours per year (gas peaker plants, batteries, etc) to pay for themselves, because that handful of run-hours can still be worth millions of dollars in annual revenue to a 50 MW power plant or battery system.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This scarcity-price structure allows capacity resources that run fewer than 100 hours per year (gas peaker plants, batteries, etc) to pay for themselves, because that handful of run-hours can still be worth millions of dollars in annual revenue to a 50 MW power plant or battery system.",
+      "parent_block_plain_text": "This scarcity-price structure allows capacity resources that run fewer than 100 hours per year (gas peaker plants, batteries, etc) to pay for themselves, because that handful of run-hours can still be worth millions of dollars in annual revenue to a 50 MW power plant or battery system.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 286,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种稀缺定价结构使得每年运行时间不足100小时的容量资源（燃气调峰电厂、电池等）能够收回成本，因为这屈指可数的运行时间，依然能为一座50兆瓦的电厂或电池系统创造数百万美元的年营收。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786785",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "这种稀缺定价结构使得每年运行时间不足100小时的容量资源（燃气调峰电厂、电池等）能够收回成本，因为这屈指可数的运行时间，依然能为一座50兆瓦的电厂或电池系统创造数百万美元的年营收。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143349",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这种稀缺定价结构使得每年运行时间不足100小时的容量资源（燃气调峰电厂、电池等）能够收回成本，因为这屈指可数的运行时间，依然能为一座50兆瓦的电厂或电池系统创造数百万美元的年营收。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:23.485506",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这种稀缺定价结构使得每年运行时间不足100小时的容量资源（燃气调峰电厂、电池等）能够收回成本，因为这屈指可数的运行时间，依然能为一座50兆瓦的电厂或电池系统创造数百万美元的年营收。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Said differently: in PJM, the central operator has the responsibility to analyze the system, determine capacity needs, and guarantees payment to power plant owners to provide capacity. In ERCOT, there’s no guarantee and it falls on the asset owners to make analysis and use their judgement on whether the market has enough capacity or not. Real-time pricing signals are a proof of market constraints.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Said differently: in PJM, the central operator has the responsibility to analyze the system, determine capacity needs, and guarantees payment to power plant owners to provide capacity. In ERCOT, there’s no guarantee and it falls on the asset owners to make analysis and use their judgement on whether the market has enough capacity or not. Real-time pricing signals are a proof of market constraints.",
+      "parent_block_plain_text": "Said differently: in PJM, the central operator has the responsibility to analyze the system, determine capacity needs, and guarantees payment to power plant owners to provide capacity. In ERCOT, there’s no guarantee and it falls on the asset owners to make analysis and use their judgement on whether the market has enough capacity or not. Real-time pricing signals are a proof of market constraints.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 400,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "换言之：在PJM，中央调度机构负责分析系统、确定容量需求，并保证向提供容量的电厂所有者支付费用。而在ERCOT，没有任何保底承诺，资产所有者必须自行分析并判断市场容量是否充足。实时价格信号就是反映市场供需瓶颈的直接证据。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786795",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "换言之：在PJM，中央调度机构负责分析系统、确定容量需求，并保证向提供容量的电厂所有者支付费用。而在ERCOT，没有任何保底承诺，资产所有者必须自行分析并判断市场容量是否充足。实时价格信号就是反映市场供需瓶颈的直接证据。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143369",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "换言之：在PJM，中央调度机构负责分析系统、确定容量需求，并保证向提供容量的电厂所有者支付费用。而在ERCOT，没有任何保底承诺，资产所有者必须自行分析并判断市场容量是否充足。实时价格信号就是反映市场供需瓶颈的直接证据。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:28.099621",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "换言之：在PJM，中央调度机构负责分析系统、确定容量需求，并保证向提供容量的电厂所有者支付费用。而在ERCOT，没有任何保底承诺，资产所有者必须自行分析并判断市场容量是否充足。实时价格信号就是反映市场供需瓶颈的直接证据。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "ERCOT’s Demand Forecast: Extraordinary -- and Largely Ignored",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### ERCOT’s Demand Forecast: Extraordinary -- and Largely Ignored",
+      "parent_block_plain_text": "ERCOT’s Demand Forecast: Extraordinary -- and Largely Ignored",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 61,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ERCOT的需求预测：规模惊人——却大多被忽视",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786803",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "ERCOT的需求预测：规模惊人——却大多被忽视",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143377",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "ERCOT的需求预测：规模惊人——却大多被忽视",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:35.059207",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "ERCOT的需求预测：规模惊人——却大多被忽视",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "This difference is particularly interesting as ERCOT also provides demand forecasts. And the outlook is staggering. The 2025 Long-Term Load Forecast, released April 2025, identified datacenters as the single largest driver of incremental peak growth. Based partly on attestation from Texas transmission service providers, ERCOT projected 77.9 GW of potential datacenter load by 2030 -- more than double the 29.6 GW in the prior year’s outlook, an unprecedented one-year revision.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "2025 Long-Term Load Forecast",
+          "start": 120,
+          "end": 148,
+          "href": "https://www.ercot.com/files/docs/2025/04/29/Long-term-Load-Forecast-RPG.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0089",
+      "parent_block_index": 89,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This difference is particularly interesting as ERCOT also provides demand forecasts. And the outlook is staggering. The [2025 Long-Term Load Forecast](https://www.ercot.com/files/docs/2025/04/29/Long-term-Load-Forecast-RPG.pdf), released April 2025, identified datacenters as the single largest driver of incremental peak growth. Based partly on attestation from Texas transmission service providers, ERCOT projected 77.9 GW of potential datacenter load by 2030 -- more than double the 29.6 GW in the prior year’s outlook, an unprecedented one-year revision.",
+      "parent_block_plain_text": "This difference is particularly interesting as ERCOT also provides demand forecasts. And the outlook is staggering. The 2025 Long-Term Load Forecast, released April 2025, identified datacenters as the single largest driver of incremental peak growth. Based partly on attestation from Texas transmission service providers, ERCOT projected 77.9 GW of potential datacenter load by 2030 -- more than double the 29.6 GW in the prior year’s outlook, an unprecedented one-year revision.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "2025 Long-Term Load Forecast",
+          "start": 120,
+          "end": 148,
+          "href": "https://www.ercot.com/files/docs/2025/04/29/Long-term-Load-Forecast-RPG.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 479,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的《2025年长期负荷预测》指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786860",
+          "tokenized_text": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的[[[LINK_1|《2025年长期负荷预测》]]]指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的《2025年长期负荷预测》指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:52.391755",
+          "tokenized_text": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的[[[LINK_1|《2025年长期负荷预测》]]]指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的《2025年长期负荷预测》指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+      "confirmed_tokenized": "这种差异尤为耐人寻味，因为ERCOT同样也会发布需求预测，且其预测数据规模惊人。2025年4月发布的[[[LINK_1|《2025年长期负荷预测》]]]指出，数据中心是峰值负荷增量的最大单一驱动因素。部分基于德克萨斯州输电服务提供商的申报数据，ERCOT预计到2030年，潜在的数据中心负荷将达到77.9 GW——这一数字是上一年度预测值（29.6 GW）的两倍多，创下了史无前例的单年上调幅度。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786870",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143398",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:38.843024",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F11a823b3-3e3f-4f95-9b4c-6a9ce585f4a9_1800x961.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: ERCOT",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: ERCOT",
+      "parent_block_plain_text": "Source: ERCOT",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 13,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：ERCOT",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786879",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "来源： ERCOT",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143411",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： ERCOT",
+          "model": "manual",
+          "created_at": "2026-03-16T00:52:55.231014",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： ERCOT",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Taken at face value, that forecast implies a structural demand shock on the order of an entire new ERCOT system layered on top of today’s load curve. In reality, no one believed in these numbers, and the market largely ignored them.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Taken at face value, that forecast implies a structural demand shock on the order of an entire new ERCOT system layered on top of today’s load curve. In reality, no one believed in these numbers, and the market largely ignored them.",
+      "parent_block_plain_text": "Taken at face value, that forecast implies a structural demand shock on the order of an entire new ERCOT system layered on top of today’s load curve. In reality, no one believed in these numbers, and the market largely ignored them.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 232,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "若按字面理解，该预测意味着一场结构性的需求冲击，其量级相当于在当前的负荷曲线上叠加一个全新的ERCOT系统。但实际上，没有人相信这些数字，市场也基本将其无视。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786887",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "若按字面理解，该预测意味着一场结构性的需求冲击，其量级相当于在当前的负荷曲线上叠加一个全新的ERCOT系统。但实际上，没有人相信这些数字，市场也基本将其无视。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143419",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "若按字面理解，该预测意味着一场结构性的需求冲击，其量级相当于在当前的负荷曲线上叠加一个全新的ERCOT系统。但实际上，没有人相信这些数字，市场也基本将其无视。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:53:04.222044",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "若按字面理解，该预测意味着一场结构性的需求冲击，其量级相当于在当前的负荷曲线上叠加一个全新的ERCOT系统。但实际上，没有人相信这些数字，市场也基本将其无视。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Even ERCOT recognized that their forecast was not realized and changed course. In the May 2025 Capacity, Demand and Reserves report, they applied a deliberate haircut: generic requests were discounted to 49.8%, officer-attested requests to 55.4%, and all in-service dates pushed back by 180 days. ERCOT’s internal grid analysts effectively said they would not plan for 100% of what developers claim until shovels actually move.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Even ERCOT recognized that their forecast was not realized and changed course. In the May 2025 Capacity, Demand and Reserves report, they applied a deliberate haircut: generic requests were discounted to 49.8%, officer-attested requests to 55.4%, and all in-service dates pushed back by 180 days. ERCOT’s internal grid analysts effectively said they would not plan for 100% of what developers claim until shovels actually move.",
+      "parent_block_plain_text": "Even ERCOT recognized that their forecast was not realized and changed course. In the May 2025 Capacity, Demand and Reserves report, they applied a deliberate haircut: generic requests were discounted to 49.8%, officer-attested requests to 55.4%, and all in-service dates pushed back by 180 days. ERCOT’s internal grid analysts effectively said they would not plan for 100% of what developers claim until shovels actually move.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 427,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "甚至连ERCOT也承认其预测并未兑现，并随之调整了方向。在2025年5月的《容量、需求与储备报告》中，他们主动采用了风险折减：常规申请被折减至49.8%，有高管签字确认的申请被折减至55.4%，且所有项目的投运日期均被推迟了180天。ERCOT的内部电网分析师实际上是在表明，除非项目真正破土动工，否则他们绝不会按照开发商声称的规模进行100%的规划。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786897",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143427",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "连ERCOT自己也承认其预测落空，并改弦更张。在2025年5月的《容量、需求与储备报告》中，他们主动进行了折算削减：常规申请按49.8%折算，经高管签字确认的申请按55.4%折算，且所有投运日期均推迟180天。ERCOT内部的电网分析师言下之意是，在真正破土动工之前，他们不会全盘按照开发商上报的规模来进行规划。",
+          "model": "default",
+          "created_at": "2026-03-16T00:53:21.936980",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "连ERCOT自己也承认其预测落空，并改弦更张。在2025年5月的《容量、需求与储备报告》中，他们主动进行了折算削减：常规申请按49.8%折算，经高管签字确认的申请按55.4%折算，且所有投运日期均推迟180天。ERCOT内部的电网分析师言下之意是，在真正动工之前，他们不会全盘按照开发商上报的规模来进行规划。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:54:05.496657",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "连ERCOT自己也承认其预测落空，并改弦更张。在2025年5月的《容量、需求与储备报告》中，他们主动进行了折算削减：常规申请按49.8%折算，经高管签字确认的申请按55.4%折算，且所有投运日期均推迟180天。ERCOT内部的电网分析师言下之意是，在真正动工之前，他们不会全盘按照开发商上报的规模来进行规划。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": [
+        {
+          "text": "连ERCOT自己也承认其预测落空，并改弦更张。在2025年5月的《容量、需求与储备报告》中，他们主动进行了折算削减：常规申请按49.8%折算，经高管签字确认的申请按55.4%折算，且所有投运日期均推迟180天。ERCOT内部的电网分析师言下之意是，在真正破土动工之前，他们不会全盘按照开发商上报的规模来进行规划。",
+          "timestamp": "2026-03-16T00:53:58.022540",
+          "source": "manual"
+        }
+      ]
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786907",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143435",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:53:05.734633",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e31a199-bfe3-45c6-9d33-2a6a48cc4fcb_1800x961.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: ERCOT",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: ERCOT",
+      "parent_block_plain_text": "Source: ERCOT",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 13,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：ERCOT",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786915",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "来源： ERCOT",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143444",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： ERCOT",
+          "model": "manual",
+          "created_at": "2026-03-16T00:53:07.330423",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： ERCOT",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "But the difference here is that ERCOT’s load forecasts and interconnection queue constraints do not directly drive electricity prices. PJM’s forecasts drive a simulated supply-demand curve, which in turn directly determines the bounds of what system capacity can cost. ERCOT uses its demand forecasts to guide system planning, transmission expansion, and resource adequacy studies -- not as a direct pricing input. ERCOT’s approach embeds skepticism that filters speculative demand before it can influence market outcomes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But the difference here is that ERCOT’s load forecasts and interconnection queue constraints do not directly drive electricity prices. PJM’s forecasts drive a simulated supply-demand curve, which in turn directly determines the bounds of what system capacity can cost. ERCOT uses its demand forecasts to guide system planning, transmission expansion, and resource adequacy studies -- not as a direct pricing input. ERCOT’s approach embeds skepticism that filters speculative demand before it can influence market outcomes.",
+      "parent_block_plain_text": "But the difference here is that ERCOT’s load forecasts and interconnection queue constraints do not directly drive electricity prices. PJM’s forecasts drive a simulated supply-demand curve, which in turn directly determines the bounds of what system capacity can cost. ERCOT uses its demand forecasts to guide system planning, transmission expansion, and resource adequacy studies -- not as a direct pricing input. ERCOT’s approach embeds skepticism that filters speculative demand before it can influence market outcomes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 522,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "但这里的区别在于，ERCOT的负荷预测和并网队列约束并不直接决定电价。PJM的预测则用于生成一条模拟的供需曲线，进而直接决定系统容量成本的边界。相比之下，ERCOT仅将其需求预测用于指导系统规划、输电网扩建以及资源充裕度研究——而非作为直接的定价输入变量。ERCOT的机制内置了审慎原则，能够在投机性需求影响市场结果之前将其有效过滤。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786924",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "但这里的区别在于，ERCOT的负载预测和并网排队限制并不直接决定电价。PJM的预测会生成一条模拟供需曲线，进而直接决定系统容量成本的上下限。ERCOT则将需求预测用于指导系统规划、输电扩容和资源充裕度研究，而非作为直接的定价输入变量。ERCOT的这种方法内置了审慎机制，能够在投机性需求影响市场结果前将其过滤。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143451",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "但这里的区别在于，ERCOT的负载预测和并网排队限制并不直接决定电价。PJM的预测会生成一条模拟供需曲线，进而直接决定系统容量成本的上下限。ERCOT则将需求预测用于指导系统规划、输电扩容和资源充裕度研究，而非作为直接的定价输入变量。ERCOT的这种方法内置了审慎机制，能够在投机性需求影响市场结果前将其过滤。",
+          "model": "default",
+          "created_at": "2026-03-16T00:53:51.561471",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "但这里的区别在于，ERCOT的负载预测和并网排队限制并不直接决定电价。PJM的预测会生成一条模拟供需曲线，进而直接决定系统容量成本的上下限。ERCOT则将需求预测用于指导系统规划、输电扩容和资源充裕度研究，而非作为直接的定价输入变量。ERCOT的这种方法内置了审慎机制，能够在投机性需求影响市场结果前将其过滤。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:54:12.919349",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "但这里的区别在于，ERCOT的负载预测和并网排队限制并不直接决定电价。PJM的预测会生成一条模拟供需曲线，进而直接决定系统容量成本的上下限。ERCOT则将需求预测用于指导系统规划、输电扩容和资源充裕度研究，而非作为直接的定价输入变量。ERCOT的这种方法内置了审慎机制，能够在投机性需求影响市场结果前将其过滤。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "More Datacenter Load, Less Scarcity",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### More Datacenter Load, Less Scarcity",
+      "parent_block_plain_text": "More Datacenter Load, Less Scarcity",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 35,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "数据中心负荷增加，电力稀缺性反而下降",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786933",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "数据中心负荷增加，电力稀缺性反而下降",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143463",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "数据中心负荷增加，电力稀缺性反而下降",
+          "model": "manual",
+          "created_at": "2026-03-16T00:53:13.243418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "数据中心负荷增加，电力稀缺性反而下降",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "The physical system confirms ERCOT’s approach is working. The grid has already experienced record-breaking peaks of over 90 GW in summer 2024 and a spring record of 78.4 GW in May 2025. Hyperscaler demand growth in Texas is already enormous, and there have been no brownouts since.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The physical system confirms ERCOT’s approach is working. The grid has already experienced record-breaking peaks of over 90 GW in summer 2024 and a spring record of 78.4 GW in May 2025. Hyperscaler demand growth in Texas is already enormous, and there have been no brownouts since.",
+      "parent_block_plain_text": "The physical system confirms ERCOT’s approach is working. The grid has already experienced record-breaking peaks of over 90 GW in summer 2024 and a spring record of 78.4 GW in May 2025. Hyperscaler demand growth in Texas is already enormous, and there have been no brownouts since.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 281,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "物理系统的实际运行证实了ERCOT的机制行之有效。该电网在2024年夏季已经历了超过90 GW的创纪录用电峰值，并在2025年5月创下了78.4 GW的春季历史新高。德克萨斯州超大规模数据中心的电力需求增长已然极为庞大，但此后并未发生过欠压供电/局部限电。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786941",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143470",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "实体系统的表现证实，ERCOT的策略行之有效。2024年夏季，电网已承受了超过90吉瓦的破纪录峰值负荷，并在2025年5月创下了78.4吉瓦的春季负荷纪录。德克萨斯州超大规模云服务商的用电需求增长已极其庞大，但此后并未发生过限电。",
+          "model": "default",
+          "created_at": "2026-03-16T00:53:34.363595",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "实体系统的表现证实，ERCOT的策略行之有效。2024年夏季，电网已承受了超过90吉瓦的破纪录峰值负荷，并在2025年5月创下了78.4吉瓦的春季负荷纪录。德克萨斯州超大规模云服务商的用电需求增长已极其庞大，但此后并未发生过限电。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:54:42.508059",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "实体系统的表现证实，ERCOT的策略行之有效。2024年夏季，电网已承受了超过90吉瓦的破纪录峰值负荷，并在2025年5月创下了78.4吉瓦的春季负荷纪录。德克萨斯州超大规模云服务商的用电需求增长已极其庞大，但此后并未发生过限电。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "The prices that energy traders see have not gone to the moon either. Forward prices -- particularly 2026, 2028, and 2030 contracts -- have increased 11-17% in the past year, a notable increase and roughly similar to that of PJM, but no 9x surge in capacity prices.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0099",
+      "parent_block_index": 99,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The prices that energy traders see have not gone to the moon either. Forward prices -- particularly 2026, 2028, and 2030 contracts -- have increased 11-17% in the past year, a notable increase and roughly similar to that of PJM, but no 9x surge in capacity prices.",
+      "parent_block_plain_text": "The prices that energy traders see have not gone to the moon either. Forward prices -- particularly 2026, 2028, and 2030 contracts -- have increased 11-17% in the past year, a notable increase and roughly similar to that of PJM, but no 9x surge in capacity prices.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 264,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "能源交易员所看到的电价同样没有出现暴涨。远期价格——尤其是2026年、2028年和2030年的合约——在过去一年中上涨了11%至17%，这一涨幅虽然显著且与PJM大致相当，但并未出现容量价格飙升9倍的现象。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786950",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "能源交易员所看到的电价同样没有出现暴涨。远期价格——尤其是2026年、2028年和2030年的合约——在过去一年中上涨了11%至17%，这一涨幅虽然显著且与PJM大致相当，但并未出现容量价格飙升9倍的现象。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143479",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "能源交易员所看到的电价同样没有出现暴涨。远期价格——尤其是2026年、2028年和2030年的合约——在过去一年中上涨了11%至17%，这一涨幅虽然显著且与PJM大致相当，但并未出现容量价格飙升9倍的现象。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:54:46.958722",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "能源交易员所看到的电价同样没有出现暴涨。远期价格——尤其是2026年、2028年和2030年的合约——在过去一年中上涨了11%至17%，这一涨幅虽然显著且与PJM大致相当，但并未出现容量价格飙升9倍的现象。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786958",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143486",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:54:49.946600",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Source: Bloomberg",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Bloomberg",
+      "parent_block_plain_text": "Source: Bloomberg",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：彭博",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.786967",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "来源： Bloomberg",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143493",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： Bloomberg",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:01.807975",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Bloomberg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "The 2024 Biennial ORDC Report explains that more online reserves were available than in prior cycles, allowing for steady, calm growth. Solar, wind, batteries, and fossil fuel peakers all came online in sufficient volume to cushion the system. The measurable effect was that the number of hours with scarcity pricing and the total spend on scarcity pricing fell relative to previous years. Energy is now less scarce in ERCOT territory despite the increase in electric demand. It takes more incremental gigawatts of demand to push the system into true scarcity conditions than it did even two years ago. In their public messaging, ERCOT’s concerns about datacenter growth leave out resource scarcity worries.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "2024 Biennial ORDC Report",
+          "start": 4,
+          "end": 29,
+          "href": "https://www.ercot.com/files/docs/2024/10/31/2024-biennial-ercot-report-on-the-ordc-20241031.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The [2024 Biennial ORDC Report](https://www.ercot.com/files/docs/2024/10/31/2024-biennial-ercot-report-on-the-ordc-20241031.pdf) explains that more online reserves were available than in prior cycles, allowing for steady, calm growth. Solar, wind, batteries, and fossil fuel peakers all came online in sufficient volume to cushion the system. The measurable effect was that the number of hours with scarcity pricing and the total spend on scarcity pricing fell relative to previous years. Energy is now less scarce in ERCOT territory despite the increase in electric demand. It takes more incremental gigawatts of demand to push the system into true scarcity conditions than it did even two years ago. In their public messaging, ERCOT’s concerns about datacenter growth leave out resource scarcity worries.",
+      "parent_block_plain_text": "The 2024 Biennial ORDC Report explains that more online reserves were available than in prior cycles, allowing for steady, calm growth. Solar, wind, batteries, and fossil fuel peakers all came online in sufficient volume to cushion the system. The measurable effect was that the number of hours with scarcity pricing and the total spend on scarcity pricing fell relative to previous years. Energy is now less scarce in ERCOT territory despite the increase in electric demand. It takes more incremental gigawatts of demand to push the system into true scarcity conditions than it did even two years ago. In their public messaging, ERCOT’s concerns about datacenter growth leave out resource scarcity worries.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "2024 Biennial ORDC Report",
+          "start": 4,
+          "end": 29,
+          "href": "https://www.ercot.com/files/docs/2024/10/31/2024-biennial-ercot-report-on-the-ordc-20241031.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 707,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "《2024年ORDC双年报告》指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.787003",
+          "tokenized_text": "[[[LINK_1|《2024年ORDC双年报告》]]]指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "《2024年ORDC双年报告》指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:32.271675",
+          "tokenized_text": "[[[LINK_1|《2024年ORDC双年报告》]]]指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "《2024年ORDC双年报告》指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+      "confirmed_tokenized": "[[[LINK_1|《2024年ORDC双年报告》]]]指出，与以往周期相比，当前系统拥有更多的在线备用容量，从而保障了平稳、从容的增长。太阳能、风能、电池储能以及化石燃料调峰电厂均以充足的规模并网，为系统提供了缓冲。其可衡量的实际效果是，与往年相比，触发稀缺定价的小时数以及在稀缺定价上的总支出均有所下降。尽管电力需求不断攀升，但如今在ERCOT管辖区内，能源的稀缺程度反而有所缓解。如今，要将系统推入真正的稀缺状态，所需的吉瓦级新增需求甚至比两年前还要多。在对外发布的信息中，ERCOT对数据中心增长的关注点，也并不包含对资源稀缺的担忧。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.787014",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143504",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:04.912094",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faeb83ece-fc7c-4534-b358-0b494e4cacef_1740x1100.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "Source: ERCOT, SemiAnalysis annotation",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0104",
+      "parent_block_index": 104,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: ERCOT, SemiAnalysis annotation",
+      "parent_block_plain_text": "Source: ERCOT, SemiAnalysis annotation",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：ERCOT，SemiAnalysis标注",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.787022",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143512",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： ERCOT, SemiAnalysis annotation",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:07.235734",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： ERCOT, SemiAnalysis annotation",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "The forward wholesale price curve tells us that traders believe ERCOT can absorb the growth. They are betting on supply expansion, improved reserves, and SB 6 curtailment authority to mitigate scarcity in the long term. That skepticism mirrors ERCOT’s own haircutting of developer submissions. The system operator discounts the raw datacenter claims in its forecast; the market discounts them in its forward prices.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SB 6 curtailment",
+          "start": 154,
+          "end": 170,
+          "href": "https://www.bakerbotts.com/thought-leadership/publications/2025/july/texas-senate-bill-6-understanding-the-impacts-to-large-loads-and-co-located-generation",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0105",
+      "parent_block_index": 105,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The forward wholesale price curve tells us that traders believe ERCOT can absorb the growth. They are betting on supply expansion, improved reserves, and [SB 6 curtailment](https://www.bakerbotts.com/thought-leadership/publications/2025/july/texas-senate-bill-6-understanding-the-impacts-to-large-loads-and-co-located-generation) authority to mitigate scarcity in the long term. That skepticism mirrors ERCOT’s own haircutting of developer submissions. The system operator discounts the raw datacenter claims in its forecast; the market discounts them in its forward prices.",
+      "parent_block_plain_text": "The forward wholesale price curve tells us that traders believe ERCOT can absorb the growth. They are betting on supply expansion, improved reserves, and SB 6 curtailment authority to mitigate scarcity in the long term. That skepticism mirrors ERCOT’s own haircutting of developer submissions. The system operator discounts the raw datacenter claims in its forecast; the market discounts them in its forward prices.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SB 6 curtailment",
+          "start": 154,
+          "end": 170,
+          "href": "https://www.bakerbotts.com/thought-leadership/publications/2025/july/texas-senate-bill-6-understanding-the-impacts-to-large-loads-and-co-located-generation",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 415,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及SB 6限电权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.787050",
+          "tokenized_text": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及[[[LINK_1|SB 6限电]]]权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及SB 6限电权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:48.321391",
+          "tokenized_text": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及[[[LINK_1|SB 6限电]]]权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及SB 6限电权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+      "confirmed_tokenized": "批发市场远期价格曲线表明，交易员相信ERCOT能够消化这一增长。他们押注于供应扩张、储备改善以及[[[LINK_1|SB 6限电]]]权限，认为这能在长期内缓解电力短缺。这种怀疑态度与ERCOT自身对开发商提交的申请进行风险折减的做法如出一辙。系统运营商在其预测中对数据中心原始的用电主张进行了折减；而市场则在远期价格中对这些主张进行了折价。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "ERCOT also moves much faster: one of its key advantages over PJM is that it only covers one state and is not subject to FERC jurisdiction. On the other hand, PJM has to deal with FERC and with 13 states.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0106",
+      "parent_block_index": 106,
+      "parent_block_type": "p",
+      "parent_block_markdown": "ERCOT also moves much faster: one of its key advantages over PJM is that it only covers one state and is not subject to FERC jurisdiction. On the other hand, PJM has to deal with FERC and with 13 states.",
+      "parent_block_plain_text": "ERCOT also moves much faster: one of its key advantages over PJM is that it only covers one state and is not subject to FERC jurisdiction. On the other hand, PJM has to deal with FERC and with 13 states.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 203,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ERCOT的行动速度也要快得多：相较于PJM，其关键优势之一在于仅覆盖单一州，且不受FERC管辖。相比之下，PJM则必须应对FERC以及13个州。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:31:06.787059",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "ERCOT的行动速度也要快得多：相较于PJM，其关键优势之一在于仅覆盖单一州，且不受FERC管辖。相比之下，PJM则必须应对FERC以及13个州。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.143522",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "ERCOT的行动速度也要快得多：相较于PJM，其关键优势之一在于仅覆盖单一州，且不受FERC管辖。相比之下，PJM则必须应对FERC以及13个州。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:55:49.070868",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "ERCOT的行动速度也要快得多：相较于PJM，其关键优势之一在于仅覆盖单一州，且不受FERC管辖。相比之下，PJM则必须应对FERC以及13个州。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+          "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the control group in the article's argument, proving that massive AI load growth does not necessitate consumer price shocks if the market design is sound.",
+          "relation_to_previous": "Directly contrasts PJM's $16B forecasting failure with ERCOT's real-time market success under similar AI load conditions.",
+          "relation_to_next": "Sets the baseline for ERCOT's operational efficiency before testing both grids under the extreme pressure of 'Winter Storm Fern'.",
+          "key_points": [
+            "ERCOT balances supply and demand via real-time prices without relying on central forecasts.",
+            "ERCOT has a significant regulatory advantage: it operates in a single state and is exempt from FERC jurisdiction, allowing it to move much faster than PJM."
+          ],
+          "translation_notes": [
+            "Institutional terms: 'FERC jurisdiction' (联邦能源管理委员会管辖).",
+            "Capture the nuance of 'market discipline' and 'unified market mechanism' accurately to reflect free-market efficiency."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "未遵守术语表约定（Hyperscalers → 超大规模云厂商），将其译为了“超大规模数据中心”。此外，“欠压供电/局部限电”使用了斜杠，带有词典释义感，破坏了行文的流畅度和专业感。"
+          },
+          {
+            "type": "annotation",
+            "description": "提示中明确指出需要注意“FERC jurisdiction (联邦能源管理委员会管辖)”，且要求执行“首现加注”策略。译文中直接使用了FERC缩写，未提供中文全称。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

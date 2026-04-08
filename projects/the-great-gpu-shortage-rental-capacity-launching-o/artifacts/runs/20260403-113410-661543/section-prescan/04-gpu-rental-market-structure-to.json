@@ -1,0 +1,37 @@
+{
+  "section_id": "04-gpu-rental-market-structure-to",
+  "new_terms": [
+    {
+      "term": "GPU refresh cycle",
+      "suggested_translation": "GPU更新周期",
+      "context": "The period before next-generation hardware puts pricing pressure on existing assets.",
+      "confidence": 0.95
+    },
+    {
+      "term": "incumbent GPU servers",
+      "suggested_translation": "现役GPU服务器",
+      "context": "Current generation servers already deployed in data centers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "prepay",
+      "suggested_translation": "预付款",
+      "context": "Negotiating for higher upfront payments in rental contracts.",
+      "confidence": 0.95
+    },
+    {
+      "term": "book of clients",
+      "suggested_translation": "客户组合",
+      "context": "The portfolio or set of customers signed for a specific cluster over time.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "offtake": "包销协议",
+    "tenor": "合同期限",
+    "spot instance": "竞价",
+    "on-demand": "按需"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:06:47.861729"
+}

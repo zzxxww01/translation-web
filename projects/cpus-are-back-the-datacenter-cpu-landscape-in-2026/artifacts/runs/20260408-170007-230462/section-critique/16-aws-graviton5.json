@@ -1,0 +1,30 @@
+{
+  "section_id": "16-aws-graviton5",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.2,
+    "accuracy_score": 9.0,
+    "conciseness_score": 8.8,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "AWS also disaggregated the design into chiplets, with four DDR5 memory and two PCIe5 I/O chiplets...",
+        "description": "术语“chiplet”前后翻译不一致。在段落 4 和 5 中被译为“小芯片”，而在段落 12 中被译为“芯粒”。",
+        "why_it_matters": "在同一篇深度技术文章中，核心硬件术语应当保持高度一致。“芯粒”是目前中文半导体工程界更标准、更专业的译法，比“小芯片”更契合硬核科技文章的调性。",
+        "suggestion": "全文统一译为“芯粒”。此处修改为：“采用了芯粒 (Chiplet) 解耦设计……环绕着 4 个 DDR5 内存芯粒和 2 个 PCIe5 I/O 芯粒”。段落 5 的标题也相应改为“芯粒与先进封装”。"
+      },
+      {
+        "paragraph_index": 15,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "...creating an internal dogfooding cycle where Gravitons design Gravitons.",
+        "description": "将“dogfooding”译为“内部试用”虽然意思准确，但丢失了科技界“吃自家狗粮 (eating your own dog food)”这一极客黑话的生动色彩。",
+        "why_it_matters": "SemiAnalysis 的文章带有强烈的工程师文化色彩，保留原汁原味的行业黑话能更好地契合目标读者的阅读习惯并传递原文的语气。",
+        "suggestion": "建议译为“自产自用 (Dogfooding)”或直接译为“‘吃自家狗粮’式 (Dogfooding) 的内部闭环”。"
+      }
+    ]
+  }
+}

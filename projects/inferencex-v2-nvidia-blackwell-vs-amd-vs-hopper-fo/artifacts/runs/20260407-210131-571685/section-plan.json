@@ -1,0 +1,392 @@
+{
+  "article_theme": "A comprehensive benchmarking of AI inference hardware and software frameworks using InferenceXv2, emphasizing the critical role of advanced techniques like Disaggregated Prefill and Wide Expert Parallelism in optimizing the interactivity-throughput tradeoff and Total Cost of Ownership (TCO) across NVIDIA and AMD ecosystems.",
+  "structure_summary": "The article opens with an introduction to the InferenceXv2 benchmark and a primer on foundational technical concepts (tradeoffs, TP/EP/DP). It then dives into empirical benchmark results for DeepSeek R1 and GPT-OSS 120B, analyzing the impact of Disaggregated Serving and WideEP. Following this, it contrasts NVIDIA and AMD's hardware (Hopper/Blackwell vs. MI300/355) and software ecosystems (TRTLLM vs. SGLang/ATOM). The piece concludes with discussions on unit economics, accuracy evaluations, project infrastructure updates (Claude AI usage, GitHub Actions), and the future roadmap.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/36",
+      "paragraph_count": 3,
+      "previous_section_title": "",
+      "next_section_title": "Introduction",
+      "section_role": "Metadata and keyword seeding, establishing the temporal and technical scope of the benchmark report.",
+      "translation_notes": [
+        "Keep hardware SKUs and framework names in English.",
+        "Establish standardized Chinese translations for core concepts early: 'Disaggregated Serving' (分离式服务), 'Wide Expert Parallelism' (宽专家并行), 'Large Mixture of Experts' (大型混合专家模型)."
+      ]
+    },
+    {
+      "section_id": "01-introduction",
+      "title": "Introduction",
+      "position": "2/36",
+      "paragraph_count": 8,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Key Observations and Results to Highlight",
+      "section_role": "Establishes the credibility, methodology, and open-source ethos of the InferenceXv2 project.",
+      "translation_notes": [
+        "Translate 'point-in-time benchmarks' accurately to convey static limitations (e.g., 静态的/特定时间点的基准测试).",
+        "Maintain a community-driven, welcoming tone while preserving the technical authority of the methodology."
+      ]
+    },
+    {
+      "section_id": "02-key-observations-and-results-t",
+      "title": "Key Observations and Results to Highlight",
+      "position": "3/36",
+      "paragraph_count": 10,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters",
+      "section_role": "Delivers the executive summary of the benchmark's most critical findings regarding the AMD vs. NVIDIA rivalry.",
+      "translation_notes": [
+        "The term 'framemog' is hardcore internet/gaming slang meaning to completely dominate in performance/frame rates. Translate with a strong equivalent like '性能全面碾压' or '呈碾压之势'.",
+        "Ensure 'composability' is translated accurately in a software architecture context (软件可组合性)."
+      ]
+    },
+    {
+      "section_id": "03-acknowledgments-and-inferencex",
+      "title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters",
+      "position": "4/36",
+      "paragraph_count": 8,
+      "previous_section_title": "Key Observations and Results to Highlight",
+      "next_section_title": "A Primer on Important Technical Concepts",
+      "section_role": "Builds institutional authority by demonstrating deep industry access and provides a monetization/support CTA.",
+      "translation_notes": [
+        "Ensure NVIDIA executives' names are correctly transliterated (Jensen Huang -> 黄仁勋) or kept in English if preferred by the target publication style.",
+        "Translate 'Pushing Pareto Frontier' as '推进帕累托前沿', ensuring the economic/optimization context is clear."
+      ]
+    },
+    {
+      "section_id": "04-a-primer-on-important-technica",
+      "title": "A Primer on Important Technical Concepts",
+      "position": "5/36",
+      "paragraph_count": 1,
+      "previous_section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters",
+      "next_section_title": "Interactivity vs Throughput Tradeoff",
+      "section_role": "Acts as a structural signpost, warning readers of a shift from high-level summaries to foundational technical theory.",
+      "translation_notes": [
+        "Keep the translation brief and navigational. 'Primer' can be effectively translated as '入门指南' or '核心技术概念科普'."
+      ]
+    },
+    {
+      "section_id": "05-interactivity-vs-throughput-tr",
+      "title": "Interactivity vs Throughput Tradeoff",
+      "position": "6/36",
+      "paragraph_count": 11,
+      "previous_section_title": "A Primer on Important Technical Concepts",
+      "next_section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+      "section_role": "Defines the core economic and performance tension in LLM serving, establishing the metrics used throughout the benchmark.",
+      "translation_notes": [
+        "Strict terminology consistency required: 'Interactivity' (交互性/响应速度), 'Throughput' (吞吐量), 'TPOT' (每个输出token的时间).",
+        "Translate 'Disaggregated prefill' as '分离式Prefill' or '预填充与解码分离', and note the 'PD disaggregation' abbreviation."
+      ]
+    },
+    {
+      "section_id": "06-tensor-parallel-expert-parall",
+      "title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+      "position": "7/36",
+      "paragraph_count": 1,
+      "previous_section_title": "Interactivity vs Throughput Tradeoff",
+      "next_section_title": "Tracking Improvements Over Time",
+      "section_role": "Explains the distributed computing topologies used to manipulate the interactivity/throughput tradeoff.",
+      "translation_notes": [
+        "Do not translate the acronyms (TP, EP, DP) without their English counterparts.",
+        "Use precise distributed systems terminology: 'all-reduce' (全归约), 'all-to-all collective' (全对全集合通信), 'shards experts' (专家分片), 'ranks' (节点/进程序列)."
+      ]
+    },
+    {
+      "section_id": "07-tracking-improvements-over-tim",
+      "title": "Tracking Improvements Over Time",
+      "position": "8/36",
+      "paragraph_count": 1,
+      "previous_section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+      "next_section_title": "DeepSeek R1",
+      "section_role": "Justifies the continuous, dynamic methodology of InferenceX by contrasting hardware and software development cycles.",
+      "translation_notes": [
+        "The notation 'O(yearly)' and 'O(weekly)' uses Big O notation for order of magnitude. Translate to convey this specific meaning, e.g., '以年为数量级/周期' and '以周为数量级/周期'."
+      ]
+    },
+    {
+      "section_id": "08-deepseek-r1",
+      "title": "DeepSeek R1",
+      "position": "9/36",
+      "paragraph_count": 24,
+      "previous_section_title": "Tracking Improvements Over Time",
+      "next_section_title": "GPT-OSS 120B",
+      "section_role": "Provides a concrete, empirical case study demonstrating both the benchmark's value and AMD's rapid software progress.",
+      "translation_notes": [
+        "Translate 'upstream' as a verb accurately in the open-source context (e.g., '推送到上游' or '合并到官方主分支').",
+        "Maintain an objective but encouraging tone regarding AMD's software velocity, ensuring exact preservation of model (DeepSeek R1) and datatype (FP4) names."
+      ]
+    },
+    {
+      "section_id": "09-gpt-oss-120b",
+      "title": "GPT-OSS 120B",
+      "position": "10/36",
+      "paragraph_count": 12,
+      "previous_section_title": "DeepSeek R1",
+      "next_section_title": "Disaggregated Inference Frameworks",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-disaggregated-inference-framew",
+      "title": "Disaggregated Inference Frameworks",
+      "position": "11/36",
+      "paragraph_count": 1,
+      "previous_section_title": "GPT-OSS 120B",
+      "next_section_title": "DeepSeek Disagg +WideEP Results Deep Dive",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-deepseek-disagg-wideep-result",
+      "title": "DeepSeek Disagg +WideEP Results Deep Dive",
+      "position": "12/36",
+      "paragraph_count": 24,
+      "previous_section_title": "Disaggregated Inference Frameworks",
+      "next_section_title": "Nvidia versus AMD Disagg Prefill",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-nvidia-versus-amd-disagg-prefi",
+      "title": "Nvidia versus AMD Disagg Prefill",
+      "position": "13/36",
+      "paragraph_count": 22,
+      "previous_section_title": "DeepSeek Disagg +WideEP Results Deep Dive",
+      "next_section_title": "Unpacking Inference Providers’ Unit Economics",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "13-unpacking-inference-providers",
+      "title": "Unpacking Inference Providers’ Unit Economics",
+      "position": "14/36",
+      "paragraph_count": 38,
+      "previous_section_title": "Nvidia versus AMD Disagg Prefill",
+      "next_section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-jensen-under-promising-and-ove",
+      "title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+      "position": "15/36",
+      "paragraph_count": 18,
+      "previous_section_title": "Unpacking Inference Providers’ Unit Economics",
+      "next_section_title": "Blackwell vs Blackwell Ultra",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-blackwell-vs-blackwell-ultra",
+      "title": "Blackwell vs Blackwell Ultra",
+      "position": "16/36",
+      "paragraph_count": 3,
+      "previous_section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+      "next_section_title": "MI355X vs MI325X vs MI300X",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+      "title": "MI355X vs MI325X vs MI300X",
+      "position": "17/36",
+      "paragraph_count": 8,
+      "previous_section_title": "Blackwell vs Blackwell Ultra",
+      "next_section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "17-amd-composability-issue-on-fp4",
+      "title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+      "position": "18/36",
+      "paragraph_count": 7,
+      "previous_section_title": "MI355X vs MI325X vs MI300X",
+      "next_section_title": "AMD ATOM Engine",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "18-amd-atom-engine",
+      "title": "AMD ATOM Engine",
+      "position": "19/36",
+      "paragraph_count": 11,
+      "previous_section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+      "next_section_title": "Multi Token Prediction (MTP)",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "19-multi-token-prediction-mtp",
+      "title": "Multi Token Prediction (MTP)",
+      "position": "20/36",
+      "paragraph_count": 20,
+      "previous_section_title": "AMD ATOM Engine",
+      "next_section_title": "Accuracy Evaluations",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "20-accuracy-evaluations",
+      "title": "Accuracy Evaluations",
+      "position": "21/36",
+      "paragraph_count": 5,
+      "previous_section_title": "Multi Token Prediction (MTP)",
+      "next_section_title": "Anthropic Fast Mode Inferencing Explained",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "21-anthropic-fast-mode-inferencin",
+      "title": "Anthropic Fast Mode Inferencing Explained",
+      "position": "22/36",
+      "paragraph_count": 26,
+      "previous_section_title": "Accuracy Evaluations",
+      "next_section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "22-wide-expert-parallelism-widee",
+      "title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+      "position": "23/36",
+      "paragraph_count": 1,
+      "previous_section_title": "Anthropic Fast Mode Inferencing Explained",
+      "next_section_title": "WideEP",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "23-wideep",
+      "title": "WideEP",
+      "position": "24/36",
+      "paragraph_count": 15,
+      "previous_section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+      "next_section_title": "Disaggregated Prefill",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "24-disaggregated-prefill",
+      "title": "Disaggregated Prefill",
+      "position": "25/36",
+      "paragraph_count": 10,
+      "previous_section_title": "WideEP",
+      "next_section_title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "25-optimizing-inference-with-wide",
+      "title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+      "position": "26/36",
+      "paragraph_count": 14,
+      "previous_section_title": "Disaggregated Prefill",
+      "next_section_title": "Dive into DeepSeek R1 Single Node Results",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "26-dive-into-deepseek-r1-single-n",
+      "title": "Dive into DeepSeek R1 Single Node Results",
+      "position": "27/36",
+      "paragraph_count": 14,
+      "previous_section_title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+      "next_section_title": "GPT-OSS 120B Single Node",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "27-gpt-oss-120b-single-node",
+      "title": "GPT-OSS 120B Single Node",
+      "position": "28/36",
+      "paragraph_count": 10,
+      "previous_section_title": "Dive into DeepSeek R1 Single Node Results",
+      "next_section_title": "Core InferenceX Repo Updates",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "28-core-inferencex-repo-updates",
+      "title": "Core InferenceX Repo Updates",
+      "position": "29/36",
+      "paragraph_count": 1,
+      "previous_section_title": "GPT-OSS 120B Single Node",
+      "next_section_title": "Core Changes Since InferenceXv1",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "29-core-changes-since-inferencexv",
+      "title": "Core Changes Since InferenceXv1",
+      "position": "30/36",
+      "paragraph_count": 4,
+      "previous_section_title": "Core InferenceX Repo Updates",
+      "next_section_title": "Klaud Cold AI Usage",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "30-klaud-cold-ai-usage",
+      "title": "Klaud Cold AI Usage",
+      "position": "31/36",
+      "paragraph_count": 4,
+      "previous_section_title": "Core Changes Since InferenceXv1",
+      "next_section_title": "GitHub Actions",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "31-github-actions",
+      "title": "GitHub Actions",
+      "position": "32/36",
+      "paragraph_count": 7,
+      "previous_section_title": "Klaud Cold AI Usage",
+      "next_section_title": "Future of InferenceX",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "32-future-of-inferencex",
+      "title": "Future of InferenceX",
+      "position": "33/36",
+      "paragraph_count": 2,
+      "previous_section_title": "GitHub Actions",
+      "next_section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "33-migration-to-multi-turn-real-m",
+      "title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets",
+      "position": "34/36",
+      "paragraph_count": 5,
+      "previous_section_title": "Future of InferenceX",
+      "next_section_title": "Adding TPU, Trainium and More Models",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "34-adding-tpu-trainium-and-more",
+      "title": "Adding TPU, Trainium and More Models",
+      "position": "35/36",
+      "paragraph_count": 2,
+      "previous_section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets",
+      "next_section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "35-total-cost-of-ownership-nvl72",
+      "title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)",
+      "position": "36/36",
+      "paragraph_count": 7,
+      "previous_section_title": "Adding TPU, Trainium and More Models",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

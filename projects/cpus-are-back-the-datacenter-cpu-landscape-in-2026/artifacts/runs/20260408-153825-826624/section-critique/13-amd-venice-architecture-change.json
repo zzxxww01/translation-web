@@ -1,0 +1,48 @@
+{
+  "section_id": "13-amd-venice-architecture-change",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.8,
+    "accuracy_score": 8.7,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "We have the volumes for this in our Accelerator, HBM, and Advanced Packaging Model.",
+        "description": "译文中出现多余的句号，打断了句子的连贯性（“模型。中”）。",
+        "why_it_matters": "明显的标点排版错误，严重影响阅读体验和专业感。",
+        "suggestion": "删除多余的句号，修改为：“我们在加速器、HBM 与高级封装模型中提供了相关的出货量数据。”"
+      },
+      {
+        "paragraph_index": 9,
+        "issue_type": "accuracy|data",
+        "severity": "medium",
+        "original_text": "SPECrate®2017\\int\\base ... AVX512\\FP16, AVX\\VVNI\\INT8 and a new AVX512\\BMM",
+        "description": "原文中的反斜杠（可能是 Markdown 转义下划线遗留）在译文中被直接删除，导致基准测试名称和指令集名称连写乱码（如 SPECrate®2017intbase、AVX-512FP16、AVX-VVNIINT8）。",
+        "why_it_matters": "对于硬核技术文章，基准测试和指令集的名称必须保持准确、规范的格式，连写会显得极不专业。",
+        "suggestion": "恢复分隔符（建议使用下划线或空格），修改为：“SPECrate®2017_int_base”、“AVX-512_FP16”、“AVX_VNNI_INT8”（注：原文 VVNI 疑为 VNNI 笔误，建议顺手修正）以及“AVX-512_BMM”。"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "forming another NUMA domain that Intel’s solution avoids.",
+        "description": "将“NUMA domain”译为“NUMA 节点”。虽然在很多语境下 node 和 domain 经常混用，但严格来说 domain 对应的中文是“域”。",
+        "why_it_matters": "在架构深度的分析文章中，保持术语的精确对应有助于体现专业度。",
+        "suggestion": "建议将“NUMA 节点”改为“NUMA 域”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Zen6c receives the full 4MB L3 cache per core",
+        "description": "“L3缓存”之间缺少中英文空格。",
+        "why_it_matters": "不符合中文排版规范，影响视觉整洁度。",
+        "suggestion": "修改为“L3 缓存”。"
+      }
+    ]
+  }
+}

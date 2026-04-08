@@ -1,0 +1,577 @@
+{
+  "section_id": "20-arm-phoenix",
+  "title": "ARM Phoenix",
+  "title_translation": "ARM Phoenix",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0248",
+      "parent_block_index": 248,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.476677",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6xHo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e44d5f-8aeb-4974-9868-cd834fe74993_2560x1440.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "ARM’s CSS Offerings Balance Customization with Development Cost. Source: ARM",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "ARM’s CSS Offerings Balance Customization with Development Cost. Source: ARM",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0249",
+      "parent_block_index": 249,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*ARM’s CSS Offerings Balance Customization with Development Cost. Source: ARM*",
+      "parent_block_plain_text": "ARM’s CSS Offerings Balance Customization with Development Cost. Source: ARM",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "ARM’s CSS Offerings Balance Customization with Development Cost. Source: ARM",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ARM 的 CSS 产品在定制化与开发成本之间取得平衡。来源：ARM",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.476825",
+          "tokenized_text": "[[[EM_1|ARM 的 CSS 产品在定制化与开发成本之间取得平衡。来源：ARM]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "ARM’s core IP licensing business has been very successful in the datacenter market, with nearly every hyperscaler adopting their Neoverse CSS designs for their custom CPUs. To date, over 1 Billion Neoverse cores have been deployed across datacenter CPUs and DPUs, with 21 CSS licenses signed across 12 companies. With increasing core counts and hyperscale ARM CPU ramps, datacenter royalty revenue more than doubled Year-over-Year, and they are projecting CSS to represent over 50% of royalty revenue in the next couple of years. Read our article here to learn more about ARM’s business model and how CSS extracts more value.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0250",
+      "parent_block_index": 250,
+      "parent_block_type": "p",
+      "parent_block_markdown": "ARM’s core IP licensing business has been very successful in the datacenter market, with nearly every hyperscaler adopting their Neoverse CSS designs for their custom CPUs. To date, over 1 Billion Neoverse cores have been deployed across datacenter CPUs and DPUs, with 21 CSS licenses signed across 12 companies. With increasing core counts and hyperscale ARM CPU ramps, datacenter royalty revenue more than doubled Year-over-Year, and they are projecting CSS to represent over 50% of royalty revenue in the next couple of years. Read our article here to learn more about ARM’s business model and how CSS extracts more value.",
+      "parent_block_plain_text": "ARM’s core IP licensing business has been very successful in the datacenter market, with nearly every hyperscaler adopting their Neoverse CSS designs for their custom CPUs. To date, over 1 Billion Neoverse cores have been deployed across datacenter CPUs and DPUs, with 21 CSS licenses signed across 12 companies. With increasing core counts and hyperscale ARM CPU ramps, datacenter royalty revenue more than doubled Year-over-Year, and they are projecting CSS to represent over 50% of royalty revenue in the next couple of years. Read our article here to learn more about ARM’s business model and how CSS extracts more value.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 625,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ARM 的核心 IP 授权业务在数据中心市场大获成功。几乎所有超大规模云厂商都在其定制 CPU 中采用了 ARM 的 Neoverse 计算子系统 (CSS) 设计。迄今为止，已有超过 10 亿个 Neoverse 核心部署于数据中心 CPU 和 DPU 中，12 家公司共签署了 21 份 CSS 授权协议。随着核心数量不断增加以及超大规模云厂商大举部署 ARM CPU，其数据中心版税营收实现同比翻番有余。ARM 预计，未来几年 CSS 将贡献超过 50% 的版税营收。阅读我们此前的文章，深入了解 ARM 的商业模式以及 CSS 如何攫取更多商业价值。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.476861",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Arm and a Leg: Arm's Quest To Extract Their True Value - Dylan Patel, Myron Xie, and 2 others · September 14, 2023",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Arm and a Leg: Arm's Quest To Extract Their True Value",
+          "start": 0,
+          "end": 54,
+          "href": "https://newsletter.semianalysis.com/p/arm-and-a-leg-arms-quest-to-extract",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0251",
+      "parent_block_index": 251,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Arm and a Leg: Arm's Quest To Extract Their True Value](https://newsletter.semianalysis.com/p/arm-and-a-leg-arms-quest-to-extract) - Dylan Patel, Myron Xie, and 2 others · September 14, 2023",
+      "parent_block_plain_text": "Arm and a Leg: Arm's Quest To Extract Their True Value - Dylan Patel, Myron Xie, and 2 others · September 14, 2023",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Arm and a Leg: Arm's Quest To Extract Their True Value",
+          "start": 0,
+          "end": 54,
+          "href": "https://newsletter.semianalysis.com/p/arm-and-a-leg-arms-quest-to-extract",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 114,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "《Arm 的代价：Arm 如何榨取自身的真正价值》 - Dylan Patel、Myron Xie 及另外 2 人 · 2023 年 9 月 14 日",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.476945",
+          "tokenized_text": "[[[LINK_1|《Arm 的代价：Arm 如何榨取自身的真正价值》]]] - Dylan Patel、Myron Xie 及另外 2 人 · 2023 年 9 月 14 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "However, ARM is taking things further in 2026 and will be offering full datacenter CPU designs, with Meta as its first customer. This CPU, codenamed Phoenix, changes the business model by becoming a chip vendor, designing the entire chip from cores to packaging. This means that ARM will now compete directly with its customers who license the Neoverse CSS architecture. ARM, who are majority owned by SoftBank, are also designing custom CPUs for OpenAI as part of the Stargate OpenAI Softbank venture. Cloudflare is also looking to be a customer for Phoenix. We have detailed COGS, margin, and revenue in Core Research.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Core Research",
+          "start": 606,
+          "end": 619,
+          "href": "https://semianalysis.com/core-research/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0252",
+      "parent_block_index": 252,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, ARM is taking things further in 2026 and will be offering full datacenter CPU designs, with Meta as its first customer. This CPU, codenamed Phoenix, changes the business model by becoming a chip vendor, designing the entire chip from cores to packaging. This means that ARM will now compete directly with its customers who license the Neoverse CSS architecture. ARM, who are majority owned by SoftBank, are also designing custom CPUs for OpenAI as part of the Stargate OpenAI Softbank venture. Cloudflare is also looking to be a customer for Phoenix. We have detailed COGS, margin, and revenue in [Core Research](https://semianalysis.com/core-research/).",
+      "parent_block_plain_text": "However, ARM is taking things further in 2026 and will be offering full datacenter CPU designs, with Meta as its first customer. This CPU, codenamed Phoenix, changes the business model by becoming a chip vendor, designing the entire chip from cores to packaging. This means that ARM will now compete directly with its customers who license the Neoverse CSS architecture. ARM, who are majority owned by SoftBank, are also designing custom CPUs for OpenAI as part of the Stargate OpenAI Softbank venture. Cloudflare is also looking to be a customer for Phoenix. We have detailed COGS, margin, and revenue in Core Research.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Core Research",
+          "start": 606,
+          "end": 619,
+          "href": "https://semianalysis.com/core-research/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 620,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，ARM 将在 2026 年更进一步，直接提供完整的数据中心 CPU 设计，Meta 将成为其首发客户。这款代号为 Phoenix 的 CPU 将彻底改变 ARM 的商业模式。ARM 将借此转型为芯片供应商，包揽从核心到封装的整颗芯片设计。这意味着 ARM 势必与那些获得 Neoverse CSS 架构授权的客户展开直接竞争。作为软银控股的企业，ARM 还在为 OpenAI 设计定制 CPU，这也是星际之门 (Stargate) OpenAI 与软银合资项目的一部分。此外，Cloudflare 也有望成为 Phoenix 的客户。我们在 Core Research 中详细剖析了其销货成本 (COGS)、利润率与营收。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.477037",
+          "tokenized_text": "然而，ARM 将在 2026 年更进一步，直接提供完整的数据中心 CPU 设计，Meta 将成为其首发客户。这款代号为 Phoenix 的 CPU 将彻底改变 ARM 的商业模式。ARM 将借此转型为芯片供应商，包揽从核心到封装的整颗芯片设计。这意味着 ARM 势必与那些获得 Neoverse CSS 架构授权的客户展开直接竞争。作为软银控股的企业，ARM 还在为 OpenAI 设计定制 CPU，这也是星际之门 (Stargate) OpenAI 与软银合资项目的一部分。此外，Cloudflare 也有望成为 Phoenix 的客户。我们在 [[[LINK_1|Core Research]]] 中详细剖析了其销货成本 (COGS)、利润率与营收。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Phoenix has a standard Neoverse CSS design and layout that is similar to Microsoft’s Cobalt 200. 128 Neoverse V3 cores are connected with ARM’s CMN mesh network across two half-reticle size dies made on TSMC’s 3nm process. On the memory and I/O front, Phoenix features 12 channels of DDR5 at 8400 MT/s and 96 lanes of PCIe Gen 6. Power efficiency is competitive, with a configurable CPU TDP of 250W to 350W.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0253",
+      "parent_block_index": 253,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Phoenix has a standard Neoverse CSS design and layout that is similar to Microsoft’s Cobalt 200. 128 Neoverse V3 cores are connected with ARM’s CMN mesh network across two half-reticle size dies made on TSMC’s 3nm process. On the memory and I/O front, Phoenix features 12 channels of DDR5 at 8400 MT/s and 96 lanes of PCIe Gen 6. Power efficiency is competitive, with a configurable CPU TDP of 250W to 350W.",
+      "parent_block_plain_text": "Phoenix has a standard Neoverse CSS design and layout that is similar to Microsoft’s Cobalt 200. 128 Neoverse V3 cores are connected with ARM’s CMN mesh network across two half-reticle size dies made on TSMC’s 3nm process. On the memory and I/O front, Phoenix features 12 channels of DDR5 at 8400 MT/s and 96 lanes of PCIe Gen 6. Power efficiency is competitive, with a configurable CPU TDP of 250W to 350W.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 407,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Phoenix 采用了标准的 Neoverse CSS 设计，其物理布图与微软 Cobalt 200 类似。128 个 Neoverse V3 核心通过 ARM 的核心网格网络 (CMN) 互联。这些核心分布在两颗半掩膜尺寸的裸片上，采用台积电 3nm 制程节点制造。在内存与 I/O 方面，Phoenix 配备 12 通道 DDR5（速率为 8400 MT/s）以及 96 条 PCIe 6.0 通道。其能效表现极具竞争力，CPU 的可配置热设计功耗 (TDP) 介于 250W 至 350W 之间。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.477062",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "With this, Meta now has their own ARM CPU to match the likes of Microsoft, Google and AWS. As an AI head node, Phoenix enables coherent shared memory to attached XPUs over PCIe6 via an Accelerator Enablement Kit. We will detail the next generation ARM “Venom” CPU design for our subscribers below, including a significant memory change.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0254",
+      "parent_block_index": 254,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With this, Meta now has their own ARM CPU to match the likes of Microsoft, Google and AWS. As an AI head node, Phoenix enables coherent shared memory to attached XPUs over PCIe6 via an Accelerator Enablement Kit. We will detail the next generation ARM “Venom” CPU design for our subscribers below, including a significant memory change.",
+      "parent_block_plain_text": "With this, Meta now has their own ARM CPU to match the likes of Microsoft, Google and AWS. As an AI head node, Phoenix enables coherent shared memory to attached XPUs over PCIe6 via an Accelerator Enablement Kit. We will detail the next generation ARM “Venom” CPU design for our subscribers below, including a significant memory change.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 336,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "借此，Meta 如今也拥有了自家的 ARM CPU，足以与微软、谷歌和 AWS (亚马逊云科技) 旗鼓相当。作为 AI 头节点，Phoenix 能够通过加速器支持套件 (Accelerator Enablement Kit)，经由 PCIe 6.0 为外接的 XPU 提供一致性共享内存。下文我们将为订阅用户详细解析下一代 ARM Venom CPU 设计，其中包括一项重大的内存架构变更。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:17:21.477086",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The translation renders 'CMN' as '核心网格网络'. In ARM's architecture, CMN stands for 'Coherent Mesh Network'. Translating 'Coherent' as '核心' (Core) is a technical mistranslation that loses the critical architectural concept of cache coherency."
+          },
+          {
+            "type": "terminology",
+            "description": "The text translates 'reticle size' as '掩膜尺寸'. In semiconductor manufacturing, 'reticle' in the context of die size limits is standardly translated as '光罩' (as noted in the provided glossary: 'Reticle-sized → 光罩极限尺寸')."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

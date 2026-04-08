@@ -1,0 +1,54 @@
+{
+  "section_id": "03-the-tsmc-n3-shortage",
+  "new_terms": [
+    {
+      "term": "N3B / N3E / N3P / 3NP",
+      "suggested_translation": "N3B / N3E / N3P / 3NP 工艺",
+      "context": "Specific variants of TSMC's 3nm process node mentioned as key drivers of yield and cost.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Snapdragon 8 Elite",
+      "suggested_translation": "骁龙8至尊版",
+      "context": "Qualcomm's latest flagship smartphone processor mentioned as a key N3 customer.",
+      "confidence": 0.98
+    },
+    {
+      "term": "AID / MID / XCD tiles",
+      "suggested_translation": "AID / MID / XCD 单元",
+      "context": "Specific chiplet components (tiles) in AMD's MI400 accelerator architecture.",
+      "confidence": 0.9
+    },
+    {
+      "term": "optical DSP",
+      "suggested_translation": "光学数字信号处理器",
+      "context": "Digital Signal Processors used in high-speed optical networking (e.g., 200G optical DSPs).",
+      "confidence": 0.95
+    },
+    {
+      "term": "design wins",
+      "suggested_translation": "赢得设计订单",
+      "context": "A semiconductor industry term referring to a manufacturer's component being selected for a customer's product.",
+      "confidence": 0.95
+    },
+    {
+      "term": "demand shock",
+      "suggested_translation": "需求冲击",
+      "context": "Economic term describing the sudden surge in N3 wafer capacity demand due to AI compute growth.",
+      "confidence": 0.9
+    },
+    {
+      "term": "foundry diversification",
+      "suggested_translation": "代工厂多元化",
+      "context": "The strategy of using multiple chip manufacturers to mitigate supply chain risks.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "n3": "N3制程",
+    "foundry": "晶圆代工厂",
+    "wafer": "晶圆"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-13T22:14:58.952092"
+}

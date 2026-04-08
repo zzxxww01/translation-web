@@ -1,0 +1,1 @@
+We have made a few core architectural changes to the InferenceX repository to make it easier to understand and reproduce benchmarks. Additionally, we have fully subscribed to AI usage to maximize productivity and increase developer velocity.

@@ -1,0 +1,29 @@
+{
+  "section_id": "06-mid-term-contracts",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "accuracy",
+        "severity": "medium",
+        "original_text": "The more economically relevant segments are the contract markets...",
+        "description": "将“more economically relevant”翻译为“真正具有经济指示意义”，丢失了与前文（短期市场）的比较意味（more）。",
+        "why_it_matters": "原文的逻辑是对比前文提及的短期市场，强调中长期合同市场在经济上的重要性“更高”，保留比较级能更好地衔接上下文逻辑。",
+        "suggestion": "建议修改为：“更具经济参考价值的细分领域是合同市场……”或“更具经济意义的细分领域……”"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "...high prepays of above 20% which were previously atypical for 4y+ deals.",
+        "description": "将“atypical”翻译为“实属罕见”存在轻微的语气放大（tone inflation）。Atypical通常指“不典型、不常见”。",
+        "why_it_matters": "金融科技分析文章应保持用词的客观与克制，避免过度渲染情绪。",
+        "suggestion": "建议将“实属罕见”修改为“并不常见”或“较为少见”。"
+      }
+    ]
+  }
+}

@@ -6,6 +6,7 @@ from typing import List
 from fastapi import APIRouter
 
 from src.agents.translation import TranslationAgent, TranslationContext
+from src.core.glossary_prompt import build_term_usage_from_project
 from src.core.models import ParagraphStatus
 
 from ..dependencies import (
@@ -39,7 +40,14 @@ def _find_paragraph(section, paragraph_id: str):
     return None, None
 
 
-def _build_translation_context(section, para_index: int, glossary, learned_rules) -> TranslationContext:
+def _build_translation_context(
+    section,
+    para_index: int,
+    glossary,
+    learned_rules,
+    *,
+    sections=None,
+) -> TranslationContext:
     context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
     context.previous_paragraphs = [
         (p.source, p.confirmed) for p in section.paragraphs[:para_index] if p.confirmed
@@ -47,6 +55,13 @@ def _build_translation_context(section, para_index: int, glossary, learned_rules
     context.next_preview = [
         p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
     ]
+    if sections and 0 <= para_index < len(section.paragraphs):
+        context.term_usage = build_term_usage_from_project(
+            sections,
+            glossary,
+            current_section_id=section.section_id,
+            current_paragraph_id=section.paragraphs[para_index].id,
+        )
     return context
 
 def _translate_paragraph_sync(
@@ -69,7 +84,14 @@ def _translate_paragraph_sync(
 
     glossary = gm.load_merged(project_id)
     learned_rules = memory_service.get_rules_for_prompt()
-    context = _build_translation_context(section, para_index, glossary, learned_rules)
+    sections = pm.get_sections(project_id)
+    context = _build_translation_context(
+        section,
+        para_index,
+        glossary,
+        learned_rules,
+        sections=sections,
+    )
 
     agent = TranslationAgent(llm)
     instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
@@ -316,7 +338,14 @@ def _batch_translate_paragraphs_sync(
 
         try:
             learned_rules = memory_service.get_rules_for_prompt()
-            context = _build_translation_context(section, para_index, glossary, learned_rules)
+            sections = pm.get_sections(project_id)
+            context = _build_translation_context(
+                section,
+                para_index,
+                glossary,
+                learned_rules,
+                sections=sections,
+            )
 
             instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
             if instruction:

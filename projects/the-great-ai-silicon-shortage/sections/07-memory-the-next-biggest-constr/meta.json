@@ -1,0 +1,1265 @@
+{
+  "section_id": "07-memory-the-next-biggest-constr",
+  "title": "Memory The Next Biggest Constraint",
+  "title_translation": "内存：下一个最大瓶颈",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The global memory shortage is unlikely to ease in the near term. Memory has emerged as the next major battleground, as chip vendors and hyperscalers race to secure DRAM supply for accelerator production. While total DRAM wafer capacity continues to grow, most incremental capacity is being absorbed by HBM, effectively crowding out commodity DRAM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "global memory shortage",
+          "start": 4,
+          "end": 26,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The [global memory shortage](https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades) is unlikely to ease in the near term. Memory has emerged as the next major battleground, as chip vendors and hyperscalers race to secure DRAM supply for accelerator production. While total DRAM wafer capacity continues to grow, most incremental capacity is being absorbed by HBM, effectively crowding out commodity DRAM.",
+      "parent_block_plain_text": "The global memory shortage is unlikely to ease in the near term. Memory has emerged as the next major battleground, as chip vendors and hyperscalers race to secure DRAM supply for accelerator production. While total DRAM wafer capacity continues to grow, most incremental capacity is being absorbed by HBM, effectively crowding out commodity DRAM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "global memory shortage",
+          "start": 4,
+          "end": 26,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 347,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "全球存储短缺在短期内难以缓解。随着芯片厂商与超大规模云服务商竞相锁定用于加速器生产的DRAM供应，存储领域已然成为下一个主战场。尽管DRAM晶圆总产能仍在持续增长，但大部分新增产能正被HBM吸纳，实质上对标准型DRAM造成了挤出效应。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:15:07.694179",
+          "tokenized_text": "[[[LINK_1|全球存储短缺]]]在短期内难以缓解。随着芯片厂商与超大规模云服务商竞相锁定用于加速器生产的DRAM供应，存储领域已然成为下一个主战场。尽管DRAM晶圆总产能仍在持续增长，但大部分新增产能正被HBM吸纳，实质上对标准型DRAM造成了挤出效应。",
+          "format_issues": []
+        },
+        "default": {
+          "text": "全球存储芯片短缺短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+          "model": "default",
+          "created_at": "2026-03-14T22:10:20.216679",
+          "tokenized_text": "[[[LINK_1|全球存储芯片短缺]]]短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "全球存储芯片短缺短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:32:50.292749",
+          "tokenized_text": "[[[LINK_1|全球存储芯片短缺]]]短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "全球存储芯片短缺短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+      "confirmed_tokenized": "[[[LINK_1|全球存储芯片短缺]]]短期内不太可能缓解。随着芯片供应商和超大规模云厂商竞相锁定DRAM供应以满足加速器生产需求，存储芯片已成为下一个主战场。尽管DRAM晶圆总产能持续增长，但大部分新增产能正被HBM吞噬，实质上挤压了通用DRAM的产能。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "On a wafer-per-bit basis, HBM consumes roughly three times more wafer capacity than commodity DRAM, a gap that could widen to nearly four times as the industry transitions to HBM4 this year and even larger in HBM4E next year. As a result, incremental HBM growth diverts a disproportionate share of DRAM wafer capacity away from commodity DRAM, reinforcing structurally tight memory conditions.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0055",
+      "parent_block_index": 55,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On a wafer-per-bit basis, HBM consumes roughly three times more wafer capacity than commodity DRAM, a gap that could widen to nearly four times as the industry transitions to HBM4 this year and even larger in HBM4E next year. As a result, incremental HBM growth diverts a disproportionate share of DRAM wafer capacity away from commodity DRAM, reinforcing structurally tight memory conditions.",
+      "parent_block_plain_text": "On a wafer-per-bit basis, HBM consumes roughly three times more wafer capacity than commodity DRAM, a gap that could widen to nearly four times as the industry transitions to HBM4 this year and even larger in HBM4E next year. As a result, incremental HBM growth diverts a disproportionate share of DRAM wafer capacity away from commodity DRAM, reinforcing structurally tight memory conditions.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 393,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "按每比特晶圆消耗量计算，HBM消耗的晶圆产能约为标准型DRAM的三倍。随着今年业界向HBM4过渡，这一差距可能会扩大至近四倍，而明年进入HBM4E阶段时还会进一步拉大。因此，HBM的增量扩张从标准型DRAM手中抽离了不成比例的DRAM晶圆产能份额，进一步加剧了存储市场结构性紧缺的局面。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:15:27.609621",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "按每比特晶圆消耗量计算，HBM消耗的晶圆产能约为标准型DRAM的三倍。随着今年业界向HBM4过渡，这一差距可能会扩大至近四倍，而明年进入HBM4E阶段时还会进一步拉大。因此，HBM的增量扩张从标准型DRAM手中抽离了不成比例的DRAM晶圆产能份额，进一步加剧了存储市场结构性紧缺的局面。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:32:53.351743",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "按每比特晶圆消耗量计算，HBM消耗的晶圆产能约为标准型DRAM的三倍。随着今年业界向HBM4过渡，这一差距可能会扩大至近四倍，而明年进入HBM4E阶段时还会进一步拉大。因此，HBM的增量扩张从标准型DRAM手中抽离了不成比例的DRAM晶圆产能份额，进一步加剧了存储市场结构性紧缺的局面。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0056",
+      "parent_block_index": 56,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:33:42.910996",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3edd595-4b9d-4d67-8da2-ee97a6f6e053_2136x1126.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis Memory Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0057",
+      "parent_block_index": 57,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Memory Model](https://semianalysis.com/memory-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Memory Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Memory Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:33:43.629747",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Memory Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Memory Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0058",
+      "parent_block_index": 58,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:33:44.248653",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faab0bd24-a53a-4e2a-a0ea-7daa0057e0f8_2004x1094.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis Memory Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0059",
+      "parent_block_index": 59,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Memory Model](https://semianalysis.com/memory-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Memory Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Memory Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:33:44.779666",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Memory Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Memory Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "This pressure is being amplified by rapid increases in HBM content per accelerator. HBM bit shipments are inflecting sharply, driven primarily by rising memory capacity per device rather than unit growth alone. For NVIDIA, the move from Blackwell to Blackwell Ultra and Rubin increases HBM capacity by 50%, with Rubin Ultra driving a further ~4×increase. Similar step-ups are occurring across hyperscaler ASICs, with TPU v8AX and Trainium3 also migrating to 12-Hi stacks from 8-Hi in their previous generation, while AMD’s memory capacity increases by 50% from MI350 to MI400.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0060",
+      "parent_block_index": 60,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This pressure is being amplified by rapid increases in HBM content per accelerator. HBM bit shipments are inflecting sharply, driven primarily by rising memory capacity per device rather than unit growth alone. For NVIDIA, the move from Blackwell to Blackwell Ultra and Rubin increases HBM capacity by 50%, with Rubin Ultra driving a further ~4×increase. Similar step-ups are occurring across hyperscaler ASICs, with TPU v8AX and Trainium3 also migrating to 12-Hi stacks from 8-Hi in their previous generation, while AMD’s memory capacity increases by 50% from MI350 to MI400.",
+      "parent_block_plain_text": "This pressure is being amplified by rapid increases in HBM content per accelerator. HBM bit shipments are inflecting sharply, driven primarily by rising memory capacity per device rather than unit growth alone. For NVIDIA, the move from Blackwell to Blackwell Ultra and Rubin increases HBM capacity by 50%, with Rubin Ultra driving a further ~4×increase. Similar step-ups are occurring across hyperscaler ASICs, with TPU v8AX and Trainium3 also migrating to 12-Hi stacks from 8-Hi in their previous generation, while AMD’s memory capacity increases by 50% from MI350 to MI400.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 576,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着单颗加速器搭载的HBM容量急剧上升，这种压力正被进一步放大。HBM的比特出货量正迎来陡峭的增长拐点，这主要归因于单设备内存容量的提升，而非仅仅依赖于设备出货量的增长。对英伟达（NVIDIA）而言，从Blackwell向Blackwell Ultra和Rubin的迭代，使其HBM容量增加了50%，而Rubin Ultra更是将推动容量进一步实现约4倍的增长。超大规模云厂商的定制芯片（ASIC）也在经历类似的跨越式升级，TPU（张量处理器，Tensor Processing Unit）v8AX和Trainium3均从上一代的8层（8-Hi）堆叠升级至12层（12-Hi）堆叠，而AMD从MI350到MI400的内存容量也实现了50%的增长。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:15:47.877919",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "随着单颗加速器搭载的HBM容量急剧上升，这种压力正被进一步放大。HBM的比特出货量正迎来陡峭的增长拐点，这主要归因于单设备内存容量的提升，而非仅仅依赖于设备出货量的增长。对英伟达（NVIDIA）而言，从Blackwell向Blackwell Ultra和Rubin的迭代，使其HBM容量增加了50%，而Rubin Ultra更是将推动容量进一步实现约4倍的增长。超大规模云厂商的定制芯片（ASIC）也在经历类似的跨越式升级，TPU v8AX和Trainium3均从上一代的8层（8-Hi）堆叠升级至12层（12-Hi）堆叠，而AMD从MI350到MI400的内存容量也实现了50%的增长。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:35:15.551129",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "随着单颗加速器搭载的HBM容量急剧上升，这种压力正被进一步放大。HBM的比特出货量正迎来陡峭的增长拐点，这主要归因于单设备内存容量的提升，而非仅仅依赖于设备出货量的增长。对英伟达（NVIDIA）而言，从Blackwell向Blackwell Ultra和Rubin的迭代，使其HBM容量增加了50%，而Rubin Ultra更是将推动容量进一步实现约4倍的增长。超大规模云厂商的定制芯片（ASIC）也在经历类似的跨越式升级，TPU v8AX和Trainium3均从上一代的8层（8-Hi）堆叠升级至12层（12-Hi）堆叠，而AMD从MI350到MI400的内存容量也实现了50%的增长。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0061",
+      "parent_block_index": 61,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:35:16.238583",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17bae206-924e-4e87-a7f1-c91a3f257c9e_2098x1130.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0062",
+      "parent_block_index": 62,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Accelerator Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:35:16.836933",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Accelerator Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Accelerator Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Another tightening dynamic is the push toward higher HBM pin speeds. Customers such as NVIDIA are targeting approximately 11 Gb/s pin speeds for HBM4, a requirement that remains difficult for memory vendors to achieve at acceptable yields. While SK Hynix and Samsung are making better progress toward meeting these specifications, Micron is lagging behind in HBM4, a dynamic we discussed in our Rubin article and within the Accelerator & HBM Model as early as January. This escalation in performance requirements, as customers demand higher pin speeds and vendors struggle to deliver at scale, further constrains effective HBM supply.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Rubin article",
+          "start": 395,
+          "end": 408,
+          "href": "https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Accelerator & HBM Model",
+          "start": 424,
+          "end": 447,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0063",
+      "parent_block_index": 63,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another tightening dynamic is the push toward higher HBM pin speeds. Customers such as NVIDIA are targeting approximately 11 Gb/s pin speeds for HBM4, a requirement that remains difficult for memory vendors to achieve at acceptable yields. While SK Hynix and Samsung are making better progress toward meeting these specifications, Micron is lagging behind in HBM4, a dynamic we discussed in our [Rubin article](https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution) and within the [Accelerator & HBM Model](https://semianalysis.com/accelerator-hbm-model/) as early as January. This escalation in performance requirements, as customers demand higher pin speeds and vendors struggle to deliver at scale, further constrains effective HBM supply.",
+      "parent_block_plain_text": "Another tightening dynamic is the push toward higher HBM pin speeds. Customers such as NVIDIA are targeting approximately 11 Gb/s pin speeds for HBM4, a requirement that remains difficult for memory vendors to achieve at acceptable yields. While SK Hynix and Samsung are making better progress toward meeting these specifications, Micron is lagging behind in HBM4, a dynamic we discussed in our Rubin article and within the Accelerator & HBM Model as early as January. This escalation in performance requirements, as customers demand higher pin speeds and vendors struggle to deliver at scale, further constrains effective HBM supply.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Rubin article",
+          "start": 395,
+          "end": 408,
+          "href": "https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Accelerator & HBM Model",
+          "start": 424,
+          "end": 447,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 634,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "另一个加剧供应紧张的因素是业界对更高HBM引脚速度的追求。诸如英伟达（NVIDIA）等客户正将HBM4的引脚速度目标设定在11 Gb/s左右，这一要求对于存储供应商而言，仍难以在可接受的良率水平下达成。尽管SK海力士（SK Hynix）和三星（Samsung）在满足这些规格方面取得了较好的进展，但美光（Micron）在HBM4上却处于落后态势，我们早在1月份的Rubin文章以及加速器与HBM模型中就探讨过这一动态。随着客户要求更高的引脚速度，而供应商难以实现规模化交付，这种性能要求的不断升级进一步限制了HBM的有效供应。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:16:07.581051",
+          "tokenized_text": "另一个加剧供应紧张的因素是业界对更高HBM引脚速度的追求。诸如英伟达（NVIDIA）等客户正将HBM4的引脚速度目标设定在11 Gb/s左右，这一要求对于存储供应商而言，仍难以在可接受的良率水平下达成。尽管SK海力士（SK Hynix）和三星（Samsung）在满足这些规格方面取得了较好的进展，但美光（Micron）在HBM4上却处于落后态势，我们早在1月份的[[[LINK_1|Rubin文章]]]以及[[[LINK_2|加速器与HBM模型]]]中就探讨过这一动态。随着客户要求更高的引脚速度，而供应商难以实现规模化交付，这种性能要求的不断升级进一步限制了HBM的有效供应。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "另一个加剧供应紧张的因素是业界对更高HBM引脚速度的追求。诸如英伟达（NVIDIA）等客户正将HBM4的引脚速度目标设定在11 Gb/s左右，这一要求对于存储供应商而言，仍难以在可接受的良率水平下达成。尽管SK海力士和三星在满足这些规格方面取得了较好的进展，但美光（Micron）在HBM4上却处于落后态势，我们早在1月份的Rubin文章以及加速器与HBM模型中就探讨过这一动态。随着客户要求更高的引脚速度，而供应商难以实现规模化交付，这种性能要求的不断升级进一步限制了HBM的有效供应。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:37:20.148872",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "另一个加剧供应紧张的因素是业界对更高HBM引脚速度的追求。诸如英伟达（NVIDIA）等客户正将HBM4的引脚速度目标设定在11 Gb/s左右，这一要求对于存储供应商而言，仍难以在可接受的良率水平下达成。尽管SK海力士和三星在满足这些规格方面取得了较好的进展，但美光（Micron）在HBM4上却处于落后态势，我们早在1月份的Rubin文章以及加速器与HBM模型中就探讨过这一动态。随着客户要求更高的引脚速度，而供应商难以实现规模化交付，这种性能要求的不断升级进一步限制了HBM的有效供应。",
+      "confirmed_tokenized": "另一个加剧供应紧张的因素是业界对更高HBM引脚速度的追求。诸如英伟达（NVIDIA）等客户正将HBM4的引脚速度目标设定在11 Gb/s左右，这一要求对于存储供应商而言，仍难以在可接受的良率水平下达成。尽管SK海力士（SK Hynix）和三星（Samsung）在满足这些规格方面取得了较好的进展，但美光（Micron）在HBM4上却处于落后态势，我们早在1月份的[[[LINK_1|Rubin文章]]]以及[[[LINK_2|加速器与HBM模型]]]中就探讨过这一动态。随着客户要求更高的引脚速度，而供应商难以实现规模化交付，这种性能要求的不断升级进一步限制了HBM的有效供应。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0064",
+      "parent_block_index": 64,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:37:21.271617",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5c55d753-0c40-4c17-83f1-e3d2063f7cfc_2134x1226.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis Memory Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0065",
+      "parent_block_index": 65,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Memory Model](https://semianalysis.com/memory-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Memory Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Memory Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:37:21.917922",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Memory Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Memory Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Beyond HBM, server DRAM demand is also strengthening. AI server system memory will increase materially in NVIDIA’s next-generation platforms, with VR NVL72 racks carrying 3× higher DDR content, at 1,536 GB per Vera CPU versus 512 GB per Grace. We also expect general DRAM bit demand to inflect higher in 2026, as an aging cloud and enterprise server installed base enters a multi-year replacement cycle. At the same time, AI workloads, particularly data staging, orchestration, and reinforcement learning, are driving CPU demand, gradually increasing CPU-to-GPU ratios over time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "driving CPU demand",
+          "start": 510,
+          "end": 528,
+          "href": "https://newsletter.semianalysis.com/p/cpus-are-back-the-datacenter-cpu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0066",
+      "parent_block_index": 66,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Beyond HBM, server DRAM demand is also strengthening. AI server system memory will increase materially in NVIDIA’s next-generation platforms, with VR NVL72 racks carrying 3× higher DDR content, at 1,536 GB per Vera CPU versus 512 GB per Grace. We also expect general DRAM bit demand to inflect higher in 2026, as an aging cloud and enterprise server installed base enters a multi-year replacement cycle. At the same time, AI workloads, particularly data staging, orchestration, and reinforcement learning, are [driving CPU demand](https://newsletter.semianalysis.com/p/cpus-are-back-the-datacenter-cpu), gradually increasing CPU-to-GPU ratios over time.",
+      "parent_block_plain_text": "Beyond HBM, server DRAM demand is also strengthening. AI server system memory will increase materially in NVIDIA’s next-generation platforms, with VR NVL72 racks carrying 3× higher DDR content, at 1,536 GB per Vera CPU versus 512 GB per Grace. We also expect general DRAM bit demand to inflect higher in 2026, as an aging cloud and enterprise server installed base enters a multi-year replacement cycle. At the same time, AI workloads, particularly data staging, orchestration, and reinforcement learning, are driving CPU demand, gradually increasing CPU-to-GPU ratios over time.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "driving CPU demand",
+          "start": 510,
+          "end": 528,
+          "href": "https://newsletter.semianalysis.com/p/cpus-are-back-the-datacenter-cpu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 579,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "除了HBM，服务器DRAM的需求也在走强。在英伟达（NVIDIA）的下一代平台中，AI服务器系统内存将出现实质性增长，VR NVL72机架搭载的DDR容量将达到原来的3倍，即每个Vera CPU配备1,536 GB，而此前的Grace CPU仅为512 GB。随着老化的云和企业服务器存量设备进入持续多年的替换周期，我们预计常规DRAM的比特需求也将在2026年迎来向上拐点。与此同时，AI工作负载，特别是数据暂存、任务编排和强化学习，正在拉动CPU需求，并将在未来逐步提升CPU与GPU的配比。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:16:29.557939",
+          "tokenized_text": "除了HBM，服务器DRAM的需求也在走强。在英伟达（NVIDIA）的下一代平台中，AI服务器系统内存将出现实质性增长，VR NVL72机架搭载的DDR容量将达到原来的3倍，即每个Vera CPU配备1,536 GB，而此前的Grace CPU仅为512 GB。随着老化的云和企业服务器存量设备进入持续多年的替换周期，我们预计常规DRAM的比特需求也将在2026年迎来向上拐点。与此同时，AI工作负载，特别是数据暂存、任务编排和强化学习，正在[[[LINK_1|拉动CPU需求]]]，并将在未来逐步提升CPU与GPU的配比。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "除了HBM，服务器DRAM的需求也在走强。在英伟达的下一代平台中，AI服务器系统内存将出现实质性增长，VR NVL72机架搭载的DDR容量将达到原来的3倍，即每个Vera CPU配备1,536 GB，而此前的Grace CPU仅为512 GB。随着老化的云和企业服务器存量设备进入持续多年的替换周期，我们预计常规DRAM的比特需求也将在2026年迎来向上拐点。与此同时，AI工作负载，特别是数据暂存、任务编排和强化学习，正在拉动CPU需求，并将在未来逐步提升CPU与GPU的配比。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:47:46.715459",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "除了HBM，服务器DRAM的需求也在走强。在英伟达的下一代平台中，AI服务器系统内存将出现实质性增长，VR NVL72机架搭载的DDR容量将达到原来的3倍，即每个Vera CPU配备1,536 GB，而此前的Grace CPU仅为512 GB。随着老化的云和企业服务器存量设备进入持续多年的替换周期，我们预计常规DRAM的比特需求也将在2026年迎来向上拐点。与此同时，AI工作负载，特别是数据暂存、任务编排和强化学习，正在拉动CPU需求，并将在未来逐步提升CPU与GPU的配比。",
+      "confirmed_tokenized": "除了HBM，服务器DRAM的需求也在走强。在英伟达（NVIDIA）的下一代平台中，AI服务器系统内存将出现实质性增长，VR NVL72机架搭载的DDR容量将达到原来的3倍，即每个Vera CPU配备1,536 GB，而此前的Grace CPU仅为512 GB。随着老化的云和企业服务器存量设备进入持续多年的替换周期，我们预计常规DRAM的比特需求也将在2026年迎来向上拐点。与此同时，AI工作负载，特别是数据暂存、任务编排和强化学习，正在[[[LINK_1|拉动CPU需求]]]，并将在未来逐步提升CPU与GPU的配比。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Across the DRAM market, accelerating deployment of AI and general-purpose servers and rising DRAM content per system is expected to drive server DRAM demand higher over time. This demand should more than offset softness in smartphones, PCs, and consumer electronics over the next two years as memory prices rise.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0067",
+      "parent_block_index": 67,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Across the DRAM market, accelerating deployment of AI and general-purpose servers and rising DRAM content per system is expected to drive server DRAM demand higher over time. This demand should more than offset softness in smartphones, PCs, and consumer electronics over the next two years as memory prices rise.",
+      "parent_block_plain_text": "Across the DRAM market, accelerating deployment of AI and general-purpose servers and rising DRAM content per system is expected to drive server DRAM demand higher over time. This demand should more than offset softness in smartphones, PCs, and consumer electronics over the next two years as memory prices rise.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 312,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "纵观整个DRAM市场，AI与通用服务器的加速部署，叠加单系统DRAM搭载量的不断提升，预计将持续推高服务器DRAM的需求。在未来两年存储器价格上涨的周期内，这一强劲需求足以完全抵消智能手机、个人电脑及消费电子市场疲软带来的影响。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:16:46.725003",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "纵观整个DRAM市场，AI与通用服务器的加速部署，叠加单系统DRAM搭载量的不断提升，预计将持续推高服务器DRAM的需求。在未来两年存储器价格上涨的周期内，这一强劲需求足以完全抵消智能手机、个人电脑及消费电子市场疲软带来的影响。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:48:53.517644",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "纵观整个DRAM市场，AI与通用服务器的加速部署，叠加单系统DRAM搭载量的不断提升，预计将持续推高服务器DRAM的需求。在未来两年存储器价格上涨的周期内，这一强劲需求足以完全抵消智能手机、个人电脑及消费电子市场疲软带来的影响。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:48:54.200219",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f090096-02d5-4aaf-b7b2-d0233652675f_2002x1180.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Source: SemiAnalysis Memory Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Memory Model](https://semianalysis.com/memory-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Memory Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Memory Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:48:54.748057",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Memory Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Memory Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "If logic capacity is freed up for accelerators, customers will quickly need to turn their attention to securing more HBM from memory suppliers. With conventional DDR DRAM prices skyrocketing, DDR margins have surged close to or even surpassing levels at which HBM supply has been contracted. In the past, the superior margin profile offered by HBM gave memory suppliers a clear reason to expand HBM wafer capacity. However, this is no longer the case as margin dynamics have reversed, at least for 2026.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "p",
+      "parent_block_markdown": "If logic capacity is freed up for accelerators, customers will quickly need to turn their attention to securing more HBM from memory suppliers. With conventional DDR DRAM prices skyrocketing, DDR margins have surged close to or even surpassing levels at which HBM supply has been contracted. In the past, the superior margin profile offered by HBM gave memory suppliers a clear reason to expand HBM wafer capacity. However, this is no longer the case as margin dynamics have reversed, at least for 2026.",
+      "parent_block_plain_text": "If logic capacity is freed up for accelerators, customers will quickly need to turn their attention to securing more HBM from memory suppliers. With conventional DDR DRAM prices skyrocketing, DDR margins have surged close to or even surpassing levels at which HBM supply has been contracted. In the past, the superior margin profile offered by HBM gave memory suppliers a clear reason to expand HBM wafer capacity. However, this is no longer the case as margin dynamics have reversed, at least for 2026.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 503,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如果逻辑产能被释放给加速器，客户很快就需要将注意力机制转向从存储供应商处锁定更多HBM。随着传统DDR DRAM价格的飙升，DDR的利润率已大幅上涨，接近甚至超过了已签约HBM供应的利润水平。过去，HBM更优厚的利润率水平为存储供应商扩大HBM晶圆产能提供了明确的理由。然而，如今情况已然生变，因为利润率格局已经发生逆转，至少对2026年而言是如此。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:17:16.628990",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "如果逻辑产能被释放给加速器，客户很快就需要将注意力机制转向从存储供应商处锁定更多HBM。传统DDR DRAM价格正在飙升，其利润率已大幅攀升，接近甚至超过了HBM供应合同锁定的利润水平。过去，HBM更丰厚的利润率，是存储供应商扩充HBM晶圆产能的明确动力。但随着利润率格局发生逆转，这一逻辑已不再成立，至少对2026年而言确实如此。",
+          "model": "default",
+          "created_at": "2026-03-14T22:50:16.065079",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "如果逻辑产能被释放给加速器，客户很快就需要将注意力转向从存储供应商处锁定更多HBM。传统DDR DRAM价格正在飙升，其利润率已大幅攀升，接近甚至超过了HBM供应合同锁定的利润水平。过去，HBM更丰厚的利润率，是存储供应商扩充HBM晶圆产能的明确动力。但随着利润率格局发生逆转，这一逻辑已不再成立，至少对2026年而言确实如此。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:50:59.464173",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "如果逻辑产能被释放给加速器，客户很快就需要将注意力转向从存储供应商处锁定更多HBM。传统DDR DRAM价格正在飙升，其利润率已大幅攀升，接近甚至超过了HBM供应合同锁定的利润水平。过去，HBM更丰厚的利润率，是存储供应商扩充HBM晶圆产能的明确动力。但随着利润率格局发生逆转，这一逻辑已不再成立，至少对2026年而言确实如此。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "To incentivize more HBM wafer starts vs commodity wafers, customers would likely need to pay higher prices than current contracted levels to secure incremental HBM supply. This dynamic is likely to become more visible in 2027, when the next round of HBM pricing negotiations is settled. If the memory suppliers relent and shift capacity towards HBM, the available bit supply for conventional DDR DRAM would tighten even further.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To incentivize more HBM wafer starts vs commodity wafers, customers would likely need to pay higher prices than current contracted levels to secure incremental HBM supply. This dynamic is likely to become more visible in 2027, when the next round of HBM pricing negotiations is settled. If the memory suppliers relent and shift capacity towards HBM, the available bit supply for conventional DDR DRAM would tighten even further.",
+      "parent_block_plain_text": "To incentivize more HBM wafer starts vs commodity wafers, customers would likely need to pay higher prices than current contracted levels to secure incremental HBM supply. This dynamic is likely to become more visible in 2027, when the next round of HBM pricing negotiations is settled. If the memory suppliers relent and shift capacity towards HBM, the available bit supply for conventional DDR DRAM would tighten even further.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 428,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了激励供应商增加HBM晶圆投片量而非生产常规晶圆，客户可能需要支付高于当前合约水平的价格，以确保获得增量的HBM供应。这一趋势在2027年下一轮HBM定价谈判尘埃落定时，预计将变得更加显著。如果存储供应商做出让步，将产能向HBM倾斜，那么传统DDR DRAM的可用比特供应量将进一步收紧。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:17:31.390836",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "为了激励供应商增加HBM晶圆投片量而非生产常规晶圆，客户可能需要支付高于当前合约水平的价格，以确保获得增量的HBM供应。这一趋势在2027年下一轮HBM定价谈判尘埃落定时，预计将变得更加显著。如果存储供应商做出让步，将产能向HBM倾斜，那么传统DDR DRAM的可用比特供应量将进一步收紧。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:51:55.451484",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "为了激励供应商增加HBM晶圆投片量而非生产常规晶圆，客户可能需要支付高于当前合约水平的价格，以确保获得增量的HBM供应。这一趋势在2027年下一轮HBM定价谈判尘埃落定时，预计将变得更加显著。如果存储供应商做出让步，将产能向HBM倾斜，那么传统DDR DRAM的可用比特供应量将进一步收紧。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Another key implication is the reallocation of bits from consumer applications to server and HBM, a dynamic we have been highlighting since 2H25. In our latest analysis in Memory Model, we highlight the impact of consumer shock on potential bit reallocation. In an extreme scenario where there is a 50% cut in consumer unit shipments, approximately 55,390 million Gb would be released, equivalent to roughly 14% of total DRAM demand in 2026. Under a 25% cut scenario, around 27,690 million Gb would be freed up, representing about 7% of total DRAM demand and nearly 80% of this year’s HBM demand.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another key implication is the reallocation of bits from consumer applications to server and HBM, a dynamic we have been highlighting since 2H25. In our latest analysis in Memory Model, we highlight the impact of consumer shock on potential bit reallocation. In an extreme scenario where there is a 50% cut in consumer unit shipments, approximately 55,390 million Gb would be released, equivalent to roughly 14% of total DRAM demand in 2026. Under a 25% cut scenario, around 27,690 million Gb would be freed up, representing about 7% of total DRAM demand and nearly 80% of this year’s HBM demand.",
+      "parent_block_plain_text": "Another key implication is the reallocation of bits from consumer applications to server and HBM, a dynamic we have been highlighting since 2H25. In our latest analysis in Memory Model, we highlight the impact of consumer shock on potential bit reallocation. In an extreme scenario where there is a 50% cut in consumer unit shipments, approximately 55,390 million Gb would be released, equivalent to roughly 14% of total DRAM demand in 2026. Under a 25% cut scenario, around 27,690 million Gb would be freed up, representing about 7% of total DRAM demand and nearly 80% of this year’s HBM demand.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 596,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "另一个关键影响是比特产能从消费级应用向服务器和HBM的重新分配，这是我们自2025年下半年以来一直强调的行业动态。在我们最新的存储模型分析中，我们重点探讨了消费端需求冲击对潜在比特产能重新分配的影响。在消费终端出货量削减50%的极端情境下，将释放约553.9亿Gb的产能，这大约相当于2026年DRAM总需求的14%。而在出货量削减25%的情境下，将腾出约276.9亿Gb的产能，相当于DRAM总需求的7%左右，且接近今年HBM需求的80%。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:17:57.248420",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "另一个关键影响是比特产能从消费级应用向服务器和HBM重新分配，我们自2025年下半年起就一直在强调这一动态。在最新的存储模型分析中，我们重点探讨了消费市场冲击对潜在比特产能重新分配的影响。在消费端出货量削减50%的极端情境下，将释放约553.9亿Gb产能，大致相当于2026年DRAM总需求的14%。若出货量削减25%，则将释放约276.9亿Gb产能，约占DRAM总需求的7%，接近今年HBM总需求的80%。",
+          "model": "default",
+          "created_at": "2026-03-14T22:58:28.422912",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "另一个关键影响是比特产能从消费级应用向服务器和HBM重新分配，我们自2025年下半年起就一直在强调这一动态。在最新的存储模型分析中，我们重点探讨了消费市场冲击对潜在比特产能重新分配的影响。在消费端出货量削减50%的极端情境下，将释放约553.9亿Gb产能，大致相当于2026年DRAM总需求的14%。若出货量削减25%，则将释放约276.9亿Gb产能，约占DRAM总需求的7%，接近今年HBM总需求的80%。",
+          "model": "manual",
+          "created_at": "2026-03-14T23:04:39.754201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "另一个关键影响是比特产能从消费级应用向服务器和HBM重新分配，我们自2025年下半年起就一直在强调这一动态。在最新的存储模型分析中，我们重点探讨了消费市场冲击对潜在比特产能重新分配的影响。在消费端出货量削减50%的极端情境下，将释放约553.9亿Gb产能，大致相当于2026年DRAM总需求的14%。若出货量削减25%，则将释放约276.9亿Gb产能，约占DRAM总需求的7%，接近今年HBM总需求的80%。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0073",
+      "parent_block_index": 73,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png",
+          "model": "manual",
+          "created_at": "2026-03-14T23:04:40.496063",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd82a56a-592f-48d7-8269-232c73920309_2379x504.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Source: SemiAnalysis Memory Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0074",
+      "parent_block_index": 74,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Memory Model](https://semianalysis.com/memory-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Memory Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Memory Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Memory Model",
+          "model": "manual",
+          "created_at": "2026-03-14T23:04:41.020326",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Memory Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Memory Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Our base case remains a more moderate 10-15% decline in consumer shipments. Under a 10% shipment cut, approximately 11,076 million Gb would be released, representing only ~3% of total DRAM demand. In our view, this level of incremental supply is not sufficient to materially alter the overall supply-demand dynamics we expect to see this year.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our base case remains a more moderate 10-15% decline in consumer shipments. Under a 10% shipment cut, approximately 11,076 million Gb would be released, representing only ~3% of total DRAM demand. In our view, this level of incremental supply is not sufficient to materially alter the overall supply-demand dynamics we expect to see this year.",
+      "parent_block_plain_text": "Our base case remains a more moderate 10-15% decline in consumer shipments. Under a 10% shipment cut, approximately 11,076 million Gb would be released, representing only ~3% of total DRAM demand. In our view, this level of incremental supply is not sufficient to materially alter the overall supply-demand dynamics we expect to see this year.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 343,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的基本假设依然是，消费类产品出货量将出现较为温和的10%至15%的下滑。若出货量下调10%，大约将释放出110.76亿Gb的供给，这仅占DRAM总需求的3%左右。我们认为，这种程度的增量供给不足以实质性改变我们预期的今年整体供需格局。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:18:18.198332",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "我们的基本假设依然是，消费类产品出货量将出现较为温和的10%至15%的下滑。若出货量下调10%，大约将释放出110.76亿Gb的供给，这仅占DRAM总需求的3%左右。我们认为，这种程度的增量供给不足以实质性改变我们预期的今年整体供需格局。",
+          "model": "manual",
+          "created_at": "2026-03-14T23:05:09.013356",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "我们的基本假设依然是，消费类产品出货量将出现较为温和的10%至15%的下滑。若出货量下调10%，大约将释放出110.76亿Gb的供给，这仅占DRAM总需求的3%左右。我们认为，这种程度的增量供给不足以实质性改变我们预期的今年整体供需格局。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "The key question is how prepared memory suppliers are for consumer weakness, and to what extent they have already adjusted. We believe memory makers have a solid understanding of softness across consumer end markets. Samsung management, for example, has highlighted consumer weakness on multiple occasions, and we believe capacity allocation plans already incorporate a 10-15% downside shipment scenario. We expect other major memory suppliers to be similarly positioned.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key question is how prepared memory suppliers are for consumer weakness, and to what extent they have already adjusted. We believe memory makers have a solid understanding of softness across consumer end markets. Samsung management, for example, has highlighted consumer weakness on multiple occasions, and we believe capacity allocation plans already incorporate a 10-15% downside shipment scenario. We expect other major memory suppliers to be similarly positioned.",
+      "parent_block_plain_text": "The key question is how prepared memory suppliers are for consumer weakness, and to what extent they have already adjusted. We believe memory makers have a solid understanding of softness across consumer end markets. Samsung management, for example, has highlighted consumer weakness on multiple occasions, and we believe capacity allocation plans already incorporate a 10-15% downside shipment scenario. We expect other major memory suppliers to be similarly positioned.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 471,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "关键问题在于，存储供应商对消费端需求的疲软做好了多充分的准备，以及他们已经在多大程度上做出了调整。我们认为，存储制造商对各个消费类终端市场的疲软状况已有充分的把握。例如，三星（Samsung）管理层已在多个场合强调消费端需求的疲软，我们认为其产能分配计划已经将出货量下调10%至15%的下行情境纳入考量。我们预计其他主要存储供应商也已做好了类似的准备。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:18:34.057464",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "核心问题在于，存储供应商对消费端疲软的准备有多充分，以及他们已经做出了多大程度的调整。我们认为，存储厂商对各消费终端市场的疲软态势已有充分认知。以三星（Samsung）为例，其管理层已在多个场合强调消费端疲软，我们认为其产能分配计划已将出货量下滑10%至15%的下行情形纳入考量。我们预计其他主要存储供应商也做出了类似部署。",
+          "model": "default",
+          "created_at": "2026-03-14T23:06:02.121951",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "核心问题在于，存储供应商对消费端疲软的准备有多充分，以及他们已经做出了多大程度的调整。我们认为，存储厂商对各消费终端市场的疲软态势已有充分认知。以三星为例，其管理层已在多个场合强调消费端疲软，我们认为其产能分配计划已将出货量下滑10%至15%的下行情形纳入考量。我们预计其他主要存储供应商也做出了类似部署。",
+          "model": "manual",
+          "created_at": "2026-03-14T23:06:57.995976",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "核心问题在于，存储供应商对消费端疲软的准备有多充分，以及他们已经做出了多大程度的调整。我们认为，存储厂商对各消费终端市场的疲软态势已有充分认知。以三星为例，其管理层已在多个场合强调消费端疲软，我们认为其产能分配计划已将出货量下滑10%至15%的下行情形纳入考量。我们预计其他主要存储供应商也做出了类似部署。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

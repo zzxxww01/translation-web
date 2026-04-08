@@ -1,0 +1,39 @@
+{
+  "section_id": "07-history-of-multi-core-cpu-inte",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 8.8,
+    "accuracy_score": 9.2,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "...simply consisted of two independent single cores...",
+        "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。",
+        "why_it_matters": "影响技术结构描述的严谨性与中文句意的完整度。",
+        "suggestion": "修改为“仅仅由两个独立的单核组成”或“仅仅包含两个独立的单核”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "...through on-die NoC (Network on Chip) data fabrics.",
+        "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。",
+        "why_it_matters": "消除不必要的词语重复，提升专业术语表达的流畅度。",
+        "suggestion": "修改为“片上 NoC（片上网络）数据互连”或“片上 NoC 数据总线”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "...as core counts grow in the hundreds.",
+        "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。",
+        "why_it_matters": "技术分析文章在讲述历史客观规律时应保持冷静、中立的基调。",
+        "suggestion": "将“飙升至数百个”改为“增长至数百个级别”或“达到数百个”。"
+      }
+    ]
+  }
+}

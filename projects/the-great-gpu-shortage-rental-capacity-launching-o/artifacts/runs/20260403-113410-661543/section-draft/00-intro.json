@@ -1,0 +1,328 @@
+{
+  "section_id": "00-intro",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "00-intro",
+    "section_title": "Introduction",
+    "section_title_translation": "引言",
+    "section_position": "1/10",
+    "article_theme": "Driven by explosive demand from advanced AI models and tightening supply, GPU rental prices are surging across all contract terms, prompting the introduction of a new contract price index to track this structural market shift.",
+    "structure_summary": "The article introduces the recent 40% surge in H100 rental prices, contrasting current tight supply with past bearish expectations ('The Comeback Kid'). It then introduces the SemiAnalysis 1Y H100 contract price index to better track the market. The core of the piece breaks down the rental market structure into short, mid, and long-term segments, explaining the dynamics of each. Finally, it projects future trends based on supply chain bottlenecks, tokenomics, and new cluster deployments, concluding that prices will continue to rise.",
+    "target_audience": "Institutional investors, AI lab executives, cloud infrastructure planners, and semiconductor analysts.",
+    "translation_voice": "A top-tier financial and tech analyst. The Chinese should be dense with accurate industry jargon but flow naturally, balancing formal financial analysis with engaging, punchy market commentary.",
+    "previous_section_title": "",
+    "next_section_title": "Surge Pricing Comes to the GPU Rental Market",
+    "section_role": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+    "translation_notes": [
+      "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+      "Maintain a professional, authoritative tone suitable for an executive summary."
+    ],
+    "key_points": [
+      "H100 rental prices have surged by 40%.",
+      "A structural shift in the compute rental market requires new tracking tools.",
+      "The report will analyze market structure and project future pricing trends."
+    ],
+    "guidelines": [
+      "Maintain the authoritative yet slightly colloquial tone of a top-tier tech/finance analyst. Use professional financial/tech jargon (e.g., '边际需求', '投资回报率', '产能爬坡') while capturing the punchy style of the original.",
+      "Ensure precise translation of cloud infrastructure and financial terms. Pay special attention to 'offtake' (包销), 'tenor' (期限), and 'bare metal' (裸金属).",
+      "Restructure long English sentences into concise Chinese clauses, especially when describing complex market dynamics. Use a 'topic-comment' structure where appropriate to improve Chinese-native paragraph flow.",
+      "For terms like 'Neocloud', consistently use '新兴算力云厂商' to clearly distinguish them from traditional 'Hyperscalers' (超大规模云厂商).",
+      "Pay special attention to timeframes, pricing units, and hardware specs (e.g., '$1.70/hr/GPU', '1Q26', 'p6-b200'). Ensure they are formatted correctly and unambiguously in Chinese.",
+      "When translating idiomatic section headers ('Where The Puck is Going', 'The Comeback Kid'), prioritize the underlying business meaning over literal translation to maintain the professional analytical voice."
+    ],
+    "article_challenges": [
+      {
+        "location": "Section Heading: Where The Puck is Going",
+        "issue": "Idiomatic expression (from Wayne Gretzky) meaning anticipating the future, which doesn't translate literally.",
+        "suggestion": "Translate conceptually as '趋势前瞻' or '行业未来走向' to maintain the professional analytical tone."
+      },
+      {
+        "location": "Section Heading: The Comeback Kid",
+        "issue": "Idiomatic phrase referring to someone/something that recovers from a disadvantageous situation.",
+        "suggestion": "Translate as '触底反弹' or '绝地反击' to capture the unexpected recovery of GPU rental prices."
+      },
+      {
+        "location": "Paragraph starting 'Customers are fighting to pay...'",
+        "issue": "High density of technical specs (p6-b200, 8 nodes/64 GPUs) mixed with market actions.",
+        "suggestion": "Break the sentence into clear, parallel clauses in Chinese to maintain readability without losing the sense of market frenzy."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Neocloud",
+        "term": "Neocloud",
+        "translation": "新兴算力云厂商",
+        "strategy": "translate",
+        "note": "Emerging cloud providers specializing primarily in AI compute and GPU rentals (e.g., CoreWeave, Lambda, Nebius).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Major traditional cloud providers like AWS, Google Cloud, and Microsoft Azure.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Offtake",
+        "term": "Offtake",
+        "translation": "包销协议",
+        "strategy": "translate",
+        "note": "Long-term agreements (usually 4-5 years) where AI labs commit to buying massive amounts of compute capacity.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Spot instance",
+        "term": "Spot instance",
+        "translation": "竞价实例",
+        "strategy": "translate",
+        "note": "Spare compute capacity offered at variable, often cheaper rates, but can be interrupted.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Bare metal",
+        "term": "Bare metal",
+        "translation": "裸金属",
+        "strategy": "translate",
+        "note": "Physical servers rented without virtualization layers, allowing AI labs to customize the tech stack.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tenor",
+        "term": "Tenor",
+        "translation": "合同期限",
+        "strategy": "translate",
+        "note": "The length or duration of a rental contract (e.g., 1-year, 5-year).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Sweating fixed compute assets",
+        "term": "Sweating fixed compute assets",
+        "translation": "最大化压榨固定算力资产价值",
+        "strategy": "translate",
+        "note": "Extracting the maximum possible value and utilization out of existing hardware before it becomes obsolete.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tokenomics",
+        "term": "Tokenomics",
+        "translation": "Token经济学",
+        "strategy": "translate",
+        "note": "The economics of AI model usage, specifically tracking token generation volumes, costs, and revenues.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+    "relation_to_previous": "N/A - Opening section.",
+    "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+    "key_points": [
+      "H100 rental prices have surged by 40%.",
+      "A structural shift in the compute rental market requires new tracking tools.",
+      "The report will analyze market structure and project future pricing trends."
+    ],
+    "translation_notes": [
+      "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+      "Maintain a professional, authoritative tone suitable for an executive summary."
+    ]
+  },
+  "translations": [
+    "H100租赁价格飙升40%，GPU租赁定价仪表盘上线，算力租赁市场结构解析，租赁价格还会继续上涨吗？",
+    "作者：Dylan Patel、Daniel Nishball、Jordan Nanos 等2人",
+    "2026年4月2日 · 免费",
+    "Anthropic 的 Claude 4.6 Opus 和 Claude Code 需求激增。短短一个季度内，Anthropic 的年度经常性收入（ARR）几乎翻了三倍，从去年底的 90 亿美元飙升至如今的 250 亿美元以上。GLM 和 Kimi K2.5 等开源模型也推动了开源模型应用场景的暴涨。此外，Anthropic、OpenAI 以及各类新兴 AI 实验室（Neolab）完成融资后，同样产生了对 GPU 的庞大需求。",
+    "Claude Code 是行业拐点 - Doug O'Laughlin、Jeremie Eliahou Ontiveros 等3人 · 2月5日",
+    "这一拐点意味着需求已然暴增，超大规模云厂商和新兴算力云厂商（Neocloud）的 GPU 遭遇抢购潮。",
+    "这股新增需求推高了整个供应链的产品与服务定价，从 DRAM 和 NAND 存储器，到光纤线缆、数据中心托管乃至燃气轮机，无一幸免。",
+    "在众多算力相关的产品与服务中，GPU 租赁是最新一个因供应极度紧张而导致价格跳涨的领域。H100 的 1 年期 GPU 租赁合同价格已从 2025 年 10 月 1.70 美元/小时/GPU 的低点，暴涨近 40%，至 2026 年 3 月的 2.35 美元/小时/GPU。",
+    "所有型号的按需 GPU 租赁算力均已售罄——那些已经锁定按需实例的客户，尽管面临近期价格跳涨，也不愿将这些算力释放回资源池。在2026年初寻找 GPU 算力，就像试图预订最后一班航班的机票一样：价格高昂，且几乎一票难求。这还是个体面的比喻，更准确的说法是，现在想租一个集群简直像在买毒品一样。",
+    "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+    "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+    "得益于我们在ClusterMAX、InferenceX以及AI 云总拥有成本方面的工作，SemiAnalysis 一直在深入追踪新兴算力云厂商和超大规模云厂商生态内的 GPU 租赁定价等趋势与议题。",
+    "我们还投入大量时间协助 AI 实验室对接新兴算力云厂商，在市场上寻找 GPU 租赁资源，并与生态内的几乎所有参与者积极探讨 GPU 租赁价格趋势。",
+    "自2023年以来，我们一直为客户维护着GPU 租赁价格指数，追踪大多数主流 GPU 型号（H100、H200、B200、B300、GB200、GB300、MI300、MI325、MI355）在所有关键合同期限下的定价，涵盖从按需、1个月一直到5年的各类期限。我们的指数基于对众多新兴算力云厂商和算力买家的调研数据构建，并通过实际交易数据，以及我们亲自促成的谈判与交易进行了交叉验证。",
+    "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+    "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+    "今天，我们将公开发布 H100 一年期 GPU 租赁指数，为行业提供更多数据与洞察。我们每月更新该指数，并将通过 X 和 LinkedIn 官方账号点评最新趋势与市场动态。至于其他所有主流 GPU 型号的全期限结构与租赁定价数据，则向订阅了我们任意模型或产品的机构客户开放。",
+    "[点击此处访问我们的 GPU 租赁指数仪表盘](https://semianalysis.com/gpu-pricing-index/)",
+    "本报告将探讨 GPU 租赁市场的最新趋势、市场动态与核心数据点，阐述我们如何剖析更宏观的 GPU 租赁市场结构，并前瞻租赁定价的未来走向。"
+  ]
+}

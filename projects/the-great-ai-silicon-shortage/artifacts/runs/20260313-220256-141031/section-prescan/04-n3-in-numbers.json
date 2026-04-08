@@ -1,0 +1,54 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "new_terms": [
+    {
+      "term": "Rubin",
+      "suggested_translation": "Rubin",
+      "context": "Nvidia's next-generation architecture following Blackwell, based on N3P.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Blackwell",
+      "suggested_translation": "Blackwell",
+      "context": "Nvidia's current high-volume AI accelerator architecture.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Trainium3",
+      "suggested_translation": "Trainium3",
+      "context": "Amazon's custom AI training chip scheduled for N3P production.",
+      "confidence": 0.95
+    },
+    {
+      "term": "allocation",
+      "suggested_translation": "产能分配",
+      "context": "The process of TSMC distributing limited wafer capacity among competing customers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ASP",
+      "suggested_translation": "平均售价",
+      "context": "Average Selling Price; used here to explain why AI chips are prioritized over consumer chips.",
+      "confidence": 0.9
+    },
+    {
+      "term": "die size",
+      "suggested_translation": "裸片尺寸",
+      "context": "The physical area of the semiconductor chip, impacting yield and cost.",
+      "confidence": 0.9
+    },
+    {
+      "term": "client market",
+      "suggested_translation": "客户端市场",
+      "context": "Refers to the consumer PC and laptop segment, contrasted with the AI infrastructure market.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "n3": "N3",
+    "wafer-in": "晶圆投片",
+    "foundry": "代工厂"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-13T22:29:41.551260"
+}

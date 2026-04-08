@@ -1,0 +1,53 @@
+{
+  "section_id": "08-crossbar-limits",
+  "new_terms": [
+    {
+      "term": "all-to-all",
+      "suggested_translation": "全互连",
+      "context": "crossbar designs were used in an all-to-all fashion",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dunnington",
+      "suggested_translation": "Dunnington",
+      "context": "Intel’s 6-core Dunnington in 2008 used three dual-core modules",
+      "confidence": 0.95
+    },
+    {
+      "term": "Istanbul",
+      "suggested_translation": "Istanbul",
+      "context": "AMD Opteron Istanbul 6-core die",
+      "confidence": 0.95
+    },
+    {
+      "term": "Magny-Cours",
+      "suggested_translation": "Magny-Cours",
+      "context": "Their 12-core Magny-Cours in 2010 used two 6-core dies",
+      "confidence": 0.95
+    },
+    {
+      "term": "Interlagos",
+      "suggested_translation": "Interlagos",
+      "context": "with the 16-core Interlagos consisting of two dies",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bulldozer",
+      "suggested_translation": "推土机",
+      "context": "each with four Bulldozer dual-core modules",
+      "confidence": 0.99
+    }
+  ],
+  "term_usages": {
+    "crossbar": "交叉开关",
+    "multi-chip modules": "多芯片模块",
+    "L2 cache": "L2缓存",
+    "data fabric": "数据网络",
+    "L3 cache": "L3缓存",
+    "Intel": "英特尔",
+    "AMD": "AMD",
+    "Opteron": "皓龙"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:54:11.720425"
+}

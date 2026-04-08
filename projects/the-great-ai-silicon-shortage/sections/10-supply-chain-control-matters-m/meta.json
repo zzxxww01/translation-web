@@ -1,0 +1,168 @@
+{
+  "section_id": "10-supply-chain-control-matters-m",
+  "title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared",
+  "title_translation": "供应链掌控最关键：英伟达准备最充分",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute they can secure. Nvidia is once again the primary beneficiary, having locked in the majority of supply for logic wafers, memory, and various other necessary components. Nvidia saw this all coming, which is why they worked the hardest on winning over the supply chain: Jensen’s trips to Asia weren’t just for going to night markets. His 2025 trip to Korea was to secure memory supply, and it laid the groundwork for Nvidia being able to secure cheaper DRAM and offload procurement pressure for its customers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute they can secure. Nvidia is once again the primary beneficiary, having locked in the majority of supply for logic wafers, memory, and various other necessary components. Nvidia saw this all coming, which is why they worked the hardest on winning over the supply chain: Jensen’s trips to Asia weren’t just for going to night markets. His 2025 trip to Korea was to secure memory supply, and it laid the groundwork for Nvidia being able to secure cheaper DRAM and offload procurement pressure for its customers. While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of [TPUs](https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the?utm_source=publication-search) and [Trainium](https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential?utm_source=publication-search), the immediate reality is that whichever vendor secures the most silicon supply will ultimately capture the most deployed compute.",
+      "parent_block_plain_text": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute they can secure. Nvidia is once again the primary beneficiary, having locked in the majority of supply for logic wafers, memory, and various other necessary components. Nvidia saw this all coming, which is why they worked the hardest on winning over the supply chain: Jensen’s trips to Asia weren’t just for going to night markets. His 2025 trip to Korea was to secure memory supply, and it laid the groundwork for Nvidia being able to secure cheaper DRAM and offload procurement pressure for its customers. While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of TPUs and Trainium, the immediate reality is that whichever vendor secures the most silicon supply will ultimately capture the most deployed compute.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "TPUs",
+          "start": 776,
+          "end": 780,
+          "href": "https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Trainium",
+          "start": 785,
+          "end": 793,
+          "href": "https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 664,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在这种环境下，采购的成败至关重要。鉴于算力供不应求而数据中心电力尚有余量，AI实验室会不惜代价抢下任何能弄到手的可用算力。英伟达（NVIDIA）再次成为最大的受益者，它已经锁定了逻辑晶圆、存储器以及其他各类核心零部件的绝大部分供应。英伟达对此早有预判，这也是为什么他们在拉拢供应链方面最为卖力：黄仁勋的亚洲之行绝不仅仅是为了逛夜市。他2025年的韩国之行意在确保存储器供应，这为英伟达锁定更廉价的DRAM并替客户卸下采购重担打下了坚实基础。",
+          "model": "pro",
+          "created_at": "2026-03-14T13:35:50.354942",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "在当前环境下，能否搞定采购才是重中之重。在算力短缺而数据中心电力充足的情况下，AI实验室会扫光所有能弄到手的可用算力。英伟达（NVIDIA）再次成为最大赢家，他们已经锁定了大部分逻辑晶圆、存储器以及各类其他必需组件的供应。英伟达早就预见到了这种局面，因此他们在搞定供应链方面最下血本：黄仁勋的亚洲之行可不只是为了去逛夜市。他2025年的韩国之行正是为了锁定存储器产能，这不仅为英伟达获取更便宜的DRAM打下了基础，也替客户扛下了采购压力。",
+          "model": "default",
+          "created_at": "2026-03-15T00:03:40.373731",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在当前环境下，能否搞定采购才是重中之重。在算力短缺而数据中心电力充足的情况下，AI实验室会扫光所有能弄到手的可用算力。英伟达再次成为最大赢家，他们已经锁定了大部分逻辑晶圆、存储器以及各类其他必需组件的供应。英伟达早就预见到了这种局面，因此他们在搞定供应链方面最下血本：黄仁勋的亚洲之行可不只是为了去逛夜市。他2025年的韩国之行正是为了锁定存储器产能，这不仅为英伟达获取更便宜的DRAM打下了基础，也替客户扛下了采购压力。",
+          "model": "manual",
+          "created_at": "2026-03-15T00:03:58.407926",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "在当前环境下，能否搞定采购才是重中之重。在算力短缺而数据中心电力充足的情况下，AI实验室会扫光所有能弄到手的可用算力。英伟达再次成为最大赢家，他们已经锁定了大部分逻辑晶圆、存储器以及各类其他必需组件的供应。英伟达早就预见到了这种局面，因此他们在搞定供应链方面最下血本：黄仁勋的亚洲之行可不只是为了去逛夜市。他2025年的韩国之行正是为了锁定存储器产能，这不仅为英伟达获取更便宜的DRAM打下了基础，也替客户扛下了采购压力。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of TPUs and Trainium, the immediate reality is that whichever vendor secures the most silicon supply will ultimately capture the most deployed compute.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "TPUs",
+          "start": 111,
+          "end": 115,
+          "href": "https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Trainium",
+          "start": 120,
+          "end": 128,
+          "href": "https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute they can secure. Nvidia is once again the primary beneficiary, having locked in the majority of supply for logic wafers, memory, and various other necessary components. Nvidia saw this all coming, which is why they worked the hardest on winning over the supply chain: Jensen’s trips to Asia weren’t just for going to night markets. His 2025 trip to Korea was to secure memory supply, and it laid the groundwork for Nvidia being able to secure cheaper DRAM and offload procurement pressure for its customers. While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of [TPUs](https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the?utm_source=publication-search) and [Trainium](https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential?utm_source=publication-search), the immediate reality is that whichever vendor secures the most silicon supply will ultimately capture the most deployed compute.",
+      "parent_block_plain_text": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute they can secure. Nvidia is once again the primary beneficiary, having locked in the majority of supply for logic wafers, memory, and various other necessary components. Nvidia saw this all coming, which is why they worked the hardest on winning over the supply chain: Jensen’s trips to Asia weren’t just for going to night markets. His 2025 trip to Korea was to secure memory supply, and it laid the groundwork for Nvidia being able to secure cheaper DRAM and offload procurement pressure for its customers. While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of TPUs and Trainium, the immediate reality is that whichever vendor secures the most silicon supply will ultimately capture the most deployed compute.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "TPUs",
+          "start": 776,
+          "end": 780,
+          "href": "https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Trainium",
+          "start": 785,
+          "end": 793,
+          "href": "https://newsletter.semianalysis.com/p/aws-trainium3-deep-dive-a-potential?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 665,
+      "segment_end": 924,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管Anthropic对TPU和Trainium的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+          "model": "pro",
+          "created_at": "2026-03-14T13:36:09.735405",
+          "tokenized_text": "尽管Anthropic对[[[LINK_1|TPU]]]和[[[LINK_2|Trainium]]]的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "尽管Anthropic对TPU和Trainium的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+          "model": "manual",
+          "created_at": "2026-03-15T00:04:14.085984",
+          "tokenized_text": "尽管Anthropic对[[[LINK_1|TPU]]]和[[[LINK_2|Trainium]]]的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "尽管Anthropic对TPU和Trainium的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+      "confirmed_tokenized": "尽管Anthropic对[[[LINK_1|TPU]]]和[[[LINK_2|Trainium]]]的大量使用，在一定程度上让GPU与定制ASIC的路线之争愈演愈烈，但眼下最直接的现实是：哪家供应商能锁定最多的芯片供应，谁就能最终占据最大的已部署算力份额。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

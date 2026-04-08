@@ -1,0 +1,69 @@
+{
+  "section_id": "16-aws-graviton5",
+  "new_terms": [
+    {
+      "term": "OSAT",
+      "suggested_translation": "外包封测厂商 (OSAT)",
+      "context": "going directly to TSMC and OSAT partners for chip production",
+      "confidence": 0.95
+    },
+    {
+      "term": "Neoverse Compute Subsystem (CSS)",
+      "suggested_translation": "Neoverse计算子系统 (CSS)",
+      "context": "ARM’s Neoverse Compute Subsystem (CSS) reference designs",
+      "confidence": 0.95
+    },
+    {
+      "term": "Core Mesh Network (CMN)",
+      "suggested_translation": "核心网格网络 (CMN)",
+      "context": "A 10x7 Core Mesh Network (CMN) was employed with 65 cores printed on die",
+      "confidence": 0.9
+    },
+    {
+      "term": "binning",
+      "suggested_translation": "芯片分级 / 筛选",
+      "context": "leaving room for 1 core to be disabled for binning",
+      "confidence": 0.95
+    },
+    {
+      "term": "Trainium",
+      "suggested_translation": "Trainium",
+      "context": "design and verify future Graviton, Trainium and Nitro silicon",
+      "confidence": 0.95
+    },
+    {
+      "term": "Nitro",
+      "suggested_translation": "Nitro",
+      "context": "design and verify future Graviton, Trainium and Nitro silicon",
+      "confidence": 0.95
+    },
+    {
+      "term": "dogfooding",
+      "suggested_translation": "内部试用 / 吃自家狗粮",
+      "context": "creating an internal dogfooding cycle where Gravitons design Gravitons",
+      "confidence": 0.9
+    },
+    {
+      "term": "XPU",
+      "suggested_translation": "XPU",
+      "context": "with 1 CPU to 4 XPUs",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云厂商",
+    "chiplet": "芯粒",
+    "emib": "EMIB (嵌入式多芯片互连桥接)",
+    "tco": "总拥有成本",
+    "mesh stops": "网格站点",
+    "head node": "头节点",
+    "aws": "AWS",
+    "tsmc": "台积电",
+    "xeon": "至强",
+    "ddr5": "DDR5",
+    "l2 cache": "L2缓存",
+    "l3 cache": "L3缓存"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:28:07.894032"
+}

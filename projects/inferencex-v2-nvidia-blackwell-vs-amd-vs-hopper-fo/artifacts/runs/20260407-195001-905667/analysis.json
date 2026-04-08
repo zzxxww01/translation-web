@@ -1,0 +1,1240 @@
+{
+  "theme": "The release of InferenceXv2 benchmark results reveals that while AMD's MI355X shows competitive single-node performance, Nvidia's hardware and software stack (GB300 NVL72, TRT-LLM) maintain a dominant lead in complex, multi-node, disaggregated LLM inference setups used by frontier AI labs.",
+  "key_arguments": [
+    "InferenceXv2 provides a dynamic, open-source benchmarking standard that tracks AI inference performance and economics across evolving hardware and software stacks.",
+    "Nvidia's GB300 NVL72 and B200, paired with Dynamo and TRT-LLM, deliver overwhelming performance advantages (up to 100x vs Hopper in certain configs), proving Jensen Huang's claims were not mere marketing.",
+    "AMD's MI355X is highly competitive in single-node and specific FP8 distributed scenarios using SGLang, offering significant TCO advantages over previous AMD generations.",
+    "AMD struggles severely with software composability; combining FP4, Wide Expert Parallelism (WideEP), and Disaggregated Inferencing causes performance to plummet, highlighting a lack of focus on multi-node enterprise needs.",
+    "The fundamental tradeoff in LLM inference is interactivity (tok/s/user) versus throughput (tok/s), and frontier labs are solving this via Disaggregated Prefill and Wide Expert Parallelism.",
+    "Accurate TCO analysis must account for both the higher capital expenditure of Nvidia's hardware and its vastly superior software-driven throughput, which often results in better unit economics."
+  ],
+  "structure_summary": "The article opens with an introduction to the InferenceXv2 framework and top-level benchmark results. It then provides a technical primer on crucial inference concepts (Interactivity vs Throughput, TP/EP/DP, MTP, Disaggregated Prefill, WideEP). The core of the piece is a deep dive into specific hardware/software configurations, comparing Nvidia (Hopper/Blackwell) and AMD (MI300/MI325/MI355) across single-node and multi-node setups. It concludes with a TCO analysis and a roadmap for the InferenceX repository.",
+  "terminology": [
+    {
+      "term": "Disaggregated Serving / Disaggregated Prefill",
+      "context_meaning": "Separating the compute-heavy prefill phase and memory-heavy decode phase of LLM inference onto different nodes.",
+      "translation": "分离式服务 / 预填充-解码分离",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Core architectural concept in modern LLM inference. '分离式' (Disaggregated) is the industry standard term."
+    },
+    {
+      "term": "Wide Expert Parallelism (WideEP)",
+      "context_meaning": "Distributing the experts of a Mixture of Experts (MoE) model across a large number of GPUs (e.g., 64 GPUs).",
+      "translation": "宽专家并行",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "A specialized extension of EP (Expert Parallelism). Keep the English acronym 'WideEP' after initial Chinese translation."
+    },
+    {
+      "term": "Interactivity",
+      "context_meaning": "Tokens per second per user (tok/s/user), representing the latency/speed experienced by an individual user.",
+      "translation": "交互性 (tok/s/user)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Distinguished from overall 'Throughput' (吞吐量). Must be translated consistently to highlight the tradeoff."
+    },
+    {
+      "term": "Multi Token Prediction (MTP)",
+      "context_meaning": "A speculative decoding technique where a smaller draft model predicts multiple future tokens to be verified by the main model in a single forward pass.",
+      "translation": "多Token预测 (MTP)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Key feature of DeepSeek models. Translate as 多Token预测 and retain the MTP acronym."
+    },
+    {
+      "term": "Composability",
+      "context_meaning": "The ability of different software optimizations (e.g., FP4, WideEP, Disagg) to work together simultaneously without breaking or degrading performance.",
+      "translation": "可组合性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Critical software engineering term explaining AMD's current bottleneck."
+    },
+    {
+      "term": "All-reduce / All-to-all collective",
+      "context_meaning": "GPU communication primitives. All-reduce combines data across GPUs, all-to-all sends distinct data from every GPU to every other GPU.",
+      "translation": "全局归约 (All-reduce) / 全局到全局通信 (All-to-all)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Standard distributed computing terminology. First occurrence should include the English term for clarity."
+    },
+    {
+      "term": "Forward pass",
+      "context_meaning": "The computation of data through the neural network from input to output.",
+      "translation": "前向传播",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard deep learning term."
+    },
+    {
+      "term": "NVL72",
+      "context_meaning": "Nvidia's rack-scale system containing 72 interconnected GPUs.",
+      "translation": "NVL72机架级系统",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "Hardware product name. Add '机架级系统' (rack-scale system) on first mention to clarify it's a full rack, not a single chip."
+    },
+    {
+      "term": "KV cache offloading",
+      "context_meaning": "Moving the Key-Value cache from GPU HBM to CPU RAM or NVMe storage to save VRAM.",
+      "translation": "KV缓存卸载",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard LLM inference optimization term."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Highly technical, analytical, authoritative, yet peppered with internet-native, slightly edgy insider slang.",
+    "target_audience": "AI researchers, GPU engineers, hardware investors, and cloud infrastructure architects.",
+    "translation_voice": "Professional and rigorous when discussing technical architectures and financial metrics, but adopting a sharp, 'tech-bro/hacker' localized tone when translating the author's informal internet slang."
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Key Observations and Results to Highlight",
+      "issue": "Slang terms: 'framemogging', 'jestermaxxing', 'lookmaxxing'.",
+      "suggestion": "Translate using Chinese tech-community slang. 'Framemogging' -> '性能碾压' or '降维打击'; 'jestermaxxing' -> '纯纯小丑'; 'lookmaxxing' -> '表面功夫' or 'PPT造车'."
+    },
+    {
+      "type": "accuracy",
+      "location": "Interactivity vs Throughput Tradeoff",
+      "issue": "Analogy: 'riding a metro bus vs a race car'.",
+      "suggestion": "Keep the literal translation but ensure the mapping is clear: 赛车 (race car) represents low latency/high interactivity for one user; 公交车 (metro bus) represents high throughput/batching for many users."
+    },
+    {
+      "type": "accuracy",
+      "location": "Jensen Under Promising and Overdelivering",
+      "issue": "'reality distortion field' and 'Jensen Math jokes'.",
+      "suggestion": "Translate as '现实扭曲力场' (a well-known Steve Jobs reference in Chinese tech circles) and '黄氏定律/黄氏数学笑话'."
+    },
+    {
+      "type": "accuracy",
+      "location": "GitHub Actions",
+      "issue": "'We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.'",
+      "suggestion": "The 'unicorn' refers to GitHub's error page mascot. 'Touch some grass' means going outside/taking a break from the internet. Translate as: '最近我们看到GitHub报错页面“独角兽”的次数比什么都多！也许我们真的该“下线去接触一下大自然”了。'"
+    },
+    {
+      "type": "accuracy",
+      "location": "Total Cost of Ownership",
+      "issue": "Financial vs Hardware terms: 'capital cost', 'compute tray content', 'margins'.",
+      "suggestion": "Use standard hardware-finance terms: 资本支出 (capital cost), 计算托盘成本/用量 (compute tray content), 利润率 (margins)."
+    }
+  ],
+  "guidelines": [
+    "Retain the hardcore engineering tone: Use precise Chinese terminology for AI and semiconductor concepts (e.g., 预填充, 解码, 显存带宽, 张量并行). Do not over-simplify technical explanations.",
+    "Handle internet slang dynamically: The authors use terms like 'mogged' or 'jestermaxxing' to express extreme dominance or foolishness. Use equivalent Chinese tech/internet slang (e.g., 碾压, 吊打, 小丑) to preserve the edgy, opinionated voice of SemiAnalysis.",
+    "Restructure complex technical sentences: Sentences describing multi-variable configurations (e.g., 'disagg prefill+wideEP with FP4 on the MI355X') should be broken down or clearly grouped in Chinese to avoid modifier pile-ups (e.g., '在MI355X上组合使用FP4、分离式预填充以及宽专家并行时...').",
+    "Acronym handling: For AI parallelism (TP, EP, DP, WideEP) and inference metrics (ISL, OSL, TPOT), provide the full Chinese translation in parentheses at the first occurrence, then use the English acronyms strictly thereafter to maintain a clean, professional look.",
+    "Maintain distinction between inference phases: Always strictly differentiate 'Prefill' (预填充) and 'Decode' (解码), as the entire article's premise on 'Disaggregated Serving' relies on this distinction.",
+    "TCO and Financials: Ensure that hardware pricing and cluster capex discussions use standard enterprise IT procurement terminology (e.g., 资本支出/CAPEX, 总拥有成本/TCO, 节点/Node).",
+    "Preserve title semantics: The translation of section headers and the article title must capture all technical keywords (e.g., WideEP, Disagg, NVL72) without dropping subjects for the sake of brevity."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Establishes the article's metadata, key hardware/software subjects, and author credibility.",
+      "relation_to_previous": "None (Opening section).",
+      "relation_to_next": "Sets the high-level context before diving into the formal introduction of the InferenceXv2 framework.",
+      "key_points": [
+        "Identifies the core hardware (GB300 NVL72, MI355X, B200, H100) and software/techniques (Disaggregated Serving, WideEP, SGLang, vLLM, TRTLLM) analyzed in the article."
+      ],
+      "translation_notes": [
+        "Retain hardware and software names in English.",
+        "Translate 'Disaggregated Serving' to standard industry terminology like '分离式服务' or '解耦服务'.",
+        "Translate 'Wide Expert Parallelism' to '宽泛专家并行' or keep 'WideEP' as an acronym with an initial explanation."
+      ]
+    },
+    "01-introduction": {
+      "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+      "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+      "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+      "key_points": [
+        "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+        "The framework adapts at the rapid speed of the AI software ecosystem."
+      ],
+      "translation_notes": [
+        "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+        "Maintain an authoritative yet community-oriented tone."
+      ]
+    },
+    "02-key-observations-and-results-t": {
+      "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+      "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+      "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+      "key_points": [
+        "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+        "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+        "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+      ],
+      "translation_notes": [
+        "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+        "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+      ]
+    },
+    "03-acknowledgments-and-inferencex": {
+      "role_in_article": "Establishes the scale, legitimacy, and independence of the benchmark by crediting hardware providers.",
+      "relation_to_previous": "Validates the explosive claims in the 'Key Observations' by revealing the massive scale of hardware access (1000+ GPUs).",
+      "relation_to_next": "Closes the introductory/meta portion of the article, pivoting to the technical educational primer.",
+      "key_points": [
+        "The authors had independent access to nearly 1000 GPUs, including the latest GB300 NVL72 systems, provided by Nvidia.",
+        "The benchmark pushes the 'Pareto Frontier' of open-source performance."
+      ],
+      "translation_notes": [
+        "Ensure professional courtesy in the tone of acknowledgments.",
+        "Translate 'Pushing Pareto Frontier' as '拓展帕累托前沿' or '推高帕累托前沿'."
+      ]
+    },
+    "04-a-primer-on-important-technica": {
+      "role_in_article": "Acts as a navigational signpost, preparing less-technical readers for foundational concepts.",
+      "relation_to_previous": "Shifts the article's gear from high-level summaries and acknowledgments to deep technical foundations.",
+      "relation_to_next": "Directly introduces the first technical concept: the Interactivity vs Throughput tradeoff.",
+      "key_points": [
+        "Provides a brief technical primer necessary for interpreting the complex benchmark results to follow."
+      ],
+      "translation_notes": [
+        "Translate 'primer' as '入门指南' or '基础概念科普'. Keep the tone helpful and instructional."
+      ]
+    },
+    "05-interactivity-vs-throughput-tr": {
+      "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+      "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+      "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+      "key_points": [
+        "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+        "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+        "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+      ],
+      "translation_notes": [
+        "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+        "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+      ]
+    },
+    "06-tensor-parallel-expert-parall": {
+      "role_in_article": "Explains the three primary parallelization strategies and their respective network/compute tradeoffs.",
+      "relation_to_previous": "Explains the hardware-level techniques used to manage the throughput/latency tradeoff defined in the previous section.",
+      "relation_to_next": "Concludes the technical primer, allowing the article to transition into historical benchmark tracking.",
+      "key_points": [
+        "Tensor Parallel (TP) maximizes interactivity but requires costly all-reduce operations at every layer.",
+        "Expert Parallel (EP) exploits MoE sparsity but requires heavy all-to-all collectives.",
+        "Data Parallel (DP) replicates models to load balance requests across multiple ranks."
+      ],
+      "translation_notes": [
+        "Use established Chinese distributed training terms: 'all-reduce' -> '全量归约' (or keep English), 'all-to-all collective' -> '全对全集合通信', 'shards experts' -> '专家分片'."
+      ]
+    },
+    "07-tracking-improvements-over-tim": {
+      "role_in_article": "Outlines the methodology of the benchmark: tracking rapid software evolution against static hardware.",
+      "relation_to_previous": "Transitions from static technical definitions to the dynamic methodology used in the InferenceXv2 benchmark.",
+      "relation_to_next": "Applies this specific temporal tracking methodology to evaluate AMD's progress on DeepSeek R1.",
+      "key_points": [
+        "Software improves on a weekly cadence, whereas hardware improves on a yearly cadence.",
+        "InferenceX continuously updates its recipes to capture the latest software optimizations."
+      ],
+      "translation_notes": [
+        "Translate 'O(yearly) cadence' and 'O(weekly) cadence' as 'O(年)级别周期' and 'O(周)级别周期'. Ensure the Big O notation context is preserved for a hardcore tech audience."
+      ]
+    },
+    "08-deepseek-r1": {
+      "role_in_article": "Demonstrates AMD's recent software-driven performance gains using a specific, highly relevant workload (DeepSeek R1).",
+      "relation_to_previous": "Provides a concrete example of the rapid software improvements discussed in section 07.",
+      "relation_to_next": "Contrasts the massive gains seen in MoE models (DeepSeek) with the marginal gains in dense models (GPT-OSS) in the next section.",
+      "key_points": [
+        "AMD doubled throughput for SGLang DeepSeek R1 FP4 in less than 2 months through software updates.",
+        "Performance gains were realized by upstreaming AMD's forked SGLang images into the official repository.",
+        "Historical comparisons prior to January 2026 are invalid due to previous reliance on private ROCm images."
+      ],
+      "translation_notes": [
+        "Translate 'upstreaming' as '合并到上游' or '推送到主分支'.",
+        "Translate 'forked' as '分支版本' or '分叉版本'."
+      ]
+    },
+    "09-gpt-oss-120b": {
+      "role_in_article": "Shows the benchmark progression for a different model architecture, highlighting where software optimizations hit diminishing returns.",
+      "relation_to_previous": "Serves as a counter-example to the massive gains in section 08, showing a more constrained improvement curve.",
+      "relation_to_next": "Concludes the single-node software tracking, pivoting to the architecture of multi-node disaggregated setups.",
+      "key_points": [
+        "MI300X and MI325X saw only marginal improvements on GPT-OSS 120B.",
+        "Gains were primarily driven by AITER optimizations and switching to the upstream vLLM ROCm image."
+      ],
+      "translation_notes": [
+        "Translate 'marginal improvements' as '边际提升' or '小幅改进'.",
+        "Ensure 'AITER' and 'vLLM ROCm image' are kept in English or cleanly transliterated where appropriate."
+      ]
+    },
+    "10-disaggregated-inference-framew": {
+      "role_in_article": "Details the specific multi-node software stacks used by Nvidia and AMD for the most complex benchmark tests.",
+      "relation_to_previous": "Shifts focus from single-node historical tracking to the cutting-edge multi-node frameworks required for frontier AI.",
+      "relation_to_next": "Establishes the exact software configurations that generate the empirical results shown in the next section.",
+      "key_points": [
+        "Nvidia utilizes Dynamo, an engine-agnostic framework supporting SGLang and TRT-LLM, for disaggregated inference and KV cache offloading.",
+        "AMD relies on SGLang paired with KV cache transfer frameworks like MoRI (RDMA-focused) and Mooncake."
+      ],
+      "translation_notes": [
+        "Translate 'KV cache offloading' as 'KV缓存卸载'.",
+        "Maintain clarity that Dynamo is 'inference-engine agnostic' ('与推理引擎解耦' or '引擎无关')."
+      ]
+    },
+    "11-deepseek-disagg-wideep-result": {
+      "role_in_article": "Presents empirical evidence proving that multi-node disaggregated setups are vastly superior to single-node aggregated ones.",
+      "relation_to_previous": "Applies the disaggregated frameworks from section 10 to real-world testing on the DeepSeek model.",
+      "relation_to_next": "Establishes disaggregated prefill as the gold standard before pitting Nvidia and AMD against each other in this specific setup.",
+      "key_points": [
+        "Multi-node disaggregated prefill completely dominates ('framemogs') single-node aggregated serving across almost all interactivity levels.",
+        "Disaggregation yields higher total token throughput per GPU."
+      ],
+      "translation_notes": [
+        "Translate 'aggregated inference' as '聚合推理' or '一体化推理' to contrast with 'disaggregated' (分离式).",
+        "Again, translate 'framemogs' with strong slang like '绝对碾压'."
+      ]
+    },
+    "12-nvidia-versus-amd-disagg-prefi": {
+      "role_in_article": "The climax of the technical argument: a direct, high-stakes comparison of Nvidia's and AMD's best disaggregated setups.",
+      "relation_to_previous": "Takes the optimal disaggregated architecture proven in section 11 and uses it as the battleground for the Nvidia vs AMD showdown.",
+      "relation_to_next": "Translates these raw technical performance metrics into real-world business implications (Unit Economics).",
+      "key_points": [
+        "InferenceXv2 reveals the first full Pareto frontier for open-source MI355X distributed inference.",
+        "Nvidia's B200 with Dynamo TRT-LLM significantly outperforms the MI355X.",
+        "Even with Multi-Token Prediction (MTP) enabled, MI355X can only match the baseline B200 (without MTP) within a narrow interactivity range (60-120 tok/s/user)."
+      ],
+      "translation_notes": [
+        "Translate 'Pareto frontier' as '帕累托前沿'.",
+        "Ensure the distinction between setups 'with MTP' and 'without MTP' is crystal clear, as it is the crux of the performance comparison."
+      ]
+    },
+    "13-unpacking-inference-providers": {
+      "role_in_article": "Contextualizes the theoretical benchmark limits by analyzing current real-world API provider pricing and performance.",
+      "relation_to_previous": "Grounds the hardcore hardware metrics from section 12 in the actual market economics of AI labs.",
+      "relation_to_next": "Pivots from current market economics to an analysis of generational hardware scaling and manufacturer claims.",
+      "key_points": [
+        "Analysis of OpenRouter providers serving DeepSeek R1 0528 FP8 reveals an average interactivity of ~35 tok/s/user.",
+        "Provides a baseline to understand the commercial viability of the hardware setups previously discussed."
+      ],
+      "translation_notes": [
+        "Translate 'Unit Economics' as '单位经济效益'.",
+        "Translate 'middle of the pack provider' as '处于中游的提供商' or '表现中等的服务商'."
+      ]
+    },
+    "14-jensen-under-promising-and-ove": {
+      "role_in_article": "Validates Nvidia's generational hardware claims, refuting skepticism about their marketing numbers.",
+      "relation_to_previous": "Shifts from current market reality to analyzing the generational leap from Hopper to Blackwell.",
+      "relation_to_next": "Narrows the hardware focus from the Hopper/Blackwell generational leap to the intra-generational Blackwell/Ultra leap.",
+      "key_points": [
+        "Jensen Huang's claim of a 30x performance gain from H100 to GB200 NVL72 was widely dismissed as marketing hype.",
+        "Benchmark data proves the 30x multiplier is accurate when comparing the worst-case H200 FP8 to a reasonable GB200 FP4 setup."
+      ],
+      "translation_notes": [
+        "Translate 'lookmaxxing' (internet slang for maximizing appearance) conceptually as '表面光鲜的包装', '过度美化', or '纯粹的营销噱头'.",
+        "Translate 'reality distortion field' literally as '现实扭曲力场' (a well-known tech trope).",
+        "Translate 'Jensen Math' as '老黄刀法' or '老黄数学'."
+      ]
+    },
+    "15-blackwell-vs-blackwell-ultra": {
+      "role_in_article": "Analyzes the latest hardware iteration (Blackwell Ultra), highlighting discrepancies between paper specs and actual performance.",
+      "relation_to_previous": "Continues the hardware analysis from section 14, moving to the absolute cutting edge of Nvidia's lineup.",
+      "relation_to_next": "Serves as the final technical data point before the article's unlisted conclusion/roadmap.",
+      "key_points": [
+        "Despite identical paper specs for memory bandwidth, Blackwell Ultra delivers up to 1.5x better FP8 performance than standard Blackwell.",
+        "FP4 performance only sees a 1.1x improvement.",
+        "The gains are likely driven by software optimizations specific to the newly released GPU."
+      ],
+      "translation_notes": [
+        "Translate 'On paper' as '纸面数据上' or '理论上'.",
+        "Ensure precision when distinguishing between 'FP8' and 'FP4' performance multipliers."
+      ]
+    },
+    "16-mi355x-vs-mi325x-vs-mi300x": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "17-amd-composability-issue-on-fp4": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "18-amd-atom-engine": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "19-multi-token-prediction-mtp": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "20-accuracy-evaluations": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "21-anthropic-fast-mode-inferencin": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "22-wide-expert-parallelism-widee": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "23-wideep": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "24-disaggregated-prefill": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "25-optimizing-inference-with-wide": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "26-dive-into-deepseek-r1-single-n": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "27-gpt-oss-120b-single-node": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "28-core-inferencex-repo-updates": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "29-core-changes-since-inferencexv": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "30-klaud-cold-ai-usage": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "31-github-actions": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "32-future-of-inferencex": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "33-migration-to-multi-turn-real-m": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "34-adding-tpu-trainium-and-more": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "35-total-cost-of-ownership-nvl72": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 36,
+  "paragraph_count": 358,
+  "word_count": 11794
+}

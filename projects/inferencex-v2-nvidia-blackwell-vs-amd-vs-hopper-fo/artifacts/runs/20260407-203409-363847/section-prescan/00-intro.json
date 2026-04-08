@@ -1,0 +1,50 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GB300 NVL72",
+      "suggested_translation": "GB300 NVL72",
+      "context": "NVIDIA next-generation rack-scale AI system",
+      "confidence": 0.95
+    },
+    {
+      "term": "MI355X",
+      "suggested_translation": "MI355X",
+      "context": "AMD Instinct next-generation AI accelerator",
+      "confidence": 0.95
+    },
+    {
+      "term": "Disaggregated Serving",
+      "suggested_translation": "分离式服务",
+      "context": "System architecture separating prefill and decode phases for LLM inference",
+      "confidence": 0.9
+    },
+    {
+      "term": "Large Mixture of Experts",
+      "suggested_translation": "大规模专家混合模型",
+      "context": "Specific scaling of MoE architecture",
+      "confidence": 0.9
+    },
+    {
+      "term": "SGLang",
+      "suggested_translation": "SGLang",
+      "context": "High-performance LLM inference framework",
+      "confidence": 0.95
+    },
+    {
+      "term": "vLLM",
+      "suggested_translation": "vLLM",
+      "context": "Popular open-source LLM inference engine",
+      "confidence": 0.95
+    },
+    {
+      "term": "TRTLLM",
+      "suggested_translation": "TRT-LLM",
+      "context": "NVIDIA TensorRT-LLM inference library",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:36:10.899218"
+}

@@ -1,0 +1,11 @@
+短期租赁处于租赁期限结构的最前端，通常代表着剩余产能。不过，像Runpod和Lambda等许多厂商，已非常成功地专注于提供大量灵活的按需实例或竞价实例产能。按需实例的定价机制与GPU租赁合同市场的其他部分截然不同。供应商通常会为按需产能设定固定价格，且极少进行调整。
+
+https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg
+
+来源：Lambda Labs
+
+供应商会根据利用率水平对价格进行一次性调整——如果利用率过低，他们会降价以吸引需求；如果利用率拉满，供应商就会上调价格，因为他们判定即使在更高的价格水平下，利用率仍将保持高位。这就是为什么新兴算力云厂商公布的按需实例定价时间序列，往往会在很长一段时间内保持平稳，随后才出现跳空上涨或下跌的阶跃式变化。在按需实例市场中，衡量需求的最佳高频指标是利用率，而不是价格。
+
+https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png
+
+来源：Lambda Labs，SemiAnalysis

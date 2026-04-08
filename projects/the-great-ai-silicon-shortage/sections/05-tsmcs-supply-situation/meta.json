@@ -1,0 +1,350 @@
+{
+  "section_id": "05-tsmcs-supply-situation",
+  "title": "TSMC’s Supply Situation",
+  "title_translation": "台积电供应现状",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "With demand running far ahead of supply, TSMC is expanding capacity and pushing its existing lines to the limit, extracting every possible wafer from its nameplate capacity. As a result, effective N3 utilization is expected to exceed 100% in the second half of 2026. The company is also shifting certain process layers to other fabs to free up incremental N3 capacity wherever possible.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With demand running far ahead of supply, TSMC is expanding capacity and pushing its existing lines to the limit, extracting every possible wafer from its nameplate capacity. As a result, effective N3 utilization is expected to exceed 100% in the second half of 2026. The company is also shifting certain process layers to other fabs to free up incremental N3 capacity wherever possible.",
+      "parent_block_plain_text": "With demand running far ahead of supply, TSMC is expanding capacity and pushing its existing lines to the limit, extracting every possible wafer from its nameplate capacity. As a result, effective N3 utilization is expected to exceed 100% in the second half of 2026. The company is also shifting certain process layers to other fabs to free up incremental N3 capacity wherever possible.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 386,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在需求远超供给的背景下，台积电正在扩充产能，并将现有产线逼至极限，竭力从其铭牌产能中榨取每一片晶圆。因此，预计到2026年下半年，实际N3制程稼动率将突破100%。此外，台积电还将特定的工艺层转移至其他晶圆厂，以尽可能释放增量的N3制程产能。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.719660",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "当前需求远超供应，台积电正在扩充产能，并将现有产线逼至极限，力求从标称产能中榨取每一片晶圆。受此影响，预计2026年下半年N3的实际产能利用率将突破100%。此外，台积电还将特定工艺层转移至其他晶圆厂，尽一切可能释放额外的N3产能。",
+          "model": "manual",
+          "created_at": "2026-03-15T13:27:16.209436",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "当前需求远超供应，台积电（TSMC）正在扩充产能，并将现有产线逼至极限，力求从标称产能中榨取每一片晶圆。受此影响，预计2026年下半年N3的实际产能利用率将突破100%。此外，台积电还将特定工艺层转移至其他晶圆厂，尽一切可能释放额外的N3产能。",
+          "model": "default",
+          "created_at": "2026-03-15T13:27:07.683023",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "当前需求远超供应，台积电正在扩充产能，并将现有产线逼至极限，力求从标称产能中榨取每一片晶圆。受此影响，预计2026年下半年N3的实际产能利用率将突破100%。此外，台积电还将特定工艺层转移至其他晶圆厂，尽一切可能释放额外的N3产能。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "在需求远超供给的背景下，台积电正在扩充产能，并将现有产线逼至极限，竭力从其铭牌产能中榨取每一片晶圆。因此，预计到2026年下半年，实际N3制程稼动率将突破100%。此外，台积电还将特定的工艺层转移至其他晶圆厂，以尽可能释放增量的N3制程产能。",
+          "timestamp": "2026-03-15T13:26:31.440402",
+          "source": "default"
+        }
+      ]
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Why can’t TSMC simply add more N3 wafer starts? Like the memory suppliers, TSMC is constrained by available cleanroom space. Additional usable fab area must first be built before equipment can be installed and new capacity brought online. For the next 2 years, TSMC will not be able to add enough capacity to fully meet demand. As a result, for companies to get more wafer allocation in the meantime, others will have to give up their existing precious allocation, and this just may happen.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Why can’t TSMC simply add more N3 wafer starts? Like the memory suppliers, TSMC is constrained by available cleanroom space. Additional usable fab area must first be built before equipment can be installed and new capacity brought online. For the next 2 years, TSMC will not be able to add enough capacity to fully meet demand. As a result, for companies to get more wafer allocation in the meantime, others will have to give up their existing precious allocation, and this just may happen.",
+      "parent_block_plain_text": "Why can’t TSMC simply add more N3 wafer starts? Like the memory suppliers, TSMC is constrained by available cleanroom space. Additional usable fab area must first be built before equipment can be installed and new capacity brought online. For the next 2 years, TSMC will not be able to add enough capacity to fully meet demand. As a result, for companies to get more wafer allocation in the meantime, others will have to give up their existing precious allocation, and this just may happen.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 490,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为什么台积电不能直接增加N3制程的晶圆投片量？与存储器供应商一样，台积电也受限于现有的无尘室空间。必须先建出额外的可用厂房面积，才能进行设备装机并实现新产能上线。在未来两年内，台积电将无法增加足够的产能来完全满足需求。因此，在此期间，如果某些公司想要获得更多的晶圆产能分配，就必须有其他公司放弃其现有宝贵的产能分配，而这极有可能发生。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.719744",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "为什么台积电不能直接增加N3制程的晶圆投片量？与存储器供应商一样，台积电也受限于现有的无尘室空间。必须先建出额外的可用厂房面积，才能进行设备装机并实现新产能上线。在未来两年内，台积电将无法增加足够的产能来完全满足需求。因此，在此期间，如果某些公司想要获得更多的晶圆产能分配，就必须有其他公司放弃其现有宝贵的产能分配，而这极有可能发生。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:01:33.325648",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "为什么台积电不能直接增加N3制程的晶圆投片量？与存储器供应商一样，台积电也受限于现有的无尘室空间。必须先建出额外的可用厂房面积，才能进行设备装机并实现新产能上线。在未来两年内，台积电将无法增加足够的产能来完全满足需求。因此，在此期间，如果某些公司想要获得更多的晶圆产能分配，就必须有其他公司放弃其现有宝贵的产能分配，而这极有可能发生。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0040",
+      "parent_block_index": 40,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.720395",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:01:34.027012",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F450c33c0-062f-486e-aff1-1db8c0dc68b4_2020x1088.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis Foundry Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Foundry Model](https://semianalysis.com/foundry-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Foundry Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：SemiAnalysis晶圆代工厂模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.720515",
+          "tokenized_text": "资料来源：[[[LINK_1|SemiAnalysis晶圆代工厂模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Foundry Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:01:34.590902",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Foundry Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Foundry Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.720532",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:01:35.197618",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12d5f30f-d1ba-4037-aa57-763d58a3bde1_2571x1505.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis Foundry Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Foundry Model](https://semianalysis.com/foundry-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Foundry Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis 晶圆代工厂模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:44:54.720595",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 晶圆代工厂模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Foundry Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:01:35.732141",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Foundry Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Foundry Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

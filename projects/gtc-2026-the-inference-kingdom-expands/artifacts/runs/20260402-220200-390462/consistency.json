@@ -1,0 +1,12 @@
+{
+  "report": {
+    "is_consistent": true,
+    "issues": [],
+    "auto_fixable": [],
+    "manual_review": [],
+    "term_stats": {},
+    "style_score": 100.0,
+    "suggestions": []
+  },
+  "translations_after_consistency": {}
+}

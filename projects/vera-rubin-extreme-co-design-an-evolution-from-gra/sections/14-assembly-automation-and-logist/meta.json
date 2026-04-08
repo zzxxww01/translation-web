@@ -1,0 +1,333 @@
+{
+  "section_id": "14-assembly-automation-and-logist",
+  "title": "Assembly Automation and Logistics",
+  "title_translation": "组装自动化与物流",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "At CES 2026, Jensen mentioned that with the streamlined cableless design and automation assembly process, compute tray assembly time has significantly reduced from 2 hours to 5 minutes from Blackwell to Rubin. There are only three L10 level compute tray assembly partners with automation capability for the Rubin platform – Foxconn, Quanta, and Wistron.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0399",
+      "parent_block_index": 399,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At CES 2026, Jensen mentioned that with the streamlined cableless design and automation assembly process, compute tray assembly time has significantly reduced from 2 hours to 5 minutes from Blackwell to Rubin. There are only three L10 level compute tray assembly partners with automation capability for the Rubin platform – Foxconn, Quanta, and Wistron.",
+      "parent_block_plain_text": "At CES 2026, Jensen mentioned that with the streamlined cableless design and automation assembly process, compute tray assembly time has significantly reduced from 2 hours to 5 minutes from Blackwell to Rubin. There are only three L10 level compute tray assembly partners with automation capability for the Rubin platform – Foxconn, Quanta, and Wistron.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 353,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 2026 年消费电子展（CES 2026）上，黄仁勋提到，凭借精简的无线缆设计和自动化组装流程，算力托盘的组装时间已从 Blackwell 时代的 2 小时大幅缩减至 Rubin 时代的 5 分钟。目前，针对 Rubin 平台，仅有三家具备自动化能力的 L10 级算力托盘组装合作伙伴：富士康（Foxconn）、广达（Quanta）和纬创（Wistron）。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:45.063770",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.4
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“L6 级板卡级 PCBA 层面”中，“级”字出现频率过高，且 PCBA 本身即包含板卡组装之意，存在语义重复。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“在上述三家自动化供应商处代工其算力托盘”较为口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "“即使是非自动化的算力托盘组装”表述准确，但若为了对比“自动化”，可更明确地指出其“手动”属性。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0400",
+      "parent_block_index": 400,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:45.063816",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.4
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“L6 级板卡级 PCBA 层面”中，“级”字出现频率过高，且 PCBA 本身即包含板卡组装之意，存在语义重复。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“在上述三家自动化供应商处代工其算力托盘”较为口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "“即使是非自动化的算力托盘组装”表述准确，但若为了对比“自动化”，可更明确地指出其“手动”属性。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0401",
+      "parent_block_index": 401,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达（NVIDIA） VR NVL72 组件物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:45.063886",
+          "tokenized_text": "来源：[[[LINK_1|英伟达（NVIDIA） VR NVL72 组件物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.4
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“L6 级板卡级 PCBA 层面”中，“级”字出现频率过高，且 PCBA 本身即包含板卡组装之意，存在语义重复。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“在上述三家自动化供应商处代工其算力托盘”较为口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "“即使是非自动化的算力托盘组装”表述准确，但若为了对比“自动化”，可更明确地指出其“手动”属性。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "At L6, board level PCBA, Wistron and Foxconn are the main supplier of Blackwell and Rubin. For L10, Blackwell had lots of different compute tray manufacturers as they buy the Bianca boards from Nvidia to sell to their clients. For Rubin, there are only three suppliers that have the capability to do automation of Rubin compute tray. For smaller ODM or OEM, they either have their compute tray made at the three automation suppliers mentioned above or they will do it in-house without automation. Although not as efficient, compute tray assembly without automation should be much easier compared to Blackwell as well given the seamless modular design. Then at L11, the various ODMs/OEMs assemble the compute tray into the rack.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0402",
+      "parent_block_index": 402,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At L6, board level PCBA, Wistron and Foxconn are the main supplier of Blackwell and Rubin. For L10, Blackwell had lots of different compute tray manufacturers as they buy the Bianca boards from Nvidia to sell to their clients. For Rubin, there are only three suppliers that have the capability to do automation of Rubin compute tray. For smaller ODM or OEM, they either have their compute tray made at the three automation suppliers mentioned above or they will do it in-house without automation. Although not as efficient, compute tray assembly without automation should be much easier compared to Blackwell as well given the seamless modular design. Then at L11, the various ODMs/OEMs assemble the compute tray into the rack.",
+      "parent_block_plain_text": "At L6, board level PCBA, Wistron and Foxconn are the main supplier of Blackwell and Rubin. For L10, Blackwell had lots of different compute tray manufacturers as they buy the Bianca boards from Nvidia to sell to their clients. For Rubin, there are only three suppliers that have the capability to do automation of Rubin compute tray. For smaller ODM or OEM, they either have their compute tray made at the three automation suppliers mentioned above or they will do it in-house without automation. Although not as efficient, compute tray assembly without automation should be much easier compared to Blackwell as well given the seamless modular design. Then at L11, the various ODMs/OEMs assemble the compute tray into the rack.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 727,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 L6 级板卡级 PCBA 层面，纬创和富士康是 Blackwell 与 Rubin 的主要供应商。在 L10 级，Blackwell 拥有众多不同的算力托盘制造商，因为这些厂商从英伟达购买 Bianca 板卡后再销售给其客户。而对于 Rubin，目前仅有三家供应商具备实现 Rubin 算力托盘自动化的能力。规模较小的 ODM 或 OEM 厂商，要么选择在上述三家自动化供应商处代工其算力托盘，要么在内部进行非自动化组装。尽管效率较低，但得益于无缝的模块化设计，即使是非自动化的算力托盘组装，难度也比 Blackwell 时代要低得多。随后在 L11 级，各家 ODM/OEM 将算力托盘组装进机柜。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:15:45.063901",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.4
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“L6 级板卡级 PCBA 层面”中，“级”字出现频率过高，且 PCBA 本身即包含板卡组装之意，存在语义重复。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“在上述三家自动化供应商处代工其算力托盘”较为口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "“即使是非自动化的算力托盘组装”表述准确，但若为了对比“自动化”，可更明确地指出其“手动”属性。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

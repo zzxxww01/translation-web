@@ -1,0 +1,59 @@
+{
+  "section_id": "02-the-pc-era",
+  "new_terms": [
+    {
+      "term": "mainframe",
+      "suggested_translation": "大型机",
+      "context": "advanced workstation and mainframe computers from the likes of DEC and IBM",
+      "confidence": 1.0
+    },
+    {
+      "term": "workstation",
+      "suggested_translation": "工作站",
+      "context": "advanced workstation and mainframe computers",
+      "confidence": 1.0
+    },
+    {
+      "term": "Pentium",
+      "suggested_translation": "奔腾",
+      "context": "Intel’s i386, i486 and Pentium generations",
+      "confidence": 1.0
+    },
+    {
+      "term": "Xeon",
+      "suggested_translation": "至强",
+      "context": "The Xeon brand then followed suit in 1998",
+      "confidence": 1.0
+    },
+    {
+      "term": "L2 cache",
+      "suggested_translation": "二级缓存",
+      "context": "multiple L2 cache dies co-packaged with the CPU",
+      "confidence": 1.0
+    },
+    {
+      "term": "Multi-Chip Module (MCM)",
+      "suggested_translation": "多芯片模块 (MCM)",
+      "context": "co-packaged with the CPU in a Multi-Chip Module (MCM)",
+      "confidence": 1.0
+    },
+    {
+      "term": "DEC",
+      "suggested_translation": "DEC",
+      "context": "from the likes of DEC and IBM",
+      "confidence": 1.0
+    },
+    {
+      "term": "IBM",
+      "suggested_translation": "IBM",
+      "context": "from the likes of DEC and IBM",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "intel": "Intel",
+    "cpu": "CPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:01:15.171186"
+}

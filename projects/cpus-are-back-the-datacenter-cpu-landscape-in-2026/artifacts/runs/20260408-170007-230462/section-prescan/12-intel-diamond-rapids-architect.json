@@ -1,0 +1,86 @@
+{
+  "section_id": "12-intel-diamond-rapids-architect",
+  "new_terms": [
+    {
+      "term": "Diamond Rapids",
+      "suggested_translation": "Diamond Rapids (代号)",
+      "context": "Diamond Rapids almost looks like a copy of AMD’s designs",
+      "confidence": 1.0
+    },
+    {
+      "term": "Core Building Block (CBB)",
+      "suggested_translation": "核心构建块 (CBB)",
+      "context": "Four Core Building Block (CBB) dies flank two I/O and Memory Hub (IMH) dies",
+      "confidence": 0.95
+    },
+    {
+      "term": "I/O and Memory Hub (IMH)",
+      "suggested_translation": "I/O与内存集线器 (IMH)",
+      "context": "flank two I/O and Memory Hub (IMH) dies in the middle.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dual Core Modules (DCM)",
+      "suggested_translation": "双核模块 (DCM)",
+      "context": "32 Dual Core Modules (DCM) on Intel 18A-P are hybrid bonded",
+      "confidence": 0.95
+    },
+    {
+      "term": "DDR5",
+      "suggested_translation": "DDR5",
+      "context": "16-channel DDR5 memory interfaces",
+      "confidence": 1.0
+    },
+    {
+      "term": "CXL3",
+      "suggested_translation": "CXL3",
+      "context": "PCIe6 with CXL3 support",
+      "confidence": 0.95
+    },
+    {
+      "term": "QAT",
+      "suggested_translation": "QAT (快速辅助技术)",
+      "context": "Intel datapath Accelerators (QAT, DLB, IAA, DSA)",
+      "confidence": 0.95
+    },
+    {
+      "term": "DLB",
+      "suggested_translation": "DLB (动态负载均衡器)",
+      "context": "Intel datapath Accelerators (QAT, DLB, IAA, DSA)",
+      "confidence": 0.95
+    },
+    {
+      "term": "IAA",
+      "suggested_translation": "IAA (内存分析加速器)",
+      "context": "Intel datapath Accelerators (QAT, DLB, IAA, DSA)",
+      "confidence": 0.95
+    },
+    {
+      "term": "DSA",
+      "suggested_translation": "DSA (数据流加速器)",
+      "context": "Intel datapath Accelerators (QAT, DLB, IAA, DSA)",
+      "confidence": 0.95
+    },
+    {
+      "term": "P-cores",
+      "suggested_translation": "P核 (性能核)",
+      "context": "Intel removes SMT on their P-cores.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "mesh architecture": "mesh network",
+    "context memory storage": "context storage",
+    "hybrid bonding": "hybrid bonded",
+    "simultaneous multi-threading (smt)": "SMT",
+    "numa": "NUMA nodes",
+    "emib": "EMIB advanced packaging",
+    "spectre": "Spectre",
+    "meltdown": "Meltdown",
+    "sku": "SKUs / SKU stack",
+    "yield": "yields",
+    "latency": "latencies"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:07:22.455796"
+}

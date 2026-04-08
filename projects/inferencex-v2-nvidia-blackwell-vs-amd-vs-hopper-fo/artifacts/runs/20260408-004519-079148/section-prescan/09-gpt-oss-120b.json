@@ -1,0 +1,52 @@
+{
+  "section_id": "09-gpt-oss-120b",
+  "new_terms": [
+    {
+      "term": "AITER",
+      "suggested_translation": "AITER",
+      "context": "Some AITER optimizations helped MI300X performance across all interactivities",
+      "confidence": 0.95
+    },
+    {
+      "term": "upstream",
+      "suggested_translation": "上游",
+      "context": "switching to the upstream vLLM ROCm image led to improvements",
+      "confidence": 0.9
+    },
+    {
+      "term": "downstream",
+      "suggested_translation": "下游",
+      "context": "performance enhancements that were present in the downstream ROCm fork image",
+      "confidence": 0.9
+    },
+    {
+      "term": "fork image",
+      "suggested_translation": "Fork 镜像",
+      "context": "present in the downstream ROCm fork image",
+      "confidence": 0.85
+    },
+    {
+      "term": "hard errors",
+      "suggested_translation": "严重错误",
+      "context": "is not yet optimized for the MI355X and runs into hard errors",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "mi300x": "MI300X",
+    "mi325x": "MI325X",
+    "mi355x": "MI355X",
+    "interactivity": "交互速度",
+    "vllm": "vLLM",
+    "rocm": "ROCm",
+    "semianalysis": "SemiAnalysis",
+    "inferencex": "InferenceX",
+    "nvidia": "英伟达",
+    "hopper": "Hopper",
+    "blackwell": "Blackwell",
+    "recipe": "配置方案 (或配方)",
+    "gpu": "GPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:49:25.511152"
+}

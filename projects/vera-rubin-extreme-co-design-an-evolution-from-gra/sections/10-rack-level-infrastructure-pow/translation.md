@@ -1,0 +1,29 @@
+在 2024 年的 GB200 文章 中，我们讨论了供电架构从节点级电源单元（PSU）向集中式机柜级电源架（Power Shelf）的演进。随着 VR NVL72 的机柜热设计功耗（TDP）从 GB200 和 GB300 的 120kW-140kW 增长到每机柜 180kW-220kW，供电基础设施再次发生了演进。在下文中，我们将讨论 VR NVL72 参考设计的机柜级供电基础设施，以及算力托盘级的供电方案。
+
+自 GB200 部署以来，供电基础设施演进的主旋律一直是传输效率和功率稳定性。超大规模云厂商（Hyperscalers）正在开发供电基础设施，以应对高密度 AI 服务器机柜带来的挑战，未来几年的路线图已设定为每机柜 1MW。因此，高压直流（HVDC）电源机柜、电池备份单元（BBU）、电容备份单元（CBU）、液冷母线（Busbar）以及固态变压器（SST）正在被开发，以提高传输效率和功率稳定性。这些技术将由客户根据其专有的基础设施设计进行部署。关于这一点的更多细节，我们在本报告中阐述了 AI 训练对电网带来的挑战。
+
+https://substackcdn.com/image/fetch/$s_!YedG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06dbd2aa-7e3c-4f9a-ab81-60bcc8b26b5c_733x1702.png
+
+来源： Nvidia VR NVL72 Component BoM and Power Budget Model
+
+对于 VR NVL72 参考设计，机柜级的供电基础设施包括四个 110kW 的电源架。对于 Rubin TDP 为 2300W 的 SKU，VR NVL72 系统的 TDP 高达 220kW。采用四个 110kW 电源架的设计是一种 N+1 冗余方案。每个 110kW 电源架高度为 3U，包含六个 18.3kW 的 PSU，且 PSU 内置了电容器。每个电源架通过两条 100A 的电源线接收三相 415VAC-480VAC 电源。电源架将电压从 415VAC-480VAC 降压至 50VDC 并输送到母线。有趣的是，VR NVL72 的母线额定电流达到 5000A 以上，远高于 Grace Blackwell 的 2900A。考虑到极高的电流以及机柜内缺乏风扇，母线必须采用液冷设计。
+
+https://substackcdn.com/image/fetch/$s_!mnFo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4bba56-9812-4977-8f9e-201a0cab7ff1_1640x940.png
+
+来源： TE Connectivity, OCP 2025
+
+对于超大规模客户，他们可能会选择部署独立的低压直流（LVDC）或高压直流（HVDC）电源机柜。下面我们提供了 VR NVL72 电源机柜部署的两种可能方案。
+
+https://substackcdn.com/image/fetch/$s_!HQjd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F882952fa-6781-496c-b90a-2bcb9eb0f1bc_3165x2172.png
+
+来源： Nvidia VR NVL72 Component BoM and Power Budget Model
+
+首先，配备高压直流（HVDC）电源机柜的 VR NVL72 机柜运行电压为 800VDC（英伟达规范）或 +/-400VDC（OCP 规范）。由于 VR NVL72 机柜母线仍运行在 50V，且算力托盘只能接收 50V 输入，因此来自电源机柜的 800VDC 无法直接输送至母线。VR NVL72 机柜中仍需配置 DC-DC 电源架。如下文所示，这些 DC-DC 电源架会将电流电压从 800VDC 降压至 50VDC。
+
+https://substackcdn.com/image/fetch/$s_!nFTK!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F003855a3-c39f-4c22-a4bc-3783e1b20428_1460x833.png
+
+来源： OCP, Meta, SemiAnalysis
+
+其次，部分客户（即 Meta）可能会考虑将其网络交换机机柜与 BBU（电池备份单元）和 CBU（电容备份单元）机架集成，以提高效率并实现削峰填谷（peak shaving）。这可以容纳更多在 GPU 机柜中无法放置的 CBU 和 BBU 容量。BBU/CBU 与交换机机柜将通过 50V 水平母线连接到 GPU 机柜。Meta 将此称为“高功率机柜（high power rack）”，并在 OCP 会议上进行了讨论。
+
+我们在VR NVL72 物料清单（BoM）与功耗预算模型中提供了更详尽的电力和架构细节。

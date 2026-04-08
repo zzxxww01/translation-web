@@ -1,0 +1,422 @@
+{
+  "section_id": "06-smartphones-as-the-front-end-r",
+  "title": "Smartphones as the Front-End Release Valve?",
+  "title_translation": "智能手机会成为前端释放阀吗？",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Smartphones are the next largest driver of N3 wafer demand this year. If anything, this is the segment most likely to see demand soften, freeing up capacity for XPU wafers. Currently, Apple and other smartphone customers such as MediaTek and Qualcomm have collectively placed supply chain orders assuming low single-digit smartphone unit growth this year.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0045",
+      "parent_block_index": 45,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Smartphones are the next largest driver of N3 wafer demand this year. If anything, this is the segment most likely to see demand soften, freeing up capacity for XPU wafers. Currently, Apple and other smartphone customers such as MediaTek and Qualcomm have collectively placed supply chain orders assuming low single-digit smartphone unit growth this year.",
+      "parent_block_plain_text": "Smartphones are the next largest driver of N3 wafer demand this year. If anything, this is the segment most likely to see demand soften, freeing up capacity for XPU wafers. Currently, Apple and other smartphone customers such as MediaTek and Qualcomm have collectively placed supply chain orders assuming low single-digit smartphone unit growth this year.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 355,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "智能手机是今年N3晶圆需求的第二大驱动力。事实上，这也是最有可能出现需求疲软的细分市场，从而将为XPU晶圆腾出产能。目前，苹果以及联发科（MediaTek）和高通（Qualcomm）等其他智能手机客户，已基于今年智能手机出货量呈低个位数增长的预期，集体向供应链下达了订单。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:13:50.582831",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "今年，智能手机是N3晶圆需求的第二大驱动力。事实上，该领域最有可能出现需求疲软，进而为XPU晶圆腾出产能。目前，苹果以及联发科（MediaTek）和高通（Qualcomm）等智能手机客户，均基于今年智能手机出货量仅有低个位数增长的预期，向供应链下达了订单。",
+          "model": "default",
+          "created_at": "2026-03-14T22:04:39.373217",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "今年，智能手机是N3晶圆需求的第二大驱动力。事实上，该领域最有可能出现需求疲软，进而为XPU晶圆腾出产能。目前，苹果以及联发科和高通等智能手机客户，均基于今年智能手机出货量仅有低个位数增长的预期，向供应链下达了订单。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:06:14.910806",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "今年，智能手机是N3晶圆需求的第二大驱动力。事实上，该领域最有可能出现需求疲软，进而为XPU晶圆腾出产能。目前，苹果以及联发科和高通等智能手机客户，均基于今年智能手机出货量仅有低个位数增长的预期，向供应链下达了订单。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "However, rising memory prices are now flowing through to handset BOM costs and ultimately to consumer ASPs. This is likely to dampen consumer demand. We are already seeing signs that smartphone demand will be revised down to low double digit year over year declines. As smartphone demand weakens, associated wafer demand will be cut, freeing up additional capacity for XPU logic.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0046",
+      "parent_block_index": 46,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, rising memory prices are now flowing through to handset BOM costs and ultimately to consumer ASPs. This is likely to dampen consumer demand. We are already seeing signs that smartphone demand will be revised down to low double digit year over year declines. As smartphone demand weakens, associated wafer demand will be cut, freeing up additional capacity for XPU logic.",
+      "parent_block_plain_text": "However, rising memory prices are now flowing through to handset BOM costs and ultimately to consumer ASPs. This is likely to dampen consumer demand. We are already seeing signs that smartphone demand will be revised down to low double digit year over year declines. As smartphone demand weakens, associated wafer demand will be cut, freeing up additional capacity for XPU logic.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 379,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，不断上涨的存储器价格正传导至手机BOM成本，并最终推高消费端的平均售价（ASP）。这很可能会抑制消费者需求。我们已经看到迹象表明，智能手机的需求预期将被下调至同比出现低两位数的下滑。随着智能手机需求走弱，相关的晶圆需求也将随之削减，从而为XPU逻辑芯片腾出更多产能。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:14:07.451408",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "然而，不断上涨的存储器价格正传导至手机BOM（物料清单）成本，并最终推高消费端的平均售价（ASP）。这很可能会抑制消费者需求。已有迹象表明，智能手机的需求预期将被下调，同比降幅达低两位数。随着智能手机需求走弱，相关的晶圆需求也将随之减少，从而为XPU逻辑芯片腾出更多产能。",
+          "model": "default",
+          "created_at": "2026-03-14T22:07:10.012823",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "然而，不断上涨的存储器价格正传导至手机BOM（物料清单）成本，并最终推高消费端的平均售价（ASP）。这很可能会抑制消费者需求。已有迹象表明，智能手机的需求预期将被下调，同比降幅达低两位数。随着智能手机需求走弱，相关的晶圆需求也将随之减少，从而为XPU逻辑芯片腾出更多产能。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:07:37.275803",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "然而，不断上涨的存储器价格正传导至手机BOM（物料清单）成本，并最终推高消费端的平均售价（ASP）。这很可能会抑制消费者需求。已有迹象表明，智能手机的需求预期将被下调，同比降幅达低两位数。随着智能手机需求走弱，相关的晶圆需求也将随之减少，从而为XPU逻辑芯片腾出更多产能。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "In terms of what this means for shipments, reallocating 5% of total smartphone N3 wafer starts in 2026 (5% of 437k wafers) to AI accelerators would enable the production of ~0.1 million additional Rubin GPUs or ~0.3 million additional TPU v7s. In a more extreme scenario where 25% of total smartphone N3 wafer starts in 2026 are reallocated to AI accelerators, TSMC could manufacture ~0.7 million additional Rubin GPUs or ~1.5 million additional TPU v7s. However, logic is only part of the equation for an AI accelerator chip, memory supply and advanced packaging is also needed.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0047",
+      "parent_block_index": 47,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In terms of what this means for shipments, reallocating 5% of total smartphone N3 wafer starts in 2026 (5% of 437k wafers) to AI accelerators would enable the production of ~0.1 million additional Rubin GPUs or ~0.3 million additional TPU v7s. In a more extreme scenario where 25% of total smartphone N3 wafer starts in 2026 are reallocated to AI accelerators, TSMC could manufacture ~0.7 million additional Rubin GPUs or ~1.5 million additional TPU v7s. However, logic is only part of the equation for an AI accelerator chip, memory supply and advanced packaging is also needed.",
+      "parent_block_plain_text": "In terms of what this means for shipments, reallocating 5% of total smartphone N3 wafer starts in 2026 (5% of 437k wafers) to AI accelerators would enable the production of ~0.1 million additional Rubin GPUs or ~0.3 million additional TPU v7s. In a more extreme scenario where 25% of total smartphone N3 wafer starts in 2026 are reallocated to AI accelerators, TSMC could manufacture ~0.7 million additional Rubin GPUs or ~1.5 million additional TPU v7s. However, logic is only part of the equation for an AI accelerator chip, memory supply and advanced packaging is also needed.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 579,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "就出货量而言，如果将2026年智能手机N3晶圆总投片量的5%（即43.7万片晶圆的5%）重新分配给AI加速器，将能够额外生产约10万颗Rubin GPU，或约30万颗TPU（张量处理器）v7。在更为极端的情境下，若将2026年智能手机N3晶圆总投片量的25%重新分配给AI加速器，台积电（TSMC）则可额外制造约70万颗Rubin GPU，或约150万颗TPU v7。然而，逻辑芯片只是AI加速器芯片的要素之一，存储器供应和先进封装同样不可或缺。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:14:30.479219",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "据此推算出货量，若将2026年智能手机N3晶圆总投片量的5%（即43.7万片晶圆的5%）转配给AI加速器，即可额外生产约10万颗Rubin GPU，或约30万颗TPU（张量处理器，Tensor Processing Unit）v7。在更极端的假设下，若将2026年智能手机N3晶圆总投片量的25%转配给AI加速器，台积电（TSMC）就能额外生产约70万颗Rubin GPU，或约150万颗TPU v7。然而，对于AI加速器芯片而言，逻辑部分只是其中一环，存储器供应和先进封装同样不可或缺。",
+          "model": "default",
+          "created_at": "2026-03-14T22:08:39.369402",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "据此推算出货量，若将2026年智能手机N3晶圆总投片量的5%（即43.7万片晶圆的5%）转配给AI加速器，即可额外生产约10万颗Rubin GPU，或约30万颗TPU（张量处理器，Tensor Processing Unit）v7。在更极端的假设下，若将2026年智能手机N3晶圆总投片量的25%转配给AI加速器，台积电（TSMC）就能额外生产约70万颗Rubin GPU，或约150万颗TPU v7。然而，对于AI加速器芯片而言，逻辑部分只是其中一环，存储器供应和先进封装同样不可或缺。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:27.556127",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "据此推算出货量，若将2026年智能手机N3晶圆总投片量的5%（即43.7万片晶圆的5%）转配给AI加速器，即可额外生产约10万颗Rubin GPU，或约30万颗TPU（张量处理器，Tensor Processing Unit）v7。在更极端的假设下，若将2026年智能手机N3晶圆总投片量的25%转配给AI加速器，台积电（TSMC）就能额外生产约70万颗Rubin GPU，或约150万颗TPU v7。然而，对于AI加速器芯片而言，逻辑部分只是其中一环，存储器供应和先进封装同样不可或缺。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0048",
+      "parent_block_index": 48,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:28.249703",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb40dd801-4946-431b-bcd4-b99550108971_1376x320.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis Foundry Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0049",
+      "parent_block_index": 49,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Foundry Model](https://semianalysis.com/foundry-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Foundry Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Foundry Model",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:28.887837",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Foundry Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Foundry Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0050",
+      "parent_block_index": 50,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:29.383979",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6f4f58ae-8668-4da8-8143-b528a369cd1a_2018x1084.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis Estimates",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0051",
+      "parent_block_index": 51,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis Estimates",
+      "parent_block_plain_text": "Source: SemiAnalysis Estimates",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Estimates",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:29.856636",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Estimates",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom - Dylan Patel, Ray Wang, and 3 others · Feb 6",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom",
+          "start": 0,
+          "end": 74,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0052",
+      "parent_block_index": 52,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom](https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades) - Dylan Patel, Ray Wang, and 3 others · Feb 6",
+      "parent_block_plain_text": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom - Dylan Patel, Ray Wang, and 3 others · Feb 6",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom",
+          "start": 0,
+          "end": 74,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 120,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "存储狂热：四十年一遇的短缺如何助推存储繁荣 - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+          "model": "pro",
+          "created_at": "2026-03-14T14:14:42.114037",
+          "tokenized_text": "[[[LINK_1|存储狂热：四十年一遇的短缺如何助推存储繁荣]]] - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "存储狂热：四十年一遇的短缺如何助推存储繁荣 - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+          "model": "manual",
+          "created_at": "2026-03-14T22:09:30.272726",
+          "tokenized_text": "[[[LINK_1|存储狂热：四十年一遇的短缺如何助推存储繁荣]]] - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+          "format_issues": []
+        }
+      },
+      "confirmed": "存储狂热：四十年一遇的短缺如何助推存储繁荣 - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+      "confirmed_tokenized": "[[[LINK_1|存储狂热：四十年一遇的短缺如何助推存储繁荣]]] - Dylan Patel、Ray Wang 等 3 人 · 2月6日",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

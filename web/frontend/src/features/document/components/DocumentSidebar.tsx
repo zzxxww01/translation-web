@@ -3,7 +3,7 @@
  */
 
 import { useState } from 'react';
-import { BookOpen, ChevronDown, Download, Layers, Zap } from 'lucide-react';
+import { BookOpen, ChevronDown, Download, Layers, ScanSearch, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -24,6 +24,7 @@ interface DocumentSidebarProps {
   onSectionSelect: (sectionId: string) => void;
   onNewProject: () => void;
   onFullTranslate?: (method?: TranslationMethod) => void;
+  onOpenConsistency?: () => void;
   isFullTranslating?: boolean;
   isPreparingFullTranslate?: boolean;
   fullTranslateProgress?: { current: number; total: number } | null;
@@ -37,6 +38,7 @@ export function DocumentSidebar({
   onSectionSelect,
   onNewProject,
   onFullTranslate,
+  onOpenConsistency,
   isFullTranslating,
   isPreparingFullTranslate,
   fullTranslateProgress,
@@ -172,6 +174,18 @@ export function DocumentSidebar({
                 </CollapsibleContent>
               </Collapsible>
             </div>
+          )}
+
+          {projectId && onOpenConsistency && (
+            <Button
+              variant="outline"
+              size="default"
+              onClick={onOpenConsistency}
+              leftIcon={<ScanSearch className="h-4 w-4" />}
+              className="w-full"
+            >
+              查看一致性报告
+            </Button>
           )}
 
           {projectId && (

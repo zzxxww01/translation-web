@@ -1,0 +1,62 @@
+{
+  "section_id": "06-the-rl-and-agentic-era",
+  "new_terms": [
+    {
+      "term": "RAG",
+      "suggested_translation": "检索增强生成 (RAG)",
+      "context": "the rise of Retrieval Augmented Generative (RAG) models that search and use the internet",
+      "confidence": 0.99
+    },
+    {
+      "term": "TAM",
+      "suggested_translation": "总潜在市场 (TAM)",
+      "context": "take share in a server CPU TAM it believes will grow",
+      "confidence": 0.95
+    },
+    {
+      "term": "Fairwater",
+      "suggested_translation": "Fairwater",
+      "context": "Microsoft’s “Fairwater” datacenters for OpenAI",
+      "confidence": 0.95
+    },
+    {
+      "term": "Rubin",
+      "suggested_translation": "Rubin",
+      "context": "meaning a future GPU generation such as Rubin may require an even higher ratio",
+      "confidence": 0.95
+    },
+    {
+      "term": "Graviton",
+      "suggested_translation": "Graviton",
+      "context": "massive CPU buildouts of their own Graviton and Cobalt lines of CPUs",
+      "confidence": 0.99
+    },
+    {
+      "term": "Cobalt",
+      "suggested_translation": "Cobalt",
+      "context": "massive CPU buildouts of their own Graviton and Cobalt lines of CPUs",
+      "confidence": 0.99
+    },
+    {
+      "term": "RL Environment",
+      "suggested_translation": "RL环境",
+      "context": "in an RL training loop, the “RL Environment” needs to execute the actions",
+      "confidence": 0.95
+    },
+    {
+      "term": "Reward Hacking",
+      "suggested_translation": "奖励作弊 / 奖励劫持",
+      "context": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "head node": "head nodes",
+    "decode": "decode",
+    "rl": "RL",
+    "x86": "x86",
+    "xeon": "Xeon"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:50:32.407915"
+}

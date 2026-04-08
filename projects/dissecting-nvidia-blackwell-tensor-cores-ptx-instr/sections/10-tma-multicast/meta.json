@@ -1,0 +1,740 @@
+{
+  "section_id": "10-tma-multicast",
+  "title": "TMA Multicast",
+  "title_translation": "TMA 多播",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "TMA supports a multicast mode, where a single load copies data to the shared memory of multiple SMs, specified by a CTA mask. Multicast is commonly used in GEMM-like patterns, where input tiles are shared between SMs working on different output tiles. For example, multicast is useful for the activation function SwiGLU, which uses a dual-GEMM pattern of two GEMM operations sharing one input matrix. The major benefit is reducing HBM loads, which lowers effective bandwidth usage. It also significantly reduces L2 traffic, because requests for shared data for multiple CTAs are coalesced into one request.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TMA supports a multicast mode, where a single load copies data to the shared memory of multiple SMs, specified by a CTA mask. Multicast is commonly used in GEMM-like patterns, where input tiles are shared between SMs working on different output tiles. For example, multicast is useful for the activation function SwiGLU, which uses a dual-GEMM pattern of two GEMM operations sharing one input matrix. The major benefit is reducing HBM loads, which lowers effective bandwidth usage. It also significantly reduces L2 traffic, because requests for shared data for multiple CTAs are coalesced into one request.",
+      "parent_block_plain_text": "TMA supports a multicast mode, where a single load copies data to the shared memory of multiple SMs, specified by a CTA mask. Multicast is commonly used in GEMM-like patterns, where input tiles are shared between SMs working on different output tiles. For example, multicast is useful for the activation function SwiGLU, which uses a dual-GEMM pattern of two GEMM operations sharing one input matrix. The major benefit is reducing HBM loads, which lowers effective bandwidth usage. It also significantly reduces L2 traffic, because requests for shared data for multiple CTAs are coalesced into one request.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 606,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "TMA 支持多播模式。在该模式下，单次加载操作即可将数据复制到由 CTA 掩码指定的多个 SM 的共享内存 (SMEM) 中。多播通常用于类似 GEMM 的模式，此时处理不同输出分块的 SM 需要共享输入分块。例如，多播非常适合 SwiGLU 激活函数，该函数采用双GEMM模式，即两个 GEMM 操作共享同一个输入矩阵。其主要优势在于减少了 HBM 的加载次数，从而降低了实际的带宽消耗。此外，由于多个 CTA 对共享数据的请求被合并为单一请求，它还能显著减少 L2 缓存的流量。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012358",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "According to NCU, the unit responsible for serving TMA multicast requests is called the L2 Request Coalescer (LRC):",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "According to NCU, the unit responsible for serving TMA multicast requests is called the L2 Request Coalescer (LRC):",
+      "parent_block_plain_text": "According to NCU, the unit responsible for serving TMA multicast requests is called the L2 Request Coalescer (LRC):",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 115,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "根据 NCU 的分析，负责处理 TMA 多播请求的硬件单元称为 L2 请求合并器 (LRC)：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012399",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "The L2 Request Coalescer (LRC) processes incoming requests for L2 and tries to coalesce read requests before forwarding them to the L2 cache. It also serves programmatic multicast requests from the SM and supports compression for writes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The L2 Request Coalescer (LRC) processes incoming requests for L2 and tries to coalesce read requests before forwarding them to the L2 cache. It also serves programmatic multicast requests from the SM and supports compression for writes.",
+      "parent_block_plain_text": "The L2 Request Coalescer (LRC) processes incoming requests for L2 and tries to coalesce read requests before forwarding them to the L2 cache. It also serves programmatic multicast requests from the SM and supports compression for writes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 237,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "L2 请求合并器 (LRC) 负责处理发往 L2 的请求，并尝试在将读取请求转发至 L2 缓存前对其进行合并。它还负责处理来自 SM 的编程式多播请求，并支持写入压缩。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012411",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "It sounds like the hardware might provide some multicast behavior, even if it isn’t explicitly requested, like a miss status holding register. We test this by running the same TMA multicast benchmark, except instead of one CTA issuing a multicast load, all CTAs issue independent TMA loads to the same data.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It sounds like the hardware might provide some multicast behavior, even if it isn’t explicitly requested, like a miss status holding register. We test this by running the same TMA multicast benchmark, except instead of one CTA issuing a multicast load, all CTAs issue independent TMA loads to the same data.",
+      "parent_block_plain_text": "It sounds like the hardware might provide some multicast behavior, even if it isn’t explicitly requested, like a miss status holding register. We test this by running the same TMA multicast benchmark, except instead of one CTA issuing a multicast load, all CTAs issue independent TMA loads to the same data.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 307,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这表明即使没有显式请求，硬件也可能提供某种多播行为（类似于未命中状态保持寄存器）。我们通过运行相同的 TMA 多播基准测试来验证这一点。唯一的区别在于：此次并非由单个 CTA 发起多播加载，而是所有 CTA 均向同一数据发起独立的 TMA 加载。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012421",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Here, we compare three cases:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Here, we compare three cases:",
+      "parent_block_plain_text": "Here, we compare three cases:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在此，我们对比三种情况：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012430",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "1. Every SM loads different data (baseline) 2. TMA multicast (explicit) - one CTA in each cluster issues multicast loads to all CTAs in its cluster 3. TMA multicast (implicit) - all CTAs in each cluster issue plain TMA loads to the same data",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "1. Every SM loads different data (baseline) 2. TMA multicast (explicit) - one CTA in each cluster issues multicast loads to all CTAs in its cluster 3. TMA multicast (implicit) - all CTAs in each cluster issue plain TMA loads to the same data",
+      "parent_block_plain_text": "1. Every SM loads different data (baseline) 2. TMA multicast (explicit) - one CTA in each cluster issues multicast loads to all CTAs in its cluster 3. TMA multicast (implicit) - all CTAs in each cluster issue plain TMA loads to the same data",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 241,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "1. 每个 SM 加载不同的数据（基准测试）；2. TMA 多播（显式）——每个集群中的一个 CTA 向该集群内的所有 CTA 发起多播加载；3. TMA 多播（隐式）——每个集群内的所有 CTA 均向同一数据发起普通的 TMA 加载。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012439",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "TMA multicast allows for much higher load bandwidth to fill SMEM buffers, even if data is not already in L2. For known traffic patterns, explicit TMA multicast instructions perfectly eliminate L2 traffic, resulting in the ideal “1 / cluster\\_size” L2 bytes per SMEM byte. We also observe that for this simple benchmark, we achieve nearly the same SMEM fill throughput in both the explicit and the implicit case. However, we can see the LRC is not perfect; the L2 receives a bit more traffic in the implicit case, especially as the total volume increases.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TMA multicast allows for much higher load bandwidth to fill SMEM buffers, even if data is not already in L2. For known traffic patterns, explicit TMA multicast instructions perfectly eliminate L2 traffic, resulting in the ideal “1 / cluster\\_size” L2 bytes per SMEM byte. We also observe that for this simple benchmark, we achieve nearly the same SMEM fill throughput in both the explicit and the implicit case. However, we can see the LRC is not perfect; the L2 receives a bit more traffic in the implicit case, especially as the total volume increases.",
+      "parent_block_plain_text": "TMA multicast allows for much higher load bandwidth to fill SMEM buffers, even if data is not already in L2. For known traffic patterns, explicit TMA multicast instructions perfectly eliminate L2 traffic, resulting in the ideal “1 / cluster\\_size” L2 bytes per SMEM byte. We also observe that for this simple benchmark, we achieve nearly the same SMEM fill throughput in both the explicit and the implicit case. However, we can see the LRC is not perfect; the L2 receives a bit more traffic in the implicit case, especially as the total volume increases.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 554,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "即使数据尚未驻留在 L2 缓存中，TMA 多播也能提供极高的加载带宽来填充共享内存 (SMEM) 缓冲区。对于已知的流量模式，显式的 TMA 多播指令能够完美消除冗余的 L2 流量，使每字节共享内存 (SMEM) 对应的 L2 传输量达到理想的“1 / cluster_size”比例。我们还观察到，在这个简单的基准测试中，显式和隐式多播均能实现几乎相同的共享内存 (SMEM) 填充吞吐量。然而，LRC 并非完美无缺；在隐式多播情况下，L2 缓存接收到的流量略高，且这种现象随着总数据量的增加而愈发明显。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012448",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012457",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Implicit multicast performs on par with explicit in terms of effective memory throughput. However, for L2 cache traffic reduction, implicit multicast loses effectiveness after more than 64 bytes in-flight.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Implicit multicast performs on par with explicit in terms of effective memory throughput. However, for L2 cache traffic reduction, implicit multicast loses effectiveness after more than 64 bytes in-flight.",
+          "start": 0,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Implicit multicast performs on par with explicit in terms of effective memory throughput. However, for L2 cache traffic reduction, implicit multicast loses effectiveness after more than 64 bytes in-flight.*",
+      "parent_block_plain_text": "Implicit multicast performs on par with explicit in terms of effective memory throughput. However, for L2 cache traffic reduction, implicit multicast loses effectiveness after more than 64 bytes in-flight.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Implicit multicast performs on par with explicit in terms of effective memory throughput. However, for L2 cache traffic reduction, implicit multicast loses effectiveness after more than 64 bytes in-flight.",
+          "start": 0,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 205,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "就有效内存吞吐量而言，隐式多播与显式多播性能持平。但在降低 L2 缓存流量方面，一旦在途数据超过 64 字节，隐式多播便会失去效果。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:28:03.012509",
+          "tokenized_text": "[[[EM_1|就有效内存吞吐量而言，隐式多播与显式多播性能持平。但在降低 L2 缓存流量方面，一旦在途数据超过 64 字节，隐式多播便会失去效果。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'multicast mode' as '多播模式'.",
+          "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+          "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+          "relation_to_previous": "Deepens the TMA discussion by introducing a cluster-level optimization feature.",
+          "relation_to_next": "Transitions from Global-to-Shared memory movement (TMA) to Shared-to-Shared memory movement (DSMEM) in the following section.",
+          "key_points": [
+            "Multicast reduces HBM loads and effective bandwidth usage, particularly useful for dual-GEMM patterns like SwiGLU.",
+            "Implicit multicast performs similarly to explicit multicast for memory throughput but loses L2 cache reduction effectiveness past 64 bytes in-flight."
+          ],
+          "translation_notes": [
+            "Translate 'multicast mode' as '多播模式'.",
+            "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+            "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文中的 '64 bytes' 极可能是笔误。在 TMA 操作的上下文中，在途数据通常在 KB 级别，或者此处指的是 64 个请求（requests）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "section_id": "02-gpu-rental-prices-the-comeba",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "most market observers were skeptical on GPU terminal value",
+        "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。",
+        "why_it_matters": "不准确的财务术语会削弱文章作为顶尖金融/科技分析报告的专业权威感，破坏分析师声线。",
+        "suggestion": "将“GPU 的终端价值”改为“GPU 的终值（或残值）”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "when memory pricing, across both DRAM and NAND pricing",
+        "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。",
+        "why_it_matters": "将 NAND 归入“内存”在硬件和半导体语境下属于明显的术语硬伤，会引起核心专业读者的质疑。",
+        "suggestion": "将“DRAM 和 NAND 的内存价格”改为“存储器价格（包括 DRAM 和 NAND）”。"
+      }
+    ]
+  }
+}

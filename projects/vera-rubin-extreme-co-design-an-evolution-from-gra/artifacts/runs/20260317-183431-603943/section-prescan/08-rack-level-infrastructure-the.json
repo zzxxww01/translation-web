@@ -1,0 +1,54 @@
+{
+  "section_id": "08-rack-level-infrastructure-the",
+  "new_terms": [
+    {
+      "term": "inlet temperature",
+      "suggested_translation": "进液温度",
+      "context": "The temperature of the coolant as it enters the compute tray or rack.",
+      "confidence": 0.95
+    },
+    {
+      "term": "chiller",
+      "suggested_translation": "冷水机组",
+      "context": "Mechanical compressor-based cooling equipment used in datacenters.",
+      "confidence": 0.98
+    },
+    {
+      "term": "CDU (Cooling Distribution Unit)",
+      "suggested_translation": "冷量分配单元",
+      "context": "A system used to manage coolant distribution and heat exchange between loops.",
+      "confidence": 0.98
+    },
+    {
+      "term": "delta-T",
+      "suggested_translation": "温差",
+      "context": "The temperature difference between the supply and return coolant.",
+      "confidence": 0.95
+    },
+    {
+      "term": "economizer",
+      "suggested_translation": "节能器",
+      "context": "A cooling system design that uses ambient air to reduce or eliminate chiller use.",
+      "confidence": 0.9
+    },
+    {
+      "term": "pressure head",
+      "suggested_translation": "压头",
+      "context": "The pressure gain provided by a pump within the hydraulic cooling path.",
+      "confidence": 0.9
+    },
+    {
+      "term": "TCS (Technology Cooling System)",
+      "suggested_translation": "技术冷却系统",
+      "context": "The secondary cooling loop that circulates coolant directly to the IT equipment.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "quick disconnect (qd/mqd)": "快速接头",
+    "internal manifold": "歧管",
+    "chassis": "机箱"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:55:13.291579"
+}

@@ -1,0 +1,511 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "title": "N3 in numbers",
+  "title_translation": "数据看 N3",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin production ramp as the company transitions from 4NP-based Blackwell to the N3P-based Rubin generation. However, Blackwell will still ship in higher volumes than Rubin this year given greater platform and supply chain maturity. Google and Broadcom’s TPU beat Nvidia and Amazon to N3, with TPUv7 chips already in production during 2025. This momentum continues this year with a huge increase in TPU shipment volume due to both internal Google and external demand from Anthropic and others. At the same time, the transition to next generation TPUv8 variants will begin, which will also remain on the N3 node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin production ramp as the company transitions from 4NP-based Blackwell to the N3P-based Rubin generation. However, Blackwell will still ship in higher volumes than Rubin this year given greater platform and supply chain maturity. Google and Broadcom’s TPU beat Nvidia and Amazon to N3, with TPUv7 chips already in production during 2025. This momentum continues this year with a huge increase in TPU shipment volume due to both internal Google and external demand from Anthropic and others. At the same time, the transition to next generation TPUv8 variants will begin, which will also remain on the N3 node. Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp.",
+      "parent_block_plain_text": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin production ramp as the company transitions from 4NP-based Blackwell to the N3P-based Rubin generation. However, Blackwell will still ship in higher volumes than Rubin this year given greater platform and supply chain maturity. Google and Broadcom’s TPU beat Nvidia and Amazon to N3, with TPUv7 chips already in production during 2025. This momentum continues this year with a huge increase in TPU shipment volume due to both internal Google and external demand from Anthropic and others. At the same time, the transition to next generation TPUv8 variants will begin, which will also remain on the N3 node. Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 757,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "现在，让我们来看看产能究竟有多紧张。贯穿今年全年，N3制程加速器的晶圆需求将迅猛攀升。核心驱动力在于英伟达的Rubin产能爬坡，目前该公司正从基于4NP的Blackwell架构向基于N3P的Rubin架构过渡。然而，得益于更高的平台与供应链成熟度，今年Blackwell的出货量仍将高于Rubin。谷歌与博通的TPU在导入N3制程的进度上领先于英伟达和亚马逊，其TPUv7芯片在2025年便已投入量产。这一强劲势头在今年得以延续，在谷歌内部需求以及Anthropic等外部需求的共同推动下，TPU的出货量迎来了激增。与此同时，向下一代TPUv8变体的过渡也将启动，该系列将继续采用N3制程节点。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.299789",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "现在，让我们来看看产能究竟有多紧张。贯穿今年全年，N3制程加速器的晶圆需求将迅猛攀升。核心驱动力在于英伟达的Rubin产能爬坡，目前该公司正从基于4NP的Blackwell架构向基于N3P的Rubin架构过渡。然而，得益于更高的平台与供应链成熟度，今年Blackwell的出货量仍将高于Rubin。谷歌与博通的TPU在导入N3制程的进度上领先于英伟达和亚马逊，其TPUv7芯片在2025年便已投入量产。这一强劲势头在今年得以延续，在谷歌内部需求以及Anthropic等外部需求的共同推动下，TPU的出货量迎来了激增。与此同时，向下一代TPUv8变体的过渡也将启动，该系列将继续采用N3制程节点。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:54:01.850325",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "现在，让我们来看看产能究竟有多紧张。贯穿今年全年，N3制程加速器的晶圆需求将迅猛攀升。核心驱动力在于英伟达的Rubin产能爬坡，目前该公司正从基于4NP的Blackwell架构向基于N3P的Rubin架构过渡。然而，得益于更高的平台与供应链成熟度，今年Blackwell的出货量仍将高于Rubin。谷歌与博通的TPU在导入N3制程的进度上领先于英伟达和亚马逊，其TPUv7芯片在2025年便已投入量产。这一强劲势头在今年得以延续，在谷歌内部需求以及Anthropic等外部需求的共同推动下，TPU的出货量迎来了激增。与此同时，向下一代TPUv8变体的过渡也将启动，该系列将继续采用N3制程节点。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin production ramp as the company transitions from 4NP-based Blackwell to the N3P-based Rubin generation. However, Blackwell will still ship in higher volumes than Rubin this year given greater platform and supply chain maturity. Google and Broadcom’s TPU beat Nvidia and Amazon to N3, with TPUv7 chips already in production during 2025. This momentum continues this year with a huge increase in TPU shipment volume due to both internal Google and external demand from Anthropic and others. At the same time, the transition to next generation TPUv8 variants will begin, which will also remain on the N3 node. Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp.",
+      "parent_block_plain_text": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin production ramp as the company transitions from 4NP-based Blackwell to the N3P-based Rubin generation. However, Blackwell will still ship in higher volumes than Rubin this year given greater platform and supply chain maturity. Google and Broadcom’s TPU beat Nvidia and Amazon to N3, with TPUv7 chips already in production during 2025. This momentum continues this year with a huge increase in TPU shipment volume due to both internal Google and external demand from Anthropic and others. At the same time, the transition to next generation TPUv8 variants will begin, which will also remain on the N3 node. Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 758,
+      "segment_end": 878,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "另一个关键变量是，基于N3P制程的Trainium3将从2026年初开始晶圆投片，以迎接下半年产能的大幅爬坡。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.299953",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "另一个关键变量是，基于N3P制程的Trainium3将从2026年初开始晶圆投片，以迎接下半年产能的大幅爬坡。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:54:04.787124",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "另一个关键变量是，基于N3P制程的Trainium3将从2026年初开始晶圆投片，以迎接下半年产能的大幅爬坡。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "AI-related (accelerator, host CPU, and networking N3 demand) therefore ends up taking up just under 60% of N3 output this year. The remaining 40% is primarily for smartphone and CPU. Demand from these sources fully utilizes the entirety of N3 capacity, which gives TSMC little chance of being able to add more capacity. This tightness gets even more severe in 2027, even with TSMC adding N3 capacity. We model AI demand to be 86% of 2027 N3 wafer output nearly entirely squeezing out smartphone and CPU wafers. Part of this shift is driven by planned smartphone roadmaps transitioning to N2, but tight N3 capacity is certainly playing a part in hastening this transition. For product lines that remain on N3, demand is unlikely to be entirely fulfilled.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AI-related (accelerator, host CPU, and networking N3 demand) therefore ends up taking up just under 60% of N3 output this year. The remaining 40% is primarily for smartphone and CPU. Demand from these sources fully utilizes the entirety of N3 capacity, which gives TSMC little chance of being able to add more capacity. This tightness gets even more severe in 2027, even with TSMC adding N3 capacity. We model AI demand to be 86% of 2027 N3 wafer output nearly entirely squeezing out smartphone and CPU wafers. Part of this shift is driven by planned smartphone roadmaps transitioning to N2, but tight N3 capacity is certainly playing a part in hastening this transition. For product lines that remain on N3, demand is unlikely to be entirely fulfilled.",
+      "parent_block_plain_text": "AI-related (accelerator, host CPU, and networking N3 demand) therefore ends up taking up just under 60% of N3 output this year. The remaining 40% is primarily for smartphone and CPU. Demand from these sources fully utilizes the entirety of N3 capacity, which gives TSMC little chance of being able to add more capacity. This tightness gets even more severe in 2027, even with TSMC adding N3 capacity. We model AI demand to be 86% of 2027 N3 wafer output nearly entirely squeezing out smartphone and CPU wafers. Part of this shift is driven by planned smartphone roadmaps transitioning to N2, but tight N3 capacity is certainly playing a part in hastening this transition. For product lines that remain on N3, demand is unlikely to be entirely fulfilled.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 753,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "因此，与AI相关的需求（加速器、主机CPU以及网络芯片对N3制程的需求）最终将占据今年N3制程产量略低于60%的份额。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3制程的全部产能，使得台积电几乎无力再扩充更多产能。即使台积电增加N3制程产能，这种供需紧张的局面在2027年也会变得更加严峻。我们的模型预测，2027年AI需求将占到N3制程晶圆产量的86%，几乎完全挤出智能手机和CPU的晶圆份额。这种转变部分是由于智能手机的规划路线图正向N2制程过渡，但N3制程产能的紧缺无疑也加速了这一进程。对于继续停留在N3制程的产品线而言，其需求将很难得到完全满足。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301322",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "因此，AI相关需求（包括加速器、主机CPU和网络设备的N3需求）最终占据了今年N3制程略低于60%的产量。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3的全部产能，台积电（TSMC）几乎无力再扩充更多产能。到了2027年，即使台积电增加N3产能，这种紧缺状况也会变得更加严峻。据我们测算，2027年AI需求将占到N3晶圆产量的86%，几乎完全挤占了智能手机和CPU的晶圆份额。这种转变部分源于智能手机产品路线图按计划向N2制程迁移，但N3产能紧缺无疑也加速了这一进程。至于继续留在N3制程的产品线，其需求难以得到完全满足。",
+          "model": "default",
+          "created_at": "2026-03-14T21:57:28.022135",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "因此，AI相关需求（包括加速器、主机CPU和网络设备的N3需求）最终占据了今年N3制程略低于60%的产量。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3的全部产能，台积电几乎无力再扩充更多产能。到了2027年，即使台积电增加N3产能，这种紧缺状况也会变得更加严峻。据我们测算，2027年AI需求将占到N3晶圆产量的86%，几乎完全挤占了智能手机和CPU的晶圆份额。这种转变部分源于智能手机产品路线图按计划向N2制程迁移，但N3产能紧缺无疑也加速了这一进程。至于继续留在N3制程的产品线，其需求难以得到完全满足。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:57:54.799817",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "因此，AI相关需求（包括加速器、主机CPU和网络设备的N3需求）最终占据了今年N3制程略低于60%的产量。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3的全部产能，台积电几乎无力再扩充更多产能。到了2027年，即使台积电增加N3产能，这种紧缺状况也会变得更加严峻。据我们测算，2027年AI需求将占到N3晶圆产量的86%，几乎完全挤占了智能手机和CPU的晶圆份额。这种转变部分源于智能手机产品路线图按计划向N2制程迁移，但N3产能紧缺无疑也加速了这一进程。至于继续留在N3制程的产品线，其需求难以得到完全满足。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301369",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:57:55.632033",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis Foundry Model, SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 36,
+          "end": 66,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Foundry Model](https://semianalysis.com/foundry-industry-model/), [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Foundry Model, SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Foundry Model",
+          "start": 8,
+          "end": 34,
+          "href": "https://semianalysis.com/foundry-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 36,
+          "end": 66,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：SemiAnalysis晶圆代工厂模型，SemiAnalysis加速器模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301500",
+          "tokenized_text": "资料来源：[[[LINK_1|SemiAnalysis晶圆代工厂模型]]]，[[[LINK_2|SemiAnalysis加速器模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Foundry Model, SemiAnalysis Accelerator Model",
+          "model": "manual",
+          "created_at": "2026-03-14T21:57:56.225685",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Foundry Model, SemiAnalysis Accelerator Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Foundry Model]]], [[[LINK_2|SemiAnalysis Accelerator Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301515",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:57:56.846158",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0034",
+      "parent_block_index": 34,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis加速器模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301580",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis加速器模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Accelerator Model",
+          "model": "manual",
+          "created_at": "2026-03-14T21:57:57.605711",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Accelerator Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Accelerator Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "TSMC ultimately plays the role of kingmaker among customers competing for limited N3 allocation. In 2026, AI infrastructure customers are receiving clear priority over consumer electronics. AI accelerator designs typically have larger die sizes and more complex packaging requirements, which translate to higher ASPs. More importantly, AI-driven demand has been by far the primary driver of TSMC’s growth. End customers are willing to do whatever it takes to deploy more compute. This is backed up by multi-year visibility driven by the compute commitments of the major AI labs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC ultimately plays the role of kingmaker among customers competing for limited N3 allocation. In 2026, AI infrastructure customers are receiving clear priority over consumer electronics. AI accelerator designs typically have larger die sizes and more complex packaging requirements, which translate to higher ASPs. More importantly, AI-driven demand has been by far the primary driver of TSMC’s growth. End customers are willing to do whatever it takes to deploy more compute. This is backed up by multi-year visibility driven by the compute commitments of the major AI labs.",
+      "parent_block_plain_text": "TSMC ultimately plays the role of kingmaker among customers competing for limited N3 allocation. In 2026, AI infrastructure customers are receiving clear priority over consumer electronics. AI accelerator designs typically have larger die sizes and more complex packaging requirements, which translate to higher ASPs. More importantly, AI-driven demand has been by far the primary driver of TSMC’s growth. End customers are willing to do whatever it takes to deploy more compute. This is backed up by multi-year visibility driven by the compute commitments of the major AI labs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 578,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在各家客户争夺有限的N3制程产能分配时，台积电最终扮演着造王者的角色。展望2026年，AI基础设施客户的优先级已明显高于消费电子客户。AI加速器的设计通常具有更大的裸片尺寸和更复杂的封装要求，这直接转化为更高的平均售价。更重要的是，AI驱动的需求已成为台积电目前绝对的核心增长引擎。终端客户愿意不惜一切代价来部署更多算力，而各大AI实验室对算力投入的坚定承诺带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301607",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "在客户争夺有限的N3产能时，台积电（TSMC）最终扮演着“造王者”的角色。在2026年的产能分配上，AI基础设施客户的优先级明显高于消费电子。AI加速器设计通常拥有更大的裸片尺寸和更复杂的封装需求，从而带来更高的平均售价。更重要的是，AI驱动的需求无疑是目前台积电增长的最大引擎。终端客户愿意不惜一切代价部署更多算力。各大AI实验室在算力上的坚定投入带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+          "model": "default",
+          "created_at": "2026-03-14T22:00:20.333237",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在客户争夺有限的N3产能时，台积电最终扮演着“造王者”的角色。在2026年的产能分配上，AI基础设施客户的优先级明显高于消费电子。AI加速器设计通常拥有更大的裸片尺寸和更复杂的封装需求，从而带来更高的平均售价。更重要的是，AI驱动的需求无疑是目前台积电增长的最大引擎。终端客户愿意不惜一切代价部署更多算力。各大AI实验室在算力上的坚定投入带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:00:36.937000",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "在客户争夺有限的N3产能时，台积电最终扮演着“造王者”的角色。在2026年的产能分配上，AI基础设施客户的优先级明显高于消费电子。AI加速器设计通常拥有更大的裸片尺寸和更复杂的封装需求，从而带来更高的平均售价。更重要的是，AI驱动的需求无疑是目前台积电增长的最大引擎。终端客户愿意不惜一切代价部署更多算力。各大AI实验室在算力上的坚定投入带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This stands in contrast to the mobile and client market that are now very much saturated, offering less opportunity for either volume or content growth. This gives AI accelerator customers a relative advantage in securing advanced-node capacity. Customers in other segments that are unable to secure sufficient N3 capacity may be forced to either extend existing product cycles or migrate directly to the N2 platform.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This stands in contrast to the mobile and client market that are now very much saturated, offering less opportunity for either volume or content growth. This gives AI accelerator customers a relative advantage in securing advanced-node capacity. Customers in other segments that are unable to secure sufficient N3 capacity may be forced to either extend existing product cycles or migrate directly to the N2 platform.",
+      "parent_block_plain_text": "This stands in contrast to the mobile and client market that are now very much saturated, offering less opportunity for either volume or content growth. This gives AI accelerator customers a relative advantage in securing advanced-node capacity. Customers in other segments that are unable to secure sufficient N3 capacity may be forced to either extend existing product cycles or migrate directly to the N2 platform.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 417,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这与目前已高度饱和的移动和客户端市场形成鲜明对比，后者无论在出货量还是单机半导体价值量增长方面，所能提供的空间都已十分有限。这使得AI加速器客户在锁定先进制程产能时具备了相对优势。其他细分市场中无法锁定充足N3制程产能的客户，可能将被迫延长现有产品周期，或者直接迁移至N2平台。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:39:25.301619",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这与目前已高度饱和的移动和客户端市场形成鲜明对比，后者无论在出货量还是单机半导体价值量增长方面，所能提供的空间都已十分有限。这使得AI加速器客户在锁定先进制程产能时具备了相对优势。其他细分市场中无法锁定充足N3制程产能的客户，可能将被迫延长现有产品周期，或者直接迁移至N2平台。",
+          "model": "manual",
+          "created_at": "2026-03-14T22:00:44.974638",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这与目前已高度饱和的移动和客户端市场形成鲜明对比，后者无论在出货量还是单机半导体价值量增长方面，所能提供的空间都已十分有限。这使得AI加速器客户在锁定先进制程产能时具备了相对优势。其他细分市场中无法锁定充足N3制程产能的客户，可能将被迫延长现有产品周期，或者直接迁移至N2平台。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

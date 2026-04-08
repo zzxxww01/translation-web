@@ -1,0 +1,32 @@
+{
+  "section_id": "03-introducing-the-semianalysis-1",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.54,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.8,
+      "terminology": 10.0,
+      "completeness": 8.5,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "今天，我们将免费开放 SemiAnalysis H100 一年期租赁合同价格指数，以提升市场对 GPU 租赁趋势的认知与透明度。",
+    "[点击此处访问我们的 GPU 租赁指数仪表板](https://semianalysis.com/gpu-pricing-index/)",
+    "我们的指数基于对 100 多家市场参与者（包括新兴算力云厂商、算力买方和卖方）的直接调查数据构建。我们每月采集这些数据，以确定 GPU 租赁合同的代表性价格区间（第 25 至第 75 百分位数）。我们不仅通过交易数据验证这些定价水平，还在我们的网络内撮合算力买卖双方，亲自促成部分交易以进行交叉验证。",
+    "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+    "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+    "自 2023 年以来，我们持续追踪 H100、H200、B200、B300、GB200 和 GB300 在 3 个月至 5 年不同合同期限下的合约市场价格，并精选了 AMD 系列（MI300、MI325、MI355）的可用数据。",
+    "SemiAnalysis H100 一年期合同价格指数能够对现有 GPU 指数形成有力补充，原因如下：",
+    "许多 GPU 租赁指数源于竞价/按需实例的挂牌价或公开报价，但 GPU 租赁市场的大部分交易都是基于长期合同（至少 6 个月或更长）。这些价格通过双边协商敲定，相关的报价和交易价格通常不会发布在任何免费的在线数据库中。大多数大型新兴算力云厂商倾向于出租至少 1 年期的算力，2 年或 3 年期更佳——如果能拿下 5 年期的大型包销协议则最为理想。SemiAnalysis H100 一年期租赁合同价格指数专门针对这一占据绝大部分租赁交易量的合约市场。该指数锚定特定的合同期限，不仅让用户更容易理解其所反映的细分市场，还能帮助用户将这些趋势与他们观察到的实际情况进行交叉验证。",
+    "算力买家的实际交易价格，未必就是超大规模云厂商和新兴算力云厂商公开的挂牌价。这些挂牌价的波动固然能为 GPU 租赁价格走势提供有价值的方向性信号，但仅凭这些变动，无法准确估算实际的交易价格。通常情况下，这些公开挂牌价往往在合同市场发生转变之后才会调整，滞后于算力需求的实际趋势。特别是按需市场，其运作逻辑是将价格维持在固定水平，而将采用率或利用率作为变量。这种定价仅在必要时才会进行临时调整。关于该市场的运作机制，我们将在后文详细探讨。",
+    "市场上有许多指数擅长处理海量的报价、价格和交易数据，它们同样是分析市场趋势的绝佳工具。但从本质上讲，我们的方法侧重于与市场参与者，以及那些制定定价和采购决策的幕后人员进行直接交流。每一次报价和每一笔交易背后都大有文章。我们旨在揭示其中起作用的定性与定量趋势，并分享业内轶事，帮助大家全面透视 GPU 租赁市场。",
+    "机构订阅用户可以获取当前几乎所有活跃 GPU 租赁市场的完整期限结构数据。",
+    "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+    "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+    "在公开发布 H100 一年期合同价格追踪工具的同时，我们也向 Token经济学模型机构订阅用户推出了 SemiAnalysis Token经济学仪表板——这是一款用于追踪和解析前沿 AI 模型竞争格局的利器。该仪表板允许用户在代码编写、逻辑推理、数学计算以及智能体评估等维度构建自定义基准对比，横向比较头部模型与供应商的 API 定价，并查看各大 AI 实验室披露的关键数据，包括 Token 消耗量、营收、估值以及客户规模。"
+  ]
+}

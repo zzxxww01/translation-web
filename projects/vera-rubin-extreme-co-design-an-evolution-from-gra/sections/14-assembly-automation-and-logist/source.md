@@ -1,0 +1,7 @@
+At CES 2026, Jensen mentioned that with the streamlined cableless design and automation assembly process, compute tray assembly time has significantly reduced from 2 hours to 5 minutes from Blackwell to Rubin. There are only three L10 level compute tray assembly partners with automation capability for the Rubin platform – Foxconn, Quanta, and Wistron.
+
+![](https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png)
+
+Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)
+
+At L6, board level PCBA, Wistron and Foxconn are the main supplier of Blackwell and Rubin. For L10, Blackwell had lots of different compute tray manufacturers as they buy the Bianca boards from Nvidia to sell to their clients. For Rubin, there are only three suppliers that have the capability to do automation of Rubin compute tray. For smaller ODM or OEM, they either have their compute tray made at the three automation suppliers mentioned above or they will do it in-house without automation. Although not as efficient, compute tray assembly without automation should be much easier compared to Blackwell as well given the seamless modular design. Then at L11, the various ODMs/OEMs assemble the compute tray into the rack.

@@ -1,0 +1,56 @@
+{
+  "section_id": "16-real-world-use-case-cutlass",
+  "new_terms": [
+    {
+      "term": "tiled GEMM",
+      "suggested_translation": "分块 GEMM (Tiled GEMM)",
+      "context": "the tiled GEMM inner-loop pattern of continuously loading tiles",
+      "confidence": 0.95
+    },
+    {
+      "term": "load stages",
+      "suggested_translation": "加载阶段 (Load Stages)",
+      "context": "vary the number of load stages in the DMA->Math pipeline",
+      "confidence": 0.9
+    },
+    {
+      "term": "steady state mode",
+      "suggested_translation": "稳态模式 (Steady State Mode)",
+      "context": "measure the achieved math throughput in the steady state mode of the software pipeline",
+      "confidence": 0.9
+    },
+    {
+      "term": "software pipeline",
+      "suggested_translation": "软件流水线 (Software Pipeline)",
+      "context": "steady state mode of the software pipeline as a percentage of hardware speed-of-light",
+      "confidence": 0.95
+    },
+    {
+      "term": "GEMM Epilogue",
+      "suggested_translation": "GEMM 后处理 (GEMM Epilogue)",
+      "context": "if the GEMM Epilogue consumes SMEM, there is less available for the main loop",
+      "confidence": 0.95
+    },
+    {
+      "term": "latency hiding",
+      "suggested_translation": "延迟掩盖 (Latency Hiding)",
+      "context": "achieving better latency hiding by increasing the number of stages",
+      "confidence": 0.9
+    },
+    {
+      "term": "barrier storage",
+      "suggested_translation": "屏障存储 (Barrier Storage)",
+      "context": "SMEM usage and therefore stage count is computed based on: ... Barrier storage",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "cutlass": "CUTLASS",
+    "persistent cta": "持久化 CTA (Persistent CTA)",
+    "smem": "共享内存 (SMEM)",
+    "speed of light (sol)": "理论极限性能 (Speed of Light, SoL)",
+    "mma (matrix multiply-accumulate)": "矩阵乘累加 (MMA)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:36:34.442197"
+}

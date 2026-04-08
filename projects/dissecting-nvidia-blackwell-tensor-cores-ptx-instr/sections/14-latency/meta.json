@@ -1,0 +1,415 @@
+{
+  "section_id": "14-latency",
+  "title": "Latency",
+  "title_translation": "延迟",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We benchmarked single MMA instruction latency, and we plot the comparison below. Across all configurations, we see latency linearly increases from N=64 to 128, and the spike at N=256 is likely due to the jump from 128 to 256. For individual CTA group MMAs, 1SM MMA M=64 and M=128 have similar latencies across N sizes, whereas in 2SM MMA, M=256 latency grows slightly faster than M=128, which matches our theoretical estimations. Comparing data types, we see little difference for 1SM but clear separation for 2SM MMAs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0133",
+      "parent_block_index": 133,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We benchmarked single MMA instruction latency, and we plot the comparison below. Across all configurations, we see latency linearly increases from N=64 to 128, and the spike at N=256 is likely due to the jump from 128 to 256. For individual CTA group MMAs, 1SM MMA M=64 and M=128 have similar latencies across N sizes, whereas in 2SM MMA, M=256 latency grows slightly faster than M=128, which matches our theoretical estimations. Comparing data types, we see little difference for 1SM but clear separation for 2SM MMAs.",
+      "parent_block_plain_text": "We benchmarked single MMA instruction latency, and we plot the comparison below. Across all configurations, we see latency linearly increases from N=64 to 128, and the spike at N=256 is likely due to the jump from 128 to 256. For individual CTA group MMAs, 1SM MMA M=64 and M=128 have similar latencies across N sizes, whereas in 2SM MMA, M=256 latency grows slightly faster than M=128, which matches our theoretical estimations. Comparing data types, we see little difference for 1SM but clear separation for 2SM MMAs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 519,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们对单条 MMA 指令的延迟进行了基准测试，并将对比结果绘制如下。在所有配置中，延迟在 N=64 到 128 之间均呈线性增长；N=256 时的延迟激增，很可能是由于 N 值从 128 直接跨越到 256 造成的。具体到各个协作线程阵列 (CTA) 组的 MMA，在 1SM MMA 中，无论 N 值大小，M=64 和 M=128 的延迟都非常接近；而在 2SM MMA 中，M=256 的延迟增长速度略快于 M=128，这与我们的理论估算相符。对比不同数据类型可以发现，1SM MMA 在数据类型间的延迟差异微乎其微，但 2SM MMA 则表现出明显的分化。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661057",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0134",
+      "parent_block_index": 134,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661143",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "We notice a small but consistent pattern of the order of latency:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0135",
+      "parent_block_index": 135,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We notice a small but consistent pattern of the order of latency:",
+      "parent_block_plain_text": "We notice a small but consistent pattern of the order of latency:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 65,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们注意到，各类数据类型的延迟排序呈现出一个微小但高度一致的规律：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661174",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "S8 < BF16 = E4M3 = F4 < MXF8 = MXF4",
+      "source_html": null,
+      "element_type": "blockquote",
+      "inline_elements": [],
+      "parent_block_id": "b0136",
+      "parent_block_index": 136,
+      "parent_block_type": "blockquote",
+      "parent_block_markdown": "> S8 < BF16 = E4M3 = F4 < MXF8 = MXF4",
+      "parent_block_plain_text": "S8 < BF16 = E4M3 = F4 < MXF8 = MXF4",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 35,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "S8 < BF16 = E4M3 = F4 < MXF8 = MXF4",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661200",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "We believe integer operations being more power efficient leads to S8 being the fastest, and scale factor computation introduces a minor overhead for MXF8 and MXF4.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0137",
+      "parent_block_index": 137,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We believe integer operations being more power efficient leads to S8 being the fastest, and scale factor computation introduces a minor overhead for MXF8 and MXF4.",
+      "parent_block_plain_text": "We believe integer operations being more power efficient leads to S8 being the fastest, and scale factor computation introduces a minor overhead for MXF8 and MXF4.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 163,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，整数运算具备更高的能效，因此 S8 的速度最快；而比例因子计算则给 MXF8 和 MXF4 带来了少量的额外开销。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661224",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0138",
+      "parent_block_index": 138,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:34:51.661247",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'scale factor' in the context of MX (Microscaling) data formats is more commonly and professionally translated as '缩放因子' rather than '比例因子' in GPU architecture literature."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

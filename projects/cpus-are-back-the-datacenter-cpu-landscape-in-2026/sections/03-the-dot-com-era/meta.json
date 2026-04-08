@@ -1,0 +1,175 @@
+{
+  "section_id": "03-the-dot-com-era",
+  "title": "The Dot Com Era",
+  "title_translation": "Dot-Com时代",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The 2000s brought the internet age, with the emergence of Web 2.0, e-mail, e-commerce, Google search, smartphones with 3G broadband data, and the need for datacenter CPUs to serve the world’s internet traffic as everything went online. Datacenter CPUs grew into a multi-billion dollar segment. On the design front, after the GHz wars were over with the end of Dennard scaling, attention shifted to multi-core CPUs and increased integration. AMD integrated the memory controller into the CPU silicon, and high-speed IO (PCIe) came directly from the CPU as well. Multi-core CPUs were especially suited for datacenter workloads, where many tasks could be run in parallel across different cores.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The 2000s brought the internet age, with the emergence of Web 2.0, e-mail, e-commerce, Google search, smartphones with 3G broadband data, and the need for datacenter CPUs to serve the world’s internet traffic as everything went online. Datacenter CPUs grew into a multi-billion dollar segment. On the design front, after the GHz wars were over with the end of Dennard scaling, attention shifted to multi-core CPUs and increased integration. AMD integrated the memory controller into the CPU silicon, and high-speed IO (PCIe) came directly from the CPU as well. Multi-core CPUs were especially suited for datacenter workloads, where many tasks could be run in parallel across different cores.",
+      "parent_block_plain_text": "The 2000s brought the internet age, with the emergence of Web 2.0, e-mail, e-commerce, Google search, smartphones with 3G broadband data, and the need for datacenter CPUs to serve the world’s internet traffic as everything went online. Datacenter CPUs grew into a multi-billion dollar segment. On the design front, after the GHz wars were over with the end of Dennard scaling, attention shifted to multi-core CPUs and increased integration. AMD integrated the memory controller into the CPU silicon, and high-speed IO (PCIe) came directly from the CPU as well. Multi-core CPUs were especially suited for datacenter workloads, where many tasks could be run in parallel across different cores.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 691,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "21 世纪初迎来了互联网时代。Web 2.0、电子邮件、电子商务、谷歌搜索以及支持 3G 宽带数据的智能手机相继涌现。随着万物触网，数据中心 CPU 必须承担起处理全球互联网流量的重任，并随之成长为一个价值数十亿美元的细分市场。在设计层面，随着登纳德缩放定律走向终结，“主频大战”偃旗息鼓，业界的注意力转向了多核 CPU 与更高的集成度。AMD 将内存控制器直接集成到 CPU 裸片中，高速 I/O（PCIe）也改为直接由 CPU 提供。多核 CPU 格外契合数据中心工作负载，能让大量任务在不同核心上并行处理。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:46:10.260512",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.575,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+          "Ensure 'GHz wars' reflects the historical context (主频大战).",
+          "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the architectural pivot from frequency scaling to multi-core designs driven by the internet boom and physical semiconductor limits.",
+          "relation_to_previous": "Shows how the foundational PC-era architectures had to adapt to the massive traffic scaling of Web 2.0.",
+          "relation_to_next": "Sets the stage for the virtualization era, as having multiple cores and threads enabled the partitioning of physical servers into virtual ones.",
+          "key_points": [
+            "The end of Dennard scaling forced the industry to abandon frequency increases (GHz wars) in favor of multi-core CPU designs.",
+            "Simultaneous Multi-Threading (SMT) and integrated memory controllers were introduced to maximize throughput for parallelizable internet workloads.",
+            "Multi-socket servers (using QPI) became necessary to meet the insatiable demand for compute."
+          ],
+          "translation_notes": [
+            "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+            "Ensure 'GHz wars' reflects the historical context (主频大战).",
+            "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+          ]
+        },
+        "scores": {
+          "readability": 9.6,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "terminology",
+            "description": "前文将“Multi-socket”翻译为行业标准的“多路”，但后文将“sockets”翻译为“插槽”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We will detail the evolution of how these multiple cores are connected in the interconnect section below. Simultaneous Multi-Threading (SMT) was also introduced in this time by both AMD and Intel, partitioning a core into two logical threads that could operate independently while sharing most core resources, further improving performance in parallelizable datacenter workloads. Those looking for more performance would turn to Multi-socket CPU servers, with Intel’s Quick Path Interconnect (QPI) and AMD’s HyperTransport Direct Connect Architecture in their Opteron CPUs providing coherent links between up to eight sockets per server.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We will detail the evolution of how these multiple cores are connected in the interconnect section below. Simultaneous Multi-Threading (SMT) was also introduced in this time by both AMD and Intel, partitioning a core into two logical threads that could operate independently while sharing most core resources, further improving performance in parallelizable datacenter workloads. Those looking for more performance would turn to Multi-socket CPU servers, with Intel’s Quick Path Interconnect (QPI) and AMD’s HyperTransport Direct Connect Architecture in their Opteron CPUs providing coherent links between up to eight sockets per server.",
+      "parent_block_plain_text": "We will detail the evolution of how these multiple cores are connected in the interconnect section below. Simultaneous Multi-Threading (SMT) was also introduced in this time by both AMD and Intel, partitioning a core into two logical threads that could operate independently while sharing most core resources, further improving performance in parallelizable datacenter workloads. Those looking for more performance would turn to Multi-socket CPU servers, with Intel’s Quick Path Interconnect (QPI) and AMD’s HyperTransport Direct Connect Architecture in their Opteron CPUs providing coherent links between up to eight sockets per server.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 637,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们将在下文的互连架构章节详细剖析多核连接方式的演进历程。AMD 和英特尔也在这一时期引入了同步多线程 (SMT) 技术。该技术将一个物理核心划分为两个逻辑线程，两者在共享大部分核心资源的同时能够独立运行，从而进一步提升了可并行化数据中心工作负载的性能。对性能有更高要求的用户则会转向多路 CPU 服务器。英特尔的快速通道互联 (QPI) 与 AMD 皓龙 CPU 采用的 HyperTransport直连架构，能够在单台服务器中为多达八个插槽提供一致性链路。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:46:10.260604",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.575,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+          "Ensure 'GHz wars' reflects the historical context (主频大战).",
+          "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the architectural pivot from frequency scaling to multi-core designs driven by the internet boom and physical semiconductor limits.",
+          "relation_to_previous": "Shows how the foundational PC-era architectures had to adapt to the massive traffic scaling of Web 2.0.",
+          "relation_to_next": "Sets the stage for the virtualization era, as having multiple cores and threads enabled the partitioning of physical servers into virtual ones.",
+          "key_points": [
+            "The end of Dennard scaling forced the industry to abandon frequency increases (GHz wars) in favor of multi-core CPU designs.",
+            "Simultaneous Multi-Threading (SMT) and integrated memory controllers were introduced to maximize throughput for parallelizable internet workloads.",
+            "Multi-socket servers (using QPI) became necessary to meet the insatiable demand for compute."
+          ],
+          "translation_notes": [
+            "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+            "Ensure 'GHz wars' reflects the historical context (主频大战).",
+            "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+          ]
+        },
+        "scores": {
+          "readability": 9.6,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "terminology",
+            "description": "前文将“Multi-socket”翻译为行业标准的“多路”，但后文将“sockets”翻译为“插槽”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

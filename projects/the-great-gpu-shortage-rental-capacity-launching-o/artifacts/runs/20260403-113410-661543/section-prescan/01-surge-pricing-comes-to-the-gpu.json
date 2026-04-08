@@ -1,0 +1,55 @@
+{
+  "section_id": "01-surge-pricing-comes-to-the-gpu",
+  "new_terms": [
+    {
+      "term": "Mixture of Experts (MoE)",
+      "suggested_translation": "专家混合模型",
+      "context": "AI architecture used in models like Mixtral or GPT-4, mentioned as an inference workload.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Blackwell",
+      "suggested_translation": "Blackwell",
+      "context": "NVIDIA's latest GPU architecture succeeding Hopper.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Hopper",
+      "suggested_translation": "Hopper",
+      "context": "NVIDIA's GPU architecture (H100/H200 series).",
+      "confidence": 0.95
+    },
+    {
+      "term": "open-weight models",
+      "suggested_translation": "开放权重模型",
+      "context": "Models where weights are public but training data/code might not be (e.g., Llama, Mistral).",
+      "confidence": 0.9
+    },
+    {
+      "term": "lead time",
+      "suggested_translation": "交付周期 / 交期",
+      "context": "The time between the initiation and completion of a production process or order.",
+      "confidence": 0.9
+    },
+    {
+      "term": "world-size",
+      "suggested_translation": "并行规模 / 通信域大小",
+      "context": "Refers to the number of GPUs in a distributed computing setup that can communicate directly.",
+      "confidence": 0.85
+    },
+    {
+      "term": "subletting compute",
+      "suggested_translation": "算力转租",
+      "context": "The practice of a compute renter re-leasing their capacity to another party.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "neocloud": "新兴算力云厂商",
+    "spot instance": "竞价实例",
+    "inference": "推理",
+    "training": "训练"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T11:38:45.564283"
+}

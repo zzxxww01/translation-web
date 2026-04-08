@@ -1,0 +1,159 @@
+{
+  "section_id": "32-future-of-inferencex",
+  "title": "Future of InferenceX",
+  "title_translation": "InferenceX 的未来",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Since the initial release of InferenceX in early October 2025, we have worked hard to continuously improve InferenceX. After release, we spent some time refactoring the codebase to make it more scalable, such that new models and inference techniques can now be added in a “plug and play” fashion. These changes enabled us to seamlessly integrate PD-disagg benchmarks for H100, H200, B200, B300, GB200, GB300, and MI355X. We also added accuracy evaluations to our default benchmark pipeline to ensure visibility into model performance across all configurations.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0366",
+      "parent_block_index": 366,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since the initial release of InferenceX in early October 2025, we have worked hard to continuously improve InferenceX. After release, we spent some time refactoring the codebase to make it more scalable, such that new models and inference techniques can now be added in a “plug and play” fashion. These changes enabled us to seamlessly integrate PD-disagg benchmarks for H100, H200, B200, B300, GB200, GB300, and MI355X. We also added accuracy evaluations to our default benchmark pipeline to ensure visibility into model performance across all configurations.",
+      "parent_block_plain_text": "Since the initial release of InferenceX in early October 2025, we have worked hard to continuously improve InferenceX. After release, we spent some time refactoring the codebase to make it more scalable, such that new models and inference techniques can now be added in a “plug and play” fashion. These changes enabled us to seamlessly integrate PD-disagg benchmarks for H100, H200, B200, B300, GB200, GB300, and MI355X. We also added accuracy evaluations to our default benchmark pipeline to ensure visibility into model performance across all configurations.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 560,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 2025 年 10 月初 InferenceX 首次发布以来，我们一直致力于持续改进。发布后，我们花时间重构了代码库，提升其可扩展性，现在已经可以“即插即用”地添加新模型和推理技术。正是基于这些改进，我们才得以无缝集成了针对 H100、H200、B200、B300、GB200、GB300 和 MI355X 的 PD-disagg 基准测试。此外，我们还在默认的基准测试流水线中加入了准确性评估，以确保模型在所有配置下的性能表现都清晰可见。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:19:20.532332",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语呼应与句法微瑕。词汇表中明确规定了“Disaggregated Prefill → 分离式 Prefill”，此处的“PD-disagg”即 Prefill-Decode disaggregation。建议译文与词汇表统一，补充“分离式”的概念。此外，“得以无缝集成了”中的“了”字造成了轻微的语意阻滞。"
+          },
+          {
+            "type": "readability",
+            "description": "动词缺少宾语。中文“致力于持续改进”单独出现时，略显像企业公关稿件中的空泛套话（翻译腔），且遗漏了原文的宾语“InferenceX”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对常见术语过度加注。译文添加了“(最先进)”。考虑到本文的目标读者是 AI 基础设施工程师、GPU 投资者和 ML 研究人员，他们对“SOTA”一词极度熟悉。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Although we have made many improvements since our release, there is still much work to be done to achieve the north star goal of providing the most real-world inference benchmarks possible. To achieve this goal, we plan to benchmark on real datasets, add an agentic coding performance benchmark, include more SOTA inference optimizations, benchmark more models, and so much more.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0367",
+      "parent_block_index": 367,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although we have made many improvements since our release, there is still much work to be done to achieve the north star goal of providing the most real-world inference benchmarks possible. To achieve this goal, we plan to benchmark on real datasets, add an agentic coding performance benchmark, include more SOTA inference optimizations, benchmark more models, and so much more.",
+      "parent_block_plain_text": "Although we have made many improvements since our release, there is still much work to be done to achieve the north star goal of providing the most real-world inference benchmarks possible. To achieve this goal, we plan to benchmark on real datasets, add an agentic coding performance benchmark, include more SOTA inference optimizations, benchmark more models, and so much more.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 379,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然发布至今我们已取得诸多改进，但要实现我们的北极星目标——提供最贴近真实世界的推理基准测试——仍然任重道远。为此，我们计划在真实数据集上进行基准测试、新增智能体编程性能基准测试、集成更多 SOTA (最先进) 的推理优化、测试更多模型，未来工作远不止于此。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:19:20.532376",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语呼应与句法微瑕。词汇表中明确规定了“Disaggregated Prefill → 分离式 Prefill”，此处的“PD-disagg”即 Prefill-Decode disaggregation。建议译文与词汇表统一，补充“分离式”的概念。此外，“得以无缝集成了”中的“了”字造成了轻微的语意阻滞。"
+          },
+          {
+            "type": "readability",
+            "description": "动词缺少宾语。中文“致力于持续改进”单独出现时，略显像企业公关稿件中的空泛套话（翻译腔），且遗漏了原文的宾语“InferenceX”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对常见术语过度加注。译文添加了“(最先进)”。考虑到本文的目标读者是 AI 基础设施工程师、GPU 投资者和 ML 研究人员，他们对“SOTA”一词极度熟悉。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

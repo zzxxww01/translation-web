@@ -1,0 +1,70 @@
+{
+  "section_id": "13-unpacking-inference-providers",
+  "new_terms": [
+    {
+      "term": "prefix caching",
+      "suggested_translation": "前缀缓存",
+      "context": "InferenceX benchmarks on random data and disables prefix caching.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Hyperscaler",
+      "suggested_translation": "超大规模云厂商",
+      "context": "Total Cost of Ownership (TCO) (Owning – Hyperscaler) for each GPU",
+      "confidence": 0.95
+    },
+    {
+      "term": "speculative decoding",
+      "suggested_translation": "投机解码",
+      "context": "it becomes necessary to employ speculative decoding techniques like MTP",
+      "confidence": 0.95
+    },
+    {
+      "term": "InfiniBand (IB)",
+      "suggested_translation": "InfiniBand (IB)",
+      "context": "usually using InfiniBand or Ethernet as the networking protocol.",
+      "confidence": 0.95
+    },
+    {
+      "term": "GEMM",
+      "suggested_translation": "GEMM (通用矩阵乘法)",
+      "context": "one after the column-parallel GEMM, one after the row-parallel GEMM",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory-bandwidth-bound",
+      "suggested_translation": "内存带宽瓶颈",
+      "context": "decode is memory-bandwidth-bound: the bottleneck is how fast GPUs can load weights from HBM.",
+      "confidence": 0.9
+    },
+    {
+      "term": "load balancing",
+      "suggested_translation": "负载均衡",
+      "context": "TP is preferred at lower concurrencies due to load balancing.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TTFT",
+      "suggested_translation": "TTFT (首个 Token 延迟)",
+      "context": "disaggregrated it leading to better TTFT performance.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互速度",
+    "tco": "TCO",
+    "mtp": "MTP",
+    "disagg": "disagg",
+    "wide expert parallelism (wideep)": "wide EP",
+    "gross margin": "毛利率",
+    "all-to-all": "all-to-all",
+    "tensor parallel (tp)": "TP",
+    "expert parallel (ep)": "EP",
+    "data parallel (dp)": "DP",
+    "scale-out": "Scale-out",
+    "prefill": "Prefill",
+    "decode": "decode"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:35:53.516985"
+}

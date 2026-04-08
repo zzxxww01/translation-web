@@ -1,0 +1,61 @@
+{
+  "section_id": "05-the-ai-gpu-and-cpu-consolidati",
+  "new_terms": [
+    {
+      "term": "Tensor Cores",
+      "suggested_translation": "张量核心 (Tensor Core)",
+      "context": "AI-specific GPUs added MatMul focused Tensor Cores to the mix.",
+      "confidence": 0.95
+    },
+    {
+      "term": "AVX512",
+      "suggested_translation": "AVX-512",
+      "context": "Intel’s efforts to add more vector and matrix support with doubled AVX512 ports",
+      "confidence": 0.95
+    },
+    {
+      "term": "AMX",
+      "suggested_translation": "AMX (高级矩阵扩展)",
+      "context": "dedicated AMX accelerator engines",
+      "confidence": 0.9
+    },
+    {
+      "term": "Key Value Cache",
+      "suggested_translation": "键值缓存 (KV Cache)",
+      "context": "utilize CPU memory as model context Key Value Cache expansions",
+      "confidence": 0.95
+    },
+    {
+      "term": "superchip",
+      "suggested_translation": "超级芯片",
+      "context": "1 Vera CPU to 2 Rubin GPUs per superchip",
+      "confidence": 0.9
+    },
+    {
+      "term": "compute tray",
+      "suggested_translation": "计算托盘",
+      "context": "1 Venice CPU to 4 MI455X GPUs per compute tray",
+      "confidence": 0.9
+    },
+    {
+      "term": "Cloud-Native",
+      "suggested_translation": "云原生",
+      "context": "accelerated the development of “Cloud-Native” CPUs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Socket Consolidation",
+      "suggested_translation": "插槽整合",
+      "context": "Cloud-Native Socket Consolidation... Socket consolidation ratios of 10:1 or greater can be achieved.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "head node": "头节点",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "xeon": "至强"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:48:14.001507"
+}

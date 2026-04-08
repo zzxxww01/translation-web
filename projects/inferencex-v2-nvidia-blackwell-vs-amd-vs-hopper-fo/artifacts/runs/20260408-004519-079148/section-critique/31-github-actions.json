@@ -1,0 +1,30 @@
+{
+  "section_id": "31-github-actions",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "all runs occur on GitHub Actions",
+        "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。",
+        "why_it_matters": "补充上下文能让表达更符合中文技术工程师的阅读习惯，消除翻译腔。",
+        "suggestion": "建议将“所有运行”修改为“所有测试任务”或“所有基准测试的运行”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "aggregate uptime numbers",
+        "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。",
+        "why_it_matters": "使用更贴切的行业术语能进一步增强文章作为“资深技术分析师”视角的专业度和受众亲和力。",
+        "suggestion": "建议修改为“整体在线率数据”或“整体可用性指标”。"
+      }
+    ]
+  }
+}

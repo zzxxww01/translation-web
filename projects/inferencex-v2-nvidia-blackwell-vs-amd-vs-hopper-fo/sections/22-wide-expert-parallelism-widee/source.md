@@ -1,0 +1,1 @@
+In this section, we will go deeper on expert parallelism and go on to explain what *wide* expert parallelism is. We will then explain the idea of Disaggregated Prefill, how it is different from WideEP, and how WideEP and Disaggregated Prefill are used in unison to achieve SOTA performance.

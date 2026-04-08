@@ -1,0 +1,82 @@
+{
+  "section_id": "15-nvidia-grace",
+  "new_terms": [
+    {
+      "term": "Scalable Coherency Fabric",
+      "suggested_translation": "可扩展一致性网络",
+      "context": "Nvidia Grace Scalable Coherency Fabric.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NVLink-C2C",
+      "suggested_translation": "NVLink-C2C",
+      "context": "Nvidia’s CPUs are designed with head nodes and Extended GPU Memory in mind, with NVLink-C2C as its party trick.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Cache Switch Node (CSN)",
+      "suggested_translation": "缓存交换节点 (CSN)",
+      "context": "Each Cache Switch Node (CSN) on the mesh stop connects up to 2 cores and L3 slices.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bisection bandwidth",
+      "suggested_translation": "对分带宽",
+      "context": "NVIDIA emphasizes the high 3.2TB/s bisection bandwidth of the mesh network...",
+      "confidence": 0.95
+    },
+    {
+      "term": "Branch Target Buffer",
+      "suggested_translation": "分支目标缓冲区",
+      "context": "Performance starts to drop off massively when this Branch Target Buffer fills beyond 24 regions...",
+      "confidence": 0.95
+    },
+    {
+      "term": "ALU",
+      "suggested_translation": "算术逻辑单元 (ALU)",
+      "context": "ALUs sit idle awaiting instructions to execute.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOCAMM",
+      "suggested_translation": "SOCAMM",
+      "context": "doubling the memory width with eight 128bit wide SOCAMM 192GB modules",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoWoS-R",
+      "suggested_translation": "CoWoS-R",
+      "context": "totaling 6 dies packaged with CoWoS-R",
+      "confidence": 1.0
+    },
+    {
+      "term": "CXL3",
+      "suggested_translation": "CXL3",
+      "context": "4 LPDDR5 memory dies and 1 PCIe6/CXL3 IO die",
+      "confidence": 1.0
+    },
+    {
+      "term": "SVE2",
+      "suggested_translation": "SVE2",
+      "context": "now supporting ARM’s SVE2 FP8 operations.",
+      "confidence": 1.0
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8",
+      "context": "now supporting ARM’s SVE2 FP8 operations.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "head node": "头节点",
+    "superchip": "超级芯片",
+    "mesh stops": "网格站点",
+    "branch prediction": "分支预测",
+    "reticle-sized": "光罩极限尺寸",
+    "floorplan": "物理布图",
+    "floating point unit (fpu)": "浮点单元"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:25:28.212338"
+}

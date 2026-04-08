@@ -1,0 +1,14 @@
+{
+  "section_id": "22-wide-expert-parallelism-widee",
+  "new_terms": [],
+  "term_usages": {
+    "expert parallelism": "专家并行",
+    "wide expert parallelism": "宽专家并行",
+    "Disaggregated Prefill": "分离式 Prefill",
+    "WideEP": "WideEP",
+    "SOTA": "SOTA",
+    "performance": "性能"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:55:45.811416"
+}

@@ -1,0 +1,38 @@
+{
+  "section_id": "13-customization",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.2,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "accuracy",
+        "severity": "medium",
+        "original_text": "We expect most hyperscaler customers to adopt their in-house DSP instead of Bluefield-4. Given the limitation on form factor and dimensions, hyperscalers are redesigning the board layout and module form factor of their in-house DPU to match that of Bluefield-4.",
+        "description": "原文中第一句使用了 'DSP'，而紧随其后的第二句使用了 'DPU'。考虑到 Bluefield-4 是典型的 DPU，原文的 'DSP' 极大概率为笔误。译文机械地保留了 'DSP'，可能会误导硬核读者。",
+        "why_it_matters": "对于半导体专业读者，DSP（数字信号处理器）与 DPU（数据处理单元）是完全不同的芯片类别。在 Bluefield 的上下文中，此处必然指代 DPU。保留笔误会显得译者对硬件架构缺乏基本理解。",
+        "suggestion": "建议将第一句的 'DSP' 改为 'DPU'，或在 'DSP' 后加括号备注 '[原文如此，应为 DPU]'。考虑到 SemiAnalysis 的语境，直接统一为 DPU 更符合专业习惯。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "For the power delivery modules and management, some customers are also looking to combine them.",
+        "description": "译文“一些客户还计划将二者合二为一”虽然准确，但稍显口语化。",
+        "why_it_matters": "在分析报告中，描述硬件集成通常使用更具工程感的词汇。",
+        "suggestion": "建议改为：“部分客户正寻求将供电模块与管理模块进行集成设计（Combine/Integrate）。”"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "JBOK / Nitro Box NIC version",
+        "description": "JBOK 是一个非常小众且具有特定黑话色彩的术语（通常指 Just a Bunch of KonnectX，即纯网卡簇）。",
+        "why_it_matters": "直接翻译为“网卡版本”虽然没错，但丢失了原文对硬件形态（类似 JBOD/JBOF 的模块化堆叠）的暗示。",
+        "suggestion": "保留英文原文或采用更硬核的表述：“亚马逊确实为 VR NVL72 提供了 JBOK / Nitro Box 架构的网卡版本。”"
+      }
+    ]
+  }
+}

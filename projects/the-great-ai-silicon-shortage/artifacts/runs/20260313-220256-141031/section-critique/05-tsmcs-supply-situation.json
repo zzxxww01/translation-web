@@ -1,0 +1,38 @@
+{
+  "section_id": "05-tsmcs-supply-situation",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "The company is also shifting certain process layers to other fabs to free up incremental N3 capacity wherever possible.",
+        "description": "“释放增量的N3制程产能”略显生硬，带有轻微的翻译腔。",
+        "why_it_matters": "优化表达可以提升中文阅读的流畅度，同时保持专业感。",
+        "suggestion": "建议改为“以尽可能释放额外的N3产能”或“挤出更多N3产能”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "As a result, for companies to get more wafer allocation in the meantime, others will have to give up their existing precious allocation, and this just may happen.",
+        "description": "将“wafer allocation”翻译为“晶圆产能分配”略显冗长。在半导体供应链语境中，通常简称为“配额”。",
+        "why_it_matters": "使用行业内更简洁的黑话（配额）能让文章的分析师基调更强，句子也更利落。",
+        "suggestion": "建议改为：“因此，在此期间，如果某些公司想要获得更多晶圆配额，就必须有其他公司放弃其现有的宝贵配额，而这极有可能发生。”"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "段落3：资料来源：SemiAnalysis晶圆代工厂模型\n段落5：来源：SemiAnalysis 晶圆代工厂模型",
+        "description": "段落3和段落5对“Source:”的翻译不一致，且有无空格不统一。",
+        "why_it_matters": "细节的统一性体现了专业出版物的严谨度。",
+        "suggestion": "统一为“资料来源：SemiAnalysis 晶圆代工模型”或“图源：SemiAnalysis 晶圆代工模型”。"
+      }
+    ]
+  }
+}

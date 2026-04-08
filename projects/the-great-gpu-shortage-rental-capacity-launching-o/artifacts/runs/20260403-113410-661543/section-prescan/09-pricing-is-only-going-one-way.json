@@ -1,0 +1,48 @@
+{
+  "section_id": "09-pricing-is-only-going-one-way",
+  "new_terms": [
+    {
+      "term": "ROIC",
+      "suggested_translation": "投入资本回报率",
+      "context": "Return on Invested Capital, a key metric for Neocloud profitability mentioned in the title.",
+      "confidence": 0.95
+    },
+    {
+      "term": "OEM",
+      "suggested_translation": "原始设备制造商",
+      "context": "Refers to hardware manufacturers like Dell or Supermicro in the server market context.",
+      "confidence": 0.95
+    },
+    {
+      "term": "margin expansion",
+      "suggested_translation": "利润率扩张",
+      "context": "Financial term describing the increase in profit margins due to higher rental rates.",
+      "confidence": 0.9
+    },
+    {
+      "term": "economic useful life",
+      "suggested_translation": "经济使用寿命",
+      "context": "The period over which an asset is expected to be usable for its intended purpose.",
+      "confidence": 0.9
+    },
+    {
+      "term": "install base",
+      "suggested_translation": "装机量 / 已安装规模",
+      "context": "Refers to the total number of GPUs (like H100) already deployed by a provider.",
+      "confidence": 0.85
+    },
+    {
+      "term": "roll off",
+      "suggested_translation": "(合同) 到期 / 退出",
+      "context": "Capacity roll off refers to when existing contracts expire, allowing for repricing.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "neocloud": "新兴算力云厂商",
+    "tenor": "合同期限",
+    "useful lives": "使用寿命"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:12:17.340463"
+}

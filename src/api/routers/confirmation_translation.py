@@ -4,6 +4,8 @@ Confirmation translation/review endpoints.
 
 import asyncio
 from datetime import datetime
+import json
+from pathlib import Path
 import uuid
 
 from fastapi import APIRouter
@@ -11,6 +13,7 @@ from fastapi import APIRouter
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.format_tokens import apply_translation_payload
 from src.core.glossary_prompt import build_term_usage_from_project
+from src.core.models import ArticleAnalysis
 from src.api.utils.glossary import get_combined_glossary
 
 from ..dependencies import (
@@ -32,6 +35,38 @@ from .translate_utils import build_retranslate_instruction, get_latest_translati
 
 
 router = APIRouter()
+
+ALLOWED_CONSISTENCY_ISSUE_TYPES = {"terminology"}
+
+
+def _load_latest_article_analysis(pm, project_id: str) -> ArticleAnalysis | None:
+    runs_root = Path(pm.projects_path) / project_id / "artifacts" / "runs"
+    if not runs_root.exists():
+        return None
+
+    run_dirs = sorted(
+        (path for path in runs_root.iterdir() if path.is_dir()),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    for run_dir in run_dirs:
+        analysis_path = run_dir / "analysis.json"
+        if not analysis_path.exists():
+            continue
+        try:
+            with open(analysis_path, "r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+            return ArticleAnalysis.model_validate(payload)
+        except (json.JSONDecodeError, OSError, ValueError):
+            continue
+    return None
+
+
+def _filter_consistency_issues(issues: list[dict]) -> list[dict]:
+    return [
+        item for item in issues
+        if item.get("issue_type") in ALLOWED_CONSISTENCY_ISSUE_TYPES
+    ]
 
 
 @router.post("/{project_id}/translate-all")
@@ -294,7 +329,12 @@ async def run_consistency_review(
             translations[section.section_id] = trans_list
 
         reviewer = ConsistencyReviewer(llm)
-        report = reviewer.review(sections, translations)
+        analysis = _load_latest_article_analysis(pm, project_id)
+        report = reviewer.review(
+            sections,
+            translations,
+            article_analysis=analysis,
+        )
 
         return {
             "is_consistent": report.is_consistent,
@@ -319,6 +359,81 @@ async def run_consistency_review(
 
     except Exception as e:
         raise BadRequestException(detail=f"Failed to run review: {str(e)}")
+
+
+@router.get("/{project_id}/consistency-report")
+async def get_latest_consistency_report(
+    project_id: str,
+    pm: ProjectManagerDep,
+):
+    try:
+        pm.get(project_id)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+
+    runs_root = Path(pm.projects_path) / project_id / "artifacts" / "runs"
+    if not runs_root.exists():
+        return {
+            "project_id": project_id,
+            "report": None,
+            "message": "暂无运行报告",
+        }
+
+    run_dirs = sorted(
+        (path for path in runs_root.iterdir() if path.is_dir()),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    for run_dir in run_dirs:
+        summary_path = run_dir / "run-summary.json"
+        if not summary_path.exists():
+            continue
+        try:
+            with open(summary_path, "r", encoding="utf-8") as handle:
+                summary = json.load(handle)
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        consistency = summary.get("consistency")
+        if not consistency:
+            continue
+
+        issues = [
+            {
+                "section_id": item.get("section_id", ""),
+                "paragraph_index": item.get("paragraph_index", 0),
+                "issue_type": item.get("issue_type", ""),
+                "description": item.get("description", ""),
+                "auto_fixable": item.get("auto_fixable", False),
+                "fix_suggestion": item.get("fix_suggestion"),
+            }
+            for item in consistency.get("issues", [])
+        ]
+        filtered_issues = _filter_consistency_issues(issues)
+        report = {
+            "is_consistent": len(filtered_issues) == 0,
+            "issue_count": len(filtered_issues),
+            "total_issues": len(filtered_issues),
+            "auto_fixable_count": sum(1 for issue in filtered_issues if issue.get("auto_fixable")),
+            "manual_review_count": sum(1 for issue in filtered_issues if not issue.get("auto_fixable")),
+            "issues": filtered_issues,
+        }
+        return {
+            "project_id": project_id,
+            "report": report,
+            "run_id": summary.get("run_id") or run_dir.name,
+            "status": summary.get("status"),
+            "started_at": summary.get("started_at"),
+            "finished_at": summary.get("finished_at"),
+            "artifacts_path": summary.get("artifacts_path"),
+            "source": "latest_run_summary",
+        }
+
+    return {
+        "project_id": project_id,
+        "report": None,
+        "message": "暂无一致性报告",
+    }
 
 
 # ============ 翻译规则管理 API（全局） ============

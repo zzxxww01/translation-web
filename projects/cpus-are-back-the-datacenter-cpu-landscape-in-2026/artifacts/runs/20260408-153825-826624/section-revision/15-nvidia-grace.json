@@ -1,0 +1,36 @@
+{
+  "section_id": "15-nvidia-grace",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.299999999999999,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.0,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+    "英伟达 Grace CPU 连接示意图。来源：英伟达",
+    "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+    "英伟达 Grace 可扩展一致性网络。来源：英伟达",
+    "与本文讨论的大多数通用 CPU 不同，英伟达的 CPU 在设计之初就充分考虑了头节点（head nodes）和扩展 GPU 内存的需求，并将 NVLink-C2C 作为其杀手锏。这条 900GB/s（双向）的高速链路允许相连的 Hopper 或 Blackwell GPU 全带宽访问 CPU 内存。每颗 Grace CPU 内存容量高达 480GB，有效缓解了 HBM 内存容量不足的限制。Grace 还采用了移动级 LPDDR5X 内存，在 512 位宽内存总线上维持 500GB/s 高带宽的同时，有效降低了非 GPU 功耗。初代 Grace Hopper 超级芯片为每颗 GPU 搭配 1 颗 Grace，而后续的 Grace Blackwell 世代则让 2 颗 GPU 共享 1 颗 CPU。此外，英伟达还为需要高内存带宽的 HPC 客户提供了双 Grace 超级芯片 CPU。",
+    "在 CPU 核心方面，英伟达采用了高性能的 ARM Neoverse V2 设计，每核心配备 1MB 私有 L2缓存。其 6x7 网格网络容纳了 76 个核心和 117MB 的 L3缓存，为保证良率，最多启用 72 个核心。网格节点上的每个缓存交换节点（CSN）最多连接 2 个核心和 L3缓存切片。英伟达着重强调了该网格网络高达 3.2TB/s 的对分带宽，这表明 Grace 专门侧重于数据流，而非单纯的 CPU 原始性能。",
+    "在性能方面，Grace 存在一个源自 Neoverse V2 核心的古怪微架构瓶颈，导致其运行未经优化的 HPC 代码时速度缓慢。根据英伟达的 Grace 性能调优指南，针对更好的代码局部性来优化大型应用，可带来 50% 的提速。这是因为核心分支预测引擎在提前存储和获取指令方面存在局限。在 Grace 上，指令被组织成 32 个 2MB 的虚拟地址空间。",
+    "当这个分支目标缓冲区填满超过 24 个区域时，性能开始一路陡降。热点代码会霸占缓冲区并加剧指令搅动（instruction churn），从而导致更多的分支预测失误。如果程序超出 32 个区域，整个 64MB 缓冲区将被清空，分支预测器会遗忘所有先前的分支指令，以腾出空间容纳新指令。在失去有效运作的分支预测器后，CPU 核心的前端会成为整个操作的瓶颈，导致 ALU 只能闲置等待指令执行。",
+    "正因如此，目前在 GB200 和 GB300 中，AI 工作负载会被 Grace CPU 拖慢。",
+    "英伟达 Vera",
+    "2026 年，Vera 将在 Rubin 平台上更进一步。其 C2C 带宽翻倍至 1.8TB/s；内存位宽同样翻倍，配备 8 个 128 位宽的 SOCAMM 192GB 模块，提供 1.5TB 内存容量和 1.2TB/s 带宽。网格网络设计得以保留，7x13 的网格容纳了 91 个核心，其中最多激活 88 个。L3缓存增加至 162MB。英伟达现将外围内存和 I/O 区域解耦为独立的芯粒（chiplet），共计 6 颗裸片采用 CoWoS-R 封装（包括 1 颗采用 3nm 工艺并配备 NVLink-C2C 的光罩极限尺寸（Reticle-sized）计算裸片、4 颗 LPDDR5 内存裸片以及 1 颗 PCIe6/CXL3 IO 裸片）。",
+    "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+    "Vera Rubin NVLink C2C 架构图。来源：英伟达",
+    "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+    "Vera CPU 规格。来源：英伟达",
+    "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+    "Vera 物理布图注释版。来源：英伟达，SemiAnalysis 测算",
+    "或许是吃尽了 ARM Neoverse 内核性能瓶颈的苦头，英伟达重新召回了其定制化 ARM 内核设计团队，推出了支持 SMT 的全新 Olympus 内核，实现了 88 核 176 线程的配置。英伟达上一款定制内核还要追溯到 8 年前，即搭载 10 宽发射 Carmel 内核的 Tegra Xavier SoC。基于 ARMv9.2 架构的 Olympus 内核将浮点单元宽度从 Neoverse V2 的 4 个端口提升至 6 个 128b 宽端口，现已支持 ARM 的 SVE2 FP8 运算。每个内核配备 2MB 私有 L2缓存，容量较 Grace 翻倍。综合来看，英伟达宣称升级至 Vera 后整体性能实现了 2 倍提升。"
+  ]
+}

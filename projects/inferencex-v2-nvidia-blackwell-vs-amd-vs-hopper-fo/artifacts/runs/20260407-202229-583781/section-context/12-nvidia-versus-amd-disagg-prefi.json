@@ -1,0 +1,291 @@
+{
+  "section_id": "12-nvidia-versus-amd-disagg-prefi",
+  "section_title": "Nvidia versus AMD Disagg Prefill",
+  "section_title_translation": "英伟达与 AMD 分离式 Prefill 对比",
+  "section_position": "13/36",
+  "article_theme": "A rigorous technical and economic benchmark analysis (InferenceXv2) evaluating Nvidia and AMD's latest GPUs across advanced AI inference techniques like disaggregated prefill, wide expert parallelism, and low-precision formats.",
+  "structure_summary": "The article opens by introducing the InferenceXv2 benchmark and acknowledging hardware partners. It then provides a technical primer on fundamental tradeoffs (interactivity vs throughput) and parallelism strategies (TP, EP, DP). The core of the piece is a deep dive into benchmark results, comparing AMD and Nvidia across various setups (single-node, multi-node, FP4/FP8) and models (DeepSeek R1, GPT-OSS). It critically evaluates the software ecosystems (SGLang vs TRT-LLM, AMD's ATOM) and advanced techniques (WideEP, Disaggregated Prefill). The article concludes with updates to the InferenceX repository, the authors' AI-assisted coding journey, and the roadmap for future benchmarking.",
+  "target_audience": "AI inference engineers, GPU hardware architects, quantitative analysts, and tech investors.",
+  "translation_voice": "硅谷硬核极客口吻。在技术原理解释上保持绝对的严谨和专业（准确使用分布式系统和GPU架构术语），但在评价厂商和框架时，保留原文桀骜不驯、辛辣讽刺的网感（如使用“碾压”、“画大饼”、“瞎折腾”等词），避免翻译成平淡的学术论文。",
+  "previous_section_title": "DeepSeek Disagg +WideEP Results Deep Dive",
+  "next_section_title": "Unpacking Inference Providers’ Unit Economics",
+  "section_role": "待分析",
+  "translation_notes": [],
+  "key_points": [],
+  "guidelines": [
+    "Technical Accuracy First: Ensure precise translation of distributed computing terms. 'Disaggregated' must be '分离式', 'All-reduce' is '全归约', 'All-to-all' is '全交换'. Do not substitute with generic terms.",
+    "Sentence Restructuring for Flow: The original text features dense, clause-heavy sentences (e.g., in the 'Interactivity vs Throughput Tradeoff' section). Break these into multiple independent Chinese sentences. Use logical connectors (因此, 相比之下, 然而) to build a native-feeling paragraph flow.",
+    "Slang Adaptation: Embrace the author's edgy tone. When translating '-mog' or '-maxxing' suffixes, use punchy Chinese tech-bro equivalents ('碾压', '降维打击', '瞎折腾') rather than academic phrasing. The tone should feel like an insider's unfiltered critique.",
+    "Acronym Handling: Keep hardware SKUs (MI355X, B200, NVL72) and software frameworks (SGLang, vLLM, Dynamo) in English. For parallelism strategies (TP, EP, DP), write out the Chinese and English on first mention (e.g., '张量并行 (TP)'), then use the English abbreviation.",
+    "Preserve Analogies: The 'metro bus vs race car' analogy is central to the author's explanation of throughput vs interactivity. Ensure this metaphor is preserved and explicitly linked to 'batching' (批处理) and 'latency' (延迟).",
+    "Sharp Critiques: Do not soften the author's criticism of AMD's ATOM engine or GitHub's Copilot. Use decisive, strong language (e.g., '毫无用武之地', '根本无法用于生产环境', '极其糟糕') to match the original intensity."
+  ],
+  "article_challenges": [
+    {
+      "location": "Throughout, specifically terms like 'framemog', 'jestermaxing', 'lookmaxxing'.",
+      "issue": "These are hyper-niche internet slang terms appended with '-mog' or '-maxxing'. Literal translation will confuse Chinese readers.",
+      "suggestion": "Use dynamic equivalence with Chinese internet/tech slang. 'framemog' -> '框架级碾压/降维打击', 'jestermaxing' -> '纯属瞎折腾', 'lookmaxxing' -> '营销包装/PPT造势'.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Interactivity vs Throughput Tradeoff / Anthropic Fast Mode Inferencing Explained",
+      "issue": "The 'metro bus vs race car' analogy. 'Mercedes makes metro busses as well as race cars.'",
+      "suggestion": "Maintain the analogy explicitly. Metro bus = high capacity, high latency (high throughput, low interactivity). Race car = low capacity, low latency (low throughput, high interactivity). Translate as '公交车与赛车之别' and ensure the connection to batching is clear.",
+      "type": "accuracy"
+    },
+    {
+      "location": "GitHub Actions section ('touch some grass')",
+      "issue": "Idiom meaning to disconnect from the internet and go outside to experience reality.",
+      "suggestion": "Translate as '也许我们该放下键盘，去外面接接地气了' or '是时候回归一下现实生活了'.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Unpacking Inference Providers’ Unit Economics",
+      "issue": "'Unit Economics' can be translated differently depending on context.",
+      "suggestion": "Use '单位经济效益' or '单Token经济模型' to clearly link the financial concept to AI inference costs.",
+      "type": "accuracy"
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Disaggregated Prefill",
+      "term": "Disaggregated Prefill",
+      "translation": "分离式 Prefill",
+      "strategy": "translate",
+      "note": "Separating the compute-heavy prefill phase and the memory-heavy decode phase of LLM inference onto separate nodes.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Wide Expert Parallelism (WideEP)",
+      "term": "Wide Expert Parallelism (WideEP)",
+      "translation": "宽专家并行 (WideEP)",
+      "strategy": "translate",
+      "note": "Distributing MoE expert weights across a large number of GPUs to handle massive models like DeepSeek R1.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Interactivity",
+      "term": "Interactivity",
+      "translation": "交互速度",
+      "strategy": "translate",
+      "note": "The speed at which a single user receives tokens, measured in tok/s/user. The inverse of Time Per Output Token (TPOT).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Throughput",
+      "term": "Throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "note": "The total number of tokens a system can generate across all users, achieved via batching.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "framemog",
+      "term": "framemog",
+      "translation": "框架级碾压",
+      "strategy": "translate",
+      "note": "Internet slang ('mog' meaning to dominate/outperform) applied to inference frameworks. Means one framework completely crushes another.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "jestermaxing",
+      "term": "jestermaxing",
+      "translation": "纯属瞎折腾",
+      "strategy": "translate",
+      "note": "Slang for acting like a fool or doing something pointless (running nightly sweeps unnecessarily).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "lookmaxxing",
+      "term": "lookmaxxing",
+      "translation": "纯营销包装",
+      "strategy": "translate",
+      "note": "Slang (optimizing appearance) used here to mean marketing exaggeration or hype.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Composability",
+      "term": "Composability",
+      "translation": "可组合性",
+      "strategy": "translate",
+      "note": "The ability to combine multiple software optimizations (e.g., FP4 + Disagg + WideEP) simultaneously without breaking.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "All-reduce",
+      "term": "All-reduce",
+      "translation": "全归约 (All-reduce)",
+      "strategy": "translate",
+      "note": "A collective communication operation where all processes reduce data and receive the result.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "All-to-all",
+      "term": "All-to-all",
+      "translation": "全交换 (All-to-all)",
+      "strategy": "translate",
+      "note": "A collective communication operation where every process sends a distinct message to every other process (used in MoE).",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "TRTLLM",
+      "term": "TRTLLM",
+      "translation": "TensorRT-LLM",
+      "strategy": "preserve",
+      "note": "Nvidia's TensorRT-LLM framework.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Unit Economics",
+      "term": "Unit Economics",
+      "translation": "单位经济效益",
+      "strategy": "translate",
+      "note": "The direct revenues and costs associated with a particular business model, here referring to cost per million tokens.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    }
+  ]
+}

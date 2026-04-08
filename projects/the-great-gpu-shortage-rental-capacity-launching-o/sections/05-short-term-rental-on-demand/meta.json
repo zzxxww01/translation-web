@@ -1,0 +1,489 @@
+{
+  "section_id": "05-short-term-rental-on-demand",
+  "title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+  "title_translation": "短期租赁：按需、现货及三个月以内合同",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Short-term rentals represent the very front end of the rental term structure and in many cases represents residual capacity, though many such as Runpod and Lambda very successfully focus on providing considerable capacity of flexible on-demand or spot capacity. On-demand pricing functions tends to function very differently than the rest of the contract GPU rental market. Providers usually set a fixed price for on-demand capacity and will only very infrequently adjust prices.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0065",
+      "parent_block_index": 65,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Short-term rentals represent the very front end of the rental term structure and in many cases represents residual capacity, though many such as Runpod and Lambda very successfully focus on providing considerable capacity of flexible on-demand or spot capacity. On-demand pricing functions tends to function very differently than the rest of the contract GPU rental market. Providers usually set a fixed price for on-demand capacity and will only very infrequently adjust prices.",
+      "parent_block_plain_text": "Short-term rentals represent the very front end of the rental term structure and in many cases represents residual capacity, though many such as Runpod and Lambda very successfully focus on providing considerable capacity of flexible on-demand or spot capacity. On-demand pricing functions tends to function very differently than the rest of the contract GPU rental market. Providers usually set a fixed price for on-demand capacity and will only very infrequently adjust prices.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 479,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "短期租赁处于租赁期限结构的最前端，通常代表着剩余产能。不过，像Runpod和Lambda等许多厂商，已非常成功地专注于提供大量灵活的按需实例或竞价实例产能。按需实例的定价机制与GPU租赁合同市场的其他部分截然不同。供应商通常会为按需产能设定固定价格，且极少进行调整。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531534",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0066",
+      "parent_block_index": 66,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531580",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: Lambda Labs",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0067",
+      "parent_block_index": 67,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Lambda Labs",
+      "parent_block_plain_text": "Source: Lambda Labs",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Lambda Labs",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556283",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Lambda Labs",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531594",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Lambda Labs",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Providers will adjust pricing on a one-off basis in response to utilization levels – if utilization is too low, they will drop pricing to attract demand. If utilization is maxed out – then prices will be hiked as the provider determines that utilization will remain high even at higher pricing levels. This is why a time series of Neocloud posted on-demand pricing will be flat for a long period of time before gapping up or down. With the on-demand market, utilization is the best high frequency indicator of demand, and not price.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Providers will adjust pricing on a one-off basis in response to utilization levels – if utilization is too low, they will drop pricing to attract demand. If utilization is maxed out – then prices will be hiked as the provider determines that utilization will remain high even at higher pricing levels. This is why a time series of Neocloud posted on-demand pricing will be flat for a long period of time before gapping up or down. With the on-demand market, utilization is the best high frequency indicator of demand, and not price.",
+      "parent_block_plain_text": "Providers will adjust pricing on a one-off basis in response to utilization levels – if utilization is too low, they will drop pricing to attract demand. If utilization is maxed out – then prices will be hiked as the provider determines that utilization will remain high even at higher pricing levels. This is why a time series of Neocloud posted on-demand pricing will be flat for a long period of time before gapping up or down. With the on-demand market, utilization is the best high frequency indicator of demand, and not price.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 532,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "供应商会根据利用率水平对价格进行一次性调整——如果利用率过低，他们会降价以吸引需求；如果利用率拉满，供应商就会上调价格，因为他们判定即使在更高的价格水平下，利用率仍将保持高位。这就是为什么新兴算力云厂商公布的按需实例定价时间序列，往往会在很长一段时间内保持平稳，随后才出现跳空上涨或下跌的阶跃式变化。在按需实例市场中，衡量需求的最佳高频指标是利用率，而不是价格。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531605",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531615",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: Lambda Labs, SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Lambda Labs, SemiAnalysis",
+      "parent_block_plain_text": "Source: Lambda Labs, SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Lambda Labs，SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556289",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Lambda Labs，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T12:08:51.531625",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Lambda Labs，SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+          "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+          "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+          "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+          "key_points": [
+            "Short-term rentals often represent residual capacity.",
+            "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+            "Utilization is the best high-frequency indicator for this specific segment."
+          ],
+          "translation_notes": [
+            "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+            "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

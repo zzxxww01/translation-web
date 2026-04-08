@@ -1,0 +1,15 @@
+在 AMD 的各款芯片中，我们看到 MI355X 的性能最高可达 MI300X 的 10 倍。目前，AMD 仅在 MI355X 上成功跑通了 DeepSeek SGLang 的分离式推理。他们尚未提交 MI300X 或 MI325X 的分离式推理测试结果，这可能是因为旧款芯片上仍有悬而未决的软件问题。
+
+https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png
+
+来源：SemiAnalysis InferenceX
+
+https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png
+
+来源：SemiAnalysis InferenceX
+
+再看成本方面，在 FP8 精度下运行 DeepSeek-R1 时，若交互性设定为 24 Token/秒/用户，MI355X 的推理成本比 MI325X 便宜了将近 3 倍。其单卡吞吐量略低于 MI325X 的 4 倍。
+
+https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png
+
+来源：SemiAnalysis InferenceX

@@ -1,0 +1,444 @@
+{"ts": "2026-04-07T20:22:29.513855", "kind": "client_start", "url": "http://127.0.0.1:54321/api/projects/inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo/translate-four-step", "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo"}
+{"ts": "2026-04-07T20:22:29.546127", "kind": "http_status", "status_code": 200}
+{"type": "start", "total": 358, "total_sections": 36, "message": "开始四步法翻译", "ts": "2026-04-07T20:22:29.546314"}
+{"type": "progress", "step": "深度分析全文", "current": 0, "total": 358, "message": "深度分析全文", "ts": "2026-04-07T20:22:29.638340"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:30.645955"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:31.654068"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:32.669426"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:33.678672"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:34.685644"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:35.698565"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:36.701703"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:37.710505"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:38.716041"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:39.730431"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:40.736924"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:41.753089"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:42.769189"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:43.781833"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:44.789063"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:45.799165"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:46.815330"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:47.824369"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:48.833605"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:49.844711"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:50.861222"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:51.865080"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:52.869607"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:53.875191"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:54.878707"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:55.892625"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:56.897258"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:57.909736"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:58.923999"}
+{"type": "heartbeat", "ts": "2026-04-07T20:22:59.925658"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:00.934765"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:01.943434"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:02.946217"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:03.959629"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:04.975452"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:05.991444"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:06.993953"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:07.998632"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:09.000245"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:10.010969"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:11.015010"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:12.026476"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:13.029248"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:14.040795"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:15.047529"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:16.062959"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:17.076418"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:18.088014"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:19.089953"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:20.096204"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:21.111694"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:22.125164"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:23.141030"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:24.150717"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:25.163839"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:26.166791"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:27.177092"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:28.188890"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:29.191916"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:30.195967"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:31.205330"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:32.223463"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:33.226373"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:34.240332"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:35.242053"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:36.259798"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:37.270336"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:38.276385"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:39.286988"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:40.303856"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:41.307642"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:42.310923"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:43.325309"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:44.340633"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:45.345359"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:46.357824"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:47.367970"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:48.376629"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:49.378792"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:50.388882"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:51.404587"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:52.423250"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:53.426876"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:54.440387"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:55.451722"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:56.463719"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:57.475664"}
+{"type": "heartbeat", "ts": "2026-04-07T20:23:58.479169"}
+{"type": "progress", "step": "翻译标题", "current": 0, "total": 358, "message": "翻译标题", "ts": "2026-04-07T20:23:59.245936"}
+{"type": "progress", "step": "翻译章节标题", "current": 0, "total": 358, "message": "翻译章节标题", "ts": "2026-04-07T20:23:59.285746"}
+{"type": "progress", "step": "翻译来源说明", "current": 0, "total": 358, "message": "翻译来源说明", "ts": "2026-04-07T20:23:59.286753"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:00.294758"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:01.302439"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:02.312745"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:03.321067"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:04.330496"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:05.346540"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:06.355491"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:07.369588"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:08.383340"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:09.399807"}
+{"type": "progress", "step": "跳过: Introduction (已翻译)", "current": 3, "total": 358, "message": "跳过: Introduction (已翻译)", "ts": "2026-04-07T20:24:09.838217"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:10.843999"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:11.852896"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:12.861252"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:13.875859"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:14.888726"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:15.894655"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:16.904242"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:17.907810"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:18.911558"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:19.927255"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:20.935072"}
+{"type": "progress", "step": "跳过: Introduction (已翻译)", "current": 11, "total": 358, "message": "跳过: Introduction (已翻译)", "ts": "2026-04-07T20:24:21.515216"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:22.523667"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:23.535169"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:24.540572"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:25.542005"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:26.545058"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:27.560795"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:28.563817"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:29.570174"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:30.572207"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:31.589101"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:32.601864"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:33.610470"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:34.625995"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:35.644059"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:36.657786"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:37.673424"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:38.675497"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:39.686175"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:40.687642"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:41.695534"}
+{"type": "progress", "step": "跳过: Key Observations and Results to Highlight (已翻译)", "current": 21, "total": 358, "message": "跳过: Key Observations and Results to Highlight (已翻译)", "ts": "2026-04-07T20:24:42.640634"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:43.646011"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:44.658613"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:45.673925"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:46.691012"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:47.702063"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:48.712140"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:49.726043"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:50.742797"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:51.750826"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:52.758274"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:53.766262"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:54.776650"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:55.790631"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:56.797522"}
+{"type": "term_conflict", "conflict": {"term": "SemiAnalysis", "existing_translation": "", "new_translation": "SemiAnalysis", "existing_context": "", "new_context": "SemiAnalysis InferenceMAX: vLLM maintainers", "existing_note": "", "new_note": "SemiAnalysis InferenceMAX: vLLM maintainers", "existing_section_id": "", "new_section_id": "03-acknowledgments-and-inferencex", "created_at": "2026-04-07T20:24:57.695871"}, "ts": "2026-04-07T20:24:57.696929"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:58.709729"}
+{"type": "heartbeat", "ts": "2026-04-07T20:24:59.715091"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:00.723661"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:01.737626"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:02.752275"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:03.756093"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:04.769997"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:05.771775"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:06.776306"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:07.789153"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:08.800238"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:09.803434"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:10.806961"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:11.822415"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:12.837143"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:13.843897"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:14.858902"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:15.873298"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:16.889278"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:17.895531"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:18.909391"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:19.922851"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:20.929329"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:21.940618"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:22.956014"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:23.971587"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:24.990734"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:26.007401"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:27.018565"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:28.020961"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:29.036174"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:30.039167"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:31.050092"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:32.065698"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:33.079342"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:34.088851"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:35.096815"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:36.103158"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:37.107315"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:38.122855"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:39.131568"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:40.142621"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:41.153356"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:42.158283"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:43.160047"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:44.175889"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:45.186139"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:46.196560"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:47.204763"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:48.209334"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:49.215179"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:50.223223"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:51.232769"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:52.236519"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:53.239131"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:54.241070"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:55.242651"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:56.256246"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:57.270147"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:58.286496"}
+{"type": "heartbeat", "ts": "2026-04-07T20:25:59.289240"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:00.301818"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:01.309821"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:02.319957"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:03.336104"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:04.340970"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:05.352142"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:06.355707"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:07.368541"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:08.374236"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:09.389068"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:10.404732"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:11.415210"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:12.423867"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:13.438750"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:14.450058"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:15.455960"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:16.460120"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:17.471401"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:18.482989"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:19.485825"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:20.489671"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:21.505365"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:22.520010"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:23.522266"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:24.537947"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:25.548064"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:26.553042"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:27.567171"}
+{"type": "progress", "step": "跳过: Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters (已翻译)", "current": 29, "total": 358, "message": "跳过: Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters (已翻译)", "ts": "2026-04-07T20:26:28.213316"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:29.220125"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:30.222125"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:31.235466"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:32.237297"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:33.251055"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:34.258222"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:35.262947"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:36.274997"}
+{"type": "progress", "step": "跳过: A Primer on Important Technical Concepts (已翻译)", "current": 30, "total": 358, "message": "跳过: A Primer on Important Technical Concepts (已翻译)", "ts": "2026-04-07T20:26:36.279239"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:37.286298"}
+{"type": "progress", "step": "跳过: Interactivity vs Throughput Tradeoff (已翻译)", "current": 41, "total": 358, "message": "跳过: Interactivity vs Throughput Tradeoff (已翻译)", "ts": "2026-04-07T20:26:37.880375"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:38.885614"}
+{"type": "progress", "step": "跳过: Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP) (已翻译)", "current": 42, "total": 358, "message": "跳过: Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP) (已翻译)", "ts": "2026-04-07T20:26:39.294158"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:40.302970"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:41.307810"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:42.319084"}
+{"type": "progress", "step": "跳过: Tracking Improvements Over Time (已翻译)", "current": 43, "total": 358, "message": "跳过: Tracking Improvements Over Time (已翻译)", "ts": "2026-04-07T20:26:42.665150"}
+{"type": "progress", "step": "翻译: DeepSeek R1", "current": 43, "total": 358, "message": "翻译: DeepSeek R1", "ts": "2026-04-07T20:26:43.462167"}
+{"type": "progress", "step": "DeepSeek R1 - 理解章节", "current": 59, "total": 358, "message": "DeepSeek R1 - 理解章节", "ts": "2026-04-07T20:26:43.462646"}
+{"type": "progress", "step": "DeepSeek R1 - 初译", "current": 61, "total": 358, "message": "DeepSeek R1 - 初译", "ts": "2026-04-07T20:26:43.476589"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:44.491828"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:45.504042"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:46.511778"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:47.519430"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:48.523929"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:49.537072"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:50.547700"}
+{"type": "progress", "step": "翻译: GPT-OSS 120B", "current": 43, "total": 358, "message": "翻译: GPT-OSS 120B", "ts": "2026-04-07T20:26:50.920506"}
+{"type": "progress", "step": "GPT-OSS 120B - 理解章节", "current": 51, "total": 358, "message": "GPT-OSS 120B - 理解章节", "ts": "2026-04-07T20:26:50.934099"}
+{"type": "progress", "step": "GPT-OSS 120B - 初译", "current": 52, "total": 358, "message": "GPT-OSS 120B - 初译", "ts": "2026-04-07T20:26:50.935598"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:51.939516"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:52.948704"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:53.952274"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:54.955788"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:55.961078"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:56.975860"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:57.991263"}
+{"type": "heartbeat", "ts": "2026-04-07T20:26:58.995834"}
+{"type": "progress", "step": "翻译: Disaggregated Inference Frameworks", "current": 43, "total": 358, "message": "翻译: Disaggregated Inference Frameworks", "ts": "2026-04-07T20:26:59.670579"}
+{"type": "progress", "step": "Disaggregated Inference Frameworks - 理解章节", "current": 43, "total": 358, "message": "Disaggregated Inference Frameworks - 理解章节", "ts": "2026-04-07T20:26:59.671237"}
+{"type": "progress", "step": "Disaggregated Inference Frameworks - 初译", "current": 43, "total": 358, "message": "Disaggregated Inference Frameworks - 初译", "ts": "2026-04-07T20:26:59.671792"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:00.680853"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:01.697394"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:02.699718"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:03.701783"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:04.717063"}
+{"type": "progress", "step": "翻译: DeepSeek Disagg +WideEP Results Deep Dive", "current": 43, "total": 358, "message": "翻译: DeepSeek Disagg +WideEP Results Deep Dive", "ts": "2026-04-07T20:27:04.911643"}
+{"type": "progress", "step": "DeepSeek Disagg +WideEP Results Deep Dive - 理解章节", "current": 57, "total": 358, "message": "DeepSeek Disagg +WideEP Results Deep Dive - 理解章节", "ts": "2026-04-07T20:27:04.922269"}
+{"type": "progress", "step": "DeepSeek Disagg +WideEP Results Deep Dive - 初译", "current": 59, "total": 358, "message": "DeepSeek Disagg +WideEP Results Deep Dive - 初译", "ts": "2026-04-07T20:27:04.923087"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:05.937290"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:06.950391"}
+{"type": "progress", "step": "翻译: Nvidia versus AMD Disagg Prefill", "current": 43, "total": 358, "message": "翻译: Nvidia versus AMD Disagg Prefill", "ts": "2026-04-07T20:27:07.574201"}
+{"type": "progress", "step": "Nvidia versus AMD Disagg Prefill - 理解章节", "current": 57, "total": 358, "message": "Nvidia versus AMD Disagg Prefill - 理解章节", "ts": "2026-04-07T20:27:07.574522"}
+{"type": "progress", "step": "Nvidia versus AMD Disagg Prefill - 初译", "current": 59, "total": 358, "message": "Nvidia versus AMD Disagg Prefill - 初译", "ts": "2026-04-07T20:27:07.574787"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:08.583712"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:09.585657"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:10.590762"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:11.595437"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:12.605975"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:13.613795"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:14.619993"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:15.623229"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:16.632990"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:17.648018"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:18.652111"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:19.664248"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:20.668465"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:21.682471"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:22.696477"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:23.699494"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:24.703669"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:25.711940"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:26.719709"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:27.722011"}
+{"type": "progress", "step": "翻译: Unpacking Inference Providers’ Unit Economics", "current": 43, "total": 358, "message": "翻译: Unpacking Inference Providers’ Unit Economics", "ts": "2026-04-07T20:27:28.538316"}
+{"type": "progress", "step": "Unpacking Inference Providers’ Unit Economics - 理解章节", "current": 57, "total": 358, "message": "Unpacking Inference Providers’ Unit Economics - 理解章节", "ts": "2026-04-07T20:27:28.553070"}
+{"type": "progress", "step": "Unpacking Inference Providers’ Unit Economics - 初译", "current": 63, "total": 358, "message": "Unpacking Inference Providers’ Unit Economics - 初译", "ts": "2026-04-07T20:27:28.553521"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:29.555736"}
+{"type": "progress", "step": "翻译: Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72", "current": 43, "total": 358, "message": "翻译: Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72", "ts": "2026-04-07T20:27:30.478881"}
+{"type": "progress", "step": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72 - 理解章节", "current": 53, "total": 358, "message": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72 - 理解章节", "ts": "2026-04-07T20:27:30.482506"}
+{"type": "progress", "step": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72 - 初译", "current": 55, "total": 358, "message": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72 - 初译", "ts": "2026-04-07T20:27:30.484239"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:31.487848"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:32.502390"}
+{"type": "progress", "step": "翻译: Blackwell vs Blackwell Ultra", "current": 43, "total": 358, "message": "翻译: Blackwell vs Blackwell Ultra", "ts": "2026-04-07T20:27:33.060845"}
+{"type": "progress", "step": "Blackwell vs Blackwell Ultra - 理解章节", "current": 45, "total": 358, "message": "Blackwell vs Blackwell Ultra - 理解章节", "ts": "2026-04-07T20:27:33.065044"}
+{"type": "progress", "step": "Blackwell vs Blackwell Ultra - 初译", "current": 45, "total": 358, "message": "Blackwell vs Blackwell Ultra - 初译", "ts": "2026-04-07T20:27:33.066349"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:34.075036"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:35.081232"}
+{"type": "progress", "step": "翻译: MI355X vs MI325X vs MI300X", "current": 43, "total": 358, "message": "翻译: MI355X vs MI325X vs MI300X", "ts": "2026-04-07T20:27:35.894059"}
+{"type": "progress", "step": "MI355X vs MI325X vs MI300X - 理解章节", "current": 49, "total": 358, "message": "MI355X vs MI325X vs MI300X - 理解章节", "ts": "2026-04-07T20:27:35.902741"}
+{"type": "progress", "step": "MI355X vs MI325X vs MI300X - 初译", "current": 49, "total": 358, "message": "MI355X vs MI325X vs MI300X - 初译", "ts": "2026-04-07T20:27:35.903048"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:36.916645"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:37.932688"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:38.937990"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:39.953207"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:40.969697"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:41.971688"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:42.986588"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:43.995458"}
+{"type": "progress", "step": "翻译: AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism", "current": 43, "total": 358, "message": "翻译: AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism", "ts": "2026-04-07T20:27:44.081606"}
+{"type": "progress", "step": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism - 理解章节", "current": 45, "total": 358, "message": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism - 理解章节", "ts": "2026-04-07T20:27:44.082115"}
+{"type": "progress", "step": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism - 初译", "current": 46, "total": 358, "message": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism - 初译", "ts": "2026-04-07T20:27:44.088247"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:45.099645"}
+{"type": "progress", "step": "翻译: AMD ATOM Engine", "current": 43, "total": 358, "message": "翻译: AMD ATOM Engine", "ts": "2026-04-07T20:27:46.076184"}
+{"type": "progress", "step": "AMD ATOM Engine - 理解章节", "current": 47, "total": 358, "message": "AMD ATOM Engine - 理解章节", "ts": "2026-04-07T20:27:46.076761"}
+{"type": "progress", "step": "AMD ATOM Engine - 初译", "current": 48, "total": 358, "message": "AMD ATOM Engine - 初译", "ts": "2026-04-07T20:27:46.077226"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:47.105668"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:48.115806"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:49.125438"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:50.136302"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:51.150039"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:52.158350"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:53.170945"}
+{"type": "progress", "step": "翻译: Multi Token Prediction (MTP)", "current": 43, "total": 358, "message": "翻译: Multi Token Prediction (MTP)", "ts": "2026-04-07T20:27:53.555738"}
+{"type": "progress", "step": "Multi Token Prediction (MTP) - 理解章节", "current": 55, "total": 358, "message": "Multi Token Prediction (MTP) - 理解章节", "ts": "2026-04-07T20:27:53.567330"}
+{"type": "progress", "step": "Multi Token Prediction (MTP) - 初译", "current": 57, "total": 358, "message": "Multi Token Prediction (MTP) - 初译", "ts": "2026-04-07T20:27:53.568707"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:54.575112"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:55.592686"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:56.602036"}
+{"type": "progress", "step": "翻译: Accuracy Evaluations", "current": 43, "total": 358, "message": "翻译: Accuracy Evaluations", "ts": "2026-04-07T20:27:57.089515"}
+{"type": "progress", "step": "Accuracy Evaluations - 理解章节", "current": 45, "total": 358, "message": "Accuracy Evaluations - 理解章节", "ts": "2026-04-07T20:27:57.098156"}
+{"type": "progress", "step": "Accuracy Evaluations - 初译", "current": 45, "total": 358, "message": "Accuracy Evaluations - 初译", "ts": "2026-04-07T20:27:57.098446"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:58.102117"}
+{"type": "progress", "step": "翻译: Anthropic Fast Mode Inferencing Explained", "current": 43, "total": 358, "message": "翻译: Anthropic Fast Mode Inferencing Explained", "ts": "2026-04-07T20:27:58.972391"}
+{"type": "progress", "step": "Anthropic Fast Mode Inferencing Explained - 理解章节", "current": 61, "total": 358, "message": "Anthropic Fast Mode Inferencing Explained - 理解章节", "ts": "2026-04-07T20:27:58.983919"}
+{"type": "progress", "step": "Anthropic Fast Mode Inferencing Explained - 初译", "current": 63, "total": 358, "message": "Anthropic Fast Mode Inferencing Explained - 初译", "ts": "2026-04-07T20:27:58.984157"}
+{"type": "heartbeat", "ts": "2026-04-07T20:27:59.985986"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:00.992099"}
+{"type": "progress", "step": "翻译: Wide Expert Parallelism (WideEP) and Disaggregated Prefill", "current": 43, "total": 358, "message": "翻译: Wide Expert Parallelism (WideEP) and Disaggregated Prefill", "ts": "2026-04-07T20:28:01.256442"}
+{"type": "progress", "step": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill - 理解章节", "current": 43, "total": 358, "message": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill - 理解章节", "ts": "2026-04-07T20:28:01.257306"}
+{"type": "progress", "step": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill - 初译", "current": 43, "total": 358, "message": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill - 初译", "ts": "2026-04-07T20:28:01.257776"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:02.266740"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:03.276017"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:04.282396"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:05.300018"}
+{"type": "progress", "step": "翻译: WideEP", "current": 43, "total": 358, "message": "翻译: WideEP", "ts": "2026-04-07T20:28:06.057251"}
+{"type": "progress", "step": "WideEP - 理解章节", "current": 45, "total": 358, "message": "WideEP - 理解章节", "ts": "2026-04-07T20:28:06.057623"}
+{"type": "progress", "step": "WideEP - 初译", "current": 48, "total": 358, "message": "WideEP - 初译", "ts": "2026-04-07T20:28:06.081381"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:07.101789"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:08.118082"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:09.132601"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:10.137857"}
+{"type": "progress", "step": "翻译: Disaggregated Prefill", "current": 43, "total": 358, "message": "翻译: Disaggregated Prefill", "ts": "2026-04-07T20:28:10.670930"}
+{"type": "progress", "step": "Disaggregated Prefill - 理解章节", "current": 47, "total": 358, "message": "Disaggregated Prefill - 理解章节", "ts": "2026-04-07T20:28:10.672425"}
+{"type": "progress", "step": "Disaggregated Prefill - 初译", "current": 48, "total": 358, "message": "Disaggregated Prefill - 初译", "ts": "2026-04-07T20:28:10.672682"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:11.694403"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:12.699594"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:13.701621"}
+{"type": "progress", "step": "翻译: Optimizing Inference with Wide EP + Disaggregated Serving", "current": 43, "total": 358, "message": "翻译: Optimizing Inference with Wide EP + Disaggregated Serving", "ts": "2026-04-07T20:28:14.173207"}
+{"type": "progress", "step": "Optimizing Inference with Wide EP + Disaggregated Serving - 理解章节", "current": 49, "total": 358, "message": "Optimizing Inference with Wide EP + Disaggregated Serving - 理解章节", "ts": "2026-04-07T20:28:14.173693"}
+{"type": "progress", "step": "Optimizing Inference with Wide EP + Disaggregated Serving - 初译", "current": 51, "total": 358, "message": "Optimizing Inference with Wide EP + Disaggregated Serving - 初译", "ts": "2026-04-07T20:28:14.174174"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:15.189399"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:16.204199"}
+{"type": "progress", "step": "翻译: Dive into DeepSeek R1 Single Node Results", "current": 43, "total": 358, "message": "翻译: Dive into DeepSeek R1 Single Node Results", "ts": "2026-04-07T20:28:16.400351"}
+{"type": "progress", "step": "Dive into DeepSeek R1 Single Node Results - 理解章节", "current": 51, "total": 358, "message": "Dive into DeepSeek R1 Single Node Results - 理解章节", "ts": "2026-04-07T20:28:16.400794"}
+{"type": "progress", "step": "Dive into DeepSeek R1 Single Node Results - 初译", "current": 52, "total": 358, "message": "Dive into DeepSeek R1 Single Node Results - 初译", "ts": "2026-04-07T20:28:16.401012"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:17.411797"}
+{"type": "progress", "step": "翻译: GPT-OSS 120B Single Node", "current": 43, "total": 358, "message": "翻译: GPT-OSS 120B Single Node", "ts": "2026-04-07T20:28:17.740015"}
+{"type": "progress", "step": "GPT-OSS 120B Single Node - 理解章节", "current": 49, "total": 358, "message": "GPT-OSS 120B Single Node - 理解章节", "ts": "2026-04-07T20:28:17.742126"}
+{"type": "progress", "step": "GPT-OSS 120B Single Node - 初译", "current": 50, "total": 358, "message": "GPT-OSS 120B Single Node - 初译", "ts": "2026-04-07T20:28:17.744197"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:18.755624"}
+{"type": "progress", "step": "翻译: Core InferenceX Repo Updates", "current": 43, "total": 358, "message": "翻译: Core InferenceX Repo Updates", "ts": "2026-04-07T20:28:19.026917"}
+{"type": "progress", "step": "Core InferenceX Repo Updates - 理解章节", "current": 43, "total": 358, "message": "Core InferenceX Repo Updates - 理解章节", "ts": "2026-04-07T20:28:19.031712"}
+{"type": "progress", "step": "Core InferenceX Repo Updates - 初译", "current": 43, "total": 358, "message": "Core InferenceX Repo Updates - 初译", "ts": "2026-04-07T20:28:19.032043"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:20.044152"}
+{"type": "progress", "step": "翻译: Core Changes Since InferenceXv1", "current": 43, "total": 358, "message": "翻译: Core Changes Since InferenceXv1", "ts": "2026-04-07T20:28:20.476543"}
+{"type": "progress", "step": "Core Changes Since InferenceXv1 - 理解章节", "current": 44, "total": 358, "message": "Core Changes Since InferenceXv1 - 理解章节", "ts": "2026-04-07T20:28:20.488676"}
+{"type": "progress", "step": "Core Changes Since InferenceXv1 - 初译", "current": 44, "total": 358, "message": "Core Changes Since InferenceXv1 - 初译", "ts": "2026-04-07T20:28:20.489364"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:21.505497"}
+{"type": "progress", "step": "翻译: Klaud Cold AI Usage", "current": 43, "total": 358, "message": "翻译: Klaud Cold AI Usage", "ts": "2026-04-07T20:28:22.104412"}
+{"type": "progress", "step": "Klaud Cold AI Usage - 理解章节", "current": 43, "total": 358, "message": "Klaud Cold AI Usage - 理解章节", "ts": "2026-04-07T20:28:22.118760"}
+{"type": "progress", "step": "Klaud Cold AI Usage - 初译", "current": 44, "total": 358, "message": "Klaud Cold AI Usage - 初译", "ts": "2026-04-07T20:28:22.120965"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:23.129503"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:24.143472"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:25.153817"}
+{"type": "progress", "step": "翻译: GitHub Actions", "current": 43, "total": 358, "message": "翻译: GitHub Actions", "ts": "2026-04-07T20:28:25.411344"}
+{"type": "progress", "step": "GitHub Actions - 理解章节", "current": 47, "total": 358, "message": "GitHub Actions - 理解章节", "ts": "2026-04-07T20:28:25.419259"}
+{"type": "progress", "step": "GitHub Actions - 初译", "current": 47, "total": 358, "message": "GitHub Actions - 初译", "ts": "2026-04-07T20:28:25.421315"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:26.424874"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:27.428863"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:28.436217"}
+{"type": "progress", "step": "翻译: Future of InferenceX", "current": 43, "total": 358, "message": "翻译: Future of InferenceX", "ts": "2026-04-07T20:28:28.912371"}
+{"type": "progress", "step": "Future of InferenceX - 理解章节", "current": 43, "total": 358, "message": "Future of InferenceX - 理解章节", "ts": "2026-04-07T20:28:28.912904"}
+{"type": "progress", "step": "Future of InferenceX - 初译", "current": 43, "total": 358, "message": "Future of InferenceX - 初译", "ts": "2026-04-07T20:28:28.919432"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:29.929086"}
+{"type": "progress", "step": "翻译: Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets", "current": 43, "total": 358, "message": "翻译: Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets", "ts": "2026-04-07T20:28:30.198661"}
+{"type": "progress", "step": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets - 理解章节", "current": 43, "total": 358, "message": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets - 理解章节", "ts": "2026-04-07T20:28:30.207458"}
+{"type": "progress", "step": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets - 初译", "current": 44, "total": 358, "message": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets - 初译", "ts": "2026-04-07T20:28:30.211749"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:31.215126"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:32.219295"}
+{"type": "progress", "step": "翻译: Adding TPU, Trainium and More Models", "current": 43, "total": 358, "message": "翻译: Adding TPU, Trainium and More Models", "ts": "2026-04-07T20:28:33.103297"}
+{"type": "progress", "step": "Adding TPU, Trainium and More Models - 理解章节", "current": 43, "total": 358, "message": "Adding TPU, Trainium and More Models - 理解章节", "ts": "2026-04-07T20:28:33.104914"}
+{"type": "progress", "step": "Adding TPU, Trainium and More Models - 初译", "current": 43, "total": 358, "message": "Adding TPU, Trainium and More Models - 初译", "ts": "2026-04-07T20:28:33.105288"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:34.115496"}
+{"type": "progress", "step": "翻译: Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)", "current": 43, "total": 358, "message": "翻译: Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)", "ts": "2026-04-07T20:28:34.928729"}
+{"type": "progress", "step": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300) - 理解章节", "current": 47, "total": 358, "message": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300) - 理解章节", "ts": "2026-04-07T20:28:34.929257"}
+{"type": "progress", "step": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300) - 初译", "current": 47, "total": 358, "message": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300) - 初译", "ts": "2026-04-07T20:28:34.929777"}
+{"type": "heartbeat", "ts": "2026-04-07T20:28:35.939303"}
+{"type": "progress", "step": "一致性审查", "current": 43, "total": 358, "message": "一致性审查", "ts": "2026-04-07T20:28:36.788739"}
+{"type": "incomplete", "translated_count": 200, "total": 358, "result": {"project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo", "status": "incomplete", "total_sections": 36, "translated_sections": 8, "total_paragraphs": 358, "translated_paragraphs": 200, "error_count": 29, "errors": [{"type": "term_conflict", "term": "SemiAnalysis", "existing": "", "new": "SemiAnalysis", "existing_note": "", "new_note": "SemiAnalysis InferenceMAX: vLLM maintainers", "section_id": "03-acknowledgments-and-inferencex", "timestamp": "2026-04-07T20:24:57.695889"}, {"error": "Failed to translate section 08-deepseek-r1: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:26:45.358451", "section": "08-deepseek-r1"}, {"error": "Failed to translate section 09-gpt-oss-120b: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:26:58.732900", "section": "09-gpt-oss-120b"}, {"error": "Failed to translate section 10-disaggregated-inference-framew: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:03.507769", "section": "10-disaggregated-inference-framew"}, {"error": "Failed to translate section 11-deepseek-disagg-wideep-result: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:05.765597", "section": "11-deepseek-disagg-wideep-result"}, {"error": "Failed to translate section 12-nvidia-versus-amd-disagg-prefi: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:10.397702", "section": "12-nvidia-versus-amd-disagg-prefi"}, {"error": "Failed to translate section 13-unpacking-inference-providers: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:29.819647", "section": "13-unpacking-inference-providers"}, {"error": "Failed to translate section 14-jensen-under-promising-and-ove: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:32.017051", "section": "14-jensen-under-promising-and-ove"}, {"error": "Failed to translate section 15-blackwell-vs-blackwell-ultra: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:35.273236", "section": "15-blackwell-vs-blackwell-ultra"}, {"error": "Failed to translate section 16-mi355x-vs-mi325x-vs-mi300x: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:40.083043", "section": "16-mi355x-vs-mi325x-vs-mi300x"}, {"error": "Failed to translate section 17-amd-composability-issue-on-fp4: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:45.301494", "section": "17-amd-composability-issue-on-fp4"}, {"error": "Failed to translate section 18-amd-atom-engine: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:49.018844", "section": "18-amd-atom-engine"}, {"error": "Failed to translate section 19-multi-token-prediction-mtp: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:56.057768", "section": "19-multi-token-prediction-mtp"}, {"error": "Failed to translate section 20-accuracy-evaluations: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:27:58.162895", "section": "20-accuracy-evaluations"}, {"error": "Failed to translate section 21-anthropic-fast-mode-inferencin: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:00.464317", "section": "21-anthropic-fast-mode-inferencin"}, {"error": "Failed to translate section 22-wide-expert-parallelism-widee: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:04.680488", "section": "22-wide-expert-parallelism-widee"}, {"error": "Failed to translate section 23-wideep: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:08.905647", "section": "23-wideep"}, {"error": "Failed to translate section 24-disaggregated-prefill: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:12.129630", "section": "24-disaggregated-prefill"}, {"error": "Failed to translate section 25-optimizing-inference-with-wide: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:15.791656", "section": "25-optimizing-inference-with-wide"}, {"error": "Failed to translate section 26-dive-into-deepseek-r1-single-n: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:17.039103", "section": "26-dive-into-deepseek-r1-single-n"}, {"error": "Failed to translate section 27-gpt-oss-120b-single-node: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:18.497331", "section": "27-gpt-oss-120b-single-node"}, {"error": "Failed to translate section 28-core-inferencex-repo-updates: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:19.935142", "section": "28-core-inferencex-repo-updates"}, {"error": "Failed to translate section 29-core-changes-since-inferencexv: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:21.470043", "section": "29-core-changes-since-inferencexv"}, {"error": "Failed to translate section 30-klaud-cold-ai-usage: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:23.366939", "section": "30-klaud-cold-ai-usage"}, {"error": "Failed to translate section 31-github-actions: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:28.307498", "section": "31-github-actions"}, {"error": "Failed to translate section 32-future-of-inferencex: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:29.575518", "section": "32-future-of-inferencex"}, {"error": "Failed to translate section 33-migration-to-multi-turn-real-m: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:32.485914", "section": "33-migration-to-multi-turn-real-m"}, {"error": "Failed to translate section 34-adding-tpu-trainium-and-more: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:34.298791", "section": "34-adding-tpu-trainium-and-more"}, {"error": "Failed to translate section 35-total-cost-of-ownership-nvl72: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}", "timestamp": "2026-04-07T20:28:36.788091", "section": "35-total-cost-of-ownership-nvl72"}], "started_at": "2026-04-07T20:22:29.583768", "finished_at": "2026-04-07T20:28:36.913383", "run_id": "20260407-202229-583781", "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260407-202229-583781", "export": {"generated_at": "2026-04-07T20:28:36.803713", "translation_mode": "four_step", "markdown": {"path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\NVIDIA Blackwell vs AMD vs Hopper（原 InferenceMAX）_zh.md", "generated": true, "bytes": 108880}}, "api_calls": 12, "elapsed_seconds": 367.4, "consistency": {"is_consistent": false, "total_issues": 2, "auto_fixable_count": 0, "manual_review_count": 2, "issues": [{"section_id": "00-intro", "paragraph_index": 0, "issue_type": "style", "description": "人称使用不统一: 第一人称72次, 第三人称22次", "auto_fixable": false}, {"section_id": "01-introduction", "paragraph_index": 1, "issue_type": "proper_noun", "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}", "auto_fixable": false}]}}, "message": "Translation incomplete: 200/358 paragraphs usable", "ts": "2026-04-07T20:28:36.958426"}

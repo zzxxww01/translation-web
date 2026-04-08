@@ -1,0 +1,23 @@
+{
+  "section_id": "20-accuracy-evaluations",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.2,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 8.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "吞吐量优化有时会暗中牺牲准确性（例如激进放宽接受率、微调解码、使用数值不稳定的算子，或错误配置端点）。若缺乏评测，配置错误的服务器（如发生截断、解码错误、端点参数错误）依然能跑出华丽的吞吐量数据，但输出的纯属垃圾回答。例如，正是借助这层额外的检查，我们才揪出了 GPT-OSS 中某些 DP 注意力机制实现存在的缺陷。",
+    "如今，每种典型的吞吐量配置都已绑定相应的数值准确性检查。目前我们仅使用 GSM8k。但该基准测试过于简单，数值计算差异未必会引起评测分数的明显波动；而在更高难度的基准测试中，数值计算精度不同所带来的评测分数落差可能会更大。因此，我们计划未来引入更高难度的基准测试，如 GPQA、HLE、MATH-500 以及 SWE-Bench verified。",
+    "量化是性能与准确性博弈的另一种体现。降低模型服务精度往往会导致输出质量下降。在 DeepSeek R1 的测试中，FP8 版本的评测分数微幅领先于 FP4。需要注意的是，GSM8k 评测指标现已饱和。在进行量化感知训练 (QAT)/PAT 时，模型通常会针对主流的 GSM8k、MATH-500 等数据集进行专门校准。这就导致跑分数据看起来光鲜亮丽，而真实终端用户的实际体验却大打折扣。如果你想加入团队，共同探索如何正确评估推理引擎的准确性，请在此申请加入这项任务。",
+    "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

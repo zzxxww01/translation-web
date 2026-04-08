@@ -1,0 +1,67 @@
+{
+  "section_id": "25-arm-venom",
+  "new_terms": [
+    {
+      "term": "Venom",
+      "suggested_translation": "Venom (代号)",
+      "context": "ARM’s successor to Phoenix, codenamed Venom",
+      "confidence": 1.0
+    },
+    {
+      "term": "Phoenix",
+      "suggested_translation": "Phoenix (代号)",
+      "context": "ARM’s successor to Phoenix",
+      "confidence": 1.0
+    },
+    {
+      "term": "Neoverse V4",
+      "suggested_translation": "Neoverse V4",
+      "context": "The CPU contains 228 future Neoverse V4 cores",
+      "confidence": 1.0
+    },
+    {
+      "term": "C1 Ultra",
+      "suggested_translation": "C1 Ultra",
+      "context": "likely derived from ARM’s C1 Ultra mobile core",
+      "confidence": 1.0
+    },
+    {
+      "term": "Socionext",
+      "suggested_translation": "索喜科技 (Socionext)",
+      "context": "Socionext has some involvement in the design",
+      "confidence": 1.0
+    },
+    {
+      "term": "LPDDR6",
+      "suggested_translation": "LPDDR6",
+      "context": "the biggest change is the move to LPDDR6 memory",
+      "confidence": 1.0
+    },
+    {
+      "term": "DIMM",
+      "suggested_translation": "DIMM (双列直插式内存模块)",
+      "context": "from traditional DDR5 DIMMs",
+      "confidence": 0.95
+    },
+    {
+      "term": "Accelerator Enablement Kit (AEK)",
+      "suggested_translation": "加速器支持套件 (AEK)",
+      "context": "A next generation Accelerator Enablement Kit, AEK over PCIe7",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "arm": "ARM",
+    "cpu": "CPU",
+    "tsmc": "台积电",
+    "reticle-sized": "光罩极限尺寸",
+    "nvidia": "英伟达",
+    "vera": "Vera (代号)",
+    "chiplet": "芯粒",
+    "ddr5": "DDR5",
+    "ai": "AI",
+    "xpu": "XPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:19:16.178708"
+}

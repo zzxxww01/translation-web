@@ -1,0 +1,37 @@
+{
+  "section_id": "01-are-ai-datacenters-increasing",
+  "assessment": {
+    "passed": false,
+    "overall_score": 9.425,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [
+      "critical_errors (1 > 0)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "SemiAnalysis 携手 Fluidstack 将于 3 月 15 日举办一场为期 48 小时的全栈 AI 基础设施黑客松，以此拉开 GTC 大会的帷幕。本次活动涵盖从电力接入到预填充、从破土动工到解码生成的全栈环节。届时将有来自 OpenAI、GPU MODE 和 Thinking Machines 的嘉宾发表演讲，并提供算力赞助与GPU集群访问权限。快来与顶尖人才并肩共创：在此申请（https://luma.com/SAxFSHack）。",
+    "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与我们近期辟谣的耗水谬论如出一辙。2025年6月，当地居民电价在一夜之间出现约20%的暴涨，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心超过85%的电力均为自发自用，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+    "本报告通过剖析美国最大的两大能源市场（它们同时也是最大的AI数据中心枢纽）来探讨这一问题：PJM互联区域（覆盖含新泽西州在内美国东部13个州的电网运营商）以及ERCOT（负责管理得克萨斯州电网）。在“孤星之州”得克萨斯，过去三年的电价基本保持稳定。反观PJM区域的6700万居民，其2026年的电费账单预计将比“前AI数据中心”时代平均上涨约15%？为何会出现如此显著的分化？简而言之，实证数据表明，罪魁祸首是政府政策，而非AI。",
+    "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+    "来源：SemiAnalysis 能源模型，PJM，Monitoring Analytics",
+    "我们认为，在PJM市场中，糟糕的市场设计才是真正的罪魁祸首。PJM辖区内家庭电费账单15%的涨幅，绝大部分源于一个鲜为人知且常被误解的机制：BRA容量拍卖。如下图所示，2025/26年度的拍卖价格较上一年暴涨了9.3倍。更糟糕的是，这种暴涨完全由一场“模拟”推演而来，根本无法反映真实状况。它在很大程度上取决于集中规划者（即PJM）做出的供需预测，而正如我们后文将要剖析的那样，该机构在预测方面有着屡现重大失误的黑历史。",
+    "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+    "资料来源：PJM BRA报告",
+    "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷歌重点在俄亥俄州哥伦布市周边训练其Gemini模型，而位于印第安纳州和俄亥俄州的Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）与Meta的“普罗米修斯”（Prometheus）项目，均跻身我们统计的全球前五大AI数据中心之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+    "现在来看看得克萨斯州。该州同样在经历规模相当的AI基础设施建设，OpenAI、谷歌DeepMind和Anthropic都在此地建造超大型设施。然而，得州的电力期货在过去一年里仅波动了几个百分点。没有9倍的暴涨，没有危机，这源于截然不同的市场设计。",
+    "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+    "资料来源：彭博社",
+    "我们来深入剖析。本报告将重点聚焦ERCOT和PJM，因为它们不仅是美国最大的两个能源市场，更是这场AI革命的震中。我们将深度拆解两者各自的市场设计，解析它们如何应对激增的AI数据中心负荷增长，以及这些影响最终将如何传导至普通家庭。",
+    "随后，在付费专区，我们将探讨其对供应链的影响。我们认为，市场制约因素正在发生剧烈转变，而许多人却对此毫无察觉。这种转变将深刻影响各大AI领域的赢家，包括独立发电商（IPPs，如Vistra、Constellation、Talen等）、设备供应商，以及类似加密货币矿企的数据中心开发商。",
+    "对于寻求更深入分析的机构，请订阅我们的能源模型和数据中心行业模型。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+    "让我们先简要解析一下“容量”究竟是什么，以及它是如何传导至你每月的电费账单中的，然后再进一步深入剖析市场设计。",
+    "本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。"
+  ]
+}

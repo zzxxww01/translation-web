@@ -1,0 +1,578 @@
+{
+  "report": {
+    "is_consistent": false,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称72次, 第三人称22次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "auto_fixable": [],
+    "manual_review": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称72次, 第三人称22次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "term_stats": {
+      "TRTLLM": {
+        "total_count": 4,
+        "translations": {
+          "TensorRT-LLM": 2
+        },
+        "is_consistent": true,
+        "preferred": "TensorRT-LLM"
+      },
+      "LLM": {
+        "total_count": 10,
+        "translations": {
+          "LLM": 10
+        },
+        "is_consistent": true,
+        "preferred": "LLM"
+      },
+      "GB300 NVL72": {
+        "total_count": 5,
+        "translations": {
+          "GB300 NVL72": 5
+        },
+        "is_consistent": true,
+        "preferred": "GB300 NVL72"
+      },
+      "MI355X": {
+        "total_count": 3,
+        "translations": {
+          "MI355X": 3
+        },
+        "is_consistent": true,
+        "preferred": "MI355X"
+      },
+      "Disaggregated Serving": {
+        "total_count": 2,
+        "translations": {
+          "分离式服务": 2
+        },
+        "is_consistent": true,
+        "preferred": "分离式服务"
+      },
+      "Large Mixture of Experts": {
+        "total_count": 1,
+        "translations": {
+          "大规模混合专家模型": 1
+        },
+        "is_consistent": true,
+        "preferred": "大规模混合专家模型"
+      },
+      "SGLang": {
+        "total_count": 7,
+        "translations": {
+          "SGLang": 7
+        },
+        "is_consistent": true,
+        "preferred": "SGLang"
+      },
+      "vLLM": {
+        "total_count": 6,
+        "translations": {
+          "vLLM": 6
+        },
+        "is_consistent": true,
+        "preferred": "vLLM"
+      },
+      "B200": {
+        "total_count": 5,
+        "translations": {
+          "B200": 5
+        },
+        "is_consistent": true,
+        "preferred": "B200"
+      },
+      "H100": {
+        "total_count": 3,
+        "translations": {
+          "H100": 3
+        },
+        "is_consistent": true,
+        "preferred": "H100"
+      },
+      "aggregated serving": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "聚合式服务"
+      },
+      "AI": {
+        "total_count": 16,
+        "translations": {
+          "AI": 5
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "inference": {
+        "total_count": 23,
+        "translations": {
+          "推理": 11
+        },
+        "is_consistent": true,
+        "preferred": "推理"
+      },
+      "performance": {
+        "total_count": 10,
+        "translations": {
+          "性能": 10
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "benchmark": {
+        "total_count": 8,
+        "translations": {
+          "基准测试": 8
+        },
+        "is_consistent": true,
+        "preferred": "基准测试"
+      },
+      "InferenceXv2": {
+        "total_count": 3,
+        "translations": {
+          "InferenceXv2": 3
+        },
+        "is_consistent": true,
+        "preferred": "InferenceXv2"
+      },
+      "OSS": {
+        "total_count": 9,
+        "translations": {
+          "开源软件": 1
+        },
+        "is_consistent": true,
+        "preferred": "开源软件"
+      },
+      "Wide Expert Parallelism (WideEP)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "宽专家并行 (WideEP)"
+      },
+      "NVIDIA": {
+        "total_count": 9,
+        "translations": {
+          "英伟达": 9
+        },
+        "is_consistent": true,
+        "preferred": "英伟达"
+      },
+      "AMD": {
+        "total_count": 6,
+        "translations": {
+          "AMD": 6
+        },
+        "is_consistent": true,
+        "preferred": "AMD"
+      },
+      "GPU": {
+        "total_count": 5,
+        "translations": {
+          "GPU": 5
+        },
+        "is_consistent": true,
+        "preferred": "GPU"
+      },
+      "prefill": {
+        "total_count": 10,
+        "translations": {
+          "预填充": 10
+        },
+        "is_consistent": true,
+        "preferred": "预填充"
+      },
+      "Vera": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "SKU": {
+        "total_count": 2,
+        "translations": {
+          "SKU": 2
+        },
+        "is_consistent": true,
+        "preferred": "SKU"
+      },
+      "node": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "制程节点"
+      },
+      "Blackwell": {
+        "total_count": 5,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "Blackwell Ultra": {
+        "total_count": 1,
+        "translations": {
+          "Blackwell Ultra": 1
+        },
+        "is_consistent": true,
+        "preferred": "Blackwell Ultra"
+      },
+      "pareto frontier curve": {
+        "total_count": 1,
+        "translations": {
+          "帕累托前沿曲线": 1
+        },
+        "is_consistent": true,
+        "preferred": "帕累托前沿曲线"
+      },
+      "FP4": {
+        "total_count": 5,
+        "translations": {
+          "FP4": 5
+        },
+        "is_consistent": true,
+        "preferred": "FP4"
+      },
+      "FP8": {
+        "total_count": 4,
+        "translations": {
+          "FP8": 4
+        },
+        "is_consistent": true,
+        "preferred": "FP8"
+      },
+      "Claude Code Fast mode": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "Claude Code Fast 模式"
+      },
+      "ML": {
+        "total_count": 2,
+        "translations": {
+          "机器学习": 2
+        },
+        "is_consistent": true,
+        "preferred": "机器学习"
+      },
+      "TPU": {
+        "total_count": 2,
+        "translations": {
+          "TPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "TPUv7 Ironwood": {
+        "total_count": 1,
+        "translations": {
+          "TPUv7 Ironwood": 1
+        },
+        "is_consistent": true,
+        "preferred": "TPUv7 Ironwood"
+      },
+      "Trainium3": {
+        "total_count": 1,
+        "translations": {
+          "Trainium3": 1
+        },
+        "is_consistent": true,
+        "preferred": "Trainium3"
+      },
+      "framemog": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "框架级碾压"
+      },
+      "TCO": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "总拥有成本"
+      },
+      "perf per TCO": {
+        "total_count": 3,
+        "translations": {
+          "单位 TCO 性能": 2
+        },
+        "is_consistent": true,
+        "preferred": "单位 TCO 性能"
+      },
+      "upstream": {
+        "total_count": 2,
+        "translations": {
+          "上游": 2
+        },
+        "is_consistent": true,
+        "preferred": "上游"
+      },
+      "SemiAnalysis": {
+        "total_count": 6,
+        "translations": {
+          "SemiAnalysis": 6
+        },
+        "is_consistent": true,
+        "preferred": "SemiAnalysis"
+      },
+      "token": {
+        "total_count": 4,
+        "translations": {
+          "token": 4
+        },
+        "is_consistent": true,
+        "preferred": "token"
+      },
+      "efficiency": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "效率"
+      },
+      "Composability": {
+        "total_count": 2,
+        "translations": {
+          "可组合性": 2
+        },
+        "is_consistent": true,
+        "preferred": "可组合性"
+      },
+      "SOTA": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "SOTA (顶尖水平)"
+      },
+      "revenue": {
+        "total_count": 1,
+        "translations": {
+          "营收": 1
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "MTP": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "MTP (多 token 预测)"
+      },
+      "GTC": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "GTC 大会"
+      },
+      "Jensen Math": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "黄氏数学 (Jensen Math)"
+      },
+      "triage": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "故障分级/排查"
+      },
+      "GPT": {
+        "total_count": 1,
+        "translations": {
+          "GPT": 1
+        },
+        "is_consistent": true,
+        "preferred": "GPT"
+      },
+      "Interactivity": {
+        "total_count": 4,
+        "translations": {
+          "交互速度": 3
+        },
+        "is_consistent": true,
+        "preferred": "交互速度"
+      },
+      "Throughput": {
+        "total_count": 3,
+        "translations": {
+          "吞吐量": 3
+        },
+        "is_consistent": true,
+        "preferred": "吞吐量"
+      },
+      "latency": {
+        "total_count": 3,
+        "translations": {
+          "延迟": 3
+        },
+        "is_consistent": true,
+        "preferred": "延迟"
+      },
+      "FLOPS": {
+        "total_count": 1,
+        "translations": {
+          "FLOPS": 1
+        },
+        "is_consistent": true,
+        "preferred": "FLOPS"
+      },
+      "TOPS": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "TOPS"
+      },
+      "decode": {
+        "total_count": 4,
+        "translations": {
+          "解码": 4
+        },
+        "is_consistent": true,
+        "preferred": "解码"
+      },
+      "HBM": {
+        "total_count": 1,
+        "translations": {
+          "HBM": 1
+        },
+        "is_consistent": true,
+        "preferred": "HBM"
+      },
+      "bandwidth": {
+        "total_count": 1,
+        "translations": {
+          "带宽": 1
+        },
+        "is_consistent": true,
+        "preferred": "带宽"
+      },
+      "Disaggregated Prefill": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "分离式 Prefill"
+      },
+      "All-reduce": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "全归约 (All-reduce)"
+      },
+      "All-to-all": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "全交换 (All-to-all)"
+      }
+    },
+    "style_score": 90.0,
+    "suggestions": [
+      {
+        "issue_type": "proper_noun",
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "style",
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "description": "人称使用不统一: 第一人称72次, 第三人称22次",
+        "action": "建议统一使用一种人称表述",
+        "auto_fixable": false,
+        "priority": 4
+      }
+    ]
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "GB300 NVL72、MI355X、B200、H100、分离式服务、宽泛专家并行、大规模混合专家模型、SGLang、vLLM、TensorRT-LLM (TRTLLM)",
+      "作者：Dylan Patel、Cam Quilici、Bryan Shan 等 4 人",
+      "2026 年 2 月 16 日 · 付费文章"
+    ],
+    "01-introduction": [
+      "InferenceXv2（前身为 InferenceMAX）在 InferenceMAXv1 奠定的基础上构建，后者是我们开源且持续更新的推理基准测试（benchmark），为 AI 推理性能与经济性树立了新标杆。InferenceMAXv1 摒弃了静态、特定时间点的基准测试，转而对数百款芯片和主流开源框架进行持续测试。点击此处查看免费数据看板。",
+      "我们的基准测试已被几乎所有主要算力买家广泛复现、验证或支持，涵盖从 Google Cloud、Microsoft Azure 到 Oracle、OpenAI 等众多头部企业。",
+      "InferenceXv2 正是建立在这一基础之上。它扩大了测试范围，纳入了采用宽专家并行（Wide Expert Parallelism (WideEP)）优化的大规模 DeepSeek 混合专家模型（MoE）分离式推理（分离式预填充，简称“分离式”），覆盖了过去 4 年英伟达面向西方市场推出的全部 6 款 GPU SKU (库存单位/型号)，以及过去 3 年 AMD 面向西方市场发布的每一款 GPU SKU。总体而言，InferenceXv2 调用了近 1000 张前沿 GPU，以完成跨所有 SKU 的完整基准测试运行。",
+      "随着今日发布，InferenceXv2 成为首个跨越整条帕累托前沿曲线对 Blackwell Ultra GB300 NVL72机架级系统和 B300 进行基准测试的套件；同时，它也是首个测试在 MI355X 上组合使用 FP4 与 FP8、分离式架构以及宽专家并行时多节点性能的第三方基准测试。在 InferenceX 的未来迭代中，我们将继续重兵投入采用宽专家并行的分离式服务，因为这正是 OpenAI、Anthropic、xAI、Google Deepmind、DeepSeek 等前沿 AI 实验室，以及 TogetherAI、Baseten 和 Fireworks 等先进 API 提供商在生产环境中实际部署的方案。在本文中，我们还将深入剖析围绕最新的 Claude Code 快速模式功能所涉及的系统工程原理与经济学逻辑。",
+      "我们的基准测试在 Apache 2.0 协议下完全开源——这意味着我们能够与 AI 软件生态系统的演进保持同样的高速迭代。如果你认可我们的工作并希望提供支持，请在我们的 GitHub 上点个 Star！我们还在 https://inferencex.com 提供了免费的数据可视化工具，供机器学习社区的所有人自行探索完整数据集。",
+      "我们将在首日（day 0）即刻支持并加入 DeepSeekv4 及其他热门的中国前沿模型，因为在过去 6 个月里，我们已经清理了大量技术债，如今能够在稳定的基础设施上快速迭代。今年晚些时候，我们还将把 TPUv7 Ironwood 和 Trainium3 纳入 InferenceX！如果你渴望参与这项极具影响力的使命，同时获得极具竞争力的薪酬，欢迎在此申请加入我们。",
+      "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+      "来源：InferenceMAX GitHub"
+    ],
+    "02-key-observations-and-results-t": [
+      "在对比 AMD 平台上采用 FP8 精度、分离式预填充（disagg prefill）加宽专家并行（wideEP）的 SGLang 与英伟达 B200 上同等配置的 SGLang 时，我们发现 MI355X 展现出了极具竞争力的单位 TCO 性能。然而，一旦与广泛使用的 Dynamo TensorRT-LLM (TRTLLM) B200 FP8 配置相比，TRT 依然呈现降维打击之势。即便如此，AMD 的 SGLang 在 FP8 分离式预填充加 wideEP 配置下能够追平英伟达的 SGLang 性能，这依然是个极其振奋人心的消息。",
+      "我们还发现，在单节点集成式服务场景下，AMD 的 SGLang 在 FP8 精度上提供了比英伟达 SGLang 更优的单位 TCO 性能。令人欣慰的是，AMD 已经废弃了他们那个二流的 vLLM 分支，转而更积极地向上游靠拢，向提供一流体验迈进了一大步。敬请期待我们的《AMD 现状》一文，我们将在其中探讨 AMD 进展神速的诸多领域，以及那些差强人意的短板。我们建议英伟达在 TRTLLM 引擎之外，进一步加码对 SGLang 和 vLLM 生态系统的投入。黄仁勋需要调配更多资源和工程师，为 SGLang 和 vLLM 等开放生态做出贡献。",
+      "SemiAnalysis 的 InferenceX 是一款免费开源软件，由读者提供支持。若想接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+      "当谈及最顶尖的前沿大规模推理服务所采用的最新推理技术（如分离式预填充+wideEP+FP4）时，英伟达凭借 B200、B300 以及堪称“ASU 兄弟会老大”（译注：形容其极具统治力）的 GB200/GB300 NVL72机架级系统，在 SGLang 和 TRTLLM 上均实现了全面的降维打击。英伟达 GPU 在能效方面同样占据统治地位，在所有工作负载下，每个 token 的综合配置能耗（皮焦耳级别）都要低得多。",
+      "反观 AMD，我们发现其系统与软件在推理上面临的最大问题在于[可组合性](https://en.wikipedia.org/wiki/Composability)。也就是说，AMD 的许多推理优化方案在单独运行时表现良好，但与其他优化手段组合使用时，结果却远不如预期那般具备竞争力。具体而言，分离式预填充、wideEP 以及 FP4 推理优化之间的可组合性亟待大幅提升。",
+      "虽然在仅开启部分业界领先的推理优化时，AMD 的性能尚具竞争力，但一旦同时开启前沿实验室常用的这三大核心优化，AMD 目前的性能便无法与英伟达抗衡。我们强烈建议 AMD 将重心放在不同推理优化的可组合性上。有消息称，AMD 将开始在整个软件栈层面发力解决 FP4 加分布式推理的软件可组合性问题。这项工作将在农历新年后展开，因为他们大部分负责分离式预填充加 wideEP 的“10倍速”推理工程师都常驻中国。",
+      "英伟达的 GB300 NVL72机架级系统 没有让人失望。即便与强悍的 H100 分离式预填充+wideEP+MTP（多Token预测）基准相比，它在 FP4 精度下相比 H100 的 FP8 精度实现了高达 100 倍的性能飞跃，而在同等 FP8 精度对比中也达到了 65 倍。在 H100 与 GB200 NVL72机架级系统 的较量中，我们观察到在每秒每用户 75 个 token（tok/s/user）的吞吐量下，实际性能差距高达 55 倍。Blackwell NVL72机架级系统 正在对 Hopper 架构实施降维打击，衬托得 Hopper 简直像个纯纯小丑。正如黄仁勋在 GTC 2025 大会上所言，他是首席营收毁灭者。",
+      "在 GTC 2024 大会上，黄仁勋宣称 Blackwell 的推理性能将比 H100 提升高达 30 倍，而他在 Blackwell 推理性能上显然是低调承诺、超额交付。这应该能让分析师们在未来一段时间内少拿“黄氏数学”开玩笑了。",
+      "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png",
+      "来源：SemiAnalysis InferenceX"
+    ],
+    "03-acknowledgments-and-inferencex": [
+      "我们在此感谢黄仁勋和 Ian Buck 对这项开源工作的鼎力支持，他们不仅为我们开放了最新 GB300 NVL72机架级系统的访问权限，还提供了涵盖其过去四年生产的所有 GPU SKU 的服务器。我们要感谢英伟达团队允许我们在这近 1000 张 GPU 上开展独立基准测试。感谢 Jatin Gangani、Kedar Potdar、Sridhar Ramaswamy、Ishan Dhanani、Sahithi Chigurupati 以及众多其他英伟达推理工程师，协助我们验证并优化 Blackwell 与 Hopper (架构) 的配置。",
+      "我们同样感谢苏姿丰和 Anush Elangovan 对 InferenceMAX 的大力支持，并促成了我们与 Chun、Andy、Bill、Ramine、Theresa、Parth 等数十位 AMD 工程师的合作。这些工程师不仅为 InferenceMAX 及上游 vLLM/SGLang 的 Bug 修复贡献了力量，还在协助调试与分类排查 AMD 平台特有的 Bug 时展现了极高的响应速度，切实助力优化了 AMD 的性能。",
+      "我们还要特别鸣谢 SGLang、vLLM 和 TensorRT-LLM 的维护者，他们构建了世界级软件栈并将其全面开源。您可以在此查看他们关于 InferenceX 的文章：",
+      "SemiAnalysis InferenceMAX：vLLM 维护者与英伟达加速 Blackwell 推理",
+      "GPT-开源软件 (OSS) 性能优化：推高帕累托前沿",
+      "SGLang 与英伟达携手加速 SemiAnalysis InferenceMAX 与 GB200",
+      "InferenceX 计划还得到了众多核心算力买家及机器学习 (ML) 社区重量级成员的支持，包括来自 OpenAI、微软、vLLM、PyTorch 基金会、甲骨文等机构的专家，以及 Tri Dao 等个人。点击此处查看完整名单。",
+      "SemiAnalysis InferenceX 是一款免费开源软件，依靠读者支持运营。欢迎成为免费或付费订阅者，以获取最新文章并支持我们的工作。"
+    ],
+    "04-a-primer-on-important-technica": [
+      "在本节中，我们将提供一份简短的技术概念入门指南，帮助读者更好地解读结果。部分读者可能不需要这部分内容，可以直接跳到我们的结果分析。在结果分析之后，我们将对其中一些主题进行深度探讨。"
+    ],
+    "05-interactivity-vs-throughput-tr": [
+      "LLM 推理的根本权衡在于吞吐量与延迟。交互速度 (tok/s/user) 衡量系统向每位用户返回 token 的快慢，它是每个输出Token的时间 (TPOT) 的倒数。吞吐量 (tok/s) 则衡量系统在所有用户中总共能产出多少 token。通过批处理请求可以实现更高的总吞吐量，但分配给每个请求的 FLOPS 会减少，导致完成速度变慢。这就像是在乘坐公交车和赛车之间做选择。公交车能服务众多乘客，但频繁停靠会耗费时间，不过其成本可以分摊到众多乘客身上。",
+      "赛车只能搭载一两名乘客，但几乎中途不停，整体行程更快，不过单客乘坐成本要高得多。周末去公园游玩的人可能更适合坐公交车，而护送名人前往目的地则更适合用赛车。这里没有放之四海而皆准的解决方案。",
+      "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+      "来源：SemiAnalysis",
+      "本文展示的大多数 InferenceX 基准测试结果都呈一条曲线。必须分析不同交互速度/延迟水平下的吞吐量，而非仅仅盯着最高吞吐量（通常只能在单一的低交互速度下实现）。推理领域不存在万能的用例。所需的交互速度和吞吐量水平取决于具体应用场景。例如，实时语音模型要求极低的延迟，确保最终用户能与 LLM 保持自然的“对话”；而基础的问答聊天机器人则可以容忍较高的延迟。读者可以自行查看曲线，并运用这一原则来确定自己的用例在吞吐量-交互速度曲线上的具体位置。",
+      "单位 TCO 性价比与交互速度/端到端延迟曲线，基本与吞吐量与交互速度/端到端延迟曲线走势一致：每小时生成的 token 越多，分摊到每个 token 上的固定小时成本就越低，从而降低了单 token 成本。",
+      "预填充与解码阶段",
+      "推理包含两个主要阶段：预填充和解码。预填充发生在请求生命周期的首次前向传播期间。由于请求中的所有 token 都在并行处理，该阶段属于计算密集型。此阶段负责为序列“填满”KV 缓存。预填充结束后，系统会逐个 token 地生成（或解码）响应。每次前向传播都会从 HBM 加载该序列的完整 KV 缓存，却只执行单个 token 的计算，这使得解码成为内存（带宽）密集型操作。",
+      "若预填充与解码在同一引擎上执行，预填充会频繁打断解码批次，拖累整体性能。",
+      "分离式预填充",
+      "分离式预填充（又称 PD分离 (预填充-解码分离)，或简称“分离”）是指将预填充与解码阶段拆分，分别交由独立的 GPU 资源池或集群来处理。这些相互独立的预填充池与解码池可进行独立调优，并弹性缩放以适配工作负载需求。"
+    ],
+    "06-tensor-parallel-expert-parall": [
+      "张量并行（TP）能在小批次下实现交互性 (tok/s/user) 最大化，但必须在每一层执行全量归约。专家并行（EP）通过专家分片来利用混合专家（MoE）的稀疏性。其缺点在于，MoE 层需要执行全对全集合通信（成本高于全量归约等简单集合通信），且在小批次下容易出现负载不均。数据并行（DP）将整个模型（或注意力机制等部分模型）复制到多组 GPU（Rank）上，随后在各 Rank 之间对请求进行负载均衡。这种方式扩展最简单，但会重复加载权重，在规模扩大时容易造成资源浪费。"
+    ],
+    "07-tracking-improvements-over-tim": [
+      "InferenceX 的主要目标之一，是直观呈现性能随时间推移的提升轨迹。尽管新芯片按 O(年)级别周期发布，但软件的发布却遵循 O(周)级别周期。我们的目标是，持续将最新、最优的软件改进融入配置方案 (Recipes) 中，并对这些配置进行基准测试。"
+    ]
+  }
+}

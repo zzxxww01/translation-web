@@ -1,0 +1,35 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "grid reliability",
+      "suggested_translation": "电网可靠性",
+      "context": "ERCOT vs PJM grid reliability and expansion",
+      "confidence": 0.95
+    },
+    {
+      "term": "grid expansion",
+      "suggested_translation": "电网扩建",
+      "context": "ERCOT vs PJM grid reliability and expansion",
+      "confidence": 0.95
+    },
+    {
+      "term": "market design",
+      "suggested_translation": "市场设计",
+      "context": "PJM's poor market design",
+      "confidence": 0.9
+    },
+    {
+      "term": "capacity prices",
+      "suggested_translation": "容量价格",
+      "context": "Capacity prices 9.3x growth",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "pjm": "PJM",
+    "ercot": "ERCOT"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T21:05:23.709844"
+}

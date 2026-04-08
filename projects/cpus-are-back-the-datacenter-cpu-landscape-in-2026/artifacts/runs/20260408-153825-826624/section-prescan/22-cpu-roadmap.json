@@ -1,0 +1,48 @@
+{
+  "section_id": "22-cpu-roadmap",
+  "new_terms": [
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+      "confidence": 1.0
+    },
+    {
+      "term": "Huawei",
+      "suggested_translation": "华为",
+      "context": "including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Microsoft",
+      "suggested_translation": "微软",
+      "context": "including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Google",
+      "suggested_translation": "谷歌",
+      "context": "including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei.",
+      "confidence": 1.0
+    },
+    {
+      "term": "OpenAI",
+      "suggested_translation": "OpenAI",
+      "context": "Ampere Computing’s lineup will be changed to try to intersect with OpenAI.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "cpu": "CPU",
+    "datacenter": "数据中心",
+    "amd": "AMD",
+    "intel": "英特尔",
+    "nvidia": "英伟达",
+    "aws": "AWS",
+    "arm": "ARM",
+    "qualcomm": "高通",
+    "ampere computing": "Ampere Computing (安培计算)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:43:01.660316"
+}

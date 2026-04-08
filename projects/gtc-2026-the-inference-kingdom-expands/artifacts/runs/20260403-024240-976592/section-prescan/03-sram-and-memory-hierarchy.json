@@ -1,0 +1,55 @@
+{
+  "section_id": "03-sram-and-memory-hierarchy",
+  "new_terms": [
+    {
+      "term": "time to first token",
+      "suggested_translation": "首字延迟",
+      "context": "Groq’s LPU enable very fast time to first token but at the expense of total throughput.",
+      "confidence": 0.95
+    },
+    {
+      "term": "KVcache",
+      "suggested_translation": "KV 缓存",
+      "context": "limited SRAM capacity quickly gets saturated by weights, with little left over for KVcache.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NVFP4",
+      "suggested_translation": "NVFP4 数值格式",
+      "context": "It will incorporate NVFP4 number format but given Nvidia is prioritizing time to market.",
+      "confidence": 0.9
+    },
+    {
+      "term": "SF4",
+      "suggested_translation": "SF4 (三星 4nm 制程)",
+      "context": "LP35 which is a minor refresh of the LP30 which will remain on SF4.",
+      "confidence": 0.9
+    },
+    {
+      "term": "MatMul cores",
+      "suggested_translation": "矩阵乘法核心",
+      "context": "a very small amount of area dedicated to MatMul cores that offer 1.2 PFLOPs of FP8 compute.",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoWoS-R",
+      "suggested_translation": "CoWoS-R",
+      "context": "fabricated on TSMC N3P and use CoWoS-R.",
+      "confidence": 0.95
+    },
+    {
+      "term": "hybrid bonded DRAM",
+      "suggested_translation": "混合键合 DRAM",
+      "context": "technical innovations planned is hybrid bonded DRAM to extend on-chip memory.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "lpu (language processing unit)": "语言处理单元 (LPU)",
+    "reticle size": "光罩极限尺寸",
+    "sram": "SRAM",
+    "throughput": "吞吐量"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:48:50.416478"
+}

@@ -1,0 +1,34 @@
+{
+  "section_id": "07-compute-tray-mechanical",
+  "new_terms": [
+    {
+      "term": "Grace Blackwell",
+      "suggested_translation": "Grace Blackwell",
+      "context": "Comparison between VR NVL72 and the Grace Blackwell compute tray.",
+      "confidence": 0.95
+    },
+    {
+      "term": "blind mate",
+      "suggested_translation": "盲插",
+      "context": "A process where modules are guided to connect with the midplane without visual alignment.",
+      "confidence": 0.98
+    },
+    {
+      "term": "loading mechanism",
+      "suggested_translation": "加载机构",
+      "context": "Mechanical parts that apply force to ensure modules are well connected to connectors.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "VR NVL72": "VR NVL72",
+    "Orchid modules": "Orchid 模块",
+    "BlueField-4": "BlueField-4",
+    "midplane": "中板",
+    "internal manifolds": "内部歧管",
+    "Paladin connectors": "Paladin 连接器",
+    "MQD": "MQD"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:30:14.300045"
+}

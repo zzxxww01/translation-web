@@ -1,0 +1,44 @@
+{
+  "section_id": "32-future-of-inferencex",
+  "new_terms": [
+    {
+      "term": "agentic coding",
+      "suggested_translation": "智能体编程",
+      "context": "add an agentic coding performance benchmark",
+      "confidence": 0.95
+    },
+    {
+      "term": "benchmark pipeline",
+      "suggested_translation": "基准测试流水线",
+      "context": "added accuracy evaluations to our default benchmark pipeline",
+      "confidence": 0.95
+    },
+    {
+      "term": "north star goal",
+      "suggested_translation": "北极星目标",
+      "context": "achieve the north star goal of providing the most real-world inference benchmarks",
+      "confidence": 0.9
+    },
+    {
+      "term": "GB300",
+      "suggested_translation": "GB300",
+      "context": "integrate PD-disagg benchmarks for H100, H200, B200, B300, GB200, GB300, and MI355X",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "inferencex": "InferenceX",
+    "pd disaggregation": "PD 分离",
+    "disagg": "分离 (Disagg)",
+    "h100": "H100",
+    "h200": "H200",
+    "b200": "B200",
+    "b300": "B300",
+    "gb200": "GB200",
+    "mi355x": "MI355X",
+    "benchmark": "基准测试",
+    "sota": "SOTA (最先进)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:17:54.080104"
+}

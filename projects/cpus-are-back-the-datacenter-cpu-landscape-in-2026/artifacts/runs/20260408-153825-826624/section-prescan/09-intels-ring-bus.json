@@ -1,0 +1,69 @@
+{
+  "section_id": "09-intels-ring-bus",
+  "new_terms": [
+    {
+      "term": "ring stop",
+      "suggested_translation": "环形站点",
+      "context": "ring stops integrated into the L3 cache slices and wiring",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory snooping",
+      "suggested_translation": "内存嗅探",
+      "context": "Caching and Home agents deal with memory snooping between cores",
+      "confidence": 0.95
+    },
+    {
+      "term": "Caching and Home agents",
+      "suggested_translation": "缓存与主代理",
+      "context": "Caching and Home agents deal with memory snooping between cores and coherence",
+      "confidence": 0.9
+    },
+    {
+      "term": "counter rotating rings",
+      "suggested_translation": "双向反转环",
+      "context": "two counter rotating rings are implemented, with the optimal direction of travel chosen",
+      "confidence": 0.9
+    },
+    {
+      "term": "HCC",
+      "suggested_translation": "高核心数 (HCC)",
+      "context": "18-core Haswell HCC die featuring dual independent counter rotating ring buses",
+      "confidence": 0.95
+    },
+    {
+      "term": "MCC",
+      "suggested_translation": "中等核心数 (MCC)",
+      "context": "The MCC die variant wrapped a single half-ring back on itself.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Non Uniform Memory Access (NUMA)",
+      "suggested_translation": "非统一内存访问 (NUMA)",
+      "context": "This Non Uniform Memory Access (NUMA) was detrimental to system performance",
+      "confidence": 1.0
+    },
+    {
+      "term": "Cluster on Die (CoD)",
+      "suggested_translation": "片上集群 (CoD)",
+      "context": "Intel offered a “Cluster on Die” configuration option in the BIOS",
+      "confidence": 0.95
+    },
+    {
+      "term": "BIOS",
+      "suggested_translation": "BIOS",
+      "context": "configuration option in the BIOS",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "intel": "英特尔",
+    "ring bus": "环形总线",
+    "l3 cache": "L3缓存",
+    "latency": "延迟",
+    "integrated memory controller (imc)": "集成内存控制器",
+    "quick path interconnect (qpi)": "QPI"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:56:10.893139"
+}

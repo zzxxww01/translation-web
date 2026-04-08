@@ -1,0 +1,20 @@
+{
+  "section_id": "05-short-term-rental-on-demand",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 3,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "Providers will adjust pricing on a one-off basis in response to utilization levels",
+        "description": "“一次性调整”在中文语境下容易被误解为“只调整一次，以后不再调整（一劳永逸）”。原文“on a one-off basis”结合后文的阶跃函数特征，意指价格调整是离散的、事件驱动的单次行为（与算法连续动态定价相反）。",
+        "why_it_matters": "避免读者误解供应商的定价策略，更精准地传达按需市场价格调整的非连续性/离散性。",
+        "suggestion": "建议将“进行一次性调整”修改为“进行不定期单次调整”或“进行单次离散调整”。"
+      }
+    ]
+  }
+}

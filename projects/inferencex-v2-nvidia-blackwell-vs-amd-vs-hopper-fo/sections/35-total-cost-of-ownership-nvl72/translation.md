@@ -1,0 +1,13 @@
+横向对比同代产品，英伟达系统的资本成本通常高于 AMD 系统。这主要是因为其计算托盘的组件成本更高，而这又源于更高的 GPU 定价——众所周知，从财报来看，英伟达 GPU 的利润率远高于其他厂商。举例来说，MI300X 计算托盘的组件成本约为 13.8 万美元，而 H100 SXM 则约为 17 万美元，到了后几代产品，这一差距进一步拉大。MI355X 约为 19.7 万美元，B200 增至约 26.4 万美元，B300 则高达约 34.4 万美元。这些增加的芯片组件成本直接推高了服务器成本，并最终导致每台服务器的集群总资本支出水涨船高。
+
+这一动态在 Blackwell 这一代产品中得以延续：GPU 组件成本的增加推高了服务器总成本，进而抬高了单台服务器的前期集群资本支出，最终导致了更高的资本拥有成本。
+
+https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png
+
+来源：SemiAnalysis AI TCO 模型
+
+在同代产品中，每块 GPU 的运营成本大致相当，因为芯片的 TDP (热设计功耗) 是决定 TCO 中运营成本的主导因素。从 H100 升级到 GB300，这一成本随之上升，因为芯片 TDP 翻了一番，从而推高了每块 GPU 的每小时运营成本。
+
+https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png
+
+来源：SemiAnalysis AI TCO 模型

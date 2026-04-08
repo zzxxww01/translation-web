@@ -1,0 +1,63 @@
+{
+  "section_id": "07-history-of-multi-core-cpu-inte",
+  "new_terms": [
+    {
+      "term": "Xeon Paxville",
+      "suggested_translation": "至强 Paxville",
+      "context": "Early dual-core design by Intel in 2005.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Northbridge",
+      "suggested_translation": "北桥",
+      "context": "Chip that housed the memory controllers in early architectures.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Athlon 64 X2",
+      "suggested_translation": "速龙 64 X2",
+      "context": "AMD's 2005 dual-core processor.",
+      "confidence": 0.95
+    },
+    {
+      "term": "integrated memory controller (IMC)",
+      "suggested_translation": "集成内存控制器 (IMC)",
+      "context": "Controller integrated on the same die to allow cores to communicate directly to memory.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Network on Chip (NoC)",
+      "suggested_translation": "片上网络 (NoC)",
+      "context": "On-die data fabrics for communication within the silicon.",
+      "confidence": 0.95
+    },
+    {
+      "term": "data fabric",
+      "suggested_translation": "数据网络",
+      "context": "On-die core-to-core communication architecture.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Tulsa",
+      "suggested_translation": "Tulsa",
+      "context": "Intel processor generation codename.",
+      "confidence": 0.9
+    },
+    {
+      "term": "L3 cache",
+      "suggested_translation": "三级缓存",
+      "context": "16MB of L3 cache shared between the two cores.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "cpu": "CPU",
+    "intel": "Intel",
+    "amd": "AMD",
+    "die shot": "Die Shot",
+    "pentium": "Pentium",
+    "xeon": "Xeon"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:03:30.232616"
+}

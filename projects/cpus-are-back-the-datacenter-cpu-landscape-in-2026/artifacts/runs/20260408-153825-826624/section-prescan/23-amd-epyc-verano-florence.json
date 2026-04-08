@@ -1,0 +1,86 @@
+{
+  "section_id": "23-amd-epyc-verano-florence",
+  "new_terms": [
+    {
+      "term": "Verano",
+      "suggested_translation": "Verano",
+      "context": "AMD EPYC CPU codename, variant of Venice.",
+      "confidence": 0.99
+    },
+    {
+      "term": "Florence",
+      "suggested_translation": "Florence",
+      "context": "Next generation Zen 7 EPYC CPU codename.",
+      "confidence": 0.99
+    },
+    {
+      "term": "SerDes",
+      "suggested_translation": "SerDes (串行器/解串器)",
+      "context": "200G Ethernet SerDes for Infinity Fabric connection.",
+      "confidence": 0.95
+    },
+    {
+      "term": "UALoE",
+      "suggested_translation": "UALoE",
+      "context": "Ultra Accelerator Link over Ethernet, supported by the new I/O die.",
+      "confidence": 0.9
+    },
+    {
+      "term": "backside power",
+      "suggested_translation": "背面供电",
+      "context": "TSMC's A16 process feature.",
+      "confidence": 0.99
+    },
+    {
+      "term": "ACE",
+      "suggested_translation": "ACE",
+      "context": "Dedicated Matrix Multiplication engine known as ACE in the x86 Advisory Group.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FRED",
+      "suggested_translation": "FRED (灵活返回与事件交付)",
+      "context": "Flexible Return and Event Delivery, a new interrupt model on Zen7.",
+      "confidence": 0.98
+    },
+    {
+      "term": "ChkTag",
+      "suggested_translation": "ChkTag",
+      "context": "Memory tagging feature debuting on Zen7.",
+      "confidence": 0.95
+    },
+    {
+      "term": "APX",
+      "suggested_translation": "APX (高级性能扩展)",
+      "context": "Advanced Performance Extensions supported by Diamond Rapids.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Sapphire Rapids",
+      "suggested_translation": "Sapphire Rapids",
+      "context": "Intel CPU codename.",
+      "confidence": 0.99
+    },
+    {
+      "term": "AVX10",
+      "suggested_translation": "AVX10",
+      "context": "Evolution of AVX512 instruction set.",
+      "confidence": 0.99
+    }
+  ],
+  "term_usages": {
+    "amd": "AMD",
+    "epyc": "EPYC",
+    "venice": "Venice",
+    "tsmc": "TSMC",
+    "intel": "Intel",
+    "diamond rapids": "Diamond Rapids",
+    "infinity fabric": "Infinity Fabric",
+    "pcie": "PCIe",
+    "amx": "AMX",
+    "avx512": "AVX512",
+    "x86": "x86"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:44:09.510320"
+}

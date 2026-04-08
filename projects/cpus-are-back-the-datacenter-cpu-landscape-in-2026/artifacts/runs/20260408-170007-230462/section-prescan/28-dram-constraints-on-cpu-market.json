@@ -1,0 +1,47 @@
+{
+  "section_id": "28-dram-constraints-on-cpu-market",
+  "new_terms": [
+    {
+      "term": "Coreweave",
+      "suggested_translation": "CoreWeave",
+      "context": "consolidation toward the large players who have high volumes... such as OpenAI, Coreweave",
+      "confidence": 0.95
+    },
+    {
+      "term": "double ordering",
+      "suggested_translation": "重复下单",
+      "context": "CPU vendors are fearful of memory double ordering that exacerbates the perceived memory shortage",
+      "confidence": 0.95
+    },
+    {
+      "term": "ASP",
+      "suggested_translation": "平均售价 (Average Selling Price)",
+      "context": "CPU ASP is only a minor part of system cost.",
+      "confidence": 0.95
+    },
+    {
+      "term": "server chassis",
+      "suggested_translation": "服务器机箱",
+      "context": "the cost of the CPU and the rest of the server chassis.",
+      "confidence": 0.9
+    },
+    {
+      "term": "memory instances",
+      "suggested_translation": "内存实例",
+      "context": "higher rental pricing for larger memory instances.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "cpu": "CPU",
+    "ddr5": "DDR5",
+    "dram": "DRAM",
+    "openai": "OpenAI",
+    "hyperscaler": "超大规模云厂商",
+    "head node": "头节点",
+    "virtualization": "虚拟化",
+    "sku": "SKU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:20:27.236913"
+}

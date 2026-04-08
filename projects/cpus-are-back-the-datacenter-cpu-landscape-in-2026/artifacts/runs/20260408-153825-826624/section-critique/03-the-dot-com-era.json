@@ -1,0 +1,30 @@
+{
+  "section_id": "03-the-dot-com-era",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.6,
+    "accuracy_score": 9.8,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "HyperTransport直连架构",
+        "description": "中英文之间缺少空格（CJK-Latin spacing）。",
+        "why_it_matters": "在专业科技排版中，中英文之间保留一个半角空格能显著提升阅读体验，也是规范排版的基本要求。",
+        "suggestion": "修改为“HyperTransport 直连架构”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "对性能有更高要求的用户则会转向多路 CPU 服务器。……能够在单台服务器中为多达八个插槽提供一致性链路。",
+        "description": "前文将“Multi-socket”翻译为行业标准的“多路”，但后文将“sockets”翻译为“插槽”。",
+        "why_it_matters": "虽然“插槽”在字面上完全正确且易于理解，但在服务器硬件语境下，“八个插槽”通常直接称为“八路”（如 8-socket server 即八路服务器）。统一术语能让行文更显专业。",
+        "suggestion": "可将“为多达八个插槽提供一致性链路”调整为“为多达八个插槽（八路）提供一致性链路”或直接改为“为多达八路 CPU 提供一致性链路”，以呼应前文的“多路 CPU 服务器”。"
+      }
+    ]
+  }
+}

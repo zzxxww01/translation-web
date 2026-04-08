@@ -1,0 +1,803 @@
+{
+  "project_id": "the-great-gpu-shortage-rental-capacity-launching-o",
+  "project_title": "The Great GPU Shortage – Rental Capacity – Launching our H100 1 Year Rental Price Index",
+  "review_required": true,
+  "generated_at": "2026-04-03T11:34:10.636453",
+  "total_candidates": 19,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "on-demand",
+          "suggested_translation": "按需（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "04-gpu-rental-market-structure-to",
+              "section_title": "GPU Rental Market Structure Today"
+            },
+            {
+              "section_id": "05-short-term-rental-on-demand",
+              "section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts"
+            }
+          ],
+          "contexts": [
+            "On-Demand GPU rental capacity is sold out",
+            "Short-term rental model where users pay for what they use immediately.",
+            "Cloud computing pricing model where resources are paid for as used without long-term commitment"
+          ],
+          "similar_terms": [
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Neocloud",
+          "suggested_translation": "[保持原文] Neocloud",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-surge-pricing-comes-to-the-gpu",
+              "section_title": "Surge Pricing Comes to the GPU Rental Market"
+            },
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            },
+            {
+              "section_id": "03-introducing-the-semianalysis-1",
+              "section_title": "Introducing the SemiAnalysis 1Y H100 contract price index"
+            },
+            {
+              "section_id": "05-short-term-rental-on-demand",
+              "section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts"
+            },
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "GPU rental pricing within the Neocloud and Hyperscale ecosystem",
+            "Specialized GPU cloud providers like CoreWeave or Lambda",
+            "Refers to specialized AI cloud providers like CoreWeave or Lambda."
+          ],
+          "similar_terms": [
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "yield",
+              "translation": "良率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Claude Code",
+          "suggested_translation": "[保持原文] Claude Code",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            }
+          ],
+          "contexts": [
+            "Anthropic’s Claude 4.6 Opus and Claude Code have soared in demand",
+            "Anthropic's agentic tool for software development."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.706
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.538
+            },
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "hyperscaler",
+          "suggested_translation": "超大规模云服务商",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            },
+            {
+              "section_id": "03-introducing-the-semianalysis-1",
+              "section_title": "Introducing the SemiAnalysis 1Y H100 contract price index"
+            },
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "run on GPUs at the hyperscalers and Neoclouds",
+            "Large cloud providers like AWS, Azure, and Google Cloud.",
+            "Large cloud service providers like AWS, Azure, and Google Cloud."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "ARR",
+          "suggested_translation": "年度经常性收入",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "08-where-the-puck-is-going",
+              "section_title": "Where The Puck is Going"
+            }
+          ],
+          "contexts": [
+            "Anthropic’s ARR has nearly tripled in just a single quarter",
+            "Annual Recurring Revenue, a key metric for AI labs' business scaling."
+          ],
+          "similar_terms": [
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-surge-pricing-comes-to-the-gpu",
+      "section_title": "Surge Pricing Comes to the GPU Rental Market",
+      "candidates": [
+        {
+          "term": "Hopper",
+          "suggested_translation": "[保持原文] Hopper",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "01-surge-pricing-comes-to-the-gpu",
+          "related_sections": [
+            {
+              "section_id": "01-surge-pricing-comes-to-the-gpu",
+              "section_title": "Surge Pricing Comes to the GPU Rental Market"
+            },
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            }
+          ],
+          "contexts": [
+            "NVIDIA GPU architecture preceding Blackwell (H100/H200)",
+            "NVIDIA's GPU architecture preceding Blackwell (H100, H200)."
+          ],
+          "similar_terms": [
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.6
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "GB300 NVL72",
+          "suggested_translation": "[保持原文] GB300 NVL72",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-surge-pricing-comes-to-the-gpu",
+          "related_sections": [
+            {
+              "section_id": "01-surge-pricing-comes-to-the-gpu",
+              "section_title": "Surge Pricing Comes to the GPU Rental Market"
+            },
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "Specific NVIDIA rack-scale system configuration",
+            "Specific NVIDIA Blackwell-based rack-scale system configuration."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "open-weight models",
+          "suggested_translation": "开放权重模型",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-surge-pricing-comes-to-the-gpu",
+          "related_sections": [
+            {
+              "section_id": "01-surge-pricing-comes-to-the-gpu",
+              "section_title": "Surge Pricing Comes to the GPU Rental Market"
+            },
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            }
+          ],
+          "contexts": [
+            "Models where weights are public but training data/code might not be",
+            "Models where weights are released but not necessarily fully open source."
+          ],
+          "similar_terms": [
+            {
+              "original": "weights",
+              "translation": "权重",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.56
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "02-gpu-rental-prices-the-comeba",
+      "section_title": "GPU Rental Prices – The Comeback Kid",
+      "candidates": [
+        {
+          "term": "agentic",
+          "suggested_translation": "智能体化（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "02-gpu-rental-prices-the-comeba",
+          "related_sections": [
+            {
+              "section_id": "02-gpu-rental-prices-the-comeba",
+              "section_title": "GPU Rental Prices – The Comeback Kid"
+            }
+          ],
+          "contexts": [
+            "Relating to AI agents capable of autonomous multi-step workflows."
+          ],
+          "similar_terms": [
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "self-attention",
+              "translation": "自注意力机制",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-introducing-the-semianalysis-1",
+      "section_title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+      "candidates": [
+        {
+          "term": "tenor",
+          "suggested_translation": "期限",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-introducing-the-semianalysis-1",
+          "related_sections": [
+            {
+              "section_id": "03-introducing-the-semianalysis-1",
+              "section_title": "Introducing the SemiAnalysis 1Y H100 contract price index"
+            },
+            {
+              "section_id": "04-gpu-rental-market-structure-to",
+              "section_title": "GPU Rental Market Structure Today"
+            },
+            {
+              "section_id": "06-mid-term-contracts",
+              "section_title": "Mid-Term Contracts"
+            },
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "The length of time until a financial contract or rental agreement expires.",
+            "Financial term referring to the time remaining in a contract or the length of the agreement.",
+            "The length of time until a financial contract expires or a loan must be repaid."
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.6
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Tokenomics",
+          "suggested_translation": "代币经济学",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-introducing-the-semianalysis-1",
+          "related_sections": [
+            {
+              "section_id": "03-introducing-the-semianalysis-1",
+              "section_title": "Introducing the SemiAnalysis 1Y H100 contract price index"
+            }
+          ],
+          "contexts": [
+            "SemiAnalysis's specific model and dashboard for tracking AI model costs and economics."
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.667
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-gpu-rental-market-structure-to",
+      "section_title": "GPU Rental Market Structure Today",
+      "candidates": [
+        {
+          "term": "Neoclouds",
+          "suggested_translation": "新兴云服务商（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "04-gpu-rental-market-structure-to",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-rental-market-structure-to",
+              "section_title": "GPU Rental Market Structure Today"
+            },
+            {
+              "section_id": "09-pricing-is-only-going-one-way",
+              "section_title": "Pricing is Only Going One Way For Now, and ROIC Follows"
+            }
+          ],
+          "contexts": [
+            "Operators like CoreWeave or Lambda that specialize in GPU cloud services.",
+            "Specialized cloud providers like CoreWeave or Lambda that focus on GPU compute."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "offtake",
+          "suggested_translation": "承购（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-gpu-rental-market-structure-to",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-rental-market-structure-to",
+              "section_title": "GPU Rental Market Structure Today"
+            },
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "Long-term agreements to purchase or rent a certain amount of capacity.",
+            "Refers to long-term agreements to purchase capacity or products, common in energy and now AI compute."
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Hyperscalers",
+          "suggested_translation": "超大规模云服务商（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-gpu-rental-market-structure-to",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-rental-market-structure-to",
+              "section_title": "GPU Rental Market Structure Today"
+            },
+            {
+              "section_id": "09-pricing-is-only-going-one-way",
+              "section_title": "Pricing is Only Going One Way For Now, and ROIC Follows"
+            }
+          ],
+          "contexts": [
+            "Large-scale cloud providers like AWS, Azure, and Google Cloud.",
+            "Large-scale cloud providers like AWS, Google Cloud, and Azure."
+          ],
+          "similar_terms": [
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-short-term-rental-on-demand",
+      "section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+      "candidates": [
+        {
+          "term": "Lambda",
+          "suggested_translation": "[保持原文] Lambda",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "05-short-term-rental-on-demand",
+          "related_sections": [
+            {
+              "section_id": "05-short-term-rental-on-demand",
+              "section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts"
+            }
+          ],
+          "contexts": [
+            "GPU cloud service provider, also known as Lambda Labs"
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-mid-term-contracts",
+      "section_title": "Mid-Term Contracts",
+      "candidates": [
+        {
+          "term": "AI Natives",
+          "suggested_translation": "AI 原生公司（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-mid-term-contracts",
+          "related_sections": [
+            {
+              "section_id": "06-mid-term-contracts",
+              "section_title": "Mid-Term Contracts"
+            }
+          ],
+          "contexts": [
+            "Refers to companies built around AI from the ground up, distinct from traditional firms adopting AI."
+          ],
+          "similar_terms": [
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            },
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            },
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.333
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-long-term-offtakes",
+      "section_title": "Long-Term Offtakes",
+      "candidates": [
+        {
+          "term": "backstop",
+          "suggested_translation": "兜底（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "07-long-term-offtakes",
+          "related_sections": [
+            {
+              "section_id": "07-long-term-offtakes",
+              "section_title": "Long-Term Offtakes"
+            }
+          ],
+          "contexts": [
+            "A financial guarantee or support provided by a stronger entity (Hyperscaler) to secure a deal."
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.5
+            },
+            {
+              "original": "Blackwell",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达的显卡",
+              "similarity": 0.471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-where-the-puck-is-going",
+      "section_title": "Where The Puck is Going",
+      "candidates": [
+        {
+          "term": "Neocloud providers",
+          "suggested_translation": "新兴云服务商（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-where-the-puck-is-going",
+          "related_sections": [
+            {
+              "section_id": "08-where-the-puck-is-going",
+              "section_title": "Where The Puck is Going"
+            }
+          ],
+          "contexts": [
+            "Refers to specialized GPU cloud companies like CoreWeave and Nebius."
+          ],
+          "similar_terms": [
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.485
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "09-pricing-is-only-going-one-way",
+      "section_title": "Pricing is Only Going One Way For Now, and ROIC Follows",
+      "candidates": [
+        {
+          "term": "ROIC",
+          "suggested_translation": "投入资本回报率（首次标注原文）",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "09-pricing-is-only-going-one-way",
+          "related_sections": [
+            {
+              "section_id": "09-pricing-is-only-going-one-way",
+              "section_title": "Pricing is Only Going One Way For Now, and ROIC Follows"
+            }
+          ],
+          "contexts": [
+            "Return on Invested Capital, a key financial metric for GPU rental profitability."
+          ],
+          "similar_terms": [
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

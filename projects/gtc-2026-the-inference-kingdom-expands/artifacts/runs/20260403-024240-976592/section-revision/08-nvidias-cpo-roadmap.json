@@ -1,0 +1,40 @@
+{
+  "section_id": "08-nvidias-cpo-roadmap",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.025,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "英伟达在 GTC 2026 主题演讲中公布了其光电共封装（Co-Packaged Optics (CPO)）路线图，随后黄仁勋在次日举行的财务分析师问答会议上作了补充说明。尽管许多人曾期望光电共封装能用于 Rubin Ultra Kyber 机架内的向上扩展（scale-up），但英伟达的重点实际上是利用光电共封装来实现更大集群并行规模的计算系统。",
+    "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+    "来源：SemiAnalysis AI 网络模型，英伟达",
+    "在 Rubin 世代，英伟达将提供采用全铜向上扩展网络的 Oberon NVL72 形态的 Rubin GPU。对于 Rubin Ultra，正如我们预期的那样，在 Oberon 和 Kyber 机架形态中，Rubin Ultra 将仅提供基于铜缆的向上扩展选项。Rubin Ultra 还将提供更大集群并行规模的系统版本，该系统将 8 个配备 72 颗 Rubin Ultra GPU 的 Oberon 机架连接起来，形成所谓的 NVL576。光电共封装的向上扩展将用于构建这种更大的集群并行规模，在机架之间通过两层全互联（all-to-all）网络进行连接，不过机架内部的向上扩展仍将基于铜缆。",
+    "到了 Feynman 世代，光电共封装的应用范围将通过另一个大集群并行规模机架 NVL1152 进一步扩大，该机架由 8 个 Kyber 机架组合而成。虽然概述机架配置路线图的英伟达技术博客指出，“英伟达 Kyber 将使用类似的直接光学互连进行机架间向上扩展，从而向上扩展为庞大的全互联 NVL1152 超级计算机”，但黄仁勋在财务分析师问答环节中确实表示，Feynman 世代的 NVL1152 将是“全光电共封装（all CPO）”。关于机架内的向上扩展是继续使用铜缆还是由光电共封装取代铜缆，目前仍存在一些分歧。",
+    "英伟达的策略一直是：能用铜缆的地方就用铜缆，必须用光学互连的地方才用光学互连。Feynman 世代 NVL1152 的架构也将遵循同样的原则。显然，NVL1152 将采用光电共封装进行机架间连接，但从 GPU 到 NVLink 交换机的连接目前在计划记录（POR）中仍是铜缆。英伟达无法实现电通道速率从 224Gbit/s 双向再次翻倍至 448Gbit/s 单向，这意味着带宽表现并没有那么惊人。",
+    "尽管与采用裸片间（die-to-die）连接至光学引擎相比，448G 高速 SerDes 在芯片边缘面积（shoreline）、传输距离和功耗方面面临巨大挑战，但考虑到 Feynman 在制造难度、成本和可靠性上的综合考量，连接至交换机的链路依然必须使用铜缆。",
+    "话虽如此，NVL1152 SKU 距离问世还有数年时间，路线图极有可能发生变化。目前，我们的基准预测仍是机架内部使用铜缆、机架之间使用光电共封装，但这很容易发生改变。",
+    "目前，我们对英伟达光电共封装路线图的最佳预测如下：",
+    "Rubin：",
+    "NVL72 —— Oberon 全铜向上扩展",
+    "Rubin Ultra：",
+    "NVL72 —— Oberon 全铜向上扩展",
+    "NVL144 —— Kyber 机架全铜向上扩展",
+    "NVL288 —— Kyber 机架全铜向上扩展，通过铜缆将 2 个机架连接在一起",
+    "NVL576 —— 8 个 Oberon 机架，机架内部采用铜缆向上扩展，机架间的交换机采用光电共封装，构成两层全互联拓扑。该配置产量较低，主要用于测试目的。",
+    "Feynman：",
+    "NVL72 —— Oberon 机架 —— 全铜",
+    "NVL144 —— Kyber 机架 —— 全铜",
+    "NVL1152 —— 8 个 Kyber 机架 —— 机架内部采用铜缆，机架间的交换机采用光电共封装",
+    "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+    "来源：SemiAnalysis，英伟达"
+  ]
+}

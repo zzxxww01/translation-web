@@ -1,0 +1,55 @@
+{
+  "section_id": "10-cmx-and-stx",
+  "new_terms": [
+    {
+      "term": "CMX (Context Memory Storage)",
+      "suggested_translation": "CMX (上下文内存存储平台)",
+      "context": "NVIDIA's platform for offloading KV Cache to address memory bottlenecks in long-context inference.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ICMS (Inference Context Memory Storage)",
+      "suggested_translation": "ICMS (推理上下文内存存储)",
+      "context": "The previous branding for what is now known as the CMX platform.",
+      "confidence": 0.95
+    },
+    {
+      "term": "STX",
+      "suggested_translation": "STX (存储参考机架架构)",
+      "context": "NVIDIA's reference storage rack architecture designed to complement Vera Rubin compute racks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Tier G3.5",
+      "suggested_translation": "G3.5 层存储",
+      "context": "An intermediate storage tier in the inference memory hierarchy between DRAM (G3) and shared storage (G4).",
+      "confidence": 0.9
+    },
+    {
+      "term": "SOCAMM modules",
+      "suggested_translation": "SOCAMM 模块",
+      "context": "Specific hardware modules found within the STX storage box architecture.",
+      "confidence": 0.85
+    },
+    {
+      "term": "CX-9 NICs",
+      "suggested_translation": "CX-9 网卡",
+      "context": "ConnectX-9 network interface cards used in the STX reference design.",
+      "confidence": 0.9
+    },
+    {
+      "term": "VR compute racks",
+      "suggested_translation": "VR 计算机架",
+      "context": "Vera Rubin compute racks that are complemented by STX storage solutions.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "bluefield-4": "BlueField-4",
+    "kvcache": "KV 缓存",
+    "spectrum-x": "Spectrum-X",
+    "lpx compute tray": "LPX 系统"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T03:07:12.535748"
+}

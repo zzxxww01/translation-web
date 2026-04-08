@@ -1,0 +1,732 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": null,
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC N3 Wafer Shortages, Memory Constraints, Datacenter Bottlenecks, Supply Chain Wars Winner"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Ivan Chiam, Myron Xie, Ray Wang, and 3 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Mar 12, 2026 · Paid"
+        }
+      ]
+    },
+    {
+      "section_id": "01-semianalysis-x-fluidstack-hack",
+      "title": "SemiAnalysis x Fluidstack Hackathon",
+      "title_translation": null,
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We’re hosting a hackathon ahead of GTC this year on Sunday the 15th, in partnership with Fluidstack, and would love to have you join us!"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apply here: https://luma.com/SAxFSHack"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "02-the-compute-shortage",
+      "title": "The Compute Shortage",
+      "title_translation": null,
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Token demand is skyrocketing and the need for AI compute continues to accelerate. The improvement in model capabilities combined with the rapid emergence of age"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From our own experiences, we have reached out to every neocloud we know asking if they have small clusters available, but everything is already firmly locked up"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Company Earnings, Bloomberg"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This is a tremendous level of spending, and hyperscalers would deploy even more capital if they could, but they are constrained by one critical factor: silicon "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Accelerator Model"
+        }
+      ]
+    },
+    {
+      "section_id": "03-the-tsmc-n3-shortage",
+      "title": "The TSMC N3 Shortage",
+      "title_translation": null,
+      "paragraph_count": 12,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One of, if not the, biggest constraints is TSMC’s N3 logic wafer capacity. TSMC’s N3 family started shipping for revenue in 2023, with demand initially driven p"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Foundry Model"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Up until today, N3 demand has been driven primarily by consumer electronics. In 2026, all the main AI accelerator families are transitioning to N3, and AI will "
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We can see in the table below the industry-wide convergence toward TSMC’s N3 family as the leading process node for AI accelerators heading into 2026. NVIDIA tr"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Accelerator Model"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This shift is not limited to XPU silicon. The Vera CPU used in VR racks uses N3P for all its silicon. There is also networking silicon in the form of the NVLink"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This sudden convergence of N3 adoption coupled with the continued growth of AI compute demand has resulted in a huge demand shock for N3 wafer capacity. TSMC ha"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Company Filings"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While TSMC maintains a clear technology lead over its only competitors, Intel and Samsung, that advantage matters less if customers cannot secure sufficient waf"
+        }
+      ]
+    },
+    {
+      "section_id": "04-n3-in-numbers",
+      "title": "N3 in numbers",
+      "title_translation": null,
+      "paragraph_count": 9,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Now, let’s look at just how tight things are. N3 accelerator wafer demand ramps aggressively throughout this year. The primary driver is Nvidia’s Rubin producti"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another major swing factor is N3P-based Trainium3 commencing wafer-in from early 2026 for a big second half output ramp."
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AI-related (accelerator, host CPU, and networking N3 demand) therefore ends up taking up just under 60% of N3 output this year. The remaining 40% is primarily f"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Foundry Model, SemiAnalysis Accelerator Model"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Accelerator Model"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC ultimately plays the role of kingmaker among customers competing for limited N3 allocation. In 2026, AI infrastructure customers are receiving clear priori"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This stands in contrast to the mobile and client market that are now very much saturated, offering less opportunity for either volume or content growth. This gi"
+        }
+      ]
+    },
+    {
+      "section_id": "05-tsmcs-supply-situation",
+      "title": "TSMC’s Supply Situation",
+      "title_translation": null,
+      "paragraph_count": 6,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With demand running far ahead of supply, TSMC is expanding capacity and pushing its existing lines to the limit, extracting every possible wafer from its namepl"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Why can’t TSMC simply add more N3 wafer starts? Like the memory suppliers, TSMC is constrained by available cleanroom space. Additional usable fab area must fir"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!u-E7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Foundry Model"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!fzVm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Foundry Model"
+        }
+      ]
+    },
+    {
+      "section_id": "06-smartphones-as-the-front-end-r",
+      "title": "Smartphones as the Front-End Release Valve?",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Smartphones are the next largest driver of N3 wafer demand this year. If anything, this is the segment most likely to see demand soften, freeing up capacity for"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, rising memory prices are now flowing through to handset BOM costs and ultimately to consumer ASPs. This is likely to dampen consumer demand. We are alr"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In terms of what this means for shipments, reallocating 5% of total smartphone N3 wafer starts in 2026 (5% of 437k wafers) to AI accelerators would enable the p"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!86sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Foundry Model"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!N61c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Estimates"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom - Dylan Patel, Ray Wang, and 3 others · Feb 6"
+        }
+      ]
+    },
+    {
+      "section_id": "07-memory-the-next-biggest-constr",
+      "title": "Memory The Next Biggest Constraint",
+      "title_translation": null,
+      "paragraph_count": 23,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The global memory shortage is unlikely to ease in the near term. Memory has emerged as the next major battleground, as chip vendors and hyperscalers race to sec"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On a wafer-per-bit basis, HBM consumes roughly three times more wafer capacity than commodity DRAM, a gap that could widen to nearly four times as the industry "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3wRG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3eWl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This pressure is being amplified by rapid increases in HBM content per accelerator. HBM bit shipments are inflecting sharply, driven primarily by rising memory "
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!vlh2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Accelerator Model"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another tightening dynamic is the push toward higher HBM pin speeds. Customers such as NVIDIA are targeting approximately 11 Gb/s pin speeds for HBM4, a require"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!nRle!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Beyond HBM, server DRAM demand is also strengthening. AI server system memory will increase materially in NVIDIA’s next-generation platforms, with VR NVL72 rack"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Across the DRAM market, accelerating deployment of AI and general-purpose servers and rising DRAM content per system is expected to drive server DRAM demand hig"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2Opv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "If logic capacity is freed up for accelerators, customers will quickly need to turn their attention to securing more HBM from memory suppliers. With conventiona"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To incentivize more HBM wafer starts vs commodity wafers, customers would likely need to pay higher prices than current contracted levels to secure incremental "
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another key implication is the reallocation of bits from consumer applications to server and HBM, a dynamic we have been highlighting since 2H25. In our latest "
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qN_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Our base case remains a more moderate 10-15% decline in consumer shipments. Under a 10% shipment cut, approximately 11,076 million Gb would be released, represe"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The key question is how prepared memory suppliers are for consumer weakness, and to what extent they have already adjusted. We believe memory makers have a soli"
+        }
+      ]
+    },
+    {
+      "section_id": "08-cowos-tight-but-easing",
+      "title": "CoWoS – Tight but Easing",
+      "title_translation": null,
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Front-end capacity is now the dominant bottleneck, with CoWoS constraints easing. While CoWoS is limited, capacity planning by TSMC is with N3 constraints in mi"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Behind the paywall, we will talk about two of the other major constraints: datacenters and power. These have shifted over time."
+        }
+      ]
+    },
+    {
+      "section_id": "09-from-power-constrained-to-acce",
+      "title": "From Power-Constrained to Accelerator-Constrained",
+      "title_translation": null,
+      "paragraph_count": 5,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Datacenters and power have been a major constraint over the past few years. To deploy more compute, the industry raced to expand datacenter and power capacity i"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Datacenter Model"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Expanding datacenters and power is much easier than building new fabs."
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "These things will be difficult and the supply chains will make tons of money and have many successful companies, but ultimately this will be solved with human i"
+        }
+      ]
+    },
+    {
+      "section_id": "10-supply-chain-control-matters-m",
+      "title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared",
+      "title_translation": null,
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In this environment, successful procurement matters the most. With compute in short supply but DC power available, AI labs will take whatever usable compute the"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While the debate between GPUs and custom ASICs is louder than ever, driven in part by Anthropic’s heavy use of TPUs and Trainium, the immediate reality is that "
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "section_id": "05-interactivity-vs-throughput-tr",
+  "new_terms": [
+    {
+      "term": "forward pass",
+      "suggested_translation": "前向传播",
+      "context": "Prefill occurs during the first forward pass of a request’s lifetime.",
+      "confidence": 0.95
+    },
+    {
+      "term": "End-to-End Latency",
+      "suggested_translation": "端到端延迟",
+      "context": "The Cost/Perf per TCO vs Interactivity/End-to-End Latency curve",
+      "confidence": 0.95
+    },
+    {
+      "term": "PD disaggregation",
+      "suggested_translation": "PD 分离 (Prefill-Decode 分离)",
+      "context": "Disaggregated prefill (aka PD disaggregation or simply “disagg”)",
+      "confidence": 0.9
+    },
+    {
+      "term": "disagg",
+      "suggested_translation": "分离 (Disagg)",
+      "context": "aka PD disaggregation or simply “disagg”",
+      "confidence": 0.9
+    },
+    {
+      "term": "batching",
+      "suggested_translation": "批处理",
+      "context": "One can achieve higher total throughput by batching requests",
+      "confidence": 0.95
+    },
+    {
+      "term": "QA chatbot",
+      "suggested_translation": "问答聊天机器人",
+      "context": "whereas a basic QA chatbot may allow for higher latency.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互速度",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "prefill": "预填充",
+    "decode": "解码",
+    "tco": "总拥有成本",
+    "flops": "FLOPS",
+    "hbm": "HBM",
+    "inferencex": "InferenceX",
+    "disaggregated prefill": "分离式 Prefill"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:47:45.154499"
+}

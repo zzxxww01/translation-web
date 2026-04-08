@@ -1,0 +1,19 @@
+在对比 AMD 平台上采用 FP8 精度、分离式预填充（disagg prefill）加宽专家并行（WideEP）的 SGLang 与英伟达 B200 上同等配置的 SGLang 时，我们发现 MI355X 展现出了极具竞争力的单位 TCO 性能。然而，一旦与广泛使用的 Dynamo TensorRT-LLM (TRTLLM) B200 FP8 配置相比，TRT 依然呈现降维打击之势。即便如此，AMD 的 SGLang 在 FP8 分离式预填充加 WideEP 配置下能够追平英伟达的 SGLang 性能，这依然是个极其振奋人心的消息。
+
+我们还发现，在单节点集成式服务场景下，AMD 的 SGLang 在 FP8 精度上提供了比英伟达 SGLang 更优的单位 TCO 性能。令人欣慰的是，AMD 已经废弃了他们那个二流的 vLLM 分支，转而更积极地向上游靠拢，向提供一流体验迈进了一大步。敬请期待我们的《AMD 现状》一文，我们将在其中探讨 AMD 进展神速的诸多领域，以及那些差强人意的短板。我们建议英伟达在 TRTLLM 引擎之外，进一步加码对 SGLang 和 vLLM 生态系统的投入。黄仁勋需要调配更多资源和工程师，为 SGLang 和 vLLM 等开放生态做出贡献。
+
+SemiAnalysis 的 InferenceX 是一款免费开源软件，由读者提供支持。若想接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。
+
+当谈及最顶尖的前沿大规模推理服务所采用的最新推理技术（如分离式预填充+WideEP+FP4）时，英伟达凭借 B200、B300 以及堪称“ASU 兄弟会老大”（译注：形容其极具统治力）的 GB200/GB300 NVL72 机架级系统，在 SGLang 和 TRTLLM 上均实现了全面的降维打击。英伟达 GPU 在能效方面同样占据统治地位，在所有工作负载下，每个 token 的综合配置能耗（皮焦耳级别）都要低得多。
+
+反观 AMD，我们发现其系统与软件在推理上面临的最大问题在于[可组合性](https://en.wikipedia.org/wiki/Composability)。也就是说，AMD 的许多推理优化方案在单独运行时表现良好，但与其他优化手段组合使用时，结果却远不如预期那般具备竞争力。具体而言，分离式预填充、WideEP 以及 FP4 推理优化之间的可组合性亟待大幅提升。
+
+虽然在仅开启部分业界领先的推理优化时，AMD 的性能尚具竞争力，但一旦同时开启前沿实验室常用的这三大核心优化，AMD 目前的性能便无法与英伟达抗衡。我们强烈建议 AMD 将重心放在不同推理优化的可组合性上。有消息称，AMD 将开始在整个软件栈层面发力解决 FP4 加分布式推理的软件可组合性问题。这项工作将在农历新年后展开，因为他们大部分负责分离式预填充加 WideEP 的“10倍速”推理工程师都常驻中国。
+
+英伟达的 GB300 NVL72 机架级系统 没有让人失望。即便与强悍的 H100 分离式预填充+WideEP+MTP（多Token预测）基准相比，它在 FP4 精度下相比 H100 的 FP8 精度实现了高达 100 倍的性能飞跃，而在同等 FP8 精度对比中也达到了 65 倍。在 H100 与 GB200 NVL72 机架级系统 的较量中，我们观察到在每秒每用户 75 个 token（tok/s/user）的吞吐量下，实际性能差距高达 55 倍。Blackwell NVL72 机架级系统 正在对 Hopper 架构实施降维打击，衬托得 Hopper 简直像个纯纯小丑。正如黄仁勋在 GTC 2025 大会上所言，他是首席营收毁灭者。
+
+在 GTC 2024 大会上，黄仁勋宣称 Blackwell 的推理性能将比 H100 提升高达 30 倍，而他在 Blackwell 推理性能上显然是低调承诺、超额交付。这应该能让分析师们在未来一段时间内少拿“黄氏数学”开玩笑了。
+
+https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png
+
+来源：SemiAnalysis InferenceX

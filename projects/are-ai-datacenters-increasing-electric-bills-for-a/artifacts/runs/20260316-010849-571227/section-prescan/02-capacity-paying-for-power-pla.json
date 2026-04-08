@@ -1,0 +1,53 @@
+{
+  "section_id": "02-capacity-paying-for-power-pla",
+  "new_terms": [
+    {
+      "term": "Transmission & Distribution (T&D)",
+      "suggested_translation": "输配电 (T&D)",
+      "context": "Charges for the electrical distribution network and the providers' regulated returns.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Return on Equity (ROE)",
+      "suggested_translation": "净资产收益率 (ROE)",
+      "context": "The pre-determined, regulated profit rate for T&D providers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ancillary services",
+      "suggested_translation": "辅助服务",
+      "context": "Services necessary to support the transmission of electric power from seller to purchaser.",
+      "confidence": 0.9
+    },
+    {
+      "term": "electric load",
+      "suggested_translation": "电力负荷",
+      "context": "The amount of electricity being drawn from the grid at a given time.",
+      "confidence": 0.95
+    },
+    {
+      "term": "forward auction",
+      "suggested_translation": "远期拍卖",
+      "context": "An auction held in advance to determine capacity prices for a future period.",
+      "confidence": 0.9
+    },
+    {
+      "term": "delivery period",
+      "suggested_translation": "交付期",
+      "context": "The specific timeframe (e.g., 2025/26) during which the capacity must be available.",
+      "confidence": 0.9
+    },
+    {
+      "term": "retail adders",
+      "suggested_translation": "零售加价",
+      "context": "Additional charges added to the wholesale price by retail electricity providers.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "capacity": "容量",
+    "energy": "电量"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:10:31.450015"
+}

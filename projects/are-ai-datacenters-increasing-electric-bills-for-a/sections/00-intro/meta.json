@@ -1,0 +1,366 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Power prices misconception, PJM's poor market design, Capacity prices 9.3x growth, ERCOT vs PJM grid reliability and expansion",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Power prices misconception, PJM's poor market design, Capacity prices 9.3x growth, ERCOT vs PJM grid reliability and expansion",
+      "parent_block_plain_text": "Power prices misconception, PJM's poor market design, Capacity prices 9.3x growth, ERCOT vs PJM grid reliability and expansion",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 126,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "电价成因误区，PJM糟糕的市场设计，容量电价暴涨9.3倍，ERCOT与PJM的电网可靠性及扩张对比",
+          "model": "pro",
+          "created_at": "2026-03-15T21:08:57.073844",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.774190",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "作者：Aishwarya Mahesh、Jeremie Eliahou Ontiveros、Ajey Pandey 及另外两人\n\n电价误区、PJM 糟糕的市场设计、容量电价暴涨 9.3 倍、ERCOT 与 PJM 电网可靠性及扩容对比",
+          "model": "default",
+          "created_at": "2026-03-16T00:25:09.037528",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "电价误区、PJM（覆盖含新泽西州在内美国东部13个州的电网运营商）糟糕的市场设计、容量电价暴涨 9.3 倍、ERCOT（德克萨斯州电力可靠性委员会）与 PJM 电网可靠性及扩容对比",
+          "model": "manual",
+          "created_at": "2026-03-16T00:51:48.868679",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "电价误区、PJM（覆盖含新泽西州在内美国东部13个州的电网运营商）糟糕的市场设计、容量电价暴涨 9.3 倍、ERCOT（德克萨斯州电力可靠性委员会）与 PJM 电网可靠性及扩容对比",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+          "Maintain the authoritative, myth-busting tone of the thesis statement."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Establishes the core thesis that flawed capacity market designs, not AI datacenters, are causing power price spikes, setting the comparative framework between PJM and ERCOT.",
+          "relation_to_previous": "N/A - This is the opening section.",
+          "relation_to_next": "Lays the groundwork for addressing the specific mainstream misconception about AI datacenters detailed in the following section.",
+          "key_points": [
+            "PJM's market design is fundamentally flawed, leading to a 9.3x growth in capacity prices.",
+            "The popular narrative blaming AI power demand is a misconception.",
+            "ERCOT serves as the proof point that grid reliability and expansion can be managed without price shocks."
+          ],
+          "translation_notes": [
+            "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+            "Maintain the authoritative, myth-busting tone of the thesis statement."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“容量价格”，而本章翻译注意点中明确建议将“capacity prices”翻译为“容量电价”，以区别于一般电价（energy prices）。同时，“9.3倍的增长”略显平淡，可根据语境微调以体现暴涨的意味。"
+          },
+          {
+            "type": "readability",
+            "description": "“电价误解”作为标题或摘要标签略显生硬，直译痕迹较重。"
+          }
+        ]
+      },
+      "history": [
+        {
+          "text": "电价误区、PJM 糟糕的市场设计、容量电价暴涨 9.3 倍、ERCOT 与 PJM 电网可靠性及扩容对比",
+          "timestamp": "2026-03-16T00:49:26.384377",
+          "source": "manual"
+        },
+        {
+          "text": "电价误区、PJM 糟糕的市场设计、容量电价暴涨 9.3 倍、ERCOT（德克萨斯州电力可靠性委员会） 与 PJM 电网可靠性及扩容对比",
+          "timestamp": "2026-03-16T00:51:48.868703",
+          "source": "manual"
+        }
+      ]
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Aishwarya Mahesh, Jeremie Eliahou Ontiveros, Ajey Pandey, and 2 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Aishwarya Mahesh",
+          "start": 3,
+          "end": 19,
+          "href": "https://substack.com/@powerbytes",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 21,
+          "end": 46,
+          "href": "https://substack.com/@jeremieeliahouontiveros",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Ajey Pandey",
+          "start": 48,
+          "end": 59,
+          "href": "https://substack.com/@ajeypandey",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Aishwarya Mahesh](https://substack.com/@powerbytes), [Jeremie Eliahou Ontiveros](https://substack.com/@jeremieeliahouontiveros), [Ajey Pandey](https://substack.com/@ajeypandey), and 2 others",
+      "parent_block_plain_text": "By Aishwarya Mahesh, Jeremie Eliahou Ontiveros, Ajey Pandey, and 2 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Aishwarya Mahesh",
+          "start": 3,
+          "end": 19,
+          "href": "https://substack.com/@powerbytes",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 21,
+          "end": 46,
+          "href": "https://substack.com/@jeremieeliahouontiveros",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Ajey Pandey",
+          "start": 48,
+          "end": 59,
+          "href": "https://substack.com/@ajeypandey",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作者：Aishwarya Mahesh、Jeremie Eliahou Ontiveros、Ajey Pandey及另外2人",
+          "model": "pro",
+          "created_at": "2026-03-15T21:08:57.074478",
+          "tokenized_text": "作者：[[[LINK_1|Aishwarya Mahesh]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Ajey Pandey]]]及另外2人",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "作者：Aishwarya Mahesh、Jeremie Eliahou Ontiveros、Ajey Pandey及另外2人",
+          "model": "manual",
+          "created_at": "2026-03-16T00:25:31.236389",
+          "tokenized_text": "作者：[[[LINK_1|Aishwarya Mahesh]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Ajey Pandey]]]及另外2人",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Aishwarya Mahesh、Jeremie Eliahou Ontiveros、Ajey Pandey及另外2人",
+      "confirmed_tokenized": "作者：[[[LINK_1|Aishwarya Mahesh]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Ajey Pandey]]]及另外2人",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+          "Maintain the authoritative, myth-busting tone of the thesis statement."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Establishes the core thesis that flawed capacity market designs, not AI datacenters, are causing power price spikes, setting the comparative framework between PJM and ERCOT.",
+          "relation_to_previous": "N/A - This is the opening section.",
+          "relation_to_next": "Lays the groundwork for addressing the specific mainstream misconception about AI datacenters detailed in the following section.",
+          "key_points": [
+            "PJM's market design is fundamentally flawed, leading to a 9.3x growth in capacity prices.",
+            "The popular narrative blaming AI power demand is a misconception.",
+            "ERCOT serves as the proof point that grid reliability and expansion can be managed without price shocks."
+          ],
+          "translation_notes": [
+            "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+            "Maintain the authoritative, myth-busting tone of the thesis statement."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“容量价格”，而本章翻译注意点中明确建议将“capacity prices”翻译为“容量电价”，以区别于一般电价（energy prices）。同时，“9.3倍的增长”略显平淡，可根据语境微调以体现暴涨的意味。"
+          },
+          {
+            "type": "readability",
+            "description": "“电价误解”作为标题或摘要标签略显生硬，直译痕迹较重。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Mar 03, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Mar 03, 2026 · Paid",
+      "parent_block_plain_text": "Mar 03, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026年3月3日 · 付费",
+          "model": "pro",
+          "created_at": "2026-03-15T21:08:57.074550",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "2026年3月3日",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.774243",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "2026年3月3日",
+          "model": "manual",
+          "created_at": "2026-03-16T00:25:36.769505",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026年3月3日",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+          "Maintain the authoritative, myth-busting tone of the thesis statement."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Establishes the core thesis that flawed capacity market designs, not AI datacenters, are causing power price spikes, setting the comparative framework between PJM and ERCOT.",
+          "relation_to_previous": "N/A - This is the opening section.",
+          "relation_to_next": "Lays the groundwork for addressing the specific mainstream misconception about AI datacenters detailed in the following section.",
+          "key_points": [
+            "PJM's market design is fundamentally flawed, leading to a 9.3x growth in capacity prices.",
+            "The popular narrative blaming AI power demand is a misconception.",
+            "ERCOT serves as the proof point that grid reliability and expansion can be managed without price shocks."
+          ],
+          "translation_notes": [
+            "Ensure 'capacity prices' is accurately translated (e.g., 容量电价) to distinguish it from general energy prices.",
+            "Maintain the authoritative, myth-busting tone of the thesis statement."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“容量价格”，而本章翻译注意点中明确建议将“capacity prices”翻译为“容量电价”，以区别于一般电价（energy prices）。同时，“9.3倍的增长”略显平淡，可根据语境微调以体现暴涨的意味。"
+          },
+          {
+            "type": "readability",
+            "description": "“电价误解”作为标题或摘要标签略显生硬，直译痕迹较重。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

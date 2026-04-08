@@ -1,0 +1,21 @@
+{
+  "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.2,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "the MI355X delivers inferences a cost that is slightly less than 3x cheaper than for the MI325X.",
+        "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。",
+        "why_it_matters": "在硬核技术与商业分析长文中，财务和成本数据的表述需要极致严谨，避免口语化的病句降低专业感。",
+        "suggestion": "建议改为：“MI355X 的推理成本略高于 MI325X 的三分之一（即成本降低了近 3 倍）”或“MI355X 的推理成本比 MI325X 低了近 3 倍”。"
+      }
+    ]
+  }
+}

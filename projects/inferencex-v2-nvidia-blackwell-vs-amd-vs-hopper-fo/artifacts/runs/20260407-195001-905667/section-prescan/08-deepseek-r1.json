@@ -1,0 +1,72 @@
+{
+  "section_id": "08-deepseek-r1",
+  "new_terms": [
+    {
+      "term": "ROCm",
+      "suggested_translation": "ROCm",
+      "context": "AMD's open-source software stack for GPU computing, mentioned as 'private ROCm images'.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MoRI",
+      "suggested_translation": "MoRI",
+      "context": "AMD's MoE dispatch/combine collective and KV Cache transfer library.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NCCL",
+      "suggested_translation": "NCCL",
+      "context": "NVIDIA Collective Communications Library, used for multi-GPU communication.",
+      "confidence": 0.95
+    },
+    {
+      "term": "RCCL",
+      "suggested_translation": "RCCL",
+      "context": "Radeon Collective Communications Library, AMD's version of NCCL.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dynamo",
+      "suggested_translation": "Dynamo",
+      "context": "Likely referring to TorchDynamo (PyTorch 2.0 compiler) used in the GB200 TRT-LLM stack.",
+      "confidence": 0.85
+    },
+    {
+      "term": "H200",
+      "suggested_translation": "H200",
+      "context": "NVIDIA Hopper architecture GPU SKU.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MI300X",
+      "suggested_translation": "MI300X",
+      "context": "AMD Instinct GPU SKU.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MI325X",
+      "suggested_translation": "MI325X",
+      "context": "AMD Instinct GPU SKU.",
+      "confidence": 0.95
+    },
+    {
+      "term": "PR",
+      "suggested_translation": "PR (拉取请求)",
+      "context": "Pull Request, referring to code contributions to upstream repositories.",
+      "confidence": 0.9
+    },
+    {
+      "term": "CI",
+      "suggested_translation": "CI (持续集成)",
+      "context": "Continuous Integration, mentioned in the context of MoRI testing.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "disaggregated serving": "分离式推理服务",
+    "wide expert parallelism (wideep)": "宽专家并行 (wide EP)",
+    "throughput": "吞吐量 (throughput per GPU)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:04:44.353188"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "gtc-2026",
+  "title": "Nvidia – The Inference Kingdom Expands",
+  "title_translation": null,
+  "source_file": "source.html",
+  "created_at": "2026-04-02T21:59:17.450219",
+  "updated_at": "2026-04-02T21:59:17.450439",
+  "status": "created",
+  "progress": {
+    "total_sections": 13,
+    "total_paragraphs": 211,
+    "approved": 41,
+    "reviewing": 0,
+    "pending": 170
+  },
+  "config": {
+    "ai_model": "pro",
+    "model_type": "pro",
+    "translation_style": "natural_professional",
+    "segment_level": "h2",
+    "max_paragraph_length": 800,
+    "merge_short_paragraphs": true
+  },
+  "metadata": {
+    "authors": [
+      "Dylan Patel",
+      "Myron Xie",
+      "Daniel Nishball"
+    ],
+    "published_date": "Mar 24, 2026",
+    "subtitle": "Groq LP30, LPX Rack, Attention FFN Disaggregation, Oberon & Kyber Updates, Nvidia's CPO Roadmap, Vera ETL256, CMX & STX",
+    "publication": null,
+    "original_url": "https://newsletter.semianalysis.com/p/nvidia-the-inference-kingdom-expands",
+    "cover_image": "https://substackcdn.com/image/fetch/$s_!NON4!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c04430f-0039-4084-85bb-697f877e33b3_2709x1815.png",
+    "raw_metadata_html": null
+  },
+  "sections": [],
+  "versions": [],
+  "confirmation_map": {},
+  "workflow_mode": "paragraph_confirmation"
+}

@@ -1,5 +1,5 @@
 {
-  "version": 28,
+  "version": 29,
   "terms": [
     {
       "original": "TSMC",
@@ -355,7 +355,7 @@
     {
       "original": "TPU",
       "translation": "TPU",
-      "strategy": "first_annotate",
+      "strategy": "preserve_annotate",
       "note": "张量处理器 (Tensor Processing Unit)",
       "tags": [
         "chip"
@@ -364,7 +364,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570413"
+      "updated_at": "2026-04-08T14:30:49.498568"
     },
     {
       "original": "chiplet",

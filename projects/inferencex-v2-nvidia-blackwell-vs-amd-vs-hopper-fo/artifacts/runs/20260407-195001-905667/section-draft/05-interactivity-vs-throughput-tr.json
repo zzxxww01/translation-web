@@ -1,0 +1,329 @@
+{
+  "section_id": "05-interactivity-vs-throughput-tr",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "05-interactivity-vs-throughput-tr",
+    "section_title": "Interactivity vs Throughput Tradeoff",
+    "section_title_translation": "交互性与吞吐量的权衡",
+    "section_position": "6/36",
+    "article_theme": "The release of InferenceXv2 benchmark results reveals that while AMD's MI355X shows competitive single-node performance, Nvidia's hardware and software stack (GB300 NVL72, TRT-LLM) maintain a dominant lead in complex, multi-node, disaggregated LLM inference setups used by frontier AI labs.",
+    "structure_summary": "The article opens with an introduction to the InferenceXv2 framework and top-level benchmark results. It then provides a technical primer on crucial inference concepts (Interactivity vs Throughput, TP/EP/DP, MTP, Disaggregated Prefill, WideEP). The core of the piece is a deep dive into specific hardware/software configurations, comparing Nvidia (Hopper/Blackwell) and AMD (MI300/MI325/MI355) across single-node and multi-node setups. It concludes with a TCO analysis and a roadmap for the InferenceX repository.",
+    "target_audience": "AI researchers, GPU engineers, hardware investors, and cloud infrastructure architects.",
+    "translation_voice": "Professional and rigorous when discussing technical architectures and financial metrics, but adopting a sharp, 'tech-bro/hacker' localized tone when translating the author's informal internet slang.",
+    "previous_section_title": "A Primer on Important Technical Concepts",
+    "next_section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+    "section_role": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+    "translation_notes": [
+      "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+      "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+    ],
+    "key_points": [
+      "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+      "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+      "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+    ],
+    "guidelines": [
+      "Retain the hardcore engineering tone: Use precise Chinese terminology for AI and semiconductor concepts (e.g., 预填充, 解码, 显存带宽, 张量并行). Do not over-simplify technical explanations.",
+      "Handle internet slang dynamically: The authors use terms like 'mogged' or 'jestermaxxing' to express extreme dominance or foolishness. Use equivalent Chinese tech/internet slang (e.g., 碾压, 吊打, 小丑) to preserve the edgy, opinionated voice of SemiAnalysis.",
+      "Restructure complex technical sentences: Sentences describing multi-variable configurations (e.g., 'disagg prefill+wideEP with FP4 on the MI355X') should be broken down or clearly grouped in Chinese to avoid modifier pile-ups (e.g., '在MI355X上组合使用FP4、分离式预填充以及宽专家并行时...').",
+      "Acronym handling: For AI parallelism (TP, EP, DP, WideEP) and inference metrics (ISL, OSL, TPOT), provide the full Chinese translation in parentheses at the first occurrence, then use the English acronyms strictly thereafter to maintain a clean, professional look.",
+      "Maintain distinction between inference phases: Always strictly differentiate 'Prefill' (预填充) and 'Decode' (解码), as the entire article's premise on 'Disaggregated Serving' relies on this distinction.",
+      "TCO and Financials: Ensure that hardware pricing and cluster capex discussions use standard enterprise IT procurement terminology (e.g., 资本支出/CAPEX, 总拥有成本/TCO, 节点/Node)."
+    ],
+    "article_challenges": [
+      {
+        "location": "Key Observations and Results to Highlight",
+        "issue": "Slang terms: 'framemogging', 'jestermaxxing', 'lookmaxxing'.",
+        "suggestion": "Translate using Chinese tech-community slang. 'Framemogging' -> '性能碾压' or '降维打击'; 'jestermaxxing' -> '纯纯小丑'; 'lookmaxxing' -> '表面功夫' or 'PPT造车'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Interactivity vs Throughput Tradeoff",
+        "issue": "Analogy: 'riding a metro bus vs a race car'.",
+        "suggestion": "Keep the literal translation but ensure the mapping is clear: 赛车 (race car) represents low latency/high interactivity for one user; 公交车 (metro bus) represents high throughput/batching for many users.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Jensen Under Promising and Overdelivering",
+        "issue": "'reality distortion field' and 'Jensen Math jokes'.",
+        "suggestion": "Translate as '现实扭曲力场' (a well-known Steve Jobs reference in Chinese tech circles) and '黄氏定律/黄氏数学笑话'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "GitHub Actions",
+        "issue": "'We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.'",
+        "suggestion": "The 'unicorn' refers to GitHub's error page mascot. 'Touch some grass' means going outside/taking a break from the internet. Translate as: '最近我们看到GitHub报错页面“独角兽”的次数比什么都多！也许我们真的该“下线去接触一下大自然”了。'",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Disaggregated Serving / Disaggregated Prefill",
+        "term": "Disaggregated Serving / Disaggregated Prefill",
+        "translation": "分离式服务 / 预填充-解码分离",
+        "strategy": "translate",
+        "note": "Separating the compute-heavy prefill phase and memory-heavy decode phase of LLM inference onto different nodes.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Wide Expert Parallelism (WideEP)",
+        "term": "Wide Expert Parallelism (WideEP)",
+        "translation": "宽专家并行",
+        "strategy": "first_annotate",
+        "note": "Distributing the experts of a Mixture of Experts (MoE) model across a large number of GPUs (e.g., 64 GPUs).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Interactivity",
+        "term": "Interactivity",
+        "translation": "交互性 (tok/s/user)",
+        "strategy": "translate",
+        "note": "Tokens per second per user (tok/s/user), representing the latency/speed experienced by an individual user.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Multi Token Prediction (MTP)",
+        "term": "Multi Token Prediction (MTP)",
+        "translation": "多Token预测 (MTP)",
+        "strategy": "first_annotate",
+        "note": "A speculative decoding technique where a smaller draft model predicts multiple future tokens to be verified by the main model in a single forward pass.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Composability",
+        "term": "Composability",
+        "translation": "可组合性",
+        "strategy": "translate",
+        "note": "The ability of different software optimizations (e.g., FP4, WideEP, Disagg) to work together simultaneously without breaking or degrading performance.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "All-reduce / All-to-all collective",
+        "term": "All-reduce / All-to-all collective",
+        "translation": "全局归约 (All-reduce) / 全局到全局通信 (All-to-all)",
+        "strategy": "first_annotate",
+        "note": "GPU communication primitives. All-reduce combines data across GPUs, all-to-all sends distinct data from every GPU to every other GPU.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Forward pass",
+        "term": "Forward pass",
+        "translation": "前向传播",
+        "strategy": "translate",
+        "note": "The computation of data through the neural network from input to output.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVL72",
+        "term": "NVL72",
+        "translation": "NVL72机架级系统",
+        "strategy": "preserve",
+        "note": "Nvidia's rack-scale system containing 72 interconnected GPUs.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "KV cache offloading",
+        "term": "KV cache offloading",
+        "translation": "KV缓存卸载",
+        "strategy": "translate",
+        "note": "Moving the Key-Value cache from GPU HBM to CPU RAM or NVMe storage to save VRAM.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Defines the fundamental tension in LLM serving and introduces the concept of disaggregation as a solution.",
+    "relation_to_previous": "Delivers the first technical explanation promised in the primer.",
+    "relation_to_next": "Sets up the discussion on parallelization strategies (TP/EP/DP) which are used to manipulate this very tradeoff.",
+    "key_points": [
+      "LLM inference requires balancing Interactivity (tokens/sec/user; latency) against Throughput (total tokens/sec; system capacity).",
+      "Higher throughput lowers Cost per TCO by amortizing fixed costs.",
+      "Disaggregated prefill solves bottlenecks by separating prefill and decode phases into independently tunable GPU pools."
+    ],
+    "translation_notes": [
+      "Strict terminology required: 'Interactivity' -> '交互速度' or '响应延迟', 'Throughput' -> '吞吐量', 'TPOT' -> '每个输出Token的时间 (Time Per Output Token)'.",
+      "Translate 'Disaggregated prefill' as 'Prefill-Decode分离' or '预填充与解码解耦'."
+    ]
+  },
+  "translations": [
+    "LLM 推理的根本权衡在于吞吐量与延迟。交互速度 (tok/s/user) 衡量系统向每位用户返回 token 的快慢，它是每个输出Token的时间 (TPOT) 的倒数。吞吐量 (tok/s) 则衡量系统在所有用户中总共能产出多少 token。通过批处理请求可以实现更高的总吞吐量，但分配给每个请求的 FLOPS 会减少，导致完成速度变慢。这就像是在乘坐公交车和赛车之间做选择。公交车能服务众多乘客，但频繁停靠会耗费时间，不过其成本可以分摊到众多乘客身上。",
+    "赛车只能搭载一两名乘客，但几乎中途不停，整体行程更快，不过单客乘坐成本要高得多。周末去公园游玩的人可能更适合坐公交车，而护送名人前往目的地则更适合用赛车。这里没有放之四海而皆准的解决方案。",
+    "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F18c9a3dd-3777-44d5-a3e2-b4d28140df38_2106x1380.png",
+    "来源：SemiAnalysis",
+    "本文展示的大多数 InferenceX 基准测试结果都呈一条曲线。必须分析不同交互速度/延迟水平下的吞吐量，而非仅仅盯着最高吞吐量（通常只能在单一的低交互速度下实现）。推理领域不存在万能的用例。所需的交互速度和吞吐量水平取决于具体应用场景。例如，实时语音模型要求极低的延迟，确保最终用户能与 LLM 保持自然的“对话”；而基础的问答聊天机器人则可以容忍较高的延迟。读者可以自行查看曲线，并运用这一原则来确定自己的用例在吞吐量-交互速度曲线上的具体位置。",
+    "单位 TCO 性价比与交互速度/端到端延迟曲线，基本与吞吐量与交互速度/端到端延迟曲线走势一致：每小时生成的 token 越多，分摊到每个 token 上的固定小时成本就越低，从而降低了单 token 成本。",
+    "预填充与解码阶段",
+    "推理包含两个主要阶段：预填充和解码。预填充发生在请求生命周期的首次前向传播期间。由于请求中的所有 token 都在并行处理，该阶段属于计算密集型。此阶段负责为序列“填满”KV 缓存。预填充结束后，系统会逐个 token 地生成（或解码）响应。每次前向传播都会从 HBM 加载该序列的完整 KV 缓存，却只执行单个 token 的计算，这使得解码成为内存（带宽）密集型操作。",
+    "若预填充与解码在同一引擎上执行，预填充会频繁打断解码批次，拖累整体性能。",
+    "分离式预填充",
+    "分离式预填充（又称 PD分离 (预填充-解码分离)，或简称“分离”）是指将预填充与解码阶段拆分，分别交由独立的 GPU 资源池或集群来处理。这些相互独立的预填充池与解码池可进行独立调优，并弹性缩放以适配工作负载需求。"
+  ]
+}

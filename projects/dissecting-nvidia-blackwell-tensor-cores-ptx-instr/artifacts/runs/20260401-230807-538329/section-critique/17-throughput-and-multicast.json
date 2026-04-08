@@ -1,0 +1,29 @@
+{
+  "section_id": "17-throughput-and-multicast",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "2SM MMA atoms",
+        "description": "在 CUTLASS 和 GPU 架构语境下，“MMA atoms” 指的是矩阵乘加运算的基础形状或基本原语（building blocks），而非用于同步的“原子指令”（atomic instructions，如 atomicAdd）。译为“原子指令”极易引起底层开发者的误解。",
+        "why_it_matters": "MMA atom 是 CUTLASS 编程模型中的核心概念，与内存原子操作完全不同，术语误译会严重影响技术准确性与专业度。",
+        "suggestion": "建议修改为“2SM MMA 基础原语 (atoms)”或直接保留“2SM MMA atoms”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "per-CTA tile size ... per-CTA tile shapes",
+        "description": "“CTA”在上一段已完成首现加注，本段重复使用完整的“协作线程阵列 (CTA)”显得冗长且机械。",
+        "why_it_matters": "对常见缩写过度加注和全称重复会降低文本的信息密度，打断技术人员的阅读心流。",
+        "suggestion": "建议直接简称为“每个 CTA 的分块 (tile) 大小”和“128x128 的单 CTA 分块形状”。"
+      }
+    ]
+  }
+}

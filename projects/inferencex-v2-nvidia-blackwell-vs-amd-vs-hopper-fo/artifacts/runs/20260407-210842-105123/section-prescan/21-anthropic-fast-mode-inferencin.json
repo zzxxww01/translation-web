@@ -1,0 +1,44 @@
+{
+  "section_id": "21-anthropic-fast-mode-inferencin",
+  "new_terms": [
+    {
+      "term": "fast mode",
+      "suggested_translation": "快速模式",
+      "context": "Anthropic recently released 'fast mode' alongside Opus 4.6.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Opus 4.6",
+      "suggested_translation": "Opus 4.6",
+      "context": "Anthropic recently released 'fast mode' alongside Opus 4.6.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CPMT",
+      "suggested_translation": "每百万 Token 成本 (CPMT)",
+      "context": "cost per million tokens (CPMT) shifts accordingly.",
+      "confidence": 0.95
+    },
+    {
+      "term": "agentic loops",
+      "suggested_translation": "智能体循环",
+      "context": "if claude code agentic loops (which runs on Trainium in production) that tool use call NVL72 racks",
+      "confidence": 0.9
+    },
+    {
+      "term": "latency-throughput tradeoff",
+      "suggested_translation": "延迟与吞吐量权衡",
+      "context": "This follows directly from the fundamental latency-throughput tradeoff in LLM inference.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互速度",
+    "tok/sec/user": "Token/秒/用户",
+    "TRT-LLM": "TRTLLM",
+    "DeepSeek R1": "DeepSeek-R1",
+    "MTP": "多 Token 预测 (MTP)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T22:01:11.024466"
+}

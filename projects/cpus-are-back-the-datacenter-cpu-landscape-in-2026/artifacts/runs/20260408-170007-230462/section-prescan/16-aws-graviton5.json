@@ -1,0 +1,67 @@
+{
+  "section_id": "16-aws-graviton5",
+  "new_terms": [
+    {
+      "term": "CSS",
+      "suggested_translation": "计算子系统 (Compute Subsystem)",
+      "context": "ARM’s Neoverse Compute Subsystem (CSS) reference designs",
+      "confidence": 0.95
+    },
+    {
+      "term": "EC2",
+      "suggested_translation": "EC2",
+      "context": "offer their EC2 cloud instances at lower prices",
+      "confidence": 0.95
+    },
+    {
+      "term": "OSAT",
+      "suggested_translation": "外包半导体封装测试 (OSAT)",
+      "context": "going directly to TSMC and OSAT partners for chip production",
+      "confidence": 0.95
+    },
+    {
+      "term": "CMN",
+      "suggested_translation": "核心网格网络 (Core Mesh Network)",
+      "context": "A 10x7 Core Mesh Network (CMN) was employed",
+      "confidence": 0.95
+    },
+    {
+      "term": "binning",
+      "suggested_translation": "芯片分级 (Binning)",
+      "context": "leaving room for 1 core to be disabled for binning",
+      "confidence": 0.95
+    },
+    {
+      "term": "CI/CD",
+      "suggested_translation": "持续集成/持续部署 (CI/CD)",
+      "context": "CI/CD design integration flows",
+      "confidence": 0.95
+    },
+    {
+      "term": "EDA",
+      "suggested_translation": "电子设计自动化 (EDA)",
+      "context": "run EDA tools to design and verify",
+      "confidence": 0.95
+    },
+    {
+      "term": "XPU",
+      "suggested_translation": "XPU",
+      "context": "with 1 CPU to 4 XPUs",
+      "confidence": 0.95
+    },
+    {
+      "term": "dogfooding",
+      "suggested_translation": "内部试用 (Dogfooding)",
+      "context": "creating an internal dogfooding cycle where Gravitons design Gravitons",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云厂商",
+    "mesh stop": "网格节点",
+    "head node": "头节点",
+    "tco": "总拥有成本"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:09:19.341683"
+}

@@ -1,0 +1,55 @@
+{
+  "section_id": "05-compute-tray-thermal",
+  "new_terms": [
+    {
+      "term": "cold plate",
+      "suggested_translation": "冷板",
+      "context": "The VR NVL72 compute tray uses cold plates to remove heat from modules.",
+      "confidence": 0.95
+    },
+    {
+      "term": "internal manifold",
+      "suggested_translation": "内部歧管",
+      "context": "An internal manifold distributes inlet coolant and collects outlet coolant within the chassis.",
+      "confidence": 0.9
+    },
+    {
+      "term": "UQD / MQD",
+      "suggested_translation": "通用快速接头 / 小型快速接头",
+      "context": "Quick disconnect standards (Universal / Miniature) used for coolant routing in the compute tray.",
+      "confidence": 0.85
+    },
+    {
+      "term": "micro-channel cold plate (MCCP)",
+      "suggested_translation": "微通道冷板",
+      "context": "An upgraded cold plate with reduced channel pitch (100 micron) for higher thermal dissipation.",
+      "confidence": 0.95
+    },
+    {
+      "term": "liquid metal Indium",
+      "suggested_translation": "液态金属铟",
+      "context": "A high-conductivity TIM2 material used between the GPU and the cold plate.",
+      "confidence": 0.9
+    },
+    {
+      "term": "L6 / L10 assembly",
+      "suggested_translation": "L6 / L10 组装级别",
+      "context": "Refers to the stage of manufacturing (PCBA level vs. full system integration level).",
+      "confidence": 0.9
+    },
+    {
+      "term": "vrm",
+      "suggested_translation": "电压调节模块",
+      "context": "Components on the board that require cooling alongside the processors.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "compute tray": "计算托盘",
+    "strata module": "Strata 模块",
+    "orchid module": "Orchid 模块",
+    "tim2": "第二层热界面材料"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T22:24:07.208596"
+}

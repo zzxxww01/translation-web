@@ -1,0 +1,58 @@
+{
+  "section_id": "29-future-cpu-trends",
+  "new_terms": [
+    {
+      "term": "APU",
+      "suggested_translation": "APU (加速处理器)",
+      "context": "APU designs pioneered with AMD’s MI300A with integrated CPU cores",
+      "confidence": 0.95
+    },
+    {
+      "term": "JBOM",
+      "suggested_translation": "JBOM (简单HBM阵列)",
+      "context": "memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts",
+      "confidence": 0.95
+    },
+    {
+      "term": "Known Good Die",
+      "suggested_translation": "已知良好裸片 (KGD)",
+      "context": "number of die to-die links and Known Good Die testing",
+      "confidence": 0.95
+    },
+    {
+      "term": "TIM",
+      "suggested_translation": "热界面材料 (TIM)",
+      "context": "integrated passive devices, TIM and lid costs",
+      "confidence": 0.95
+    },
+    {
+      "term": "ATE",
+      "suggested_translation": "自动测试设备 (ATE)",
+      "context": "Testing costs include ATE/SLT and Burn-in cost",
+      "confidence": 0.95
+    },
+    {
+      "term": "SLT",
+      "suggested_translation": "系统级测试 (SLT)",
+      "context": "Testing costs include ATE/SLT and Burn-in cost",
+      "confidence": 0.95
+    },
+    {
+      "term": "XGMI",
+      "suggested_translation": "XGMI (AMD多路互连技术)",
+      "context": "multi socket interconnect specifications (AMD XGMI and Intel UPI)",
+      "confidence": 0.9
+    },
+    {
+      "term": "UPI",
+      "suggested_translation": "UPI (Intel超级通道互联)",
+      "context": "multi socket interconnect specifications (AMD XGMI and Intel UPI)",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "bom": "物料清单 (BOM)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:21:00.827580"
+}

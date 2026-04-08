@@ -1,0 +1,44 @@
+{
+  "section_id": "15-throughput-at-different-in-fli",
+  "new_terms": [
+    {
+      "term": "in-flight instructions",
+      "suggested_translation": "在途指令",
+      "context": "Benchmarking throughput at different in-flight instruction counts to amortize overheads.",
+      "confidence": 0.95
+    },
+    {
+      "term": "commit wait overheads",
+      "suggested_translation": "提交等待开销",
+      "context": "Overheads associated with waiting for instructions to retire or commit in the pipeline.",
+      "confidence": 0.9
+    },
+    {
+      "term": "1SM MMA",
+      "suggested_translation": "1SM MMA",
+      "context": "Comparing throughput between 1SM and 2SM MMA configurations.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CUTLASS",
+      "suggested_translation": "CUTLASS",
+      "context": "A CUDA C++ template library for implementing high-performance GEMM and related computations.",
+      "confidence": 1.0
+    },
+    {
+      "term": "floorplans",
+      "suggested_translation": "芯片平面规划",
+      "context": "Discussion of physical layout and resource distribution on the silicon die.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "throughput": "吞吐量",
+    "speed of light (sol)": "理论极限性能 (SoL)",
+    "mma (matrix multiply-accumulate)": "矩阵乘累加 (MMA)",
+    "2sm mma": "2SM MMA",
+    "cta group": "CTA 组"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:34:58.453841"
+}

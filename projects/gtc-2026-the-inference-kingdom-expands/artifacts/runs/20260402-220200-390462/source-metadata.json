@@ -1,0 +1,95 @@
+{
+  "items": [
+    {
+      "source": "Source: Groq, SemiAnalysis",
+      "translation": "来源：Groq，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: MegaScale-Infer",
+      "translation": "来源：MegaScale-Infer",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: MegaScale-Infer, SemiAnalysis",
+      "translation": "来源：MegaScale-Infer，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Nvidia",
+      "translation": "来源：英伟达",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 4
+    },
+    {
+      "source": "Source: Nvidia, SemiAnalysis",
+      "translation": "来源：英伟达，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Nvidia, SemiAnalysis Accelerator Model",
+      "translation": "来源：Nvidia, SemiAnalysis Accelerator 模型",
+      "tokenized_translation": "来源：Nvidia, [[[LINK_1|SemiAnalysis Accelerator 模型]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Original NVIDIA ICMS blog in January, 2026 – updated and re-released on March 16, 2026 https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/",
+      "translation": "来源：2026年1月发布的英伟达ICMS原博客——于2026年3月16日更新并重新发布 https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/",
+      "tokenized_translation": "来源：2026年1月发布的英伟达ICMS原博客——于2026年3月16日更新并重新发布 [[[LINK_1|https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis",
+      "translation": "来源：SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 17
+    },
+    {
+      "source": "Source: SemiAnalysis AI Networking Model, Nvidia",
+      "translation": "来源：SemiAnalysis AI网络模型，英伟达（NVIDIA）",
+      "tokenized_translation": "来源：[[[LINK_1|SemiAnalysis AI网络模型]]]，英伟达（NVIDIA）",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "translation": "来源：SemiAnalysis Accelerator 模型",
+      "tokenized_translation": "来源：SemiAnalysis [[[LINK_1|Accelerator 模型]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: SemiAnalysis Networking Model",
+      "translation": "来源：SemiAnalysis Networking 模型",
+      "tokenized_translation": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "format_issues": [],
+      "occurrences": 5
+    },
+    {
+      "source": "Source: SemiAnalysis, MegaScale-Infer",
+      "translation": "来源：SemiAnalysis，MegaScale-Infer",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis, Nvidia",
+      "translation": "来源：SemiAnalysis，英伟达",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

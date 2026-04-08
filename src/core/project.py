@@ -38,6 +38,7 @@ from .format_tokens import (
 )
 from .markdown_project_parser import MarkdownProjectParser
 from ..html2md import convert_html_to_markdown_text
+from .title_guard import find_missing_title_terms
 
 
 class ProjectManager:
@@ -120,6 +121,34 @@ class ProjectManager:
 
     def _group_section_blocks(self, section: Section) -> list[list[Paragraph]]:
         return sorted_block_groups(section.paragraphs)
+
+    def _section_display_title(self, section: Section) -> str:
+        return (section.title_translation or section.title or "").strip()
+
+    def _is_front_matter_section(self, section: Section) -> bool:
+        paragraphs = section.paragraphs
+        if not paragraphs or len(paragraphs) > 4:
+            return False
+        first = paragraphs[0]
+        if not first.is_heading or first.heading_level not in {3, 4}:
+            return False
+        return all(
+            p.element_type in {ElementType.H3, ElementType.H4, ElementType.P, ElementType.IMAGE}
+            for p in paragraphs
+        )
+
+    def _should_render_section_heading(
+        self, sections: list[Section], index: int, section: Section
+    ) -> bool:
+        if index != 0 or index + 1 >= len(sections):
+            return True
+
+        current_title = self._section_display_title(section)
+        next_title = self._section_display_title(sections[index + 1])
+        if not current_title or current_title != next_title:
+            return True
+
+        return not self._is_front_matter_section(section)
 
     def _render_source_block_markdown(self, paragraphs: list[Paragraph]) -> str:
         first = paragraphs[0]
@@ -224,6 +253,137 @@ class ProjectManager:
         filename = self.get_export_filename(project_id, format=format)
         return self._project_dir(project_id) / filename
 
+    def _looks_like_untranslated_residue(self, text: str) -> bool:
+        normalized = (text or "").strip()
+        if not normalized:
+            return False
+        if re.search(r"[\u4e00-\u9fff]", normalized) is None:
+            return False
+        if "来源：" in normalized and len(normalized) <= 80:
+            return False
+
+        english_spans = re.findall(
+            r"[A-Za-z][A-Za-z0-9'’/+.-]*(?:\s+[A-Za-z][A-Za-z0-9'’/+.-]*){2,}",
+            normalized,
+        )
+        if not english_spans:
+            return False
+
+        for span in english_spans:
+            words = re.findall(r"[A-Za-z][A-Za-z0-9'’/+.-]*", span)
+            if len(words) < 4:
+                continue
+            lowercase_words = [word for word in words if re.search(r"[a-z]", word)]
+            if len(words) >= 6:
+                return True
+            if len(lowercase_words) >= 3:
+                return True
+            if ":" in span or "’" in span or "'" in span:
+                return True
+        return False
+
+    def _build_export_lint_payload(
+        self,
+        meta: ProjectMeta,
+        sections: list[Section],
+    ) -> dict[str, Any]:
+        issues: list[dict[str, Any]] = []
+
+        missing_title_terms = find_missing_title_terms(
+            meta.title,
+            self._preferred_export_title(meta),
+        )
+        if missing_title_terms:
+            issues.append(
+                {
+                    "type": "title_semantics",
+                    "severity": "error",
+                    "message": "导出标题缺少原题中的关键品牌/版本信息。",
+                    "missing_terms": missing_title_terms,
+                }
+            )
+
+        if (
+            len(sections) > 1
+            and self._is_front_matter_section(sections[0])
+            and self._should_render_section_heading(sections, 0, sections[0])
+            and self._should_render_section_heading(sections, 1, sections[1])
+            and self._section_display_title(sections[0])
+            and self._section_display_title(sections[0])
+            == self._section_display_title(sections[1])
+        ):
+            issues.append(
+                {
+                    "type": "duplicate_intro_heading",
+                    "severity": "error",
+                    "message": "front matter 标题与正文首章标题重复，导出时可能出现重复 H2。",
+                    "heading": self._section_display_title(sections[0]),
+                }
+            )
+
+        for section in sections:
+            for paragraph in section.paragraphs:
+                if paragraph.is_metadata:
+                    continue
+                if paragraph.element_type in {ElementType.IMAGE, ElementType.TABLE, ElementType.CODE}:
+                    continue
+
+                translated = paragraph.best_translation_text(fallback_to_source=False).strip()
+                if not translated:
+                    issues.append(
+                        {
+                            "type": "missing_translation",
+                            "severity": "error",
+                            "section_id": section.section_id,
+                            "paragraph_id": paragraph.id,
+                            "message": "段落没有译文。",
+                            "source_preview": paragraph.source[:160],
+                        }
+                    )
+                    continue
+
+                if translated == paragraph.source.strip():
+                    issues.append(
+                        {
+                            "type": "untranslated_paragraph",
+                            "severity": "error",
+                            "section_id": section.section_id,
+                            "paragraph_id": paragraph.id,
+                            "message": "段落译文与原文完全相同。",
+                            "source_preview": paragraph.source[:160],
+                        }
+                    )
+                    continue
+
+                if self._looks_like_untranslated_residue(translated):
+                    issues.append(
+                        {
+                            "type": "residual_english",
+                            "severity": "warning",
+                            "section_id": section.section_id,
+                            "paragraph_id": paragraph.id,
+                            "message": "译文中存在较长英文残留片段，建议复核。",
+                            "translation_preview": translated[:160],
+                        }
+                    )
+
+        return {
+            "project_id": meta.id,
+            "generated_at": datetime.now().isoformat(),
+            "issue_count": len(issues),
+            "issues": issues,
+        }
+
+    def _write_export_lint_artifact(
+        self,
+        project_id: str,
+        payload: dict[str, Any],
+    ) -> None:
+        artifact_path = (
+            self._project_dir(project_id) / "artifacts" / "export-lint" / "latest.json"
+        )
+        self._write_json(artifact_path, payload)
+
     def create(
         self,
         name: str,
@@ -289,10 +449,11 @@ class ProjectManager:
         sections = parsed_project.sections
 
         # 自动批准 metadata 段落（图片等）；source metadata 走专用批翻链路
+        structured_metadata_types = {"source", "subtitle", "byline", "date_access"}
         for section in sections:
             for paragraph in section.paragraphs:
                 if paragraph.is_metadata:
-                    if paragraph.metadata_type == "source":
+                    if paragraph.metadata_type in structured_metadata_types:
                         continue
                     paragraph.status = ParagraphStatus.APPROVED
                     paragraph.confirmed = paragraph.source
@@ -675,11 +836,11 @@ class ProjectManager:
         article_title = self._preferred_export_title(meta)
         lines = [f"# {article_title}", ""]
 
-        for section in sections:
-            # 章节标题
-            title = section.title_translation or section.title
-            lines.append(f"## {title}")
-            lines.append("")
+        for index, section in enumerate(sections):
+            if self._should_render_section_heading(sections, index, section):
+                title = self._section_display_title(section)
+                lines.append(f"## {title}")
+                lines.append("")
 
             for block in self._group_section_blocks(section):
                 if include_source and any(p.confirmed for p in block):
@@ -702,6 +863,10 @@ class ProjectManager:
             format="zh",
         )
         self._write_text(output_path, content)
+        self._write_export_lint_artifact(
+            project_id,
+            self._build_export_lint_payload(meta, sections),
+        )
 
         return content
 

@@ -1,0 +1,1811 @@
+{
+  "section_id": "13-throughput",
+  "title": "Throughput",
+  "title_translation": "吞吐量",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "NVIDIA claims specific throughput performance for different input data types, and here we show their claims for each (format + CTA group) and compare them with the max achievable throughput. We show that UMMA achieves near peak throughput for all formats and CTA groups, and even on 2SM versions where coordination overhead may be a concern.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA claims specific throughput performance for different input data types, and here we show their claims for each (format + CTA group) and compare them with the max achievable throughput. We show that UMMA achieves near peak throughput for all formats and CTA groups, and even on 2SM versions where coordination overhead may be a concern.",
+      "parent_block_plain_text": "NVIDIA claims specific throughput performance for different input data types, and here we show their claims for each (format + CTA group) and compare them with the max achievable throughput. We show that UMMA achieves near peak throughput for all formats and CTA groups, and even on 2SM versions where coordination overhead may be a concern.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 341,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达公布了针对不同输入数据类型的特定吞吐量性能。在此，我们展示其针对每种配置（数据格式与 CTA 组）的官方标称值，并将其与实际可达到的最大吞吐量进行对比。结果表明，UMMA 在所有数据格式和 CTA 组配置下均能达到接近峰值的吞吐量；即使在可能存在协同开销的 2SM 版本上，其表现依然如此。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090621",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090669",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "For 1SM MMA across all N sizes, we see that the smaller M=64 achieves max 50% theoretical peak throughput, and the larger M=128 achieves near 100%. This confirms that M=64 is utilizing half of the datapath. For 2SM MMA, we see that M=128 throughput starts at 90% peak for N=64 and reaches near 100% for all other N sizes. M128N64 throughput must be bound at a different hardware unit such as TMEM, L2, SMEM, etc. Meanwhile, M=256 sustains near 100% peak throughput across all configurations, this is because M=256 is M=128 per SM, which can utilize the full datapath. We note that throughput is identical across formats with the same data type bit width, and micro-scaling data types have virtually no overhead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For 1SM MMA across all N sizes, we see that the smaller M=64 achieves max 50% theoretical peak throughput, and the larger M=128 achieves near 100%. This confirms that M=64 is utilizing half of the datapath. For 2SM MMA, we see that M=128 throughput starts at 90% peak for N=64 and reaches near 100% for all other N sizes. M128N64 throughput must be bound at a different hardware unit such as TMEM, L2, SMEM, etc. Meanwhile, M=256 sustains near 100% peak throughput across all configurations, this is because M=256 is M=128 per SM, which can utilize the full datapath. We note that throughput is identical across formats with the same data type bit width, and micro-scaling data types have virtually no overhead.",
+      "parent_block_plain_text": "For 1SM MMA across all N sizes, we see that the smaller M=64 achieves max 50% theoretical peak throughput, and the larger M=128 achieves near 100%. This confirms that M=64 is utilizing half of the datapath. For 2SM MMA, we see that M=128 throughput starts at 90% peak for N=64 and reaches near 100% for all other N sizes. M128N64 throughput must be bound at a different hardware unit such as TMEM, L2, SMEM, etc. Meanwhile, M=256 sustains near 100% peak throughput across all configurations, this is because M=256 is M=128 per SM, which can utilize the full datapath. We note that throughput is identical across formats with the same data type bit width, and micro-scaling data types have virtually no overhead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 711,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于所有 N 尺寸下的 1SM MMA，我们观察到较小的 M=64 配置最高仅达到 50% 的理论峰值吞吐量，而较大的 M=128 配置则接近 100%。这证实了 M=64 仅利用了一半的数据通路。对于 2SM MMA，M=128 的吞吐量在 N=64 时起步于 90% 的峰值，而在所有其他 N 尺寸下均接近 100%。因此，M128N64 的吞吐量必然受限于其他硬件单元（如张量内存 (TMEM)、L2 缓存、共享内存 (SMEM) 等）。同时，M=256 在所有配置下均能维持接近 100% 的峰值吞吐量，这是因为 M=256 相当于每个 SM 分配 M=128，从而能够完全利用数据通路。我们还注意到，在相同数据类型位宽下，不同格式的吞吐量完全一致，且微缩放 (micro-scaling) 数据类型几乎没有额外开销。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090689",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090706",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "MMA supports two different AB layouts: Both input matrices stored in SMEM (SS), and matrix A stored in TMEM and matrix B stored in SMEM (TS). We observed that for M=128, while ABLayout=TS achieves near peak throughput, ABLayout=SS underperforms in smaller N sizes and catches up at N=128.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0114",
+      "parent_block_index": 114,
+      "parent_block_type": "p",
+      "parent_block_markdown": "MMA supports two different AB layouts: Both input matrices stored in SMEM (SS), and matrix A stored in TMEM and matrix B stored in SMEM (TS). We observed that for M=128, while ABLayout=TS achieves near peak throughput, ABLayout=SS underperforms in smaller N sizes and catches up at N=128.",
+      "parent_block_plain_text": "MMA supports two different AB layouts: Both input matrices stored in SMEM (SS), and matrix A stored in TMEM and matrix B stored in SMEM (TS). We observed that for M=128, while ABLayout=TS achieves near peak throughput, ABLayout=SS underperforms in smaller N sizes and catches up at N=128.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 288,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "MMA 支持两种不同的 AB 矩阵布局：两个输入矩阵均存储在共享内存 (SMEM) 中（简称 SS），以及矩阵 A 存储在张量内存 (TMEM) 中而矩阵 B 存储在共享内存 (SMEM) 中（简称 TS）。我们观察到，在 M=128 时，虽然 ABLayout=TS 能够达到接近峰值的吞吐量，但 ABLayout=SS 在较小的 N 尺寸下性能表现不佳，直到 N=128 时才追平前者。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090723",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090739",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "We can show that this is because the instruction itself is SMEM bandwidth bound below N=128 for SS mode. For example, for FP16 we know the hardware can do 8192 MMA FLOPs per cycle per SM, and the SMEM bandwidth is 128 B/cycle (per SM). So for M=128 N=64 K=16, we have:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We can show that this is because the instruction itself is SMEM bandwidth bound below N=128 for SS mode. For example, for FP16 we know the hardware can do 8192 MMA FLOPs per cycle per SM, and the SMEM bandwidth is 128 B/cycle (per SM). So for M=128 N=64 K=16, we have:",
+      "parent_block_plain_text": "We can show that this is because the instruction itself is SMEM bandwidth bound below N=128 for SS mode. For example, for FP16 we know the hardware can do 8192 MMA FLOPs per cycle per SM, and the SMEM bandwidth is 128 B/cycle (per SM). So for M=128 N=64 K=16, we have:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 268,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们可以证明，这是因为在 SS 模式下，当 N 小于 128 时，指令本身会受限于共享内存 (SMEM) 带宽。例如，对于 FP16 数据类型，我们已知硬件在每个 SM 上每周期可执行 8192 次 MMA FLOPs，而共享内存 (SMEM) 带宽为 128 B/周期（每个 SM）。因此，对于 M=128、N=64、K=16 的配置，我们有：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090757",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;",
+          "start": 0,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "p",
+      "parent_block_markdown": "`A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;`",
+      "parent_block_plain_text": "A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;",
+          "start": 0,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 47,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090831",
+          "tokenized_text": "[[[CODE_1|A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "FLOPs = 2*M*N*K = 262144",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "FLOPs = 2*M*N*K = 262144",
+          "start": 0,
+          "end": 24,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "p",
+      "parent_block_markdown": "`FLOPs = 2*M*N*K = 262144`",
+      "parent_block_plain_text": "FLOPs = 2*M*N*K = 262144",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "FLOPs = 2*M*N*K = 262144",
+          "start": 0,
+          "end": 24,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 24,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "FLOPs = 2*M*N*K = 262144",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090881",
+          "tokenized_text": "[[[CODE_1|FLOPs = 2*M*N*K = 262144]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles",
+          "start": 0,
+          "end": 59,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "`SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles`",
+      "parent_block_plain_text": "SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles",
+          "start": 0,
+          "end": 59,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 59,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090925",
+          "tokenized_text": "[[[CODE_1|SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+          "start": 0,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0120",
+      "parent_block_index": 120,
+      "parent_block_type": "p",
+      "parent_block_markdown": "`Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles`",
+      "parent_block_plain_text": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+          "start": 0,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 51,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090967",
+          "tokenized_text": "[[[CODE_1|Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "We compute this for increasing N and find we are finally Math limited starting from the N=128 instruction.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We compute this for increasing N and find we are finally Math limited starting from the N=128 instruction.",
+      "parent_block_plain_text": "We compute this for increasing N and find we are finally Math limited starting from the N=128 instruction.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 106,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们针对不断增大的 N 值进行计算，发现从 N=128 的指令开始，性能最终受限于算力。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.090985",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0122",
+      "parent_block_index": 122,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091001",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "The same is true for other datatypes - MMA instructions with both operands in SMEM are SMEM-bound below N=128.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The same is true for other datatypes - MMA instructions with both operands in SMEM are SMEM-bound below N=128.",
+      "parent_block_plain_text": "The same is true for other datatypes - MMA instructions with both operands in SMEM are SMEM-bound below N=128.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 110,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "其他数据类型的情况也是如此——当两个操作数均存储在共享内存 (SMEM) 中时，若 N 小于 128，MMA 指令会受限于共享内存 (SMEM) 带宽。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091016",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "To further illustrate the point, we plot the roofline for all shapes of FP8 1SM MMA. We see clearly that the N < 256 is at the memory-bounded region, and the slope is roughly 128 bytes / cycle, the SMEM bandwidth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To further illustrate the point, we plot the roofline for all shapes of FP8 1SM MMA. We see clearly that the N < 256 is at the memory-bounded region, and the slope is roughly 128 bytes / cycle, the SMEM bandwidth.",
+      "parent_block_plain_text": "To further illustrate the point, we plot the roofline for all shapes of FP8 1SM MMA. We see clearly that the N < 256 is at the memory-bounded region, and the slope is roughly 128 bytes / cycle, the SMEM bandwidth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 213,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了进一步说明这一点，我们绘制了所有形状的 FP8 1SM MMA 的 Roofline 模型图。可以清楚地看到，当 N < 256 时，指令处于内存受限区域，其斜率约为 128 字节/周期，这正是共享内存 (SMEM) 的带宽。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091031",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091047",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "2SM MMA achieves perfect weak scaling across all formats and shapes, reaching 2x speedup when using 2x the amount of compute resources than 1SM MMA. In smaller shapes of ABLayout=SS, we observe over 2x speedup, which again happens because the instruction is SMEM bound below N=128 for SS and the 2SM version splits operand B between the two SMs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "p",
+      "parent_block_markdown": "2SM MMA achieves perfect weak scaling across all formats and shapes, reaching 2x speedup when using 2x the amount of compute resources than 1SM MMA. In smaller shapes of ABLayout=SS, we observe over 2x speedup, which again happens because the instruction is SMEM bound below N=128 for SS and the 2SM version splits operand B between the two SMs.",
+      "parent_block_plain_text": "2SM MMA achieves perfect weak scaling across all formats and shapes, reaching 2x speedup when using 2x the amount of compute resources than 1SM MMA. In smaller shapes of ABLayout=SS, we observe over 2x speedup, which again happens because the instruction is SMEM bound below N=128 for SS and the 2SM version splits operand B between the two SMs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 345,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2SM MMA 在所有数据格式和形状上均实现了完美的弱扩展性，在使用两倍于 1SM MMA 的计算资源时，达到了 2 倍的加速比。在 ABLayout=SS 的较小形状中，我们观察到了超过 2 倍的加速比，这同样是因为当 N < 128 时，SS 模式下的指令受限于共享内存 (SMEM) 带宽，而 2SM 版本将操作数 B 分摊到了两个 SM 之间。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091063",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091078",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "SS mode: Over 2x speedup for N < 128 due to being SMEM bound",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SS mode: Over 2x speedup for N < 128 due to being SMEM bound",
+          "start": 0,
+          "end": 60,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SS mode: Over 2x speedup for N < 128 due to being SMEM bound*",
+      "parent_block_plain_text": "SS mode: Over 2x speedup for N < 128 due to being SMEM bound",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SS mode: Over 2x speedup for N < 128 due to being SMEM bound",
+          "start": 0,
+          "end": 60,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SS 模式：由于受限于共享内存 (SMEM) 带宽，在 N < 128 时加速比超过 2 倍",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091121",
+          "tokenized_text": "[[[EM_1|SS 模式：由于受限于共享内存 (SMEM) 带宽，在 N < 128 时加速比超过 2 倍]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091138",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "TS mode: Near-perfect 2x speedup",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TS mode: Near-perfect 2x speedup",
+          "start": 0,
+          "end": 32,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0130",
+      "parent_block_index": 130,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TS mode: Near-perfect 2x speedup*",
+      "parent_block_plain_text": "TS mode: Near-perfect 2x speedup",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TS mode: Near-perfect 2x speedup",
+          "start": 0,
+          "end": 32,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "TS 模式：近乎完美的 2 倍加速比",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091175",
+          "tokenized_text": "[[[EM_1|TS 模式：近乎完美的 2 倍加速比]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "These experiments show that you should always use the largest instruction shape available for a given SMEM tile size to get maximum throughput.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0131",
+      "parent_block_index": 131,
+      "parent_block_type": "p",
+      "parent_block_markdown": "These experiments show that you should always use the largest instruction shape available for a given SMEM tile size to get maximum throughput.",
+      "parent_block_plain_text": "These experiments show that you should always use the largest instruction shape available for a given SMEM tile size to get maximum throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 143,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些实验表明，对于给定的共享内存 (SMEM) 分块大小，应始终使用可用的最大指令形状，以获得最大吞吐量。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:33:34.091192",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。"
+          },
+          {
+            "type": "data",
+            "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。"
+          },
+          {
+            "type": "readability",
+            "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

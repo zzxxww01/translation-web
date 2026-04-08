@@ -1,0 +1,33 @@
+{
+  "section_id": "19-ampereone-softbank-acquisiti",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.29,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 8.8,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png",
+    "AmpereOne 2024 年路线图。来源：Ampere Computing",
+    "https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png",
+    "Ampere Altra Max（左）与 Altra（右）。来源：Ampere Computing",
+    "https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png",
+    "开盖的 AmpereOne CPU。来源：Brendan Crain，Wikimedia",
+    "https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png",
+    "AmpereOne 网格架构。来源：Ampere Computing，Hot Chips 2024",
+    "Ampere Computing 是商业化 ARM 芯片最初的领军者，作为 OEM（原始设备制造商）服务器构建的第三方芯片供应商，直接与 AMD 和英特尔展开竞争。凭借与 Oracle 的紧密合作，Ampere 大张旗鼓地推出了 80 核的 Altra 与 128 核的 Altra Max 系列 CPU，承诺用高性价比的 ARM CPU 打破 x86 CPU 的双头垄断。Ampere Altra 采用 Neoverse N1 内核与自研网格互连架构，将内核划分为多个 4 核集群。与内核配套的是单颗台积电 7nm 裸片上的 8 通道 DDR4 和 128 条 PCIe 4 通道。",
+    "得益于转向 5nm 工艺以及新颖的芯粒设计，下一代 AmpereOne CPU 将核心数量提升至 192 个。该设计将 I/O 解耦为独立的 DDR5 和 PCIe 裸片，采用无需使用中介层的 MCM 配置。Ampere 还转向了定制 ARM 内核，该内核追求核心密度而非极致性能，并搭配超大容量的 2MB 二级缓存，以尽量减少来自“吵闹的邻居 (资源抢占者)”的性能损失——即运行在相邻内核上的其他虚拟机抢占共享网格互连流量的问题。类似的 4 核集群被部署在 9x8 网格网络上。总体而言，其整数性能比 Altra Max 翻了一番。",
+    "这种芯粒设计允许同一计算裸片在其他变体中重复使用，例如 12 通道的 AmpereOne-M 就增加了 2 颗内存控制器裸片。未来的 AmpereOne-MX 复用了相同的 I/O 芯粒，但替换为拥有 256 个核心的 3nm 计算裸片。其 2024 年路线图还详细介绍了一款未来的 AmpereOne Aurora 芯片，该芯片拥有 512 个核心，并具备 AI 训练和推理能力。",
+    "然而，随着 Ampere Computing 在 2025 年被软银以 65 亿美元收购，这份路线图已彻底作废。尽管孙正义确实希望利用 Ampere 的 CPU 设计人才来加强其“星际之门项目”的 CPU 设计，但促成此次收购的另一大动因是 Oracle 急于剥离这项表现不佳的业务。由于时机把握与执行层面的双重问题，Ampere 的 CPU 出货量始终未能实现真正意义上的规模化。",
+    "Altra 代产品是他们首次大规模进军市场之作，但由于当时大多数软件并非 ARM 原生，其问世时间对大规模普及而言为时尚早。超大规模云厂商可以迅速调整内部工作负载以适配自研 ARM 芯片，但通用与企业级 CPU 市场的转型步伐要缓慢得多。紧接着，AmpereOne 代产品遭遇多次延期，直到 2024 年下半年 Oracle Cloud A2 实例和 CPU 才姗姗来迟。到那时，超大规模云厂商的 ARM CPU 项目已全面铺开，且 AMD 也能追平 Ampere 的 192 核配置，单核性能更是高出 3 到 4 倍。尽管 Oracle 极力推销单核授权费减半的 Ampere 实例，但这些 CPU 依然无人问津，订单也随之枯竭。",
+    "Oracle 从未用完他们购买 Ampere CPU 的全额预付款，其 Ampere CPU 采购额从 2023 财年的 4800 万美元一路陡降至 2024 年的 300 万美元，2025 年也仅为 370 万美元。",
+    "归入软银麾下后，Ampere 目前正同时研发 AI 芯片与 CPU。"
+  ]
+}

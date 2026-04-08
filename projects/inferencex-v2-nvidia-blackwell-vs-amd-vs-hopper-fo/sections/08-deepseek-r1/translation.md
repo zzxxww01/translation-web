@@ -1,0 +1,47 @@
+AMD 团队已大幅提升了 SGLang DeepSeek R1 FP4 所有配置的性能。在同等交互性下，AMD 仅用不到两个月的时间，就将吞吐量几乎翻了一番。此外，我们还敦促 AMD 将其魔改版 SGLang 镜像中提升性能的改动合入上游官方 SGLang 镜像。从 2025 年 12 月到 2026 年 1 月，AMD 的软件性能实现了高达 2 倍的提升。
+
+https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png
+
+来源：SemiAnalysis InferenceX
+
+为了不断逼近一流的使用体验，AMD 必须加大对 vLLM 和 SGLang 维护者的支持力度，不仅要贡献算力与代码，还要安排更多 AMD 内部审查人员，加速将 AMD 的 PR (Pull Request) 审核并合入上游。
+
+https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg
+
+来源：SemiAnalysis
+
+另一方面，英伟达的测试结果则更为稳定，在同期内 B200 SGLang 的性能仅有小幅提升。
+
+https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png
+
+来源：SemiAnalysis InferenceX
+
+许多成熟的 SKU 性能提升微乎其微。例如，自 10 月以来的四个月里，H200 TRT 单节点的性能毫无变化。这是因为 Hopper 从发布首日起就获得了极佳的软件支持，其在该工作负载下的性能一直逼近理论峰值，因此很难再挤出额外的性能提升。
+
+https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png
+
+来源：SemiAnalysis InferenceX
+
+MI300X 和 MI325X 取得了一些性能提升，这主要归功于最新发布的 SGLang 版本。需要注意的是，在 InferenceX 的大部分历史测试中，AMD 使用的都是未推送到上游的“私有” ROCm 镜像，因此 2026 年 1 月左右之前的测试结果，无法与近期的结果直接对比。
+
+https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png
+
+来源：SemiAnalysis InferenceX
+
+GB200 Dynamo TRT-LLM Disagg (分离) 架构同样取得了显著提升，在短短一个多月的时间里，最大吞吐量飙升了 20%。在部署了宽专家并行（WideEP）的中等交互性场景下，我们也看到了性能改善。这很可能得益于 GB200 上宽专家并行内核的日益成熟。
+
+https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png
+
+来源：SemiAnalysis InferenceX
+
+自我们首次发布以来，B200 SGLang 在 FP4 和 FP8 场景下均实现了稳步且持续的提升。自去年十月以来，在特定的交互性水平下，单 GPU 吞吐量已经翻番。
+
+https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png
+
+来源：SemiAnalysis InferenceX
+
+对于 MI355X 分离式推理服务，AMD 推荐搭配 MoRI 使用 SGLang。MoRI 是 AMD 的 MoE (混合专家) 分发/合并集合通信与 KV Cache 传输库，由 AMD 位于中国的一支实力爆表的“十倍工程师”团队基于第一性原理打造。尽管 MoRI 还需要更开放的 CI（持续集成）与测试，但我们极度看好它的发展方向。原因在于，AMD 以往的常规操作是直接把英伟达的 NCCL 分支出来魔改为 RCCL，但这次 MoRI 摒弃了这种做法。它汲取了 RCCL/NCCL 的经验教训，完全基于第一性原理从零构建了一个全新的代码包。在短短一个多月的时间里，MoRI 的应用带来了可观的加速效果：在 20-45 tok/s/user 的交互性区间内，单 GPU 吞吐量提升了 20% 以上。
+
+https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png
+
+来源：SemiAnalysis InferenceX

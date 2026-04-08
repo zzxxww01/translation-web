@@ -1,0 +1,28 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "cancelled",
+  "message": "Translation cancelled by user",
+  "total_sections": 36,
+  "translated_sections": 8,
+  "total_paragraphs": 358,
+  "translated_paragraphs": 200,
+  "error_count": 1,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "Nvidia's latest GPU architecture following Hopper",
+      "section_id": "03-acknowledgments-and-inferencex",
+      "timestamp": "2026-04-07T20:36:47.987915"
+    }
+  ],
+  "started_at": "2026-04-07T20:34:09.363833",
+  "finished_at": "2026-04-07T20:37:06.872154",
+  "run_id": "20260407-203409-363847",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260407-203409-363847",
+  "api_calls": 6,
+  "elapsed_seconds": 177.6
+}

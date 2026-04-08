@@ -1,0 +1,29 @@
+{
+  "section_id": "11-dsmem-vs-smem",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "structure",
+        "severity": "medium",
+        "original_text": "Additionally, we observed that in order to get the full 128B/cycle for local SMEM, ld.shared must be used without ::cluster. This was a pitfall we ran into when we wrote a benchmark which simply used ld.shared::cluster to local and remote SMEM addresses.",
+        "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。",
+        "why_it_matters": "在底层技术文章中，严格区分正文文本与代码指令（如 `ld.shared` 和 `ld.shared::cluster`）有助于读者快速扫读并识别关键指令，符合开发者阅读习惯。",
+        "suggestion": "此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 `ld.shared` 而不带 `::cluster` 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 `ld.shared::cluster`。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "structure",
+        "severity": "medium",
+        "original_text": "With ld.shared, the compiler emits LDS instead of a generic LD emitted with ld.shared::cluster which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with ld.shared::cluster, and only achieved slightly higher throughput through DSMEM after switching to cp.async.bulk(PTX) / UBLKCP(SASS) to move higher volume of data per instruction.",
+        "description": "同上，段落中的多处指令未采用内联代码格式化。",
+        "why_it_matters": "未格式化指令会使文本显得不够专业，尤其是在对比 PTX 宏指令和 SASS 汇编指令时，代码格式能提供清晰的视觉区分。",
+        "suggestion": "使用 `ld.shared` 时，编译器会生成 `LDS` 指令，而不是像使用 `ld.shared::cluster` 时那样生成通用的 `LD` 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 `ld.shared::cluster` 的实际吞吐量，直到切换为使用 `cp.async.bulk` (PTX) / `UBLKCP` (SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。"
+      }
+    ]
+  }
+}

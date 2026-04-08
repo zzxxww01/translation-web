@@ -1,0 +1,30 @@
+{
+  "section_id": "30-klaud-cold-ai-usage",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "accuracy|terminology",
+        "severity": "medium",
+        "original_text": "spending at a $6,000/day run rate",
+        "description": "“run rate” 意为当前的消耗或运转速率。原文给出的具体速率是“每天 6000 美元”，但译文擅自添加了“年化”二字，导致“年化支出率”与“每天”连用存在逻辑矛盾（年化通常指推算到全年的总额，后文的 annualized $3 million 才是年化）。",
+        "why_it_matters": "混淆了财务术语中的日消耗率与年化数值，造成数据表达前言不搭后语。",
+        "suggestion": "删去“年化”，改为“目前的支出速度（run rate）已经飙到了每天 6000 美元”。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "how much developer throughput was being left on the table",
+        "description": "“流失”在中文里通常搭配用户、客户、人才或资金，用来搭配“吞吐量”略显生硬。“left on the table” 的核心含义是未被充分利用或白白浪费。",
+        "why_it_matters": "轻微的搭配不当，影响中文母语者的阅读流畅度。",
+        "suggestion": "将“白白流失了”改为“白白浪费了”。"
+      }
+    ]
+  }
+}

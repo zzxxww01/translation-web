@@ -1,0 +1,766 @@
+{
+  "article_theme": "A comprehensive benchmark analysis of Nvidia and AMD AI inference performance, highlighting how software stack maturity—specifically regarding advanced techniques like disaggregated prefill and wide expert parallelism—dictates real-world hardware capabilities and Total Cost of Ownership (TCO).",
+  "structure_summary": "The article opens by introducing the InferenceXv2 benchmark and thanking contributors. It then provides a technical primer on core LLM inference concepts (interactivity vs throughput, TP/EP/DP). The core sections dissect benchmark results for DeepSeek R1 and GPT-OSS across Nvidia and AMD hardware, highlighting the impact of frameworks, disaggregated serving, and WideEP. It transitions into an analysis of AMD's software shortcomings (composability, ATOM engine) and explains advanced techniques (MTP, Anthropic Fast Mode). Finally, it details InferenceX's internal updates, AI usage, and future roadmap, concluding with TCO comparisons.",
+  "style": {
+    "tone": "Hardcore technical, highly analytical, yet heavily infused with cynical tech-bro internet slang and insider humor.",
+    "target_audience": "AI engineers, hardware architects, quantitative analysts, and infrastructure executives.",
+    "translation_voice": "Professional and razor-sharp on technical details, but deliberately colloquial and punchy when translating slang, capturing the distinct 'SemiAnalysis' flavor without sounding like a dry academic paper."
+  },
+  "guidelines": [
+    "Maintain strict technical accuracy for GPU and AI inference terminology. Do not over-localize standard English abbreviations like FP8, FP4, NVMe, HBM, or framework names (TRTLLM, SGLang, vLLM).",
+    "Restructure long, dense technical explanations (e.g., the primer on TP/EP/DP or Disaggregated Prefill) into clear, logical Chinese sentences. Break up overly long English clauses and use active voice to improve paragraph flow.",
+    "Capture the author's unique slang (mog, maxxing) using equivalent Chinese tech community internet slang (e.g., 降维打击, 无效内卷) rather than dry academic translations, preserving the distinct SemiAnalysis voice.",
+    "Ensure exact alignment when discussing metrics. 'Interactivity' must clearly map to per-user speed (交互速度), and 'Throughput' to total system speed (系统吞吐量). Do not conflate the two.",
+    "When translating AMD's 'composability issue', translate it as '特性叠加兼容性问题' to accurately reflect that individual optimizations work in isolation but fail when combined in production.",
+    "For the article title and section headers, preserve all semantic components. Do not drop subjects or hardware names for the sake of brevity.",
+    "When translating 'All-reduce' and 'All-to-all', keep the English terms but provide the Chinese translation (全归约 / 全对全) in parentheses on their first occurrence to aid comprehension."
+  ],
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Paragraphs mentioning 'framemog', 'lookmaxxing', 'jestermaxing'",
+      "issue": "These are niche internet slang terms that do not have direct, formal Chinese equivalents.",
+      "suggestion": "Translate using vivid Chinese tech-community slang (e.g., 降维打击, 疯狂堆料, 瞎折腾) to maintain the edgy, insider tone."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: Jensen Under Promising... 'Jensen Math jokes', 'reality distortion field', 'touch some grass'",
+      "issue": "References to tech-industry memes (Nvidia CEO's math, Steve Jobs' RDF) and general internet slang.",
+      "suggestion": "Translate as '老黄数学（Jensen Math）的段子', '现实扭曲力场', and '接点地气' or '去户外走走'. The target audience is familiar with '老黄' and '现实扭曲力场'."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: Interactivity vs Throughput Tradeoff ('metro bus vs a race car')",
+      "issue": "Analogy used to explain latency vs throughput.",
+      "suggestion": "Translate literally as '公交车与赛车'. The analogy works perfectly in Chinese (公交车载客量大但停靠频繁=高吞吐高延迟；赛车快但只载一人=低延迟低吞吐)."
+    },
+    {
+      "type": "accuracy",
+      "location": "Throughout (Interactivity vs Throughput)",
+      "issue": "These terms can be vague if not strictly anchored to their units (tok/s/user vs tok/s).",
+      "suggestion": "Always append the context: Interactivity = 单用户交互速度, Throughput = 系统总吞吐量."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: Disaggregated Prefill ('prefilling the KV cache', 'loading the KV cache from HBM')",
+      "issue": "Hardware/Memory specific operations.",
+      "suggestion": "Ensure 'KV cache' is kept as 'KV 缓存' and 'HBM' is left as English. 'Prefilling' translates cleanly to '预填充'."
+    }
+  ],
+  "terminology": [
+    {
+      "term": "Disaggregated Prefill / Disaggregated Serving",
+      "translation": "分离式 Prefill / 分离式推理",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Core architectural concept in modern LLM inference. '分离式' is the standard industry term in Chinese for disaggregated architectures."
+    },
+    {
+      "term": "Wide Expert Parallelism (WideEP)",
+      "translation": "宽专家并行 (WideEP)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "A specific scaling technique. Best to translate literally and append the English acronym on first use for clarity."
+    },
+    {
+      "term": "framemog / mogged",
+      "translation": "绝对碾压 / 降维打击",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Preserves the author's casual, aggressive 'tech-bro' rhetorical tone without confusing Chinese readers with literal translations of 'mog'."
+    },
+    {
+      "term": "Interactivity",
+      "translation": "交互速度 (tok/s/user)",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Must be clearly distinguished from 'Throughput'. Adding the unit on first mention prevents ambiguity."
+    },
+    {
+      "term": "Throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard cloud/AI metric. '系统' emphasizes it's aggregate, contrasting with per-user interactivity."
+    },
+    {
+      "term": "Composability Issue",
+      "translation": "特性叠加兼容性问题",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "'Composability' usually means 可组合性, but in this debugging context, it specifically refers to optimizations failing when stacked/combined."
+    },
+    {
+      "term": "lookmaxxing / jestermaxing",
+      "translation": "表面粉饰 / 无效瞎折腾",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Requires dynamic translation into Chinese internet slang to match the cynical, informal tone."
+    },
+    {
+      "term": "All-reduce / All-to-all collective",
+      "translation": "All-reduce (全归约) / All-to-all (全对全) 集合通信",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Standard distributed computing terms. Keep English primarily but annotate with Chinese for junior readers."
+    },
+    {
+      "term": "Multi Token Prediction (MTP)",
+      "translation": "多 Token 预测 (MTP)",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Standard terminology. 'Token' is usually left untranslated in Chinese AI contexts."
+    },
+    {
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ]
+}

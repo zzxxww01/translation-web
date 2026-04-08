@@ -1,0 +1,30 @@
+{
+  "section_id": "09-gpt-oss-120b",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.0,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.8,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Some AITER optimizations helped MI300X performance across all interactivities",
+        "description": "术语“interactivities”被译为“交互度”，违反了词汇表（Glossary）中规定的标准译法“交互速度”。在性能基准测试的语境下，“交互速度”更准确地对应了 tok/s/user 的衡量标准。",
+        "why_it_matters": "未遵守词汇表会导致全文核心性能指标术语不一致，影响读者对关键技术论点的理解。",
+        "suggestion": "改为“部分 AITER 优化改善了 MI300X 在所有交互速度下的性能”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "downstream ROCm fork image ... a fork of the vLLM 0.10.1 build",
+        "description": "译文两次将“fork”处理为“Fork (分支)”。在开源社区和开发者语境中，“fork”作为名词或动词已被广泛接受，强行加注“分支”不仅显得累赘，而且“分支”在 Git 语境中通常对应“branch”，容易引起轻微歧义。",
+        "why_it_matters": "过度加注会削弱目标受众（AI 基础设施工程师、开发者）阅读时的流畅度和“内行”感。",
+        "suggestion": "直接使用小写的“fork”，去掉括号及中文解释。例如：“下游 ROCm fork 镜像”、“vLLM 0.10.1 版本的 fork”。"
+      }
+    ]
+  }
+}

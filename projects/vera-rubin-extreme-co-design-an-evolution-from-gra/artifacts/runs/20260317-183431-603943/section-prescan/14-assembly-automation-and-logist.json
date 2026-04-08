@@ -1,0 +1,49 @@
+{
+  "section_id": "14-assembly-automation-and-logist",
+  "new_terms": [
+    {
+      "term": "Foxconn",
+      "suggested_translation": "富士康/鸿海",
+      "context": "Mentioned as one of the three L10 level compute tray assembly partners for the Rubin platform.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Quanta",
+      "suggested_translation": "广达",
+      "context": "One of the key ODM partners for Rubin platform assembly.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Wistron",
+      "suggested_translation": "纬创",
+      "context": "Main supplier for L6 board level PCBA and L10 compute tray assembly.",
+      "confidence": 0.95
+    },
+    {
+      "term": "PCBA",
+      "suggested_translation": "PCBA",
+      "context": "Refers to L6 board level assembly (Printed Circuit Board Assembly).",
+      "confidence": 0.9
+    },
+    {
+      "term": "OEM",
+      "suggested_translation": "OEM",
+      "context": "Original Equipment Manufacturers, contrasted with ODMs in the assembly process.",
+      "confidence": 0.9
+    },
+    {
+      "term": "modular design",
+      "suggested_translation": "模块化设计",
+      "context": "Describes the seamless design of Rubin that simplifies assembly.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "L10 / L6 assembly level": "L10 / L6 级",
+    "Bianca board": "Bianca 板卡",
+    "L11 integration": "L11 级"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:15:16.514915"
+}

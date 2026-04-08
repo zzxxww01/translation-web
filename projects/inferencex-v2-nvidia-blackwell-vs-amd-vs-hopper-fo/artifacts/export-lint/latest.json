@@ -1,0 +1,55 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "generated_at": "2026-04-08T14:57:18.981678",
+  "issue_count": 6,
+  "issues": [
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "01-introduction",
+      "paragraph_id": "p003",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "随着今日发布，InferenceXv2 成为首个跨越整条帕累托前沿曲线对 Blackwell Ultra GB300 NVL72 机架级系统和 B300 进行基准测试的套件；同时，它也是首个测试在 MI355X 上组合使用 FP4 与 FP8、分离式架构以及宽专家并行时多节点性能的第三方基准测试。在 Inference"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "12-nvidia-versus-amd-disagg-prefi",
+      "paragraph_id": "p014",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "在对比 Dynamo TRTLLM B200 与 SGLang MoRI MI355 的 Disagg (分离) 预填充时，由于 TRTLLM 对 Disagg (分离) 预填充的实现更为成熟，AMD 遭遇了全方位的性能碾压。"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "13-unpacking-inference-providers",
+      "paragraph_id": "p014",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "OpenRouter 数据还显示，Nebius AI Studio (Fast) 提供 DeepSeek FP4 服务的交互性为 167 Token/秒/用户，定价为每百万输入 Token 2 美元、每百万输出 Token 6 美元。在 InferenceX 中对交互性进行相应调整后，我们得到了以下数据。"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "14-jensen-under-promising-and-ove",
+      "paragraph_id": "p015",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "诚然，GB300 NVL72 的单 GPU 综合成本更高，但这仅仅是将其单位 TCO 带宽优势降至 8 倍。这种机架级架构的带宽优势直接大幅降低了每 token 成本。目前，谷歌 TPU（张量处理器 (Tensor Processing Unit)）、AWS Trainium 和英伟达是仅有的已部署机架级系统设计的 A"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "17-amd-composability-issue-on-fp4",
+      "paragraph_id": "p002",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "AMD 的软件依然不达标。SemiAnalysis 和 AMD 内部的理论极限性能建模 (Speed of Light) 均表明，在 FP4 精度下，结合宽专家并行的分离式推理，其性能理应优于 MI355X 的单节点推理。遗憾的是，软件依然是掣肘 AMD GPU 的巨大瓶颈。AMD 管理层必须进一步优化工程人才的资源配"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "18-amd-atom-engine",
+      "paragraph_id": "p002",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "我们 SemiAnalysis 一直在敦促 AMD 为 vLLM 贡献更多算力，并在过去几周取得了一些进展。vLLM 将开始获得几台 MI355X 机器，从而将 CI 测试对等度从 0% 提升至非零。在即将发布的《AMD 现状》（State of AMD）文章中，我们将深入探讨 AMD 此前在 vLLM、SGLang、"
+    }
+  ]
+}

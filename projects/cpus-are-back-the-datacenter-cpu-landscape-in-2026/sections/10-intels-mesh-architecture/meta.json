@@ -1,0 +1,3441 @@
+{
+  "section_id": "10-intels-mesh-architecture",
+  "title": "Intel’s Mesh Architecture",
+  "title_translation": "英特尔Mesh架构",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.206892",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Intel Knights Landing Mesh Interconnect. Source: Intel, Hot Chips 2016",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Knights Landing Mesh Interconnect. Source: Intel, Hot Chips 2016",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Knights Landing Mesh Interconnect. Source: Intel, Hot Chips 2016*",
+      "parent_block_plain_text": "Intel Knights Landing Mesh Interconnect. Source: Intel, Hot Chips 2016",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Knights Landing Mesh Interconnect. Source: Intel, Hot Chips 2016",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 70,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 Knights Landing 网格互连架构。来源：英特尔，Hot Chips 2016",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207029",
+          "tokenized_text": "[[[EM_1|英特尔 Knights Landing 网格互连架构。来源：英特尔，Hot Chips 2016]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "To solve the scalability problem, Intel adopted the mesh interconnect architecture used in their 2016 Xeon Phi “Knights Landing” processor for their mainline Skylake-X Xeon Scalable CPUs in 2017, bringing 28 cores in the XCC die. While core counts did not increase much over Broadwell, the design would form the base that would scale core counts over the next decade.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To solve the scalability problem, Intel adopted the mesh interconnect architecture used in their 2016 Xeon Phi “Knights Landing” processor for their mainline Skylake-X Xeon Scalable CPUs in 2017, bringing 28 cores in the XCC die. While core counts did not increase much over Broadwell, the design would form the base that would scale core counts over the next decade.",
+      "parent_block_plain_text": "To solve the scalability problem, Intel adopted the mesh interconnect architecture used in their 2016 Xeon Phi “Knights Landing” processor for their mainline Skylake-X Xeon Scalable CPUs in 2017, bringing 28 cores in the XCC die. While core counts did not increase much over Broadwell, the design would form the base that would scale core counts over the next decade.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 367,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了解决可扩展性问题，英特尔在 2017 年将其 2016 款至强 Phi “Knights Landing” 处理器中使用的网格互连架构，引入到主流的 Skylake-X 至强可扩展 CPU 中，在 XCC (极高核心数) 裸片中集成了 28 个核心。尽管核心数相比 Broadwell 并未大幅增加，但这一设计奠定了未来十年持续扩展核心数的基础。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207063",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "In a mesh architecture, cores are arranged in a grid, with each column and row connected with half rings, forming a 2D mesh array. Each mesh stop can house cores and L3 cache slices, PCIe IO, the IMC, and accelerators. Routing between cores is done in a circular manner, with data travelling in the vertical direction before moving horizontally across. The caching and home agents are now distributed across all the ring stops along with their snoop filters for memory coherence across the network.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In a mesh architecture, cores are arranged in a grid, with each column and row connected with half rings, forming a 2D mesh array. Each mesh stop can house cores and L3 cache slices, PCIe IO, the IMC, and accelerators. Routing between cores is done in a circular manner, with data travelling in the vertical direction before moving horizontally across. The caching and home agents are now distributed across all the ring stops along with their snoop filters for memory coherence across the network.",
+      "parent_block_plain_text": "In a mesh architecture, cores are arranged in a grid, with each column and row connected with half rings, forming a 2D mesh array. Each mesh stop can house cores and L3 cache slices, PCIe IO, the IMC, and accelerators. Routing between cores is done in a circular manner, with data travelling in the vertical direction before moving horizontally across. The caching and home agents are now distributed across all the ring stops along with their snoop filters for memory coherence across the network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 498,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在网格架构中，核心呈网格状排列，每行每列通过半环相连，形成 2D 网格阵列。每个网格节点可容纳核心与 L3缓存切片、PCIe IO、IMC 以及加速器。核心间的路由采用环形机制，数据先沿垂直方向传输，再沿水平方向移动。缓存与主代理及其嗅探过滤器如今分布在所有环形节点上，以维持整个网络内的内存一致性。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207089",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "With a mesh network and multiple memory controllers on opposite sides of the die, memory access and core to core latency would vary significantly with large meshes. As with the earlier Cluster on Die approach, several clustering modes were offered that split the mesh into quadrants for Sub-NUMA Clustering (SNC), reducing average latencies at the expense of treating each processor as multiple sockets with smaller L3 and memory access pools for each NUMA node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With a mesh network and multiple memory controllers on opposite sides of the die, memory access and core to core latency would vary significantly with large meshes. As with the earlier Cluster on Die approach, several clustering modes were offered that split the mesh into quadrants for Sub-NUMA Clustering (SNC), reducing average latencies at the expense of treating each processor as multiple sockets with smaller L3 and memory access pools for each NUMA node.",
+      "parent_block_plain_text": "With a mesh network and multiple memory controllers on opposite sides of the die, memory access and core to core latency would vary significantly with large meshes. As with the earlier Cluster on Die approach, several clustering modes were offered that split the mesh into quadrants for Sub-NUMA Clustering (SNC), reducing average latencies at the expense of treating each processor as multiple sockets with smaller L3 and memory access pools for each NUMA node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 462,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在网格网络中，由于多个内存控制器分布在裸片两侧，大型网格的内存访问与核心间延迟差异极大。与早期的片上集群 (CoD) 方法类似，系统提供了几种集群模式，将网格划分为四个象限以实现子NUMA集群 (SNC)。这降低了平均延迟，但代价是将每个处理器视为多个插槽，且每个 NUMA 节点的 L3缓存与内存访问池也相应缩小。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207113",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "In Knights Landing, each mesh stop housed two cores with a shared L2 cache. The mesh grid is 6 columns by 9 rows in size, with top and bottom rows more IO and MCDRAM. The mesh network runs on it’s own clock, and can dynamically adjust mesh clocks to save power. On Knights Landing, the mesh ran at 1.6GHz.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In Knights Landing, each mesh stop housed two cores with a shared L2 cache. The mesh grid is 6 columns by 9 rows in size, with top and bottom rows more IO and MCDRAM. The mesh network runs on it’s own clock, and can dynamically adjust mesh clocks to save power. On Knights Landing, the mesh ran at 1.6GHz.",
+      "parent_block_plain_text": "In Knights Landing, each mesh stop housed two cores with a shared L2 cache. The mesh grid is 6 columns by 9 rows in size, with top and bottom rows more IO and MCDRAM. The mesh network runs on it’s own clock, and can dynamically adjust mesh clocks to save power. On Knights Landing, the mesh ran at 1.6GHz.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 305,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 Knights Landing 中，每个网格节点容纳两个核心，并共享 L2缓存。网格阵列规模为 6 列 9 行，顶部和底部行配置了更多的 IO 和 MCDRAM。网格网络运行在独立的时钟频率上，并能动态调整网格时钟以节省功耗。在 Knights Landing 上，网格运行频率为 1.6GHz。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207135",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207157",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Skylake-SP Mesh Diagram. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Skylake-SP Mesh Diagram. Source: Intel",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Skylake-SP Mesh Diagram. Source: Intel*",
+      "parent_block_plain_text": "Skylake-SP Mesh Diagram. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Skylake-SP Mesh Diagram. Source: Intel",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Skylake-SP 网格架构图。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207223",
+          "tokenized_text": "[[[EM_1|Skylake-SP 网格架构图。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "With Skylake-X, the 28 cores are arranged in a 6x6 mesh with a north IO cap and 2 spots for the IMC on the sides. The mesh array is smaller due to the size of the cores, which added more L2 cache and an AVX-512 extension to the core for increased floating point performance. The die size would exceed the 26 x 33 mm reticle limit if another row or column were to be added. With a smaller mesh and higher CPU frequencies of up to 4.5GHz, the mesh clock was increased to 2.4GHz, allowing similar average latencies to Broadwell’s dual rings.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With Skylake-X, the 28 cores are arranged in a 6x6 mesh with a north IO cap and 2 spots for the IMC on the sides. The mesh array is smaller due to the size of the cores, which added more L2 cache and an AVX-512 extension to the core for increased floating point performance. The die size would exceed the 26 x 33 mm reticle limit if another row or column were to be added. With a smaller mesh and higher CPU frequencies of up to 4.5GHz, the mesh clock was increased to 2.4GHz, allowing similar average latencies to Broadwell’s dual rings.",
+      "parent_block_plain_text": "With Skylake-X, the 28 cores are arranged in a 6x6 mesh with a north IO cap and 2 spots for the IMC on the sides. The mesh array is smaller due to the size of the cores, which added more L2 cache and an AVX-512 extension to the core for increased floating point performance. The die size would exceed the 26 x 33 mm reticle limit if another row or column were to be added. With a smaller mesh and higher CPU frequencies of up to 4.5GHz, the mesh clock was increased to 2.4GHz, allowing similar average latencies to Broadwell’s dual rings.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 538,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 Skylake-X 中，28 个核心排列成 6x6 网格阵列，顶部设有北侧 IO 模块，两侧预留了两个 IMC (集成内存控制器) 位置。核心体积增大导致网格阵列规模缩小。为提升浮点性能，这些核心内部增加了更多的 L2缓存与 AVX-512 扩展。若再增加一行或一列，裸片尺寸必将突破 26 x 33 毫米的光刻掩模版极限。得益于网格规模缩小以及 CPU 频率提升（最高达 4.5GHz），网格时钟频率也随之拉高至 2.4GHz。这使得其平均延迟与 Broadwell 的双环架构不相上下。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207247",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "The subsequent Cascade Lake and Cooper Lake processors brought minor changes with the same 28-core layout. As a side node, Intel made a 56-core dual die MCM in Cascade Lake-AP and cancelled a similar version for Cooper Lake CPX-4 in response to AMD’s datacenter return with EPYC.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0099",
+      "parent_block_index": 99,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The subsequent Cascade Lake and Cooper Lake processors brought minor changes with the same 28-core layout. As a side node, Intel made a 56-core dual die MCM in Cascade Lake-AP and cancelled a similar version for Cooper Lake CPX-4 in response to AMD’s datacenter return with EPYC.",
+      "parent_block_plain_text": "The subsequent Cascade Lake and Cooper Lake processors brought minor changes with the same 28-core layout. As a side node, Intel made a 56-core dual die MCM in Cascade Lake-AP and cancelled a similar version for Cooper Lake CPX-4 in response to AMD’s datacenter return with EPYC.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 279,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随后的 Cascade Lake 与 Cooper Lake 处理器仅作微调，依然沿用相同的 28 核心布局。顺带一提，面对 AMD 携 EPYC 杀回数据中心市场，英特尔在 Cascade Lake-AP 上推出了 56 核心的双裸片 MCM (多芯片模块)，但随后又砍掉了 Cooper Lake CPX-4 的类似版本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207270",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207292",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Ice Lake XCC 40-core Mesh Diagram. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Ice Lake XCC 40-core Mesh Diagram. Source: Intel",
+          "start": 0,
+          "end": 48,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Ice Lake XCC 40-core Mesh Diagram. Source: Intel*",
+      "parent_block_plain_text": "Ice Lake XCC 40-core Mesh Diagram. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Ice Lake XCC 40-core Mesh Diagram. Source: Intel",
+          "start": 0,
+          "end": 48,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 48,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Ice Lake XCC (极高核心数) 40 核心网格架构图。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207354",
+          "tokenized_text": "[[[EM_1|Ice Lake XCC (极高核心数) 40 核心网格架构图。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The next Ice Lake generation benefited from a node shrink from 14nm to 10nm, allowing core counts to increase to 40 cores in a 8x7 mesh, the maximum within the reticle limit. However, the next generation Sapphire Rapids was still going to be on the same node and with more features. That placed Intel in a pickle with how to increase core counts again.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The next Ice Lake generation benefited from a node shrink from 14nm to 10nm, allowing core counts to increase to 40 cores in a 8x7 mesh, the maximum within the reticle limit. However, the next generation Sapphire Rapids was still going to be on the same node and with more features. That placed Intel in a pickle with how to increase core counts again.",
+      "parent_block_plain_text": "The next Ice Lake generation benefited from a node shrink from 14nm to 10nm, allowing core counts to increase to 40 cores in a 8x7 mesh, the maximum within the reticle limit. However, the next generation Sapphire Rapids was still going to be on the same node and with more features. That placed Intel in a pickle with how to increase core counts again.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 352,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下一代 Ice Lake 受益于制程节点从 14nm 演进至 10nm，核心数得以提升至 40 个，呈 8x7 网格排列。这已是光刻掩模版极限下的最大规模。然而，紧随其后的下一代 Sapphire Rapids 仍将停留在同一制程节点，且需集成更多功能特性。这让英特尔在如何继续堆叠核心数上进退维谷。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207378",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Disaggregated Mesh Across EMIB",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Disaggregated Mesh Across EMIB",
+      "parent_block_plain_text": "Disaggregated Mesh Across EMIB",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "跨 EMIB (嵌入式多芯片互连桥接) 的解耦网格架构",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207399",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0104",
+      "parent_block_index": 104,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207419",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Intel Xeon’s Disaggregation Journey to Chiplets. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Xeon’s Disaggregation Journey to Chiplets. Source: Intel",
+          "start": 0,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0105",
+      "parent_block_index": 105,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Xeon’s Disaggregation Journey to Chiplets. Source: Intel*",
+      "parent_block_plain_text": "Intel Xeon’s Disaggregation Journey to Chiplets. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Xeon’s Disaggregation Journey to Chiplets. Source: Intel",
+          "start": 0,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 62,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔至强向 Chiplet 演进的解耦之路。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207478",
+          "tokenized_text": "[[[EM_1|英特尔至强向 Chiplet 演进的解耦之路。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0106",
+      "parent_block_index": 106,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207500",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Sapphire Rapids XCC Topology. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Sapphire Rapids XCC Topology. Source: Intel",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0107",
+      "parent_block_index": 107,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Sapphire Rapids XCC Topology. Source: Intel*",
+      "parent_block_plain_text": "Sapphire Rapids XCC Topology. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Sapphire Rapids XCC Topology. Source: Intel",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 43,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Sapphire Rapids XCC 拓扑图。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207580",
+          "tokenized_text": "[[[EM_1|Sapphire Rapids XCC 拓扑图。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Sapphire Rapids added Advanced Matrix Extension (AMX) engines for matrix multiplication and AI, further increasing core area. That meant a single monolithic die would only fit 34 cores, a regression from Ice Lake. To increase core counts to 60, Intel had no choice but to split the cores across multiple dies again. However, they wanted to keep the silicon “logically monolithic”, such that the processor would appear and perform identically to a single die.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0108",
+      "parent_block_index": 108,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Sapphire Rapids added Advanced Matrix Extension (AMX) engines for matrix multiplication and AI, further increasing core area. That meant a single monolithic die would only fit 34 cores, a regression from Ice Lake. To increase core counts to 60, Intel had no choice but to split the cores across multiple dies again. However, they wanted to keep the silicon “logically monolithic”, such that the processor would appear and perform identically to a single die.",
+      "parent_block_plain_text": "Sapphire Rapids added Advanced Matrix Extension (AMX) engines for matrix multiplication and AI, further increasing core area. That meant a single monolithic die would only fit 34 cores, a regression from Ice Lake. To increase core counts to 60, Intel had no choice but to split the cores across multiple dies again. However, they wanted to keep the silicon “logically monolithic”, such that the processor would appear and perform identically to a single die.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 458,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Sapphire Rapids 引入了用于矩阵乘法和 AI 的 AMX (高级矩阵扩展) 引擎，核心面积进一步增大。这意味着单片裸片只能容纳 34 个核心，相比 Ice Lake 反而出现了倒退。为了将核心数提升至 60 个，英特尔别无选择，只能再次将核心拆分到多个裸片上。然而，他们希望在芯片层面保持“逻辑上的单片结构”。这样一来，处理器在系统层面的呈现形态和性能表现就能与单片裸片毫无二致。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207667",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Thus, Sapphire Rapids debuted Intel’s EMIB advanced packaging technology to carry the mesh architecture across dies. Two pairs of mirrored 15-core dies were stitched together with a Modular Die Fabric, creating a much larger 8x12 mesh across four quadrants and nearly 1600 mm2 of silicon. A double row of mesh stops were required for the IO to facilitate the increased data traffic between the doubled throughput of PCIe 5.0 and the new data accelerator blocks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0109",
+      "parent_block_index": 109,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Thus, Sapphire Rapids debuted Intel’s EMIB advanced packaging technology to carry the mesh architecture across dies. Two pairs of mirrored 15-core dies were stitched together with a Modular Die Fabric, creating a much larger 8x12 mesh across four quadrants and nearly 1600 mm2 of silicon. A double row of mesh stops were required for the IO to facilitate the increased data traffic between the doubled throughput of PCIe 5.0 and the new data accelerator blocks.",
+      "parent_block_plain_text": "Thus, Sapphire Rapids debuted Intel’s EMIB advanced packaging technology to carry the mesh architecture across dies. Two pairs of mirrored 15-core dies were stitched together with a Modular Die Fabric, creating a much larger 8x12 mesh across four quadrants and nearly 1600 mm2 of silicon. A double row of mesh stops were required for the IO to facilitate the increased data traffic between the doubled throughput of PCIe 5.0 and the new data accelerator blocks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 461,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "因此，Sapphire Rapids 首次采用了英特尔的 EMIB (嵌入式多芯片互连桥接) 高级封装技术，实现了跨裸片的网格架构。两对镜像对称的 15 核心裸片通过模块化裸片互连结构拼接在一起。这在四个象限和近 1600 平方毫米的硅片上，构建了一个规模庞大得多的 8x12 网格。为了应对 PCIe 5.0 翻倍的吞吐量与全新数据加速器模块之间激增的数据流量，IO 区域必须配备双排网格节点。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207751",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "With a much larger mesh spanning multiple dies, average core to core latencies deteriorated to 59ns from Skylake’s 47ns. To avoid using the mesh network as much as possible, Intel increased the private L2 cache for each core to 2MB, resulting in more L2 cache on die than L3 cache (120MB vs 112.5MB). Sub-NUMA Clustering (SNC) was also recommended more with each die treated as its own quadrant.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With a much larger mesh spanning multiple dies, average core to core latencies deteriorated to 59ns from Skylake’s 47ns. To avoid using the mesh network as much as possible, Intel increased the private L2 cache for each core to 2MB, resulting in more L2 cache on die than L3 cache (120MB vs 112.5MB). Sub-NUMA Clustering (SNC) was also recommended more with each die treated as its own quadrant.",
+      "parent_block_plain_text": "With a much larger mesh spanning multiple dies, average core to core latencies deteriorated to 59ns from Skylake’s 47ns. To avoid using the mesh network as much as possible, Intel increased the private L2 cache for each core to 2MB, resulting in more L2 cache on die than L3 cache (120MB vs 112.5MB). Sub-NUMA Clustering (SNC) was also recommended more with each die treated as its own quadrant.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 395,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着跨多裸片的网格规模大幅扩张，核心间的平均延迟从 Skylake 的 47ns 恶化至 59ns。为了尽量避开网格网络，英特尔将每个核心的私有 L2缓存增加到 2MB。这导致裸片上的 L2缓存总量甚至超过了 L3缓存（120MB 对 112.5MB）。此外，官方也更加推荐使用子NUMA集群 (SNC) 模式，将每个裸片视为一个独立的象限。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207833",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "While a first for Intel in going to chiplets, Sapphire Rapids was infamous for its multi-year delay and numerous revisions. Perhaps due to performance problems getting the mesh to function across EMIB or from other execution issues, the final version made it all the way to stepping E5 before release in early 2023. Original roadmaps slated it for 2021.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While a first for Intel in going to chiplets, Sapphire Rapids was infamous for its multi-year delay and numerous revisions. Perhaps due to performance problems getting the mesh to function across EMIB or from other execution issues, the final version made it all the way to stepping E5 before release in early 2023. Original roadmaps slated it for 2021.",
+      "parent_block_plain_text": "While a first for Intel in going to chiplets, Sapphire Rapids was infamous for its multi-year delay and numerous revisions. Perhaps due to performance problems getting the mesh to function across EMIB or from other execution issues, the final version made it all the way to stepping E5 before release in early 2023. Original roadmaps slated it for 2021.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 353,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管这是英特尔首次转向 Chiplet 架构，但 Sapphire Rapids 却因长达数年的延期和频繁的改版而臭名昭著。或许是由于跨 EMIB 运行网格架构时遇到了性能瓶颈，亦或是出于其他执行层面的问题，其最终版本直到修改至E5步进才最终发布。而在最初的路线图中，它的原定发布时间是 2021 年。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207912",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "The subsequent Emerald Rapids update in late 2023 kept the same core architecture and node, but reduced the die count to 2. With less silicon area spent on the EMIB die to die links, Intel were able to increase core counts from 60 to 66 (up to 64 enabled for yield) while also nearly tripling L3 cache to 320MB. We wrote more about the design decisions here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The subsequent Emerald Rapids update in late 2023 kept the same core architecture and node, but reduced the die count to 2. With less silicon area spent on the EMIB die to die links, Intel were able to increase core counts from 60 to 66 (up to 64 enabled for yield) while also nearly tripling L3 cache to 320MB. We wrote more about the design decisions here.",
+      "parent_block_plain_text": "The subsequent Emerald Rapids update in late 2023 kept the same core architecture and node, but reduced the die count to 2. With less silicon area spent on the EMIB die to die links, Intel were able to increase core counts from 60 to 66 (up to 64 enabled for yield) while also nearly tripling L3 cache to 320MB. We wrote more about the design decisions here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 358,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2023 年底推出的后续更新版本 Emerald Rapids 沿用了相同的核心架构和制程节点，但将裸片数量减少到了 2 个。得益于 EMIB 裸片间互连占用的硅片面积减少，英特尔得以将核心数从 60 个提升至 66 个（为保证良率，实际最多启用 64 个）。同时，L3缓存也几乎翻了三倍，达到 320MB。我们曾在此处详细撰文探讨过相关设计决策。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.207990",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Intel Emerald Rapids Backtracks on Chiplets – Design, Performance & Cost - Dylan Patel, Gerald Wong, and 3 others · May 3, 2023",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Intel Emerald Rapids Backtracks on Chiplets – Design, Performance & Cost",
+          "start": 0,
+          "end": 72,
+          "href": "https://newsletter.semianalysis.com/p/intel-emerald-rapids-backtracks-on",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Intel Emerald Rapids Backtracks on Chiplets – Design, Performance & Cost](https://newsletter.semianalysis.com/p/intel-emerald-rapids-backtracks-on) - Dylan Patel, Gerald Wong, and 3 others · May 3, 2023",
+      "parent_block_plain_text": "Intel Emerald Rapids Backtracks on Chiplets – Design, Performance & Cost - Dylan Patel, Gerald Wong, and 3 others · May 3, 2023",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Intel Emerald Rapids Backtracks on Chiplets – Design, Performance & Cost",
+          "start": 0,
+          "end": 72,
+          "href": "https://newsletter.semianalysis.com/p/intel-emerald-rapids-backtracks-on",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 Emerald Rapids 在 Chiplet 路线上的倒退——设计、性能与成本 - Dylan Patel、Gerald Wong 及另外 3 人 · 2023 年 5 月 3 日",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208242",
+          "tokenized_text": "[[[LINK_1|英特尔 Emerald Rapids 在 Chiplet 路线上的倒退——设计、性能与成本]]] - Dylan Patel、Gerald Wong 及另外 3 人 · 2023 年 5 月 3 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "Heterogeneous Disaggregation on Xeon 6",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0114",
+      "parent_block_index": 114,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Heterogeneous Disaggregation on Xeon 6",
+      "parent_block_plain_text": "Heterogeneous Disaggregation on Xeon 6",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至强 6 上的异构解耦",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208330",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208408",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "Xeon 6 Platform Features. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Platform Features. Source: Intel",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Xeon 6 Platform Features. Source: Intel*",
+      "parent_block_plain_text": "Xeon 6 Platform Features. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Platform Features. Source: Intel",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 39,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至强 6 平台特性。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208688",
+          "tokenized_text": "[[[EM_1|至强 6 平台特性。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208792",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p028",
+      "index": 28,
+      "source": "Xeon 6 Compute and I/O Die Diagrams. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Compute and I/O Die Diagrams. Source: Intel",
+          "start": 0,
+          "end": 50,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Xeon 6 Compute and I/O Die Diagrams. Source: Intel*",
+      "parent_block_plain_text": "Xeon 6 Compute and I/O Die Diagrams. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Compute and I/O Die Diagrams. Source: Intel",
+          "start": 0,
+          "end": 50,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 50,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至强 6 计算与 I/O 裸片图解。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.208998",
+          "tokenized_text": "[[[EM_1|至强 6 计算与 I/O 裸片图解。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p029",
+      "index": 29,
+      "source": "Another benefit going to a multi-die chiplet design beyond going past the reticle limit is being able to mix and match dies and share designs across different variants and configurations. For the next Xeon 6 platform in 2024, Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory. Doing this allows the I/O dies to stay on the older Intel 7 node while the compute dies moved to Intel 3. Intel could thus reuse the I/O IP developed from Sapphire Rapids while saving cost as I/O does not benefit as much from moving to more advanced nodes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another benefit going to a multi-die chiplet design beyond going past the reticle limit is being able to mix and match dies and share designs across different variants and configurations. For the next Xeon 6 platform in 2024, Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory. Doing this allows the I/O dies to stay on the older Intel 7 node while the compute dies moved to Intel 3. Intel could thus reuse the I/O IP developed from Sapphire Rapids while saving cost as I/O does not benefit as much from moving to more advanced nodes. At the same time, the compute dies can be mixed and matched with both P-core Granite Rapids and E-core Sierra Forest configurations with up to 3 compute dies on the top Granite Rapids-AP Xeon 6900P series, creating a large 10x19 mesh over 5 dies, connecting 132 cores with up to 128 enabled for yield.",
+      "parent_block_plain_text": "Another benefit going to a multi-die chiplet design beyond going past the reticle limit is being able to mix and match dies and share designs across different variants and configurations. For the next Xeon 6 platform in 2024, Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory. Doing this allows the I/O dies to stay on the older Intel 7 node while the compute dies moved to Intel 3. Intel could thus reuse the I/O IP developed from Sapphire Rapids while saving cost as I/O does not benefit as much from moving to more advanced nodes. At the same time, the compute dies can be mixed and matched with both P-core Granite Rapids and E-core Sierra Forest configurations with up to 3 compute dies on the top Granite Rapids-AP Xeon 6900P series, creating a large 10x19 mesh over 5 dies, connecting 132 cores with up to 128 enabled for yield.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 581,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "采用多裸片芯粒设计，除了能突破光刻掩模版面积限制外，另一大优势在于能够灵活混搭裸片，并在不同的变体和配置中共享设计。在 2024 年推出的下一代至强 6 平台上，英特尔将 I/O 与核心和内存剥离，走向了异构解耦。此举使得 I/O 裸片得以保留在较旧的 Intel 7 制程节点上，而计算裸片则跃升至 Intel 3 制程节点。因此，英特尔能够复用为 Sapphire Rapids 架构开发的 I/O IP；同时，由于 I/O 模块从先进节点中获益有限，这种做法也有效节约了成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209084",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p030",
+      "index": 30,
+      "source": "At the same time, the compute dies can be mixed and matched with both P-core Granite Rapids and E-core Sierra Forest configurations with up to 3 compute dies on the top Granite Rapids-AP Xeon 6900P series, creating a large 10x19 mesh over 5 dies, connecting 132 cores with up to 128 enabled for yield.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another benefit going to a multi-die chiplet design beyond going past the reticle limit is being able to mix and match dies and share designs across different variants and configurations. For the next Xeon 6 platform in 2024, Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory. Doing this allows the I/O dies to stay on the older Intel 7 node while the compute dies moved to Intel 3. Intel could thus reuse the I/O IP developed from Sapphire Rapids while saving cost as I/O does not benefit as much from moving to more advanced nodes. At the same time, the compute dies can be mixed and matched with both P-core Granite Rapids and E-core Sierra Forest configurations with up to 3 compute dies on the top Granite Rapids-AP Xeon 6900P series, creating a large 10x19 mesh over 5 dies, connecting 132 cores with up to 128 enabled for yield.",
+      "parent_block_plain_text": "Another benefit going to a multi-die chiplet design beyond going past the reticle limit is being able to mix and match dies and share designs across different variants and configurations. For the next Xeon 6 platform in 2024, Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory. Doing this allows the I/O dies to stay on the older Intel 7 node while the compute dies moved to Intel 3. Intel could thus reuse the I/O IP developed from Sapphire Rapids while saving cost as I/O does not benefit as much from moving to more advanced nodes. At the same time, the compute dies can be mixed and matched with both P-core Granite Rapids and E-core Sierra Forest configurations with up to 3 compute dies on the top Granite Rapids-AP Xeon 6900P series, creating a large 10x19 mesh over 5 dies, connecting 132 cores with up to 128 enabled for yield.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 582,
+      "segment_end": 883,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与此同时，计算裸片可以与 P 核 Granite Rapids 架构和 E 核 Sierra Forest 架构灵活混搭。在顶配的 Granite Rapids-AP 至强 6900P 系列中，最多可搭载 3 个计算裸片，从而在总计 5 个裸片上构建出一张庞大的 10x19 网格。该网格物理连接了 132 个核心，出于良率考量，实际最多启用 128 个核心。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209165",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p031",
+      "index": 31,
+      "source": "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0120",
+      "parent_block_index": 120,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209242",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p032",
+      "index": 32,
+      "source": "Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c. Source: Intel, SemiAnalysis Estimates",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c. Source: Intel, SemiAnalysis Estimates",
+          "start": 0,
+          "end": 127,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c. Source: Intel, SemiAnalysis Estimates*",
+      "parent_block_plain_text": "Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c. Source: Intel, SemiAnalysis Estimates",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c. Source: Intel, SemiAnalysis Estimates",
+          "start": 0,
+          "end": 127,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至强 6 计算裸片拼接图。从左上角顺时针方向依次为：UCC 44核、高核心数 (HCC) 50核、HDCC (高密度核心数) 152核、LCC 20核。来源：英特尔，SemiAnalysis 预估",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209478",
+          "tokenized_text": "[[[EM_1|至强 6 计算裸片拼接图。从左上角顺时针方向依次为：UCC 44核、高核心数 (HCC) 50核、HDCC (高密度核心数) 152核、LCC 20核。来源：英特尔，SemiAnalysis 预估]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p033",
+      "index": 33,
+      "source": "On the 144-core Sierra Forest, the E-cores are grouped into 4-core clusters that share a common mesh stop, arranged in an 8x6 mesh with 152 cores printed and up to 144 cores active. Although Sierra Forest was made on a request from hyperscalers for a “cloud-native” CPU with lower TCO per core, Intel has admitted that adoption has been limited, with hyperscalers already adopting AMD and designing their own ARM-based CPUs, while Intel’s traditional enterprise customers were not interested in it. As a result, the dual-die 288-core Sierra Forest-AP (Xeon 6900E) SKUs did not make it to general availability, surviving as low volume off-roadmap parts to serve the few hyperscale customers that ordered it.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0122",
+      "parent_block_index": 122,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the 144-core Sierra Forest, the E-cores are grouped into 4-core clusters that share a common mesh stop, arranged in an 8x6 mesh with 152 cores printed and up to 144 cores active. Although Sierra Forest was made on a request from hyperscalers for a “cloud-native” CPU with lower TCO per core, Intel has admitted that adoption has been limited, with hyperscalers already adopting AMD and designing their own ARM-based CPUs, while Intel’s traditional enterprise customers were not interested in it. As a result, the dual-die 288-core Sierra Forest-AP (Xeon 6900E) SKUs did not make it to general availability, surviving as low volume off-roadmap parts to serve the few hyperscale customers that ordered it.",
+      "parent_block_plain_text": "On the 144-core Sierra Forest, the E-cores are grouped into 4-core clusters that share a common mesh stop, arranged in an 8x6 mesh with 152 cores printed and up to 144 cores active. Although Sierra Forest was made on a request from hyperscalers for a “cloud-native” CPU with lower TCO per core, Intel has admitted that adoption has been limited, with hyperscalers already adopting AMD and designing their own ARM-based CPUs, while Intel’s traditional enterprise customers were not interested in it. As a result, the dual-die 288-core Sierra Forest-AP (Xeon 6900E) SKUs did not make it to general availability, surviving as low volume off-roadmap parts to serve the few hyperscale customers that ordered it.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 706,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 144 核的 Sierra Forest 上，E 核被划分为 4 核集群并共享一个公共网格节点。这些集群排列成 8x6 的网格，裸片上物理光刻了 152 个核心，最多可激活 144 个。尽管 Sierra Forest 是应超大规模云服务商的要求而打造，旨在提供单核 TCO 更低的“云原生”CPU，但英特尔已承认其市场接受度极其有限。目前，这些云厂商早已转向 AMD 并开始自研基于 ARM 的 CPU，而英特尔传统的企业级客户对此也毫无兴趣。结果就是，双裸片 288 核的 Sierra Forest-AP（至强 6900E）SKU 未能实现全面上市，仅作为路线图之外的低产量产品苟延残喘，专供极少数下了订单的超大规模云客户。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209562",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p034",
+      "index": 34,
+      "source": "Clearwater Forest Failure",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Clearwater Forest Failure",
+      "parent_block_plain_text": "Clearwater Forest Failure",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 25,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Clearwater Forest 的失败",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209641",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p035",
+      "index": 35,
+      "source": "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209720",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p036",
+      "index": 36,
+      "source": "Twelve 24-core Clearwater Forest Compute Dies on 18A. Source: Intel, SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Twelve 24-core Clearwater Forest Compute Dies on 18A. Source: Intel, SemiAnalysis",
+          "start": 0,
+          "end": 81,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Twelve 24-core Clearwater Forest Compute Dies on 18A. Source: Intel, SemiAnalysis*",
+      "parent_block_plain_text": "Twelve 24-core Clearwater Forest Compute Dies on 18A. Source: Intel, SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Twelve 24-core Clearwater Forest Compute Dies on 18A. Source: Intel, SemiAnalysis",
+          "start": 0,
+          "end": 81,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 81,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "基于 18A 制程节点的十二个 24 核 Clearwater Forest 计算裸片。来源：英特尔，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.209941",
+          "tokenized_text": "[[[EM_1|基于 18A 制程节点的十二个 24 核 Clearwater Forest 计算裸片。来源：英特尔，SemiAnalysis]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p037",
+      "index": 37,
+      "source": "The I/O dies are also being reused in the upcoming Xeon 6+ Clearwater Forest-AP E-core processors. The compute dies debut Intel’s Foveros Direct hybrid bonding technology, stacking 18A core dies atop base dies containing the mesh, L3 cache and memory interface, bringing core counts up to 288. Vertical disaggregation allows the compute cores to move to the latest 18A logic process while keeping the mesh, cache and I/O that does not scale as well on the older Intel 3 node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The I/O dies are also being reused in the upcoming Xeon 6+ Clearwater Forest-AP E-core processors. The compute dies debut Intel’s Foveros Direct hybrid bonding technology, stacking 18A core dies atop base dies containing the mesh, L3 cache and memory interface, bringing core counts up to 288. Vertical disaggregation allows the compute cores to move to the latest 18A logic process while keeping the mesh, cache and I/O that does not scale as well on the older Intel 3 node.",
+      "parent_block_plain_text": "The I/O dies are also being reused in the upcoming Xeon 6+ Clearwater Forest-AP E-core processors. The compute dies debut Intel’s Foveros Direct hybrid bonding technology, stacking 18A core dies atop base dies containing the mesh, L3 cache and memory interface, bringing core counts up to 288. Vertical disaggregation allows the compute cores to move to the latest 18A logic process while keeping the mesh, cache and I/O that does not scale as well on the older Intel 3 node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 475,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些 I/O 裸片也将被复用于即将推出的至强 6+ Clearwater Forest-AP E 核处理器中。计算裸片首次采用了英特尔的 Foveros Direct 混合键合技术，将 18A 核心裸片堆叠在包含网格、L3缓存和内存接口的基础裸片之上，使核心总数跃升至 288 个。垂直解耦设计使得计算核心能够向最新的 18A 逻辑制程节点演进，同时将微缩效益不佳的网格、缓存和 I/O 模块保留在较旧的英特尔 3 制程节点上。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.210025",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p038",
+      "index": 38,
+      "source": "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.210103",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p039",
+      "index": 39,
+      "source": "Clearwater Forest Performance Projections. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Clearwater Forest Performance Projections. Source: Intel",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Clearwater Forest Performance Projections. Source: Intel*",
+      "parent_block_plain_text": "Clearwater Forest Performance Projections. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Clearwater Forest Performance Projections. Source: Intel",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Clearwater Forest 性能预测。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.210307",
+          "tokenized_text": "[[[EM_1|Clearwater Forest 性能预测。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p040",
+      "index": 40,
+      "source": "However, Intel’s execution issues surface again with Clearwater Forest, delaying availability from H2 ’25 to H1 ’26. Intel blamed the delay on their Foveros Direct integration challenges, which is not surprising with such a complex server chip being the lead vehicle as Intel tries to figure out hybrid bonding. Perhaps as a result of this, the vertically disaggregated interconnect has a relatively low bandwidth at only 35GB/s per 4-core cluster in accessing the base die’s L3 and mesh network.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, Intel’s execution issues surface again with Clearwater Forest, delaying availability from H2 ’25 to H1 ’26. Intel blamed the delay on their Foveros Direct integration challenges, which is not surprising with such a complex server chip being the lead vehicle as Intel tries to figure out hybrid bonding. Perhaps as a result of this, the vertically disaggregated interconnect has a relatively low bandwidth at only 35GB/s per 4-core cluster in accessing the base die’s L3 and mesh network.",
+      "parent_block_plain_text": "However, Intel’s execution issues surface again with Clearwater Forest, delaying availability from H2 ’25 to H1 ’26. Intel blamed the delay on their Foveros Direct integration challenges, which is not surprising with such a complex server chip being the lead vehicle as Intel tries to figure out hybrid bonding. Perhaps as a result of this, the vertically disaggregated interconnect has a relatively low bandwidth at only 35GB/s per 4-core cluster in accessing the base die’s L3 and mesh network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 496,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，英特尔的执行力问题在 Clearwater Forest 上再次暴露，其上市时间从 2025 年下半年推迟至 2026 年上半年。英特尔将延期归咎于 Foveros Direct 的集成难题。考虑到英特尔在摸索混合键合技术时，竟拿如此复杂的服务器芯片作为首发载体，出现这种情况并不令人意外。或许正因如此，这种垂直解耦的互连架构在访问基础裸片的 L3 缓存和网格网络时，带宽相对较低，每个 4 核集群仅有 35GB/s。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.210390",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p041",
+      "index": 41,
+      "source": "Despite a two-year gap with new core micro-architecture, new node, new advanced packaging and higher cost, Intel showed Clearwater Forest as being only 17% faster than Sierra Forest at the same core counts. With such limited performance gains despite much higher costs from low hybrid bonding yields, it is no wonder that Intel barely mentioned Clearwater Forest in their latest Q4 ’25 earnings. Our take is that Intel does not want to produce these chips in high volumes which hurt margins and would rather keep this as a yield learning vehicle for Foveros Direct.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0130",
+      "parent_block_index": 130,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Despite a two-year gap with new core micro-architecture, new node, new advanced packaging and higher cost, Intel showed Clearwater Forest as being only 17% faster than Sierra Forest at the same core counts. With such limited performance gains despite much higher costs from low hybrid bonding yields, it is no wonder that Intel barely mentioned Clearwater Forest in their latest Q4 ’25 earnings. Our take is that Intel does not want to produce these chips in high volumes which hurt margins and would rather keep this as a yield learning vehicle for Foveros Direct.",
+      "parent_block_plain_text": "Despite a two-year gap with new core micro-architecture, new node, new advanced packaging and higher cost, Intel showed Clearwater Forest as being only 17% faster than Sierra Forest at the same core counts. With such limited performance gains despite much higher costs from low hybrid bonding yields, it is no wonder that Intel barely mentioned Clearwater Forest in their latest Q4 ’25 earnings. Our take is that Intel does not want to produce these chips in high volumes which hurt margins and would rather keep this as a yield learning vehicle for Foveros Direct.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 565,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管历经两年的时间跨度，并采用了全新的核心微架构、新制程节点、新的先进封装且成本更高，英特尔展示的数据却表明，在同等核心数量下，Clearwater Forest 的性能仅比 Sierra Forest 快 17%。混合键合良率低下导致成本飙升，性能提升却如此有限，难怪英特尔在最新的 2025 年第四季度财报中对 Clearwater Forest 几乎只字未提。我们的判断是，英特尔根本不想大规模量产这些会拖累利润率的芯片，而是宁愿将其作为 Foveros Direct 提升良率的试验载体。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:10:21.210468",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "多处中英文字符与数字之间缺少标准空格，例如“L3缓存”、“L2缓存”、“子NUMA集群”、“E5步进”。（共涉及段落：3、4、5、8、20、21、22、37）"
+          },
+          {
+            "type": "data",
+            "description": "原文“latest Q4 ’25 earnings”存在明显的年份笔误（发文时间为2025年初，最新财报实为2024年Q4），译文直译为“最新的 2025 年第四季度财报”。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文将其翻译为“单片裸片”，由于“片”字的重复，读起来略显冗余。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

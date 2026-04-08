@@ -1,0 +1,3156 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": "引言",
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "GB300 NVL72, MI355X, B200, H100, Disaggregated Serving, Wide Expert Parallelism, Large Mixture of Experts, SGLang, vLLM, TRTLLM"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Dylan Patel, Cam Quilici, Bryan Shan, and 4 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Feb 16, 2026 · Paid"
+        }
+      ]
+    },
+    {
+      "section_id": "01-introduction",
+      "title": "Introduction",
+      "title_translation": "引言",
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "InferenceXv2 (formerly InferenceMAX) builds on the foundation established by InferenceMAXv1, our open-source, continuously updated inference benchmark that has "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer of compute from Google Cloud to Microsoft Azure to Oracle, Open"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "InferenceXv2 builds on this foundation. It expands coverage to include large scale DeepSeek MoE disaggregated inference (disagg prefill, or simply “disagg”) wit"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With today’s release, InferenceXv2 is now the first suite to benchmark the Blackwell Ultra GB300 NVL72 and B300 across the whole pareto frontier curve, and it i"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Our benchmark is completely open-source under Apache 2.0 – this means that we are able to move at the same rapid speed at which the AI software ecosystem is adv"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We will add DeepSeekv4 and other popular Chinese frontier models with day 0 support as over the past 6 months, we now have cleaned up a lot of tech debt and are"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: InferenceMAX GitHub"
+        }
+      ]
+    },
+    {
+      "section_id": "02-key-observations-and-results-t",
+      "title": "Key Observations and Results to Highlight",
+      "title_translation": "核心观察与重点结果",
+      "paragraph_count": 10,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We see competitive perf per TCO results on FP8 MI355X disagg+wideEP SGLang on AMD compared to FP8 B200 disagg+wideEP SGLang, but when compared to widely used Dy"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We also see that for single node aggregated serving, AMD’s SGLang delivers better perf per TCO than NVIDIA’s SGLang for FP8. It is also great to see that AMD ha"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work consider becoming a free or paid subscriber"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When it comes to the latest inference techniques that are used by the most prominent frontier large-scale inference services (such as disagg prefill+wideEP+FP4)"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Turning to AMD, we find that the biggest issue with inference on their systems and using their software is [composability](https://en.wikipedia.org/wiki/Composa"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While performance is competitive on AMD when enabling just a subset of the SOTA inference optimizations, enabling all three major optimizations that labs use, A"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Nvidia’s GB300 NVL72 doesn’t disappoint. It achieves up to 100x on FP8 vs FP4 compared to even a strong H100 disagg+wideEP+MTP baseline and 65x on FP8 vs FP8. O"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At GTC 2024, Jensen claimed that Blackwell will deliver up to 30x perf on inference compared to H100, Jensen under promised & overdelivered on Blackwell inferen"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "03-acknowledgments-and-inferencex",
+      "title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters",
+      "title_translation": "致谢与 InferenceX™（原 InferenceMAX）倡议支持者",
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We would like to thank Jensen Huang and Ian Buck for supporting this open-source effort by providing access to the latest GB300 NVL72 systems along with access "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We’re also grateful to Lisa Su and Anush Elangovan for their support of InferenceMAX and for supporting our work with the dozens of AMD engineers like Chun, And"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We also want to recognize the SGLang, vLLM, and TensorRT-LLM maintainers for building a world-class software stack and open sourcing it to the entire world. You"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceMAX: vLLM maintainers & NVIDIA accelerate Blackwell Inference"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GPT-OSS Performance Optimizations: Pushing Pareto Frontier"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SGLang & NVIDIA Accelerating SemiAnalysis InferenceMAX & GB200 Together"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The InferenceX initiative is also supported by many major buyers of compute and prominent members of the ML community including those from OpenAI, Microsoft, vL"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscribe"
+        }
+      ]
+    },
+    {
+      "section_id": "04-a-primer-on-important-technica",
+      "title": "A Primer on Important Technical Concepts",
+      "title_translation": "核心技术概念解析",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In this section, we will give a brief primer on technical concepts that may help the reader better interpret results. Some readers may not need this and can ski"
+        }
+      ]
+    },
+    {
+      "section_id": "05-interactivity-vs-throughput-tr",
+      "title": "Interactivity vs Throughput Tradeoff",
+      "title_translation": "交互性与吞吐量的权衡",
+      "paragraph_count": 11,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The fundamental tradeoff with LLM inference is throughput versus latency. Interactivity (tok/s/user) describes how fast each user of a system receives tokens – "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The race car can only carry one or two passengers, but it will make few if any additional stops meaning a faster travel time overall, but it is much more expens"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!M543!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Most benchmark results we will show in this article are InferenceX is a curve. It is important to analyze throughput at various levels of interactivity/latency "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Cost/Perf per TCO vs Interactivity/End-to-End Latency curve mostly follows the Throughput vs Interactivity/End-to-End Latency Curve: More tokens/hour leads "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Prefill and Decode Phases"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Inference contains two main phases: prefill and decode. Prefill occurs during the first forward pass of a request’s lifetime. It is computationally intensive si"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When prefill and decode performed on the same engine, prefill constantly disrupts decode batches leading to worse overall performance."
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Disaggregated Prefill"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Disaggregated prefill (aka PD disaggregation or simply “disagg”) is the practice of separating the prefill and decode phases across separate pools of GPUs or cl"
+        }
+      ]
+    },
+    {
+      "section_id": "06-tensor-parallel-expert-parall",
+      "title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+      "title_translation": "张量并行、专家并行与数据并行（TP、EP、DP）",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TP allows for maximize interactivity at small batch sizes, but it must carry out an all-reduce at every layer. EP shards experts, exploiting MoE sparsity, with "
+        }
+      ]
+    },
+    {
+      "section_id": "07-tracking-improvements-over-tim",
+      "title": "Tracking Improvements Over Time",
+      "title_translation": "性能演进追踪",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One of the main goals of InferenceX is to visualize performance improvements over time. While new chips are released on an O(yearly) cadence, software releases "
+        }
+      ]
+    },
+    {
+      "section_id": "08-deepseek-r1",
+      "title": "DeepSeek R1",
+      "title_translation": "DeepSeek R1",
+      "paragraph_count": 24,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The AMD team has significantly improved performance for all configurations of SGLang DeepSeek R1 FP4. For the same interactivity, AMD has almost doubled the amo"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In order to continue becoming closer to an first class experience, AMD needs increase their support of vLLM & SGLang maintainers through compute contributions a"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the other hand, Nvidia’s results were more consistent, with minor improvements for B200 SGLang over a similar time period."
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Many of the mature SKUs had minimal improvements. For example, H200 TRT single node has not changed in performance in the span of 4 months since October, but th"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MI300X and MI325X have seen some improvements, mainly from the most recent SGLang release. Note that for much of the history of InferenceX, AMD was using “priva"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GB200 Dynamo TRT-LLM disagg has seen some significant improvements as well, with a 20% increase in max throughput in the span of a little over 1 month. We also "
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "B200 SGLang has seen steady and continuous improvement for both FP4 and FP8 scenarios since our initial launch, with throughput per GPU doubling at some interac"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For MI355X Disaggregated inference serving, AMD recommends using SGLang with MoRI. MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library b"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "09-gpt-oss-120b",
+      "title": "GPT-OSS 120B",
+      "title_translation": "GPT-OSS 120B",
+      "paragraph_count": 12,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For MI300X and MI325X, we have seen marginal improvements across the board. Some AITER optimizations helped MI300X performance across all interactivities, and s"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscribe"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!jygf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In the case of the MI325X, it appears that not all performance enhancements that were present in the downstream ROCm fork image (used during the October 5th, 20"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Xx8c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Turning back to Nvidia’s systems, both Hopper and Blackwell saw a steady performance increase between vLLM 0.11.2 and 0.13.0. Soon, we will update recipes for N"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!WD4A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!ZeZf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "10-disaggregated-inference-framew",
+      "title": "Disaggregated Inference Frameworks",
+      "title_translation": "分离式推理框架",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVIDIA uses Dynamo for its disaggregated inference setup. Dynamo is an inference framework designed for multi-node distributed inference, featuring techniques s"
+        }
+      ]
+    },
+    {
+      "section_id": "11-deepseek-disagg-wideep-result",
+      "title": "DeepSeek Disagg +WideEP Results Deep Dive",
+      "title_translation": "DeepSeek 分离式推理与 WideEP 结果深度解析",
+      "paragraph_count": 24,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At almost all interactivity levels, disagg outperform aggregated inference (grey lines) in terms of total token throughput per GPU. Multi-node disaggregrated pr"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Nvidia continues to push new updates for B200/GB200 FP8. The latest data on DeepSeek FP8 B200 TRT single node (both MTP enabled/disabled) vs GB200 Dynamo+TRT di"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When comparing MI355X disaggregated inference vs aggregated inference, we noticed a similar pattern. Disaggregated inference only overtakes aggregated inference"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When composing disagg prefill+wideEP with FP4 on the MI355X, we observe suffers subpar performance."
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Although theoretical modeling shows that disagg inference on MI355Xs should perform way better than single node, disagg actually performs worse for higher inter"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Nvidia TensorRT LLM and NVL72"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TensorRT LLM already serves billions of tokens per hour globally across providers like TogetherAI and other advanced providers, and it has really allowed the GB"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The benefits delivered from the larger world size of the NVL72 family is also evident if we look at cost graphs. At a fixed interactivity level of 60 tok/s/user"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscribe"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This gap shrinks as interactivity increases. At 130 tok/s/user, the GB200 NVL72 has nearly no advantage and is even more expensive on a $/Million tokens basis. "
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "12-nvidia-versus-amd-disagg-prefi",
+      "title": "Nvidia versus AMD Disagg Prefill",
+      "title_translation": "英伟达与 AMD 分离式 Prefill 对比",
+      "paragraph_count": 22,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With today’s release of InferenceXv2, for the first time the ML community is able to see a full Pareto frontier for open-source MI355X distributed inference. We"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For FP8 disagg prefill, MI355X (MoRI SGLang) is quite competitive with B200 (Dynamo SGLang). Wide EP is not used for either of these configs as all prefill/deco"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, if we were to only measure output (decode) token throughput, we see that output token throughput is much higher for the B200 than for the MI355X at low"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Despite the MI355X being competitive in FP8 disagg, its FP4 performance suffers from composability issues. AMD single node FP4 performance is decent, but when w"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Once we bring Dynamo TRT-LLM into the equation, the B200’s performance is boosted even more to the point that the MI355X even with MTP can’t match the B200’s pe"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When comparing Dynamo TRTLLM B200 disagg prefill to SGLang MoRI MI355 disagg prefill, AMD gets framemogged due to the more mature implementation of disagg prefi"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Dwarkesh Podcast and SemiAnalysis"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The diagram below shows us the various parallelism configurations that form up the MI355X (MoRI SGLang) Pareto frontier. Note that currently, wide EP is not emp"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "13-unpacking-inference-providers",
+      "title": "Unpacking Inference Providers’ Unit Economics",
+      "title_translation": "拆解推理服务商的单位经济效益",
+      "paragraph_count": 38,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Below is a list on OpenRouter of all inference providers that serve DeepSeek R1 0528 FP8 along with their cost per million input/output tokens and average inter"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: OpenRouter"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We can then use real InferenceX data to interpolate the cost per million input/output tokens at an interactivity level of 35 tok/sec/user, which is a reasonable"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we mention later in the article, this is best understood as baseline data and not completely representative of real-world inference, mainly because Inference"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Comparing disagg+wideEP configs at this interactivity level, we see just how effective distributed inference techniques are when it comes to both perf/TCO and o"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It is interesting to note that at this interactivity level (on an 8k1k workload type), the B200 can achieve the best perf/TCO when MTP is enabled. Below we also"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis TCO Model"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Let’s use the findings above to dig deeper into the unit economics of serving LLMs at scale. From the OpenRouter data above, we see that Crusoe serves at 36 tok"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscribe"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Of course, these assumptions may not be exactly correct and these calculations don’t account for downtime or underutilization, but this gives an idea of some co"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The OpenRouter data also shows Nebius AI Studio (Fast) serving DeepSeek FP4 at 167 tok/sec/user at $2/M input, $6/M output tokens. Adjusting the interactivity l"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At this high of interactivity, it becomes necessary to employ speculative decoding techniques like MTP to achieve high enough throughput to make inference econo"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Lastly, we show one more chart of an FP8 DeepSeek workload served at 125 tok/s/user. This is another low latency workload where MTP considerably improves econom"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Nvidia Disagg Prefill and WideEP"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "EP requires all-to-all communication, where every GPU needs to send tokens to every other GPU. This is extremely bandwidth hungry. Recall that Nvidia’s servers "
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVLink domain (within the NVL72 rack): 72 GPUs connected via NVLink with 900 GB/s uni-directional bandwidth per GPU. This is roughly 7-10x the bandwidth of the "
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "InfiniBand/RoCEv2 Ethernet (outside of the NVL72 rack): Typically 400-800 Gbit/s per GPU uni-directional (50-100 GB/s). Note that all our testing for Nvidia was"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TP shards every layer’s weight matrices across GPUs. This means that every single token at every single layer requires up to two all-reduce communications (one "
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Because EP’s all-to-all communication bandwidth requirements scale with the number of participants, staying within the high-bandwidth NVLink domain before havin"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscribe"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Wide EP also has a major advantage in weight loading efficiency. For a model like DeepSeek R1, decode is memory-bandwidth-bound: the bottleneck is how fast GPUs"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Generally, TP is preferred at lower concurrencies due to load balancing. At small batch sizes, EP suffers from uneven token-to-expert routing, leaving some GPUs"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At higher concurrencies, this tradeoff changes. Expert activation becomes more evenly distributed across larger batch sizes, and EP’s communication and weight-l"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For higher interactivity levels (low batch size), large scale-up world sizes tend not to deliver stronger performance. B300 disagg over IB has the same performa"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Prefill/decode disaggregation also plays a role. Prefill is compute-heavy and bursty; decode is memory-bandwidth-bound and steady-state. When they share the sam"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different fr"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "14-jensen-under-promising-and-ove",
+      "title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+      "title_translation": "黄仁勋的低承诺与超预期交付：Hopper、Blackwell 与机架级 NVL72 对比",
+      "paragraph_count": 18,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At GTC 2024, Jensen was on stage promising up to 30x performance gains from H100 to GB200 NVL72, everyone thought it was classic marketing lookmaxxing and would"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Nvidia Blackwell Perf TCO Analysis - B100 vs B200 vs GB200NVL72 - Dylan Patel and Daniel Nishball · April 10, 2024"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!9ywW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Nvidia GTC 2024"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But it turns out the joke is on them. Fast forward almost two years later, and we can now see that it wasn’t marketing hype lookmaxing after all, and Jensen was"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rxr1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Even when factoring in the increased total cost of ownership of Blackwell and Blackwell Ultra, we see a 9.7x(40 tok/s/user) up to 65x(116 tok/s/user) improvemen"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7m9y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As mentioned earlier in the article, B300 servers only connect at most 8 GPUs using the 900GByte/s/GPU NVLink scale-up network whereas GB300 NVL72 servers conne"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Compare this to a rack scale GB300 NVL72 which connects 72 GPUs over NVLink delivering 900GByte/s (uni-di) per GPU of bandwidth and we can see that the rack-sca"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!x_1H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Admittedly the GB300 NVL72 has a higher all-in cost per GPU, but this only reduces the bandwidth per TCO advantage to being 8x faster. The bandwidth advantage o"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!UGuH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "15-blackwell-vs-blackwell-ultra",
+      "title": "Blackwell vs Blackwell Ultra",
+      "title_translation": "Blackwell 与 Blackwell Ultra 对比",
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On paper, the newly released Blackwell Ultra has the same memory bandwidth as Blackwell, the same FP8 performance and only 1.5x higher FP4 performance, but when"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!hX_E!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+      "title": "MI355X vs MI325X vs MI300X",
+      "title_translation": "MI355X、MI325X 与 MI300X 对比",
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On AMD SKUs, we see up to 10x better performance on the MI355X vs the MI300X. AMD has only gotten DeepSeek SGLang Disaggregated Inferencing to work on the MI355"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Turning to cost, for DeepSeekR1 on FP8, at an interactivity of 24 tok/s/user, the MI355X delivers inferences a cost that is slightly less than 3x cheaper than f"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "17-amd-composability-issue-on-fp4",
+      "title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+      "title_translation": "AMD 在 FP4、分布式推理与宽专家并行上的可组合性问题",
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While AMD performs somewhat decently on single node FP4 and performs competitively to B200 SGLang on FP8 distributed inferencing, the issue with the current AMD"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber."
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disagg"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD is more than six months behind on open source distributed inferencing and wide expert parallelism and FP4 composability as shown by Nvidia and SGLang team s"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "18-amd-atom-engine",
+      "title": "AMD ATOM Engine",
+      "title_translation": "AMD ATOM 引擎",
+      "paragraph_count": 11,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD has launched a new inference engine called ATOM. Atom can deliver slightly better single node performance, but it is completely lacking on a lot of features"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Furthermore, maintainers of open-source inference engines like vLLM are disappointed in AMD due to a lack of engineering and GPU resources provided by AMD. For "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We at SemiAnalysis have been trying to get AMD to contribute more compute to vLLM and have had some success on that within the couple weeks. vLLM will start to "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Moreover, the vLLM maintainers say that they cannot support day 0 vLLM support for ROCm due to this issue of lack of machine resources. This huge disparity in t"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Github"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Lastly, AMD has not had enough committers “who demonstrated sustained upstream engagement through feature shepherding and code ownership” and has a lack of revi"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are many talented 10x engineers at AMD that work on ATOM and we would encourage AMD management to think about re-deploying these 10x engineers towards wor"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we mentioned earlier, AMD also needs to prioritize addressing composability issues with FP4, wideEP and disaggregated serving as opposed to overly focusing o"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "19-multi-token-prediction-mtp",
+      "title": "Multi Token Prediction (MTP)",
+      "title_translation": "多 Token 预测（MTP）",
+      "paragraph_count": 20,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Speculative decoding reduces the cost of autoregressive generation by using a small, inexpensive draft model to propose several tokens ahead. The large model th"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Brendan Bycroft"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This assumption regarding additional token production with the same time budget is strongest for dense models because batched verification can reuse the same we"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Multi-token prediction pursues similar benefits without requiring a separate draft model. Auxiliary prediction heads are added to the model architecture, so a s"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Across all SKUs, enabling MTP results in performance gains. By making use of the typically unused logits to verify the extra tokens, minimal compute overhead is"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At large batch sizes, the inference regime is less memory-bandwidth bound compared to for low batch sizes. Since speculative decoding (including MTP) works by t"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In terms of cost, MTP can drive huge cost savings, in the below table, we see that DeepSeek-R1-0528 run on FP4 using Dynamo TRT costs $0.251 per million total t"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In all configs, when all else is held equal, using MTP with DeepSeek R1 increases interactivity with no significant impact on model accuracy. This is in line wi"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Regarding the validity of MTP performance numbers, one may argue that the distribution of a synthetic dataset may not resemble real data. However, comparing MTP"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "20-accuracy-evaluations",
+      "title": "Accuracy Evaluations",
+      "title_translation": "准确率评估",
+      "paragraph_count": 5,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Throughput optimizations can sometimes quietly trade off accuracy (e.g. via aggressively relaxed acceptance rates, decoding tweaks, numerically unstable kernels"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Each representative throughput config now has an associated numerical accuracy check. Currently we are only using GSM8k, but being a very easy benchmark, the ev"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another form of performance-accuracy tradeoff is quantization. Serving models at lower precision may result in worse model outputs. For DeepSeek R1, FP8 runs ha"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "21-anthropic-fast-mode-inferencin",
+      "title": "Anthropic Fast Mode Inferencing Explained",
+      "title_translation": "Anthropic 快速模式推理详解",
+      "paragraph_count": 26,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Anthropic recently released “fast mode” alongside Opus 4.6. The value proposition: the same model quality at roughly 2.5× the speed, for around 6–12× the price."
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Bean counters may think that fast mode is more expensive, but when looking at it through a total cost of ownership lens, fast mode is actually way cheaper for s"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!sIVI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Anthropic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7boM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Anthropic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Consider a DeepSeek R1 0528 FP4 coding workflow served on B200s with TRT-LLM. At an interactivity of 50 tok/sec/user, inference cost is approximately $0.56/M ou"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7SFd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!CjTZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This follows directly from the fundamental latency-throughput tradeoff in LLM inference. At high batch sizes, GPUs achieve better utilization and greater total "
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In short, fast mode isn’t necessarily a hardware story, but merely the natural consequence of trading throughput for latency on the same GPUs."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!pPy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Furthermore, we observe that inference optimization techniques such as speculative decoding, as explained earlier, can directly lead to cheaper inference; no ne"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Take the following example, DeepSeek R1 FP4 on an 8k/1k workload. At an interactivity level of 150 tok/sec/user, the baseline GB300 Dynamo TRT cost per million "
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!8RyG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!YpDx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rSgJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Fixing an interactivity level of 50 tok/sec/user, we further see how much MTP can effectively decrease CPMT across a variety of chips."
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!BIXI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "22-wide-expert-parallelism-widee",
+      "title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+      "title_translation": "宽专家并行（WideEP）与分离式 Prefill",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In this section, we will go deeper on expert parallelism and go on to explain what wide expert parallelism is. We will then explain the idea of Disaggregated Pr"
+        }
+      ]
+    },
+    {
+      "section_id": "23-wideep",
+      "title": "WideEP",
+      "title_translation": "WideEP",
+      "paragraph_count": 15,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By now, most frontier AI labs employ Mixture of Experts (MoE) model architectures as opposed to dense. In MoE architectures, only a subset of “experts” are acti"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Consider serving DeepSeek R1 on a single 8-GPU server. At 671B parameters, some form of parallelism is required to fit the model across available HBM. The naive"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Expert parallelism takes a more well-suited approach, assigning whole experts to individual GPUs. With EP=8, we divide the 256 experts per layer across 8 GPUs f"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The forward pass proceeds in two phases per layer. During attention, each GPU acts as an independent data-parallel rank, processing its own subset of requests u"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "**An EP8 DP8 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 8 GPUs, whereas attention along with other non-expert weights (sh"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The obvious way to scale is replication: deploy N independent EP8 instances across N nodes. Each instance serves requests independently with no cross-node commu"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Wide expert parallelism (WideEP) takes a different approach by scaling EP across nodes rather than replicating independent instances. On a 64-GPU cluster (8 nod"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This yields three compounding benefits over the single-node EP8 baseline. First, reducing expert footprint from 32 to 4 experts/GPU frees substantial HBM for KV"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "**A WideEP EP64 DP64 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 64 GPUs (8 nodes), and attention and other non-expert wei"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The above configurations use only DP+EP (also known as DEP), where each GPU holds a full replica of all non-expert weights. As GPU count grows, this replication"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Adding tensor parallelism within groups of GPUs addresses this. In an EP64/DP8/TP8 configuration, the 64 GPUs are organized into 8 DP groups of 8 GPUs each. Wit"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Pure DEP has a single communication pattern: all-to-all for expert routing. Adding TP introduces a second all-reduce within each TP group for the attention and "
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As always, the tradeoff is that of throughput versus latency. TP=8 within a group means those 8 GPUs now share a batch and must synchronize every decode step, r"
+        }
+      ]
+    },
+    {
+      "section_id": "24-disaggregated-prefill",
+      "title": "Disaggregated Prefill",
+      "title_translation": "分离式 Prefill",
+      "paragraph_count": 10,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Disaggregated prefill, sometimes referred to as prefill-decode (PD) disaggregation, is the process of performing prefill and decode phases of LLM inference on s"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In traditional single-node inference, engines interleave prefill and decode on the same GPUs. Incoming prefill requests stall in-flight decode batches, increasi"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: DistServe"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelis"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history sk"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to th"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instan"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Github"
+        }
+      ]
+    },
+    {
+      "section_id": "25-optimizing-inference-with-wide",
+      "title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+      "title_translation": "利用 WideEP 与分离式服务优化推理",
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Wide EP and disaggregated prefill are separate techniques that are often used together to achieve Pareto optimal performance. In this section, we walk through r"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It helps to first understand what parallelism strategies fall on what parts of the Pareto frontier for single-node configurations. Take the example of DeepSeek "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At the highest interactivity levels (batch 1-16), pure TP outperforms any configuration involving EP. At low batch sizes, only a small fraction of experts activ"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node c"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node."
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the low interactivity end of the frontier, there are fewer concurrent requests in flight, so a single prefill instance can keep pace with incoming demand. Ye"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "26-dive-into-deepseek-r1-single-n",
+      "title": "Dive into DeepSeek R1 Single Node Results",
+      "title_translation": "DeepSeek R1 单节点结果深度解析",
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On DeepSeek R1 FP8 1k1k, we see that MI355X is competitive with its counterpart B200 on single node scenarios, despite getting mogged on FP4 multi node scenario"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unfortunately, the year is 2026, and most frontier labs and inference providers are not running FP8 nor single node inference."
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This result goes to show that AMDs chips are great and can be extremely competitive with Nvidia if only they could move faster on the software front. Speed is t"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceMAX"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To that end, we see MI355X fall well behind B200 in performance on FP4:"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In comparing DeepSeek R1 FP8 perf between H200 (SGLang) and MI325X (SGLang), not much has changed since our initial release of InferenceXv1 last October. The MI"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One thing we note is the considerably smaller interactivity range for MI325X than H200, with H200 ranging from 30-90 tok/sec/user whereas MI325X ranges from onl"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "27-gpt-oss-120b-single-node",
+      "title": "GPT-OSS 120B Single Node",
+      "title_translation": "GPT-OSS 120B 单节点",
+      "paragraph_count": 10,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MI300X, MI325X, H200, and H100 group in the lower-left of the throughput vs interactivity plot, indicating broadly similar tradeoffs, with Nvidia generally hold"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Above that tier sits NVIDIA’s B200 and GB200, which outperform MI355X across the frontier. While B200 and GB200 share the same Blackwell compute die, GB200 achi"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!euhc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "If we add cost into the equation, MI355x becomes more competitive: beating B200 at high throughputs. However, GB200 still takes the cake for being the cheapest "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!wliK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Turning again to the comparison between B200 and GB200 NVL72, it is obvious the impact NVL72 has. We discussed the impact of the GB200 NVL72’s larger 72 GPU sca"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!J3Ls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis InferenceX"
+        }
+      ]
+    },
+    {
+      "section_id": "28-core-inferencex-repo-updates",
+      "title": "Core InferenceX Repo Updates",
+      "title_translation": "InferenceX 核心代码库更新",
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We have made a few core architectural changes to the InferenceX repository to make it easier to understand and reproduce benchmarks. Additionally, we have fully"
+        }
+      ]
+    },
+    {
+      "section_id": "29-core-changes-since-inferencexv",
+      "title": "Core Changes Since InferenceXv1",
+      "title_translation": "InferenceXv1 以来的核心变更",
+      "paragraph_count": 4,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One of the main changes we have made since v1 is the cadence with which we perform sweeps. Previously, we were jestermaxing and performed a full sweep over each"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We now trigger sweeps based on additions to a changelog at the root of the repo. When a developer makes a performance-impacting change to a given config, they a"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Below is a high-level diagram of how InferenceX launches jobs."
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "30-klaud-cold-ai-usage",
+      "title": "Klaud Cold AI Usage",
+      "title_translation": "Klaud Cold AI 使用情况",
+      "paragraph_count": 4,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Shortly after the release of InferenceX v1, we realized how much developer throughput was being left on the table by not utilizing AI more in our InferenceX dev"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "You probably would have had to pay us to keep using it."
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We had been using Claude Code locally ever since it was released. But recently, we have integrated Claude Code into InferenceX development, using it for the usu"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another cool use case is using Claude to find recipes for new vLLM/SGLang images. When a new image is released, recipes sometimes need to be updated to achieve "
+        }
+      ]
+    },
+    {
+      "section_id": "31-github-actions",
+      "title": "GitHub Actions",
+      "title_translation": "GitHub Actions",
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In the spirit of open source, all runs occur on GitHub Actions, so benchmark results are verifiable, transparent, and reproducible. However, GitHub outages have"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft/GitHub themselves are aware of this and have stopped updating its status page with aggregate uptime numbers and are down to a single 9: 97.36% over th"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Outages project"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Outages project"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "All in all, GitHub Actions is just alright. It provides a painfully average experience for developers. It is certainly not meant for launching thousands of jobs"
+        }
+      ]
+    },
+    {
+      "section_id": "32-future-of-inferencex",
+      "title": "Future of InferenceX",
+      "title_translation": "InferenceX 的未来",
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since the initial release of InferenceX in early October 2025, we have worked hard to continuously improve InferenceX. After release, we spent some time refacto"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Although we have made many improvements since our release, there is still much work to be done to achieve the north star goal of providing the most real-world i"
+        }
+      ]
+    },
+    {
+      "section_id": "33-migration-to-multi-turn-real-m",
+      "title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets",
+      "title_translation": "向真实多轮对话与智能体编程数据集迁移",
+      "paragraph_count": 5,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Currently, InferenceX uses completely random tokens as input for benchmarking. We then vary the ISL/OSL uniformly subject to the distribution [ISL\\*0.8, ISL], s"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In the near term, we will create a basic multi-turn benchmark with a dataset like allenai/WildChat-4.8M, which captures real users’ multi-turn conversations. In"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the other hand, in scenarios where the GPU KV cache is stressed and blocks are offloaded to the CPU, we expect the GBs to excel as these chips have 900GB/s b"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The point is: real-world multiturn datasets test more SOTA inference engine features and can capture more nuanced and robust performance data across all chips."
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With the rise of Claude Code, Codex, and Kimi, it is becoming increasingly important to benchmark performance in agentic coding scenarios. Like above, these sce"
+        }
+      ]
+    },
+    {
+      "section_id": "34-adding-tpu-trainium-and-more",
+      "title": "Adding TPU, Trainium and More Models",
+      "title_translation": "新增 TPU、Trainium 及更多模型支持",
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Currently, we continuously benchmark DeepSeek R1 and GPT OSS 120B (previously Llama 3.1 70B as well). To keep up with the newest model architectures, we plan on"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In addition to new models, we are actively working on adding both TPU and Trainium."
+        }
+      ]
+    },
+    {
+      "section_id": "35-total-cost-of-ownership-nvl72",
+      "title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)",
+      "title_translation": "总拥有成本（NVL72、Blackwell、Blackwell Ultra、MI355、Hopper、MI325、MI300）",
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Looking at capital costs across comparable generations, Nvidia systems tend to have higher capital cost than AMD systems. This is driven mostly by higher comput"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This similar dynamic carries over into the Blackwell generation, where an increase in GPU content drives rising total Server cost, in turn driving higher total "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis AI TCO Model"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Across comparable generations, operating costs per GPU are broadly similar because chip TDP is the dominant driver of TCO for operating costs. This goes up as y"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis AI TCO Model"
+        }
+      ]
+    }
+  ]
+}

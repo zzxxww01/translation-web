@@ -1,0 +1,32 @@
+{
+  "section_id": "04-a-primer-on-important-technica",
+  "new_terms": [
+    {
+      "term": "primer",
+      "suggested_translation": "入门指南",
+      "context": "A Primer on Important Technical Concepts",
+      "confidence": 0.9
+    },
+    {
+      "term": "technical concepts",
+      "suggested_translation": "技术概念",
+      "context": "A Primer on Important Technical Concepts",
+      "confidence": 0.9
+    },
+    {
+      "term": "results analysis",
+      "suggested_translation": "结果分析",
+      "context": "skip directly to our analysis of results / after the results analysis",
+      "confidence": 0.9
+    },
+    {
+      "term": "deeper dive",
+      "suggested_translation": "深度探讨",
+      "context": "take a deeper dive into some of these topics",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:01:09.887102"
+}

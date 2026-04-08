@@ -1,0 +1,19 @@
+{
+  "section_id": "06-memory-subsystem",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.25,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "本节将探讨内存子系统，即负责在计算单元之间搬运数据的硬件单元。内存拷贝指令负责调用内存子系统执行操作，而新一代架构引入了异步拷贝指令（阅读上一篇文章以了解异步机制的演进）。本文将重点分析异步拷贝指令的两种变体：`LDGSTS` 与张量内存加速器 (`TMA`)。"
+  ]
+}

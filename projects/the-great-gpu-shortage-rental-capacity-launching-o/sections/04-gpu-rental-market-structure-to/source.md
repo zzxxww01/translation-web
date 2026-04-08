@@ -1,0 +1,7 @@
+Before late 2025, GPU rental pricing was more competitive as operators had much greater GPU inventory while end demand was only starting to accelerate meaningfully. Pricing exercises were competitive, with multiple Neoclouds able to offer very competitive pricing. These operators prioritized utilization and ensuring they did not miss out on sweating fixed compute assets before the next GPU refresh cycle potentially puts pressure on pricing for incumbent GPU servers.
+
+GPU rental providers’ strategy has pivoted 180 degrees since then. Neoclouds and Hyperscalers are now in the driver’s seat – they can now negotiate for more favorable terms such as higher prepay, better pricing, longer contract lengths and can even pick and choose the contract start and end dates to match their inventory availability. Time is also now on the Neoclouds’ side – they can plan deployments on their own time, harnessing the increasing price climate to build the best book of clients for a given cluster over time.
+
+The GPU rental market structure is best understood by dividing it into three primary market segments, each of which tends to cater to different types of customers:
+
+1. Short-term rental: On-Demand, Spot and less than 3-month contracts 2. Mid-term contracts: 3-month contracts all the way to 3-year+ contracts. 3. Long-term offtakes: 4-year to 5-year contracts, though 5-year is the most popular tenor.

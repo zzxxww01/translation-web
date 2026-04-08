@@ -1,0 +1,108 @@
+{
+  "project_id": "gtc-2026-the-inference-kingdom-expands",
+  "status": "incomplete",
+  "total_sections": 13,
+  "translated_sections": 0,
+  "total_paragraphs": 211,
+  "translated_paragraphs": 78,
+  "error_count": 14,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Rubin",
+      "existing": "",
+      "new": "Rubin (鲁宾)",
+      "existing_note": "英伟达架构",
+      "new_note": "Nvidia's next-generation GPU architecture following Blackwell",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-02T22:05:23.482832"
+    },
+    {
+      "error": "Failed to translate section 00-intro: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-02T22:21:16.090706",
+      "section": "00-intro"
+    },
+    {
+      "error": "Failed to translate section 01-groq: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-02T22:22:22.509251",
+      "section": "01-groq"
+    },
+    {
+      "error": "Failed to translate section 02-lpu-chip: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-02T22:24:58.586046",
+      "section": "02-lpu-chip"
+    },
+    {
+      "error": "Failed to translate section 03-sram-and-memory-hierarchy: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:25:36.637111",
+      "section": "03-sram-and-memory-hierarchy"
+    },
+    {
+      "error": "Failed to translate section 04-gpu-and-lpu-integration-atten: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:26:16.767695",
+      "section": "04-gpu-and-lpu-integration-atten"
+    },
+    {
+      "error": "Failed to translate section 05-speculative-decoding: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:26:56.895753",
+      "section": "05-speculative-decoding"
+    },
+    {
+      "error": "Failed to translate section 06-lpx-rack-system: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:27:37.064414",
+      "section": "06-lpx-rack-system"
+    },
+    {
+      "error": "Failed to translate section 07-lpu-network: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:28:17.241917",
+      "section": "07-lpu-network"
+    },
+    {
+      "error": "Failed to translate section 08-nvidias-cpo-roadmap: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:28:57.360022",
+      "section": "08-nvidias-cpo-roadmap"
+    },
+    {
+      "error": "Failed to translate section 09-oberon-and-kyber-updates-larg: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:29:37.459712",
+      "section": "09-oberon-and-kyber-updates-larg"
+    },
+    {
+      "error": "Failed to translate section 10-cmx-and-stx: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:30:17.599209",
+      "section": "10-cmx-and-stx"
+    },
+    {
+      "error": "Failed to translate section 11-feynman-nvl1152-networking-top: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:30:57.765949",
+      "section": "11-feynman-nvl1152-networking-top"
+    },
+    {
+      "error": "Failed to translate section 12-gtc-2026-supply-chain-implicat: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-02T22:31:37.889038",
+      "section": "12-gtc-2026-supply-chain-implicat"
+    }
+  ],
+  "started_at": "2026-04-02T22:02:00.390448",
+  "finished_at": "2026-04-02T22:31:38.026417",
+  "run_id": "20260402-220200-390462",
+  "artifacts_path": "projects\\gtc-2026-the-inference-kingdom-expands\\artifacts\\runs\\20260402-220200-390462",
+  "export": {
+    "generated_at": "2026-04-02T22:31:37.917432",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\gtc-2026-the-inference-kingdom-expands\\推理王国的扩张_zh.md",
+      "generated": true,
+      "bytes": 53696
+    }
+  },
+  "api_calls": 9,
+  "elapsed_seconds": 1777.7,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

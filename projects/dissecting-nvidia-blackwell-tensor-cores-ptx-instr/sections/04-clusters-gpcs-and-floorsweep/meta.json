@@ -1,0 +1,1052 @@
+{
+  "section_id": "04-clusters-gpcs-and-floorsweep",
+  "title": "Clusters, GPCs, and Floorsweeping",
+  "title_translation": "集群、GPC 与核心屏蔽",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Since Hopper, Nvidia datacenter GPUs have supported an optional feature which is known by several names, such as “thread block clusters”, “CTA clusters”, and “cooperative grid arrays” (CGAs), all of which refer to the same feature. A cluster is a logical grouping of CTAs, the shape and size of which can be statically or dynamically specified per-kernel. Clusters are visible to the programming model in some useful ways, one of which allows for multicast loads to multiple CTAs in the same cluster; we discuss this later in the context of TMA multicast.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since Hopper, Nvidia datacenter GPUs have supported an optional feature which is known by several names, such as “thread block clusters”, “CTA clusters”, and “cooperative grid arrays” (CGAs), all of which refer to the same feature. A cluster is a logical grouping of CTAs, the shape and size of which can be statically or dynamically specified per-kernel. Clusters are visible to the programming model in some useful ways, one of which allows for multicast loads to multiple CTAs in the same cluster; we discuss this later in the context of TMA multicast.",
+      "parent_block_plain_text": "Since Hopper, Nvidia datacenter GPUs have supported an optional feature which is known by several names, such as “thread block clusters”, “CTA clusters”, and “cooperative grid arrays” (CGAs), all of which refer to the same feature. A cluster is a logical grouping of CTAs, the shape and size of which can be statically or dynamically specified per-kernel. Clusters are visible to the programming model in some useful ways, one of which allows for multicast loads to multiple CTAs in the same cluster; we discuss this later in the context of TMA multicast.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 555,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 Hopper 架构以来，英伟达数据中心 GPU 开始支持一项可选特性。该特性有多种称呼，如“线程块集群”、“CTA 集群”和“协作网格阵列 (CGA)”，它们指代的都是同一功能。集群是 CTA 的逻辑分组，其形状和大小可以针对每个内核进行静态或动态指定。集群在编程模型中有几种实用的可见方式，其中之一是允许向同一集群内的多个 CTA 执行多播加载；我们将在后文探讨 TMA 多播时详细讨论这一点。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087713",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Importantly, CTAs in a cluster are guaranteed to be co-scheduled on the same GPC. This has an important consequence in the 1-CTA-per-SM “persistent CTA”-style Blackwell kernel: if the cluster size does not evenly divide the number of SMs in a GPC, some of the SMs will be left idle. This behavior can be confusing for kernel authors who, unaware of the sparsely-documented GPC, naively launch a number of persistent CTAs equal to the number of SMs with clusters enabled, resulting in serialized execution for some CTAs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Importantly, CTAs in a cluster are guaranteed to be co-scheduled on the same GPC. This has an important consequence in the 1-CTA-per-SM “persistent CTA”-style Blackwell kernel: if the cluster size does not evenly divide the number of SMs in a GPC, some of the SMs will be left idle. This behavior can be confusing for kernel authors who, unaware of the sparsely-documented GPC, naively launch a number of persistent CTAs equal to the number of SMs with clusters enabled, resulting in serialized execution for some CTAs.",
+      "parent_block_plain_text": "Importantly, CTAs in a cluster are guaranteed to be co-scheduled on the same GPC. This has an important consequence in the 1-CTA-per-SM “persistent CTA”-style Blackwell kernel: if the cluster size does not evenly divide the number of SMs in a GPC, some of the SMs will be left idle. This behavior can be confusing for kernel authors who, unaware of the sparsely-documented GPC, naively launch a number of persistent CTAs equal to the number of SMs with clusters enabled, resulting in serialized execution for some CTAs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 519,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "重要的是，系统保证同一集群内的 CTA 会被协同调度到同一个 GPC 上。在 Blackwell 架构中，采用“每个 SM 分配 1 个 CTA”的“持久化 CTA”风格内核时，这会带来一个重要后果：如果集群大小不能整除 GPC 中的 SM 数量，部分 SM 将处于闲置状态。这种行为可能会让内核开发者感到困惑——由于 GPC 的相关文档较少，他们往往会在启用集群的情况下，直接启动与 SM 数量相等的持久化 CTA，从而导致部分 CTA 被串行执行。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087758",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "The number of yielded SMs per GPCs is not fixed, not the same between GPCs on the same chip, and may not even be symmetrical between dies in the same package. Manufacturing of semiconductors results in defects and those defects can land all over the chip. As such Nvidia has to engineer their chips in a way such that they can still have those yielded units still exposed to software in a relatively uniform way.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The number of yielded SMs per GPCs is not fixed, not the same between GPCs on the same chip, and may not even be symmetrical between dies in the same package. Manufacturing of semiconductors results in defects and those defects can land all over the chip. As such Nvidia has to engineer their chips in a way such that they can still have those yielded units still exposed to software in a relatively uniform way.",
+      "parent_block_plain_text": "The number of yielded SMs per GPCs is not fixed, not the same between GPCs on the same chip, and may not even be symmetrical between dies in the same package. Manufacturing of semiconductors results in defects and those defects can land all over the chip. As such Nvidia has to engineer their chips in a way such that they can still have those yielded units still exposed to software in a relatively uniform way.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 412,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 GPC 中良率合格的 SM 数量并非固定不变，同一芯片上不同 GPC 之间的数量也不相同，甚至在同一个封装内的不同裸片 (die) 之间也可能不对称。半导体制造过程中不可避免地会产生缺陷，而这些缺陷可能随机分布在芯片各处。因此，英伟达必须在芯片设计上采取措施，确保这些良率合格的单元仍能以相对统一的方式对软件可见。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087771",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "We prompted Claude to write a utility to reverse-engineer the mapping of SMs to GPCs by launching clusters of various sizes and using PTX %%smid to record which SMs appear in the same GPC. The result is a list of logical groupings of TPCs into GPCs. The list is longer than the 8 GPCs present in Hopper/Blackwell because there are some TPCs which seem to occupy their own logical GPC, and are never co-scheduled with any other TPCs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "%%smid",
+          "start": 138,
+          "end": 144,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We prompted Claude to write a utility to reverse-engineer the mapping of SMs to GPCs by launching clusters of various sizes and using PTX `%%smid` to record which SMs appear in the same GPC. The result is a list of logical groupings of TPCs into GPCs. The list is longer than the 8 GPCs present in Hopper/Blackwell because there are some TPCs which seem to occupy their own logical GPC, and are never co-scheduled with any other TPCs.",
+      "parent_block_plain_text": "We prompted Claude to write a utility to reverse-engineer the mapping of SMs to GPCs by launching clusters of various sizes and using PTX %%smid to record which SMs appear in the same GPC. The result is a list of logical groupings of TPCs into GPCs. The list is longer than the 8 GPCs present in Hopper/Blackwell because there are some TPCs which seem to occupy their own logical GPC, and are never co-scheduled with any other TPCs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "%%smid",
+          "start": 138,
+          "end": 144,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 432,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们让 Claude 编写了一个测试工具，通过启动不同大小的集群并使用 PTX %%smid 记录哪些 SM 出现在同一个 GPC 中，以此反向推导 SM 到 GPC 的映射关系。测试结果是一份将 TPC 划分至 GPC 的逻辑分组列表。由于某些 TPC 似乎占据了独立的逻辑 GPC，且从不与其他任何 TPC 协同调度，因此该列表的长度超过了 Hopper/Blackwell 架构中实际存在的 8 个 GPC。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087834",
+          "tokenized_text": "我们让 Claude 编写了一个测试工具，通过启动不同大小的集群并使用 PTX [[[CODE_1|%%smid]]] 记录哪些 SM 出现在同一个 GPC 中，以此反向推导 SM 到 GPC 的映射关系。测试结果是一份将 TPC 划分至 GPC 的逻辑分组列表。由于某些 TPC 似乎占据了独立的逻辑 GPC，且从不与其他任何 TPC 协同调度，因此该列表的长度超过了 Hopper/Blackwell 架构中实际存在的 8 个 GPC。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087846",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "As of SM100, NVIDIA has provided a solution to this quantization issue so that kernels can get the benefit of larger clusters while still making use of all the available SMs. Kernels can be launched with two cluster sizes: a preferred cluster size and a fallback cluster size. In general, to use the whole GPU, the fallback cluster should be size 2 or size 1.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0034",
+      "parent_block_index": 34,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As of SM100, NVIDIA has provided a solution to this quantization issue so that kernels can get the benefit of larger clusters while still making use of all the available SMs. Kernels can be launched with two cluster sizes: a preferred cluster size and a fallback cluster size. In general, to use the whole GPU, the fallback cluster should be size 2 or size 1.",
+      "parent_block_plain_text": "As of SM100, NVIDIA has provided a solution to this quantization issue so that kernels can get the benefit of larger clusters while still making use of all the available SMs. Kernels can be launched with two cluster sizes: a preferred cluster size and a fallback cluster size. In general, to use the whole GPU, the fallback cluster should be size 2 or size 1.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 359,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从 SM100 开始，英伟达针对这种整数划分问题提供了解决方案，使得内核既能利用大集群的优势，又能充分调用所有可用的 SM。内核在启动时可以指定两个集群大小：首选集群大小和后备集群大小。通常情况下，为了跑满整个 GPU，后备集群的大小应设为 2 或 1。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087857",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "References:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "References:",
+      "parent_block_plain_text": "References:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 11,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "参考资料：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087866",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Cluster API",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Cluster API",
+          "start": 0,
+          "end": 11,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-host-programming.html#launching-with-clusters-using-cudalaunchkernelex",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Cluster API](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-host-programming.html#launching-with-clusters-using-cudalaunchkernelex)",
+      "parent_block_plain_text": "Cluster API",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Cluster API",
+          "start": 0,
+          "end": 11,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-host-programming.html#launching-with-clusters-using-cudalaunchkernelex",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 11,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Cluster API",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087892",
+          "tokenized_text": "[[[LINK_1|Cluster API]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Cooperative groups API",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Cooperative groups API",
+          "start": 0,
+          "end": 22,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cooperative-groups.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0037",
+      "parent_block_index": 37,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Cooperative groups API](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cooperative-groups.html)",
+      "parent_block_plain_text": "Cooperative groups API",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Cooperative groups API",
+          "start": 0,
+          "end": 22,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cooperative-groups.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "协作组 API",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087916",
+          "tokenized_text": "[[[LINK_1|协作组 API]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+          "start": 0,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* `CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`",
+      "parent_block_plain_text": "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+          "start": 0,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 47,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087939",
+          "tokenized_text": "[[[CODE_1|CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "CUTLASS Example 73",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "CUTLASS Example 73",
+          "start": 0,
+          "end": 18,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/examples/73_blackwell_gemm_preferred_cluster/blackwell_gemm_preferred_cluster.cu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [CUTLASS Example 73](https://github.com/NVIDIA/cutlass/blob/main/examples/73_blackwell_gemm_preferred_cluster/blackwell_gemm_preferred_cluster.cu)",
+      "parent_block_plain_text": "CUTLASS Example 73",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "CUTLASS Example 73",
+          "start": 0,
+          "end": 18,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/examples/73_blackwell_gemm_preferred_cluster/blackwell_gemm_preferred_cluster.cu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 18,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "CUTLASS 示例 73",
+          "model": "pro",
+          "created_at": "2026-04-01T23:18:34.087961",
+          "tokenized_text": "[[[LINK_1|CUTLASS 示例 73]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+          "Translate 'thread block clusters' as '线程块集群'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+          "relation_to_previous": "Deepens the high-level architectural overview from section 03 by detailing how execution units are grouped and scheduled.",
+          "relation_to_next": "Sets up a contrast by establishing the 'logical' software view, which will be subverted by the 'physical' reality in the next section.",
+          "key_points": [
+            "Clusters are logical groupings of CTAs that allow for optimizations like multicast loads.",
+            "SM100 solves the quantization issue by allowing kernels to specify both a preferred and a fallback cluster size, improving overall SM utilization."
+          ],
+          "translation_notes": [
+            "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+            "Translate 'thread block clusters' as '线程块集群'."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“在编程模型中有几种实用的可见方式”是对“visible to the programming model”的字面直译，略带翻译腔。在计算机科学语境中，通常意为特性被“暴露/开放给”编程模型，或编程模型“提供了相应的接口”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“由于 GPC 的相关文档较少，他们往往会……”漏译了“unaware of”（未意识到/不了解）的主观状态。原意是开发者“不了解 GPC 机制（且官方文档也少）”，因此“天真地（naively）”直接启动了等量的 CTA。"
+          },
+          {
+            "type": "format",
+            "description": "根据指南要求，PTX 指令或寄存器名称最好格式化为内联代码。虽然原文未加反引号，但加上反引号会更符合技术文档的阅读习惯。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

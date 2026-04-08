@@ -1,0 +1,13 @@
+Lastly, the 4–5 year segment is dominated by AI labs locking in huge quantities of capacity early. These deals involve large clusters of 50MW or 100MW or even larger – equivalent to about ~24,000 to 48,000 GB300 NVL72 GPUs. In aggregate – these deals represent a very large proportion of the overall Neocloud GPU rental market.
+
+AI Labs like these contracts as they can lock in a huge amounts of compute in one go to cater to rapidly accelerating end demand. The AI Labs also have considerable influence on the cluster design, making decisions regarding storage, networking, CPU compute and more. These are very often bare metal deals as AI Labs have the engineering expertise to customize more layers of the tech stack and extract the highest performance per TCO possible.
+
+Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab. This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.
+
+The below table shows a number of large offtake deals we have been tracking. We analyze these deals closely to calculate the implied pricing in $/hr/GPU and profitability metrics like Project IRR, EBIT Margins, etc.
+
+![](https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png)
+
+Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)
+
+In today’s market climate, most of the large AI Clusters that are ramping are captive to AI Labs, who nonetheless have been dipping into the sub 4y market to supplement existing capacity ramps. They are also preventing supply from re-entering the sub 4y contract market by simply renewing their existing H100 and H200 clusters, indirectly playing in these markets. It will be interesting to see how supply-demand dynamics play out in the 1-3y contract market as AI Labs ramp their GB200 and GB300 megaclusters.

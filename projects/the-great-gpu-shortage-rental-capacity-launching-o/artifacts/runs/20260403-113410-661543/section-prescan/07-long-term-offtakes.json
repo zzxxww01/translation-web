@@ -1,0 +1,55 @@
+{
+  "section_id": "07-long-term-offtakes",
+  "new_terms": [
+    {
+      "term": "GB300 NVL72",
+      "suggested_translation": "GB300 NVL72",
+      "context": "Specific NVIDIA GPU cluster configuration mentioned as a benchmark for capacity.",
+      "confidence": 1.0
+    },
+    {
+      "term": "backstop",
+      "suggested_translation": "兜底 / 信用背书",
+      "context": "Hyperscalers serving as the direct offtaker to provide financial security for Neocloud debt.",
+      "confidence": 0.95
+    },
+    {
+      "term": "duration risk",
+      "suggested_translation": "久期风险",
+      "context": "The risk associated with the mismatch between contract length and financing terms.",
+      "confidence": 0.95
+    },
+    {
+      "term": "project IRR",
+      "suggested_translation": "项目内部收益率",
+      "context": "A metric used by Neoclouds to measure the profitability of long-term offtake deals.",
+      "confidence": 0.98
+    },
+    {
+      "term": "captive",
+      "suggested_translation": "专属 / 专用",
+      "context": "Large AI clusters that are dedicated to specific AI labs rather than available on the open market.",
+      "confidence": 0.9
+    },
+    {
+      "term": "megaclusters",
+      "suggested_translation": "巨型集群 / 万卡级集群",
+      "context": "Extremely large-scale GPU deployments like GB200 and GB300 setups.",
+      "confidence": 0.9
+    },
+    {
+      "term": "EBIT Margins",
+      "suggested_translation": "息税前利润率",
+      "context": "Profitability metric used to analyze the performance of offtake deals.",
+      "confidence": 0.98
+    }
+  ],
+  "term_usages": {
+    "offtake": "包销协议",
+    "tenor": "合同期限",
+    "bare metal": "裸金属",
+    "hyperscaler": "超大规模云厂商"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:09:49.980933"
+}

@@ -225,7 +225,7 @@ class TranslationAgent:
             translated_text=translated_tokenized_text,
             format_tokens=format_token_context(paragraph),
             issues=issues,
-            model="flash",
+            model="preview",
         )
 
 

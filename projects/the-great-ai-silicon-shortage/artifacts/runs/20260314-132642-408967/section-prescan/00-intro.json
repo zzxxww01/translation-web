@@ -1,0 +1,32 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "N3",
+      "suggested_translation": "N3 / 3纳米制程",
+      "context": "TSMC N3 Wafer Shortages",
+      "confidence": 0.95
+    },
+    {
+      "term": "wafer shortages",
+      "suggested_translation": "晶圆短缺",
+      "context": "TSMC N3 Wafer Shortages",
+      "confidence": 0.9
+    },
+    {
+      "term": "memory constraints",
+      "suggested_translation": "存储受限 / 内存约束",
+      "context": "Memory Constraints, Datacenter Bottlenecks",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "tsmc": "台积电",
+    "wafer": "晶圆",
+    "data center": "数据中心",
+    "bottleneck": "瓶颈",
+    "supply chain": "供应链"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-14T13:28:26.559776"
+}

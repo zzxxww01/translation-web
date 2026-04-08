@@ -1,0 +1,54 @@
+{
+  "section_id": "14-latency",
+  "new_terms": [
+    {
+      "term": "S8",
+      "suggested_translation": "S8 (Int8)",
+      "context": "A specific integer data format mentioned in the context of MMA latency benchmarking",
+      "confidence": 0.95
+    },
+    {
+      "term": "E4M3",
+      "suggested_translation": "E4M3 (FP8)",
+      "context": "A specific FP8 format variant used in Hopper and Blackwell architectures",
+      "confidence": 0.95
+    },
+    {
+      "term": "F4",
+      "suggested_translation": "F4 (FP4)",
+      "context": "A 4-bit floating point format introduced in the Blackwell architecture",
+      "confidence": 0.95
+    },
+    {
+      "term": "MXF8",
+      "suggested_translation": "MXF8",
+      "context": "Micro-scaling FP8 format",
+      "confidence": 0.95
+    },
+    {
+      "term": "MXF4",
+      "suggested_translation": "MXF4",
+      "context": "Micro-scaling FP4 format",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale factor computation",
+      "suggested_translation": "缩放因子计算",
+      "context": "The overhead associated with calculating scales for micro-scaling (MX) data formats",
+      "confidence": 0.9
+    },
+    {
+      "term": "CTA group",
+      "suggested_translation": "CTA 组",
+      "context": "A grouping of Cooperative Thread Arrays for multi-SM MMA operations",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "latency": "延迟",
+    "mma (matrix multiply-accumulate)": "矩阵乘累加 (MMA)",
+    "2sm mma": "2SM MMA"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:33:49.509093"
+}

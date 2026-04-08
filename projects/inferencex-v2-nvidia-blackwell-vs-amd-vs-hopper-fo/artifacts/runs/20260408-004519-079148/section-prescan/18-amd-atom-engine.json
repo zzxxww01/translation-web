@@ -1,0 +1,75 @@
+{
+  "section_id": "18-amd-atom-engine",
+  "new_terms": [
+    {
+      "term": "NVMe",
+      "suggested_translation": "NVMe",
+      "context": "does not support NVMe or CPU KVCache offloading",
+      "confidence": 1.0
+    },
+    {
+      "term": "CUDA",
+      "suggested_translation": "CUDA",
+      "context": "reach the same level of usability as CUDA",
+      "confidence": 1.0
+    },
+    {
+      "term": "JAX",
+      "suggested_translation": "JAX",
+      "context": "quality of tests that AMD & NVIDIA runs on vLLM, SGLang, PyTorch, & JAX",
+      "confidence": 1.0
+    },
+    {
+      "term": "RFC",
+      "suggested_translation": "RFC",
+      "context": "Simon Mo, lead vLLM maintainer, states in this GitHub RFC",
+      "confidence": 1.0
+    },
+    {
+      "term": "tool parsing",
+      "suggested_translation": "工具解析",
+      "context": "does not support NVMe or CPU KVCache offloading, tool parsing",
+      "confidence": 0.95
+    },
+    {
+      "term": "token factories",
+      "suggested_translation": "Token 工厂",
+      "context": "there are no token factories currently using ATOM",
+      "confidence": 0.9
+    },
+    {
+      "term": "day 0",
+      "suggested_translation": "首发 (Day 0)",
+      "context": "they cannot support day 0 vLLM support for ROCm",
+      "confidence": 0.9
+    },
+    {
+      "term": "feature shepherding",
+      "suggested_translation": "特性护航",
+      "context": "demonstrated sustained upstream engagement through feature shepherding and code ownership",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "atom": "ATOM",
+    "kv cache offloading": "KV Cache 卸载",
+    "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
+    "disaggregated serving": "分离式 Serving",
+    "trtllm": "TRTLLM",
+    "togetherai": "TogetherAI",
+    "vllm": "vLLM",
+    "mi355x": "MI355X",
+    "b200": "B200",
+    "mi300x": "MI300X",
+    "semianalysis": "SemiAnalysis",
+    "sglang": "SGLang",
+    "pytorch": "PyTorch",
+    "rocm": "ROCm",
+    "gross margin": "毛利率",
+    "cost of goods sold": "销货成本 (COGS)",
+    "composability": "可组合性",
+    "fp4": "FP4"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:52:36.984382"
+}

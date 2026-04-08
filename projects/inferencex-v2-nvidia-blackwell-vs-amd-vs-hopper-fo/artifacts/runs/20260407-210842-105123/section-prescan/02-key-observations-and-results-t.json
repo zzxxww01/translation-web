@@ -1,0 +1,71 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "Dynamo",
+      "suggested_translation": "Dynamo",
+      "context": "widely used Dynamo TRTLLM B200 FP8",
+      "confidence": 0.95
+    },
+    {
+      "term": "TRT",
+      "suggested_translation": "TRT",
+      "context": "TRT continues to framemog (abbreviation for TRTLLM/TensorRT)",
+      "confidence": 0.95
+    },
+    {
+      "term": "framemog",
+      "suggested_translation": "性能碾压",
+      "context": "TRT continues to framemog / Nvidia absolutely frame mogs (slang for dominating in performance/frame rates)",
+      "confidence": 0.85
+    },
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "聚合式 Serving",
+      "context": "for single node aggregated serving (contrast to disaggregated serving)",
+      "confidence": 0.95
+    },
+    {
+      "term": "composability",
+      "suggested_translation": "可组合性",
+      "context": "the biggest issue with inference on their systems and using their software is composability",
+      "confidence": 0.95
+    },
+    {
+      "term": "rack scale",
+      "suggested_translation": "机架级",
+      "context": "rack scale GB200/GB300 NVL72",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "SOTA (业界领先)",
+      "context": "enabling just a subset of the SOTA inference optimizations",
+      "confidence": 0.95
+    },
+    {
+      "term": "Hopper",
+      "suggested_translation": "Hopper",
+      "context": "framemogging hopper and makes hopper looks like it is jestermaxxing",
+      "confidence": 0.95
+    },
+    {
+      "term": "jestermaxxing",
+      "suggested_translation": "显得极其滑稽 (小丑化)",
+      "context": "makes hopper looks like it is jestermaxxing (slang for acting like a clown)",
+      "confidence": 0.8
+    },
+    {
+      "term": "GTC",
+      "suggested_translation": "GTC",
+      "context": "As Jensen said at GTC 2025",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 (used as shorthand 'disagg' in text)",
+    "nvidia": "Nvidia / NVIDIA (capitalization varies in text)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:11:55.240908"
+}

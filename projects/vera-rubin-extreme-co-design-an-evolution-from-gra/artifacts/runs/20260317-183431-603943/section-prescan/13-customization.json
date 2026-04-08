@@ -1,0 +1,56 @@
+{
+  "section_id": "13-customization",
+  "new_terms": [
+    {
+      "term": "GB300",
+      "suggested_translation": "GB300",
+      "context": "Nvidia's next-generation Blackwell-based platform mentioned alongside NVL72.",
+      "confidence": 1.0
+    },
+    {
+      "term": "ConnectX-8 NIC",
+      "suggested_translation": "ConnectX-8 网卡",
+      "context": "The latest generation of Nvidia's network interface cards used for backend networking.",
+      "confidence": 0.95
+    },
+    {
+      "term": "backend network",
+      "suggested_translation": "后端网络",
+      "context": "The high-bandwidth network used for GPU-to-GPU communication in AI clusters.",
+      "confidence": 0.9
+    },
+    {
+      "term": "frontend network",
+      "suggested_translation": "前端网络",
+      "context": "The network used for external connectivity and management in data centers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "in-house DPU",
+      "suggested_translation": "自研 DPU",
+      "context": "Custom data processing units developed by hyperscalers to replace standard Bluefield chips.",
+      "confidence": 0.95
+    },
+    {
+      "term": "form factor",
+      "suggested_translation": "外形规格",
+      "context": "The physical size, shape, and layout of hardware modules or components.",
+      "confidence": 0.9
+    },
+    {
+      "term": "JBOK / Nitro Box NIC",
+      "suggested_translation": "JBOK / Nitro Box 网卡",
+      "context": "Amazon's specific custom networking hardware configuration for its Nitro system.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云厂商",
+    "chassis": "机箱",
+    "bom": "物料清单",
+    "bluefield-3": "Bluefield-3",
+    "bluefield-4": "Bluefield-4"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:13:17.782064"
+}

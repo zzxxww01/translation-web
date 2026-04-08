@@ -1,0 +1,87 @@
+{
+  "section_id": "11-amds-zen-interconnect-archite",
+  "new_terms": [
+    {
+      "term": "EPYC",
+      "suggested_translation": "霄龙 (EPYC)",
+      "context": "AMD’s return to the datacenter CPU market with their EPYC Naples 7001 series",
+      "confidence": 0.95
+    },
+    {
+      "term": "Core Complex (CCX)",
+      "suggested_translation": "核心复合体 (CCX)",
+      "context": "Each die holds 2 Core Complexes (CCX), with 4 cores and 8MB of L3",
+      "confidence": 0.95
+    },
+    {
+      "term": "Core Compute Die (CCD)",
+      "suggested_translation": "核心计算裸片 (CCD)",
+      "context": "Eight 8-core Core Compute Dies (CCD) surrounded a central I/O die",
+      "confidence": 0.95
+    },
+    {
+      "term": "Infinity Fabric",
+      "suggested_translation": "Infinity Fabric",
+      "context": "Infinity Fabric enabled coherent memory sharing between dies",
+      "confidence": 0.95
+    },
+    {
+      "term": "Infinity Fabric on Package (IFOP)",
+      "suggested_translation": "封装内Infinity Fabric (IFOP)",
+      "context": "Infinity Fabric on Package (IFOP) links connected each die to the other 3",
+      "confidence": 0.9
+    },
+    {
+      "term": "Infinity Fabric Inter Socket (IFIS)",
+      "suggested_translation": "插槽间Infinity Fabric (IFIS)",
+      "context": "Infinity Fabric Inter Socket (IFIS) links enabled dual-socket designs",
+      "confidence": 0.9
+    },
+    {
+      "term": "Global Memory Interconnect (GMI)",
+      "suggested_translation": "全局内存互连 (GMI)",
+      "context": "signals travel across the substrate over Global Memory Interconnect (GMI) links",
+      "confidence": 0.9
+    },
+    {
+      "term": "Scalable Data Fabric",
+      "suggested_translation": "可扩展数据网络",
+      "context": "An on-die Scalable Data Fabric enables inter-CCX communication",
+      "confidence": 0.9
+    },
+    {
+      "term": "GlobalFoundries",
+      "suggested_translation": "格芯",
+      "context": "the I/O die stayed on GlobalFoundries’ 12nm",
+      "confidence": 0.95
+    },
+    {
+      "term": "tapeout",
+      "suggested_translation": "流片",
+      "context": "could only afford to tape out a single die / single silicon tapeout",
+      "confidence": 0.95
+    },
+    {
+      "term": "glued-together",
+      "suggested_translation": "胶水拼接",
+      "context": "Intel mocking the design as “Four glued-together desktop die”",
+      "confidence": 0.9
+    },
+    {
+      "term": "SKU",
+      "suggested_translation": "SKU",
+      "context": "offer the full gamut of core counts across the SKU stack",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "heterogeneous disaggregation": "异构解耦",
+    "multi-chip module (mcm)": "MCM",
+    "data fabric": "数据网络",
+    "crossbar": "交叉开关",
+    "ring bus": "环形总线",
+    "reticle-sized": "光罩极限尺寸"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:10:54.993846"
+}

@@ -1,0 +1,57 @@
+{
+  "section_id": "07-lpu-network",
+  "new_terms": [
+    {
+      "term": "AECs",
+      "suggested_translation": "有源电缆 (AEC)",
+      "context": "Active Electrical Cables used for inter-rack connectivity within 100G reach.",
+      "confidence": 0.95
+    },
+    {
+      "term": "all-to-all mesh",
+      "suggested_translation": "全对全网格拓扑",
+      "context": "Describes the connectivity within a tray where all 16 LPUs are interconnected.",
+      "confidence": 0.9
+    },
+    {
+      "term": "PCB trace",
+      "suggested_translation": "PCB 走线",
+      "context": "The physical medium for intra-node C2C connections requiring high routing density.",
+      "confidence": 0.95
+    },
+    {
+      "term": "line rate",
+      "suggested_translation": "线路速率",
+      "context": "The total raw physical layer speed (e.g., 112G) as opposed to effective data rate.",
+      "confidence": 0.9
+    },
+    {
+      "term": "effective data rate",
+      "suggested_translation": "有效数据速率",
+      "context": "The actual throughput available for data after overhead (e.g., 100G).",
+      "confidence": 0.9
+    },
+    {
+      "term": "daisy chain configuration",
+      "suggested_translation": "菊花链配置",
+      "context": "The network topology used to connect racks together.",
+      "confidence": 0.95
+    },
+    {
+      "term": "differential pairs",
+      "suggested_translation": "差分对",
+      "context": "Used in backplane calculations for Rx and Tx signal lanes.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "lpu (language processing unit)": "语言处理单元 (LPU)",
+    "scale-up networking": "纵向扩展网络",
+    "scale-out fabric": "横向扩展网络织物",
+    "backplane": "背板",
+    "osfp cages": "OSFP 笼子",
+    "intra-node connections": "节点内连接"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:54:57.655436"
+}

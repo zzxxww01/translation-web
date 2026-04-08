@@ -1,0 +1,1002 @@
+{
+  "section_id": "25-optimizing-inference-with-wide",
+  "title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+  "title_translation": "利用 WideEP 与分离式服务优化推理",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Wide EP and disaggregated prefill are separate techniques that are often used together to achieve Pareto optimal performance. In this section, we walk through real results from InferenceX to build intuition for which combinations of parallelism strategy, wide EP, and disaggregated prefill are appropriate at different interactivity levels.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0308",
+      "parent_block_index": 308,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Wide EP and disaggregated prefill are separate techniques that are often used together to achieve Pareto optimal performance. In this section, we walk through real results from InferenceX to build intuition for which combinations of parallelism strategy, wide EP, and disaggregated prefill are appropriate at different interactivity levels.",
+      "parent_block_plain_text": "Wide EP and disaggregated prefill are separate techniques that are often used together to achieve Pareto optimal performance. In this section, we walk through real results from InferenceX to build intuition for which combinations of parallelism strategy, wide EP, and disaggregated prefill are appropriate at different interactivity levels.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 340,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "宽专家并行（WideEP）与分离式 Prefill 是两项独立的技术，但业界常将其组合使用以实现帕累托最优性能。本节我们将剖析 InferenceX 的实际测试结果，帮助大家建立直观认知：在不同的交互性水平下，究竟该如何合理搭配并行策略、宽 EP 与分离式 Prefill。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563707",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "It helps to first understand what parallelism strategies fall on what parts of the Pareto frontier for single-node configurations. Take the example of DeepSeek R1 FP4 8k/1k on a single 8-GPU B200 node with TRT-LLM. The optimal strategy shifts as you move along the frontier, driven primarily by batch size and its effect on expert activation density.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0309",
+      "parent_block_index": 309,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It helps to first understand what parallelism strategies fall on what parts of the Pareto frontier for single-node configurations. Take the example of DeepSeek R1 FP4 8k/1k on a single 8-GPU B200 node with TRT-LLM. The optimal strategy shifts as you move along the frontier, driven primarily by batch size and its effect on expert activation density.",
+      "parent_block_plain_text": "It helps to first understand what parallelism strategies fall on what parts of the Pareto frontier for single-node configurations. Take the example of DeepSeek R1 FP4 8k/1k on a single 8-GPU B200 node with TRT-LLM. The optimal strategy shifts as you move along the frontier, driven primarily by batch size and its effect on expert activation density.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 350,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "首先需要厘清，在单节点配置下，不同的并行策略分别落在帕累托前沿的哪个区间。以采用 TRT-LLM 框架、运行在单个 8-GPU B200 节点上的 DeepSeek R1 FP4 8k/1k 为例。随着我们在帕累托前沿上移动，最优策略也会随之切换，这主要由 Batch Size 及其对专家激活密度的影响所驱动。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563754",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "At the highest interactivity levels (batch 1-16), pure TP outperforms any configuration involving EP. At low batch sizes, only a small fraction of experts activate per step. With EP, these activations are distributed unevenly across GPUs: at batch 4, only 32 of 256 experts fire, and any given GPU has roughly a low double digit percent chance of receiving zero routed tokens in a given layer. TP avoids this by sharding every expert across all GPUs, so all 8 GPUs participate equally in every expert computation regardless of which experts the router selects. We collected expert activation ratio versus batch size data while profiling DeepSeek R1, which confirms that at batch sizes 16 and below, expert activation per layer is very low.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0310",
+      "parent_block_index": 310,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At the highest interactivity levels (batch 1-16), pure TP outperforms any configuration involving EP. At low batch sizes, only a small fraction of experts activate per step. With EP, these activations are distributed unevenly across GPUs: at batch 4, only 32 of 256 experts fire, and any given GPU has roughly a low double digit percent chance of receiving zero routed tokens in a given layer. TP avoids this by sharding every expert across all GPUs, so all 8 GPUs participate equally in every expert computation regardless of which experts the router selects. We collected expert activation ratio versus batch size data while profiling DeepSeek R1, which confirms that at batch sizes 16 and below, expert activation per layer is very low.",
+      "parent_block_plain_text": "At the highest interactivity levels (batch 1-16), pure TP outperforms any configuration involving EP. At low batch sizes, only a small fraction of experts activate per step. With EP, these activations are distributed unevenly across GPUs: at batch 4, only 32 of 256 experts fire, and any given GPU has roughly a low double digit percent chance of receiving zero routed tokens in a given layer. TP avoids this by sharding every expert across all GPUs, so all 8 GPUs participate equally in every expert computation regardless of which experts the router selects. We collected expert activation ratio versus batch size data while profiling DeepSeek R1, which confirms that at batch sizes 16 and below, expert activation per layer is very low.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 739,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在最高交互性区间（Batch Size 1-16），纯张量并行 (TP) 的表现全方位碾压任何包含专家并行 (EP) 的配置。在小 Batch Size 下，每步仅有极小比例的专家被激活。若采用 EP，这些激活负载在各 GPU 间的分布极不均衡：当 Batch Size 为 4 时，256 个专家中仅有 32 个被激活，在任意给定层中，单块 GPU 接收不到任何路由 token 的概率高达 10% 出头。TP 则通过将每个专家切分至所有 GPU 来规避此问题，因此无论路由器选中哪些专家，8 块 GPU 都能均等参与每一次专家计算。我们在对 DeepSeek R1 进行性能分析时，收集了专家激活率与 Batch Size 的对比数据，结果印证了当 Batch Size 在 16 及以下时，单层专家激活率确实极低。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563768",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0311",
+      "parent_block_index": 311,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563779",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!M1tW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ca10b5a-f80e-45b4-8d22-e3134d30b54d_2232x1446.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0312",
+      "parent_block_index": 312,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427964",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563789",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs around batch 32, where approximately 50-60% of experts activate per layer. At this density, EP’s load imbalance becomes tolerable and its token-routing overhead is cheaper than the per-expert all-reduce required by TP. Configurations in this range use TEP: tensor parallelism for attention (all GPUs collaborate on each attention computation), expert parallelism for MoE layers (experts assigned to specific GPUs with all-to-all routing).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0313",
+      "parent_block_index": 313,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs around batch 32, where approximately 50-60% of experts activate per layer. At this density, EP’s load imbalance becomes tolerable and its token-routing overhead is cheaper than the per-expert all-reduce required by TP. Configurations in this range use TEP: tensor parallelism for attention (all GPUs collaborate on each attention computation), expert parallelism for MoE layers (experts assigned to specific GPUs with all-to-all routing). In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP, and batch capacity is maximized at the cost of per-token latency. (128+) and attention weights are fully replicated across all DP ranks, maximizing throughput.",
+      "parent_block_plain_text": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs around batch 32, where approximately 50-60% of experts activate per layer. At this density, EP’s load imbalance becomes tolerable and its token-routing overhead is cheaper than the per-expert all-reduce required by TP. Configurations in this range use TEP: tensor parallelism for attention (all GPUs collaborate on each attention computation), expert parallelism for MoE layers (experts assigned to specific GPUs with all-to-all routing). In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP, and batch capacity is maximized at the cost of per-token latency. (128+) and attention weights are fully replicated across all DP ranks, maximizing throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 598,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着我们下探至交互性稍降的区间，Batch Size 依然偏小，专家权重仍通过 TP 而非 EP 进行切分。真正的转折点出现在 Batch Size 32 附近，此时单层约有 50-60% 的专家被激活。达到该密度后，EP 的负载不均衡已在可容忍范围内，且其 token 路由开销要低于 TP 强制要求的单专家全归约 (All-reduce) 成本。这一区间的配置开始采用张量-专家并行 (TEP)：注意力机制走张量并行（所有 GPU 协同完成每次注意力计算），混合专家 (MoE) 层走专家并行（专家被分配至特定 GPU，并辅以全对全 (All-to-all) 路由）。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563799",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP, and batch capacity is maximized at the cost of per-token latency. (128+) and attention weights are fully replicated across all DP ranks, maximizing throughput.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0313",
+      "parent_block_index": 313,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs around batch 32, where approximately 50-60% of experts activate per layer. At this density, EP’s load imbalance becomes tolerable and its token-routing overhead is cheaper than the per-expert all-reduce required by TP. Configurations in this range use TEP: tensor parallelism for attention (all GPUs collaborate on each attention computation), expert parallelism for MoE layers (experts assigned to specific GPUs with all-to-all routing). In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP, and batch capacity is maximized at the cost of per-token latency. (128+) and attention weights are fully replicated across all DP ranks, maximizing throughput.",
+      "parent_block_plain_text": "As we move to slightly lower interactivities, batch sizes remain small enough that expert weights are still sharded via TP rather than EP. The crossover occurs around batch 32, where approximately 50-60% of experts activate per layer. At this density, EP’s load imbalance becomes tolerable and its token-routing overhead is cheaper than the per-expert all-reduce required by TP. Configurations in this range use TEP: tensor parallelism for attention (all GPUs collaborate on each attention computation), expert parallelism for MoE layers (experts assigned to specific GPUs with all-to-all routing). In the highest throughput, lowest interactivity region of the frontier, batch sizes are large (128+) and configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks, experts are distributed via EP, and batch capacity is maximized at the cost of per-token latency. (128+) and attention weights are fully replicated across all DP ranks, maximizing throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 599,
+      "segment_end": 1020,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在帕累托前沿上吞吐量最高、交互性最低的区间，Batch Size 极大（128+），配置全面转向完整的数据-专家并行 (DEP)：注意力权重作为独立的数据并行 Rank 在所有 GPU 上被完全复制，专家则通过 EP 进行分布式部署。系统以牺牲单 token 延迟为代价，将批处理容量压榨到极限；注意力权重在所有 DP Rank 上的完全复制，最终实现了吞吐量的最大化。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563810",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0314",
+      "parent_block_index": 314,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563820",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Qbqv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd13280a5-ddc2-4610-84bb-bf470301cc8e_2086x1233.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0315",
+      "parent_block_index": 315,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427972",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563888",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node counts, both tuned to the workload and target interactivity level. Take an 8k/1k workload (prefill heavy) at the high-throughput, low-interactivity end of the frontier. Prefill is the bottleneck as each request requires a forward pass of 8192 input tokens, which is computationally expensive. Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput. These prefill nodes run DEP configurations, replicating attention weights across independent data-parallel ranks so that multiple long-context prefills can be processed simultaneously.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0316",
+      "parent_block_index": 316,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node counts, both tuned to the workload and target interactivity level. Take an 8k/1k workload (prefill heavy) at the high-throughput, low-interactivity end of the frontier. Prefill is the bottleneck as each request requires a forward pass of 8192 input tokens, which is computationally expensive. Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput. These prefill nodes run DEP configurations, replicating attention weights across independent data-parallel ranks so that multiple long-context prefills can be processed simultaneously. Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node.",
+      "parent_block_plain_text": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node counts, both tuned to the workload and target interactivity level. Take an 8k/1k workload (prefill heavy) at the high-throughput, low-interactivity end of the frontier. Prefill is the bottleneck as each request requires a forward pass of 8192 input tokens, which is computationally expensive. Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput. These prefill nodes run DEP configurations, replicating attention weights across independent data-parallel ranks so that multiple long-context prefills can be processed simultaneously. Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 754,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "当我们将分离式 Prefill 扩展到宽专家并行 (WideEP) 场景时，也观察到同样的通用模式。Prefill 和 decode 阶段采用各自独立的并行策略和节点数量，两者都针对具体的工作负载和目标交互性进行精细调优。以帕累托前沿上高吞吐、低交互性的一端为例，处理一个 8k/1k 工作负载（预填充任务繁重）。此时，Prefill 阶段是瓶颈，因为每个请求都需要对 8192 个输入 token 进行前向传播，计算开销极大。因此，该区间的方案会分配比 decode 节点更多的 prefill 节点（如 4P1D (4个Prefill节点，1个Decode节点)、7P2D、4P3D），以维持高 prefill 吞吐量。这些 prefill 节点运行数据-专家并行 (DEP) 配置，将注意力权重复制到各个独立的数据并行 Rank 上，从而实现对多个长上下文 prefill 请求的并行处理。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563903",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0316",
+      "parent_block_index": 316,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node counts, both tuned to the workload and target interactivity level. Take an 8k/1k workload (prefill heavy) at the high-throughput, low-interactivity end of the frontier. Prefill is the bottleneck as each request requires a forward pass of 8192 input tokens, which is computationally expensive. Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput. These prefill nodes run DEP configurations, replicating attention weights across independent data-parallel ranks so that multiple long-context prefills can be processed simultaneously. Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node.",
+      "parent_block_plain_text": "We observe the same general pattern when extending to wide EP with disaggregated prefill. Prefill and decode run with separate parallelism strategies and node counts, both tuned to the workload and target interactivity level. Take an 8k/1k workload (prefill heavy) at the high-throughput, low-interactivity end of the frontier. Prefill is the bottleneck as each request requires a forward pass of 8192 input tokens, which is computationally expensive. Recipes in this region allocate more prefill nodes than decode (4P1D, 7P2D, 4P3D) to sustain high prefill throughput. These prefill nodes run DEP configurations, replicating attention weights across independent data-parallel ranks so that multiple long-context prefills can be processed simultaneously. Decode nodes are fewer but run wide DEP with large batch sizes by the same principle as with single node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 755,
+      "segment_end": 860,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Decode 节点的数量较少，但其运行原理与单节点配置相同，即采用宽数据-专家并行 (wide DEP) 模式来处理大批量请求。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563914",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "On the low interactivity end of the frontier, there are fewer concurrent requests in flight, so a single prefill instance can keep pace with incoming demand. Yet each request still requires 1024 decode steps, and at high interactivity those steps must be fast. Recipes in this region shift to more decode nodes than prefill (1P3D, 1P4D), with each decode instance running TEP at low batch size. Tensor parallelism on attention minimizes per-step latency by sharding the computation across all GPUs in the instance, while expert parallelism handles MoE routing at the moderate batch sizes where EP load balance is sufficient. Multiple small-batch decode instances, rather than fewer large-batch ones, keep per-token latency low while still providing enough concurrent serving capacity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0317",
+      "parent_block_index": 317,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the low interactivity end of the frontier, there are fewer concurrent requests in flight, so a single prefill instance can keep pace with incoming demand. Yet each request still requires 1024 decode steps, and at high interactivity those steps must be fast. Recipes in this region shift to more decode nodes than prefill (1P3D, 1P4D), with each decode instance running TEP at low batch size. Tensor parallelism on attention minimizes per-step latency by sharding the computation across all GPUs in the instance, while expert parallelism handles MoE routing at the moderate batch sizes where EP load balance is sufficient. Multiple small-batch decode instances, rather than fewer large-batch ones, keep per-token latency low while still providing enough concurrent serving capacity.",
+      "parent_block_plain_text": "On the low interactivity end of the frontier, there are fewer concurrent requests in flight, so a single prefill instance can keep pace with incoming demand. Yet each request still requires 1024 decode steps, and at high interactivity those steps must be fast. Recipes in this region shift to more decode nodes than prefill (1P3D, 1P4D), with each decode instance running TEP at low batch size. Tensor parallelism on attention minimizes per-step latency by sharding the computation across all GPUs in the instance, while expert parallelism handles MoE routing at the moderate batch sizes where EP load balance is sufficient. Multiple small-batch decode instances, rather than fewer large-batch ones, keep per-token latency low while still providing enough concurrent serving capacity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 784,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在帕累托前沿上追求高交互性的一端，并发请求数量较少，因此单个 prefill 实例就能跟上输入需求。然而，每个请求仍需要 1024 个 decode 步骤，而要实现高交互性，这些步骤就必须快。因此，该区间的方案转向分配比 prefill 节点更多的 decode 节点（如 1P3D、1P4D），每个 decode 实例都以小批量 (low batch size) 方式运行张量-专家并行 (TEP)。注意力计算上的张量并行通过将计算分片到实例内的所有 GPU 上，最大限度地降低了每一步的延迟；与此同时，在中等 Batch Size 这一负载均衡已足够高效的区间，专家并行 (EP) 负责处理混合专家 (MoE) 的路由。最终，通过采用多个小批量 decode 实例，而非少数几个大批量实例，既保持了较低的单 token 延迟，又提供了足够的并发服务能力。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563924",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0318",
+      "parent_block_index": 318,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563934",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!LpAb!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61e2a61e-1b95-4ecb-a03d-061d15615c40_2086x1214.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0319",
+      "parent_block_index": 319,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis InferenceX",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427978",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:07:09.563943",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 “extending to wide EP with disaggregated prefill” 意指“将（上述分析/规律）扩展至宽专家并行搭配分离式 Prefill 的场景”。译文“将分离式 Prefill 扩展到宽专家并行 (Wide EP) 场景时”错误地将“分离式 Prefill”作为动词扩展的直接宾语，轻微改变了原意中两项技术并列组合的逻辑关系。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

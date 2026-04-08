@@ -1,0 +1,54 @@
+{
+  "section_id": "03-acknowledgments-and-inferencex",
+  "new_terms": [
+    {
+      "term": "InferenceX",
+      "suggested_translation": "InferenceX",
+      "context": "The InferenceX initiative is also supported by many major buyers of compute...",
+      "confidence": 1.0
+    },
+    {
+      "term": "InferenceMAX",
+      "suggested_translation": "InferenceMAX",
+      "context": "formerly InferenceMAX",
+      "confidence": 1.0
+    },
+    {
+      "term": "GB200",
+      "suggested_translation": "GB200",
+      "context": "Accelerating SemiAnalysis InferenceMAX & GB200 Together",
+      "confidence": 1.0
+    },
+    {
+      "term": "GPT-OSS",
+      "suggested_translation": "GPT-OSS",
+      "context": "GPT-OSS Performance Optimizations: Pushing Pareto Frontier",
+      "confidence": 0.95
+    },
+    {
+      "term": "TensorRT-LLM",
+      "suggested_translation": "TensorRT-LLM",
+      "context": "recognize the SGLang, vLLM, and TensorRT-LLM maintainers",
+      "confidence": 1.0
+    },
+    {
+      "term": "ML",
+      "suggested_translation": "ML (机器学习)",
+      "context": "prominent members of the ML community",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "nvidia": "英伟达",
+    "amd": "AMD",
+    "sglang": "SGLang",
+    "vllm": "vLLM",
+    "gb300 nvl72": "GB300 NVL72",
+    "sku": "SKU",
+    "benchmark": "基准测试",
+    "inference": "推理",
+    "hopper": "Hopper"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:12:22.906160"
+}

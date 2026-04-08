@@ -1,0 +1,50 @@
+{
+  "section_id": "07-asynchronous-copy",
+  "new_terms": [
+    {
+      "term": "bytes-in-flight",
+      "suggested_translation": "在途字节数",
+      "context": "throughput versus bytes-in-flight per SM, the total number of bytes concurrent memory loading instructions are loading",
+      "confidence": 0.95
+    },
+    {
+      "term": "multi-latent attention (mla)",
+      "suggested_translation": "多潜变量注意力机制 (MLA)",
+      "context": "benchmark config space multi-latent attention (MLA) kernels",
+      "confidence": 0.98
+    },
+    {
+      "term": "mio throttle",
+      "suggested_translation": "MIO 节流",
+      "context": "high number of warps stalled due to MIO (memory input output) throttle",
+      "confidence": 0.92
+    },
+    {
+      "term": "instruction issue pressure",
+      "suggested_translation": "指令发射压力",
+      "context": "reduces instruction issue pressure by using fewer stages and larger load sizes",
+      "confidence": 0.9
+    },
+    {
+      "term": "memory barrier objects",
+      "suggested_translation": "内存屏障对象",
+      "context": "saves the memory space for 2 memory barrier objects",
+      "confidence": 0.85
+    },
+    {
+      "term": "non-blocking",
+      "suggested_translation": "非阻塞",
+      "context": "Async copy is non-blocking, allowing memory loads to overlap with computation",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "ldgsts": "LDGSTS",
+    "ptx": "PTX",
+    "sass": "SASS",
+    "sm": "SM",
+    "cta": "CTA"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:21:41.514957"
+}

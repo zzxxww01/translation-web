@@ -1,0 +1,66 @@
+{
+  "section_id": "18-google-axion-c4a-n4a",
+  "new_terms": [
+    {
+      "term": "GCP",
+      "suggested_translation": "GCP (谷歌云平台)",
+      "context": "The Axion line signaled Google’s entry into custom silicon CPUs for their GCP cloud services.",
+      "confidence": 1.0
+    },
+    {
+      "term": "bare metal instances",
+      "suggested_translation": "裸金属实例",
+      "context": "a new 3nm die was designed for the 96-core C4A bare metal instances",
+      "confidence": 1.0
+    },
+    {
+      "term": "monolithic die",
+      "suggested_translation": "单片裸片",
+      "context": "with 8 channels of DDR5 and PCIe5 connectivity on a large monolithic 5nm die.",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-out",
+      "suggested_translation": "横向扩展",
+      "context": "For more cost-effective scale-out web and microservices",
+      "confidence": 0.95
+    },
+    {
+      "term": "microservices",
+      "suggested_translation": "微服务",
+      "context": "For more cost-effective scale-out web and microservices",
+      "confidence": 1.0
+    },
+    {
+      "term": "volume ramps",
+      "suggested_translation": "产能爬坡",
+      "context": "allowing significant volume ramps through 2026.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Axion",
+      "suggested_translation": "Axion",
+      "context": "The Axion line signaled Google’s entry into custom silicon CPUs",
+      "confidence": 1.0
+    },
+    {
+      "term": "Gemini",
+      "suggested_translation": "Gemini",
+      "context": "head nodes in their TPU clusters powering Gemini.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "wafer": "晶圆",
+    "cpu": "CPU",
+    "ddr5": "DDR5",
+    "yield": "良率",
+    "tsmc": "台积电",
+    "arm": "ARM",
+    "x86": "x86",
+    "head node": "头节点",
+    "tpu": "TPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:33:58.637933"
+}

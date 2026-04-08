@@ -1,0 +1,691 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Groq LP30, LPX Rack, Attention FFN Disaggregation, Oberon & Kyber Updates, Nvidia's CPO Roadmap, Vera ETL256, CMX & STX",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Groq LP30, LPX Rack, Attention FFN Disaggregation, Oberon & Kyber Updates, Nvidia's CPO Roadmap, Vera ETL256, CMX & STX",
+      "parent_block_plain_text": "Groq LP30, LPX Rack, Attention FFN Disaggregation, Oberon & Kyber Updates, Nvidia's CPO Roadmap, Vera ETL256, CMX & STX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 119,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Groq LP30、LPX机架、注意力与前馈网络解耦（AFD）、Oberon与Kyber更新、英伟达光电共封装（CPO）路线图、Vera ETL256、CMX与STX",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.642898",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Dylan Patel, Myron Xie, Daniel Nishball, and 7 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 16,
+          "end": 25,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 27,
+          "end": 42,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Dylan Patel](https://substack.com/@semianalysis), [Myron Xie](https://substack.com/@myronxie), [Daniel Nishball](https://substack.com/@danielnishball730869), and 7 others",
+      "parent_block_plain_text": "By Dylan Patel, Myron Xie, Daniel Nishball, and 7 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 16,
+          "end": 25,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 27,
+          "end": 42,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作者：Dylan Patel、Myron Xie、Daniel Nishball及其他7人",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643240",
+          "tokenized_text": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Myron Xie]]]、[[[LINK_3|Daniel Nishball]]]及其他7人",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Mar 24, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Mar 24, 2026 · Paid",
+      "parent_block_plain_text": "Mar 24, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026年3月24日 · 付费文章",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643299",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643335",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!dC_X!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5522a45-77c1-40f8-94c0-395f272b8db1_2709x1815.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia",
+      "parent_block_plain_text": "Source: Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881114",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643361",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "At GTC 2026, Nvidia delivered an event packed full of ground breaking announcements. Nvidia’s pace of innovation is not showing any signs of slowing, as they introduced three entirely new systems this year: Groq LPX, Vera ETL256, and STX. Also announced were updates to Nvidia’s Kyber rack architecture system, CPO making its debut for scale-up networking with the unveiling of the Rubin Ultra NVL576 and Feynman NVL1152 multi-rack systems. Early hints on Feynman’s architecture was also a key topic. A Jensen callout for InferenceX during the keynote was a highlight.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceX during the keynote was a highlight.",
+          "start": 522,
+          "end": 568,
+          "href": "https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At GTC 2026, Nvidia delivered an event packed full of ground breaking announcements. Nvidia’s pace of innovation is not showing any signs of slowing, as they introduced three entirely new systems this year: Groq LPX, Vera ETL256, and STX. Also announced were updates to Nvidia’s Kyber rack architecture system, CPO making its debut for scale-up networking with the unveiling of the Rubin Ultra NVL576 and Feynman NVL1152 multi-rack systems. Early hints on Feynman’s architecture was also a key topic. A Jensen callout for [InferenceX during the keynote was a highlight.](https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs)",
+      "parent_block_plain_text": "At GTC 2026, Nvidia delivered an event packed full of ground breaking announcements. Nvidia’s pace of innovation is not showing any signs of slowing, as they introduced three entirely new systems this year: Groq LPX, Vera ETL256, and STX. Also announced were updates to Nvidia’s Kyber rack architecture system, CPO making its debut for scale-up networking with the unveiling of the Rubin Ultra NVL576 and Feynman NVL1152 multi-rack systems. Early hints on Feynman’s architecture was also a key topic. A Jensen callout for InferenceX during the keynote was a highlight.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceX during the keynote was a highlight.",
+          "start": 522,
+          "end": 568,
+          "href": "https://newsletter.semianalysis.com/p/inferencex-v2-nvidia-blackwell-vs",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 568,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在GTC 2026上，英伟达带来了一场充满突破性发布的盛会。英伟达的创新步伐没有任何放缓的迹象，今年他们推出了三个全新的系统：Groq LPX、Vera ETL256和STX。此外，英伟达还宣布了对其Kyber机架架构系统的更新，随着Rubin Ultra NVL576和Feynman NVL1152多机架系统的亮相，光电共封装技术在纵向扩展（scale-up）网络中首次登场。关于Feynman架构的早期线索也是一个关键话题。黄仁勋在主题演讲中特别提及InferenceX是一大亮点。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643458",
+          "tokenized_text": "在GTC 2026上，英伟达带来了一场充满突破性发布的盛会。英伟达的创新步伐没有任何放缓的迹象，今年他们推出了三个全新的系统：Groq LPX、Vera ETL256和STX。此外，英伟达还宣布了对其Kyber机架架构系统的更新，随着Rubin Ultra NVL576和Feynman NVL1152多机架系统的亮相，光电共封装技术在纵向扩展（scale-up）网络中首次登场。关于Feynman架构的早期线索也是一个关键话题。黄仁勋在主题演讲中特别提及[[[LINK_1|InferenceX是一大亮点。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "This is our GTC 2026 recap, and we will address many of the key questions that have been left unanswered by Nvidia. Specifically, we will go through the LPX rack and LP30 chip and explain how attention and feed forward network disaggregation (AFD) works; more details on the various rack architectures behind NVL144, NVL576, and NVL1152 and clarify just how much optics will be inserted as well as the rationale behind the dense Vera ETL256. The next generation Kyber rack had some big updates and some hidden details.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is our GTC 2026 recap, and we will address many of the key questions that have been left unanswered by Nvidia. Specifically, we will go through the LPX rack and LP30 chip and explain how attention and feed forward network disaggregation (AFD) works; more details on the various rack architectures behind NVL144, NVL576, and NVL1152 and clarify just how much optics will be inserted as well as the rationale behind the dense Vera ETL256. The next generation Kyber rack had some big updates and some hidden details.",
+      "parent_block_plain_text": "This is our GTC 2026 recap, and we will address many of the key questions that have been left unanswered by Nvidia. Specifically, we will go through the LPX rack and LP30 chip and explain how attention and feed forward network disaggregation (AFD) works; more details on the various rack architectures behind NVL144, NVL576, and NVL1152 and clarify just how much optics will be inserted as well as the rationale behind the dense Vera ETL256. The next generation Kyber rack had some big updates and some hidden details.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 518,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是我们的GTC 2026回顾，我们将解答英伟达留下的许多关键疑问。具体而言，我们将详细剖析LPX机架和LP30芯片，并解释注意力与前馈网络解耦（AFD）的工作原理；深入探讨NVL144、NVL576和NVL1152背后的各种机架架构细节，阐明其中将引入多少光学器件，以及高密度Vera ETL256背后的设计逻辑。下一代Kyber机架也迎来了一些重大更新与隐藏细节。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:46:00.643470",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Maintain an authoritative, analytical tone.",
+          "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+          "relation_to_previous": "None. Serves as the opening.",
+          "relation_to_next": "Directly transitions into the first major topic promised in the agenda: the Groq acquisition and integration.",
+          "key_points": [
+            "Nvidia's GTC 2026 announcements left key technical questions unanswered.",
+            "The article will deep-dive into Groq LPX/LP30, Attention FFN Disaggregation (AFD), Kyber/Oberon rack architectures, CPO roadmaps, and CMX/STX storage."
+          ],
+          "translation_notes": [
+            "Maintain an authoritative, analytical tone.",
+            "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文在标题中添加了过度注释“（Attention FFN Disaggregation (AFD)）”和“（Co-Packaged Optics (CPO)）”，出现了典型的“中文全称（英文全称 (缩写)）”三重冗余结构，违反了缩写标注规范，且破坏了标题的简洁性。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文在此处明确包含了缩写“(AFD)”，但译文将其遗漏（仅译为“注意力与前馈网络解耦”）。"
+          },
+          {
+            "type": "tone",
+            "description": "“left unanswered by Nvidia”被译为“解答英伟达留下的许多关键悬念”。“悬念”通常指文学或影视中的suspense，而此处指的是技术细节上的“未解答的问题”或“疑问”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

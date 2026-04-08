@@ -1,0 +1,13 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "failed",
+  "error": "('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+  "errors": [
+    {
+      "error": "('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-08T00:38:40.907222"
+    }
+  ],
+  "run_id": "20260408-003735-654330",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260408-003735-654330"
+}

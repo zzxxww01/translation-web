@@ -33,14 +33,14 @@ class DeepAnalyzer:
     def __init__(
         self,
         llm_provider: LLMProvider,
-        max_sample_chars: int = 30000
+        max_sample_chars: int = 18000
     ):
         """
         初始化深度分析器
 
         Args:
             llm_provider: LLM Provider
-            max_sample_chars: 最大采样字符数（方案 C：从 15000 增加到 30000）
+            max_sample_chars: 最大采样字符数
         """
         self.llm = llm_provider
         self.smart_sampler = create_smart_sampler(max_total_chars=max_sample_chars)
@@ -76,7 +76,7 @@ class DeepAnalyzer:
     def _extract_full_text(
         self,
         sections: List[Section],
-        max_length: int = 30000
+        max_length: int = 18000
     ) -> str:
         """
         提取全文文本（方案 C 优化：使用智能采样）
@@ -295,7 +295,7 @@ class DeepAnalyzer:
             "longform/analysis/section_role_map",
             article_theme=article_theme,
             structure_summary=structure_summary,
-            sections_summary=sections_summary[:10000]  # 限制长度
+            sections_summary=sections_summary[:6000]  # 限制长度，降低长响应失败风险
         )
 
     def get_analysis_summary(self, analysis: ArticleAnalysis) -> str:

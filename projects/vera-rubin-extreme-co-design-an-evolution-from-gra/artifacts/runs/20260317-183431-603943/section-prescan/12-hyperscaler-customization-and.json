@@ -1,0 +1,46 @@
+{
+  "section_id": "12-hyperscaler-customization-and",
+  "new_terms": [
+    {
+      "term": "Hyperscaler",
+      "suggested_translation": "超大规模云厂商",
+      "context": "Refers to the major cloud service providers (AWS, Google, Azure) that customize hardware.",
+      "confidence": 0.99
+    },
+    {
+      "term": "L11 Integration",
+      "suggested_translation": "L11 级集成",
+      "context": "The assembly level involving full rack integration, cabling, and testing.",
+      "confidence": 0.95
+    },
+    {
+      "term": "L12 Integration",
+      "suggested_translation": "L12 级集成",
+      "context": "The final deployment level involving cluster-level setup and data center integration.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ODM (Original Design Manufacturer)",
+      "suggested_translation": "原始设计制造商",
+      "context": "Contract manufacturers like Quanta or Foxconn that build custom hardware for hyperscalers.",
+      "confidence": 0.98
+    },
+    {
+      "term": "JDM (Joint Design Manufacturing)",
+      "suggested_translation": "联合设计制造",
+      "context": "A collaborative design and manufacturing model between the vendor and the hyperscaler.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SKU (Stock Keeping Unit)",
+      "suggested_translation": "产品型号/SKU",
+      "context": "Refers to the specific hardware configurations managed in the logistics chain.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "l10 / l6 assembly level": "L10 / L6 组装级别"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:12:42.248652"
+}

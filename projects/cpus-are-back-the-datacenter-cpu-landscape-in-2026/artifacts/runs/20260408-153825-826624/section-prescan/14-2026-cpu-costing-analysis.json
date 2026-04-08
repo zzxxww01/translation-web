@@ -1,0 +1,49 @@
+{
+  "section_id": "14-2026-cpu-costing-analysis",
+  "new_terms": [
+    {
+      "term": "Venice",
+      "suggested_translation": "Venice",
+      "context": "AMD Venice BoM Costing",
+      "confidence": 0.95
+    },
+    {
+      "term": "Turin",
+      "suggested_translation": "Turin",
+      "context": "AMD Turin, Venice",
+      "confidence": 0.95
+    },
+    {
+      "term": "Grace",
+      "suggested_translation": "Grace",
+      "context": "NVIDIA Grace, Vera",
+      "confidence": 0.95
+    },
+    {
+      "term": "Vera",
+      "suggested_translation": "Vera",
+      "context": "NVIDIA Grace, Vera",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bill of Materials",
+      "suggested_translation": "物料清单",
+      "context": "detailed Bill of Materials costing",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "bom": "物料清单",
+    "hyperscaler": "超大规模云厂商",
+    "arm": "ARM",
+    "cpu": "CPU",
+    "amd": "AMD",
+    "intel": "英特尔",
+    "granite rapids": "Granite Rapids",
+    "diamond rapids": "Diamond Rapids",
+    "nvidia": "英伟达",
+    "aws": "AWS"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:23:05.609109"
+}

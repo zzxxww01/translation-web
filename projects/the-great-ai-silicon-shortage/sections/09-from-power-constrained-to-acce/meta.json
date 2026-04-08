@@ -1,0 +1,288 @@
+{
+  "section_id": "09-from-power-constrained-to-acce",
+  "title": "From Power-Constrained to Accelerator-Constrained",
+  "title_translation": "从电力受限走向加速器受限",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Datacenters and power have been a major constraint over the past few years. To deploy more compute, the industry raced to expand datacenter and power capacity in order to bring new clusters online. They did a fantastic job with creative solutions like onsite gas. Now, however, our projections show that we will have power in excess of AI compute demand, because wafer fabrication hasn’t kept up with DC supply additions. Power is no longer the binding constraint; accelerator silicon supply is. This represents a structural shift from earlier on in the AI cycle, where datacenter construction and power availability were the primary bottlenecks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Now, however, our projections show that we will have power in excess of AI compute demand",
+          "start": 264,
+          "end": 353,
+          "href": "https://newsletter.semianalysis.com/p/are-ai-datacenters-increasing-electric",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Datacenters and power have been a major constraint over the past few years. To deploy more compute, the industry raced to expand datacenter and power capacity in order to bring new clusters online. They did a fantastic job with creative solutions like onsite gas. [Now, however, our projections show that we will have power in excess of AI compute demand](https://newsletter.semianalysis.com/p/are-ai-datacenters-increasing-electric), because wafer fabrication hasn’t kept up with DC supply additions. Power is no longer the binding constraint; accelerator silicon supply is. This represents a structural shift from earlier on in the AI cycle, where datacenter construction and power availability were the primary bottlenecks.",
+      "parent_block_plain_text": "Datacenters and power have been a major constraint over the past few years. To deploy more compute, the industry raced to expand datacenter and power capacity in order to bring new clusters online. They did a fantastic job with creative solutions like onsite gas. Now, however, our projections show that we will have power in excess of AI compute demand, because wafer fabrication hasn’t kept up with DC supply additions. Power is no longer the binding constraint; accelerator silicon supply is. This represents a structural shift from earlier on in the AI cycle, where datacenter construction and power availability were the primary bottlenecks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Now, however, our projections show that we will have power in excess of AI compute demand",
+          "start": 264,
+          "end": 353,
+          "href": "https://newsletter.semianalysis.com/p/are-ai-datacenters-increasing-electric",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 646,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "过去几年，数据中心和电力供应一直是主要的制约因素。为了部署更多算力，整个行业都在竞相扩充数据中心和电力容量，以推动新集群上线。凭借现场天然气发电等创新方案，业界在这方面取得了极其出色的进展。然而，我们目前的预测表明，电力供应将超过AI算力需求，因为晶圆制造产能未能跟上数据中心新增供应的速度。电力已不再是硬性制约因素，加速器芯片供应才是。这标志着AI周期发生了一次结构性转变——在周期早期，数据中心建设和电力供应才是主要的瓶颈。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:19:40.467874",
+          "tokenized_text": "过去几年，数据中心和电力供应一直是主要的制约因素。为了部署更多算力，整个行业都在竞相扩充数据中心和电力容量，以推动新集群上线。凭借现场天然气发电等创新方案，业界在这方面取得了极其出色的进展。[[[LINK_1|然而，我们目前的预测表明，电力供应将超过AI算力需求]]]，因为晶圆制造产能未能跟上数据中心新增供应的速度。电力已不再是硬性制约因素，加速器芯片供应才是。这标志着AI周期发生了一次结构性转变——在周期早期，数据中心建设和电力供应才是主要的瓶颈。",
+          "format_issues": []
+        },
+        "default": {
+          "text": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。然而，我们的预测显示，电力供应将超出AI算力需求，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+          "model": "default",
+          "created_at": "2026-03-14T23:52:29.162137",
+          "tokenized_text": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。[[[LINK_1|然而，我们的预测显示，电力供应将超出AI算力需求]]]，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。然而，我们的预测显示，电力供应将超出AI算力需求，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+          "model": "manual",
+          "created_at": "2026-03-15T00:00:13.388898",
+          "tokenized_text": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。[[[LINK_1|然而，我们的预测显示，电力供应将超出AI算力需求]]]，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。然而，我们的预测显示，电力供应将超出AI算力需求，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+      "confirmed_tokenized": "过去几年，数据中心和电力一直是主要的制约因素。为了部署更多算力并让新集群上线，整个行业竞相扩充数据中心与电力容量。业界在这方面表现极其出色，甚至采用了现场天然气发电等创新方案。[[[LINK_1|然而，我们的预测显示，电力供应将超出AI算力需求]]]，因为晶圆制造产能未能跟上数据中心新增容量的步伐。电力已不再是硬性约束，加速器芯片供应才是。这标志着AI周期发生了结构性转变。在周期早期，数据中心建设和电力供应曾是首要瓶颈。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png",
+          "model": "manual",
+          "created_at": "2026-03-15T00:00:14.199377",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!2w69!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd301614-887f-443c-9fc2-5d2455c8419e_1850x1046.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis Datacenter Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Datacenter Model",
+          "start": 8,
+          "end": 37,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Datacenter Model](https://semianalysis.com/datacenter-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Datacenter Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Datacenter Model",
+          "start": 8,
+          "end": 37,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "manual": {
+          "text": "来源： SemiAnalysis Datacenter Model",
+          "model": "manual",
+          "created_at": "2026-03-15T00:00:14.819160",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Datacenter Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Datacenter Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Expanding datacenters and power is much easier than building new fabs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Expanding datacenters and power is much easier than building new fabs.",
+      "parent_block_plain_text": "Expanding datacenters and power is much easier than building new fabs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 70,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "扩建数据中心与电力设施，远比新建晶圆厂容易得多。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:19:50.059110",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "扩建数据中心与电力设施，远比新建晶圆厂容易得多。",
+          "model": "manual",
+          "created_at": "2026-03-15T00:00:19.946028",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "扩建数据中心与电力设施，远比新建晶圆厂容易得多。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "These things will be difficult and the supply chains will make tons of money and have many successful companies, but ultimately this will be solved with human inginuiuty.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "p",
+      "parent_block_markdown": "These things will be difficult and the supply chains will make tons of money and have many successful companies, but ultimately this will be solved with human inginuiuty.",
+      "parent_block_plain_text": "These things will be difficult and the supply chains will make tons of money and have many successful companies, but ultimately this will be solved with human inginuiuty.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 170,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管这些工作困难重重，供应链上下游也将因此赚取丰厚利润并诞生众多成功企业，但归根结底，人类的聪明才智终将攻克这些难题。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:20:06.364502",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "这些工作固然困难重重，供应链也将借此赚取巨额利润并诞生众多成功企业，但人类的聪明才智最终会攻克这些难关。",
+          "model": "default",
+          "created_at": "2026-03-15T00:00:46.475074",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这些工作固然困难重重，供应链也将借此赚取巨额利润并诞生众多成功企业，但人类的聪明才智最终会攻克这些难关。",
+          "model": "manual",
+          "created_at": "2026-03-15T00:00:52.527838",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这些工作固然困难重重，供应链也将借此赚取巨额利润并诞生众多成功企业，但人类的聪明才智最终会攻克这些难关。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

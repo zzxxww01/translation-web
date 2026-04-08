@@ -1,0 +1,641 @@
+{
+  "section_id": "16-real-world-use-case-cutlass",
+  "title": "Real-world Use Case: CUTLASS",
+  "title_translation": "实际应用案例：CUTLASS",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Here we look at a real world use case: the tiled GEMM inner-loop pattern of continuously loading tiles along the inner dimension K to compute a single tile of an output matrix.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0147",
+      "parent_block_index": 147,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Here we look at a real world use case: the tiled GEMM inner-loop pattern of continuously loading tiles along the inner dimension K to compute a single tile of an output matrix.",
+      "parent_block_plain_text": "Here we look at a real world use case: the tiled GEMM inner-loop pattern of continuously loading tiles along the inner dimension K to compute a single tile of an output matrix.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 176,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "接下来我们探讨一个实际用例：分块 GEMM 内循环模式，即沿着内部维度 K 连续加载分块，从而计算出输出矩阵的单个分块。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133334",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "First we use Nvidia’s CUTLASS Library to instantiate a kernel with a single persistent CTA which computes a single output tile. We vary the number of load stages in the DMA->Math pipeline, making use of more and more SMEM as we increase the number of stages and at the same time achieving better latency hiding. The K dimension is set to be very large so that we measure the achieved math throughput in the steady state mode of the software pipeline as a percentage of the hardware speed-of-light math throughput.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0148",
+      "parent_block_index": 148,
+      "parent_block_type": "p",
+      "parent_block_markdown": "First we use Nvidia’s CUTLASS Library to instantiate a kernel with a single persistent CTA which computes a single output tile. We vary the number of load stages in the DMA->Math pipeline, making use of more and more SMEM as we increase the number of stages and at the same time achieving better latency hiding. The K dimension is set to be very large so that we measure the achieved math throughput in the steady state mode of the software pipeline as a percentage of the hardware speed-of-light math throughput.",
+      "parent_block_plain_text": "First we use Nvidia’s CUTLASS Library to instantiate a kernel with a single persistent CTA which computes a single output tile. We vary the number of load stages in the DMA->Math pipeline, making use of more and more SMEM as we increase the number of stages and at the same time achieving better latency hiding. The K dimension is set to be very large so that we measure the achieved math throughput in the steady state mode of the software pipeline as a percentage of the hardware speed-of-light math throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 513,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "首先，我们使用英伟达 CUTLASS 库实例化一个内核，该内核包含一个持久化的协作线程阵列 (CTA)，用于计算单个输出分块。我们改变 DMA->Math 流水线中的加载阶段（load stages）数量，随着阶段数的增加，内核会占用更多的共享内存 (SMEM)，同时实现更好的延迟隐藏。我们将 K 维度设置得非常大，以便在软件流水线的稳态模式下测量实际达到的数学计算吞吐量，并将其换算为硬件理论极限性能 (SoL) 数学吞吐量的百分比。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133414",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "For a chosen tile size, more and more SMEM can be used to increase the stage count and hide more latency. For a given pipeline depth N, if one stage is actively performing MMA, up to N-1 stages’ A and B buffers can be in-flight. Another way to look at it is that the latency for a given load stage can still be fully hidden up to (N-1)\\*M where M is the time for a single stage to perform MMA, so the latency hiding ability strictly increases for a fixed tile size with increasing stage count.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For a chosen tile size, more and more SMEM can be used to increase the stage count and hide more latency. For a given pipeline depth N, if one stage is actively performing MMA, up to N-1 stages’ A and B buffers can be in-flight. Another way to look at it is that the latency for a given load stage can still be fully hidden up to (N-1)\\*M where M is the time for a single stage to perform MMA, so the latency hiding ability strictly increases for a fixed tile size with increasing stage count.",
+      "parent_block_plain_text": "For a chosen tile size, more and more SMEM can be used to increase the stage count and hide more latency. For a given pipeline depth N, if one stage is actively performing MMA, up to N-1 stages’ A and B buffers can be in-flight. Another way to look at it is that the latency for a given load stage can still be fully hidden up to (N-1)\\*M where M is the time for a single stage to perform MMA, so the latency hiding ability strictly increases for a fixed tile size with increasing stage count.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 493,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于选定的分块大小，可以使用更多的共享内存 (SMEM) 来增加阶段数并隐藏更多延迟。对于给定的流水线深度 N，如果有一个阶段正在执行 MMA，那么最多可以有 N-1 个阶段的 A 和 B 缓冲区处于飞行中（in-flight）状态。换个角度来看，给定加载阶段的延迟在 (N-1)*M 的范围内仍能被完全隐藏，其中 M 是单个阶段执行 MMA 所需的时间。因此，在分块大小固定的情况下，延迟隐藏能力会随着阶段数的增加而严格提升。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133442",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "However, if the GEMM Epilogue consumes SMEM, there is less available for the main loop and so the stage count used must be lower. Here, we use an epilogue that consumes no SMEM, and therefore the lines end along the X-axis when the total SMEM consumed by stage buffers reaches the max SMEM capacity per-SM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, if the GEMM Epilogue consumes SMEM, there is less available for the main loop and so the stage count used must be lower. Here, we use an epilogue that consumes no SMEM, and therefore the lines end along the X-axis when the total SMEM consumed by stage buffers reaches the max SMEM capacity per-SM.",
+      "parent_block_plain_text": "However, if the GEMM Epilogue consumes SMEM, there is less available for the main loop and so the stage count used must be lower. Here, we use an epilogue that consumes no SMEM, and therefore the lines end along the X-axis when the total SMEM consumed by stage buffers reaches the max SMEM capacity per-SM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 306,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，如果 GEMM 的 Epilogue（收尾操作）消耗了共享内存 (SMEM)，主循环可用的容量就会减少，因此必须降低使用的阶段数。在这里，我们使用不消耗共享内存 (SMEM) 的 Epilogue，因此，当阶段缓冲区消耗的总共享内存 (SMEM) 达到每个 SM 的最大容量时，曲线会在 X 轴方向上终止。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133462",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0151",
+      "parent_block_index": 151,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133483",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "So SMEM usage and therefore stage count is computed based on:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "computed",
+          "start": 43,
+          "end": 51,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/include/cutlass/gemm/collective/builders/sm100_umma_builder.inl#L84",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "p",
+      "parent_block_markdown": "So SMEM usage and therefore stage count is [computed](https://github.com/NVIDIA/cutlass/blob/main/include/cutlass/gemm/collective/builders/sm100_umma_builder.inl#L84) based on:",
+      "parent_block_plain_text": "So SMEM usage and therefore stage count is computed based on:",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "computed",
+          "start": 43,
+          "end": 51,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/include/cutlass/gemm/collective/builders/sm100_umma_builder.inl#L84",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 61,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "因此，共享内存 (SMEM) 的使用量以及由此决定的阶段数是基于以下因素计算的：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133605",
+          "tokenized_text": "因此，共享内存 (SMEM) 的使用量以及由此决定的阶段数是基于以下因素[[[LINK_1|计算]]]的：",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Operand SMEM tiles (A and B)",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Operand SMEM tiles (A and B)",
+      "parent_block_plain_text": "Operand SMEM tiles (A and B)",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "操作数共享内存 (SMEM) 分块（A 和 B）",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133630",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Barrier storage",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0154",
+      "parent_block_index": 154,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Barrier storage",
+      "parent_block_plain_text": "Barrier storage",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 15,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "屏障 (Barrier) 存储",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133861",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Epilogue SMEM usage",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Epilogue SMEM usage",
+      "parent_block_plain_text": "Epilogue SMEM usage",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Epilogue 共享内存 (SMEM) 使用量",
+          "model": "pro",
+          "created_at": "2026-04-01T23:38:38.133912",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "1. 'in-flight' 修饰 buffers（通常指 DMA 加载过程中的数据）时，直译为“飞行中”略显生硬，在中文硬件语境下译为“在途”更为地道。2. 'up to (N-1)*M' 表示时间上限，译为“在...范围内”不够精准，改为“只要不超过...就能”更能体现出极限条件。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

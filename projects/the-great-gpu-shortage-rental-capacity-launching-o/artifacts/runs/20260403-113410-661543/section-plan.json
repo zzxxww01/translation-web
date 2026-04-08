@@ -1,0 +1,137 @@
+{
+  "article_theme": "Driven by explosive demand from advanced AI models and tightening supply, GPU rental prices are surging across all contract terms, prompting the introduction of a new contract price index to track this structural market shift.",
+  "structure_summary": "The article introduces the recent 40% surge in H100 rental prices, contrasting current tight supply with past bearish expectations ('The Comeback Kid'). It then introduces the SemiAnalysis 1Y H100 contract price index to better track the market. The core of the piece breaks down the rental market structure into short, mid, and long-term segments, explaining the dynamics of each. Finally, it projects future trends based on supply chain bottlenecks, tokenomics, and new cluster deployments, concluding that prices will continue to rise.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/10",
+      "paragraph_count": 19,
+      "previous_section_title": "",
+      "next_section_title": "Surge Pricing Comes to the GPU Rental Market",
+      "section_role": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+      "translation_notes": [
+        "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+        "Maintain a professional, authoritative tone suitable for an executive summary."
+      ]
+    },
+    {
+      "section_id": "01-surge-pricing-comes-to-the-gpu",
+      "title": "Surge Pricing Comes to the GPU Rental Market",
+      "position": "2/10",
+      "paragraph_count": 6,
+      "previous_section_title": "Introduction",
+      "next_section_title": "GPU Rental Prices – The Comeback Kid",
+      "section_role": "Provides empirical and anecdotal evidence of the severe supply-demand imbalance driving the price surge.",
+      "translation_notes": [
+        "Translate 'Surge Pricing' to capture dynamic, demand-driven spikes (e.g., 激增定价/动态加价).",
+        "Accurately render 'Neocloud Giants' (新兴云巨头) and 'open-weight models' (开放权重模型)."
+      ]
+    },
+    {
+      "section_id": "02-gpu-rental-prices-the-comeba",
+      "title": "GPU Rental Prices – The Comeback Kid",
+      "position": "3/10",
+      "paragraph_count": 17,
+      "previous_section_title": "Surge Pricing Comes to the GPU Rental Market",
+      "next_section_title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+      "section_role": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+      "translation_notes": [
+        "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+        "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+      ]
+    },
+    {
+      "section_id": "03-introducing-the-semianalysis-1",
+      "title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+      "position": "4/10",
+      "paragraph_count": 14,
+      "previous_section_title": "GPU Rental Prices – The Comeback Kid",
+      "next_section_title": "GPU Rental Market Structure Today",
+      "section_role": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+      "translation_notes": [
+        "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+        "Maintain a promotional yet highly analytical tone for the product launch."
+      ]
+    },
+    {
+      "section_id": "04-gpu-rental-market-structure-to",
+      "title": "GPU Rental Market Structure Today",
+      "position": "5/10",
+      "paragraph_count": 4,
+      "previous_section_title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+      "next_section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+      "section_role": "Establishes a structural framework for understanding the GPU rental market by dividing it into three temporal segments.",
+      "translation_notes": [
+        "Translate 'sweating fixed compute assets' as maximizing utilization/extracting value (充分压榨固定算力资产价值).",
+        "'Tenor' in this financial/contractual context should be translated as 期限."
+      ]
+    },
+    {
+      "section_id": "05-short-term-rental-on-demand",
+      "title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+      "position": "6/10",
+      "paragraph_count": 6,
+      "previous_section_title": "GPU Rental Market Structure Today",
+      "next_section_title": "Mid-Term Contracts",
+      "section_role": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+      "translation_notes": [
+        "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+        "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+      ]
+    },
+    {
+      "section_id": "06-mid-term-contracts",
+      "title": "Mid-Term Contracts",
+      "position": "7/10",
+      "paragraph_count": 1,
+      "previous_section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+      "next_section_title": "Long-Term Offtakes",
+      "section_role": "Highlights the mid-term (1-3y) market as the core economic indicator for marginal demand and tightening supply.",
+      "translation_notes": [
+        "Accurately translate 'marginal demand' (边际需求) and 'spillovers' (溢出需求).",
+        "Use standard industry phrasing for 'AI Natives' (AI原生企业)."
+      ]
+    },
+    {
+      "section_id": "07-long-term-offtakes",
+      "title": "Long-Term Offtakes",
+      "position": "8/10",
+      "paragraph_count": 8,
+      "previous_section_title": "Mid-Term Contracts",
+      "next_section_title": "Where The Puck is Going",
+      "section_role": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+      "translation_notes": [
+        "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+        "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+      ]
+    },
+    {
+      "section_id": "08-where-the-puck-is-going",
+      "title": "Where The Puck is Going",
+      "position": "9/10",
+      "paragraph_count": 6,
+      "previous_section_title": "Long-Term Offtakes",
+      "next_section_title": "Pricing is Only Going One Way For Now, and ROIC Follows",
+      "section_role": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+      "translation_notes": [
+        "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+        "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+      ]
+    },
+    {
+      "section_id": "09-pricing-is-only-going-one-way",
+      "title": "Pricing is Only Going One Way For Now, and ROIC Follows",
+      "position": "10/10",
+      "paragraph_count": 9,
+      "previous_section_title": "Where The Puck is Going",
+      "next_section_title": "",
+      "section_role": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+      "translation_notes": [
+        "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+        "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+      ]
+    }
+  ]
+}

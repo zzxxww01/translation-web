@@ -1,0 +1,1098 @@
+{
+  "section_id": "03-sram-and-memory-hierarchy",
+  "title": "SRAM and Memory Hierarchy",
+  "title_translation": "SRAM 与存储层级",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We have written about the role of SRAM in the memory hierarchy, but the quick recap is that SRAM is very fast (low latency and high bandwidth) but this comes at the expense of density and therefore cost.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have written about the role of SRAM in the memory hierarchy, but the quick recap is that SRAM is very fast (low latency and high bandwidth) but this comes at the expense of density and therefore cost.",
+      "parent_block_plain_text": "We have written about the role of SRAM in the memory hierarchy, but the quick recap is that SRAM is very fast (low latency and high bandwidth) but this comes at the expense of density and therefore cost.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 203,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们之前曾撰文探讨过 SRAM 在存储层级中的作用，简而言之，SRAM 速度极快（低延迟且高带宽），但这是以牺牲密度为代价的，因此成本高昂。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797832",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SRAM machines such as Groq’s LPU therefore enable very fast time to first token and tokens per second per user but at the expense of total throughput, as their limited SRAM capacity quickly gets saturated by weights, with little left over for KVcache that grows as more users are batched. GPUs win for throughput and cost as we have shown. This is why Nvidia has decided to combine these architectures to get the best of both worlds: accelerate parts of decode that are more latency sensitive and are not as memory heavy on a low-latency SRAM-heavy chip like the LPU, while memory hungry attention is performed on GPUs that come with a lot of fast (but not SRAM fast) memory capacity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SRAM machines such as Groq’s LPU therefore enable very fast time to first token and tokens per second per user but at the expense of total throughput, as their limited SRAM capacity quickly gets saturated by weights, with little left over for KVcache that grows as more users are batched. GPUs win for throughput and cost as we have shown. This is why Nvidia has decided to combine these architectures to get the best of both worlds: accelerate parts of decode that are more latency sensitive and are not as memory heavy on a low-latency SRAM-heavy chip like the LPU, while memory hungry attention is performed on GPUs that come with a lot of fast (but not SRAM fast) memory capacity.",
+      "parent_block_plain_text": "SRAM machines such as Groq’s LPU therefore enable very fast time to first token and tokens per second per user but at the expense of total throughput, as their limited SRAM capacity quickly gets saturated by weights, with little left over for KVcache that grows as more users are batched. GPUs win for throughput and cost as we have shown. This is why Nvidia has decided to combine these architectures to get the best of both worlds: accelerate parts of decode that are more latency sensitive and are not as memory heavy on a low-latency SRAM-heavy chip like the LPU, while memory hungry attention is performed on GPUs that come with a lot of fast (but not SRAM fast) memory capacity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 684,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "因此，像 Groq 的 LPU 这样的 SRAM 机器能够实现极快的首个 token 生成时间和每用户每秒 token 数，但这以牺牲总吞吐量为代价。因为它们有限的 SRAM 容量很快就会被权重占满，几乎没有剩余空间留给随着批处理用户增多而不断增长的 KVcache。正如我们所展示的，GPU 在吞吐量和成本方面胜出。这就是为什么英伟达决定将这两种架构结合以实现优势互补：在像 LPU 这样低延迟、搭载大量 SRAM 的芯片上，加速那些对延迟更敏感且内存需求不大的解码部分；而将极其消耗内存的注意力机制交由配备大量快速（尽管不及 SRAM 快）内存容量的 GPU 来执行。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797887",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797898",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881264",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797905",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "This brings us to the Groq 3 LPU or LP30, with LPU gen 2 being skipped over. This chip has no Nvidia design involvement. The SerDes issues affecting v2 appear to be fixed. Behind the paywall, we will reveal the SerDes IP vendor which may come as a surprise. Nvidia also announced an LP35 which is a minor refresh of the LP30 which will remain on SF4 and will require a new tapeout. It will incorporate NVFP4 number format but given Nvidia is prioritizing time to market we don’t expect any other drastic design changes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This brings us to the Groq 3 LPU or LP30, with LPU gen 2 being skipped over. This chip has no Nvidia design involvement. The SerDes issues affecting v2 appear to be fixed. Behind the paywall, we will reveal the SerDes IP vendor which may come as a surprise. Nvidia also announced an LP35 which is a minor refresh of the LP30 which will remain on SF4 and will require a new tapeout. It will incorporate NVFP4 number format but given Nvidia is prioritizing time to market we don’t expect any other drastic design changes.",
+      "parent_block_plain_text": "This brings us to the Groq 3 LPU or LP30, with LPU gen 2 being skipped over. This chip has no Nvidia design involvement. The SerDes issues affecting v2 appear to be fixed. Behind the paywall, we will reveal the SerDes IP vendor which may come as a surprise. Nvidia also announced an LP35 which is a minor refresh of the LP30 which will remain on SF4 and will require a new tapeout. It will incorporate NVFP4 number format but given Nvidia is prioritizing time to market we don’t expect any other drastic design changes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 519,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这就引出了 Groq 3 LPU 或 LP30，而第二代 LPU 则被直接跳过。这款芯片没有英伟达的设计参与。影响第二代的 SerDes 问题似乎已得到修复。在付费内容中，我们将揭晓 SerDes IP 供应商，这可能会让人感到意外。英伟达还发布了 LP35，这是 LP30 的小幅更新版本，它将继续采用 SF4，并需要重新流片。它将集成 NVFP4 数值格式，但考虑到英伟达目前优先保证上市时间，我们预计不会有其他重大的设计变更。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797913",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797920",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0028",
+      "parent_block_index": 28,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia",
+      "parent_block_plain_text": "Source: Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881193",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797928",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "LPU 3’s near reticle size die layout is very similar to LPU 1. a significant amount of area taken is up by the 500MB of on-chip SRAM, with a very small amount of area dedicated to MatMul cores that offer 1.2 PFLOPs of FP8 compute – a fraction of compute compared to Nvidia GPUs. This compares to LPU 1 with 230MB of SRAM and 750 TFLOPs of INT8, with the performance increase mostly driven by node migration from GF16 to SF4. As a single monolithic die, advanced packaging isn’t required.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "LPU 3’s near reticle size die layout is very similar to LPU 1. a significant amount of area taken is up by the 500MB of on-chip SRAM, with a very small amount of area dedicated to MatMul cores that offer 1.2 PFLOPs of FP8 compute – a fraction of compute compared to Nvidia GPUs. This compares to LPU 1 with 230MB of SRAM and 750 TFLOPs of INT8, with the performance increase mostly driven by node migration from GF16 to SF4. As a single monolithic die, advanced packaging isn’t required.",
+      "parent_block_plain_text": "LPU 3’s near reticle size die layout is very similar to LPU 1. a significant amount of area taken is up by the 500MB of on-chip SRAM, with a very small amount of area dedicated to MatMul cores that offer 1.2 PFLOPs of FP8 compute – a fraction of compute compared to Nvidia GPUs. This compares to LPU 1 with 230MB of SRAM and 750 TFLOPs of INT8, with the performance increase mostly driven by node migration from GF16 to SF4. As a single monolithic die, advanced packaging isn’t required.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 487,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "LPU 3 接近光罩极限尺寸的裸片布局与 LPU 1 非常相似。很大一部分面积被 500MB 的片上 SRAM 占据，只有极少部分面积分配给提供 1.2 PFLOPs FP8 算力的 MatMul 核心——这仅为英伟达 GPU 算力的一小部分。相比之下，LPU 1 拥有 230MB 的 SRAM 和 750 TFLOPs 的 INT8 算力，性能的提升主要得益于从 GF16 到 SF4 的制程节点迁移。由于采用单片式裸片设计，因此不需要先进封装。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.797936",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "One of the benefits of relying on SF4 is that it isn’t constrained like TSMC’s N3, which is putting a cap on accelerator production and is a key reason why the industry remains compute constrained. This is in addition to not having HBM which is also constrained. This allows Nvidia to ramp production of the LPU without sacrificing or eating into their valuable TSMC allocation or HBM allocations, representing true incremental revenue and capacity that noone else can access.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "constrained like TSMC’s N3, which is putting a cap on accelerator production and is a key reason why the industry remains compute constrained.",
+          "start": 55,
+          "end": 197,
+          "href": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "HBM which is also constrained",
+          "start": 232,
+          "end": 261,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One of the benefits of relying on SF4 is that it isn’t [constrained like TSMC’s N3, which is putting a cap on accelerator production and is a key reason why the industry remains compute constrained.](https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage) This is in addition to not having [HBM which is also constrained](https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades). This allows Nvidia to ramp production of the LPU without sacrificing or eating into their valuable TSMC allocation or HBM allocations, representing true incremental revenue and capacity that noone else can access.",
+      "parent_block_plain_text": "One of the benefits of relying on SF4 is that it isn’t constrained like TSMC’s N3, which is putting a cap on accelerator production and is a key reason why the industry remains compute constrained. This is in addition to not having HBM which is also constrained. This allows Nvidia to ramp production of the LPU without sacrificing or eating into their valuable TSMC allocation or HBM allocations, representing true incremental revenue and capacity that noone else can access.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "constrained like TSMC’s N3, which is putting a cap on accelerator production and is a key reason why the industry remains compute constrained.",
+          "start": 55,
+          "end": 197,
+          "href": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "HBM which is also constrained",
+          "start": 232,
+          "end": 261,
+          "href": "https://newsletter.semianalysis.com/p/memory-mania-how-a-once-in-four-decades",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 476,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "依赖 SF4 的好处之一是它不会像台积电的 N3 制程那样受到产能限制，这种限制给加速器产量设定了上限，也是整个行业仍然面临算力瓶颈的关键原因。此外，该设计也不需要使用同样受限于产能的 HBM。这使得英伟达能够扩大 LPU 的生产规模，而无需牺牲或挤占其宝贵的台积电或 HBM 产能配额。这代表了其他任何人都无法获取的真正增量收入与产能。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.798002",
+          "tokenized_text": "依赖 SF4 的好处之一是它不会[[[LINK_1|像台积电的 N3 制程那样受到产能限制，这种限制给加速器产量设定了上限，也是整个行业仍然面临算力瓶颈的关键原因。]]]此外，该设计也不需要使用[[[LINK_2|同样受限于产能的 HBM]]]。这使得英伟达能够扩大 LPU 的生产规模，而无需牺牲或挤占其宝贵的台积电或 HBM 产能配额。这代表了其他任何人都无法获取的真正增量收入与产能。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Since Nvidia has taken over, the next generation LP40 will be fabricated on TSMC N3P and use CoWoS-R, and Nvidia will contribute more of their own IP such as supporting the NVLink protocol rather than Groq’s C2C. This will be the first LPU to be extremely co-designed alongside the Feynman platform. Groq’s original plans for LPU Gen 4 was also with TSMC and Alchip as the back-end design partner. Alchip’s involvement is now redundant with Nvidia able to perform backend design on their own. One of the technical innovations planned is hybrid bonded DRAM to extend on-chip memory with only a slight decrease in latency and bandwidth vs SRAM, but much higher performance compared to DRAM. SK Hynix was tapped as the supplier of the DRAM to be used for the 3D stacking.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since Nvidia has taken over, the next generation LP40 will be fabricated on TSMC N3P and use CoWoS-R, and Nvidia will contribute more of their own IP such as supporting the NVLink protocol rather than Groq’s C2C. This will be the first LPU to be extremely co-designed alongside the Feynman platform. Groq’s original plans for LPU Gen 4 was also with TSMC and Alchip as the back-end design partner. Alchip’s involvement is now redundant with Nvidia able to perform backend design on their own. One of the technical innovations planned is hybrid bonded DRAM to extend on-chip memory with only a slight decrease in latency and bandwidth vs SRAM, but much higher performance compared to DRAM. SK Hynix was tapped as the supplier of the DRAM to be used for the 3D stacking. All of this and more was detailed long ago in the [Accelerator model](https://semianalysis.com/accelerator-hbm-model/).",
+      "parent_block_plain_text": "Since Nvidia has taken over, the next generation LP40 will be fabricated on TSMC N3P and use CoWoS-R, and Nvidia will contribute more of their own IP such as supporting the NVLink protocol rather than Groq’s C2C. This will be the first LPU to be extremely co-designed alongside the Feynman platform. Groq’s original plans for LPU Gen 4 was also with TSMC and Alchip as the back-end design partner. Alchip’s involvement is now redundant with Nvidia able to perform backend design on their own. One of the technical innovations planned is hybrid bonded DRAM to extend on-chip memory with only a slight decrease in latency and bandwidth vs SRAM, but much higher performance compared to DRAM. SK Hynix was tapped as the supplier of the DRAM to be used for the 3D stacking. All of this and more was detailed long ago in the Accelerator model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator model",
+          "start": 819,
+          "end": 836,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 768,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "既然英伟达已经接手，下一代 LP40 将采用台积电 N3P 制程制造并使用 CoWoS-R 封装。英伟达将注入更多自有 IP，例如支持 NVLink 协议而非 Groq 的 C2C。这将是首款与 Feynman 平台进行深度协同设计的 LPU。Groq 原计划的第四代 LPU 同样由台积电代工，并由 Alchip 作为后端设计合作伙伴。由于英伟达能够自行完成后端设计，Alchip 的参与现已显得多余。计划中的一项技术创新是采用混合键合 DRAM 来扩展片上内存，与 SRAM 相比，其延迟和带宽仅有轻微下降，但性能远高于传统 DRAM。SK海力士已被选定为用于 3D 堆叠的 DRAM 供应商。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.798013",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "All of this and more was detailed long ago in the Accelerator model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator model",
+          "start": 50,
+          "end": 67,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since Nvidia has taken over, the next generation LP40 will be fabricated on TSMC N3P and use CoWoS-R, and Nvidia will contribute more of their own IP such as supporting the NVLink protocol rather than Groq’s C2C. This will be the first LPU to be extremely co-designed alongside the Feynman platform. Groq’s original plans for LPU Gen 4 was also with TSMC and Alchip as the back-end design partner. Alchip’s involvement is now redundant with Nvidia able to perform backend design on their own. One of the technical innovations planned is hybrid bonded DRAM to extend on-chip memory with only a slight decrease in latency and bandwidth vs SRAM, but much higher performance compared to DRAM. SK Hynix was tapped as the supplier of the DRAM to be used for the 3D stacking. All of this and more was detailed long ago in the [Accelerator model](https://semianalysis.com/accelerator-hbm-model/).",
+      "parent_block_plain_text": "Since Nvidia has taken over, the next generation LP40 will be fabricated on TSMC N3P and use CoWoS-R, and Nvidia will contribute more of their own IP such as supporting the NVLink protocol rather than Groq’s C2C. This will be the first LPU to be extremely co-designed alongside the Feynman platform. Groq’s original plans for LPU Gen 4 was also with TSMC and Alchip as the back-end design partner. Alchip’s involvement is now redundant with Nvidia able to perform backend design on their own. One of the technical innovations planned is hybrid bonded DRAM to extend on-chip memory with only a slight decrease in latency and bandwidth vs SRAM, but much higher performance compared to DRAM. SK Hynix was tapped as the supplier of the DRAM to be used for the 3D stacking. All of this and more was detailed long ago in the Accelerator model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator model",
+          "start": 819,
+          "end": 836,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 769,
+      "segment_end": 837,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "所有这些以及更多细节，早在此前的加速器模型中就已有详述。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.798034",
+          "tokenized_text": "所有这些以及更多细节，早在此前的[[[LINK_1|加速器模型]]]中就已有详述。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.798043",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: Nvidia, SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 16,
+          "end": 46,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia, [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: Nvidia, SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 16,
+          "end": 46,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 46,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Nvidia, SemiAnalysis Accelerator 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881608",
+          "tokenized_text": "来源：Nvidia, [[[LINK_1|SemiAnalysis Accelerator 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：英伟达，SemiAnalysis 加速器模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:50:21.798064",
+          "tokenized_text": "来源：英伟达，[[[LINK_1|SemiAnalysis 加速器模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Nvidia, SemiAnalysis Accelerator 模型",
+      "confirmed_tokenized": "来源：Nvidia, [[[LINK_1|SemiAnalysis Accelerator 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+          "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+          "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+          "key_points": [
+            "SRAM offers extremely low latency and high bandwidth.",
+            "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+          ],
+          "translation_notes": [
+            "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,1435 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": "引言",
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Power prices misconception, PJM's poor market design, Capacity prices 9.3x growth, ERCOT vs PJM grid reliability and expansion"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Aishwarya Mahesh, Jeremie Eliahou Ontiveros, Ajey Pandey, and 2 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Mar 03, 2026 · Paid"
+        }
+      ]
+    },
+    {
+      "section_id": "01-are-ai-datacenters-increasing",
+      "title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+      "title_translation": "AI数据中心推高了美国家庭的电费吗？",
+      "paragraph_count": 17,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With spea"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The topic of datacenter load growth and impact on power prices remains broadly misunderstood, akin to the water consumption myth that we debunked recently. It w"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This report explores the question by analyzing the two biggest energy markets in the US, which are also the largest AI Datacenter hubs: the PJM interconnection "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Energy Model, PJM, Monitoring Analytics"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In PJM, we think poor market design is the main culprit. Most of the 15% increase in household electricity bills in PJM is driven by a widely misunderstood and "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: PJM BRA Report"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Many are finger-pointing at the surge in AI datacenters, and it is understandable. The PJM area is at the forefront of the AI boom, with Google notably training"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Now look at Texas. The state is witnessing an equivalent AI buildout, with OpenAI, Google DeepMind, Anthropic all building massive facilities. Yet power futures"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Bloomberg"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Let’s dig in. This report focuses on ERCOT and PJM since they’re the two largest energy markets in the country, and are epicenters of the AI revolution. We’ll d"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Then, behind paywall, we discuss the supply chain implications. We believe that market constraints are dramatically shifting and many are missing it. This shift"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For institutions looking for deeper analysis, subscribe to our Energy Model and Datacenter Industry Model. The latter tracks and forecasts quarter-by-quarter, 2"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Let’s start with a brief explainer of what “capacity” actually is, how it flows to your monthly bill, and then dig further into market designs."
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm."
+        }
+      ]
+    },
+    {
+      "section_id": "02-capacity-paying-for-power-pla",
+      "title": "Capacity: paying for power plants to sit idle 95% of the time",
+      "title_translation": "容量：为95%时间闲置的发电厂买单",
+      "paragraph_count": 11,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At a high level, a monthly household electric bill is driven by the following charges:"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Energy: In deregulated territories (including PJM’s 13 states, and ERCOT/Texas), this is a function of wholesale prices, i.e. real-time supply and demand for el"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Capacity: This charge doesn’t exist in ERCOT but matters in PJM. It is a function of supply & demand for capacity, i.e. power that will only turn on a few hours"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Transmission & Distribution (T&D): the charges for the electrical distribution network."
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This remains a highly regulated area. T&D providers typically earn a pre-determined, regulated Return on Equity. As such, utilization rate of transmission & dis"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Others: taxes, retail adders, ancillary services, etc. We will not dive into this, as it varies based on location."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis estimates, EIA"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The purpose of capacity markets is to ensure households and businesses always have the electricity they need, including on peak summer or winter days. For conte"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In PJM, to ensure we have capacity when it’s needed, we pay power plant owners to maintain their assets on standby for >95% of the year. The price paid is deter"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ERCOT, on the other hand, is an “energy-only” market, with no separate capacity auction. Real-time pricing signals determine “scarcity” and incentivizes power p"
+        }
+      ]
+    },
+    {
+      "section_id": "03-pjm-the-16-billion-simulatio",
+      "title": "PJM: The $16 Billion Simulation",
+      "title_translation": "PJM：160亿美元的模拟",
+      "paragraph_count": 47,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The core issue with the capacity market design is that it is directly impacted by the supply & demand forecast of a central planner, PJM. Any forecasting error "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "How the Base Residual Auction Works"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM pays for system capacity with the aforementioned forward capacity market, called the Base Residual Auction (BRA). This is a yearly auction ran two years ahe"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unlike wholesale energy markets that trade in $/MWh (i.e. electrons consumed in a given hour), the BRA trades in $/MW-day (i.e. peak power provisioned in a give"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Until recently, the BRA delivered on its promise. Summer 2025 was brutally hot in PJM, with June 23 and 24 setting records as the 3rd- and 4th-highest peak days"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But that reliability now comes at an extraordinary price. Between June 2024 and May 2025 (the 2024/25 service period), capacity cost $29/MW-day. For the current"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!48ZG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: PJM BRA Report"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM blamed “runaway” power costs on both extreme weather and hyperscaler datacenter & AI power demand, and that narrative trickled into mainstream news. But tha"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Simulation Under the Hood"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Capacity prices are based on an artificial supply-demand curve known internally as the Variable Resource Requirement (VRR) curve. The VRR curve is built on PJM’"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!H6mE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, the VRR curve is constructed from a web of assumptions, many of which depend on non-public models and proprietary data. Even modest changes in forecast"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Datacenters blamed as the culprit for surging capacity prices"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM’s Internal Market Monitor (IMM) -- an independent monitoring entity required by the Federal Energy Regulatory Commission (FERC) -- ran alternate simulations"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Removing all datacenters from the forecast reduced PJM peak load by 7,927 MW, resulting in a $9.33 billion reduction of total capacity payments -- a 64% reducti"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Keeping only already-energized datacenters reduced peak load by 4,654 MW, resulting in a $7.74 billion reduction -- a 53% cut from the actual price. For the 202"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "According to the IMM’s analysis, incremental datacenter load growth alone explains roughly a doubling in capacity costs versus a hypothetical grid without that "
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But all of these simulations obscure a deeper issue: the main auction that drives electric rates is also based on a simulation. The VRR curve is an artificial s"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "And we believe the forecast is inaccurate. Our methodology tracks precise construction timelines of every single datacenter in the PJM area and shows PJM’s fore"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!prZB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Datacenter Model, PJM"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We show below a great example of this. PJM’s own data shows an inability to forecast even one year out. In 2024, the datacenter load forecast was cut by 800MW v"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!U3MK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: PJM, Monitoring Analytics"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Forward Energy Prices Tell a Different Story"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The energy market in PJM remains closer to a real market, with supply and demand balances that return a moving price per MWh of electricity. These prices spike "
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM Western Hub forward prices -- the most liquid benchmark for energy traders’ view of the future -- have increased 12-20% in the 2028 and 2030 windows, with t"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!aZkY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Bloomberg"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "PJM’s supply-side forecast is also simulated"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM’s forecast and methodology are also impacting the supply side of the forecast. A year before the AI Datacenter boom, issues had already begun to rise. As sh"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!0RvI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: PJM"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As shown below, while coal retirements were the biggest drivers, PJM also introduced major methodology changes that caused close to 20GW of supply to disappear."
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!lio-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: PJM"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "How Capacity Prices Hit Household Bills"
+        },
+        {
+          "id": "p038",
+          "index": 38,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2026/27 Base Residual Auction (BRA) clearing price of $329/MW-day represents a tangible cost increase for every load in PJM. These costs are ultimately reco"
+        },
+        {
+          "id": "p039",
+          "index": 39,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To estimate the impact on retail bills, we need the following datapoints:"
+        },
+        {
+          "id": "p040",
+          "index": 40,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Average power consumption per household: in PJM, that’s 880 kWh per month."
+        },
+        {
+          "id": "p041",
+          "index": 41,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· “Load factor”, i.e. average usage to peak usage. Empirical data shows 40% as a common value."
+        },
+        {
+          "id": "p042",
+          "index": 42,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Capacity prices: at $329/MW-day, we can divide this by the number of hours per day, and apply the 0.4 load factor, to get $34/MWh (or 3.4c/kWh)."
+        },
+        {
+          "id": "p043",
+          "index": 43,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Multiplying 3.4 by the monthly consumption (880 kWh) gets us a $29.9 monthly payment. Given the auction has already been cleared, we have near-certainty that ho"
+        },
+        {
+          "id": "p044",
+          "index": 44,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p045",
+          "index": 45,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Energy Model, PJM, Monitoring Analytics"
+        },
+        {
+          "id": "p046",
+          "index": 46,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Let’s now turn our attention to Texas, to see how power prices have responded to the massive AI Datacenter surge."
+        }
+      ]
+    },
+    {
+      "section_id": "04-ercot-same-load-growth-no-pr",
+      "title": "ERCOT: Same Load Growth, No Price Shock",
+      "title_translation": "ERCOT：同等负载增长，无价格冲击",
+      "paragraph_count": 25,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Electric Reliability Council of Texas (ERCOT) is a much simpler market to understand. It runs a unified market mechanism balancing supply and demand based o"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Scarcity Pricing Instead of a Capacity Auction"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Instead of a capacity market driven by a once-a-year auction, ERCOT uses a real-time scarcity price adder based on an Operating Reserve Demand Curve (ORDC). Whe"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!pKKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This scarcity-price structure allows capacity resources that run fewer than 100 hours per year (gas peaker plants, batteries, etc) to pay for themselves, becaus"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Said differently: in PJM, the central operator has the responsibility to analyze the system, determine capacity needs, and guarantees payment to power plant own"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "ERCOT’s Demand Forecast: Extraordinary -- and Largely Ignored"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This difference is particularly interesting as ERCOT also provides demand forecasts. And the outlook is staggering. The 2025 Long-Term Load Forecast, released A"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Dqhd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: ERCOT"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Taken at face value, that forecast implies a structural demand shock on the order of an entire new ERCOT system layered on top of today’s load curve. In reality"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Even ERCOT recognized that their forecast was not realized and changed course. In the May 2025 Capacity, Demand and Reserves report, they applied a deliberate h"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!sY9J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: ERCOT"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But the difference here is that ERCOT’s load forecasts and interconnection queue constraints do not directly drive electricity prices. PJM’s forecasts drive a s"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "More Datacenter Load, Less Scarcity"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The physical system confirms ERCOT’s approach is working. The grid has already experienced record-breaking peaks of over 90 GW in summer 2024 and a spring recor"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The prices that energy traders see have not gone to the moon either. Forward prices -- particularly 2026, 2028, and 2030 contracts -- have increased 11-17% in t"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Bloomberg"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2024 Biennial ORDC Report explains that more online reserves were available than in prior cycles, allowing for steady, calm growth. Solar, wind, batteries, "
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bbjn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: ERCOT, SemiAnalysis annotation"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The forward wholesale price curve tells us that traders believe ERCOT can absorb the growth. They are betting on supply expansion, improved reserves, and SB 6 c"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ERCOT also moves much faster: one of its key advantages over PJM is that it only covers one state and is not subject to FERC jurisdiction. On the other hand, PJ"
+        }
+      ]
+    },
+    {
+      "section_id": "05-winter-storm-fern-paying-for",
+      "title": "Winter Storm Fern: Paying for Reliability vs. Delivering It",
+      "title_translation": "冬季风暴“弗恩”：为可靠性买单 vs 实际交付",
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Winter Storm Fern (January 24-27, 2026) was the first real-world stress test of PJM’s record-high 2025/26 capacity prices and of ERCOT’s market discipline under"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "ERCOT: No Crisis"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ERCOT’s grid held through the January freeze. The Weather Watch issued by the grid operator remained precautionary. Demand ran below forecasts, no emergency pro"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This was the proof that Texas had learned its lesson from the disastrous Winter Storm Uri. The post-Uri reforms -- mandatory winterization of gas production and"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Real-time prices in ERCOT peaked around $300/MWh."
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "PJM: $270/MW-Day Bought a 21 GW Failure"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM’s grid fared dramatically worse. Despite capacity markets having already priced in datacenter load risk through record-high clearing prices, the grid lost a"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Department of Energy was forced to issue emergency orders under Section 202(c) of the Federal Power Act, authorizing grid operators to bypass environmental "
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Real-time electricity prices reflected the operational stress. PJM averaged $700/MWh system-wide, with Virginia’s datacenter-heavy Dominion zone spiking to $1,8"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "That also demonstrates another failure of PJM’s capacity market. In PJM, plants get paid no matter what, even if they fail when needed. In ERCOT, power plants o"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "What the Storm Revealed"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The storm exposed the fundamental disconnect in PJM’s capacity market. High capacity prices had been driven by forecasts of datacenter load growth -- a risk tha"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ERCOT had not priced speculative datacenter growth into elevated capacity charges, yet its mandatory operational reforms delivered grid stability when tested. L"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 35 GW of datacenter backup generation identified by DOE during the storm also demonstrated something important: datacenters can function as grid resources w"
+        }
+      ]
+    },
+    {
+      "section_id": "06-what-comes-next",
+      "title": "What Comes Next",
+      "title_translation": "未来展望",
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Political Fallout Is Already Here"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PJM’s simulation-driven pricing has made the capacity market a political target. After the 2025/26 auction spike, Pennsylvania Governor Josh Shapiro filed a FER"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But the cap didn’t fix the underlying mechanism. The VRR curve, the demand forecast methodology, all remain unchanged. The bandaid also created a new problem: a"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Attempts have been made to change the PJM’s structures, but regulations and considerations are fierce. PJM’s attempt to introduce Non-Capacity-Backed Load (NCBL"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Regulatory Asymmetry"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ERCOT can move faster because its regulatory structure is simpler. ERCOT’s service territory is entirely within Texas, so the Texas legislature and Public Utili"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This structural asymmetry is durable and investable. ERCOT will continue to be able to adapt its market rules and operational requirements faster than PJM can r"
+        }
+      ]
+    },
+    {
+      "section_id": "07-winners-losers-and-the-shift",
+      "title": "Winners & losers and the shifting market bottlenecks",
+      "title_translation": "赢家、输家与不断转移的市场瓶颈",
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This takes us to the next section: winners and losers. A key issue in PJM’s forecast is their inability to see the big picture. Below, we discuss the shifting c"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Paid subscribers can scroll down below the disclaimers to access the rest of the report."
+        }
+      ]
+    },
+    {
+      "section_id": "08-disclaimers",
+      "title": "Disclaimers",
+      "title_translation": "免责声明",
+      "paragraph_count": 0,
+      "paragraphs": []
+    },
+    {
+      "section_id": "09-semianalysis-disclaimer",
+      "title": "SemiAnalysis Disclaimer",
+      "title_translation": "SemiAnalysis免责声明",
+      "paragraph_count": 43,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Analyst Certifications and Independence of Research.\n\nEach of the analysts whose names appear in this report hereby certify that all the views expressed in this"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represen"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any securi"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "No user of this Report may reproduce, modify, copy, distribute, sell, resell, transmit, transfer, license, assign or publish the Report itself or any informatio"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SemiAnalysis LLC, and any logos or marks included in this Report are proprietary materials. The use of such terms and logos and marks without the express writte"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ADMIS Disclaimer"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The data, comments and/or opinions contained herein are provided solely for informational purposes by ADM Investor Services, Inc. (”ADMIS”) and in no way should"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The risk of loss in trading futures contracts or commodity options can be substantial, and investors should carefully consider the inherent risks of such an inv"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Sources & References:"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "1. Semianalysis Datacenter Industry Model"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "2. https://www.pjm.com/-/media/DotCom/markets-ops/rpm/rpm-auction-info/2025-2026/2025-2026-base-residual-auction-report.pdf"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "3. https://www.pjm.com/-/media/DotCom/markets-ops/rpm/rpm-auction-info/2026-2027/2026-2027-bra-report.pdf"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "4. https://insidelines.pjm.com/maintaining-grid-reliability-through-highest-peaks-in-a-decade/"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "5. https://www.monitoringanalytics.com/reports/reports/2025/IMM_Analysis_of_the_20252026_RPM_Base_Residual_Auction_Part_G_20250603_Revised.pdf"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "6. https://www.pa.gov/governor/newsroom/2025-press-releases/gov-shapiro-s-legal-action-again-averts-historic-price-spike-acr"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "7. https://www.ercot.com/files/docs/2025/04/29/Long-term-Load-Forecast-RPG.pdf"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "8. https://www.ercot.com/files/docs/2025/05/15/CapacityDemandandReservesReport_May2025.pdf"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "9. https://www.ercot.com/files/docs/2025/06/17/ERCOT-Monthly-Operational-Overview-May-2025.pdf"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "10. https://www.ercot.com/files/docs/2024/10/31/2024-biennial-ercot-report-on-the-ordc-20241031.pdf"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "11. https://www.bakerbotts.com/thought-leadership/publications/2025/july/texas-senate-bill-6-understanding-the-impacts-to-large-loads-and-co-located-generation"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "12. https://www.spglobal.com/commodity-insights/en/news-research/latest-news/electric-power/042325-outlook-2025-texas-summer-power-prices-may-top-2024-levels-on"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "13. https://www.rtoinsider.com/121911-pjm-capacity-auction-clears-max-price-falls-short-reliability-requirement/"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "14. https://elibrary.ferc.gov/eLibrary/docinfo?accession_number=20241230-5225"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "15. https://www.reuters.com/business/energy/power-prices-surge-winter-storm-spikes-demand-us-data-center-alley-2026-01-25/"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "16. https://www.usnews.com/news/top-news/articles/2026-01-25/power-prices-surge-as-winter-storm-spikes-demand-in-us-data-center-alley"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "17. https://www.ercot.com/files/docs/2026/01/28/ERCOT-Post-Event-Report-Winter-Storm-Fern.pdf"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "18. https://www.utilitydive.com/news/doe-issues-emergency-orders-for-texas-new-england-and-pjm-markets-Fern-reliability/810464/"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "19. https://www.publicpower.org/periodical/article/department-energy-asks-grid-operators-be-prepared-make-backup-generation-resources-available-needed"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since mid-2025, our Datacenter Industry Model has shown a huge flip in market constraints. While energy used to be the core bottleneck, we are now seeing more “"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!p39e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Datacenter Industry Model"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The rise of onsite gas has dramatically alleviated the energy constraints. Over a month ago, we explained that the market is already seeing 12 different equipme"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!oMuQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: ERCOT"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The constraint is also shifting from energy to construction. Data from ERCOT shows that “approved to energize” campuses are not even using their full draw – typ"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "All of this means that many utility forecasts in 2027 and beyond are overstated. Even if utilities claim their forecasts are backed by ESAs and LOAs and backed "
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As our recent institutional-only article “Nvidia as the Central Bank of AI” called out, hyperscalers are using power to squeeze out other players from the marke"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Lastly, in 2027, we see the overall constraint shifting from power to silicon. The industry cannot procure enough memory and logic and more shortages are ahead."
+        },
+        {
+          "id": "p038",
+          "index": 38,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As such, we think energy constraints are now alleviating, which means downside risk for IPPs, overexposed to core grid constraints."
+        },
+        {
+          "id": "p039",
+          "index": 39,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!OgV8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p040",
+          "index": 40,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model"
+        },
+        {
+          "id": "p041",
+          "index": 41,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For cryptominers and datacenter developers, this means more competition. Grid power remains premium, but the delivery timeline is often unreliable. For example,"
+        },
+        {
+          "id": "p042",
+          "index": 42,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "##"
+        }
+      ]
+    }
+  ]
+}

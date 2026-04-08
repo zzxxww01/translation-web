@@ -1,0 +1,83 @@
+{
+  "section_id": "13-amd-venice-architecture-change",
+  "new_terms": [
+    {
+      "term": "MRDIMM",
+      "suggested_translation": "多路复用双列直插式内存模块 (MRDIMM)",
+      "context": "16-channel MRDIMM-12800 gives 1.64TB/s",
+      "confidence": 0.95
+    },
+    {
+      "term": "Integrated Passive Devices (IPD)",
+      "suggested_translation": "集成无源器件 (IPD)",
+      "context": "These are Integrated Passive Devices (IPD) that help smooth power delivery",
+      "confidence": 0.95
+    },
+    {
+      "term": "shoreline",
+      "suggested_translation": "边缘布线空间 (Shoreline)",
+      "context": "The additional shoreline required for the CCD links takes up additional width",
+      "confidence": 0.9
+    },
+    {
+      "term": "Instructions per Clock (IPC)",
+      "suggested_translation": "每时钟周期指令数 (IPC)",
+      "context": "higher Instructions per Clock (IPC)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bit Matrix Multiplication (BMM)",
+      "suggested_translation": "位矩阵乘法 (BMM)",
+      "context": "a new AVX512\\BMM instruction for Bit Matrix Multiplication",
+      "confidence": 0.95
+    },
+    {
+      "term": "floating point unit (FPU)",
+      "suggested_translation": "浮点单元 (FPU)",
+      "context": "on the CPU’s floating point unit",
+      "confidence": 0.95
+    },
+    {
+      "term": "fanout",
+      "suggested_translation": "扇出",
+      "context": "saturated with memory channel fanout.",
+      "confidence": 0.95
+    },
+    {
+      "term": "VVNI",
+      "suggested_translation": "矢量神经网络指令 (VNNI/VVNI)",
+      "context": "AVX\\VVNI\\INT8",
+      "confidence": 0.9
+    },
+    {
+      "term": "DDR5",
+      "suggested_translation": "DDR5",
+      "context": "where the DDR5 interface exits.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SP7",
+      "suggested_translation": "SP7 (插槽)",
+      "context": "where the SP7 package routing is saturated",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "emib": "EMIB",
+    "core compute die (ccd)": "CCD",
+    "hbm": "HBM",
+    "non uniform memory access (numa)": "NUMA",
+    "l3 cache": "L3缓存",
+    "sku": "SKU",
+    "head node": "头节点",
+    "llm": "LLM",
+    "granite rapids": "Granite Rapids",
+    "diamond rapids": "Diamond Rapids",
+    "epyc": "EPYC",
+    "tsmc": "TSMC",
+    "amd": "AMD",
+    "intel": "Intel"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:17:21.474533"
+}

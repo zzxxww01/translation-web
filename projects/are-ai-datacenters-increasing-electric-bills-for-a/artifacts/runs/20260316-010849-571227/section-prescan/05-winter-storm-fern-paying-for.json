@@ -1,0 +1,48 @@
+{
+  "section_id": "05-winter-storm-fern-paying-for",
+  "new_terms": [
+    {
+      "term": "Winter Storm Fern",
+      "suggested_translation": "冬季风暴 Fern",
+      "context": "A hypothetical or future-dated winter storm event used as a case study.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Weather Watch",
+      "suggested_translation": "天气预警",
+      "context": "A specific precautionary alert level issued by ERCOT.",
+      "confidence": 0.9
+    },
+    {
+      "term": "winterization",
+      "suggested_translation": "防寒准备/冬季化改造",
+      "context": "Mandatory upgrades to gas and electric systems to withstand extreme cold.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Section 202(c) of the Federal Power Act",
+      "suggested_translation": "《联邦电力法》第 202(c) 条",
+      "context": "Legal authority allowing DOE to issue emergency orders to bypass environmental limits.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Dominion zone",
+      "suggested_translation": "Dominion 分区",
+      "context": "A specific, datacenter-heavy pricing zone within the PJM market.",
+      "confidence": 0.9
+    },
+    {
+      "term": "backup generation",
+      "suggested_translation": "备用发电",
+      "context": "On-site power sources at datacenters used as a grid reliability buffer.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "capacity market": "容量市场",
+    "clearing price": "出清价格",
+    "base residual auction (bra)": "基本剩余拍卖 (BRA)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:11:07.797767"
+}

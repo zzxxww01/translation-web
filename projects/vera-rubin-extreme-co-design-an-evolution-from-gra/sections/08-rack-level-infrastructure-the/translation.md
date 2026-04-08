@@ -1,0 +1,35 @@
+除了重新设计的无风扇前置机箱和 100% 液冷算力托盘外，在关于 Vera Rubin 散热架构的讨论中，最引人注目的点是黄仁勋（Jensen）针对冷却液/进水温度以及冷水机组（chiller）使用的评论。对于许多人（更广泛地说是对“市场先生”而言！），Vera Rubin 可以在 45°C 的进水温度下运行，并可能避开基于机械压缩机的冷水机组，这一表态被散热供应商生态系统中的大部分成员视为一个重大意外。相反，我们认为这只是现有趋势的延续。
+
+Vera Rubin 将能够在 45°C 的进水温度下运行，但 Blackwell 实际上已经能够支持 40°C 以上的进水温度（例如参考 Supermicro 的 DLC-2 系统）。联想（Lenovo）和 HPE 等主要系统供应商自 2025 年初以来也一直在讨论运行在 45°C 下的 100% 液冷架构。2024 年，HPE 发布了一款基于全液冷的工业级冷却系统，而类似的方法在高性能计算（HPC）领域早已应用多年。联想在 2025 年 OCP 峰会上讨论了其下一代 Neptune 液冷解决方案，该方案采用全液冷设计，同样使用 45°C 的温水。
+
+https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png
+
+来源： HPE
+
+以 2025 年 9 月展示的施耐德（Schneider）GB300 参考设计 111 为例。在该参考设计中，数据中心采用双回路架构：一个专用于风冷（供应风墙）的冷冻水回路，以及一个专用于液冷的独立高温回路。在液冷侧，技术冷却系统（TCS）以约 40°C 的温度将冷却液循环至冷板，并以更高温度回流；而冷液分配单元（CDU）将热量传递至设施水回路，该回路进入 CDU 的温度约为 37°C。
+
+https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png
+
+来源： Schneider
+
+因此，45°C 冷却并非完全的新鲜事物。即便具备这种能力，大多数部署 Blackwell 的运营商目前仍按 20-30°C 的水温进行设计。粗略估算，目前 Blackwell 的进水温度大约在室温水平，出水温度在 40-50°C 范围内。只有少数运营商（如 Firmus）在气候条件允许的情况下，通过高度优化的节能器（economizer）设计，甚至在 GB200 系统中也去掉了回路中的冷水机组。避开机械冷却中的压缩环节可以带来显著的能效提升。
+
+鉴于 Vera Rubin 的功耗和发热量大约是 Blackwell 的两倍，英伟达（NVIDIA）将如何冷却这个散热怪兽？在回答之前，值得增加另一个考量因素。虽然较高的进水温度在提高能源效率的同时，也会随着进水温度接近最高出水温度（系统的上限温度）且温差（delta-T）收窄而使冷却变得更具挑战性。由于温差减小，需要更高的水流/冷却液流量才能带走相同热量。在 Blackwell 参考架构中，上限温度约为 65°C（例如参见维谛技术（Vertiv）的 GB200 NVL72 参考设计）。
+
+https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png
+
+来源： Vertiv
+
+尽管英伟达最初并未正式发布 Vera Rubin 液冷系统的完整规格，但我们认为该平台将支持高达 65°C 的最高冷却液回流温度。这符合英伟达的热水运行范围，虽然对温差的具体影响取决于所选的供水设定点和流量控制策略，但可以预见温差将略微收窄。压力范围预计与 GB200 相比保持不变，最大工作压力为 72 psig（5 bar），最小爆破压力为 217 psig（15 bar），符合 OCP 的 MGX 机柜级液冷规范。
+
+https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png
+
+来源： Nvidia VR NVL72 Component BoM and Power Budget Model
+
+在实际操作中，冷却遵循简单的物理原理。要冷却一个系统，必须通过回路输送温度和压力适宜且流量充足的水/冷却液。如果要提高冷量分配单元（CDU）的冷却能力，就需要在管理压力的同时增加流量。在这种情况下，这意味着流量需要增加约 2.0-2.5 倍，具体取决于运营商对出水温度的实际推高程度。
+
+英伟达表示，Vera Rubin 提高了液体流量，并在不增加 CDU 压头或引入额外冷却复杂性及成本的情况下，实现了相比 Blackwell 接近两倍的散热性能。英伟达通过优化整个液压路径实现了这一目标。我们预计将采用更大的快速接头（Quick Disconnect (QD/MQD)）以支持更高的流量，并更新分液歧管和管道。如下图所示，供应商路线图表明，至少对于下一代机柜，2 英寸的快速接头应足以容纳更高的流量，同时保持在压力和流速限制范围内。
+
+https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png
+
+来源： CoolIT

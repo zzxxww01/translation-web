@@ -1,0 +1,57 @@
+{
+  "section_id": "23-wideep",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 8.5,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "annotation",
+        "severity": "medium",
+        "original_text": "...requires an all-reduce across all GPUs...",
+        "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。",
+        "why_it_matters": "明显的格式冗余，影响阅读体验和文章的专业度。",
+        "suggestion": "删去多余的括注，保留为“全归约 (All-reduce)”。"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "annotation",
+        "severity": "medium",
+        "original_text": "...tokens are dispatched to the appropriate GPUs via all-to-all communication.",
+        "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。",
+        "why_it_matters": "格式冗余打断了硬核技术文章的阅读节奏。",
+        "suggestion": "删去多余的括注，保留为“全对全 (All-to-all)”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "annotation|readability",
+        "severity": "medium",
+        "original_text": "Wide expert parallelism (WideEP) takes a different approach by scaling EP across nodes...",
+        "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。",
+        "why_it_matters": "严重违反了术语标注的简洁性原则，导致句子开头臃肿不堪；异常空格也破坏了中文排版的连贯性。",
+        "suggestion": "改为“宽专家并行 (WideEP) 采取了截然不同的策略，它选择跨节点扩展 EP……”"
+      },
+      {
+        "paragraph_index": 12,
+        "issue_type": "accuracy|terminology",
+        "severity": "high",
+        "original_text": "Within each TP group, the attention projections... Across the full cluster, the 256 experts are still distributed one-per-4-GPUs as before.",
+        "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。",
+        "why_it_matters": "术语不一致会降低专业感；而未纠正原文的明显数学笔误，会导致硬核技术读者产生困惑，严重损害文章的权威性。",
+        "suggestion": "将“注意力投射”统一为“注意力投影”；作为高级编辑，应纠正原文笔误，将后半句改为“以每张 GPU 分配 4 个专家的形式分布”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "tone|readability",
+        "severity": "low",
+        "original_text": "EP captures most of the memory savings...",
+        "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。",
+        "why_it_matters": "虽然符合硬核分析师的语调，但动宾搭配不够地道，略带翻译腔。",
+        "suggestion": "建议改为“EP 充分释放了这部分内存空间”或“EP 实现了最大程度的内存节省”。"
+      }
+    ]
+  }
+}

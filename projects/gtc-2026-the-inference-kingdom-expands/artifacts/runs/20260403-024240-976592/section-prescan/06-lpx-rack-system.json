@@ -1,0 +1,55 @@
+{
+  "section_id": "06-lpx-rack-system",
+  "new_terms": [
+    {
+      "term": "Spectrum-X",
+      "suggested_translation": "Spectrum-X",
+      "context": "Nvidia's ethernet platform for AI, used in the LPX rack system.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Granite Rapids",
+      "suggested_translation": "Granite Rapids",
+      "context": "Intel's host CPU architecture used in the LPX compute tray.",
+      "confidence": 0.95
+    },
+    {
+      "term": "BlueField-4",
+      "suggested_translation": "BlueField-4",
+      "context": "Nvidia's next-generation front-end DPU/NIC module.",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-out fabric",
+      "suggested_translation": "横向扩展网络织物",
+      "context": "The networking layer used to connect multiple nodes/racks, distinct from scale-up.",
+      "confidence": 0.9
+    },
+    {
+      "term": "backplane",
+      "suggested_translation": "背板",
+      "context": "The physical interconnect board within the node for FPGA and LPU communication.",
+      "confidence": 0.9
+    },
+    {
+      "term": "OSFP cages",
+      "suggested_translation": "OSFP 笼子",
+      "context": "Mechanical housing on the front panel for OSFP optical modules.",
+      "confidence": 0.85
+    },
+    {
+      "term": "intra-node connections",
+      "suggested_translation": "节点内连接",
+      "context": "Connections between components within a single compute tray.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "belly-to-belly": "正反面贴装",
+    "lpx compute tray": "LPX 计算托盘",
+    "disaggregated decode system": "解耦解码系统",
+    "fabric expansion logic fpgas": "织物扩展逻辑 FPGA"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:53:37.552033"
+}

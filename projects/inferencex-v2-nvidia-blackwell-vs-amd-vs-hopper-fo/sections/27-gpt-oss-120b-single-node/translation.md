@@ -1,0 +1,19 @@
+MI300X、MI325X、H200 和 H100 扎堆在吞吐量-交互性曲线图的左下方，表明它们的性能取舍大同小异，英伟达总体上占据微弱优势。再上一个台阶是 MI355X，在同等交互性下，其单 GPU 的 token 吞吐量比第一梯队高出两倍有余。在 MI355X 阵营中，ATOM 将曲线向低交互性、高吞吐量的方向拉扯，这表明它重保峰值吞吐量，而非单用户响应速度。
+
+凌驾于该梯队之上的是英伟达的 B200 和 GB200，它们在整条曲线上全方位碾压 MI355X。尽管 B200 和 GB200 搭载相同的 Blackwell 计算裸片，但 GB200 推高了吞吐量-交互性曲线。这是因为其平台与 Serving 栈在集群规模下削减了非计算瓶颈（互连/拓扑、CPU-GPU 耦合以及运行时调度），进而转化为高效的横向扩展 (Scale-out)，并摊薄了单 token 的运行开销。
+
+https://substackcdn.com/image/fetch/$s_!euhc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F478b3a9a-c57d-4766-bde1-c3ee1fef550a_2068x1178.png
+
+来源：SemiAnalysis InferenceX
+
+如果把成本因素纳入考量，MI355X 的竞争力便凸显出来：它在高吞吐量区间反超了 B200。然而，GB200 依然稳坐成本最低的头把交椅。
+
+https://substackcdn.com/image/fetch/$s_!wliK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F028672d5-2c24-4dbd-974d-9f50d163df27_1796x1182.png
+
+来源：SemiAnalysis InferenceX
+
+目光转回 B200 与 GB200 NVL72 的对决，NVL72 的威力显而易见。前文我们已经探讨过，GB200 NVL72 具备 72 块 GPU 的超大纵向扩展 World Size，而 B200 仅为 8 块 GPU。在约 100 tok/s/user 的交互性区间内，前者的单块 GPU 输出 token 吞吐量实现翻倍有余，这充分印证了 NVL72 更大纵向扩展域的强悍实力。
+
+https://substackcdn.com/image/fetch/$s_!J3Ls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0186cfbc-1b42-46ae-ae1a-0d7791afcb20_2081x1306.png
+
+来源：SemiAnalysis InferenceX

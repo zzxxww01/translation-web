@@ -1,0 +1,22 @@
+{
+  "section_id": "16-groq-lpu-decode-rack",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.205,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "自从英伟达（NVIDIA）在 2025 年 12 月~~收购了 Groq~~ 与 Groq 签署了技术授权协议并聘用了其核心人员以来，关于英伟达将如何具体应用 Groq 技术的猜测便层出不穷。我们认为，英伟达将在 GTC 2026 上推出一款全新的 LPU 机柜。该 LPU 机柜旨在与英伟达 GPU 配合使用，共同进行推理。",
+    "鉴于 CPX 专为推理 Pre-fill 环节设计，而 LPU 强调更高带宽的 SRAM，因此 LPU 系统是针对推理 Decode 环节（Decode Loop）设计的。这是以牺牲总吞吐量为代价的，因此该 LPU Decode 系统可能被定位为服务那些对“每用户每秒 Token 数”要求极高的请求，而用户则需支付更高的单位 Token 价格，以补偿更高的服务成本。",
+    "它将被设计为与处理低交互性请求 Decode 任务的英伟达 GPU 并行运行。我们已向 Accelerator Model 客户分享了更多系统规格细节，并重点强调了供应链中可能成为巨大受益者的一个环节。",
+    "我们在此分享的部分细节包括：每个机柜包含 256 个 LPU，且采用的是基于三星（Samsung）4 纳米制程节点的第三代 Groq 芯片（跳过了第二代）。我们在 Accelerator Model 简报中 分享了一个对增长、市场份额以及拓扑结构产生影响的重要供应链细节。"
+  ]
+}

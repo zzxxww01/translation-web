@@ -1,0 +1,29 @@
+{
+  "section_id": "07-tracking-improvements-over-tim",
+  "new_terms": [
+    {
+      "term": "cadence",
+      "suggested_translation": "发布周期/频率",
+      "context": "released on an O(yearly) cadence",
+      "confidence": 0.9
+    },
+    {
+      "term": "recipes",
+      "suggested_translation": "配置方案 (Recipes)",
+      "context": "constantly update recipes with the latest and greatest software improvements",
+      "confidence": 0.85
+    },
+    {
+      "term": "O(yearly) / O(weekly)",
+      "suggested_translation": "年级规模 / 周级规模",
+      "context": "released on an O(yearly) cadence, software releases happen on an O(weekly) cadence",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "inferencex": "InferenceX",
+    "benchmark": "基准测试"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:04:05.025530"
+}

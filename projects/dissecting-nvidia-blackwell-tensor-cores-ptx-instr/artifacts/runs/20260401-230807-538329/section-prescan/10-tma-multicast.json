@@ -1,0 +1,56 @@
+{
+  "section_id": "10-tma-multicast",
+  "new_terms": [
+    {
+      "term": "multicast",
+      "suggested_translation": "多播 (Multicast)",
+      "context": "TMA supports a multicast mode where a single load copies data to multiple SMs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "L2 Request Coalescer (LRC)",
+      "suggested_translation": "L2 请求合并器 (LRC)",
+      "context": "The unit responsible for serving TMA multicast requests and coalescing read requests.",
+      "confidence": 0.98
+    },
+    {
+      "term": "CTA mask",
+      "suggested_translation": "CTA 掩码",
+      "context": "Specifies the target SMs for a multicast operation.",
+      "confidence": 0.95
+    },
+    {
+      "term": "explicit multicast",
+      "suggested_translation": "显式多播",
+      "context": "Multicast behavior triggered by specific TMA instructions.",
+      "confidence": 0.9
+    },
+    {
+      "term": "implicit multicast",
+      "suggested_translation": "隐式多播",
+      "context": "Hardware-level coalescing of independent loads to the same data address.",
+      "confidence": 0.9
+    },
+    {
+      "term": "miss status holding register (MSHR)",
+      "suggested_translation": "缺失状态保持寄存器 (MSHR)",
+      "context": "Hardware mechanism used to track outstanding cache misses, compared here to implicit multicast.",
+      "confidence": 0.95
+    },
+    {
+      "term": "dual-GEMM pattern",
+      "suggested_translation": "双 GEMM 模式",
+      "context": "A pattern where two GEMM operations share one input matrix, common in SwiGLU.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "tensor memory accelerator (tma)": "TMA",
+    "shared memory (smem)": "SMEM",
+    "cooperative thread array (cta)": "CTA",
+    "sm": "SM",
+    "l2": "L2 缓存"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:26:27.549333"
+}

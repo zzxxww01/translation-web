@@ -1,0 +1,50 @@
+{
+  "section_id": "04-ercot-same-load-growth-no-pr",
+  "new_terms": [
+    {
+      "term": "Operating Reserve Demand Curve (ORDC)",
+      "suggested_translation": "运营备用需求曲线",
+      "context": "ERCOT's mechanism for calculating real-time scarcity price adders based on grid reserves.",
+      "confidence": 0.95
+    },
+    {
+      "term": "gas peaker plants",
+      "suggested_translation": "燃气调峰电厂",
+      "context": "Power plants that run only during high demand (scarcity) periods.",
+      "confidence": 0.9
+    },
+    {
+      "term": "haircut",
+      "suggested_translation": "折减 / 比例削减",
+      "context": "A deliberate discount applied to speculative demand forecasts or developer claims.",
+      "confidence": 0.85
+    },
+    {
+      "term": "resource adequacy",
+      "suggested_translation": "资源充足性",
+      "context": "Studies and planning to ensure the grid has enough capacity to meet long-term demand.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SB 6 curtailment authority",
+      "suggested_translation": "SB 6 削减授权",
+      "context": "Refers to Texas Senate Bill 6, giving authority to curtail load or manage reserves.",
+      "confidence": 0.8
+    },
+    {
+      "term": "transmission service providers",
+      "suggested_translation": "输电服务提供商",
+      "context": "Entities in Texas responsible for the physical transmission of electricity.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "scarcity pricing": "稀缺定价",
+    "capacity market": "容量市场",
+    "energy-only market": "纯电量市场",
+    "load growth": "负荷增长",
+    "interconnection queue": "并网队列"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:10:58.946922"
+}

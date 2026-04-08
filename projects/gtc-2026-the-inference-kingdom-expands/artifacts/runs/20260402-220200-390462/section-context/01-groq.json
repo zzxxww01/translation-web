@@ -1,0 +1,284 @@
+{
+  "section_id": "01-groq",
+  "section_title": "Groq",
+  "section_title_translation": "Groq",
+  "section_position": "2/13",
+  "article_theme": "An in-depth technical and supply chain analysis of Nvidia's GTC 2026 announcements, focusing on the integration of Groq's LPU via Attention FFN Disaggregation (AFD), the evolution of rack architectures (Kyber, LPX), and the roadmap for Co-Packaged Optics (CPO) in massive AI clusters.",
+  "structure_summary": "The article flows from a high-level GTC 2026 overview to a deep dive into Groq's LPU architecture and its symbiotic integration with GPUs (AFD). It then zooms out to physical infrastructure, detailing the LPX rack, internal/external networking, and Nvidia's broader CPO roadmap. Finally, it covers storage architectures (STX/CMX) and concludes with specific supply chain impacts.",
+  "target_audience": "AI hardware engineers, semiconductor industry professionals, supply chain analysts, and tech investors.",
+  "translation_voice": "Professional tech-industry Chinese, utilizing standard mainland semiconductor and networking jargon, favoring concise and logical sentence structures over literal translations.",
+  "previous_section_title": "Introduction",
+  "next_section_title": "LPU chip",
+  "section_role": "Provides the business and strategic context for Nvidia's integration of Groq's technology, explaining the regulatory maneuvering and economic rationale.",
+  "translation_notes": [
+    "Carefully translate 'strictly speaking... functions almost as an acquisition' to reflect the legal and regulatory nuance accurately.",
+    "Avoid translating 'serve tokens' as physical serving; use standard AI inference terminology (e.g., 生成/处理 token)."
+  ],
+  "key_points": [
+    "Nvidia's $20B payment to Groq functions as an acquisition but is structured as a licensing/hiring deal to bypass regulatory scrutiny.",
+    "The standalone Groq LPU is uneconomical for token serving at scale, but its speed commands a premium.",
+    "Nvidia is rapidly integrating the LPU into the Vera Rubin inference stack."
+  ],
+  "guidelines": [
+    "Maintain strict accuracy for semiconductor and AI hardware terminology. Use industry-standard terms such as '流片' for tapeout, '掩膜版尺寸' for reticle size, and '串行器/解串器' for SerDes.",
+    "For AI networking and distributed systems, accurately translate 'world size' as '集群规模' or '并行规模', never as '世界大小'. Expand shorthand like 'pluggables' to '可插拔光模块'.",
+    "Restructure complex, modifier-heavy English sentences—especially those detailing hardware specs, networking topologies, and bandwidth calculations—into shorter, sequential Chinese clauses to ensure native paragraph flow.",
+    "When introducing proprietary acronyms (e.g., AFD, CPO, MBOM), use the format 'Chinese Translation (English Acronym)' on the first occurrence, and use the acronym exclusively thereafter.",
+    "Pay close attention to hardware physical descriptions. Translate spatial idioms like 'belly-to-belly' as 'PCB正反面对贴安装' to reflect actual electronic manufacturing practices.",
+    "Ensure the tone remains objective and analytical, reflecting a deep insider understanding of the supply chain and architectural trade-offs without marketing fluff."
+  ],
+  "article_challenges": [
+    {
+      "location": "LPU Network (Paragraph 1 & 2)",
+      "issue": "Complex networking bandwidth calculations and routing paths (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+      "suggestion": "Maintain the exact mathematical formulas. Break down the surrounding explanatory sentences into short, sequential Chinese clauses to ensure the logic of the data flow is crystal clear."
+    },
+    {
+      "location": "GTC 2026 Supply Chain Implications (Mid-board Optics section)",
+      "issue": "Detailed physical descriptions of hardware layouts (e.g., 'MBOM which then connects to the PCB via a land grid array (LGA) socket').",
+      "suggestion": "Ensure precise mechanical and electrical engineering terminology is used. For example, use '平面网格阵列 (LGA) 插座' and '前面板 (faceplate)'."
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Attention FFN Disaggregation (AFD)",
+      "term": "Attention FFN Disaggregation (AFD)",
+      "translation": "注意力与前馈网络解聚合",
+      "strategy": "first_annotate",
+      "note": "The separation of attention mechanisms and feed-forward networks into different hardware (GPUs and LPUs) to optimize inference.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Co-Packaged Optics (CPO)",
+      "term": "Co-Packaged Optics (CPO)",
+      "translation": "共封装光学",
+      "strategy": "first_annotate",
+      "note": "Integration of optical communication components directly alongside the computing chip or switch ASIC.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "World size",
+      "term": "World size",
+      "translation": "集群规模",
+      "strategy": "translate",
+      "note": "The total number of GPUs/accelerators acting together in a single coordinated cluster for training or inference.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Belly-to-belly",
+      "term": "Belly-to-belly",
+      "translation": "正反面对贴安装",
+      "strategy": "translate",
+      "note": "Mounting components directly opposite each other on both sides of a PCB.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Pluggables",
+      "term": "Pluggables",
+      "translation": "可插拔光模块",
+      "strategy": "translate",
+      "note": "Pluggable optical transceivers used in networking.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Tapeout",
+      "term": "Tapeout",
+      "translation": "流片",
+      "strategy": "translate",
+      "note": "The final result of the design process for integrated circuits before they are sent for manufacturing.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Reticle size",
+      "term": "Reticle size",
+      "translation": "掩膜版尺寸",
+      "strategy": "translate",
+      "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Midboard Optical Module (MBOM)",
+      "term": "Midboard Optical Module (MBOM)",
+      "translation": "板中光学模块",
+      "strategy": "first_annotate",
+      "note": "An optical module placed directly on the motherboard rather than at the edge/faceplate.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "LPU",
+      "term": "LPU",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "Language Processing Unit, Groq's proprietary chip architecture.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "etching",
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "deposition",
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "CMP",
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "note": "Chemical Mechanical Planarization",
+      "first_occurrence_note": true
+    }
+  ]
+}

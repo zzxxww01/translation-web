@@ -1,0 +1,7 @@
+在 2026 年消费电子展（CES 2026）上，黄仁勋提到，凭借精简的无线缆设计和自动化组装流程，算力托盘的组装时间已从 Blackwell 时代的 2 小时大幅缩减至 Rubin 时代的 5 分钟。目前，针对 Rubin 平台，仅有三家具备自动化能力的 L10 级算力托盘组装合作伙伴：富士康（Foxconn）、广达（Quanta）和纬创（Wistron）。
+
+https://substackcdn.com/image/fetch/$s_!0MXd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac6c92de-ef84-4ae2-917b-355a6c1a7930_5189x3373.png
+
+来源： Nvidia VR NVL72 Component BoM and Power Budget Model
+
+在 L6 级板卡级 PCBA 层面，纬创和富士康是 Blackwell 与 Rubin 的主要供应商。在 L10 级，Blackwell 拥有众多不同的算力托盘制造商，因为这些厂商从英伟达购买 Bianca 板卡后再销售给其客户。而对于 Rubin，目前仅有三家供应商具备实现 Rubin 算力托盘自动化的能力。规模较小的 ODM 或 OEM 厂商，要么选择在上述三家自动化供应商处代工其算力托盘，要么在内部进行非自动化组装。尽管效率较低，但得益于无缝的模块化设计，即使是非自动化的算力托盘组装，难度也比 Blackwell 时代要低得多。随后在 L11 级，各家 ODM/OEM 将算力托盘组装进机柜。

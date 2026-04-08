@@ -1,0 +1,59 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "framemog",
+      "suggested_translation": "帧级碾压 / 降维打击",
+      "context": "Used to describe NVIDIA's performance dominance over competitors (from internet slang 'mogging').",
+      "confidence": 0.95
+    },
+    {
+      "term": "jestermaxxing",
+      "suggested_translation": "沦为笑柄 / 极度滑稽",
+      "context": "Used to describe a product (Hopper) looking obsolete or ridiculous compared to a newer generation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "集成式服务",
+      "context": "The traditional serving architecture where prefill and decode happen on the same node, opposite of disaggregated serving.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学",
+      "context": "A recurring industry joke/term regarding Jensen Huang's aggressive performance or cost-saving calculations.",
+      "confidence": 0.9
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "最先进的 / 业界领先的",
+      "context": "Abbreviation for State-of-the-Art inference optimizations.",
+      "confidence": 0.98
+    },
+    {
+      "term": "picoJoules per token",
+      "suggested_translation": "每Token皮焦耳 (pJ/token)",
+      "context": "A metric for measuring the energy efficiency of AI inference.",
+      "confidence": 0.95
+    },
+    {
+      "term": "B300",
+      "suggested_translation": "B300",
+      "context": "A specific NVIDIA Blackwell GPU SKU mentioned alongside B200.",
+      "confidence": 0.98
+    },
+    {
+      "term": "GTC",
+      "suggested_translation": "GTC大会",
+      "context": "NVIDIA's GPU Technology Conference.",
+      "confidence": 0.98
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "disagg prefill",
+    "wide expert parallelism": "wideEP"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T19:54:52.826071"
+}

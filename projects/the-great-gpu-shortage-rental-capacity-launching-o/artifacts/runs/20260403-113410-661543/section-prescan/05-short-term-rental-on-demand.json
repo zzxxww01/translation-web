@@ -1,0 +1,44 @@
+{
+  "section_id": "05-short-term-rental-on-demand",
+  "new_terms": [
+    {
+      "term": "residual capacity",
+      "suggested_translation": "剩余算力",
+      "context": "Short-term rentals represent residual capacity not locked in long-term contracts.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Runpod",
+      "suggested_translation": "Runpod",
+      "context": "A specific Neocloud provider mentioned as a market leader in flexible capacity.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Lambda",
+      "suggested_translation": "Lambda",
+      "context": "A Neocloud provider (Lambda Labs) focused on on-demand and spot GPU capacity.",
+      "confidence": 1.0
+    },
+    {
+      "term": "gapping up or down",
+      "suggested_translation": "跳空上涨或下跌",
+      "context": "Describes sudden, non-continuous price adjustments in the on-demand market.",
+      "confidence": 0.85
+    },
+    {
+      "term": "high frequency indicator",
+      "suggested_translation": "高频指标",
+      "context": "Utilization is described as the best high frequency indicator of demand.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "on-demand": "按需",
+    "spot": "竞价",
+    "neocloud": "新兴算力云厂商",
+    "utilization": "利用率",
+    "term structure": "期限结构"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:08:03.211182"
+}

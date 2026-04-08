@@ -1,0 +1,58 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "RL",
+      "suggested_translation": "强化学习",
+      "context": "RL and Agent Usage / reinforcement learning",
+      "confidence": 1.0
+    },
+    {
+      "term": "ARM",
+      "suggested_translation": "ARM",
+      "context": "ARM-based datacenter CPUs",
+      "confidence": 1.0
+    },
+    {
+      "term": "DCAI",
+      "suggested_translation": "数据中心与人工智能事业部",
+      "context": "Intel Q4’25 DCAI Revenue",
+      "confidence": 0.95
+    },
+    {
+      "term": "neoclouds",
+      "suggested_translation": "新兴云厂商",
+      "context": "hyperscalers and neoclouds focused on GPUs",
+      "confidence": 0.9
+    },
+    {
+      "term": "vibe coding",
+      "suggested_translation": "Vibe Coding (直觉编程)",
+      "context": "reinforcement learning and vibe coding’s incredible demand on CPUs",
+      "confidence": 0.85
+    },
+    {
+      "term": "merchant ARM silicon",
+      "suggested_translation": "商业化ARM芯片",
+      "context": "Ampere Computing’s merchant ARM silicon bid",
+      "confidence": 0.9
+    },
+    {
+      "term": "Kunpeng",
+      "suggested_translation": "鲲鹏",
+      "context": "Huawei’s home grown Kunpeng CPU efforts",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云厂商",
+    "context memory storage": "上下文内存存储",
+    "capex": "资本支出",
+    "foundry": "晶圆代工厂",
+    "wafer": "晶圆",
+    "inference": "推理",
+    "training": "训练"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:00:43.240880"
+}

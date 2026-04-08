@@ -29,6 +29,8 @@ def convert_html_to_markdown_text(
     )
     project_metadata = ProjectArticleMetadata(
         authors=[author.name for author in metadata.authors],
+        byline_markdown=metadata.byline_markdown or None,
+        access_text=metadata.access_text or None,
         published_date=metadata.date_text or None,
         subtitle=metadata.subtitle or None,
         publication=metadata.publication or None,

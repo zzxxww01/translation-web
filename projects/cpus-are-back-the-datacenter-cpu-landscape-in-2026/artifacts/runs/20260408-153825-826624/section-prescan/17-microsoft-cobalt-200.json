@@ -1,0 +1,66 @@
+{
+  "section_id": "17-microsoft-cobalt-200",
+  "new_terms": [
+    {
+      "term": "Maia 200",
+      "suggested_translation": "Maia 200",
+      "context": "Microsoft's custom AI accelerator rackscale system.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Athena",
+      "suggested_translation": "Athena",
+      "context": "Microsoft's internal codename for its custom AI silicon.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Neoverse V3",
+      "suggested_translation": "Neoverse V3",
+      "context": "ARM core design used in Cobalt 200.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Neoverse N2",
+      "suggested_translation": "Neoverse N2",
+      "context": "Prior generation ARM core design used in Cobalt 100.",
+      "confidence": 1.0
+    },
+    {
+      "term": "CMN S3",
+      "suggested_translation": "CMN S3",
+      "context": "ARM Neoverse Coherent Mesh Network version S3.",
+      "confidence": 0.95
+    },
+    {
+      "term": "rackscale system",
+      "suggested_translation": "机架级系统",
+      "context": "Microsoft’s Maia 200 rackscale system deploys Intel’s Granite Rapids CPUs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CXL",
+      "suggested_translation": "CXL",
+      "context": "Compute Express Link; 64 lanes of PCIe6 lanes with CXL support.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "cobalt": "Cobalt",
+    "soc": "SoC",
+    "cpu": "CPU",
+    "ai": "AI",
+    "l2 cache": "L2缓存",
+    "arm": "ARM",
+    "tsmc": "台积电",
+    "ddr5": "DDR5",
+    "mesh stops": "网格站点",
+    "yield": "良率",
+    "l3 cache": "L3缓存",
+    "head node": "头节点",
+    "intel": "英特尔",
+    "granite rapids": "Granite Rapids",
+    "graviton": "Graviton"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:32:35.875251"
+}

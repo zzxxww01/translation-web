@@ -1,0 +1,5 @@
+Earlier, we took a look at the achievable throughput of individual instructions; we found that some instructions are likely inherently bound by SMEM bandwidth, but we did not consider the memory system when we measured peak performance per-instruction-shape. Here, we take the same single-CTA CUTLASS benchmark and we extend it to use clusters of size greater than 1x1. We also use 2SM MMA atoms for any cluster shape that has an even M dimension.
+
+A few such results are shown in the charts, where in each chart we hold the per-CTA tile size constant and vary the cluster size, for both 1SM and 2SM. Note that when scaling the cluster N dimension from 1 to 2 (2SM) or from 2 to 4 (1SM) for 128x128 per-CTA tile shapes, we get a marked benefit from the multicast introduced by clustering. We can conclude therefore that the tile shapes smaller than this are bound in the memory subsystem / L2 bandwidth.
+
+![](https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png)

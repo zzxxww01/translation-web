@@ -1,0 +1,302 @@
+{
+  "section_id": "08-disclaimers",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "08-disclaimers",
+    "section_title": "Disclaimers",
+    "section_title_translation": "免责声明",
+    "section_position": "9/10",
+    "article_theme": "The surge in household electric bills in certain US regions is primarily driven by the flawed, centralized capacity market design of grid operators like PJM, rather than the raw power demand of AI datacenters, a fact proven by the stable prices in ERCOT's real-time, energy-only market.",
+    "structure_summary": "The article opens by challenging the mainstream narrative that AI datacenters cause power price spikes. It then contrasts the two largest US energy markets: PJM and ERCOT. It deep-dives into PJM's flawed $16 billion capacity market simulation, then shifts to ERCOT's simpler, real-time energy-only model to show how it handles identical load growth without price shocks. The piece uses 'Winter Storm Fern' as a real-world stress test of both grids, concluding with regulatory outlooks and investment implications (winners and losers).",
+    "target_audience": "Institutional investors, energy sector professionals, datacenter developers, and hardcore tech enthusiasts.",
+    "translation_voice": "Professional financial and tech-industry Chinese. The voice should be objective but sharp, clearly conveying the author's critique of PJM's bureaucratic inefficiencies and appreciation for ERCOT's market-driven agility.",
+    "previous_section_title": "Winners & losers and the shifting market bottlenecks",
+    "next_section_title": "SemiAnalysis Disclaimer",
+    "section_role": "Acts as a structural separator for standard legal text.",
+    "translation_notes": [
+      "Translate simply as '免责声明'."
+    ],
+    "key_points": [
+      "Marks the beginning of mandatory legal disclosures."
+    ],
+    "guidelines": [
+      "Strictly differentiate between '容量市场' (Capacity market) and '纯电能市场' (Energy-only market). This contrast is the backbone of the entire article.",
+      "When translating critiques of PJM (e.g., 'The $16 Billion Simulation', 'flawed forecast'), use sharp, precise financial Chinese to convey the author's skepticism.",
+      "Maintain English acronyms for US regulatory and grid entities (PJM, ERCOT, FERC) after providing a short Chinese explanation in parentheses at their first appearance.",
+      "For company names (OpenAI, Anthropic, Vistra, Talen, Vertiv), keep them in English unless a widely recognized official Chinese name exists (e.g., Google -> 谷歌, Meta -> Meta).",
+      "Ensure technical terms related to power generation (e.g., peak load, backup generation, transmission service providers) are translated using standard Chinese power industry terminology (峰值负荷, 备用发电, 输电服务提供商).",
+      "Preserve the formatting of section headers, as they act as strong narrative signposts guiding the reader from problem identification to case studies, and finally to investment conclusions."
+    ],
+    "article_challenges": [
+      {
+        "location": "Energy market mechanism explanations (e.g., 'paying for power plants to sit idle 95% of the time')",
+        "issue": "Translating complex grid mechanics into readable Chinese without sounding like a dry regulatory manual.",
+        "suggestion": "Use active voice and sharp contrasts. Emphasize the financial absurdity highlighted by the author (e.g., spending billions for idle plants)."
+      },
+      {
+        "location": "Acronym density (PJM, ERCOT, IMM, FERC, BRA, NCBL)",
+        "issue": "Alphabet soup can severely disrupt the reading flow for a Chinese audience unfamiliar with US grid operators.",
+        "suggestion": "Strictly follow the 'first_annotate' strategy. Once defined, use the English acronyms to keep the text clean, but ensure the initial context is crystal clear."
+      },
+      {
+        "location": "Financial and investment crossover terms (e.g., 'structural asymmetry is durable and investable')",
+        "issue": "Failing to capture the investor-centric angle of the piece.",
+        "suggestion": "Translate 'investable' as '具备投资价值' or '存在投资机会', ensuring the text reads like a premium financial research report."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "PJM",
+        "term": "PJM",
+        "translation": "PJM",
+        "strategy": "first_annotate",
+        "note": "A regional transmission organization (RTO) that coordinates the movement of wholesale electricity in all or parts of 13 states and the District of Columbia.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "ERCOT",
+        "term": "ERCOT",
+        "translation": "ERCOT",
+        "strategy": "first_annotate",
+        "note": "Electric Reliability Council of Texas, the organization managing Texas's electrical grid.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Capacity market / Capacity auction",
+        "term": "Capacity market / Capacity auction",
+        "translation": "容量市场 / 容量拍卖",
+        "strategy": "translate",
+        "note": "A market mechanism where power plants are paid to guarantee they will be available to generate electricity in the future, even if they sit idle.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Energy-only market",
+        "term": "Energy-only market",
+        "translation": "纯电能市场",
+        "strategy": "translate",
+        "note": "A market design where generators are only paid for the electricity they actually produce and deliver, without separate capacity payments.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Scarcity pricing",
+        "term": "Scarcity pricing",
+        "translation": "稀缺定价",
+        "strategy": "translate",
+        "note": "A mechanism in energy-only markets where electricity prices spike during times of high demand and low supply to incentivize generation.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Base Residual Auction (BRA)",
+        "term": "Base Residual Auction (BRA)",
+        "translation": "基础剩余拍卖 (BRA)",
+        "strategy": "first_annotate",
+        "note": "PJM's primary capacity market auction held annually to secure power supply three years in advance.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Hyperscalers",
+        "term": "Hyperscalers",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Massive cloud service providers and AI developers (e.g., Google, Meta, Amazon, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "FERC",
+        "term": "FERC",
+        "translation": "FERC",
+        "strategy": "first_annotate",
+        "note": "Federal Energy Regulatory Commission, the US federal agency regulating interstate electricity transmission.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Acts as a structural separator for standard legal text.",
+    "relation_to_previous": "Follows the conclusion of the main article content and paywall prompt.",
+    "relation_to_next": "Introduces the detailed SemiAnalysis-specific legal and financial disclosures.",
+    "key_points": [
+      "Marks the beginning of mandatory legal disclosures."
+    ],
+    "translation_notes": [
+      "Translate simply as '免责声明'."
+    ]
+  },
+  "translations": []
+}

@@ -1,0 +1,55 @@
+{
+  "section_id": "11-dsmem-vs-smem",
+  "new_terms": [
+    {
+      "term": "inter-CTA reductions",
+      "suggested_translation": "CTA 间归约",
+      "context": "Useful for patterns like inter-CTA reductions in distributed shared memory.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bank conflicts",
+      "suggested_translation": "存储体冲突 (Bank Conflicts)",
+      "context": "Interleaved accesses that avoid bank conflicts in local SMEM.",
+      "confidence": 0.98
+    },
+    {
+      "term": "coalesced access",
+      "suggested_translation": "合并访问",
+      "context": "Typical coalesced access to contiguous locations in GMEM.",
+      "confidence": 0.95
+    },
+    {
+      "term": "packetized",
+      "suggested_translation": "分组化",
+      "context": "DSMEM loads are packetized similar to global loads.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ld.shared",
+      "suggested_translation": "ld.shared 指令",
+      "context": "PTX instruction for local shared memory access that emits LDS.",
+      "confidence": 0.95
+    },
+    {
+      "term": "cp.async.bulk",
+      "suggested_translation": "cp.async.bulk 指令",
+      "context": "PTX instruction used to move higher volume of data per instruction.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ublkcp",
+      "suggested_translation": "UBLKCP 指令",
+      "context": "SASS equivalent of the cp.async.bulk PTX instruction.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "distributed shared memory (dsmem)": "分布式共享内存 (DSMEM)",
+    "shared memory (smem)": "共享内存 (SMEM)",
+    "ptx": "PTX",
+    "sass": "SASS"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:28:11.935256"
+}

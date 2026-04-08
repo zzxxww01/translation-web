@@ -1,0 +1,321 @@
+{
+  "section_id": "21-huawei-kunpeng",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "21-huawei-kunpeng",
+    "section_title": "Huawei Kunpeng",
+    "section_title_translation": "华为鲲鹏",
+    "section_position": "22/30",
+    "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+    "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+    "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+    "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures.",
+    "previous_section_title": "ARM Phoenix",
+    "next_section_title": "CPU Roadmap",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+      "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+      "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+      "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+      "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+      "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+    ],
+    "article_challenges": [
+      {
+        "location": "DRAM Constraints on CPU Market",
+        "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+        "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel’s Mesh Architecture",
+        "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+        "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel Xeon Coral Rapids",
+        "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+        "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "AMD Turin Dense 7:1 Socket Consolidation",
+        "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+        "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic Era",
+        "term": "Agentic Era",
+        "translation": "智能体时代",
+        "strategy": "translate",
+        "note": "The era of AI where autonomous agents perform complex tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Crossbar",
+        "term": "Crossbar",
+        "translation": "交叉开关",
+        "strategy": "translate",
+        "note": "An interconnect topology where every core has a discrete link to all other cores.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Ring Bus",
+        "term": "Ring Bus",
+        "translation": "环形总线",
+        "strategy": "translate",
+        "note": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mesh Architecture",
+        "term": "Mesh Architecture",
+        "translation": "网格架构",
+        "strategy": "translate",
+        "note": "A 2D grid interconnect topology used in high-core-count CPUs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Die Shot",
+        "term": "Die Shot",
+        "translation": "裸片图",
+        "strategy": "translate",
+        "note": "A photograph of a semiconductor die, often annotated.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Floorplan",
+        "term": "Floorplan",
+        "translation": "物理布图",
+        "strategy": "translate",
+        "note": "The physical layout of functional blocks on a semiconductor die.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Stepping",
+        "term": "Stepping",
+        "translation": "步进",
+        "strategy": "translate",
+        "note": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Reticle-sized",
+        "term": "Reticle-sized",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Head node",
+        "term": "Head node",
+        "translation": "头节点",
+        "strategy": "translate",
+        "note": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Context Memory Storage",
+        "term": "Context Memory Storage",
+        "translation": "上下文内存存储",
+        "strategy": "translate",
+        "note": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Front Side Bus (FSB)",
+        "term": "Front Side Bus (FSB)",
+        "translation": "前端总线 (FSB)",
+        "strategy": "translate",
+        "note": "Early Intel computer communication interface.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "中国国产 CPU 的研发进程正在快速推进，龙芯和阿里巴巴的倚天系列均提供了本土设计的选项。然而，该市场的头号玩家当属华为，他们凭借 Kunpeng 处理器系列重新调整了数据中心 CPU 路线图。华为海思团队拥有业内顶尖的芯片设计工程师，其定制的 TaiShan CPU 核心与数据互连架构（data fabric）值得密切关注。",
+    "华为最初几代数据中心 CPU 均采用标准的移动端 ARM Cortex 核心。2015 年推出的 Hi1610 搭载了 16 个 A57 核心。2016 年的 Hi1612 将核心数翻倍至 32 个，而 2017 年的 Kunpeng 916 则将核心架构升级为 Cortex-A72。这三代产品均由台积电 16nm 工艺代工。",
+    "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+    "Kunpeng 920 裸片图。来源：万扯淡",
+    "Kunpeng 920 于 2019 年问世，采用了极具野心的多芯粒设计，并搭载 64 个定制核心。两颗基于台积电 7nm 工艺的计算裸片，每颗包含 8 个集群，每个集群拥有 4 个基于 ARM v8.2 指令集架构（ISA）运行的 TaiShan V110 核心。这些集群通过环形总线与同一裸片上的 4 通道 DDR4 内存相连，两颗计算裸片共计提供 8 通道内存。Kunpeng 920 是首款采用台积电 CoWoS-S 先进封装的 CPU。它利用一块大型硅中介层，通过定制的裸片间接口，将两颗计算裸片与一颗 I/O 裸片相连；该 I/O 裸片配备了 40 条 PCIe Gen 4 通道，并集成了双 100G 以太网控制器。",
+    "尽管 Kunpeng 920 集成了多项前沿技术，但美国对华为的制裁切断了其台积电代工渠道，直接打乱了华为的 CPU 路线图，导致下一代 Kunpeng 930 未能在 2021 年如期发布。",
+    "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+    "Kunpeng 920B 裸片图。来源：Kurnal",
+    "取而代之的是，升级版的 Kunpeng 920B 于 2024 年悄然发布，并带来了多项升级。TaiShan V120 核心现已支持 SMT，两颗计算裸片上各有 10 个 4 核集群，共计 80 核 160 线程。核心互连和物理布图与 Kunpeng 920 保持相似，计算裸片上配备 8 通道 DDR5。I/O 裸片现被一分为二，计算裸片置于中间。我们认为，两代 CPU 之间长达 5 年的断档，归咎于美国制裁以及被迫针对中芯国际 N+2 工艺重新设计芯片。",
+    "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+    "华为 Kunpeng CPU 路线图。来源：华为",
+    "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+    "华为 TaiShan 950 SuperPoD。来源：华为",
+    "面向 2026 年，华为将推出 Kunpeng 950 再次更新其 CPU 产品线，并将其配置在 TaiShan 950 SuperPoD 机架中以满足通用计算需求。Kunpeng 950 号称在使用其专有的 GaussDB 多写分布式数据库架构时，其 OLTP 数据库性能较 Kunpeng 920B 实现了 2.9 倍的跃升。为实现这一目标，其核心数量翻了一番以上，飙升至 192 核，并采用了保留 SMT 支持的全新 LinxiCore。此外，华为还将推出一款规模较小的 96 核版本。每个 TaiShan 950 SuperPoD 机架内容纳 16 台双路服务器，配备高达 48TB 的 DDR5 内存，这表明其采用了 12 通道内存设计。这些机架还集成了存储与网络功能，将被甲骨文 (Oracle) 的 Exadata 数据库服务器采用，并广泛应用于中国金融领域。",
+    "该设计很可能采用中芯国际的 N+3 工艺制造，该工艺近期已在 Kirin 9030 智能手机芯片上首发亮相。",
+    "华为的路线图进一步延伸至 2028 年的 Kunpeng 960 系列。这一代顺应了将设计拆分为两大分支的行业趋势。其中，面向 AI 头节点和数据库打造的 96 核 192 线程高性能版本，号称单核性能提升 50% 以上；而面向虚拟化和云计算的高密度版本，则会将核心数量推高至 256 核，甚至可能更多。我们预计，届时华为将在中国超大规模云厂商的 CPU 部署中占据可观的市场份额。",
+    "下文将展示我们直至 2028 年的 CPU 路线图，并详细剖析 2026 年之后数据中心 CPU 的核心特性与架构演进。具体内容涵盖：AMD 的 Verano 与 Florence 处理器；英特尔的 Coral Rapids 及其已被彻底砍掉的 CPU 产品线；ARM 的 Venom 规格参数；以及高通凭借 SD2 重返数据中心 CPU 市场的动向。此外，我们还将英伟达的 Bluefield-4 纳入其中，以此作为未来 CPU 部署演进方向的风向标。随后，我们将探讨 DRAM 短缺对各个数据中心 CPU 细分市场的影响，展望未来的 CPU 发展趋势，并重点解析那些将在未来十年重塑 CPU 格局的关键设计要素。"
+  ]
+}

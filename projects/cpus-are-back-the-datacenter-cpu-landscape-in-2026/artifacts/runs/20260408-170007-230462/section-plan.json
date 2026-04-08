@@ -1,0 +1,335 @@
+{
+  "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+  "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/30",
+      "paragraph_count": 16,
+      "previous_section_title": "",
+      "next_section_title": "The Role and Evolution of Datacenter CPUs",
+      "section_role": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+      "translation_notes": [
+        "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+        "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+        "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+      ]
+    },
+    {
+      "section_id": "01-the-role-and-evolution-of-data",
+      "title": "The Role and Evolution of Datacenter CPUs",
+      "position": "2/30",
+      "paragraph_count": 0,
+      "previous_section_title": "Introduction",
+      "next_section_title": "The PC Era",
+      "section_role": "Serves as a thematic bridge, defining the baseline function of datacenter CPUs to anchor the subsequent chronological deep dive.",
+      "translation_notes": [
+        "Keep the definition of 'datacenter CPUs' strictly separated from consumer desktop processors in terminology (e.g., 数据中心CPU vs 消费级处理器)."
+      ]
+    },
+    {
+      "section_id": "02-the-pc-era",
+      "title": "The PC Era",
+      "position": "3/30",
+      "paragraph_count": 4,
+      "previous_section_title": "The Role and Evolution of Datacenter CPUs",
+      "next_section_title": "The Dot Com Era",
+      "section_role": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+      "translation_notes": [
+        "Translate 'mainframe replacements' accurately (大型机替代品).",
+        "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+      ]
+    },
+    {
+      "section_id": "03-the-dot-com-era",
+      "title": "The Dot Com Era",
+      "position": "4/30",
+      "paragraph_count": 2,
+      "previous_section_title": "The PC Era",
+      "next_section_title": "The Virtualization and Cloud Computing Hyperscaler Era",
+      "section_role": "Explains the architectural pivot from frequency scaling to multi-core designs driven by the internet boom and physical semiconductor limits.",
+      "translation_notes": [
+        "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+        "Ensure 'GHz wars' reflects the historical context (主频大战).",
+        "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+      ]
+    },
+    {
+      "section_id": "04-the-virtualization-and-cloud-c",
+      "title": "The Virtualization and Cloud Computing Hyperscaler Era",
+      "position": "5/30",
+      "paragraph_count": 7,
+      "previous_section_title": "The Dot Com Era",
+      "next_section_title": "The AI GPU and CPU Consolidation Era",
+      "section_role": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+      "translation_notes": [
+        "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+        "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+        "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+      ]
+    },
+    {
+      "section_id": "05-the-ai-gpu-and-cpu-consolidati",
+      "title": "The AI GPU and CPU Consolidation Era",
+      "position": "6/30",
+      "paragraph_count": 15,
+      "previous_section_title": "The Virtualization and Cloud Computing Hyperscaler Era",
+      "next_section_title": "The RL and Agentic Era",
+      "section_role": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+      "translation_notes": [
+        "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+        "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+        "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+      ]
+    },
+    {
+      "section_id": "06-the-rl-and-agentic-era",
+      "title": "The RL and Agentic Era",
+      "position": "7/30",
+      "paragraph_count": 11,
+      "previous_section_title": "The AI GPU and CPU Consolidation Era",
+      "next_section_title": "History of Multi-Core CPU Interconnects",
+      "section_role": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+      "translation_notes": [
+        "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+        "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+        "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+      ]
+    },
+    {
+      "section_id": "07-history-of-multi-core-cpu-inte",
+      "title": "History of Multi-Core CPU Interconnects",
+      "position": "8/30",
+      "paragraph_count": 5,
+      "previous_section_title": "The RL and Agentic Era",
+      "next_section_title": "Crossbar Limits",
+      "section_role": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+      "translation_notes": [
+        "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+        "Avoid translating 'core' as anything other than '核心' in this context."
+      ]
+    },
+    {
+      "section_id": "08-crossbar-limits",
+      "title": "Crossbar Limits",
+      "position": "9/30",
+      "paragraph_count": 9,
+      "previous_section_title": "History of Multi-Core CPU Interconnects",
+      "next_section_title": "Intel’s Ring Bus",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "09-intels-ring-bus",
+      "title": "Intel’s Ring Bus",
+      "position": "10/30",
+      "paragraph_count": 15,
+      "previous_section_title": "Crossbar Limits",
+      "next_section_title": "Intel’s Mesh Architecture",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-intels-mesh-architecture",
+      "title": "Intel’s Mesh Architecture",
+      "position": "11/30",
+      "paragraph_count": 42,
+      "previous_section_title": "Intel’s Ring Bus",
+      "next_section_title": "AMD’s Zen Interconnect Architecture",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-amds-zen-interconnect-archite",
+      "title": "AMD’s Zen Interconnect Architecture",
+      "position": "12/30",
+      "paragraph_count": 20,
+      "previous_section_title": "Intel’s Mesh Architecture",
+      "next_section_title": "Intel Diamond Rapids Architecture Changes",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-intel-diamond-rapids-architect",
+      "title": "Intel Diamond Rapids Architecture Changes",
+      "position": "13/30",
+      "paragraph_count": 11,
+      "previous_section_title": "AMD’s Zen Interconnect Architecture",
+      "next_section_title": "AMD Venice Architecture Changes",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "13-amd-venice-architecture-change",
+      "title": "AMD Venice Architecture Changes",
+      "position": "14/30",
+      "paragraph_count": 13,
+      "previous_section_title": "Intel Diamond Rapids Architecture Changes",
+      "next_section_title": "2026 CPU Costing Analysis",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-2026-cpu-costing-analysis",
+      "title": "2026 CPU Costing Analysis",
+      "position": "15/30",
+      "paragraph_count": 3,
+      "previous_section_title": "AMD Venice Architecture Changes",
+      "next_section_title": "Nvidia Grace",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-nvidia-grace",
+      "title": "Nvidia Grace",
+      "position": "16/30",
+      "paragraph_count": 18,
+      "previous_section_title": "2026 CPU Costing Analysis",
+      "next_section_title": "AWS Graviton5",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-aws-graviton5",
+      "title": "AWS Graviton5",
+      "position": "17/30",
+      "paragraph_count": 16,
+      "previous_section_title": "Nvidia Grace",
+      "next_section_title": "Microsoft Cobalt 200",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "17-microsoft-cobalt-200",
+      "title": "Microsoft Cobalt 200",
+      "position": "18/30",
+      "paragraph_count": 8,
+      "previous_section_title": "AWS Graviton5",
+      "next_section_title": "Google Axion C4A, N4A",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "18-google-axion-c4a-n4a",
+      "title": "Google Axion C4A, N4A",
+      "position": "19/30",
+      "paragraph_count": 6,
+      "previous_section_title": "Microsoft Cobalt 200",
+      "next_section_title": "AmpereOne & SoftBank Acquisition",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "19-ampereone-softbank-acquisiti",
+      "title": "AmpereOne & SoftBank Acquisition",
+      "position": "20/30",
+      "paragraph_count": 15,
+      "previous_section_title": "Google Axion C4A, N4A",
+      "next_section_title": "ARM Phoenix",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "20-arm-phoenix",
+      "title": "ARM Phoenix",
+      "position": "21/30",
+      "paragraph_count": 7,
+      "previous_section_title": "AmpereOne & SoftBank Acquisition",
+      "next_section_title": "Huawei Kunpeng",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "21-huawei-kunpeng",
+      "title": "Huawei Kunpeng",
+      "position": "22/30",
+      "paragraph_count": 17,
+      "previous_section_title": "ARM Phoenix",
+      "next_section_title": "CPU Roadmap",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "22-cpu-roadmap",
+      "title": "CPU Roadmap",
+      "position": "23/30",
+      "paragraph_count": 3,
+      "previous_section_title": "Huawei Kunpeng",
+      "next_section_title": "AMD EPYC Verano & Florence",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "23-amd-epyc-verano-florence",
+      "title": "AMD EPYC Verano & Florence",
+      "position": "24/30",
+      "paragraph_count": 8,
+      "previous_section_title": "CPU Roadmap",
+      "next_section_title": "Intel Xeon Coral Rapids",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "24-intel-xeon-coral-rapids",
+      "title": "Intel Xeon Coral Rapids",
+      "position": "25/30",
+      "paragraph_count": 4,
+      "previous_section_title": "AMD EPYC Verano & Florence",
+      "next_section_title": "ARM Venom",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "25-arm-venom",
+      "title": "ARM Venom",
+      "position": "26/30",
+      "paragraph_count": 2,
+      "previous_section_title": "Intel Xeon Coral Rapids",
+      "next_section_title": "Qualcomm SD2",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "26-qualcomm-sd2",
+      "title": "Qualcomm SD2",
+      "position": "27/30",
+      "paragraph_count": 6,
+      "previous_section_title": "ARM Venom",
+      "next_section_title": "Bluefield-4 Context Memory Storage Platform",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "27-bluefield-4-context-memory-sto",
+      "title": "Bluefield-4 Context Memory Storage Platform",
+      "position": "28/30",
+      "paragraph_count": 6,
+      "previous_section_title": "Qualcomm SD2",
+      "next_section_title": "DRAM Constraints on CPU Market",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "28-dram-constraints-on-cpu-market",
+      "title": "DRAM Constraints on CPU Market",
+      "position": "29/30",
+      "paragraph_count": 3,
+      "previous_section_title": "Bluefield-4 Context Memory Storage Platform",
+      "next_section_title": "Future CPU Trends",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "29-future-cpu-trends",
+      "title": "Future CPU Trends",
+      "position": "30/30",
+      "paragraph_count": 28,
+      "previous_section_title": "DRAM Constraints on CPU Market",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+  "new_terms": [
+    {
+      "term": "MI4XX",
+      "suggested_translation": "MI4XX",
+      "context": "AMD's next-generation GPU series used as a benchmark against Nvidia's VR NVL72.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Helios",
+      "suggested_translation": "Helios",
+      "context": "AMD's rack-scale system equivalent to Nvidia's NVL series.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Project IRR",
+      "suggested_translation": "项目内部收益率",
+      "context": "A financial metric used to evaluate the profitability of AI infrastructure investments, agnostic to depreciation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "TDP",
+      "suggested_translation": "热设计功耗",
+      "context": "Thermal Design Power, used to calculate operating costs and power density at the rack level.",
+      "confidence": 0.95
+    },
+    {
+      "term": "dense FLOPS",
+      "suggested_translation": "稠密 FLOPS",
+      "context": "Standard floating-point operations per second without using sparsity techniques.",
+      "confidence": 0.9
+    },
+    {
+      "term": "sparse FP4",
+      "suggested_translation": "稀疏 FP4",
+      "context": "Nvidia's performance metric utilizing 4-bit floating point with sparsity for higher marketed throughput.",
+      "confidence": 0.9
+    },
+    {
+      "term": "CDNA4",
+      "suggested_translation": "CDNA4",
+      "context": "AMD's GPU architecture for data centers, mentioned regarding the removal of sparsity support.",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory upcycle",
+      "suggested_translation": "存储上行周期",
+      "context": "A period of increasing prices and demand in the DRAM/NAND market.",
+      "confidence": 0.85
+    },
+    {
+      "term": "mfu (model flops utilization)",
+      "suggested_translation": "模型算力利用率",
+      "context": "Effective dense PFLOP can differ based on Model Flops Utilization % (MFU)",
+      "confidence": 0.95
+    },
+    {
+      "term": "fp4 sparsity",
+      "suggested_translation": "FP4 稀疏算力",
+      "context": "real world use of FP4 Sparsity will probably not reach 50 PFLOPS",
+      "confidence": 0.9
+    },
+    {
+      "term": "fp4 dense",
+      "suggested_translation": "FP4 稠密算力",
+      "context": "it will probably deliver better effective FLOPs than FP4 Dense",
+      "confidence": 0.9
+    },
+    {
+      "term": "inferencex",
+      "suggested_translation": "InferenceX",
+      "context": "measured inference token throughput from our InferenceX benchmarks",
+      "confidence": 1.0
+    },
+    {
+      "term": "interactivity",
+      "suggested_translation": "交互性指标",
+      "context": "delivering roughly 6.3x the performance at 100 interactivity for Deepseek R1",
+      "confidence": 0.85
+    },
+    {
+      "term": "b300",
+      "suggested_translation": "B300",
+      "context": "While the B300 is rated at 4,500 Dense FP8 TFLOPs",
+      "confidence": 1.0
+    },
+    {
+      "term": "mi355",
+      "suggested_translation": "MI355",
+      "context": "versus 5,000 Dense FP8 TFLOPs for MI355",
+      "confidence": 1.0
+    },
+    {
+      "term": "spec-sheet compute",
+      "suggested_translation": "规格表算力",
+      "context": "meaning spec-sheet compute does not directly translate into real-world token generation performance",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tco": "总拥有成本",
+    "bom": "物料清单",
+    "max-p": "最高性能模式",
+    "max-q": "能效优化模式",
+    "socamm": "SOCAMM",
+    "flops": "FLOPS",
+    "inference": "推理",
+    "throughput": "吞吐量",
+    "token": "token",
+    "bandwidth": "带宽"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:55:42.923948"
+}

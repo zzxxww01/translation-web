@@ -1,0 +1,151 @@
+{
+  "article_theme": "The primary bottleneck for AI compute has structurally shifted from datacenter power to semiconductor supply chain constraints—specifically TSMC's N3 wafer capacity and HBM memory—with Nvidia best positioned to win due to its aggressive supply chain mastery.",
+  "structure_summary": "The article follows a problem-analysis-conclusion flow. It opens by establishing the surging demand for AI compute. It then systematically dissects the supply chain bottlenecks, starting with the most critical (TSMC N3 wafers) and exploring potential relief (smartphone demand softening). It then transitions to the secondary constraint (Memory/HBM) before dismissing former constraints (CoWoS and Power). It concludes by emphasizing that supply chain mastery, exemplified by Nvidia, is the ultimate determinant of market success.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/11",
+      "paragraph_count": 3,
+      "previous_section_title": "",
+      "next_section_title": "SemiAnalysis x Fluidstack Hackathon",
+      "section_role": "Establishes the core thesis and provides metadata for the publication.",
+      "translation_notes": [
+        "Ensure 'Supply Chain Wars Winner' carries a decisive, high-stakes tone (e.g., 供应链之战的最终赢家).",
+        "Keep metadata formatting clean and standard for Chinese tech newsletters."
+      ]
+    },
+    {
+      "section_id": "01-semianalysis-x-fluidstack-hack",
+      "title": "SemiAnalysis x Fluidstack Hackathon",
+      "position": "2/11",
+      "paragraph_count": 3,
+      "previous_section_title": "Introduction",
+      "next_section_title": "The Compute Shortage",
+      "section_role": "Serves as a promotional insertion for an upcoming community event.",
+      "translation_notes": [
+        "Adopt an inviting, community-focused tone.",
+        "Ensure URLs are preserved exactly as written without localized punctuation breaking the links."
+      ]
+    },
+    {
+      "section_id": "02-the-compute-shortage",
+      "title": "The Compute Shortage",
+      "position": "3/11",
+      "paragraph_count": 7,
+      "previous_section_title": "SemiAnalysis x Fluidstack Hackathon",
+      "next_section_title": "The TSMC N3 Shortage",
+      "section_role": "Establishes the demand-side context, illustrating the explosive need for AI compute that triggers the supply crisis.",
+      "translation_notes": [
+        "Translate 'agentic workflows' precisely as '智能体工作流' or '代理工作流'.",
+        "Ensure 'ARR' is correctly understood as Annual Recurring Revenue (年度经常性收入)."
+      ]
+    },
+    {
+      "section_id": "03-the-tsmc-n3-shortage",
+      "title": "The TSMC N3 Shortage",
+      "position": "4/11",
+      "paragraph_count": 12,
+      "previous_section_title": "The Compute Shortage",
+      "next_section_title": "N3 in numbers",
+      "section_role": "Identifies and explains the primary structural bottleneck in the AI industry.",
+      "translation_notes": [
+        "Translate 'logic wafer capacity' technically as '逻辑晶圆产能'.",
+        "Localize 'earn brownie points' to an equivalent political/business idiom like '获得政治加分' or '博得好感'."
+      ]
+    },
+    {
+      "section_id": "04-n3-in-numbers",
+      "title": "N3 in numbers",
+      "position": "5/11",
+      "paragraph_count": 9,
+      "previous_section_title": "The TSMC N3 Shortage",
+      "next_section_title": "TSMC’s Supply Situation",
+      "section_role": "Quantifies the N3 shortage and outlines the competitive landscape of companies fighting for capacity.",
+      "translation_notes": [
+        "In semiconductor contexts, 'content growth' means silicon content per device (单机硅含量), not media content.",
+        "Maintain clear distinctions between node variants (4NP, N3P, N3B, N3E)."
+      ]
+    },
+    {
+      "section_id": "05-tsmcs-supply-situation",
+      "title": "TSMC’s Supply Situation",
+      "position": "6/11",
+      "paragraph_count": 6,
+      "previous_section_title": "N3 in numbers",
+      "next_section_title": "Smartphones as the Front-End Release Valve?",
+      "section_role": "Highlights TSMC's operational limits and the extremity of the supply crisis.",
+      "translation_notes": [
+        "Translate 'nameplate capacity' as '名义产能' or '设计产能'.",
+        "Ensure 'extracting every possible wafer' conveys the operational strain (e.g., 榨干每一片晶圆产能)."
+      ]
+    },
+    {
+      "section_id": "06-smartphones-as-the-front-end-r",
+      "title": "Smartphones as the Front-End Release Valve?",
+      "position": "7/11",
+      "paragraph_count": 8,
+      "previous_section_title": "TSMC’s Supply Situation",
+      "next_section_title": "Memory The Next Biggest Constraint",
+      "section_role": "Explores a potential mitigating factor for the N3 shortage.",
+      "translation_notes": [
+        "Translate 'Release Valve' metaphorically as '泄压阀' or '缓冲阀'.",
+        "Keep 'XPU wafers' as XPU or clarify as 'AI加速器晶圆' depending on target audience technical level."
+      ]
+    },
+    {
+      "section_id": "07-memory-the-next-biggest-constr",
+      "title": "Memory The Next Biggest Constraint",
+      "position": "8/11",
+      "paragraph_count": 23,
+      "previous_section_title": "Smartphones as the Front-End Release Valve?",
+      "next_section_title": "CoWoS – Tight but Easing",
+      "section_role": "Identifies the secondary structural bottleneck, completing the dual-constraint thesis.",
+      "translation_notes": [
+        "Translate 'crowding out' as '挤出效应'.",
+        "Translate 'commodity DRAM' as '大宗DRAM' or '通用DRAM'.",
+        "Translate 'downside shipment scenario' as '出货量下行预期'."
+      ]
+    },
+    {
+      "section_id": "08-cowos-tight-but-easing",
+      "title": "CoWoS – Tight but Easing",
+      "position": "9/11",
+      "paragraph_count": 2,
+      "previous_section_title": "Memory The Next Biggest Constraint",
+      "next_section_title": "From Power-Constrained to Accelerator-Constrained",
+      "section_role": "Dismisses advanced packaging as the primary bottleneck to sharpen the focus on front-end logic and memory.",
+      "translation_notes": [
+        "Translate 'Front-end capacity' as '前道产能'.",
+        "Ensure OSATs is translated as '外包半导体封装测试厂商' or kept as OSAT with a parenthetical explanation."
+      ]
+    },
+    {
+      "section_id": "09-from-power-constrained-to-acce",
+      "title": "From Power-Constrained to Accelerator-Constrained",
+      "position": "10/11",
+      "paragraph_count": 5,
+      "previous_section_title": "CoWoS – Tight but Easing",
+      "next_section_title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared",
+      "section_role": "Debunks the prevailing industry narrative that datacenter power is the ultimate AI bottleneck.",
+      "translation_notes": [
+        "Translate 'binding constraint' as '刚性约束' or '核心瓶颈'.",
+        "Correct the source typo 'inginuiuty' mentally and translate as '人类的聪明才智' or '创新能力'."
+      ]
+    },
+    {
+      "section_id": "10-supply-chain-control-matters-m",
+      "title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared",
+      "position": "11/11",
+      "paragraph_count": 2,
+      "previous_section_title": "From Power-Constrained to Accelerator-Constrained",
+      "next_section_title": "",
+      "section_role": "Concludes the article by crowning the market winner based on the established bottleneck thesis.",
+      "translation_notes": [
+        "Preserve the humor in 'Jensen’s trips to Asia weren’t just for going to night markets' (黄仁勋的亚洲之行可不只是为了逛夜市).",
+        "Translate 'deployed compute' accurately as '实际部署的算力'."
+      ]
+    }
+  ]
+}

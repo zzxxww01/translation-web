@@ -1,0 +1,61 @@
+{
+  "section_id": "19-multi-token-prediction-mtp",
+  "new_terms": [
+    {
+      "term": "autoregressive generation",
+      "suggested_translation": "自回归生成",
+      "context": "Speculative decoding reduces the cost of autoregressive generation",
+      "confidence": 0.95
+    },
+    {
+      "term": "draft model",
+      "suggested_translation": "草稿模型",
+      "context": "using a small, inexpensive draft model to propose several tokens ahead",
+      "confidence": 0.95
+    },
+    {
+      "term": "dense models",
+      "suggested_translation": "稠密模型",
+      "context": "This assumption... is strongest for dense models",
+      "confidence": 0.95
+    },
+    {
+      "term": "auxiliary prediction heads",
+      "suggested_translation": "辅助预测头",
+      "context": "Auxiliary prediction heads are added to the model architecture",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory-bandwidth bound",
+      "suggested_translation": "显存带宽受限",
+      "context": "the inference regime is less memory-bandwidth bound compared to for low batch sizes",
+      "confidence": 0.9
+    },
+    {
+      "term": "MTBench",
+      "suggested_translation": "MTBench",
+      "context": "comparing MTP acceptance behavior between MTBench and our 1k1k benchmark",
+      "confidence": 1.0
+    },
+    {
+      "term": "EAGLE",
+      "suggested_translation": "EAGLE",
+      "context": "results in the EAGLE paper",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "speculative decoding": "投机解码",
+    "forward pass": "前向传播",
+    "prefill": "预填充",
+    "inference": "推理",
+    "multi token prediction (mtp)": "多 Token 预测 (MTP)",
+    "interactivity": "交互速度",
+    "fp4": "FP4",
+    "dynamo": "Dynamo",
+    "trt": "TRT",
+    "deepseekr1": "DeepSeek R1"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:54:36.929373"
+}

@@ -1,0 +1,223 @@
+{
+  "section_id": "28-dram-constraints-on-cpu-market",
+  "title": "DRAM Constraints on CPU Market",
+  "title_translation": "DRAM对CPU市场的制约",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "At this point in 2026, the supply chain is experiencing significant shortages in both server CPU availability and commodity DDR5 memory. Server CPU allocation will be prioritized to those who can prove to have a secure and available memory supply. This would accelerate consolidation toward the large players who have high volumes and negotiating power for DRAM such as OpenAI, Coreweave and the Cloud Hyperscalers. The incoming price hikes for CPUs across the board, combined with high memory prices, will affect each segment of the datacenter CPU market differently.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0306",
+      "parent_block_index": 306,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At this point in 2026, the supply chain is experiencing significant shortages in both server CPU availability and commodity DDR5 memory. Server CPU allocation will be prioritized to those who can prove to have a secure and available memory supply. This would accelerate consolidation toward the large players who have high volumes and negotiating power for DRAM such as OpenAI, Coreweave and the Cloud Hyperscalers. The incoming price hikes for CPUs across the board, combined with high memory prices, will affect each segment of the datacenter CPU market differently.",
+      "parent_block_plain_text": "At this point in 2026, the supply chain is experiencing significant shortages in both server CPU availability and commodity DDR5 memory. Server CPU allocation will be prioritized to those who can prove to have a secure and available memory supply. This would accelerate consolidation toward the large players who have high volumes and negotiating power for DRAM such as OpenAI, Coreweave and the Cloud Hyperscalers. The incoming price hikes for CPUs across the board, combined with high memory prices, will affect each segment of the datacenter CPU market differently.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 568,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "到了 2026 年此时，供应链正面临服务器 CPU 与大宗 DDR5 内存双双严重短缺的局面。服务器 CPU 供货配额将优先分配给能证明自身拥有稳定内存供应的客户。这一趋势将加速市场向 OpenAI、CoreWeave 及云服务巨头等大型玩家集中，因为他们拥有庞大的 DRAM 采购量与极强的议价能力。全面袭来的 CPU 涨价潮叠加高昂的内存价格，将对数据中心 CPU 市场的各大细分领域产生截然不同的影响。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:54:15.732983",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将其译为“云服务巨头”，未严格遵循术语表（Glossary）中规定的“超大规模云厂商”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文处理为“表象上的内存短缺”，略带翻译腔。此处的语境是“重复下单（double ordering）会制造出一种虚假的需求，让原本的短缺显得更加严重”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "For AI head nodes which come equipped with 512GB to 1TB of memory per socket, the cost and supply of memory far outweighs the cost of the CPU and the rest of the server chassis. This segment may be hit most in the future in the case where CPU supply improves while memory remains tight, still gobbled up by high margin AI accelerators. CPU vendors are fearful of memory double ordering that exacerbates the perceived memory shortage and are carefully monitoring and predicting inventory levels to manage near-term CPU demand with ongoing memory pressure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0307",
+      "parent_block_index": 307,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For AI head nodes which come equipped with 512GB to 1TB of memory per socket, the cost and supply of memory far outweighs the cost of the CPU and the rest of the server chassis. This segment may be hit most in the future in the case where CPU supply improves while memory remains tight, still gobbled up by high margin AI accelerators. CPU vendors are fearful of memory double ordering that exacerbates the perceived memory shortage and are carefully monitoring and predicting inventory levels to manage near-term CPU demand with ongoing memory pressure.",
+      "parent_block_plain_text": "For AI head nodes which come equipped with 512GB to 1TB of memory per socket, the cost and supply of memory far outweighs the cost of the CPU and the rest of the server chassis. This segment may be hit most in the future in the case where CPU supply improves while memory remains tight, still gobbled up by high margin AI accelerators. CPU vendors are fearful of memory double ordering that exacerbates the perceived memory shortage and are carefully monitoring and predicting inventory levels to manage near-term CPU demand with ongoing memory pressure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 554,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于单插槽配备 512GB 至 1TB 内存的 AI 头节点而言，内存的成本与供货难度，远超 CPU 及服务器机箱其余组件。未来，若 CPU 供应好转而内存依然紧缺（产能继续被高毛利的 AI 加速器大肆吞噬），该细分市场受到的冲击将最为惨烈。CPU 厂商极度担忧内存重复下单会加剧表象上的内存短缺。为此，他们正严密监控并预测库存水平，力求在持续的内存压力下妥善管控近期 CPU 需求。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:54:15.733057",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将其译为“云服务巨头”，未严格遵循术语表（Glossary）中规定的“超大规模云厂商”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文处理为“表象上的内存短缺”，略带翻译腔。此处的语境是“重复下单（double ordering）会制造出一种虚假的需求，让原本的短缺显得更加严重”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "For CPUs used in the Cloud and virtualization markets, throughput and power efficiency are prioritized, with higher rental pricing for larger memory instances. This segment would not be affected as much by memory pricing as the percentage of spending on memory is lower. For storage and edge servers, which typically use lower tier CPUs with low core counts, CPU ASP is only a minor part of system cost. CPU supply may be diverted away from the lower end segments in the near term as CPU makers prioritise high-end, higher margin SKUs to maximise revenue in a supply constrained environment.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0308",
+      "parent_block_index": 308,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For CPUs used in the Cloud and virtualization markets, throughput and power efficiency are prioritized, with higher rental pricing for larger memory instances. This segment would not be affected as much by memory pricing as the percentage of spending on memory is lower. For storage and edge servers, which typically use lower tier CPUs with low core counts, CPU ASP is only a minor part of system cost. CPU supply may be diverted away from the lower end segments in the near term as CPU makers prioritise high-end, higher margin SKUs to maximise revenue in a supply constrained environment.",
+      "parent_block_plain_text": "For CPUs used in the Cloud and virtualization markets, throughput and power efficiency are prioritized, with higher rental pricing for larger memory instances. This segment would not be affected as much by memory pricing as the percentage of spending on memory is lower. For storage and edge servers, which typically use lower tier CPUs with low core counts, CPU ASP is only a minor part of system cost. CPU supply may be diverted away from the lower end segments in the near term as CPU makers prioritise high-end, higher margin SKUs to maximise revenue in a supply constrained environment.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 591,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在云计算与虚拟化市场，CPU 的吞吐量与能效是首要考量，且大内存实例的租赁定价更高。由于该细分市场的内存支出占比相对较低，其受内存价格波动的影响也较小。至于存储与边缘服务器，通常采用核心数较少的低端 CPU，CPU 的平均售价 (ASP) 仅占系统总成本的极小部分。短期内，CPU 供货可能会从低端市场抽离。在产能受限的环境下，CPU 厂商势必优先保供高端、高毛利的 SKU，以实现营收最大化。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:54:15.733123",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将其译为“云服务巨头”，未严格遵循术语表（Glossary）中规定的“超大规模云厂商”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文处理为“表象上的内存短缺”，略带翻译腔。此处的语境是“重复下单（double ordering）会制造出一种虚假的需求，让原本的短缺显得更加严重”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

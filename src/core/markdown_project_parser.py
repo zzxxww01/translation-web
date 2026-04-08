@@ -33,6 +33,14 @@ class MarkdownBlock:
 
 class MarkdownProjectParser:
     SHORT_PARAGRAPH_THRESHOLD = 150
+    _SOURCE_PATTERN = re.compile(
+        r"^(?:Sources?|Data)\s*:\s",
+        re.IGNORECASE,
+    )
+    _BYLINE_PATTERN = re.compile(r"^By\s+", re.IGNORECASE)
+    _DATE_ACCESS_PATTERN = re.compile(
+        r"^[A-Z][a-z]{2,8}\s+\d{1,2},\s+\d{4}(?:\s+·\s+(?:Paid|Free))?$"
+    )
 
     def __init__(
         self,
@@ -376,21 +384,35 @@ class MarkdownProjectParser:
         self._mark_source_metadata(sections)
         return sections
 
-    _SOURCE_PATTERN = re.compile(
-        r'^(?:Sources?|Data)\s*:\s',
-        re.IGNORECASE,
-    )
-
     def _mark_source_metadata(self, sections: list[Section]) -> None:
-        """Mark 'Source: ...' paragraphs as metadata."""
-        for section in sections:
-            for paragraph in section.paragraphs:
+        """Mark structured front-matter / source paragraphs as metadata."""
+        for section_index, section in enumerate(sections):
+            for paragraph_index, paragraph in enumerate(section.paragraphs):
                 if paragraph.is_metadata:
                     continue
-                if paragraph.element_type in {ElementType.P, ElementType.LI}:
-                    if self._SOURCE_PATTERN.match(paragraph.source):
-                        paragraph.is_metadata = True
-                        paragraph.metadata_type = "source"
+
+                if (
+                    section_index == 0
+                    and paragraph_index == 0
+                    and paragraph.element_type in {ElementType.H3, ElementType.H4}
+                ):
+                    paragraph.is_metadata = True
+                    paragraph.metadata_type = "subtitle"
+                    continue
+
+                if paragraph.element_type not in {ElementType.P, ElementType.LI}:
+                    continue
+
+                source_text = paragraph.source.strip()
+                if self._SOURCE_PATTERN.match(source_text):
+                    paragraph.is_metadata = True
+                    paragraph.metadata_type = "source"
+                elif section_index == 0 and self._BYLINE_PATTERN.match(source_text):
+                    paragraph.is_metadata = True
+                    paragraph.metadata_type = "byline"
+                elif section_index == 0 and self._DATE_ACCESS_PATTERN.match(source_text):
+                    paragraph.is_metadata = True
+                    paragraph.metadata_type = "date_access"
 
     def _segments_from_block(
         self,

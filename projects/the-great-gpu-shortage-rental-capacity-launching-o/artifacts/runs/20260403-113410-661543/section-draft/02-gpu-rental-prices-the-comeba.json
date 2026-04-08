@@ -1,0 +1,326 @@
+{
+  "section_id": "02-gpu-rental-prices-the-comeba",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "02-gpu-rental-prices-the-comeba",
+    "section_title": "GPU Rental Prices – The Comeback Kid",
+    "section_title_translation": "GPU租赁价格：强势回归",
+    "section_position": "3/10",
+    "article_theme": "Driven by explosive demand from advanced AI models and tightening supply, GPU rental prices are surging across all contract terms, prompting the introduction of a new contract price index to track this structural market shift.",
+    "structure_summary": "The article introduces the recent 40% surge in H100 rental prices, contrasting current tight supply with past bearish expectations ('The Comeback Kid'). It then introduces the SemiAnalysis 1Y H100 contract price index to better track the market. The core of the piece breaks down the rental market structure into short, mid, and long-term segments, explaining the dynamics of each. Finally, it projects future trends based on supply chain bottlenecks, tokenomics, and new cluster deployments, concluding that prices will continue to rise.",
+    "target_audience": "Institutional investors, AI lab executives, cloud infrastructure planners, and semiconductor analysts.",
+    "translation_voice": "A top-tier financial and tech analyst. The Chinese should be dense with accurate industry jargon but flow naturally, balancing formal financial analysis with engaging, punchy market commentary.",
+    "previous_section_title": "Surge Pricing Comes to the GPU Rental Market",
+    "next_section_title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+    "section_role": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+    "translation_notes": [
+      "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+      "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+    ],
+    "key_points": [
+      "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+      "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+      "High ROI will sustain demand, putting upward pressure on component and rental costs."
+    ],
+    "guidelines": [
+      "Maintain the authoritative yet slightly colloquial tone of a top-tier tech/finance analyst. Use professional financial/tech jargon (e.g., '边际需求', '投资回报率', '产能爬坡') while capturing the punchy style of the original.",
+      "Ensure precise translation of cloud infrastructure and financial terms. Pay special attention to 'offtake' (包销), 'tenor' (期限), and 'bare metal' (裸金属).",
+      "Restructure long English sentences into concise Chinese clauses, especially when describing complex market dynamics. Use a 'topic-comment' structure where appropriate to improve Chinese-native paragraph flow.",
+      "For terms like 'Neocloud', consistently use '新兴算力云厂商' to clearly distinguish them from traditional 'Hyperscalers' (超大规模云厂商).",
+      "Pay special attention to timeframes, pricing units, and hardware specs (e.g., '$1.70/hr/GPU', '1Q26', 'p6-b200'). Ensure they are formatted correctly and unambiguously in Chinese.",
+      "When translating idiomatic section headers ('Where The Puck is Going', 'The Comeback Kid'), prioritize the underlying business meaning over literal translation to maintain the professional analytical voice."
+    ],
+    "article_challenges": [
+      {
+        "location": "Section Heading: Where The Puck is Going",
+        "issue": "Idiomatic expression (from Wayne Gretzky) meaning anticipating the future, which doesn't translate literally.",
+        "suggestion": "Translate conceptually as '趋势前瞻' or '行业未来走向' to maintain the professional analytical tone."
+      },
+      {
+        "location": "Section Heading: The Comeback Kid",
+        "issue": "Idiomatic phrase referring to someone/something that recovers from a disadvantageous situation.",
+        "suggestion": "Translate as '触底反弹' or '绝地反击' to capture the unexpected recovery of GPU rental prices."
+      },
+      {
+        "location": "Paragraph starting 'Customers are fighting to pay...'",
+        "issue": "High density of technical specs (p6-b200, 8 nodes/64 GPUs) mixed with market actions.",
+        "suggestion": "Break the sentence into clear, parallel clauses in Chinese to maintain readability without losing the sense of market frenzy."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Neocloud",
+        "term": "Neocloud",
+        "translation": "新兴算力云厂商",
+        "strategy": "translate",
+        "note": "Emerging cloud providers specializing primarily in AI compute and GPU rentals (e.g., CoreWeave, Lambda, Nebius).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Major traditional cloud providers like AWS, Google Cloud, and Microsoft Azure.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Offtake",
+        "term": "Offtake",
+        "translation": "包销协议",
+        "strategy": "translate",
+        "note": "Long-term agreements (usually 4-5 years) where AI labs commit to buying massive amounts of compute capacity.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Spot instance",
+        "term": "Spot instance",
+        "translation": "竞价实例",
+        "strategy": "translate",
+        "note": "Spare compute capacity offered at variable, often cheaper rates, but can be interrupted.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Bare metal",
+        "term": "Bare metal",
+        "translation": "裸金属",
+        "strategy": "translate",
+        "note": "Physical servers rented without virtualization layers, allowing AI labs to customize the tech stack.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tenor",
+        "term": "Tenor",
+        "translation": "合同期限",
+        "strategy": "translate",
+        "note": "The length or duration of a rental contract (e.g., 1-year, 5-year).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Sweating fixed compute assets",
+        "term": "Sweating fixed compute assets",
+        "translation": "最大化压榨固定算力资产价值",
+        "strategy": "translate",
+        "note": "Extracting the maximum possible value and utilization out of existing hardware before it becomes obsolete.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tokenomics",
+        "term": "Tokenomics",
+        "translation": "Token经济学",
+        "strategy": "translate",
+        "note": "The economics of AI model usage, specifically tracking token generation volumes, costs, and revenues.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+    "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+    "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+    "key_points": [
+      "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+      "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+      "High ROI will sustain demand, putting upward pressure on component and rental costs."
+    ],
+    "translation_notes": [
+      "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+      "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+    ]
+  },
+  "translations": [
+    "市场究竟是如何走到这一步的？仅仅六个月前，大多数市场观察人士还在质疑 GPU 的终端价值，认定 GPU 租赁费率势必将面临断崖式下跌。金融分析师更是对任何将 GPU 算力资产折旧期设为 6 年的新兴算力云厂商或超大规模云厂商予以猛烈抨击。在探讨未来趋势走向之前，我们先快速回顾一下此前的市场演变。",
+    "在 2025 年底之前，整个生态系统的普遍预期是，鉴于 Blackwell 的算力成本大幅降低，随着其部署规模的扩大，Hopper（即 H100 和 H200）的租赁价格将出现大幅下跌。然而，2025 年底的实际情况却截然相反：市场对 H100 的需求依然坚挺，甚至在许多场景下还在不断走强。当时开放权重模型的快速普及和推理需求的加速爆发，正是市场即将迎来算力需求无底洞狂潮的初步端倪。",
+    "1 月份成为了算力市场的下一个拐点。当时，DRAM 和 NAND 的内存价格在连续数个季度猛涨之后，开始呈现抛物线式暴涨。根据我们的内存模型，LPDDR5 和 DDR5 的合同价格在 2026 年第一季度预计将分别实现约 4 倍和 5 倍的同比增长。",
+    "为了应对组件成本飙升带来的利润率风险，OEM 厂商开始对 AI 服务器重新定价，且提价幅度远超底层组件成本的实际上涨幅度。这让集群资本投资决策变得更加棘手，因为高昂的服务器采购成本压缩了项目的预期投资回报率，迫使部分运营商放缓甚至放弃部署计划。这实际上导致原本应上线的算力供应遭到搁置，进一步加剧了租赁市场的紧缺态势。",
+    "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+    "来源：SemiAnalysis AI TCO 模型",
+    "在这场“AI 服务器定价末日”引发的采购乱局中，GPU 租赁需求显著加速，大部分剩余的闲置算力在 1 月和 2 月被抢购一空。到了 3 月，无论合同期限长短，想要找到任何 H100、H200 或 B200 的租赁算力已经变得几乎不可能。1 年期合同的租赁价格在 1 月下旬突破了每小时每卡 2 美元的大关，随后在 2 月中下旬较 1 月底飙升了 15-20%，并预计到 3 月底还将实现 15-20% 的环比上涨。",
+    "今年年初，原生媒体生成构成了需求的一大核心驱动力——随着用户大规模生成并精修图像与视频，Seedance 和 Nano Banana 正推动 Token 吞吐量激增。然而，最显性的需求引擎则是多智能体工作负载的崛起：这些智能体执行多步工作流，在高并发状态下运行并持续迭代，最终导致 Token 与算力消耗呈抛物线式暴增。",
+    "看看我们在多篇文章中已经指出的关于 Claude Code 的趋势就知道了。过去 7 天里，SemiAnalysis 作为一家公司消耗了数十亿个 Token，平均成本约为 5 美元/百万 Token，但在节省时间、拓展工作流和提升能力方面带来的回报，远远超过了这一成本。SemiAnalysis 目前已在各项工作流中部署了一套 AI 工具，应用范围远超简单的搜索和摘要——尤其是在仪表盘制作、自动化抓取、大规模数据清洗以及基于智能体的财务建模等方面。",
+    "我们正通过每日 Claude 提交量等替代指标来追踪这种压倒性的需求。按照目前的发展轨迹，我们认为到 2026 年底，Claude Code 将占所有每日代码提交量的 20% 以上。就在你眨眼之间，AI 已经吞噬了整个软件开发领域。对该数据集感兴趣的机构客户可以联系我们的API 文档团队。",
+    "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+    "来源：SemiAnalysis Token经济学仪表盘",
+    "似乎我们圈子里的几乎每个人都是 Claude Code 的狂热用户——但我们也认识到，我们的联系人圈子完全沉浸在 AI 和半导体的方方面面，因此他们只是先头部队。对于许多财富 500 强企业和更广泛的大众而言，Claude Code 和智能体（Agentic）世界只不过是偶尔出现在 Facebook 动态或最喜欢的 NPR 播客里的奇闻轶事。他们完全没有意识到，智能体世界即将向全球释放一场生产力狂潮与颠覆性变革。",
+    "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+    "来源：SemiAnalysis，由 Google Gemini 生成",
+    "随着更广泛经济领域中那些认识到 AI 工具惊人投资回报率的人加入我们，共同驾驭这股浪潮，Token 消耗量将随着时间的推移继续实现阶跃式增长。关于使用 AI 真实回报的争论如今已尘埃落定——使用 AI 工具所创造的价值，比其使用成本高出一个数量级。Token 需求曲线向右上方的移动，正形成一股强大且（目前）相对缺乏弹性的力量，持续推高 GPU 租赁价格。",
+    "简而言之——如果使用 AI 工具的投资回报率高达 5 到 10 倍，那么在价格涨至足以遏制需求之前，GPU 租赁定价显然还有很大的上行空间。若租赁价格的上涨进一步推高服务器及零部件成本，我们也不会感到意外。"
+  ]
+}

@@ -1,0 +1,617 @@
+{
+  "section_id": "17-microsoft-cobalt-200",
+  "title": "Microsoft Cobalt 200",
+  "title_translation": "微软Cobalt 200",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0218",
+      "parent_block_index": 218,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922289",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Microsoft Cobalt 200 Server. Source: Microsoft",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Cobalt 200 Server. Source: Microsoft",
+          "start": 0,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0219",
+      "parent_block_index": 219,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft Cobalt 200 Server. Source: Microsoft*",
+      "parent_block_plain_text": "Microsoft Cobalt 200 Server. Source: Microsoft",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Cobalt 200 Server. Source: Microsoft",
+          "start": 0,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 46,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Microsoft Cobalt 200 服务器。来源：Microsoft",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922514",
+          "tokenized_text": "[[[EM_1|Microsoft Cobalt 200 服务器。来源：Microsoft]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0220",
+      "parent_block_index": 220,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922569",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Cobalt 200 SoC Layout. Source: Microsoft",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Cobalt 200 SoC Layout. Source: Microsoft",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0221",
+      "parent_block_index": 221,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Cobalt 200 SoC Layout. Source: Microsoft*",
+      "parent_block_plain_text": "Cobalt 200 SoC Layout. Source: Microsoft",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Cobalt 200 SoC Layout. Source: Microsoft",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Cobalt 200 SoC 物理布图。来源：Microsoft",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922688",
+          "tokenized_text": "[[[EM_1|Cobalt 200 SoC 物理布图。来源：Microsoft]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100 - Dylan Patel and Myron Xie · November 15, 2023",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100",
+          "start": 0,
+          "end": 79,
+          "href": "https://newsletter.semianalysis.com/p/microsoft-infrastructure-ai-and-cpu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0222",
+      "parent_block_index": 222,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100](https://newsletter.semianalysis.com/p/microsoft-infrastructure-ai-and-cpu) - Dylan Patel and Myron Xie · November 15, 2023",
+      "parent_block_plain_text": "Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100 - Dylan Patel and Myron Xie · November 15, 2023",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Microsoft Infrastructure - AI & CPU Custom Silicon Maia 100, Athena, Cobalt 100",
+          "start": 0,
+          "end": 79,
+          "href": "https://newsletter.semianalysis.com/p/microsoft-infrastructure-ai-and-cpu",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Microsoft 基础设施——AI 与 CPU 定制芯片 Maia 100、Athena、Cobalt 100 - Dylan Patel 与 Myron Xie · 2023 年 11 月 15 日",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922816",
+          "tokenized_text": "[[[LINK_1|Microsoft 基础设施——AI 与 CPU 定制芯片 Maia 100、Athena、Cobalt 100]]] - Dylan Patel 与 Myron Xie · 2023 年 11 月 15 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Following on from Microsoft’s first Cobalt 100 CPU in 2023 which we covered above, Cobalt 200 was launched in late 2025 with several upgrades. While core count did not increase much, going from 128 to 132, each core is now much more powerful with the Neoverse V3 design compared to the Neoverse N2 in the prior generation. Each core has a very large 3MB L2 cache, and are connected with the standard ARM Neoverse CMN S3 mesh network across two TSMC 3nm compute dies with a custom high-bandwidth interconnect between dies. From the diagram, each die has an 8x8 mesh with 6 DDR5 channels and 64 lanes of PCIe6 lanes with CXL support. 2 cores share each mesh stop, totaling 72 cores printed on each die with 66 enabled for yield. 192MB of shared L3 cache is also spread across the mesh.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0223",
+      "parent_block_index": 223,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Following on from Microsoft’s first Cobalt 100 CPU in 2023 which we covered above, Cobalt 200 was launched in late 2025 with several upgrades. While core count did not increase much, going from 128 to 132, each core is now much more powerful with the Neoverse V3 design compared to the Neoverse N2 in the prior generation. Each core has a very large 3MB L2 cache, and are connected with the standard ARM Neoverse CMN S3 mesh network across two TSMC 3nm compute dies with a custom high-bandwidth interconnect between dies. From the diagram, each die has an 8x8 mesh with 6 DDR5 channels and 64 lanes of PCIe6 lanes with CXL support. 2 cores share each mesh stop, totaling 72 cores printed on each die with 66 enabled for yield. 192MB of shared L3 cache is also spread across the mesh. With these upgrades, Cobalt 200 achieves a 50% speedup over Cobalt 100.",
+      "parent_block_plain_text": "Following on from Microsoft’s first Cobalt 100 CPU in 2023 which we covered above, Cobalt 200 was launched in late 2025 with several upgrades. While core count did not increase much, going from 128 to 132, each core is now much more powerful with the Neoverse V3 design compared to the Neoverse N2 in the prior generation. Each core has a very large 3MB L2 cache, and are connected with the standard ARM Neoverse CMN S3 mesh network across two TSMC 3nm compute dies with a custom high-bandwidth interconnect between dies. From the diagram, each die has an 8x8 mesh with 6 DDR5 channels and 64 lanes of PCIe6 lanes with CXL support. 2 cores share each mesh stop, totaling 72 cores printed on each die with 66 enabled for yield. 192MB of shared L3 cache is also spread across the mesh. With these upgrades, Cobalt 200 achieves a 50% speedup over Cobalt 100.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 783,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "继我们在前文探讨过的 2023 年微软首款 Cobalt 100 CPU 之后，Cobalt 200 于 2025 年底发布，并带来了多项升级。虽然核心数量增幅不大（从 128 个微增至 132 个），但与上一代的 Neoverse N2 相比，采用 Neoverse V3 设计的新核心性能大幅提升。每个核心配备高达 3MB 的超大 L2缓存。这些核心分布在两颗台积电 3nm 计算裸片上，通过标准的 ARM Neoverse CMN S3 网格网络连接，裸片之间则采用定制的高带宽互连技术。从架构图来看，每颗裸片采用 8x8 网格布局，配备 6 个 DDR5 通道以及 64 条支持 CXL 的 PCIe6 通道。每 2 个核心共享一个网格节点（mesh stop）。每颗裸片上物理集成了 72 个核心，出于良率考量，实际启用了 66 个。此外，网格网络中还分布着 192MB 的共享 L3缓存。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922867",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "With these upgrades, Cobalt 200 achieves a 50% speedup over Cobalt 100.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0223",
+      "parent_block_index": 223,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Following on from Microsoft’s first Cobalt 100 CPU in 2023 which we covered above, Cobalt 200 was launched in late 2025 with several upgrades. While core count did not increase much, going from 128 to 132, each core is now much more powerful with the Neoverse V3 design compared to the Neoverse N2 in the prior generation. Each core has a very large 3MB L2 cache, and are connected with the standard ARM Neoverse CMN S3 mesh network across two TSMC 3nm compute dies with a custom high-bandwidth interconnect between dies. From the diagram, each die has an 8x8 mesh with 6 DDR5 channels and 64 lanes of PCIe6 lanes with CXL support. 2 cores share each mesh stop, totaling 72 cores printed on each die with 66 enabled for yield. 192MB of shared L3 cache is also spread across the mesh. With these upgrades, Cobalt 200 achieves a 50% speedup over Cobalt 100.",
+      "parent_block_plain_text": "Following on from Microsoft’s first Cobalt 100 CPU in 2023 which we covered above, Cobalt 200 was launched in late 2025 with several upgrades. While core count did not increase much, going from 128 to 132, each core is now much more powerful with the Neoverse V3 design compared to the Neoverse N2 in the prior generation. Each core has a very large 3MB L2 cache, and are connected with the standard ARM Neoverse CMN S3 mesh network across two TSMC 3nm compute dies with a custom high-bandwidth interconnect between dies. From the diagram, each die has an 8x8 mesh with 6 DDR5 channels and 64 lanes of PCIe6 lanes with CXL support. 2 cores share each mesh stop, totaling 72 cores printed on each die with 66 enabled for yield. 192MB of shared L3 cache is also spread across the mesh. With these upgrades, Cobalt 200 achieves a 50% speedup over Cobalt 100.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 784,
+      "segment_end": 855,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "凭借这些升级，Cobalt 200 的运行速度较 Cobalt 100 提升了 50%。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922908",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Unlike Graviton5, Cobalt 200 will only be featured in Azure’s general purpose CPU compute services and will not be used as AI head nodes. Microsoft’s Maia 200 rackscale system deploys Intel’s Granite Rapids CPUs instead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0224",
+      "parent_block_index": 224,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Unlike Graviton5, Cobalt 200 will only be featured in Azure’s general purpose CPU compute services and will not be used as AI head nodes. Microsoft’s Maia 200 rackscale system deploys Intel’s Granite Rapids CPUs instead.",
+      "parent_block_plain_text": "Unlike Graviton5, Cobalt 200 will only be featured in Azure’s general purpose CPU compute services and will not be used as AI head nodes. Microsoft’s Maia 200 rackscale system deploys Intel’s Granite Rapids CPUs instead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与 Graviton5 不同，Cobalt 200 将仅用于 Azure 的通用 CPU 计算服务，不会被用作 AI 头节点。微软的 Maia 200 机架级系统转而部署了英特尔的 Granite Rapids CPU。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:33:37.922948",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（L2缓存、L3缓存）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "section_id": "06-tensor-parallel-expert-parall",
+  "new_terms": [
+    {
+      "term": "TP (Tensor Parallel)",
+      "suggested_translation": "张量并行 (TP)",
+      "context": "TP allows for maximize interactivity at small batch sizes",
+      "confidence": 0.95
+    },
+    {
+      "term": "EP (Expert Parallel)",
+      "suggested_translation": "专家并行 (EP)",
+      "context": "EP shards experts, exploiting MoE sparsity",
+      "confidence": 0.95
+    },
+    {
+      "term": "DP (Data Parallel)",
+      "suggested_translation": "数据并行 (DP)",
+      "context": "DP replicates the entire model on multiple groups of GPUs",
+      "confidence": 0.95
+    },
+    {
+      "term": "MoE (Mixture of Experts)",
+      "suggested_translation": "混合专家模型 (MoE)",
+      "context": "exploiting MoE sparsity",
+      "confidence": 0.95
+    },
+    {
+      "term": "rank",
+      "suggested_translation": "Rank (GPU 进程)",
+      "context": "multiple groups of GPUs (ranks) and then load balances requests among ranks",
+      "confidence": 0.9
+    },
+    {
+      "term": "sparsity",
+      "suggested_translation": "稀疏性",
+      "context": "exploiting MoE sparsity",
+      "confidence": 0.9
+    },
+    {
+      "term": "shard",
+      "suggested_translation": "分片",
+      "context": "EP shards experts",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互性",
+    "all-reduce": "全局归约 (All-reduce)",
+    "all-to-all collective": "全局到全局通信 (All-to-all)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:03:25.286326"
+}

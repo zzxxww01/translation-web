@@ -1,0 +1,214 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "incomplete",
+  "total_sections": 36,
+  "translated_sections": 22,
+  "total_paragraphs": 358,
+  "translated_paragraphs": 291,
+  "error_count": 18,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "SGLang",
+      "existing": "",
+      "new": "SGLang",
+      "existing_note": "An open-source fast serving framework for LLMs.",
+      "new_note": "Large Mixture of Experts, SGLang, vLLM",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-07T21:11:02.598384"
+    },
+    {
+      "type": "term_conflict",
+      "term": "TRTLLM",
+      "existing": "",
+      "new": "TRTLLM",
+      "existing_note": "Nvidia's TensorRT-LLM inference framework.",
+      "new_note": "vLLM, TRTLLM",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-07T21:11:02.598410"
+    },
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "both Hopper and Blackwell saw a steady performance increase",
+      "section_id": "09-gpt-oss-120b",
+      "timestamp": "2026-04-07T21:18:14.322640"
+    },
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "Source: SemiAnalysis InferenceX",
+      "section_id": "15-blackwell-vs-blackwell-ultra",
+      "timestamp": "2026-04-07T21:46:30.286424"
+    },
+    {
+      "error": "Failed to translate section 18-amd-atom-engine: ('Connection broken: IncompleteRead(5459 bytes read, 1745 more expected)', IncompleteRead(5459 bytes read, 1745 more expected))",
+      "timestamp": "2026-04-07T21:52:22.156834",
+      "section": "18-amd-atom-engine"
+    },
+    {
+      "error": "Failed to translate section 23-wideep: ('Connection broken: IncompleteRead(6437 bytes read, 3803 more expected)', IncompleteRead(6437 bytes read, 3803 more expected))",
+      "timestamp": "2026-04-07T22:15:02.017925",
+      "section": "23-wideep"
+    },
+    {
+      "error": "Failed to translate section 24-disaggregated-prefill: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-07T22:17:52.524152",
+      "section": "24-disaggregated-prefill"
+    },
+    {
+      "error": "Failed to translate section 25-optimizing-inference-with-wide: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-07T22:20:38.519758",
+      "section": "25-optimizing-inference-with-wide"
+    },
+    {
+      "error": "Failed to translate section 26-dive-into-deepseek-r1-single-n: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-07T22:23:28.943763",
+      "section": "26-dive-into-deepseek-r1-single-n"
+    },
+    {
+      "error": "Failed to translate section 27-gpt-oss-120b-single-node: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:25:33.465469",
+      "section": "27-gpt-oss-120b-single-node"
+    },
+    {
+      "error": "Failed to translate section 28-core-inferencex-repo-updates: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:26:13.586932",
+      "section": "28-core-inferencex-repo-updates"
+    },
+    {
+      "error": "Failed to translate section 29-core-changes-since-inferencexv: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:26:53.754156",
+      "section": "29-core-changes-since-inferencexv"
+    },
+    {
+      "error": "Failed to translate section 30-klaud-cold-ai-usage: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:27:33.890382",
+      "section": "30-klaud-cold-ai-usage"
+    },
+    {
+      "error": "Failed to translate section 31-github-actions: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:28:14.044205",
+      "section": "31-github-actions"
+    },
+    {
+      "error": "Failed to translate section 32-future-of-inferencex: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:28:54.181410",
+      "section": "32-future-of-inferencex"
+    },
+    {
+      "error": "Failed to translate section 33-migration-to-multi-turn-real-m: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:29:34.349832",
+      "section": "33-migration-to-multi-turn-real-m"
+    },
+    {
+      "error": "Failed to translate section 34-adding-tpu-trainium-and-more: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:30:14.488637",
+      "section": "34-adding-tpu-trainium-and-more"
+    },
+    {
+      "error": "Failed to translate section 35-total-cost-of-ownership-nvl72: ('Connection aborted.', ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None))",
+      "timestamp": "2026-04-07T22:30:54.647745",
+      "section": "35-total-cost-of-ownership-nvl72"
+    }
+  ],
+  "started_at": "2026-04-07T21:08:42.105103",
+  "finished_at": "2026-04-07T22:30:54.800073",
+  "run_id": "20260407-210842-105123",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260407-210842-105123",
+  "export": {
+    "generated_at": "2026-04-07T22:30:54.700819",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\NVIDIA Blackwell vs AMD vs Hopper（原 InferenceMAX）_zh.md",
+      "generated": true,
+      "bytes": 108881
+    }
+  },
+  "api_calls": 100,
+  "elapsed_seconds": 4932.7,
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 12,
+    "auto_fixable_count": 0,
+    "manual_review_count": 12,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称183次, 第三人称91次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "发现64个超长句子（超过150字），建议拆分",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "08-deepseek-r1",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 4",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "08-deepseek-r1",
+        "paragraph_index": 15,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "13-unpacking-inference-providers",
+        "paragraph_index": 23,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 7",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "14-jensen-under-promising-and-ove",
+        "paragraph_index": 7,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 9",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "15-blackwell-vs-blackwell-ultra",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "21-anthropic-fast-mode-inferencin",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 3.3, 2",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "05-interactivity-vs-throughput-tr",
+        "paragraph_index": 9,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Disaggregated Prefill' 处理不一致: {'翻译': 1, '保留原文': 2}",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

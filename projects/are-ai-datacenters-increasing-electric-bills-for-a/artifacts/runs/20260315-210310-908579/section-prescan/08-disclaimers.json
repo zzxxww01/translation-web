@@ -1,0 +1,44 @@
+{
+  "section_id": "08-disclaimers",
+  "new_terms": [
+    {
+      "term": "forward-looking statements",
+      "suggested_translation": "前瞻性陈述",
+      "context": "Standard disclaimer regarding projections, estimates, and future expectations.",
+      "confidence": 0.95
+    },
+    {
+      "term": "safe harbor",
+      "suggested_translation": "安全港",
+      "context": "Legal provision protecting companies from liability for forward-looking statements.",
+      "confidence": 0.95
+    },
+    {
+      "term": "investment advice",
+      "suggested_translation": "投资建议",
+      "context": "Disclaimer stating the content is for informational purposes and not financial guidance.",
+      "confidence": 0.95
+    },
+    {
+      "term": "materially different",
+      "suggested_translation": "实质性差异",
+      "context": "Used to warn that actual results may vary significantly from projections.",
+      "confidence": 0.9
+    },
+    {
+      "term": "undue reliance",
+      "suggested_translation": "过度依赖",
+      "context": "Warning against placing excessive trust in forward-looking information.",
+      "confidence": 0.9
+    },
+    {
+      "term": "past performance",
+      "suggested_translation": "过往业绩",
+      "context": "Reference to historical data not being indicative of future results.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T22:54:39.260960"
+}

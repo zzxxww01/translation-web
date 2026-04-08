@@ -1,0 +1,65 @@
+{
+  "section_id": "25-arm-venom",
+  "new_terms": [
+    {
+      "term": "Neoverse V4",
+      "suggested_translation": "Neoverse V4",
+      "context": "The CPU contains 228 future Neoverse V4 cores",
+      "confidence": 1.0
+    },
+    {
+      "term": "C1 Ultra",
+      "suggested_translation": "C1 Ultra",
+      "context": "likely derived from ARM’s C1 Ultra mobile core",
+      "confidence": 1.0
+    },
+    {
+      "term": "N2",
+      "suggested_translation": "N2",
+      "context": "The cores will be fabricated on TSMC’s N2",
+      "confidence": 1.0
+    },
+    {
+      "term": "Socionext",
+      "suggested_translation": "索喜科技",
+      "context": "Socionext has some involvement in the design",
+      "confidence": 0.95
+    },
+    {
+      "term": "LPDDR6",
+      "suggested_translation": "LPDDR6",
+      "context": "the biggest change is the move to LPDDR6 memory",
+      "confidence": 1.0
+    },
+    {
+      "term": "DIMM",
+      "suggested_translation": "DIMM",
+      "context": "from traditional DDR5 DIMMs",
+      "confidence": 0.95
+    },
+    {
+      "term": "PCIe Gen 7",
+      "suggested_translation": "PCIe 7.0 / 第七代PCIe",
+      "context": "surrounded by multiple memory and PCIe Gen 7 I/O dies",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "arm": "ARM",
+    "phoenix": "Phoenix",
+    "venom": "Venom",
+    "cpu": "CPU",
+    "tsmc": "台积电",
+    "reticle-sized": "光罩极限尺寸",
+    "pcie": "PCIe",
+    "nvidia": "英伟达",
+    "vera": "Vera",
+    "chiplet": "芯粒",
+    "ddr5": "DDR5",
+    "ai": "AI",
+    "xpu": "XPU",
+    "accelerator enablement kit": "加速器支持套件"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:47:34.599713"
+}

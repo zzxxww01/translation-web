@@ -1,0 +1,75 @@
+下表列出了 OpenRouter 上所有提供 DeepSeek R1 0528 FP8 服务的推理提供商，并附上了其每百万输入/输出 Token 的成本及平均交互性。撇开 Chutes 不谈，中游提供商的交互性大约在 35 Token/秒/用户。
+
+https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png
+
+来源：OpenRouter
+
+基于上述数据，35 Token/秒/用户是一个合理的交互性水平。据此，我们可以利用真实的 InferenceX 数据进行插值计算，得出在该交互性下每百万输入/输出 Token 的成本。
+
+正如后文所述，这最好被视作基准数据，无法完全代表真实的生产环境推理。原因在于 InferenceX 采用随机数据进行基准测试，并且禁用了前缀缓存。换言之，实际的性能/成本比至少会达到这个水平。另外需要强调的是，并非每款 GPU 在每一个交互性下都有对应的数据点，因此我们无法在所有交互性维度上进行绝对精确的对比。尽管如此，在缺乏精确数据点的情况下，我们依然认为下方的条形图对比提供了（非常）合理的插值参考。
+
+在该交互性下对比 Disagg (分离) + WideEP 配置，我们能清晰看到分布式推理技术在提升性能/TCO 与整体吞吐量方面的显著成效。同时，大规模 Scale-up 架构（如 GB300 和 GB200 NVL72）在单 GPU 总吞吐量上展现出了绝对的统治力。
+
+值得注意的是，在该交互性下（针对 8k1k 工作负载类型），B200 在启用 MTP 时能够实现最佳的性能/TCO。下方我们还列出了各款 GPU 的 TCO（自购模式 —— 超大规模云厂商）：
+
+https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png
+
+来源：SemiAnalysis TCO 模型
+
+https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png
+
+来源：SemiAnalysis InferenceX
+
+基于上述发现，我们来深挖大规模部署 LLM 的单位经济效益。从上文的 OpenRouter 数据可以看出，Crusoe 提供的交互性为 36 Token/秒/用户，定价为每百万输入 Token 1.35 美元、每百万输出 Token 5.40 美元。假设在没有缓存命中的情况下，且 Crusoe 至少使用了 H200 GPU，并结合了 MTP、Disagg 以及 WideEP 等 SOTA (业界领先) 推理技术。那么上述数据表明，其成本绝不超过每百万输入 Token 0.226 美元与每百万输出 Token 2.955 美元。这意味着，其输入 Token 的毛利率最高可达 83%（折旧已计入销货成本），输出 Token 的毛利率可达 45%。
+
+SemiAnalysis InferenceX 是一款免费的开源软件，离不开广大读者的支持。如需获取最新文章并支持我们的工作，欢迎考虑成为免费或付费订阅者。
+
+当然，这些假设未必完全准确，上述计算也未将停机时间或利用率不足的情况纳入考量。但这足以展示，利用 InferenceX 数据能推演出多么精妙的测算。关于推理经济学的更多分析，详见 SemiAnalysis Tokenomics 模型。
+
+OpenRouter 数据还显示，Nebius AI Studio (Fast) 提供 DeepSeek FP4 服务的交互性为 167 Token/秒/用户，定价为每百万输入 Token 2 美元、每百万输出 Token 6 美元。在 InferenceX 中对交互性进行相应调整后，我们得到了以下数据。
+
+https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png
+
+来源：SemiAnalysis InferenceX
+
+在如此高的交互性下，必须采用 MTP 等投机解码技术来实现足够高的吞吐量，从而使推理具备经济效益。幸运的是，MTP 能够提升吞吐量，且对模型整体准确率的风险相对较低。在本文后续章节中，我们将进一步探讨 MTP，并分析如何应用该技术来提升吞吐量并降低成本。
+
+最后，我们再展示一张图表，呈现交互性为 125 Token/秒/用户的 FP8 DeepSeek 工作负载。这是另一个低延迟工作负载，其中 MTP 大幅提升了经济可行性。与前一个例子类似，我们注意到，在这些较高的交互性区间内，成本最低的配置均采用了 MTP。
+
+https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png
+
+来源：SemiAnalysis InferenceX
+
+### 英伟达分离式 Prefill 与 WideEP
+
+EP 需要全对全 (All-to-all) 通信，即每张 GPU 都需要向其他所有 GPU 发送 Token。这对带宽的消耗极大。回顾一下，英伟达服务器拥有两个独立的网络域：纵向扩展的 NVLink 域，以及通常采用 InfiniBand 或以太网协议的横向扩展 (Scale-out) 域。
+
+- NVLink 域（NVL72 机架内）：72 张 GPU 通过 NVLink 连接，每张 GPU 的单向带宽高达 900 GB/s。这大约是基于 InfiniBand 或以太网的横向扩展 (Scale-out) 网络带宽的七到十倍。
+
+- InfiniBand/RoCEv2 以太网（NVL72 机架外）：每张 GPU 单向带宽通常为 400-800 Gbit/s（50-100 GB/s）。需要注意的是，我们针对英伟达的所有测试均在基于 InfiniBand 的集群上进行。
+
+TP 将每一层的权重矩阵分片至多张 GPU。这意味着在每一层，每个 token 最多需要两次全归约 (All-reduce) 通信（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM 后）。而 EP 仅在 MoE (混合专家) 层执行全对全 (All-to-all)。每张 GPU 只发送路由至各专家的 token。因此，与 TP 相比，EP 在所有层面的通信成本都更低。
+
+EP 的全对全 (All-to-all) 通信带宽需求随参与节点数成比例增长。因此，在被迫跨越较慢的 IB/以太网架构前，将通信维持在高带宽的 NVLink 域内显然更优。借助 NVL72，系统无需离开 NVLink 即可跨 72 张 GPU 实现 EP；相比之下，前代产品（仅具备 8 卡 NVLink 域）只能在 8 张 GPU 范围内维持 NVLink 速度的 EP，随后便会撞上较慢的 IB/以太网瓶颈。
+
+SemiAnalysis InferenceX 是免费的开源软件，依靠读者支持运营。欢迎成为免费或付费订阅者，获取最新文章并支持我们的工作。
+
+WideEP 在权重加载效率上也具备重大优势。对于 DeepSeek R1 这类模型，解码阶段受限于内存带宽瓶颈：核心制约因素是 GPU 从 HBM 加载权重的速度。采用 WideEP（如 DEP32）时，32 张 GPU 共同承载并一次性加载 670B 权重，每张卡仅需加载专属分片（约 21B）。这 32 颗芯片的 HBM 总带宽被全部用于加载单份模型副本。相比之下，若采用较窄的 EP 配合更多 DP（数据并行）副本（如 5xDEP8），5 个副本各自都需要一份完整的 670B 权重，导致系统层面出现 5×670B = 3.35T 的冗余权重加载。EP 在多芯片间分摊权重，而 DP 则是复制权重。正因如此，在 NVLink 等高带宽互连技术的加持下，更宽的 EP 能够带来单 GPU 吞吐量的显著跃升。
+
+https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png
+
+来源：SemiAnalysis InferenceX
+
+通常情况下，由于负载均衡的考量，低并发场景下更倾向于使用 TP。在小 Batch Size 时，EP 容易陷入 token 到专家路由不均的困境，导致部分 GPU 闲置吃灰，而另一部分则严重超载。TP 则巧妙避开了这一问题，因为每张 GPU 都持有每个专家的一块切片，始终能分到同等的工作量。在低并发场景下，这种负载不均带来的性能损耗，远超 TP 增加的通信开销。
+
+在更高并发下，这种权衡会发生反转。随着 Batch Size 增大，专家激活分布变得更加均匀，此时 EP 在通信和权重加载上的优势，便全面压倒了 TP 昂贵的逐层全归约 (All-reduce)。在曲线中段，TP+EP 混合配置能兼顾双重考量：在每个专家内部划定小规模 TP 组以确保负载均衡，同时在更广泛的 GPU 集群上拉满 EP，从而充分分摊权重并削减通信开销。
+
+对于追求更高交互性（低 Batch Size）的场景，一味做大向上扩展 (Scale-up) 规模往往无法带来更强的性能。基于 IB 网络的 B300 Disagg (分离) 架构与采用 NVL72 的 GB300 性能相当，因为此时的工作负载受限于延迟瓶颈，而非带宽瓶颈。NVL72 庞大的 NVLink 带宽优势毫无用武之地——毕竟传输中那点微小的 token 批次，连慢得多的 IB 链路都塞不满。
+
+预填充与解码分离同样发挥着关键作用。预填充阶段计算密集且呈突发性；解码阶段则处于内存带宽瓶颈且呈稳态。当两者共享同一批 GPU 时，势必相互干扰，进而导致延迟抖动与算力浪费。将它们剥离到专属的 GPU 资源池中，能让各自运行与其特性相匹配的工作负载，从而提升有效利用率。正因如此，在吞吐量-交互性曲线的中段，采用 Disagg (分离) 配置的 B200 击败了单节点 B200。相比于把两个阶段硬塞进单个 8-GPU 节点，预填充与解码分离结合跨越更多 IB 互联 GPU 的更宽泛 EP，能更高效地分摊权重。
+
+补充说明：TogetherAI 的 10x 推理工程师们在多轮对话流量中发现了一个规律——首轮预填充的需求与后续轮次截然不同。他们顺势将其分离，从而实现了更优的 TTFT (首个 Token 延迟) 性能。
+
+https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png
+
+来源：SemiAnalysis InferenceX

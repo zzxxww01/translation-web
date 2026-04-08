@@ -1,0 +1,298 @@
+{
+  "section_id": "01-introduction",
+  "section_title": "Introduction",
+  "section_title_translation": "引言",
+  "section_position": "2/36",
+  "article_theme": "A comprehensive benchmarking of AI inference hardware and software frameworks using InferenceXv2, emphasizing the critical role of advanced techniques like Disaggregated Prefill and Wide Expert Parallelism in optimizing the interactivity-throughput tradeoff and Total Cost of Ownership (TCO) across NVIDIA and AMD ecosystems.",
+  "structure_summary": "The article opens with an introduction to the InferenceXv2 benchmark and a primer on foundational technical concepts (tradeoffs, TP/EP/DP). It then dives into empirical benchmark results for DeepSeek R1 and GPT-OSS 120B, analyzing the impact of Disaggregated Serving and WideEP. Following this, it contrasts NVIDIA and AMD's hardware (Hopper/Blackwell vs. MI300/355) and software ecosystems (TRTLLM vs. SGLang/ATOM). The piece concludes with discussions on unit economics, accuracy evaluations, project infrastructure updates (Claude AI usage, GitHub Actions), and the future roadmap.",
+  "target_audience": "AI hardware engineers, ML inference optimization researchers, cloud infrastructure architects, and tech investors.",
+  "translation_voice": "Professional and technically rigorous in engineering explanations, but retaining the sarcastic, direct, and slightly cynical 'tech-bro' flavor when critiquing corporate marketing or software failures.",
+  "previous_section_title": "Introduction",
+  "next_section_title": "Key Observations and Results to Highlight",
+  "section_role": "Establishes the credibility, methodology, and open-source ethos of the InferenceXv2 project.",
+  "translation_notes": [
+    "Translate 'point-in-time benchmarks' accurately to convey static limitations (e.g., 静态的/特定时间点的基准测试).",
+    "Maintain a community-driven, welcoming tone while preserving the technical authority of the methodology."
+  ],
+  "key_points": [
+    "InferenceXv2 replaces static, point-in-time benchmarks with continuous, dynamic testing across hundreds of chips.",
+    "The project is fully open-source (Apache 2.0) to match the rapid pace of AI software evolution.",
+    "Provides free tooling (dashboard/visualizer) for the ML community to verify data independently."
+  ],
+  "guidelines": [
+    "Maintain technical precision for AI inference metrics (e.g., tok/s/user, TPOT, ISL/OSL). Do not translate acronyms like TP, EP, DP, but provide Chinese equivalents on their first appearance.",
+    "Capture the internet-native, cynical tone of the authors. Translate slang like 'framemog' as '性能碾压' and 'lookmaxxing' as '营销包装/疯狂画饼' to match the tech-community vibe.",
+    "Sentence Restructuring: For complex English sentences explaining parallelism (e.g., 'EP shards experts... with the drawback being an all-to-all collective...'), break them into shorter, logical Chinese clauses: 'EP 旨在切分专家权重以利用 MoE 的稀疏性。然而，其缺点在于 MoE 层需要执行 All-to-all 集合通信...'",
+    "Clearly distinguish between 'Prefill' (首代词/预填充) and 'Decode' (解码) when discussing Disaggregated Prefill, ensuring the memory vs. compute tradeoff is accurately conveyed.",
+    "When discussing 'composability' (可组合性) in the AMD section, ensure the translation clearly implies software feature interoperability (i.e., using FP4, WideEP, and Disagg simultaneously), not hardware modularity.",
+    "Preserve the 'Jensen Math' (老黄数学) and 'reality distortion field' (现实扭曲力场) cultural references, as they are established memes in the Chinese hardcore hardware community."
+  ],
+  "article_challenges": [
+    {
+      "location": "Section: DeepSeek Disagg +WideEP Results Deep Dive",
+      "issue": "Slang terms like 'framemog' and 'mogged' are used to describe performance benchmarks.",
+      "suggestion": "Translate as '性能碾压' or '被按在地上摩擦' to capture the informal, aggressive tone typical of hardware enthusiast communities.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section: Jensen Under Promising and Overdelivering",
+      "issue": "References to 'Jensen Math' and 'reality distortion field'.",
+      "suggestion": "Translate 'Jensen Math' as '老黄数学' or '老黄刀法' (widely understood in Chinese tech circles). Translate 'reality distortion field' as '现实扭曲力场' (Steve Jobs reference, well-known in China).",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section: Interactivity vs Throughput Tradeoff",
+      "issue": "Analogy of 'riding a metro bus vs a race car'.",
+      "suggestion": "Translate naturally: '这就像是乘坐公交车与驾驶赛车的区别。公交车能同时服务许多乘客，但频繁停靠会消耗时间；而其成本可以分摊到众多乘客身上。'",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section: AMD Composability Issue on FP4",
+      "issue": "'Composability' in this context refers to software features working together, not hardware components.",
+      "suggestion": "Ensure the translation uses '软件特性的可组合性' to avoid confusion with hardware modularity.",
+      "type": "accuracy"
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Disaggregated Prefill",
+      "term": "Disaggregated Prefill",
+      "translation": "Prefill-Decode 分离 / 首代词分离计算",
+      "strategy": "first_annotate",
+      "note": "The process of performing prefill and decode phases of LLM inference on separate nodes to optimize compute and memory utilization.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Wide Expert Parallelism (WideEP)",
+      "term": "Wide Expert Parallelism (WideEP)",
+      "translation": "宽专家并行 (WideEP)",
+      "strategy": "first_annotate",
+      "note": "Distributing expert weights of an MoE model across a large number of GPUs to handle massive active parameters.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Interactivity",
+      "term": "Interactivity",
+      "translation": "交互性 (Interactivity)",
+      "strategy": "first_annotate",
+      "note": "Measured in tok/s/user, describing how fast each user receives tokens (latency-focused).",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Throughput",
+      "term": "Throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "note": "Measured in tok/s, describing the total tokens a system generates across all users (capacity-focused).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "All-reduce",
+      "term": "All-reduce",
+      "translation": "All-reduce 集合通信",
+      "strategy": "first_annotate",
+      "note": "A collective communication operation where all processes reduce data and receive the result.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "All-to-all collective",
+      "term": "All-to-all collective",
+      "translation": "All-to-all 集合通信",
+      "strategy": "first_annotate",
+      "note": "A communication operation where every process sends data to every other process, heavily used in EP.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Composability",
+      "term": "Composability",
+      "translation": "可组合性",
+      "strategy": "translate",
+      "note": "The ability of different software optimizations (FP4, WideEP, Disagg) to be enabled simultaneously without breaking.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Multi Token Prediction (MTP)",
+      "term": "Multi Token Prediction (MTP)",
+      "translation": "多 Token 预测 (MTP)",
+      "strategy": "first_annotate",
+      "note": "A speculative decoding technique to draft multiple tokens ahead.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "KV cache offloading",
+      "term": "KV cache offloading",
+      "translation": "KV 缓存卸载",
+      "strategy": "translate",
+      "note": "Moving the Key-Value cache from GPU HBM to CPU memory or NVMe to save VRAM.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Total Cost of Ownership (TCO)",
+      "term": "Total Cost of Ownership (TCO)",
+      "translation": "总拥有成本 (TCO)",
+      "strategy": "first_annotate",
+      "note": "The purchase price of an asset plus the costs of operation.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "framemog",
+      "term": "framemog",
+      "translation": "性能碾压 / 降维打击",
+      "strategy": "translate",
+      "note": "Internet slang meaning to completely dominate or outperform someone/something else.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "lookmaxxing",
+      "term": "lookmaxxing",
+      "translation": "营销包装 / 疯狂画饼",
+      "strategy": "translate",
+      "note": "Internet slang for maximizing one's appearance, used here to mean aggressive corporate marketing/embellishment.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "jestermaxing",
+      "term": "jestermaxing",
+      "translation": "无脑跑测 / 徒劳折腾",
+      "strategy": "translate",
+      "note": "Slang for acting foolishly or wasting time on unproductive tasks.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    }
+  ]
+}

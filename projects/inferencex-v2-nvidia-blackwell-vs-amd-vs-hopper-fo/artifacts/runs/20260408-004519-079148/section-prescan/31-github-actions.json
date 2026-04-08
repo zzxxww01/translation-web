@@ -1,0 +1,36 @@
+{
+  "section_id": "31-github-actions",
+  "new_terms": [
+    {
+      "term": "single 9",
+      "suggested_translation": "单 9",
+      "context": "down to a single 9: 97.36% over the past 90 days (referring to availability nines)",
+      "confidence": 0.95
+    },
+    {
+      "term": "lazy loading",
+      "suggested_translation": "懒加载",
+      "context": "implement lazy loading for jobs when clicking on a workflow run",
+      "confidence": 0.98
+    },
+    {
+      "term": "workflow run",
+      "suggested_translation": "工作流运行",
+      "context": "when clicking on a workflow run",
+      "confidence": 0.95
+    },
+    {
+      "term": "uptime",
+      "suggested_translation": "正常运行时间",
+      "context": "updating its status page with aggregate uptime numbers",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "github actions": "GitHub Actions",
+    "gpu": "GPU",
+    "inferencex": "InferenceX"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:16:40.429516"
+}

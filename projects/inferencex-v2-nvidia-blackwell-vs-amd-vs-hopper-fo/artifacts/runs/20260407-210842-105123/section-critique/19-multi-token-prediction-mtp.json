@@ -1,0 +1,30 @@
+{
+  "section_id": "19-multi-token-prediction-mtp",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "resembles a prefill computation",
+        "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。",
+        "why_it_matters": "统一行业黑话，提升文章的“硬核内行”质感。",
+        "suggestion": "修改为“类似 Prefill（预填充）计算”或直接使用“类似 Prefill 计算”。"
+      },
+      {
+        "paragraph_index": 17,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "comparing MTP acceptance behavior between MTBench and our 1k1k benchmark",
+        "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。",
+        "why_it_matters": "使用更符合中文技术语境的表达，提升流畅度。",
+        "suggestion": "建议将“接受行为”修改为“接受表现”或“接受率分布”。"
+      }
+    ]
+  }
+}

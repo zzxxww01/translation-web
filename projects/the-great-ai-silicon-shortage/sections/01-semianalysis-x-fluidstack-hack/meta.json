@@ -1,0 +1,189 @@
+{
+  "section_id": "01-semianalysis-x-fluidstack-hack",
+  "title": "SemiAnalysis x Fluidstack Hackathon",
+  "title_translation": "SemiAnalysis x Fluidstack 黑客松",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We’re hosting a hackathon ahead of GTC this year on Sunday the 15th, in partnership with Fluidstack, and would love to have you join us!",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We’re hosting a hackathon ahead of GTC this year on Sunday the 15th, in partnership with Fluidstack, and would love to have you join us!",
+      "parent_block_plain_text": "We’re hosting a hackathon ahead of GTC this year on Sunday the 15th, in partnership with Fluidstack, and would love to have you join us!",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 136,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今年GTC开幕前夕，我们将于15日（周日）与Fluidstack联合举办一场黑客松，诚邀您的参与！",
+          "model": "pro",
+          "created_at": "2026-03-13T22:08:11.053553",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "今年GTC开幕前夕，我们将于15日（周日）与Fluidstack联合举办一场黑客松，诚邀您的参与！",
+          "model": "manual",
+          "created_at": "2026-03-14T21:23:15.157399",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "今年GTC开幕前夕，我们将于15日（周日）与Fluidstack联合举办一场黑客松，诚邀您的参与！",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Apply here: https://luma.com/SAxFSHack",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Apply here:",
+          "start": 0,
+          "end": 11,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": "https://luma.com/SAxFSHack",
+          "start": 12,
+          "end": 38,
+          "href": "https://luma.com/SAxFSHack",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Apply here:** [https://luma.com/SAxFSHack](https://luma.com/SAxFSHack)",
+      "parent_block_plain_text": "Apply here: https://luma.com/SAxFSHack",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Apply here:",
+          "start": 0,
+          "end": 11,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": "https://luma.com/SAxFSHack",
+          "start": 12,
+          "end": 38,
+          "href": "https://luma.com/SAxFSHack",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "STRONG_1",
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在此报名： https://luma.com/SAxFSHack",
+          "model": "pro",
+          "created_at": "2026-03-13T22:08:11.053657",
+          "tokenized_text": "[[[STRONG_1|在此报名：]]] [[[LINK_1|https://luma.com/SAxFSHack]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在此报名： https://luma.com/SAxFSHack",
+          "model": "manual",
+          "created_at": "2026-03-14T21:23:14.372042",
+          "tokenized_text": "[[[STRONG_1|在此报名：]]] [[[LINK_1|https://luma.com/SAxFSHack]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "在此报名： https://luma.com/SAxFSHack",
+      "confirmed_tokenized": "[[[STRONG_1|在此报名：]]] [[[LINK_1|https://luma.com/SAxFSHack]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:08:11.053674",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:23:16.927870",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!xoJj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc74983e-edab-47a0-801c-fffe0839a20e_4000x4000.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,677 @@
+{
+  "section_id": "08-crossbar-limits",
+  "title": "Crossbar Limits",
+  "title_translation": "Crossbar架构的局限性",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "As designers tried to increase core counts further, they ran into scaling limits of these early interconnects. As minimal latency and uniformity was desired, crossbar designs were used in an all-to-all fashion, where every core has a discrete link to all other cores on die. However, the number of links increased greatly with more cores, increasing complexity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0064",
+      "parent_block_index": 64,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As designers tried to increase core counts further, they ran into scaling limits of these early interconnects. As minimal latency and uniformity was desired, crossbar designs were used in an all-to-all fashion, where every core has a discrete link to all other cores on die. However, the number of links increased greatly with more cores, increasing complexity.",
+      "parent_block_plain_text": "As designers tried to increase core counts further, they ran into scaling limits of these early interconnects. As minimal latency and uniformity was desired, crossbar designs were used in an all-to-all fashion, where every core has a discrete link to all other cores on die. However, the number of links increased greatly with more cores, increasing complexity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 361,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着设计人员试图进一步增加核心数量，他们触及了这些早期互连架构的扩展瓶颈。由于追求极低延迟与一致性，交叉开关（Crossbar）设计采用了全互连模式，即裸片上的每个核心都有一条独立链路与其他所有核心相连。然而，随着核心数量增多，链路数量激增，导致复杂性大幅上升。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842745",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "2 cores: 1 connection",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0065",
+      "parent_block_index": 65,
+      "parent_block_type": "p",
+      "parent_block_markdown": "2 cores: 1 connection",
+      "parent_block_plain_text": "2 cores: 1 connection",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 21,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2 个核心：1 条连接",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842807",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "4 cores: 6 connections",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0066",
+      "parent_block_index": 66,
+      "parent_block_type": "p",
+      "parent_block_markdown": "4 cores: 6 connections",
+      "parent_block_plain_text": "4 cores: 6 connections",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "4 个核心：6 条连接",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842835",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "6 cores: 15 connections",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0067",
+      "parent_block_index": 67,
+      "parent_block_type": "p",
+      "parent_block_markdown": "6 cores: 15 connections",
+      "parent_block_plain_text": "6 cores: 15 connections",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "6 个核心：15 条连接",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842861",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "8 cores: 28 connections",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "p",
+      "parent_block_markdown": "8 cores: 28 connections",
+      "parent_block_plain_text": "8 cores: 28 connections",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "8 个核心：28 条连接",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842886",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The practical limit for most designs ended at 4 cores, with higher core count processors achieved with multi-chip modules and dual-core modules that shared and L2 cache and data fabric socket between core pairs. The crossbar wiring is usually done in the metal lines above the shared L3 caches, saving area. Intel’s 6-core Dunnington in 2008 used three dual-core modules with 16MB of shared L3.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The practical limit for most designs ended at 4 cores, with higher core count processors achieved with multi-chip modules and dual-core modules that shared and L2 cache and data fabric socket between core pairs. The crossbar wiring is usually done in the metal lines above the shared L3 caches, saving area. Intel’s 6-core Dunnington in 2008 used three dual-core modules with 16MB of shared L3.",
+      "parent_block_plain_text": "The practical limit for most designs ended at 4 cores, with higher core count processors achieved with multi-chip modules and dual-core modules that shared and L2 cache and data fabric socket between core pairs. The crossbar wiring is usually done in the metal lines above the shared L3 caches, saving area. Intel’s 6-core Dunnington in 2008 used three dual-core modules with 16MB of shared L3.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 394,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "大多数设计的实际极限止步于 4 个核心，核心数更高的处理器则是通过多芯片模块和双核模块来实现的，这些模块在核心对之间共享L2缓存与数据网络端口。交叉开关布线通常在共享L3缓存上方的金属层中完成，以节省面积。2008 年问世的英特尔 6 核 Dunnington 处理器便采用了三个双核模块，并配备 16MB 共享L3缓存。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842909",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.842933",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "AMD Opteron Istanbul 6-core die. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Opteron Istanbul 6-core die. Source: AMD",
+          "start": 0,
+          "end": 44,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Opteron Istanbul 6-core die. Source: AMD*",
+      "parent_block_plain_text": "AMD Opteron Istanbul 6-core die. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Opteron Istanbul 6-core die. Source: AMD",
+          "start": 0,
+          "end": 44,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 44,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 皓龙 Istanbul 6 核裸片图。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.843038",
+          "tokenized_text": "[[[EM_1|AMD 皓龙 Istanbul 6 核裸片图。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "AMD launched their 6-core Istanbul in 2009 with a 6-way crossbar and 6MB L3. Their 12-core Magny-Cours in 2010 used two 6-core dies, with the 16-core Interlagos consisting of two dies each with four Bulldozer dual-core modules.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD launched their 6-core Istanbul in 2009 with a 6-way crossbar and 6MB L3. Their 12-core Magny-Cours in 2010 used two 6-core dies, with the 16-core Interlagos consisting of two dies each with four Bulldozer dual-core modules.",
+      "parent_block_plain_text": "AMD launched their 6-core Istanbul in 2009 with a 6-way crossbar and 6MB L3. Their 12-core Magny-Cours in 2010 used two 6-core dies, with the 16-core Interlagos consisting of two dies each with four Bulldozer dual-core modules.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 227,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 于 2009 年发布 6 核 Istanbul 处理器，配备 6 路交叉开关与 6MB L3 缓存。其 2010 年推出的 12 核 Magny-Cours 采用了两块 6 核裸片，而 16 核 Interlagos 则由两块裸片组成，每块裸片包含四个推土机双核模块。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:55:38.843066",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母/数字之间缺少空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将 CPU 架构代号 Bulldozer 翻译为了“推土机”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

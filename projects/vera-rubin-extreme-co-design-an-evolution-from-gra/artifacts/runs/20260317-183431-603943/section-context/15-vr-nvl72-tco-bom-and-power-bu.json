@@ -1,0 +1,282 @@
+{
+  "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+  "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+  "section_title_translation": "VR NVL72 TCO：BOM 与功耗预算分析",
+  "section_position": "16/17",
+  "article_theme": "A comprehensive technical and economic deep dive into Nvidia's Rubin (VR NVL72) platform, highlighting its transition to a modular cableless design, 100% liquid cooling, and strategic TCO positioning against AMD and Groq.",
+  "structure_summary": "The article follows a top-down engineering logic: starting with silicon-level specifications (Rubin GPUs, Vera CPUs), moving into the rack-scale architecture (Oberon), then performing a 'tear-down' style analysis of the Compute Tray (cables, thermal, power, mechanical). It concludes with macro-level infrastructure implications (cooling/power vendors), networking evolution (NVLink 6), and a rigorous financial TCO/BoM comparison with competitors.",
+  "target_audience": "Semiconductor industry professionals, hardware engineers, and institutional investors.",
+  "translation_voice": "The Chinese voice should be professional, precise, and 'hardcore' (硬核). It should avoid flowery language, favoring clear logical transitions and accurate technical nomenclature common in the Taiwan/Mainland China tech sectors.",
+  "previous_section_title": "Assembly Automation and Logistics",
+  "next_section_title": "Groq LPU Decode Rack",
+  "section_role": "待分析",
+  "translation_notes": [],
+  "key_points": [],
+  "guidelines": [
+    "Prioritize technical accuracy over readability for engineering specs (e.g., SerDes counts, pitch measurements).",
+    "Use 'Rack-scale' (机柜级) and 'Chassis' (机箱) consistently to distinguish between the two form factors.",
+    "Maintain the 'SemiAnalysis' brand voice by being direct about 'winners and losers' in the supply chain.",
+    "Keep product code names (Rubin, Vera, Blackwell, Oberon, Strata, Bianca) in English.",
+    "Ensure the distinction between 'Dense' and 'Sparse' PFLOPS is clear, as this is central to the TCO argument.",
+    "Translate 'BoM' as '物料清单' but can keep the acronym in parentheses for the first mention."
+  ],
+  "article_challenges": [
+    {
+      "location": "Networking Section",
+      "issue": "Complex networking hierarchies (leaf, spine, core) and 1.6T connectivity terminology.",
+      "suggestion": "Ensure strict adherence to networking layer terminology and keep SerDes/OSFP terms in English where appropriate."
+    },
+    {
+      "location": "Thermal/Power Delivery",
+      "issue": "Transition between mechanical units (mm, microns) and electrical units (VDC, Amps).",
+      "suggestion": "Maintain precision in units and use standard Chinese engineering terms for 'step-down' (降压) and 'busbar' (母线)."
+    },
+    {
+      "location": "Groq Section",
+      "issue": "Nuance between 'acquisition' and 'licensing agreement'.",
+      "suggestion": "Be extremely careful with the strike-through text (~acquired Groq~) to reflect the author's correction regarding the licensing agreement."
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Compute Tray",
+      "term": "Compute Tray",
+      "translation": "算力托盘",
+      "strategy": "translate",
+      "note": "The modular unit within the rack containing GPUs, CPUs, and memory.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Cableless Design",
+      "term": "Cableless Design",
+      "translation": "无线缆设计",
+      "strategy": "translate",
+      "note": "A design replacing internal flyover cables with board-to-board connectors to simplify assembly.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Flyover Cables",
+      "term": "Flyover Cables",
+      "translation": "架空线缆",
+      "strategy": "first_annotate",
+      "note": "High-speed copper cables that 'fly over' the PCB to reduce signal loss.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Coldplate",
+      "term": "Coldplate",
+      "translation": "冷板",
+      "strategy": "translate",
+      "note": "The liquid-cooled metal plate in direct contact with the silicon.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Quick Disconnect (QD/MQD)",
+      "term": "Quick Disconnect (QD/MQD)",
+      "translation": "快速接头",
+      "strategy": "first_annotate",
+      "note": "Connectors for liquid cooling loops that allow for easy swapping of components without leaks.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Sparsity",
+      "term": "Sparsity",
+      "translation": "稀疏性",
+      "strategy": "translate",
+      "note": "A technique in AI inference to skip zero-value weights to boost performance.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Radix",
+      "term": "Radix",
+      "translation": "吞吐基数",
+      "strategy": "first_annotate",
+      "note": "The number of ports on a network switch.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "TCO",
+      "term": "TCO",
+      "translation": "总拥有成本",
+      "strategy": "translate",
+      "note": "Total Cost of Ownership, including capex and opex.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Decode Loop",
+      "term": "Decode Loop",
+      "translation": "Decode 环节",
+      "strategy": "first_annotate",
+      "note": "The iterative process in LLM inference where tokens are generated one by one.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "etching",
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "deposition",
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "CMP",
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "note": "Chemical Mechanical Planarization",
+      "first_occurrence_note": true
+    }
+  ]
+}

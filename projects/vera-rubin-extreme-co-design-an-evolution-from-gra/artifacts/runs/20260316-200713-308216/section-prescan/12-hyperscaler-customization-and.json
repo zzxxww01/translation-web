@@ -1,0 +1,46 @@
+{
+  "section_id": "12-hyperscaler-customization-and",
+  "new_terms": [
+    {
+      "term": "hyperscaler",
+      "suggested_translation": "超大规模云服务商",
+      "context": "Refers to large-scale cloud providers like AWS, Google, and Meta who customize hardware.",
+      "confidence": 0.98
+    },
+    {
+      "term": "ODM",
+      "suggested_translation": "原始设计制造商",
+      "context": "Original Design Manufacturers like Quanta or Wiwynn that handle hyperscaler assembly.",
+      "confidence": 0.95
+    },
+    {
+      "term": "JDM",
+      "suggested_translation": "联合设计制造",
+      "context": "Joint Design Manufacturing, a collaborative model between chip vendors and hyperscalers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "L11",
+      "suggested_translation": "L11 级组装",
+      "context": "Rack-level integration and testing stage in the assembly logistics chain.",
+      "confidence": 0.95
+    },
+    {
+      "term": "L12",
+      "suggested_translation": "L12 级组装",
+      "context": "Data center-level integration and final deployment stage.",
+      "confidence": 0.95
+    },
+    {
+      "term": "reference design",
+      "suggested_translation": "参考设计",
+      "context": "Standardized blueprints provided by NVIDIA for partners to build Blackwell systems.",
+      "confidence": 0.92
+    }
+  ],
+  "term_usages": {
+    "l6 / l10 assembly": "L6 / L10 组装级别"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:54:34.232972"
+}

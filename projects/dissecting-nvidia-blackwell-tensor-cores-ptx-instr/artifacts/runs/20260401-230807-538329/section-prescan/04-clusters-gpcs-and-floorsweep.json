@@ -1,0 +1,49 @@
+{
+  "section_id": "04-clusters-gpcs-and-floorsweep",
+  "new_terms": [
+    {
+      "term": "cooperative grid array (cga)",
+      "suggested_translation": "协作网格阵列 (CGA)",
+      "context": "Synonym for thread block clusters or CTA clusters introduced in Hopper.",
+      "confidence": 0.95
+    },
+    {
+      "term": "persistent cta",
+      "suggested_translation": "持久化 CTA (Persistent CTA)",
+      "context": "A kernel design pattern where a fixed number of CTAs run for the duration of the kernel.",
+      "confidence": 0.9
+    },
+    {
+      "term": "co-scheduled",
+      "suggested_translation": "协同调度",
+      "context": "The guarantee that CTAs in a cluster are scheduled on the same GPC simultaneously.",
+      "confidence": 0.85
+    },
+    {
+      "term": "preferred cluster size",
+      "suggested_translation": "首选集群大小",
+      "context": "A launch attribute in SM100 allowing kernels to request an ideal cluster dimension.",
+      "confidence": 0.95
+    },
+    {
+      "term": "fallback cluster size",
+      "suggested_translation": "回退集群大小",
+      "context": "A secondary cluster size used when the preferred size cannot be accommodated due to floorsweeping.",
+      "confidence": 0.95
+    },
+    {
+      "term": "quantization issue",
+      "suggested_translation": "量化问题 (Quantization Issue)",
+      "context": "Refers to the idle SMs caused by cluster sizes not evenly dividing the available SMs in a GPC.",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "floorsweeping": "核心屏蔽 (Floorsweeping)",
+    "cluster": "集群 (Cluster)",
+    "cta": "协作线程阵列 (CTA)",
+    "gpc": "图形处理集群 (GPC)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:16:48.362405"
+}

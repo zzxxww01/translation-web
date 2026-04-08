@@ -1,0 +1,68 @@
+{
+  "section_id": "33-migration-to-multi-turn-real-m",
+  "new_terms": [
+    {
+      "term": "prefix caching",
+      "suggested_translation": "前缀缓存",
+      "context": "we disable prefix caching in all our benchmarks",
+      "confidence": 1.0
+    },
+    {
+      "term": "single-turn",
+      "suggested_translation": "单轮",
+      "context": "all the random data is single-turn, meaning each conversation contains only one prompt and one response",
+      "confidence": 1.0
+    },
+    {
+      "term": "multi-turn",
+      "suggested_translation": "多轮",
+      "context": "we will create a basic multi-turn benchmark",
+      "confidence": 1.0
+    },
+    {
+      "term": "HBM3e",
+      "suggested_translation": "HBM3e",
+      "context": "MI355X has 288GB HBM3e versus B200s 192GB",
+      "confidence": 1.0
+    },
+    {
+      "term": "bidirectional CPU-GPU bandwidth",
+      "suggested_translation": "双向 CPU-GPU 带宽",
+      "context": "these chips have 900GB/s bidirectional CPU-GPU bandwidth",
+      "confidence": 0.95
+    },
+    {
+      "term": "inference engine",
+      "suggested_translation": "推理引擎",
+      "context": "test more SOTA inference engine features",
+      "confidence": 1.0
+    },
+    {
+      "term": "tool use",
+      "suggested_translation": "工具调用",
+      "context": "include extremely long context conversations as well as tool use",
+      "confidence": 0.95
+    },
+    {
+      "term": "Codex",
+      "suggested_translation": "Codex",
+      "context": "With the rise of Claude Code, Codex, and Kimi",
+      "confidence": 1.0
+    },
+    {
+      "term": "Kimi",
+      "suggested_translation": "Kimi",
+      "context": "With the rise of Claude Code, Codex, and Kimi",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "agentic coding": "智能体编程",
+    "kv cache offloading": "KV Cache 卸载",
+    "isl": "ISL",
+    "osl": "OSL",
+    "pareto frontier curve": "帕累托前沿 (Pareto frontier)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:19:52.233841"
+}

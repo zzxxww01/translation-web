@@ -1,0 +1,1643 @@
+{
+  "section_id": "19-multi-token-prediction-mtp",
+  "title": "Multi Token Prediction (MTP)",
+  "title_translation": "多 Token 预测（MTP）",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Speculative decoding reduces the cost of autoregressive generation by using a small, inexpensive draft model to propose several tokens ahead. The large model then checks the proposed tokens in a single forward pass that resembles a prefill computation. For a given input sequence length, a single forward pass can take roughly the same time when the input has N more tokens. Speculative decoding uses this property to run inference on a smaller model to draft multiple tokens for the main model to verify with a single forward pass, producing at most N additional tokens in a similar time budget.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0227",
+      "parent_block_index": 227,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Speculative decoding reduces the cost of autoregressive generation by using a small, inexpensive draft model to propose several tokens ahead. The large model then checks the proposed tokens in a single forward pass that resembles a prefill computation. For a given input sequence length, a single forward pass can take roughly the same time when the input has N more tokens. Speculative decoding uses this property to run inference on a smaller model to draft multiple tokens for the main model to verify with a single forward pass, producing at most N additional tokens in a similar time budget.",
+      "parent_block_plain_text": "Speculative decoding reduces the cost of autoregressive generation by using a small, inexpensive draft model to propose several tokens ahead. The large model then checks the proposed tokens in a single forward pass that resembles a prefill computation. For a given input sequence length, a single forward pass can take roughly the same time when the input has N more tokens. Speculative decoding uses this property to run inference on a smaller model to draft multiple tokens for the main model to verify with a single forward pass, producing at most N additional tokens in a similar time budget.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 596,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "投机解码通过使用一个小巧且成本低廉的草稿模型提前预测几个 token，从而降低自回归生成的成本。随后，大模型在一次类似预填充计算的前向传播中，对这些预测的 token 进行校验。对于给定的输入序列长度，当输入增加 N 个 token 时，单次前向传播的耗时基本不变。投机解码正是利用了这一特性，先在较小的模型上运行推理，为大模型起草多个 token，大模型只需一次前向传播即可完成校验，从而在相近的时间预算内最多额外生成 N 个 token。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174167",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0228",
+      "parent_block_index": 228,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174253",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!V6f0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2b2aa12-c308-4f4b-84f7-969228600ce5_2296x1126.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: Brendan Bycroft",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Brendan Bycroft",
+          "start": 8,
+          "end": 23,
+          "href": "https://bbycroft.net/llm",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0229",
+      "parent_block_index": 229,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Brendan Bycroft](https://bbycroft.net/llm)",
+      "parent_block_plain_text": "Source: Brendan Bycroft",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Brendan Bycroft",
+          "start": 8,
+          "end": 23,
+          "href": "https://bbycroft.net/llm",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Brendan Bycroft",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798230",
+          "tokenized_text": "来源：[[[LINK_1|Brendan Bycroft]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Brendan Bycroft",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174376",
+          "tokenized_text": "来源：[[[LINK_1|Brendan Bycroft]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Brendan Bycroft",
+      "confirmed_tokenized": "来源：[[[LINK_1|Brendan Bycroft]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "This assumption regarding additional token production with the same time budget is strongest for dense models because batched verification can reuse the same weight stream across multiple positions. For Mixture-of-Experts models, different tokens may route to different experts, so verifying multiple draft tokens can activate more experts than single-token decoding and force additional expert weights to be fetched from memory. As shown in the Mixtral 8x7B Instruct model results in the EAGLE paper, this extra memory traffic erodes bandwidth savings and can make verification notably comparable to a standard decoding step.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0230",
+      "parent_block_index": 230,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This assumption regarding additional token production with the same time budget is strongest for dense models because batched verification can reuse the same weight stream across multiple positions. For Mixture-of-Experts models, different tokens may route to different experts, so verifying multiple draft tokens can activate more experts than single-token decoding and force additional expert weights to be fetched from memory. As shown in the Mixtral 8x7B Instruct model results in the EAGLE paper, this extra memory traffic erodes bandwidth savings and can make verification notably comparable to a standard decoding step.",
+      "parent_block_plain_text": "This assumption regarding additional token production with the same time budget is strongest for dense models because batched verification can reuse the same weight stream across multiple positions. For Mixture-of-Experts models, different tokens may route to different experts, so verifying multiple draft tokens can activate more experts than single-token decoding and force additional expert weights to be fetched from memory. As shown in the Mixtral 8x7B Instruct model results in the EAGLE paper, this extra memory traffic erodes bandwidth savings and can make verification notably comparable to a standard decoding step.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 626,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种“在相同时间预算内生成额外 token”的假设在稠密模型中最为成立，因为批处理校验可以在多个位置复用同一权重流。而对于混合专家（MoE）模型，不同的 token 可能会被路由到不同的专家，因此校验多个草稿 token 激活的专家数量会多于单 token 解码，迫使系统从内存中读取更多专家权重。正如 EAGLE 论文中 Mixtral 8x7B Instruct 模型的结果所示，这种额外的内存流量吞噬了省下的带宽红利，甚至可能导致校验阶段的耗时与标准解码步骤相差无几。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174404",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Multi-token prediction pursues similar benefits without requiring a separate draft model. Auxiliary prediction heads are added to the model architecture, so a single model can propose several future tokens from the same underlying representation. This improves distribution alignment because the proposals come from the same model that ultimately scores them. Multi-token prediction also avoids the operational complexity of serving an additional model while still enabling multi-token generation strategies but requires the MTP heads to be pretrained alongside the main model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0231",
+      "parent_block_index": 231,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Multi-token prediction pursues similar benefits without requiring a separate draft model. Auxiliary prediction heads are added to the model architecture, so a single model can propose several future tokens from the same underlying representation. This improves distribution alignment because the proposals come from the same model that ultimately scores them. Multi-token prediction also avoids the operational complexity of serving an additional model while still enabling multi-token generation strategies but requires the MTP heads to be pretrained alongside the main model.",
+      "parent_block_plain_text": "Multi-token prediction pursues similar benefits without requiring a separate draft model. Auxiliary prediction heads are added to the model architecture, so a single model can propose several future tokens from the same underlying representation. This improves distribution alignment because the proposals come from the same model that ultimately scores them. Multi-token prediction also avoids the operational complexity of serving an additional model while still enabling multi-token generation strategies but requires the MTP heads to be pretrained alongside the main model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 577,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "多 Token 预测（MTP）追求类似的收益，但无需单独的草稿模型。通过在模型架构中加入辅助预测头，单一模型就能基于相同的底层表示预测未来几个 token。这改善了分布对齐，因为预测结果和最终评分均出自同一模型。MTP 还能在支持多 token 生成策略的同时，避免部署额外模型带来的运维复杂性，不过它要求 MTP 预测头必须与主模型一起进行预训练。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174425",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0232",
+      "parent_block_index": 232,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174444",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!KL8_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F27ee5a46-78b5-40dd-b76d-1f096e0ae06d_1755x1154.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0233",
+      "parent_block_index": 233,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427816",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174509",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Across all SKUs, enabling MTP results in performance gains. By making use of the typically unused logits to verify the extra tokens, minimal compute overhead is added, saving extra expensive weight loads during decode.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0234",
+      "parent_block_index": 234,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Across all SKUs, enabling MTP results in performance gains. By making use of the typically unused logits to verify the extra tokens, minimal compute overhead is added, saving extra expensive weight loads during decode.",
+      "parent_block_plain_text": "Across all SKUs, enabling MTP results in performance gains. By making use of the typically unused logits to verify the extra tokens, minimal compute overhead is added, saving extra expensive weight loads during decode.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 218,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在所有 SKU 上，启用 MTP 都能带来性能提升。通过利用通常闲置的 Logits 来校验额外的 token，该方法仅引入微乎其微的计算开销，却能在解码期间省下昂贵的额外权重加载成本。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174532",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0235",
+      "parent_block_index": 235,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174553",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!HkQ0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb5fc8fa-d129-475c-bb87-664e08bc6179_1773x1151.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0236",
+      "parent_block_index": 236,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427825",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174609",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "At large batch sizes, the inference regime is less memory-bandwidth bound compared to for low batch sizes. Since speculative decoding (including MTP) works by trading excess compute for fewer memory-bound decoding steps, this extra verification work from speculative tokens may not fit cleanly into slack, resulting in smaller improvements at high batch sizes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0237",
+      "parent_block_index": 237,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At large batch sizes, the inference regime is less memory-bandwidth bound compared to for low batch sizes. Since speculative decoding (including MTP) works by trading excess compute for fewer memory-bound decoding steps, this extra verification work from speculative tokens may not fit cleanly into slack, resulting in smaller improvements at high batch sizes.",
+      "parent_block_plain_text": "At large batch sizes, the inference regime is less memory-bandwidth bound compared to for low batch sizes. Since speculative decoding (including MTP) works by trading excess compute for fewer memory-bound decoding steps, this extra verification work from speculative tokens may not fit cleanly into slack, resulting in smaller improvements at high batch sizes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 360,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在大 Batch Size 下，推理过程受内存带宽的限制弱于低 Batch Size 场景。投机解码（包含 MTP）的本质是用冗余算力换取更少的访存受限解码步数。因此，投机 Token 带来的额外校验工作可能无法完美填补算力空隙（slack）。这导致在大 Batch Size 下的性能提升幅度较小。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174632",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "In terms of cost, MTP can drive huge cost savings, in the below table, we see that DeepSeek-R1-0528 run on FP4 using Dynamo TRT costs $0.251 per million total tokens, but enabling MTP can push costs down dramatically to only $0.057 per million total tokens.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0238",
+      "parent_block_index": 238,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In terms of cost, MTP can drive huge cost savings, in the below table, we see that DeepSeek-R1-0528 run on FP4 using Dynamo TRT costs $0.251 per million total tokens, but enabling MTP can push costs down dramatically to only $0.057 per million total tokens.",
+      "parent_block_plain_text": "In terms of cost, MTP can drive huge cost savings, in the below table, we see that DeepSeek-R1-0528 run on FP4 using Dynamo TRT costs $0.251 per million total tokens, but enabling MTP can push costs down dramatically to only $0.057 per million total tokens.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 257,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "成本方面，MTP 能带来巨幅节省。下表显示，使用 Dynamo TRT 以 FP4 精度运行 DeepSeek-R1-0528 时，每百万总 Token 成本为 0.251 美元。一旦启用 MTP，该成本便一路陡降至仅 0.057 美元。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174654",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0239",
+      "parent_block_index": 239,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174674",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_ljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdcf44984-9cb9-49ae-b35a-aeb5b5d14244_1566x1778.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0240",
+      "parent_block_index": 240,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427833",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174730",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "In all configs, when all else is held equal, using MTP with DeepSeek R1 increases interactivity with no significant impact on model accuracy. This is in line with the DeepSeek V3 tech report findings.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0241",
+      "parent_block_index": 241,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In all configs, when all else is held equal, using MTP with DeepSeek R1 increases interactivity with no significant impact on model accuracy. This is in line with the DeepSeek V3 tech report findings.",
+      "parent_block_plain_text": "In all configs, when all else is held equal, using MTP with DeepSeek R1 increases interactivity with no significant impact on model accuracy. This is in line with the DeepSeek V3 tech report findings.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 200,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在所有配置下，只要控制其他变量不变，搭配 DeepSeek R1 使用 MTP 均能提升交互性。且该操作对模型精度并无显著影响。这与 DeepSeek V3 技术报告的结论高度吻合。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174752",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0242",
+      "parent_block_index": 242,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174773",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!MXVB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1143164c-b38f-4ca9-888a-e9e270d6ef48_1757x1187.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0243",
+      "parent_block_index": 243,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427841",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174836",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Regarding the validity of MTP performance numbers, one may argue that the distribution of a synthetic dataset may not resemble real data. However, comparing MTP acceptance behavior between MTBench and our 1k1k benchmark, we see a very similar distribution confirming that our InferenceX benchmark is a good proxy for real world production performance. That said, InferenceX is not perfect and we are always looking to improve. If you want to be part of the mission, apply to join our special projects team here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "apply to join our special projects team here",
+          "start": 466,
+          "end": 510,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0244",
+      "parent_block_index": 244,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Regarding the validity of MTP performance numbers, one may argue that the distribution of a synthetic dataset may not resemble real data. However, comparing MTP acceptance behavior between MTBench and our 1k1k benchmark, we see a very similar distribution confirming that our InferenceX benchmark is a good proxy for real world production performance. That said, InferenceX is not perfect and we are always looking to improve. If you want to be part of the mission, [apply to join our special projects team here](https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1).",
+      "parent_block_plain_text": "Regarding the validity of MTP performance numbers, one may argue that the distribution of a synthetic dataset may not resemble real data. However, comparing MTP acceptance behavior between MTBench and our 1k1k benchmark, we see a very similar distribution confirming that our InferenceX benchmark is a good proxy for real world production performance. That said, InferenceX is not perfect and we are always looking to improve. If you want to be part of the mission, apply to join our special projects team here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "apply to join our special projects team here",
+          "start": 466,
+          "end": 510,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 511,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "关于 MTP 性能数据的有效性，有人可能会质疑合成数据集的分布偏离真实数据。然而，对比 MTBench 与我们的 1k1k 基准测试中的 MTP 接受情况，我们发现两者分布高度一致。这印证了 InferenceX 基准测试是衡量真实生产环境性能的可靠参照。话虽如此，InferenceX 仍非完美，我们始终在持续迭代。如果你想参与这项使命，欢迎在此申请加入我们的特别项目团队。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.174968",
+          "tokenized_text": "关于 MTP 性能数据的有效性，有人可能会质疑合成数据集的分布偏离真实数据。然而，对比 MTBench 与我们的 1k1k 基准测试中的 MTP 接受情况，我们发现两者分布高度一致。这印证了 InferenceX 基准测试是衡量真实生产环境性能的可靠参照。话虽如此，InferenceX 仍非完美，我们始终在持续迭代。如果你想参与这项使命，[[[LINK_1|欢迎在此申请加入我们的特别项目团队]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0245",
+      "parent_block_index": 245,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.175011",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!d8l8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c4a7c01-3d56-486d-b959-cb4b6468f56f_2408x1390.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0246",
+      "parent_block_index": 246,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427847",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:55:03.175104",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 prefill 译为“预填充”。虽然在字面上准确，但在大模型推理的硬核技术语境中，“Prefill”通常作为专有名词直接使用。且根据术语表“Disaggregated Prefill”译为“分离式 Prefill”，此处保留英文或加注会更契合目标读者的阅读习惯。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 acceptance behavior 直译为“接受行为”。在投机解码（Speculative Decoding）的语境下，这里指的是草稿 Token 被主模型接受的统计表现或规律，“行为”一词略显拟人化且生硬。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

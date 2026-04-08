@@ -1,0 +1,29 @@
+{
+  "section_id": "18-amd-atom-engine",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.14,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.3,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "AMD 推出了一款名为 ATOM 的新推理引擎。ATOM 能提供稍好一点的单节点性能，但严重缺失大量关键特性，导致其根本无法用于实际工作负载。例如，它不支持 NVMe 或 CPU KVCache 卸载、工具解析、宽专家并行（Wide Expert Parallelism）以及分离式 Serving。这导致目前在生产环境中根本没有客户使用它。英伟达的 TRTLLM 在 TogetherAI 等公司全球每小时生成数十亿个 token，并且确实支持工具解析等特性；相比之下，由于缺乏上述特性，目前没有任何 Token 工厂在使用 ATOM。",
+    "此外，由于 AMD 提供的工程和 GPU 资源匮乏，vLLM 等开源推理引擎的维护者对 AMD 感到失望。例如，vLLM 首席维护者 Simon Mo 在 GitHub 的一份 RFC 中表示，目前仍然没有可用的 MI355X 供他添加到 vLLM 的 CI (持续集成) 中，这直接导致了糟糕的用户体验。目前 vLLM 上针对 MI355X 的测试数量为零，而英伟达的 B200 在 vLLM 上已有大量测试。同样，vLLM 上的 MI300X CI 机器数量依然不足。上游 vLLM 至少还需要 20 台 MI300、20 台 MI325 和 20 台 MI355X 机器，才能达到与 CUDA 同等的易用性水平。",
+    "我们 SemiAnalysis 一直在敦促 AMD 为 vLLM 贡献更多算力，并在过去几周取得了一些进展。vLLM 将开始获得几台 MI355X 机器，从而将 CI 测试对等度从 0% 提升至非零。在即将发布的《AMD 现状》（State of AMD）文章中，我们将深入探讨 AMD 此前在 vLLM、SGLang、PyTorch CI 机器贡献上的拉胯表现，以及 Anush 是如何着手解决这一问题的。在 SemiAnalysis，我们将建立内部仪表盘，专门追踪 AMD 和英伟达在 vLLM、SGLang、PyTorch 和 JAX 上运行的测试数量及质量。",
+    "此外，vLLM 维护者表示，正是由于机器资源匮乏，他们无法为 ROCm 提供 vLLM 的首发 (Day 0) 支持。这种上市时间上的巨大差距导致 ROCm 持续落后，也给英伟达留下了巨大的市场空档，使其得以继续攫取高达 75% 的疯狂毛利率（相当于成本的 4 倍加价）。",
+    "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png",
+    "来源：Github",
+    "最后，AMD 缺乏足够多“通过特性护航和代码所有权展现出持续参与上游建设”的代码提交者，同时也缺乏能够审查自家代码的审核员。这就是为什么 ROCm vLLM 的开发节奏远比 CUDA vLLM 慢得多的原因。",
+    "AMD 内部有许多才华横溢的 10 倍工程师在开发 ATOM，我们敦促 AMD 管理层考虑重新部署这些 10 倍工程师，让他们去开发人们真正使用的库和框架，比如 vLLM 和 SGLang。",
+    "正如前文所述，AMD 也必须优先解决 FP4、wideEP 以及分离式 Serving 的可组合性问题，而非过度执迷于单节点的 FP4 优化。",
+    "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

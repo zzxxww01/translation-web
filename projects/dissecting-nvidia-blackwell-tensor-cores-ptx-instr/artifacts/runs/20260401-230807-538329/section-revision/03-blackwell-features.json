@@ -1,0 +1,25 @@
+{
+  "section_id": "03-blackwell-features",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.425,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "从 Hopper 到 Blackwell，英伟达对架构进行了多项渐进式改进，并调整了 MMA 相关指令的 PTX 抽象。我们在英伟达 Tensor Core 演进一文中详细探讨了大部分改进。主要显著变化如下：",
+    "引入张量内存 (TMEM) 用于存储 MMA 累加器。线程不再隐式持有 MMA 运算结果，而是由软件在 MMA 作用域内对 TMEM 进行显式管理。",
+    "tcgen05 操作现在由单一线程代表整个协作线程阵列 (CTA) 发出，而不再像前几代那样在 warp 或 warpgroup 作用域内发出。这一点体现在 CuTe MMA atom 的设计中，它现在使用 ThrID = Layout<1>`` [在 Blackwell 架构中](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mmatraitssm100.hpp#L1045)，而不是 `ThrID = Layout`<128>``，后者常见于 Hopper 的 warpgroup 作用域 MMA 中。",
+    "支持在成对的协作 CTA 之间执行 TPC 作用域的张量内存加速器 (TMA) 和 MMA 操作，这在 PTX 中体现为 cta_group::2，在 SASS 中体现为 2CTA。构成一个 TPC 的两个 SM 可以在共享操作数上执行 tcgen05.mma，通过降低每个 CTA 的共享内存 (SMEM) 带宽需求，从而能够执行更高计算访存比的 MMA 指令。后文我们将证明，这种操作数共享机制对于充分利用现有的 MMA 吞吐量是必不可少的。",
+    "原生支持带微缩放 (micro-scaling) 的子字节数据类型。",
+    "集群启动控制 (CLC) 为持久化 CTA 内核中的动态工作调度提供硬件支持（将在后续文章中详细探讨）。",
+    "Hopper 架构中引入的可编程依赖启动 (PDL)，用于隐藏连续 (back-to-back) 执行内核时的启动与设置延迟（将在后续文章中详细探讨）。"
+  ]
+}

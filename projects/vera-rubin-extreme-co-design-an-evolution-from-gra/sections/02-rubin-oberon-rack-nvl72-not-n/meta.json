@@ -1,0 +1,2533 @@
+{
+  "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+  "title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+  "title_translation": "Rubin Oberon 机架：是 NVL72，而非 NVL144 或 NVL36",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Since the announcement of GB200 at Nvidia GTC 2024, the concept of an AI server system has shifted from a chassis to a rack scale system. In our [GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component), we discussed the evolution of Nvidia AI server form factor from HGX (8 GPU per node) to Oberon (NVL72 rack scale). While the HGX form factor still exists, the majority of Nvidia’s Blackwell GPUs are integrated in the Oberon form factor. Rubin will also be offered in both HGX and Oberon systems.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)",
+          "start": 145,
+          "end": 241,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since the announcement of GB200 at Nvidia GTC 2024, the concept of an AI server system has shifted from a chassis to a rack scale system. In our **[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)**, we discussed the evolution of Nvidia AI server form factor from HGX (8 GPU per node) to Oberon (NVL72 rack scale). While the HGX form factor still exists, the majority of Nvidia’s Blackwell GPUs are integrated in the Oberon form factor. Rubin will also be offered in both HGX and Oberon systems.",
+      "parent_block_plain_text": "Since the announcement of GB200 at Nvidia GTC 2024, the concept of an AI server system has shifted from a chassis to a rack scale system. In our [GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component), we discussed the evolution of Nvidia AI server form factor from HGX (8 GPU per node) to Oberon (NVL72 rack scale). While the HGX form factor still exists, the majority of Nvidia’s Blackwell GPUs are integrated in the Oberon form factor. Rubin will also be offered in both HGX and Oberon systems.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)",
+          "start": 145,
+          "end": 241,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 538,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自英伟达（NVIDIA）在 2024 年 GTC 大会上发布 GB200 以来，AI 服务器系统的概念已从机箱（Chassis）转向机柜级（Rack-scale）系统。在我们的 [GB200 文章](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component) 中，我们讨论了英伟达 AI 服务器形态从 HGX（每节点 8 颗 GPU）到 Oberon（NVL72 机柜级）的演进。虽然 HGX 形态依然存在，但英伟达 Blackwell 架构 GPU 的大部分都集成在 Oberon 形态中。Rubin 同样将提供 HGX 和 Oberon 两种系统。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190578",
+          "tokenized_text": "自英伟达（NVIDIA）在 2024 年 GTC 大会上发布 GB200 以来，AI 服务器系统的概念已从机箱（Chassis）转向机柜级（Rack-scale）系统。在我们的 [[[STRONG_1|[GB200 文章](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)]]] 中，我们讨论了英伟达 AI 服务器形态从 HGX（每节点 8 颗 GPU）到 Oberon（NVL72 机柜级）的演进。虽然 HGX 形态依然存在，但英伟达 Blackwell 架构 GPU 的大部分都集成在 Oberon 形态中。Rubin 同样将提供 HGX 和 Oberon 两种系统。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The key difference between the Blackwell and Rubin Oberon architecture is the number of SKUs offered to customers. As Blackwell Oberon was the first ever mass deployment of a rack scale solution with rack power density over 100KW for the GB200 NVL72 SKU, many datacenters did not have the infrastructure ready to support 100kw+ per rack. Nvidia offered two SKUs of Blackwell Oberon: GB200 NVL72 and GB200 NVL36x2. The latter being a lower density SKU offered for customers who did not have the infra ready to handle the thermals of a single high density rack. We discussed the difference between the two form factors in the [GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)",
+          "start": 624,
+          "end": 720,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": ".",
+          "start": 720,
+          "end": 721,
+          "href": "https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key difference between the Blackwell and Rubin Oberon architecture is the number of SKUs offered to customers. As Blackwell Oberon was the first ever mass deployment of a rack scale solution with rack power density over 100KW for the GB200 NVL72 SKU, many datacenters did not have the infrastructure ready to support 100kw+ per rack. Nvidia offered two SKUs of Blackwell Oberon: GB200 NVL72 and GB200 NVL36x2. The latter being a lower density SKU offered for customers who did not have the infra ready to handle the thermals of a single high density rack. We discussed the difference between the two form factors in the **[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)**[.](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)",
+      "parent_block_plain_text": "The key difference between the Blackwell and Rubin Oberon architecture is the number of SKUs offered to customers. As Blackwell Oberon was the first ever mass deployment of a rack scale solution with rack power density over 100KW for the GB200 NVL72 SKU, many datacenters did not have the infrastructure ready to support 100kw+ per rack. Nvidia offered two SKUs of Blackwell Oberon: GB200 NVL72 and GB200 NVL36x2. The latter being a lower density SKU offered for customers who did not have the infra ready to handle the thermals of a single high density rack. We discussed the difference between the two form factors in the [GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component).",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "[GB200 article](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)",
+          "start": 624,
+          "end": 720,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": ".",
+          "start": 720,
+          "end": 721,
+          "href": "https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 721,
+      "expected_tokens": [
+        "STRONG_1",
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Blackwell 与 Rubin Oberon 架构之间的关键区别在于提供给客户的 SKU 数量。由于 Blackwell Oberon 是首个大规模部署的机柜级解决方案，其 GB200 NVL72 SKU 的机架功率密度超过了 100kW，许多数据中心尚未准备好支持单机架 100kW 以上的基础设施。因此，英伟达提供了两种 Blackwell Oberon SKU：GB200 NVL72 和 GB200 NVL36x2。后者是为那些基础设施尚未准备好处理单高密度机架散热需求的客户提供的低密度 SKU。我们已在 [GB200 文章](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component). 中讨论了这两种形态的区别。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190815",
+          "tokenized_text": "Blackwell 与 Rubin Oberon 架构之间的关键区别在于提供给客户的 SKU 数量。由于 Blackwell Oberon 是首个大规模部署的机柜级解决方案，其 GB200 NVL72 SKU 的机架功率密度超过了 100kW，许多数据中心尚未准备好支持单机架 100kW 以上的基础设施。因此，英伟达提供了两种 Blackwell Oberon SKU：GB200 NVL72 和 GB200 NVL36x2。后者是为那些基础设施尚未准备好处理单高密度机架散热需求的客户提供的低密度 SKU。我们已在 [[[STRONG_1|[GB200 文章](https://newsletter.semianalysis.com/p/gb200-hardware-architecture-and-component)]]][[[LINK_1|.]]] 中讨论了这两种形态的区别。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Unlike Blackwell, Rubin is only offered in the VR NVL72 SKU. The set up is very similar to that of GB200/GB300 NVL72. Each VR NVL72 system consists of:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Unlike Blackwell, Rubin is only offered in the VR NVL72 SKU. The set up is very similar to that of GB200/GB300 NVL72. Each VR NVL72 system consists of:",
+      "parent_block_plain_text": "Unlike Blackwell, Rubin is only offered in the VR NVL72 SKU. The set up is very similar to that of GB200/GB300 NVL72. Each VR NVL72 system consists of:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 151,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与 Blackwell 不同，Rubin 仅提供 VR NVL72 这一种 SKU。其配置与 GB200/GB300 NVL72 非常相似。每套 VR NVL72 系统包含：",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190847",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "72 Rubin GPU packages",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 72 Rubin GPU packages",
+      "parent_block_plain_text": "72 Rubin GPU packages",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 21,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "72 个 Rubin GPU 封装",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190867",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "36 Vera CPUs",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 36 Vera CPUs",
+      "parent_block_plain_text": "36 Vera CPUs",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 12,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "36 颗 Vera CPU",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190882",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "36 NVLink 6 Switch ASICs",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 36 NVLink 6 Switch ASICs",
+      "parent_block_plain_text": "36 NVLink 6 Switch ASICs",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 24,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "36 颗 NVLink 6 交换机 ASIC",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190896",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190909",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!xB_f!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42660b70-c898-4e6b-a117-7490baf5ae4c_733x1702.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: Nvidia VR NVL72 BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 BoM and Power Budget Model",
+          "start": 8,
+          "end": 50,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 BoM and Power Budget Model",
+          "start": 8,
+          "end": 50,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 50,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190947",
+          "tokenized_text": "来源：[[[LINK_1|英伟达 VR NVL72 物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "On a side note, VR NVL72 was initially known as VR NVL144 as Jensen math from GTC 2025 defined the number of GPU as the number of GPU compute die in system (with 2 compute dies per package and 72 Rubin packages per Oberon rack = 144 compute die). The naming was changed back to VR NVL72 to represent the 72 Rubin GPU packages in the system in late December. This was right before CES 2026 where the naming was officially confirmed as VR NVL72.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Jensen math",
+          "start": 61,
+          "end": 72,
+          "href": "https://newsletter.semianalysis.com/i/174558496/jensen-math-changes-every-year",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On a side note, VR NVL72 was initially known as VR NVL144 as [Jensen math](https://newsletter.semianalysis.com/i/174558496/jensen-math-changes-every-year) from GTC 2025 defined the number of GPU as the number of GPU compute die in system (with 2 compute dies per package and 72 Rubin packages per Oberon rack = 144 compute die). The naming was changed back to VR NVL72 to represent the 72 Rubin GPU packages in the system in late December. This was right before CES 2026 where the naming was officially confirmed as VR NVL72.",
+      "parent_block_plain_text": "On a side note, VR NVL72 was initially known as VR NVL144 as Jensen math from GTC 2025 defined the number of GPU as the number of GPU compute die in system (with 2 compute dies per package and 72 Rubin packages per Oberon rack = 144 compute die). The naming was changed back to VR NVL72 to represent the 72 Rubin GPU packages in the system in late December. This was right before CES 2026 where the naming was officially confirmed as VR NVL72.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Jensen math",
+          "start": 61,
+          "end": 72,
+          "href": "https://newsletter.semianalysis.com/i/174558496/jensen-math-changes-every-year",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 443,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "顺带一提，VR NVL72 最初被称为 VR NVL144，因为根据 GTC 2025 上的 黄氏数学（Jensen math），系统中的 GPU 数量被定义为系统内 GPU 计算裸片（compute die）的数量（每个封装包含 2 个计算裸片，每个 Oberon 机架包含 72 个 Rubin 封装 = 144 个计算裸片）。在 12 月下旬，命名被改回 VR NVL72，以代表系统中的 72 个 Rubin GPU 封装。这恰好发生在 CES 2026 之前，届时该命名被正式确认为 VR NVL72。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.190990",
+          "tokenized_text": "顺带一提，VR NVL72 最初被称为 VR NVL144，因为根据 GTC 2025 上的 [[[LINK_1|黄氏数学（Jensen math）]]]，系统中的 GPU 数量被定义为系统内 GPU 计算裸片（compute die）的数量（每个封装包含 2 个计算裸片，每个 Oberon 机架包含 72 个 Rubin 封装 = 144 个计算裸片）。在 12 月下旬，命名被改回 VR NVL72，以代表系统中的 72 个 Rubin GPU 封装。这恰好发生在 CES 2026 之前，届时该命名被正式确认为 VR NVL72。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "CPX Form Factor",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### CPX Form Factor",
+      "parent_block_plain_text": "CPX Form Factor",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 15,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "CPX 形态规格",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191005",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191017",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!BH0r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30fd28ad-beb1-46a4-844e-bab6c4d4b216_1507x1697.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: Nvidia VR NVL72 BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 BoM and Power Budget Model",
+          "start": 8,
+          "end": 50,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 BoM and Power Budget Model",
+          "start": 8,
+          "end": 50,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 50,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191048",
+          "tokenized_text": "来源：[[[LINK_1|英伟达 VR NVL72 物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Although Nvidia initially planned to integrate the CPX accelerator into the VR NVL72 rack, the current development suggests that CPX will only be offered as a standalone rack as we detailed in our article introducing Nvidia [CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack) . To recap Rubin-era system planning in our previous CPX article, Nvidia initially contemplated three VR NVL72 configurations:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "our article introducing Nvidia",
+          "start": 193,
+          "end": 223,
+          "href": "https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "strong",
+          "text": "[CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack)",
+          "start": 224,
+          "end": 330,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although Nvidia initially planned to integrate the CPX accelerator into the VR NVL72 rack, the current development suggests that CPX will only be offered as a standalone rack as we detailed in [our article introducing Nvidia](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack) **[CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack)** . To recap Rubin-era system planning in our previous CPX article, Nvidia initially contemplated three VR NVL72 configurations:",
+      "parent_block_plain_text": "Although Nvidia initially planned to integrate the CPX accelerator into the VR NVL72 rack, the current development suggests that CPX will only be offered as a standalone rack as we detailed in our article introducing Nvidia [CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack) . To recap Rubin-era system planning in our previous CPX article, Nvidia initially contemplated three VR NVL72 configurations:",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "our article introducing Nvidia",
+          "start": 193,
+          "end": 223,
+          "href": "https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "strong",
+          "text": "[CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack)",
+          "start": 224,
+          "end": 330,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 457,
+      "expected_tokens": [
+        "LINK_1",
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管英伟达（NVIDIA）最初计划将 CPX 加速器集成到 VR NVL72 机柜中，但目前的进展表明，CPX 将仅作为独立机柜提供，正如我们在 介绍英伟达的文章 [CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack) 中所详述的那样。回顾我们在前篇 CPX 文章中提到的 Rubin 时代系统规划，英伟达最初考虑了三种 VR NVL72 配置：",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191119",
+          "tokenized_text": "尽管英伟达（NVIDIA）最初计划将 CPX 加速器集成到 VR NVL72 机柜中，但目前的进展表明，CPX 将仅作为独立机柜提供，正如我们在 [[[LINK_1|介绍英伟达的文章]]] [[[STRONG_1|[CPX](https://newsletter.semianalysis.com/p/another-giant-leap-the-rubin-cpx-specialized-accelerator-rack)]]] 中所详述的那样。回顾我们在前篇 CPX 文章中提到的 Rubin 时代系统规划，英伟达最初考虑了三种 VR NVL72 配置：",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "VR NVL72 (Regular): Standard Oberon VR NVL72 without CPX",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 (Regular):",
+          "start": 0,
+          "end": 19,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **VR NVL72 (Regular):** Standard Oberon VR NVL72 without CPX",
+      "parent_block_plain_text": "VR NVL72 (Regular): Standard Oberon VR NVL72 without CPX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 (Regular):",
+          "start": 0,
+          "end": 19,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "VR NVL72（常规版）： 不带 CPX 的标准 Oberon VR NVL72",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191152",
+          "tokenized_text": "[[[STRONG_1|VR NVL72（常规版）：]]] 不带 CPX 的标准 Oberon VR NVL72",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "VR NVL72 CPX (Integrated): Rubin GPU and Rubin CPX within the same compute tray",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 CPX (Integrated):",
+          "start": 0,
+          "end": 26,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0089",
+      "parent_block_index": 89,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **VR NVL72 CPX (Integrated):** Rubin GPU and Rubin CPX within the same compute tray",
+      "parent_block_plain_text": "VR NVL72 CPX (Integrated): Rubin GPU and Rubin CPX within the same compute tray",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 CPX (Integrated):",
+          "start": 0,
+          "end": 26,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 79,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "VR NVL72 CPX（集成版）： Rubin GPU 和 Rubin CPX 位于同一个算力托盘内",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191185",
+          "tokenized_text": "[[[STRONG_1|VR NVL72 CPX（集成版）：]]] Rubin GPU 和 Rubin CPX 位于同一个算力托盘内",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "VR NVL72 CPX (Dual Rack): Rubin CPX deployed in a separate rack alongside the VR NVL72 rack",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 CPX (Dual Rack):",
+          "start": 0,
+          "end": 25,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **VR NVL72 CPX (Dual Rack):** Rubin CPX deployed in a separate rack alongside the VR NVL72 rack",
+      "parent_block_plain_text": "VR NVL72 CPX (Dual Rack): Rubin CPX deployed in a separate rack alongside the VR NVL72 rack",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "VR NVL72 CPX (Dual Rack):",
+          "start": 0,
+          "end": 25,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 91,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "VR NVL72 CPX（双机架版）： Rubin CPX 部署在与 VR NVL72 机架并列的独立机架中",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191213",
+          "tokenized_text": "[[[STRONG_1|VR NVL72 CPX（双机架版）：]]] Rubin CPX 部署在与 VR NVL72 机架并列的独立机架中",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "The standalone/dedicated rack direction materially changes the deployment calculus. A dual-rack approach allows hyperscalers to scale prefill and decode capacity independently, optimize datacenter power envelopes, and reduce system-level failure domains versus tightly coupled trays. More importantly, it formalizes architectural disaggregation between inference prefill (compute-bound) and decode (bandwidth-bound).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The standalone/dedicated rack direction materially changes the deployment calculus. A dual-rack approach allows hyperscalers to scale prefill and decode capacity independently, optimize datacenter power envelopes, and reduce system-level failure domains versus tightly coupled trays. More importantly, it formalizes architectural disaggregation between inference prefill (compute-bound) and decode (bandwidth-bound).",
+      "parent_block_plain_text": "The standalone/dedicated rack direction materially changes the deployment calculus. A dual-rack approach allows hyperscalers to scale prefill and decode capacity independently, optimize datacenter power envelopes, and reduce system-level failure domains versus tightly coupled trays. More importantly, it formalizes architectural disaggregation between inference prefill (compute-bound) and decode (bandwidth-bound).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 416,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "独立/专用机架的方向实质性地改变了部署的权衡逻辑。双机架方案允许超大规模云厂商（Hyperscalers）独立扩展 Prefill 和 Decode 环节（Decode Loop）的容量，优化数据中心功耗包络，并降低与紧耦合托盘相比的系统级故障域。更重要的是，它正式确立了推理 Prefill（受算力限制）与 Decode 环节（受带宽限制）之间的架构解耦。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191227",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Rubin CPX was originally architected as a GDDR7-based accelerator optimized for prefill, based on three key considerations:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rubin CPX was originally architected as a GDDR7-based accelerator optimized for prefill, based on three key considerations:",
+      "parent_block_plain_text": "Rubin CPX was originally architected as a GDDR7-based accelerator optimized for prefill, based on three key considerations:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 123,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin CPX 最初被设计为一种基于 GDDR7 的加速器，专门针对 Prefill 进行了优化，这基于三个关键考量：",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191240",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Prefill is primarily FLOPs-limited, not bandwidth-limited, making HBM less indispensable.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Prefill is primarily FLOPs-limited, not bandwidth-limited, making HBM less indispensable.",
+      "parent_block_plain_text": "Prefill is primarily FLOPs-limited, not bandwidth-limited, making HBM less indispensable.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 89,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Prefill 主要受算力（FLOPs）限制，而非带宽限制，这使得 HBM 并非不可或缺。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191256",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "HBM’s increased bandwidth is structurally underutilized in prefill.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* HBM’s increased bandwidth is structurally underutilized in prefill.",
+      "parent_block_plain_text": "HBM’s increased bandwidth is structurally underutilized in prefill.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 67,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "HBM 增加的带宽在 Prefill 环节中存在结构性的利用不足。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191270",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "GDDR7 offers materially lower cost per GB and avoids the need for 2.5D packaging,",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* GDDR7 offers materially lower cost per GB and avoids the need for 2.5D packaging,",
+      "parent_block_plain_text": "GDDR7 offers materially lower cost per GB and avoids the need for 2.5D packaging,",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 81,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GDDR7 提供了显著更低的单位容量成本（cost per GB），且无需 2.5D 封装。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191284",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "However, Nvidia began exploring HBM-equipped variants for prefill, either via modified CPX configurations or through lower memory spec (such as using HBM3E) Rubin deployments dedicated to prefill, which we noted this way back in early December last year in our Accelerator & HBM model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "noted",
+          "start": 206,
+          "end": 211,
+          "href": "https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "early December last year",
+          "start": 229,
+          "end": 253,
+          "href": "https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Accelerator & HBM model",
+          "start": 261,
+          "end": 284,
+          "href": "https://semianalysis.com/accelerator-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, Nvidia began exploring HBM-equipped variants for prefill, either via modified CPX configurations or through lower memory spec (such as using HBM3E) Rubin deployments dedicated to prefill, which we [noted](https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/) this way back in [early December last year](https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/) in our [Accelerator & HBM model](https://semianalysis.com/accelerator-model/).",
+      "parent_block_plain_text": "However, Nvidia began exploring HBM-equipped variants for prefill, either via modified CPX configurations or through lower memory spec (such as using HBM3E) Rubin deployments dedicated to prefill, which we noted this way back in early December last year in our Accelerator & HBM model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "noted",
+          "start": 206,
+          "end": 211,
+          "href": "https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "early December last year",
+          "start": 229,
+          "end": 253,
+          "href": "https://semianalysis.com/institutional/rubin-delay-and-gb300-revision-b30a-h200-rubin-cpx-hbm-update-new-specs-sheet/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Accelerator & HBM model",
+          "start": 261,
+          "end": 284,
+          "href": "https://semianalysis.com/accelerator-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 285,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，英伟达（NVIDIA）开始探索用于 Prefill 的配备 HBM 的变体，无论是通过修改 CPX 配置，还是通过专门用于 Prefill 的低内存规格（如使用 HBM3E）的 Rubin 部署，正如我们在去年12月初的加速器与HBM模型中指出的那样。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191339",
+          "tokenized_text": "然而，英伟达（NVIDIA）开始探索用于 Prefill 的配备 HBM 的变体，无论是通过修改 CPX 配置，还是通过专门用于 Prefill 的低内存规格（如使用 HBM3E）的 Rubin 部署，正如我们在[[[LINK_2|去年12月初]]]的[[[LINK_3|加速器与HBM模型]]]中[[[LINK_1|指出]]]的那样。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "We also think a lot this shift is driven by evolving memory economics. Conventional DRAM pricing has risen sharply: As DDR pricing increases, the relative premium of HBM compresses because pricing is more locked down in long term contracts, narrowing the cost gap between a GDDR-based CPX and lower-spec HBM configurations, therefore eliminating a lot of the cost benefits GDDR offers relative to performance. While memory bandwidth is not as important for pre-fill compare to decode, it is still necessary.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Conventional DRAM pricing has risen sharply:",
+          "start": 71,
+          "end": 115,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We also think a lot this shift is driven by evolving memory economics. **Conventional DRAM pricing has risen sharply:** As DDR pricing increases, the relative premium of HBM compresses because pricing is more locked down in long term contracts, narrowing the cost gap between a GDDR-based CPX and lower-spec HBM configurations, therefore eliminating a lot of the cost benefits GDDR offers relative to performance. While memory bandwidth is not as important for pre-fill compare to decode, it is still necessary.",
+      "parent_block_plain_text": "We also think a lot this shift is driven by evolving memory economics. Conventional DRAM pricing has risen sharply: As DDR pricing increases, the relative premium of HBM compresses because pricing is more locked down in long term contracts, narrowing the cost gap between a GDDR-based CPX and lower-spec HBM configurations, therefore eliminating a lot of the cost benefits GDDR offers relative to performance. While memory bandwidth is not as important for pre-fill compare to decode, it is still necessary.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Conventional DRAM pricing has risen sharply:",
+          "start": 71,
+          "end": 115,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 507,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们还认为，这种转变在很大程度上是由不断变化的内存经济效益驱动的。常规 DRAM 价格已大幅上涨： 随着 DDR 价格上涨，HBM 的相对溢价正在缩小，因为其定价在长期合同中更为固定，从而缩小了基于 GDDR 的 CPX 与低规格 HBM 配置之间的成本差距，因此消除了 GDDR 相对于其性能表现所具备的许多成本优势。虽然与 Decode 环节相比，内存带宽对于 Prefill 并不那么重要，但它仍然是必要的。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:37:55.191379",
+          "tokenized_text": "我们还认为，这种转变在很大程度上是由不断变化的内存经济效益驱动的。[[[STRONG_1|常规 DRAM 价格已大幅上涨：]]] 随着 DDR 价格上涨，HBM 的相对溢价正在缩小，因为其定价在长期合同中更为固定，从而缩小了基于 GDDR 的 CPX 与低规格 HBM 配置之间的成本差距，因此消除了 GDDR 相对于其性能表现所具备的许多成本优势。虽然与 Decode 环节相比，内存带宽对于 Prefill 并不那么重要，但它仍然是必要的。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": false,
+        "applied_terms": [
+          "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+          "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+          "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+          "relation_to_previous": "Moves from silicon specs to the physical container (the rack) that houses them.",
+          "relation_to_next": "Narrows the focus from the whole rack to the specific engineering of the Compute Tray.",
+          "key_points": [
+            "Transition from HGX (8-GPU) to Oberon (NVL72) as the primary form factor",
+            "Memory economics: HBM pricing compression vs. GDDR",
+            "The elimination of GDDR-based cost benefits due to rising conventional DRAM prices"
+          ],
+          "translation_notes": [
+            "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+            "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+            "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "出现了重复的代词“我们”，且句式略显累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "“集成了...中” 动宾搭配不当，通常应为“集成在...中”。"
+          },
+          {
+            "type": "tone",
+            "description": "“deployment calculus” 翻译为 “部署逻辑” 稍显平淡，calculus 在此类分析文章中通常指代“权衡、计算或考量”。"
+          },
+          {
+            "type": "readability",
+            "description": "“relative to performance” 翻译得较为生硬。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中为了对应超链接，在词语之间加入了过多的空格，导致句子视觉上非常破碎。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

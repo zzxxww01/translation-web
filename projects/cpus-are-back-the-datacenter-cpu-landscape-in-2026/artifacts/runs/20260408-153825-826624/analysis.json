@@ -1,0 +1,1168 @@
+{
+  "theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+  "key_arguments": [
+    "Datacenter CPUs have evolved through distinct historical eras, currently entering an AI-driven RL and Agentic era that fundamentally reshapes compute requirements.",
+    "The scaling of multi-core CPUs has historically been bottlenecked by interconnect limits, driving innovations from Crossbars to Ring Buses, Mesh architectures, and chiplets.",
+    "The 2026+ CPU landscape features intense fragmentation and competition among x86 incumbents (Intel, AMD) and ARM-based custom silicon from hyperscalers and Nvidia.",
+    "Severe DRAM supply constraints and high memory costs will heavily impact CPU availability, accelerating market consolidation toward hyperscalers with massive negotiating power.",
+    "Future CPU designs are diverging into specialized use cases—such as AI head nodes, general compute, and context memory storage—rather than a one-size-fits-all approach."
+  ],
+  "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+  "terminology": [
+    {
+      "term": "Hyperscaler",
+      "context_meaning": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry translation in cloud computing contexts."
+    },
+    {
+      "term": "Agentic Era",
+      "context_meaning": "The era of AI where autonomous agents perform complex tasks.",
+      "translation": "智能体时代",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard AI terminology for agent-based systems."
+    },
+    {
+      "term": "Crossbar",
+      "context_meaning": "An interconnect topology where every core has a discrete link to all other cores.",
+      "translation": "交叉开关",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Fundamental CPU interconnect terminology. First occurrence should note it as an all-to-all topology."
+    },
+    {
+      "term": "Ring Bus",
+      "context_meaning": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+      "translation": "环形总线",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard hardware architecture term."
+    },
+    {
+      "term": "Mesh Architecture",
+      "context_meaning": "A 2D grid interconnect topology used in high-core-count CPUs.",
+      "translation": "网格架构",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard hardware architecture term."
+    },
+    {
+      "term": "Die Shot",
+      "context_meaning": "A photograph of a semiconductor die, often annotated.",
+      "translation": "裸片图",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Common in semiconductor analysis; '裸片显微摄影' or '裸片图' is accurate."
+    },
+    {
+      "term": "Floorplan",
+      "context_meaning": "The physical layout of functional blocks on a semiconductor die.",
+      "translation": "物理布图",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Must not be translated as '楼层平面图'. '物理布图' or '布局图' is correct in EDA/semiconductor contexts."
+    },
+    {
+      "term": "Stepping",
+      "context_meaning": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+      "translation": "步进",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Crucial semiconductor term; indicates hardware revision level. First occurrence note: '指芯片的硬件版本或修订号'."
+    },
+    {
+      "term": "Reticle-sized",
+      "context_meaning": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+      "translation": "光罩极限尺寸",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Refers to the physical limit of lithography equipment. First occurrence note: '指达到光刻机单次曝光面积上限的芯片尺寸'."
+    },
+    {
+      "term": "Head node",
+      "context_meaning": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+      "translation": "头节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard cluster computing term."
+    },
+    {
+      "term": "Context Memory Storage",
+      "context_meaning": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+      "translation": "上下文内存存储",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Emerging AI hardware concept combining memory and storage for LLM context."
+    },
+    {
+      "term": "Front Side Bus (FSB)",
+      "context_meaning": "Early Intel computer communication interface.",
+      "translation": "前端总线 (FSB)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Historical PC architecture term."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, highly technical, blunt, and analytical. Typical of SemiAnalysis, combining deep engineering knowledge with unvarnished business/strategy critiques.",
+    "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+    "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures."
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "DRAM Constraints on CPU Market",
+      "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+      "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context."
+    },
+    {
+      "type": "accuracy",
+      "location": "Intel’s Mesh Architecture",
+      "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+      "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration."
+    },
+    {
+      "type": "accuracy",
+      "location": "Intel Xeon Coral Rapids",
+      "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+      "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'."
+    },
+    {
+      "type": "accuracy",
+      "location": "AMD Turin Dense 7:1 Socket Consolidation",
+      "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+      "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware."
+    }
+  ],
+  "guidelines": [
+    "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+    "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+    "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+    "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+    "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+    "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+      "relation_to_previous": "N/A",
+      "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+      "key_points": [
+        "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+        "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+        "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+      ],
+      "translation_notes": [
+        "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+        "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+        "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+      ]
+    },
+    "01-the-role-and-evolution-of-data": {
+      "role_in_article": "Serves as a thematic bridge, defining the baseline function of datacenter CPUs to anchor the subsequent chronological deep dive.",
+      "relation_to_previous": "Narrows the broad, forward-looking introduction into a structured historical framework.",
+      "relation_to_next": "Directly sets up the starting point of the historical timeline (the 1990s PC era).",
+      "key_points": [
+        "Datacenter CPUs have constantly evolved their core architectures and interconnects to meet shifting computing paradigms."
+      ],
+      "translation_notes": [
+        "Keep the definition of 'datacenter CPUs' strictly separated from consumer desktop processors in terminology (e.g., 数据中心CPU vs 消费级处理器)."
+      ]
+    },
+    "02-the-pc-era": {
+      "role_in_article": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+      "relation_to_previous": "Begins the evolutionary timeline established in the previous section.",
+      "relation_to_next": "Progresses chronologically from localized enterprise computing to the globally connected internet era.",
+      "key_points": [
+        "The modern datacenter CPU originated from the need for cost-effective mainframe replacements in the 1990s.",
+        "The creation of the Xeon brand and the addition of multiple L2 cache dies marked the first major architectural divergence for server workloads."
+      ],
+      "translation_notes": [
+        "Translate 'mainframe replacements' accurately (大型机替代品).",
+        "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+      ]
+    },
+    "03-the-dot-com-era": {
+      "role_in_article": "Explains the architectural pivot from frequency scaling to multi-core designs driven by the internet boom and physical semiconductor limits.",
+      "relation_to_previous": "Shows how the foundational PC-era architectures had to adapt to the massive traffic scaling of Web 2.0.",
+      "relation_to_next": "Sets the stage for the virtualization era, as having multiple cores and threads enabled the partitioning of physical servers into virtual ones.",
+      "key_points": [
+        "The end of Dennard scaling forced the industry to abandon frequency increases (GHz wars) in favor of multi-core CPU designs.",
+        "Simultaneous Multi-Threading (SMT) and integrated memory controllers were introduced to maximize throughput for parallelizable internet workloads.",
+        "Multi-socket servers (using QPI) became necessary to meet the insatiable demand for compute."
+      ],
+      "translation_notes": [
+        "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+        "Ensure 'GHz wars' reflects the historical context (主频大战).",
+        "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+      ]
+    },
+    "04-the-virtualization-and-cloud-c": {
+      "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+      "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+      "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+      "key_points": [
+        "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+        "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+      ],
+      "translation_notes": [
+        "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+        "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+        "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+      ]
+    },
+    "05-the-ai-gpu-and-cpu-consolidati": {
+      "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+      "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+      "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+      "key_points": [
+        "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+        "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+      ],
+      "translation_notes": [
+        "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+        "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+        "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+      ]
+    },
+    "06-the-rl-and-agentic-era": {
+      "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+      "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+      "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+      "key_points": [
+        "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+        "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+      ],
+      "translation_notes": [
+        "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+        "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+        "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+      ]
+    },
+    "07-history-of-multi-core-cpu-inte": {
+      "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+      "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+      "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+      "key_points": [
+        "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+        "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+      ],
+      "translation_notes": [
+        "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+        "Avoid translating 'core' as anything other than '核心' in this context."
+      ]
+    },
+    "08-crossbar-limits": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "09-intels-ring-bus": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "10-intels-mesh-architecture": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "11-amds-zen-interconnect-archite": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-intel-diamond-rapids-architect": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "13-amd-venice-architecture-change": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "14-2026-cpu-costing-analysis": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "15-nvidia-grace": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "16-aws-graviton5": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "17-microsoft-cobalt-200": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "18-google-axion-c4a-n4a": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "19-ampereone-softbank-acquisiti": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "20-arm-phoenix": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "21-huawei-kunpeng": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "22-cpu-roadmap": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "23-amd-epyc-verano-florence": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "24-intel-xeon-coral-rapids": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "25-arm-venom": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "26-qualcomm-sd2": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "27-bluefield-4-context-memory-sto": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "28-dram-constraints-on-cpu-market": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "29-future-cpu-trends": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 30,
+  "paragraph_count": 320,
+  "word_count": 12684
+}

@@ -1,0 +1,217 @@
+{
+  "section_id": "02-future-work",
+  "title": "Future Work",
+  "title_translation": "未来工作",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "This article is the first in a series exploring low-level assembly and kernel code of AI accelerators. In future installments, we will expand the effort by benchmarking additional Blackwell and Blackwell Ultra PTX instructions, including EXP2 and TensorMap update latencies. Furthermore, we have concrete plans to benchmark TPU Pallas kernels, Trainium NKI kernels, and AMD CDNA4 assemblies. For AMD CDNA4 in particular, benchmarking is within reach in the near term since many of the instructions are already well-documented.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "many of the instructions are already well-documented",
+          "start": 473,
+          "end": 525,
+          "href": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This article is the first in a series exploring low-level assembly and kernel code of AI accelerators. In future installments, we will expand the effort by benchmarking additional Blackwell and Blackwell Ultra PTX instructions, including EXP2 and TensorMap update latencies. Furthermore, we have concrete plans to benchmark TPU Pallas kernels, Trainium NKI kernels, and AMD CDNA4 assemblies. For AMD CDNA4 in particular, benchmarking is within reach in the near term since [many of the instructions are already well-documented](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf).",
+      "parent_block_plain_text": "This article is the first in a series exploring low-level assembly and kernel code of AI accelerators. In future installments, we will expand the effort by benchmarking additional Blackwell and Blackwell Ultra PTX instructions, including EXP2 and TensorMap update latencies. Furthermore, we have concrete plans to benchmark TPU Pallas kernels, Trainium NKI kernels, and AMD CDNA4 assemblies. For AMD CDNA4 in particular, benchmarking is within reach in the near term since many of the instructions are already well-documented.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "many of the instructions are already well-documented",
+          "start": 473,
+          "end": 525,
+          "href": "https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本文是探索 AI 加速器底层汇编与内核代码系列文章的开篇之作。在后续文章中，我们将扩大测试范围，对更多 Blackwell 和 Blackwell Ultra 的 PTX 指令进行基准测试，包括 EXP2 和 TensorMap 的更新延迟。此外，我们已制定具体计划，将对 TPU Pallas 内核、Trainium NKI 内核以及 AMD CDNA4 汇编代码展开基准测试。特别是针对 AMD CDNA4，由于许多指令已有详尽的文档说明，我们在短期内即可启动相关的基准测试工作。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:14:50.143225",
+          "tokenized_text": "本文是探索 AI 加速器底层汇编与内核代码系列文章的开篇之作。在后续文章中，我们将扩大测试范围，对更多 Blackwell 和 Blackwell Ultra 的 PTX 指令进行基准测试，包括 EXP2 和 TensorMap 的更新延迟。此外，我们已制定具体计划，将对 TPU Pallas 内核、Trainium NKI 内核以及 AMD CDNA4 汇编代码展开基准测试。特别是针对 AMD CDNA4，由于[[[LINK_1|许多指令已有详尽的文档说明]]]，我们在短期内即可启动相关的基准测试工作。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain a professional yet enticing tone for the recruitment call.",
+          "Translate 'bullet points' as '核心亮点' or '关键要点' rather than a literal '子弹点'.",
+          "Keep 'ClusterMAX' as a proper noun."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Frames the article as the first installment of a broader, ongoing research series and serves as a recruitment call for low-level engineers.",
+          "relation_to_previous": "Expands the scope from the currently acknowledged work to a larger roadmap of AI accelerator analysis.",
+          "relation_to_next": "Concludes the meta-commentary (intro/ack/future) and abruptly shifts into the actual technical deep-dive starting in section 03.",
+          "key_points": [
+            "Future articles will cover EXP2, TensorMap update latencies, TPU Pallas kernels, Trainium NKI, and AMD CDNA4.",
+            "The team is actively recruiting engineers with exceptional low-level benchmarking and inference simulator skills."
+          ],
+          "translation_notes": [
+            "Maintain a professional yet enticing tone for the recruitment call.",
+            "Translate 'bullet points' as '核心亮点' or '关键要点' rather than a literal '子弹点'.",
+            "Keep 'ClusterMAX' as a proper noun."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "原文的 interesting（有趣）被译为“极具挑战”，虽然符合招聘语境，但略微改变了原意，建议保留原文轻松吸引人的基调。"
+          },
+          {
+            "type": "readability",
+            "description": "邮箱地址与前后的中文字符之间缺少空格，在中文排版中显得拥挤。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Join us if you want to work on low level benchmarking, ClusterMAX, inference simulators, or other interesting technical work. Send your resume to letsgo@semianalysis.com with 5 bullet points demonstrating your exceptional engineering abilities. Please attach GitHub repo links, YouTube demos, websites, blogs, etc to support your bullet points.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "letsgo@semianalysis.com",
+          "start": 146,
+          "end": 169,
+          "href": "mailto:letsgo@semianalysis.com",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Join us if you want to work on low level benchmarking, ClusterMAX, inference simulators, or other interesting technical work. Send your resume to [letsgo@semianalysis.com](mailto:letsgo@semianalysis.com) with 5 bullet points demonstrating your exceptional engineering abilities. Please attach GitHub repo links, YouTube demos, websites, blogs, etc to support your bullet points.",
+      "parent_block_plain_text": "Join us if you want to work on low level benchmarking, ClusterMAX, inference simulators, or other interesting technical work. Send your resume to letsgo@semianalysis.com with 5 bullet points demonstrating your exceptional engineering abilities. Please attach GitHub repo links, YouTube demos, websites, blogs, etc to support your bullet points.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "letsgo@semianalysis.com",
+          "start": 146,
+          "end": 169,
+          "href": "mailto:letsgo@semianalysis.com",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 344,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如果你渴望参与底层基准测试、ClusterMAX、推理模拟器或其他极具挑战的技术工作，欢迎加入我们。请将简历发送至letsgo@semianalysis.com，并列出 5 个能证明你卓越工程能力的核心亮点。请随信附上 GitHub 仓库链接、YouTube 演示视频、个人网站或博客等材料，以佐证你的核心亮点。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:14:50.143323",
+          "tokenized_text": "如果你渴望参与底层基准测试、ClusterMAX、推理模拟器或其他极具挑战的技术工作，欢迎加入我们。请将简历发送至[[[LINK_1|letsgo@semianalysis.com]]]，并列出 5 个能证明你卓越工程能力的核心亮点。请随信附上 GitHub 仓库链接、YouTube 演示视频、个人网站或博客等材料，以佐证你的核心亮点。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.525,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain a professional yet enticing tone for the recruitment call.",
+          "Translate 'bullet points' as '核心亮点' or '关键要点' rather than a literal '子弹点'.",
+          "Keep 'ClusterMAX' as a proper noun."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Frames the article as the first installment of a broader, ongoing research series and serves as a recruitment call for low-level engineers.",
+          "relation_to_previous": "Expands the scope from the currently acknowledged work to a larger roadmap of AI accelerator analysis.",
+          "relation_to_next": "Concludes the meta-commentary (intro/ack/future) and abruptly shifts into the actual technical deep-dive starting in section 03.",
+          "key_points": [
+            "Future articles will cover EXP2, TensorMap update latencies, TPU Pallas kernels, Trainium NKI, and AMD CDNA4.",
+            "The team is actively recruiting engineers with exceptional low-level benchmarking and inference simulator skills."
+          ],
+          "translation_notes": [
+            "Maintain a professional yet enticing tone for the recruitment call.",
+            "Translate 'bullet points' as '核心亮点' or '关键要点' rather than a literal '子弹点'.",
+            "Keep 'ClusterMAX' as a proper noun."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "原文的 interesting（有趣）被译为“极具挑战”，虽然符合招聘语境，但略微改变了原意，建议保留原文轻松吸引人的基调。"
+          },
+          {
+            "type": "readability",
+            "description": "邮箱地址与前后的中文字符之间缺少空格，在中文排版中显得拥挤。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+  "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/13",
+      "paragraph_count": 7,
+      "previous_section_title": "",
+      "next_section_title": "Groq",
+      "section_role": "Sets the stage by outlining the article's agenda and framing it as the definitive guide to filling the technical gaps left by Nvidia's GTC 2026 keynote.",
+      "translation_notes": [
+        "Maintain an authoritative, analytical tone.",
+        "Ensure 'Attention FFN Disaggregation (AFD)' is accurately translated (e.g., 注意力机制与前馈网络解耦) while keeping the English acronym."
+      ]
+    },
+    {
+      "section_id": "01-groq",
+      "title": "Groq",
+      "position": "2/13",
+      "paragraph_count": 3,
+      "previous_section_title": "Introduction",
+      "next_section_title": "LPU chip",
+      "section_role": "Explains the strategic and business context of Nvidia's $20B 'pseudo-acquisition' of Groq and justifies its rapid integration into Nvidia's ecosystem.",
+      "translation_notes": [
+        "Translate 'pseudo-acquisition' or 'functions almost as an acquisition' carefully (e.g., 变相收购/类收购) to reflect the legal nuance of bypassing antitrust regulators."
+      ]
+    },
+    {
+      "section_id": "02-lpu-chip",
+      "title": "LPU chip",
+      "position": "3/13",
+      "paragraph_count": 10,
+      "previous_section_title": "Groq",
+      "next_section_title": "SRAM and Memory Hierarchy",
+      "section_role": "Details the historical and technical evolution of Groq's LPU architecture to explain what exactly Nvidia has productized.",
+      "translation_notes": [
+        "Technical terminology must be precise: 'streaming registers' (流式寄存器), 'scratchpad SRAM' (便笺式SRAM/暂存器), 'tape out' (流片), 'C2C SerDes' (芯片间串行器/解串器)."
+      ]
+    },
+    {
+      "section_id": "03-sram-and-memory-hierarchy",
+      "title": "SRAM and Memory Hierarchy",
+      "position": "4/13",
+      "paragraph_count": 13,
+      "previous_section_title": "LPU chip",
+      "next_section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+      "section_role": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+      "translation_notes": [
+        "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+      ]
+    },
+    {
+      "section_id": "04-gpu-and-lpu-integration-atten",
+      "title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+      "position": "5/13",
+      "paragraph_count": 26,
+      "previous_section_title": "SRAM and Memory Hierarchy",
+      "next_section_title": "Speculative Decoding",
+      "section_role": "Introduces the core algorithmic breakthrough (AFD) that enables the Nvidia-Groq hybrid system, assigning specific neural network tasks to the optimal hardware.",
+      "translation_notes": [
+        "Ensure clear distinction between 'stateful' (有状态) and 'stateless' (无状态).",
+        "Translate 'dynamic KV cache loading patterns' accurately (动态KV Cache加载模式)."
+      ]
+    },
+    {
+      "section_id": "05-speculative-decoding",
+      "title": "Speculative Decoding",
+      "position": "6/13",
+      "paragraph_count": 5,
+      "previous_section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+      "next_section_title": "LPX Rack System",
+      "section_role": "Details a secondary inference acceleration method utilizing LPUs and explains how its hardware requirements differ fundamentally from AFD.",
+      "translation_notes": [
+        "Terminology: 'Speculative decoding' (推测解码), 'draft models' (草稿模型), 'Multi-Token Prediction (MTP)' (多Token预测), 'Fabric Expansion Logic FPGAs' (Fabric扩展逻辑FPGA)."
+      ]
+    },
+    {
+      "section_id": "06-lpx-rack-system",
+      "title": "LPX Rack System",
+      "position": "7/13",
+      "paragraph_count": 14,
+      "previous_section_title": "Speculative Decoding",
+      "next_section_title": "LPU Network",
+      "section_role": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+      "translation_notes": [
+        "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+        "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+      ]
+    },
+    {
+      "section_id": "07-lpu-network",
+      "title": "LPU Network",
+      "position": "8/13",
+      "paragraph_count": 14,
+      "previous_section_title": "LPX Rack System",
+      "next_section_title": "Nvidia’s CPO Roadmap",
+      "section_role": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+      "translation_notes": [
+        "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+        "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+      ]
+    },
+    {
+      "section_id": "08-nvidias-cpo-roadmap",
+      "title": "Nvidia’s CPO Roadmap",
+      "position": "9/13",
+      "paragraph_count": 22,
+      "previous_section_title": "LPU Network",
+      "next_section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+      "section_role": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+      "translation_notes": [
+        "Translate 'CPO' as '共封装光学' but retain the acronym.",
+        "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+      ]
+    },
+    {
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+      "position": "10/13",
+      "paragraph_count": 45,
+      "previous_section_title": "Nvidia’s CPO Roadmap",
+      "next_section_title": "CMX and STX",
+      "section_role": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+      "translation_notes": [
+        "Translate 'densified' as '密度提升' or '高密度化'.",
+        "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+      ]
+    },
+    {
+      "section_id": "10-cmx-and-stx",
+      "title": "CMX and STX",
+      "position": "11/13",
+      "paragraph_count": 17,
+      "previous_section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+      "next_section_title": "Feynman NVL1152 Networking Topologies",
+      "section_role": "Concludes the technical hardware breakdown by introducing the storage architectures designed to feed these massive compute clusters, and teases the paywall.",
+      "translation_notes": [
+        "Translate 'reference rack architecture' as '参考机架架构'.",
+        "Translate 'behind the paywall' naturally (e.g., 在付费内容中/在付费墙后).",
+        "Retain all acronyms (CMX, STX, VR, BF-4, CX-9) in English."
+      ]
+    },
+    {
+      "section_id": "11-feynman-nvl1152-networking-top",
+      "title": "Feynman NVL1152 Networking Topologies",
+      "position": "12/13",
+      "paragraph_count": 13,
+      "previous_section_title": "CMX and STX",
+      "next_section_title": "GTC 2026 Supply Chain Implications",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-gtc-2026-supply-chain-implicat",
+      "title": "GTC 2026 Supply Chain Implications",
+      "position": "13/13",
+      "paragraph_count": 22,
+      "previous_section_title": "Feynman NVL1152 Networking Topologies",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

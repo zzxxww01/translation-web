@@ -1,0 +1,51 @@
+{
+  "section_id": "03-acknowledgments-and-inferencex",
+  "new_terms": [
+    {
+      "term": "ML",
+      "suggested_translation": "机器学习",
+      "context": "members of the ML community",
+      "confidence": 0.95
+    },
+    {
+      "term": "OSS",
+      "suggested_translation": "开源软件",
+      "context": "GPT-OSS Performance Optimizations",
+      "confidence": 0.95
+    },
+    {
+      "term": "GPT",
+      "suggested_translation": "GPT",
+      "context": "GPT-OSS Performance Optimizations",
+      "confidence": 0.95
+    },
+    {
+      "term": "upstream",
+      "suggested_translation": "上游",
+      "context": "upstream vLLM/SGLang bug fixes",
+      "confidence": 0.9
+    },
+    {
+      "term": "triage",
+      "suggested_translation": "故障分级/排查",
+      "context": "helping debug and triage AMD exclusive bugs",
+      "confidence": 0.85
+    },
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "SemiAnalysis InferenceMAX: vLLM maintainers",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "inferencex": "InferenceX",
+    "inferencemax": "InferenceMAX",
+    "vllm": "vLLM",
+    "sglang": "SGLang",
+    "trtllm": "TensorRT-LLM",
+    "sku": "SKU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:24:57.695912"
+}

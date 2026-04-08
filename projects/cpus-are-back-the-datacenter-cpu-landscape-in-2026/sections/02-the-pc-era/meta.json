@@ -1,0 +1,353 @@
+{
+  "section_id": "02-the-pc-era",
+  "title": "The PC Era",
+  "title_translation": "PC时代",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:44:55.276083",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'mainframe replacements' accurately (大型机替代品).",
+          "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+          "relation_to_previous": "Begins the evolutionary timeline established in the previous section.",
+          "relation_to_next": "Progresses chronologically from localized enterprise computing to the globally connected internet era.",
+          "key_points": [
+            "The modern datacenter CPU originated from the need for cost-effective mainframe replacements in the 1990s.",
+            "The creation of the Xeon brand and the addition of multiple L2 cache dies marked the first major architectural divergence for server workloads."
+          ],
+          "translation_notes": [
+            "Translate 'mainframe replacements' accurately (大型机替代品).",
+            "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格，“L2缓存裸片”应为“L2 缓存裸片”。（注：第3段中也存在相同的中英文字符间距问题）"
+          },
+          {
+            "type": "conciseness",
+            "description": "“小众利基市场”存在语义重复，“小众”与“利基”表达的是同一概念。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Intel Pentium Pro. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Pentium Pro. Source: Intel",
+          "start": 0,
+          "end": 32,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Pentium Pro. Source: Intel*",
+      "parent_block_plain_text": "Intel Pentium Pro. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Pentium Pro. Source: Intel",
+          "start": 0,
+          "end": 32,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔奔腾 Pro。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T15:44:55.276276",
+          "tokenized_text": "[[[EM_1|英特尔奔腾 Pro。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'mainframe replacements' accurately (大型机替代品).",
+          "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+          "relation_to_previous": "Begins the evolutionary timeline established in the previous section.",
+          "relation_to_next": "Progresses chronologically from localized enterprise computing to the globally connected internet era.",
+          "key_points": [
+            "The modern datacenter CPU originated from the need for cost-effective mainframe replacements in the 1990s.",
+            "The creation of the Xeon brand and the addition of multiple L2 cache dies marked the first major architectural divergence for server workloads."
+          ],
+          "translation_notes": [
+            "Translate 'mainframe replacements' accurately (大型机替代品).",
+            "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格，“L2缓存裸片”应为“L2 缓存裸片”。（注：第3段中也存在相同的中英文字符间距问题）"
+          },
+          {
+            "type": "conciseness",
+            "description": "“小众利基市场”存在语义重复，“小众”与“利基”表达的是同一概念。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "The modern version of the datacenter CPU can be traced back to the 1990s following the success of Personal Computers in the prior decade, bringing basic computing into the home. As PC processing power grew with Intel’s i386, i486 and Pentium generations, many tasks normally computed by advanced workstation and mainframe computers from the likes of DEC and IBM were instead done on PCs at a fraction of the cost. Responding to this need for higher performance “mainframe replacements”, Intel began to release PC processor variants that had more performance and larger caches for higher prices, starting with the Pentium Pro in 1995 that had multiple L2 cache dies co-packaged with the CPU in a Multi-Chip Module (MCM).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The modern version of the datacenter CPU can be traced back to the 1990s following the success of Personal Computers in the prior decade, bringing basic computing into the home. As PC processing power grew with Intel’s i386, i486 and Pentium generations, many tasks normally computed by advanced workstation and mainframe computers from the likes of DEC and IBM were instead done on PCs at a fraction of the cost. Responding to this need for higher performance “mainframe replacements”, Intel began to release PC processor variants that had more performance and larger caches for higher prices, starting with the Pentium Pro in 1995 that had multiple L2 cache dies co-packaged with the CPU in a Multi-Chip Module (MCM). The Xeon brand then followed suit in 1998, with the Pentium II Xeons that similarly had multiple L2 cache dies added to the CPU processor slot. While mainframes still continue today in the IBM Z lines used for bank transaction verifications and such, they remain a niche corner of the market that we will not cover in this piece.",
+      "parent_block_plain_text": "The modern version of the datacenter CPU can be traced back to the 1990s following the success of Personal Computers in the prior decade, bringing basic computing into the home. As PC processing power grew with Intel’s i386, i486 and Pentium generations, many tasks normally computed by advanced workstation and mainframe computers from the likes of DEC and IBM were instead done on PCs at a fraction of the cost. Responding to this need for higher performance “mainframe replacements”, Intel began to release PC processor variants that had more performance and larger caches for higher prices, starting with the Pentium Pro in 1995 that had multiple L2 cache dies co-packaged with the CPU in a Multi-Chip Module (MCM). The Xeon brand then followed suit in 1998, with the Pentium II Xeons that similarly had multiple L2 cache dies added to the CPU processor slot. While mainframes still continue today in the IBM Z lines used for bank transaction verifications and such, they remain a niche corner of the market that we will not cover in this piece.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 719,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "现代数据中心 CPU 的雏形可追溯至 20 世纪 90 年代。在此前十年间，个人电脑大获成功，让基础计算真正走入千家万户。随着英特尔 i386、i486 和奔腾系列产品的迭代，PC 算力水涨船高。许多原本依赖 DEC 和 IBM 等高级工作站与大型机处理的任务转由 PC 承担，成本仅为前者的零头。面对市场对高性能“大型机替代品”的渴求，英特尔开始推出性能更强、缓存更大的高价位 PC 处理器变体。这一趋势始于 1995 年问世的奔腾 Pro，该处理器采用多芯片模块 (MCM) 技术，将多个 L2缓存裸片与 CPU 共封装。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:44:55.276335",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'mainframe replacements' accurately (大型机替代品).",
+          "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+          "relation_to_previous": "Begins the evolutionary timeline established in the previous section.",
+          "relation_to_next": "Progresses chronologically from localized enterprise computing to the globally connected internet era.",
+          "key_points": [
+            "The modern datacenter CPU originated from the need for cost-effective mainframe replacements in the 1990s.",
+            "The creation of the Xeon brand and the addition of multiple L2 cache dies marked the first major architectural divergence for server workloads."
+          ],
+          "translation_notes": [
+            "Translate 'mainframe replacements' accurately (大型机替代品).",
+            "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格，“L2缓存裸片”应为“L2 缓存裸片”。（注：第3段中也存在相同的中英文字符间距问题）"
+          },
+          {
+            "type": "conciseness",
+            "description": "“小众利基市场”存在语义重复，“小众”与“利基”表达的是同一概念。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The Xeon brand then followed suit in 1998, with the Pentium II Xeons that similarly had multiple L2 cache dies added to the CPU processor slot. While mainframes still continue today in the IBM Z lines used for bank transaction verifications and such, they remain a niche corner of the market that we will not cover in this piece.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The modern version of the datacenter CPU can be traced back to the 1990s following the success of Personal Computers in the prior decade, bringing basic computing into the home. As PC processing power grew with Intel’s i386, i486 and Pentium generations, many tasks normally computed by advanced workstation and mainframe computers from the likes of DEC and IBM were instead done on PCs at a fraction of the cost. Responding to this need for higher performance “mainframe replacements”, Intel began to release PC processor variants that had more performance and larger caches for higher prices, starting with the Pentium Pro in 1995 that had multiple L2 cache dies co-packaged with the CPU in a Multi-Chip Module (MCM). The Xeon brand then followed suit in 1998, with the Pentium II Xeons that similarly had multiple L2 cache dies added to the CPU processor slot. While mainframes still continue today in the IBM Z lines used for bank transaction verifications and such, they remain a niche corner of the market that we will not cover in this piece.",
+      "parent_block_plain_text": "The modern version of the datacenter CPU can be traced back to the 1990s following the success of Personal Computers in the prior decade, bringing basic computing into the home. As PC processing power grew with Intel’s i386, i486 and Pentium generations, many tasks normally computed by advanced workstation and mainframe computers from the likes of DEC and IBM were instead done on PCs at a fraction of the cost. Responding to this need for higher performance “mainframe replacements”, Intel began to release PC processor variants that had more performance and larger caches for higher prices, starting with the Pentium Pro in 1995 that had multiple L2 cache dies co-packaged with the CPU in a Multi-Chip Module (MCM). The Xeon brand then followed suit in 1998, with the Pentium II Xeons that similarly had multiple L2 cache dies added to the CPU processor slot. While mainframes still continue today in the IBM Z lines used for bank transaction verifications and such, they remain a niche corner of the market that we will not cover in this piece.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 720,
+      "segment_end": 1049,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "至强品牌紧随其后于 1998 年面世，首发产品奔腾 II 至强同样在 CPU 处理器插槽中加入了多个 L2缓存裸片。尽管时至今日，大型机依然活跃于负责银行交易验证等任务的 IBM Z 系列中，但其已退居小众利基市场，本文不再赘述。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:44:55.276363",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'mainframe replacements' accurately (大型机替代品).",
+          "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Chronicles the origin of the modern datacenter CPU, explaining how cost-effective PC architectures usurped legacy mainframes.",
+          "relation_to_previous": "Begins the evolutionary timeline established in the previous section.",
+          "relation_to_next": "Progresses chronologically from localized enterprise computing to the globally connected internet era.",
+          "key_points": [
+            "The modern datacenter CPU originated from the need for cost-effective mainframe replacements in the 1990s.",
+            "The creation of the Xeon brand and the addition of multiple L2 cache dies marked the first major architectural divergence for server workloads."
+          ],
+          "translation_notes": [
+            "Translate 'mainframe replacements' accurately (大型机替代品).",
+            "Ensure legacy hardware terms like 'i386', 'i486', and 'L2 cache dies' use standard localized nomenclature (e.g., L2缓存裸片/芯片)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格，“L2缓存裸片”应为“L2 缓存裸片”。（注：第3段中也存在相同的中英文字符间距问题）"
+          },
+          {
+            "type": "conciseness",
+            "description": "“小众利基市场”存在语义重复，“小众”与“利基”表达的是同一概念。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

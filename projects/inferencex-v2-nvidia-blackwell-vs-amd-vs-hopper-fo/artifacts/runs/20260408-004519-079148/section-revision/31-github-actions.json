@@ -1,0 +1,25 @@
+{
+  "section_id": "31-github-actions",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.45,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "本着开源精神，所有运行均在 GitHub Actions 上进行，因此基准测试结果是可验证、透明且可复现的。然而，近期 GitHub 的频繁宕机成了我们实现目标的拦路虎。最近我们看到（GitHub 宕机时的）独角兽的次数比什么动物都多！或许我们真该下线去碰碰草（接触下大自然）了。",
+    "微软和 GitHub 官方自己也意识到了这一点。他们已经停止在状态页面上更新总体正常运行时间数据，而过去 90 天的数据更是跌到了单 9：97.36%。看来，掩耳盗铃并不能让问题凭空消失……",
+    "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png",
+    "来源：Outages 项目",
+    "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png",
+    "来源：Outages 项目",
+    "总而言之，GitHub Actions 也就那么回事。它给开发者带来的体验平庸得让人抓狂，显然也不是为了在数百张 GPU 组成的集群上并发启动数千个任务而设计的。尽管如此，自发布以来，为了更好地满足 InferenceX 的需求，我们与几位 GitHub Actions 工程师展开了密切合作；我们可以由衷地说，与他们共事非常愉快。此外，我们的一个直接诉求是，在点击工作流运行时为任务实现懒加载。虽然确实花了不少时间，但他们最终还是上线了这一功能。"
+  ]
+}

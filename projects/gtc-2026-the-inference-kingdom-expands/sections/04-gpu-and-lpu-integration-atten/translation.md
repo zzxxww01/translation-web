@@ -1,0 +1,51 @@
+https://substackcdn.com/image/fetch/$s_!269y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05b555ed-9d4e-45db-ad03-cbc1cc261b17_3064x1497.jpeg
+
+来源：英伟达
+
+了解了 LPU 的优势后，我们就能理解它们如何融入推理架构。英伟达引入 LPU 是为了提升高交互场景的性能。在这些场景中，LPU 能够利用其低延迟特性来改善解码阶段（decode phase）的延迟。LPU 改善解码阶段延迟的方法之一，是应用在 MegaScale-Infer 和 Step-3 中提出的注意力与前馈网络解耦（Attention FFN Disaggregation (AFD)）技术。
+
+正如我们在 InferenceX 文章 中所解释的，大语言模型（LLM）推理包含两个阶段：预填充（prefill）和解码（decode）。预填充阶段处理完整的输入上下文：它是计算密集型的，非常适合 GPU 处理。另一方面，解码阶段负责预测新 token，属于内存受限型（memory-bounded）任务。由于模型需要逐个预测新 token，解码阶段对延迟极其敏感，而 LPU 的高 SRAM 带宽和低延迟特性有助于加速这一迭代过程。
+
+https://substackcdn.com/image/fetch/$s_!xoes!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F97ce6be2-5ef7-4770-85b8-d65ebda7c049_1887x551.jpeg
+
+来源：SemiAnalysis
+
+注意力机制（Attention）和前馈网络（FFN）是模型中的两个操作子集。在模型的前向传播（forward pass）中，注意力机制的输出会输入给 token 路由器（token router），随后 token 路由器将每个 token 分配给 k 个专家（experts），其中每个专家都是一个 FFN。注意力机制和 FFN 具有截然不同的性能特征。在解码阶段，由于受限于加载 KV Cache，即使扩大批处理规模（batch size），注意力机制的 GPU 利用率也几乎没有提升。相比之下，FFN 的 GPU 利用率随批处理规模扩大的提升效果要好得多。
+
+针对这一问题，我们已经与部分硬件供应商和存储公司合作，使用我们的推理模拟器进行了超过 6 个月的研究。
+
+https://substackcdn.com/image/fetch/$s_!hooB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc0bd1310-e0d9-4158-8959-b52bc3b65fab_577x409.jpeg
+
+来源：MegaScale-Infer，SemiAnalysis
+
+随着最先进的混合专家（MoE）模型变得日益稀疏，token 可以从更大的专家池中选择专家。因此，每个专家接收到的 token 数量减少，导致利用率下降。这促使了注意力与前馈网络解耦。如果 GPU 仅执行注意力操作，其 HBM 容量就可以完全分配给 KV Cache，从而增加其能够处理的 token 总数，进而提高每个专家平均处理的 token 数量。
+
+https://substackcdn.com/image/fetch/$s_!ZhUl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc51c24d7-d5a7-4c99-a243-0baa24afbf08_1474x783.jpeg
+
+来源：SemiAnalysis
+
+对比这两种操作，由于动态KV Cache加载模式，注意力机制是有状态的；相比之下，前馈网络（FFN）是无状态的，因为其计算仅依赖于 token 输入。因此，我们将注意力机制与 FFN 的计算进行解耦。我们将注意力计算映射到擅长处理动态工作负载的 GPU 上。对于 FFN，我们将其映射到 LPU 上，因为 LPU 架构具有固有的确定性，能够从静态计算工作负载中获益。
+
+https://substackcdn.com/image/fetch/$s_!27kD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65ead35a-ac7d-4416-b5d8-b2484e3e5a45_1217x372.jpeg
+
+来源：SemiAnalysis，MegaScale-Infer
+
+在注意力与前馈网络解耦（AFD）架构下，从GPU到LPU的token路由可能成为瓶颈，在严格的延迟限制下尤为明显。token路由流程包含两个操作：分发与合并。在分发阶段，我们通过All-to-All集合通信操作将每个token路由至其top k专家。专家完成计算后，我们执行合并阶段，通过反向All-to-All集合通信将输出结果发送回源位置，以继续下一层的计算。
+
+https://substackcdn.com/image/fetch/$s_!XL7s!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd5a62c2-81f4-4f64-b101-6a7e9e611fe6_830x1054.jpeg
+
+来源：SemiAnalysis
+
+为了隐藏分发与合并的通信延迟，我们采用乒乓流水线并行。除了像标准流水线并行那样将批次拆分为微批次并实现计算流水线化之外，分发到LPU的token还会合并回源GPU，从而在GPU与LPU之间进行乒乓式传输。
+
+https://substackcdn.com/image/fetch/$s_!oNdF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F15b11e7c-2540-46c1-92a2-ad4fe5b4e561_1400x673.jpeg
+
+来源：MegaScale-Infer
+
+https://substackcdn.com/image/fetch/$s_!jmpy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fefbdfe32-e16d-4a9b-bfd8-725d4b880569_1381x1082.jpeg
+
+来源：SemiAnalysis
+
+https://substackcdn.com/image/fetch/$s_!G-iW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1204b3bb-7e16-4820-9a71-4171d79a719e_889x778.jpeg
+
+来源：SemiAnalysis

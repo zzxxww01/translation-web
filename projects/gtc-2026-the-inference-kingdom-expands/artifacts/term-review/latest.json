@@ -1,0 +1,1665 @@
+{
+  "project_id": "gtc-2026-the-inference-kingdom-expands",
+  "project_title": "Nvidia – The Inference Kingdom Expands",
+  "review_required": true,
+  "generated_at": "2026-04-03T02:42:40.882391",
+  "total_candidates": 44,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "CPO",
+          "suggested_translation": "共封装光学（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 24,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            },
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            },
+            {
+              "section_id": "11-feynman-nvl1152-networking-top",
+              "section_title": "Feynman NVL1152 Networking Topologies"
+            }
+          ],
+          "contexts": [
+            "Co-Packaged Optics, making its debut for scale-up networking in the Rubin/Feynman systems.",
+            "NVIDIA revealed its CPO Roadmap at the GTC Keynote 2026",
+            "Co-packaged optics, discussed for scale-up networking in Kyber and Feynman."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "GTC",
+          "suggested_translation": "GTC 大会",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Nvidia's annual GPU Technology Conference."
+          ],
+          "similar_terms": [
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-groq",
+      "section_title": "Groq",
+      "candidates": [
+        {
+          "term": "LPU",
+          "suggested_translation": "LPU（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 44,
+          "first_occurrence": "01-groq",
+          "related_sections": [
+            {
+              "section_id": "01-groq",
+              "section_title": "Groq"
+            },
+            {
+              "section_id": "02-lpu-chip",
+              "section_title": "LPU chip"
+            },
+            {
+              "section_id": "03-sram-and-memory-hierarchy",
+              "section_title": "SRAM and Memory Hierarchy"
+            },
+            {
+              "section_id": "04-gpu-and-lpu-integration-atten",
+              "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)"
+            },
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            },
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            },
+            {
+              "section_id": "07-lpu-network",
+              "section_title": "LPU Network"
+            }
+          ],
+          "contexts": [
+            "Groq's specific hardware architecture: Language Processing Unit",
+            "Language Processing Unit, Groq's specific AI accelerator architecture",
+            "Groq's specialized processor for LLM inference, contrasting with GPUs."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "GPU",
+              "translation": "GPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "图形处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "NPU",
+              "translation": "NPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "神经网络处理器",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "disaggregated decode system",
+          "suggested_translation": "解构式解码系统",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-groq",
+          "related_sections": [
+            {
+              "section_id": "01-groq",
+              "section_title": "Groq"
+            },
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            }
+          ],
+          "contexts": [
+            "how LPU fits into a disaggregated decode system",
+            "An architecture where the decoding process is separated from other compute tasks."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.364
+            }
+          ]
+        },
+        {
+          "term": "IP",
+          "suggested_translation": "知识产权（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-groq",
+          "related_sections": [
+            {
+              "section_id": "01-groq",
+              "section_title": "Groq"
+            }
+          ],
+          "contexts": [
+            "Nvidia paid Groq $20B to license their IP"
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.5
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.444
+            },
+            {
+              "original": "RF chip",
+              "translation": "射频芯片",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Radio Frequency",
+              "similarity": 0.444
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "02-lpu-chip",
+      "section_title": "LPU chip",
+      "candidates": [
+        {
+          "term": "Groq",
+          "suggested_translation": "[保持原文] Groq",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "02-lpu-chip",
+          "related_sections": [
+            {
+              "section_id": "02-lpu-chip",
+              "section_title": "LPU chip"
+            }
+          ],
+          "contexts": [
+            "The company name developing the LPU architecture"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "deterministic",
+          "suggested_translation": "确定性",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-lpu-chip",
+          "related_sections": [
+            {
+              "section_id": "02-lpu-chip",
+              "section_title": "LPU chip"
+            }
+          ],
+          "contexts": [
+            "Hardware execution property where timing and data flow are predictable"
+          ],
+          "similar_terms": [
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            },
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "scratchpad SRAM",
+          "suggested_translation": "暂存SRAM（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-lpu-chip",
+          "related_sections": [
+            {
+              "section_id": "02-lpu-chip",
+              "section_title": "LPU chip"
+            }
+          ],
+          "contexts": [
+            "Single-level memory used between functional units for deterministic execution"
+          ],
+          "similar_terms": [
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.421
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-sram-and-memory-hierarchy",
+      "section_title": "SRAM and Memory Hierarchy",
+      "candidates": [
+        {
+          "term": "Alchip",
+          "suggested_translation": "世芯电子（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-sram-and-memory-hierarchy",
+          "related_sections": [
+            {
+              "section_id": "03-sram-and-memory-hierarchy",
+              "section_title": "SRAM and Memory Hierarchy"
+            }
+          ],
+          "contexts": [
+            "A leading backend design partner for advanced chip projects."
+          ],
+          "similar_terms": [
+            {
+              "original": "analog chip",
+              "translation": "模拟芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.706
+            },
+            {
+              "original": "logic chip",
+              "translation": "逻辑芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.625
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.615
+            }
+          ]
+        },
+        {
+          "term": "KVcache",
+          "suggested_translation": "KV 缓存",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-sram-and-memory-hierarchy",
+          "related_sections": [
+            {
+              "section_id": "03-sram-and-memory-hierarchy",
+              "section_title": "SRAM and Memory Hierarchy"
+            },
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            }
+          ],
+          "contexts": [
+            "Memory used in transformers to store key-value pairs for attention mechanisms.",
+            "Key-Value Cache used in LLM inference to store intermediate states."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "time to first token",
+          "suggested_translation": "首字延迟（TTFT）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-sram-and-memory-hierarchy",
+          "related_sections": [
+            {
+              "section_id": "03-sram-and-memory-hierarchy",
+              "section_title": "SRAM and Memory Hierarchy"
+            },
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "A key latency metric for LLM inference performance.",
+            "A key performance metric for LLM prefill performance."
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.417
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-gpu-and-lpu-integration-atten",
+      "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+      "candidates": [
+        {
+          "term": "FFN",
+          "suggested_translation": "前馈网络（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "04-gpu-and-lpu-integration-atten",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-and-lpu-integration-atten",
+              "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)"
+            },
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            }
+          ],
+          "contexts": [
+            "Feed-Forward Network, a subset of operations in a transformer model.",
+            "Feed-Forward Network, a core component of transformer layers"
+          ],
+          "similar_terms": [
+            {
+              "original": "efficiency",
+              "translation": "效率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "KV cache",
+          "suggested_translation": "[保持原文] KV cache",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "04-gpu-and-lpu-integration-atten",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-and-lpu-integration-atten",
+              "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)"
+            },
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            },
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "Key-Value cache used during the decode phase of LLM inference.",
+            "Key-Value cache used to store intermediate states in transformer models to speed up decoding",
+            "Key-Value cache used in LLM inference, a primary bottleneck for long-context workloads."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "AFD",
+          "suggested_translation": "Attention FFN 解耦（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-gpu-and-lpu-integration-atten",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-and-lpu-integration-atten",
+              "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)"
+            }
+          ],
+          "contexts": [
+            "Attention FFN Disaggregation, a technique to separate attention and feed-forward network computations."
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.667
+            },
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "token router",
+          "suggested_translation": "令牌路由器（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-gpu-and-lpu-integration-atten",
+          "related_sections": [
+            {
+              "section_id": "04-gpu-and-lpu-integration-atten",
+              "section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)"
+            }
+          ],
+          "contexts": [
+            "The component that assigns tokens to experts in an MoE model."
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.588
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            },
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-speculative-decoding",
+      "section_title": "Speculative Decoding",
+      "candidates": [
+        {
+          "term": "draft model",
+          "suggested_translation": "草稿模型",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "05-speculative-decoding",
+          "related_sections": [
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            }
+          ],
+          "contexts": [
+            "A smaller, faster model used in speculative decoding to generate candidate tokens"
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.533
+            },
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.471
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "speculative decoding",
+          "suggested_translation": "投机性解码（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "05-speculative-decoding",
+          "related_sections": [
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            }
+          ],
+          "contexts": [
+            "An inference optimization technique using a draft model to predict multiple tokens"
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            },
+            {
+              "original": "self-attention",
+              "translation": "自注意力机制",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.457
+            }
+          ]
+        },
+        {
+          "term": "warm prefill",
+          "suggested_translation": "热预填充",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-speculative-decoding",
+          "related_sections": [
+            {
+              "section_id": "05-speculative-decoding",
+              "section_title": "Speculative Decoding"
+            }
+          ],
+          "contexts": [
+            "A prefill operation performed on a small number of new tokens to verify draft predictions"
+          ],
+          "similar_terms": [
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.737
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-lpx-rack-system",
+      "section_title": "LPX Rack System",
+      "candidates": [
+        {
+          "term": "Spectrum-X",
+          "suggested_translation": "[保持原文] Spectrum-X",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "06-lpx-rack-system",
+          "related_sections": [
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            },
+            {
+              "section_id": "07-lpu-network",
+              "section_title": "LPU Network"
+            },
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "Nvidia's Ethernet platform for AI networking.",
+            "NVIDIA's Ethernet platform for AI, mentioned as the scale-out interface.",
+            "NVIDIA's Ethernet networking platform for AI clusters."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "belly-to-belly",
+          "suggested_translation": "背靠背（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-lpx-rack-system",
+          "related_sections": [
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            }
+          ],
+          "contexts": [
+            "A PCB mounting technique where modules are placed on both sides of the board to reduce trace length."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "compute tray",
+          "suggested_translation": "计算托盘",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-lpx-rack-system",
+          "related_sections": [
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            }
+          ],
+          "contexts": [
+            "The modular hardware unit within the rack containing processors and memory."
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "scale-out fabric",
+          "suggested_translation": "横向扩展织物",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-lpx-rack-system",
+          "related_sections": [
+            {
+              "section_id": "06-lpx-rack-system",
+              "section_title": "LPX Rack System"
+            }
+          ],
+          "contexts": [
+            "The networking infrastructure used to connect multiple nodes or racks."
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            },
+            {
+              "original": "fab",
+              "translation": "晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "fabrication facility",
+              "similarity": 0.316
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-lpu-network",
+      "section_title": "LPU Network",
+      "candidates": [
+        {
+          "term": "backplane",
+          "suggested_translation": "背板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "07-lpu-network",
+          "related_sections": [
+            {
+              "section_id": "07-lpu-network",
+              "section_title": "LPU Network"
+            },
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "The copper cable infrastructure used for inter-node links within a rack.",
+            "Refers to the cable backplane and connectors used in the LPX and Kyber systems."
+          ],
+          "similar_terms": [
+            {
+              "original": "Blackwell",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达的显卡",
+              "similarity": 0.556
+            },
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.556
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "scale-up",
+          "suggested_translation": "纵向扩展（scale-up）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "07-lpu-network",
+          "related_sections": [
+            {
+              "section_id": "07-lpu-network",
+              "section_title": "LPU Network"
+            },
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            }
+          ],
+          "contexts": [
+            "Refers to the C2C network within a node or rack for high-bandwidth interconnectivity.",
+            "CPO to be used for scale-up within the rack for Rubin Ultra Kyber"
+          ],
+          "similar_terms": [
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            },
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "C2C",
+          "suggested_translation": "[保持原文] C2C",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "07-lpu-network",
+          "related_sections": [
+            {
+              "section_id": "07-lpu-network",
+              "section_title": "LPU Network"
+            }
+          ],
+          "contexts": [
+            "Chip-to-Chip interconnect; specifically Groq's proprietary scale-up fabric, distinct from NVLink."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "08-nvidias-cpo-roadmap",
+      "section_title": "Nvidia’s CPO Roadmap",
+      "candidates": [
+        {
+          "term": "Kyber",
+          "suggested_translation": "[保持原文] Kyber",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 24,
+          "first_occurrence": "08-nvidias-cpo-roadmap",
+          "related_sections": [
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            },
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            },
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "Rubin Ultra in the Oberon and Kyber Rack form factor",
+            "Nvidia's latest rack form factor following the Oberon design.",
+            "Nvidia's project or system name for the next-generation rack architecture."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "SerDes",
+          "suggested_translation": "[保持原文] SerDes",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "08-nvidias-cpo-roadmap",
+          "related_sections": [
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            },
+            {
+              "section_id": "11-feynman-nvl1152-networking-top",
+              "section_title": "Feynman NVL1152 Networking Topologies"
+            },
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "While 448G high speed SerDes have big challenges for shoreline",
+            "High-speed serializer/deserializer interfaces used for data transmission.",
+            "High speed SerDes for Samsung Foundry and Groq's C2C connectivity."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Feynman",
+          "suggested_translation": "[保持原文] Feynman",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "08-nvidias-cpo-roadmap",
+          "related_sections": [
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            },
+            {
+              "section_id": "11-feynman-nvl1152-networking-top",
+              "section_title": "Feynman NVL1152 Networking Topologies"
+            }
+          ],
+          "contexts": [
+            "When we reach the Feynman Generation, CPO usage will expand",
+            "Next-generation NVIDIA platform/rack architecture following Blackwell."
+          ],
+          "similar_terms": [
+            {
+              "original": "benchmark",
+              "translation": "基准测试",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "只有表示大模型等的评测方式时翻译成基准测试",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Oberon",
+          "suggested_translation": "[保持原文] Oberon",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "08-nvidias-cpo-roadmap",
+          "related_sections": [
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            }
+          ],
+          "contexts": [
+            "Nvidia will offer the Rubin GPU in an Oberon NVL72 form factor"
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.545
+            },
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "world size",
+          "suggested_translation": "计算规模（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "08-nvidias-cpo-roadmap",
+          "related_sections": [
+            {
+              "section_id": "08-nvidias-cpo-roadmap",
+              "section_title": "Nvidia’s CPO Roadmap"
+            },
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "Nvidia’s focus was instead on using CPO to enable larger world size compute systems",
+            "The total number of GPUs in a single coherent scale-up domain."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+      "candidates": [
+        {
+          "term": "Rubin Ultra",
+          "suggested_translation": "[保持原文] Rubin Ultra",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 11,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "High-end variant of the Rubin GPU architecture."
+          ],
+          "similar_terms": [
+            {
+              "original": "Rubin",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达架构",
+              "similarity": 0.625
+            }
+          ]
+        },
+        {
+          "term": "midplane",
+          "suggested_translation": "中板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "The PCB interface used to connect compute and switch blades in the Kyber rack."
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            },
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "radix",
+          "suggested_translation": "基数（Radix）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "Refers to the number of ports or connectivity density of a switch chip."
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.571
+            },
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.5
+            },
+            {
+              "original": "R&D",
+              "translation": "研发",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "Research and Development",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "switch blade",
+          "suggested_translation": "交换刀片",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "Rack units containing NVLink or Ethernet switches."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "flyover cables",
+          "suggested_translation": "跨接电缆",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            },
+            {
+              "section_id": "11-feynman-nvl1152-networking-top",
+              "section_title": "Feynman NVL1152 Networking Topologies"
+            }
+          ],
+          "contexts": [
+            "Copper cables used to bypass PCB traces for high-speed signals over longer distances.",
+            "Internal high-speed cables that bypass the PCB to reduce signal loss."
+          ],
+          "similar_terms": [
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.571
+            },
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            }
+          ]
+        },
+        {
+          "term": "compute blade",
+          "suggested_translation": "计算刀片",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-oberon-and-kyber-updates-larg",
+          "related_sections": [
+            {
+              "section_id": "09-oberon-and-kyber-updates-larg",
+              "section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates"
+            }
+          ],
+          "contexts": [
+            "Individual units within the rack containing GPUs and CPUs."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "10-cmx-and-stx",
+      "section_title": "CMX and STX",
+      "candidates": [
+        {
+          "term": "STX",
+          "suggested_translation": "[保持原文] STX",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "10-cmx-and-stx",
+          "related_sections": [
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's reference storage rack architecture using BF-4 based solutions."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "CMX",
+          "suggested_translation": "[保持原文] CMX",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "10-cmx-and-stx",
+          "related_sections": [
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's context memory storage platform for KV Cache offloading."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "ICMS",
+          "suggested_translation": "[保持原文] ICMS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "10-cmx-and-stx",
+          "related_sections": [
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "Inference Context Memory Storage, the previous name for the CMX platform."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.571
+            },
+            {
+              "original": "IDM",
+              "translation": "IDM",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "SOCAMM",
+          "suggested_translation": "[保持原文] SOCAMM",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-cmx-and-stx",
+          "related_sections": [
+            {
+              "section_id": "10-cmx-and-stx",
+              "section_title": "CMX and STX"
+            }
+          ],
+          "contexts": [
+            "Specific memory modules used within the STX reference design boxes."
+          ],
+          "similar_terms": [
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.667
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.6
+            },
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "11-feynman-nvl1152-networking-top",
+      "section_title": "Feynman NVL1152 Networking Topologies",
+      "candidates": [
+        {
+          "term": "OCS",
+          "suggested_translation": "[保持原文] OCS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "11-feynman-nvl1152-networking-top",
+          "related_sections": [
+            {
+              "section_id": "11-feynman-nvl1152-networking-top",
+              "section_title": "Feynman NVL1152 Networking Topologies"
+            }
+          ],
+          "contexts": [
+            "Optical Circuit Switch, used for reconfigurable optical networking."
+          ],
+          "similar_terms": [
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "12-gtc-2026-supply-chain-implicat",
+      "section_title": "GTC 2026 Supply Chain Implications",
+      "candidates": [
+        {
+          "term": "FIT",
+          "suggested_translation": "鸿腾精密（FIT）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "12-gtc-2026-supply-chain-implicat",
+          "related_sections": [
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "Foxconn Interconnect Technology, a key supplier for connectors and cable cartridges."
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.667
+            },
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Voronoi",
+          "suggested_translation": "[保持原文] Voronoi",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "12-gtc-2026-supply-chain-implicat",
+          "related_sections": [
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "Nvidia's proprietary connector specification designed to replace standard connectors."
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "pluggable transceiver",
+          "suggested_translation": "可插拔收发器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "12-gtc-2026-supply-chain-implicat",
+          "related_sections": [
+            {
+              "section_id": "12-gtc-2026-supply-chain-implicat",
+              "section_title": "GTC 2026 Supply Chain Implications"
+            }
+          ],
+          "contexts": [
+            "Standard networking components like OSFP/QSFP that MBOM aims to replace."
+          ],
+          "similar_terms": [
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.467
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

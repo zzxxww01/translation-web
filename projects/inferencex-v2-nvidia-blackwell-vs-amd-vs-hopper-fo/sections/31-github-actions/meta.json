@@ -1,0 +1,613 @@
+{
+  "section_id": "31-github-actions",
+  "title": "GitHub Actions",
+  "title_translation": "GitHub Actions",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "In the spirit of open source, all runs occur on GitHub Actions, so benchmark results are verifiable, transparent, and reproducible. However, GitHub outages have been a constant obstacle to our goals recently. We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "We have seen more unicorns lately than any other animal",
+          "start": 209,
+          "end": 264,
+          "href": "https://github.com/503.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0358",
+      "parent_block_index": 358,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In the spirit of open source, all runs occur on GitHub Actions, so benchmark results are verifiable, transparent, and reproducible. However, GitHub outages have been a constant obstacle to our goals recently. [We have seen more unicorns lately than any other animal](https://github.com/503.html)! But maybe it’s time for us to touch some grass.",
+      "parent_block_plain_text": "In the spirit of open source, all runs occur on GitHub Actions, so benchmark results are verifiable, transparent, and reproducible. However, GitHub outages have been a constant obstacle to our goals recently. We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "We have seen more unicorns lately than any other animal",
+          "start": 209,
+          "end": 264,
+          "href": "https://github.com/503.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 313,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本着开源精神，所有运行均在 GitHub Actions 上进行，因此基准测试结果是可验证、透明且可复现的。然而，近期 GitHub 的频繁宕机成了我们实现目标的拦路虎。最近我们看到（GitHub 宕机时的）独角兽的次数比什么动物都多！或许我们真该下线去碰碰草（接触下大自然）了。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017677",
+          "tokenized_text": "本着开源精神，所有运行均在 GitHub Actions 上进行，因此基准测试结果是可验证、透明且可复现的。然而，近期 GitHub 的频繁宕机成了我们实现目标的拦路虎。[[[LINK_1|最近我们看到（GitHub 宕机时的）独角兽的次数比什么动物都多]]]！或许我们真该下线去碰碰草（接触下大自然）了。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Microsoft/GitHub themselves are aware of this and have stopped updating its status page with aggregate uptime numbers and are down to a single 9: 97.36% over the past 90 days. The problem doesn’t seem to go away if you choose to ignore it...",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0359",
+      "parent_block_index": 359,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Microsoft/GitHub themselves are aware of this and have stopped updating its status page with aggregate uptime numbers and are down to a single 9: 97.36% over the past 90 days. The problem doesn’t seem to go away if you choose to ignore it...",
+      "parent_block_plain_text": "Microsoft/GitHub themselves are aware of this and have stopped updating its status page with aggregate uptime numbers and are down to a single 9: 97.36% over the past 90 days. The problem doesn’t seem to go away if you choose to ignore it...",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 241,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软和 GitHub 官方自己也意识到了这一点。他们已经停止在状态页面上更新总体正常运行时间数据，而过去 90 天的数据更是跌到了单 9：97.36%。看来，掩耳盗铃并不能让问题凭空消失……",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017736",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0360",
+      "parent_block_index": 360,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017766",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!0uH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b921859-49f3-4b0b-b02e-dd0bf7a36e2e_3000x975.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: Outages project",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Outages project",
+          "start": 8,
+          "end": 23,
+          "href": "https://github.com/outages/github-outages",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0361",
+      "parent_block_index": 361,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Outages project](https://github.com/outages/github-outages)",
+      "parent_block_plain_text": "Source: Outages project",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Outages project",
+          "start": 8,
+          "end": 23,
+          "href": "https://github.com/outages/github-outages",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Outages项目",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798263",
+          "tokenized_text": "来源：[[[LINK_1|Outages项目]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Outages 项目",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017837",
+          "tokenized_text": "来源：[[[LINK_1|Outages 项目]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Outages项目",
+      "confirmed_tokenized": "来源：[[[LINK_1|Outages项目]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0362",
+      "parent_block_index": 362,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017867",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!mh4e!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdd7aad58-ba30-4364-9565-980ae6464534_3000x975.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: Outages project",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Outages project",
+          "start": 8,
+          "end": 23,
+          "href": "https://github.com/outages/github-outages",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0363",
+      "parent_block_index": 363,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Outages project](https://github.com/outages/github-outages)",
+      "parent_block_plain_text": "Source: Outages project",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Outages project",
+          "start": 8,
+          "end": 23,
+          "href": "https://github.com/outages/github-outages",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Outages项目",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798270",
+          "tokenized_text": "来源：[[[LINK_1|Outages项目]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Outages 项目",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017927",
+          "tokenized_text": "来源：[[[LINK_1|Outages 项目]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Outages项目",
+      "confirmed_tokenized": "来源：[[[LINK_1|Outages项目]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "All in all, GitHub Actions is just alright. It provides a painfully average experience for developers. It is certainly not meant for launching thousands of jobs across a fleet of hundreds of GPUs. Nevertheless, we have worked closely with some GitHub Actions engineers since our launch to better meet the needs of InferenceX, and we can confidently say they have been a pleasure to work with. Moreover, one of our direct asks was to implement lazy loading for jobs when clicking on a workflow run and, while it did take them a while, they eventually implemented the feature.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "they eventually implemented the feature.",
+          "start": 534,
+          "end": 574,
+          "href": "http://github.blog/changelog/2025-12-22-improved-performance-for-github-actions-workflows-page/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0364",
+      "parent_block_index": 364,
+      "parent_block_type": "p",
+      "parent_block_markdown": "All in all, GitHub Actions is just alright. It provides a painfully average experience for developers. It is certainly not meant for launching thousands of jobs across a fleet of hundreds of GPUs. Nevertheless, we have worked closely with some GitHub Actions engineers since our launch to better meet the needs of InferenceX, and we can confidently say they have been a pleasure to work with. Moreover, one of our direct asks was to implement lazy loading for jobs when clicking on a workflow run and, while it did take them a while, [they eventually implemented the feature.](http://github.blog/changelog/2025-12-22-improved-performance-for-github-actions-workflows-page/)",
+      "parent_block_plain_text": "All in all, GitHub Actions is just alright. It provides a painfully average experience for developers. It is certainly not meant for launching thousands of jobs across a fleet of hundreds of GPUs. Nevertheless, we have worked closely with some GitHub Actions engineers since our launch to better meet the needs of InferenceX, and we can confidently say they have been a pleasure to work with. Moreover, one of our direct asks was to implement lazy loading for jobs when clicking on a workflow run and, while it did take them a while, they eventually implemented the feature.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "they eventually implemented the feature.",
+          "start": 534,
+          "end": 574,
+          "href": "http://github.blog/changelog/2025-12-22-improved-performance-for-github-actions-workflows-page/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 574,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "总而言之，GitHub Actions 也就那么回事。它给开发者带来的体验平庸得让人抓狂，显然也不是为了在数百张 GPU 组成的集群上并发启动数千个任务而设计的。尽管如此，自发布以来，为了更好地满足 InferenceX 的需求，我们与几位 GitHub Actions 工程师展开了密切合作；我们可以由衷地说，与他们共事非常愉快。此外，我们的一个直接诉求是，在点击工作流运行时为任务实现懒加载。虽然确实花了不少时间，但他们最终还是上线了这一功能。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:17:33.017998",
+          "tokenized_text": "总而言之，GitHub Actions 也就那么回事。它给开发者带来的体验平庸得让人抓狂，显然也不是为了在数百张 GPU 组成的集群上并发启动数千个任务而设计的。尽管如此，自发布以来，为了更好地满足 InferenceX 的需求，我们与几位 GitHub Actions 工程师展开了密切合作；我们可以由衷地说，与他们共事非常愉快。此外，我们的一个直接诉求是，在点击工作流运行时为任务实现懒加载。虽然确实花了不少时间，但[[[LINK_1|他们最终还是上线了这一功能。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“所有运行”直接作为名词使用在中文里略显生硬。此处的 runs 指代的是基准测试的执行或工作流任务。"
+          },
+          {
+            "type": "terminology",
+            "description": "“总体正常运行时间数据”虽然字面准确，但在云服务和基础设施语境中，uptime 更地道的行业黑话是“在线率”或“可用性”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

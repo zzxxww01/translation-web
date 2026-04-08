@@ -1,0 +1,48 @@
+{
+  "section_id": "29-future-cpu-trends",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 8.9,
+    "conciseness_score": 8.8,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "accuracy|readability",
+        "severity": "medium",
+        "original_text": "High performance per core CPUs with high memory bandwidth...",
+        "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。",
+        "why_it_matters": "数据中心 CPU 动辄数十上百核，如果被误解为“单核 CPU”会引发严重的常识性技术错误。",
+        "suggestion": "建议修改为“具备高单核性能的 CPU”或“单核性能强劲的 CPU”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Credo’s Omniconnect memory gearboxes",
+        "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。",
+        "why_it_matters": "直译机械术语会破坏文章的硬件工程专业调性，降低目标读者（半导体工程师）的阅读体验。",
+        "suggestion": "建议修改为“Credo 的 Omniconnect 内存变速器”或“内存变速芯片”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "tone|readability",
+        "severity": "low",
+        "original_text": "JBOM “Just a Bunch of HBM” concepts",
+        "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。",
+        "why_it_matters": "影响专业分析师的行文调性与排版规范。",
+        "suggestion": "建议改为“JBOM（Just a Bunch of HBM，海量 HBM 阵列）概念”；并在“RL 环境”中间补充空格。"
+      },
+      {
+        "paragraph_index": 16,
+        "issue_type": "accuracy",
+        "severity": "medium",
+        "original_text": "...wasting good dies on faulty assemblies.",
+        "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。",
+        "why_it_matters": "先进封装良率损失的本质是：因为封装组件本身的不良，导致上面已经贴好的 KGD（已知良好裸片）也随之报废。准确翻译有助于阐明 BOM 成本增加的逻辑。",
+        "suggestion": "建议修改为“导致完好裸片因封装组件失效而被浪费”或“导致完好裸片在不良组件上被白白消耗”。"
+      }
+    ]
+  }
+}

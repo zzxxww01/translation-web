@@ -1,0 +1,3146 @@
+{
+  "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+  "title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+  "title_translation": "VR NVL72 TCO：BOM 与功耗预算分析",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The VR NVL72 Component BoM and Power Budget Model provides a detailed analysis on the BoM and the Power Budget of the rack system.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 4,
+          "end": 49,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0404",
+      "parent_block_index": 404,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The [VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/) provides a detailed analysis on the BoM and the Power Budget of the rack system.",
+      "parent_block_plain_text": "The VR NVL72 Component BoM and Power Budget Model provides a detailed analysis on the BoM and the Power Budget of the rack system.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 4,
+          "end": 49,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 130,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "VR NVL72 组件物料清单（BoM）与功耗预算模型 提供了关于该机柜系统物料清单 (BoM) 和功耗预算的详细分析。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080111",
+          "tokenized_text": "[[[LINK_1|VR NVL72 组件物料清单（BoM）与功耗预算模型]]] 提供了关于该机柜系统物料清单 (BoM) 和功耗预算的详细分析。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0405",
+      "parent_block_index": 405,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080172",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 53,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0406",
+      "parent_block_index": 406,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 53,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 53,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：VR NVL72 组件物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080252",
+          "tokenized_text": "来源：[[[LINK_1|VR NVL72 组件物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The VR NVL72 is more expensive on a per-GPU capital cost basis, ~45% higher vs GB300s and ~14-15% higher vs the MI4XX given a higher server cost on a per GPU basis. This results in a higher Capital Cost of Ownership (TCO). For example VR NVL 72 Hyperscaler Arista has a capital cost of $3.28 to MI4XX Hyperscaler of $2.86 per hour per GPU over a 4 year useful life. Our TCO Model runs on a 4y useful life for the purpose of calculating capital cost per hour to reflect a conservative business case, but most Neoclouds and Hyperscalers will use a 5-6y depreciation period and we think it is best to look at EBIT margins using this depreciation period. Our preferred yardstick is Project IRR, which is agnostic to the chosen depreciation period.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0407",
+      "parent_block_index": 407,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The VR NVL72 is more expensive on a per-GPU capital cost basis, ~45% higher vs GB300s and ~14-15% higher vs the MI4XX given a higher server cost on a per GPU basis. This results in a higher Capital Cost of Ownership (TCO). For example VR NVL 72 Hyperscaler Arista has a capital cost of $3.28 to MI4XX Hyperscaler of $2.86 per hour per GPU over a 4 year useful life. Our TCO Model runs on a 4y useful life for the purpose of calculating capital cost per hour to reflect a conservative business case, but most Neoclouds and Hyperscalers will use a 5-6y depreciation period and we think it is best to look at EBIT margins using this depreciation period. Our preferred yardstick is Project IRR, which is agnostic to the chosen depreciation period.",
+      "parent_block_plain_text": "The VR NVL72 is more expensive on a per-GPU capital cost basis, ~45% higher vs GB300s and ~14-15% higher vs the MI4XX given a higher server cost on a per GPU basis. This results in a higher Capital Cost of Ownership (TCO). For example VR NVL 72 Hyperscaler Arista has a capital cost of $3.28 to MI4XX Hyperscaler of $2.86 per hour per GPU over a 4 year useful life. Our TCO Model runs on a 4y useful life for the purpose of calculating capital cost per hour to reflect a conservative business case, but most Neoclouds and Hyperscalers will use a 5-6y depreciation period and we think it is best to look at EBIT margins using this depreciation period. Our preferred yardstick is Project IRR, which is agnostic to the chosen depreciation period.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 743,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "以单 GPU 资本支出成本计算，VR NVL72 价格更高，由于单 GPU 服务器成本上升，其比 GB300s 高出约 45%，比 MI4XX 高出约 14-15%。这导致了更高的资本总拥有成本（TCO）。例如，在 4 年的使用寿命内，VR NVL72 超大规模计算厂商 Arista 的单 GPU 每小时资本成本为 3.28 美元，而 MI4XX 超大规模计算厂商则为 2.86 美元。为了反映保守的商业案例，我们的总拥有成本模型在计算每小时资本成本时采用了 4 年使用寿命，但大多数新型云服务商 (Neoclouds) 和超大规模计算厂商会使用 5-6 年的折旧期，我们认为使用这一折旧期来观察息税前利润 (EBIT) 率最为合适。我们首选的衡量标准是项目内部收益率 (Project IRR)，它与所选的折旧期无关。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080284",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "However, one advantage for Nvidia’s VR SOCAMM option is that NVIDIA directly procures memory, allowing them to negotiate long-term agreements, volume-preferential terms with memory suppliers and most importantly, VVIP pricing. We think this will shield end customers from spikes in memory costs as we outline in our AI server apocalypse note, and is another example of how, as the Central Bank of AI, Nvidia is effectively hedging DRAM prices for all of its customers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "AI server apocalypse note",
+          "start": 316,
+          "end": 341,
+          "href": "https://semianalysis.com/institutional/the-ai-server-pricing-apocalypse/?access_token=eyJhbGciOiJFUzI1NiIsImtpZCI6InNlbWlhbmFseXNpcy5wYXNzcG9ydC5vbmxpbmUiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJzZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lIiwiYXpwIjoiS1NncVhBaGFmZmtwVjQzbmt0UU1INSIsImVudCI6eyJ1cmkiOlsiaHR0cHM6Ly9zZW1pYW5hbHlzaXMuY29tL2luc3RpdHV0aW9uYWwvdGhlLWFpLXNlcnZlci1wcmljaW5nLWFwb2NhbHlwc2UvIl19LCJleHAiOjE3NzIyMjcwMTcsImlhdCI6MTc2OTYzNTAxNywiaXNzIjoiaHR0cHM6Ly9zZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lL29hdXRoIiwic2NvcGUiOiJmZWVkOnJlYWQgYXJ0aWNsZTpyZWFkIGFzc2V0OnJlYWQgY2F0ZWdvcnk6cmVhZCBlbnRpdGxlbWVudHMiLCJzdWIiOiIwMTk4OTQ2ZC0xNWUwLTc4MGItYWE2My1iNTc2YmQ3YWY2OTIiLCJ1c2UiOiJhY2Nlc3MifQ.2-BzgpJsNkRro7XCzTy3QDFtE-QyqEQxE7kykja0HIN5XHg3O1bvBzRuBc5x1Pz_HfCVhuRT3fA8f1s7GI_CvA",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "as the Central Bank of AI",
+          "start": 374,
+          "end": 399,
+          "href": "https://semianalysis.com/institutional/nvidia-as-the-central-bank-of-ai/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0408",
+      "parent_block_index": 408,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, one advantage for Nvidia’s VR SOCAMM option is that NVIDIA directly procures memory, allowing them to negotiate long-term agreements, volume-preferential terms with memory suppliers and most importantly, VVIP pricing. We think this will shield end customers from spikes in memory costs as we outline in our [AI server apocalypse note](https://semianalysis.com/institutional/the-ai-server-pricing-apocalypse/?access_token=eyJhbGciOiJFUzI1NiIsImtpZCI6InNlbWlhbmFseXNpcy5wYXNzcG9ydC5vbmxpbmUiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJzZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lIiwiYXpwIjoiS1NncVhBaGFmZmtwVjQzbmt0UU1INSIsImVudCI6eyJ1cmkiOlsiaHR0cHM6Ly9zZW1pYW5hbHlzaXMuY29tL2luc3RpdHV0aW9uYWwvdGhlLWFpLXNlcnZlci1wcmljaW5nLWFwb2NhbHlwc2UvIl19LCJleHAiOjE3NzIyMjcwMTcsImlhdCI6MTc2OTYzNTAxNywiaXNzIjoiaHR0cHM6Ly9zZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lL29hdXRoIiwic2NvcGUiOiJmZWVkOnJlYWQgYXJ0aWNsZTpyZWFkIGFzc2V0OnJlYWQgY2F0ZWdvcnk6cmVhZCBlbnRpdGxlbWVudHMiLCJzdWIiOiIwMTk4OTQ2ZC0xNWUwLTc4MGItYWE2My1iNTc2YmQ3YWY2OTIiLCJ1c2UiOiJhY2Nlc3MifQ.2-BzgpJsNkRro7XCzTy3QDFtE-QyqEQxE7kykja0HIN5XHg3O1bvBzRuBc5x1Pz_HfCVhuRT3fA8f1s7GI_CvA), and is another example of how, [as the Central Bank of AI](https://semianalysis.com/institutional/nvidia-as-the-central-bank-of-ai/), Nvidia is effectively hedging DRAM prices for all of its customers.",
+      "parent_block_plain_text": "However, one advantage for Nvidia’s VR SOCAMM option is that NVIDIA directly procures memory, allowing them to negotiate long-term agreements, volume-preferential terms with memory suppliers and most importantly, VVIP pricing. We think this will shield end customers from spikes in memory costs as we outline in our AI server apocalypse note, and is another example of how, as the Central Bank of AI, Nvidia is effectively hedging DRAM prices for all of its customers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "AI server apocalypse note",
+          "start": 316,
+          "end": 341,
+          "href": "https://semianalysis.com/institutional/the-ai-server-pricing-apocalypse/?access_token=eyJhbGciOiJFUzI1NiIsImtpZCI6InNlbWlhbmFseXNpcy5wYXNzcG9ydC5vbmxpbmUiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJzZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lIiwiYXpwIjoiS1NncVhBaGFmZmtwVjQzbmt0UU1INSIsImVudCI6eyJ1cmkiOlsiaHR0cHM6Ly9zZW1pYW5hbHlzaXMuY29tL2luc3RpdHV0aW9uYWwvdGhlLWFpLXNlcnZlci1wcmljaW5nLWFwb2NhbHlwc2UvIl19LCJleHAiOjE3NzIyMjcwMTcsImlhdCI6MTc2OTYzNTAxNywiaXNzIjoiaHR0cHM6Ly9zZW1pYW5hbHlzaXMucGFzc3BvcnQub25saW5lL29hdXRoIiwic2NvcGUiOiJmZWVkOnJlYWQgYXJ0aWNsZTpyZWFkIGFzc2V0OnJlYWQgY2F0ZWdvcnk6cmVhZCBlbnRpdGxlbWVudHMiLCJzdWIiOiIwMTk4OTQ2ZC0xNWUwLTc4MGItYWE2My1iNTc2YmQ3YWY2OTIiLCJ1c2UiOiJhY2Nlc3MifQ.2-BzgpJsNkRro7XCzTy3QDFtE-QyqEQxE7kykja0HIN5XHg3O1bvBzRuBc5x1Pz_HfCVhuRT3fA8f1s7GI_CvA",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "as the Central Bank of AI",
+          "start": 374,
+          "end": 399,
+          "href": "https://semianalysis.com/institutional/nvidia-as-the-central-bank-of-ai/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 468,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，英伟达（NVIDIA） VR SOCAMM 方案的一个优势在于，英伟达直接采购内存，这使其能够与内存供应商谈判长期协议、大客户优惠条款，以及最重要的 VVIP 定价。正如我们在 AI 服务器启示录报告 中所述，我们认为这将保护终端客户免受内存成本飙升的影响，也是英伟达 作为 AI 中央银行 如何有效地为所有客户对冲 DRAM 价格的又一例证。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080445",
+          "tokenized_text": "然而，英伟达（NVIDIA） VR SOCAMM 方案的一个优势在于，英伟达直接采购内存，这使其能够与内存供应商谈判长期协议、大客户优惠条款，以及最重要的 VVIP 定价。正如我们在 [[[LINK_1|AI 服务器启示录报告]]] 中所述，我们认为这将保护终端客户免受内存成本飙升的影响，也是英伟达 [[[LINK_2|作为 AI 中央银行]]] 如何有效地为所有客户对冲 DRAM 价格的又一例证。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "By contrast, AMD is much more exposed to DRAM price increases as it has about double the amount of DRAM, with about 55 TB per rack of LPDDR5 and 55 TB per rack of DDR5. For the AMD’s Helios rack scale system, AMD sells the GPU/board and does procure the LPDDR5 memory, but it does not procure DDR5 DRAM for rack compute trays; rack assemblers/ODMs source and integrate DDR5 memory. This leaves buyers of AMD’s racks more exposed because AMD is only able to potentially “hedge” the LPDDR5 portion via long-term contracts leaving the DDR5 portion completely exposed. Having double the DRAM content also nearly doubles the overall exposure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0409",
+      "parent_block_index": 409,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By contrast, AMD is much more exposed to DRAM price increases as it has about double the amount of DRAM, with about 55 TB per rack of LPDDR5 and 55 TB per rack of DDR5. For the AMD’s Helios rack scale system, AMD sells the GPU/board and does procure the LPDDR5 memory, but it does not procure DDR5 DRAM for rack compute trays; rack assemblers/ODMs source and integrate DDR5 memory. This leaves buyers of AMD’s racks more exposed because AMD is only able to potentially “hedge” the LPDDR5 portion via long-term contracts leaving the DDR5 portion completely exposed. Having double the DRAM content also nearly doubles the overall exposure.",
+      "parent_block_plain_text": "By contrast, AMD is much more exposed to DRAM price increases as it has about double the amount of DRAM, with about 55 TB per rack of LPDDR5 and 55 TB per rack of DDR5. For the AMD’s Helios rack scale system, AMD sells the GPU/board and does procure the LPDDR5 memory, but it does not procure DDR5 DRAM for rack compute trays; rack assemblers/ODMs source and integrate DDR5 memory. This leaves buyers of AMD’s racks more exposed because AMD is only able to potentially “hedge” the LPDDR5 portion via long-term contracts leaving the DDR5 portion completely exposed. Having double the DRAM content also nearly doubles the overall exposure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 637,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "相比之下，AMD 对 DRAM 价格上涨的风险敞口要大得多，因为其 DRAM 用量大约是英伟达的两倍，每机柜配备约 55 TB 的 LPDDR5 和 55 TB 的 DDR5。对于 AMD 的 Helios 机柜级系统，AMD 销售 GPU/板卡并确实采购 LPDDR5 内存，但它并不为机柜算力托盘采购 DDR5 DRAM；机柜组装商/ODM 负责采购并集成 DDR5 内存。这使得 AMD 机柜的买家面临更大的风险，因为 AMD 只能通过长期合同潜在地“对冲” LPDDR5 部分，而让 DDR5 部分完全暴露在风险中。DRAM 含量翻倍也意味着整体风险敞口几乎翻倍。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080478",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Helios memory costs are more likely to be passed through or re-priced by assemblers and therefore exhibit greater hikes in a memory upcycle. Therefore, we model lower memory price hikes for VR and GB compared to MI4XX below. Our MI400 rack assumptions reflect $8.70/GB LPDDR pricing for AMD versus $6.77/GB for Nvidia, embedding volume discount structures vs the market contract price of $10.63/GB but reflecting the slack of volume economics vs NVIDIA.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0410",
+      "parent_block_index": 410,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Helios memory costs are more likely to be passed through or re-priced by assemblers and therefore exhibit greater hikes in a memory upcycle. Therefore, we model lower memory price hikes for VR and GB compared to MI4XX below. Our MI400 rack assumptions reflect $8.70/GB LPDDR pricing for AMD versus $6.77/GB for Nvidia, embedding volume discount structures vs the market contract price of $10.63/GB but reflecting the slack of volume economics vs NVIDIA.",
+      "parent_block_plain_text": "Helios memory costs are more likely to be passed through or re-priced by assemblers and therefore exhibit greater hikes in a memory upcycle. Therefore, we model lower memory price hikes for VR and GB compared to MI4XX below. Our MI400 rack assumptions reflect $8.70/GB LPDDR pricing for AMD versus $6.77/GB for Nvidia, embedding volume discount structures vs the market contract price of $10.63/GB but reflecting the slack of volume economics vs NVIDIA.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 453,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Helios 的内存成本更有可能被组装商转嫁或重新定价，因此在内存上行周期中会表现出更大的涨幅。因此，在下文中，我们为 VR 和 GB 设定的内存价格涨幅低于 MI4XX。我们对 MI400 机柜的假设反映了 AMD 的 LPDDR 价格为 8.70 美元/GB，而英伟达为 6.77 美元/GB，这虽然包含了相对于 10.63 美元/GB 市场合同价的批量折扣结构，但也反映了其与英伟达相比在规模经济上的差距。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080521",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Our AI Memory Model expects significant increases in LPDDR5 and DDR5 contract prices into 2Q26 and beyond and we expect to make further revisions higher in total server capex.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "AI Memory Model",
+          "start": 4,
+          "end": 19,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0411",
+      "parent_block_index": 411,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our [AI Memory Model](https://semianalysis.com/memory-model/) expects significant increases in LPDDR5 and DDR5 contract prices into 2Q26 and beyond and we expect to make further revisions higher in total server capex.",
+      "parent_block_plain_text": "Our AI Memory Model expects significant increases in LPDDR5 and DDR5 contract prices into 2Q26 and beyond and we expect to make further revisions higher in total server capex.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "AI Memory Model",
+          "start": 4,
+          "end": 19,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 175,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的 AI 内存模型 预计 LPDDR5 和 DDR5 的合同价格在 2026 年第二季度及以后将大幅上涨，我们预计将进一步上调服务器总资本支出预测。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080592",
+          "tokenized_text": "我们的 [[[LINK_1|AI 内存模型]]] 预计 LPDDR5 和 DDR5 的合同价格在 2026 年第二季度及以后将大幅上涨，我们预计将进一步上调服务器总资本支出预测。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "NVIDIA’s 2300W configuration represents the Max-P configuration, while the efficiency optimized Max-Q configuration runs at 1800W. Regardless of which configuration Nvidia claims both can hit the same peak clocks and therefore achieve marketed 50 PFLOPS FP4 performance. While the underlying hardware is the same, the TCO implications are due to operating costs from different levels of power consumption.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0412",
+      "parent_block_index": 412,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA’s 2300W configuration represents the Max-P configuration, while the efficiency optimized Max-Q configuration runs at 1800W. Regardless of which configuration Nvidia claims both can hit the same peak clocks and therefore achieve marketed 50 PFLOPS FP4 performance. While the underlying hardware is the same, the TCO implications are due to operating costs from different levels of power consumption.",
+      "parent_block_plain_text": "NVIDIA’s 2300W configuration represents the Max-P configuration, while the efficiency optimized Max-Q configuration runs at 1800W. Regardless of which configuration Nvidia claims both can hit the same peak clocks and therefore achieve marketed 50 PFLOPS FP4 performance. While the underlying hardware is the same, the TCO implications are due to operating costs from different levels of power consumption.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 405,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达（NVIDIA）的 2300W 配置代表了 Max-P 配置，而针对能效优化的 Max-Q 配置运行功率为 1800W。无论采用哪种配置，英伟达都声称两者都能达到相同的峰值频率，从而实现其宣传的 50 PFLOPS FP4 性能。虽然底层硬件相同，但总拥有成本的影响主要源于不同功耗水平带来的运营成本差异。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080720",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Below we share detailed numbers on cost of servers, storage, networking, etc as well as what Nvidia plans to do with Groq.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0413",
+      "parent_block_index": 413,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Below we share detailed numbers on cost of servers, storage, networking, etc as well as what Nvidia plans to do with Groq.",
+      "parent_block_plain_text": "Below we share detailed numbers on cost of servers, storage, networking, etc as well as what Nvidia plans to do with Groq.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 122,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下面我们分享了有关服务器、存储、网络等成本的详细数据，以及英伟达针对 Groq 的应对策略。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080754",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0414",
+      "parent_block_index": 414,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080778",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0415",
+      "parent_block_index": 415,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI 总拥有成本模型",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080863",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI 总拥有成本模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0416",
+      "parent_block_index": 416,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080890",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0417",
+      "parent_block_index": 417,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI 总拥有成本模型",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080943",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI 总拥有成本模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Operating costs are similar for VR Max-P vs MI4XX given their comparable chip TDPs and given that most operating costs scale with respect to IT power requirements.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0418",
+      "parent_block_index": 418,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Operating costs are similar for VR Max-P vs MI4XX given their comparable chip TDPs and given that most operating costs scale with respect to IT power requirements.",
+      "parent_block_plain_text": "Operating costs are similar for VR Max-P vs MI4XX given their comparable chip TDPs and given that most operating costs scale with respect to IT power requirements.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 163,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "考虑到芯片 TDP 相当，且大多数运营成本随 IT 功耗需求而变化，VR Max-P 与 MI4XX 的运营成本相似。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080969",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "VR Max-Q on the other hand, exhibits lower Operating costs relative to MI4XX given the lower chip TDP. For example a VR NVL 72 cluster deployed at a Hyperscaler with Arista networking would have a operating cost of $0.75 per gpu per hour, representing ~20% lower costs vs MI4XX deployed with a Hyperscaler with the same Arista networking. This highlights the advantages of the Max-Q configuration, particularly from an operating cost perspective, as the lower power TDP reduces rack-level power density for a meaningful cost savings over time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0419",
+      "parent_block_index": 419,
+      "parent_block_type": "p",
+      "parent_block_markdown": "VR Max-Q on the other hand, exhibits lower Operating costs relative to MI4XX given the lower chip TDP. For example a VR NVL 72 cluster deployed at a Hyperscaler with Arista networking would have a operating cost of $0.75 per gpu per hour, representing ~20% lower costs vs MI4XX deployed with a Hyperscaler with the same Arista networking. This highlights the advantages of the Max-Q configuration, particularly from an operating cost perspective, as the lower power TDP reduces rack-level power density for a meaningful cost savings over time.",
+      "parent_block_plain_text": "VR Max-Q on the other hand, exhibits lower Operating costs relative to MI4XX given the lower chip TDP. For example a VR NVL 72 cluster deployed at a Hyperscaler with Arista networking would have a operating cost of $0.75 per gpu per hour, representing ~20% lower costs vs MI4XX deployed with a Hyperscaler with the same Arista networking. This highlights the advantages of the Max-Q configuration, particularly from an operating cost perspective, as the lower power TDP reduces rack-level power density for a meaningful cost savings over time.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 543,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "另一方面，由于芯片 TDP 较低，VR Max-Q 的运营成本低于 MI4XX。例如，在采用 Arista 网络配置的超大规模云厂商处部署的 VR NVL72 集群，每 GPU 每小时的运营成本为 0.75 美元，相比在相同 Arista 网络环境下部署的 MI4XX，其成本降低了约 20%。这突显了 Max-Q 配置的优势，特别是从运营成本的角度来看，较低的 TDP 降低了机柜级功率密度，从而随着时间的推移实现显著的成本节约。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.080991",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0420",
+      "parent_block_index": 420,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081033",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0421",
+      "parent_block_index": 421,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO Model",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081089",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO Model]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0422",
+      "parent_block_index": 422,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081111",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0423",
+      "parent_block_index": 423,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO Model",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081160",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO Model]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "The MI4XX currently has a performance per TCO advantage based on marketed dense FLOPS over VR. VR has a higher TCO per GPU compared to MI4XX, yet VR marketed PFLOPs are lower vs MI4XX resulting in a TCO per PFLOP disadvantage for the VR vs MI4XX.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0424",
+      "parent_block_index": 424,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The MI4XX currently has a performance per TCO advantage based on marketed dense FLOPS over VR. VR has a higher TCO per GPU compared to MI4XX, yet VR marketed PFLOPs are lower vs MI4XX resulting in a TCO per PFLOP disadvantage for the VR vs MI4XX.",
+      "parent_block_plain_text": "The MI4XX currently has a performance per TCO advantage based on marketed dense FLOPS over VR. VR has a higher TCO per GPU compared to MI4XX, yet VR marketed PFLOPs are lower vs MI4XX resulting in a TCO per PFLOP disadvantage for the VR vs MI4XX.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 246,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前，基于官方公布的稠密（dense）FLOPS，MI4XX 相较于 VR 在单位总拥有成本（TCO）性能上具有优势。与 MI4XX 相比，VR 的单 GPU TCO 更高，但其官方公布的 PFLOPS 却低于 MI4XX，导致 VR 在单位 PFLOP 的 TCO 方面处于劣势。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081181",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "NVIDIA is offering sparsity for FP4, marketing 50 PFLOPS of FP4, while AMD has opsted to remove sparsity support since CDNA4 for inference dtypes. Harnessing the 50 PFLOPS sparse vs 35 PFLOPS dense drops the cost per perf in units of $/hr per Marketed PFLOP by 35% – a valid comparison if AI Labs can indeed successfully harness Sparse FP4 on the VR NVL72.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0425",
+      "parent_block_index": 425,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA is offering sparsity for FP4, marketing 50 PFLOPS of FP4, while AMD has opsted to remove sparsity support since CDNA4 for inference dtypes. Harnessing the 50 PFLOPS sparse vs 35 PFLOPS dense drops the cost per perf in units of $/hr per Marketed PFLOP by 35% – a valid comparison if AI Labs can indeed successfully harness Sparse FP4 on the VR NVL72.",
+      "parent_block_plain_text": "NVIDIA is offering sparsity for FP4, marketing 50 PFLOPS of FP4, while AMD has opsted to remove sparsity support since CDNA4 for inference dtypes. Harnessing the 50 PFLOPS sparse vs 35 PFLOPS dense drops the cost per perf in units of $/hr per Marketed PFLOP by 35% – a valid comparison if AI Labs can indeed successfully harness Sparse FP4 on the VR NVL72.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 356,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达（NVIDIA）为 FP4 提供了稀疏性（sparsity）支持，宣称其 FP4 性能可达 50 PFLOPS；而 AMD 自 CDNA4 架构起，已选择在推理数据类型中移除稀疏性支持。如果能利用 50 PFLOPS 的稀疏性能而非 35 PFLOPS 的稠密性能，那么以“每小时每官方 PFLOP 成本”衡量的单位性能成本将下降 35% —— 如果 AI 实验室确实能在 VR NVL72 上成功利用稀疏 FP4，这一对比就是有效的。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "As always, one caveat is that this comparison is done based on a marketed dense PFLOP basis. Effective dense PFLOP (i.e. the real world chip throughput) can differ based on Model Flops Utilization % (MFU), and in general we have seen NVIDIA chip operate at a higher MFU % vs AMD chips, suggesting that performance per TCO based on effective dense PFLOPs could be better for NVIDIA systems vs AMD – however, MFU is dependent on actual workloads with no one-size-fits-all MFU % that is consistently applicable to either systems.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0426",
+      "parent_block_index": 426,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As always, one caveat is that this comparison is done based on a marketed dense PFLOP basis. Effective dense PFLOP (i.e. the real world chip throughput) can differ based on Model Flops Utilization % (MFU), and in general we have seen NVIDIA chip operate at a higher MFU % vs AMD chips, suggesting that performance per TCO based on effective dense PFLOPs could be better for NVIDIA systems vs AMD – however, MFU is dependent on actual workloads with no one-size-fits-all MFU % that is consistently applicable to either systems.",
+      "parent_block_plain_text": "As always, one caveat is that this comparison is done based on a marketed dense PFLOP basis. Effective dense PFLOP (i.e. the real world chip throughput) can differ based on Model Flops Utilization % (MFU), and in general we have seen NVIDIA chip operate at a higher MFU % vs AMD chips, suggesting that performance per TCO based on effective dense PFLOPs could be better for NVIDIA systems vs AMD – however, MFU is dependent on actual workloads with no one-size-fits-all MFU % that is consistently applicable to either systems.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "一如既往，需要说明的是，此番对比是基于官方公布的稠密 PFLOP 数据。有效稠密 PFLOP（即芯片在真实世界中的吞吐量）会因模型算力利用率（MFU）的不同而有所差异。通常情况下，我们观察到英伟达芯片的 MFU 高于 AMD 芯片，这表明如果基于有效稠密 PFLOP 计算，英伟达系统的单位 TCO 性能可能优于 AMD。然而，MFU 取决于实际工作负载，并没有一个通用的 MFU 百分比能始终适用于这两类系统。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081251",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Indeed, real world use of FP4 Sparsity will probably not reach 50 PFLOPS but it will probably deliver better effective FLOPs than FP4 Dense, but we have yet to evaluate what that real-world performance could be. Running VR NVL72 on 1800W would probably mean lower FP4 Sparse FLOPs than on 2300W.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0427",
+      "parent_block_index": 427,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Indeed, real world use of FP4 Sparsity will probably not reach 50 PFLOPS but it will probably deliver better effective FLOPs than FP4 Dense, but we have yet to evaluate what that real-world performance could be. Running VR NVL72 on 1800W would probably mean lower FP4 Sparse FLOPs than on 2300W.",
+      "parent_block_plain_text": "Indeed, real world use of FP4 Sparsity will probably not reach 50 PFLOPS but it will probably deliver better effective FLOPs than FP4 Dense, but we have yet to evaluate what that real-world performance could be. Running VR NVL72 on 1800W would probably mean lower FP4 Sparse FLOPs than on 2300W.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "事实上，在真实场景中使用 FP4 稀疏性可能无法达到 50 PFLOPS，但其提供的有效 FLOPS 很可能高于 FP4 稠密性能，不过我们尚需评估其实际表现。在 1800W 功耗下运行 VR NVL72，其 FP4 稀疏 FLOPS 可能会低于在 2300W 下运行的表现。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081295",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0428",
+      "parent_block_index": 428,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081323",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0429",
+      "parent_block_index": 429,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO Model",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081400",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO Model]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0430",
+      "parent_block_index": 430,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081425",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0431",
+      "parent_block_index": 431,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO Model",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081484",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO Model]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis AI TCO Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p028",
+      "index": 28,
+      "source": "Inference throughput too can diverge materially from marketed peak FLOPS, meaning spec-sheet compute does not directly translate into real-world token generation performance. While the B300 is rated at 4,500 Dense FP8 TFLOPs versus 5,000 Dense FP8 TFLOPs for MI355, implying a 10% theoretical compute disadvantage and with same marketed memory bandwidth of 8TB/s measured inference token throughput from our InferenceX benchmarks shows B300 delivering roughly 6.3x the performance at 100 interactivity for Deepseek R1, using 8k input tokens and 1k output tokens.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceX",
+          "start": 408,
+          "end": 418,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0432",
+      "parent_block_index": 432,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Inference throughput too can diverge materially from marketed peak FLOPS, meaning spec-sheet compute does not directly translate into real-world token generation performance. While the B300 is rated at 4,500 Dense FP8 TFLOPs versus 5,000 Dense FP8 TFLOPs for MI355, implying a 10% theoretical compute disadvantage and with same marketed memory bandwidth of 8TB/s measured inference token throughput from our [InferenceX](https://inferencex.semianalysis.com/) benchmarks shows B300 delivering roughly 6.3x the performance at 100 interactivity for Deepseek R1, using 8k input tokens and 1k output tokens.",
+      "parent_block_plain_text": "Inference throughput too can diverge materially from marketed peak FLOPS, meaning spec-sheet compute does not directly translate into real-world token generation performance. While the B300 is rated at 4,500 Dense FP8 TFLOPs versus 5,000 Dense FP8 TFLOPs for MI355, implying a 10% theoretical compute disadvantage and with same marketed memory bandwidth of 8TB/s measured inference token throughput from our InferenceX benchmarks shows B300 delivering roughly 6.3x the performance at 100 interactivity for Deepseek R1, using 8k input tokens and 1k output tokens.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceX",
+          "start": 408,
+          "end": 418,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 562,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "推理吞吐量也可能与官方宣传的峰值 FLOPS 存在实质性差异，这意味着规格表上的算力并不能直接转化为现实世界中的 Token 生成性能。虽然 B300 的额定性能为 4,500 Dense FP8 TFLOPs，而 MI355 为 5,000 Dense FP8 TFLOPs，这意味着 B300 在理论算力上存在 10% 的劣势，且两者宣传的显存带宽均为 8TB/s；但根据我们 InferenceX 基准测试测得的推理 Token 吞吐量显示，在处理 Deepseek R1 模型、使用 8k 输入 Token 和 1k 输出 Token 且交互性（interactivity）为 100 的情况下，B300 提供的性能大约是后者的 6.3 倍。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081562",
+          "tokenized_text": "推理吞吐量也可能与官方宣传的峰值 FLOPS 存在实质性差异，这意味着规格表上的算力并不能直接转化为现实世界中的 Token 生成性能。虽然 B300 的额定性能为 4,500 Dense FP8 TFLOPs，而 MI355 为 5,000 Dense FP8 TFLOPs，这意味着 B300 在理论算力上存在 10% 的劣势，且两者宣传的显存带宽均为 8TB/s；但根据我们 [[[LINK_1|InferenceX]]] 基准测试测得的推理 Token 吞吐量显示，在处理 Deepseek R1 模型、使用 8k 输入 Token 和 1k 输出 Token 且交互性（interactivity）为 100 的情况下，B300 提供的性能大约是后者的 6.3 倍。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p029",
+      "index": 29,
+      "source": "Given that total cost of ownership is only 1.75x higher, this results in a superior performance-per-TCO profile for B300 despite the more modest marketed figures. Such a wildly different result despite very similar specs underscores that real world performance is not dictated by peak FLOPS or memory bandwidth alone. Software and network capabilities are also major factors that contribute to training and token throughput in real workloads.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0433",
+      "parent_block_index": 433,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Given that total cost of ownership is only 1.75x higher, this results in a superior performance-per-TCO profile for B300 despite the more modest marketed figures. Such a wildly different result despite very similar specs underscores that real world performance is not dictated by peak FLOPS or memory bandwidth alone. Software and network capabilities are also major factors that contribute to training and token throughput in real workloads.",
+      "parent_block_plain_text": "Given that total cost of ownership is only 1.75x higher, this results in a superior performance-per-TCO profile for B300 despite the more modest marketed figures. Such a wildly different result despite very similar specs underscores that real world performance is not dictated by peak FLOPS or memory bandwidth alone. Software and network capabilities are also major factors that contribute to training and token throughput in real workloads.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 442,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "考虑到总拥有成本（TCO）仅高出 1.75 倍，尽管官方宣传数据较为保守，B300 依然展现出更优越的单位总拥有成本（TCO）性能表现。尽管规格非常相似，但结果却大相径庭，这凸显了现实世界的性能并非仅由峰值 FLOPS 或显存带宽决定。软件和网络能力也是影响实际工作负载中训练和 Token 吞吐量的主要因素。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081586",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p030",
+      "index": 30,
+      "source": "Rubin and MI4XX will ship with new microarchitectures, real world performance is especially difficult to predict without and benchmarking like we do with InferenceX.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0434",
+      "parent_block_index": 434,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rubin and MI4XX will ship with new microarchitectures, real world performance is especially difficult to predict without and benchmarking like we do with InferenceX.",
+      "parent_block_plain_text": "Rubin and MI4XX will ship with new microarchitectures, real world performance is especially difficult to predict without and benchmarking like we do with InferenceX.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 165,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin 和 MI4XX 将采用全新的微架构，如果没有像我们通过 InferenceX 进行的基准测试，现实世界的性能将极难预测。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081626",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p031",
+      "index": 31,
+      "source": "Notably, both operating modes share identical memory bandwidth specifications at 8TB/s. Yet, despite the parity in memory bandwidth inference performance still diverges materially.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0435",
+      "parent_block_index": 435,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Notably, both operating modes share identical memory bandwidth specifications at 8TB/s. Yet, despite the parity in memory bandwidth inference performance still diverges materially.",
+      "parent_block_plain_text": "Notably, both operating modes share identical memory bandwidth specifications at 8TB/s. Yet, despite the parity in memory bandwidth inference performance still diverges materially.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 180,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，两种运行模式的显存带宽规格均为 8TB/s。然而，尽管显存带宽相同，推理性能仍存在实质性差异。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081656",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p032",
+      "index": 32,
+      "source": "https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0436",
+      "parent_block_index": 436,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081678",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p033",
+      "index": 33,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0437",
+      "parent_block_index": 437,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencex.semianalysis.com/)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-03-17T19:20:32.081736",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis InferenceX",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.86,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "译文将其处理为“超大规模计算厂商 Arista”，但这里的 Arista 指的是网络配置方案（即采用 Arista 交换机的网络架构），而非 Arista 这家公司本身作为 Hyperscaler。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“英伟达针对 Groq 的应对策略”略显主观。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“交互性（interactivity）为 100”过于字面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“总拥有成本（TCO）仅高出 1.75 倍”在中文逻辑中易产生歧义（是 A=B*1.75 还是 A=B+B*1.75）。"
+          },
+          {
+            "type": "terminology",
+            "description": "此处指 GPU 的显存带宽，译文中“显存带宽”与“内存带宽”交替使用。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

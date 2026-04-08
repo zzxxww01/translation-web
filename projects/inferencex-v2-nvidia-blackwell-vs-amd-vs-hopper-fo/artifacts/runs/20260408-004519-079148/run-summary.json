@@ -1,0 +1,144 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "completed",
+  "total_sections": 36,
+  "translated_sections": 36,
+  "total_paragraphs": 358,
+  "translated_paragraphs": 358,
+  "error_count": 4,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "SGLang",
+      "existing": "",
+      "new": "SGLang",
+      "existing_note": "An open-source fast serving framework for LLMs.",
+      "new_note": "Large Mixture of Experts, SGLang, vLLM",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-08T00:45:38.870220"
+    },
+    {
+      "type": "term_conflict",
+      "term": "TRTLLM",
+      "existing": "",
+      "new": "TRTLLM",
+      "existing_note": "Nvidia's TensorRT-LLM inference framework.",
+      "new_note": "SGLang, vLLM, TRTLLM",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-08T00:45:38.870228"
+    },
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "validate and optimize Blackwell & Hopper configurations",
+      "section_id": "03-acknowledgments-and-inferencex",
+      "timestamp": "2026-04-08T00:47:12.295362"
+    },
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "SemiAnalysis InferenceMAX: vLLM maintainers & NVIDIA accelerate",
+      "section_id": "03-acknowledgments-and-inferencex",
+      "timestamp": "2026-04-08T00:47:12.295372"
+    }
+  ],
+  "started_at": "2026-04-08T00:45:19.079127",
+  "finished_at": "2026-04-08T01:27:05.701924",
+  "run_id": "20260408-004519-079148",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260408-004519-079148",
+  "export": {
+    "generated_at": "2026-04-08T01:27:05.508635",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\NVIDIA Blackwell vs AMD vs Hopper（原 InferenceMAX）_zh.md",
+      "generated": true,
+      "bytes": 109547
+    }
+  },
+  "api_calls": 89,
+  "elapsed_seconds": 2506.7,
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 17,
+    "auto_fixable_count": 0,
+    "manual_review_count": 17,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称305次, 第三人称155次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "发现85个超长句子（超过150字），建议拆分",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "08-deepseek-r1",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "08-deepseek-r1",
+        "paragraph_index": 15,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "13-unpacking-inference-providers",
+        "paragraph_index": 23,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 7",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "14-jensen-under-promising-and-ove",
+        "paragraph_index": 7,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 9",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "15-blackwell-vs-blackwell-ultra",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "21-anthropic-fast-mode-inferencin",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3.3, 5",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "30-klaud-cold-ai-usage",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 3, 6, 000",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

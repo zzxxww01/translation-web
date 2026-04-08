@@ -1,0 +1,10 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "title": "InferenceX v2: NVIDIA Blackwell Vs AMD vs Hopper - Formerly InferenceMAX",
+  "title_translation": "NVIDIA Blackwell vs AMD vs Hopper（原 InferenceMAX）",
+  "source_file": "source.html",
+  "workflow_mode": "four_step",
+  "section_count": 36,
+  "paragraph_count": 358,
+  "generated_at": "2026-04-08T00:37:35.656229"
+}

@@ -1,0 +1,616 @@
+{
+  "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+  "title": "MI355X vs MI325X vs MI300X",
+  "title_translation": "MI355X、MI325X 与 MI300X 对比",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "On AMD SKUs, we see up to 10x better performance on the MI355X vs the MI300X. AMD has only gotten DeepSeek SGLang Disaggregated Inferencing to work on the MI355X so far AMD has not submitted MI300X or MI325X disaggregated inferencing results, potentially due to software issues on older SKUs that are still being solved.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0199",
+      "parent_block_index": 199,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On AMD SKUs, we see up to 10x better performance on the MI355X vs the MI300X. AMD has only gotten DeepSeek SGLang Disaggregated Inferencing to work on the MI355X so far AMD has not submitted MI300X or MI325X disaggregated inferencing results, potentially due to software issues on older SKUs that are still being solved.",
+      "parent_block_plain_text": "On AMD SKUs, we see up to 10x better performance on the MI355X vs the MI300X. AMD has only gotten DeepSeek SGLang Disaggregated Inferencing to work on the MI355X so far AMD has not submitted MI300X or MI325X disaggregated inferencing results, potentially due to software issues on older SKUs that are still being solved.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 320,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 AMD 的各款芯片中，我们看到 MI355X 的性能最高可达 MI300X 的 10 倍。目前，AMD 仅在 MI355X 上成功跑通了 DeepSeek SGLang 的分离式推理。他们尚未提交 MI300X 或 MI325X 的分离式推理测试结果，这可能是因为旧款芯片上仍有悬而未决的软件问题。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274661",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0200",
+      "parent_block_index": 200,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274710",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!vT9R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6dd3138-e228-4121-a061-4aa92c84d6a4_2334x1390.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_seq=8k%2F1k&i_metric=y_outputTputPerGpu&i_prec=fp8%2Cfp4&i_legend=0#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0201",
+      "parent_block_index": 201,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_seq=8k%2F1k&i_metric=y_outputTputPerGpu&i_prec=fp8%2Cfp4&i_legend=0#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_seq=8k%2F1k&i_metric=y_outputTputPerGpu&i_prec=fp8%2Cfp4&i_legend=0#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387341",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274800",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0202",
+      "parent_block_index": 202,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274823",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!rvyB!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F101c2a16-c861-40f5-8079-3f2e38038980_2491x1123.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0203",
+      "parent_block_index": 203,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis InferenceX",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387353",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274843",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Turning to cost, for DeepSeekR1 on FP8, at an interactivity of 24 tok/s/user, the MI355X delivers inferences a cost that is slightly less than 3x cheaper than for the MI325X. The throughput of each GPU is slightly less than 4 times that of MI325X.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0204",
+      "parent_block_index": 204,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Turning to cost, for DeepSeekR1 on FP8, at an interactivity of 24 tok/s/user, the MI355X delivers inferences a cost that is slightly less than 3x cheaper than for the MI325X. The throughput of each GPU is slightly less than 4 times that of MI325X.",
+      "parent_block_plain_text": "Turning to cost, for DeepSeekR1 on FP8, at an interactivity of 24 tok/s/user, the MI355X delivers inferences a cost that is slightly less than 3x cheaper than for the MI325X. The throughput of each GPU is slightly less than 4 times that of MI325X.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 247,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "再看成本方面，在 FP8 精度下运行 DeepSeek-R1 时，若交互性设定为 24 Token/秒/用户，MI355X 的推理成本比 MI325X 便宜了将近 3 倍。其单卡吞吐量略低于 MI325X 的 4 倍。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274861",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0205",
+      "parent_block_index": 205,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274881",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!SaQ4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fab1ad749-fe92-4209-9347-4456d22b0cfd_2088x1432.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0206",
+      "parent_block_index": 206,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387363",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:48:30.274935",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.344999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中文里通常不建议使用“便宜了 X 倍”或“缩小了 X 倍”这种表述，因为在严格的数学逻辑下存在歧义（减少的量不能超过本身的一倍）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

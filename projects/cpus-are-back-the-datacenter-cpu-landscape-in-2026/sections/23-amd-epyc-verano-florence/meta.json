@@ -1,0 +1,659 @@
+{
+  "section_id": "23-amd-epyc-verano-florence",
+  "title": "AMD EPYC Verano & Florence",
+  "title_translation": "AMD EPYC Verano与Florence",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0276",
+      "parent_block_index": 276,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.945164",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AMD Rackscale AI Infrastructure Roadmap. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Rackscale AI Infrastructure Roadmap. Source: AMD",
+          "start": 0,
+          "end": 52,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0277",
+      "parent_block_index": 277,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Rackscale AI Infrastructure Roadmap. Source: AMD*",
+      "parent_block_plain_text": "AMD Rackscale AI Infrastructure Roadmap. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Rackscale AI Infrastructure Roadmap. Source: AMD",
+          "start": 0,
+          "end": 52,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 52,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 机架级 AI 基础设施路线图。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.945960",
+          "tokenized_text": "[[[EM_1|AMD 机架级 AI 基础设施路线图。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "AMD’s next generation MI500 AI racks are set to launch in 2027 with a new EPYC Verano CPU, just 1 year after Venice. To our knowledge, the Zen 7 CPU core architecture will not be ready for Verano, as the cores team works on a roughly two-year cadence. We believe Verano will therefore be a variant of Venice, still using Zen 6 cores, and likely with the same 256-core count. The difference with Verano should be a new I/O die on 3nm with PCIe Gen7 support and 200G Ethernet SerDes for a much faster Infinity Fabric connection to the MI500 GPUs. This would support UALoE",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0278",
+      "parent_block_index": 278,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD’s next generation MI500 AI racks are set to launch in 2027 with a new EPYC Verano CPU, just 1 year after Venice. To our knowledge, the Zen 7 CPU core architecture will not be ready for Verano, as the cores team works on a roughly two-year cadence. We believe Verano will therefore be a variant of Venice, still using Zen 6 cores, and likely with the same 256-core count. The difference with Verano should be a new I/O die on 3nm with PCIe Gen7 support and 200G Ethernet SerDes for a much faster Infinity Fabric connection to the MI500 GPUs. This would support UALoE",
+      "parent_block_plain_text": "AMD’s next generation MI500 AI racks are set to launch in 2027 with a new EPYC Verano CPU, just 1 year after Venice. To our knowledge, the Zen 7 CPU core architecture will not be ready for Verano, as the cores team works on a roughly two-year cadence. We believe Verano will therefore be a variant of Venice, still using Zen 6 cores, and likely with the same 256-core count. The difference with Verano should be a new I/O die on 3nm with PCIe Gen7 support and 200G Ethernet SerDes for a much faster Infinity Fabric connection to the MI500 GPUs. This would support UALoE",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 569,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 下一代 MI500 AI 机架将于 2027 年发布，并搭载全新的霄龙 (EPYC) Verano CPU，距 Venice 问世仅相隔一年。据我们了解，Zen 7 CPU 内核架构赶不上 Verano 的发布节奏，因为内核团队的研发周期约为两年。因此我们认为，Verano 将是 Venice 的变体，继续沿用 Zen 6 内核，且极有可能保持相同的 256 核配置。Verano 的不同之处应在于采用全新的 3nm I/O 裸片，支持 PCIe Gen7 和 200G 以太网 SerDes (串行器/解串器)。这能大幅提升连接 MI500 GPU 的 Infinity Fabric 速度。这也将支持 UALoE。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946028",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "A true next generation Zen 7 EPYC, codenamed Florence, should debut in 2028 on TSMC’s A16 process with backside power. Alternatively, if AMD could do without backside power, they could wait for TSMC’s A14 process to be ready for 2029 products. We estimate core count to increase to around 320 or so.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0279",
+      "parent_block_index": 279,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A true next generation Zen 7 EPYC, codenamed Florence, should debut in 2028 on TSMC’s A16 process with backside power. Alternatively, if AMD could do without backside power, they could wait for TSMC’s A14 process to be ready for 2029 products. We estimate core count to increase to around 320 or so.",
+      "parent_block_plain_text": "A true next generation Zen 7 EPYC, codenamed Florence, should debut in 2028 on TSMC’s A16 process with backside power. Alternatively, if AMD could do without backside power, they could wait for TSMC’s A14 process to be ready for 2029 products. We estimate core count to increase to around 320 or so.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 299,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "代号为 Florence 的真正下一代 Zen 7 霄龙 (EPYC) 预计将于 2028 年问世，采用台积电 A16 工艺并支持背面供电。或者，如果不使用背面供电，AMD 也可以等待台积电 A14 工艺成熟，将其用于 2029 年的产品。我们预计其核心数量将增加至 320 个左右。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946062",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0280",
+      "parent_block_index": 280,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946088",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "AMD Zen CPU Core Roadmap. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Zen CPU Core Roadmap. Source: AMD",
+          "start": 0,
+          "end": 37,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0281",
+      "parent_block_index": 281,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Zen CPU Core Roadmap. Source: AMD*",
+      "parent_block_plain_text": "AMD Zen CPU Core Roadmap. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Zen CPU Core Roadmap. Source: AMD",
+          "start": 0,
+          "end": 37,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Zen CPU 内核路线图。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946185",
+          "tokenized_text": "[[[EM_1|AMD Zen CPU 内核路线图。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "On the core microarchitecture, AMD CTO Mark Papermaster confirmed that Zen7 introduces a new dedicated Matrix Multiplication engine for local AI computation that is known as ACE in the x86 Advisory Group. This is much like the AMX engines Intel added with Sapphire Rapids in 2023. Zen7 also adopts AVX10, the evolution of AVX512 with more features and instruction flexibility with smaller bit widths. A new interrupt model in FRED (Flexible Return and Event Delivery) and ChkTag memory tagging also debut on Zen7. All these features will have debuted earlier on Intel Diamond Rapids. Additionally, Diamond Rapids also support Advanced Performance Extensions (APX), an instruction set extension that adds access to more registers and improves general purpose performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0282",
+      "parent_block_index": 282,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the core microarchitecture, AMD CTO Mark Papermaster confirmed that Zen7 introduces a new dedicated Matrix Multiplication engine for local AI computation that is known as ACE in the x86 Advisory Group. This is much like the AMX engines Intel added with Sapphire Rapids in 2023. Zen7 also adopts AVX10, the evolution of AVX512 with more features and instruction flexibility with smaller bit widths. A new interrupt model in FRED (Flexible Return and Event Delivery) and ChkTag memory tagging also debut on Zen7. All these features will have debuted earlier on Intel Diamond Rapids. Additionally, Diamond Rapids also support Advanced Performance Extensions (APX), an instruction set extension that adds access to more registers and improves general purpose performance. This does not seem to be present on Zen7.",
+      "parent_block_plain_text": "On the core microarchitecture, AMD CTO Mark Papermaster confirmed that Zen7 introduces a new dedicated Matrix Multiplication engine for local AI computation that is known as ACE in the x86 Advisory Group. This is much like the AMX engines Intel added with Sapphire Rapids in 2023. Zen7 also adopts AVX10, the evolution of AVX512 with more features and instruction flexibility with smaller bit widths. A new interrupt model in FRED (Flexible Return and Event Delivery) and ChkTag memory tagging also debut on Zen7. All these features will have debuted earlier on Intel Diamond Rapids. Additionally, Diamond Rapids also support Advanced Performance Extensions (APX), an instruction set extension that adds access to more registers and improves general purpose performance. This does not seem to be present on Zen7.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 770,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在内核微架构方面，AMD 首席技术官 Mark Papermaster 证实，Zen7 引入了全新的专用矩阵乘法引擎以处理本地 AI 计算。该引擎在 x86 咨询小组中被称为 ACE。这与英特尔在 2023 年随 Sapphire Rapids 引入的 AMX (高级矩阵扩展) 引擎极为相似。Zen7 还采用了 AVX10。作为 AVX-512 的演进版本，它在更小位宽下提供了更多功能与更高的指令灵活性。FRED (灵活返回与事件交付) 中的全新中断模型以及 ChkTag 内存标记技术也将在 Zen7 上首度亮相。所有这些特性都将率先在英特尔 Diamond Rapids 上推出。此外，Diamond Rapids 还支持 APX (高级性能扩展)。这种指令集扩展增加了对更多寄存器的访问权限，并提升了通用计算性能。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946215",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "This does not seem to be present on Zen7.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0282",
+      "parent_block_index": 282,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the core microarchitecture, AMD CTO Mark Papermaster confirmed that Zen7 introduces a new dedicated Matrix Multiplication engine for local AI computation that is known as ACE in the x86 Advisory Group. This is much like the AMX engines Intel added with Sapphire Rapids in 2023. Zen7 also adopts AVX10, the evolution of AVX512 with more features and instruction flexibility with smaller bit widths. A new interrupt model in FRED (Flexible Return and Event Delivery) and ChkTag memory tagging also debut on Zen7. All these features will have debuted earlier on Intel Diamond Rapids. Additionally, Diamond Rapids also support Advanced Performance Extensions (APX), an instruction set extension that adds access to more registers and improves general purpose performance. This does not seem to be present on Zen7.",
+      "parent_block_plain_text": "On the core microarchitecture, AMD CTO Mark Papermaster confirmed that Zen7 introduces a new dedicated Matrix Multiplication engine for local AI computation that is known as ACE in the x86 Advisory Group. This is much like the AMX engines Intel added with Sapphire Rapids in 2023. Zen7 also adopts AVX10, the evolution of AVX512 with more features and instruction flexibility with smaller bit widths. A new interrupt model in FRED (Flexible Return and Event Delivery) and ChkTag memory tagging also debut on Zen7. All these features will have debuted earlier on Intel Diamond Rapids. Additionally, Diamond Rapids also support Advanced Performance Extensions (APX), an instruction set extension that adds access to more registers and improves general purpose performance. This does not seem to be present on Zen7.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 771,
+      "segment_end": 812,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Zen7 似乎并未包含该特性。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:45:42.946239",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将后半段切分为“这能大幅提升...这也将支持...”，句式略显琐碎，且“这”、“这也”连用导致语感不够连贯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“could do without” 的含义是“可以设法不用/能够不依赖”，译文“如果不使用”稍微丢失了“如果 AMD 能够承受不使用背面供电的代价”这层权衡的语境。"
+          },
+          {
+            "type": "accuracy",
+            "description": "FRED 本身就是一种新的事件交付和中断处理架构，译为“FRED 中的全新中断模型”容易引起误解，让人以为 FRED 是一个包含中断模型的大型套件。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

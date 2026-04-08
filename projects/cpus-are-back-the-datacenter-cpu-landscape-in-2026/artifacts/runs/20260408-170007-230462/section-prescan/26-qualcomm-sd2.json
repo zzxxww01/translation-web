@@ -1,0 +1,56 @@
+{
+  "section_id": "26-qualcomm-sd2",
+  "new_terms": [
+    {
+      "term": "SerDes",
+      "suggested_translation": "SerDes (串行器/解串器)",
+      "context": "shore up their high-speed SerDes and chiplet interconnect capabilities",
+      "confidence": 0.95
+    },
+    {
+      "term": "Snapdragon X Elite",
+      "suggested_translation": "骁龙 X Elite",
+      "context": "Oryon cores (that are now in the Snapdragon X Elite and 8 Elite mobile processors)",
+      "confidence": 0.99
+    },
+    {
+      "term": "Oryon",
+      "suggested_translation": "Oryon",
+      "context": "SD1 contained 80 Oryon cores",
+      "confidence": 0.95
+    },
+    {
+      "term": "NVLink Fusion",
+      "suggested_translation": "NVLink Fusion",
+      "context": "Qualcomm was featured in Nvidia’s NVLink Fusion release",
+      "confidence": 0.95
+    },
+    {
+      "term": "NUVIA",
+      "suggested_translation": "NUVIA",
+      "context": "Qualcomm acquired NUVIA in 2021",
+      "confidence": 0.95
+    },
+    {
+      "term": "ship for revenue",
+      "suggested_translation": "出货并实现营收",
+      "context": "SD2 will ship for revenue in 2027",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "qualcomm": "高通",
+    "cpu": "CPU",
+    "ai": "AI",
+    "arm": "ARM",
+    "ddr4": "DDR4",
+    "isa": "指令集架构 (ISA)",
+    "x86": "x86",
+    "tsmc": "台积电",
+    "pcie": "PCIe",
+    "nvidia": "英伟达",
+    "chiplet": "芯粒"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:19:46.615549"
+}

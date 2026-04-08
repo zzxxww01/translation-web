@@ -1,0 +1,55 @@
+{
+  "section_id": "01-are-ai-datacenters-increasing",
+  "new_terms": [
+    {
+      "term": "IPPs",
+      "suggested_translation": "独立发电商",
+      "context": "Independent Power Producers such as Vistra, Constellation, and Talen.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ELCC",
+      "suggested_translation": "有效承载能力",
+      "context": "Effective Load Carrying Capability, a metric for power plant reliability in energy models.",
+      "confidence": 0.9
+    },
+    {
+      "term": "interconnection queue",
+      "suggested_translation": "并网队列",
+      "context": "The process and waiting list for new power projects to connect to the grid.",
+      "confidence": 0.95
+    },
+    {
+      "term": "power futures",
+      "suggested_translation": "电力期货",
+      "context": "Financial contracts for the future delivery of electricity.",
+      "confidence": 0.9
+    },
+    {
+      "term": "load growth",
+      "suggested_translation": "负荷增长",
+      "context": "The increase in electrical demand over time, specifically from datacenters.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Project Rainier",
+      "suggested_translation": "Rainier 项目",
+      "context": "Anthropic and Amazon's large-scale AI datacenter project.",
+      "confidence": 0.85
+    },
+    {
+      "term": "Prometheus",
+      "suggested_translation": "Prometheus 项目",
+      "context": "Meta's large-scale AI datacenter project.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "capacity": "容量",
+    "prefill": "预填充",
+    "decode": "解码",
+    "bra": "基本剩余拍卖 (BRA)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:10:23.767130"
+}

@@ -1,0 +1,48 @@
+{
+  "section_id": "05-logical-vs-physical-gpc",
+  "new_terms": [
+    {
+      "term": "performance non-determinism",
+      "suggested_translation": "性能非确定性",
+      "context": "Variation in performance between GPUs with identical logical specs due to physical SM mapping.",
+      "confidence": 0.95
+    },
+    {
+      "term": "die-to-die crossing",
+      "suggested_translation": "跨 Die 访问",
+      "context": "Data transfer or communication between two separate silicon dies within the same package.",
+      "confidence": 0.9
+    },
+    {
+      "term": "pointer-chase array",
+      "suggested_translation": "指针追踪数组",
+      "context": "A microbenchmarking technique used to measure memory latency by traversing a linked list of pointers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SM<->SM distance matrix",
+      "suggested_translation": "SM-SM 距离矩阵",
+      "context": "A matrix representing the latency or communication cost between different Streaming Multiprocessors.",
+      "confidence": 0.9
+    },
+    {
+      "term": "yielded",
+      "suggested_translation": "启用的 (Yielded)",
+      "context": "Refers to physical hardware units (like SMs) that are functional and enabled after manufacturing binning.",
+      "confidence": 0.85
+    },
+    {
+      "term": "L2 congestion",
+      "suggested_translation": "L2 缓存拥塞",
+      "context": "Performance degradation caused by excessive simultaneous requests to the L2 cache.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "gpc": "图形处理集群 (GPC)",
+    "sm": "流式多处理器 (SM)",
+    "tpc (texture processing cluster)": "纹理处理集群 (TPC)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:18:41.156671"
+}

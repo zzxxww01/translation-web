@@ -1,0 +1,29 @@
+https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png
+
+英特尔 Nehalem-EX 环形互连架构。来源：英特尔，Hot Chips 2009
+
+为了突破这一极限，英特尔于 2010 年在其 Nehalem-EX (Beckton) 至强处理器中引入了环形总线架构，将 8 个核心、集成内存控制器以及跨插槽 QPI 链路整合到了单一裸片中。环形总线早年曾应用于 ATi Radeon GPU 与 IBM Cell 处理器中。该架构将所有节点排布成一个环路，环形站点直接集成在 L3 缓存切片内，布线则走缓存上方的金属层。缓存与归属代理负责处理核心间的内存嗅探，并维护与内存控制器的一致性。
+
+来自每个环形站点的核心与 L3缓存切片的数据经排队后注入环路，数据每个时钟周期向前推进一个站点，直至抵达目标位置。这意味着核心间的访问延迟不再均衡：相比紧邻的核心，位于环路相对两侧的核心需要等待更多周期。为缓解延迟与拥堵，设计中引入了两个反向旋转的环路，并根据地址与环路负载选择最优传输方向。随着布线复杂度得到有效控制，英特尔得以将 Nehalem-EX 的核心数扩展至 8 个，并在 Westmere-EX 上进一步增至 10 个。然而，若继续沿用单环架构进一步扩充核心，过长的环路必将引发一致性与延迟问题。
+
+### Ivy Bridge-EX 虚拟环
+
+https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png
+
+英特尔 Ivytown 虚拟环。来源：英特尔，Hot Chips 2014
+
+为了在 Ivy Bridge 世代将核心数扩展至 15 个，英特尔必须在路由拓扑上巧妙布局。核心被排布为 3 列（每列 5 个），并由 3 个“虚拟环”环绕这三列核心。环形站点内的交换机负责控制数据在半环上的传输方向，由此构建出一种“虚拟”的三环架构。
+
+### Haswell 与 Broadwell 双环形总线
+
+https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png
+
+Haswell 高核心数 (HCC) 双环形总线。来源：英特尔
+
+2014 年，英特尔在 18 核的 Haswell 高核心数 (HCC) 裸片上再次更改了拓扑结构，引入了双独立反向旋转环形总线，两者通过一对双向缓冲交换机相连。内存控制器被分置于两个环形总线中，其中 8 核的环形总线还容纳了 IO 环形站点。中等核心数 (MCC) 裸片变体则将单个半环自身折返相连。2015 年发布的 Broadwell HCC 将核心数提升至 24 个，配备了双 12 核环形总线。
+
+将多个环形总线拼接在一起的缺点在于，核心间通信与内存访问的延迟差异增大，当一个环上的核心访问另一个环的内存时尤为明显。对于那些对延迟敏感且核心间交互频繁的程序而言，这种非均匀内存访问 (NUMA) 对系统性能极为不利。
+
+为了缓解这一问题，英特尔在 BIOS 中提供了一个“片上集群 (CoD)”配置选项，将两个环形总线视为独立的处理器。操作系统会显示 CPU 被拆分为两个 NUMA 节点，每个节点可直接访问一半的本地内存和 L3缓存。在 CoD 模式下的测试表明，每个环内的延迟保持在 50ns 以下，而跨环访问则超过 100ns，这凸显了经过缓冲交换机所带来的延迟惩罚。
+
+虽然这些方法帮助英特尔将核心数增加到了 24 个，但这既不优雅，也缺乏可扩展性。增加第三个环形总线和另外两组缓冲交换机会过于复杂且不切实际，还会产生过多的 NUMA 集群。要支持更多核心，必须采用全新的互连架构。

@@ -1,0 +1,223 @@
+{
+  "section_id": "17-throughput-and-multicast",
+  "title": "Throughput and Multicast",
+  "title_translation": "吞吐量与多播",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Earlier, we took a look at the achievable throughput of individual instructions; we found that some instructions are likely inherently bound by SMEM bandwidth, but we did not consider the memory system when we measured peak performance per-instruction-shape. Here, we take the same single-CTA CUTLASS benchmark and we extend it to use clusters of size greater than 1x1. We also use 2SM MMA atoms for any cluster shape that has an even M dimension.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Earlier, we took a look at the achievable throughput of individual instructions; we found that some instructions are likely inherently bound by SMEM bandwidth, but we did not consider the memory system when we measured peak performance per-instruction-shape. Here, we take the same single-CTA CUTLASS benchmark and we extend it to use clusters of size greater than 1x1. We also use 2SM MMA atoms for any cluster shape that has an even M dimension.",
+      "parent_block_plain_text": "Earlier, we took a look at the achievable throughput of individual instructions; we found that some instructions are likely inherently bound by SMEM bandwidth, but we did not consider the memory system when we measured peak performance per-instruction-shape. Here, we take the same single-CTA CUTLASS benchmark and we extend it to use clusters of size greater than 1x1. We also use 2SM MMA atoms for any cluster shape that has an even M dimension.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 447,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "前文我们探讨了单条指令的可达吞吐量；我们发现某些指令可能天生受限于共享内存 (SMEM) 带宽，但在测量每种指令形状的峰值性能时，我们并未将内存系统纳入考量。在本节中，我们采用相同的单协作线程阵列 (CTA) CUTLASS 基准测试，并将其扩展为使用尺寸大于 1x1 的集群 (cluster)。此外，对于任何 M 维度为偶数的集群形状，我们均使用 2SM MMA 原子指令 (atoms)。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:39:51.195290",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在 CUTLASS 和 GPU 架构语境下，“MMA atoms” 指的是矩阵乘加运算的基础形状或基本原语（building blocks），而非用于同步的“原子指令”（atomic instructions，如 atomicAdd）。译为“原子指令”极易引起底层开发者的误解。"
+          },
+          {
+            "type": "readability",
+            "description": "“CTA”在上一段已完成首现加注，本段重复使用完整的“协作线程阵列 (CTA)”显得冗长且机械。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "A few such results are shown in the charts, where in each chart we hold the per-CTA tile size constant and vary the cluster size, for both 1SM and 2SM. Note that when scaling the cluster N dimension from 1 to 2 (2SM) or from 2 to 4 (1SM) for 128x128 per-CTA tile shapes, we get a marked benefit from the multicast introduced by clustering. We can conclude therefore that the tile shapes smaller than this are bound in the memory subsystem / L2 bandwidth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A few such results are shown in the charts, where in each chart we hold the per-CTA tile size constant and vary the cluster size, for both 1SM and 2SM. Note that when scaling the cluster N dimension from 1 to 2 (2SM) or from 2 to 4 (1SM) for 128x128 per-CTA tile shapes, we get a marked benefit from the multicast introduced by clustering. We can conclude therefore that the tile shapes smaller than this are bound in the memory subsystem / L2 bandwidth.",
+      "parent_block_plain_text": "A few such results are shown in the charts, where in each chart we hold the per-CTA tile size constant and vary the cluster size, for both 1SM and 2SM. Note that when scaling the cluster N dimension from 1 to 2 (2SM) or from 2 to 4 (1SM) for 128x128 per-CTA tile shapes, we get a marked benefit from the multicast introduced by clustering. We can conclude therefore that the tile shapes smaller than this are bound in the memory subsystem / L2 bandwidth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 454,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "图表中展示了部分测试结果。在每张图表中，我们保持每个协作线程阵列 (CTA) 的分块 (tile) 大小不变，并分别针对 1SM 和 2SM 改变集群大小。需要注意的是，对于 128x128 的单协作线程阵列 (CTA) 分块形状，当将集群的 N 维度从 1 扩展到 2 (2SM) 或从 2 扩展到 4 (1SM) 时，集群引入的多播 (multicast) 机制带来了显著的性能收益。因此我们可以得出结论：小于该尺寸的分块形状受限于内存子系统/L2 带宽。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:39:51.195326",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在 CUTLASS 和 GPU 架构语境下，“MMA atoms” 指的是矩阵乘加运算的基础形状或基本原语（building blocks），而非用于同步的“原子指令”（atomic instructions，如 atomicAdd）。译为“原子指令”极易引起底层开发者的误解。"
+          },
+          {
+            "type": "readability",
+            "description": "“CTA”在上一段已完成首现加注，本段重复使用完整的“协作线程阵列 (CTA)”显得冗长且机械。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:39:51.195335",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "在 CUTLASS 和 GPU 架构语境下，“MMA atoms” 指的是矩阵乘加运算的基础形状或基本原语（building blocks），而非用于同步的“原子指令”（atomic instructions，如 atomicAdd）。译为“原子指令”极易引起底层开发者的误解。"
+          },
+          {
+            "type": "readability",
+            "description": "“CTA”在上一段已完成首现加注，本段重复使用完整的“协作线程阵列 (CTA)”显得冗长且机械。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

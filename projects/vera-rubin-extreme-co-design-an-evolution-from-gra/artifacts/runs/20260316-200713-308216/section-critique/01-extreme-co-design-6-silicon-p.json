@@ -1,0 +1,47 @@
+{
+  "section_id": "01-extreme-co-design-6-silicon-p",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.2,
+    "accuracy_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 48,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "32 3.2T optical engines on the package convert these electrical signals to optical links...",
+        "description": "提示词明确要求将 'optical engines' 翻译为“光引擎”，但译文使用了“光学引擎”，违反了术语控制的硬性约束。",
+        "why_it_matters": "在光电共封装（CPO）等前沿网络硬件语境中，“光引擎”是更简洁且符合行业习惯的专有名词，且违反了给定的翻译规则。",
+        "suggestion": "将“光学引擎”修改为“光引擎”。"
+      },
+      {
+        "paragraph_index": 26,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "...upgrades have also been made with the addition of an upgraded heat spreader and a stiffener.",
+        "description": "在半导体封装（Package）领域，'stiffener' 通常指用于防止基板翘曲的“加强环”或“加固环”，译为“加强筋”偏向传统机械/塑料件结构，在此语境下不够地道。（注：第27段存在相同问题）",
+        "why_it_matters": "硬件技术长文需要使用精准的半导体封装行业术语，以体现专业分析的调性。",
+        "suggestion": "将“加强筋”修改为“加强环”或“加固环”。"
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "...while keeping the same basic structure of 2 reticle-sized dies with 8 stacks of HBM.",
+        "description": "此处将 'reticle-sized dies' 译为“光罩尺寸裸片”，但在第31段中译为了更准确的“光罩极限尺寸的计算裸片”。建议前后统一，并添加英文括注以降低读者的理解门槛。",
+        "why_it_matters": "保持核心技术概念在全文中的一致性，并突出“达到光刻机单次曝光面积极限”这一关键技术特征。",
+        "suggestion": "将“两颗光罩尺寸裸片”修改为“两颗光罩极限尺寸（reticle-sized）裸片”。"
+      },
+      {
+        "paragraph_index": 18,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "A notable omission from Rubin is the mention of Sparse FLOPs.",
+        "description": "“一个值得注意的缺失，是并未提及...” 中“缺失”与“未提及”语义存在一定重复。且原文 omission 在此更多指在宣传材料或规格表中的“省略”，而非架构上的功能“缺失”。",
+        "why_it_matters": "优化中文表达的流畅度与逻辑紧凑性，消除轻微的翻译腔。",
+        "suggestion": "修改为“鲁宾在宣传中一个值得注意的省略，是并未提及稀疏 FLOPS。”或直接精简为“值得注意的是，鲁宾并未提及稀疏 FLOPS。”"
+      }
+    ]
+  }
+}

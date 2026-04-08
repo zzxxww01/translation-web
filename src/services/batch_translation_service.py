@@ -18,6 +18,7 @@ from typing import Any, Awaitable, List, Optional, Dict, Callable, Set
 from datetime import datetime
 import logging
 
+from src.core.glossary import infer_glossary_tags
 from src.core.longform_context import (
     build_article_challenge_payload,
     build_glossary_entries_from_terms,
@@ -32,6 +33,7 @@ from src.core.models import (
     ProjectStatus,
     ArticleAnalysis,
     EnhancedTerm,
+    GlossaryTerm,
     TermConflict,
     TermConflictResolution,
     TranslationStrategy,
@@ -45,7 +47,16 @@ from src.core.format_tokens import (
 )
 from src.core.glossary_prompt import _count_term_occurrences
 from src.core.glossary_prompt import select_prompt_terms_for_text
+from src.core.glossary_prompt import (
+    render_glossary_prompt_block,
+    select_glossary_terms_for_text,
+)
 from src.core.project import ProjectManager
+from src.core.title_guard import (
+    enforce_translated_title,
+    extract_title_requirements,
+    find_missing_title_terms,
+)
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.agents.four_step_translator import FourStepTranslator
 from src.agents.context_manager import LayeredContextManager
@@ -69,6 +80,19 @@ class BatchTranslationService:
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
     TRANSLATION_MODE_SECTION = "section"  # 章节级批量翻译
+    AUTO_GLOSSARY_TERM_OVERRIDES: Dict[str, str] = {
+        "wide expert parallelism": "宽专家并行",
+        "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
+        "wide ep": "宽专家并行",
+        "wideep": "WideEP",
+        "interactivity": "交互性",
+        "throughput": "吞吐量",
+        "time per output token (tpot)": "每个输出 Token 耗时 (TPOT)",
+        "disaggregated serving": "解耦式推理服务",
+        "disaggregated inference": "解耦推理",
+        "disaggregated prefill": "解耦式预填充",
+        "disagg prefill": "解耦式预填充",
+    }
 
     def __init__(
         self,
@@ -156,6 +180,62 @@ class BatchTranslationService:
                 indent=2,
                 default=str,
             )
+
+    def _load_latest_analysis_snapshot(self, project_id: str) -> Optional[ArticleAnalysis]:
+        """Load the most recent persisted article analysis for resume runs."""
+        artifacts_root = self._artifacts_root(project_id)
+        if not artifacts_root.exists():
+            return None
+
+        run_dirs = sorted(
+            (path for path in artifacts_root.iterdir() if path.is_dir()),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
+        for run_dir in run_dirs:
+            analysis_path = run_dir / "analysis.json"
+            if not analysis_path.exists():
+                continue
+            try:
+                with open(analysis_path, "r", encoding="utf-8") as handle:
+                    payload = json.load(handle)
+                if hasattr(ArticleAnalysis, "model_validate"):
+                    return ArticleAnalysis.model_validate(payload)
+                return ArticleAnalysis.parse_obj(payload)
+            except Exception as exc:
+                logger.warning(
+                    "Failed to load analysis snapshot from %s: %s",
+                    analysis_path,
+                    exc,
+                )
+        return None
+
+    def _load_latest_run_summary(self, project_id: str) -> Optional[Dict[str, Any]]:
+        artifacts_root = self._artifacts_root(project_id)
+        if not artifacts_root.exists():
+            return None
+
+        run_dirs = sorted(
+            (path for path in artifacts_root.iterdir() if path.is_dir()),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
+        for run_dir in run_dirs:
+            summary_path = run_dir / "run-summary.json"
+            if not summary_path.exists():
+                continue
+            try:
+                with open(summary_path, "r", encoding="utf-8") as handle:
+                    payload = json.load(handle)
+                if isinstance(payload, dict):
+                    return payload
+            except Exception as exc:
+                logger.warning(
+                    "Failed to load run summary from %s: %s",
+                    summary_path,
+                    exc,
+                )
+        return None
 
     def _build_source_manifest(
         self,
@@ -305,6 +385,255 @@ class BatchTranslationService:
 
         analysis.terminology = list(merged_terms.values())
         return analysis
+
+    def _normalize_auto_glossary_translation(
+        self,
+        original: str,
+        translation: Optional[str],
+    ) -> Optional[str]:
+        normalized_original = (original or "").strip()
+        cleaned = (translation or "").strip()
+        if not normalized_original:
+            return None
+
+        override = self.AUTO_GLOSSARY_TERM_OVERRIDES.get(normalized_original.lower())
+        if not override and " (" in normalized_original and normalized_original.endswith(")"):
+            base_term = normalized_original.rsplit(" (", 1)[0].strip()
+            override = self.AUTO_GLOSSARY_TERM_OVERRIDES.get(base_term.lower())
+        if override:
+            return override
+        return cleaned or None
+
+    def _build_auto_glossary_term(
+        self,
+        *,
+        original: str,
+        translation: Optional[str],
+        strategy: TranslationStrategy,
+        note: Optional[str],
+        source: str,
+    ) -> Optional[GlossaryTerm]:
+        normalized_original = (original or "").strip()
+        normalized_translation = self._normalize_auto_glossary_translation(
+            normalized_original,
+            translation,
+        )
+        if not normalized_original:
+            return None
+
+        resolved_strategy = strategy
+        if not normalized_translation:
+            normalized_translation = normalized_original
+        if normalized_translation == normalized_original:
+            resolved_strategy = TranslationStrategy.PRESERVE
+
+        return GlossaryTerm(
+            original=normalized_original,
+            translation=normalized_translation,
+            strategy=resolved_strategy,
+            note=(note or "").strip() or None,
+            tags=infer_glossary_tags(normalized_original),
+            source=source,
+            scope="project",
+            status="active",
+        )
+
+    def _derive_auto_glossary_alias_terms(self, term: GlossaryTerm) -> List[GlossaryTerm]:
+        original = term.original.strip()
+        if " (" not in original or not original.endswith(")"):
+            return []
+
+        base, _, remainder = original.rpartition(" (")
+        abbreviation = remainder[:-1].strip()
+        aliases: List[GlossaryTerm] = []
+
+        base = base.strip()
+        if base:
+            base_translation = term.translation or base
+            suffixes = [f"({abbreviation})", f"（{abbreviation}）"]
+            for suffix in suffixes:
+                if base_translation.endswith(suffix):
+                    base_translation = base_translation[: -len(suffix)].rstrip(" （(")
+                    break
+            aliases.append(
+                term.model_copy(
+                    update={
+                        "original": base,
+                        "translation": base_translation,
+                    }
+                )
+            )
+
+        if abbreviation and len(abbreviation) <= 16:
+            aliases.append(
+                term.model_copy(
+                    update={
+                        "original": abbreviation,
+                        "translation": abbreviation,
+                        "strategy": TranslationStrategy.PRESERVE,
+                    }
+                )
+            )
+
+        return aliases
+
+    def _load_term_review_seed_terms(self, project_id: str) -> List[GlossaryTerm]:
+        latest_path = (
+            self.project_manager.projects_path
+            / project_id
+            / "artifacts"
+            / "term-review"
+            / "latest.json"
+        )
+        if not latest_path.exists():
+            return []
+
+        try:
+            with open(latest_path, "r", encoding="utf-8") as handle:
+                payload = json.load(handle)
+        except Exception as exc:
+            logger.warning("Failed to load term-review artifact %s: %s", latest_path, exc)
+            return []
+
+        terms: List[GlossaryTerm] = []
+        for section in payload.get("sections", []):
+            for candidate in section.get("candidates", []):
+                original = str(candidate.get("term") or "").strip()
+                translation = str(candidate.get("suggested_translation") or "").strip()
+                reasons = {
+                    str(reason).strip().lower()
+                    for reason in (candidate.get("reasons") or [])
+                    if str(reason).strip()
+                }
+                occurrence_count = int(candidate.get("occurrence_count") or 0)
+                if not original or not translation:
+                    continue
+                if (
+                    occurrence_count < 2
+                    and "title" not in reasons
+                    and "high_frequency" not in reasons
+                ):
+                    continue
+
+                term = self._build_auto_glossary_term(
+                    original=original,
+                    translation=translation,
+                    strategy=(
+                        TranslationStrategy.PRESERVE
+                        if translation == original
+                        else TranslationStrategy.TRANSLATE
+                    ),
+                    note=(candidate.get("contexts") or [None])[0],
+                    source="term_review_auto",
+                )
+                if term is None:
+                    continue
+                terms.append(term)
+                terms.extend(self._derive_auto_glossary_alias_terms(term))
+
+        return terms
+
+    def _build_analysis_seed_terms(
+        self,
+        analysis: ArticleAnalysis,
+    ) -> List[GlossaryTerm]:
+        terms: List[GlossaryTerm] = []
+        for term in analysis.terminology:
+            normalized_original = (term.term or "").strip()
+            base_original = (
+                normalized_original.rsplit(" (", 1)[0].strip()
+                if " (" in normalized_original and normalized_original.endswith(")")
+                else normalized_original
+            )
+            if (
+                normalized_original.lower() not in self.AUTO_GLOSSARY_TERM_OVERRIDES
+                and base_original.lower() not in self.AUTO_GLOSSARY_TERM_OVERRIDES
+            ):
+                continue
+            glossary_term = self._build_auto_glossary_term(
+                original=term.term,
+                translation=term.translation,
+                strategy=term.strategy,
+                note=term.context_meaning or term.rationale,
+                source="analysis_auto",
+            )
+            if glossary_term is None:
+                continue
+            terms.append(glossary_term)
+            terms.extend(self._derive_auto_glossary_alias_terms(glossary_term))
+        return terms
+
+    def _seed_project_glossary(
+        self,
+        project_id: str,
+        analysis: ArticleAnalysis,
+    ) -> Dict[str, Any]:
+        glossary = self.project_manager.glossary_manager.load_project(project_id)
+        global_glossary = self.project_manager.glossary_manager.load_global()
+        existing_terms = {
+            term.original.lower(): term
+            for term in glossary.terms
+            if term.status == "active"
+        }
+        global_terms = {
+            term.original.lower(): term
+            for term in global_glossary.terms
+            if term.status == "active"
+        }
+
+        added_terms: List[GlossaryTerm] = []
+        for candidate in [
+            *self._load_term_review_seed_terms(project_id),
+            *self._build_analysis_seed_terms(analysis),
+        ]:
+            key = candidate.original.lower()
+            if key in existing_terms:
+                continue
+            global_term = global_terms.get(key)
+            if global_term is not None:
+                same_translation = (
+                    (global_term.translation or global_term.original)
+                    == (candidate.translation or candidate.original)
+                )
+                if same_translation and global_term.strategy == candidate.strategy:
+                    continue
+            glossary.add_term(candidate)
+            existing_terms[key] = candidate
+            added_terms.append(candidate)
+
+        if added_terms:
+            self.project_manager.glossary_manager.save_project(project_id, glossary)
+
+        return {
+            "added": len(added_terms),
+            "terms": [
+                {
+                    "original": term.original,
+                    "translation": term.translation,
+                    "strategy": term.strategy.value,
+                    "source": term.source,
+                }
+                for term in added_terms
+            ],
+        }
+
+    def _build_title_glossary_block(
+        self,
+        project_id: str,
+        title: str,
+        subtitle: Optional[str],
+    ) -> str:
+        merged_glossary = self.project_manager.glossary_manager.load_merged(project_id)
+        selected_terms = select_glossary_terms_for_text(
+            merged_glossary,
+            "\n".join(filter(None, [title, subtitle or ""])),
+            max_terms=12,
+        )
+        return render_glossary_prompt_block(
+            selected_terms,
+            include_title=False,
+            empty_text="(无命中术语)",
+        )
 
     def _build_section_prompt_context(
         self,
@@ -493,8 +822,19 @@ class BatchTranslationService:
             self._notify_progress(
                 on_progress, "深度分析全文", translated_count, total_paragraphs
             )
+            existing_translated = self._count_project_translated_paragraphs(project.sections)
+            analysis = None
+            if existing_translated > 0:
+                analysis = self._load_latest_analysis_snapshot(project_id)
+                if analysis is not None:
+                    logger.info(
+                        "[%s] Reusing persisted analysis snapshot for resume run",
+                        project_id,
+                    )
 
-            analysis = self.deep_analyzer.analyze(project.sections)
+            if analysis is None:
+                analysis = self.deep_analyzer.analyze(project.sections)
+            glossary_seed_result = self._seed_project_glossary(project_id, analysis)
             analysis = self._merge_analysis_with_project_glossary(project_id, analysis)
 
             # 设置分析结果到上下文管理器
@@ -508,6 +848,10 @@ class BatchTranslationService:
                 return finalize_cancelled_result()
 
             self._write_artifact_json(run_dir / "analysis.json", analysis)
+            self._write_artifact_json(
+                run_dir / "glossary-seed.json",
+                glossary_seed_result,
+            )
             self._write_artifact_json(
                 run_dir / "section-plan.json",
                 self._build_section_plan(project, analysis),
@@ -880,7 +1224,7 @@ class BatchTranslationService:
                 and len(section.paragraphs) > 0
             )
             progress.current_step = "completed" if is_complete else "incomplete"
-            progress.final_status = "completed" if is_complete else "not_started"
+            progress.final_status = "completed" if is_complete else "incomplete"
             project.status = (
                 self._final_status_after_success(original_status)
                 if is_complete
@@ -1214,7 +1558,7 @@ class BatchTranslationService:
                 if element.span_id
             ],
             issues=issues,
-            model="flash",
+            model="preview",
         )
 
     def _collect_section_translations(self, section: Section) -> List[str]:
@@ -1343,13 +1687,43 @@ class BatchTranslationService:
         total_paragraphs = sum(len(section.paragraphs) for section in project.sections)
         translated = self._count_project_translated_paragraphs(project.sections)
         is_complete = total_paragraphs > 0 and translated >= total_paragraphs
+        latest_run = self._load_latest_run_summary(project_id)
+
+        if latest_run:
+            latest_status = str(latest_run.get("status") or "").strip() or "processing"
+            latest_total = int(latest_run.get("total_paragraphs") or total_paragraphs or 0)
+            latest_translated = int(
+                latest_run.get("translated_paragraphs") or translated or 0
+            )
+            return {
+                "status": latest_status,
+                "progress_percent": (
+                    (latest_translated / latest_total * 100)
+                    if latest_total > 0
+                    else 0
+                ),
+                "translated_paragraphs": latest_translated,
+                "total_paragraphs": latest_total,
+                "translated_sections": int(latest_run.get("translated_sections") or 0),
+                "total_sections": int(latest_run.get("total_sections") or len(project.sections)),
+                "current_section": None,
+                "current_step": latest_status,
+                "is_complete": latest_status == "completed",
+                "error_count": int(latest_run.get("error_count") or 0),
+                "started_at": latest_run.get("started_at"),
+                "finished_at": latest_run.get("finished_at"),
+                "final_status": latest_status,
+                "run_id": latest_run.get("run_id"),
+            }
 
         if is_complete and project.status in (
             ProjectStatus.REVIEWING,
             ProjectStatus.COMPLETED,
         ):
             status = "completed"
-        elif project.status == ProjectStatus.ANALYZING:
+        elif project.status in (ProjectStatus.ANALYZING, ProjectStatus.IN_PROGRESS):
+            status = "processing"
+        elif translated > 0:
             status = "processing"
         else:
             status = "not_started"
@@ -1423,16 +1797,46 @@ class BatchTranslationService:
 
         try:
             subtitle = project.metadata.subtitle if project.metadata else None
+            requirements = extract_title_requirements(project.title)
+            preservation_lines: List[str] = []
+            if requirements.required_prefix:
+                preservation_lines.append(
+                    f"- 必须完整保留标题前缀中的品牌/版本信息：{requirements.required_prefix}"
+                )
+            if requirements.former_name:
+                preservation_lines.append(
+                    f"- 原题中的历史名称必须保留：{requirements.former_name}"
+                )
+            glossary_block = self._build_title_glossary_block(
+                project.id,
+                project.title,
+                subtitle,
+            )
             result = self.llm.translate_title(
                 project.title,
                 context={
                     "article_theme": analysis.theme,
                     "structure_summary": analysis.structure_summary,
                     "target_audience": analysis.style.target_audience,
+                    "glossary_block": glossary_block,
+                    "preservation_block": "\n".join(preservation_lines)
+                    if preservation_lines
+                    else "- 无额外保留项",
                 },
                 subtitle=subtitle,
             )
-            project.title_translation = result.get("title", "")
+            translated_title = enforce_translated_title(
+                project.title,
+                result.get("title", ""),
+            )
+            missing_terms = find_missing_title_terms(project.title, translated_title)
+            if missing_terms:
+                logger.warning(
+                    "Translated title still missing protected terms %s for project %s",
+                    missing_terms,
+                    project.id,
+                )
+            project.title_translation = translated_title
             logger.info(
                 f"Title translated: {project.title} -> {project.title_translation}"
             )

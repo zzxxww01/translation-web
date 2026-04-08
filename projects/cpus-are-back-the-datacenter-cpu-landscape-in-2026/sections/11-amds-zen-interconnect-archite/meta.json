@@ -1,0 +1,1579 @@
+{
+  "section_id": "11-amds-zen-interconnect-archite",
+  "title": "AMD’s Zen Interconnect Architecture",
+  "title_translation": "AMD Zen互联架构",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0132",
+      "parent_block_index": 132,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044322",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AMD EPYC CPU Generations. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD EPYC CPU Generations. Source: AMD",
+          "start": 0,
+          "end": 37,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0133",
+      "parent_block_index": 133,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD EPYC CPU Generations. Source: AMD*",
+      "parent_block_plain_text": "AMD EPYC CPU Generations. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD EPYC CPU Generations. Source: AMD",
+          "start": 0,
+          "end": 37,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 霄龙 (EPYC) CPU 演进历程。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044594",
+          "tokenized_text": "[[[EM_1|AMD 霄龙 (EPYC) CPU 演进历程。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0134",
+      "parent_block_index": 134,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044662",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Intel Criticizing AMD’s Naples. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Criticizing AMD’s Naples. Source: Intel",
+          "start": 0,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0135",
+      "parent_block_index": 135,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Criticizing AMD’s Naples. Source: Intel*",
+      "parent_block_plain_text": "Intel Criticizing AMD’s Naples. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Criticizing AMD’s Naples. Source: Intel",
+          "start": 0,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 45,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔抨击 AMD Naples 处理器。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044773",
+          "tokenized_text": "[[[EM_1|英特尔抨击 AMD Naples 处理器。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "AMD’s return to the datacenter CPU market with their EPYC Naples 7001 series in 2017 caused quite a stir, with Intel mocking the design as “Four glued-together desktop die” with inconsistent performance. In reality, the small design team at AMD had to be resourceful, and could only afford to tape out a single die that had to be used for both desktop PCs, server and even embedded with integrated 10Gbit Ethernet on the same die.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0136",
+      "parent_block_index": 136,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD’s return to the datacenter CPU market with their EPYC Naples 7001 series in 2017 caused quite a stir, with Intel mocking the design as “Four glued-together desktop die” with inconsistent performance. In reality, the small design team at AMD had to be resourceful, and could only afford to tape out a single die that had to be used for both desktop PCs, server and even embedded with integrated 10Gbit Ethernet on the same die.",
+      "parent_block_plain_text": "AMD’s return to the datacenter CPU market with their EPYC Naples 7001 series in 2017 caused quite a stir, with Intel mocking the design as “Four glued-together desktop die” with inconsistent performance. In reality, the small design team at AMD had to be resourceful, and could only afford to tape out a single die that had to be used for both desktop PCs, server and even embedded with integrated 10Gbit Ethernet on the same die.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 430,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2017 年，AMD 携霄龙 (EPYC) Naples 7001 系列重返数据中心 CPU 市场，在业界引发轩然大波。英特尔嘲讽其设计是“四个胶水拼接的桌面级裸片”，且性能表现参差不齐。现实情况是，AMD 规模不大的设计团队必须精打细算。他们只承担得起流片一款裸片的成本，而这款裸片必须同时兼顾台式 PC、服务器，甚至还要在同一裸片上集成 10Gb 以太网以满足嵌入式需求。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044823",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0137",
+      "parent_block_index": 137,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044858",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "AMD Zeppelin SoC Architecture. Source: AMD, ISSCC 2018",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Zeppelin SoC Architecture. Source: AMD, ISSCC 2018",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0138",
+      "parent_block_index": 138,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Zeppelin SoC Architecture. Source: AMD, ISSCC 2018*",
+      "parent_block_plain_text": "AMD Zeppelin SoC Architecture. Source: AMD, ISSCC 2018",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Zeppelin SoC Architecture. Source: AMD, ISSCC 2018",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 54,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Zeppelin SoC（系统级芯片）架构。来源：AMD，ISSCC 2018",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044954",
+          "tokenized_text": "[[[EM_1|AMD Zeppelin SoC（系统级芯片）架构。来源：AMD，ISSCC 2018]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Naples implemented a 4-die MCM with each “Zeppelin” die containing 8 cores, allowing AMD to exceed Intel’s 28 cores with 32. Each die holds 2 Core Complexes (CCX), with 4 cores and 8MB of L3 connected with a crossbar. An on-die Scalable Data Fabric enables inter-CCX communication. Infinity Fabric on Package (IFOP) links connected each die to the other 3 in the package, while Infinity Fabric Inter Socket (IFIS) links enabled dual-socket designs. Infinity Fabric enabled coherent memory sharing between dies, and was derived from their old HyperTransport technology.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0139",
+      "parent_block_index": 139,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Naples implemented a 4-die MCM with each “Zeppelin” die containing 8 cores, allowing AMD to exceed Intel’s 28 cores with 32. Each die holds 2 Core Complexes (CCX), with 4 cores and 8MB of L3 connected with a crossbar. An on-die Scalable Data Fabric enables inter-CCX communication. Infinity Fabric on Package (IFOP) links connected each die to the other 3 in the package, while Infinity Fabric Inter Socket (IFIS) links enabled dual-socket designs. Infinity Fabric enabled coherent memory sharing between dies, and was derived from their old HyperTransport technology.",
+      "parent_block_plain_text": "Naples implemented a 4-die MCM with each “Zeppelin” die containing 8 cores, allowing AMD to exceed Intel’s 28 cores with 32. Each die holds 2 Core Complexes (CCX), with 4 cores and 8MB of L3 connected with a crossbar. An on-die Scalable Data Fabric enables inter-CCX communication. Infinity Fabric on Package (IFOP) links connected each die to the other 3 in the package, while Infinity Fabric Inter Socket (IFIS) links enabled dual-socket designs. Infinity Fabric enabled coherent memory sharing between dies, and was derived from their old HyperTransport technology.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 568,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Naples 采用了四裸片 MCM（多芯片模块）设计，每个“Zeppelin”裸片包含 8 个核心，这使得 AMD 能够以 32 核规格超越英特尔的 28 核。每个裸片容纳 2 个核心复合体 (CCX)，内部的 4 个核心与 8MB L3 缓存通过交叉开关相连。裸片上的可扩展数据网络实现了 CCX 间的通信。封装内 Infinity Fabric (IFOP) 链路将每个裸片与封装内的其他 3 个裸片相连，而插槽间 Infinity Fabric (IFIS) 链路则用于实现双插槽设计。Infinity Fabric 实现了裸片间的一致性内存共享，该技术源自 AMD 早期的 HyperTransport 技术。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.044995",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This architecture meant that there was no unified L3 cache and core-to-core latencies varied greatly, with multiple hops required to go from a core in a CCX on one die to a core in another die. A typical dual socket server ended having four NUMA domains. Intra-CCX, Inter-CCX, Die-to-die MCM, Inter-Socket. Performance reflected this, as highly parallelizable tasks with minimal core to core and memory access such as rendering performed well, while memory and latency sensitive tasks that relied more on inter-core communication did poorly. As most software was also not NUMA aware, this gave Intel’s criticism a point for “inconsistent performance”.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0140",
+      "parent_block_index": 140,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This architecture meant that there was no unified L3 cache and core-to-core latencies varied greatly, with multiple hops required to go from a core in a CCX on one die to a core in another die. A typical dual socket server ended having four NUMA domains. Intra-CCX, Inter-CCX, Die-to-die MCM, Inter-Socket. Performance reflected this, as highly parallelizable tasks with minimal core to core and memory access such as rendering performed well, while memory and latency sensitive tasks that relied more on inter-core communication did poorly. As most software was also not NUMA aware, this gave Intel’s criticism a point for “inconsistent performance”.",
+      "parent_block_plain_text": "This architecture meant that there was no unified L3 cache and core-to-core latencies varied greatly, with multiple hops required to go from a core in a CCX on one die to a core in another die. A typical dual socket server ended having four NUMA domains. Intra-CCX, Inter-CCX, Die-to-die MCM, Inter-Socket. Performance reflected this, as highly parallelizable tasks with minimal core to core and memory access such as rendering performed well, while memory and latency sensitive tasks that relied more on inter-core communication did poorly. As most software was also not NUMA aware, this gave Intel’s criticism a point for “inconsistent performance”.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 651,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种架构意味着没有统一的 L3缓存，且核心间延迟差异巨大。信号从一个裸片上 CCX 内的核心传输到另一个裸片上的核心，需要经过多次跳跃。一台典型的双插槽服务器最终会存在四个 NUMA 域。其通信层级包括：CCX 内部、CCX 之间、MCM 裸片之间、插槽之间。性能表现直接反映了这一点：渲染等高度可并行、极少需要核心间通信和内存访问的任务表现优异；而更依赖核心间通信、对内存和延迟敏感的任务则表现糟糕。此外，由于当时大多数软件并未针对 NUMA 架构进行优化，这让英特尔对 AMD“性能表现不稳定”的抨击显得确有其事。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045024",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "EPYC Rome’s Centralized IO",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0141",
+      "parent_block_index": 141,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### EPYC Rome’s Centralized IO",
+      "parent_block_plain_text": "EPYC Rome’s Centralized IO",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 26,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "霄龙 (EPYC) Rome 的集中式 I/O",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045056",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0142",
+      "parent_block_index": 142,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045085",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Rome and Milan SoC Architecture. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rome and Milan SoC Architecture. Source: AMD",
+          "start": 0,
+          "end": 44,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0143",
+      "parent_block_index": 143,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rome and Milan SoC Architecture. Source: AMD*",
+      "parent_block_plain_text": "Rome and Milan SoC Architecture. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rome and Milan SoC Architecture. Source: AMD",
+          "start": 0,
+          "end": 44,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 44,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rome 与 Milan SoC 架构。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045172",
+          "tokenized_text": "[[[EM_1|Rome 与 Milan SoC 架构。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The 2019 Rome generation saw a complete rethink of the die layout, taking advantage of heterogeneous disaggregation to create a 64-core part that far outstripped Intel who were still stuck at 28. Eight 8-core Core Compute Dies (CCD) surrounded a central I/O die containing the memory and PCIe interfaces, with the CCDs moving to the latest TSMC N7 process while the I/O die stayed on GlobalFoundries’ 12nm. The CCDs still consisted of two 4-core CCXs, but now have no direct communication with each other. Instead, all inter-CCX traffic is routed through the I/O die, where signals travel across the substrate over Global Memory Interconnect (GMI) links. This meant that Rome functionally appeared as sixteen 4-core NUMA nodes with only 2 NUMA domains.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0144",
+      "parent_block_index": 144,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The 2019 Rome generation saw a complete rethink of the die layout, taking advantage of heterogeneous disaggregation to create a 64-core part that far outstripped Intel who were still stuck at 28. Eight 8-core Core Compute Dies (CCD) surrounded a central I/O die containing the memory and PCIe interfaces, with the CCDs moving to the latest TSMC N7 process while the I/O die stayed on GlobalFoundries’ 12nm. The CCDs still consisted of two 4-core CCXs, but now have no direct communication with each other. Instead, all inter-CCX traffic is routed through the I/O die, where signals travel across the substrate over Global Memory Interconnect (GMI) links. This meant that Rome functionally appeared as sixteen 4-core NUMA nodes with only 2 NUMA domains.",
+      "parent_block_plain_text": "The 2019 Rome generation saw a complete rethink of the die layout, taking advantage of heterogeneous disaggregation to create a 64-core part that far outstripped Intel who were still stuck at 28. Eight 8-core Core Compute Dies (CCD) surrounded a central I/O die containing the memory and PCIe interfaces, with the CCDs moving to the latest TSMC N7 process while the I/O die stayed on GlobalFoundries’ 12nm. The CCDs still consisted of two 4-core CCXs, but now have no direct communication with each other. Instead, all inter-CCX traffic is routed through the I/O die, where signals travel across the substrate over Global Memory Interconnect (GMI) links. This meant that Rome functionally appeared as sixteen 4-core NUMA nodes with only 2 NUMA domains.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 752,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2019 年发布的 Rome 处理器彻底重构了裸片布局。AMD 借助异构解耦打造出 64 核产品，将当时仍停留在 28 核的英特尔远远甩在身后。八个 8 核核心计算裸片（CCD）环绕着一个中央 I/O 裸片，后者集成了内存和 PCIe 接口。CCD 升级至最新的台积电 N7 工艺，而 I/O 裸片则继续沿用格芯的 12nm 工艺。CCD 依然由两个 4 核 CCX 组成，但它们之间不再直接通信。相反，所有跨 CCX 的数据流量均通过 I/O 裸片路由，信号通过全局内存互连 (GMI) 链路在基板上传输。这意味着 Rome 在功能上表现为 16 个 4 核 NUMA 节点，但仅有两个 NUMA 域。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045212",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "VMs spun up on Rome had to be kept to 4 cores to avoid performance loss from cross-die communications, much like the prior Naples. This was addressed with the Milan generation in 2021 that increased CCX size to 8 cores by moving to a ring bus architecture, while reusing the same I/O die as Rome.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0145",
+      "parent_block_index": 145,
+      "parent_block_type": "p",
+      "parent_block_markdown": "VMs spun up on Rome had to be kept to 4 cores to avoid performance loss from cross-die communications, much like the prior Naples. This was addressed with the Milan generation in 2021 that increased CCX size to 8 cores by moving to a ring bus architecture, while reusing the same I/O die as Rome.",
+      "parent_block_plain_text": "VMs spun up on Rome had to be kept to 4 cores to avoid performance loss from cross-die communications, much like the prior Naples. This was addressed with the Milan generation in 2021 that increased CCX size to 8 cores by moving to a ring bus architecture, while reusing the same I/O die as Rome.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 296,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与上一代 Naples 类似，在 Rome 上启动的虚拟机（VM）必须限制在 4 核以内，以免因跨裸片通信造成性能损耗。2021 年发布的 Milan 处理器解决了这一问题。它转向了环形总线架构，将 CCX 规模扩大至 8 核，同时继续复用与 Rome 相同的 I/O 裸片。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045242",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0146",
+      "parent_block_index": 146,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045272",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "AMD Turin-Dense. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Turin-Dense. Source: AMD",
+          "start": 0,
+          "end": 28,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0147",
+      "parent_block_index": 147,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Turin-Dense. Source: AMD*",
+      "parent_block_plain_text": "AMD Turin-Dense. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Turin-Dense. Source: AMD",
+          "start": 0,
+          "end": 28,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Turin-Dense 架构。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045355",
+          "tokenized_text": "[[[EM_1|AMD Turin-Dense 架构。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Despite initial plans to adopt advanced packaging, AMD stuck to this familiar design for the next 2 generations as well, with 2022 Genoa moving to 12 CCDs and 2024 Turin with up to 16 CCDs on the 128-core EPYC 9755, all surrounding a central I/O die with upgraded DDR5 and PCIe5 interfaces.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0148",
+      "parent_block_index": 148,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Despite initial plans to adopt advanced packaging, AMD stuck to this familiar design for the next 2 generations as well, with 2022 Genoa moving to 12 CCDs and 2024 Turin with up to 16 CCDs on the 128-core EPYC 9755, all surrounding a central I/O die with upgraded DDR5 and PCIe5 interfaces.",
+      "parent_block_plain_text": "Despite initial plans to adopt advanced packaging, AMD stuck to this familiar design for the next 2 generations as well, with 2022 Genoa moving to 12 CCDs and 2024 Turin with up to 16 CCDs on the 128-core EPYC 9755, all surrounding a central I/O die with upgraded DDR5 and PCIe5 interfaces.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 290,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管最初计划采用先进封装，AMD 在接下来的两代产品中依然坚守了这一熟悉的架构设计。2022 年发布的 Genoa 处理器扩展至 12 个 CCD，而 2024 年发布的 Turin 处理器（如 128 核的霄龙 (EPYC) 9755）更是搭载了多达 16 个 CCD。这些 CCD 均围绕一个中央 I/O 裸片排列，该 I/O 裸片已升级支持 DDR5 和 PCIe 5.0 接口。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045391",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "The key benefit of this chiplet design is the scalability of core counts with just a single silicon tapeout. AMD only needs to design a single CCD to offer the full gamut of core counts across the SKU stack by including different numbers of CCDs. The small die area of each CCD also helps with yields and achieving earlier time to market when moving to a new process node. This contrasts with a mesh design that uses large reticle sized dies and requires multiple tapeouts for each core count offering with smaller meshes. Different CCD designs can also be swapped in while sharing the same IO die and socket platform, with AMD creating additional variants using the compact Zen 4c cores in Bergamo and Zen 5c cores for the 192-core Turin variant.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key benefit of this chiplet design is the scalability of core counts with just a single silicon tapeout. AMD only needs to design a single CCD to offer the full gamut of core counts across the SKU stack by including different numbers of CCDs. The small die area of each CCD also helps with yields and achieving earlier time to market when moving to a new process node. This contrasts with a mesh design that uses large reticle sized dies and requires multiple tapeouts for each core count offering with smaller meshes. Different CCD designs can also be swapped in while sharing the same IO die and socket platform, with AMD creating additional variants using the compact Zen 4c cores in Bergamo and Zen 5c cores for the 192-core Turin variant. We wrote about this new core variant for efficient cloud computing here. Disaggregation also allows smaller versions to be made with EPYC 8004 Siena processors using just 4 Zen 4c CCDs on a 6-channel memory platform.",
+      "parent_block_plain_text": "The key benefit of this chiplet design is the scalability of core counts with just a single silicon tapeout. AMD only needs to design a single CCD to offer the full gamut of core counts across the SKU stack by including different numbers of CCDs. The small die area of each CCD also helps with yields and achieving earlier time to market when moving to a new process node. This contrasts with a mesh design that uses large reticle sized dies and requires multiple tapeouts for each core count offering with smaller meshes. Different CCD designs can also be swapped in while sharing the same IO die and socket platform, with AMD creating additional variants using the compact Zen 4c cores in Bergamo and Zen 5c cores for the 192-core Turin variant. We wrote about this new core variant for efficient cloud computing here. Disaggregation also allows smaller versions to be made with EPYC 8004 Siena processors using just 4 Zen 4c CCDs on a 6-channel memory platform.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 747,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种芯粒设计的核心优势在于，仅需一次裸片流片即可实现核心数量的可扩展性。AMD 只需设计单一 CCD，通过组合不同数量的 CCD，就能在整个 SKU 矩阵中提供全系列的核心数量配置。此外，每个 CCD 的裸片面积较小，这不仅有助于提升良率，还能在向新制程节点迁移时加快上市时间。这与网格（mesh）架构设计形成鲜明对比：后者采用接近光刻掩模版极限尺寸的大型裸片，且针对不同核心数量的较小网格配置，必须进行多次流片。在共享同一 I/O 裸片和插槽平台的前提下，AMD 还能灵活替换不同的 CCD 设计。例如，AMD 借助紧凑的 Zen 4c 核心打造了 Bergamo 处理器，并利用 Zen 5c 核心推出了 192 核的 Turin 衍生版本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045421",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "We wrote about this new core variant for efficient cloud computing here. Disaggregation also allows smaller versions to be made with EPYC 8004 Siena processors using just 4 Zen 4c CCDs on a 6-channel memory platform.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key benefit of this chiplet design is the scalability of core counts with just a single silicon tapeout. AMD only needs to design a single CCD to offer the full gamut of core counts across the SKU stack by including different numbers of CCDs. The small die area of each CCD also helps with yields and achieving earlier time to market when moving to a new process node. This contrasts with a mesh design that uses large reticle sized dies and requires multiple tapeouts for each core count offering with smaller meshes. Different CCD designs can also be swapped in while sharing the same IO die and socket platform, with AMD creating additional variants using the compact Zen 4c cores in Bergamo and Zen 5c cores for the 192-core Turin variant. We wrote about this new core variant for efficient cloud computing here. Disaggregation also allows smaller versions to be made with EPYC 8004 Siena processors using just 4 Zen 4c CCDs on a 6-channel memory platform.",
+      "parent_block_plain_text": "The key benefit of this chiplet design is the scalability of core counts with just a single silicon tapeout. AMD only needs to design a single CCD to offer the full gamut of core counts across the SKU stack by including different numbers of CCDs. The small die area of each CCD also helps with yields and achieving earlier time to market when moving to a new process node. This contrasts with a mesh design that uses large reticle sized dies and requires multiple tapeouts for each core count offering with smaller meshes. Different CCD designs can also be swapped in while sharing the same IO die and socket platform, with AMD creating additional variants using the compact Zen 4c cores in Bergamo and Zen 5c cores for the 192-core Turin variant. We wrote about this new core variant for efficient cloud computing here. Disaggregation also allows smaller versions to be made with EPYC 8004 Siena processors using just 4 Zen 4c CCDs on a 6-channel memory platform.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 748,
+      "segment_end": 964,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们此前曾撰文分析过这种专为高效云计算打造的新型核心衍生版本。架构解耦还允许打造更小规模的版本，例如 EPYC 8004 Siena 处理器，该产品在 6 通道内存平台上仅使用了 4 个 Zen 4c CCD。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045448",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Zen 4c: AMD’s Response to Hyperscale ARM & Intel Atom - Dylan Patel and Gerald Wong · June 5, 2023",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Zen 4c: AMD’s Response to Hyperscale ARM & Intel Atom",
+          "start": 0,
+          "end": 53,
+          "href": "https://newsletter.semianalysis.com/p/zen-4c-amds-response-to-hyperscale",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Zen 4c: AMD’s Response to Hyperscale ARM & Intel Atom](https://newsletter.semianalysis.com/p/zen-4c-amds-response-to-hyperscale) - Dylan Patel and Gerald Wong · June 5, 2023",
+      "parent_block_plain_text": "Zen 4c: AMD’s Response to Hyperscale ARM & Intel Atom - Dylan Patel and Gerald Wong · June 5, 2023",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Zen 4c: AMD’s Response to Hyperscale ARM & Intel Atom",
+          "start": 0,
+          "end": 53,
+          "href": "https://newsletter.semianalysis.com/p/zen-4c-amds-response-to-hyperscale",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 98,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Zen 4c：AMD 对超大规模 ARM 与英特尔 Atom 的有力回击 - Dylan Patel 与 Gerald Wong · 2023 年 6 月 5 日",
+          "model": "pro",
+          "created_at": "2026-04-08T16:13:59.045541",
+          "tokenized_text": "[[[LINK_1|Zen 4c：AMD 对超大规模 ARM 与英特尔 Atom 的有力回击]]] - Dylan Patel 与 Gerald Wong · 2023 年 6 月 5 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|structure",
+            "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。"
+          },
+          {
+            "type": "formatting",
+            "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

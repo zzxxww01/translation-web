@@ -1,0 +1,19 @@
+Groq’s first and only publicly announced LPU architecture was detailed in their ISCA 2020 paper. Unlike typical hardware architectures connecting many general-purpose cores, Groq re-organized the architecture into groups of single-purpose units connecting to other groups of different purposes, and they named the groups “slices.” Between functional units are streaming registers, scratchpad SRAM for functional units to pass data to each other. Groq opted for single-level scratchpad SRAM instead of multi-level memory hierarchy to make the hardware execution deterministic.
+
+Concretely, LPU architecture has VXM slices for vector operations, MEM slices for loading/storing data, SXM slices for tensor shape manipulation, and MXM slices for performing matrix multiplication. Spatially, the slices are laid out horizontally, allowing the data to stream horizontally. Within a slice, instructions are pumped vertically across units. Conceptually, LPU resembles a systolic array that pumps instructions vertically and data horizontally.
+
+![](https://substackcdn.com/image/fetch/$s_!0sYb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F83c55dd8-42b5-4f62-9551-6668222d528b_1204x581.png)
+
+Source: Groq, SemiAnalysis
+
+The data flow and instruction flow design requires fine-grained pipelining to achieve high performance. Since LPU architecture makes computation deterministic, the compiler can aggressively schedule and overlap instructions to hide latency. The LPU’s use of high bandwidth SRAM and aggressive pipelining are the two main factors that enable LPU’s low latency.
+
+LPU gen 1 was designed on a legacy Global Foundries 14nm process, with Marvell responsible for the chip’s physical design. This was a much more mature node compared to peers when it taped out in 2020, with the incumbent AI chip platforms mostly on TSMC’s N7 platform. This made sense for an early product focused on proving out Groq’s architecture and bringing its inference-centric design to market. The 14nm node was mature, relatively well understood, and suitable for an initial chip where architectural differentiation mattered more than pushing its silicon to the leading edge.
+
+One of the selling points is that the chip can be manufactured and packaged entirely in the United States compared to their competitors being heavily reliant on the Asia semiconductor supply chain: logic and packaging in Taiwan, with HBM from Korea.
+
+Since then, Groq’s roadmap has stalled due to execution, with no LPU 2 having been shipped. This leaves the Groq LPU looking even more dated against competing roadmaps. What was once a meaningful but still manageable node disadvantage versus 7nm-era peers has widened into a far sharper gap, with all leading accelerator platforms now moving onto 3nm-class processes in 2026.
+
+The follow on Groq LPU 2 was designed for Samsung Foundry’s SF4X node, specifically at Samsung’s Austin fab, allowing them to extend the pitch that Groq is fabricated domestically in the USA. Samsung would also provide support for the back-end design. The choice of Samsung was driven by favorable terms / investment, with Samsung Foundry struggling to find customers for its advanced nodes and missing out on an AI logic customer. Unsurprisingly, Samsung was a key investor in Groq’s subsequent Series D in August 2024, and most recently in September 2025 before the Nvidia “acquisition.”
+
+However, the Groq LPU 2 was never productized because of design issues. The C2C SerDes on the chip couldn’t hit the advertised 112G speed which caused the design to malfunction, as we detailed long ago in the [Accelerator model](https://semianalysis.com/accelerator-hbm-model/). The third generation Groq LPU is the one that Nvidia will be productizing.

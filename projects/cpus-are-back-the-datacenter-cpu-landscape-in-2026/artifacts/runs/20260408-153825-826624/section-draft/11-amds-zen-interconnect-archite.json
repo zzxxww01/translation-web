@@ -1,0 +1,324 @@
+{
+  "section_id": "11-amds-zen-interconnect-archite",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "11-amds-zen-interconnect-archite",
+    "section_title": "AMD’s Zen Interconnect Architecture",
+    "section_title_translation": "AMD Zen互联架构",
+    "section_position": "12/30",
+    "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+    "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+    "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+    "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures.",
+    "previous_section_title": "Intel’s Mesh Architecture",
+    "next_section_title": "Intel Diamond Rapids Architecture Changes",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+      "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+      "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+      "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+      "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+      "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+    ],
+    "article_challenges": [
+      {
+        "location": "DRAM Constraints on CPU Market",
+        "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+        "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel’s Mesh Architecture",
+        "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+        "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel Xeon Coral Rapids",
+        "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+        "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "AMD Turin Dense 7:1 Socket Consolidation",
+        "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+        "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic Era",
+        "term": "Agentic Era",
+        "translation": "智能体时代",
+        "strategy": "translate",
+        "note": "The era of AI where autonomous agents perform complex tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Crossbar",
+        "term": "Crossbar",
+        "translation": "交叉开关",
+        "strategy": "translate",
+        "note": "An interconnect topology where every core has a discrete link to all other cores.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Ring Bus",
+        "term": "Ring Bus",
+        "translation": "环形总线",
+        "strategy": "translate",
+        "note": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mesh Architecture",
+        "term": "Mesh Architecture",
+        "translation": "网格架构",
+        "strategy": "translate",
+        "note": "A 2D grid interconnect topology used in high-core-count CPUs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Die Shot",
+        "term": "Die Shot",
+        "translation": "裸片图",
+        "strategy": "translate",
+        "note": "A photograph of a semiconductor die, often annotated.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Floorplan",
+        "term": "Floorplan",
+        "translation": "物理布图",
+        "strategy": "translate",
+        "note": "The physical layout of functional blocks on a semiconductor die.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Stepping",
+        "term": "Stepping",
+        "translation": "步进",
+        "strategy": "translate",
+        "note": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Reticle-sized",
+        "term": "Reticle-sized",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Head node",
+        "term": "Head node",
+        "translation": "头节点",
+        "strategy": "translate",
+        "note": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Context Memory Storage",
+        "term": "Context Memory Storage",
+        "translation": "上下文内存存储",
+        "strategy": "translate",
+        "note": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Front Side Bus (FSB)",
+        "term": "Front Side Bus (FSB)",
+        "translation": "前端总线 (FSB)",
+        "strategy": "translate",
+        "note": "Early Intel computer communication interface.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+    "AMD 霄龙 (EPYC) CPU 演进历程。来源：AMD",
+    "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+    "英特尔抨击 AMD Naples 处理器。来源：英特尔",
+    "2017 年，AMD 携霄龙 (EPYC) Naples 7001 系列重返数据中心 CPU 市场，在业界引发轩然大波。英特尔嘲讽其设计是“四个胶水拼接的桌面级裸片”，且性能表现参差不齐。现实情况是，AMD 规模不大的设计团队必须精打细算。他们只承担得起流片一款裸片的成本，而这款裸片必须同时兼顾台式 PC、服务器，甚至还要在同一裸片上集成 10Gb 以太网以满足嵌入式需求。",
+    "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+    "AMD Zeppelin SoC（系统级芯片）架构。来源：AMD，ISSCC 2018",
+    "Naples 采用了四裸片 MCM（多芯片模块）设计，每个“Zeppelin”裸片包含 8 个核心，这使得 AMD 能够以 32 核规格超越英特尔的 28 核。每个裸片容纳 2 个核心复合体 (CCX)，内部的 4 个核心与 8MB L3 缓存通过交叉开关相连。裸片上的可扩展数据网络实现了 CCX 间的通信。封装内Infinity Fabric (IFOP) 链路将每个裸片与封装内的其他 3 个裸片相连，而插槽间Infinity Fabric (IFIS) 链路则用于实现双插槽设计。Infinity Fabric 实现了裸片间的一致性内存共享，该技术源自 AMD 早期的 HyperTransport 技术。",
+    "这种架构意味着没有统一的 L3缓存，且核心间延迟差异巨大。信号从一个裸片上 CCX 内的核心传输到另一个裸片上的核心，需要经过多次跳跃。一台典型的双插槽服务器最终会存在四个 NUMA 域：CCX 内部、CCX 之间、MCM 裸片之间、插槽之间。性能表现直接反映了这一点：渲染等高度可并行、极少需要核心间通信和内存访问的任务表现优异；而更依赖核心间通信、对内存和延迟敏感的任务则表现糟糕。此外，由于当时大多数软件并未针对 NUMA 架构进行优化，这让英特尔对 AMD“性能表现不稳定”的抨击显得确有其事。",
+    "霄龙 (EPYC) Rome 的集中式 I/O",
+    "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+    "Rome 与 Milan SoC 架构。来源：AMD",
+    "2019 年发布的 Rome 处理器彻底重构了裸片布局。AMD 借助异构解耦打造出 64 核产品，将当时仍停留在 28 核的英特尔远远甩在身后。八个 8 核核心计算裸片（CCD）环绕着一个中央 I/O 裸片，后者集成了内存和 PCIe 接口。CCD 升级至最新的台积电 N7 工艺，而 I/O 裸片则继续沿用格芯的 12nm 工艺。CCD 依然由两个 4 核 CCX 组成，但它们之间不再直接通信。相反，所有跨 CCX 的数据流量均通过 I/O 裸片路由，信号通过全局内存互连 (GMI) 链路在基板上传输。这意味着 Rome 在功能上表现为 16 个 4 核 NUMA 节点，但仅有两个 NUMA 域。",
+    "与上一代 Naples 类似，在 Rome 上启动的虚拟机（VM）必须限制在 4 核以内，以免因跨裸片通信造成性能损耗。2021 年发布的 Milan 处理器解决了这一问题。它转向了环形总线架构，将 CCX 规模扩大至 8 核，同时继续复用与 Rome 相同的 I/O 裸片。",
+    "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+    "AMD Turin-Dense 架构。来源：AMD",
+    "尽管最初计划采用先进封装，AMD 在接下来的两代产品中依然坚守了这一熟悉的架构设计。2022 年发布的 Genoa 处理器扩展至 12 个 CCD，而 2024 年发布的 Turin 处理器（如 128 核的霄龙 (EPYC) 9755）更是搭载了多达 16 个 CCD。这些 CCD 均围绕一个中央 I/O 裸片排列，该 I/O 裸片已升级支持 DDR5 和 PCIe 5.0 接口。",
+    "这种芯粒设计的核心优势在于，仅需一次裸片流片即可实现核心数量的可扩展性。AMD 只需设计单一 CCD，通过组合不同数量的 CCD，就能在整个 SKU 矩阵中提供全系列的核心数量配置。此外，每个 CCD 的裸片面积较小，这不仅有助于提升良率，还能在向新制程节点迁移时加快上市时间。这与网格（mesh）架构设计形成鲜明对比：后者采用接近光刻掩模版极限尺寸的大型裸片，且针对不同核心数量的较小网格配置，必须进行多次流片。在共享同一 I/O 裸片和插槽平台的前提下，AMD 还能灵活替换不同的 CCD 设计。例如，AMD 借助紧凑的 Zen 4c 核心打造了 Bergamo 处理器，并利用 Zen 5c 核心推出了 192 核的 Turin 衍生版本。",
+    "我们此前曾撰文分析过这种专为高效云计算打造的新型核心衍生版本。架构解耦还允许打造更小规模的版本，例如 EPYC 8004 Siena 处理器，该产品在 6 通道内存平台上仅使用了 4 个 Zen 4c CCD。",
+    "Zen 4c：AMD 对超大规模 ARM 与英特尔 Atom 的有力回击 - Dylan Patel 与 Gerald Wong · 2023 年 6 月 5 日"
+  ]
+}

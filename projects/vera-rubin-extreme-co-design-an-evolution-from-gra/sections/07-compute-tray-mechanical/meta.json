@@ -1,0 +1,339 @@
+{
+  "section_id": "07-compute-tray-mechanical",
+  "title": "Compute Tray: Mechanical",
+  "title_translation": "计算托盘：机械结构",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The mechanical components of the VR NVL72 compute tray are slightly more sophisticated than that of the Grace Blackwell. At the front of the chassis, there is a mechanical structure that separates the front into three sections, with the left and right sections housing the Orchid modules and the middle sections housing the BlueField-4, the power delivery and the management modules. Each of the modules will also have a small metal chassis. The mechanical structure provides a simple guiding mechanism that guides the modules to a blind mate process with the midplane and the internal manifolds.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0225",
+      "parent_block_index": 225,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The mechanical components of the VR NVL72 compute tray are slightly more sophisticated than that of the Grace Blackwell. At the front of the chassis, there is a mechanical structure that separates the front into three sections, with the left and right sections housing the Orchid modules and the middle sections housing the BlueField-4, the power delivery and the management modules. Each of the modules will also have a small metal chassis. The mechanical structure provides a simple guiding mechanism that guides the modules to a blind mate process with the midplane and the internal manifolds.",
+      "parent_block_plain_text": "The mechanical components of the VR NVL72 compute tray are slightly more sophisticated than that of the Grace Blackwell. At the front of the chassis, there is a mechanical structure that separates the front into three sections, with the left and right sections housing the Orchid modules and the middle sections housing the BlueField-4, the power delivery and the management modules. Each of the modules will also have a small metal chassis. The mechanical structure provides a simple guiding mechanism that guides the modules to a blind mate process with the midplane and the internal manifolds.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 596,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "VR NVL72 计算托盘的机械组件比 Grace Blackwell 略显复杂。机箱前端设有一个机械结构，将前部划分为三个区域：左右两侧用于容纳 Orchid 模块，中间区域则用于安装 BlueField-4、供电模块以及管理模块。每个模块也都配有一个小型金属机箱。该机械结构提供了一套简单的导向机构，能够引导模块与中板及内部歧管完成盲插对接。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:36:51.873681",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.755,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+          "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+          "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the physical chassis, guiding mechanisms, and locking structures that physically enable the modular, cableless design.",
+          "relation_to_previous": "Grounds the thermal and power delivery systems in the physical, mechanical constraints of the tray.",
+          "relation_to_next": "Zooms back out from the compute tray's internal mechanicals to the macro rack-level facility infrastructure.",
+          "key_points": [
+            "Mechanical structures divide the front chassis to house Orchid, BlueField, and PDB modules.",
+            "Loading mechanisms apply necessary force to lock modules into Paladin connectors and MQDs, ensuring secure connections."
+          ],
+          "translation_notes": [
+            "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+            "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+            "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“midplane”在段落0中译为“中板”，而在段落3中译为“中背板”，前后不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "将“loading mechanism”译为“加载机构”虽字面无误，但在中文机械语境下，“加载”容易引发与软件加载或电气负载的歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0226",
+      "parent_block_index": 226,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png",
+          "model": "pro",
+          "created_at": "2026-03-16T23:36:51.874039",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.755,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+          "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+          "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the physical chassis, guiding mechanisms, and locking structures that physically enable the modular, cableless design.",
+          "relation_to_previous": "Grounds the thermal and power delivery systems in the physical, mechanical constraints of the tray.",
+          "relation_to_next": "Zooms back out from the compute tray's internal mechanicals to the macro rack-level facility infrastructure.",
+          "key_points": [
+            "Mechanical structures divide the front chassis to house Orchid, BlueField, and PDB modules.",
+            "Loading mechanisms apply necessary force to lock modules into Paladin connectors and MQDs, ensuring secure connections."
+          ],
+          "translation_notes": [
+            "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+            "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+            "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“midplane”在段落0中译为“中板”，而在段落3中译为“中背板”，前后不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "将“loading mechanism”译为“加载机构”虽字面无误，但在中文机械语境下，“加载”容易引发与软件加载或电气负载的歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: Nvidia, SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0227",
+      "parent_block_index": 227,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia, SemiAnalysis",
+      "parent_block_plain_text": "Source: Nvidia, SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：英伟达，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-03-16T23:36:51.874250",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia, SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.755,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+          "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+          "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the physical chassis, guiding mechanisms, and locking structures that physically enable the modular, cableless design.",
+          "relation_to_previous": "Grounds the thermal and power delivery systems in the physical, mechanical constraints of the tray.",
+          "relation_to_next": "Zooms back out from the compute tray's internal mechanicals to the macro rack-level facility infrastructure.",
+          "key_points": [
+            "Mechanical structures divide the front chassis to house Orchid, BlueField, and PDB modules.",
+            "Loading mechanisms apply necessary force to lock modules into Paladin connectors and MQDs, ensuring secure connections."
+          ],
+          "translation_notes": [
+            "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+            "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+            "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“midplane”在段落0中译为“中板”，而在段落3中译为“中背板”，前后不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "将“loading mechanism”译为“加载机构”虽字面无误，但在中文机械语境下，“加载”容易引发与软件加载或电气负载的歧义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The midplane and the internal manifolds are shipped together as a module. The mechanical design of this module is shown in the picture above. These highlighted mechanical parts acts as a loading mechanism for the modules. These loading mechanisms ensure the modules are well connected to the Paladin connectors and the MQD by applying some force to the modules locking them in place.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0228",
+      "parent_block_index": 228,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The midplane and the internal manifolds are shipped together as a module. The mechanical design of this module is shown in the picture above. These highlighted mechanical parts acts as a loading mechanism for the modules. These loading mechanisms ensure the modules are well connected to the Paladin connectors and the MQD by applying some force to the modules locking them in place.",
+      "parent_block_plain_text": "The midplane and the internal manifolds are shipped together as a module. The mechanical design of this module is shown in the picture above. These highlighted mechanical parts acts as a loading mechanism for the modules. These loading mechanisms ensure the modules are well connected to the Paladin connectors and the MQD by applying some force to the modules locking them in place.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 383,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "中背板与内部歧管作为一个整体模块出货。该模块的机械设计如上图所示。图中高亮显示的机械部件充当了各模块的加载机构。这些加载机构通过对模块施加一定的机械力将其锁定到位，从而确保模块与Paladin连接器及分水器快速接头实现紧密连接。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:36:51.874431",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.755,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+          "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+          "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the physical chassis, guiding mechanisms, and locking structures that physically enable the modular, cableless design.",
+          "relation_to_previous": "Grounds the thermal and power delivery systems in the physical, mechanical constraints of the tray.",
+          "relation_to_next": "Zooms back out from the compute tray's internal mechanicals to the macro rack-level facility infrastructure.",
+          "key_points": [
+            "Mechanical structures divide the front chassis to house Orchid, BlueField, and PDB modules.",
+            "Loading mechanisms apply necessary force to lock modules into Paladin connectors and MQDs, ensuring secure connections."
+          ],
+          "translation_notes": [
+            "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+            "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+            "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“midplane”在段落0中译为“中板”，而在段落3中译为“中背板”，前后不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "将“loading mechanism”译为“加载机构”虽字面无误，但在中文机械语境下，“加载”容易引发与软件加载或电气负载的歧义。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

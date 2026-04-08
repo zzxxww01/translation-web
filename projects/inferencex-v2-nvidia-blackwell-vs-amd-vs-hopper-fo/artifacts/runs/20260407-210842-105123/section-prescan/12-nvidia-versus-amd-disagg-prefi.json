@@ -1,0 +1,45 @@
+{
+  "section_id": "12-nvidia-versus-amd-disagg-prefi",
+  "new_terms": [
+    {
+      "term": "distributed inference",
+      "suggested_translation": "分布式推理",
+      "context": "the ML community is able to see a full Pareto frontier for open-source MI355X distributed inference.",
+      "confidence": 0.95
+    },
+    {
+      "term": "1k1k scenario",
+      "suggested_translation": "1k1k 场景",
+      "context": "In a 1k1k scenario, the MI355X (MoRI SGLang) with MTP barely manages to beat the B200",
+      "confidence": 0.9
+    },
+    {
+      "term": "tok/s/user",
+      "suggested_translation": "Token/秒/用户",
+      "context": "only for a range of interactivities from ~60 tok/s/user through ~120 tok/s/user.",
+      "confidence": 0.95
+    },
+    {
+      "term": "mogged",
+      "suggested_translation": "碾压",
+      "context": "performance is subpar and the MI355X gets absolutely mogged by Nvidia’s B200.",
+      "confidence": 0.85
+    },
+    {
+      "term": "single node",
+      "suggested_translation": "单节点",
+      "context": "AMD single node FP4 performance is decent",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disagg prefill": "分离式 Prefill",
+    "wide EP": "宽专家并行 (WideEP)",
+    "Pareto frontier": "帕累托前沿",
+    "framemogged": "性能碾压",
+    "interactivity": "交互速度",
+    "throughput": "吞吐量"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:32:16.809020"
+}

@@ -1,0 +1,38 @@
+{
+  "section_id": "07-asynchronous-copy",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.35,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "异步拷贝（PTX：cp.async，SASS：LDGSTS）于 Ampere 架构首次引入，该指令负责将数据从全局内存异步搬运至共享内存 (SMEM)。异步拷贝具有非阻塞特性，能够实现内存加载与计算的重叠。此外，该指令将数据直接写入共享内存 (SMEM) 而无需经过寄存器，从而有效降低了寄存器压力。",
+    "参考 FlashInfer 的多头注意力 (MHA) 内核，我们采用以下配置对异步拷贝进行基准测试：",
+    "每个 SM 的协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）数量：1, 2, 3, 4",
+    "流水线级数 (Stages)：1, 2, 4",
+    "每个协作线程阵列 (CTA) 的线程数：64, 128, 256",
+    "加载尺寸：4B, 8B, 16B",
+    "我们绘制了吞吐量与每个 SM 的飞行中字节数 (bytes-in-flight) 的关系曲线，飞行中字节数即并发内存加载指令正在加载的总字节数。",
+    "尽管在相同的飞行中字节数下，不同的加载尺寸最终会收敛至相似的吞吐量，但我们更倾向于使用 16 字节加载。在飞行中字节数相近的情况下，16 字节加载不仅能实现略高的吞吐量，占用的执行资源也更少。例如，当飞行中字节数为 32 KiB 时，8B 加载需要 4 个流水线级数，而 16B 加载仅需 2 个。这不仅节省了 2 个内存屏障对象所需的内存空间，还降低了指令发射压力。",
+    "https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png",
+    "整体来看，当飞行中字节数达到 32 KiB 时，使用 LDGSTS 的内存吞吐量达到饱和，约为 6.6 TB/s。",
+    "我们还对多潜在注意力 (MLA) 内核所使用的配置空间进行了基准测试：",
+    "每个 SM 1 个 CTA",
+    "16B 加载",
+    "每个协作线程阵列 (CTA) 的线程数：64, 128, 256",
+    "流水线级数 (Stages)：4, 8, 12, 16",
+    "实验表明，增加流水线级数可以在更高的飞行中字节数下实现更高的吞吐量，且在所有配置中，增加每个 CTA 的线程数均能严格提升性能。有趣的是，MLA 采用了 2 个 warp 和 12 级流水线的配置，吞吐量约为 2.2 TB/s。我们认为，这是由于 softmax warp 需要占用最多的寄存器，而增加 warp 数量会减少每个线程的寄存器分配量。",
+    "https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png",
+    "我们对同一组配置的延迟进行了基准测试。结果显示，LDGSTS 的基准延迟约为 600 纳秒，且在飞行中字节数达到 8 KiB 后几乎翻倍。这是因为要让 LDGSTS 实现较高的飞行中字节数，就必须使用大量线程，进而导致大量 warp 因 MIO（内存输入输出）节流而发生停滞。",
+    "https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png",
+    "https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png"
+  ]
+}

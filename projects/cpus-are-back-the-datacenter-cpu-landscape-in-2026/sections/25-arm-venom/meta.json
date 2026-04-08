@@ -1,0 +1,143 @@
+{
+  "section_id": "25-arm-venom",
+  "title": "ARM Venom",
+  "title_translation": "ARM Venom",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "ARM’s successor to Phoenix, codenamed Venom, will debut in 2027. The CPU contains 228 future Neoverse V4 cores, likely derived from ARM’s C1 Ultra mobile core. The cores will be fabricated on TSMC’s N2, with all cores on a single reticle-sized compute die surrounded by multiple memory and PCIe Gen 7 I/O dies in a layout similar to Nvidia’s Vera CPU. Socionext has some involvement in the design, who in 2023 designed a 32-core CPU chiplet on N2 in collaboration with ARM and TSMC.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0289",
+      "parent_block_index": 289,
+      "parent_block_type": "p",
+      "parent_block_markdown": "ARM’s successor to Phoenix, codenamed Venom, will debut in 2027. The CPU contains 228 future Neoverse V4 cores, likely derived from ARM’s C1 Ultra mobile core. The cores will be fabricated on TSMC’s N2, with all cores on a single reticle-sized compute die surrounded by multiple memory and PCIe Gen 7 I/O dies in a layout similar to Nvidia’s Vera CPU. Socionext has some involvement in the design, who in 2023 designed a 32-core CPU chiplet on N2 in collaboration with ARM and TSMC.",
+      "parent_block_plain_text": "ARM’s successor to Phoenix, codenamed Venom, will debut in 2027. The CPU contains 228 future Neoverse V4 cores, likely derived from ARM’s C1 Ultra mobile core. The cores will be fabricated on TSMC’s N2, with all cores on a single reticle-sized compute die surrounded by multiple memory and PCIe Gen 7 I/O dies in a layout similar to Nvidia’s Vera CPU. Socionext has some involvement in the design, who in 2023 designed a 32-core CPU chiplet on N2 in collaboration with ARM and TSMC.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 482,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ARM 继 Phoenix 之后的下一代产品代号为 Venom，将于 2027 年问世。该 CPU 包含 228 个未来的 Neoverse V4 核心，这些核心很可能源自 ARM 的 C1 Ultra 移动端核心。这些核心将采用台积电 N2 制程制造，所有核心均集成在一块光罩极限尺寸的计算裸片上，四周环绕着多个内存和 PCIe 7.0 I/O 裸片，其物理布图与英伟达 Vera CPU 类似。索喜科技参与了部分设计工作，该公司曾于 2023 年与 ARM 和台积电合作，设计了一款基于 N2 制程的 32 核 CPU 芯粒。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:48:21.336702",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.584999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文连续使用了两次“这些核心”（“这些核心很可能源自……”“这些核心将采用……”），导致句式略显重复，有轻微的翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Interestingly, the biggest change is the move to LPDDR6 memory from traditional DDR5 DIMMs, again following Nvidia’s design choices. This move would help with package density and tighter integration with AI XPUs. A next generation Accelerator Enablement Kit, AEK over PCIe7 is used for XPU attach with coherent memory expansion.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0290",
+      "parent_block_index": 290,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Interestingly, the biggest change is the move to LPDDR6 memory from traditional DDR5 DIMMs, again following Nvidia’s design choices. This move would help with package density and tighter integration with AI XPUs. A next generation Accelerator Enablement Kit, AEK over PCIe7 is used for XPU attach with coherent memory expansion.",
+      "parent_block_plain_text": "Interestingly, the biggest change is the move to LPDDR6 memory from traditional DDR5 DIMMs, again following Nvidia’s design choices. This move would help with package density and tighter integration with AI XPUs. A next generation Accelerator Enablement Kit, AEK over PCIe7 is used for XPU attach with coherent memory expansion.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 328,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，最大的变化在于其放弃了传统的 DDR5 DIMM，转而采用 LPDDR6 内存，这再次效仿了英伟达的设计路线。此举有助于提升封装密度，并实现与 AI XPU 更紧密的集成。此外，该架构采用基于 PCIe 7.0 的新一代加速器支持套件（AEK），用于连接 XPU 并实现一致性内存扩展。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:48:21.336764",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.584999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文连续使用了两次“这些核心”（“这些核心很可能源自……”“这些核心将采用……”），导致句式略显重复，有轻微的翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

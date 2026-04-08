@@ -1,0 +1,40 @@
+{
+  "section_id": "01-acknowledgement",
+  "new_terms": [
+    {
+      "term": "NCU profiling",
+      "suggested_translation": "NCU 分析",
+      "context": "Refers to performance profiling using NVIDIA Nsight Compute (NCU)",
+      "confidence": 0.95
+    },
+    {
+      "term": "hardware counters",
+      "suggested_translation": "硬件计数器",
+      "context": "Hardware-level performance monitors required for deep profiling",
+      "confidence": 0.9
+    },
+    {
+      "term": "Hopper Architecture",
+      "suggested_translation": "Hopper 架构",
+      "context": "NVIDIA GPU architecture (H100/H200 series)",
+      "confidence": 0.95
+    },
+    {
+      "term": "B200",
+      "suggested_translation": "B200",
+      "context": "NVIDIA Blackwell series GPU model",
+      "confidence": 0.98
+    },
+    {
+      "term": "GPU Mode",
+      "suggested_translation": "GPU Mode",
+      "context": "A specific technical community/organization focused on GPU optimization",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "node": "节点 (compute node/server node)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:12:31.113574"
+}

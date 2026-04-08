@@ -1,0 +1,7 @@
+With the arrival of Lip-Bu Tan and the cancellation of the 8-channel Diamond Rapids-SP, Intel hopes to accelerate the development of Coral Rapids and bring it to market earlier. Before this, Intel will release their custom Xeon CPU with an NVLink-C2C chiplet to provide an x86 alternative to NVIDIA rackscale GPU designs. Other than that, there is another victim of Lip-Bu’s streamlining. Intel’s Clearwater Forest successor is dead. The E-core Xeon line was already treading water as we detailed above, and the series will end with just 2 generations. Originally codenamed Rouge River Forest, then DMR-HD (Diamond Rapids High Density), the design reused the IMH dies on Diamond Rapids with new CBB dies each with 128 E-cores, enabling 512 cores in a single socket.
+
+![](https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png)
+
+*Intel 18A-Ultra and 14A-P. Source: Intel*
+
+For Coral Rapids, Intel has realized their mistake and returns SMT back to their P-core architecture. We believe it was originally designed for Intel’s 14A process (P1280), which would only be entering risk production in 2027, meaning a product launch in late 2028 at the earliest, if not early 2029. For Intel to accelerate and bring Coral Rapids to market earlier, Intel may have to port the design to a refined 18A-Ultra node.

@@ -1,0 +1,35 @@
+{
+  "section_id": "18-floorplan",
+  "new_terms": [
+    {
+      "term": "chip die shots",
+      "suggested_translation": "芯片裸片图",
+      "context": "Obtaining Blackwell chip die shots to collect more silicon information.",
+      "confidence": 0.95
+    },
+    {
+      "term": "functional block areas",
+      "suggested_translation": "功能模块区域",
+      "context": "Collecting silicon information including functional block areas.",
+      "confidence": 0.9
+    },
+    {
+      "term": "PHY bandwidth density",
+      "suggested_translation": "PHY 带宽密度",
+      "context": "Collecting information on PHY bandwidth density and floorplan.",
+      "confidence": 0.9
+    },
+    {
+      "term": "L2 cache segments",
+      "suggested_translation": "L2 缓存分段",
+      "context": "We see 8 GPCs, the L2 cache segments, and the die-to-die crossings.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "floorplan": "芯片平面规划",
+    "die-to-die crossings": "跨 Die 访问"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:40:00.076402"
+}

@@ -1,0 +1,133 @@
+{
+  "section_id": "11-networking-nvlink-6-rubin-sc",
+  "new_terms": [
+    {
+      "term": "bi-directional signaling",
+      "suggested_translation": "双向信号传输",
+      "context": "NVLink 6 doubles bandwidth by implementing bi-directional signaling over the same number of copper cables.",
+      "confidence": 0.95
+    },
+    {
+      "term": "differential pair (DP)",
+      "suggested_translation": "差分对",
+      "context": "Each electrical lane is one differential pair (DP) consisting of two conductors that carry equal magnitude and opposite polarity signals.",
+      "confidence": 0.98
+    },
+    {
+      "term": "echo cancellation",
+      "suggested_translation": "回声消除",
+      "context": "An inverted copy of the local TX must be generated at the local RX for proper echo cancellation.",
+      "confidence": 0.95
+    },
+    {
+      "term": "rail-optimized",
+      "suggested_translation": "轨道优化",
+      "context": "The scale-up network continues to be rail-optimized with all-to-all connectivity between each GPU and switch ASIC.",
+      "confidence": 0.9
+    },
+    {
+      "term": "system management module (SMM)",
+      "suggested_translation": "系统管理模块",
+      "context": "Connected to the NVSwitch tray is the system management module (SMM) that comes with a CPU and acts as a host.",
+      "confidence": 0.95
+    },
+    {
+      "term": "OSFP cage",
+      "suggested_translation": "OSFP 笼子",
+      "context": "There are two possibilities for the number of OSFP cages - either one 1.6T OSFP cage per GPU or two 800G OSFP cages.",
+      "confidence": 0.9
+    },
+    {
+      "term": "neoclouds",
+      "suggested_translation": "新兴云服务商",
+      "context": "Refers to AI-specialized cloud providers like Coreweave and Lambda.",
+      "confidence": 0.95
+    },
+    {
+      "term": "optical engines (oe)",
+      "suggested_translation": "光学引擎",
+      "context": "Components used in CPO-based switches instead of pluggable transceivers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "external light source (els)",
+      "suggested_translation": "外部光源",
+      "context": "A module providing the laser source for CPO systems.",
+      "confidence": 0.9
+    },
+    {
+      "term": "multi-rail",
+      "suggested_translation": "多轨",
+      "context": "A networking architecture common in InfiniBand clusters.",
+      "confidence": 0.9
+    },
+    {
+      "term": "fiber shuffle",
+      "suggested_translation": "光纤清洗",
+      "context": "Integrated fiber management within a switch box to simplify multi-plane connections.",
+      "confidence": 0.85
+    },
+    {
+      "term": "logical port",
+      "suggested_translation": "逻辑端口",
+      "context": "A virtualized port representation used to calculate cluster scaling limits.",
+      "confidence": 0.9
+    },
+    {
+      "term": "link flaps",
+      "suggested_translation": "链路抖动",
+      "context": "A condition where a network interface goes up and down rapidly.",
+      "confidence": 0.9
+    },
+    {
+      "term": "multi-plane network architecture",
+      "suggested_translation": "多平面网络架构",
+      "context": "Refers to GPU clusters where each GPU connects to multiple independent switch planes for higher bandwidth.",
+      "confidence": 0.95
+    },
+    {
+      "term": "octopus cables",
+      "suggested_translation": "章鱼线",
+      "context": "Breakout cables that split a high-bandwidth port into multiple lower-bandwidth connections.",
+      "confidence": 0.95
+    },
+    {
+      "term": "optical engine (OE)",
+      "suggested_translation": "光引擎",
+      "context": "The component in CPO (Co-Packaged Optics) responsible for electrical-to-optical conversion.",
+      "confidence": 0.98
+    },
+    {
+      "term": "non-scheduled fabric (NSF)",
+      "suggested_translation": "非调度织网",
+      "context": "A network architecture (typically Ethernet-based) that does not use a centralized scheduler for packet routing.",
+      "confidence": 0.9
+    },
+    {
+      "term": "AEC (Active Electrical Cable)",
+      "suggested_translation": "有源电缆 (AEC)",
+      "context": "High-speed copper cables with active circuitry for signal conditioning, used for NIC-to-TOR connections.",
+      "confidence": 0.98
+    },
+    {
+      "term": "gearbox",
+      "suggested_translation": "变速器 (Gearbox)",
+      "context": "A device or function used to convert between different SerDes lane speeds (e.g., 200G to 100G).",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "scale-up": "纵向扩展",
+    "scale-out": "横向扩展",
+    "ccl": "覆铜板",
+    "flyover cables": "架空线缆",
+    "scale out": "横向扩展",
+    "radix": "吞吐基数",
+    "cpo": "CPO",
+    "bom": "物料清单",
+    "nic": "网卡"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:01:17.288527"
+}

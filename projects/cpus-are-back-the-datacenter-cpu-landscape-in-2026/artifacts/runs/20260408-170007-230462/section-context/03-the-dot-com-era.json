@@ -1,0 +1,299 @@
+{
+  "section_id": "03-the-dot-com-era",
+  "section_title": "The Dot Com Era",
+  "section_title_translation": "Dot-Com时代",
+  "section_position": "4/30",
+  "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+  "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+  "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+  "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures.",
+  "previous_section_title": "The PC Era",
+  "next_section_title": "The Virtualization and Cloud Computing Hyperscaler Era",
+  "section_role": "Explains the architectural pivot from frequency scaling to multi-core designs driven by the internet boom and physical semiconductor limits.",
+  "translation_notes": [
+    "Translate 'Dennard scaling' as '登纳德缩放定律'.",
+    "Ensure 'GHz wars' reflects the historical context (主频大战).",
+    "Use standard industry acronyms alongside their Chinese equivalents for 'SMT' (同步多线程) and 'QPI' (快速通道互联)."
+  ],
+  "key_points": [
+    "The end of Dennard scaling forced the industry to abandon frequency increases (GHz wars) in favor of multi-core CPU designs.",
+    "Simultaneous Multi-Threading (SMT) and integrated memory controllers were introduced to maximize throughput for parallelizable internet workloads.",
+    "Multi-socket servers (using QPI) became necessary to meet the insatiable demand for compute."
+  ],
+  "guidelines": [
+    "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+    "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+    "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+    "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+    "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+    "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+  ],
+  "article_challenges": [
+    {
+      "location": "DRAM Constraints on CPU Market",
+      "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+      "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Intel’s Mesh Architecture",
+      "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+      "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Intel Xeon Coral Rapids",
+      "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+      "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'.",
+      "type": "accuracy"
+    },
+    {
+      "location": "AMD Turin Dense 7:1 Socket Consolidation",
+      "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+      "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware.",
+      "type": "accuracy"
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Hyperscaler",
+      "term": "Hyperscaler",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "note": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Agentic Era",
+      "term": "Agentic Era",
+      "translation": "智能体时代",
+      "strategy": "translate",
+      "note": "The era of AI where autonomous agents perform complex tasks.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Crossbar",
+      "term": "Crossbar",
+      "translation": "交叉开关",
+      "strategy": "translate",
+      "note": "An interconnect topology where every core has a discrete link to all other cores.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Ring Bus",
+      "term": "Ring Bus",
+      "translation": "环形总线",
+      "strategy": "translate",
+      "note": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Mesh Architecture",
+      "term": "Mesh Architecture",
+      "translation": "网格架构",
+      "strategy": "translate",
+      "note": "A 2D grid interconnect topology used in high-core-count CPUs.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Die Shot",
+      "term": "Die Shot",
+      "translation": "裸片图",
+      "strategy": "translate",
+      "note": "A photograph of a semiconductor die, often annotated.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Floorplan",
+      "term": "Floorplan",
+      "translation": "物理布图",
+      "strategy": "translate",
+      "note": "The physical layout of functional blocks on a semiconductor die.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Stepping",
+      "term": "Stepping",
+      "translation": "步进",
+      "strategy": "translate",
+      "note": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Reticle-sized",
+      "term": "Reticle-sized",
+      "translation": "光罩极限尺寸",
+      "strategy": "translate",
+      "note": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Head node",
+      "term": "Head node",
+      "translation": "头节点",
+      "strategy": "translate",
+      "note": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Context Memory Storage",
+      "term": "Context Memory Storage",
+      "translation": "上下文内存存储",
+      "strategy": "translate",
+      "note": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Front Side Bus (FSB)",
+      "term": "Front Side Bus (FSB)",
+      "translation": "前端总线 (FSB)",
+      "strategy": "translate",
+      "note": "Early Intel computer communication interface.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    }
+  ]
+}

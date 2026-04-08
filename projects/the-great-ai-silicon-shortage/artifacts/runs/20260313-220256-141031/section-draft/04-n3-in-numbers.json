@@ -1,0 +1,320 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "04-n3-in-numbers",
+    "section_title": "N3 in numbers",
+    "section_title_translation": "数据看 N3",
+    "section_position": "5/11",
+    "article_theme": "The primary bottleneck for AI compute has structurally shifted from datacenter power to semiconductor supply chain constraints—specifically TSMC N3 wafer capacity and HBM—with Nvidia best positioned to dominate due to its superior supply chain control.",
+    "structure_summary": "The article establishes the soaring demand for AI compute before diving into the primary bottleneck: TSMC's N3 capacity constraints and the shift from consumer to AI demand. It then evaluates secondary constraints (memory/HBM, CoWoS) and macro industry shifts (power to silicon bottlenecks), concluding with a strategic assessment of Nvidia's dominant supply chain positioning.",
+    "target_audience": "Semiconductor industry professionals, AI infrastructure investors, and tech-savvy readers.",
+    "translation_voice": "Professional financial and tech industry Chinese. Precise terminology, objective phrasing, but retaining the punchy, assertive conclusions of the original.",
+    "previous_section_title": "The TSMC N3 Shortage",
+    "next_section_title": "TSMC’s Supply Situation",
+    "section_role": "Quantifies the N3 shortage and details the specific impacts on major AI hardware players.",
+    "translation_notes": [
+      "Translate 'ramp' in a manufacturing context as '产能爬坡' or '量产'.",
+      "Translate 'content growth' carefully; it refers to '单机半导体价值量/硅含量增长', not generic 'content'.",
+      "Ensure node designations (4NP, N3P, N3E, N3B) remain in English."
+    ],
+    "key_points": [
+      "Nvidia's Rubin ramp (N3P) is the primary driver of N3 demand, though Blackwell still leads in volume.",
+      "Google and Broadcom's TPUv7 beat Nvidia to the N3 node.",
+      "AI customers have a procurement advantage over saturated mobile and client markets due to higher growth potential."
+    ],
+    "guidelines": [
+      "Maintain all specific company names, chip models (e.g., MI400, TPU v8AX), and process nodes (e.g., N3E, 4NP) in English to ensure industry accuracy.",
+      "Translate semiconductor manufacturing terms strictly according to industry standards (e.g., 'front-end' as 前道工序, 'wafer-in' as 晶圆投片, 'yield' as 良率).",
+      "Use professional financial and business terminology for market dynamics (e.g., 'ARR' as 年度经常性收入, 'softness' as 需求疲软, 'crowding out' as 挤出效应).",
+      "Preserve the assertive and insider-like tone of the original; avoid overly academic phrasing, keeping it sharp and investor-focused.",
+      "When translating 'agentic workflows,' use '智能体工作流', which is the current standard AI industry consensus in Chinese.",
+      "For complex data-driven sentences, prioritize logical flow in Chinese over strict literal translation, splitting long sentences if necessary to clearly highlight the cause-and-effect of supply and demand."
+    ],
+    "article_challenges": [
+      {
+        "location": "Section: Smartphones as the Front-End Release Valve?",
+        "issue": "The term 'release valve' in this context is metaphorical, referring to how dropping smartphone demand frees up capacity.",
+        "suggestion": "Translate as '前道产能的释放阀' or '缓解前道产能压力的突破口' to convey the industrial metaphor accurately."
+      },
+      {
+        "location": "Section: Memory The Next Biggest Constraint",
+        "issue": "Dense analytical sentences regarding bit shipments, margin profiles, and crowding out commodity DRAM.",
+        "suggestion": "Break down complex sentences into clear cause-and-effect clauses. Use financial terms like '挤出效应' (crowding out) and '利润率倒挂' (margin dynamics reversed) to match the analyst tone."
+      },
+      {
+        "location": "Section: The TSMC N3 Shortage",
+        "issue": "Alphabet soup of nodes and chip models (4NP, 3NP, N3P, N3E, MI350X, TPU v7).",
+        "suggestion": "Do not translate any node or chip names. Keep them exactly as written to prevent technical inaccuracies."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "N3 / N3B / N3E / N3P",
+        "term": "N3 / N3B / N3E / N3P",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "TSMC's 3-nanometer class process nodes and their variants.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic workflows",
+        "term": "Agentic workflows",
+        "translation": "智能体工作流",
+        "strategy": "translate",
+        "note": "Workflows driven by autonomous AI agents completing multi-step tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Wafer-in",
+        "term": "Wafer-in",
+        "translation": "晶圆投片",
+        "strategy": "translate",
+        "note": "The beginning of the semiconductor manufacturing process where raw wafers are introduced into the fabrication line.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "OSATs",
+        "term": "OSATs",
+        "translation": "外包封测代工厂",
+        "strategy": "first_annotate",
+        "note": "Outsourced Semiconductor Assembly and Test companies (like ASE/SPIL and Amkor).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Front-end / Back-end",
+        "term": "Front-end / Back-end",
+        "translation": "前道工序 / 后道工序",
+        "strategy": "translate",
+        "note": "Front-end refers to wafer fabrication; back-end refers to packaging and testing.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Nameplate capacity",
+        "term": "Nameplate capacity",
+        "translation": "铭牌产能",
+        "strategy": "translate",
+        "note": "The theoretical maximum designed output of a semiconductor fab.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "12-Hi stacks",
+        "term": "12-Hi stacks",
+        "translation": "12层堆叠",
+        "strategy": "translate",
+        "note": "12-layer stacked High Bandwidth Memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip on Wafer on Substrate",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "process",
+        "term": "process",
+        "translation": "工艺",
+        "strategy": "translate",
+        "note": "指芯片制造工艺",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Quantifies the N3 shortage and details the specific impacts on major AI hardware players.",
+    "relation_to_previous": "Provides hard data and specific company examples to back up the qualitative claims of the N3 shortage.",
+    "relation_to_next": "Leads into an explanation of how TSMC is operationally responding to these overwhelming numbers.",
+    "key_points": [
+      "Nvidia's Rubin ramp (N3P) is the primary driver of N3 demand, though Blackwell still leads in volume.",
+      "Google and Broadcom's TPUv7 beat Nvidia to the N3 node.",
+      "AI customers have a procurement advantage over saturated mobile and client markets due to higher growth potential."
+    ],
+    "translation_notes": [
+      "Translate 'ramp' in a manufacturing context as '产能爬坡' or '量产'.",
+      "Translate 'content growth' carefully; it refers to '单机半导体价值量/硅含量增长', not generic 'content'.",
+      "Ensure node designations (4NP, N3P, N3E, N3B) remain in English."
+    ]
+  },
+  "translations": [
+    "现在，让我们来看看产能究竟有多紧张。贯穿今年全年，N3制程加速器的晶圆需求将迅猛攀升。核心驱动力在于英伟达的Rubin产能爬坡，目前该公司正从基于4NP的Blackwell架构向基于N3P的Rubin架构过渡。然而，得益于更高的平台与供应链成熟度，今年Blackwell的出货量仍将高于Rubin。谷歌与博通的TPU在导入N3制程的进度上领先于英伟达和亚马逊，其TPUv7芯片在2025年便已投入量产。这一强劲势头在今年得以延续，在谷歌内部需求以及Anthropic等外部需求的共同推动下，TPU的出货量迎来了激增。与此同时，向下一代TPUv8变体的过渡也将启动，该系列将继续采用N3制程节点。",
+    "另一个关键变量是，基于N3P制程的Trainium3将从2026年初开始晶圆投片，以迎接下半年产能的大幅爬坡。",
+    "因此，与AI相关的需求（加速器、主机CPU以及网络芯片对N3制程的需求）最终将占据今年N3制程产量略低于60%的份额。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3制程的全部产能，使得台积电几乎无力再扩充更多产能。即使台积电增加N3制程产能，这种供需紧张的局面在2027年也会变得更加严峻。我们的模型预测，2027年AI需求将占到N3制程晶圆产量的86%，几乎完全挤出智能手机和CPU的晶圆份额。这种转变部分是由于智能手机的规划路线图正向N2制程过渡，但N3制程产能的紧缺无疑也加速了这一进程。对于继续停留在N3制程的产品线而言，其需求将很难得到完全满足。",
+    "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+    "资料来源：SemiAnalysis晶圆代工厂模型，SemiAnalysis加速器模型",
+    "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+    "来源：SemiAnalysis加速器模型",
+    "在各家客户争夺有限的N3制程产能分配时，台积电最终扮演着造王者的角色。展望2026年，AI基础设施客户的优先级已明显高于消费电子客户。AI加速器的设计通常具有更大的裸片尺寸和更复杂的封装要求，这直接转化为更高的平均售价。更重要的是，AI驱动的需求已成为台积电目前绝对的核心增长引擎。终端客户愿意不惜一切代价来部署更多算力，而各大AI实验室对算力投入的坚定承诺带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+    "这与目前已高度饱和的移动和客户端市场形成鲜明对比，后者无论在出货量还是单机半导体价值量增长方面，所能提供的空间都已十分有限。这使得AI加速器客户在锁定先进制程产能时具备了相对优势。其他细分市场中无法锁定充足N3制程产能的客户，可能将被迫延长现有产品周期，或者直接迁移至N2平台。"
+  ]
+}

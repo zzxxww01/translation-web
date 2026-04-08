@@ -1,0 +1,1930 @@
+{
+  "section_id": "01-are-ai-datacenters-increasing",
+  "title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+  "title_translation": "AI数据中心推高了美国家庭的电费吗？",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With speakers from OpenAI, GPU MODE, and Thinking Machines, plus compute grants and GPU cluster access, come build with the best: [APPLY HERE](https://luma.com/SAxFSHack).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With speakers from OpenAI, GPU MODE, and Thinking Machines, plus compute grants and GPU cluster access, come build with the best: [APPLY HERE](https://luma.com/SAxFSHack).",
+          "start": 0,
+          "end": 322,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With speakers from OpenAI, GPU MODE, and Thinking Machines, plus compute grants and GPU cluster access, come build with the best: [APPLY HERE](https://luma.com/SAxFSHack).*",
+      "parent_block_plain_text": "SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With speakers from OpenAI, GPU MODE, and Thinking Machines, plus compute grants and GPU cluster access, come build with the best: [APPLY HERE](https://luma.com/SAxFSHack).",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis x Fluidstack is launching GTC with a 48-hour, full-stack AI infrastructure hackathon on March 15th from Power to Prefill, Dirt to Decode. With speakers from OpenAI, GPU MODE, and Thinking Machines, plus compute grants and GPU cluster access, come build with the best: [APPLY HERE](https://luma.com/SAxFSHack).",
+          "start": 0,
+          "end": 322,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 322,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis 携手 Fluidstack 将于 3 月 15 日举办一场为期 48 小时的全栈 AI 基础设施黑客松，以此拉开 GTC 大会的帷幕。本次活动涵盖从电力接入到预填充、从破土动工到解码生成的全栈环节。届时将有来自 OpenAI、GPU MODE 和 Thinking Machines 的嘉宾发表演讲，并提供算力赞助与GPU集群访问权限。快来与顶尖人才并肩共创：在此申请（https://luma.com/SAxFSHack）。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.238637",
+          "tokenized_text": "[[[EM_1|SemiAnalysis 携手 Fluidstack 将于 3 月 15 日举办一场为期 48 小时的全栈 AI 基础设施黑客松，以此拉开 GTC 大会的帷幕。本次活动涵盖从电力接入到预填充、从破土动工到解码生成的全栈环节。届时将有来自 OpenAI、GPU MODE 和 Thinking Machines 的嘉宾发表演讲，并提供算力赞助与GPU集群访问权限。快来与顶尖人才并肩共创：在此申请（https://luma.com/SAxFSHack）。]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "SemiAnalysis 携手 Fluidstack 将于 3 月 15 日举办一场为期 48 小时的全栈 AI 基础设施黑客松，以此拉开 GTC 大会的帷幕。本次活动涵盖从电力接入到预填充（Prefill）、从破土动工到解码（Decode）生成的全栈环节。届时将有来自 OpenAI、GPU MODE 和 Thinking Machines 的嘉宾发表演讲，并提供算力赞助与GPU集群访问权限。快来与顶尖人才并肩共创：在此申请（https://luma.com/SAxFSHack）。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:26:45.176079",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "SemiAnalysis 携手 Fluidstack 将于 3 月 15 日举办一场为期 48 小时的全栈 AI 基础设施黑客松，以此拉开 GTC 大会的帷幕。本次活动涵盖从电力接入到预填充（Prefill）、从破土动工到解码（Decode）生成的全栈环节。届时将有来自 OpenAI、GPU MODE 和 Thinking Machines 的嘉宾发表演讲，并提供算力赞助与GPU集群访问权限。快来与顶尖人才并肩共创：在此申请（https://luma.com/SAxFSHack）。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The topic of datacenter load growth and impact on power prices remains broadly misunderstood, akin to the water consumption myth that we debunked recently. It was at the forefront of the 2025 New Jersey elections, after a ~20% jump in residential electricity rates overnight in June 2025. Some even began finger-pointing at the 300MW Nebius AI Datacenter for Microsoft in the state, a laughable claim given >85% of its power is self-generated. Are AI datacenters really causing households to pay electricity 20% more expensive?",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "water consumption myth that we debunked recently",
+          "start": 106,
+          "end": 154,
+          "href": "https://newsletter.semianalysis.com/p/from-tokens-to-burgers-a-water-footprint",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "~20% jump",
+          "start": 222,
+          "end": 231,
+          "href": "https://www.pa.gov/governor/newsroom/2025-press-releases/gov-shapiro-s-legal-action-again-averts-historic-price-spike-acr",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": ">85% of its power is self-generated",
+          "start": 407,
+          "end": 442,
+          "href": "https://newsletter.semianalysis.com/p/how-ai-labs-are-solving-the-power",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The topic of datacenter load growth and impact on power prices remains broadly misunderstood, akin to the [water consumption myth that we debunked recently](https://newsletter.semianalysis.com/p/from-tokens-to-burgers-a-water-footprint). It was at the forefront of the 2025 New Jersey elections, after a [~20% jump](https://www.pa.gov/governor/newsroom/2025-press-releases/gov-shapiro-s-legal-action-again-averts-historic-price-spike-acr) in residential electricity rates overnight in June 2025. Some even began finger-pointing at the 300MW Nebius AI Datacenter for Microsoft in the state, a laughable claim given [>85% of its power is self-generated](https://newsletter.semianalysis.com/p/how-ai-labs-are-solving-the-power). Are AI datacenters really causing households to pay electricity 20% more expensive?",
+      "parent_block_plain_text": "The topic of datacenter load growth and impact on power prices remains broadly misunderstood, akin to the water consumption myth that we debunked recently. It was at the forefront of the 2025 New Jersey elections, after a ~20% jump in residential electricity rates overnight in June 2025. Some even began finger-pointing at the 300MW Nebius AI Datacenter for Microsoft in the state, a laughable claim given >85% of its power is self-generated. Are AI datacenters really causing households to pay electricity 20% more expensive?",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "water consumption myth that we debunked recently",
+          "start": 106,
+          "end": 154,
+          "href": "https://newsletter.semianalysis.com/p/from-tokens-to-burgers-a-water-footprint",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "~20% jump",
+          "start": 222,
+          "end": 231,
+          "href": "https://www.pa.gov/governor/newsroom/2025-press-releases/gov-shapiro-s-legal-action-again-averts-historic-price-spike-acr",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": ">85% of its power is self-generated",
+          "start": 407,
+          "end": 442,
+          "href": "https://newsletter.semianalysis.com/p/how-ai-labs-are-solving-the-power",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 527,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与我们近期辟谣的耗水谬论如出一辙。2025年6月，当地居民电价在一夜之间出现约20%的暴涨，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心超过85%的电力均为自发自用，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.238910",
+          "tokenized_text": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与[[[LINK_1|我们近期辟谣的耗水谬论]]]如出一辙。2025年6月，当地居民电价在一夜之间出现[[[LINK_2|约20%的暴涨]]]，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心[[[LINK_3|超过85%的电力均为自发自用]]]，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与我们近期辟谣的耗水谬论如出一辙。2025年6月，当地居民电价在一夜之间出现约20%的暴涨，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心超过85%的电力均为自发自用，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:01.210051",
+          "tokenized_text": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与[[[LINK_1|我们近期辟谣的耗水谬论]]]如出一辙。2025年6月，当地居民电价在一夜之间出现[[[LINK_2|约20%的暴涨]]]，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心[[[LINK_3|超过85%的电力均为自发自用]]]，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+          "format_issues": []
+        }
+      },
+      "confirmed": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与我们近期辟谣的耗水谬论如出一辙。2025年6月，当地居民电价在一夜之间出现约20%的暴涨，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心超过85%的电力均为自发自用，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+      "confirmed_tokenized": "关于数据中心负荷增长及其对电价影响的议题，外界仍存在广泛误解，这与[[[LINK_1|我们近期辟谣的耗水谬论]]]如出一辙。2025年6月，当地居民电价在一夜之间出现[[[LINK_2|约20%的暴涨]]]，该议题随之成为2025年新泽西州选举的焦点。甚至有人将矛头指向该州为微软建设的300兆瓦Nebius AI数据中心，但考虑到该数据中心[[[LINK_3|超过85%的电力均为自发自用]]]，这种指责纯属无稽之谈。AI数据中心真的是导致居民电费飙升20%的罪魁祸首吗？",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "This report explores the question by analyzing the two biggest energy markets in the US, which are also the largest AI Datacenter hubs: the PJM interconnection area – the grid operating covering 13 eastern US states (including New Jersey) - and ERCOT, who oversees the electric grid in Texas. In the Lone Star State, prices have been roughly stable for the last three years. On the other hand, the 67 million residents of the PJM area are set to see their bill increase by an average of ~15% in 2026 relative to the “pre-AI-Datacenter” era? Why such a divergence? In short, empirically the fault is government policy, not AI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This report explores the question by analyzing the two biggest energy markets in the US, which are also the largest AI Datacenter hubs: the PJM interconnection area – the grid operating covering 13 eastern US states (including New Jersey) - and ERCOT, who oversees the electric grid in Texas. In the Lone Star State, prices have been roughly stable for the last three years. On the other hand, the 67 million residents of the PJM area are set to see their bill increase by an average of ~15% in 2026 relative to the “pre-AI-Datacenter” era? Why such a divergence? In short, empirically the fault is government policy, not AI.",
+      "parent_block_plain_text": "This report explores the question by analyzing the two biggest energy markets in the US, which are also the largest AI Datacenter hubs: the PJM interconnection area – the grid operating covering 13 eastern US states (including New Jersey) - and ERCOT, who oversees the electric grid in Texas. In the Lone Star State, prices have been roughly stable for the last three years. On the other hand, the 67 million residents of the PJM area are set to see their bill increase by an average of ~15% in 2026 relative to the “pre-AI-Datacenter” era? Why such a divergence? In short, empirically the fault is government policy, not AI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 625,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本报告通过剖析美国最大的两大能源市场（它们同时也是最大的AI数据中心枢纽）来探讨这一问题：PJM互联区域（覆盖含新泽西州在内美国东部13个州的电网运营商）以及ERCOT（负责管理得克萨斯州电网）。在“孤星之州”得克萨斯，过去三年的电价基本保持稳定。反观PJM区域的6700万居民，其2026年的电费账单预计将比“前AI数据中心”时代平均上涨约15%？为何会出现如此显著的分化？简而言之，实证数据表明，罪魁祸首是政府政策，而非AI。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.238964",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "本报告通过剖析美国最大的两大能源市场（它们同时也是最大的AI数据中心枢纽）来探讨这一问题：PJM互联区域（覆盖含新泽西州在内美国东部13个州的电网运营商）以及ERCOT（负责管理得克萨斯州电网）。在“孤星之州”得克萨斯，过去三年的电价基本保持稳定。反观PJM区域的6700万居民，其2026年的电费账单预计将比“前AI数据中心”时代平均上涨约15%？为何会出现如此显著的分化？简而言之，实证数据表明，罪魁祸首是政府政策，而非AI。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870499",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "本报告通过剖析美国最大的两大能源市场（它们同时也是最大的AI数据中心枢纽）来探讨这一问题：PJM互联区域（覆盖含新泽西州在内美国东部13个州的电网运营商）以及ERCOT（负责管理得克萨斯州电网）。在“孤星之州”得克萨斯，过去三年的电价基本保持稳定。反观PJM区域的6700万居民，其2026年的电费账单预计将比“前AI数据中心”时代平均上涨约15%？为何会出现如此显著的分化？简而言之，实证数据表明，罪魁祸首是政府政策，而非AI。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:25.163154",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "本报告通过剖析美国最大的两大能源市场（它们同时也是最大的AI数据中心枢纽）来探讨这一问题：PJM互联区域（覆盖含新泽西州在内美国东部13个州的电网运营商）以及ERCOT（负责管理得克萨斯州电网）。在“孤星之州”得克萨斯，过去三年的电价基本保持稳定。反观PJM区域的6700万居民，其2026年的电费账单预计将比“前AI数据中心”时代平均上涨约15%？为何会出现如此显著的分化？简而言之，实证数据表明，罪魁祸首是政府政策，而非AI。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239008",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870526",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:04.055212",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YaBK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff4cbff97-5557-4b44-aaa1-539add752ebc_2400x1125.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis Energy Model, PJM, Monitoring Analytics",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Energy Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/energy-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Energy Model](https://semianalysis.com/energy-model/), PJM, Monitoring Analytics",
+      "parent_block_plain_text": "Source: SemiAnalysis Energy Model, PJM, Monitoring Analytics",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Energy Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/energy-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis 能源模型，PJM，Monitoring Analytics",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239108",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 能源模型]]]，PJM，Monitoring Analytics",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Energy Model, PJM, Monitoring Analytics",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:28.106937",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Energy Model, PJM, Monitoring Analytics",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "In PJM, we think poor market design is the main culprit. Most of the 15% increase in household electricity bills in PJM is driven by a widely misunderstood and somewhat obscure mechanism: the BRA capacity auction. The 2025/26 auction increased 9.3x over the prior year, as shown below. Worse: this increase is driven by a “simulation” and doesn’t reflect actual conditions. Is is largely a function of the demand and supply forecast made by a central planner (PJM), which as we’ll explain, has a history of huge miscalculations.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In PJM, we think poor market design is the main culprit. Most of the 15% increase in household electricity bills in PJM is driven by a widely misunderstood and somewhat obscure mechanism: the BRA capacity auction. The 2025/26 auction increased 9.3x over the prior year, as shown below. Worse: this increase is driven by a “simulation” and doesn’t reflect actual conditions. Is is largely a function of the demand and supply forecast made by a central planner (PJM), which as we’ll explain, has a history of huge miscalculations.",
+      "parent_block_plain_text": "In PJM, we think poor market design is the main culprit. Most of the 15% increase in household electricity bills in PJM is driven by a widely misunderstood and somewhat obscure mechanism: the BRA capacity auction. The 2025/26 auction increased 9.3x over the prior year, as shown below. Worse: this increase is driven by a “simulation” and doesn’t reflect actual conditions. Is is largely a function of the demand and supply forecast made by a central planner (PJM), which as we’ll explain, has a history of huge miscalculations.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 528,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，在PJM市场中，糟糕的市场设计才是真正的罪魁祸首。PJM辖区内家庭电费账单15%的涨幅，绝大部分源于一个鲜为人知且常被误解的机制：BRA容量拍卖。如下图所示，2025/26年度的拍卖价格较上一年暴涨了9.3倍。更糟糕的是，这种暴涨完全由一场“模拟”推演而来，根本无法反映真实状况。它在很大程度上取决于集中规划者（即PJM）做出的供需预测，而正如我们后文将要剖析的那样，该机构在预测方面有着屡现重大失误的黑历史。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239149",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870544",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "在PJM，我们认为糟糕的市场设计是罪魁祸首。PJM辖区家庭电费上涨了15%，其中大部分涨幅归咎于一个常被误解且颇为晦涩的机制：BRA容量拍卖。如下图所示，2025/26年度拍卖价较上年暴涨9.3倍。更糟糕的是，这种暴涨基于“模拟”推演，并未反映实际状况。它很大程度上取决于统筹机构（PJM）的供需预测，而我们将在后文指出，该机构历来屡现严重的预测失误。",
+          "model": "default",
+          "created_at": "2026-03-16T00:29:58.546269",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在PJM，我们认为糟糕的市场设计是罪魁祸首。PJM辖区家庭电费上涨了15%，其中大部分涨幅归咎于一个常被误解且颇为晦涩的机制：BRA容量拍卖。如下图所示，2025/26年度拍卖价较上年暴涨9.3倍。更糟糕的是，这种暴涨基于“模拟”推演，并未反映实际状况。它很大程度上取决于统筹机构（PJM）的供需预测，而我们将在后文指出，该机构历来屡现严重的预测失误。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:32:23.791272",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "在PJM，我们认为糟糕的市场设计是罪魁祸首。PJM辖区家庭电费上涨了15%，其中大部分涨幅归咎于一个常被误解且颇为晦涩的机制：BRA容量拍卖。如下图所示，2025/26年度拍卖价较上年暴涨9.3倍。更糟糕的是，这种暴涨基于“模拟”推演，并未反映实际状况。它很大程度上取决于统筹机构（PJM）的供需预测，而我们将在后文指出，该机构历来屡现严重的预测失误。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239190",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870587",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:35.202331",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!4uxO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e61dd7a-0a0b-4903-9694-84e6529ae506_3179x1543.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: PJM BRA Report",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: PJM BRA Report",
+      "parent_block_plain_text": "Source: PJM BRA Report",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：PJM BRA报告",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239227",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "来源： PJM BRA Report",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870597",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： PJM BRA Report",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:36.239410",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： PJM BRA Report",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Many are finger-pointing at the surge in AI datacenters, and it is understandable. The PJM area is at the forefront of the AI boom, with Google notably training its Gemini model around Columbus Ohio, while Anthropic/Amazon’s “Project Rainier” and Meta’s “Prometheus” in Indiana and Ohio are both in our world’s top 5 largest AI Datacenters. PJM also hosts the world’s largest datacenter hub: Northern Virginia.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "oogle notably training its Gemini model around Columbus Ohio",
+          "start": 138,
+          "end": 198,
+          "href": "https://newsletter.semianalysis.com/p/multi-datacenter-training-openais",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Anthropic/Amazon’s “Project Rainier”",
+          "start": 206,
+          "end": 242,
+          "href": "https://newsletter.semianalysis.com/p/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Meta’s “Prometheus”",
+          "start": 247,
+          "end": 266,
+          "href": "https://newsletter.semianalysis.com/p/meta-superintelligence-leadership-compute-talent-and-data",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "world’s top 5 largest AI Datacenters",
+          "start": 303,
+          "end": 339,
+          "href": "https://www.youtube.com/watch?v=a-9egkpaZUw",
+          "title": null,
+          "span_id": "LINK_4"
+        }
+      ],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Many are finger-pointing at the surge in AI datacenters, and it is understandable. The PJM area is at the forefront of the AI boom, with G[oogle notably training its Gemini model around Columbus Ohio](https://newsletter.semianalysis.com/p/multi-datacenter-training-openais), while [Anthropic/Amazon’s “Project Rainier”](https://newsletter.semianalysis.com/p/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion) and [Meta’s “Prometheus”](https://newsletter.semianalysis.com/p/meta-superintelligence-leadership-compute-talent-and-data) in Indiana and Ohio are both in our [world’s top 5 largest AI Datacenters](https://www.youtube.com/watch?v=a-9egkpaZUw). PJM also hosts the world’s largest datacenter hub: Northern Virginia.",
+      "parent_block_plain_text": "Many are finger-pointing at the surge in AI datacenters, and it is understandable. The PJM area is at the forefront of the AI boom, with Google notably training its Gemini model around Columbus Ohio, while Anthropic/Amazon’s “Project Rainier” and Meta’s “Prometheus” in Indiana and Ohio are both in our world’s top 5 largest AI Datacenters. PJM also hosts the world’s largest datacenter hub: Northern Virginia.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "oogle notably training its Gemini model around Columbus Ohio",
+          "start": 138,
+          "end": 198,
+          "href": "https://newsletter.semianalysis.com/p/multi-datacenter-training-openais",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Anthropic/Amazon’s “Project Rainier”",
+          "start": 206,
+          "end": 242,
+          "href": "https://newsletter.semianalysis.com/p/amazons-ai-resurgence-aws-anthropics-multi-gigawatt-trainium-expansion",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Meta’s “Prometheus”",
+          "start": 247,
+          "end": 266,
+          "href": "https://newsletter.semianalysis.com/p/meta-superintelligence-leadership-compute-talent-and-data",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "world’s top 5 largest AI Datacenters",
+          "start": 303,
+          "end": 339,
+          "href": "https://www.youtube.com/watch?v=a-9egkpaZUw",
+          "title": null,
+          "span_id": "LINK_4"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 410,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3",
+        "LINK_4"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷歌重点在俄亥俄州哥伦布市周边训练其Gemini模型，而位于印第安纳州和俄亥俄州的Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）与Meta的“普罗米修斯”（Prometheus）项目，均跻身我们统计的全球前五大AI数据中心之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239428",
+          "tokenized_text": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷[[[LINK_1|歌重点在俄亥俄州哥伦布市周边训练其Gemini模型]]]，而位于印第安纳州和俄亥俄州的[[[LINK_2|Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）]]]与[[[LINK_3|Meta的“普罗米修斯”（Prometheus）项目]]]，均跻身我们统计的[[[LINK_4|全球前五大AI数据中心]]]之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷歌重点在俄亥俄州哥伦布市周边训练其Gemini模型，而位于印第安纳州和俄亥俄州的Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）与Meta的“普罗米修斯”（Prometheus）项目，均跻身我们统计的全球前五大AI数据中心之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:32:39.032144",
+          "tokenized_text": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷[[[LINK_1|歌重点在俄亥俄州哥伦布市周边训练其Gemini模型]]]，而位于印第安纳州和俄亥俄州的[[[LINK_2|Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）]]]与[[[LINK_3|Meta的“普罗米修斯”（Prometheus）项目]]]，均跻身我们统计的[[[LINK_4|全球前五大AI数据中心]]]之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷歌重点在俄亥俄州哥伦布市周边训练其Gemini模型，而位于印第安纳州和俄亥俄州的Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）与Meta的“普罗米修斯”（Prometheus）项目，均跻身我们统计的全球前五大AI数据中心之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+      "confirmed_tokenized": "许多人将矛头指向激增的AI数据中心，这情有可原。PJM地区正处于这场AI热潮的最前沿，谷[[[LINK_1|歌重点在俄亥俄州哥伦布市周边训练其Gemini模型]]]，而位于印第安纳州和俄亥俄州的[[[LINK_2|Anthropic/亚马逊的“雷尼尔项目”（Project Rainier）]]]与[[[LINK_3|Meta的“普罗米修斯”（Prometheus）项目]]]，均跻身我们统计的[[[LINK_4|全球前五大AI数据中心]]]之列。此外，PJM辖区内还坐落着全球最大的数据中心枢纽——北弗吉尼亚。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Now look at Texas. The state is witnessing an equivalent AI buildout, with OpenAI, Google DeepMind, Anthropic all building massive facilities. Yet power futures in Texas have moved only a few percent in the past year. No 9x spike, no crisis, very different market design.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now look at Texas. The state is witnessing an equivalent AI buildout, with OpenAI, Google DeepMind, Anthropic all building massive facilities. Yet power futures in Texas have moved only a few percent in the past year. No 9x spike, no crisis, very different market design.",
+      "parent_block_plain_text": "Now look at Texas. The state is witnessing an equivalent AI buildout, with OpenAI, Google DeepMind, Anthropic all building massive facilities. Yet power futures in Texas have moved only a few percent in the past year. No 9x spike, no crisis, very different market design.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 271,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "现在来看看得克萨斯州。该州同样在经历规模相当的AI基础设施建设，OpenAI、谷歌DeepMind和Anthropic都在此地建造超大型设施。然而，得州的电力期货在过去一年里仅波动了几个百分点。没有9倍的暴涨，没有危机，这源于截然不同的市场设计。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239472",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "现在来看看得克萨斯州。该州同样在经历规模相当的AI基础设施建设，OpenAI、谷歌DeepMind和Anthropic都在此地建造超大型设施。然而，得州的电力期货在过去一年里仅波动了几个百分点。没有9倍的暴涨，没有危机，这源于截然不同的市场设计。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870608",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "现在来看看得克萨斯州。该州同样在经历规模相当的AI基础设施建设，OpenAI、谷歌DeepMind和Anthropic都在此地建造超大型设施。然而，得州的电力期货在过去一年里仅波动了几个百分点。没有9倍的暴涨，没有危机，这源于截然不同的市场设计。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:32:50.274706",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "现在来看看得克萨斯州。该州同样在经历规模相当的AI基础设施建设，OpenAI、谷歌DeepMind和Anthropic都在此地建造超大型设施。然而，得州的电力期货在过去一年里仅波动了几个百分点。没有9倍的暴涨，没有危机，这源于截然不同的市场设计。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239510",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870617",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:40.435751",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!bTKf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F30a916ae-8f6f-462a-a184-7622bd295775_1808x1110.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: Bloomberg",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Bloomberg",
+      "parent_block_plain_text": "Source: Bloomberg",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：彭博社",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239545",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "来源： Bloomberg",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870626",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： Bloomberg",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:41.084471",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Bloomberg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Let’s dig in. This report focuses on ERCOT and PJM since they’re the two largest energy markets in the country, and are epicenters of the AI revolution. We’ll dig into their respective market design, explain how they’ve reacted to booming AI Datacenter load growth, and how that will flow to households.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Let’s dig in. This report focuses on ERCOT and PJM since they’re the two largest energy markets in the country, and are epicenters of the AI revolution. We’ll dig into their respective market design, explain how they’ve reacted to booming AI Datacenter load growth, and how that will flow to households.",
+      "parent_block_plain_text": "Let’s dig in. This report focuses on ERCOT and PJM since they’re the two largest energy markets in the country, and are epicenters of the AI revolution. We’ll dig into their respective market design, explain how they’ve reacted to booming AI Datacenter load growth, and how that will flow to households.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 303,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们来深入剖析。本报告将重点聚焦ERCOT和PJM，因为它们不仅是美国最大的两个能源市场，更是这场AI革命的震中。我们将深度拆解两者各自的市场设计，解析它们如何应对激增的AI数据中心负荷增长，以及这些影响最终将如何传导至普通家庭。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239580",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "我们来深入剖析。本报告将重点聚焦ERCOT和PJM，因为它们不仅是美国最大的两个能源市场，更是这场AI革命的震中。我们将深度拆解两者各自的市场设计，解析它们如何应对激增的AI数据中心负荷增长，以及这些影响最终将如何传导至普通家庭。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870634",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "我们来深入剖析。本报告将重点聚焦ERCOT和PJM，因为它们不仅是美国最大的两个能源市场，更是这场AI革命的震中。我们将深度拆解两者各自的市场设计，解析它们如何应对激增的AI数据中心负荷增长，以及这些影响最终将如何传导至普通家庭。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:14.017752",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "我们来深入剖析。本报告将重点聚焦ERCOT和PJM，因为它们不仅是美国最大的两个能源市场，更是这场AI革命的震中。我们将深度拆解两者各自的市场设计，解析它们如何应对激增的AI数据中心负荷增长，以及这些影响最终将如何传导至普通家庭。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Then, behind paywall, we discuss the supply chain implications. We believe that market constraints are dramatically shifting and many are missing it. This shift impacts major AI winners such as IPPs (Vistra, Constellation, Talen..), equipment suppliers, datacenter developers like cryptominers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Then, behind paywall, we discuss the supply chain implications. We believe that market constraints are dramatically shifting and many are missing it. This shift impacts major AI winners such as IPPs (Vistra, Constellation, Talen..), equipment suppliers, datacenter developers like cryptominers.",
+      "parent_block_plain_text": "Then, behind paywall, we discuss the supply chain implications. We believe that market constraints are dramatically shifting and many are missing it. This shift impacts major AI winners such as IPPs (Vistra, Constellation, Talen..), equipment suppliers, datacenter developers like cryptominers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 294,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随后，在付费专区，我们将探讨其对供应链的影响。我们认为，市场制约因素正在发生剧烈转变，而许多人却对此毫无察觉。这种转变将深刻影响各大AI领域的赢家，包括独立发电商（IPPs，如Vistra、Constellation、Talen等）、设备供应商，以及类似加密货币矿企的数据中心开发商。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239614",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "随后，在付费专区，我们将探讨其对供应链的影响。我们认为，市场制约因素正在发生剧烈转变，而许多人却对此毫无察觉。这种转变将深刻影响各大AI领域的赢家，包括独立发电商（IPPs，如Vistra、Constellation、Talen等）、设备供应商，以及类似加密货币矿企的数据中心开发商。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870643",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "随后，在付费专区，我们将探讨其对供应链的影响。我们认为，市场制约因素正在发生剧烈转变，而许多人却对此毫无察觉。这种转变将深刻影响各大AI领域的赢家，包括独立发电商（IPPs，如Vistra、Constellation、Talen等）、设备供应商，以及类似加密货币矿企的数据中心开发商。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:28.563848",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "随后，在付费专区，我们将探讨其对供应链的影响。我们认为，市场制约因素正在发生剧烈转变，而许多人却对此毫无察觉。这种转变将深刻影响各大AI领域的赢家，包括独立发电商（IPPs，如Vistra、Constellation、Talen等）、设备供应商，以及类似加密货币矿企的数据中心开发商。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "For institutions looking for deeper analysis, subscribe to our Energy Model and Datacenter Industry Model. The latter tracks and forecasts quarter-by-quarter, 2017-2032, over 5,000 individual facilities and their electrical capacity. The Energy Model builds an energy supply & demand analysis on top of it, by tracking and forecasting operations for every single power plant in the US, estimating their true ELCC, analyzing interconnection queue dynamics, and matching against our datacenter demand-side data.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Energy Model",
+          "start": 63,
+          "end": 75,
+          "href": "https://semianalysis.com/energy-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Datacenter Industry Model",
+          "start": 80,
+          "end": 105,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For institutions looking for deeper analysis, subscribe to our [Energy Model](https://semianalysis.com/energy-model/) and [Datacenter Industry Model](https://semianalysis.com/datacenter-industry-model/). The latter tracks and forecasts quarter-by-quarter, 2017-2032, over 5,000 individual facilities and their electrical capacity. The Energy Model builds an energy supply & demand analysis on top of it, by tracking and forecasting operations for every single power plant in the US, estimating their true ELCC, analyzing interconnection queue dynamics, and matching against our datacenter demand-side data.",
+      "parent_block_plain_text": "For institutions looking for deeper analysis, subscribe to our Energy Model and Datacenter Industry Model. The latter tracks and forecasts quarter-by-quarter, 2017-2032, over 5,000 individual facilities and their electrical capacity. The Energy Model builds an energy supply & demand analysis on top of it, by tracking and forecasting operations for every single power plant in the US, estimating their true ELCC, analyzing interconnection queue dynamics, and matching against our datacenter demand-side data.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Energy Model",
+          "start": 63,
+          "end": 75,
+          "href": "https://semianalysis.com/energy-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Datacenter Industry Model",
+          "start": 80,
+          "end": 105,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 509,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于寻求更深入分析的机构，请订阅我们的能源模型和数据中心行业模型。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239741",
+          "tokenized_text": "对于寻求更深入分析的机构，请订阅我们的[[[LINK_1|能源模型]]]和[[[LINK_2|数据中心行业模型]]]。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "对于寻求更深入分析的机构，请订阅我们的能源模型和数据中心行业模型。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:33.398760",
+          "tokenized_text": "对于寻求更深入分析的机构，请订阅我们的[[[LINK_1|能源模型]]]和[[[LINK_2|数据中心行业模型]]]。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "对于寻求更深入分析的机构，请订阅我们的能源模型和数据中心行业模型。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+      "confirmed_tokenized": "对于寻求更深入分析的机构，请订阅我们的[[[LINK_1|能源模型]]]和[[[LINK_2|数据中心行业模型]]]。后者按季度追踪并预测了2017至2032年间超过5000个独立设施及其电力容量。能源模型则在此基础上构建了能源供需分析，具体方法是追踪并预测全美每一座发电厂的运营情况，估算其真实的有效载荷承载能力（ELCC），分析并网队列动态，并将其与我们的数据中心需求侧数据进行匹配。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Let’s start with a brief explainer of what “capacity” actually is, how it flows to your monthly bill, and then dig further into market designs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Let’s start with a brief explainer of what “capacity” actually is, how it flows to your monthly bill, and then dig further into market designs.",
+      "parent_block_plain_text": "Let’s start with a brief explainer of what “capacity” actually is, how it flows to your monthly bill, and then dig further into market designs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 143,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "让我们先简要解析一下“容量”究竟是什么，以及它是如何传导至你每月的电费账单中的，然后再进一步深入剖析市场设计。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239779",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "让我们先简要解析一下“容量”究竟是什么，以及它是如何传导至你每月的电费账单中的，然后再进一步深入剖析市场设计。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.870652",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "让我们先简要解析一下“容量”究竟是什么，以及它是如何传导至你每月的电费账单中的，然后再进一步深入剖析市场设计。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:38.867845",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "让我们先简要解析一下“容量”究竟是什么，以及它是如何传导至你每月的电费账单中的，然后再进一步深入剖析市场设计。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm.",
+          "start": 0,
+          "end": 152,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm.*",
+      "parent_block_plain_text": "This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "This report is a collaboration between SemiAnalysis and Archer Daniels Midland Investor Services (ADMIS), a leading futures brokerage and clearing firm.",
+          "start": 0,
+          "end": 152,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 152,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:26:55.239872",
+          "tokenized_text": "[[[EM_1|本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:29:46.030900",
+          "tokenized_text": "[[[EM_1|本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。",
+      "confirmed_tokenized": "[[[EM_1|本报告由 SemiAnalysis 与领先的期货经纪与清算公司 Archer Daniels Midland Investor Services（ADMIS）联合撰写。]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+          "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by acknowledging the mainstream narrative that blames AI datacenters for rising bills, while establishing the geographical overlap between the AI boom and PJM's territory.",
+          "relation_to_previous": "Expands on the intro's mention of 'misconceptions' by specifically identifying the scapegoat: AI datacenters.",
+          "relation_to_next": "Transitions from the 'who is being blamed' (datacenters) to the 'what is actually causing it' (market mechanics) explained next.",
+          "key_points": [
+            "PJM is the epicenter of the AI datacenter boom, hosting top projects from Google, Amazon, Meta, and the Northern Virginia hub.",
+            "It is understandable why people point fingers at AI, but correlation is not causation.",
+            "The report is backed by institutional credibility (ADMIS collaboration)."
+          ],
+          "translation_notes": [
+            "The hackathon promo should sound natural and energetic; translate 'From Power to Prefill, Dirt to Decode' idiomatically to reflect full-stack infrastructure.",
+            "Translate 'finger-pointing' in a way that implies misplaced blame without sounding overly defensive."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "原文此处误用问号（该句在语法上为陈述句），译文机械保留了这一标点，导致中文语感有些突兀。"
+          },
+          {
+            "type": "terminology|annotation",
+            "description": "译文直接使用了“BRA容量拍卖”，未对BRA进行中文释义。根据术语表，BRA代表Base Residual Auction。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“追踪并预测了”中的“了”字带有完成时态的意味，而预测的时间跨度包含未来的2032年，使用“了”略显矛盾。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

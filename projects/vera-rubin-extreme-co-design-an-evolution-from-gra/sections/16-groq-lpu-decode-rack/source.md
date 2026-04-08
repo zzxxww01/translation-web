@@ -1,0 +1,7 @@
+Since Nvidia ~~acquired Groq~~ entered into a licensing agreement for Groq’s technology and hired Groq’s key people December 2025, speculation has brewed on how exactly Nvidia will implement Groq’s technology. We believe that Nvidia will introduce a new LPU rack at GTC 2026. The LPU rack is designed to be used alongside Nvidia GPUs for inference.
+
+With CPX being designed specifically for inference pre-fill, the LPU system is designed for inference decode given the LPU’s emphasis on higher bandwidth SRAM. This comes at the expense of total throughput so this LPU decode system could be positioned at serving requests that require very high tokens per second per user, with the user paying much higher $/token to compensate for higher cost to serve.
+
+It will be designed to sit alongside Nvidia GPUs that handle decode for lower interactivity requests. [We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary](https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/).
+
+Some details we will share here is that there are 256 LPUs per rack and it is the 3rd generation Groq chip on Samsung 4nm (the 2nd generation is being skipped). We share an important supply chain detail that has an impact on growth and market share as well as topology [in the Accelerator Model note.](https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/)

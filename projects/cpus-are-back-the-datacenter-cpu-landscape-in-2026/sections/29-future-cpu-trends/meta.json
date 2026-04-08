@@ -1,0 +1,2247 @@
+{
+  "section_id": "29-future-cpu-trends",
+  "title": "Future CPU Trends",
+  "title_translation": "未来CPU发展趋势",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The humble CPU will continue to evolve throughout the next decade as computing needs change over time. The current RL training and Agentic tool use era is accelerating CPU demand like never before, with CPU designs beginning to diverge to fit three use cases.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0310",
+      "parent_block_index": 310,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The humble CPU will continue to evolve throughout the next decade as computing needs change over time. The current RL training and Agentic tool use era is accelerating CPU demand like never before, with CPU designs beginning to diverge to fit three use cases.",
+      "parent_block_plain_text": "The humble CPU will continue to evolve throughout the next decade as computing needs change over time. The current RL training and Agentic tool use era is accelerating CPU demand like never before, with CPU designs beginning to diverge to fit three use cases.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 259,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着计算需求随时间推移不断变化，看似不起眼的 CPU 在未来十年仍将持续演进。当前强化学习 (RL) 训练与智能体工具应用的时代，正以前所未有的速度推高 CPU 需求，CPU 设计也开始分化，以适应三大应用场景。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951024",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "High core density efficient CPUs with high throughput for cloud and general purpose compute such as Graviton5",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0311",
+      "parent_block_index": 311,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* High core density efficient CPUs with high throughput for cloud and general purpose compute such as Graviton5",
+      "parent_block_plain_text": "High core density efficient CPUs with high throughput for cloud and general purpose compute such as Graviton5",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 109,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "面向云计算与通用计算，具备高吞吐量的高核心密度、高能效 CPU（如 Graviton5）",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951111",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "High performance per core CPUs with high memory bandwidth and tight integration with AI accelerators for coherent memory expansion such as Vera",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0312",
+      "parent_block_index": 312,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* High performance per core CPUs with high memory bandwidth and tight integration with AI accelerators for coherent memory expansion such as Vera",
+      "parent_block_plain_text": "High performance per core CPUs with high memory bandwidth and tight integration with AI accelerators for coherent memory expansion such as Vera",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 143,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "单核性能强劲、具备高内存带宽，且与 AI 加速器紧密集成以实现一致性内存扩展的 CPU（如 Vera）",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951151",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Data processing and networking capable CPUs and DPUs to deal with the massive data requirements of AI clusters and model context offloads such as Bluefield-4",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0313",
+      "parent_block_index": 313,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Data processing and networking capable CPUs and DPUs to deal with the massive data requirements of AI clusters and model context offloads such as Bluefield-4",
+      "parent_block_plain_text": "Data processing and networking capable CPUs and DPUs to deal with the massive data requirements of AI clusters and model context offloads such as Bluefield-4",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 157,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "具备数据处理与网络能力，用于应对 AI 集群海量数据需求及模型上下文卸载的 CPU 和 DPU（如 Bluefield-4）",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951186",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Going forward, we are likely to see even more specialization. In all cases, CPU sockets and core counts are getting larger with higher memory and I/O speeds and widths, placing greater pressure on CPU interconnects and data fabrics. NoC designers will be relied on even more to create designs with very high bisection bandwidths across thousands of square millimetres of silicon and multiple chiplet crossings while maintaining full coherency with external devices and requiring much lower latencies than GPU fabrics.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0314",
+      "parent_block_index": 314,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Going forward, we are likely to see even more specialization. In all cases, CPU sockets and core counts are getting larger with higher memory and I/O speeds and widths, placing greater pressure on CPU interconnects and data fabrics. NoC designers will be relied on even more to create designs with very high bisection bandwidths across thousands of square millimetres of silicon and multiple chiplet crossings while maintaining full coherency with external devices and requiring much lower latencies than GPU fabrics.",
+      "parent_block_plain_text": "Going forward, we are likely to see even more specialization. In all cases, CPU sockets and core counts are getting larger with higher memory and I/O speeds and widths, placing greater pressure on CPU interconnects and data fabrics. NoC designers will be relied on even more to create designs with very high bisection bandwidths across thousands of square millimetres of silicon and multiple chiplet crossings while maintaining full coherency with external devices and requiring much lower latencies than GPU fabrics.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 517,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "展望未来，我们很可能会看到更高程度的专业化分工。无论哪种场景，CPU 插槽规模与核心数量都在不断增加，内存与 I/O 的速度及位宽也在持续提升，这给 CPU 互连结构与数据网络带来了更大压力。业界将更加依赖片上网络 (NoC) 设计师。他们需要跨越数千平方毫米的硅片面积与多个芯粒边界，打造具备极高对分带宽的设计；同时还要保持与外部设备的完全一致性，并满足远低于 GPU 网络的延迟要求。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951222",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The adoption of LPDDR in the datacenter will continue, with PCB layer count and complexity already pushed to the limit for the large 16-channel memory designs. LPDDR6 SOCAMM modules enable far higher bandwidth density while maintaining higher capacities than on-package memory.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0315",
+      "parent_block_index": 315,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The adoption of LPDDR in the datacenter will continue, with PCB layer count and complexity already pushed to the limit for the large 16-channel memory designs. LPDDR6 SOCAMM modules enable far higher bandwidth density while maintaining higher capacities than on-package memory.",
+      "parent_block_plain_text": "The adoption of LPDDR in the datacenter will continue, with PCB layer count and complexity already pushed to the limit for the large 16-channel memory designs. LPDDR6 SOCAMM modules enable far higher bandwidth density while maintaining higher capacities than on-package memory.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 277,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "数据中心将继续采用 LPDDR。针对大型 16 通道内存设计，PCB 的层数与复杂度已被推至极限。LPDDR6 SOCAMM 模块能够实现高得多的带宽密度，同时保持比封装内内存更高的容量。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951256",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The winning design will come from the one that has the best data fabric. Some designs will employ Gigabytes of cache to hide latencies and improve memory-bound performance, while others will go to town with CXL memory expanders. We may yet see the return of HBM on CPUs, last seen in Sapphire Rapids Xeon Max and AMD’s MI300C.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0316",
+      "parent_block_index": 316,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The winning design will come from the one that has the best data fabric. Some designs will employ Gigabytes of cache to hide latencies and improve memory-bound performance, while others will go to town with CXL memory expanders. We may yet see the return of HBM on CPUs, last seen in Sapphire Rapids Xeon Max and AMD’s MI300C.",
+      "parent_block_plain_text": "The winning design will come from the one that has the best data fabric. Some designs will employ Gigabytes of cache to hide latencies and improve memory-bound performance, while others will go to town with CXL memory expanders. We may yet see the return of HBM on CPUs, last seen in Sapphire Rapids Xeon Max and AMD’s MI300C.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 326,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最终胜出的设计必将拥有最优秀的数据网络。一些设计将采用数 GB 的缓存来隐藏延迟并提升内存受限型性能；而另一些设计则会大举采用 CXL 内存扩展器。我们甚至可能看到 HBM 重返 CPU，这一设计上一次出现还是在 Sapphire Rapids 至强 Max 与 AMD 的 MI300C 中。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951287",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Looking even further out, will the datacenter CPU as we know it today still exist? The next era of compute demand may see the move to APU designs pioneered with AMD’s MI300A with integrated CPU cores, removing the need for CPU head nodes. APUs may also be an option for RL Training specific accelerators that can run the RL Environment locally with unified memory, shortening the round trip time of going to general purpose CPU clusters for RL. Co-Packaged Optics with memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts and Credo’s Omniconnect memory gearboxes may reduce the need for memory expander CPUs and lower CPU attach ratios (such as 1 CPU per rack of accelerators). We also see a future where the CPU ends up integrated as the core of a massive >400T switch.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0317",
+      "parent_block_index": 317,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Looking even further out, will the datacenter CPU as we know it today still exist? The next era of compute demand may see the move to APU designs pioneered with AMD’s MI300A with integrated CPU cores, removing the need for CPU head nodes. APUs may also be an option for RL Training specific accelerators that can run the RL Environment locally with unified memory, shortening the round trip time of going to general purpose CPU clusters for RL. Co-Packaged Optics with memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts and Credo’s Omniconnect memory gearboxes may reduce the need for memory expander CPUs and lower CPU attach ratios (such as 1 CPU per rack of accelerators). We also see a future where the CPU ends up integrated as the core of a massive >400T switch. In any case, the CPU will continue to live on as the fundamental core of the computer.",
+      "parent_block_plain_text": "Looking even further out, will the datacenter CPU as we know it today still exist? The next era of compute demand may see the move to APU designs pioneered with AMD’s MI300A with integrated CPU cores, removing the need for CPU head nodes. APUs may also be an option for RL Training specific accelerators that can run the RL Environment locally with unified memory, shortening the round trip time of going to general purpose CPU clusters for RL. Co-Packaged Optics with memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts and Credo’s Omniconnect memory gearboxes may reduce the need for memory expander CPUs and lower CPU attach ratios (such as 1 CPU per rack of accelerators). We also see a future where the CPU ends up integrated as the core of a massive >400T switch. In any case, the CPU will continue to live on as the fundamental core of the computer.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 790,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "放眼更长远的未来，我们今天所熟知的数据中心 CPU 还会存在吗？下一个计算需求时代可能会转向由 AMD MI300A 开创的加速处理器 (APU) 设计。这类设计集成了 CPU 核心，从而消除了对 CPU 头节点的需求。对于 RL 训练专用加速器而言，APU 也可能成为一种选择。它们可以利用统一内存，在本地运行 RL 环境，从而缩短 RL 任务往返通用 CPU 集群的时间。共封装光学器件、结合 JBOM（海量 HBM 阵列）概念的内存解耦与池化技术，以及 Credo 的 Omniconnect 内存变速器，可能会降低对内存扩展 CPU 的需求，并降低 CPU 配比率（例如每个加速器机架仅配 1 个 CPU）。我们还预见在未来，CPU 最终会作为核心组件，被集成到超过 400T 的巨型交换机中。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951322",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "In any case, the CPU will continue to live on as the fundamental core of the computer.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0317",
+      "parent_block_index": 317,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Looking even further out, will the datacenter CPU as we know it today still exist? The next era of compute demand may see the move to APU designs pioneered with AMD’s MI300A with integrated CPU cores, removing the need for CPU head nodes. APUs may also be an option for RL Training specific accelerators that can run the RL Environment locally with unified memory, shortening the round trip time of going to general purpose CPU clusters for RL. Co-Packaged Optics with memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts and Credo’s Omniconnect memory gearboxes may reduce the need for memory expander CPUs and lower CPU attach ratios (such as 1 CPU per rack of accelerators). We also see a future where the CPU ends up integrated as the core of a massive >400T switch. In any case, the CPU will continue to live on as the fundamental core of the computer.",
+      "parent_block_plain_text": "Looking even further out, will the datacenter CPU as we know it today still exist? The next era of compute demand may see the move to APU designs pioneered with AMD’s MI300A with integrated CPU cores, removing the need for CPU head nodes. APUs may also be an option for RL Training specific accelerators that can run the RL Environment locally with unified memory, shortening the round trip time of going to general purpose CPU clusters for RL. Co-Packaged Optics with memory disaggregation and pooling in JBOM “Just a Bunch of HBM” concepts and Credo’s Omniconnect memory gearboxes may reduce the need for memory expander CPUs and lower CPU attach ratios (such as 1 CPU per rack of accelerators). We also see a future where the CPU ends up integrated as the core of a massive >400T switch. In any case, the CPU will continue to live on as the fundamental core of the computer.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 791,
+      "segment_end": 877,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "无论如何，CPU 都将继续作为计算机的基础核心存在。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951351",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Contact us at sales@semianalysis.com for the following data.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0318",
+      "parent_block_index": 318,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Contact us at sales@semianalysis.com for the following data.",
+      "parent_block_plain_text": "Contact us at sales@semianalysis.com for the following data.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "请联系 sales@semianalysis.com 获取以下数据。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951380",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Bill of Materials (BOM) Costing",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0319",
+      "parent_block_index": 319,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Bill of Materials (BOM) Costing",
+      "parent_block_plain_text": "Bill of Materials (BOM) Costing",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "物料清单 (BOM) 成本分析",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951408",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Provide a table that breaks down the cost of production of 2026 x86 Datacenter CPUs. For each processor family, costing of different product tiers in the SKU stack will be provided.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0320",
+      "parent_block_index": 320,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Provide a table that breaks down the cost of production of 2026 x86 Datacenter CPUs. For each processor family, costing of different product tiers in the SKU stack will be provided.",
+      "parent_block_plain_text": "Provide a table that breaks down the cost of production of 2026 x86 Datacenter CPUs. For each processor family, costing of different product tiers in the SKU stack will be provided.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 181,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "提供一份表格，详细拆解 2026 年 x86 数据中心 CPU 的生产成本。针对每个处理器系列，将提供 SKU 堆栈中不同产品层级的成本数据。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951436",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Variants include AMD Venice SP7 and SP8 in both Classic and Dense CCD configurations, Intel Diamond Rapids-AP UCC 16-channel and Diamond Rapids-SP HCC and LCC 8-channel.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0321",
+      "parent_block_index": 321,
+      "parent_block_type": "li",
+      "parent_block_markdown": "- Variants include AMD Venice SP7 and SP8 in both Classic and Dense CCD configurations, Intel Diamond Rapids-AP UCC 16-channel and Diamond Rapids-SP HCC and LCC 8-channel.",
+      "parent_block_plain_text": "Variants include AMD Venice SP7 and SP8 in both Classic and Dense CCD configurations, Intel Diamond Rapids-AP UCC 16-channel and Diamond Rapids-SP HCC and LCC 8-channel.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 169,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "具体型号包括：采用经典与高密度 CCD 配置的 AMD Venice SP7 (插槽) 和 SP8 变体；英特尔 Diamond Rapids-AP 超高核心数 (UCC) 16 通道版本；以及 Diamond Rapids-SP 高核心数 (HCC) 与低核心数 (LCC) 8 通道版本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951465",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Include BOM costing of NVIDIA Grace and Vera ARM CPUs as well as other discussed ARM CPUs as a means of comparison to the x86 CPUs listed above.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0322",
+      "parent_block_index": 322,
+      "parent_block_type": "li",
+      "parent_block_markdown": "- Include BOM costing of NVIDIA Grace and Vera ARM CPUs as well as other discussed ARM CPUs as a means of comparison to the x86 CPUs listed above.",
+      "parent_block_plain_text": "Include BOM costing of NVIDIA Grace and Vera ARM CPUs as well as other discussed ARM CPUs as a means of comparison to the x86 CPUs listed above.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 144,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "包含英伟达 Grace 与 Vera 架构 ARM CPU，以及其他已讨论的 ARM CPU 的物料清单成本，作为与上述 x86 CPU 的对比基准。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951498",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Cost breakdown into active silicon (including CPU, SoC, and I/O), advanced packaging (2.5D and hybrid bonding), traditional packaging cost including yield impact and product testing costs.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0323",
+      "parent_block_index": 323,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Cost breakdown into active silicon (including CPU, SoC, and I/O), advanced packaging (2.5D and hybrid bonding), traditional packaging cost including yield impact and product testing costs.",
+      "parent_block_plain_text": "Cost breakdown into active silicon (including CPU, SoC, and I/O), advanced packaging (2.5D and hybrid bonding), traditional packaging cost including yield impact and product testing costs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 188,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "成本拆解涵盖：有源硅（包括 CPU、SoC 与 I/O）、先进封装（2.5D 与混合键合）、传统封装成本（包含良率影响），以及产品测试成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951526",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Active Silicon factors in all die sizes, process technology and metal layers, yielded dies per wafer, wafer cost, and number of dies per package. For example, active silicon cost of the top-end 256-core AMD Venice SP7 will be computed from TSMC N2 wafer cost with 8 compute dies and TSMC N6 wafer cost with 2 IO dies.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0324",
+      "parent_block_index": 324,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Active Silicon factors in all die sizes, process technology and metal layers, yielded dies per wafer, wafer cost, and number of dies per package. For example, active silicon cost of the top-end 256-core AMD Venice SP7 will be computed from TSMC N2 wafer cost with 8 compute dies and TSMC N6 wafer cost with 2 IO dies.",
+      "parent_block_plain_text": "Active Silicon factors in all die sizes, process technology and metal layers, yielded dies per wafer, wafer cost, and number of dies per package. For example, active silicon cost of the top-end 256-core AMD Venice SP7 will be computed from TSMC N2 wafer cost with 8 compute dies and TSMC N6 wafer cost with 2 IO dies.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 317,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "有源硅成本综合考量了所有裸片尺寸、工艺技术与金属层数、单片晶圆良品裸片数、晶圆成本以及单封装裸片数。例如，顶配 256 核 AMD Venice SP7 (插槽) 版本的有源硅成本，将基于 8 颗计算裸片的台积电 N2 晶圆成本，加上 2 颗 I/O 裸片的台积电 N6 晶圆成本计算得出。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951553",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Advanced packaging cost factors in type (e.g., CoWoS-L for AMD Venice, EMIB and Foveros Direct 3D for Intel Diamond Rapids), area of interposer and Hybrid bond size, number of die to-die links and Known Good Die testing. Yield loss from the advanced packaging process will be accrued as additional active silicon cost due to wasting good dies on faulty assemblies.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0325",
+      "parent_block_index": 325,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Advanced packaging cost factors in type (e.g., CoWoS-L for AMD Venice, EMIB and Foveros Direct 3D for Intel Diamond Rapids), area of interposer and Hybrid bond size, number of die to-die links and Known Good Die testing. Yield loss from the advanced packaging process will be accrued as additional active silicon cost due to wasting good dies on faulty assemblies.",
+      "parent_block_plain_text": "Advanced packaging cost factors in type (e.g., CoWoS-L for AMD Venice, EMIB and Foveros Direct 3D for Intel Diamond Rapids), area of interposer and Hybrid bond size, number of die to-die links and Known Good Die testing. Yield loss from the advanced packaging process will be accrued as additional active silicon cost due to wasting good dies on faulty assemblies.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 364,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "先进封装成本考量了封装类型（例如 AMD Venice 采用的 CoWoS-L，英特尔 Diamond Rapids 采用的 EMIB (嵌入式多芯片互连桥接) 和 Foveros Direct 3D）、中介层面积与混合键合尺寸、裸片间互连数量以及已知良好裸片 (KGD) 测试。先进封装工艺造成的良率损失，会导致完好裸片因封装组件失效而被浪费，这部分损失将计入额外的有源硅成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951580",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Traditional packaging cost includes substrate cost that factors in material, layer count, and area, as well as integrated passive devices, TIM and lid costs",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0326",
+      "parent_block_index": 326,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Traditional packaging cost includes substrate cost that factors in material, layer count, and area, as well as integrated passive devices, TIM and lid costs",
+      "parent_block_plain_text": "Traditional packaging cost includes substrate cost that factors in material, layer count, and area, as well as integrated passive devices, TIM and lid costs",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 156,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "传统封装成本包含基板成本（综合考量材料、层数与面积），以及集成无源器件、热界面材料 (TIM) 和顶盖成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951607",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Testing costs include ATE/SLT and Burn-in cost on the package level. Losses from device binning will increase the average per package BOM cost.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0327",
+      "parent_block_index": 327,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Testing costs include ATE/SLT and Burn-in cost on the package level. Losses from device binning will increase the average per package BOM cost.",
+      "parent_block_plain_text": "Testing costs include ATE/SLT and Burn-in cost on the package level. Losses from device binning will increase the average per package BOM cost.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 143,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "测试成本包含封装级的自动测试设备 (ATE) / 系统级测试 (SLT) 以及老化测试成本。芯片分级 / 筛选过程中的损耗，会推高单封装的平均物料清单成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951634",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Architectural Design and Performance Analysis",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0328",
+      "parent_block_index": 328,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Architectural Design and Performance Analysis",
+      "parent_block_plain_text": "Architectural Design and Performance Analysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 45,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "架构设计与性能分析",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951661",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "List the full specifications of AMD Venice and Intel Diamond Rapids, including but not limited to: core counts, TDP, cache sizes, memory bandwidth, PCIe and CXL IO lane counts, multi socket interconnect specifications (AMD XGMI and Intel UPI).",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0329",
+      "parent_block_index": 329,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ List the full specifications of AMD Venice and Intel Diamond Rapids, including but not limited to: core counts, TDP, cache sizes, memory bandwidth, PCIe and CXL IO lane counts, multi socket interconnect specifications (AMD XGMI and Intel UPI).",
+      "parent_block_plain_text": "List the full specifications of AMD Venice and Intel Diamond Rapids, including but not limited to: core counts, TDP, cache sizes, memory bandwidth, PCIe and CXL IO lane counts, multi socket interconnect specifications (AMD XGMI and Intel UPI).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 243,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "列出 AMD Venice 与英特尔 Diamond Rapids 的完整规格，包括但不限于：核心数、TDP (热设计功耗)、缓存大小、内存带宽、PCIe 与 CXL 的 IO 通道数，以及多插槽互连规格（AMD 的扩展全局内存互连 (XGMI) 与英特尔的超级通道互联 (UPI)）。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951691",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Provide diagrams of CPU floorplan layout and topology, including core and Last Level Cache placement, mesh interconnect sizes, die-to-die PHYs and IO PHYs.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0330",
+      "parent_block_index": 330,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Provide diagrams of CPU floorplan layout and topology, including core and Last Level Cache placement, mesh interconnect sizes, die-to-die PHYs and IO PHYs.",
+      "parent_block_plain_text": "Provide diagrams of CPU floorplan layout and topology, including core and Last Level Cache placement, mesh interconnect sizes, die-to-die PHYs and IO PHYs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 155,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "提供 CPU 物理布图与拓扑结构图，涵盖核心与末级缓存 (LLC) 布局、网格互连尺寸、裸片间 PHY 以及 IO PHY。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951718",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "Analysis of floorplan layout and topology and the changes across CPU generations, with commentary on the difficulty of scaling a mesh architecture to large sizes.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0331",
+      "parent_block_index": 331,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Analysis of floorplan layout and topology and the changes across CPU generations, with commentary on the difficulty of scaling a mesh architecture to large sizes.",
+      "parent_block_plain_text": "Analysis of floorplan layout and topology and the changes across CPU generations, with commentary on the difficulty of scaling a mesh architecture to large sizes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分析物理布图与拓扑结构及其在历代 CPU 中的演进，并点评将网格架构扩展至大规模时面临的挑战。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951748",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Comparison of layout between AMD, Intel, ARM and its impact on NUMA domains and core clustering with multiple Last Level Cache domains",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0332",
+      "parent_block_index": 332,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Comparison of layout between AMD, Intel, ARM and its impact on NUMA domains and core clustering with multiple Last Level Cache domains",
+      "parent_block_plain_text": "Comparison of layout between AMD, Intel, ARM and its impact on NUMA domains and core clustering with multiple Last Level Cache domains",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 134,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对比 AMD、英特尔与 ARM 的布局设计，并探讨其对 NUMA 域以及具有多个 LLC 域的核心集群的影响。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951778",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "Provide integration schematics of advanced packaging, including layout of chiplets, interposer sizes, and pitches.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0333",
+      "parent_block_index": 333,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Provide integration schematics of advanced packaging, including layout of chiplets, interposer sizes, and pitches.",
+      "parent_block_plain_text": "Provide integration schematics of advanced packaging, including layout of chiplets, interposer sizes, and pitches.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 114,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "提供先进封装的集成示意图，包括 chiplet 布局、中介层尺寸以及凸点间距。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951806",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "Discussion of advanced packaging technology selection(CoWoS-L (AMD Venice), CoWoS-R (NVIDIA Vera), and EMIB/Foveros Direct 3D (Intel Clearwater Forest)) and its impact on cost, power, and performance",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0334",
+      "parent_block_index": 334,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Discussion of advanced packaging technology selection(CoWoS-L (AMD Venice), CoWoS-R (NVIDIA Vera), and EMIB/Foveros Direct 3D (Intel Clearwater Forest)) and its impact on cost, power, and performance",
+      "parent_block_plain_text": "Discussion of advanced packaging technology selection(CoWoS-L (AMD Venice), CoWoS-R (NVIDIA Vera), and EMIB/Foveros Direct 3D (Intel Clearwater Forest)) and its impact on cost, power, and performance",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 199,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "探讨先进封装技术的选择 (CoWoS-L (AMD Venice)、CoWoS-R (英伟达 Vera) 与 EMIB (嵌入式多芯片互连桥接)/Foveros Direct 3D (英特尔 Clearwater Forest))，及其对成本、功耗与性能的影响",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951835",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "Detail scalability challenges on high core count CPU designs and the impact to inter-core latency, memory access uniformity and latency",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0335",
+      "parent_block_index": 335,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Detail scalability challenges on high core count CPU designs and the impact to inter-core latency, memory access uniformity and latency",
+      "parent_block_plain_text": "Detail scalability challenges on high core count CPU designs and the impact to inter-core latency, memory access uniformity and latency",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 135,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "详述高核心数 CPU 设计面临的可扩展性挑战，及其对核心间延迟、内存访问一致性与延迟的影响",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951863",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "Provide internal performance estimates (e.g. SPECint2017) for AMD Venice and Intel Diamond Rapids with analysis on performance scalability with respect to core count and chip cost",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0336",
+      "parent_block_index": 336,
+      "parent_block_type": "li",
+      "parent_block_markdown": "+ Provide internal performance estimates (e.g. SPECint2017) for AMD Venice and Intel Diamond Rapids with analysis on performance scalability with respect to core count and chip cost",
+      "parent_block_plain_text": "Provide internal performance estimates (e.g. SPECint2017) for AMD Venice and Intel Diamond Rapids with analysis on performance scalability with respect to core count and chip cost",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 179,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "提供 AMD Venice 与英特尔 Diamond Rapids 的内部性能预估数据 (如 SPECint2017)，并分析性能随核心数与芯片成本变化的可扩展性",
+          "model": "pro",
+          "created_at": "2026-04-08T16:59:13.951890",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.77,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "accuracy|readability",
+            "description": "原文指“单核性能极高的 CPU”，译文“单核高性能 CPU”存在结构歧义，容易被误解为“单核的、高性能的 CPU”（即只有一个核心的 CPU）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“gearbox”在半导体与网络通信领域（如 PAM4 gearbox）通常指“变速器”或“变速芯片”（用于速率转换），将其直译为机械领域的“齿轮箱”不够专业。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "“一堆HBM”虽然是对“Just a Bunch of HBM”的字面直译，但在严肃的科技长文中显得过于口语化。且“RL环境”之间缺少中英文空格。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“faulty assemblies”指的是存在缺陷的组装成品（即不良组件/失效封装），译文“在组装失败时”将其译为了一个动作状态，略微偏离了名词实体的含义。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

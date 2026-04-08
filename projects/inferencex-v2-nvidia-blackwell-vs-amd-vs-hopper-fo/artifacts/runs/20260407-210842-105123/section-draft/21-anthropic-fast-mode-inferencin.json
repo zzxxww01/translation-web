@@ -1,0 +1,330 @@
+{
+  "section_id": "21-anthropic-fast-mode-inferencin",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "21-anthropic-fast-mode-inferencin",
+    "section_title": "Anthropic Fast Mode Inferencing Explained",
+    "section_title_translation": "Anthropic 快速模式推理详解",
+    "section_position": "22/36",
+    "article_theme": "An in-depth analysis of AI inference performance and economics across Nvidia and AMD hardware, highlighting how software maturity, specifically in advanced techniques like Disaggregated Prefill and Wide Expert Parallelism, dictates real-world dominance.",
+    "structure_summary": "The article opens by introducing InferenceXv2 and thanking hardware partners. It transitions into a technical primer on inference concepts (Interactivity vs Throughput, TP/EP/DP). The core of the piece analyzes benchmarking results for DeepSeek R1 and GPT-OSS, comparing AMD and Nvidia across various hardware and software configurations (Disagg Prefill, WideEP). It then unpacks the unit economics and software ecosystem limitations (e.g., AMD's ATOM vs Nvidia's TRTLLM) before concluding with repo updates, AI-assisted development anecdotes, and the future roadmap for InferenceX.",
+    "target_audience": "AI infrastructure engineers, GPU investors, ML researchers, and advanced tech enthusiasts.",
+    "translation_voice": "A highly competent, insider tech analyst who deeply understands GPU architecture but isn't afraid to use sharp, internet-native language to mock corporate marketing or highlight stark performance gaps.",
+    "previous_section_title": "Accuracy Evaluations",
+    "next_section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "1. Preserve the edgy, insider tone. Do not sanitize slang like 'framemog' or 'jestermaxxing' into dry academic prose; use equivalent Chinese internet/tech community slang (e.g., '性能碾压', '瞎折腾').",
+      "2. Restructure dense comparative sentences. When the text compares throughput vs. interactivity across multiple hardware SKUs, break the English sentence into smaller Chinese clauses. Use bullet points mentally to structure the logic before writing the sentence.",
+      "3. Keep all framework names (SGLang, vLLM, TRTLLM, Dynamo, MoRI, Mooncake) and hardware SKUs (MI355X, GB200 NVL72) in English to maintain technical accuracy.",
+      "4. For domain-specific AI/GPU concepts (e.g., 'Disaggregated Prefill', 'Wide Expert Parallelism', 'All-to-all'), use the provided standardized translations and include a brief parenthetical explanation on first occurrence if it aids the reader.",
+      "5. Handle metaphors and cultural references natively. For the 'GitHub unicorn' and 'touch some grass' references, ensure the Chinese phrasing captures both the technical frustration (server outages) and the internet humor.",
+      "6. Maintain strict distinction between 'Interactivity' (tok/s/user) and 'Throughput' (tok/s). Mistranslating these will destroy the core technical argument regarding the Pareto frontier."
+    ],
+    "article_challenges": [
+      {
+        "location": "Key Observations and Results to Highlight / Nvidia versus AMD Disagg Prefill",
+        "issue": "Use of slang 'framemog' / 'framemogged'. 'Mog' is internet slang for dominating or being physically superior. Here it means overwhelming performance dominance.",
+        "suggestion": "Translate as '性能碾压' or '全方位碾压'. Do not translate literally as '帧率碾压' unless specifically talking about video games; here it's about token throughput.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Jensen Under Promising and Overdelivering",
+        "issue": "Use of '-maxxing' slang ('classic marketing lookmaxxing', 'jestermaxxing'). This is Gen Z internet slang meaning to maximize a specific trait.",
+        "suggestion": "Translate 'marketing lookmaxxing' as '极致的营销包装' or '营销拉满'. Translate 'jestermaxxing' as '纯纯的小丑行为' or '瞎折腾'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "GitHub Actions",
+        "issue": "'We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.'",
+        "suggestion": "The 'unicorn' refers to GitHub's iconic error page (the angry unicorn) during outages. 'Touch some grass' means to go outside and disconnect from the internet. Translate with a brief note or adapt natively: '最近我们看到（GitHub宕机时的）独角兽的次数比什么动物都多！或许我们真该下线去碰碰草（接触下大自然）了。'",
+        "type": "accuracy"
+      },
+      {
+        "location": "Interactivity vs Throughput Tradeoff",
+        "issue": "'riding a metro bus vs a race car'",
+        "suggestion": "Keep the metaphor: '这就像是乘坐公交车与驾驶赛车的区别。公交车能服务众多乘客，但频繁停靠会增加时间（分摊成本）；而赛车速度极快，但只服务单人。'",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Disaggregated Prefill",
+        "term": "Disaggregated Prefill",
+        "translation": "分离式 Prefill",
+        "strategy": "translate",
+        "note": "Separating the compute-heavy prefill phase and memory-heavy decode phase of LLM inference onto different nodes.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Wide Expert Parallelism (WideEP)",
+        "term": "Wide Expert Parallelism (WideEP)",
+        "translation": "宽专家并行 (WideEP)",
+        "strategy": "translate",
+        "note": "Distributing expert weights of an MoE model across a large number of GPUs.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Interactivity",
+        "term": "Interactivity",
+        "translation": "交互速度",
+        "strategy": "translate",
+        "note": "Tokens per second per user (tok/s/user), representing the responsiveness of the model to an individual user.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Throughput",
+        "term": "Throughput",
+        "translation": "吞吐量",
+        "strategy": "translate",
+        "note": "Total tokens generated by the system across all users per second (tok/s).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Time per output token (TPOT)",
+        "term": "Time per output token (TPOT)",
+        "translation": "单输出 Token 耗时 (TPOT)",
+        "strategy": "translate",
+        "note": "The inverse of interactivity; how long it takes to generate a single token.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "All-reduce",
+        "term": "All-reduce",
+        "translation": "全归约 (All-reduce)",
+        "strategy": "translate",
+        "note": "A collective communication operation where all nodes share data and receive the reduced (e.g., summed) result.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "All-to-all",
+        "term": "All-to-all",
+        "translation": "全对全 (All-to-all)",
+        "strategy": "translate",
+        "note": "A collective communication operation where every node sends distinct data to every other node, heavily used in MoE.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Multi Token Prediction (MTP)",
+        "term": "Multi Token Prediction (MTP)",
+        "translation": "多 Token 预测 (MTP)",
+        "strategy": "translate",
+        "note": "A speculative decoding technique predicting multiple future tokens in a single forward pass.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "KV Cache offloading",
+        "term": "KV Cache offloading",
+        "translation": "KV Cache 卸载",
+        "strategy": "translate",
+        "note": "Moving the Key-Value cache from GPU HBM to CPU RAM or NVMe storage to save memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "SGLang",
+        "term": "SGLang",
+        "translation": "SGLang",
+        "strategy": "preserve",
+        "note": "An open-source fast serving framework for LLMs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TRTLLM",
+        "term": "TRTLLM",
+        "translation": "TRTLLM",
+        "strategy": "preserve",
+        "note": "Nvidia's TensorRT-LLM inference framework.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "Anthropic 最近在发布 Opus 4.6 的同时推出了“快速模式”。其核心卖点是：在保持模型质量不变的前提下，速度提升约 2.5 倍，但价格也涨了约 6 到 12 倍。这两个数字可能令人咋舌，一些用户甚至猜测这肯定需要新硬件。其实不然。这本质上只是基本的权衡博弈。任何模型都可以提供多种交互速度（每用户每秒 Token 数），而每百万 Token 成本 (CPMT) 也会随之变化。顺着我们之前的比喻来说，梅赛德斯既造公交车，也造赛车。这就像是乘坐公交车与驾驶赛车的区别。公交车能服务众多乘客，但频繁停靠会增加时间（分摊成本）；而赛车速度极快，但只服务单人。",
+    "精打细算的财务人员可能觉得快速模式更贵，但如果从总体拥有成本的视角来看，在某些场景下快速模式实际上要便宜得多。举个例子，一个 GB200 NVL72 机架的成本可达 330 万美元。因此，如果 Claude Code 的智能体循环（在生产环境中运行于 Trainium）通过工具调用 NVL72 机架，而这些机架的推理速度慢了 2.5 倍，你就需要 2.5 倍数量的机架来提供推理能力。这意味着，如果不开启快速模式，将多出近 500 万美元的额外开销。",
+    "https://substackcdn.com/image/fetch/$s_!sIVI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcad37655-7b9a-4c86-81a8-3314ad0526fe_1694x348.png",
+    "来源：Anthropic",
+    "https://substackcdn.com/image/fetch/$s_!7boM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bb71482-fe77-4e33-b5cb-b7db512b61c1_1700x439.png",
+    "来源：Anthropic",
+    "以在 B200 上使用 TRT-LLM 部署 DeepSeek R1 0528 FP4 的编程工作流为例。当交互速度为 50 tok/s/user 时，推理成本约为 0.56 美元/百万输出 Token。当交互速度达到 125 tok/s/user 时，成本升至约 4 美元/百万输出 Token。速度提升 2.5 倍，价格上涨约 7 倍，这与我们在 Anthropic 快速模式中看到的情况高度吻合。需要注意的是，这里假设 DeepSeek R1 与 Opus 4.6 类似，但实际并非如此。尽管如此，这一基本原则依然成立。",
+    "https://substackcdn.com/image/fetch/$s_!7SFd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F66509f21-d3e5-435f-9163-50d9be56c789_1930x1162.png",
+    "来源：SemiAnalysis InferenceX",
+    "https://substackcdn.com/image/fetch/$s_!CjTZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6621150f-7da2-44ae-9695-493374487825_1972x1122.png",
+    "来源：SemiAnalysis InferenceX",
+    "这背后的根本原因在于 LLM 推理中固有的延迟与吞吐量权衡。在高批处理规模下，GPU 的利用率更高，总 token 吞吐量也更大，这意味着可以同时服务更多用户，每个 token 的成本也更低。而在低批处理规模下，虽然每个请求的并行度更高，能为单个用户带来更快的响应速度，但总 token 吞吐量会随之下降。由于无论如何使用，加速器的小时成本 都是固定的，因此吞吐量降低就意味着可用于分摊成本的 token 数量减少，从而导致每个 token 的价格更高。",
+    "简而言之，所谓的快速模式本质上与硬件关系不大，它只是在同一批 GPU 上牺牲吞吐量换取延迟的必然结果。",
+    "https://substackcdn.com/image/fetch/$s_!pPy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F132f55e4-43c7-4df3-bb4e-1408d85c2782_2718x1796.png",
+    "来源：SemiAnalysis InferenceX",
+    "此外我们发现，正如前文所述，像投机解码这类推理优化技术可以直接降低推理成本，完全无需更换新芯片。",
+    "以 8k/1k 负载下的 DeepSeek R1 FP4 为例。在 150 tok/sec/user 的交互速度下，基准 GB300 Dynamo TRT 的每百万 Token 成本（CPMT）约为 2.35 美元，而启用 MTP 后该成本降至约 0.11 美元。仅仅应用一项推理优化技术，就能在该交互速度下实现约 21 倍的成本下降。",
+    "https://substackcdn.com/image/fetch/$s_!8RyG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff88b30b6-aa73-4ad2-a008-b2e8f940cfd0_1958x1104.png",
+    "来源：SemiAnalysis InferenceX",
+    "https://substackcdn.com/image/fetch/$s_!YpDx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6dfa226-93d7-4596-9dc5-feebd5ef1dce_1966x1098.png",
+    "来源：SemiAnalysis InferenceX",
+    "https://substackcdn.com/image/fetch/$s_!rSgJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8742f134-05d4-4a07-9257-8c93b4730cd7_2704x1790.png",
+    "来源：SemiAnalysis InferenceX",
+    "将交互速度固定在 50 tok/sec/user，我们可以进一步观察 MTP 能在多大程度上有效降低各类芯片的 CPMT。",
+    "https://substackcdn.com/image/fetch/$s_!BIXI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbc992849-b42d-4899-81a3-77105c86886b_1950x1250.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

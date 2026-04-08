@@ -1,0 +1,68 @@
+{
+  "section_id": "11-amds-zen-interconnect-archite",
+  "new_terms": [
+    {
+      "term": "EPYC",
+      "suggested_translation": "霄龙 (EPYC)",
+      "context": "AMD’s return to the datacenter CPU market with their EPYC Naples 7001 series",
+      "confidence": 0.99
+    },
+    {
+      "term": "tape out",
+      "suggested_translation": "流片",
+      "context": "could only afford to tape out a single die that had to be used for both desktop PCs, server and even embedded",
+      "confidence": 0.99
+    },
+    {
+      "term": "Core Complex (CCX)",
+      "suggested_translation": "核心复合体 (CCX)",
+      "context": "Each die holds 2 Core Complexes (CCX), with 4 cores and 8MB of L3 connected with a crossbar.",
+      "confidence": 0.99
+    },
+    {
+      "term": "Infinity Fabric on Package (IFOP)",
+      "suggested_translation": "封装内 Infinity Fabric (IFOP)",
+      "context": "Infinity Fabric on Package (IFOP) links connected each die to the other 3 in the package",
+      "confidence": 0.95
+    },
+    {
+      "term": "Infinity Fabric Inter Socket (IFIS)",
+      "suggested_translation": "插槽间 Infinity Fabric (IFIS)",
+      "context": "Infinity Fabric Inter Socket (IFIS) links enabled dual-socket designs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Core Compute Dies (CCD)",
+      "suggested_translation": "核心计算裸片 (CCD)",
+      "context": "Eight 8-core Core Compute Dies (CCD) surrounded a central I/O die containing the memory and PCIe interfaces",
+      "confidence": 0.99
+    },
+    {
+      "term": "GlobalFoundries",
+      "suggested_translation": "格芯",
+      "context": "while the I/O die stayed on GlobalFoundries’ 12nm.",
+      "confidence": 0.99
+    },
+    {
+      "term": "Global Memory Interconnect (GMI)",
+      "suggested_translation": "全局内存互连 (GMI)",
+      "context": "signals travel across the substrate over Global Memory Interconnect (GMI) links.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SKU",
+      "suggested_translation": "SKU (库存量单位)",
+      "context": "offer the full gamut of core counts across the SKU stack by including different numbers of CCDs.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "heterogeneous disaggregation": "异构解耦",
+    "multi-chip module (mcm)": "MCM",
+    "numa": "NUMA",
+    "reticle-sized": "光罩极限尺寸 (rendered as 'reticle sized' in text)",
+    "tsmc": "台积电 (rendered as 'TSMC' in text)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:06:24.263621"
+}

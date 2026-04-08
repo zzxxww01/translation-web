@@ -1,0 +1,23 @@
+{
+  "section_id": "00-intro",
+  "assessment": {
+    "passed": false,
+    "overall_score": 9.275,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [
+      "critical_errors (1 > 0)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "电价成因误区，PJM糟糕的市场设计，容量电价暴涨9.3倍，ERCOT与PJM的电网可靠性及扩张对比",
+    "作者：Aishwarya Mahesh、Jeremie Eliahou Ontiveros、Ajey Pandey及另外2人",
+    "2026年3月3日 · 付费"
+  ]
+}

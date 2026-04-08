@@ -1,0 +1,50 @@
+{
+  "section_id": "08-where-the-puck-is-going",
+  "new_terms": [
+    {
+      "term": "useful lives",
+      "suggested_translation": "使用寿命 / 预计使用年限",
+      "context": "Refers to the accounting period over which GPUs are depreciated, linked to 'sweating assets'.",
+      "confidence": 0.95
+    },
+    {
+      "term": "terminal value",
+      "suggested_translation": "终端价值 / 终值",
+      "context": "Used in the context of GPU valuation and market concerns over long-term asset worth.",
+      "confidence": 0.9
+    },
+    {
+      "term": "compute crunch",
+      "suggested_translation": "算力荒 / 算力紧缺",
+      "context": "Describes the ongoing shortage of available compute capacity.",
+      "confidence": 0.95
+    },
+    {
+      "term": "pricing power",
+      "suggested_translation": "定价权",
+      "context": "The ability of Neocloud providers to maintain high rental prices due to scarcity.",
+      "confidence": 0.95
+    },
+    {
+      "term": "N3 logic wafer capacity",
+      "suggested_translation": "N3逻辑晶圆产能",
+      "context": "Specific reference to TSMC's 3nm node production capacity for logic chips.",
+      "confidence": 0.9
+    },
+    {
+      "term": "token consumption",
+      "suggested_translation": "Token消耗量",
+      "context": "A key metric for tracking end-user demand in AI models.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "neocloud": "新兴算力云厂商",
+    "arr": "年度经常性收入",
+    "tokenomics": "Token经济学",
+    "hbm": "HBM",
+    "dram": "DRAM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:11:02.387803"
+}

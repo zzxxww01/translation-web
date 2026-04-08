@@ -1,0 +1,825 @@
+{
+  "section_id": "24-disaggregated-prefill",
+  "title": "Disaggregated Prefill",
+  "title_translation": "分离式 Prefill",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Disaggregated prefill, sometimes referred to as prefill-decode (PD) disaggregation, is the process of performing prefill and decode phases of LLM inference on separate nodes. Prefill occurs when a request is first processed, and a forward pass is computed on all tokens at once, thereby “prefilling” the KV cache for this request. This is a compute-intensive operation as all tokens feed through the forward pass in parallel. Tokens are then generated or “decoded” one at a time, loading the KV cache from HBM at each decode step. This is a memory-intensive process as the growing KV cache is constantly being loaded.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0299",
+      "parent_block_index": 299,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Disaggregated prefill, sometimes referred to as prefill-decode (PD) disaggregation, is the process of performing prefill and decode phases of LLM inference on separate nodes. Prefill occurs when a request is first processed, and a forward pass is computed on all tokens at once, thereby “prefilling” the KV cache for this request. This is a compute-intensive operation as all tokens feed through the forward pass in parallel. Tokens are then generated or “decoded” one at a time, loading the KV cache from HBM at each decode step. This is a memory-intensive process as the growing KV cache is constantly being loaded.",
+      "parent_block_plain_text": "Disaggregated prefill, sometimes referred to as prefill-decode (PD) disaggregation, is the process of performing prefill and decode phases of LLM inference on separate nodes. Prefill occurs when a request is first processed, and a forward pass is computed on all tokens at once, thereby “prefilling” the KV cache for this request. This is a compute-intensive operation as all tokens feed through the forward pass in parallel. Tokens are then generated or “decoded” one at a time, loading the KV cache from HBM at each decode step. This is a memory-intensive process as the growing KV cache is constantly being loaded.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 617,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分离式 Prefill（Disaggregated Prefill），有时也称为预填充-解码 (PD) 分离，是指在不同节点上分别执行 LLM 推理的预填充与解码阶段。预填充发生在请求首次被处理时，系统会一次性对所有 token 计算前向传播，从而为该请求“预填充” KV 缓存。由于所有 token 并行输入前向传播，这是一项计算密集型操作。随后，token 被逐一生成或“解码”，每个解码步骤都会从 HBM 加载 KV 缓存。由于不断增长的 KV 缓存需要被频繁加载，这便成了一个内存密集型过程。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564093",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "In traditional single-node inference, engines interleave prefill and decode on the same GPUs. Incoming prefill requests stall in-flight decode batches, increasing both time-to-first-token and inter-token latency. Chunked prefill mitigates this by breaking long prefills into smaller pieces, but the fundamental resource contention remains. Disaggregated prefill eliminates this entirely!",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0300",
+      "parent_block_index": 300,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In traditional single-node inference, engines interleave prefill and decode on the same GPUs. Incoming prefill requests stall in-flight decode batches, increasing both time-to-first-token and inter-token latency. Chunked prefill mitigates this by breaking long prefills into smaller pieces, but the fundamental resource contention remains. Disaggregated prefill eliminates this entirely!",
+      "parent_block_plain_text": "In traditional single-node inference, engines interleave prefill and decode on the same GPUs. Incoming prefill requests stall in-flight decode batches, increasing both time-to-first-token and inter-token latency. Chunked prefill mitigates this by breaking long prefills into smaller pieces, but the fundamental resource contention remains. Disaggregated prefill eliminates this entirely!",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 387,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在传统的单节点推理中，推理引擎在同一批 GPU 上交替执行预填充与解码。新涌入的预填充请求会阻塞正在处理的解码批次，导致首个 Token 延迟 (TTFT) 和 Token 间延迟双双飙升。分块 Prefill 通过将长预填充拆分为更小的块来缓解这一问题，但底层的资源争用依然存在。分离式 Prefill 则将这一痛点彻底根除！",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564156",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0301",
+      "parent_block_index": 301,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564184",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: DistServe",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "DistServe",
+          "start": 8,
+          "end": 17,
+          "href": "https://arxiv.org/abs/2401.09670",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0302",
+      "parent_block_index": 302,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [DistServe](https://arxiv.org/abs/2401.09670)",
+      "parent_block_plain_text": "Source: DistServe",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "DistServe",
+          "start": 8,
+          "end": 17,
+          "href": "https://arxiv.org/abs/2401.09670",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：DistServe",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798250",
+          "tokenized_text": "来源：[[[LINK_1|DistServe]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：DistServe",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564286",
+          "tokenized_text": "来源：[[[LINK_1|DistServe]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：DistServe",
+      "confirmed_tokenized": "来源：[[[LINK_1|DistServe]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelism strategies, different batch sizes, and different memory allocation ratios. The ratio of prefill to decode nodes can also be matched to the workload’s input-output length ratio. For instance, prefill-dominated workloads (long input, short output e.g., summarization, RAG, agentic coding with large context windows) allocate more prefill instances. Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning, long-form generation) allocate more decode instances.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0303",
+      "parent_block_index": 303,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelism strategies, different batch sizes, and different memory allocation ratios. The ratio of prefill to decode nodes can also be matched to the workload’s input-output length ratio. For instance, prefill-dominated workloads (long input, short output e.g., summarization, RAG, agentic coding with large context windows) allocate more prefill instances. Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning, long-form generation) allocate more decode instances. Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history skip prefill entirely.",
+      "parent_block_plain_text": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelism strategies, different batch sizes, and different memory allocation ratios. The ratio of prefill to decode nodes can also be matched to the workload’s input-output length ratio. For instance, prefill-dominated workloads (long input, short output e.g., summarization, RAG, agentic coding with large context windows) allocate more prefill instances. Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning, long-form generation) allocate more decode instances. Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history skip prefill entirely.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 649,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分离架构还允许对各个阶段进行独立扩展与优化。借助独立的节点，每个阶段都能独立调优：采用不同的并行策略、不同的批处理大小以及不同的内存分配比例。预填充与解码节点的比例也能与工作负载的输入输出长度比相匹配。例如，以预填充为主的工作负载（长输入、短输出，如摘要生成、RAG、大上下文窗口的智能体编程）可分配更多预填充实例。而以解码为主的工作负载（短输入、长输出，如思维链推理、长文本生成）则可分配更多解码实例。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564314",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history skip prefill entirely.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0303",
+      "parent_block_index": 303,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelism strategies, different batch sizes, and different memory allocation ratios. The ratio of prefill to decode nodes can also be matched to the workload’s input-output length ratio. For instance, prefill-dominated workloads (long input, short output e.g., summarization, RAG, agentic coding with large context windows) allocate more prefill instances. Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning, long-form generation) allocate more decode instances. Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history skip prefill entirely.",
+      "parent_block_plain_text": "Disaggregation also enables independent scaling and optimization of each phase. With separate nodes, each phase can be tuned independently: different parallelism strategies, different batch sizes, and different memory allocation ratios. The ratio of prefill to decode nodes can also be matched to the workload’s input-output length ratio. For instance, prefill-dominated workloads (long input, short output e.g., summarization, RAG, agentic coding with large context windows) allocate more prefill instances. Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning, long-form generation) allocate more decode instances. Workloads with high cache hit rates also tend toward more decode, since reused KV cache entries from shared system prompts or multi-turn conversation history skip prefill entirely.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 650,
+      "segment_end": 830,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "具有高缓存命中率的工作负载也更倾向于分配更多解码实例，因为来自共享系统提示词或多轮对话历史的复用 KV 缓存条目会完全跳过预填充阶段。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564338",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to the decode node before the first decode token can be generated. For a model like DeepSeek R1 with 61 layers and FP8 KV cache, an 8192-token prefill produces roughly 500MB of KV data that must cross the network, adding directly to TTFT. This transfer is performed over RDMA (typically RoCE or InfiniBand) using zero-copy GPU-to-GPU data movement without CPU involvement. Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer behind a unified asynchronous API with pluggable backends for UCX, GPUDirect Storage, and other transports.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0304",
+      "parent_block_index": 304,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to the decode node before the first decode token can be generated. For a model like DeepSeek R1 with 61 layers and FP8 KV cache, an 8192-token prefill produces roughly 500MB of KV data that must cross the network, adding directly to TTFT. This transfer is performed over RDMA (typically RoCE or InfiniBand) using zero-copy GPU-to-GPU data movement without CPU involvement. Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer behind a unified asynchronous API with pluggable backends for UCX, GPUDirect Storage, and other transports. This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instances may span different device types or interconnects.",
+      "parent_block_plain_text": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to the decode node before the first decode token can be generated. For a model like DeepSeek R1 with 61 layers and FP8 KV cache, an 8192-token prefill produces roughly 500MB of KV data that must cross the network, adding directly to TTFT. This transfer is performed over RDMA (typically RoCE or InfiniBand) using zero-copy GPU-to-GPU data movement without CPU involvement. Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer behind a unified asynchronous API with pluggable backends for UCX, GPUDirect Storage, and other transports. This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instances may span different device types or interconnects.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 724,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "分离架构的核心成本在于 KV 缓存传输。预填充完成后，必须将该请求的完整 KV 缓存从预填充节点传输至解码节点，随后才能生成首个解码 token。对于像 DeepSeek R1 这样拥有 61 层且采用 FP8 KV 缓存的模型，8192 个 token 的预填充会产生约 500MB 必须跨网络传输的 KV 数据，这会直接推高首个 Token 延迟 (TTFT)。此传输通过 RDMA（通常是 RoCE 或 InfiniBand）进行，采用零拷贝的 GPU 到 GPU 数据移动，全程无需 CPU 介入。诸如 NIXL（英伟达推理传输库）等库将数据移动层抽象为一个统一的异步 API，并为 UCX、GPUDirect Storage 等传输协议提供可插拔的后端。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564361",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instances may span different device types or interconnects.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0304",
+      "parent_block_index": 304,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to the decode node before the first decode token can be generated. For a model like DeepSeek R1 with 61 layers and FP8 KV cache, an 8192-token prefill produces roughly 500MB of KV data that must cross the network, adding directly to TTFT. This transfer is performed over RDMA (typically RoCE or InfiniBand) using zero-copy GPU-to-GPU data movement without CPU involvement. Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer behind a unified asynchronous API with pluggable backends for UCX, GPUDirect Storage, and other transports. This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instances may span different device types or interconnects.",
+      "parent_block_plain_text": "The key cost of disaggregation is KV cache transfer. After prefill completes, the full KV cache for that request must be transmitted from the prefill node to the decode node before the first decode token can be generated. For a model like DeepSeek R1 with 61 layers and FP8 KV cache, an 8192-token prefill produces roughly 500MB of KV data that must cross the network, adding directly to TTFT. This transfer is performed over RDMA (typically RoCE or InfiniBand) using zero-copy GPU-to-GPU data movement without CPU involvement. Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer behind a unified asynchronous API with pluggable backends for UCX, GPUDirect Storage, and other transports. This decouples the inference engine from any specific transfer protocol and enables disaggregation across heterogeneous hardware where prefill and decode instances may span different device types or interconnects.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 725,
+      "segment_end": 938,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这使得推理引擎与任何特定的传输协议解耦，并实现了跨异构硬件的分离部署，让预填充与解码实例能够横跨不同的设备类型或互连网络。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564385",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0305",
+      "parent_block_index": 305,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564408",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: Github",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Github",
+          "start": 8,
+          "end": 14,
+          "href": "https://github.com/ai-dynamo/nixl/pull/1258",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0306",
+      "parent_block_index": 306,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Github](https://github.com/ai-dynamo/nixl/pull/1258)",
+      "parent_block_plain_text": "Source: Github",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Github",
+          "start": 8,
+          "end": 14,
+          "href": "https://github.com/ai-dynamo/nixl/pull/1258",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Github",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798221",
+          "tokenized_text": "来源：[[[LINK_1|Github]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Github",
+          "model": "pro",
+          "created_at": "2026-04-08T01:03:14.564472",
+          "tokenized_text": "来源：[[[LINK_1|Github]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Github",
+      "confirmed_tokenized": "来源：[[[LINK_1|Github]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "全篇对“token”的大小写处理不一致。段落 0 和段落 6 中使用了全小写的“token”，而段落 1 和段落 6 的其他位置使用了首字母大写的“Token”（如“首个 Token 延迟”）。"
+          },
+          {
+            "type": "readability",
+            "description": "“约 500MB 必须跨网络传输的 KV 数据”是一个略显生硬的偏正短语嵌套（机械名词串），读起来稍显拖沓。"
+          },
+          {
+            "type": "readability",
+            "description": "原文“abstract the data movement layer behind a unified asynchronous API”中的“behind”带有“封装屏蔽底层细节”的意味，直译为“抽象为一个”稍微削弱了这种封装感。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

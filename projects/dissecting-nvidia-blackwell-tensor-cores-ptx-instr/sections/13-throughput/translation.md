@@ -1,0 +1,43 @@
+英伟达公布了针对不同输入数据类型的特定吞吐量性能。在此，我们展示其针对每种配置（数据格式与 CTA 组）的官方标称值，并将其与实际可达到的最大吞吐量进行对比。结果表明，UMMA 在所有数据格式和 CTA 组配置下均能达到接近峰值的吞吐量；即使在可能存在协同开销的 2SM 版本上，其表现依然如此。
+
+https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png
+
+对于所有 N 尺寸下的 1SM MMA，我们观察到较小的 M=64 配置最高仅达到 50% 的理论峰值吞吐量，而较大的 M=128 配置则接近 100%。这证实了 M=64 仅利用了一半的数据通路。对于 2SM MMA，M=128 的吞吐量在 N=64 时起步于 90% 的峰值，而在所有其他 N 尺寸下均接近 100%。因此，M128N64 的吞吐量必然受限于其他硬件单元（如张量内存 (TMEM)、L2 缓存、共享内存 (SMEM) 等）。同时，M=256 在所有配置下均能维持接近 100% 的峰值吞吐量，这是因为 M=256 相当于每个 SM 分配 M=128，从而能够完全利用数据通路。我们还注意到，在相同数据类型位宽下，不同格式的吞吐量完全一致，且微缩放 (micro-scaling) 数据类型几乎没有额外开销。
+
+https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png
+
+MMA 支持两种不同的 AB 矩阵布局：两个输入矩阵均存储在共享内存 (SMEM) 中（简称 SS），以及矩阵 A 存储在张量内存 (TMEM) 中而矩阵 B 存储在共享内存 (SMEM) 中（简称 TS）。我们观察到，在 M=128 时，虽然 ABLayout=TS 能够达到接近峰值的吞吐量，但 ABLayout=SS 在较小的 N 尺寸下性能表现不佳，直到 N=128 时才追平前者。
+
+https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png
+
+我们可以证明，这是因为在 SS 模式下，当 N 小于 128 时，指令本身会受限于共享内存 (SMEM) 带宽。例如，对于 FP16 数据类型，我们已知硬件在每个 SM 上每周期可执行 8192 次 MMA FLOPs，而共享内存 (SMEM) 带宽为 128 B/周期（每个 SM）。因此，对于 M=128、N=64、K=16 的配置，我们有：
+
+A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;
+
+FLOPs = 2*M*N*K = 262144
+
+SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles
+
+Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles
+
+我们针对不断增大的 N 值进行计算，发现从 N=128 的指令开始，性能最终受限于算力。
+
+https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png
+
+其他数据类型的情况也是如此——当两个操作数均存储在共享内存 (SMEM) 中时，若 N 小于 128，MMA 指令会受限于共享内存 (SMEM) 带宽。
+
+为了进一步说明这一点，我们绘制了所有形状的 FP8 1SM MMA 的 Roofline 模型图。可以清楚地看到，当 N < 256 时，指令处于内存受限区域，其斜率约为 128 字节/周期，这正是共享内存 (SMEM) 的带宽。
+
+https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png
+
+2SM MMA 在所有数据格式和形状上均实现了完美的弱扩展性，在使用两倍于 1SM MMA 的计算资源时，达到了 2 倍的加速比。在 ABLayout=SS 的较小形状中，我们观察到了超过 2 倍的加速比，这同样是因为当 N < 128 时，SS 模式下的指令受限于共享内存 (SMEM) 带宽，而 2SM 版本将操作数 B 分摊到了两个 SM 之间。
+
+https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png
+
+SS 模式：由于受限于共享内存 (SMEM) 带宽，在 N < 128 时加速比超过 2 倍
+
+https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png
+
+TS 模式：近乎完美的 2 倍加速比
+
+这些实验表明，对于给定的共享内存 (SMEM) 分块大小，应始终使用可用的最大指令形状，以获得最大吞吐量。

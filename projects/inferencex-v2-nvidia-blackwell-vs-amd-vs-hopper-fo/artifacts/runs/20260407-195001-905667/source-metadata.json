@@ -1,0 +1,53 @@
+{
+  "items": [
+    {
+      "source": "Source: Anthropic",
+      "translation": "来源：Anthropic",
+      "tokenized_translation": "来源：[[[LINK_1|Anthropic]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: Brendan Bycroft",
+      "translation": "来源：Brendan Bycroft",
+      "tokenized_translation": "来源：[[[LINK_1|Brendan Bycroft]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: DistServe",
+      "translation": "来源：DistServe",
+      "tokenized_translation": "来源：[[[LINK_1|DistServe]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Github",
+      "translation": "来源：Github",
+      "tokenized_translation": "来源：[[[LINK_1|Github]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: Outages project",
+      "translation": "来源：Outages项目",
+      "tokenized_translation": "来源：[[[LINK_1|Outages项目]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "translation": "来源：SemiAnalysis AI TCO 模型",
+      "tokenized_translation": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: SemiAnalysis InferenceMAX",
+      "translation": "来源：SemiAnalysis InferenceMAX",
+      "tokenized_translation": "来源：[[[LINK_1|SemiAnalysis InferenceMAX]]]",
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

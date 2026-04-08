@@ -1,0 +1,11 @@
+While AMD performs somewhat decently on single node FP4 and performs competitively to B200 SGLang on FP8 distributed inferencing, the issue with the current AMD open source inferencing stack is that, while individual inference optimizations perform well, real customers deploy with multiple optimizations composed together. Top tier AI labs are all using FP4 **with** disaggregated inferencing **with** wide expert parallelism all enabled at the same time, and this is where the issue occurs.
+
+SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.
+
+AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4. The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.
+
+AMD is more than six months behind on open source distributed inferencing and wide expert parallelism and FP4 composability as shown by [Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago](https://lmsys.org/blog/2025-09-25-gb200-part-2/).
+
+![](https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png)
+
+Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)

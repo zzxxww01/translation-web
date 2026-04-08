@@ -1,0 +1,825 @@
+{
+  "section_id": "09-pricing-is-only-going-one-way",
+  "title": "Pricing is Only Going One Way For Now, and ROIC Follows",
+  "title_translation": "价格目前单边上行，投资回报率紧随其后",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Taken together, these factors point to a clear conclusion: GPU rental pricing is more likely to continue rising than falling.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0089",
+      "parent_block_index": 89,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Taken together, these factors point to a clear conclusion: GPU rental pricing is more likely to continue rising than falling.",
+      "parent_block_plain_text": "Taken together, these factors point to a clear conclusion: GPU rental pricing is more likely to continue rising than falling.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 125,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "综合上述因素，结论十分明确：GPU租金更有可能继续上涨，而非下跌。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.834904",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The dynamic is self-reinforcing. As Neoclouds see supply tighten and prices rise, they move to secure more hardware ahead of further price increases, which only tightens supply and pushes pricing higher still. This echoes the 2023–2024 GPU shortage, when tight supply allowed OEMs to push through outsized margin expansion and drove a sharp spike in server pricing, though we think the server market is mature enough this time around that this may not repeat itself.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The dynamic is self-reinforcing. As Neoclouds see supply tighten and prices rise, they move to secure more hardware ahead of further price increases, which only tightens supply and pushes pricing higher still. This echoes the 2023–2024 GPU shortage, when tight supply allowed OEMs to push through outsized margin expansion and drove a sharp spike in server pricing, though we think the server market is mature enough this time around that this may not repeat itself.",
+      "parent_block_plain_text": "The dynamic is self-reinforcing. As Neoclouds see supply tighten and prices rise, they move to secure more hardware ahead of further price increases, which only tightens supply and pushes pricing higher still. This echoes the 2023–2024 GPU shortage, when tight supply allowed OEMs to push through outsized margin expansion and drove a sharp spike in server pricing, though we think the server market is mature enough this time around that this may not repeat itself.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 466,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种动态正在自我强化。随着新兴算力云厂商察觉到供应收紧与价格上涨，他们纷纷在价格进一步攀升前抢占更多硬件，而这只会加剧供应紧张，进一步推高价格。这与2023至2024年的GPU短缺期如出一辙，当时紧缺的供应让OEM厂商得以大幅扩张利润率，并导致服务器价格暴涨；不过我们认为，如今的服务器市场已足够成熟，这一幕这次可能不会重演。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.834953",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "As we argued in a recent note to our institutional clients, the re-acceleration in GPU rental pricing improves Neocloud ROIC by expanding margins on already-deployed capital. At the same time, higher rental rates extend the economic useful life of existing GPUs, meaning invested capital generates cash flows for longer before requiring reinvestment.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "improves Neocloud ROIC",
+          "start": 102,
+          "end": 124,
+          "href": "https://semianalysis.com/institutional/the-value-of-a-gpu-is-going-up/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we argued in a recent note to our institutional clients, the re-acceleration in GPU rental pricing [improves Neocloud ROIC](https://semianalysis.com/institutional/the-value-of-a-gpu-is-going-up/) by expanding margins on already-deployed capital. At the same time, higher rental rates extend the economic useful life of existing GPUs, meaning invested capital generates cash flows for longer before requiring reinvestment.",
+      "parent_block_plain_text": "As we argued in a recent note to our institutional clients, the re-acceleration in GPU rental pricing improves Neocloud ROIC by expanding margins on already-deployed capital. At the same time, higher rental rates extend the economic useful life of existing GPUs, meaning invested capital generates cash flows for longer before requiring reinvestment.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "improves Neocloud ROIC",
+          "start": 102,
+          "end": 124,
+          "href": "https://semianalysis.com/institutional/the-value-of-a-gpu-is-going-up/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 350,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正如我们近期在致机构客户的报告中所指出的，GPU租金重拾涨势，扩大了已部署资本的利润率，从而提升了新兴算力云厂商的投资回报率（ROIC）。同时，更高的租金延长了现有GPU的经济使用寿命，这意味着投入资本在需要进行再投资之前，能够创造更长期的现金流。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835042",
+          "tokenized_text": "正如我们近期在致机构客户的报告中所指出的，GPU租金重拾涨势，扩大了已部署资本的利润率，从而[[[LINK_1|提升了新兴算力云厂商的投资回报率（ROIC）]]]。同时，更高的租金延长了现有GPU的经济使用寿命，这意味着投入资本在需要进行再投资之前，能够创造更长期的现金流。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "For now, the clearest beneficiaries are providers with:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For now, the clearest beneficiaries are providers with:",
+      "parent_block_plain_text": "For now, the clearest beneficiaries are providers with:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 55,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前来看，最显著的受益者是具备以下特征的供应商：",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835067",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Shorter-duration contracts (repricing faster)",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Shorter-duration contracts (repricing faster)",
+      "parent_block_plain_text": "Shorter-duration contracts (repricing faster)",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 45,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "合同期限较短（重新定价更快）",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835088",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Large H100 install bases",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Large H100 install bases",
+      "parent_block_plain_text": "Large H100 install bases",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 24,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "庞大的H100装机基数",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835108",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Near-term capacity additions",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Near-term capacity additions",
+      "parent_block_plain_text": "Near-term capacity additions",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "近期有新增算力产能",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835129",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Neoclouds with shorter contract tenors will see capacity roll off and reprice into the current environment, capturing immediate margin expansion. At the same time, Hyperscalers and Neoclouds locking in next-generation capacity over multi-year terms will benefit.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Neoclouds with shorter contract tenors will see capacity roll off and reprice into the current environment, capturing immediate margin expansion. At the same time, Hyperscalers and Neoclouds locking in next-generation capacity over multi-year terms will benefit.",
+      "parent_block_plain_text": "Neoclouds with shorter contract tenors will see capacity roll off and reprice into the current environment, capturing immediate margin expansion. At the same time, Hyperscalers and Neoclouds locking in next-generation capacity over multi-year terms will benefit.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 262,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "合同期限较短的新兴算力云厂商将迎来算力租约到期，并按当前市场环境重新定价，从而立即实现利润率扩张。与此同时，通过多年期合同锁定下一代算力产能的超大规模云厂商和新兴算力云厂商也将从中受益。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835259",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Would we be jinxing it if we said that This Time Might Be Different?",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Might",
+          "start": 49,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Would we be jinxing it if we said that This Time *Might* Be Different?",
+      "parent_block_plain_text": "Would we be jinxing it if we said that This Time Might Be Different?",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Might",
+          "start": 49,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 68,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如果我们说“这次可能真的不一样”，会不会有点乌鸦嘴？",
+          "model": "pro",
+          "created_at": "2026-04-03T12:13:16.835343",
+          "tokenized_text": "如果我们说“这次[[[EM_1|可能]]]真的不一样”，会不会有点乌鸦嘴？",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.99,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+          "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+          "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+          "relation_to_next": "N/A - Conclusion.",
+          "key_points": [
+            "GPU rental pricing is structurally forced upward.",
+            "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+            "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+          ],
+          "translation_notes": [
+            "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+            "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。"
+          },
+          {
+            "type": "readability",
+            "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。"
+          },
+          {
+            "type": "readability",
+            "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

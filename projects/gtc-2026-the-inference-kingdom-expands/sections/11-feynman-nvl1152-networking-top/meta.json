@@ -1,0 +1,1119 @@
+{
+  "section_id": "11-feynman-nvl1152-networking-top",
+  "title": "Feynman NVL1152 Networking Topologies",
+  "title_translation": "Feynman NVL1152 网络拓扑",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Within each Feynman Kyber rack, we tentatively assume double the bandwidth per logical GPU and double the NVLink Switch bandwidth to 28.8T and 57.6T respectively. Though Jensen, in the Financial Q+A the day after the GTC Keynote, characterized NVL1152 as “all CPO”, the key technical blog outlining the new rack form factors only strictly referenced CPO for rack to rack interconnect. We will discuss the potential topography for both options.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "technical blog outlining the new rack form factors",
+          "start": 274,
+          "end": 324,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0185",
+      "parent_block_index": 185,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Within each Feynman Kyber rack, we tentatively assume double the bandwidth per logical GPU and double the NVLink Switch bandwidth to 28.8T and 57.6T respectively. Though Jensen, in the Financial Q+A the day after the GTC Keynote, characterized NVL1152 as “all CPO”, the key [technical blog outlining the new rack form factors](https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/) only strictly referenced CPO for rack to rack interconnect. We will discuss the potential topography for both options.",
+      "parent_block_plain_text": "Within each Feynman Kyber rack, we tentatively assume double the bandwidth per logical GPU and double the NVLink Switch bandwidth to 28.8T and 57.6T respectively. Though Jensen, in the Financial Q+A the day after the GTC Keynote, characterized NVL1152 as “all CPO”, the key technical blog outlining the new rack form factors only strictly referenced CPO for rack to rack interconnect. We will discuss the potential topography for both options.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "technical blog outlining the new rack form factors",
+          "start": 274,
+          "end": 324,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 443,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在每个 Feynman Kyber 机架内，我们暂且假设每个逻辑 GPU 的带宽和 NVLink 交换机带宽均翻倍，分别达到 28.8T 和 57.6T。尽管 Jensen 在 GTC Keynote 次日的财务问答环节中，将 NVL1152 描述为“全光电共封装（CPO）”，但概述新机架形态的关键技术博客仅明确指出机架间互连采用了光电共封装。我们将探讨这两种方案的潜在拓扑结构。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257051",
+          "tokenized_text": "在每个 Feynman Kyber 机架内，我们暂且假设每个逻辑 GPU 的带宽和 NVLink 交换机带宽均翻倍，分别达到 28.8T 和 57.6T。尽管 Jensen 在 GTC Keynote 次日的财务问答环节中，将 NVL1152 描述为“全光电共封装（CPO）”，但[[[LINK_1|概述新机架形态的关键技术博客]]]仅明确指出机架间互连采用了光电共封装。我们将探讨这两种方案的潜在拓扑结构。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "To double the scale-up bandwidth using copper interconnect, NVIDIA would have to achieve a per lane bandwidth of 448Gbit/s uni-di (and implemented with simulatanous bi-directional SerDes so that each physical channel carries 448G of RX and 448G of TX). However, this is a challenging feat as they would first have to prove the feasibility of 448Gb/s PAM4 SerDes at large volumes, then implement echo cancellation to achieve bidirectional bandwidth, which is in itself extremely difficult. We believe Nvidia is going for 448G uni-di only.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "echo cancellation to achieve bidirectional bandwidth",
+          "start": 395,
+          "end": 447,
+          "href": "https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0186",
+      "parent_block_index": 186,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To double the scale-up bandwidth using copper interconnect, NVIDIA would have to achieve a per lane bandwidth of 448Gbit/s uni-di (and implemented with simulatanous bi-directional SerDes so that each physical channel carries 448G of RX and 448G of TX). However, this is a challenging feat as they would first have to prove the feasibility of 448Gb/s PAM4 SerDes at large volumes, then implement [echo cancellation to achieve bidirectional bandwidth](https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution), which is in itself extremely difficult. We believe Nvidia is going for 448G uni-di only.",
+      "parent_block_plain_text": "To double the scale-up bandwidth using copper interconnect, NVIDIA would have to achieve a per lane bandwidth of 448Gbit/s uni-di (and implemented with simulatanous bi-directional SerDes so that each physical channel carries 448G of RX and 448G of TX). However, this is a challenging feat as they would first have to prove the feasibility of 448Gb/s PAM4 SerDes at large volumes, then implement echo cancellation to achieve bidirectional bandwidth, which is in itself extremely difficult. We believe Nvidia is going for 448G uni-di only.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "echo cancellation to achieve bidirectional bandwidth",
+          "start": 395,
+          "end": 447,
+          "href": "https://newsletter.semianalysis.com/p/vera-rubin-extreme-co-design-an-evolution",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 537,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "若要使用铜互连将 scale-up 带宽翻倍，英伟达必须实现每通道 448Gbit/s 单向带宽（并采用同步双向 SerDes，使每个物理通道承载 448G 的 RX 和 448G 的 TX）。然而，这是一项艰巨的挑战，因为他们首先必须证明大批量生产 448Gb/s PAM4 SerDes 的可行性，然后还要实现回波抵消以实现双向带宽，这本身就极其困难。我们认为英伟达只会采用 448G 单向方案。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257228",
+          "tokenized_text": "若要使用铜互连将 scale-up 带宽翻倍，英伟达必须实现每通道 448Gbit/s 单向带宽（并采用同步双向 SerDes，使每个物理通道承载 448G 的 RX 和 448G 的 TX）。然而，这是一项艰巨的挑战，因为他们首先必须证明大批量生产 448Gb/s PAM4 SerDes 的可行性，然后还要实现[[[LINK_1|回波抵消以实现双向带宽]]]，这本身就极其困难。我们认为英伟达只会采用 448G 单向方案。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0187",
+      "parent_block_index": 187,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257286",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!i-U0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd34ddb8c-e8ae-4e4e-8478-62996d8775e7_1799x952.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0188",
+      "parent_block_index": 188,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881508",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257318",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Feynman could use in-rack optics, where switch blades are blind-mated to the midplane using optical connectors and thin fiber strands can be used to connect the optical connectors to the NVLink 8 Switches in place of flyover cables., but we believe this is very unlikely.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0189",
+      "parent_block_index": 189,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feynman could use in-rack optics, where switch blades are blind-mated to the midplane using optical connectors and thin fiber strands can be used to connect the optical connectors to the NVLink 8 Switches in place of flyover cables., but we believe this is very unlikely.",
+      "parent_block_plain_text": "Feynman could use in-rack optics, where switch blades are blind-mated to the midplane using optical connectors and thin fiber strands can be used to connect the optical connectors to the NVLink 8 Switches in place of flyover cables., but we believe this is very unlikely.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 271,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Feynman 可以采用机架内光互连，即交换机刀片通过光学连接器与中板盲插连接，并使用细光纤束代替飞线电缆将光学连接器连接到 NVLink 8 交换机。但我们认为这极不可能。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257347",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0190",
+      "parent_block_index": 190,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257376",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!uIm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fecaed357-cd0b-4635-99c4-70bc5cf9fec9_1782x930.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0191",
+      "parent_block_index": 191,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881534",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257404",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "For rack-to-rack interconnect, we explore two different topologies. The first is a two-layer CLOS network that is similar to the Oberon form factor, but with twice the bandwidth of each GPU and NVLink switch.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0192",
+      "parent_block_index": 192,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For rack-to-rack interconnect, we explore two different topologies. The first is a two-layer CLOS network that is similar to the Oberon form factor, but with twice the bandwidth of each GPU and NVLink switch.",
+      "parent_block_plain_text": "For rack-to-rack interconnect, we explore two different topologies. The first is a two-layer CLOS network that is similar to the Oberon form factor, but with twice the bandwidth of each GPU and NVLink switch.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 208,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "针对机架间互连，我们探讨两种不同的拓扑结构。第一种是两层 CLOS 网络，它类似于 Oberon 形态，但每个 GPU 和 NVLink 交换机的带宽均翻倍。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257430",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0193",
+      "parent_block_index": 193,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257462",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!JB0C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0cb78043-cb1d-4d66-9f72-d97c1cefe4de_1062x462.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0194",
+      "parent_block_index": 194,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881558",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257494",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "The second is a reconfigurable dragonfly topology using OCS switches to connect the 8 racks. The number of OCS ports required for this topology remains tentative.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0195",
+      "parent_block_index": 195,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The second is a reconfigurable dragonfly topology using OCS switches to connect the 8 racks. The number of OCS ports required for this topology remains tentative.",
+      "parent_block_plain_text": "The second is a reconfigurable dragonfly topology using OCS switches to connect the 8 racks. The number of OCS ports required for this topology remains tentative.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "第二种是采用 OCS 交换机连接这 8 个机架的可重构蜻蜓拓扑。该拓扑所需的 OCS 端口数量暂未确定。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257526",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0196",
+      "parent_block_index": 196,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257553",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!HR-M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe606aa58-6349-444b-92f5-bf49c165ae4d_1141x1225.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0197",
+      "parent_block_index": 197,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881582",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:10:33.257578",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“关键的概述新机架形态的技术博客”中“的”字过多，导致定语堆砌，阅读不够流畅。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文使用了“全光电共封装（Co-Packaged Optics (CPO)）”，括号嵌套且英文全称赘余，不符合简洁的缩略语首次出现原则。"
+          },
+          {
+            "type": "terminology",
+            "description": "“echo cancellation”在高速串行通信（SerDes）和信号处理领域中，标准术语为“回波抵消”或“回波消除”，而“回声消除”通常用于声学和音频领域。"
+          },
+          {
+            "type": "readability",
+            "description": "“448Gbit/s 单向的每通道带宽”语序略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

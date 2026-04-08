@@ -1,0 +1,39 @@
+{
+  "section_id": "08-deepseek-r1",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 15,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "This is likely due to maturing wide EP kernels on GB200.",
+        "description": "将 GPU 计算中的“kernels”翻译成了“内核”。",
+        "why_it_matters": "在 GPU 编程和 AI 推理框架的语境下，“kernel”专指“算子”（计算核心/函数），而“内核”通常指代操作系统内核或 CPU 物理核心。这是一个典型的跨领域术语误译，会影响硬核技术读者的观感。",
+        "suggestion": "改为：“这很可能得益于 GB200 上宽专家并行算子的日益成熟。”"
+      },
+      {
+        "paragraph_index": 15,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "We also see improvements in the middle interactivities, where wide EP is deployed.",
+        "description": "将“interactivities”翻译为“交互度”，与前文不一致。",
+        "why_it_matters": "在第 0 段中，已将 Interactivity 准确定义并翻译为“交互速度（Interactivity）”，此处变为“交互度”破坏了术语的一致性。",
+        "suggestion": "改为：“在部署了宽专家并行（wide EP）的中等交互速度场景下，我们也看到了性能改善。”"
+      },
+      {
+        "paragraph_index": 21,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "For MI355X Disaggregated inference serving, AMD recommends using SGLang with MoRI.",
+        "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。",
+        "why_it_matters": "根据提供的术语表，Disaggregated Prefill 已统一为“分离式 Prefill”。此处直接使用“分离式推理服务”即可，中英夹杂加括号的方式略显累赘，打断了阅读的流畅感。",
+        "suggestion": "改为：“对于 MI355X 分离式推理服务，AMD 推荐搭配 MoRI 使用 SGLang。”"
+      }
+    ]
+  }
+}

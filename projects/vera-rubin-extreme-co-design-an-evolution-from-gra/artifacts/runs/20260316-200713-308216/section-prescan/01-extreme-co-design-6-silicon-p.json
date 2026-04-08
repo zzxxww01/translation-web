@@ -1,0 +1,138 @@
+{
+  "section_id": "01-extreme-co-design-6-silicon-p",
+  "new_terms": [
+    {
+      "term": "Blackwell",
+      "suggested_translation": "布莱克威尔",
+      "context": "Nvidia's GPU architecture preceding Rubin, mentioned as a baseline for performance comparison.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Transformer Engine",
+      "suggested_translation": "Transformer引擎",
+      "context": "Nvidia's specialized hardware/software feature for accelerating Transformer model workloads.",
+      "confidence": 0.95
+    },
+    {
+      "term": "2:4 structured sparsity",
+      "suggested_translation": "2:4结构化稀疏",
+      "context": "A hardware feature in previous Nvidia architectures that doubles throughput by zeroing out specific weights.",
+      "confidence": 0.9
+    },
+    {
+      "term": "adaptive compression engine",
+      "suggested_translation": "自适应压缩引擎",
+      "context": "A new feature in Rubin's Transformer Engine to boost inference performance via dynamic sparsity.",
+      "confidence": 0.9
+    },
+    {
+      "term": "NVLink-C2C",
+      "suggested_translation": "NVLink-C2C",
+      "context": "Nvidia's high-speed chip-to-chip interconnect for linking CPUs and GPUs or chiplets.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SerDes",
+      "suggested_translation": "SerDes",
+      "context": "High-speed serializer/deserializer interfaces used for NVLink and other high-bandwidth connections.",
+      "confidence": 0.95
+    },
+    {
+      "term": "reticle-sized die",
+      "suggested_translation": "光罩尺寸裸片",
+      "context": "A semiconductor die that reaches the maximum size limit of a lithography reticle.",
+      "confidence": 0.85
+    },
+    {
+      "term": "SM",
+      "suggested_translation": "流式多处理器",
+      "context": "Streaming Multiprocessor; the fundamental building block of Nvidia GPUs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Max-P / Max-Q",
+      "suggested_translation": "最高性能模式 / 能效优化模式",
+      "context": "Nvidia power profiles for Rubin GPUs (Max-P for performance, Max-Q for efficiency)",
+      "confidence": 0.95
+    },
+    {
+      "term": "heat spreader",
+      "suggested_translation": "均热盖",
+      "context": "Mechanical component in the Rubin package for heat distribution and support",
+      "confidence": 0.9
+    },
+    {
+      "term": "stiffener",
+      "suggested_translation": "加强筋",
+      "context": "Added to the Rubin package structure to provide mechanical support and avoid warpage",
+      "confidence": 0.85
+    },
+    {
+      "term": "TIM2",
+      "suggested_translation": "第二层热界面材料",
+      "context": "Thermal Interface Material between the heat spreader lid and the cold plate",
+      "confidence": 0.9
+    },
+    {
+      "term": "reticle-sized",
+      "suggested_translation": "光罩极限尺寸的",
+      "context": "Refers to a die that takes up the maximum printable area of a lithography reticle",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOCAMM",
+      "suggested_translation": "SOCAMM",
+      "context": "A new memory module form factor (Solder-down Compression Attached Memory Module)",
+      "confidence": 0.9
+    },
+    {
+      "term": "SHARP",
+      "suggested_translation": "SHARP",
+      "context": "Scalable Hierarchical Aggregation and Reduction Protocol for in-network compute acceleration",
+      "confidence": 0.95
+    },
+    {
+      "term": "Spectrum-6 CPO",
+      "suggested_translation": "Spectrum-6 CPO",
+      "context": "Nvidia networking product featuring Co-Packaged Optics",
+      "confidence": 0.95
+    },
+    {
+      "term": "Radix",
+      "suggested_translation": "基数",
+      "context": "Refers to the number of ports or connectivity of a switch die",
+      "confidence": 0.9
+    },
+    {
+      "term": "Optical engine",
+      "suggested_translation": "光学引擎",
+      "context": "Component on the package that converts electrical signals to optical links",
+      "confidence": 0.95
+    },
+    {
+      "term": "OSFP cage",
+      "suggested_translation": "OSFP 笼子",
+      "context": "Physical housing for pluggable OSFP optical modules",
+      "confidence": 0.9
+    },
+    {
+      "term": "Scale-out",
+      "suggested_translation": "横向扩展",
+      "context": "Architecture for expanding clusters by adding more nodes",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "rubin": "鲁宾",
+    "vera": "维拉",
+    "extreme co-design": "极致协同设计",
+    "flops": "FLOPs",
+    "rack scale": "机架级",
+    "bom": "物料清单",
+    "chiplet": "芯粒",
+    "bandwidth": "带宽",
+    "gpu cluster": "集群"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T20:33:24.623095"
+}

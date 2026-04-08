@@ -1,0 +1,307 @@
+{
+  "section_id": "15-blackwell-vs-blackwell-ultra",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "15-blackwell-vs-blackwell-ultra",
+    "section_title": "Blackwell vs Blackwell Ultra",
+    "section_title_translation": "Blackwell 与 Blackwell Ultra 对比",
+    "section_position": "16/36",
+    "article_theme": "An in-depth analysis of AI inference performance and economics across Nvidia and AMD hardware, highlighting how software maturity, specifically in advanced techniques like Disaggregated Prefill and Wide Expert Parallelism, dictates real-world dominance.",
+    "structure_summary": "The article opens by introducing InferenceXv2 and thanking hardware partners. It transitions into a technical primer on inference concepts (Interactivity vs Throughput, TP/EP/DP). The core of the piece analyzes benchmarking results for DeepSeek R1 and GPT-OSS, comparing AMD and Nvidia across various hardware and software configurations (Disagg Prefill, WideEP). It then unpacks the unit economics and software ecosystem limitations (e.g., AMD's ATOM vs Nvidia's TRTLLM) before concluding with repo updates, AI-assisted development anecdotes, and the future roadmap for InferenceX.",
+    "target_audience": "AI infrastructure engineers, GPU investors, ML researchers, and advanced tech enthusiasts.",
+    "translation_voice": "A highly competent, insider tech analyst who deeply understands GPU architecture but isn't afraid to use sharp, internet-native language to mock corporate marketing or highlight stark performance gaps.",
+    "previous_section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+    "next_section_title": "MI355X vs MI325X vs MI300X",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "1. Preserve the edgy, insider tone. Do not sanitize slang like 'framemog' or 'jestermaxxing' into dry academic prose; use equivalent Chinese internet/tech community slang (e.g., '性能碾压', '瞎折腾').",
+      "2. Restructure dense comparative sentences. When the text compares throughput vs. interactivity across multiple hardware SKUs, break the English sentence into smaller Chinese clauses. Use bullet points mentally to structure the logic before writing the sentence.",
+      "3. Keep all framework names (SGLang, vLLM, TRTLLM, Dynamo, MoRI, Mooncake) and hardware SKUs (MI355X, GB200 NVL72) in English to maintain technical accuracy.",
+      "4. For domain-specific AI/GPU concepts (e.g., 'Disaggregated Prefill', 'Wide Expert Parallelism', 'All-to-all'), use the provided standardized translations and include a brief parenthetical explanation on first occurrence if it aids the reader.",
+      "5. Handle metaphors and cultural references natively. For the 'GitHub unicorn' and 'touch some grass' references, ensure the Chinese phrasing captures both the technical frustration (server outages) and the internet humor.",
+      "6. Maintain strict distinction between 'Interactivity' (tok/s/user) and 'Throughput' (tok/s). Mistranslating these will destroy the core technical argument regarding the Pareto frontier."
+    ],
+    "article_challenges": [
+      {
+        "location": "Key Observations and Results to Highlight / Nvidia versus AMD Disagg Prefill",
+        "issue": "Use of slang 'framemog' / 'framemogged'. 'Mog' is internet slang for dominating or being physically superior. Here it means overwhelming performance dominance.",
+        "suggestion": "Translate as '性能碾压' or '全方位碾压'. Do not translate literally as '帧率碾压' unless specifically talking about video games; here it's about token throughput.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Jensen Under Promising and Overdelivering",
+        "issue": "Use of '-maxxing' slang ('classic marketing lookmaxxing', 'jestermaxxing'). This is Gen Z internet slang meaning to maximize a specific trait.",
+        "suggestion": "Translate 'marketing lookmaxxing' as '极致的营销包装' or '营销拉满'. Translate 'jestermaxxing' as '纯纯的小丑行为' or '瞎折腾'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "GitHub Actions",
+        "issue": "'We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.'",
+        "suggestion": "The 'unicorn' refers to GitHub's iconic error page (the angry unicorn) during outages. 'Touch some grass' means to go outside and disconnect from the internet. Translate with a brief note or adapt natively: '最近我们看到（GitHub宕机时的）独角兽的次数比什么动物都多！或许我们真该下线去碰碰草（接触下大自然）了。'",
+        "type": "accuracy"
+      },
+      {
+        "location": "Interactivity vs Throughput Tradeoff",
+        "issue": "'riding a metro bus vs a race car'",
+        "suggestion": "Keep the metaphor: '这就像是乘坐公交车与驾驶赛车的区别。公交车能服务众多乘客，但频繁停靠会增加时间（分摊成本）；而赛车速度极快，但只服务单人。'",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Disaggregated Prefill",
+        "term": "Disaggregated Prefill",
+        "translation": "分离式 Prefill",
+        "strategy": "translate",
+        "note": "Separating the compute-heavy prefill phase and memory-heavy decode phase of LLM inference onto different nodes.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Wide Expert Parallelism (WideEP)",
+        "term": "Wide Expert Parallelism (WideEP)",
+        "translation": "宽专家并行 (WideEP)",
+        "strategy": "translate",
+        "note": "Distributing expert weights of an MoE model across a large number of GPUs.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Interactivity",
+        "term": "Interactivity",
+        "translation": "交互速度",
+        "strategy": "translate",
+        "note": "Tokens per second per user (tok/s/user), representing the responsiveness of the model to an individual user.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Throughput",
+        "term": "Throughput",
+        "translation": "吞吐量",
+        "strategy": "translate",
+        "note": "Total tokens generated by the system across all users per second (tok/s).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Time per output token (TPOT)",
+        "term": "Time per output token (TPOT)",
+        "translation": "单输出 Token 耗时 (TPOT)",
+        "strategy": "translate",
+        "note": "The inverse of interactivity; how long it takes to generate a single token.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "All-reduce",
+        "term": "All-reduce",
+        "translation": "全归约 (All-reduce)",
+        "strategy": "translate",
+        "note": "A collective communication operation where all nodes share data and receive the reduced (e.g., summed) result.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "All-to-all",
+        "term": "All-to-all",
+        "translation": "全对全 (All-to-all)",
+        "strategy": "translate",
+        "note": "A collective communication operation where every node sends distinct data to every other node, heavily used in MoE.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Multi Token Prediction (MTP)",
+        "term": "Multi Token Prediction (MTP)",
+        "translation": "多 Token 预测 (MTP)",
+        "strategy": "translate",
+        "note": "A speculative decoding technique predicting multiple future tokens in a single forward pass.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "KV Cache offloading",
+        "term": "KV Cache offloading",
+        "translation": "KV Cache 卸载",
+        "strategy": "translate",
+        "note": "Moving the Key-Value cache from GPU HBM to CPU RAM or NVMe storage to save memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "SGLang",
+        "term": "SGLang",
+        "translation": "SGLang",
+        "strategy": "preserve",
+        "note": "An open-source fast serving framework for LLMs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TRTLLM",
+        "term": "TRTLLM",
+        "translation": "TRTLLM",
+        "strategy": "preserve",
+        "note": "Nvidia's TensorRT-LLM inference framework.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "纸面参数上，新发布的 Blackwell Ultra 与 Blackwell 内存带宽相同、FP8 性能持平，FP4 性能仅为后者的 1.5 倍。但在实测中，我们却发现 Blackwell Ultra 的 FP8 性能最高达到了 1.5 倍，而 FP4 性能仅为 1.1 倍。这可能是因为 Blackwell Ultra 作为全新发布的 GPU，软件优化尚未完全到位。",
+    "https://substackcdn.com/image/fetch/$s_!hX_E!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa7625f0e-7e35-4170-8986-4fe0d66f7925_2125x1247.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

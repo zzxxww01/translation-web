@@ -1,0 +1,1613 @@
+{
+  "section_id": "08-rack-level-infrastructure-the",
+  "title": "Rack Level Infrastructure: Thermal",
+  "title_translation": "机架级基础设施：散热",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Beyond the redesigned fanless front chassis and the 100% liquid-cooled compute tray, the most notable point in the Vera Rubin cooling architecture discussion was Jensen’s comment on coolant/water warm temperatures and the use of chillers. For many (for Mr. Market more broadly!) the statement that Vera Rubin can operate with 45C inlet temperatures, potentially avoiding mechanical compressor-based chillers, was viewed as a major surprise for much of the cooling supplier ecosystem. We instead view this as a continuation of existing trends.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0230",
+      "parent_block_index": 230,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Beyond the redesigned fanless front chassis and the 100% liquid-cooled compute tray, the most notable point in the Vera Rubin cooling architecture discussion was Jensen’s comment on coolant/water warm temperatures and the use of chillers. For many (for Mr. Market more broadly!) the statement that Vera Rubin can operate with 45C inlet temperatures, potentially avoiding mechanical compressor-based chillers, was viewed as a major surprise for much of the cooling supplier ecosystem. We instead view this as a continuation of existing trends.",
+      "parent_block_plain_text": "Beyond the redesigned fanless front chassis and the 100% liquid-cooled compute tray, the most notable point in the Vera Rubin cooling architecture discussion was Jensen’s comment on coolant/water warm temperatures and the use of chillers. For many (for Mr. Market more broadly!) the statement that Vera Rubin can operate with 45C inlet temperatures, potentially avoiding mechanical compressor-based chillers, was viewed as a major surprise for much of the cooling supplier ecosystem. We instead view this as a continuation of existing trends.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 542,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "除了重新设计的无风扇前置机箱和 100% 液冷算力托盘外，在关于 Vera Rubin 散热架构的讨论中，最引人注目的点是黄仁勋（Jensen）针对冷却液/进水温度以及冷水机组（chiller）使用的评论。对于许多人（更广泛地说是对“市场先生”而言！），Vera Rubin 可以在 45°C 的进水温度下运行，并可能避开基于机械压缩机的冷水机组，这一表态被散热供应商生态系统中的大部分成员视为一个重大意外。相反，我们认为这只是现有趋势的延续。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791486",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Vera Rubin will be able to operate at a 45C inlet temperature, but Blackwell is already capable of operating with inlet water temperatures above 40C (see for example Supermicro’s DLC-2 system). Major system vendors such as Lenovo and HPE have also been discussing 100% liquid-cooled architectures operating at 45C since early 2025. In 2024, HPE announced an industrial cooling system based on full liquid cooling, and similar approaches have long been used before in HPC. Lenovo discussed the next generation of its Neptune liquid solution at the 2025 OCP Summit, which is fully liquid-cooled and also uses 45C water.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0231",
+      "parent_block_index": 231,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Vera Rubin will be able to operate at a 45C inlet temperature, but Blackwell is already capable of operating with inlet water temperatures above 40C (see for example Supermicro’s DLC-2 system). Major system vendors such as Lenovo and HPE have also been discussing 100% liquid-cooled architectures operating at 45C since early 2025. In 2024, HPE announced an industrial cooling system based on full liquid cooling, and similar approaches have long been used before in HPC. Lenovo discussed the next generation of its Neptune liquid solution at the 2025 OCP Summit, which is fully liquid-cooled and also uses 45C water.",
+      "parent_block_plain_text": "Vera Rubin will be able to operate at a 45C inlet temperature, but Blackwell is already capable of operating with inlet water temperatures above 40C (see for example Supermicro’s DLC-2 system). Major system vendors such as Lenovo and HPE have also been discussing 100% liquid-cooled architectures operating at 45C since early 2025. In 2024, HPE announced an industrial cooling system based on full liquid cooling, and similar approaches have long been used before in HPC. Lenovo discussed the next generation of its Neptune liquid solution at the 2025 OCP Summit, which is fully liquid-cooled and also uses 45C water.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 617,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Vera Rubin 将能够在 45°C 的进水温度下运行，但 Blackwell 实际上已经能够支持 40°C 以上的进水温度（例如参考 Supermicro 的 DLC-2 系统）。联想（Lenovo）和 HPE 等主要系统供应商自 2025 年初以来也一直在讨论运行在 45°C 下的 100% 液冷架构。2024 年，HPE 发布了一款基于全液冷的工业级冷却系统，而类似的方法在高性能计算（HPC）领域早已应用多年。联想在 2025 年 OCP 峰会上讨论了其下一代 Neptune 液冷解决方案，该方案采用全液冷设计，同样使用 45°C 的温水。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791608",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0232",
+      "parent_block_index": 232,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791643",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!P5WH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9fe04678-76b1-406b-bb5a-c7822727bab0_1863x1070.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: HPE",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0233",
+      "parent_block_index": 233,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: HPE",
+      "parent_block_plain_text": "Source: HPE",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 11,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：HPE",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791777",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： HPE",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Consider Schneider’s GB300 Reference Design 111, presented in September 2025, as another example. In this reference design, the datacenter uses a dual-loop architecture: a chilled-water loop dedicated to air cooling (feeding the fan walls) and a separate, higher-temperature loop dedicated to liquid cooling. On the liquid side, the TCS circulates coolant to the cold plates at roughly 40C and returns it at a higher temperature, while the CDU transfers that heat into the facility water loop, which can enter the CDU at approximately 37C.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0234",
+      "parent_block_index": 234,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Consider Schneider’s GB300 Reference Design 111, presented in September 2025, as another example. In this reference design, the datacenter uses a dual-loop architecture: a chilled-water loop dedicated to air cooling (feeding the fan walls) and a separate, higher-temperature loop dedicated to liquid cooling. On the liquid side, the TCS circulates coolant to the cold plates at roughly 40C and returns it at a higher temperature, while the CDU transfers that heat into the facility water loop, which can enter the CDU at approximately 37C.",
+      "parent_block_plain_text": "Consider Schneider’s GB300 Reference Design 111, presented in September 2025, as another example. In this reference design, the datacenter uses a dual-loop architecture: a chilled-water loop dedicated to air cooling (feeding the fan walls) and a separate, higher-temperature loop dedicated to liquid cooling. On the liquid side, the TCS circulates coolant to the cold plates at roughly 40C and returns it at a higher temperature, while the CDU transfers that heat into the facility water loop, which can enter the CDU at approximately 37C.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 539,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "以 2025 年 9 月展示的施耐德（Schneider）GB300 参考设计 111 为例。在该参考设计中，数据中心采用双回路架构：一个专用于风冷（供应风墙）的冷冻水回路，以及一个专用于液冷的独立高温回路。在液冷侧，技术冷却系统（TCS）以约 40°C 的温度将冷却液循环至冷板，并以更高温度回流；而冷液分配单元（CDU）将热量传递至设施水回路，该回路进入 CDU 的温度约为 37°C。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791882",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0235",
+      "parent_block_index": 235,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791916",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!13E2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F345a084e-4701-4993-819c-892c840fbb4d_1717x960.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: Schneider",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0236",
+      "parent_block_index": 236,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Schneider",
+      "parent_block_plain_text": "Source: Schneider",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：施耐德",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791959",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Schneider",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "So 45C cooling is not entirely new. Even with this capability, most operators deploying Blackwell are still designing for 20-30C water temperatures. As a rough approximation, current Blackwell inlet temperatures are around room temperature, with outlet temperatures in the 40-50C range. Only a small number of operators, such as Firmus, have removed chillers from the loop (even with systems like GB200) in favor of highly optimized economizer designs where climate permits. Avoiding the compression step in mechanical cooling can deliver meaningful energy efficiency gains.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0237",
+      "parent_block_index": 237,
+      "parent_block_type": "p",
+      "parent_block_markdown": "So 45C cooling is not entirely new. Even with this capability, most operators deploying Blackwell are still designing for 20-30C water temperatures. As a rough approximation, current Blackwell inlet temperatures are around room temperature, with outlet temperatures in the 40-50C range. Only a small number of operators, such as Firmus, have removed chillers from the loop (even with systems like GB200) in favor of highly optimized economizer designs where climate permits. Avoiding the compression step in mechanical cooling can deliver meaningful energy efficiency gains.",
+      "parent_block_plain_text": "So 45C cooling is not entirely new. Even with this capability, most operators deploying Blackwell are still designing for 20-30C water temperatures. As a rough approximation, current Blackwell inlet temperatures are around room temperature, with outlet temperatures in the 40-50C range. Only a small number of operators, such as Firmus, have removed chillers from the loop (even with systems like GB200) in favor of highly optimized economizer designs where climate permits. Avoiding the compression step in mechanical cooling can deliver meaningful energy efficiency gains.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 574,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "因此，45°C 冷却并非完全的新鲜事物。即便具备这种能力，大多数部署 Blackwell 的运营商目前仍按 20-30°C 的水温进行设计。粗略估算，目前 Blackwell 的进水温度大约在室温水平，出水温度在 40-50°C 范围内。只有少数运营商（如 Firmus）在气候条件允许的情况下，通过高度优化的节能器（economizer）设计，甚至在 GB200 系统中也去掉了回路中的冷水机组。避开机械冷却中的压缩环节可以带来显著的能效提升。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.791985",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Now, how does Nvidia cool this heat monster, given that Vera Rubin’s power consumption and heat generation is roughly double that of Blackwell? Before answering, it is worth adding another consideration. Warmer inlet temperatures, while improving energy efficiency, can make cooling more challenging as inlet temperatures approach the maximum outlet temperature (the system’s ceiling temperature) and the delta-T tightens. With less temperature differential, you need higher water/coolant flow to remove the same amount of heat. In Blackwell reference architectures, the ceiling temperature is around 65C (e.g. see the Vertiv GB200 NVL72 reference design).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0238",
+      "parent_block_index": 238,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now, how does Nvidia cool this heat monster, given that Vera Rubin’s power consumption and heat generation is roughly double that of Blackwell? Before answering, it is worth adding another consideration. Warmer inlet temperatures, while improving energy efficiency, can make cooling more challenging as inlet temperatures approach the maximum outlet temperature (the system’s ceiling temperature) and the delta-T tightens. With less temperature differential, you need higher water/coolant flow to remove the same amount of heat. In Blackwell reference architectures, the ceiling temperature is around 65C (e.g. see the Vertiv GB200 NVL72 reference design).",
+      "parent_block_plain_text": "Now, how does Nvidia cool this heat monster, given that Vera Rubin’s power consumption and heat generation is roughly double that of Blackwell? Before answering, it is worth adding another consideration. Warmer inlet temperatures, while improving energy efficiency, can make cooling more challenging as inlet temperatures approach the maximum outlet temperature (the system’s ceiling temperature) and the delta-T tightens. With less temperature differential, you need higher water/coolant flow to remove the same amount of heat. In Blackwell reference architectures, the ceiling temperature is around 65C (e.g. see the Vertiv GB200 NVL72 reference design).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 656,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "鉴于 Vera Rubin 的功耗和发热量大约是 Blackwell 的两倍，英伟达（NVIDIA）将如何冷却这个散热怪兽？在回答之前，值得增加另一个考量因素。虽然较高的进水温度在提高能源效率的同时，也会随着进水温度接近最高出水温度（系统的上限温度）且温差（delta-T）收窄而使冷却变得更具挑战性。由于温差减小，需要更高的水流/冷却液流量才能带走相同热量。在 Blackwell 参考架构中，上限温度约为 65°C（例如参见维谛技术（Vertiv）的 GB200 NVL72 参考设计）。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792008",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0239",
+      "parent_block_index": 239,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792031",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Wxin!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8dfbf6ca-5b7c-4296-b4e3-56f41888f963_2801x1132.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: Vertiv",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0240",
+      "parent_block_index": 240,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Vertiv",
+      "parent_block_plain_text": "Source: Vertiv",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：维谛技术（Vertiv）",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792053",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Vertiv",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Although NVIDIA initially did not formally publish full specifications for Vera Rubin’s liquid cooling system, we believe the platform will support maximum coolant return temperatures up to 65C. This aligns with Nvidia’s warm-water operating envelope, and while the exact implication for delta-T depends on the chosen supply setpoint and flow control strategy, we can expect a slightly tighten delta-T. The pressure envelope is expected to be unchanged versus GB200, with maximum operating pressure of 72 psig (5 bar) and minimum burst pressure of 217 psig (15 bar), aligning with OCP’s MGX rack-level liquid-cooling specification.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0241",
+      "parent_block_index": 241,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although NVIDIA initially did not formally publish full specifications for Vera Rubin’s liquid cooling system, we believe the platform will support maximum coolant return temperatures up to 65C. This aligns with Nvidia’s warm-water operating envelope, and while the exact implication for delta-T depends on the chosen supply setpoint and flow control strategy, we can expect a slightly tighten delta-T. The pressure envelope is expected to be unchanged versus GB200, with maximum operating pressure of 72 psig (5 bar) and minimum burst pressure of 217 psig (15 bar), aligning with OCP’s MGX rack-level liquid-cooling specification.",
+      "parent_block_plain_text": "Although NVIDIA initially did not formally publish full specifications for Vera Rubin’s liquid cooling system, we believe the platform will support maximum coolant return temperatures up to 65C. This aligns with Nvidia’s warm-water operating envelope, and while the exact implication for delta-T depends on the chosen supply setpoint and flow control strategy, we can expect a slightly tighten delta-T. The pressure envelope is expected to be unchanged versus GB200, with maximum operating pressure of 72 psig (5 bar) and minimum burst pressure of 217 psig (15 bar), aligning with OCP’s MGX rack-level liquid-cooling specification.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 631,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管英伟达最初并未正式发布 Vera Rubin 液冷系统的完整规格，但我们认为该平台将支持高达 65°C 的最高冷却液回流温度。这符合英伟达的热水运行范围，虽然对温差的具体影响取决于所选的供水设定点和流量控制策略，但可以预见温差将略微收窄。压力范围预计与 GB200 相比保持不变，最大工作压力为 72 psig（5 bar），最小爆破压力为 217 psig（15 bar），符合 OCP 的 MGX 机柜级液冷规范。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792068",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0242",
+      "parent_block_index": 242,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792082",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!SWCn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80029eec-d319-4b7a-8fa2-452e463f396e_1782x774.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0243",
+      "parent_block_index": 243,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达 VR NVL72 组件物料清单（BoM）与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792185",
+          "tokenized_text": "来源：[[[LINK_1|英伟达 VR NVL72 组件物料清单（BoM）与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "In practice, cooling follows straightforward physics. To cool a system, you must deliver sufficient water/coolant at the appropriate temperature and pressure through the loop. If you want to increase the cooling capacity of a CDU, you increase flow rate while managing pressure, which in this case implies around a 2.0-2.5x flow increase, depending on how far outlet temperatures are actually pushed by operators.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0244",
+      "parent_block_index": 244,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In practice, cooling follows straightforward physics. To cool a system, you must deliver sufficient water/coolant at the appropriate temperature and pressure through the loop. If you want to increase the cooling capacity of a CDU, you increase flow rate while managing pressure, which in this case implies around a 2.0-2.5x flow increase, depending on how far outlet temperatures are actually pushed by operators.",
+      "parent_block_plain_text": "In practice, cooling follows straightforward physics. To cool a system, you must deliver sufficient water/coolant at the appropriate temperature and pressure through the loop. If you want to increase the cooling capacity of a CDU, you increase flow rate while managing pressure, which in this case implies around a 2.0-2.5x flow increase, depending on how far outlet temperatures are actually pushed by operators.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 413,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在实际操作中，冷却遵循简单的物理原理。要冷却一个系统，必须通过回路输送温度和压力适宜且流量充足的水/冷却液。如果要提高冷量分配单元（CDU）的冷却能力，就需要在管理压力的同时增加流量。在这种情况下，这意味着流量需要增加约 2.0-2.5 倍，具体取决于运营商对出水温度的实际推高程度。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792224",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Nvidia has indicated that Vera Rubin increases liquid flow rate and achieves nearly double the thermal performance vs Blackwell, without increasing CDU pressure head or introducing additional cooling complexity or cost. Nvidia has achieved this by optimizing the entire hydraulic path. We expect larger quick disconnects to support higher flow, as well as updated manifolds and piping. As seen in the image below, vendor roadmaps suggest that, at least for the next generation of racks, 2 inch QDs should be sufficient to accommodate higher flow while staying within pressure and flow-velocity limits.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0245",
+      "parent_block_index": 245,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia has indicated that Vera Rubin increases liquid flow rate and achieves nearly double the thermal performance vs Blackwell, without increasing CDU pressure head or introducing additional cooling complexity or cost. Nvidia has achieved this by optimizing the entire hydraulic path. We expect larger quick disconnects to support higher flow, as well as updated manifolds and piping. As seen in the image below, vendor roadmaps suggest that, at least for the next generation of racks, 2 inch QDs should be sufficient to accommodate higher flow while staying within pressure and flow-velocity limits.",
+      "parent_block_plain_text": "Nvidia has indicated that Vera Rubin increases liquid flow rate and achieves nearly double the thermal performance vs Blackwell, without increasing CDU pressure head or introducing additional cooling complexity or cost. Nvidia has achieved this by optimizing the entire hydraulic path. We expect larger quick disconnects to support higher flow, as well as updated manifolds and piping. As seen in the image below, vendor roadmaps suggest that, at least for the next generation of racks, 2 inch QDs should be sufficient to accommodate higher flow while staying within pressure and flow-velocity limits.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 601,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达表示，Vera Rubin 提高了液体流量，并在不增加 CDU 压头或引入额外冷却复杂性及成本的情况下，实现了相比 Blackwell 接近两倍的散热性能。英伟达通过优化整个液压路径实现了这一目标。我们预计将采用更大的快速接头（Quick Disconnect (QD/MQD)）以支持更高的流量，并更新分液歧管和管道。如下图所示，供应商路线图表明，至少对于下一代机柜，2 英寸的快速接头应足以容纳更高的流量，同时保持在压力和流速限制范围内。",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792238",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0246",
+      "parent_block_index": 246,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792272",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!LwLu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F00716966-64d3-4d63-b50d-823b873e285c_2026x1132.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Source: CoolIT",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0247",
+      "parent_block_index": 247,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: CoolIT",
+      "parent_block_plain_text": "Source: CoolIT",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：CoolIT",
+          "model": "pro",
+          "created_at": "2026-03-17T18:56:34.792284",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： CoolIT",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+          "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+          "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+          "relation_to_previous": "Extends the internal tray thermal discussion to the facility level.",
+          "relation_to_next": "Final section; likely leads into the full BoM model purchase call-to-action.",
+          "key_points": [
+            "Vera Rubin's ability to operate with 45C inlet temperatures",
+            "Disruption of the 'chiller' (mechanical compressor) market",
+            "Strategic surprise for the broader cooling supplier ecosystem"
+          ],
+          "translation_notes": [
+            "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+            "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+            "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The translation uses '冷液分配单元' in Paragraph 4 but switches to '冷量分配单元' in Paragraph 14."
+          },
+          {
+            "type": "terminology",
+            "description": "Translated as '优化整个液压路径'."
+          },
+          {
+            "type": "readability",
+            "description": "Translated as '2 英寸的快速接头'."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

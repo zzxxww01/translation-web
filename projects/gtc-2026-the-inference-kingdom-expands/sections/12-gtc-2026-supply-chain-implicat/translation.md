@@ -1,0 +1,43 @@
+在此，我们将探讨我们的调查发现，分析 GTC 上的这些发布将为供应链价值量带来哪些重大变化。
+
+#### LP30 中的 AlphaWave 112G SerDes
+
+读者可能会感到惊讶，高通（Qualcomm）竟然在 Groq LPU 3 芯片中拥有 IP！具体而言，是高通去年收购的 AlphaWave 为 Groq 的 C2C 互联提供 112G SerDes。AlphaWave 之所以入选，是因为它是唯一能为三星晶圆代工厂提供高速 SerDes 的 IP 供应商。此前正是 AlphaWave 的 SerDes 导致了 Groq LPU 2 出现问题。LP35 将继续使用 AlphaWave，但当 LP40 重新转回台积电代工时，英伟达显然会使用自家的 NVLink SerDes IP。
+
+#### LPX PCB
+
+接下来，我们曾提到 LPX 计算托盘需要极高规格的 PCB。我们预估每块计算托盘主板 PCB 的平均售价（ASP）将达到 7000 美元。其供应商为胜宏科技（Victory Giant）和沪电股份（WUS）。当然，计算托盘中还有其他几个 PCB 模块，但它们不需要如此高的规格。英伟达延续了与 Vera Rubin 计算托盘类似的无缆化设计理念，这需要大量板对板连接器，这也引出了下一个主要受益方。
+
+#### 线缆与连接器：Amphenol 持续受益
+
+对于 LPX 而言，Amphenol 将成为背板所有连接器的受益方。每个 LPX 节点需要 16 个 80DP Paladin 连接器用于背板。此外，还需要板对板连接器来连接托盘内的各个模块：将主 LPU 板与主机 CPU 模块、位于 CPU 模块下方的 OSFP/QSFP 模块、前端网卡（NIC）模块以及管理模块连接起来。Amphenol 也将供应线缆背板，每个机架包含 8,160 个差分对（DP）。
+
+#### NVL288 系统
+
+对于我们在上文讨论过的 Vera Rubin Ultra NVL288 系统，可以说线缆背板将在 Kyber 中回归。如果 Rubin Ultra 采用这种形态部署——每颗 Rubin Ultra GPU 将具备 14.4Tbit/s 单向的纵向扩展带宽，需要 144 个 DP 线缆连接至 NVSwitch。144 个 DP 乘以 288 颗 GPU，意味着总共需要 41,472 个 DP 才能连接这个更大的集群并行规模域。这涉及庞大的线缆数量，因此它更像是此处线缆用量的上限。如果存在超分（oversubscription），或者机架间连接通过交换机进行，那么实际所需的 DP 数量可能会更少。
+
+#### FIT 入局
+
+背板线缆插接件与 Paladin 连接器的需求极为强劲，导致 Amphenol 的产能已无法跟上供应。Amphenol 现已完成将 VR NVL72 背板线缆插接件以及 Paladin HD 连接器对 FIT 的授权，后者现可制造这些组件。此事已筹备多时，如今终于尘埃落定。Amphenol 将从 FIT 销售的这些授权组件中赚取授权费。
+
+#### Kyber Voronoi——FIT 的又一次胜利？
+
+Kyber 中板将使用大量 8×19 DP 连接器，用于与机架前端的计算托盘以及机架后端的交换机刀片进行接口连接。
+
+对于 Kyber 而言，英伟达目前在 IP 方面占据了主导地位，并设计了一款名为 Voronoi 的专有连接器规格，因此将不再使用 Amphenol 的 Paladin 连接器。目前有三家供应商竞标该项目：FIT、Molex 和 Amphenol。FIT 似乎在这些连接器的市场中处于领先地位，但据报道，Amphenol 也在与 FIT 密切合作制造这些连接器。Voronoi 的设计与实现仍处于变动之中，但 FIT 和 Amphenol 都需要利用从英伟达获得的规格授权来大幅提升产量。
+
+中板、交换机托盘和计算托盘均配备母头连接器，这将需要使用带有弹簧结构的公头部件，以保护引脚并在两侧之间实现接口连接。这些连接器的密度最终将远高于 Amphenol 的 Paladin 连接器。
+
+更多内容仅供我们的机构订阅客户阅读，请联系 sales@semianalysis.com。
+
+#### 板载光学——英伟达向可插拔模块宣战
+
+有趣的是，在 GTC 2026 展区展出的 Kyber 机架缺少用于横向扩展网络的 OSFP 接口笼。相反，我们只看到每个计算托盘引出 4 个 MPO 端口。这一设计实际上将除 DSP 之外的关键可插拔收发器组件（驱动器、TIA 等）提取出来，并放置在板载光模块（Midboard Optical Module (MBOM)）上，然后该模块通过平面网格阵列（LGA）插座连接到 PCB。两个 CX-9 共享一个板载光模块，后者随后通过短光纤连接到 MPO 面板。该板载光模块提供两个 MPO 端口，每个端口速率为 2x800G，总连接带宽达到 1.6T。
+
+https://substackcdn.com/image/fetch/$s_!RazY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3445fbb8-93c3-458e-8937-a67192ef8276_4000x3000.jpeg
+
+左侧为 4 个 MPO 端口，而非 OSFP 接口笼。来源：英伟达，SemiAnalysis
+
+使用板载光模块将阻碍任何形式的可插拔收发器或 AEC 的使用，超级云服务商自然对这一想法表示“绝对拒绝”（CP-Hell No，此处暗讽对光电共封装 CPO 的抵触），并继续极力要求保留 OSFP 接口笼，以便能够继续使用可插拔模块。
+
+需要指出的是，Kyber 设计的许多方面仍处于变动之中，在 Kyber 机架实际部署之前，仍可能出现多项设计变更。毕竟——从四个节点机箱（canister）的设计改为“两个计算托盘机箱 + 一个交换机刀片组”已经是一项巨大的改变。

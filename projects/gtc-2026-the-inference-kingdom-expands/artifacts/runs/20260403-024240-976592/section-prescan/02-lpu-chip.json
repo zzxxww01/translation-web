@@ -1,0 +1,61 @@
+{
+  "section_id": "02-lpu-chip",
+  "new_terms": [
+    {
+      "term": "slice",
+      "suggested_translation": "架构切片",
+      "context": "Groq re-organized the architecture into groups of single-purpose units... named the groups 'slices'.",
+      "confidence": 0.95
+    },
+    {
+      "term": "deterministic",
+      "suggested_translation": "确定性",
+      "context": "Groq opted for single-level scratchpad SRAM instead of multi-level memory hierarchy to make the hardware execution deterministic.",
+      "confidence": 0.9
+    },
+    {
+      "term": "systolic array",
+      "suggested_translation": "脉动阵列",
+      "context": "Conceptually, LPU resembles a systolic array that pumps instructions vertically and data horizontally.",
+      "confidence": 0.98
+    },
+    {
+      "term": "VXM / MEM / SXM / MXM slices",
+      "suggested_translation": "VXM / MEM / SXM / MXM 切片",
+      "context": "LPU architecture has VXM slices for vector operations, MEM slices for loading/storing data, etc.",
+      "confidence": 0.95
+    },
+    {
+      "term": "tape out",
+      "suggested_translation": "流片",
+      "context": "This was a much more mature node compared to peers when it taped out in 2020.",
+      "confidence": 0.98
+    },
+    {
+      "term": "physical design",
+      "suggested_translation": "物理设计",
+      "context": "Marvell responsible for the chip’s physical design.",
+      "confidence": 0.9
+    },
+    {
+      "term": "C2C SerDes",
+      "suggested_translation": "芯片间串行器/解串器",
+      "context": "The C2C SerDes on the chip couldn’t hit the advertised 112G speed.",
+      "confidence": 0.92
+    },
+    {
+      "term": "fine-grained pipelining",
+      "suggested_translation": "细粒度流水线",
+      "context": "The data flow and instruction flow design requires fine-grained pipelining to achieve high performance.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "lpu (language processing unit)": "LPU",
+    "scratchpad sram": "暂存SRAM",
+    "node": "制程节点",
+    "foundry": "晶圆代工厂"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:46:54.951145"
+}

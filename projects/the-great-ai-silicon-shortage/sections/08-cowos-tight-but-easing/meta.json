@@ -1,0 +1,120 @@
+{
+  "section_id": "08-cowos-tight-but-easing",
+  "title": "CoWoS – Tight but Easing",
+  "title_translation": "CoWoS：仍紧张但正在缓解",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Front-end capacity is now the dominant bottleneck, with CoWoS constraints easing. While CoWoS is limited, capacity planning by TSMC is with N3 constraints in mind. There is no point for TSMC to over-invest in CoWoS capacity if there is no front-end wafer supply to support it. There are also other options for 2.5D packaging. CoWoS can and has previously been outsourced to OSATs like ASE/SPIL and Amkor. For example, Nvidia went to Amkor to package H200s destined for China when the news that export licenses would be granted. Intel’s flagship EMIB 2.5D advanced packaging solution is also another option that is increasingly gaining traction, with Trainium and TPU adopting it to different degrees.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Front-end capacity is now the dominant bottleneck, with CoWoS constraints easing. While CoWoS is limited, capacity planning by TSMC is with N3 constraints in mind. There is no point for TSMC to over-invest in CoWoS capacity if there is no front-end wafer supply to support it. There are also other options for 2.5D packaging. CoWoS can and has previously been outsourced to OSATs like ASE/SPIL and Amkor. For example, Nvidia went to Amkor to package H200s destined for China when the news that export licenses would be granted. Intel’s flagship EMIB 2.5D advanced packaging solution is also another option that is increasingly gaining traction, with Trainium and TPU adopting it to different degrees.",
+      "parent_block_plain_text": "Front-end capacity is now the dominant bottleneck, with CoWoS constraints easing. While CoWoS is limited, capacity planning by TSMC is with N3 constraints in mind. There is no point for TSMC to over-invest in CoWoS capacity if there is no front-end wafer supply to support it. There are also other options for 2.5D packaging. CoWoS can and has previously been outsourced to OSATs like ASE/SPIL and Amkor. For example, Nvidia went to Amkor to package H200s destined for China when the news that export licenses would be granted. Intel’s flagship EMIB 2.5D advanced packaging solution is also another option that is increasingly gaining traction, with Trainium and TPU adopting it to different degrees.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 700,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着CoWoS产能限制的缓解，前端产能现已成为最主要的瓶颈。尽管CoWoS产能依然有限，但台积电（TSMC）在进行产能规划时，已经将N3工艺的产能限制考虑在内。如果没有充足的前端晶圆供应作为支撑，台积电过度投资CoWoS产能毫无意义。此外，2.5D封装领域也存在其他替代方案。CoWoS不仅可以外包，而且此前已有外包给日月光/硅品（ASE/SPIL）和安靠（Amkor）等外包半导体封装测试厂商（OSAT）的先例。例如，在传出有望取得出口许可的消息后，英伟达（NVIDIA）便将面向中国市场的H200芯片交由安靠进行封装。英特尔（Intel）的旗舰级EMIB 2.5D先进封装解决方案同样是日益备受青睐的另一种选择，Trainium和TPU（张量处理器）均已在不同程度上采用了该方案。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:19:08.155346",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "随着CoWoS产能限制缓解，前端产能现已成为最主要的瓶颈。尽管CoWoS产能依然受限，但台积电在规划产能时，已将N3工艺的限制考虑在内。如果没有充足的前端晶圆供应支撑，台积电过度投资CoWoS产能将毫无意义。此外，2.5D封装也有其他替代方案。CoWoS不仅可以外包，此前也已有交由日月光/硅品（ASE/SPIL）和安靠（Amkor）等封测代工厂（OSAT）的先例。例如，在传出有望获批出口许可的消息时，英伟达便将面向中国市场的H200交由安靠封装。英特尔的旗舰级EMIB 2.5D先进封装方案也是另一个日益受青睐的选择，Trainium和TPU均已在不同程度上采用了该方案。",
+          "model": "manual",
+          "created_at": "2026-03-14T23:39:00.161847",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "随着CoWoS产能限制缓解，前端产能现已成为最主要的瓶颈。尽管CoWoS产能依然受限，但台积电（TSMC）在规划产能时，已将N3工艺的限制考虑在内。如果没有充足的前端晶圆供应支撑，台积电过度投资CoWoS产能毫无意义。此外，2.5D封装也有其他替代方案。CoWoS不仅可以外包，此前也已有交由日月光/硅品（ASE/SPIL）和安靠（Amkor）等封测代工厂（OSAT）的先例。例如，在传出有望获批出口许可的消息时，英伟达（NVIDIA）便将面向中国市场的H200交由安靠封装。英特尔（Intel）的旗舰级EMIB 2.5D先进封装方案也是另一个日益受青睐的选择，Trainium和TPU（张量处理器）均已在不同程度上采用了该方案。",
+          "model": "default",
+          "created_at": "2026-03-14T23:20:08.489159",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "随着CoWoS产能限制缓解，前端产能现已成为最主要的瓶颈。尽管CoWoS产能依然受限，但台积电在规划产能时，已将N3工艺的限制考虑在内。如果没有充足的前端晶圆供应支撑，台积电过度投资CoWoS产能将毫无意义。此外，2.5D封装也有其他替代方案。CoWoS不仅可以外包，此前也已有交由日月光/硅品（ASE/SPIL）和安靠（Amkor）等封测代工厂（OSAT）的先例。例如，在传出有望获批出口许可的消息时，英伟达便将面向中国市场的H200交由安靠封装。英特尔的旗舰级EMIB 2.5D先进封装方案也是另一个日益受青睐的选择，Trainium和TPU均已在不同程度上采用了该方案。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "随着CoWoS产能限制的缓解，前端产能现已成为最主要的瓶颈。尽管CoWoS产能依然有限，但台积电（TSMC）在进行产能规划时，已经将N3工艺的产能限制考虑在内。如果没有充足的前端晶圆供应作为支撑，台积电过度投资CoWoS产能毫无意义。此外，2.5D封装领域也存在其他替代方案。CoWoS不仅可以外包，而且此前已有外包给日月光/硅品（ASE/SPIL）和安靠（Amkor）等外包半导体封装测试厂商（OSAT）的先例。例如，在传出有望取得出口许可的消息后，英伟达（NVIDIA）便将面向中国市场的H200芯片交由安靠进行封装。英特尔（Intel）的旗舰级EMIB 2.5D先进封装解决方案同样是日益备受青睐的另一种选择，Trainium和TPU（张量处理器）均已在不同程度上采用了该方案。",
+          "timestamp": "2026-03-14T23:20:08.489077",
+          "source": "default"
+        }
+      ]
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Behind the paywall, we will talk about two of the other major constraints: datacenters and power. These have shifted over time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Behind the paywall, we will talk about two of the other major constraints: datacenters and power. These have shifted over time.",
+      "parent_block_plain_text": "Behind the paywall, we will talk about two of the other major constraints: datacenters and power. These have shifted over time.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在付费墙后，我们将探讨另外两大主要瓶颈：数据中心和电力。随着时间的推移，这些制约因素已经发生了演变。",
+          "model": "pro",
+          "created_at": "2026-03-14T14:19:22.439381",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在付费内容中，我们将探讨另外两大主要瓶颈：数据中心和电力。随着时间的推移，这些制约因素已经发生了演变。",
+          "model": "manual",
+          "created_at": "2026-03-14T23:40:14.465267",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "在付费内容中，我们将探讨另外两大主要瓶颈：数据中心和电力。随着时间的推移，这些制约因素已经发生了演变。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": [
+        {
+          "text": "在付费墙后，我们将探讨另外两大主要瓶颈：数据中心和电力。随着时间的推移，这些制约因素已经发生了演变。",
+          "timestamp": "2026-03-14T23:40:13.130045",
+          "source": "manual"
+        }
+      ]
+    }
+  ]
+}

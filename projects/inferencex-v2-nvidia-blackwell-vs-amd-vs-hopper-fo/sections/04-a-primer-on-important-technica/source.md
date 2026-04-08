@@ -1,0 +1,1 @@
+In this section, we will give a brief primer on technical concepts that may help the reader better interpret results. Some readers may not need this and can skip directly to our analysis of results. We will take a deeper dive into some of these topics after the results analysis.

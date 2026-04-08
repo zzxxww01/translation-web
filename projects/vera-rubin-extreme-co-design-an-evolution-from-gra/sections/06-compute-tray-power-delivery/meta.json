@@ -1,0 +1,953 @@
+{
+  "section_id": "06-compute-tray-power-delivery",
+  "title": "Compute Tray: Power Delivery",
+  "title_translation": "计算托盘：供电",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "At the compute tray level, 50VDC power enters the compute tray via the busbar clips at the back of the chassis. Then power travels to the middle of the chassis via the internal busbar cables. From the internal busbar cables, the power path is split into three destinations. The first and second path goes to the left and the right Strata Board, where the internal busbar cable feeds 50VDC power to the Strata Board directly. The third path goes to the power distribution module at the front of the chassis. The internal busbar cables will feed 50VDC power to a busbar device that travels under the PCB midplane to connect to the power distribution board (PDB) on the other side of the PCB midplane. This differs from Grace Blackwell, where 50VDC power goes directly to the PDB.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0216",
+      "parent_block_index": 216,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At the compute tray level, 50VDC power enters the compute tray via the busbar clips at the back of the chassis. Then power travels to the middle of the chassis via the internal busbar cables. From the internal busbar cables, the power path is split into three destinations. The first and second path goes to the left and the right Strata Board, where the internal busbar cable feeds 50VDC power to the Strata Board directly. The third path goes to the power distribution module at the front of the chassis. The internal busbar cables will feed 50VDC power to a busbar device that travels under the PCB midplane to connect to the power distribution board (PDB) on the other side of the PCB midplane. This differs from Grace Blackwell, where 50VDC power goes directly to the PDB. Then, the PDB feeds 12VDC to all the boards in the compute tray.",
+      "parent_block_plain_text": "At the compute tray level, 50VDC power enters the compute tray via the busbar clips at the back of the chassis. Then power travels to the middle of the chassis via the internal busbar cables. From the internal busbar cables, the power path is split into three destinations. The first and second path goes to the left and the right Strata Board, where the internal busbar cable feeds 50VDC power to the Strata Board directly. The third path goes to the power distribution module at the front of the chassis. The internal busbar cables will feed 50VDC power to a busbar device that travels under the PCB midplane to connect to the power distribution board (PDB) on the other side of the PCB midplane. This differs from Grace Blackwell, where 50VDC power goes directly to the PDB. Then, the PDB feeds 12VDC to all the boards in the compute tray.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 777,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在计算托盘层级，50VDC电力通过机箱后部的汇流排夹进入计算托盘。随后，电力通过内部汇流排线缆传输至机箱中部。从内部汇流排线缆开始，供电路径被分流至三个目的地。第一和第二条路径分别通向左右两侧的Strata Board，由内部汇流排线缆直接向其输入50VDC电力。第三条路径则通向机箱前部的配电模块。内部汇流排线缆会将50VDC电力输送至一个走线于PCB中板下方的汇流排装置，进而连接至PCB中板另一侧的电源分配板（PDB）。这与Grace 布莱克威尔的设计不同，后者的50VDC电力是直接输入PDB的。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.085103",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Then, the PDB feeds 12VDC to all the boards in the compute tray.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0216",
+      "parent_block_index": 216,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At the compute tray level, 50VDC power enters the compute tray via the busbar clips at the back of the chassis. Then power travels to the middle of the chassis via the internal busbar cables. From the internal busbar cables, the power path is split into three destinations. The first and second path goes to the left and the right Strata Board, where the internal busbar cable feeds 50VDC power to the Strata Board directly. The third path goes to the power distribution module at the front of the chassis. The internal busbar cables will feed 50VDC power to a busbar device that travels under the PCB midplane to connect to the power distribution board (PDB) on the other side of the PCB midplane. This differs from Grace Blackwell, where 50VDC power goes directly to the PDB. Then, the PDB feeds 12VDC to all the boards in the compute tray.",
+      "parent_block_plain_text": "At the compute tray level, 50VDC power enters the compute tray via the busbar clips at the back of the chassis. Then power travels to the middle of the chassis via the internal busbar cables. From the internal busbar cables, the power path is split into three destinations. The first and second path goes to the left and the right Strata Board, where the internal busbar cable feeds 50VDC power to the Strata Board directly. The third path goes to the power distribution module at the front of the chassis. The internal busbar cables will feed 50VDC power to a busbar device that travels under the PCB midplane to connect to the power distribution board (PDB) on the other side of the PCB midplane. This differs from Grace Blackwell, where 50VDC power goes directly to the PDB. Then, the PDB feeds 12VDC to all the boards in the compute tray.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 778,
+      "segment_end": 842,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随后，电源分配板向计算托盘内的所有板卡输送12VDC电力。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.104496",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0217",
+      "parent_block_index": 217,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.104726",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0218",
+      "parent_block_index": 218,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.105059",
+          "tokenized_text": "来源：[[[LINK_1|英伟达 VR NVL72 组件物料清单与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "50VDC enters the Strata Board via one of the 50V power connectors on both sides of the Strata board. 50VDC is stepped down to 12VDC by the IBC module at the bottom of the Strata Board. Then the 12VDC will be stepped down to 1VDC by the VRM before feeding into the Rubin GPU and Vera CPU. Strata directly receives 50VDC whereas the Bianca board of Grace Blackwell receives 12VDC from the PDB. As the Strata board draws around 4800W of power (equivalent to the TDP of half a general server rack) versus Bianca at 3000W, it is necessary to deliver power to the board at a higher voltage. The benefit of moving 50VDC-12VDC conversion closer is to the reduce current and increase transmission efficiency.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0219",
+      "parent_block_index": 219,
+      "parent_block_type": "p",
+      "parent_block_markdown": "50VDC enters the Strata Board via one of the 50V power connectors on both sides of the Strata board. 50VDC is stepped down to 12VDC by the IBC module at the bottom of the Strata Board. Then the 12VDC will be stepped down to 1VDC by the VRM before feeding into the Rubin GPU and Vera CPU. Strata directly receives 50VDC whereas the Bianca board of Grace Blackwell receives 12VDC from the PDB. As the Strata board draws around 4800W of power (equivalent to the TDP of half a general server rack) versus Bianca at 3000W, it is necessary to deliver power to the board at a higher voltage. The benefit of moving 50VDC-12VDC conversion closer is to the reduce current and increase transmission efficiency. 96 Amps at 50V has 17x lower power loss than 400A at 12V due to the quadratic relationship between power loss and current.",
+      "parent_block_plain_text": "50VDC enters the Strata Board via one of the 50V power connectors on both sides of the Strata board. 50VDC is stepped down to 12VDC by the IBC module at the bottom of the Strata Board. Then the 12VDC will be stepped down to 1VDC by the VRM before feeding into the Rubin GPU and Vera CPU. Strata directly receives 50VDC whereas the Bianca board of Grace Blackwell receives 12VDC from the PDB. As the Strata board draws around 4800W of power (equivalent to the TDP of half a general server rack) versus Bianca at 3000W, it is necessary to deliver power to the board at a higher voltage. The benefit of moving 50VDC-12VDC conversion closer is to the reduce current and increase transmission efficiency. 96 Amps at 50V has 17x lower power loss than 400A at 12V due to the quadratic relationship between power loss and current.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 699,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "50VDC 通过 Strata 板卡两侧的 50V 电源连接器之一进入板卡。接着，50VDC 由 Strata 板卡底部的 IBC 模块降压至 12VDC。随后，在馈入 Rubin GPU 和 Vera CPU 之前，12VDC 会由电压调节模块进一步降压至 1VDC。Strata 直接接收 50VDC，而 Grace Blackwell 的 Bianca 板卡则从电源分配板接收 12VDC。由于 Strata 板卡的功耗约为 4800W（相当于半个普通服务器机架的 TDP），而 Bianca 仅为 3000W，因此必须以更高的电压向板卡供电。将 50VDC 至 12VDC 的转换环节移至更近的位置，其优势在于能够降低电流并提升传输效率。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.105155",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "96 Amps at 50V has 17x lower power loss than 400A at 12V due to the quadratic relationship between power loss and current.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0219",
+      "parent_block_index": 219,
+      "parent_block_type": "p",
+      "parent_block_markdown": "50VDC enters the Strata Board via one of the 50V power connectors on both sides of the Strata board. 50VDC is stepped down to 12VDC by the IBC module at the bottom of the Strata Board. Then the 12VDC will be stepped down to 1VDC by the VRM before feeding into the Rubin GPU and Vera CPU. Strata directly receives 50VDC whereas the Bianca board of Grace Blackwell receives 12VDC from the PDB. As the Strata board draws around 4800W of power (equivalent to the TDP of half a general server rack) versus Bianca at 3000W, it is necessary to deliver power to the board at a higher voltage. The benefit of moving 50VDC-12VDC conversion closer is to the reduce current and increase transmission efficiency. 96 Amps at 50V has 17x lower power loss than 400A at 12V due to the quadratic relationship between power loss and current.",
+      "parent_block_plain_text": "50VDC enters the Strata Board via one of the 50V power connectors on both sides of the Strata board. 50VDC is stepped down to 12VDC by the IBC module at the bottom of the Strata Board. Then the 12VDC will be stepped down to 1VDC by the VRM before feeding into the Rubin GPU and Vera CPU. Strata directly receives 50VDC whereas the Bianca board of Grace Blackwell receives 12VDC from the PDB. As the Strata board draws around 4800W of power (equivalent to the TDP of half a general server rack) versus Bianca at 3000W, it is necessary to deliver power to the board at a higher voltage. The benefit of moving 50VDC-12VDC conversion closer is to the reduce current and increase transmission efficiency. 96 Amps at 50V has 17x lower power loss than 400A at 12V due to the quadratic relationship between power loss and current.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 700,
+      "segment_end": 822,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "由于功率损耗与电流之间存在平方关系，50V、96A 条件下的功率损耗仅为 12V、400A 时的 1/17。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.105924",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "We have the volume and ASP for all the power semis for the all the various VRMs contained in the VR NVL72 Component BoM and Power Budget Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 97,
+          "end": 142,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0220",
+      "parent_block_index": 220,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have the volume and ASP for all the power semis for the all the various VRMs contained in the [VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/).",
+      "parent_block_plain_text": "We have the volume and ASP for all the power semis for the all the various VRMs contained in the VR NVL72 Component BoM and Power Budget Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 97,
+          "end": 142,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 143,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们在 VR NVL72 组件物料清单与功率预算模型 中，列出了各类电压调节模块所需的所有功率半导体的用量与平均售价。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.106364",
+          "tokenized_text": "我们在 [[[LINK_1|VR NVL72 组件物料清单与功率预算模型]]] 中，列出了各类电压调节模块所需的所有功率半导体的用量与平均售价。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Nvidia's Christmas Present: GB300 & B300 - Reasoning Inference, Amazon, Memory, Supply Chain - Dylan Patel, Myron Xie, and Daniel Nishball · December 25, 2024",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia's Christmas Present: GB300 & B300 - Reasoning Inference, Amazon, Memory, Supply Chain",
+          "start": 0,
+          "end": 92,
+          "href": "https://newsletter.semianalysis.com/p/nvidias-christmas-present-gb300-b300-reasoning-inference-amazon-memory-supply-chain",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0221",
+      "parent_block_index": 221,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Nvidia's Christmas Present: GB300 & B300 - Reasoning Inference, Amazon, Memory, Supply Chain](https://newsletter.semianalysis.com/p/nvidias-christmas-present-gb300-b300-reasoning-inference-amazon-memory-supply-chain) - Dylan Patel, Myron Xie, and Daniel Nishball · December 25, 2024",
+      "parent_block_plain_text": "Nvidia's Christmas Present: GB300 & B300 - Reasoning Inference, Amazon, Memory, Supply Chain - Dylan Patel, Myron Xie, and Daniel Nishball · December 25, 2024",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia's Christmas Present: GB300 & B300 - Reasoning Inference, Amazon, Memory, Supply Chain",
+          "start": 0,
+          "end": 92,
+          "href": "https://newsletter.semianalysis.com/p/nvidias-christmas-present-gb300-b300-reasoning-inference-amazon-memory-supply-chain",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 158,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达的圣诞礼物：GB300 与 B300——推理（Reasoning）与推断、亚马逊、内存与供应链 - Dylan Patel、Myron Xie 与 Daniel Nishball · 2024 年 12 月 25 日",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.107314",
+          "tokenized_text": "[[[LINK_1|英伟达的圣诞礼物：GB300 与 B300——推理（Reasoning）与推断、亚马逊、内存与供应链]]] - Dylan Patel、Myron Xie 与 Daniel Nishball · 2024 年 12 月 25 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Power sloshing between Vera and Rubin is still present, a feature carried over from GB300 that we covered in our article above. This enables more efficient power planning by sharing the 4800W provided amongst both GPU and CPU. In GPU demanding loads, 2300W goes to each GPU leaving 200W for the CPU. Vera can then dynamically boost to higher power when GPU demand drops to help minimize GPU idle time while not overprovisioning power.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0222",
+      "parent_block_index": 222,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Power sloshing between Vera and Rubin is still present, a feature carried over from GB300 that we covered in our article above. This enables more efficient power planning by sharing the 4800W provided amongst both GPU and CPU. In GPU demanding loads, 2300W goes to each GPU leaving 200W for the CPU. Vera can then dynamically boost to higher power when GPU demand drops to help minimize GPU idle time while not overprovisioning power.",
+      "parent_block_plain_text": "Power sloshing between Vera and Rubin is still present, a feature carried over from GB300 that we covered in our article above. This enables more efficient power planning by sharing the 4800W provided amongst both GPU and CPU. In GPU demanding loads, 2300W goes to each GPU leaving 200W for the CPU. Vera can then dynamically boost to higher power when GPU demand drops to help minimize GPU idle time while not overprovisioning power.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 434,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "维拉与鲁宾之间的功率动态分配依然存在，这一特性延续自我们上文报道过的 GB300。通过在 GPU 和 CPU 之间共享总计 4800W 的功率，该特性实现了更高效的电源规划。在对 GPU 需求极高的负载下，每个 GPU 会分配到 2300W 功率，剩余的 200W 留给 CPU。当 GPU 的功耗需求下降时，维拉便可动态提升至更高功率，从而在避免过度配置电源的同时，最大限度地减少 GPU 的空闲时间。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.107421",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "For the modules at the front of chassis - CX-9,BlueField-4, and management - the PDB feeds 12VDC of power to each of the modules. 50VDC l down to 12VDC at the PDB then, via a coper busbar device, the PDB feeds 12VDC to its neighboring modules. The power connector of CX-9 is located near the Paladin HD2 at the top of the modules.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0223",
+      "parent_block_index": 223,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For the modules at the front of chassis - CX-9,BlueField-4, and management - the PDB feeds 12VDC of power to each of the modules. 50VDC l down to 12VDC at the PDB then, via a coper busbar device, the PDB feeds 12VDC to its neighboring modules. The power connector of CX-9 is located near the Paladin HD2 at the top of the modules.",
+      "parent_block_plain_text": "For the modules at the front of chassis - CX-9,BlueField-4, and management - the PDB feeds 12VDC of power to each of the modules. 50VDC l down to 12VDC at the PDB then, via a coper busbar device, the PDB feeds 12VDC to its neighboring modules. The power connector of CX-9 is located near the Paladin HD2 at the top of the modules.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 330,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于机箱前端的模块——ConnectX-9、BlueField-4 以及管理模块——电源分配板会向每个模块提供 12VDC 的电源。50VDC 直流电在电源分配板处降压至 12VDC，随后电源分配板通过铜制汇流排装置，将 12VDC 电源输送给相邻模块。ConnectX-9 的电源连接器位于模块顶部，紧邻 Paladin HD2。",
+          "model": "pro",
+          "created_at": "2026-03-16T23:30:03.107482",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.625,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+          "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+          "Translate 'power distribution module (PDB)' as 配电模块."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+          "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+          "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+          "key_points": [
+            "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+            "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+            "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+          ],
+          "translation_notes": [
+            "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+            "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+            "Translate 'power distribution module (PDB)' as 配电模块."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将部分芯片/架构代号（Rubin、Vera、Grace Blackwell）音译为“鲁宾”、“维拉”、“Grace 布莱克威尔”，但同段落中的其他代号（Strata、Bianca）却保留了英文。这不仅打破了术语一致性，也不符合中文硬核科技内容的惯例（通常直接保留英文原名）。此问题同样出现在第0段和第8段。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文将“17x lower power loss”翻译为“功率损耗比...降低了 17 倍”。在中文语境中，“降低了 N 倍”属于常见的逻辑语病（降低幅度不能超过100%），此处实际表达的是前者损耗是后者的 1/17。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将“Reasoning Inference”直译为“逻辑推理与推理”，在中文里显得冗余且拗口。这里的“Reasoning”特指大语言模型中的“推理模型/复杂推理（如 OpenAI o1）”，而“Inference”指推断算力。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

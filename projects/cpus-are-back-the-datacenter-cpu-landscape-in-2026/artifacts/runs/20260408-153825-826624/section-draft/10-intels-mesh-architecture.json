@@ -1,0 +1,346 @@
+{
+  "section_id": "10-intels-mesh-architecture",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "10-intels-mesh-architecture",
+    "section_title": "Intel’s Mesh Architecture",
+    "section_title_translation": "英特尔Mesh架构",
+    "section_position": "11/30",
+    "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+    "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+    "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+    "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures.",
+    "previous_section_title": "Intel’s Ring Bus",
+    "next_section_title": "AMD’s Zen Interconnect Architecture",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+      "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+      "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+      "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+      "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+      "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+    ],
+    "article_challenges": [
+      {
+        "location": "DRAM Constraints on CPU Market",
+        "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+        "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel’s Mesh Architecture",
+        "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+        "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel Xeon Coral Rapids",
+        "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+        "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "AMD Turin Dense 7:1 Socket Consolidation",
+        "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+        "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic Era",
+        "term": "Agentic Era",
+        "translation": "智能体时代",
+        "strategy": "translate",
+        "note": "The era of AI where autonomous agents perform complex tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Crossbar",
+        "term": "Crossbar",
+        "translation": "交叉开关",
+        "strategy": "translate",
+        "note": "An interconnect topology where every core has a discrete link to all other cores.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Ring Bus",
+        "term": "Ring Bus",
+        "translation": "环形总线",
+        "strategy": "translate",
+        "note": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mesh Architecture",
+        "term": "Mesh Architecture",
+        "translation": "网格架构",
+        "strategy": "translate",
+        "note": "A 2D grid interconnect topology used in high-core-count CPUs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Die Shot",
+        "term": "Die Shot",
+        "translation": "裸片图",
+        "strategy": "translate",
+        "note": "A photograph of a semiconductor die, often annotated.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Floorplan",
+        "term": "Floorplan",
+        "translation": "物理布图",
+        "strategy": "translate",
+        "note": "The physical layout of functional blocks on a semiconductor die.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Stepping",
+        "term": "Stepping",
+        "translation": "步进",
+        "strategy": "translate",
+        "note": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Reticle-sized",
+        "term": "Reticle-sized",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Head node",
+        "term": "Head node",
+        "translation": "头节点",
+        "strategy": "translate",
+        "note": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Context Memory Storage",
+        "term": "Context Memory Storage",
+        "translation": "上下文内存存储",
+        "strategy": "translate",
+        "note": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Front Side Bus (FSB)",
+        "term": "Front Side Bus (FSB)",
+        "translation": "前端总线 (FSB)",
+        "strategy": "translate",
+        "note": "Early Intel computer communication interface.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+    "英特尔 Knights Landing 网格互连架构。来源：英特尔，Hot Chips 2016",
+    "为了解决可扩展性问题，英特尔在 2017 年将其 2016 款至强 Phi “Knights Landing” 处理器中使用的网格互连架构，引入到主流的 Skylake-X 至强可扩展 CPU 中，在 XCC (极高核心数) 裸片中集成了 28 个核心。尽管核心数相比 Broadwell 并未大幅增加，但这一设计奠定了未来十年持续扩展核心数的基础。",
+    "在网格架构中，核心呈网格状排列，每行每列通过半环相连，形成 2D 网格阵列。每个网格节点可容纳核心与 L3缓存切片、PCIe IO、IMC 以及加速器。核心间的路由采用环形机制，数据先沿垂直方向传输，再沿水平方向移动。缓存与主代理及其嗅探过滤器如今分布在所有环形节点上，以维持整个网络内的内存一致性。",
+    "在网格网络中，由于多个内存控制器分布在裸片两侧，大型网格的内存访问与核心间延迟差异极大。与早期的片上集群 (CoD) 方法类似，系统提供了几种集群模式，将网格划分为四个象限以实现子NUMA集群 (SNC)。这降低了平均延迟，但代价是将每个处理器视为多个插槽，且每个 NUMA 节点的 L3缓存与内存访问池也相应缩小。",
+    "在 Knights Landing 中，每个网格节点容纳两个核心，并共享 L2缓存。网格阵列规模为 6 列 9 行，顶部和底部行配置了更多的 IO 和 MCDRAM。网格网络运行在独立的时钟频率上，并能动态调整网格时钟以节省功耗。在 Knights Landing 上，网格运行频率为 1.6GHz。",
+    "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+    "Skylake-SP 网格架构图。来源：英特尔",
+    "在 Skylake-X 中，28 个核心排列成 6x6 网格阵列，顶部设有北侧 IO 模块，两侧预留了两个 IMC (集成内存控制器) 位置。核心体积增大导致网格阵列规模缩小。为提升浮点性能，这些核心内部增加了更多的 L2缓存与 AVX-512 扩展。若再增加一行或一列，裸片尺寸必将突破 26 x 33 毫米的光刻掩模版极限。得益于网格规模缩小以及 CPU 频率提升（最高达 4.5GHz），网格时钟频率也随之拉高至 2.4GHz。这使得其平均延迟与 Broadwell 的双环架构不相上下。",
+    "随后的 Cascade Lake 与 Cooper Lake 处理器仅作微调，依然沿用相同的 28 核心布局。顺带一提，面对 AMD 携 EPYC 杀回数据中心市场，英特尔在 Cascade Lake-AP 上推出了 56 核心的双裸片 MCM (多芯片模块)，但随后又砍掉了 Cooper Lake CPX-4 的类似版本。",
+    "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+    "Ice Lake XCC (极高核心数) 40 核心网格架构图。来源：英特尔",
+    "下一代 Ice Lake 受益于制程节点从 14nm 演进至 10nm，核心数得以提升至 40 个，呈 8x7 网格排列。这已是光刻掩模版极限下的最大规模。然而，紧随其后的下一代 Sapphire Rapids 仍将停留在同一制程节点，且需集成更多功能特性。这让英特尔在如何继续堆叠核心数上进退维谷。",
+    "跨 EMIB (嵌入式多芯片互连桥接) 的解耦网格架构",
+    "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+    "英特尔至强向 Chiplet 演进的解耦之路。来源：英特尔",
+    "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+    "Sapphire Rapids XCC 拓扑图。来源：英特尔",
+    "Sapphire Rapids 引入了用于矩阵乘法和 AI 的 AMX (高级矩阵扩展) 引擎，核心面积进一步增大。这意味着单片裸片只能容纳 34 个核心，相比 Ice Lake 反而出现了倒退。为了将核心数提升至 60 个，英特尔别无选择，只能再次将核心拆分到多个裸片上。然而，他们希望在芯片层面保持“逻辑上的单片结构”。这样一来，处理器在系统层面的呈现形态和性能表现就能与单片裸片毫无二致。",
+    "因此，Sapphire Rapids 首次采用了英特尔的 EMIB (嵌入式多芯片互连桥接) 高级封装技术，实现了跨裸片的网格架构。两对镜像对称的 15 核心裸片通过模块化裸片互连结构拼接在一起。这在四个象限和近 1600 平方毫米的硅片上，构建了一个规模庞大得多的 8x12 网格。为了应对 PCIe 5.0 翻倍的吞吐量与全新数据加速器模块之间激增的数据流量，IO 区域必须配备双排网格节点。",
+    "随着跨多裸片的网格规模大幅扩张，核心间的平均延迟从 Skylake 的 47ns 恶化至 59ns。为了尽量避开网格网络，英特尔将每个核心的私有 L2缓存增加到 2MB。这导致裸片上的 L2缓存总量甚至超过了 L3缓存（120MB 对 112.5MB）。此外，官方也更加推荐使用子NUMA集群 (SNC) 模式，将每个裸片视为一个独立的象限。",
+    "尽管这是英特尔首次转向 Chiplet 架构，但 Sapphire Rapids 却因长达数年的延期和频繁的改版而臭名昭著。或许是由于跨 EMIB 运行网格架构时遇到了性能瓶颈，亦或是出于其他执行层面的问题，其最终版本直到修改至E5步进才最终发布。而在最初的路线图中，它的原定发布时间是 2021 年。",
+    "2023 年底推出的后续更新版本 Emerald Rapids 沿用了相同的核心架构和制程节点，但将裸片数量减少到了 2 个。得益于 EMIB 裸片间互连占用的硅片面积减少，英特尔得以将核心数从 60 个提升至 66 个（为保证良率，实际最多启用 64 个）。同时，L3缓存也几乎翻了三倍，达到 320MB。我们曾在此处详细撰文探讨过相关设计决策。",
+    "英特尔 Emerald Rapids 在 Chiplet 路线上的倒退——设计、性能与成本 - Dylan Patel、Gerald Wong 及另外 3 人 · 2023 年 5 月 3 日",
+    "至强 6 上的异构解耦",
+    "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+    "至强 6 平台特性。来源：英特尔",
+    "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+    "至强 6 计算与 I/O 裸片图解。来源：英特尔",
+    "采用多裸片芯粒设计，除了能突破光刻掩模版面积限制外，另一大优势在于能够灵活混搭裸片，并在不同的变体和配置中共享设计。在 2024 年推出的下一代至强 6 平台上，英特尔将 I/O 与核心和内存剥离，走向了异构解耦。此举使得 I/O 裸片得以保留在较旧的 Intel 7 制程节点上，而计算裸片则跃升至 Intel 3 制程节点。因此，英特尔能够复用为 Sapphire Rapids 架构开发的 I/O IP；同时，由于 I/O 模块从先进节点中获益有限，这种做法也有效节约了成本。",
+    "与此同时，计算裸片可以与 P 核 Granite Rapids 架构和 E 核 Sierra Forest 架构灵活混搭。在顶配的 Granite Rapids-AP 至强 6900P 系列中，最多可搭载 3 个计算裸片，从而在总计 5 个裸片上构建出一张庞大的 10x19 网格。该网格物理连接了 132 个核心，出于良率考量，实际最多启用 128 个核心。",
+    "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+    "至强 6 计算裸片拼接图。从左上角顺时针方向依次为：UCC 44核、高核心数 (HCC) 50核、HDCC (高密度核心数) 152核、LCC 20核。来源：英特尔，SemiAnalysis 预估",
+    "在 144 核的 Sierra Forest 上，E 核被划分为 4 核集群并共享一个公共网格节点。这些集群排列成 8x6 的网格，裸片上物理光刻了 152 个核心，最多可激活 144 个。尽管 Sierra Forest 是应超大规模云服务商的要求而打造，旨在提供单核 TCO 更低的“云原生”CPU，但英特尔已承认其市场接受度极其有限。目前，这些云厂商早已转向 AMD 并开始自研基于 ARM 的 CPU，而英特尔传统的企业级客户对此也毫无兴趣。结果就是，双裸片 288 核的 Sierra Forest-AP（至强 6900E）SKU 未能实现全面上市，仅作为路线图之外的低产量产品苟延残喘，专供极少数下了订单的超大规模云客户。",
+    "Clearwater Forest 的失败",
+    "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+    "基于 18A 制程节点的十二个 24 核 Clearwater Forest 计算裸片。来源：英特尔，SemiAnalysis",
+    "这些 I/O 裸片也将被复用于即将推出的至强 6+ Clearwater Forest-AP E 核处理器中。计算裸片首次采用了英特尔的 Foveros Direct 混合键合技术，将 18A 核心裸片堆叠在包含网格、L3缓存和内存接口的基础裸片之上，使核心总数跃升至 288 个。垂直解耦设计使得计算核心能够向最新的 18A 逻辑制程节点演进，同时将微缩效益不佳的网格、缓存和 I/O 模块保留在较旧的英特尔 3 制程节点上。",
+    "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+    "Clearwater Forest 性能预测。来源：英特尔",
+    "然而，英特尔的执行力问题在 Clearwater Forest 上再次暴露，其上市时间从 2025 年下半年推迟至 2026 年上半年。英特尔将延期归咎于 Foveros Direct 的集成难题。考虑到英特尔在摸索混合键合技术时，竟拿如此复杂的服务器芯片作为首发载体，出现这种情况并不令人意外。或许正因如此，这种垂直解耦的互连架构在访问基础裸片的 L3 缓存和网格网络时，带宽相对较低，每个 4 核集群仅有 35GB/s。",
+    "尽管历经两年的时间跨度，并采用了全新的核心微架构、新制程节点、新的先进封装且成本更高，英特尔展示的数据却表明，在同等核心数量下，Clearwater Forest 的性能仅比 Sierra Forest 快 17%。混合键合良率低下导致成本飙升，性能提升却如此有限，难怪英特尔在最新的 2025 年第四季度财报中对 Clearwater Forest 几乎只字未提。我们的判断是，英特尔根本不想大规模量产这些会拖累利润率的芯片，而是宁愿将其作为 Foveros Direct 提升良率的试验载体。"
+  ]
+}

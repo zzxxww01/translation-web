@@ -1,0 +1,1191 @@
+{
+  "section_id": "02-capacity-paying-for-power-pla",
+  "title": "Capacity: paying for power plants to sit idle 95% of the time",
+  "title_translation": "容量：为95%时间闲置的发电厂买单",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "At a high level, a monthly household electric bill is driven by the following charges:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At a high level, a monthly household electric bill is driven by the following charges:",
+      "parent_block_plain_text": "At a high level, a monthly household electric bill is driven by the following charges:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 86,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "总体而言，家庭月度电费账单主要由以下几项费用构成：",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340619",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "总体而言，家庭月度电费账单主要由以下几项费用构成：",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975614",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "总体而言，家庭月度电费账单主要由以下几项费用构成：",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:56.317360",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "总体而言，家庭月度电费账单主要由以下几项费用构成：",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Energy: In deregulated territories (including PJM’s 13 states, and ERCOT/Texas), this is a function of wholesale prices, i.e. real-time supply and demand for electricity.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Energy",
+          "start": 0,
+          "end": 6,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Energy**: In deregulated territories (including PJM’s 13 states, and ERCOT/Texas), this is a function of wholesale prices, i.e. real-time supply and demand for electricity.",
+      "parent_block_plain_text": "Energy: In deregulated territories (including PJM’s 13 states, and ERCOT/Texas), this is a function of wholesale prices, i.e. real-time supply and demand for electricity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Energy",
+          "start": 0,
+          "end": 6,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 170,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "电量：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340755",
+          "tokenized_text": "[[[STRONG_1|电量]]]：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "电量：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:33:57.991419",
+          "tokenized_text": "[[[STRONG_1|电量]]]：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "电量：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+      "confirmed_tokenized": "[[[STRONG_1|电量]]]：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Capacity: This charge doesn’t exist in ERCOT but matters in PJM. It is a function of supply & demand for capacity, i.e. power that will only turn on a few hours per year, at necessary peak events. In PJM, this charge is defined annually via a large auction.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Capacity",
+          "start": 0,
+          "end": 8,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "capacity",
+          "start": 105,
+          "end": 113,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Capacity**: This charge doesn’t exist in ERCOT but matters in PJM. It is a function of supply & demand for **capacity**, i.e. power that will only turn on a few hours per year, at necessary peak events. In PJM, this charge is defined annually via a large auction.",
+      "parent_block_plain_text": "Capacity: This charge doesn’t exist in ERCOT but matters in PJM. It is a function of supply & demand for capacity, i.e. power that will only turn on a few hours per year, at necessary peak events. In PJM, this charge is defined annually via a large auction.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Capacity",
+          "start": 0,
+          "end": 8,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "capacity",
+          "start": 105,
+          "end": 113,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 257,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "容量：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于容量的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340879",
+          "tokenized_text": "[[[STRONG_1|容量]]]：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于[[[STRONG_2|容量]]]的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "容量：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于容量的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:04.381288",
+          "tokenized_text": "[[[STRONG_1|容量]]]：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于[[[STRONG_2|容量]]]的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "容量：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于容量的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+      "confirmed_tokenized": "[[[STRONG_1|容量]]]：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于[[[STRONG_2|容量]]]的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Transmission & Distribution (T&D): the charges for the electrical distribution network.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Transmission & Distribution (T&D)",
+          "start": 0,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Transmission & Distribution (T&D)**: the charges for the electrical distribution network.",
+      "parent_block_plain_text": "Transmission & Distribution (T&D): the charges for the electrical distribution network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Transmission & Distribution (T&D)",
+          "start": 0,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 87,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "输配电（T&D）：电力输配网络的费用。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340925",
+          "tokenized_text": "[[[STRONG_1|输配电（T&D）]]]：电力输配网络的费用。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "输配电（T&D）：电力输配网络的费用。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:11.569238",
+          "tokenized_text": "[[[STRONG_1|输配电（T&D）]]]：电力输配网络的费用。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "输配电（T&D）：电力输配网络的费用。",
+      "confirmed_tokenized": "[[[STRONG_1|输配电（T&D）]]]：电力输配网络的费用。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "This remains a highly regulated area. T&D providers typically earn a pre-determined, regulated Return on Equity. As such, utilization rate of transmission & distribution assets can impact consumer power prices. We will not dive into this in this report – we’ll leave that for a future deep dive.",
+      "source_html": null,
+      "element_type": "blockquote",
+      "inline_elements": [],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "blockquote",
+      "parent_block_markdown": "> This remains a highly regulated area. T&D providers typically earn a pre-determined, regulated Return on Equity. As such, utilization rate of transmission & distribution assets can impact consumer power prices. We will not dive into this in this report – we’ll leave that for a future deep dive.",
+      "parent_block_plain_text": "This remains a highly regulated area. T&D providers typically earn a pre-determined, regulated Return on Equity. As such, utilization rate of transmission & distribution assets can impact consumer power prices. We will not dive into this in this report – we’ll leave that for a future deep dive.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一领域依然受到高度监管。输配电企业通常赚取预先设定的、受监管的股本回报率。因此，输配电资产的利用率会影响终端消费者的电价。我们在本报告中不会对此展开探讨，而是将其留待未来的深度报告再作剖析。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340943",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "这一领域依然受到高度监管。输配电企业通常赚取预先设定的、受监管的股本回报率。因此，输配电资产的利用率会影响终端消费者的电价。我们在本报告中不会对此展开探讨，而是将其留待未来的深度报告再作剖析。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975659",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这一领域依然受到高度监管。输配电企业通常赚取预先设定的、受监管的股本回报率。因此，输配电资产的利用率会影响终端消费者的电价。我们在本报告中不会对此展开探讨，而是将其留待未来的深度报告再作剖析。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:16.338192",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这一领域依然受到高度监管。输配电企业通常赚取预先设定的、受监管的股本回报率。因此，输配电资产的利用率会影响终端消费者的电价。我们在本报告中不会对此展开探讨，而是将其留待未来的深度报告再作剖析。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Others: taxes, retail adders, ancillary services, etc. We will not dive into this, as it varies based on location.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Others",
+          "start": 0,
+          "end": 6,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Others**: taxes, retail adders, ancillary services, etc. We will not dive into this, as it varies based on location.",
+      "parent_block_plain_text": "Others: taxes, retail adders, ancillary services, etc. We will not dive into this, as it varies based on location.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Others",
+          "start": 0,
+          "end": 6,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 114,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "其他：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340981",
+          "tokenized_text": "[[[STRONG_1|其他]]]：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "其他：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:23.858464",
+          "tokenized_text": "[[[STRONG_1|其他]]]：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "其他：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+      "confirmed_tokenized": "[[[STRONG_1|其他]]]：税费、零售附加费、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0028",
+      "parent_block_index": 28,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.340999",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975672",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:27.929569",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: SemiAnalysis estimates, EIA",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis estimates, EIA",
+      "parent_block_plain_text": "Source: SemiAnalysis estimates, EIA",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 35,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：SemiAnalysis 测算，EIA",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.341016",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975682",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis estimates, EIA",
+          "model": "manual",
+          "created_at": "2026-03-16T00:34:28.773134",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： SemiAnalysis estimates, EIA",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "The purpose of capacity markets is to ensure households and businesses always have the electricity they need, including on peak summer or winter days. For context, on a single day, the electric load of New York City alone can vary by 2 gigawatts (GW), against a daily peak of 6-8 GW. During a heat wave, this same city can draw 10 GW of electricity as everyone runs their air conditioning at once.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "New York City alone can vary by 2 gigawatts (GW",
+          "start": 202,
+          "end": 249,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "6-8 GW.",
+          "start": 276,
+          "end": 283,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "10 GW",
+          "start": 328,
+          "end": 333,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The purpose of capacity markets is to ensure households and businesses always have the electricity they need, including on peak summer or winter days. For context, on a single day, the electric load of **New York City alone can vary by 2 gigawatts (GW**), against a daily peak of **6-8 GW.** During a heat wave, this same city can draw **10 GW** of electricity as everyone runs their air conditioning at once.",
+      "parent_block_plain_text": "The purpose of capacity markets is to ensure households and businesses always have the electricity they need, including on peak summer or winter days. For context, on a single day, the electric load of New York City alone can vary by 2 gigawatts (GW), against a daily peak of 6-8 GW. During a heat wave, this same city can draw 10 GW of electricity as everyone runs their air conditioning at once.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "New York City alone can vary by 2 gigawatts (GW",
+          "start": 202,
+          "end": 249,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "6-8 GW.",
+          "start": 276,
+          "end": 283,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "10 GW",
+          "start": 328,
+          "end": 333,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 397,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW），而作为对比基数的日常峰值仅为 6 至 8 吉瓦。当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 10 吉瓦。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.341090",
+          "tokenized_text": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，[[[STRONG_1|仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW）]]]，而作为对比基数的日常峰值仅为 [[[STRONG_2|6 至 8 吉瓦。]]]当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 [[[STRONG_3|10 吉瓦]]]。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW），而作为对比基数的日常峰值仅为 6 至 8 吉瓦。当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 10 吉瓦。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:35:01.196009",
+          "tokenized_text": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，[[[STRONG_1|仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW）]]]，而作为对比基数的日常峰值仅为 [[[STRONG_2|6 至 8 吉瓦。]]]当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 [[[STRONG_3|10 吉瓦]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW），而作为对比基数的日常峰值仅为 6 至 8 吉瓦。当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 10 吉瓦。",
+      "confirmed_tokenized": "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，[[[STRONG_1|仅纽约市一地的电力负荷波动就可高达 2 吉瓦（GW）]]]，而作为对比基数的日常峰值仅为 [[[STRONG_2|6 至 8 吉瓦。]]]当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 [[[STRONG_3|10 吉瓦]]]。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "In PJM, to ensure we have capacity when it’s needed, we pay power plant owners to maintain their assets on standby for >95% of the year. The price paid is determined by a forward auction, run once per year. That price is then spread across all electricity customers in the region. And that price went up by 9.3x in the 2025/26 delivery period, as detailed below.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In PJM, to ensure we have capacity when it’s needed, we pay power plant owners to maintain their assets on standby for >95% of the year. The price paid is determined by a forward auction, run once per year. That price is then spread across all electricity customers in the region. And that price went up by 9.3x in the 2025/26 delivery period, as detailed below.",
+      "parent_block_plain_text": "In PJM, to ensure we have capacity when it’s needed, we pay power plant owners to maintain their assets on standby for >95% of the year. The price paid is determined by a forward auction, run once per year. That price is then spread across all electricity customers in the region. And that price went up by 9.3x in the 2025/26 delivery period, as detailed below.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 362,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在PJM，为确保在关键时刻有充足的电力容量，我们向发电厂所有者支付费用，让其资产在全年超过95%的时间里处于闲置待命状态。这笔费用的定价由每年举行一次的远期拍卖来决定，随后这笔成本会被分摊给该区域内的所有电力用户。正如后文详述，在2025/26交付期，这一价格暴涨了9.3倍。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.341109",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "建议统一使用中文标点",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975692",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "在PJM市场，为了确保在需要时有足够的电力容量，我们向发电厂所有者支付费用，使其资产在全年超过95%的时间里保持待命状态。该价格由每年举行一次的远期拍卖决定，随后分摊给该地区的所有电力用户。如下文详述，在2025/26交付期，这一价格暴涨了9.3倍。",
+          "model": "default",
+          "created_at": "2026-03-16T00:34:53.328356",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "在PJM市场，为了确保在需要时有足够的电力容量，我们向发电厂所有者支付费用，使其资产在全年超过95%的时间里保持待命状态。该价格由每年举行一次的远期拍卖决定，随后分摊给该地区的所有电力用户。如下文详述，在2025/26交付期，这一价格暴涨了9.3倍。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:35:09.385638",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "在PJM市场，为了确保在需要时有足够的电力容量，我们向发电厂所有者支付费用，使其资产在全年超过95%的时间里保持待命状态。该价格由每年举行一次的远期拍卖决定，随后分摊给该地区的所有电力用户。如下文详述，在2025/26交付期，这一价格暴涨了9.3倍。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "ERCOT, on the other hand, is an “energy-only” market, with no separate capacity auction. Real-time pricing signals determine “scarcity” and incentivizes power plants to solve the issue. There are a few technicalities we detail later in the report, but the fundamental difference is the absence of a centralized annual capacity auction, instead using real-time market forces.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "ERCOT, on the other hand, is an “energy-only” market, with no separate capacity auction. Real-time pricing signals determine “scarcity” and incentivizes power plants to solve the issue. There are a few technicalities we detail later in the report, but the fundamental difference is the absence of a centralized annual capacity auction, instead using real-time market forces.",
+      "parent_block_plain_text": "ERCOT, on the other hand, is an “energy-only” market, with no separate capacity auction. Real-time pricing signals determine “scarcity” and incentivizes power plants to solve the issue. There are a few technicalities we detail later in the report, but the fundamental difference is the absence of a centralized annual capacity auction, instead using real-time market forces.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 374,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "相比之下，ERCOT是一个“纯电能市场”，没有单独的容量拍卖机制。实时价格信号决定了电力的“稀缺性”，并以此激励发电厂解决供需缺口。我们在报告后文中会详述一些技术细节，但两者的根本区别在于，ERCOT不存在中心化的年度容量拍卖，而是依靠实时的市场力量。",
+          "model": "pro",
+          "created_at": "2026-03-15T21:37:51.341167",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "相比之下，ERCOT是一个“纯电能市场”，没有单独的容量拍卖机制。实时价格信号决定了电力的“稀缺性”，并以此激励发电厂解决供需缺口。我们在报告后文中会详述一些技术细节，但两者的根本区别在于，ERCOT不存在中心化的年度容量拍卖，而是依靠实时的市场力量。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:09.975701",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "相比之下，ERCOT是一个“纯电能市场”，没有单独的容量拍卖机制。实时价格信号决定了电力的“稀缺性”，并以此激励发电厂解决供需缺口。我们在报告后文中会详述一些技术细节，但两者的根本区别在于，ERCOT不存在中心化的年度容量拍卖，而是依靠实时的市场力量。",
+          "model": "manual",
+          "created_at": "2026-03-16T00:35:22.052261",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "相比之下，ERCOT是一个“纯电能市场”，没有单独的容量拍卖机制。实时价格信号决定了电力的“稀缺性”，并以此激励发电厂解决供需缺口。我们在报告后文中会详述一些技术细节，但两者的根本区别在于，ERCOT不存在中心化的年度容量拍卖，而是依靠实时的市场力量。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 8.82,
+        "is_excellent": false,
+        "applied_terms": [
+          "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+          "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+          "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+          "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+          "key_points": [
+            "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+            "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+          ],
+          "translation_notes": [
+            "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+            "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+          ]
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "提示词的本章翻译注意点中明确要求将 'retail adders' 翻译为“零售附加费”，但译文中使用了“零售加价”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文中的 'against' 表示“相对于/以...为基数”，意在强调 2 GW 的波动幅度相对于 6-8 GW 的总峰值来说占比极大。译文将其拆分为并列句“而其日常峰值负荷通常为 6 至 8 吉瓦”，略微削弱了这种对比的张力。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

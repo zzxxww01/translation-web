@@ -1,0 +1,36 @@
+{
+  "section_id": "14-jensen-under-promising-and-ove",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.174999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.0,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "在 GTC 2024 上，黄仁勋在台上承诺从 H100 到 GB200 NVL72 将带来高达 30 倍的性能提升，所有人都觉得这不过是经典的营销拉满，在现实世界中根本无法实现。许多人试图给这种看似施展了现实扭曲力场的行为贴上标签，好让他们能讲更多黄氏数学的段子。的确——我们当时也曾指出，这 30 倍的性能差距，实际上是将 H200 在 FP8 下的最差情况与 GB200 在 FP4 下的合理情况进行对比得出的。",
+    "英伟达 Blackwell 性能与 TCO 分析——B100 对比 B200 对比 GB200 NVL72 - Dylan Patel 与 Daniel Nishball · 2024 年 4 月 10 日",
+    "https://substackcdn.com/image/fetch/$s_!9ywW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4fec3378-2cf4-4c1c-a40d-bcbd788c9a70_3022x1964.jpeg",
+    "来源：英伟达 GTC 2024",
+    "但事实证明，小丑竟是他们自己。时间快进到将近两年后，我们现在可以看到，这终究不是什么营销炒作拉满，黄仁勋实际上一直对 Blackwell 的性能作了保守承诺。根据我们的测试，在大规模 MoE (混合专家) 推理方面，即使与强大的 H100 Disagg (分离) 结合宽专家并行 (Wide EP) 的 FP8 基准相比，Blackwell 的表现也极其出色。在 116 Token/秒/用户的交互速度下，GB200 NVL72 FP4 的性能提升高达 98 倍，而 GB300 NVL72 FP4 的性能提升更是高达 100 倍！也许黄氏数学的新法则是：在 token 吞吐量方面，他交付的实际结果永远是承诺的两倍。买得越多，省得越多，诚不欺我！",
+    "https://substackcdn.com/image/fetch/$s_!rxr1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70638c7e-69a6-43f2-96a4-23766bcabbd2_2121x1248.png",
+    "来源：SemiAnalysis InferenceX",
+    "即使将 Blackwell 和 Blackwell Ultra 增加的 TCO 考虑在内，与 Hopper 相比，每美元 token 数依然实现了 9.7 倍（40 Token/秒/用户）到 65 倍（116 Token/秒/用户）的提升。您可以在我们的免费网站上详细探索 Hopper 与 Blackwell 的性能对比。与 Hopper 相比，Blackwell 的性能实在太强了，以至于我们必须在数据大盘中使用对数坐标轴才能将其可视化。",
+    "https://substackcdn.com/image/fetch/$s_!7m9y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F402b23af-7ad6-46e4-97af-a5698ea2bd87_2176x1416.png",
+    "来源：SemiAnalysis InferenceX",
+    "正如前文所述，B300 服务器仅通过 900GByte/s/GPU 的 NVLink 纵向扩展网络 (Scale-up 网络) 最多连接 8 个 GPU，而 GB300 NVL72 服务器则通过 NVLink 纵向扩展网络 (Scale-up 网络) 连接 72 个 GPU。因此，当我们的推理配置需要 8 个以上（但少于 72 个）GPU 时，就必须引入多个 B300 服务器节点来构建推理系统。这意味着通信将降级至速率较低的 InfiniBand XDR 横向扩展 (Scale-out) 网络，其每 GPU 带宽仅为 800Gbit/s 单向 (Uni-directional)。",
+    "相比之下，机架级 GB300 NVL72 通过 NVLink 连接 72 个 GPU，提供高达 900GByte/s 单向 (Uni-directional) 的每 GPU 带宽。由此可见，与多节点 B300 服务器方案相比，这种机架级服务器能让推理配置中的 GPU 以超过 9 倍的带宽进行互联通信。",
+    "SemiAnalysis 是免费开源软件，由读者提供支持。要接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+    "https://substackcdn.com/image/fetch/$s_!x_1H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8664f48c-037c-45cc-b6f8-1999ed0cee0e_2298x1430.png",
+    "来源：SemiAnalysis InferenceX",
+    "诚然，GB300 NVL72 的单 GPU 综合成本更高，但这仅仅是将其单位 TCO 带宽优势降至 8 倍。这种机架级架构的带宽优势直接大幅降低了每 token 成本。目前，谷歌 TPU（张量处理器 (Tensor Processing Unit)）、AWS Trainium 和英伟达是仅有的已部署机架级系统设计的 AI 芯片。AMD 首款机架级 MI455X UALoE72 系统将于 2026 年下半年推出工程样机并进行小批量生产。而受制于制造延期，其量产爬坡以及在 MI455X UALoE72 上生成的首批生产级 token，要等到 2027 年第二季度才能实现。",
+    "https://substackcdn.com/image/fetch/$s_!UGuH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F58c7b664-76a7-454b-ac99-036b0b6f4abb_2132x1456.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

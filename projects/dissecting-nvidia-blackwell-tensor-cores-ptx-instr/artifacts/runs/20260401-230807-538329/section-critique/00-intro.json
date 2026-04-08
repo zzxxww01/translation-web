@@ -1,0 +1,29 @@
+{
+  "section_id": "00-intro",
+  "reflection": {
+    "overall_score": 8.5,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "Speed of Light, Distributed Shared Memory, GPC Floorsweeps",
+        "description": "The translation contains duplicated parentheses, likely due to a search-and-replace error during drafting (e.g., `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` and `GPC 核心屏蔽 (Floorsweeping)（Floorsweeping）`).",
+        "why_it_matters": "Duplicated annotations make the text look unpolished and disrupt reading flow.",
+        "suggestion": "Remove the redundant parentheses. Change to: `理论极限性能 (Speed of Light, SoL)、分布式共享内存 (DSMEM)、GPC 核心屏蔽 (Floorsweeping)`"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "on PTX and SASS instructions",
+        "description": "The English conjunction 'and' was left untranslated in the phrase `PTX and SASS 指令级别`.",
+        "why_it_matters": "Leaving basic English conjunctions in a Chinese sentence breaks the immersion and looks like an incomplete translation.",
+        "suggestion": "Change `PTX and SASS` to `PTX 和 SASS`."
+      }
+    ]
+  }
+}

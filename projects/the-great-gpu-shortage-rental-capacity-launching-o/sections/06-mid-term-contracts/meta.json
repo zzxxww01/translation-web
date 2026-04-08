@@ -1,0 +1,89 @@
+{
+  "section_id": "06-mid-term-contracts",
+  "title": "Mid-Term Contracts",
+  "title_translation": "中期合同",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The more economically relevant segments are the contract markets where most GPU rentals by value are transacted. The 1-year segment captures the marginal demand from non-AI lab customers and spillovers from large buyers, making it the most sensitive indicator of tightening conditions. AI Natives and smaller AI Labs can be seen mostly in the 1-3y tenors, though increasingly these labs and AI Natives are looking to lock up compute by contracting for longer terms of more than 4 years and even agreeing to high prepays of above 20% which were previously atypical for 4y+ deals.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The more economically relevant segments are the contract markets where most GPU rentals by value are transacted. The 1-year segment captures the marginal demand from non-AI lab customers and spillovers from large buyers, making it the most sensitive indicator of tightening conditions. AI Natives and smaller AI Labs can be seen mostly in the 1-3y tenors, though increasingly these labs and AI Natives are looking to lock up compute by contracting for longer terms of more than 4 years and even agreeing to high prepays of above 20% which were previously atypical for 4y+ deals.",
+      "parent_block_plain_text": "The more economically relevant segments are the contract markets where most GPU rentals by value are transacted. The 1-year segment captures the marginal demand from non-AI lab customers and spillovers from large buyers, making it the most sensitive indicator of tightening conditions. AI Natives and smaller AI Labs can be seen mostly in the 1-3y tenors, though increasingly these labs and AI Natives are looking to lock up compute by contracting for longer terms of more than 4 years and even agreeing to high prepays of above 20% which were previously atypical for 4y+ deals.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 578,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "更具经济参考价值的细分领域是合同市场，按交易金额计算，绝大多数GPU租赁交易均在此完成。1年期市场吸收了非AI实验室客户的边际需求以及大型买家的溢出需求，因此成为反映供应趋紧最敏锐的指标。AI原生企业和规模较小的AI实验室主要集中在1至3年的合同期限内。然而，目前的趋势是，这些实验室和AI原生企业正越来越多地寻求通过签订4年以上的长期合同来锁定算力，甚至愿意接受超过20%的高额预付比例，这在以往4年以上的交易中并不常见。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:09:42.201932",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately translate 'marginal demand' (边际需求) and 'spillovers' (溢出需求).",
+          "Use standard industry phrasing for 'AI Natives' (AI原生企业)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the mid-term (1-3y) market as the core economic indicator for marginal demand and tightening supply.",
+          "relation_to_previous": "Shifts focus from short-term residual capacity to the primary, economically relevant contract market.",
+          "relation_to_next": "Bridges the gap between smaller AI labs and the massive hyperscaler deals detailed in the long-term section.",
+          "key_points": [
+            "The 1-year segment captures marginal demand and spillovers, making it highly sensitive to tightening conditions.",
+            "Most GPU rentals by value occur in this mid-term segment.",
+            "AI Natives are increasingly seeking longer lock-ups to secure compute."
+          ],
+          "translation_notes": [
+            "Accurately translate 'marginal demand' (边际需求) and 'spillovers' (溢出需求).",
+            "Use standard industry phrasing for 'AI Natives' (AI原生企业)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "将“more economically relevant”翻译为“真正具有经济指示意义”，丢失了与前文（短期市场）的比较意味（more）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“atypical”翻译为“实属罕见”存在轻微的语气放大（tone inflation）。Atypical通常指“不典型、不常见”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

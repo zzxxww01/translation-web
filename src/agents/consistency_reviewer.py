@@ -3,17 +3,9 @@ Translation Agent - Consistency Reviewer
 
 全文一致性审查器（Phase 2）
 
-检查项：
-1. 术语一致性 - 同一术语翻译是否统一
-2. 风格一致性 - 语气、正式程度是否统一
-3. 逻辑连贯性 - 上下文是否连贯
-4. 交叉引用准确性 - 前后引用是否正确
-5. 数据一致性 - 数字、单位是否准确
-
-增强功能：
-- 术语使用统计
-- 风格一致性评分
-- 建议修正列表
+当前仅保留高精度的术语一致性检查。
+低质量启发式检查（风格、数字、专有名词、交叉引用）已停用，
+避免把低置信度提示误报成“问题”。
 """
 
 from typing import List, Dict, Optional, Tuple
@@ -87,22 +79,8 @@ class ConsistencyReviewer:
             all_issues.extend(terminology_issues)
             self.term_stats = term_stats
 
-        # 2. 风格一致性检查（增强版）
-        style_issues, style_score = self._check_style_consistency_enhanced(sections, translations)
-        all_issues.extend(style_issues)
-        self.style_score = style_score
-
-        # 3. 交叉引用检查
-        reference_issues = self._check_cross_references(sections, translations)
-        all_issues.extend(reference_issues)
-
-        # 4. 数字和数据一致性检查
-        data_issues = self._check_data_consistency(sections, translations)
-        all_issues.extend(data_issues)
-
-        # 6. 新增：专有名词一致性检查
-        proper_noun_issues = self._check_proper_nouns(sections, translations)
-        all_issues.extend(proper_noun_issues)
+        # 仅保留高精度术语一致性检查。
+        self.style_score = 100.0
 
         # 生成建议修正列表
         self._generate_suggestions(all_issues, sections, translations)

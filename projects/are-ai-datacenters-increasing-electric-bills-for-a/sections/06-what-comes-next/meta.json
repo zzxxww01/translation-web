@@ -1,0 +1,685 @@
+{
+  "section_id": "06-what-comes-next",
+  "title": "What Comes Next",
+  "title_translation": "未来展望",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The Political Fallout Is Already Here",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### The Political Fallout Is Already Here",
+      "parent_block_plain_text": "The Political Fallout Is Already Here",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "政治余波已然显现",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.262798",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "政治余波已然显现",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296704",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "政治余波已然显现",
+          "model": "manual",
+          "created_at": "2026-03-16T00:59:22.178256",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "政治余波已然显现",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "PJM’s simulation-driven pricing has made the capacity market a political target. After the 2025/26 auction spike, Pennsylvania Governor Josh Shapiro filed a FERC complaint alleging the BRA rules were unjust. A FERC-approved settlement imposed a tighter price cap — a temporary collar for the 2026/27 and 2027/28 delivery years. This is why the 2027/28 auction cleared at nearly the same price as the prior year~~.~~",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "p",
+      "parent_block_markdown": "PJM’s simulation-driven pricing has made the capacity market a political target. After the 2025/26 auction spike, Pennsylvania Governor Josh Shapiro filed a FERC complaint alleging the BRA rules were unjust. A FERC-approved settlement imposed a tighter price cap — a temporary collar for the 2026/27 and 2027/28 delivery years. This is why the 2027/28 auction cleared at nearly the same price as the prior year~~.~~",
+      "parent_block_plain_text": "PJM’s simulation-driven pricing has made the capacity market a political target. After the 2025/26 auction spike, Pennsylvania Governor Josh Shapiro filed a FERC complaint alleging the BRA rules were unjust. A FERC-approved settlement imposed a tighter price cap — a temporary collar for the 2026/27 and 2027/28 delivery years. This is why the 2027/28 auction cleared at nearly the same price as the prior year~~.~~",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 415,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "PJM基于模拟测算的定价机制，已使其容量市场沦为政治众矢之的。在2025/26交付年拍卖价格飙升之后，宾夕法尼亚州州长乔什·夏皮罗向FERC正式提出申诉，指控BRA规则有失公允。随后，一项经FERC批准的和解协议强制实施了更为严格的价格上限——即针对2026/27和2027/28交付年的临时价格区间限制。这正是2027/28交付年拍卖的出清价格与前一年几乎持平的根本原因。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.262898",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "PJM基于模拟测算的定价机制，已使其容量市场沦为政治众矢之的。在2025/26交付年拍卖价格飙升之后，宾夕法尼亚州州长乔什·夏皮罗向FERC正式提出申诉，指控BRA规则有失公允。随后，一项经FERC批准的和解协议强制实施了更为严格的价格上限——即针对2026/27和2027/28交付年的临时价格区间限制。这正是2027/28交付年拍卖的出清价格与前一年几乎持平的根本原因。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296725",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "PJM基于模拟测算的定价机制，已使其容量市场沦为政治众矢之的。在2025/26交付年拍卖价格飙升之后，宾夕法尼亚州州长乔什·夏皮罗向FERC正式提出申诉，指控BRA规则有失公允。随后，一项经FERC批准的和解协议强制实施了更为严格的价格上限——即针对2026/27和2027/28交付年的临时价格区间限制。这正是2027/28交付年拍卖的出清价格与前一年几乎持平的根本原因。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:02:10.070119",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "PJM基于模拟测算的定价机制，已使其容量市场沦为政治众矢之的。在2025/26交付年拍卖价格飙升之后，宾夕法尼亚州州长乔什·夏皮罗向FERC正式提出申诉，指控BRA规则有失公允。随后，一项经FERC批准的和解协议强制实施了更为严格的价格上限——即针对2026/27和2027/28交付年的临时价格区间限制。这正是2027/28交付年拍卖的出清价格与前一年几乎持平的根本原因。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "But the cap didn’t fix the underlying mechanism. The VRR curve, the demand forecast methodology, all remain unchanged. The bandaid also created a new problem: a reserve margin below PJM’s own reliability targets. The grid still performs and maintains a reserve margin, but the margin is shrinking, and the capacity market’s ability to attract new generation investment is now compromised by regulatory uncertainty over future price caps.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But the cap didn’t fix the underlying mechanism. The VRR curve, the demand forecast methodology, all remain unchanged. The bandaid also created a new problem: a reserve margin below PJM’s own reliability targets. The grid still performs and maintains a reserve margin, but the margin is shrinking, and the capacity market’s ability to attract new generation investment is now compromised by regulatory uncertainty over future price caps.",
+      "parent_block_plain_text": "But the cap didn’t fix the underlying mechanism. The VRR curve, the demand forecast methodology, all remain unchanged. The bandaid also created a new problem: a reserve margin below PJM’s own reliability targets. The grid still performs and maintains a reserve margin, but the margin is shrinking, and the capacity market’s ability to attract new generation investment is now compromised by regulatory uncertainty over future price caps.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 437,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "但价格上限并未修复底层机制。VRR曲线与需求预测方法等均未作任何改变。这种治标不治本的权宜之计还引发了一个新问题：备用容量率跌破了PJM自身的可靠性目标。尽管电网目前仍在正常运转并维持着一定的备用容量率，但该比率正在不断萎缩；同时，关于未来价格上限的监管不确定性，也正在削弱容量市场吸引新增发电投资的能力。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.262946",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "但这一价格上限并未触及底层机制。VRR曲线和需求预测方法均原封不动。这种权宜之计还引发了新问题：备用容量裕度跌破了PJM自身设定的可靠性目标。尽管电网仍在正常运行并维持着一定的备用容量，但该裕度正在不断萎缩。同时，由于未来价格上限存在监管不确定性，容量市场吸引新建发电项目投资的能力已大打折扣。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296730",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "但这一价格上限并未触及底层机制。VRR曲线和需求预测方法均原封不动。这种权宜之计还引发了新问题：备用容量裕度跌破了PJM自身设定的可靠性目标。尽管电网仍在正常运行并维持着一定的备用容量，但该裕度正在不断萎缩。同时，由于未来价格上限存在监管不确定性，容量市场吸引新建发电项目投资的能力已大打折扣。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:05:41.910179",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "但这一价格上限并未触及底层机制。VRR曲线和需求预测方法均原封不动。这种权宜之计还引发了新问题：备用容量裕度跌破了PJM自身设定的可靠性目标。尽管电网仍在正常运行并维持着一定的备用容量，但该裕度正在不断萎缩。同时，由于未来价格上限存在监管不确定性，容量市场吸引新建发电项目投资的能力已大打折扣。",
+          "model": "default",
+          "created_at": "2026-03-16T01:05:07.619966",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "但这一价格上限并未触及底层机制。VRR曲线和需求预测方法均原封不动。这种权宜之计还引发了新问题：备用容量裕度跌破了PJM自身设定的可靠性目标。尽管电网仍在正常运行并维持着一定的备用容量，但该裕度正在不断萎缩。同时，由于未来价格上限存在监管不确定性，容量市场吸引新建发电项目投资的能力已大打折扣。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": [
+        {
+          "text": "但价格上限并未修复底层机制。VRR曲线与需求预测方法等均未作任何改变。这种治标不治本的权宜之计还引发了一个新问题：备用容量率跌破了PJM自身的可靠性目标。尽管电网目前仍在正常运转并维持着一定的备用容量率，但该比率正在不断萎缩；同时，关于未来价格上限的监管不确定性，也正在削弱容量市场吸引新增发电投资的能力。",
+          "timestamp": "2026-03-16T01:05:07.619920",
+          "source": "default"
+        }
+      ]
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Attempts have been made to change the PJM’s structures, but regulations and considerations are fierce. PJM’s attempt to introduce Non-Capacity-Backed Load (NCBL) rules — essentially a mechanism to curtail large loads that haven’t secured their own capacity — was uniformly condemned by stakeholders and withdrawn. FERC’s Advance Notice of Proposed Rulemaking (ANOPR) on large loads and datacenters signals increased federal scrutiny, but all in all, any rulemaking from FERC will take years and face legal challenges.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "FERC’s Advance Notice of Proposed Rulemaking (ANOPR)",
+          "start": 314,
+          "end": 366,
+          "href": "https://www.mayerbrown.com/en/insights/publications/2025/11/ferc-large-load-interconnection-preliminary-rulemaking-key-takeaways-for-data-center-developers-other-large-load-projects-and-investors",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Attempts have been made to change the PJM’s structures, but regulations and considerations are fierce. PJM’s attempt to introduce Non-Capacity-Backed Load (NCBL) rules — essentially a mechanism to curtail large loads that haven’t secured their own capacity — was uniformly condemned by stakeholders and withdrawn. [FERC’s Advance Notice of Proposed Rulemaking (ANOPR)](https://www.mayerbrown.com/en/insights/publications/2025/11/ferc-large-load-interconnection-preliminary-rulemaking-key-takeaways-for-data-center-developers-other-large-load-projects-and-investors) on large loads and datacenters signals increased federal scrutiny, but all in all, any rulemaking from FERC will take years and face legal challenges.",
+      "parent_block_plain_text": "Attempts have been made to change the PJM’s structures, but regulations and considerations are fierce. PJM’s attempt to introduce Non-Capacity-Backed Load (NCBL) rules — essentially a mechanism to curtail large loads that haven’t secured their own capacity — was uniformly condemned by stakeholders and withdrawn. FERC’s Advance Notice of Proposed Rulemaking (ANOPR) on large loads and datacenters signals increased federal scrutiny, but all in all, any rulemaking from FERC will take years and face legal challenges.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "FERC’s Advance Notice of Proposed Rulemaking (ANOPR)",
+          "start": 314,
+          "end": 366,
+          "href": "https://www.mayerbrown.com/en/insights/publications/2025/11/ferc-large-load-interconnection-preliminary-rulemaking-key-takeaways-for-data-center-developers-other-large-load-projects-and-investors",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 517,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.263104",
+          "tokenized_text": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。[[[LINK_1|FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）]]]标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:04:53.990557",
+          "tokenized_text": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。[[[LINK_1|FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）]]]标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+      "confirmed_tokenized": "业界曾尝试改革PJM的市场结构，但面临的监管阻力与各方利益博弈极其激烈。PJM曾试图引入无容量支撑负荷（NCBL）规则——这本质上是一种对未能确保自身容量的大型负荷进行限电的机制——但遭到利益相关方的一致谴责并最终撤回。[[[LINK_1|FERC针对大型负荷与数据中心发布的拟议规则制定的提前通知（ANOPR）]]]标志着联邦层面的审查正在趋严，但总而言之，FERC的任何规则制定都将耗时数年，且必将面临法律挑战。",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The Regulatory Asymmetry",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### The Regulatory Asymmetry",
+      "parent_block_plain_text": "The Regulatory Asymmetry",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 24,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "监管不对称性",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.263151",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "监管不对称性",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296739",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "监管不对称性",
+          "model": "manual",
+          "created_at": "2026-03-16T01:04:56.806425",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "监管不对称性",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "ERCOT can move faster because its regulatory structure is simpler. ERCOT’s service territory is entirely within Texas, so the Texas legislature and Public Utility Commission regulate it directly. SB 6 was passed, signed, and operational within a single legislative session. PJM’s service territory spans 13 states and the District of Columbia, and its regulatory authority comes from FERC. Replicating anything like SB 6’s curtailment authority would require FERC approval and potentially federal legislation, taking years instead of months.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "p",
+      "parent_block_markdown": "ERCOT can move faster because its regulatory structure is simpler. ERCOT’s service territory is entirely within Texas, so the Texas legislature and Public Utility Commission regulate it directly. SB 6 was passed, signed, and operational within a single legislative session. PJM’s service territory spans 13 states and the District of Columbia, and its regulatory authority comes from FERC. Replicating anything like SB 6’s curtailment authority would require FERC approval and potentially federal legislation, taking years instead of months.",
+      "parent_block_plain_text": "ERCOT can move faster because its regulatory structure is simpler. ERCOT’s service territory is entirely within Texas, so the Texas legislature and Public Utility Commission regulate it directly. SB 6 was passed, signed, and operational within a single legislative session. PJM’s service territory spans 13 states and the District of Columbia, and its regulatory authority comes from FERC. Replicating anything like SB 6’s curtailment authority would require FERC approval and potentially federal legislation, taking years instead of months.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 541,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ERCOT之所以能更迅速地采取行动，得益于其更为精简的监管架构。由于ERCOT的服务辖区完全位于得克萨斯州境内，得州立法机构与公共事业委员会能够对其进行直接监管。第6号参议院法案 (SB 6) 仅在一个立法会期内，便完成了通过、签署并正式生效的全部流程。相比之下，PJM的服务辖区横跨13个州及哥伦比亚特区，其监管权限归属于FERC。若要复制类似第6号参议院法案 (SB 6) 的负荷削减权限，不仅需要FERC的批准，甚至可能牵涉联邦层面的立法，整个过程将耗时数年，而非短短数月。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.263188",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "ERCOT之所以能更迅速地采取行动，得益于其更为精简的监管架构。由于ERCOT的服务辖区完全位于得克萨斯州境内，得州立法机构与公共事业委员会能够对其进行直接监管。第6号参议院法案 (SB 6) 仅在一个立法会期内，便完成了通过、签署并正式生效的全部流程。相比之下，PJM的服务辖区横跨13个州及哥伦比亚特区，其监管权限归属于FERC。若要复制类似SB 6 的负荷削减权限，不仅需要FERC的批准，甚至可能牵涉联邦层面的立法，整个过程将耗时数年，而非短短数月。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296756",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "ERCOT之所以能更迅速地采取行动，得益于其更为精简的监管架构。由于ERCOT的服务辖区完全位于得克萨斯州境内，得州立法机构与公共事业委员会能够对其进行直接监管。第6号参议院法案 (SB 6) 仅在一个立法会期内，便完成了通过、签署并正式生效的全部流程。相比之下，PJM的服务辖区横跨13个州及哥伦比亚特区，其监管权限归属于FERC。若要复制类似SB 6 的负荷削减权限，不仅需要FERC的批准，甚至可能牵涉联邦层面的立法，整个过程将耗时数年，而非短短数月。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:05:27.015225",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "ERCOT之所以能更迅速地采取行动，得益于其更为精简的监管架构。由于ERCOT的服务辖区完全位于得克萨斯州境内，得州立法机构与公共事业委员会能够对其进行直接监管。第6号参议院法案 (SB 6) 仅在一个立法会期内，便完成了通过、签署并正式生效的全部流程。相比之下，PJM的服务辖区横跨13个州及哥伦比亚特区，其监管权限归属于FERC。若要复制类似SB 6 的负荷削减权限，不仅需要FERC的批准，甚至可能牵涉联邦层面的立法，整个过程将耗时数年，而非短短数月。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": [
+        {
+          "text": "ERCOT之所以能更迅速地采取行动，得益于其更为精简的监管架构。由于ERCOT的服务辖区完全位于得克萨斯州境内，得州立法机构与公共事业委员会能够对其进行直接监管。第6号参议院法案 (SB 6) 仅在一个立法会期内，便完成了通过、签署并正式生效的全部流程。相比之下，PJM的服务辖区横跨13个州及哥伦比亚特区，其监管权限归属于FERC。若要复制类似第6号参议院法案 (SB 6) 的负荷削减权限，不仅需要FERC的批准，甚至可能牵涉联邦层面的立法，整个过程将耗时数年，而非短短数月。",
+          "timestamp": "2026-03-16T01:05:19.014717",
+          "source": "manual"
+        }
+      ]
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "This structural asymmetry is durable and investable. ERCOT will continue to be able to adapt its market rules and operational requirements faster than PJM can reform its capacity construct. For hyperscalers making 10-year site-selection decisions, this regulatory agility matters as much as the current price differential.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This structural asymmetry is durable and investable. ERCOT will continue to be able to adapt its market rules and operational requirements faster than PJM can reform its capacity construct. For hyperscalers making 10-year site-selection decisions, this regulatory agility matters as much as the current price differential.",
+      "parent_block_plain_text": "This structural asymmetry is durable and investable. ERCOT will continue to be able to adapt its market rules and operational requirements faster than PJM can reform its capacity construct. For hyperscalers making 10-year site-selection decisions, this regulatory agility matters as much as the current price differential.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 322,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种结构性不对称具有持久性，且具备投资价值。相比PJM改革其容量市场架构的步伐，ERCOT在调整自身市场规则与运营要求方面，将始终保持更快的响应速度。对于正在制定10年期选址决策的超大规模云厂商而言，这种监管敏捷性与当前的电价差异同等重要。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:52:29.263225",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "这种结构性不对称具有持久性，且具备投资价值。相比PJM改革其容量市场架构的步伐，ERCOT在调整自身市场规则与运营要求方面，将始终保持更快的响应速度。对于正在制定10年期选址决策的超大规模云厂商而言，这种监管敏捷性与当前的电价差异同等重要。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.296763",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这种结构性不对称具有持久性，且具备投资价值。相比PJM改革其容量市场架构的步伐，ERCOT在调整自身市场规则与运营要求方面，将始终保持更快的响应速度。对于正在制定10年期选址决策的超大规模云厂商而言，这种监管敏捷性与当前的电价差异同等重要。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:05:06.429051",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这种结构性不对称具有持久性，且具备投资价值。相比PJM改革其容量市场架构的步伐，ERCOT在调整自身市场规则与运营要求方面，将始终保持更快的响应速度。对于正在制定10年期选址决策的超大规模云厂商而言，这种监管敏捷性与当前的电价差异同等重要。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": false,
+        "applied_terms": [
+          "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+          "Maintain the analytical, forward-looking tone suitable for institutional investors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the regulatory and political aftermath, arguing that ERCOT's structural and regulatory agility gives it a permanent advantage over PJM.",
+          "relation_to_previous": "Moves from the operational fallout of the storm to its long-term political and regulatory consequences.",
+          "relation_to_next": "Bridges the macro regulatory outlook into the micro investment implications (identifying specific winners and losers).",
+          "key_points": [
+            "PJM's attempts at reform (like NCBL) face fierce opposition and fail, while FERC rulemaking will take years.",
+            "ERCOT's ability to adapt quickly is a durable, investable structural asymmetry.",
+            "Regulatory agility is just as important as price differentials for hyperscalers making 10-year site-selection decisions."
+          ],
+          "translation_notes": [
+            "Precise translation needed for 'Non-Capacity-Backed Load (NCBL)' (无容量支撑负荷) and 'Advance Notice of Proposed Rulemaking (ANOPR)' (拟议规则制定的提前通知).",
+            "Maintain the analytical, forward-looking tone suitable for institutional investors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

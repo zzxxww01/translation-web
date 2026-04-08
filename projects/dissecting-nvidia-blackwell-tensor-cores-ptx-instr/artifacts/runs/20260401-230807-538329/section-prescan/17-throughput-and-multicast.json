@@ -1,0 +1,38 @@
+{
+  "section_id": "17-throughput-and-multicast",
+  "new_terms": [
+    {
+      "term": "MMA atoms",
+      "suggested_translation": "MMA 原子",
+      "context": "2SM MMA atoms for any cluster shape that has an even M dimension",
+      "confidence": 0.95
+    },
+    {
+      "term": "cluster N dimension",
+      "suggested_translation": "集群 N 维度",
+      "context": "scaling the cluster N dimension from 1 to 2",
+      "confidence": 0.9
+    },
+    {
+      "term": "per-CTA tile shape",
+      "suggested_translation": "每个 CTA 的 Tile 形状",
+      "context": "128x128 per-CTA tile shapes",
+      "confidence": 0.85
+    },
+    {
+      "term": "achievable throughput",
+      "suggested_translation": "可实现的吞吐量",
+      "context": "achievable throughput of individual instructions",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "throughput": "吞吐量",
+    "multicast": "多播",
+    "2SM MMA": "2SM MMA",
+    "tile size": "Tile 大小",
+    "memory subsystem": "内存子系统"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:38:49.820100"
+}

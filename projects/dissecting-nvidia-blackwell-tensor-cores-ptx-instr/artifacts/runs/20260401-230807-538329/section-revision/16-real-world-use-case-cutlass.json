@@ -1,0 +1,27 @@
+{
+  "section_id": "16-real-world-use-case-cutlass",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.5,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "接下来我们探讨一个实际用例：分块 GEMM 内循环模式，即沿着内部维度 K 连续加载分块，从而计算出输出矩阵的单个分块。",
+    "首先，我们使用英伟达 CUTLASS 库实例化一个内核，该内核包含一个持久化的协作线程阵列 (CTA)，用于计算单个输出分块。我们改变 DMA->Math 流水线中的加载阶段（load stages）数量，随着阶段数的增加，内核会占用更多的共享内存 (SMEM)，同时实现更好的延迟隐藏。我们将 K 维度设置得非常大，以便在软件流水线的稳态模式下测量实际达到的数学计算吞吐量，并将其换算为硬件理论极限性能 (SoL) 数学吞吐量的百分比。",
+    "对于选定的分块大小，可以使用更多的共享内存 (SMEM) 来增加阶段数并隐藏更多延迟。对于给定的流水线深度 N，如果有一个阶段正在执行 MMA，那么最多可以有 N-1 个阶段的 A 和 B 缓冲区处于飞行中（in-flight）状态。换个角度来看，给定加载阶段的延迟在 (N-1)*M 的范围内仍能被完全隐藏，其中 M 是单个阶段执行 MMA 所需的时间。因此，在分块大小固定的情况下，延迟隐藏能力会随着阶段数的增加而严格提升。",
+    "然而，如果 GEMM 的 Epilogue（收尾操作）消耗了共享内存 (SMEM)，主循环可用的容量就会减少，因此必须降低使用的阶段数。在这里，我们使用不消耗共享内存 (SMEM) 的 Epilogue，因此，当阶段缓冲区消耗的总共享内存 (SMEM) 达到每个 SM 的最大容量时，曲线会在 X 轴方向上终止。",
+    "https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png",
+    "因此，共享内存 (SMEM) 的使用量以及由此决定的阶段数是基于以下因素计算的：",
+    "操作数共享内存 (SMEM) 分块（A 和 B）",
+    "屏障 (Barrier) 存储",
+    "Epilogue 共享内存 (SMEM) 使用量"
+  ]
+}

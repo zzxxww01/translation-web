@@ -1,0 +1,1149 @@
+{
+  "report": {
+    "is_consistent": false,
+    "issues": [
+      {
+        "section_id": "02-gpu-rental-prices-the-comeba",
+        "paragraph_index": 1,
+        "issue_type": "style",
+        "description": "发现口语化表达，可能影响专业性",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称89次, 第三人称35次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 40",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 02",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 3",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 13,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 1, 2023",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 16,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-surge-pricing-comes-to-the-gpu",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "03-introducing-the-semianalysis-1",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "03-introducing-the-semianalysis-1",
+        "paragraph_index": 6,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2025",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 180",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "06-mid-term-contracts",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 20, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "07-long-term-offtakes",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 4, 48",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "07-long-term-offtakes",
+        "paragraph_index": 7,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "08-where-the-puck-is-going",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "08-where-the-puck-is-going",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "09-pricing-is-only-going-one-way",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2023, 2024",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 10,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Rental Price Dashboard' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "auto_fixable": [],
+    "manual_review": [
+      {
+        "section_id": "02-gpu-rental-prices-the-comeba",
+        "paragraph_index": 1,
+        "issue_type": "style",
+        "description": "发现口语化表达，可能影响专业性",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称89次, 第三人称35次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 40",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 02",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 3",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 13,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 1, 2023",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 16,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-surge-pricing-comes-to-the-gpu",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "03-introducing-the-semianalysis-1",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "03-introducing-the-semianalysis-1",
+        "paragraph_index": 6,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2025",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 180",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "04-gpu-rental-market-structure-to",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "06-mid-term-contracts",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 20, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "07-long-term-offtakes",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 4, 48",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "07-long-term-offtakes",
+        "paragraph_index": 7,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "08-where-the-puck-is-going",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "08-where-the-puck-is-going",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 4",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "09-pricing-is-only-going-one-way",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2023, 2024",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 10,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Rental Price Dashboard' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "term_stats": {
+      "GPU": {
+        "total_count": 41,
+        "translations": {
+          "GPU": 41
+        },
+        "is_consistent": true,
+        "preferred": "GPU"
+      },
+      "AI": {
+        "total_count": 40,
+        "translations": {
+          "AI": 21
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "ARR": {
+        "total_count": 6,
+        "translations": {
+          "年度经常性收入": 2
+        },
+        "is_consistent": true,
+        "preferred": "年度经常性收入"
+      },
+      "inflection point": {
+        "total_count": 3,
+        "translations": {
+          "拐点": 3
+        },
+        "is_consistent": true,
+        "preferred": "拐点"
+      },
+      "Neocloud": {
+        "total_count": 21,
+        "translations": {
+          "新兴算力云厂商": 21
+        },
+        "is_consistent": true,
+        "preferred": "新兴算力云厂商"
+      },
+      "Hyperscaler": {
+        "total_count": 7,
+        "translations": {
+          "超大规模云厂商": 7
+        },
+        "is_consistent": true,
+        "preferred": "超大规模云厂商"
+      },
+      "DRAM": {
+        "total_count": 4,
+        "translations": {
+          "DRAM": 3
+        },
+        "is_consistent": true,
+        "preferred": "DRAM"
+      },
+      "colocation": {
+        "total_count": 1,
+        "translations": {
+          "托管": 1
+        },
+        "is_consistent": true,
+        "preferred": "托管"
+      },
+      "on-demand": {
+        "total_count": 7,
+        "translations": {
+          "按需": 7
+        },
+        "is_consistent": true,
+        "preferred": "按需"
+      },
+      "SemiAnalysis": {
+        "total_count": 17,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "inference": {
+        "total_count": 5,
+        "translations": {
+          "推理": 3
+        },
+        "is_consistent": true,
+        "preferred": "推理"
+      },
+      "SoC": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "SoC"
+      },
+      "term structure": {
+        "total_count": 3,
+        "translations": {
+          "期限结构": 3
+        },
+        "is_consistent": true,
+        "preferred": "期限结构"
+      },
+      "training": {
+        "total_count": 1,
+        "translations": {
+          "训练": 1
+        },
+        "is_consistent": true,
+        "preferred": "训练"
+      },
+      "performance": {
+        "total_count": 3,
+        "translations": {
+          "性能": 2
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "Mixture of Experts (MoE)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "专家混合模型"
+      },
+      "world-size": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "并行规模 / 通信域大小"
+      },
+      "GB300 NVL72": {
+        "total_count": 2,
+        "translations": {
+          "GB300 NVL72": 2
+        },
+        "is_consistent": true,
+        "preferred": "GB300 NVL72"
+      },
+      "NVIDIA": {
+        "total_count": 1,
+        "translations": {
+          "英伟达": 1
+        },
+        "is_consistent": true,
+        "preferred": "英伟达"
+      },
+      "AMD": {
+        "total_count": 2,
+        "translations": {
+          "AMD": 2
+        },
+        "is_consistent": true,
+        "preferred": "AMD"
+      },
+      "Blackwell": {
+        "total_count": 3,
+        "translations": {
+          "Blackwell": 3
+        },
+        "is_consistent": true,
+        "preferred": "Blackwell"
+      },
+      "Hopper": {
+        "total_count": 3,
+        "translations": {
+          "Hopper": 3
+        },
+        "is_consistent": true,
+        "preferred": "Hopper"
+      },
+      "Spot instance": {
+        "total_count": 1,
+        "translations": {
+          "竞价实例": 1
+        },
+        "is_consistent": true,
+        "preferred": "竞价实例"
+      },
+      "node": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "制程节点"
+      },
+      "open-weight models": {
+        "total_count": 2,
+        "translations": {
+          "开放权重模型": 2
+        },
+        "is_consistent": true,
+        "preferred": "开放权重模型"
+      },
+      "lead time": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "交付周期 / 交期"
+      },
+      "terminal value": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "终端价值 / 终值"
+      },
+      "Vera": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "OEM": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "原始设备制造商"
+      },
+      "TCO": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "总拥有成本"
+      },
+      "token": {
+        "total_count": 7,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "token"
+      },
+      "throughput": {
+        "total_count": 1,
+        "translations": {
+          "吞吐量": 1
+        },
+        "is_consistent": true,
+        "preferred": "吞吐量"
+      },
+      "Tokenomics": {
+        "total_count": 3,
+        "translations": {
+          "Token经济学": 3
+        },
+        "is_consistent": true,
+        "preferred": "Token经济学"
+      },
+      "semiconductor": {
+        "total_count": 1,
+        "translations": {
+          "半导体": 1
+        },
+        "is_consistent": true,
+        "preferred": "半导体"
+      },
+      "token consumption": {
+        "total_count": 2,
+        "translations": {
+          "Token消耗量": 1
+        },
+        "is_consistent": true,
+        "preferred": "Token消耗量"
+      },
+      "representative range": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "代表性区间"
+      },
+      "Tenor": {
+        "total_count": 6,
+        "translations": {
+          "合同期限": 6
+        },
+        "is_consistent": true,
+        "preferred": "合同期限"
+      },
+      "AMD complex": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "AMD产品系列"
+      },
+      "Offtake": {
+        "total_count": 5,
+        "translations": {
+          "包销协议": 4
+        },
+        "is_consistent": true,
+        "preferred": "包销协议"
+      },
+      "bilateral basis": {
+        "total_count": 1,
+        "translations": {
+          "双边协商": 1
+        },
+        "is_consistent": true,
+        "preferred": "双边协商"
+      },
+      "utilization rate": {
+        "total_count": 1,
+        "translations": {
+          "利用率": 1
+        },
+        "is_consistent": true,
+        "preferred": "利用率"
+      },
+      "take-up rates": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "认购率 / 采用率"
+      },
+      "benchmark": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "基准测试"
+      },
+      "revenue": {
+        "total_count": 3,
+        "translations": {
+          "营收": 2
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "agentic evals": {
+        "total_count": 1,
+        "translations": {
+          "智能体评估": 1
+        },
+        "is_consistent": true,
+        "preferred": "智能体评估"
+      },
+      "frontier AI model": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "前沿AI模型"
+      },
+      "Sweating fixed compute assets": {
+        "total_count": 1,
+        "translations": {
+          "最大化压榨固定算力资产价值": 1
+        },
+        "is_consistent": true,
+        "preferred": "最大化压榨固定算力资产价值"
+      },
+      "GPU refresh cycle": {
+        "total_count": 1,
+        "translations": {
+          "GPU更新周期": 1
+        },
+        "is_consistent": true,
+        "preferred": "GPU更新周期"
+      },
+      "incumbent GPU servers": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "现役GPU服务器"
+      },
+      "prepay": {
+        "total_count": 2,
+        "translations": {
+          "预付款": 1
+        },
+        "is_consistent": true,
+        "preferred": "预付款"
+      },
+      "book of clients": {
+        "total_count": 1,
+        "translations": {
+          "客户组合": 1
+        },
+        "is_consistent": true,
+        "preferred": "客户组合"
+      },
+      "residual capacity": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "剩余算力"
+      },
+      "Runpod": {
+        "total_count": 1,
+        "translations": {
+          "Runpod": 1
+        },
+        "is_consistent": true,
+        "preferred": "Runpod"
+      },
+      "Lambda": {
+        "total_count": 3,
+        "translations": {
+          "Lambda": 3
+        },
+        "is_consistent": true,
+        "preferred": "Lambda"
+      },
+      "gapping up or down": {
+        "total_count": 1,
+        "translations": {
+          "跳空上涨或下跌": 1
+        },
+        "is_consistent": true,
+        "preferred": "跳空上涨或下跌"
+      },
+      "high frequency indicator": {
+        "total_count": 1,
+        "translations": {
+          "高频指标": 1
+        },
+        "is_consistent": true,
+        "preferred": "高频指标"
+      },
+      "AI Natives": {
+        "total_count": 1,
+        "translations": {
+          "AI原生企业": 1
+        },
+        "is_consistent": true,
+        "preferred": "AI原生企业"
+      },
+      "marginal demand": {
+        "total_count": 1,
+        "translations": {
+          "边际需求": 1
+        },
+        "is_consistent": true,
+        "preferred": "边际需求"
+      },
+      "spillovers": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "溢出效应"
+      },
+      "lock up compute": {
+        "total_count": 1,
+        "translations": {
+          "锁定算力": 1
+        },
+        "is_consistent": true,
+        "preferred": "锁定算力"
+      },
+      "Bare metal": {
+        "total_count": 1,
+        "translations": {
+          "裸金属": 1
+        },
+        "is_consistent": true,
+        "preferred": "裸金属"
+      },
+      "CPU": {
+        "total_count": 1,
+        "translations": {
+          "CPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "CPU"
+      },
+      "backstop": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "兜底 / 信用背书"
+      },
+      "project IRR": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "项目内部收益率"
+      },
+      "EBIT Margins": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "息税前利润率"
+      },
+      "captive": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "专属 / 专用"
+      },
+      "megaclusters": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "巨型集群 / 万卡级集群"
+      },
+      "useful lives": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "使用寿命 / 预计使用年限"
+      },
+      "margin expansion": {
+        "total_count": 3,
+        "translations": {
+          "利润率扩张": 2
+        },
+        "is_consistent": true,
+        "preferred": "利润率扩张"
+      },
+      "pricing power": {
+        "total_count": 1,
+        "translations": {
+          "定价权": 1
+        },
+        "is_consistent": true,
+        "preferred": "定价权"
+      },
+      "compute crunch": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "算力荒 / 算力紧缺"
+      },
+      "TSMC": {
+        "total_count": 1,
+        "translations": {
+          "台积电": 1
+        },
+        "is_consistent": true,
+        "preferred": "台积电"
+      },
+      "wafer": {
+        "total_count": 1,
+        "translations": {
+          "晶圆": 1
+        },
+        "is_consistent": true,
+        "preferred": "晶圆"
+      },
+      "HBM": {
+        "total_count": 1,
+        "translations": {
+          "HBM": 1
+        },
+        "is_consistent": true,
+        "preferred": "HBM"
+      },
+      "N3 logic wafer capacity": {
+        "total_count": 1,
+        "translations": {
+          "N3逻辑晶圆产能": 1
+        },
+        "is_consistent": true,
+        "preferred": "N3逻辑晶圆产能"
+      },
+      "InFO": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "InFO"
+      },
+      "ROIC": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "投入资本回报率"
+      },
+      "economic useful life": {
+        "total_count": 1,
+        "translations": {
+          "经济使用寿命": 1
+        },
+        "is_consistent": true,
+        "preferred": "经济使用寿命"
+      },
+      "install base": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "装机量 / 已安装规模"
+      },
+      "roll off": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "(合同) 到期 / 退出"
+      }
+    },
+    "style_score": 85.0,
+    "suggestions": [
+      {
+        "issue_type": "proper_noun",
+        "section_id": "00-intro",
+        "paragraph_index": 10,
+        "description": "专有名词 'Rental Price Dashboard' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "description": "译文中可能遗漏了数字: 40",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 1,
+        "description": "译文中可能遗漏了数字: 2",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "description": "译文中可能遗漏了数字: 2026, 02",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "description": "译文中可能遗漏了数字: 5, 3",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 8,
+        "description": "译文中可能遗漏了数字: 2026",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 13,
+        "description": "译文中可能遗漏了数字: 5, 1, 2023",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 16,
+        "description": "译文中可能遗漏了数字: 1",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "01-surge-pricing-comes-to-the-gpu",
+        "paragraph_index": 3,
+        "description": "译文中可能遗漏了数字: 2, 3",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "03-introducing-the-semianalysis-1",
+        "paragraph_index": 0,
+        "description": "译文中可能遗漏了数字: 1",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      }
+    ]
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "H100租赁价格飙升40%，GPU租赁定价仪表盘上线，算力租赁市场结构解析，租赁价格还会继续上涨吗？",
+      "作者：Dylan Patel、Daniel Nishball、Jordan Nanos 等2人",
+      "2026年4月2日 · 免费",
+      "Anthropic 的 Claude 4.6 Opus 和 Claude Code 需求激增。短短一个季度内，Anthropic 的年度经常性收入（ARR）几乎翻了三倍，从去年底的 90 亿美元飙升至如今的 250 亿美元以上。GLM 和 Kimi K2.5 等开源模型也推动了开源模型应用场景的暴涨。此外，Anthropic、OpenAI 以及各类新兴 AI 实验室（Neolab）完成融资后，同样产生了对 GPU 的庞大需求。",
+      "Claude Code 是行业拐点 - Doug O'Laughlin、Jeremie Eliahou Ontiveros 等3人 · 2月5日",
+      "这一拐点意味着需求已然暴增，超大规模云厂商和新兴算力云厂商（Neocloud）的 GPU 遭遇抢购潮。",
+      "这股新增需求推高了整个供应链的产品与服务定价，从 DRAM 和 NAND 存储器，到光纤线缆、数据中心托管乃至燃气轮机，无一幸免。",
+      "在众多算力相关的产品与服务中，GPU 租赁是最新一个因供应极度紧张而导致价格跳涨的领域。H100 的 1 年期 GPU 租赁合同价格已从 2025 年 10 月 1.70 美元/小时/GPU 的低点，暴涨近 40%，至 2026 年 3 月的 2.35 美元/小时/GPU。",
+      "所有型号的按需 GPU 租赁算力均已售罄——那些已经锁定按需实例的客户，尽管面临近期价格跳涨，也不愿将这些算力释放回资源池。在2026年初寻找 GPU 算力，就像试图预订最后一班航班的机票一样：价格高昂，且几乎一票难求。这还是个体面的比喻，更准确的说法是，现在想租一个集群简直像在买毒品一样。",
+      "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+      "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "得益于我们在ClusterMAX、InferenceX以及AI 云总拥有成本方面的工作，SemiAnalysis 一直在深入追踪新兴算力云厂商和超大规模云厂商生态内的 GPU 租赁定价等趋势与议题。",
+      "我们还投入大量时间协助 AI 实验室对接新兴算力云厂商，在市场上寻找 GPU 租赁资源，并与生态内的几乎所有参与者积极探讨 GPU 租赁价格趋势。",
+      "自2023年以来，我们一直为客户维护着GPU 租赁价格指数，追踪大多数主流 GPU 型号（H100、H200、B200、B300、GB200、GB300、MI300、MI325、MI355）在所有关键合同期限下的定价，涵盖从按需、1个月一直到5年的各类期限。我们的指数基于对众多新兴算力云厂商和算力买家的调研数据构建，并通过实际交易数据，以及我们亲自促成的谈判与交易进行了交叉验证。",
+      "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+      "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "今天，我们将公开发布 H100 一年期 GPU 租赁指数，为行业提供更多数据与洞察。我们每月更新该指数，并将通过 X 和 LinkedIn 官方账号点评最新趋势与市场动态。至于其他所有主流 GPU 型号的全期限结构与租赁定价数据，则向订阅了我们任意模型或产品的机构客户开放。",
+      "[点击此处访问我们的 GPU 租赁指数仪表盘](https://semianalysis.com/gpu-pricing-index/)",
+      "本报告将探讨 GPU 租赁市场的最新趋势、市场动态与核心数据点，阐述我们如何剖析更宏观的 GPU 租赁市场结构，并前瞻租赁定价的未来走向。"
+    ],
+    "01-surge-pricing-comes-to-the-gpu": [
+      "展示一年期 H100 租赁价格的图表，其实不足以充分反映这一趋势的猛烈程度——我们在尝试采购算力时的第一手见闻，加上市场其他参与者的反馈，描绘出了一幅更为严峻的画面。",
+      "在众多高度异构的应用场景中，需求依然强劲，且不存在放之四海而皆准的方案。大量推理工作负载（例如大型混合专家模型（MoE）推理）在 GB300 NVL72 等最新超大规模系统上运行效果最佳，而训练工作负载在 H100 上则能实现最佳性价比，这使得即使是老款显卡也维持着高企的需求。",
+      "InferenceX v2：英伟达 Blackwell 对决 AMD 与 Hopper——前身为 InferenceMAX - Dylan Patel、Cam Quilici 等 5 人 · 2 月 16 日",
+      "客户争相在 AWS 上以每小时每卡 14 美元的价格抢购 p6-b200 竞价实例；一些新兴算力云厂商巨头不再出售单节点；H100 正以与两三年前签订时完全相同的费率被续约，部分 H100 合同甚至一续就是 4 年，直接签到 2028 年。想要寻找哪怕只有 8 个节点（64 张 GPU）的 H100 或 H200 算力也绝非易事——我们询问的供应商中有一半已经完全售罄，而大多数供应商干脆回复称，他们根本没有任何 Hopper 架构 GPU 的合同到期释放产能。",
+      "我们甚至听说，有算力租户将自己的集群拆分并将算力转租出去，就像摩纳哥大奖赛期间高价转租公寓一样。即将上演的戏码——新兴算力云厂商“二房东”的崛起？",
+      "Blackwell 的可用产能同样极其吃紧。我们获悉，由于对开放权重模型的强劲需求以及推理需求的持续激增，新 Blackwell 部署的交付周期现已延长至 6 月到 7 月，且这些集群中的绝大多数已被抢购一空。事实上，放眼整个市场，直到 2026 年 8 月至 9 月上线的所有产能都已预订完毕！"
+    ],
+    "02-gpu-rental-prices-the-comeba": [
+      "市场究竟是如何走到这一步的？仅仅六个月前，大多数市场观察人士还在质疑 GPU 的残值，认定 GPU 租赁费率势必将面临断崖式下跌。金融分析师更是对任何将 GPU 算力资产折旧期设为 6 年的新兴算力云厂商或超大规模云厂商予以猛烈抨击。在探讨未来趋势走向之前，我们先快速回顾一下此前的市场演变。",
+      "在 2025 年底之前，整个生态系统的普遍预期是，鉴于 Blackwell 的算力成本大幅降低，随着其部署规模的扩大，Hopper（即 H100 和 H200）的租赁价格将出现大幅下跌。然而，2025 年底的实际情况却截然相反：市场对 H100 的需求依然坚挺，甚至在许多场景下还在不断走强。当时开放权重模型的快速普及和推理需求的加速爆发，正是市场即将迎来算力需求无底洞狂潮的初步端倪。",
+      "1 月份成为了算力市场的下一个拐点。当时，存储器价格（包括 DRAM 和 NAND）在连续数个季度猛涨之后，开始呈现抛物线式暴涨。根据我们的存储器模型，LPDDR5 和 DDR5 的合同价格在 2026 年第一季度预计将分别实现约 4 倍和 5 倍的同比增长。",
+      "为了应对组件成本飙升带来的利润率风险，OEM 厂商开始对 AI 服务器重新定价，且提价幅度远超底层组件成本的实际上涨幅度。这让集群资本投资决策变得更加棘手，因为高昂的服务器采购成本压缩了项目的预期投资回报率，迫使部分运营商放缓甚至放弃部署计划。这实际上导致原本应上线的算力供应遭到搁置，进一步加剧了租赁市场的紧缺态势。",
+      "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+      "来源：SemiAnalysis AI TCO 模型",
+      "在这场“AI 服务器定价末日”引发的采购乱局中，GPU 租赁需求显著加速，大部分剩余的闲置算力在 1 月和 2 月被抢购一空。到了 3 月，无论合同期限长短，想要找到任何 H100、H200 或 B200 的租赁算力已经变得几乎不可能。1 年期合同的租赁价格在 1 月下旬突破了每小时每卡 2 美元的大关，随后在 2 月中下旬较 1 月底飙升了 15-20%，并预计到 3 月底还将实现 15-20% 的环比上涨。",
+      "今年年初，原生媒体生成构成了需求的一大核心驱动力——随着用户大规模生成并精修图像与视频，Seedance 和 Nano Banana 正推动 Token 吞吐量激增。然而，最显性的需求引擎则是多智能体工作负载的崛起：这些智能体执行多步工作流，在高并发状态下运行并持续迭代，最终导致 Token 与算力消耗呈抛物线式暴增。",
+      "看看我们在多篇文章中已经指出的关于 Claude Code 的趋势就知道了。过去 7 天里，SemiAnalysis 作为一家公司消耗了数十亿个 Token，平均成本约为 5 美元/百万 Token，但在节省时间、拓展工作流和提升能力方面带来的回报，远远超过了这一成本。SemiAnalysis 目前已在各项工作流中部署了一套 AI 工具，应用范围远超简单的搜索和摘要——尤其是在仪表盘制作、自动化抓取、大规模数据清洗以及基于智能体的财务建模等方面。",
+      "我们正通过每日 Claude 提交量等替代指标来追踪这种压倒性的需求。按照目前的发展轨迹，我们认为到 2026 年底，Claude Code 将占所有每日代码提交量的 20% 以上。就在你眨眼之间，AI 已经吞噬了整个软件开发领域。对该数据集感兴趣的机构客户可以联系我们的API 文档团队。",
+      "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+      "来源：SemiAnalysis Token经济学仪表盘",
+      "似乎我们圈子里的几乎每个人都是 Claude Code 的狂热用户——但我们也认识到，我们的联系人圈子完全沉浸在 AI 和半导体的方方面面，因此他们只是先头部队。对于许多财富 500 强企业和更广泛的大众而言，Claude Code 和智能体（Agentic）世界只不过是偶尔出现在 Facebook 动态或最喜欢的 NPR 播客里的奇闻轶事。他们完全没有意识到，智能体世界即将向全球释放一场生产力狂潮与颠覆性变革。",
+      "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+      "来源：SemiAnalysis，由 Google Gemini 生成",
+      "随着更广泛经济领域中那些认识到 AI 工具惊人投资回报率的人加入我们，共同驾驭这股浪潮，Token 消耗量将随着时间的推移继续实现阶跃式增长。关于使用 AI 真实回报的争论如今已尘埃落定——使用 AI 工具所创造的价值，比其使用成本高出一个数量级。Token 需求曲线向右上方的移动，正形成一股强大且（目前）相对缺乏弹性的力量，持续推高 GPU 租赁价格。",
+      "简而言之——如果使用 AI 工具的投资回报率高达 5 到 10 倍，那么在价格涨至足以遏制需求之前，GPU 租赁定价显然还有很大的上行空间。若租赁价格的上涨进一步推高服务器及零部件成本，我们也不会感到意外。"
+    ],
+    "03-introducing-the-semianalysis-1": [
+      "今天，我们将免费开放 SemiAnalysis H100 一年期租赁合同价格指数，以提升市场对 GPU 租赁趋势的认知与透明度。",
+      "[点击此处访问我们的 GPU 租赁指数仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "我们的指数基于对 100 多家市场参与者（包括新兴算力云厂商、算力买方和卖方）的直接调查数据构建。我们每月采集这些数据，以确定 GPU 租赁合同的代表性价格区间（第 25 至第 75 百分位数）。我们不仅通过交易数据验证这些定价水平，还在我们的网络内撮合算力买卖双方，亲自促成部分交易以进行交叉验证。",
+      "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+      "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "自 2023 年以来，我们持续追踪 H100、H200、B200、B300、GB200 和 GB300 在 3 个月至 5 年不同合同期限下的合约市场价格，并精选了 AMD 系列（MI300、MI325、MI355）的可用数据。",
+      "SemiAnalysis H100 一年期合同价格指数能够对现有 GPU 指数形成有力补充，原因如下：",
+      "许多 GPU 租赁指数源于竞价/按需实例的挂牌价或公开报价，但 GPU 租赁市场的大部分交易都是基于长期合同（至少 6 个月或更长）。这些价格通过双边协商敲定，相关的报价和交易价格通常不会发布在任何免费的在线数据库中。大多数大型新兴算力云厂商倾向于出租至少 1 年期的算力，2 年或 3 年期更佳——如果能拿下 5 年期的大型包销协议则最为理想。SemiAnalysis H100 一年期租赁合同价格指数专门针对这一占据绝大部分租赁交易量的合约市场。该指数锚定特定的合同期限，不仅让用户更容易理解其所反映的细分市场，还能帮助用户将这些趋势与他们观察到的实际情况进行交叉验证。",
+      "算力买家的实际交易价格，未必就是超大规模云厂商和新兴算力云厂商公开的挂牌价。这些挂牌价的波动固然能为 GPU 租赁价格走势提供有价值的方向性信号，但仅凭这些变动，无法准确估算实际的交易价格。通常情况下，这些公开挂牌价往往在合同市场发生转变之后才会调整，滞后于算力需求的实际趋势。特别是按需市场，其运作逻辑是将价格维持在固定水平，而将采用率或利用率作为变量。这种定价仅在必要时才会进行临时调整。关于该市场的运作机制，我们将在后文详细探讨。",
+      "市场上有许多指数擅长处理海量的报价、价格和交易数据，它们同样是分析市场趋势的绝佳工具。但从本质上讲，我们的方法侧重于与市场参与者，以及那些制定定价和采购决策的幕后人员进行直接交流。每一次报价和每一笔交易背后都大有文章。我们旨在揭示其中起作用的定性与定量趋势，并分享业内轶事，帮助大家全面透视 GPU 租赁市场。",
+      "机构订阅用户可以获取当前几乎所有活跃 GPU 租赁市场的完整期限结构数据。",
+      "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+      "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "在公开发布 H100 一年期合同价格追踪工具的同时，我们也向 Token经济学模型机构订阅用户推出了 SemiAnalysis Token经济学仪表板——这是一款用于追踪和解析前沿 AI 模型竞争格局的利器。该仪表板允许用户在代码编写、逻辑推理、数学计算以及智能体评估等维度构建自定义基准对比，横向比较头部模型与供应商的 API 定价，并查看各大 AI 实验室披露的关键数据，包括 Token 消耗量、营收、估值以及客户规模。"
+    ],
+    "04-gpu-rental-market-structure-to": [
+      "在2025年底之前，GPU租赁市场的定价竞争更为激烈。当时运营商手中握有大量GPU库存，而终端需求才刚刚开始实质性加速。报价环节竞争激烈，多家新兴算力云厂商都能开出极具竞争力的价格。这些运营商将出租率放在首位，力求在下一轮GPU更新周期可能对现有GPU服务器价格造成冲击之前，牢牢抓住机会，最大化压榨固定算力资产价值。",
+      "自那以后，GPU租赁供应商的策略发生了180度大转弯。如今，新兴算力云厂商与超大规模云厂商已完全掌握主动权——他们能够争取到更有利的条款，例如更高的预付款比例、更优的定价以及更长的合同期限，甚至可以根据自身的库存情况，从容挑选合同的起止日期。时间也站到了新兴算力云厂商这一边：他们能够按照自己的节奏规划部署，并利用价格不断上涨的大环境，逐步为特定算力集群构建最优的客户组合。",
+      "深入理解GPU租赁市场结构的最佳方式，是将其划分为三个主要的细分市场，每个细分市场通常服务于不同类型的客户：",
+      "1. 短期租赁：按需实例、竞价实例以及短于3个月的合同 2. 中期合同：从3个月一直延伸至3年以上的合同。 3. 长期包销协议：4到5年的合同，其中5年是最主流的合同期限。"
+    ],
+    "05-short-term-rental-on-demand": [
+      "短期租赁处于租赁期限结构的最前端，通常代表着剩余产能。不过，像Runpod和Lambda等许多厂商，已非常成功地专注于提供大量灵活的按需实例或竞价实例产能。按需实例的定价机制与GPU租赁合同市场的其他部分截然不同。供应商通常会为按需产能设定固定价格，且极少进行调整。",
+      "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c1678ba-ba7f-4e59-968e-5eb51b99f1e2_614x921.jpeg",
+      "资料来源：Lambda Labs",
+      "供应商会根据利用率水平对价格进行一次性调整——如果利用率过低，他们会降价以吸引需求；如果利用率拉满，供应商就会上调价格，因为他们判定即使在更高的价格水平下，利用率仍将保持高位。这就是为什么新兴算力云厂商公布的按需实例定价时间序列，往往会在很长一段时间内保持平稳，随后才出现跳空上涨或下跌的阶跃式变化。在按需实例市场中，衡量需求的最佳高频指标是利用率，而不是价格。",
+      "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17b076f7-d4ed-41fe-bb4e-6531c21fa9ef_1140x748.png",
+      "资料来源：Lambda Labs，SemiAnalysis"
+    ],
+    "06-mid-term-contracts": [
+      "更具经济参考价值的细分领域是合同市场，按交易金额计算，绝大多数GPU租赁交易均在此完成。1年期市场吸收了非AI实验室客户的边际需求以及大型买家的溢出需求，因此成为反映供应趋紧最敏锐的指标。AI原生企业和规模较小的AI实验室主要集中在1至3年的合同期限内。然而，目前的趋势是，这些实验室和AI原生企业正越来越多地寻求通过签订4年以上的长期合同来锁定算力，甚至愿意接受超过20%的高额预付比例，这在以往4年以上的交易中并不常见。"
+    ],
+    "07-long-term-offtakes": [
+      "最后，4至5年期市场由提前锁定海量算力的AI实验室主导。这些交易涉及50MW、100MW甚至更大规模的大型集群——相当于约24,000至48,000张GB300 NVL72 GPU。整体而言，这些交易在新兴算力云厂商的GPU租赁市场总盘子中占据了极大比例。",
+      "AI实验室青睐这类合同，因为能够一次性锁定海量算力，以应对急剧增长的终端需求。此外，AI实验室对集群设计拥有极大的话语权，能够主导存储、网络、CPU算力等方面的决策。这类交易通常以裸金属形式交付，因为AI实验室具备深厚的工程能力，能够深度定制各层技术栈，最大化单位TCO的性能产出。",
+      "新兴算力云厂商同样青睐这类交易，因为他们可以将销售资源集中在少数几笔大型包销协议上，而无需耗费精力去跟进数十笔才能凑够同等营收的小单。长期合同对新兴算力云厂商还有一大优势：他们可以凭借这些合同，以优惠条件获得与合同期限相匹配的债务融资，从而基本消除久期错配和GPU租金波动的风险，并在大多数情况下锁定10%至20%区间的项目IRR。此外，超大规模云厂商为这类交易兜底的情况也屡见不鲜——他们先作为直接包销方向新兴算力云厂商采购，随后再将算力转售给AI实验室。",
+      "这种交易结构实现了多方共赢：由于包销方是拥有AAA信用评级的超大规模云厂商，新兴算力云厂商能够获得极具优势的融资条件；而超大规模云厂商只需依托自身资产负债表提供兜底，无需实际扩表，即可从中分得一杯羹。",
+      "下表展示了我们持续追踪的多笔大型包销协议。我们对这些交易进行了深入分析，以测算其隐含的单卡小时租金（$/hr/GPU），以及项目IRR、EBIT利润率等盈利指标。",
+      "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png",
+      "资料来源：SemiAnalysis AI TCO模型",
+      "在当下的市场环境中，大多数处于爬坡阶段的大型AI集群均被AI实验室独占。尽管如此，这些实验室依然在向4年期以下市场出手，以填补现有算力爬坡期的缺口。同时，他们直接续签现有的H100和H200集群，截断了原本可能回流至4年期以下合同市场的算力供给，从而间接影响了该细分市场的格局。随着AI实验室逐步推进GB200和GB300巨型集群的部署，1至3年期合同市场的供需动态将如何演变，势必成为一大看点。"
+    ],
+    "08-where-the-puck-is-going": [
+      "最引人注目的是，这些底层基本面与整体市场情绪之间存在严重背离。尽管有确凿证据表明供应趋紧且价格上涨——这些利好本应通过利润率扩张以及更有力地支撑延长资产折旧年限的逻辑，直接让新兴算力云厂商受益——但二级市场对CoreWeave、Nebius、IREN等标的的情绪却日益悲观，这些公司的股价目前正处于过去6至12个月交易区间的底部。",
+      "市场依然受制于算力最终将供过于求并走向商品化的惯性叙事，前文所述的行业进展几乎未能缓解市场对GPU残值的担忧。然而，一线市场的实际情况却指向了持续的稀缺性，以及所有新兴算力云厂商普遍具备的定价权；这意味着在如此严重的短缺面前，所有算力都将供不应求——无论其相对性能如何。",
+      "展望未来，要判断GPU租金能否继续维持高位，有三个核心观测点值得关注：",
+      "GB300集群将在整个2026年持续爬坡。我们将密切关注新增算力及随之涌入市场的Token吞吐量，究竟能在多大程度上缓解当前的算力紧缺，还是说Token需求的增长会反超这些新增供给。这将决定AI实验室在4年期以下租赁市场的参与深度，进而决定该细分市场的价格走势。",
+      "当前芯片短缺的恶化程度。我们近期在AI芯片大短缺一文中，明确提示了台积电（TSMC）N3逻辑晶圆产能以及HBM、DRAM和NAND存储器等环节的供应紧张。鉴于这些复杂的制造工艺随时可能出现执行层面的波折，短缺状况完全可能进一步恶化。",
+      "AI实验室年度经常性收入（ARR）的规模扩张情况——以及应用普及和Token消耗量持续增长的速度。我们的AI Token经济学模型正是聚焦于此，通过分析关键的需求与使用信号来追踪终端需求。"
+    ],
+    "09-pricing-is-only-going-one-way": [
+      "综合上述因素，结论十分明确：GPU租金更有可能继续上涨，而非下跌。",
+      "这种动态正在自我强化。随着新兴算力云厂商察觉到供应收紧与价格上涨，他们纷纷在价格进一步攀升前抢占更多硬件，而这只会加剧供应紧张，进一步推高价格。这与2023至2024年的GPU短缺期如出一辙，当时紧缺的供应让OEM厂商得以大幅扩张利润率，并导致服务器价格暴涨；不过我们认为，如今的服务器市场已足够成熟，这一幕这次可能不会重演。",
+      "正如我们近期在致机构客户的报告中所指出的，GPU租金重拾涨势，扩大了已部署资本的利润率，从而提升了新兴算力云厂商的投资回报率（ROIC）。同时，更高的租金延长了现有GPU的经济使用寿命，这意味着投入资本在需要进行再投资之前，能够创造更长期的现金流。",
+      "目前来看，最显著的受益者是具备以下特征的供应商：",
+      "合同期限较短（重新定价更快）",
+      "庞大的H100装机基数",
+      "近期有新增算力产能",
+      "合同期限较短的新兴算力云厂商将迎来算力租约到期，并按当前市场环境重新定价，从而立即实现利润率扩张。与此同时，通过多年期合同锁定下一代算力产能的超大规模云厂商和新兴算力云厂商也将从中受益。",
+      "如果我们说“这次可能真的不一样”，会不会有点乌鸦嘴？"
+    ]
+  }
+}

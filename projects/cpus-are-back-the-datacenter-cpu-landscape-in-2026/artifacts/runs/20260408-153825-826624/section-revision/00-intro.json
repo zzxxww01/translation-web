@@ -1,0 +1,34 @@
+{
+  "section_id": "00-intro",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.45,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "强化学习 (RL) 与智能体应用、上下文内存存储、DRAM 定价影响、CPU 互连演进、AMD Venice 处理器、Verano、Florence、英特尔（Intel）Diamond Rapids 架构、Coral Rapids、ARM Phoenix 与 Venom、Graviton 5、Axion",
+    "作者：Gerald Wong 与 Dylan Patel",
+    "2026 年 2 月 9 日 · 付费专享",
+    "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+    "自 2023 年以来，数据中心的叙事逻辑极其简单：GPU 与网络设备称王。AI 训练与推理的问世及随后的爆发，抽离了原本属于 CPU 的计算需求。这导致服务器 CPU 的主要供应商英特尔，未能乘上这波数据中心建设与支出狂潮的东风。随着超大规模云厂商与新锐云厂商将重心转向 GPU 及数据中心基础设施，服务器 CPU 营收一直停滞不前。",
+    "与此同时，这些超大规模云厂商一直在为其云计算服务自研基于 ARM 架构的数据中心 CPU，直接封死了英特尔一大片可寻址市场。而在自家的 x86 阵地内，英特尔拉垮的执行力，加上面对竞争对手 AMD 时毫无竞争力的性能表现，进一步蚕食了其市场份额。由于拿不出能打的 AI 加速器产品，当整个行业在尽情狂欢时，英特尔只能在原地停滞不前。",
+    "过去六个月里，情况发生了翻天覆地的变化。我们在 Core Research 与 Tokenomics Model 中发布了多份关于 CPU 需求飙升的报告。我们展示并建模分析的主要驱动力，是强化学习 (RL) 与直觉编程 (vibe coding) 对 CPU 产生的惊人需求。我们还报道了多家供应商与 AI 实验室达成的大型 CPU 云服务协议，并建模分析了正在部署的 CPU 数量及类型。",
+    "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+    "英特尔 2025 年第四季度数据中心与人工智能事业部 (DCAI) 营收。来源：英特尔",
+    "然而，英特尔近期的强势反弹以及 2025 年下半年需求信号的转变表明，CPU 如今已重回舞台中心。在最新的第四季度财报中，英特尔发现 2025 年底数据中心 CPU 需求出现意外上扬。为此，他们正在上调 2026 年晶圆代工厂（foundry）设备的资本支出（capex）指引，并将晶圆产能分配从 PC 优先向服务器倾斜，以缓解满足这一新增需求时的供应链瓶颈。这标志着 CPU 在数据中心的角色迎来拐点，AI 模型训练与推理对 CPU 的依赖愈发显著。",
+    "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+    "数据中心 CPU 核心数趋势。来源：SemiAnalysis 预测",
+    "2026 年是数据中心 CPU 令人振奋的一年。在需求激增的背景下，各大供应商都将在今年推出众多新一代产品。因此，本文将为您描绘 2026 年的 CPU 市场格局。我们将首先铺垫背景，回顾数据中心 CPU 的发展史以及不断演变的需求驱动因素，并深入剖析英特尔与 AMD 多年来在数据中心 CPU 架构上的变迁。",
+    "随后，我们将目光转向 2026 年的 CPU 产品，全面拆解英特尔的 Clearwater Forest 与 Diamond Rapids 处理器，以及 AMD 的 Venice 处理器。我们将探讨它们在设计上引人注目的趋同（与分歧）之处，分析其性能差异，并预告我们的 CPU 成本分析。",
+    "接下来，我们将详细阐述 ARM 阵营的竞争态势。这包括英伟达（NVIDIA）的 Grace 与 Vera 架构、亚马逊的 Graviton 系列、微软的 Cobalt、谷歌的 Axion CPU 系列、Ampere Computing 进军商用 ARM 芯片市场的举措及其被软银收购的事件、ARM 自家的 Phoenix CPU 设计，并审视华为自主研发的 Kunpeng CPU 进展。",
+    "面向我们的订阅用户，我们将提供直至 2028 年的数据中心 CPU 路线图，并详细介绍 AMD、英特尔、ARM 与高通（Qualcomm）在 2026 年之后的数据中心 CPU 规划。随后，我们将展望数据中心 CPU 的未来图景，探讨 DRAM 短缺带来的影响，分析英伟达 Bluefield-4 的上下文内存存储平台对通用 CPU 未来的意义，并指出未来 CPU 市场与设计中值得关注的关键趋势。"
+  ]
+}

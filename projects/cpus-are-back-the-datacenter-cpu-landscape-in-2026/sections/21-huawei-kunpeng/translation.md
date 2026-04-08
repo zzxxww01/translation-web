@@ -1,0 +1,33 @@
+中国国产 CPU 的研发进程正在快速推进，龙芯和阿里巴巴的倚天系列均提供了本土设计的选项。然而，该市场的头号玩家当属华为，他们凭借 Kunpeng 处理器系列重新调整了数据中心 CPU 路线图。华为海思团队拥有业内顶尖的芯片设计工程师，其定制的 TaiShan CPU 核心与数据互连架构（data fabric）值得密切关注。
+
+华为最初几代数据中心 CPU 均采用标准的移动端 ARM Cortex 核心。2015 年推出的 Hi1610 搭载了 16 个 A57 核心。2016 年的 Hi1612 将核心数翻倍至 32 个，而 2017 年的 Kunpeng 916 则将核心架构升级为 Cortex-A72。这三代产品均由台积电 16nm 工艺代工。
+
+https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png
+
+Kunpeng 920 裸片图。来源：万扯淡
+
+Kunpeng 920 于 2019 年问世，采用了极具野心的多芯粒设计，并搭载 64 个定制核心。两颗基于台积电 7nm 工艺的计算裸片，每颗包含 8 个集群，每个集群拥有 4 个基于 ARM v8.2 指令集架构（ISA）运行的 TaiShan V110 核心。这些集群通过环形总线与同一裸片上的 4 通道 DDR4 内存相连，两颗计算裸片共计提供 8 通道内存。Kunpeng 920 是首款采用台积电 CoWoS-S 先进封装的 CPU。它利用一块大型硅中介层，通过定制的裸片间接口，将两颗计算裸片与一颗 I/O 裸片相连；该 I/O 裸片配备了 40 条 PCIe Gen 4 通道，并集成了双 100G 以太网控制器。
+
+尽管 Kunpeng 920 集成了多项前沿技术，但美国对华为的制裁切断了其台积电代工渠道，直接打乱了华为的 CPU 路线图，导致下一代 Kunpeng 930 未能在 2021 年如期发布。
+
+https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png
+
+Kunpeng 920B 裸片图。来源：Kurnal
+
+取而代之的是，升级版的 Kunpeng 920B 于 2024 年悄然发布，并带来了多项升级。TaiShan V120 核心现已支持 SMT，两颗计算裸片上各有 10 个 4 核集群，共计 80 核 160 线程。核心互连和物理布图与 Kunpeng 920 保持相似，计算裸片上配备 8 通道 DDR5。I/O 裸片现被一分为二，计算裸片置于中间。我们认为，两代 CPU 之间长达 5 年的断档，归咎于美国制裁以及被迫针对中芯国际 N+2 工艺重新设计芯片。
+
+https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png
+
+华为 Kunpeng CPU 路线图。来源：华为
+
+https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png
+
+华为 TaiShan 950 SuperPoD。来源：华为
+
+面向 2026 年，华为将推出 Kunpeng 950 再次更新其 CPU 产品线，并将其配置在 TaiShan 950 SuperPoD 机架中以满足通用计算需求。Kunpeng 950 号称在使用其专有的 GaussDB 多写分布式数据库架构时，其 OLTP 数据库性能较 Kunpeng 920B 实现了 2.9 倍的跃升。为实现这一目标，其核心数量翻了一番以上，飙升至 192 核，并采用了保留 SMT 支持的全新 LinxiCore。此外，华为还将推出一款规模较小的 96 核版本。每个 TaiShan 950 SuperPoD 机架内容纳 16 台双路服务器，配备高达 48TB 的 DDR5 内存，这表明其采用了 12 通道内存设计。这些机架还集成了存储与网络功能，将被甲骨文 (Oracle) 的 Exadata 数据库服务器采用，并广泛应用于中国金融领域。
+
+该设计很可能采用中芯国际的 N+3 工艺制造，该工艺近期已在 Kirin 9030 智能手机芯片上首发亮相。
+
+华为的路线图进一步延伸至 2028 年的 Kunpeng 960 系列。这一代顺应了将设计拆分为两大分支的行业趋势。其中，面向 AI 头节点和数据库打造的 96 核 192 线程高性能版本，号称单核性能提升 50% 以上；而面向虚拟化和云计算的高密度版本，则会将核心数量推高至 256 核，甚至可能更多。我们预计，届时华为将在中国超大规模云厂商的 CPU 部署中占据可观的市场份额。
+
+下文将展示我们直至 2028 年的 CPU 路线图，并详细剖析 2026 年之后数据中心 CPU 的核心特性与架构演进。具体内容涵盖：AMD 的 Verano 与 Florence 处理器；英特尔的 Coral Rapids 及其已被彻底砍掉的 CPU 产品线；ARM 的 Venom 规格参数；以及高通凭借 SD2 重返数据中心 CPU 市场的动向。此外，我们还将英伟达的 Bluefield-4 纳入其中，以此作为未来 CPU 部署演进方向的风向标。随后，我们将探讨 DRAM 短缺对各个数据中心 CPU 细分市场的影响，展望未来的 CPU 发展趋势，并重点解析那些将在未来十年重塑 CPU 格局的关键设计要素。

@@ -1,0 +1,13 @@
+{
+  "project_id": "are-ai-datacenters-increasing-electric-bills-for-a",
+  "status": "failed",
+  "error": "HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3-pro-preview:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+  "errors": [
+    {
+      "error": "HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3-pro-preview:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-03-15T20:52:05.436954"
+    }
+  ],
+  "run_id": "20260315-205152-414204",
+  "artifacts_path": "projects\\are-ai-datacenters-increasing-electric-bills-for-a\\artifacts\\runs\\20260315-205152-414204"
+}

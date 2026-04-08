@@ -1,0 +1,1352 @@
+{
+  "section_id": "23-wideep",
+  "title": "WideEP",
+  "title_translation": "宽专家并行（WideEP）",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "By now, most frontier AI labs employ Mixture of Experts (MoE) model architectures as opposed to dense. In MoE architectures, only a subset of “experts” are activated for each token. For instance, DeepSeek R1 has 671B total parameters, but only 37B active parameters. Specifically, DeepSeek R1 has 256 routed experts (and 1 shared expert) with each token being routed to 8 distinct experts. This architecture lends itself naturally to expert parallelism (EP), which evenly distributes expert weights across some number of GPUs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0283",
+      "parent_block_index": 283,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By now, most frontier AI labs employ Mixture of Experts (MoE) model architectures as opposed to dense. In MoE architectures, only a subset of “experts” are activated for each token. For instance, DeepSeek R1 has 671B total parameters, but only 37B active parameters. Specifically, DeepSeek R1 has 256 routed experts (and 1 shared expert) with each token being routed to 8 distinct experts. This architecture lends itself naturally to expert parallelism (EP), which evenly distributes expert weights across some number of GPUs.",
+      "parent_block_plain_text": "By now, most frontier AI labs employ Mixture of Experts (MoE) model architectures as opposed to dense. In MoE architectures, only a subset of “experts” are activated for each token. For instance, DeepSeek R1 has 671B total parameters, but only 37B active parameters. Specifically, DeepSeek R1 has 256 routed experts (and 1 shared expert) with each token being routed to 8 distinct experts. This architecture lends itself naturally to expert parallelism (EP), which evenly distributes expert weights across some number of GPUs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如今，大多数前沿 AI 实验室均采用混合专家 (MoE) 模型架构，而非稠密模型。在 MoE 架构中，每个 token 仅激活一小部分“专家”。例如，DeepSeek R1 的总参数量为 671B，但激活参数仅有 37B。具体而言，DeepSeek R1 拥有 256 个路由专家（以及 1 个共享专家），每个 token 会被路由至 8 个不同的专家。这种架构天然契合专家并行 (EP)，可将专家权重均匀分布在多张 GPU 上。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525527",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Consider serving DeepSeek R1 on a single 8-GPU server. At 671B parameters, some form of parallelism is required to fit the model across available HBM. The naive approach is tensor parallelism (TP), which shards every weight matrix across all GPUs. This works well for dense models but ignores the sparse activation pattern of MoE. With TP=8, each expert’s weights are sharded across all 8 GPUs, meaning every expert activation requires an all-reduce across all GPUs & the reduction dims of the GEMM is smaller leading to lower arithmetic intensity, even though only 8 of 256 experts activate per token. TP treats each expert like a dense layer, paying full cross-GPU communication cost while the model’s sparsity goes unexploited.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0284",
+      "parent_block_index": 284,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Consider serving DeepSeek R1 on a single 8-GPU server. At 671B parameters, some form of parallelism is required to fit the model across available HBM. The naive approach is tensor parallelism (TP), which shards every weight matrix across all GPUs. This works well for dense models but ignores the sparse activation pattern of MoE. With TP=8, each expert’s weights are sharded across all 8 GPUs, meaning every expert activation requires an all-reduce across all GPUs & the reduction dims of the GEMM is smaller leading to lower arithmetic intensity, even though only 8 of 256 experts activate per token. TP treats each expert like a dense layer, paying full cross-GPU communication cost while the model’s sparsity goes unexploited.",
+      "parent_block_plain_text": "Consider serving DeepSeek R1 on a single 8-GPU server. At 671B parameters, some form of parallelism is required to fit the model across available HBM. The naive approach is tensor parallelism (TP), which shards every weight matrix across all GPUs. This works well for dense models but ignores the sparse activation pattern of MoE. With TP=8, each expert’s weights are sharded across all 8 GPUs, meaning every expert activation requires an all-reduce across all GPUs & the reduction dims of the GEMM is smaller leading to lower arithmetic intensity, even though only 8 of 256 experts activate per token. TP treats each expert like a dense layer, paying full cross-GPU communication cost while the model’s sparsity goes unexploited.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 730,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "假设在单台 8 卡 GPU 服务器上部署 DeepSeek R1。面对 671B 的参数规模，必须引入某种并行策略，才能将模型装入现有的 HBM 中。最简单粗暴的方法是张量并行 (TP)，即将每个权重矩阵切分至所有 GPU。该策略在稠密模型上表现优异，却完全无视了 MoE 的稀疏激活模式。在 TP=8 的配置下，每个专家的权重被切分到全部 8 张 GPU 上。这意味着，尽管每个 token 仅激活 256 个专家中的 8 个，但每次专家激活都必须在所有 GPU 间执行一次全归约 (All-reduce)。此外，通用矩阵乘法 (GEMM) 的归约维度随之缩小，进而拉低了算术强度。TP 将每个专家等同于稠密层处理，不仅承担了全额的跨 GPU 通信开销，还白白浪费了模型的稀疏性优势。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525621",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Expert parallelism takes a more well-suited approach, assigning whole experts to individual GPUs. With EP=8, we divide the 256 experts per layer across 8 GPUs for a total of 32 experts/layer/GPU. Each GPU holds approximately 1/8th of the expert weights plus a full replica of the non-expert weights (attention projections, embeddings, normalization, and the shared expert). Since roughly 90%+ of DeepSeek R1’s parameters are routed expert weights, EP captures most of the memory savings, and replicating the remaining less than 30B non-expert parameters across all 8 GPUs is affordable.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0285",
+      "parent_block_index": 285,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Expert parallelism takes a more well-suited approach, assigning whole experts to individual GPUs. With EP=8, we divide the 256 experts per layer across 8 GPUs for a total of 32 experts/layer/GPU. Each GPU holds approximately 1/8th of the expert weights plus a full replica of the non-expert weights (attention projections, embeddings, normalization, and the shared expert). Since roughly 90%+ of DeepSeek R1’s parameters are routed expert weights, EP captures most of the memory savings, and replicating the remaining less than 30B non-expert parameters across all 8 GPUs is affordable.",
+      "parent_block_plain_text": "Expert parallelism takes a more well-suited approach, assigning whole experts to individual GPUs. With EP=8, we divide the 256 experts per layer across 8 GPUs for a total of 32 experts/layer/GPU. Each GPU holds approximately 1/8th of the expert weights plus a full replica of the non-expert weights (attention projections, embeddings, normalization, and the shared expert). Since roughly 90%+ of DeepSeek R1’s parameters are routed expert weights, EP captures most of the memory savings, and replicating the remaining less than 30B non-expert parameters across all 8 GPUs is affordable.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 586,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "专家并行 (EP) 采取了更契合的方案，将完整的专家分配给独立的 GPU。在 EP=8 时，我们将每层的 256 个专家划分至 8 张 GPU，即每张 GPU 承载 32 个专家/层。每张 GPU 容纳约 1/8 的专家权重，并保留一份完整的非专家权重副本（包含注意力投影、嵌入层、归一化层及共享专家）。由于 DeepSeek R1 中 90% 以上的参数均为路由专家权重，EP 实现了最大程度的内存节省；而在全部 8 张 GPU 上复制剩余不足 30B 的非专家参数，其成本完全可以承受。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525659",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The forward pass proceeds in two phases per layer. During attention, each GPU acts as an independent data-parallel rank, processing its own subset of requests using its replicated non-expert weights, no inter-GPU communication is needed. During the MoE phase, a lightweight router determines which experts each token requires, and tokens are dispatched to the appropriate GPUs via all-to-all communication. Each GPU executes its local experts on only the tokens routed to it, and results are returned via a second all-to-all.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0286",
+      "parent_block_index": 286,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The forward pass proceeds in two phases per layer. During attention, each GPU acts as an independent data-parallel rank, processing its own subset of requests using its replicated non-expert weights, no inter-GPU communication is needed. During the MoE phase, a lightweight router determines which experts each token requires, and tokens are dispatched to the appropriate GPUs via all-to-all communication. Each GPU executes its local experts on only the tokens routed to it, and results are returned via a second all-to-all.",
+      "parent_block_plain_text": "The forward pass proceeds in two phases per layer. During attention, each GPU acts as an independent data-parallel rank, processing its own subset of requests using its replicated non-expert weights, no inter-GPU communication is needed. During the MoE phase, a lightweight router determines which experts each token requires, and tokens are dispatched to the appropriate GPUs via all-to-all communication. Each GPU executes its local experts on only the tokens routed to it, and results are returned via a second all-to-all.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 525,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每层的前向传播分为两个阶段。在注意力计算阶段，每张 GPU 作为独立的数据并行 (DP) Rank，利用其非专家权重副本处理专属的请求子集，全程无需跨 GPU 通信。进入 MoE 阶段后，轻量级路由器会判定每个 token 所需的专家，随后通过全对全 (All-to-all) 通信将 token 分发至对应的 GPU。每张 GPU 仅对路由至本地的 token 执行本地专家计算，计算结果再由第二次全对全 (All-to-all) 通信传回。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525689",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0287",
+      "parent_block_index": 287,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525719",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_wHq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2f923fd4-57c0-418e-8b01-49025b9c48d5_8236x3544.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "**An EP8 DP8 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 8 GPUs, whereas attention along with other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 8 DP ranks. Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": " Source: SemiAnalysis",
+          "start": 250,
+          "end": 271,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0288",
+      "parent_block_index": 288,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**An EP8 DP8 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 8 GPUs, whereas attention along with other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 8 DP ranks.* Source: SemiAnalysis*",
+      "parent_block_plain_text": "**An EP8 DP8 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 8 GPUs, whereas attention along with other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 8 DP ranks. Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": " Source: SemiAnalysis",
+          "start": 250,
+          "end": 271,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 271,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "**DeepSeek R1 的 EP8 DP8 部署架构。每层全部 256 个专家被均匀划分至 8 张 GPU，而注意力层及其他非专家权重（共享专家、门控网络、RMSNorm、LM Head 等）则在所有 8 个 DP Rank 上保留完整副本。 来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525853",
+          "tokenized_text": "**DeepSeek R1 的 EP8 DP8 部署架构。每层全部 256 个专家被均匀划分至 8 张 GPU，而注意力层及其他非专家权重（共享专家、门控网络、RMSNorm、LM Head 等）则在所有 8 个 DP Rank 上保留完整副本。[[[EM_1| 来源：SemiAnalysis]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The obvious way to scale is replication: deploy N independent EP8 instances across N nodes. Each instance serves requests independently with no cross-node communication. This scales throughput linearly, but each GPU still holds 32 experts per layer, and each token activates at most 8 of those 32 local experts. 75% of expert weights sit cold in HBM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0289",
+      "parent_block_index": 289,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The obvious way to scale is replication: deploy N independent EP8 instances across N nodes. Each instance serves requests independently with no cross-node communication. This scales throughput linearly, but each GPU still holds 32 experts per layer, and each token activates at most 8 of those 32 local experts. 75% of expert weights sit cold in HBM.",
+      "parent_block_plain_text": "The obvious way to scale is replication: deploy N independent EP8 instances across N nodes. Each instance serves requests independently with no cross-node communication. This scales throughput linearly, but each GPU still holds 32 experts per layer, and each token activates at most 8 of those 32 local experts. 75% of expert weights sit cold in HBM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 350,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最直观的扩展方式是直接复制：在 N 个节点上部署 N 个独立的 EP8 实例。各实例独立处理请求，全程无跨节点通信。这种做法能使吞吐量呈线性扩展，但每张 GPU 依然承载每层 32 个专家，且每个 token 至多激活这 32 个本地专家中的 8 个。高达 75% 的专家权重在 HBM 中处于闲置冷冻状态。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.525936",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Wide expert parallelism (WideEP) takes a different approach by scaling EP across nodes rather than replicating independent instances. On a 64-GPU cluster (8 nodes), DP64/EP64 places only 256/64 = 4 experts per layer per GPU, each still holding a full replica of the non-expert weights. During the MoE phase, tokens from all 64 DP ranks are dispatched via all-to-all to the GPUs hosting their routed experts.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Wide expert parallelism",
+          "start": 0,
+          "end": 23,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "em",
+          "text": "across",
+          "start": 74,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0290",
+      "parent_block_index": 290,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Wide expert parallelism** (WideEP) takes a different approach by scaling EP *across* nodes rather than replicating independent instances. On a 64-GPU cluster (8 nodes), DP64/EP64 places only 256/64 = 4 experts per layer per GPU, each still holding a full replica of the non-expert weights. During the MoE phase, tokens from all 64 DP ranks are dispatched via all-to-all to the GPUs hosting their routed experts.",
+      "parent_block_plain_text": "Wide expert parallelism (WideEP) takes a different approach by scaling EP across nodes rather than replicating independent instances. On a 64-GPU cluster (8 nodes), DP64/EP64 places only 256/64 = 4 experts per layer per GPU, each still holding a full replica of the non-expert weights. During the MoE phase, tokens from all 64 DP ranks are dispatched via all-to-all to the GPUs hosting their routed experts.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Wide expert parallelism",
+          "start": 0,
+          "end": 23,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "em",
+          "text": "across",
+          "start": 74,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 407,
+      "expected_tokens": [
+        "STRONG_1",
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "宽专家并行 (WideEP) 采取了截然不同的策略，它选择跨节点扩展 EP，而非简单复制独立实例。在包含 64 张卡的 GPU集群（8 个节点）中，DP64/EP64 架构将每层分配给单张 GPU 的专家数量降至 256/64 = 4 个，同时每张 GPU 依然保留完整的非专家权重副本。进入 MoE 阶段后，来自全部 64 个 DP Rank 的 token 会通过全对全 (All-to-all) 通信，精准分发至承载其路由专家的目标 GPU 上。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526078",
+          "tokenized_text": "[[[STRONG_1|宽专家并行 (WideEP)]]] 采取了截然不同的策略，它选择[[[EM_1|跨]]]节点扩展 EP，而非简单复制独立实例。在包含 64 张卡的 GPU集群（8 个节点）中，DP64/EP64 架构将每层分配给单张 GPU 的专家数量降至 256/64 = 4 个，同时每张 GPU 依然保留完整的非专家权重副本。进入 MoE 阶段后，来自全部 64 个 DP Rank 的 token 会通过全对全 (All-to-all) 通信，精准分发至承载其路由专家的目标 GPU 上。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This yields three compounding benefits over the single-node EP8 baseline. First, reducing expert footprint from 32 to 4 experts/GPU frees substantial HBM for KV cache, directly increasing per-GPU batch size capacity. Second, 64 DP ranks funneling tokens through fewer experts per GPU increases tokens-per-expert, raising arithmetic intensity (more FLOPs per byte of weights loaded) and improving compute utilization. The same expert weights service 8x more tokens per step. Third, aggregate HBM bandwidth scales linearly with GPU count; 64 GPUs loading expert weights simultaneously provide 8x the memory bandwidth of a single node, reducing memory bottleneck.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0291",
+      "parent_block_index": 291,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This yields three compounding benefits over the single-node EP8 baseline. First, reducing expert footprint from 32 to 4 experts/GPU frees substantial HBM for KV cache, directly increasing per-GPU batch size capacity. Second, 64 DP ranks funneling tokens through fewer experts per GPU increases tokens-per-expert, raising arithmetic intensity (more FLOPs per byte of weights loaded) and improving compute utilization. The same expert weights service 8x more tokens per step. Third, aggregate HBM bandwidth scales linearly with GPU count; 64 GPUs loading expert weights simultaneously provide 8x the memory bandwidth of a single node, reducing memory bottleneck.",
+      "parent_block_plain_text": "This yields three compounding benefits over the single-node EP8 baseline. First, reducing expert footprint from 32 to 4 experts/GPU frees substantial HBM for KV cache, directly increasing per-GPU batch size capacity. Second, 64 DP ranks funneling tokens through fewer experts per GPU increases tokens-per-expert, raising arithmetic intensity (more FLOPs per byte of weights loaded) and improving compute utilization. The same expert weights service 8x more tokens per step. Third, aggregate HBM bandwidth scales linearly with GPU count; 64 GPUs loading expert weights simultaneously provide 8x the memory bandwidth of a single node, reducing memory bottleneck.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 660,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与单节点 EP8 基线相比，这种方法能带来三重叠加优势。首先，将每张 GPU 承载的专家数量从 32 个减少到 4 个，为 KV 缓存释放了大量 HBM 空间，从而直接提升了单 GPU 的批处理容量。其次，64 个数据并行 (DP) Rank 将 token 集中输送给更少的专家，提升了“每专家处理的 token 数”，这不仅提高了算术强度（每加载一字节权重所执行的浮点运算次数），也改善了计算利用率。同样的专家权重，在每个步骤中能服务多达 8 倍的 token。第三，总 HBM 带宽随 GPU 数量线性增长；64 张 GPU 同时加载专家权重，提供了单节点 8 倍的显存带宽，缓解了显存瓶颈。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526111",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0292",
+      "parent_block_index": 292,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526139",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Hv_Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ae2668e-28ef-4a1f-8ab1-0b5f1373a1d1_8476x3546.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "**A WideEP EP64 DP64 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 64 GPUs (8 nodes), and attention and other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 64 DP ranks. Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": " Source: SemiAnalysis",
+          "start": 259,
+          "end": 280,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0293",
+      "parent_block_index": 293,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**A WideEP EP64 DP64 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 64 GPUs (8 nodes), and attention and other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 64 DP ranks.* Source: SemiAnalysis*",
+      "parent_block_plain_text": "**A WideEP EP64 DP64 deployment of DeepSeek R1. All 256 experts per layer are divided evenly among the 64 GPUs (8 nodes), and attention and other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.) are replicated across all 64 DP ranks. Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": " Source: SemiAnalysis",
+          "start": 259,
+          "end": 280,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 280,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "DeepSeek R1 的 WideEP EP64 DP64 部署架构。每层全部 256 个专家被均匀划分至 64 张 GPU（8 个节点），而注意力计算及其他非专家权重（共享专家、门控网络、RMSNorm、LM Head 等）则在所有 64 个 DP Rank 间完全复制。来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526226",
+          "tokenized_text": "DeepSeek R1 的 WideEP EP64 DP64 部署架构。每层全部 256 个专家被均匀划分至 64 张 GPU（8 个节点），而注意力计算及其他非专家权重（共享专家、门控网络、RMSNorm、LM Head 等）则在所有 64 个 DP Rank 间完全复制。[[[EM_1|来源：SemiAnalysis]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "The above configurations use only DP+EP (also known as DEP), where each GPU holds a full replica of all non-expert weights. As GPU count grows, this replication becomes increasingly wasteful. On a 64-GPU DP64/EP64 deployment, every GPU stores an identical copy of the ~40B non-expert parameters.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0294",
+      "parent_block_index": 294,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The above configurations use only DP+EP (also known as DEP), where each GPU holds a full replica of all non-expert weights. As GPU count grows, this replication becomes increasingly wasteful. On a 64-GPU DP64/EP64 deployment, every GPU stores an identical copy of the ~40B non-expert parameters.",
+      "parent_block_plain_text": "The above configurations use only DP+EP (also known as DEP), where each GPU holds a full replica of all non-expert weights. As GPU count grows, this replication becomes increasingly wasteful. On a 64-GPU DP64/EP64 deployment, every GPU stores an identical copy of the ~40B non-expert parameters.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "上述配置仅使用了数据并行 (DP) 和专家并行 (EP) 的组合（也称 DEP），每张 GPU 都持有所有非专家权重的完整副本。随着 GPU 数量增长，这种复制方式的冗余和浪费问题也愈发突出。在一个 64-GPU 的 DP64/EP64 部署中，每张 GPU 都存储着一份完全相同的、约 400 亿参数的非专家权重。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526256",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Adding tensor parallelism within groups of GPUs addresses this. In an EP64/DP8/TP8 configuration, the 64 GPUs are organized into 8 DP groups of 8 GPUs each. Within each TP group, the attention projections, shared expert, normalization, and LM head are sharded 8 ways, so each GPU holds only 1/8th of the non-expert weights. Across the full cluster, the 256 experts are still distributed one-per-4-GPUs as before.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0295",
+      "parent_block_index": 295,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Adding tensor parallelism within groups of GPUs addresses this. In an EP64/DP8/TP8 configuration, the 64 GPUs are organized into 8 DP groups of 8 GPUs each. Within each TP group, the attention projections, shared expert, normalization, and LM head are sharded 8 ways, so each GPU holds only 1/8th of the non-expert weights. Across the full cluster, the 256 experts are still distributed one-per-4-GPUs as before.",
+      "parent_block_plain_text": "Adding tensor parallelism within groups of GPUs addresses this. In an EP64/DP8/TP8 configuration, the 64 GPUs are organized into 8 DP groups of 8 GPUs each. Within each TP group, the attention projections, shared expert, normalization, and LM head are sharded 8 ways, so each GPU holds only 1/8th of the non-expert weights. Across the full cluster, the 256 experts are still distributed one-per-4-GPUs as before.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 412,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 GPU 组内增加张量并行 (TP) 可以解决这个问题。在 EP64/DP8/TP8 配置下，64 张 GPU 被组织成 8 个数据并行 (DP) 组，每组包含 8 张 GPU。在每个张量并行 (TP) 组内部，注意力投影、共享专家、归一化层和 LM Head 都被 8 路分片，因此每张 GPU 只需持有 1/8 的非专家权重。在整个集群层面，256 个专家仍然像之前一样，以每张 GPU 分配 4 个专家的形式分布。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526282",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Pure DEP has a single communication pattern: all-to-all for expert routing. Adding TP introduces a second all-reduce within each TP group for the attention and non-expert computations. The key design principle is to place TP groups within a single node, where NVLink or MNNVL provides high-bandwidth interconnect, and run EP/DP across nodes, where the all-to-all communication pattern can tolerate higher latency.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0296",
+      "parent_block_index": 296,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Pure DEP has a single communication pattern: all-to-all for expert routing. Adding TP introduces a second all-reduce within each TP group for the attention and non-expert computations. The key design principle is to place TP groups within a single node, where NVLink or MNNVL provides high-bandwidth interconnect, and run EP/DP across nodes, where the all-to-all communication pattern can tolerate higher latency.",
+      "parent_block_plain_text": "Pure DEP has a single communication pattern: all-to-all for expert routing. Adding TP introduces a second all-reduce within each TP group for the attention and non-expert computations. The key design principle is to place TP groups within a single node, where NVLink or MNNVL provides high-bandwidth interconnect, and run EP/DP across nodes, where the all-to-all communication pattern can tolerate higher latency.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 413,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "纯粹的 DEP 模式只有一种通信模式：用于专家路由的全对全 (All-to-all) 通信。引入张量并行 (TP) 后，则增加第二种通信模式：在每个 TP 组内部，为处理注意力和非专家计算，需要进行全归约 (All-reduce) 通信。其关键设计原则是：将 TP 组置于单个节点内，利用 NVLink 或 MNNVL 提供的高带宽互连；而将专家并行 (EP) 和数据并行 (DP) 扩展到跨节点运行，因为其全对全 (All-to-all) 通信模式更能容忍较高的延迟。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526307",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "As always, the tradeoff is that of throughput versus latency. TP=8 within a group means those 8 GPUs now share a batch and must synchronize every decode step, reducing effective DP degree from 64 to 8. Per-GPU batching independence on the attention side is lost. But each DP group now processes attention 8x faster per step, since the matmul is split 8 ways across the TP group. Per-token latency drops while peak concurrency also drops, sliding the configuration along the latency-throughput Pareto frontier relative to pure DEP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0297",
+      "parent_block_index": 297,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As always, the tradeoff is that of throughput versus latency. TP=8 within a group means those 8 GPUs now share a batch and must synchronize every decode step, reducing effective DP degree from 64 to 8. Per-GPU batching independence on the attention side is lost. But each DP group now processes attention 8x faster per step, since the matmul is split 8 ways across the TP group. Per-token latency drops while peak concurrency also drops, sliding the configuration along the latency-throughput Pareto frontier relative to pure DEP.",
+      "parent_block_plain_text": "As always, the tradeoff is that of throughput versus latency. TP=8 within a group means those 8 GPUs now share a batch and must synchronize every decode step, reducing effective DP degree from 64 to 8. Per-GPU batching independence on the attention side is lost. But each DP group now processes attention 8x faster per step, since the matmul is split 8 ways across the TP group. Per-token latency drops while peak concurrency also drops, sliding the configuration along the latency-throughput Pareto frontier relative to pure DEP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 530,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与往常一样，这需要在吞吐量和延迟之间做出权衡。在一个组内实现 TP=8 意味着这 8 张 GPU 现在共享一个批处理任务，并且必须在每个解码步骤同步，这使得有效的数据并行 (DP) 度从 64 降至 8。在注意力计算方面，GPU 之间独立的批处理能力不复存在。但好处是，由于矩阵乘法在 TP 组内被 8 路拆分，每个 DP 组处理注意力计算的单步速度提升了 8 倍。最终结果是，单 token 延迟降低，但峰值并发度也随之下降，这使得该配置相较于纯 DEP 模式，在延迟-吞吐量的帕累托前沿曲线上发生了移动。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:01:22.526333",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全归约 (All-reduce)（All-reduce）”，属于排版/编辑工具残留的错误。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文中再次出现了重复的英文括注“全对全 (All-to-all)（All-to-all）”。"
+          },
+          {
+            "type": "annotation|readability",
+            "description": "译文开头出现了三重嵌套括注“宽专家并行 (WideEP)（Wide Expert Parallelism (WideEP)）”，且在“选择 跨 节点”中存在不必要的空格。"
+          },
+          {
+            "type": "accuracy|terminology",
+            "description": "1. 术语不一致：前文第2段将“attention projections”译为“注意力投影”，此处译为“注意力投射”。2. 逻辑/数学错误：原文“one-per-4-GPUs”存在明显的笔误（256个专家分给64张卡，应为每张卡4个专家，即 4-per-GPU），译文机械直译为“以每 4 张 GPU 分配一个专家的形式分布”，导致数学逻辑在中文中完全错误（这需要1024张卡）。"
+          },
+          {
+            "type": "tone|readability",
+            "description": "译文为“EP 充分榨取了这部分内存节省空间”。“榨取”通常与“性能”或“价值”搭配，与“节省空间”搭配略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

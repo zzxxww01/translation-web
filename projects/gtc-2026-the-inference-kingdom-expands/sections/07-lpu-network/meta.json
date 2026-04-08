@@ -1,0 +1,1102 @@
+{
+  "section_id": "07-lpu-network",
+  "title": "LPU Network",
+  "title_translation": "LPU 网络",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The LPU network can be divided into the scale-up ‘C2C’ network and scale-out network which interacts with the Nvidia GPUs through Spectrum-X. First let’s discuss the scale-up network which can be divided into 3 portions: intra-node, inter-node/intra-rack, inter-rack. For C2C within the rack Nvidia announced a total of 640TB/s of scale up bandwidth per rack which comes from 256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s. Note that Nvidia uses the total 112G line rate rather than 100G of effective data rate.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The LPU network can be divided into the scale-up ‘C2C’ network and scale-out network which interacts with the Nvidia GPUs through Spectrum-X. First let’s discuss the scale-up network which can be divided into 3 portions: intra-node, inter-node/intra-rack, inter-rack. For C2C within the rack Nvidia announced a total of 640TB/s of scale up bandwidth per rack which comes from 256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s. Note that Nvidia uses the total 112G line rate rather than 100G of effective data rate.",
+      "parent_block_plain_text": "The LPU network can be divided into the scale-up ‘C2C’ network and scale-out network which interacts with the Nvidia GPUs through Spectrum-X. First let’s discuss the scale-up network which can be divided into 3 portions: intra-node, inter-node/intra-rack, inter-rack. For C2C within the rack Nvidia announced a total of 640TB/s of scale up bandwidth per rack which comes from 256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s. Note that Nvidia uses the total 112G line rate rather than 100G of effective data rate.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 521,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "LPU 网络可分为纵向扩展的“C2C”网络，以及通过 Spectrum-X 与英伟达 GPU 交互的横向扩展网络。首先探讨纵向扩展网络，该网络可分为三部分：节点内、节点间/机架内、机架间。针对机架内的 C2C 连接，英伟达宣布单机架纵向扩展总带宽为 640TB/s，具体计算如下：256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s。请注意，英伟达采用的是 112G 的线路速率，而非 100G 的有效数据速率。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.880858",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Intra-Tray Topology",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Intra-Tray Topology",
+      "parent_block_plain_text": "Intra-Tray Topology",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "托盘内拓扑",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.880896",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.880922",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis Networking Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Networking Model](https://semianalysis.com/ai-networking-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Networking Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881790",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 网络模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881011",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|网络模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Networking 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Within each tray or node, all 16 LPUs are connected to each other in an all-to-all mesh. Each LPU module connects to the 15 other LPUs within the node with 4x100G of C2C bandwidth. Note that this ‘C2C’ is not related to NVLink, but Groq’s own scaleup fabric. These connections are all via PCB trace, which necessitates an extremely high spec PCB to support this routing density. This is why the belly-to-belly layout is used: it reduces the ‘X’ and ‘Y’ distance between all the LPUs and instead have routing go in the ‘Z’ dimension.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Within each tray or node, all 16 LPUs are connected to each other in an all-to-all mesh. Each LPU module connects to the 15 other LPUs within the node with 4x100G of C2C bandwidth. Note that this ‘C2C’ is not related to NVLink, but Groq’s own scaleup fabric. These connections are all via PCB trace, which necessitates an extremely high spec PCB to support this routing density. This is why the belly-to-belly layout is used: it reduces the ‘X’ and ‘Y’ distance between all the LPUs and instead have routing go in the ‘Z’ dimension.",
+      "parent_block_plain_text": "Within each tray or node, all 16 LPUs are connected to each other in an all-to-all mesh. Each LPU module connects to the 15 other LPUs within the node with 4x100G of C2C bandwidth. Note that this ‘C2C’ is not related to NVLink, but Groq’s own scaleup fabric. These connections are all via PCB trace, which necessitates an extremely high spec PCB to support this routing density. This is why the belly-to-belly layout is used: it reduces the ‘X’ and ‘Y’ distance between all the LPUs and instead have routing go in the ‘Z’ dimension.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 532,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在每个托盘或节点内，所有 16 个 LPU 均以全互联网状拓扑相互连接。每个 LPU 模块通过 4x100G 的 C2C 带宽与节点内的其他 15 个 LPU 相连。需要注意的是，这里的“C2C”与 NVLink 无关，而是 Groq 自有的纵向扩展互联架构。这些连接全部通过 PCB 走线实现，因此需要规格极高的 PCB 来支持如此庞大的布线密度。这也正是采用正反面贴装的原因：它缩短了所有 LPU 之间在“X”和“Y”轴上的距离，转而利用“Z”轴空间进行布线。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881068",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The LPU also has 1x100G going to one FPGA, with each FPGA interfacing with 8 LPUs. The 2 FPGAs each have 8x PCIe Gen 5 going to the CPUs. The LPU needs to traverse through the FPGA to interface with the CPU as LPUs don’t have PCIe PHYs to interface directly.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The LPU also has 1x100G going to one FPGA, with each FPGA interfacing with 8 LPUs. The 2 FPGAs each have 8x PCIe Gen 5 going to the CPUs. The LPU needs to traverse through the FPGA to interface with the CPU as LPUs don’t have PCIe PHYs to interface directly.",
+      "parent_block_plain_text": "The LPU also has 1x100G going to one FPGA, with each FPGA interfacing with 8 LPUs. The 2 FPGAs each have 8x PCIe Gen 5 going to the CPUs. The LPU needs to traverse through the FPGA to interface with the CPU as LPUs don’t have PCIe PHYs to interface directly.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 258,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，每个 LPU 还有 1x100G 链路连接至一个 FPGA，而每个 FPGA 负责与 8 个 LPU 对接。这两个 FPGA 各自通过 8x PCIe Gen 5 链路连接至 CPU。由于 LPU 没有用于直接通信的 PCIe PHY，因此必须经过 FPGA 才能与 CPU 对接。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881087",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Inter-node/Intra-rack",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0089",
+      "parent_block_index": 89,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Inter-node/Intra-rack",
+      "parent_block_plain_text": "Inter-node/Intra-rack",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 21,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "节点间/机架内",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881121",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881137",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis Networking Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Networking Model](https://semianalysis.com/ai-networking-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Networking Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881814",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 网络模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881196",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|网络模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Networking 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Each LPU connects to one LPU from each of the 15 other nodes in the server. Each of these inter-node links is 2x100G so there are 15x2x100G inter-node links coming out of each LPU. These inter-node links are via a copper cable backplane. In addition, each FPGA also connects to an FPGA in every other node at either 25G or 50G per link for 15x25G/50G. This also goes through the backplane. This means that each node has 16 x 15 x 2 lanes for inter-node C2C and 2 x 15 lanes for inter-node FPGA which is a total of 510 lanes or 1020 differential pairs (for Rx and Tx). Therefore, the backplane is 16 x 1020/2 = 8,160 differential pairs – we divide by 2 as each device Tx channel is a corresponding device’s Rx channel.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each LPU connects to one LPU from each of the 15 other nodes in the server. Each of these inter-node links is 2x100G so there are 15x2x100G inter-node links coming out of each LPU. These inter-node links are via a copper cable backplane. In addition, each FPGA also connects to an FPGA in every other node at either 25G or 50G per link for 15x25G/50G. This also goes through the backplane. This means that each node has 16 x 15 x 2 lanes for inter-node C2C and 2 x 15 lanes for inter-node FPGA which is a total of 510 lanes or 1020 differential pairs (for Rx and Tx). Therefore, the backplane is 16 x 1020/2 = 8,160 differential pairs – we divide by 2 as each device Tx channel is a corresponding device’s Rx channel.",
+      "parent_block_plain_text": "Each LPU connects to one LPU from each of the 15 other nodes in the server. Each of these inter-node links is 2x100G so there are 15x2x100G inter-node links coming out of each LPU. These inter-node links are via a copper cable backplane. In addition, each FPGA also connects to an FPGA in every other node at either 25G or 50G per link for 15x25G/50G. This also goes through the backplane. This means that each node has 16 x 15 x 2 lanes for inter-node C2C and 2 x 15 lanes for inter-node FPGA which is a total of 510 lanes or 1020 differential pairs (for Rx and Tx). Therefore, the backplane is 16 x 1020/2 = 8,160 differential pairs – we divide by 2 as each device Tx channel is a corresponding device’s Rx channel.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 717,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 LPU 连接到服务器中其他 15 个节点各一个 LPU。每条节点间链路的带宽为 2x100G，因此每个 LPU 引出 15x2x100G 的节点间链路。这些节点间链路通过铜缆背板实现连接。此外，每个 FPGA 也与其他每个节点中的一个 FPGA 相连，单条链路带宽为 25G 或 50G，总计 15x25G/50G。这同样通过背板进行路由。这意味着每个节点拥有 16 x 15 x 2 条用于节点间 C2C 的通道（lane），以及 2 x 15 条用于节点间 FPGA 的通道，总计 510 条通道，即 1020 对差分对（分别用于接收 Rx 和发送 Tx）。因此，背板共有 16 x 1020/2 = 8,160 对差分对——这里除以 2，是因为一个设备的发送（Tx）通道正好对应另一个设备的接收（Rx）通道。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881238",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Inter-rack",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Inter-rack",
+      "parent_block_plain_text": "Inter-rack",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 10,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "机架间",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881273",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881290",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: SemiAnalysis Networking Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Networking Model](https://semianalysis.com/ai-networking-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Networking Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881836",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 网络模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881337",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|网络模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Networking 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Lastly, there is the inter-rack C2C. Each LPU has 4x100G lanes that go to the OSFP cages to connect LPUs across 4 racks. There are various configurations that can be used for this inter-rack scale up. One option is 4x100G from each LPU going to one OSFP cage, each OSFP escaping 800G of C2C from 2 LPUs. However, for greater fan out the preferred configuration seems to be each 100G lane from the LPU going to 4 individual cages, with each cage escaping 800G of C2C from 8 LPUs. In terms of how the racks are networked together it appears to be a daisy chain configuration, with each Node0 connected to 2 other Node 0. This can all be achieved within the reach of 100G AECs, though optics can be used if necessary.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, there is the inter-rack C2C. Each LPU has 4x100G lanes that go to the OSFP cages to connect LPUs across 4 racks. There are various configurations that can be used for this inter-rack scale up. One option is 4x100G from each LPU going to one OSFP cage, each OSFP escaping 800G of C2C from 2 LPUs. However, for greater fan out the preferred configuration seems to be each 100G lane from the LPU going to 4 individual cages, with each cage escaping 800G of C2C from 8 LPUs. In terms of how the racks are networked together it appears to be a daisy chain configuration, with each Node0 connected to 2 other Node 0. This can all be achieved within the reach of 100G AECs, though optics can be used if necessary.",
+      "parent_block_plain_text": "Lastly, there is the inter-rack C2C. Each LPU has 4x100G lanes that go to the OSFP cages to connect LPUs across 4 racks. There are various configurations that can be used for this inter-rack scale up. One option is 4x100G from each LPU going to one OSFP cage, each OSFP escaping 800G of C2C from 2 LPUs. However, for greater fan out the preferred configuration seems to be each 100G lane from the LPU going to 4 individual cages, with each cage escaping 800G of C2C from 8 LPUs. In terms of how the racks are networked together it appears to be a daisy chain configuration, with each Node0 connected to 2 other Node 0. This can all be achieved within the reach of 100G AECs, though optics can be used if necessary.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 714,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后是机架间 C2C 连接。每个 LPU 拥有 4x100G 通道，这些通道连接至 OSFP 笼（cages），用于跨 4 个机架连接 LPU。这种机架间向上扩展（scale-up）可以采用多种配置。一种方案是，每个 LPU 的 4x100G 通道接入同一个 OSFP 笼，每个 OSFP 接口引出来自 2 个 LPU 的 800G C2C 带宽。然而，为了实现更大的扇出（fan out），首选配置似乎是将 LPU 的每条 100G 通道分别接入 4 个独立的 OSFP 笼，每个 OSFP 笼引出来自 8 个 LPU 的 800G C2C 带宽。至于机架之间的网络连接方式，似乎采用了菊链配置（daisy chain configuration），每个 Node 0 分别连接到另外两个 Node 0。这些连接完全可以在 100G AEC（有源电缆）的传输距离内实现，当然，如有必要也可以使用光模块。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:56:29.881358",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+          "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+          "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+          "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+          "key_points": [
+            "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+            "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+            "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+            "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    }
+  ]
+}

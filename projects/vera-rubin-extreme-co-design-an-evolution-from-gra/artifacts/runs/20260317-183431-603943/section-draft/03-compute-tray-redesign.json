@@ -1,0 +1,366 @@
+{
+  "section_id": "03-compute-tray-redesign",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "03-compute-tray-redesign",
+    "section_title": "Compute Tray Redesign",
+    "section_title_translation": "计算托盘重构",
+    "section_position": "4/17",
+    "article_theme": "A comprehensive technical and economic deep dive into Nvidia's Rubin (VR NVL72) platform, highlighting its transition to a modular cableless design, 100% liquid cooling, and strategic TCO positioning against AMD and Groq.",
+    "structure_summary": "The article follows a top-down engineering logic: starting with silicon-level specifications (Rubin GPUs, Vera CPUs), moving into the rack-scale architecture (Oberon), then performing a 'tear-down' style analysis of the Compute Tray (cables, thermal, power, mechanical). It concludes with macro-level infrastructure implications (cooling/power vendors), networking evolution (NVLink 6), and a rigorous financial TCO/BoM comparison with competitors.",
+    "target_audience": "Semiconductor industry professionals, hardware engineers, and institutional investors.",
+    "translation_voice": "The Chinese voice should be professional, precise, and 'hardcore' (硬核). It should avoid flowery language, favoring clear logical transitions and accurate technical nomenclature common in the Taiwan/Mainland China tech sectors.",
+    "previous_section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+    "next_section_title": "Compute Tray Cableless Design",
+    "section_role": "Introduces the central engineering thesis: modularity and the elimination of cables for reliability.",
+    "translation_notes": [
+      "'Cableless' (无电缆化/去线缆化) is the core marketing/tech claim; keep it punchy",
+      "'Point of failure' (故障点) is a standard engineering term",
+      "Maintain the contrast between 'Node-bound' host DRAM and aggregate footprint"
+    ],
+    "key_points": [
+      "Assembly time reduction from 2 hours to 5 minutes via cableless design",
+      "Cables identified as the primary failure point in previous generations (GB200/300)",
+      "KV cache scaling challenges necessitating complex memory hierarchies"
+    ],
+    "guidelines": [
+      "Prioritize technical accuracy over readability for engineering specs (e.g., SerDes counts, pitch measurements).",
+      "Use 'Rack-scale' (机柜级) and 'Chassis' (机箱) consistently to distinguish between the two form factors.",
+      "Maintain the 'SemiAnalysis' brand voice by being direct about 'winners and losers' in the supply chain.",
+      "Keep product code names (Rubin, Vera, Blackwell, Oberon, Strata, Bianca) in English.",
+      "Ensure the distinction between 'Dense' and 'Sparse' PFLOPS is clear, as this is central to the TCO argument.",
+      "Translate 'BoM' as '物料清单' but can keep the acronym in parentheses for the first mention."
+    ],
+    "article_challenges": [
+      {
+        "location": "Networking Section",
+        "issue": "Complex networking hierarchies (leaf, spine, core) and 1.6T connectivity terminology.",
+        "suggestion": "Ensure strict adherence to networking layer terminology and keep SerDes/OSFP terms in English where appropriate."
+      },
+      {
+        "location": "Thermal/Power Delivery",
+        "issue": "Transition between mechanical units (mm, microns) and electrical units (VDC, Amps).",
+        "suggestion": "Maintain precision in units and use standard Chinese engineering terms for 'step-down' (降压) and 'busbar' (母线)."
+      },
+      {
+        "location": "Groq Section",
+        "issue": "Nuance between 'acquisition' and 'licensing agreement'.",
+        "suggestion": "Be extremely careful with the strike-through text (~acquired Groq~) to reflect the author's correction regarding the licensing agreement."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Compute Tray",
+        "term": "Compute Tray",
+        "translation": "算力托盘",
+        "strategy": "translate",
+        "note": "The modular unit within the rack containing GPUs, CPUs, and memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Cableless Design",
+        "term": "Cableless Design",
+        "translation": "无线缆设计",
+        "strategy": "translate",
+        "note": "A design replacing internal flyover cables with board-to-board connectors to simplify assembly.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Flyover Cables",
+        "term": "Flyover Cables",
+        "translation": "架空线缆",
+        "strategy": "first_annotate",
+        "note": "High-speed copper cables that 'fly over' the PCB to reduce signal loss.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Coldplate",
+        "term": "Coldplate",
+        "translation": "冷板",
+        "strategy": "translate",
+        "note": "The liquid-cooled metal plate in direct contact with the silicon.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Quick Disconnect (QD/MQD)",
+        "term": "Quick Disconnect (QD/MQD)",
+        "translation": "快速接头",
+        "strategy": "first_annotate",
+        "note": "Connectors for liquid cooling loops that allow for easy swapping of components without leaks.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Sparsity",
+        "term": "Sparsity",
+        "translation": "稀疏性",
+        "strategy": "translate",
+        "note": "A technique in AI inference to skip zero-value weights to boost performance.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Radix",
+        "term": "Radix",
+        "translation": "吞吐基数",
+        "strategy": "first_annotate",
+        "note": "The number of ports on a network switch.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TCO",
+        "term": "TCO",
+        "translation": "总拥有成本",
+        "strategy": "translate",
+        "note": "Total Cost of Ownership, including capex and opex.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Decode Loop",
+        "term": "Decode Loop",
+        "translation": "Decode 环节",
+        "strategy": "first_annotate",
+        "note": "The iterative process in LLM inference where tokens are generated one by one.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Introduces the central engineering thesis: modularity and the elimination of cables for reliability.",
+    "relation_to_previous": "Drills down into the most critical sub-unit of the Oberon rack.",
+    "relation_to_next": "Prepares the reader for the electrical engineering details of the cableless PCB design.",
+    "key_points": [
+      "Assembly time reduction from 2 hours to 5 minutes via cableless design",
+      "Cables identified as the primary failure point in previous generations (GB200/300)",
+      "KV cache scaling challenges necessitating complex memory hierarchies"
+    ],
+    "translation_notes": [
+      "'Cableless' (无电缆化/去线缆化) is the core marketing/tech claim; keep it punchy",
+      "'Point of failure' (故障点) is a standard engineering term",
+      "Maintain the contrast between 'Node-bound' host DRAM and aggregate footprint"
+    ]
+  },
+  "translations": [
+    "VR NVL72 的重大变化之一在于其算力托盘。此次算力托盘重新设计的核心在于简化组装，即消除算力托盘内的线缆，因为线缆一直是 GB200/300 组装过程中的主要故障点。正如黄仁勋（Jensen）在 CES 2026 上所言，无线缆设计将算力托盘的组装时间从 2 小时缩短至 5 分钟。为了实现这一目标，VR NVL72 算力托盘采用了模块化设计，各模块通过板对板连接器相互连接。",
+    "https://substackcdn.com/image/fetch/$s_!PGJb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fff713757-9939-4bc5-a9b7-b21ea415c5bc_832x1398.png",
+    "来源：英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+    "要理解 VR NVL72 的算力托盘，我们必须首先了解构成该托盘的 6 个模块：",
+    "1. Strata 模块 x 2 2. Orchid 模块 x 4 3. 算力托盘中板 x 1 4. 电源分配模块 x 1 5. BlueField-4 模块 x 1 6. 系统管理模块 x 1",
+    "我们在 英伟达 VR NVL72 物料清单（BoM）与功耗预算模型 中详细拆解了这些组件及其所有子组件的成本。",
+    "Strata",
+    "https://substackcdn.com/image/fetch/$s_!3S86!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e60d518-4f27-49ac-b476-45433bca8a0a_911x1066.png",
+    "Strata 模块，来源：[英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型](https://semianalysis.com/vr-nvl72-model/)",
+    "https://substackcdn.com/image/fetch/$s_!0YnS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ccb2f3a-f952-4300-bc34-96c1470be6ba_1032x1080.png",
+    "Bianca 模块。来源：[英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型](https://semianalysis.com/vr-nvl72-model/)",
+    "位于机箱（Chassis）后部，VR NVL72 的 Strata 模块相当于 GB200/300 的 Bianca 板卡。它承载了两颗 Rubin GPU 和一颗 Vera CPU。与 Bianca 不同，Vera 的 LPDDR5X 内存通过 SOCAMM 模块以插槽方式连接。8 个 SOCAMM 插槽分布在 Vera 的左右两侧。提供两种不同容量的 SOCAMM 模块（192GByte 和 128GByte），使每颗 Vera CPU 的最大内存容量达到 1,534GByte，最小为 1,024GByte。随着 CX-9 移至机箱前部，Connect-X 网卡子卡（mezzanine module）也从 Strata 模块中移除。在无线缆设计下，所有线缆连接端口也被移除，取而代之的是位于模块底部的 Paladin HD2 板对板连接器。",
+    "在另一侧，与 GB200 和 GB300 相同的一组 Paladin HD2 背板连接器同样安置在模块后部，通过 NVLink 背板连接到 NVLink 6 交换机。",
+    "Orchid",
+    "https://substackcdn.com/image/fetch/$s_!764T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74182e8e-49ce-4a30-b7bd-c2b0a35b6419_584x1115.png",
+    "来源：英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型",
+    "Orchid 模块容纳了两个 ConnectX-9 网卡（NIC）、两个 800G 光收发器笼子（transceiver cages）以及一个 E1.S 模块插槽。四个 Orchid 模块位于机箱（Chassis）前部。每两个 Orchid 模块上下堆叠，占据了机箱前部的左侧和右侧空间。在模块末端有一个 Paladin HD2 板对板连接器，与中板（Midplane）上的连接器相连。Orchid 模块外形细长，使 PCIe 6 信号能够从中板传输到位于机箱前部的 CX-9 网卡。",
+    "中板",
+    "https://substackcdn.com/image/fetch/$s_!bnHy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b2c77d5-6f60-4022-9753-07ffa81846fe_1089x814.png",
+    "来源：英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型",
+    "中板充当了两个 Strata 模块与机箱前部模块之间 PCIe 信号传输的桥梁。中板模块垂直安置在机箱中部，模块两侧均配有 Paladin HD2 板对板连接器。Strata 模块连接到中板的一侧，而 Orchid 模块、BlueField-4 模块、电源分配板（PDB）模块以及管理模块则连接到另一侧。",
+    "BlueField-4",
+    "https://substackcdn.com/image/fetch/$s_!9hkF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea791cfc-972f-4952-b1fd-283e63357743_823x1648.png",
+    "来源：英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型",
+    "BlueField-4 DPU 位于机箱前部中央，介于左侧的 Orchid 模块和管理模块之间。如前所述，BlueField-4 由一颗 Grace CPU 和一个 CX-9 网卡（NIC）组成。该模块还配备了 128GB 板载 LPDDR5x、512GB 板载可插拔 SSD，以及一颗来自信骅（Aspeed）的集成 AST2600 BMC。在 VR NVL72 算力托盘（Compute Tray）的参考设计中，BlueField-4 作为 DPU 提供高达 800Gb/s 的前端网络能力。然而，与 BlueField-3 类似，BlueField-4 仅会被少数客户采用，即 CoreWeave 以及其他定制化能力较弱的小型 Neoclouds 客户。",
+    "对于大多数超大规模云厂商（Hyperscalers）的部署，BlueField-4 模块将被其自研的前端网络模块取代，或者直接换成成本更低的 CX-9。",
+    "谈到 BlueField-4，有必要讨论一下黄仁勋（Jensen）在今年早些时候 CES 上强调的新产品：ICMS，即推理上下文内存存储（Inference Context Memory Storage）——据传该平台在 GTC 上可能会更名为“CMX”。ICMS（或 CMX）引入了第三个完全独立的网络，专门用于上下文内存。CMX 是一个专为 KV 缓存（KV cache）构建的织网（Fabric）。随着长上下文推理将上下文窗口推向数百万个 token，且智能体（Agentic）并发在用户和服务之间大规模扩展，目前用于存储 KV 缓存的内存层级结构开始显得力不从心。",
+    "KV 缓存随序列长度线性增长，并随工作负载并行度成倍增加，迅速扩张到超出任何单一内存层级所能承载的范围。GPU HBM 虽然在带宽和延迟方面无与伦比，但仅凭其自身不足以存储 KV 缓存，特别是对于轮次间或工具调用间日益流行的长序列长度查询。主机端 DRAM 扩展了容量，但仍受限于节点（Node-bound），且总占用空间（Aggregate footprint）有限，最终容量也捉襟见肘。与此同时，传统的共享存储——其架构设计初衷是持久性而非延迟——具有更高的访问时间和功耗开销，使其不适合参与 Decode 环节（Decode Loop）。",
+    "正如我们在 1 月中旬的 Memory Model note 中指出的，英伟达（NVIDIA）的 ICMS 在本地 SSD（G3）和共享存储（G4）之间插入了一个新的 G3.5 层级，专门针对临时、可重算的 KV 缓存进行了优化。ICMS 需要一个专为 KV 流量设计的专用网络层。在这种架构中，无论何处使用网络，它都被配置为上下文内存网络——与通用数据传输隔离，并针对可预测的 Decode 环节延迟进行了优化。",
+    "这里的挑战在于，业界对进入 ICMS / CMX 的 SSD 出货量估计过于夸大。我们在 Memory model 和 Tokenomics model 中进行了详细的数学测算。",
+    "BlueField-4 将成为这第三个网络的芯片锚点。它位于存储阵列上，以线速（Line rate）终结 NVMe-oF 和 RDMA 流量，并独立于主机 CPU 和 GPU 管理 KV 迁移。凭借提供 800Gb/s 带宽的 2×400G SerDes 链路、集成的 Grace CPU 和 LPDDR，BlueField-4 将充当分布式上下文内存织网的控制器。在首选的 DGX 风格配置中，每个托盘的一个 BlueField-4 可服务四个 Rubin 处理器，该 DPU 专门用于 KV 缓存流量，不与通用存储 I/O 共享。",
+    "新的 CMX/ICMS 生态系统可能包括领先的存储供应商，如 Weka、DDN、戴尔科技（Dell Technologies）、NetApp、VAST Data 等。",
+    "供电系统",
+    "供电模块位于 BlueField-4 模块上方。该模块从内部母线线缆接收 50V 电源，随后通过模块化电源砖将电流降压至 12V。接着，12V 电流通过更小的内部母线输送至 Orchid 模块、BlueField-4 模块以及各管理模块。",
+    "在 VR NVL72 组件物料清单（BoM）与功耗预算模型 中，我们详细拆解了 BlueField、Strada 板卡以及机柜其余组件的供电构成。",
+    "系统管理",
+    "管理模块由属于该类别的多个更小的管理子模块组成。这些模块占据了 BlueField-4 模块与右侧 Orchid 模块之间的一处细长空间。管理模块包括以下几种：",
+    "系统管理模块（SMM）",
+    "可信平台模块（TPM）",
+    "数据中心安全控制模块（DC-SCM）",
+    "这些模块为算力托盘提供管理安全功能。超大规模云服务商（Hyperscalers）通常拥有自研的管理模块设计。因此，每个终端客户的管理模块可能有所不同。除 BlueField-4 外，供电模块和管理模块是算力托盘中英伟达（NVIDIA）允许定制的仅有的另外两个组件。一些终端客户正考虑将管理模块集成到供电模块中。尽管如此，这些模块仍需遵循英伟达提供的外形规格，以便插入算力托盘中板（midplane）上的指定连接器。",
+    "算力托盘拓扑结构",
+    "VR NVL72 的算力托盘拓扑结构与 GB200 和 GB300 大致相似。与 Grace Blackwell 相比，其主要区别在于三点：GPU 与 ConnectX 网卡（NIC）之间的连接、与本地 NVMe 存储的连接，以及 BlueField-4 与 ConnectX-9 之间的连接。",
+    "https://substackcdn.com/image/fetch/$s_!9T2Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F571bad1d-efd0-4475-8d55-1563d0c00448_3772x1694.png",
+    "来源：英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+    "https://substackcdn.com/image/fetch/$s_!xV2T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F596ff1e3-1d12-4353-8d7f-c71ac273ae75_3105x2014.png",
+    "来源：英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+    "首先，GPU 与 ConnectX 网卡之间的连接经历了从 GB200 到 GB300 再到 Vera Rubin 的演进。在 GB200 中，GPU 无法直接访问 ConnectX-7。相反，B200 通过 C2C 连接与 Grace CPU 相连，然后 Grace CPU 通过 PCIe 5 与 ConnectX-7 通信。到了 GB300，英伟达引入了网卡直连 ConnectX-8 的方案，允许 B300 GPU 无需经过 Grace CPU 即可直接与 ConnectX-8 网卡进行通信。",
+    "从本质上讲，这意味着 ConnectX-8 拥有两个主机：Grace CPU 和 B300 GPU。这改善了后端网络的延迟。然而，对于 VR NVL72，Rubin GPU 与 ConnectX-9 之间的直接连接恢复到了与 GB200 相同的设计，因为 Rubin 没有足够的 PCIe 带宽来支持两个 ConnectX-9。Rubin 通过 C2C 链路连接到 Vera，然后 Vera 再通过 PCIe 6.0 通道连接到 ConnectX-9。",
+    "其次，Rubin 的本地 NVMe 存储位置与 Grace Blackwell 中的 NVMe 存储位置不同。此前，本地 NVMe 存储由 BlueField-3 管理。在 VR NVL72 中，本地 NVMe 存储物理上位于由 ConnectX-9 管理的 Orchid 模块上。",
+    "https://substackcdn.com/image/fetch/$s_!299t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fedcb2919-19ac-481a-851c-24e14c7eedee_3422x2419.png",
+    "来源：英伟达, 英伟达 VR NVL72 物料清单（BoM）与功耗预算模型",
+    "最后，BlueField-4 DPU 能够控制 8 个 ConnectX-9 后端网卡，从而实现对前端南北向网络和后端高速东西向网络的统一管理。该系统被称为高级安全可信资源架构（Advanced Secure Trusted Resource Architecture，简称 Astra），从而减轻了主机 CPU 的配置和监控负载。唯一的问题是 BlueField-4 价格昂贵，因此我们预计大多数超大规模客户将部署其自研的 DPU 解决方案。我们将在后面的章节中进一步讨论定制化。",
+    "从 Blackwell 架构的演进",
+    "VR NVL72 算力托盘中的所有这些模块虽然不完全相同，但在 GB200/300 的算力托盘中都能找到。唯一的区别是中板（midplane）模块，它是为了消除算力托盘内部线缆而引入的新组件。此外，机箱前端的模块（子模块）比 Blackwell 中的对应模块长得多，以便通过 PCB 将信号从中板连接到前端 I/O 端口。在接下来的章节中，我们将讨论算力托盘的无线缆设计、散热设计变化以及机械设计变化。"
+  ]
+}

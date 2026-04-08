@@ -1,0 +1,1274 @@
+{
+  "section_id": "05-the-ai-gpu-and-cpu-consolidati",
+  "title": "The AI GPU and CPU Consolidation Era",
+  "title_translation": "AI GPU与CPU整合时代",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Following the COVID boom that boosted internet traffic with way more Zoom calls, e-commerce and more time spent online, datacenter CPU growth was at an all-time high. In the five years leading up to ChatGPT’s launch in November 2022, Intel shipped over 100 Million Xeon Scalable CPUs to cloud and enterprise datacenters.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Following the COVID boom that boosted internet traffic with way more Zoom calls, e-commerce and more time spent online, datacenter CPU growth was at an all-time high. In the five years leading up to ChatGPT’s launch in November 2022, Intel shipped over 100 Million Xeon Scalable CPUs to cloud and enterprise datacenters.",
+      "parent_block_plain_text": "Following the COVID boom that boosted internet traffic with way more Zoom calls, e-commerce and more time spent online, datacenter CPU growth was at an all-time high. In the five years leading up to ChatGPT’s launch in November 2022, Intel shipped over 100 Million Xeon Scalable CPUs to cloud and enterprise datacenters.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 320,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "新冠疫情引发了一波线上红利，Zoom 视频会议激增、电商繁荣以及网民在线时长的大幅增加，共同推高了互联网流量，数据中心 CPU 的出货量也随之创下历史新高。在 2022 年 11 月 ChatGPT 问世前的五年间，英特尔向云厂商和企业级数据中心累计出货了超 1 亿颗至强可扩展 CPU。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.673617",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "From then on, AI model training and inference serving would upend the CPU’s role in the datacenter, causing widespread changes in CPU deployment and design strategies. Computing AI models requires lots of matrix multiplication, an operation that can be easily parallelized and done at massive scales on GPUs which had large arrays of vector units originally used to render 3D graphics for games and visualizations.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "p",
+      "parent_block_markdown": "From then on, AI model training and inference serving would upend the CPU’s role in the datacenter, causing widespread changes in CPU deployment and design strategies. Computing AI models requires lots of matrix multiplication, an operation that can be easily parallelized and done at massive scales on GPUs which had large arrays of vector units originally used to render 3D graphics for games and visualizations.",
+      "parent_block_plain_text": "From then on, AI model training and inference serving would upend the CPU’s role in the datacenter, causing widespread changes in CPU deployment and design strategies. Computing AI models requires lots of matrix multiplication, an operation that can be easily parallelized and done at massive scales on GPUs which had large arrays of vector units originally used to render 3D graphics for games and visualizations.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 414,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自此以后，AI 模型的训练与推理服务彻底颠覆了 CPU 在数据中心里的地位，并引发了 CPU 部署与设计策略的全面变革。AI 模型计算依赖海量的矩阵乘法，这类运算极易实现并行化，非常适合在 GPU 上大规模执行。GPU 本就配备了庞大的向量单元阵列，这些阵列最初正是为了渲染游戏与可视化 3D 图形而设计的。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.673789",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "While accelerator nodes still used host CPUs, the highly structured and relatively simple compute requirements did not take advantage of the CPU’s ability to run branchy, latency sensitive code. And with tens of vector units compared with thousands on GPUs, performance and efficiency was 100-1000x worse on CPU, especially when AI-specific GPUs added MatMul focused Tensor Cores to the mix. Despite Intel’s efforts to add more vector and matrix support with doubled AVX512 ports and dedicated AMX accelerator engines, the CPU was relegated to a support role in the datacenter. However, the internet still had to be served while power in the datacenter got prioritized to GPU compute. As a result, CPUs evolved with the times and were split into two categories.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0034",
+      "parent_block_index": 34,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While accelerator nodes still used host CPUs, the highly structured and relatively simple compute requirements did not take advantage of the CPU’s ability to run branchy, latency sensitive code. And with tens of vector units compared with thousands on GPUs, performance and efficiency was 100-1000x worse on CPU, especially when AI-specific GPUs added MatMul focused Tensor Cores to the mix. Despite Intel’s efforts to add more vector and matrix support with doubled AVX512 ports and dedicated AMX accelerator engines, the CPU was relegated to a support role in the datacenter. However, the internet still had to be served while power in the datacenter got prioritized to GPU compute. As a result, CPUs evolved with the times and were split into two categories.",
+      "parent_block_plain_text": "While accelerator nodes still used host CPUs, the highly structured and relatively simple compute requirements did not take advantage of the CPU’s ability to run branchy, latency sensitive code. And with tens of vector units compared with thousands on GPUs, performance and efficiency was 100-1000x worse on CPU, especially when AI-specific GPUs added MatMul focused Tensor Cores to the mix. Despite Intel’s efforts to add more vector and matrix support with doubled AVX512 ports and dedicated AMX accelerator engines, the CPU was relegated to a support role in the datacenter. However, the internet still had to be served while power in the datacenter got prioritized to GPU compute. As a result, CPUs evolved with the times and were split into two categories.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 761,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管加速器节点依然需要宿主 CPU，但 AI 高度结构化且相对简单的计算需求，根本无法发挥 CPU 运行多分支、对延迟敏感代码的优势。此外，CPU 仅有几十个向量单元，而 GPU 动辄数千个，这导致 CPU 的性能与效率落后了 100 到 1000 倍。尤其是当专为 AI 设计的 GPU 引入了专攻矩阵乘法的张量核心 (Tensor Core) 后，差距更是悬殊。尽管英特尔试图通过翻倍的 AVX-512 端口和专用的 AMX (高级矩阵扩展) 加速引擎来强化向量与矩阵运算支持，CPU 依然在数据中心里沦为了配角。然而，互联网服务仍需维持运转，而数据中心的电力却已优先倾斜给 GPU 计算。在双重驱动下，CPU 顺应时代演进，分化成了两大阵营。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.673871",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Head Nodes",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Head Nodes",
+      "parent_block_plain_text": "Head Nodes",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 10,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "头节点",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.673947",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The head node CPU’s role is to manage the attached GPUs and keep them fed with data. High per-core performance with large caches and high bandwidth memory and IO are desired to keep tail latencies as low as possible. Dedicated designs such as NVIIDA’s Grace were made with coherent memory access for GPUs to utilize CPU memory as model context Key Value Cache expansions, requiring extremely high CPU to GPU bandwidth. For head nodes, 1 CPU is usually paired with 2 or 4 GPUs in each compute node. Examples include:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The head node CPU’s role is to manage the attached GPUs and keep them fed with data. High per-core performance with large caches and high bandwidth memory and IO are desired to keep tail latencies as low as possible. Dedicated designs such as NVIIDA’s Grace were made with coherent memory access for GPUs to utilize CPU memory as model context Key Value Cache expansions, requiring extremely high CPU to GPU bandwidth. For head nodes, 1 CPU is usually paired with 2 or 4 GPUs in each compute node. Examples include:",
+      "parent_block_plain_text": "The head node CPU’s role is to manage the attached GPUs and keep them fed with data. High per-core performance with large caches and high bandwidth memory and IO are desired to keep tail latencies as low as possible. Dedicated designs such as NVIIDA’s Grace were made with coherent memory access for GPUs to utilize CPU memory as model context Key Value Cache expansions, requiring extremely high CPU to GPU bandwidth. For head nodes, 1 CPU is usually paired with 2 or 4 GPUs in each compute node. Examples include:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 515,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "头节点 CPU 的职责是管理挂载的 GPU 并持续为其输送数据。为了尽可能压低长尾延迟，系统需要极高的单核性能、大容量缓存，以及高带宽内存与 IO。像英伟达 Grace 这样的专用设计，专门为 GPU 实现了内存一致性访问，使 GPU 能够将 CPU 内存用作模型上下文的键值缓存 (KV Cache) 扩展，这要求 CPU 与 GPU 之间具备极高的带宽。在每个计算节点中，头节点通常采用 1 颗 CPU 搭配 2 颗或 4 颗 GPU 的配置。典型例子包括：",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674015",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "1 Vera CPU to 2 Rubin GPUs per superchip",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0037",
+      "parent_block_index": 37,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 1 Vera CPU to 2 Rubin GPUs per superchip",
+      "parent_block_plain_text": "1 Vera CPU to 2 Rubin GPUs per superchip",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个超级芯片配备 1 颗 Vera CPU 与 2 颗 Rubin GPU",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674082",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "1 Venice CPU to 4 MI455X GPUs per compute tray",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 1 Venice CPU to 4 MI455X GPUs per compute tray",
+      "parent_block_plain_text": "1 Venice CPU to 4 MI455X GPUs per compute tray",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 46,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个计算托盘配备 1 颗 Venice CPU 与 4 颗 MI455X GPU",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674149",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "1 Graviton5 CPU to 4 Trainium3 per compute tray",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 1 Graviton5 CPU to 4 Trainium3 per compute tray",
+      "parent_block_plain_text": "1 Graviton5 CPU to 4 Trainium3 per compute tray",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 47,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个计算托盘配备 1 颗 Graviton5 CPU 与 4 颗 Trainium3",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674214",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "2 x86 CPUs to 8 TPUv7 per node",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0040",
+      "parent_block_index": 40,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 2 x86 CPUs to 8 TPUv7 per node",
+      "parent_block_plain_text": "2 x86 CPUs to 8 TPUv7 per node",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个节点配备 2 颗 x86 CPU 与 8 颗 TPUv7",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674278",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Cloud-Native Socket Consolidation",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Cloud-Native Socket Consolidation",
+      "parent_block_plain_text": "Cloud-Native Socket Consolidation",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "云原生插槽整合",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674348",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "As GPUs hogged more datacenter power budgets, the need to serve the rest of the internet as efficiently as possible accelerated the development of “Cloud-Native” CPUs. The goal is maximum throughput and requests served per socket at the best efficiency (throughput per Watt). Instead of adding more, newer CPUs to boost total throughput, old, less efficient servers are decommissioned and replaced with a far smaller number of cloud-native CPUs that met the total throughput requirement while sipping a fraction of the power, lowering operating costs and freeing up power budget for more GPU compute.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As GPUs hogged more datacenter power budgets, the need to serve the rest of the internet as efficiently as possible accelerated the development of “Cloud-Native” CPUs. The goal is maximum throughput and requests served per socket at the best efficiency (throughput per Watt). Instead of adding more, newer CPUs to boost total throughput, old, less efficient servers are decommissioned and replaced with a far smaller number of cloud-native CPUs that met the total throughput requirement while sipping a fraction of the power, lowering operating costs and freeing up power budget for more GPU compute.",
+      "parent_block_plain_text": "As GPUs hogged more datacenter power budgets, the need to serve the rest of the internet as efficiently as possible accelerated the development of “Cloud-Native” CPUs. The goal is maximum throughput and requests served per socket at the best efficiency (throughput per Watt). Instead of adding more, newer CPUs to boost total throughput, old, less efficient servers are decommissioned and replaced with a far smaller number of cloud-native CPUs that met the total throughput requirement while sipping a fraction of the power, lowering operating costs and freeing up power budget for more GPU compute.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 600,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GPU 疯狂吞噬数据中心功耗预算。为了尽可能高效地处理其余互联网业务，“云原生”CPU 的研发进程全面提速。其核心目标在于：在最优效率（每瓦吞吐量）下，实现单插槽吞吐量与请求处理量的最大化。行业不再一味堆叠新型 CPU 来拉升总吞吐量，而是果断退役低效的老旧服务器，将其替换为数量极少的云原生 CPU。这些新处理器不仅能满足总吞吐量需求，功耗更只有原先的一小部分。这不仅大幅削减了运营成本，更为扩充 GPU 算力腾出了宝贵的功耗预算。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674485",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "AMD Turin Dense 7:1 Socket Consolidation. Source: AMD",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Turin Dense 7:1 Socket Consolidation. Source: AMD",
+          "start": 0,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0044",
+      "parent_block_index": 44,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AMD Turin Dense 7:1 Socket Consolidation. Source: AMD*",
+      "parent_block_plain_text": "AMD Turin Dense 7:1 Socket Consolidation. Source: AMD",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AMD Turin Dense 7:1 Socket Consolidation. Source: AMD",
+          "start": 0,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 53,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD Turin Dense 处理器 7:1 插槽整合。来源：AMD",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674729",
+          "tokenized_text": "[[[EM_1|AMD Turin Dense 处理器 7:1 插槽整合。来源：AMD]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Socket consolidation ratios of 10:1 or greater can be achieved. Millions of Intel Cascade Lake servers bought during the COVID cloud spend are being retired for the latest AMD and Intel CPUs that process at the same performance level but at less than a fifth of the power.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0045",
+      "parent_block_index": 45,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Socket consolidation ratios of 10:1 or greater can be achieved. Millions of Intel Cascade Lake servers bought during the COVID cloud spend are being retired for the latest AMD and Intel CPUs that process at the same performance level but at less than a fifth of the power.",
+      "parent_block_plain_text": "Socket consolidation ratios of 10:1 or greater can be achieved. Millions of Intel Cascade Lake servers bought during the COVID cloud spend are being retired for the latest AMD and Intel CPUs that process at the same performance level but at less than a fifth of the power.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 272,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "业界现已能实现 10:1 甚至更高的插槽整合率。疫情期间云计算投资狂潮中采购的数百万台英特尔 Cascade Lake 服务器正面临退役。取而代之的是 AMD 与英特尔最新一代 CPU，它们在提供同等性能的同时，功耗还不到老架构的五分之一。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674807",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Design wise, these Cloud-native CPUs target higher core counts with area and power efficient medium-sized cores, and have less cache and IO capabilities compared to traditional CPUs. Intel brought their Atom cores to the datacenter with Sierra Forest. AMD’s Bergamo used a more area and power efficient layout of their Zen4 core. Power efficient ARM-based designs such as AWS Graviton saw great success, while Ampere Computing targeted cloud-native compute with the Altra and AmpereOne lines.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0046",
+      "parent_block_index": 46,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Design wise, these Cloud-native CPUs target higher core counts with area and power efficient medium-sized cores, and have less cache and IO capabilities compared to traditional CPUs. Intel brought their Atom cores to the datacenter with Sierra Forest. AMD’s Bergamo used a more area and power efficient layout of their Zen4 core. Power efficient ARM-based designs such as AWS Graviton saw great success, while Ampere Computing targeted cloud-native compute with the Altra and AmpereOne lines.",
+      "parent_block_plain_text": "Design wise, these Cloud-native CPUs target higher core counts with area and power efficient medium-sized cores, and have less cache and IO capabilities compared to traditional CPUs. Intel brought their Atom cores to the datacenter with Sierra Forest. AMD’s Bergamo used a more area and power efficient layout of their Zen4 core. Power efficient ARM-based designs such as AWS Graviton saw great success, while Ampere Computing targeted cloud-native compute with the Altra and AmpereOne lines.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 492,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "架构设计上，这些云原生 CPU 采用面积与能效比高的中型核心，主攻超多核路线。相较于传统 CPU，它们适当削减了缓存容量与 IO 扩展能力。英特尔凭借 Sierra Forest 处理器，将 Atom 核心正式引入数据中心。AMD Bergamo 处理器则采用了面积与能效比更高的 Zen4 核心物理布图。具备出色能效的 ARM 架构设计（如 AWS Graviton 处理器）大获成功；Ampere Computing 也顺势推出 Altra 与 AmpereOne 系列产品线，直指云原生计算市场。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:50:08.674873",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+          "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+          "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the peak of traditional CPU shipments and the industry's pivot toward highly efficient, cloud-native CPUs amidst the rise of AI accelerators.",
+          "relation_to_previous": "Shows the peak of the cloud era (COVID boom) and the sudden architectural shift triggered by generative AI (ChatGPT).",
+          "relation_to_next": "Transitions from the initial LLM AI boom into the specific, CPU-heavy demands of modern Reinforcement Learning.",
+          "key_points": [
+            "Despite record CPU shipments leading up to the ChatGPT launch, the market is bifurcating into AI accelerators and cloud-native CPUs.",
+            "Cloud-native CPUs (e.g., Sierra Forest, Bergamo, Graviton) sacrifice cache and IO for maximum area and power efficiency via medium-sized cores."
+          ],
+          "translation_notes": [
+            "Translate 'Cloud-native CPUs' as '云原生CPU'.",
+            "Ensure 'area and power efficient' is accurately rendered (面积与能效比高).",
+            "Preserve vendor-specific core branding carefully (Atom, Zen4c/Bergamo, Altra)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“growth”指的是“增长（率/量）”，译文将其替换为“出货量”，改变了原文侧重描述增速或增量的本意。"
+          },
+          {
+            "type": "readability",
+            "description": "“翻倍的 AVX-512 端口”带有一定的翻译腔，中文中“翻倍”通常作动词，较少直接作前置定语修饰名词。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

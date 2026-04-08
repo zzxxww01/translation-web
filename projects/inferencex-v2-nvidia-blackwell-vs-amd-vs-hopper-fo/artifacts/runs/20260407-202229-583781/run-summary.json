@@ -1,0 +1,198 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "status": "incomplete",
+  "total_sections": 36,
+  "translated_sections": 8,
+  "total_paragraphs": 358,
+  "translated_paragraphs": 200,
+  "error_count": 29,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "SemiAnalysis InferenceMAX: vLLM maintainers",
+      "section_id": "03-acknowledgments-and-inferencex",
+      "timestamp": "2026-04-07T20:24:57.695889"
+    },
+    {
+      "error": "Failed to translate section 08-deepseek-r1: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:26:45.358451",
+      "section": "08-deepseek-r1"
+    },
+    {
+      "error": "Failed to translate section 09-gpt-oss-120b: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:26:58.732900",
+      "section": "09-gpt-oss-120b"
+    },
+    {
+      "error": "Failed to translate section 10-disaggregated-inference-framew: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:03.507769",
+      "section": "10-disaggregated-inference-framew"
+    },
+    {
+      "error": "Failed to translate section 11-deepseek-disagg-wideep-result: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:05.765597",
+      "section": "11-deepseek-disagg-wideep-result"
+    },
+    {
+      "error": "Failed to translate section 12-nvidia-versus-amd-disagg-prefi: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:10.397702",
+      "section": "12-nvidia-versus-amd-disagg-prefi"
+    },
+    {
+      "error": "Failed to translate section 13-unpacking-inference-providers: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:29.819647",
+      "section": "13-unpacking-inference-providers"
+    },
+    {
+      "error": "Failed to translate section 14-jensen-under-promising-and-ove: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:32.017051",
+      "section": "14-jensen-under-promising-and-ove"
+    },
+    {
+      "error": "Failed to translate section 15-blackwell-vs-blackwell-ultra: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:35.273236",
+      "section": "15-blackwell-vs-blackwell-ultra"
+    },
+    {
+      "error": "Failed to translate section 16-mi355x-vs-mi325x-vs-mi300x: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:40.083043",
+      "section": "16-mi355x-vs-mi325x-vs-mi300x"
+    },
+    {
+      "error": "Failed to translate section 17-amd-composability-issue-on-fp4: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:45.301494",
+      "section": "17-amd-composability-issue-on-fp4"
+    },
+    {
+      "error": "Failed to translate section 18-amd-atom-engine: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:49.018844",
+      "section": "18-amd-atom-engine"
+    },
+    {
+      "error": "Failed to translate section 19-multi-token-prediction-mtp: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:56.057768",
+      "section": "19-multi-token-prediction-mtp"
+    },
+    {
+      "error": "Failed to translate section 20-accuracy-evaluations: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:27:58.162895",
+      "section": "20-accuracy-evaluations"
+    },
+    {
+      "error": "Failed to translate section 21-anthropic-fast-mode-inferencin: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:00.464317",
+      "section": "21-anthropic-fast-mode-inferencin"
+    },
+    {
+      "error": "Failed to translate section 22-wide-expert-parallelism-widee: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:04.680488",
+      "section": "22-wide-expert-parallelism-widee"
+    },
+    {
+      "error": "Failed to translate section 23-wideep: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:08.905647",
+      "section": "23-wideep"
+    },
+    {
+      "error": "Failed to translate section 24-disaggregated-prefill: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:12.129630",
+      "section": "24-disaggregated-prefill"
+    },
+    {
+      "error": "Failed to translate section 25-optimizing-inference-with-wide: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:15.791656",
+      "section": "25-optimizing-inference-with-wide"
+    },
+    {
+      "error": "Failed to translate section 26-dive-into-deepseek-r1-single-n: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:17.039103",
+      "section": "26-dive-into-deepseek-r1-single-n"
+    },
+    {
+      "error": "Failed to translate section 27-gpt-oss-120b-single-node: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:18.497331",
+      "section": "27-gpt-oss-120b-single-node"
+    },
+    {
+      "error": "Failed to translate section 28-core-inferencex-repo-updates: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:19.935142",
+      "section": "28-core-inferencex-repo-updates"
+    },
+    {
+      "error": "Failed to translate section 29-core-changes-since-inferencexv: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:21.470043",
+      "section": "29-core-changes-since-inferencexv"
+    },
+    {
+      "error": "Failed to translate section 30-klaud-cold-ai-usage: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:23.366939",
+      "section": "30-klaud-cold-ai-usage"
+    },
+    {
+      "error": "Failed to translate section 31-github-actions: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:28.307498",
+      "section": "31-github-actions"
+    },
+    {
+      "error": "Failed to translate section 32-future-of-inferencex: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:29.575518",
+      "section": "32-future-of-inferencex"
+    },
+    {
+      "error": "Failed to translate section 33-migration-to-multi-turn-real-m: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:32.485914",
+      "section": "33-migration-to-multi-turn-real-m"
+    },
+    {
+      "error": "Failed to translate section 34-adding-tpu-trainium-and-more: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:34.298791",
+      "section": "34-adding-tpu-trainium-and-more"
+    },
+    {
+      "error": "Failed to translate section 35-total-cost-of-ownership-nvl72: 400 FAILED_PRECONDITION. {'error': {'code': 400, 'message': 'User location is not supported for the API use.', 'status': 'FAILED_PRECONDITION'}}",
+      "timestamp": "2026-04-07T20:28:36.788091",
+      "section": "35-total-cost-of-ownership-nvl72"
+    }
+  ],
+  "started_at": "2026-04-07T20:22:29.583768",
+  "finished_at": "2026-04-07T20:28:36.913383",
+  "run_id": "20260407-202229-583781",
+  "artifacts_path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\artifacts\\runs\\20260407-202229-583781",
+  "export": {
+    "generated_at": "2026-04-07T20:28:36.803713",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\NVIDIA Blackwell vs AMD vs Hopper（原 InferenceMAX）_zh.md",
+      "generated": true,
+      "bytes": 108880
+    }
+  },
+  "api_calls": 12,
+  "elapsed_seconds": 367.4,
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 2,
+    "auto_fixable_count": 0,
+    "manual_review_count": 2,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称72次, 第三人称22次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-introduction",
+        "paragraph_index": 1,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Oracle' 处理不一致: {'保留原文': 1, '翻译': 1}",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

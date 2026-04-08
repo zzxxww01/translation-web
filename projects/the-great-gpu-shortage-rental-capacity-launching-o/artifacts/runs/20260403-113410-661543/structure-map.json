@@ -1,0 +1,804 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": null,
+      "paragraph_count": 19,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "H100 Rental Prices up 40%, GPU Rental Pricing Dashboard Launch, Compute Rental Market Structure, Will Rental Prices keep going up?"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Dylan Patel, Daniel Nishball, Jordan Nanos, and 2 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apr 02, 2026 · Free"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Anthropic’s Claude 4.6 Opus and Claude Code have soared in demand. Anthropic’s ARR has nearly tripled in just a single quarter from $9B at the end of last year "
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Claude Code is the Inflection Point - Doug O'Laughlin, Jeremie Eliahou Ontiveros, and 3 others · Feb 5"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This inflection point means that demand has spiked and there’s been a run on GPUs at the hyperscalers and Neoclouds."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This new source of demand has spiked pricing for products and services across the supply chain, from DRAM and NAND memory to fiber optic cables, datacenter colo"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GPU Rental Pricing is the latest of many compute related products and services to see a dramatic tightness in supply and resulting jump in pricing. H100 1-year "
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On-Demand GPU rental capacity is sold out across all GPU types – those that have locked up on-demand instances are not willing to relinquish this capacity back "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At SemiAnalysis, we have been deeply involved in tracking trends and topics including GPU rental pricing within the Neocloud and Hyperscale ecosystem thanks to "
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We also spend a good amount of time helping AI Labs connect with Neoclouds and find GPU rentals in the market and have been actively discussing GPU rental price"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since 2023, for our clients, we have maintained GPU rental price indices tracking pricing for most major GPU types (H100, H200, B200, B300, GB200, GB300, MI300,"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Today, we are making our H100 1 year GPU rental index publicly available to provide additional data and insights to the community. We update the index monthly a"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This report will discuss the latest trends, anecdotes and data points regarding the GPU rental market, explain how we analyze the broader GPU Rental market stru"
+        }
+      ]
+    },
+    {
+      "section_id": "01-surge-pricing-comes-to-the-gpu",
+      "title": "Surge Pricing Comes to the GPU Rental Market",
+      "title_translation": null,
+      "paragraph_count": 6,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The chart illustrating the 1y H100 rental price hardly does the trend justice – anecdotes from our first-hand experience in trying to procure compute and feedba"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Demand is strong across many very heterogeneous use cases and there is no one-size fits all approach. There are plenty of inference workloads like large mixture"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "InferenceX v2: NVIDIA Blackwell Vs AMD vs Hopper - Formerly InferenceMAX - Dylan Patel, Cam Quilici, and 5 others · Feb 16"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Customers are fighting to pay $14/hr/GPU for p6-b200 spot instances in AWS, some Neocloud Giants no longer sell single nodes, H100s are getting renewed at the e"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We have even heard of renters of compute subdividing their clusters and subletting the compute just like an apartment during the Monaco Grand Prix. Coming soon "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Blackwell availability is very tight too. We are hearing lead times for new Blackwell deployments now extending into June-July thanks to strong demand for open-"
+        }
+      ]
+    },
+    {
+      "section_id": "02-gpu-rental-prices-the-comeba",
+      "title": "GPU Rental Prices – The Comeback Kid",
+      "title_translation": null,
+      "paragraph_count": 17,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But how did the market come to this point? Only six months ago, most market observers were skeptical on GPU terminal value and assumed an inexorably steep fall "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Before late 2025, the prevailing expectation across the ecosystem was that Hopper (i.e. H100 and H200) rental prices would drop considerably as Blackwell deploy"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "January was the next inflection point for compute when memory pricing, across both DRAM and NAND pricing, went from rising aggressively for several quarters, to"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To manage margin risk stemming from this rapid hike in component costs, OEMs began repricing AI servers at levels that significantly exceeded the underlying inc"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis AI TCO Model"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Amid the server procurement disarray cause by this AI Server Pricing Apocalypse, GPU rental demand was clearly accelerating, with most remaining spare capacity "
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A major driver of demand early this year arose from native media generation - Seedance and Nano Banana are driving massive increases in token throughput as user"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Look no further than the trends regarding Claude Code that we have already called out in many articles. SemiAnalysis as a company has, over the past 7 days, con"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We are tracking the overwhelming demand through proxies like Claude Commits Daily. At the current trajectory, we believe that Claude Code will be 20%+ of all da"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Tokenomics Dashboard"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It seems that almost everyone in our circle is an avid user of Claude Code – yet we recognize that our circle of contacts are immersed in everything AI and Semi"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis, Generated by Google Gemini"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As those in the broader economy that recognize the amazing return on investment from using AI Tools join us in surfing this tidal wave, there will continue to b"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Put simply – if the return on investment from using AI tools is 5-10x, then there is clearly a long way to go in GPU rental pricing before prices rise enough to"
+        }
+      ]
+    },
+    {
+      "section_id": "03-introducing-the-semianalysis-1",
+      "title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Today, we are making our SemiAnalysis H100 1-year rental contract price index freely available to create greater awareness and transparency around trends in the"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Our index is constructed from direct survey data across a pool of 100+ market participants including Neocloud providers, buyers and sellers of compute that is c"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since 2023, we have tracked the contract market price across 3m to 5y tenors for the H100, H200, B200, B300, GB200, GB300, and we have selected data available f"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The SemiAnalysis H100 1-year contract price index is additive to currently available GPU indices for a few different reasons:"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Many GPU rental indices are derived from spot/on-demand listings or posted pricing, but most of the GPU rental market is transacted on a long-term basis with co"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There is no guarantee that buyers of compute are actually transacting at prices publicly posted by Hyperscalers and Neoclouds. These posted prices may shift aro"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are many indices that are adept at digesting great volumes of quote, price and transaction data and these can also be great tools for analyzing market tre"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Institutional subscribers have access to the full term structure across almost all currently active GPU rental markets."
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Alongside the public release of our H100 1Y contract price tracker, we have launched the SemiAnalysis Tokenomics Dashboard for our institutional Tokenomics mode"
+        }
+      ]
+    },
+    {
+      "section_id": "04-gpu-rental-market-structure-to",
+      "title": "GPU Rental Market Structure Today",
+      "title_translation": null,
+      "paragraph_count": 4,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Before late 2025, GPU rental pricing was more competitive as operators had much greater GPU inventory while end demand was only starting to accelerate meaningfu"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GPU rental providers’ strategy has pivoted 180 degrees since then. Neoclouds and Hyperscalers are now in the driver’s seat – they can now negotiate for more fav"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The GPU rental market structure is best understood by dividing it into three primary market segments, each of which tends to cater to different types of custome"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "1. Short-term rental: On-Demand, Spot and less than 3-month contracts 2. Mid-term contracts: 3-month contracts all the way to 3-year+ contracts. 3. Long-term of"
+        }
+      ]
+    },
+    {
+      "section_id": "05-short-term-rental-on-demand",
+      "title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+      "title_translation": null,
+      "paragraph_count": 6,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Short-term rentals represent the very front end of the rental term structure and in many cases represents residual capacity, though many such as Runpod and Lamb"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!UHp_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Lambda Labs"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Providers will adjust pricing on a one-off basis in response to utilization levels – if utilization is too low, they will drop pricing to attract demand. If uti"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!YdhD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Lambda Labs, SemiAnalysis"
+        }
+      ]
+    },
+    {
+      "section_id": "06-mid-term-contracts",
+      "title": "Mid-Term Contracts",
+      "title_translation": null,
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The more economically relevant segments are the contract markets where most GPU rentals by value are transacted. The 1-year segment captures the marginal demand"
+        }
+      ]
+    },
+    {
+      "section_id": "07-long-term-offtakes",
+      "title": "Long-Term Offtakes",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Lastly, the 4–5 year segment is dominated by AI labs locking in huge quantities of capacity early. These deals involve large clusters of 50MW or 100MW or even l"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AI Labs like these contracts as they can lock in a huge amounts of compute in one go to cater to rapidly accelerating end demand. The AI Labs also have consider"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up gene"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscaler"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The below table shows a number of large offtake deals we have been tracking. We analyze these deals closely to calculate the implied pricing in $/hr/GPU and pro"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis AI TCO Model"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In today’s market climate, most of the large AI Clusters that are ramping are captive to AI Labs, who nonetheless have been dipping into the sub 4y market to su"
+        }
+      ]
+    },
+    {
+      "section_id": "08-where-the-puck-is-going",
+      "title": "Where The Puck is Going",
+      "title_translation": null,
+      "paragraph_count": 6,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "What is most striking is the disconnect between these underlying dynamics and broader market sentiment. Despite clear evidence of tightening supply and rising p"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The market is still anchored to a narrative of eventual oversupply and commoditization, and the developments described above have done little to assuage concern"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Looking forward, there are three check points to monitor to determine if GPU rental prices will continue to remain elevated."
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GB300 clusters will ramp throughout 2026. We will monitor the extent to which additional compute capacity and thus token volumes coming market ameliorates the o"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The extent to which the ongoing silicon shortage worsens. We recently wrote about the great AI Silicon shortage, calling out tightness in TSMC’s N3 logic wafer "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "How ARR for AI labs continues to scale – and the rate at which adoption spreads and token consumption continues to grow. Our AI Tokenomics model is squarely foc"
+        }
+      ]
+    },
+    {
+      "section_id": "09-pricing-is-only-going-one-way",
+      "title": "Pricing is Only Going One Way For Now, and ROIC Follows",
+      "title_translation": null,
+      "paragraph_count": 9,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Taken together, these factors point to a clear conclusion: GPU rental pricing is more likely to continue rising than falling."
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The dynamic is self-reinforcing. As Neoclouds see supply tighten and prices rise, they move to secure more hardware ahead of further price increases, which only"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we argued in a recent note to our institutional clients, the re-acceleration in GPU rental pricing improves Neocloud ROIC by expanding margins on already-dep"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For now, the clearest beneficiaries are providers with:"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Shorter-duration contracts (repricing faster)"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Large H100 install bases"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Near-term capacity additions"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Neoclouds with shorter contract tenors will see capacity roll off and reprice into the current environment, capturing immediate margin expansion. At the same ti"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Would we be jinxing it if we said that This Time Might Be Different?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "section_id": "01-acknowledgement",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.45,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 8.5,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "感谢 Nebius 和 Verda 提供用于微基准测试的 B200 节点。这些节点启用了正确的硬件计数器，使得 NCU性能分析成为可能。对于所用云服务商未启用 NCU 的用户，可以参考 GPU Mode 的 Mark Saroufim 建议的替代方案。此外，我们还要感谢《通过微基准测试与多层次分析剖析 NVIDIA Hopper 架构》与《tcgen05 入门指南》的作者，我们的代码正是基于他们的工作成果编写而成。",
+    "最后，我们要感谢所有的审稿人与外部协作者：",
+    "Kilian Haefeli - Cohere",
+    "Benjamin Spector - Flappy Airplanes 与 Stanford",
+    "Neil Movva - Sail Research",
+    "Orian Leitersdorf - Decart AI",
+    "Hardik Bishnoi - Arcee AI",
+    "以及众多匿名审稿人",
+    "https://substackcdn.com/image/fetch/$s_!eHLl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e5c8ca9-ca65-4217-94fb-3c5fd9946bc1_200x200.png",
+    "https://substackcdn.com/image/fetch/$s_!ibuq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44d04885-53a0-4567-bd9f-d2ebb5a712c8_200x200.png"
+  ]
+}

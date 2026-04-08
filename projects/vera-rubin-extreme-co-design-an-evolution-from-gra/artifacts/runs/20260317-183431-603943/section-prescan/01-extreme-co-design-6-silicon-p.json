@@ -1,0 +1,53 @@
+{
+  "section_id": "01-extreme-co-design-6-silicon-p",
+  "new_terms": [
+    {
+      "term": "adaptive compression engine",
+      "suggested_translation": "自适应压缩引擎",
+      "context": "A key feature in Rubin's Transformer Engine to boost inference performance by dynamic computation of sparsity.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Max-P / Max-Q",
+      "suggested_translation": "Max-P / Max-Q 功耗模式",
+      "context": "Default power profiles for Rubin GPUs representing maximum performance and maximum efficiency respectively.",
+      "confidence": 0.9
+    },
+    {
+      "term": "stiffener",
+      "suggested_translation": "加强件",
+      "context": "A mechanical component added to the Rubin package structure to provide support and avoid warpage.",
+      "confidence": 0.85
+    },
+    {
+      "term": "liquid metal TIM2",
+      "suggested_translation": "液态金属 TIM2",
+      "context": "Thermal interface material used between the heat spreader lid and the cold plate.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Olympus core",
+      "suggested_translation": "Olympus 核心",
+      "context": "NVIDIA's custom ARM CPU design used in the Vera CPU.",
+      "confidence": 0.95
+    },
+    {
+      "term": "reticle-sized die",
+      "suggested_translation": "掩模版尺寸晶片",
+      "context": "Refers to a chip die that reaches the maximum size limit of the lithography equipment.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Spectrum-6 CPO",
+      "suggested_translation": "Spectrum-6 CPO",
+      "context": "A version of the Spectrum-6 switch utilizing Co-Packaged Optics for larger scale-out clusters.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "sparsity": "稀疏性",
+    "transformer engine": "Transformer Engine"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:35:50.135354"
+}

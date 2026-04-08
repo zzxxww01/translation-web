@@ -1,0 +1,352 @@
+{
+  "section_id": "29-core-changes-since-inferencexv",
+  "title": "Core Changes Since InferenceXv1",
+  "title_translation": "InferenceXv1 以来的核心变更",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "One of the main changes we have made since v1 is the cadence with which we perform sweeps. Previously, we were jestermaxing and performed a full sweep over each configuration nightly. However, as we added more chips, disaggregated prefill, wide EP, and other features, we realized that running every single night was way too time consuming and wasteful. Moreover, it’s just not necessary – benchmarks only really need to be re-run when recipes change or a new software version is released.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0349",
+      "parent_block_index": 349,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One of the main changes we have made since v1 is the cadence with which we perform sweeps. Previously, we were jestermaxing and performed a full sweep over each configuration nightly. However, as we added more chips, disaggregated prefill, wide EP, and other features, we realized that running every single night was way too time consuming and wasteful. Moreover, it’s just not necessary – benchmarks only really need to be re-run when recipes change or a new software version is released.",
+      "parent_block_plain_text": "One of the main changes we have made since v1 is the cadence with which we perform sweeps. Previously, we were jestermaxing and performed a full sweep over each configuration nightly. However, as we added more chips, disaggregated prefill, wide EP, and other features, we realized that running every single night was way too time consuming and wasteful. Moreover, it’s just not necessary – benchmarks only really need to be re-run when recipes change or a new software version is released.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 489,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 v1 版本以来，我们做出的主要改动之一，是调整了执行遍历测试的节奏。以前我们纯属瞎折腾，每晚都会对每种配置进行一次完整的遍历测试。然而，随着我们加入了更多芯片、分离式 Prefill、宽专家并行 (EP) 等功能，我们意识到每晚都跑一遍测试实在是太耗时、太浪费了。更何况，这完全没必要——基准测试只在方案（recipe）变更或新版软件发布时才有必要重跑。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:14:31.700034",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The acronym MTP was not expanded, while all other preceding acronyms in the same list (ISL, OSL, EP, TP, DP) were. This creates an inconsistency."
+          },
+          {
+            "type": "readability",
+            "description": "The translated sentence '现在，我们通过触发机制来运行遍历测试，触发器是代码仓库根目录下的 更新日志 的新增条目' is slightly convoluted and exhibits a translationese structure ('We do X via Y, where Y is Z')."
+          },
+          {
+            "type": "readability",
+            "description": "The translation includes non-standard spaces around highlighted Chinese terms like '更新日志' and '主 YAML 配置文件'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We now trigger sweeps based on additions to a changelog at the root of the repo. When a developer makes a performance-impacting change to a given config, they add an entry to the changelog listing the affected config along with a brief description of the change. All configs are defined in a master configuration YAML file, which serves as the stateful representation of every data point to be swept, including core settings like ISL/OSL, EP, TP, DP, MTP, and so on. When a PR containing a changelog addition is merged, a workflow parses the referenced config keys, pulls the corresponding sweep definitions from the master config, and fans them out as individual GitHub Actions jobs. The jobs collect all data points for the full sweep and upload the results as artifacts.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "changelog",
+          "start": 46,
+          "end": 55,
+          "href": "https://github.com/InferenceMAX/InferenceMAX/blob/main/perf-changelog.yaml",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "master configuration YAML file",
+          "start": 292,
+          "end": 322,
+          "href": "https://github.com/InferenceMAX/InferenceMAX/blob/main/.github/configs/nvidia-master.yaml",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0350",
+      "parent_block_index": 350,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We now trigger sweeps based on additions to a [changelog](https://github.com/InferenceMAX/InferenceMAX/blob/main/perf-changelog.yaml) at the root of the repo. When a developer makes a performance-impacting change to a given config, they add an entry to the changelog listing the affected config along with a brief description of the change. All configs are defined in a [master configuration YAML file](https://github.com/InferenceMAX/InferenceMAX/blob/main/.github/configs/nvidia-master.yaml), which serves as the stateful representation of every data point to be swept, including core settings like ISL/OSL, EP, TP, DP, MTP, and so on. When a PR containing a changelog addition is merged, a workflow parses the referenced config keys, pulls the corresponding sweep definitions from the master config, and fans them out as individual GitHub Actions jobs. The jobs collect all data points for the full sweep and upload the results as artifacts.",
+      "parent_block_plain_text": "We now trigger sweeps based on additions to a changelog at the root of the repo. When a developer makes a performance-impacting change to a given config, they add an entry to the changelog listing the affected config along with a brief description of the change. All configs are defined in a master configuration YAML file, which serves as the stateful representation of every data point to be swept, including core settings like ISL/OSL, EP, TP, DP, MTP, and so on. When a PR containing a changelog addition is merged, a workflow parses the referenced config keys, pulls the corresponding sweep definitions from the master config, and fans them out as individual GitHub Actions jobs. The jobs collect all data points for the full sweep and upload the results as artifacts.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "changelog",
+          "start": 46,
+          "end": 55,
+          "href": "https://github.com/InferenceMAX/InferenceMAX/blob/main/perf-changelog.yaml",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "master configuration YAML file",
+          "start": 292,
+          "end": 322,
+          "href": "https://github.com/InferenceMAX/InferenceMAX/blob/main/.github/configs/nvidia-master.yaml",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 773,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "现在，我们改为根据代码仓库根目录下更新日志的新增内容来触发遍历测试。当开发者对特定配置做出影响性能的改动时，他们会在更新日志中添加一条记录，写明受影响的配置和改动简述。所有配置都定义在一个主 YAML 配置文件中，该文件是所有待测数据点的权威状态定义源，涵盖了输入序列长度 (ISL)、输出序列长度 (OSL)、专家并行 (EP)、张量并行 (TP)、数据并行 (DP)、多 Token 预测 (MTP) 等核心设置。当包含更新日志的 PR 被合并后，一个工作流会自动解析其中引用的配置项，从主配置文件中拉取相应的遍历测试定义，然后将其拆分为独立的 GitHub Actions 任务并分发执行。这些任务会为完整的遍历测试收集所有数据点，并将结果作为构建产物上传。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:14:31.700218",
+          "tokenized_text": "现在，我们改为根据代码仓库根目录下[[[LINK_1|更新日志]]]的新增内容来触发遍历测试。当开发者对特定配置做出影响性能的改动时，他们会在更新日志中添加一条记录，写明受影响的配置和改动简述。所有配置都定义在一个[[[LINK_2|主 YAML 配置文件]]]中，该文件是所有待测数据点的权威状态定义源，涵盖了输入序列长度 (ISL)、输出序列长度 (OSL)、专家并行 (EP)、张量并行 (TP)、数据并行 (DP)、多 Token 预测 (MTP) 等核心设置。当包含更新日志的 PR 被合并后，一个工作流会自动解析其中引用的配置项，从主配置文件中拉取相应的遍历测试定义，然后将其拆分为独立的 GitHub Actions 任务并分发执行。这些任务会为完整的遍历测试收集所有数据点，并将结果作为构建产物上传。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The acronym MTP was not expanded, while all other preceding acronyms in the same list (ISL, OSL, EP, TP, DP) were. This creates an inconsistency."
+          },
+          {
+            "type": "readability",
+            "description": "The translated sentence '现在，我们通过触发机制来运行遍历测试，触发器是代码仓库根目录下的 更新日志 的新增条目' is slightly convoluted and exhibits a translationese structure ('We do X via Y, where Y is Z')."
+          },
+          {
+            "type": "readability",
+            "description": "The translation includes non-standard spaces around highlighted Chinese terms like '更新日志' and '主 YAML 配置文件'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Below is a high-level diagram of how InferenceX launches jobs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0351",
+      "parent_block_index": 351,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Below is a high-level diagram of how InferenceX launches jobs.",
+      "parent_block_plain_text": "Below is a high-level diagram of how InferenceX launches jobs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 62,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下图是 InferenceX 启动任务的流程示意图。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:14:31.700252",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The acronym MTP was not expanded, while all other preceding acronyms in the same list (ISL, OSL, EP, TP, DP) were. This creates an inconsistency."
+          },
+          {
+            "type": "readability",
+            "description": "The translated sentence '现在，我们通过触发机制来运行遍历测试，触发器是代码仓库根目录下的 更新日志 的新增条目' is slightly convoluted and exhibits a translationese structure ('We do X via Y, where Y is Z')."
+          },
+          {
+            "type": "readability",
+            "description": "The translation includes non-standard spaces around highlighted Chinese terms like '更新日志' and '主 YAML 配置文件'."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0352",
+      "parent_block_index": 352,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:14:31.700273",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The acronym MTP was not expanded, while all other preceding acronyms in the same list (ISL, OSL, EP, TP, DP) were. This creates an inconsistency."
+          },
+          {
+            "type": "readability",
+            "description": "The translated sentence '现在，我们通过触发机制来运行遍历测试，触发器是代码仓库根目录下的 更新日志 的新增条目' is slightly convoluted and exhibits a translationese structure ('We do X via Y, where Y is Z')."
+          },
+          {
+            "type": "readability",
+            "description": "The translation includes non-standard spaces around highlighted Chinese terms like '更新日志' and '主 YAML 配置文件'."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

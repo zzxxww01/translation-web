@@ -1,0 +1,314 @@
+{
+  "section_id": "11-dsmem-vs-smem",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "11-dsmem-vs-smem",
+    "section_title": "DSMEM vs. SMEM",
+    "section_title_translation": "DSMEM 与 SMEM 对比",
+    "section_position": "12/19",
+    "article_theme": "An in-depth microbenchmarking analysis of Nvidia's Blackwell GPU architecture, revealing the performance characteristics of its new memory subsystems, cluster configurations, and 5th-generation Tensor Core MMA instructions for AI workloads.",
+    "structure_summary": "The article begins with an introduction and acknowledgments, setting the context of Blackwell's microarchitecture. It then details high-level architectural features (Clusters, GPCs, Floorsweeping) before diving deep into the memory subsystem (Async Copy, TMA, DSMEM). The core of the article analyzes computation instructions (5th Gen MMA, throughput, latency), and concludes by tying these microbenchmarking findings to real-world use cases (CUTLASS, Multicast) and the physical chip floorplan.",
+    "target_audience": "AI system engineers, GPU optimization researchers, hardware architects, and low-level kernel programmers.",
+    "translation_voice": "Professional and precise Chinese engineering voice. Emphasize clarity in technical logic over literary flair. Use industry-standard GPU and semiconductor terminology natively.",
+    "previous_section_title": "TMA Multicast",
+    "next_section_title": "Tensor Core 5th Generation MMA",
+    "section_role": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+    "translation_notes": [
+      "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+      "Translate 'emit' in the compiler context as '生成' or '发射'.",
+      "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+    ],
+    "key_points": [
+      "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+      "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+    ],
+    "guidelines": [
+      "Maintain English for all PTX and SASS instructions (e.g., cp.async, LDGSTS, tcgen05.mma), formatting them as inline code where appropriate.",
+      "For niche hardware terms like 'Floorsweeping' or 'Speed of Light (SoL)', provide a brief Chinese annotation on the first occurrence (e.g., '核心屏蔽 (Floorsweeping)', '理论极限性能 (SoL)'), then use the English abbreviation or standard Chinese term.",
+      "Ensure strict consistency for memory hierarchy terms: Global Memory (全局内存), Shared Memory / SMEM (共享内存), Tensor Memory / TMEM (张量内存), and Distributed Shared Memory / DSMEM (分布式共享内存).",
+      "Restructure complex, long-winded English sentences into shorter, cohesive Chinese clauses. Use active voice where possible and ensure logical connectors (e.g., '因此', '然而', '具体而言') are explicitly added for natural Chinese paragraph flow.",
+      "Preserve the analytical and authoritative tone of the original text. Avoid overly marketing-driven language; stick to objective, engineering-focused phrasing.",
+      "When discussing matrix dimensions and MMA shapes (e.g., 'M=128', 'N < 128'), keep the mathematical notations exactly as they are without adding unnecessary spaces between letters and numbers."
+    ],
+    "article_challenges": [
+      {
+        "location": "Clusters, GPCs, and Floorsweeping",
+        "issue": "The term 'Floorsweeping' and the distinction between logical and physical GPCs can be confusing if translated literally.",
+        "suggestion": "Translate 'Floorsweeping' as '核心屏蔽' or '良率屏蔽' and explicitly clarify that it refers to the physical enabling/disabling of SMs based on silicon yield."
+      },
+      {
+        "location": "Throughput at Different In-Flight Instruction Count",
+        "issue": "Phrases like 'Speed-of-Light (SoL)' and 'in-flight instructions' are highly specific to GPU profiling.",
+        "suggestion": "Translate 'in-flight instructions' as '飞行中指令' or '执行中指令' and 'SoL' as '理论极限性能 (SoL)'. Ensure the mathematical relationships (e.g., N sizes, percentages) are conveyed accurately."
+      },
+      {
+        "location": "Throughout the text (Instruction names)",
+        "issue": "Instructions like 'cp.async.bulk.tensor', 'ld.shared::cluster', and 'tcgen05.mma' have complex syntax.",
+        "suggestion": "Do not alter or translate any PTX/SASS instruction syntax. Keep them exactly as written in the source, preferably formatted as code."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Floorsweeping",
+        "term": "Floorsweeping",
+        "translation": "核心屏蔽 (Floorsweeping)",
+        "strategy": "first_annotate",
+        "note": "A semiconductor manufacturing practice where partially defective chips are sold with faulty cores disabled to improve yield.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Speed of Light (SoL)",
+        "term": "Speed of Light (SoL)",
+        "translation": "理论极限性能 (Speed of Light, SoL)",
+        "strategy": "first_annotate",
+        "note": "In Nvidia Nsight Compute (NCU) profiling, this refers to the theoretical maximum achievable performance of a hardware unit.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Cooperative Thread Array (CTA)",
+        "term": "Cooperative Thread Array (CTA)",
+        "translation": "协作线程阵列 (CTA)",
+        "strategy": "first_annotate",
+        "note": "Nvidia's terminology for a thread block.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Tensor Memory Accelerator (TMA)",
+        "term": "Tensor Memory Accelerator (TMA)",
+        "translation": "张量内存加速器 (TMA)",
+        "strategy": "first_annotate",
+        "note": "A specialized asynchronous data copy engine introduced in Hopper.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Shared Memory (SMEM)",
+        "term": "Shared Memory (SMEM)",
+        "translation": "共享内存 (SMEM)",
+        "strategy": "translate",
+        "note": "On-chip memory shared within a CTA.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tensor Memory (TMEM)",
+        "term": "Tensor Memory (TMEM)",
+        "translation": "张量内存 (TMEM)",
+        "strategy": "translate",
+        "note": "A new memory type in Blackwell to hold MMA accumulators.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Distributed Shared Memory (DSMEM)",
+        "term": "Distributed Shared Memory (DSMEM)",
+        "translation": "分布式共享内存 (DSMEM)",
+        "strategy": "translate",
+        "note": "Allows CTAs within a cluster to access each other's shared memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "PTX and SASS",
+        "term": "PTX and SASS",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "Nvidia's intermediate and low-level assembly instruction sets.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+    "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+    "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+    "key_points": [
+      "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+      "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+    ],
+    "translation_notes": [
+      "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+      "Translate 'emit' in the compiler context as '生成' or '发射'.",
+      "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+    ]
+  },
+  "translations": [
+    "英伟达在 Hopper 架构中引入了分布式共享内存 (DSMEM)。DSMEM 允许一个集群内的协作线程阵列 (CTA) 访问彼此的共享内存 (SMEM)。这对于 CTA间归约等模式非常有用。通过 DSMEM 读取对等 CTA 内存的吞吐量，显著低于共享内存 (SMEM) 每时钟周期 128 字节的吞吐量。",
+    "我们测试了几种与 DSMEM 交互的不同 PTX 模式。为 DSMEM 编写代码与为共享内存 (SMEM) 编写代码的一个重要区别在于，DSMEM 加载与全局加载类似，采用数据包化传输；因此，其最优访问模式完全不同于本地共享内存 (SMEM) 中避免 bank 冲突的交错访问，而更像全局内存 (GMEM) 中对连续地址的典型合并访问。此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 ld.shared 而不带 ::cluster 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 ld.shared::cluster。",
+    "使用 ld.shared 时，编译器会生成 LDS 指令，而不是像使用 ld.shared::cluster 时那样生成通用的 LD 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 ld.shared::cluster 的实际吞吐量，直到切换为使用 cp.async.bulk(PTX) / UBLKCP(SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。",
+    "我们使用每种 PTX 模式时达到的峰值吞吐量如下所示，单位统一表示为每时钟周期字节数 (B/clk)，以便与 SM 本地共享内存 (SMEM) 已知的最大可达吞吐量进行对比。",
+    "https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png"
+  ]
+}

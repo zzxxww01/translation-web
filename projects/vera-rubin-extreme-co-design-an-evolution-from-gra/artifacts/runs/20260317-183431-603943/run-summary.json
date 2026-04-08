@@ -1,0 +1,103 @@
+{
+  "project_id": "vera-rubin-extreme-co-design-an-evolution-from-gra",
+  "status": "completed",
+  "total_sections": 17,
+  "translated_sections": 16,
+  "total_paragraphs": 439,
+  "translated_paragraphs": 439,
+  "error_count": 0,
+  "errors": [],
+  "started_at": "2026-03-17T18:34:31.603917",
+  "finished_at": "2026-03-17T19:21:04.960418",
+  "run_id": "20260317-183431-603943",
+  "artifacts_path": "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\artifacts\\runs\\20260317-183431-603943",
+  "export": {
+    "generated_at": "2026-03-17T19:21:04.871911",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\源自 Grace Blackwell Oberon 的演进_zh.md",
+      "generated": true,
+      "bytes": 118360
+    }
+  },
+  "api_calls": 148,
+  "elapsed_seconds": 2793.5,
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 63,
+    "auto_fixable_count": 0,
+    "manual_review_count": 63,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称210次, 第三人称196次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "发现89个超长句子（超过150字），建议拆分",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 25",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 4",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6.0",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 3.5, 2, 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 35, 2, 8",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 160, 224",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 10,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 32768",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

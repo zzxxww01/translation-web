@@ -1,0 +1,56 @@
+{
+  "section_id": "20-arm-phoenix",
+  "new_terms": [
+    {
+      "term": "Phoenix",
+      "suggested_translation": "Phoenix",
+      "context": "ARM's codename for its first full datacenter CPU design, where ARM acts as a chip vendor. Meta is the first customer.",
+      "confidence": 0.95
+    },
+    {
+      "term": "chip vendor",
+      "suggested_translation": "芯片供应商",
+      "context": "Describes ARM's new business model of designing and selling entire chips, not just licensing IP.",
+      "confidence": 0.9
+    },
+    {
+      "term": "DPU",
+      "suggested_translation": "DPU (数据处理器)",
+      "context": "Data Processing Unit, mentioned alongside CPUs as a target for Neoverse core deployment in datacenters.",
+      "confidence": 0.9
+    },
+    {
+      "term": "SoftBank",
+      "suggested_translation": "软银",
+      "context": "The majority owner of ARM, involved in the Stargate venture with OpenAI.",
+      "confidence": 0.95
+    },
+    {
+      "term": "COGS",
+      "suggested_translation": "COGS (销货成本)",
+      "context": "Cost of Goods Sold, a key financial metric mentioned in the context of ARM's new chip vendor business model.",
+      "confidence": 0.9
+    },
+    {
+      "term": "TDP",
+      "suggested_translation": "TDP (热设计功耗)",
+      "context": "Thermal Design Power, a key CPU specification. The Phoenix CPU has a configurable TDP of 250W to 350W.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Accelerator Enablement Kit",
+      "suggested_translation": "加速器支持套件",
+      "context": "A kit that enables coherent shared memory to attached XPUs over PCIe6 for the Phoenix CPU.",
+      "confidence": 0.85
+    },
+    {
+      "term": "Venom",
+      "suggested_translation": "Venom",
+      "context": "Codename for ARM's next-generation CPU design that will succeed Phoenix.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:38:42.004351"
+}

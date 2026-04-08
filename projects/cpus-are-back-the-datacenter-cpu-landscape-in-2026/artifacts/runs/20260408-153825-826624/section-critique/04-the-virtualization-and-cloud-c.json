@@ -1,0 +1,39 @@
+{
+  "section_id": "04-the-virtualization-and-cloud-c",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "traded CapEx for OpEx",
+        "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。",
+        "why_it_matters": "不必要的英文括注会降低中文阅读的流畅度，且大小写不规范（原文为大写 OpEx）。",
+        "suggestion": "删除“（opex）”，改为“将资本支出转化为运营支出”。"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability|annotation",
+        "severity": "medium",
+        "original_text": "Spectre and Meltdown vulnerabilities",
+        "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。",
+        "why_it_matters": "机械的括号排版打断了阅读节奏，且不符合科技文章对重大漏洞名称的标准引用习惯。",
+        "suggestion": "改为“被‘幽灵’（Spectre）与‘熔断’（Meltdown）漏洞所利用”。"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "conciseness",
+        "severity": "low",
+        "original_text": "ahead of the running program",
+        "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。",
+        "why_it_matters": "消除冗余字词能让长句的节奏更紧凑、更符合母语习惯。",
+        "suggestion": "改为“在程序实际运行前进行猜测”或直接使用“提前猜测、提取并执行指令”。"
+      }
+    ]
+  }
+}

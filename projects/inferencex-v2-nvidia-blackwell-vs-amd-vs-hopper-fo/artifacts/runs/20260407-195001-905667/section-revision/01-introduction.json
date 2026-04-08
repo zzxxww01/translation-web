@@ -1,0 +1,26 @@
+{
+  "section_id": "01-introduction",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.275,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 5.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "InferenceXv2（前身为 InferenceMAX）在 InferenceMAXv1 奠定的基础上构建，后者是我们开源且持续更新的推理基准测试（benchmark），为 AI 推理性能与经济性树立了新标杆。InferenceMAXv1 摒弃了静态、特定时间点的基准测试，转而对数百款芯片和主流开源框架进行持续测试。点击此处查看免费数据看板。",
+    "我们的基准测试已被几乎所有主要算力买家广泛复现、验证或支持，涵盖从 Google Cloud、Microsoft Azure 到 Oracle、OpenAI 等众多头部企业。",
+    "InferenceXv2 正是建立在这一基础之上。它扩大了测试范围，纳入了采用宽专家并行（Wide Expert Parallelism (WideEP)）优化的大规模 DeepSeek 混合专家模型（MoE）分离式推理（分离式预填充，简称“分离式”），覆盖了过去 4 年英伟达面向西方市场推出的全部 6 款 GPU SKU (库存单位/型号)，以及过去 3 年 AMD 面向西方市场发布的每一款 GPU SKU。总体而言，InferenceXv2 调用了近 1000 张前沿 GPU，以完成跨所有 SKU 的完整基准测试运行。",
+    "随着今日发布，InferenceXv2 成为首个跨越整条帕累托前沿曲线对 Blackwell Ultra GB300 NVL72机架级系统和 B300 进行基准测试的套件；同时，它也是首个测试在 MI355X 上组合使用 FP4 与 FP8、分离式架构以及宽专家并行时多节点性能的第三方基准测试。在 InferenceX 的未来迭代中，我们将继续重兵投入采用宽专家并行的分离式服务，因为这正是 OpenAI、Anthropic、xAI、Google Deepmind、DeepSeek 等前沿 AI 实验室，以及 TogetherAI、Baseten 和 Fireworks 等先进 API 提供商在生产环境中实际部署的方案。在本文中，我们还将深入剖析围绕最新的 Claude Code 快速模式功能所涉及的系统工程原理与经济学逻辑。",
+    "我们的基准测试在 Apache 2.0 协议下完全开源——这意味着我们能够与 AI 软件生态系统的演进保持同样的高速迭代。如果你认可我们的工作并希望提供支持，请在我们的 GitHub 上点个 Star！我们还在 https://inferencex.com 提供了免费的数据可视化工具，供机器学习社区的所有人自行探索完整数据集。",
+    "我们将在首日（day 0）即刻支持并加入 DeepSeekv4 及其他热门的中国前沿模型，因为在过去 6 个月里，我们已经清理了大量技术债，如今能够在稳定的基础设施上快速迭代。今年晚些时候，我们还将把 TPUv7 Ironwood 和 Trainium3 纳入 InferenceX！如果你渴望参与这项极具影响力的使命，同时获得极具竞争力的薪酬，欢迎在此申请加入我们。",
+    "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+    "来源：InferenceMAX GitHub"
+  ]
+}

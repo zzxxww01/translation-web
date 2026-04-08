@@ -1,0 +1,22 @@
+{
+  "section_id": "29-core-changes-since-inferencexv",
+  "assessment": {
+    "passed": true,
+    "overall_score": 8.799999999999999,
+    "scores": {
+      "readability": 8.2,
+      "accuracy": 9.1,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "自 v1 版本以来，我们做出的主要改动之一，是调整了执行遍历测试的节奏。以前我们纯属瞎折腾，每晚都会对每种配置进行一次完整的遍历测试。然而，随着我们加入了更多芯片、分离式 Prefill、宽专家并行 (EP) 等功能，我们意识到每晚都跑一遍测试实在是太耗时、太浪费了。更何况，这完全没必要——基准测试只在方案（recipe）变更或新版软件发布时才有必要重跑。",
+    "现在，我们改为根据代码仓库根目录下更新日志的新增内容来触发遍历测试。当开发者对特定配置做出影响性能的改动时，他们会在更新日志中添加一条记录，写明受影响的配置和改动简述。所有配置都定义在一个主 YAML 配置文件中，该文件是所有待测数据点的权威状态定义源，涵盖了输入序列长度 (ISL)、输出序列长度 (OSL)、专家并行 (EP)、张量并行 (TP)、数据并行 (DP)、多 Token 预测 (MTP) 等核心设置。当包含更新日志的 PR 被合并后，一个工作流会自动解析其中引用的配置项，从主配置文件中拉取相应的遍历测试定义，然后将其拆分为独立的 GitHub Actions 任务并分发执行。这些任务会为完整的遍历测试收集所有数据点，并将结果作为构建产物上传。",
+    "下图是 InferenceX 启动任务的流程示意图。",
+    "https://substackcdn.com/image/fetch/$s_!qJ_B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74936db5-88cb-418e-932a-e7a8693a6857_2904x2845.png"
+  ]
+}

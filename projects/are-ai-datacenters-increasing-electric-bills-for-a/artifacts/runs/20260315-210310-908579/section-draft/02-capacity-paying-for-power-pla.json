@@ -1,0 +1,318 @@
+{
+  "section_id": "02-capacity-paying-for-power-pla",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "02-capacity-paying-for-power-pla",
+    "section_title": "Capacity: paying for power plants to sit idle 95% of the time",
+    "section_title_translation": "容量：为95%时间闲置的发电厂买单",
+    "section_position": "3/10",
+    "article_theme": "The surge in household electric bills in certain US regions is primarily driven by the flawed, centralized capacity market design of grid operators like PJM, rather than the raw power demand of AI datacenters, a fact proven by the stable prices in ERCOT's real-time, energy-only market.",
+    "structure_summary": "The article opens by challenging the mainstream narrative that AI datacenters cause power price spikes. It then contrasts the two largest US energy markets: PJM and ERCOT. It deep-dives into PJM's flawed $16 billion capacity market simulation, then shifts to ERCOT's simpler, real-time energy-only model to show how it handles identical load growth without price shocks. The piece uses 'Winter Storm Fern' as a real-world stress test of both grids, concluding with regulatory outlooks and investment implications (winners and losers).",
+    "target_audience": "Institutional investors, energy sector professionals, datacenter developers, and hardcore tech enthusiasts.",
+    "translation_voice": "Professional financial and tech-industry Chinese. The voice should be objective but sharp, clearly conveying the author's critique of PJM's bureaucratic inefficiencies and appreciation for ERCOT's market-driven agility.",
+    "previous_section_title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+    "next_section_title": "PJM: The $16 Billion Simulation",
+    "section_role": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+    "translation_notes": [
+      "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+      "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+    ],
+    "key_points": [
+      "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+      "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+    ],
+    "guidelines": [
+      "Strictly differentiate between '容量市场' (Capacity market) and '纯电能市场' (Energy-only market). This contrast is the backbone of the entire article.",
+      "When translating critiques of PJM (e.g., 'The $16 Billion Simulation', 'flawed forecast'), use sharp, precise financial Chinese to convey the author's skepticism.",
+      "Maintain English acronyms for US regulatory and grid entities (PJM, ERCOT, FERC) after providing a short Chinese explanation in parentheses at their first appearance.",
+      "For company names (OpenAI, Anthropic, Vistra, Talen, Vertiv), keep them in English unless a widely recognized official Chinese name exists (e.g., Google -> 谷歌, Meta -> Meta).",
+      "Ensure technical terms related to power generation (e.g., peak load, backup generation, transmission service providers) are translated using standard Chinese power industry terminology (峰值负荷, 备用发电, 输电服务提供商).",
+      "Preserve the formatting of section headers, as they act as strong narrative signposts guiding the reader from problem identification to case studies, and finally to investment conclusions."
+    ],
+    "article_challenges": [
+      {
+        "location": "Energy market mechanism explanations (e.g., 'paying for power plants to sit idle 95% of the time')",
+        "issue": "Translating complex grid mechanics into readable Chinese without sounding like a dry regulatory manual.",
+        "suggestion": "Use active voice and sharp contrasts. Emphasize the financial absurdity highlighted by the author (e.g., spending billions for idle plants)."
+      },
+      {
+        "location": "Acronym density (PJM, ERCOT, IMM, FERC, BRA, NCBL)",
+        "issue": "Alphabet soup can severely disrupt the reading flow for a Chinese audience unfamiliar with US grid operators.",
+        "suggestion": "Strictly follow the 'first_annotate' strategy. Once defined, use the English acronyms to keep the text clean, but ensure the initial context is crystal clear."
+      },
+      {
+        "location": "Financial and investment crossover terms (e.g., 'structural asymmetry is durable and investable')",
+        "issue": "Failing to capture the investor-centric angle of the piece.",
+        "suggestion": "Translate 'investable' as '具备投资价值' or '存在投资机会', ensuring the text reads like a premium financial research report."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "PJM",
+        "term": "PJM",
+        "translation": "PJM",
+        "strategy": "first_annotate",
+        "note": "A regional transmission organization (RTO) that coordinates the movement of wholesale electricity in all or parts of 13 states and the District of Columbia.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "ERCOT",
+        "term": "ERCOT",
+        "translation": "ERCOT",
+        "strategy": "first_annotate",
+        "note": "Electric Reliability Council of Texas, the organization managing Texas's electrical grid.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Capacity market / Capacity auction",
+        "term": "Capacity market / Capacity auction",
+        "translation": "容量市场 / 容量拍卖",
+        "strategy": "translate",
+        "note": "A market mechanism where power plants are paid to guarantee they will be available to generate electricity in the future, even if they sit idle.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Energy-only market",
+        "term": "Energy-only market",
+        "translation": "纯电能市场",
+        "strategy": "translate",
+        "note": "A market design where generators are only paid for the electricity they actually produce and deliver, without separate capacity payments.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Scarcity pricing",
+        "term": "Scarcity pricing",
+        "translation": "稀缺定价",
+        "strategy": "translate",
+        "note": "A mechanism in energy-only markets where electricity prices spike during times of high demand and low supply to incentivize generation.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Base Residual Auction (BRA)",
+        "term": "Base Residual Auction (BRA)",
+        "translation": "基础剩余拍卖 (BRA)",
+        "strategy": "first_annotate",
+        "note": "PJM's primary capacity market auction held annually to secure power supply three years in advance.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Hyperscalers",
+        "term": "Hyperscalers",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Massive cloud service providers and AI developers (e.g., Google, Meta, Amazon, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "FERC",
+        "term": "FERC",
+        "translation": "FERC",
+        "strategy": "first_annotate",
+        "note": "Federal Energy Regulatory Commission, the US federal agency regulating interstate electricity transmission.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Educates the reader on grid economics, defining the structural difference between PJM's capacity market and ERCOT's energy-only market.",
+    "relation_to_previous": "Shifts the focus from the symptoms (high bills, AI blame) to the underlying structural mechanics of how electricity bills are calculated.",
+    "relation_to_next": "Provides the necessary technical definitions to understand the magnitude of PJM's $16 billion failure in the subsequent section.",
+    "key_points": [
+      "Capacity markets (like PJM) charge ratepayers to pay power plants to sit idle for extreme peak scenarios.",
+      "ERCOT uses an 'energy-only' model relying on real-time scarcity pricing instead of centralized annual capacity auctions."
+    ],
+    "translation_notes": [
+      "Terminology is critical: 'Capacity market' (容量市场), 'energy-only market' (单一电量市场/纯电能市场), 'retail adders' (零售附加费), 'ancillary services' (辅助服务).",
+      "Ensure the explanation of 'scarcity pricing' (稀缺定价) clearly conveys its role as an incentive mechanism."
+    ]
+  },
+  "translations": [
+    "总体而言，家庭月度电费账单主要由以下几项费用构成：",
+    "电量：在放开管制的地区（包括PJM覆盖的13个州以及ERCOT/德克萨斯州），这项费用取决于批发价格，即电力的实时供需情况。",
+    "容量：这项费用在ERCOT中并不存在，但在PJM中却至关重要。它取决于容量的供需情况，即那些每年仅在必要的用电高峰期才会启动数小时的电力资源。在PJM，这项费用每年通过一场大型拍卖来确定。",
+    "输配电（T&D）：电力输配网络的费用。",
+    "这一领域依然受到高度监管。输配电企业通常赚取预先设定的、受监管的股本回报率。因此，输配电资产的利用率会影响终端消费者的电价。我们在本报告中不会对此展开探讨，而是将其留待未来的深度报告再作剖析。",
+    "其他：税费、零售加价、辅助服务等。由于这些费用因地区而异，我们在此不做深入探讨。",
+    "https://substackcdn.com/image/fetch/$s_!Y-ZQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a888155-3f13-42d0-b47c-2633abbebb27_2848x1504.jpeg",
+    "资料来源：SemiAnalysis 测算，EIA",
+    "容量市场的设立初衷，是确保家庭和企业始终能获得所需的电力，哪怕是在夏季或冬季的用电高峰期。作为背景参考，在单日内，仅纽约市的电力负荷波动就可达 2 吉瓦（GW），而其日常峰值负荷通常为 6 至 8 吉瓦。当热浪来袭、所有人同时开启空调时，该市的用电负荷甚至会飙升至 10 吉瓦。",
+    "在PJM，为确保在关键时刻有充足的电力容量，我们向发电厂所有者支付费用，让其资产在全年超过95%的时间里处于闲置待命状态。这笔费用的定价由每年举行一次的远期拍卖来决定，随后这笔成本会被分摊给该区域内的所有电力用户。正如后文详述，在2025/26交付期，这一价格暴涨了9.3倍。",
+    "相比之下，ERCOT是一个“纯电能市场”，没有单独的容量拍卖机制。实时价格信号决定了电力的“稀缺性”，并以此激励发电厂解决供需缺口。我们在报告后文中会详述一些技术细节，但两者的根本区别在于，ERCOT不存在中心化的年度容量拍卖，而是依靠实时的市场力量。"
+  ]
+}

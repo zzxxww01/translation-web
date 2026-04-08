@@ -1,0 +1,48 @@
+{
+  "section_id": "06-compute-tray-power-delivery",
+  "new_terms": [
+    {
+      "term": "PDB",
+      "suggested_translation": "电源分配板",
+      "context": "Power Distribution Board (PDB) feeds 12VDC to all the boards in the compute tray.",
+      "confidence": 0.95
+    },
+    {
+      "term": "IBC module",
+      "suggested_translation": "IBC 模块",
+      "context": "Intermediate Bus Converter; 50VDC is stepped down to 12VDC by the IBC module.",
+      "confidence": 0.9
+    },
+    {
+      "term": "power sloshing",
+      "suggested_translation": "功率动态分配",
+      "context": "A feature enabling dynamic power sharing between the CPU and GPU based on workload demand.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ASP",
+      "suggested_translation": "平均售价",
+      "context": "Average Selling Price for power semiconductors in the BoM.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CX-9",
+      "suggested_translation": "ConnectX-9",
+      "context": "Nvidia's next-generation networking adapter mentioned alongside BlueField-4.",
+      "confidence": 0.95
+    },
+    {
+      "term": "busbar clips",
+      "suggested_translation": "汇流排夹",
+      "context": "Hardware used to connect 50VDC power from the rack busbar to the compute tray.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "strata module": "Strata Board (Strata 板卡)",
+    "vrm": "VRM (电压调节模块)",
+    "busbar": "busbar (汇流排)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:06:34.773278"
+}

@@ -1,0 +1,1435 @@
+{
+  "section_id": "15-nvidia-grace",
+  "title": "Nvidia Grace",
+  "title_translation": "英伟达Grace",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0182",
+      "parent_block_index": 182,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.844896",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Nvidia’s Grace CPU connections. Source: NVIDIA",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia’s Grace CPU connections. Source: NVIDIA",
+          "start": 0,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0183",
+      "parent_block_index": 183,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Nvidia’s Grace CPU connections. Source: NVIDIA*",
+      "parent_block_plain_text": "Nvidia’s Grace CPU connections. Source: NVIDIA",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia’s Grace CPU connections. Source: NVIDIA",
+          "start": 0,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 46,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达 Grace CPU 连接示意图。来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845026",
+          "tokenized_text": "[[[EM_1|英伟达 Grace CPU 连接示意图。来源：英伟达]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0184",
+      "parent_block_index": 184,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845056",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Nvidia Grace Scalable Coherency Fabric. Source: NVIDIA",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia Grace Scalable Coherency Fabric. Source: NVIDIA",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0185",
+      "parent_block_index": 185,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Nvidia Grace Scalable Coherency Fabric. Source: NVIDIA*",
+      "parent_block_plain_text": "Nvidia Grace Scalable Coherency Fabric. Source: NVIDIA",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia Grace Scalable Coherency Fabric. Source: NVIDIA",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 54,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达 Grace 可扩展一致性网络。来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845115",
+          "tokenized_text": "[[[EM_1|英伟达 Grace 可扩展一致性网络。来源：英伟达]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Unlike most of the general purpose CPUs covered in this article, Nvidia’s CPUs are designed with head nodes and Extended GPU Memory in mind, with NVLink-C2C as its party trick. This 900GB/s (bi-directional) high speed link allows the connected Hopper or Blackwell GPU to access the CPU’s memory at full bandwidth, alleviating the low memory capacity limits of HBM with up to 480GB memory per Grace CPU. Grace also adopts mobile-class LPDDR5X memory to keep non-GPU power down while maintaining high bandwidths of 500GB/s on a 512-bit wide memory bus. The initial Grace Hopper superchips attached 1 Grace for each GPU, while the later Grace Blackwell generations shared the CPU across 2 GPUs. NVIDIA also offered a dual-Grace superchip CPU for HPC customers that require high memory bandwidth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0186",
+      "parent_block_index": 186,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Unlike most of the general purpose CPUs covered in this article, Nvidia’s CPUs are designed with head nodes and Extended GPU Memory in mind, with NVLink-C2C as its party trick. This 900GB/s (bi-directional) high speed link allows the connected Hopper or Blackwell GPU to access the CPU’s memory at full bandwidth, alleviating the low memory capacity limits of HBM with up to 480GB memory per Grace CPU. Grace also adopts mobile-class LPDDR5X memory to keep non-GPU power down while maintaining high bandwidths of 500GB/s on a 512-bit wide memory bus. The initial Grace Hopper superchips attached 1 Grace for each GPU, while the later Grace Blackwell generations shared the CPU across 2 GPUs. NVIDIA also offered a dual-Grace superchip CPU for HPC customers that require high memory bandwidth.",
+      "parent_block_plain_text": "Unlike most of the general purpose CPUs covered in this article, Nvidia’s CPUs are designed with head nodes and Extended GPU Memory in mind, with NVLink-C2C as its party trick. This 900GB/s (bi-directional) high speed link allows the connected Hopper or Blackwell GPU to access the CPU’s memory at full bandwidth, alleviating the low memory capacity limits of HBM with up to 480GB memory per Grace CPU. Grace also adopts mobile-class LPDDR5X memory to keep non-GPU power down while maintaining high bandwidths of 500GB/s on a 512-bit wide memory bus. The initial Grace Hopper superchips attached 1 Grace for each GPU, while the later Grace Blackwell generations shared the CPU across 2 GPUs. NVIDIA also offered a dual-Grace superchip CPU for HPC customers that require high memory bandwidth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 792,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与本文讨论的大多数通用 CPU 不同，英伟达的 CPU 在设计之初就充分考虑了头节点（head nodes）和扩展 GPU 内存的需求，并将 NVLink-C2C 作为其杀手锏。这条 900GB/s（双向）的高速链路允许相连的 Hopper 或 Blackwell GPU 全带宽访问 CPU 内存。每颗 Grace CPU 内存容量高达 480GB，有效缓解了 HBM 内存容量不足的限制。Grace 还采用了移动级 LPDDR5X 内存，在 512 位宽内存总线上维持 500GB/s 高带宽的同时，有效降低了非 GPU 功耗。初代 Grace Hopper 超级芯片为每颗 GPU 搭配 1 颗 Grace，而后续的 Grace Blackwell 世代则让 2 颗 GPU 共享 1 颗 CPU。此外，英伟达还为需要高内存带宽的 HPC 客户提供了双 Grace 超级芯片 CPU。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845135",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Regarding the CPU cores, NVIDIA uses the high performance ARM Neoverse V2 design with 1MB of private L2 cache on a 6x7 mesh network housing 76 cores and 117MB of L3 cache, with up to 72 cores enabled for yield. Each Cache Switch Node (CSN) on the mesh stop connects up to 2 cores and L3 slices. NVIDIA emphasizes the high 3.2TB/s bisection bandwidth of the mesh network, showing Grace’s specialized focus on data flow rather than raw CPU performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0187",
+      "parent_block_index": 187,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Regarding the CPU cores, NVIDIA uses the high performance ARM Neoverse V2 design with 1MB of private L2 cache on a 6x7 mesh network housing 76 cores and 117MB of L3 cache, with up to 72 cores enabled for yield. Each Cache Switch Node (CSN) on the mesh stop connects up to 2 cores and L3 slices. NVIDIA emphasizes the high 3.2TB/s bisection bandwidth of the mesh network, showing Grace’s specialized focus on data flow rather than raw CPU performance.",
+      "parent_block_plain_text": "Regarding the CPU cores, NVIDIA uses the high performance ARM Neoverse V2 design with 1MB of private L2 cache on a 6x7 mesh network housing 76 cores and 117MB of L3 cache, with up to 72 cores enabled for yield. Each Cache Switch Node (CSN) on the mesh stop connects up to 2 cores and L3 slices. NVIDIA emphasizes the high 3.2TB/s bisection bandwidth of the mesh network, showing Grace’s specialized focus on data flow rather than raw CPU performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 450,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 CPU 核心方面，英伟达采用了高性能的 ARM Neoverse V2 设计，每核心配备 1MB 私有 L2缓存。其 6x7 网格网络容纳了 76 个核心和 117MB 的 L3缓存，为保证良率，最多启用 72 个核心。网格节点上的每个缓存交换节点（CSN）最多连接 2 个核心和 L3缓存切片。英伟达着重强调了该网格网络高达 3.2TB/s 的对分带宽，这表明 Grace 专门侧重于数据流，而非单纯的 CPU 原始性能。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845152",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "On the performance side, Grace has a quirky microarchitectural bottleneck from the Neoverse V2 cores that makes it slow for unoptimized HPC code. From Nvidia’s Grace Performance Tuning Guide, optimizing large applications for better code locality can result in 50% speedups. This is due to limitations in the core branch prediction engine in storing and fetching instructions ahead of use. On Grace, instructions are organized into 32 2MB virtual address spaces.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Grace Performance Tuning Guide",
+          "start": 160,
+          "end": 190,
+          "href": "https://docs.nvidia.com/dccpu/grace-perf-tuning-guide/compilers.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0188",
+      "parent_block_index": 188,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the performance side, Grace has a quirky microarchitectural bottleneck from the Neoverse V2 cores that makes it slow for unoptimized HPC code. From Nvidia’s [Grace Performance Tuning Guide](https://docs.nvidia.com/dccpu/grace-perf-tuning-guide/compilers.html), optimizing large applications for better code locality can result in 50% speedups. This is due to limitations in the core branch prediction engine in storing and fetching instructions ahead of use. On Grace, instructions are organized into 32 2MB virtual address spaces.",
+      "parent_block_plain_text": "On the performance side, Grace has a quirky microarchitectural bottleneck from the Neoverse V2 cores that makes it slow for unoptimized HPC code. From Nvidia’s Grace Performance Tuning Guide, optimizing large applications for better code locality can result in 50% speedups. This is due to limitations in the core branch prediction engine in storing and fetching instructions ahead of use. On Grace, instructions are organized into 32 2MB virtual address spaces.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Grace Performance Tuning Guide",
+          "start": 160,
+          "end": 190,
+          "href": "https://docs.nvidia.com/dccpu/grace-perf-tuning-guide/compilers.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 462,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在性能方面，Grace 存在一个源自 Neoverse V2 核心的古怪微架构瓶颈，导致其运行未经优化的 HPC 代码时速度缓慢。根据英伟达的 Grace 性能调优指南，针对更好的代码局部性来优化大型应用，可带来 50% 的提速。这是因为核心分支预测引擎在提前存储和获取指令方面存在局限。在 Grace 上，指令被组织成 32 个 2MB 的虚拟地址空间。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845215",
+          "tokenized_text": "在性能方面，Grace 存在一个源自 Neoverse V2 核心的古怪微架构瓶颈，导致其运行未经优化的 HPC 代码时速度缓慢。根据英伟达的 [[[LINK_1|Grace 性能调优指南]]]，针对更好的代码局部性来优化大型应用，可带来 50% 的提速。这是因为核心分支预测引擎在提前存储和获取指令方面存在局限。在 Grace 上，指令被组织成 32 个 2MB 的虚拟地址空间。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Performance starts to drop off massively when this Branch Target Buffer fills beyond 24 regions as hot code hogs the buffer and increases instruction churn, causing more branch prediction mispredicts. If the program exceeds 32 regions, the entire 64MB buffer gets flushed, with the branch predictor forgetting all previous branch instructions to accommodate new incoming ones. Without a functioning branch predictor, the CPU core’s front end bottlenecks the whole operating as ALUs sit idle awaiting instructions to execute.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0189",
+      "parent_block_index": 189,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Performance starts to drop off massively when this Branch Target Buffer fills beyond 24 regions as hot code hogs the buffer and increases instruction churn, causing more branch prediction mispredicts. If the program exceeds 32 regions, the entire 64MB buffer gets flushed, with the branch predictor forgetting all previous branch instructions to accommodate new incoming ones. Without a functioning branch predictor, the CPU core’s front end bottlenecks the whole operating as ALUs sit idle awaiting instructions to execute.",
+      "parent_block_plain_text": "Performance starts to drop off massively when this Branch Target Buffer fills beyond 24 regions as hot code hogs the buffer and increases instruction churn, causing more branch prediction mispredicts. If the program exceeds 32 regions, the entire 64MB buffer gets flushed, with the branch predictor forgetting all previous branch instructions to accommodate new incoming ones. Without a functioning branch predictor, the CPU core’s front end bottlenecks the whole operating as ALUs sit idle awaiting instructions to execute.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 524,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "当这个分支目标缓冲区填满超过 24 个区域时，性能开始一路陡降。热点代码会霸占缓冲区并加剧指令搅动（instruction churn），从而导致更多的分支预测失误。如果程序超出 32 个区域，整个 64MB 缓冲区将被清空，分支预测器会遗忘所有先前的分支指令，以腾出空间容纳新指令。在失去有效运作的分支预测器后，CPU 核心的前端会成为整个操作的瓶颈，导致 ALU 只能闲置等待指令执行。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845234",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This is why AI workloads are currently being slowed by the Grace CPUs in GB200 and GB300.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0190",
+      "parent_block_index": 190,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is why AI workloads are currently being slowed by the Grace CPUs in GB200 and GB300.",
+      "parent_block_plain_text": "This is why AI workloads are currently being slowed by the Grace CPUs in GB200 and GB300.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 89,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正因如此，目前在 GB200 和 GB300 中，AI 工作负载会被 Grace CPU 拖慢。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845251",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Nvidia Vera",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0191",
+      "parent_block_index": 191,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Nvidia Vera",
+      "parent_block_plain_text": "Nvidia Vera",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 11,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达 Vera",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845267",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Vera takes things further in 2026 for the Rubin platform, doubling C2C bandwidth to 1.8TB/s and doubling the memory width with eight 128bit wide SOCAMM 192GB modules for 1.5TB of memory at 1.2TB/s of bandwidth. The mesh design remains, with a 7x13 grid that houses 91 cores, with up to 88 active. L3 cache increases to 162MB. NVIDIA now disaggregates the perimeter memory and I/O regions into separate chiplets, totaling 6 dies packaged with CoWoS-R (1 reticle-sized compute die on 3nm with NVLink-C2C, 4 LPDDR5 memory dies and 1 PCIe6/CXL3 IO die).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0192",
+      "parent_block_index": 192,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Vera takes things further in 2026 for the Rubin platform, doubling C2C bandwidth to 1.8TB/s and doubling the memory width with eight 128bit wide SOCAMM 192GB modules for 1.5TB of memory at 1.2TB/s of bandwidth. The mesh design remains, with a 7x13 grid that houses 91 cores, with up to 88 active. L3 cache increases to 162MB. NVIDIA now disaggregates the perimeter memory and I/O regions into separate chiplets, totaling 6 dies packaged with CoWoS-R (1 reticle-sized compute die on 3nm with NVLink-C2C, 4 LPDDR5 memory dies and 1 PCIe6/CXL3 IO die).",
+      "parent_block_plain_text": "Vera takes things further in 2026 for the Rubin platform, doubling C2C bandwidth to 1.8TB/s and doubling the memory width with eight 128bit wide SOCAMM 192GB modules for 1.5TB of memory at 1.2TB/s of bandwidth. The mesh design remains, with a 7x13 grid that houses 91 cores, with up to 88 active. L3 cache increases to 162MB. NVIDIA now disaggregates the perimeter memory and I/O regions into separate chiplets, totaling 6 dies packaged with CoWoS-R (1 reticle-sized compute die on 3nm with NVLink-C2C, 4 LPDDR5 memory dies and 1 PCIe6/CXL3 IO die).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 549,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026 年，Vera 将在 Rubin 平台上更进一步。其 C2C 带宽翻倍至 1.8TB/s；内存位宽同样翻倍，配备 8 个 128 位宽的 SOCAMM 192GB 模块，提供 1.5TB 内存容量和 1.2TB/s 带宽。网格网络设计得以保留，7x13 的网格容纳了 91 个核心，其中最多激活 88 个。L3缓存增加至 162MB。英伟达现将外围内存和 I/O 区域解耦为独立的芯粒（chiplet），共计 6 颗裸片采用 CoWoS-R 封装（包括 1 颗采用 3nm 工艺并配备 NVLink-C2C 的光罩极限尺寸（Reticle-sized）计算裸片、4 颗 LPDDR5 内存裸片以及 1 颗 PCIe6/CXL3 IO 裸片）。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845299",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0193",
+      "parent_block_index": 193,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845319",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Vera Rubin NVLink C2C Diagram. Source: NVIDIA",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera Rubin NVLink C2C Diagram. Source: NVIDIA",
+          "start": 0,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0194",
+      "parent_block_index": 194,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Vera Rubin NVLink C2C Diagram. Source: NVIDIA*",
+      "parent_block_plain_text": "Vera Rubin NVLink C2C Diagram. Source: NVIDIA",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera Rubin NVLink C2C Diagram. Source: NVIDIA",
+          "start": 0,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 45,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Vera Rubin NVLink C2C 架构图。来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845371",
+          "tokenized_text": "[[[EM_1|Vera Rubin NVLink C2C 架构图。来源：英伟达]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0195",
+      "parent_block_index": 195,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845389",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Vera CPU Specifications. Source: NVIDIA",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera CPU Specifications. Source: NVIDIA",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0196",
+      "parent_block_index": 196,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Vera CPU Specifications. Source: NVIDIA*",
+      "parent_block_plain_text": "Vera CPU Specifications. Source: NVIDIA",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera CPU Specifications. Source: NVIDIA",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 39,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Vera CPU 规格。来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845433",
+          "tokenized_text": "[[[EM_1|Vera CPU 规格。来源：英伟达]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0197",
+      "parent_block_index": 197,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845456",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Vera Floorplan Annotated. Source: NVIDIA, SemiAnalysis Estimates",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera Floorplan Annotated. Source: NVIDIA, SemiAnalysis Estimates",
+          "start": 0,
+          "end": 64,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0198",
+      "parent_block_index": 198,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Vera Floorplan Annotated. Source: NVIDIA, SemiAnalysis Estimates*",
+      "parent_block_plain_text": "Vera Floorplan Annotated. Source: NVIDIA, SemiAnalysis Estimates",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Vera Floorplan Annotated. Source: NVIDIA, SemiAnalysis Estimates",
+          "start": 0,
+          "end": 64,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 64,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Vera 物理布图注释版。来源：英伟达，SemiAnalysis 测算",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845502",
+          "tokenized_text": "[[[EM_1|Vera 物理布图注释版。来源：英伟达，SemiAnalysis 测算]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Perhaps burned by the performance bottlenecks of ARM’s Neoverse cores, NVIDIA has brought back their custom ARM core design team with a new Olympus core that supports SMT, enabling 88 cores with 176 threads. The last NVIDIA custom core was 8 years ago in the Tegra Xavier SoC with 10-wide Carmel cores. The ARMv9.2 Olympus core increases the width of the floating point unit to 6x 128b-wide ports vs 4 on Neoverse V2, now supporting ARM’s SVE2 FP8 operations. 2MB of private L2 cache supports each core, doubled from Grace. In total, Nvidia claims a 2x performance improvement going to Vera.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0199",
+      "parent_block_index": 199,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Perhaps burned by the performance bottlenecks of ARM’s Neoverse cores, NVIDIA has brought back their custom ARM core design team with a new Olympus core that supports SMT, enabling 88 cores with 176 threads. The last NVIDIA custom core was 8 years ago in the Tegra Xavier SoC with 10-wide Carmel cores. The ARMv9.2 Olympus core increases the width of the floating point unit to 6x 128b-wide ports vs 4 on Neoverse V2, now supporting ARM’s SVE2 FP8 operations. 2MB of private L2 cache supports each core, doubled from Grace. In total, Nvidia claims a 2x performance improvement going to Vera.",
+      "parent_block_plain_text": "Perhaps burned by the performance bottlenecks of ARM’s Neoverse cores, NVIDIA has brought back their custom ARM core design team with a new Olympus core that supports SMT, enabling 88 cores with 176 threads. The last NVIDIA custom core was 8 years ago in the Tegra Xavier SoC with 10-wide Carmel cores. The ARMv9.2 Olympus core increases the width of the floating point unit to 6x 128b-wide ports vs 4 on Neoverse V2, now supporting ARM’s SVE2 FP8 operations. 2MB of private L2 cache supports each core, doubled from Grace. In total, Nvidia claims a 2x performance improvement going to Vera.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 591,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "或许是吃尽了 ARM Neoverse 内核性能瓶颈的苦头，英伟达重新召回了其定制化 ARM 内核设计团队，推出了支持 SMT 的全新 Olympus 内核，实现了 88 核 176 线程的配置。英伟达上一款定制内核还要追溯到 8 年前，即搭载 10 宽发射 Carmel 内核的 Tegra Xavier SoC。基于 ARMv9.2 架构的 Olympus 内核将浮点单元宽度从 Neoverse V2 的 4 个端口提升至 6 个 128b 宽端口，现已支持 ARM 的 SVE2 FP8 运算。每个内核配备 2MB 私有 L2缓存，容量较 Grace 翻倍。综合来看，英伟达宣称升级至 Vera 后整体性能实现了 2 倍提升。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:27:39.845515",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中多次出现中英文之间缺少空格的情况，如“L2缓存”、“L3缓存”。根据中文排版规范，英文字母/数字与中文字符之间应保留一个半角空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“instruction churn”直译为“指令搅动”。在计算机体系结构中，“churn”通常指缓存或缓冲区中内容的频繁替换与失效，更地道的术语翻译是“抖动”或“频繁替换”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

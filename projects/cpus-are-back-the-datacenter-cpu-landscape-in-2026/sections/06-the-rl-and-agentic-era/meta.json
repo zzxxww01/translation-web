@@ -1,0 +1,1030 @@
+{
+  "section_id": "06-the-rl-and-agentic-era",
+  "title": "The RL and Agentic Era",
+  "title_translation": "强化学习与智能体时代",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0048",
+      "parent_block_index": 48,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188136",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Microsoft “Fairwater” GPU and CPU buildings. Source: Google Earth",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft “Fairwater” GPU and CPU buildings. Source: Google Earth",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0049",
+      "parent_block_index": 49,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft “Fairwater” GPU and CPU buildings. Source: Google Earth*",
+      "parent_block_plain_text": "Microsoft “Fairwater” GPU and CPU buildings. Source: Google Earth",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft “Fairwater” GPU and CPU buildings. Source: Google Earth",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 65,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软 Fairwater GPU 与 CPU 数据中心建筑。来源：Google Earth",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188283",
+          "tokenized_text": "[[[EM_1|微软 Fairwater GPU 与 CPU 数据中心建筑。来源：Google Earth]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Now, CPU usage is accelerating again to support AI training and inference beyond head nodes. We can already see evidence of this in Microsoft’s “Fairwater” datacenters for OpenAI. Here, a 48MW CPU and storage building supports the main 295MW GPU cluster. This means tens of thousands of CPUs are now needed to process and manage the Petabytes of data generated by the GPUs, a use case that wouldn’t have otherwise been required without AI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0050",
+      "parent_block_index": 50,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now, CPU usage is accelerating again to support AI training and inference beyond head nodes. We can already see evidence of this in Microsoft’s “Fairwater” datacenters for OpenAI. Here, a 48MW CPU and storage building supports the main 295MW GPU cluster. This means tens of thousands of CPUs are now needed to process and manage the Petabytes of data generated by the GPUs, a use case that wouldn’t have otherwise been required without AI.",
+      "parent_block_plain_text": "Now, CPU usage is accelerating again to support AI training and inference beyond head nodes. We can already see evidence of this in Microsoft’s “Fairwater” datacenters for OpenAI. Here, a 48MW CPU and storage building supports the main 295MW GPU cluster. This means tens of thousands of CPUs are now needed to process and manage the Petabytes of data generated by the GPUs, a use case that wouldn’t have otherwise been required without AI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 439,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如今，为支持头节点之外的AI训练与推理，CPU的使用量再次激增。微软为 OpenAI 建设的 Fairwater 数据中心便是明证。在这里，一栋48兆瓦（MW）的 CPU 与存储建筑支撑着295兆瓦的主GPU集群（GPU cluster）。这意味着现在需要数以万计的 CPU 来处理和管理由 GPU 产生的 PB 级数据，如果没有 AI，这种庞大需求根本无从谈起。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188322",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The evolution of AI computing paradigms has caused this increase in CPU usage intensity. In pretraining and model fine-tuning, CPUs are used to store, shard and index data to be fed to the GPU clusters for matrix multiplication. CPUs are also used for image and video decode in multimodal models, although more fixed function media acceleration is being integrated directly into GPUs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0051",
+      "parent_block_index": 51,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The evolution of AI computing paradigms has caused this increase in CPU usage intensity. In pretraining and model fine-tuning, CPUs are used to store, shard and index data to be fed to the GPU clusters for matrix multiplication. CPUs are also used for image and video decode in multimodal models, although more fixed function media acceleration is being integrated directly into GPUs.",
+      "parent_block_plain_text": "The evolution of AI computing paradigms has caused this increase in CPU usage intensity. In pretraining and model fine-tuning, CPUs are used to store, shard and index data to be fed to the GPU clusters for matrix multiplication. CPUs are also used for image and video decode in multimodal models, although more fixed function media acceleration is being integrated directly into GPUs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 384,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AI 计算范式的演进直接推高了 CPU 的使用强度。在预训练与模型微调阶段，CPU 负责对数据进行存储、分片和索引，随后将其输送至 GPU 集群进行矩阵乘法运算。在多模态模型中，CPU 还被用于图像和视频解码，尽管目前已有越来越多的固定功能媒体加速模块被直接集成到 GPU 中。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188350",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0052",
+      "parent_block_index": 52,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188382",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Reinforcement Learning Training Loop. CPUs used in RL Environment (Green). Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Reinforcement Learning Training Loop. CPUs used in RL Environment (Green). Source: SemiAnalysis",
+          "start": 0,
+          "end": 95,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0053",
+      "parent_block_index": 53,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Reinforcement Learning Training Loop. CPUs used in RL Environment (Green). Source: SemiAnalysis*",
+      "parent_block_plain_text": "Reinforcement Learning Training Loop. CPUs used in RL Environment (Green). Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Reinforcement Learning Training Loop. CPUs used in RL Environment (Green). Source: SemiAnalysis",
+          "start": 0,
+          "end": 95,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 95,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "强化学习 (RL) 训练循环。RL环境（绿色部分）中使用的 CPU。来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188446",
+          "tokenized_text": "[[[EM_1|强化学习 (RL) 训练循环。RL环境（绿色部分）中使用的 CPU。来源：SemiAnalysis]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Use of Reinforcement Learning techniques for model improvement increases CPU demand further. From our deep dive on Reinforcement Learning, we see that in an RL training loop, the “RL Environment” needs to execute the actions generated by the model and calculate the appropriate reward. To do this in areas such as coding and mathematics, lots of CPUs are needed in parallel to perform code compilation, verification, interpretation, and tool use. CPUs are also heavily involved in complex physics simulations and verifying generated synthetic data at high precision. The growing complexity of RL environments needed to scale models further thus necessitates large high-performance CPU clusters located close to the main GPU clusters to keep them busy and minimize GPU idle time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Use of Reinforcement Learning techniques for model improvement increases CPU demand further. From our deep dive on Reinforcement Learning, we see that in an RL training loop, the “RL Environment” needs to execute the actions generated by the model and calculate the appropriate reward. To do this in areas such as coding and mathematics, lots of CPUs are needed in parallel to perform code compilation, verification, interpretation, and tool use. CPUs are also heavily involved in complex physics simulations and verifying generated synthetic data at high precision. The growing complexity of RL environments needed to scale models further thus necessitates large high-performance CPU clusters located close to the main GPU clusters to keep them busy and minimize GPU idle time. This increasing reliance on RL and CPUs in the training loop is creating a new bottleneck, as AI accelerators are improving in Performance per Watt at a far greater rate than CPUs, meaning a future GPU generation such as Rubin may require an even higher ratio of CPU to GPU power than the 1:6 ratio seen in Fairwater above.",
+      "parent_block_plain_text": "Use of Reinforcement Learning techniques for model improvement increases CPU demand further. From our deep dive on Reinforcement Learning, we see that in an RL training loop, the “RL Environment” needs to execute the actions generated by the model and calculate the appropriate reward. To do this in areas such as coding and mathematics, lots of CPUs are needed in parallel to perform code compilation, verification, interpretation, and tool use. CPUs are also heavily involved in complex physics simulations and verifying generated synthetic data at high precision. The growing complexity of RL environments needed to scale models further thus necessitates large high-performance CPU clusters located close to the main GPU clusters to keep them busy and minimize GPU idle time. This increasing reliance on RL and CPUs in the training loop is creating a new bottleneck, as AI accelerators are improving in Performance per Watt at a far greater rate than CPUs, meaning a future GPU generation such as Rubin may require an even higher ratio of CPU to GPU power than the 1:6 ratio seen in Fairwater above.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 778,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "采用强化学习 (RL) 技术来改进模型，进一步推高了 CPU 需求。正如我们在强化学习 (RL) 深度分析中所指出的，在 RL 训练循环中，“RL环境”需要执行模型生成的动作并计算相应的奖励。在编程和数学等领域，这要求大量 CPU 并行工作，以完成代码编译、验证、解释及工具调用。此外，CPU 还深度参与复杂的物理模拟，并对生成的合成数据进行高精度验证。为进一步扩展模型规模，RL环境日益复杂。这就要求在主 GPU 集群附近部署大型高性能 CPU 集群，以确保 GPU 满载运行，最大限度减少 GPU 空闲时间。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188471",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "This increasing reliance on RL and CPUs in the training loop is creating a new bottleneck, as AI accelerators are improving in Performance per Watt at a far greater rate than CPUs, meaning a future GPU generation such as Rubin may require an even higher ratio of CPU to GPU power than the 1:6 ratio seen in Fairwater above.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Use of Reinforcement Learning techniques for model improvement increases CPU demand further. From our deep dive on Reinforcement Learning, we see that in an RL training loop, the “RL Environment” needs to execute the actions generated by the model and calculate the appropriate reward. To do this in areas such as coding and mathematics, lots of CPUs are needed in parallel to perform code compilation, verification, interpretation, and tool use. CPUs are also heavily involved in complex physics simulations and verifying generated synthetic data at high precision. The growing complexity of RL environments needed to scale models further thus necessitates large high-performance CPU clusters located close to the main GPU clusters to keep them busy and minimize GPU idle time. This increasing reliance on RL and CPUs in the training loop is creating a new bottleneck, as AI accelerators are improving in Performance per Watt at a far greater rate than CPUs, meaning a future GPU generation such as Rubin may require an even higher ratio of CPU to GPU power than the 1:6 ratio seen in Fairwater above.",
+      "parent_block_plain_text": "Use of Reinforcement Learning techniques for model improvement increases CPU demand further. From our deep dive on Reinforcement Learning, we see that in an RL training loop, the “RL Environment” needs to execute the actions generated by the model and calculate the appropriate reward. To do this in areas such as coding and mathematics, lots of CPUs are needed in parallel to perform code compilation, verification, interpretation, and tool use. CPUs are also heavily involved in complex physics simulations and verifying generated synthetic data at high precision. The growing complexity of RL environments needed to scale models further thus necessitates large high-performance CPU clusters located close to the main GPU clusters to keep them busy and minimize GPU idle time. This increasing reliance on RL and CPUs in the training loop is creating a new bottleneck, as AI accelerators are improving in Performance per Watt at a far greater rate than CPUs, meaning a future GPU generation such as Rubin may require an even higher ratio of CPU to GPU power than the 1:6 ratio seen in Fairwater above.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 779,
+      "segment_end": 1102,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "训练循环对 RL 和 CPU 的依赖愈发显著，正在催生新的瓶颈。由于 AI 加速器的每瓦性能提升速度远超 CPU，这意味着诸如 Rubin 等下一代 GPU，其所需的 CPU 与 GPU 功耗配比，可能会进一步攀升，甚至打破上文 Fairwater 数据中心中 1:6 的比例。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188494",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data",
+          "start": 0,
+          "end": 82,
+          "href": "https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0055",
+      "parent_block_index": 55,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data](https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data) - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "parent_block_plain_text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data",
+          "start": 0,
+          "end": 82,
+          "href": "https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 126,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "扩展强化学习：环境、奖励作弊、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188555",
+          "tokenized_text": "[[[LINK_1|扩展强化学习：环境、奖励作弊、智能体、扩展数据]]] - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "On the inference side, the rise of Retrieval Augmented Generative (RAG) models that search and use the internet along with agentic models that invoke tools and query databases has significantly increased the need for general-purpose CPU compute to service these requests. With the ability to send out API calls to multiple sources, each agent can essentially use the internet far more intensively than a human can by doing simple Google searches. AWS and Azure are doing massive CPU buildouts of their own Graviton and Cobalt lines of CPUs as well as purchasing even more x86 general purpose servers for this stepfold increase in internet traffic.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0056",
+      "parent_block_index": 56,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the inference side, the rise of Retrieval Augmented Generative (RAG) models that search and use the internet along with agentic models that invoke tools and query databases has significantly increased the need for general-purpose CPU compute to service these requests. With the ability to send out API calls to multiple sources, each agent can essentially use the internet far more intensively than a human can by doing simple Google searches. AWS and Azure are doing massive CPU buildouts of their own Graviton and Cobalt lines of CPUs as well as purchasing even more x86 general purpose servers for this stepfold increase in internet traffic.",
+      "parent_block_plain_text": "On the inference side, the rise of Retrieval Augmented Generative (RAG) models that search and use the internet along with agentic models that invoke tools and query databases has significantly increased the need for general-purpose CPU compute to service these requests. With the ability to send out API calls to multiple sources, each agent can essentially use the internet far more intensively than a human can by doing simple Google searches. AWS and Azure are doing massive CPU buildouts of their own Graviton and Cobalt lines of CPUs as well as purchasing even more x86 general purpose servers for this stepfold increase in internet traffic.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 647,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在推理端，能够搜索并利用互联网的检索增强生成 (RAG) 模型日益兴起，加之能够调用工具和查询数据库的智能体模型不断涌现，双重驱动下，处理这些请求所需的通用 CPU 算力需求大幅飙升。由于具备向多个数据源发送 API 调用的能力，每个智能体对互联网的使用强度，本质上远超人类进行简单的谷歌搜索。为应对互联网流量的阶梯式跃升，AWS 和 Azure 正在大规模部署其自研的 Graviton 和 Cobalt 系列 CPU，同时采购更多的商用 x86 通用服务器。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188578",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "As we go through 2026, the demands on datacenter CPU and DRAM are only getting stronger. Frontier AI labs are running out of CPUs for their RL Training needs and are scrambling for CPU allocation by competing directly with the cloud providers for commodity x86 CPU servers. Intel, facing the unexpected depletion of their CPU inventory, is looking to raise prices across their Xeon line while they ramp additional tools to shore up CPU production. AMD has been increasing their supply capability to grow and take share in a server CPU TAM it believes will grow in the “strong double digits” in 2026. We will discuss how the CPU landscape evolves beyond 2026 for our subscribers below.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0057",
+      "parent_block_index": 57,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we go through 2026, the demands on datacenter CPU and DRAM are only getting stronger. Frontier AI labs are running out of CPUs for their RL Training needs and are scrambling for CPU allocation by competing directly with the cloud providers for commodity x86 CPU servers. Intel, facing the unexpected depletion of their CPU inventory, is looking to raise prices across their Xeon line while they ramp additional tools to shore up CPU production. AMD has been increasing their supply capability to grow and take share in a server CPU TAM it believes will grow in the “strong double digits” in 2026. We will discuss how the CPU landscape evolves beyond 2026 for our subscribers below.",
+      "parent_block_plain_text": "As we go through 2026, the demands on datacenter CPU and DRAM are only getting stronger. Frontier AI labs are running out of CPUs for their RL Training needs and are scrambling for CPU allocation by competing directly with the cloud providers for commodity x86 CPU servers. Intel, facing the unexpected depletion of their CPU inventory, is looking to raise prices across their Xeon line while they ramp additional tools to shore up CPU production. AMD has been increasing their supply capability to grow and take share in a server CPU TAM it believes will grow in the “strong double digits” in 2026. We will discuss how the CPU landscape evolves beyond 2026 for our subscribers below.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 684,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "步入 2026 年，数据中心对 CPU 和 DRAM 的需求只会愈发强劲。前沿 AI 实验室的 CPU 已经无法满足其 RL 训练需求，正直接与云服务提供商抢夺商用 x86 CPU 服务器，疯狂争夺 CPU 供货配额。面对 CPU 库存意外告罄的局面，英特尔正计划全面上调其至强系列的价格，同时增加生产设备以提振 CPU 产能。AMD 则一直在提升供货能力，旨在实现增长并抢占服务器 CPU 总潜在市场 (TAM) 份额，其笃定该市场在 2026 年将实现“强劲的双位数”增长。接下来，我们将为订阅者深入探讨 2026 年之后 CPU 市场格局的演变。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:52:11.188603",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+          "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+          "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the current market crisis where Reinforcement Learning and Agentic AI are exhausting CPU supplies, altering vendor pricing and supply chain strategies.",
+          "relation_to_previous": "Moves from the general AI accelerator boom to the acute, CPU-intensive bottlenecks caused by the RL Training Loop.",
+          "relation_to_next": "Pauses the market/historical timeline to dive into the technical interconnect architectures needed to solve these exact RL bottlenecks.",
+          "key_points": [
+            "Reinforcement Learning training loops require massive CPU resources, causing Frontier AI labs to exhaust x86 CPU supplies.",
+            "AI labs are now competing directly with hyperscalers for commodity servers, allowing Intel to raise prices and forcing AMD to rapidly ramp supply."
+          ],
+          "translation_notes": [
+            "Translate 'Frontier AI labs' as '前沿AI实验室' and 'Agentic era' as '智能体时代'.",
+            "Ensure 'commodity x86 CPU servers' is translated to reflect standard, off-the-shelf hardware (商用/通用x86 CPU服务器).",
+            "Maintain the urgency and market tension in the phrasing of supply shortages and price hikes."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation|readability",
+            "description": "“主GPU集群”以及数字与单位之间缺少中英文空格。此外，“GPU 集群”已经是极其基础的行业术语，无需再用英文括号加注“(GPU cluster)”，否则显得冗余。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "“RL环境”缺少中英文之间的空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

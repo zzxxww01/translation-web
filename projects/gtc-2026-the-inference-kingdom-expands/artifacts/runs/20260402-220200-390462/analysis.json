@@ -1,0 +1,1034 @@
+{
+  "theme": "An in-depth technical and supply chain analysis of Nvidia's GTC 2026 announcements, focusing on the integration of Groq's LPU via Attention FFN Disaggregation (AFD), the evolution of rack architectures (Kyber, LPX), and the roadmap for Co-Packaged Optics (CPO) in massive AI clusters.",
+  "key_arguments": [
+    "Nvidia's de facto acquisition of Groq enables rapid LPU integration into the Vera Rubin stack to accelerate inference via Attention FFN Disaggregation (AFD).",
+    "Groq's LP30 utilizes large on-chip SRAM for deterministic, stateless FFN computations, perfectly complementing GPUs which are better suited for stateful attention workloads.",
+    "Nvidia's networking roadmap delays in-rack optical interconnects in favor of pushing copper limits, deploying CPO primarily for cross-rack scale-up in massive clusters like NVL1152.",
+    "Evolving rack architectures (Kyber, STX) and new mid-board optical designs are reshaping the supply chain, shifting value away from traditional pluggable transceivers while benefiting connector vendors."
+  ],
+  "structure_summary": "The article flows from a high-level GTC 2026 overview to a deep dive into Groq's LPU architecture and its symbiotic integration with GPUs (AFD). It then zooms out to physical infrastructure, detailing the LPX rack, internal/external networking, and Nvidia's broader CPO roadmap. Finally, it covers storage architectures (STX/CMX) and concludes with specific supply chain impacts.",
+  "terminology": [
+    {
+      "term": "Attention FFN Disaggregation (AFD)",
+      "context_meaning": "The separation of attention mechanisms and feed-forward networks into different hardware (GPUs and LPUs) to optimize inference.",
+      "translation": "注意力与前馈网络解聚合",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "A core architectural concept introduced in this article. Needs clear Chinese translation followed by the acronym."
+    },
+    {
+      "term": "Co-Packaged Optics (CPO)",
+      "context_meaning": "Integration of optical communication components directly alongside the computing chip or switch ASIC.",
+      "translation": "共封装光学",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Standard industry term; crucial for understanding Nvidia's networking roadmap."
+    },
+    {
+      "term": "World size",
+      "context_meaning": "The total number of GPUs/accelerators acting together in a single coordinated cluster for training or inference.",
+      "translation": "集群规模",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Directly translating to '世界大小' is a critical mistranslation in AI distributed computing. Must be translated as '集群规模' or '并行规模'."
+    },
+    {
+      "term": "Belly-to-belly",
+      "context_meaning": "Mounting components directly opposite each other on both sides of a PCB.",
+      "translation": "正反面对贴安装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Literal translation '腹对腹' or '肚皮贴肚皮' is unprofessional. Needs precise hardware layout terminology."
+    },
+    {
+      "term": "Pluggables",
+      "context_meaning": "Pluggable optical transceivers used in networking.",
+      "translation": "可插拔光模块",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Common shorthand in English hardware analysis, must be expanded to its full technical meaning in Chinese."
+    },
+    {
+      "term": "Tapeout",
+      "context_meaning": "The final result of the design process for integrated circuits before they are sent for manufacturing.",
+      "translation": "流片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard semiconductor terminology."
+    },
+    {
+      "term": "Reticle size",
+      "context_meaning": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+      "translation": "掩膜版尺寸",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Domain-specific term; 'reticle limit' is a major physical constraint in modern chip design."
+    },
+    {
+      "term": "Midboard Optical Module (MBOM)",
+      "context_meaning": "An optical module placed directly on the motherboard rather than at the edge/faceplate.",
+      "translation": "板中光学模块",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Emerging hardware term related to Nvidia's push against traditional pluggables."
+    },
+    {
+      "term": "LPU",
+      "context_meaning": "Language Processing Unit, Groq's proprietary chip architecture.",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "Proprietary brand/architecture name, widely recognized in its English acronym form."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, highly technical, analytical, and objective.",
+    "target_audience": "AI hardware engineers, semiconductor industry professionals, supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-industry Chinese, utilizing standard mainland semiconductor and networking jargon, favoring concise and logical sentence structures over literal translations."
+  },
+  "challenges": [
+    {
+      "location": "LPU Network (Paragraph 1 & 2)",
+      "issue": "Complex networking bandwidth calculations and routing paths (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+      "suggestion": "Maintain the exact mathematical formulas. Break down the surrounding explanatory sentences into short, sequential Chinese clauses to ensure the logic of the data flow is crystal clear."
+    },
+    {
+      "location": "GTC 2026 Supply Chain Implications (Mid-board Optics section)",
+      "issue": "Detailed physical descriptions of hardware layouts (e.g., 'MBOM which then connects to the PCB via a land grid array (LGA) socket').",
+      "suggestion": "Ensure precise mechanical and electrical engineering terminology is used. For example, use '平面网格阵列 (LGA) 插座' and '前面板 (faceplate)'."
+    }
+  ],
+  "guidelines": [
+    "Maintain strict accuracy for semiconductor and AI hardware terminology. Use industry-standard terms such as '流片' for tapeout, '掩膜版尺寸' for reticle size, and '串行器/解串器' for SerDes.",
+    "For AI networking and distributed systems, accurately translate 'world size' as '集群规模' or '并行规模', never as '世界大小'. Expand shorthand like 'pluggables' to '可插拔光模块'.",
+    "Restructure complex, modifier-heavy English sentences—especially those detailing hardware specs, networking topologies, and bandwidth calculations—into shorter, sequential Chinese clauses to ensure native paragraph flow.",
+    "When introducing proprietary acronyms (e.g., AFD, CPO, MBOM), use the format 'Chinese Translation (English Acronym)' on the first occurrence, and use the acronym exclusively thereafter.",
+    "Pay close attention to hardware physical descriptions. Translate spatial idioms like 'belly-to-belly' as 'PCB正反面对贴安装' to reflect actual electronic manufacturing practices.",
+    "Ensure the tone remains objective and analytical, reflecting a deep insider understanding of the supply chain and architectural trade-offs without marketing fluff.",
+    "The article title translation must preserve all semantic components of the original title. Do not drop subject phrases even if the subtitle seems more keyword-rich."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Sets the agenda by outlining the key unanswered questions from GTC 2026 that the article will resolve, serving as an executive summary.",
+      "relation_to_previous": "N/A - Opening section.",
+      "relation_to_next": "Transitions directly into the first major topic promised in the intro: the Groq LPU integration.",
+      "key_points": [
+        "The article will cover the LPX rack, LP30 chip, and Attention FFN Disaggregation (AFD).",
+        "It will detail rack architectures (NVL144, NVL576, NVL1152) and the Kyber rack updates.",
+        "It will explain Nvidia's CPO roadmap, Vera ETL256, and storage architectures (CMX & STX)."
+      ],
+      "translation_notes": [
+        "Ensure highly specific technical acronyms (AFD, CPO, ETL256, CMX, STX) are either kept in English or paired with standard Chinese industry terms on first use.",
+        "Maintain an authoritative, analytical tone appropriate for senior hardware engineers and investors."
+      ]
+    },
+    "01-groq": {
+      "role_in_article": "Provides the business and strategic context for Nvidia's integration of Groq's technology, explaining the regulatory maneuvering and economic rationale.",
+      "relation_to_previous": "Follows the intro's promise to explain the Groq integration by starting with the corporate strategy behind it.",
+      "relation_to_next": "Sets up the deep dive into the actual architecture of the LPU chip mentioned here.",
+      "key_points": [
+        "Nvidia's $20B payment to Groq functions as an acquisition but is structured as a licensing/hiring deal to bypass regulatory scrutiny.",
+        "The standalone Groq LPU is uneconomical for token serving at scale, but its speed commands a premium.",
+        "Nvidia is rapidly integrating the LPU into the Vera Rubin inference stack."
+      ],
+      "translation_notes": [
+        "Carefully translate 'strictly speaking... functions almost as an acquisition' to reflect the legal and regulatory nuance accurately.",
+        "Avoid translating 'serve tokens' as physical serving; use standard AI inference terminology (e.g., 生成/处理 token)."
+      ]
+    },
+    "02-lpu-chip": {
+      "role_in_article": "Details the architectural history, design philosophy, and past failures of the Groq LPU to contextualize the current generation.",
+      "relation_to_previous": "Shifts from the business strategy of the Groq deal to the foundational hardware engineering of the LPU.",
+      "relation_to_next": "Narrows the architectural focus specifically to the SRAM memory hierarchy, which dictates the LPU's performance profile.",
+      "key_points": [
+        "Groq uses a slice-based architecture relying on single-level scratchpad SRAM instead of traditional caches.",
+        "LPU 1 was built on a mature 14nm node to prove the architecture.",
+        "LPU 2 failed due to 112G SerDes issues, leading to Nvidia productizing LPU 3."
+      ],
+      "translation_notes": [
+        "Translate 'streaming registers' (流寄存器) and 'scratchpad SRAM' (暂存器 SRAM) precisely.",
+        "Accurately convey the narrative of the 'tape out' (流片) and the subsequent SerDes malfunction."
+      ]
+    },
+    "03-sram-and-memory-hierarchy": {
+      "role_in_article": "Explains the fundamental hardware tradeoff of SRAM (speed vs. density) that necessitates the specific GPU/LPU division of labor.",
+      "relation_to_previous": "Builds on the previous section's mention of scratchpad SRAM by explaining its physical and economic characteristics.",
+      "relation_to_next": "Provides the physical constraints that justify the software/hardware split (AFD) detailed in the next section.",
+      "key_points": [
+        "SRAM provides extremely low latency and high bandwidth.",
+        "The tradeoff for this speed is low density and high cost."
+      ],
+      "translation_notes": [
+        "Keep memory hierarchy terms standard (内存层级, 延迟, 带宽, 密度).",
+        "Ensure the contrast between performance benefits and density/cost drawbacks is sharply articulated."
+      ]
+    },
+    "04-gpu-and-lpu-integration-atten": {
+      "role_in_article": "Explains the core technical thesis of the article: how Attention FFN Disaggregation (AFD) optimally utilizes both GPU and LPU architectures.",
+      "relation_to_previous": "Applies the SRAM constraints from the previous section to the LLM inference workload, explaining how tasks are divided.",
+      "relation_to_next": "Explores an alternative decoding method (Speculative Decoding) that contrasts with the AFD approach.",
+      "key_points": [
+        "Attention mechanisms are stateful due to dynamic KV cache loading, making them ideal for GPUs.",
+        "Feed Forward Networks (FFN) are stateless and deterministic, making them perfect for the SRAM-heavy LPU.",
+        "AFD disaggregates these two computations to maximize hardware efficiency."
+      ],
+      "translation_notes": [
+        "Ensure 'stateful' (有状态) and 'stateless' (无状态) are translated accurately in a compute/inference context.",
+        "Standardize the translation of 'Attention FFN Disaggregation' (注意力与前馈网络解耦/分离)."
+      ]
+    },
+    "05-speculative-decoding": {
+      "role_in_article": "Explores an alternative architectural use-case for LPUs (Draft models/MTP) and details the specific hardware requirements needed to support it.",
+      "relation_to_previous": "Contrasts with AFD by showing how stateful workloads *could* be forced onto LPUs using external memory.",
+      "relation_to_next": "Transitions from chip and algorithmic logic to the physical rack systems required to house these hardware setups.",
+      "key_points": [
+        "LPUs can accelerate speculative decoding via draft models or Multi-Token Prediction (MTP) layers.",
+        "Unlike stateless FFNs, draft models/MTP require dynamic KV cache and tens of gigabytes of memory.",
+        "To support this, LPUs access up to 256 GB of DDR5 via FPGAs on the LPX compute tray."
+      ],
+      "translation_notes": [
+        "Translate 'draft models' (草稿模型) and 'Multi-Token Prediction' (多 Token 预测) accurately.",
+        "Clearly distinguish between the memory footprint of FFNs (megabytes) versus MTP layers (gigabytes)."
+      ]
+    },
+    "06-lpx-rack-system": {
+      "role_in_article": "Describes the physical engineering, layout, and port configurations of the LPU-based rack.",
+      "relation_to_previous": "Moves from the chip and algorithmic level down to the physical infrastructure (rack/tray level) mentioned previously.",
+      "relation_to_next": "Sets up the explanation of how these physical trays and ports are wired together in the LPU Network section.",
+      "key_points": [
+        "The production LPX rack features 32 1U LPU compute trays with Spectrum-X switches.",
+        "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the all-to-all mesh.",
+        "Front panels feature OSFP cages for cross-rack C2C and ports for Spectrum-switches to connect LPUs and GPUs."
+      ],
+      "translation_notes": [
+        "Translate 'belly-to-belly' appropriately for hardware contexts (e.g., 双面贴装 or 背靠背贴装).",
+        "Ensure 'escape' in the context of networking cages (引出/输出) uses correct hardware routing terminology."
+      ]
+    },
+    "07-lpu-network": {
+      "role_in_article": "Details the bandwidth, topology, and physical connectors of the LPU network, both internally and externally.",
+      "relation_to_previous": "Explains the networking topology that plugs into the physical ports described in the LPX rack section.",
+      "relation_to_next": "Zooms out from local copper/LPU networking to Nvidia's broader optical networking (CPO) strategy.",
+      "key_points": [
+        "The network is divided into scale-up (C2C) and scale-out (Spectrum-X to GPUs).",
+        "Intra-rack C2C achieves 640TB/s scale-up bandwidth (using 112G line rates).",
+        "Inter-rack C2C uses OSFP cages with specific fan-out configurations (e.g., 4x100G lanes escaping 800G from multiple LPUs)."
+      ],
+      "translation_notes": [
+        "Strictly differentiate between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+        "Ensure the math logic (112Gbps/8) is translated clearly so the bit-to-byte conversion is obvious to the reader."
+      ]
+    },
+    "08-nvidias-cpo-roadmap": {
+      "role_in_article": "Analyzes Nvidia's strategic direction for Co-Packaged Optics (CPO) and its intended scale.",
+      "relation_to_previous": "Shifts the focus from LPU-specific networking to cluster-scale optical networking.",
+      "relation_to_next": "Connects the CPO roadmap to the specific rack architectures (Kyber) that will or will not utilize it.",
+      "key_points": [
+        "Nvidia's CPO roadmap was revealed at GTC 2026 and clarified in a subsequent financial analyst Q&A.",
+        "CPO will not be used for scale-up within the Rubin Ultra Kyber rack.",
+        "Instead, CPO is targeted at enabling larger world-size compute systems."
+      ],
+      "translation_notes": [
+        "Translate 'world size compute systems' to reflect distributed computing cluster sizes (e.g., 全局规模计算系统 or 超大规模集群).",
+        "Use standard terminology for 'Co-Packaged Optics' (CPO / 共封装光学)."
+      ]
+    },
+    "09-oberon-and-kyber-updates-larg": {
+      "role_in_article": "Details the physical evolution and densification of Nvidia's flagship GPU racks from prototypes to current designs.",
+      "relation_to_previous": "Applies the networking and CPO context to the physical GPU rack updates.",
+      "relation_to_next": "Moves from compute and networking racks to storage racks in the final technical section.",
+      "key_points": [
+        "Kyber rack architecture has evolved significantly since its GTC 2025 prototype.",
+        "Compute blades have densified to include 4x Rubin Ultra GPUs and 2x Vera CPUs each.",
+        "A single rack now contains 36 compute blades, totaling 144 GPUs."
+      ],
+      "translation_notes": [
+        "Maintain consistency in product naming (Oberon, Kyber, Rubin Ultra, Vera).",
+        "Translate 'densified' (密度提升/高密度化) appropriately for hardware form factors."
+      ]
+    },
+    "10-cmx-and-stx": {
+      "role_in_article": "Covers the storage infrastructure architectures and serves as the transition to the paywalled supply chain analysis.",
+      "relation_to_previous": "Completes the physical infrastructure tour by moving from compute (Kyber/LPX) to storage (STX/CMX).",
+      "relation_to_next": "Leads directly into the paywall, promising actionable supply chain and financial takeaways based on the preceding technical analysis.",
+      "key_points": [
+        "Nvidia introduced the STX reference storage rack architecture to complement VR compute racks.",
+        "STX specifies the exact integration of BF-4 DPUs, Vera CPUs, CX-9 NICs, and Spectrum-X switches.",
+        "The article transitions to a paywalled section detailing supply chain impacts and beneficiaries."
+      ],
+      "translation_notes": [
+        "Ensure 'Behind the paywall' (付费墙后/订阅内容) is translated clearly to manage reader expectations.",
+        "Keep component acronyms (CMX, STX, BF-4, CX-9) intact but contextualize them as storage/networking hardware if necessary."
+      ]
+    },
+    "11-feynman-nvl1152-networking-top": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-gtc-2026-supply-chain-implicat": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 13,
+  "paragraph_count": 211,
+  "word_count": 6836
+}

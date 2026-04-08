@@ -1,0 +1,61 @@
+{
+  "section_id": "09-procurement-and-cooling-vendor",
+  "new_terms": [
+    {
+      "term": "L2A (Liquid-to-Air)",
+      "suggested_translation": "液对气 / 液转风",
+      "context": "Refers to cooling systems that transfer heat from liquid to air, common in transitional cooling architectures.",
+      "confidence": 0.95
+    },
+    {
+      "term": "L2L (Liquid-to-Liquid)",
+      "suggested_translation": "液对液",
+      "context": "Refers to 100% liquid cooling systems where heat is transferred between two liquid loops.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FWS (Facility Water System)",
+      "suggested_translation": "设施水系统",
+      "context": "The primary water loop provided by the data center facility to remove heat from the TCS.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Dry cooler",
+      "suggested_translation": "干冷器",
+      "context": "A cooling device that uses ambient air to cool a fluid without water consumption, often used in chiller-less designs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Adiabatic tower",
+      "suggested_translation": "绝热冷却塔",
+      "context": "A cooling tower that uses evaporation to pre-cool ambient air, increasing efficiency in high-density cooling.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Chiller-less design",
+      "suggested_translation": "无冷水机组设计",
+      "context": "A data center architecture that eliminates traditional chillers in favor of dry coolers or adiabatic systems.",
+      "confidence": 0.9
+    },
+    {
+      "term": "White-space cooling",
+      "suggested_translation": "机房白区冷却",
+      "context": "Cooling infrastructure located within the IT equipment area (white space) of a data center.",
+      "confidence": 0.85
+    },
+    {
+      "term": "Content/MW",
+      "suggested_translation": "每兆瓦价值量",
+      "context": "A financial metric referring to the dollar value of specific components sold per megawatt of power capacity.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "cdu (cooling distribution unit)": "冷量分配单元",
+    "tcs (technology cooling system)": "技术冷却系统",
+    "manifold": "歧管",
+    "uqd / mqd": "快速接头 (QD)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:51:17.859314"
+}

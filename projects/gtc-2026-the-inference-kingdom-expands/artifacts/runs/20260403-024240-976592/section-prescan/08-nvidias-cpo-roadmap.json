@@ -1,0 +1,54 @@
+{
+  "section_id": "08-nvidias-cpo-roadmap",
+  "new_terms": [
+    {
+      "term": "Oberon",
+      "suggested_translation": "Oberon",
+      "context": "Nvidia's rack form factor for Rubin GPU systems, similar to the Blackwell NVL72 rack.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bi-di",
+      "suggested_translation": "双向",
+      "context": "Short for bidirectional, used in the context of electrical lane speed (e.g., 224Gbit/s bi-di).",
+      "confidence": 0.95
+    },
+    {
+      "term": "shoreline",
+      "suggested_translation": "岸线",
+      "context": "Refers to the physical edge of a chip die where I/O connections are made, critical for bandwidth density.",
+      "confidence": 0.9
+    },
+    {
+      "term": "POR (Plan of Record)",
+      "suggested_translation": "现定方案",
+      "context": "The currently approved and official technical plan or configuration for a product.",
+      "confidence": 0.95
+    },
+    {
+      "term": "optical engine",
+      "suggested_translation": "光引擎",
+      "context": "The component in a CPO system that converts electrical signals to optical signals.",
+      "confidence": 0.95
+    },
+    {
+      "term": "all-to-all topology",
+      "suggested_translation": "全对全拓扑",
+      "context": "A network configuration where every node or rack has a direct connection to every other node.",
+      "confidence": 0.9
+    },
+    {
+      "term": "all-copper",
+      "suggested_translation": "全铜",
+      "context": "Refers to interconnects using copper cables/traces instead of optical fibers.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "scale-up networking": "纵向扩展网络",
+    "world size": "集群并行规模",
+    "uni-di": "单向"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:56:41.835415"
+}

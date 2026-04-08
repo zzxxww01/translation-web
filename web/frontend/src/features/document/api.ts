@@ -20,6 +20,34 @@ export interface UpdateParagraphPayload {
   source_text?: string;
 }
 
+export interface ConsistencyIssue {
+  section_id: string;
+  paragraph_index: number;
+  issue_type: string;
+  description: string;
+  auto_fixable: boolean;
+  fix_suggestion?: string | null;
+}
+
+export interface LatestConsistencyReportResponse {
+  project_id: string;
+  report: {
+    is_consistent: boolean;
+    issue_count: number;
+    total_issues: number;
+    auto_fixable_count: number;
+    manual_review_count: number;
+    issues: ConsistencyIssue[];
+  } | null;
+  run_id?: string;
+  status?: string;
+  started_at?: string;
+  finished_at?: string;
+  artifacts_path?: string;
+  source?: string;
+  message?: string;
+}
+
 /**
  * 长文翻译 API
  */
@@ -147,6 +175,21 @@ export const documentApi = {
       undefined,
       { params: { format } }
     ),
+
+  getLatestConsistencyReport: (projectId: string) =>
+    apiClient.get<LatestConsistencyReportResponse>(
+      `/projects/${projectId}/consistency-report`
+    ),
+
+  runConsistencyReview: (projectId: string) =>
+    apiClient.post<{
+      is_consistent: boolean;
+      style_score: number;
+      issue_count: number;
+      auto_fixable_count: number;
+      manual_review_count: number;
+      issues: ConsistencyIssue[];
+    }>(`/projects/${projectId}/consistency-review`),
 
   /**
    * 批量翻译指定段落

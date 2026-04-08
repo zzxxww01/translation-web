@@ -1,0 +1,86 @@
+{
+  "section_id": "29-future-cpu-trends",
+  "new_terms": [
+    {
+      "term": "JBOM",
+      "suggested_translation": "JBOM (一堆HBM)",
+      "context": "JBOM “Just a Bunch of HBM” concepts",
+      "confidence": 0.95
+    },
+    {
+      "term": "APU",
+      "suggested_translation": "加速处理器 (APU)",
+      "context": "APU designs pioneered with AMD’s MI300A",
+      "confidence": 0.95
+    },
+    {
+      "term": "UCC",
+      "suggested_translation": "超高核心数 (UCC)",
+      "context": "Intel Diamond Rapids-AP UCC 16-channel",
+      "confidence": 0.9
+    },
+    {
+      "term": "LCC",
+      "suggested_translation": "低核心数 (LCC)",
+      "context": "Diamond Rapids-SP HCC and LCC 8-channel",
+      "confidence": 0.9
+    },
+    {
+      "term": "ATE",
+      "suggested_translation": "自动测试设备 (ATE)",
+      "context": "Testing costs include ATE/SLT and Burn-in cost",
+      "confidence": 0.95
+    },
+    {
+      "term": "SLT",
+      "suggested_translation": "系统级测试 (SLT)",
+      "context": "Testing costs include ATE/SLT and Burn-in cost",
+      "confidence": 0.95
+    },
+    {
+      "term": "TIM",
+      "suggested_translation": "热界面材料 (TIM)",
+      "context": "integrated passive devices, TIM and lid costs",
+      "confidence": 0.95
+    },
+    {
+      "term": "UPI",
+      "suggested_translation": "超级通道互联 (UPI)",
+      "context": "multi socket interconnect specifications (AMD XGMI and Intel UPI)",
+      "confidence": 0.95
+    },
+    {
+      "term": "XGMI",
+      "suggested_translation": "扩展全局内存互连 (XGMI)",
+      "context": "multi socket interconnect specifications (AMD XGMI and Intel UPI)",
+      "confidence": 0.9
+    },
+    {
+      "term": "Foveros Direct 3D",
+      "suggested_translation": "Foveros Direct 3D",
+      "context": "EMIB and Foveros Direct 3D for Intel Diamond Rapids",
+      "confidence": 0.95
+    },
+    {
+      "term": "Known Good Die",
+      "suggested_translation": "已知良好裸片 (KGD)",
+      "context": "number of die to-die links and Known Good Die testing",
+      "confidence": 0.95
+    },
+    {
+      "term": "Last Level Cache",
+      "suggested_translation": "末级缓存 (LLC)",
+      "context": "core and Last Level Cache placement",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "bom": "物料清单",
+    "ccd": "核心计算裸片 (CCD)",
+    "hcc": "高核心数 (HCC)",
+    "emib": "EMIB (嵌入式多芯片互连桥接)",
+    "numa": "非统一内存访问 (NUMA)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:54:57.352278"
+}

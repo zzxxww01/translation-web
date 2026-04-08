@@ -1,0 +1,29 @@
+{
+  "section_id": "02-future-work",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "other interesting technical work",
+        "description": "原文的 interesting（有趣）被译为“极具挑战”，虽然符合招聘语境，但略微改变了原意，建议保留原文轻松吸引人的基调。",
+        "why_it_matters": "过度拔高语气可能会失去原文极客式的亲切感和趣味性。",
+        "suggestion": "其他有趣的技术工作"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Send your resume to letsgo@semianalysis.com",
+        "description": "邮箱地址与前后的中文字符之间缺少空格，在中文排版中显得拥挤。",
+        "why_it_matters": "适当的中英文字符间距能提升整体阅读体验和专业感。",
+        "suggestion": "请将简历发送至 letsgo@semianalysis.com，并列出..."
+      }
+    ]
+  }
+}

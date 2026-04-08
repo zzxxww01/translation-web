@@ -1,0 +1,20 @@
+{
+  "section_id": "06-what-comes-next",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.5,
+    "accuracy_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 3,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "PJM’s attempt to introduce Non-Capacity-Backed Load (NCBL) rules... FERC’s Advance Notice of Proposed Rulemaking (ANOPR) on large loads...",
+        "description": "译文使用了“非容量保障负荷”和“拟议规则制定预告”，未遵循本章翻译注意点中明确要求的指定术语翻译（无容量支撑负荷、拟议规则制定的提前通知）。",
+        "why_it_matters": "未遵守Prompt中明确给出的“本章翻译注意点”强制术语约束，可能导致与上下游文档或特定行业语境脱节。",
+        "suggestion": "将“非容量保障负荷（NCBL）”修改为“无容量支撑负荷（NCBL）”；将“拟议规则制定预告（ANOPR）”修改为“拟议规则制定的提前通知（ANOPR）”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,847 @@
+{
+  "section_id": "03-blackwell-features",
+  "title": "Blackwell Features",
+  "title_translation": "Blackwell 特性",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "From Hopper to Blackwell, NVIDIA made several incremental improvements to the architecture and changes to the PTX abstractions for MMA-related instructions. We cover most of these in our article NVIDIA Tensor Core Evolution. The major notable changes are:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "NVIDIA Tensor Core Evolution",
+          "start": 195,
+          "end": 223,
+          "href": "https://newsletter.semianalysis.com/i/174558646/blackwell",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "p",
+      "parent_block_markdown": "From Hopper to Blackwell, NVIDIA made several incremental improvements to the architecture and changes to the PTX abstractions for MMA-related instructions. We cover most of these in our article [NVIDIA Tensor Core Evolution](https://newsletter.semianalysis.com/i/174558646/blackwell). The major notable changes are:",
+      "parent_block_plain_text": "From Hopper to Blackwell, NVIDIA made several incremental improvements to the architecture and changes to the PTX abstractions for MMA-related instructions. We cover most of these in our article NVIDIA Tensor Core Evolution. The major notable changes are:",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "NVIDIA Tensor Core Evolution",
+          "start": 195,
+          "end": 223,
+          "href": "https://newsletter.semianalysis.com/i/174558646/blackwell",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 255,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从 Hopper 到 Blackwell，英伟达对架构进行了多项渐进式改进，并调整了 MMA 相关指令的 PTX 抽象。我们在英伟达 Tensor Core 演进一文中详细探讨了大部分改进。主要显著变化如下：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658400",
+          "tokenized_text": "从 Hopper 到 Blackwell，英伟达对架构进行了多项渐进式改进，并调整了 MMA 相关指令的 PTX 抽象。我们在[[[LINK_1|英伟达 Tensor Core 演进]]]一文中详细探讨了大部分改进。主要显著变化如下：",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The introduction of tensor memory (TMEM) to hold MMA accumulators. Threads no longer implicitly own the results of MMA operations and instead, TMEM is explicitly managed at the MMA scope from software",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* The introduction of tensor memory (TMEM) to hold MMA accumulators. Threads no longer implicitly own the results of MMA operations and instead, TMEM is explicitly managed at the MMA scope from software",
+      "parent_block_plain_text": "The introduction of tensor memory (TMEM) to hold MMA accumulators. Threads no longer implicitly own the results of MMA operations and instead, TMEM is explicitly managed at the MMA scope from software",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 200,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "引入张量内存 (TMEM) 用于存储 MMA 累加器。线程不再隐式持有 MMA 运算结果，而是由软件在 MMA 作用域内对 TMEM 进行显式管理。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658437",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "tcgen05 operations are now issued by a single thread on behalf of the entire CTA, rather than at warp or warpgroup scope as in previous generations. You can see this reflected in the CuTe MMA atoms which now use ThrID = Layout<1>`` [in Blackwell](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mmatraitssm100.hpp#L1045) instead of `ThrID = Layout`<128>`` as in the warpgroup-scoped MMAs of Hopper",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "tcgen05",
+          "start": 0,
+          "end": 7,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "ThrID = Layout",
+          "start": 212,
+          "end": 226,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "em",
+          "text": "1>`` [in Blackwell](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma",
+          "start": 227,
+          "end": 312,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "sm100.hpp#L1045) instead of `ThrID = Layout`<",
+          "start": 318,
+          "end": 363,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "link",
+          "text": "warpgroup-scoped MMAs of Hopper",
+          "start": 380,
+          "end": 411,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm90_gmma.hpp#L491",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* `tcgen05` operations are now issued by a single thread on behalf of the entire CTA, rather than at warp or warpgroup scope as in previous generations. You can see this reflected in the CuTe MMA atoms which now use `ThrID = Layout`<_1>`` [in Blackwell](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm100.hpp#L1045) instead of `ThrID = Layout`<_128>`` as in the [warpgroup-scoped MMAs of Hopper](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm90_gmma.hpp#L491)",
+      "parent_block_plain_text": "tcgen05 operations are now issued by a single thread on behalf of the entire CTA, rather than at warp or warpgroup scope as in previous generations. You can see this reflected in the CuTe MMA atoms which now use ThrID = Layout<1>`` [in Blackwell](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mmatraitssm100.hpp#L1045) instead of `ThrID = Layout`<128>`` as in the warpgroup-scoped MMAs of Hopper",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "tcgen05",
+          "start": 0,
+          "end": 7,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "ThrID = Layout",
+          "start": 212,
+          "end": 226,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "em",
+          "text": "1>`` [in Blackwell](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma",
+          "start": 227,
+          "end": 312,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "sm100.hpp#L1045) instead of `ThrID = Layout`<",
+          "start": 318,
+          "end": 363,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "link",
+          "text": "warpgroup-scoped MMAs of Hopper",
+          "start": 380,
+          "end": 411,
+          "href": "https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm90_gmma.hpp#L491",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 411,
+      "expected_tokens": [
+        "CODE_1",
+        "CODE_2",
+        "EM_1",
+        "EM_2",
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "tcgen05 操作现在由单一线程代表整个协作线程阵列 (CTA) 发出，而不再像前几代那样在 warp 或 warpgroup 作用域内发出。这一点体现在 CuTe MMA atom 的设计中，它现在使用 ThrID = Layout<1>`` [在 Blackwell 架构中](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mmatraitssm100.hpp#L1045)，而不是 `ThrID = Layout`<128>``，后者常见于 Hopper 的 warpgroup 作用域 MMA 中。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658509",
+          "tokenized_text": "[[[CODE_1|tcgen05]]] 操作现在由单一线程代表整个协作线程阵列 (CTA) 发出，而不再像前几代那样在 warp 或 warpgroup 作用域内发出。这一点体现在 CuTe MMA atom 的设计中，它现在使用 [[[CODE_2|ThrID = Layout]]]<[[[EM_1|1>`` [在 Blackwell 架构中](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma]]]traits[[[EM_2|sm100.hpp#L1045)，而不是 `ThrID = Layout`<]]]128>``，后者常见于 [[[LINK_1|Hopper 的 warpgroup 作用域 MMA]]] 中。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Support for TPC-scoped TMA and MMA across pairs of coordinating CTAs, exposed as cta_group::2 in PTX and 2CTA in SASS, where two SMs making up a TPC can execute tcgen05.mma on shared operands, providing access to higher operational intensity MMA instructions by reducing per-CTA SMEM bandwidth requirements. Later we show that this operand sharing is necessary to make use of the available MMA throughput",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "cta_group::2",
+          "start": 81,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "2CTA",
+          "start": 105,
+          "end": 109,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "code",
+          "text": "tcgen05.mma",
+          "start": 161,
+          "end": 172,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_3"
+        }
+      ],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Support for TPC-scoped TMA and MMA across pairs of coordinating CTAs, exposed as `cta_group::2` in PTX and `2CTA` in SASS, where two SMs making up a TPC can execute `tcgen05.mma` on shared operands, providing access to higher operational intensity MMA instructions by reducing per-CTA SMEM bandwidth requirements. Later we show that this operand sharing is necessary to make use of the available MMA throughput",
+      "parent_block_plain_text": "Support for TPC-scoped TMA and MMA across pairs of coordinating CTAs, exposed as cta_group::2 in PTX and 2CTA in SASS, where two SMs making up a TPC can execute tcgen05.mma on shared operands, providing access to higher operational intensity MMA instructions by reducing per-CTA SMEM bandwidth requirements. Later we show that this operand sharing is necessary to make use of the available MMA throughput",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "cta_group::2",
+          "start": 81,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "2CTA",
+          "start": 105,
+          "end": 109,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "code",
+          "text": "tcgen05.mma",
+          "start": 161,
+          "end": 172,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 404,
+      "expected_tokens": [
+        "CODE_1",
+        "CODE_2",
+        "CODE_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "支持在成对的协作 CTA 之间执行 TPC 作用域的张量内存加速器 (TMA) 和 MMA 操作，这在 PTX 中体现为 cta_group::2，在 SASS 中体现为 2CTA。构成一个 TPC 的两个 SM 可以在共享操作数上执行 tcgen05.mma，通过降低每个 CTA 的共享内存 (SMEM) 带宽需求，从而能够执行更高计算访存比的 MMA 指令。后文我们将证明，这种操作数共享机制对于充分利用现有的 MMA 吞吐量是必不可少的。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658556",
+          "tokenized_text": "支持在成对的协作 CTA 之间执行 TPC 作用域的张量内存加速器 (TMA) 和 MMA 操作，这在 PTX 中体现为 [[[CODE_1|cta_group::2]]]，在 SASS 中体现为 [[[CODE_2|2CTA]]]。构成一个 TPC 的两个 SM 可以在共享操作数上执行 [[[CODE_3|tcgen05.mma]]]，通过降低每个 CTA 的共享内存 (SMEM) 带宽需求，从而能够执行更高计算访存比的 MMA 指令。后文我们将证明，这种操作数共享机制对于充分利用现有的 MMA 吞吐量是必不可少的。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Native support for sub-byte datatypes with micro-scaling",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Native support for sub-byte datatypes with micro-scaling",
+      "parent_block_plain_text": "Native support for sub-byte datatypes with micro-scaling",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "原生支持带微缩放 (micro-scaling) 的子字节数据类型。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658568",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Cluster Launch Control (CLC) as hardware support for dynamic work scheduling in persistent-CTA kernels (Covering in future articles)",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Cluster Launch Control (CLC)",
+          "start": 0,
+          "end": 28,
+          "href": "https://docs.nvidia.com/cutlass/latest/media/docs/cpp/blackwell_cluster_launch_control.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Cluster Launch Control (CLC)](https://docs.nvidia.com/cutlass/latest/media/docs/cpp/blackwell_cluster_launch_control.html) as hardware support for dynamic work scheduling in persistent-CTA kernels (Covering in future articles)",
+      "parent_block_plain_text": "Cluster Launch Control (CLC) as hardware support for dynamic work scheduling in persistent-CTA kernels (Covering in future articles)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Cluster Launch Control (CLC)",
+          "start": 0,
+          "end": 28,
+          "href": "https://docs.nvidia.com/cutlass/latest/media/docs/cpp/blackwell_cluster_launch_control.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 132,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "集群启动控制 (CLC) 为持久化 CTA 内核中的动态工作调度提供硬件支持（将在后续文章中详细探讨）。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658593",
+          "tokenized_text": "[[[LINK_1|集群启动控制 (CLC)]]] 为持久化 CTA 内核中的动态工作调度提供硬件支持（将在后续文章中详细探讨）。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Programmatic dependent launch (PDL) was introduced in Hopper to hide launch and setup latency in back-to-back kernels (Covering in future articles)",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Programmatic dependent launch (PDL)",
+          "start": 0,
+          "end": 35,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/programmatic-dependent-launch.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Programmatic dependent launch (PDL)](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/programmatic-dependent-launch.html) was introduced in Hopper to hide launch and setup latency in back-to-back kernels (Covering in future articles)",
+      "parent_block_plain_text": "Programmatic dependent launch (PDL) was introduced in Hopper to hide launch and setup latency in back-to-back kernels (Covering in future articles)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Programmatic dependent launch (PDL)",
+          "start": 0,
+          "end": 35,
+          "href": "https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/programmatic-dependent-launch.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 147,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Hopper 架构中引入的可编程依赖启动 (PDL)，用于隐藏连续 (back-to-back) 执行内核时的启动与设置延迟（将在后续文章中详细探讨）。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:16:40.658618",
+          "tokenized_text": "Hopper 架构中引入的[[[LINK_1|可编程依赖启动 (PDL)]]]，用于隐藏连续 (back-to-back) 执行内核时的启动与设置延迟（将在后续文章中详细探讨）。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+          "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+          "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+          "relation_to_previous": "Pivots from the introductory roadmap directly into the core technical analysis of the Blackwell architecture.",
+          "relation_to_next": "Introduces TPC/CTA concepts that are immediately expanded upon in the detailed Clusters and GPCs section.",
+          "key_points": [
+            "Blackwell introduces TPC-scoped TMA and MMA across pairs of coordinating CTAs (cta_group::2).",
+            "Operand sharing between two SMs reduces per-CTA SMEM bandwidth and enables higher operational intensity MMA.",
+            "Programmatic dependent launch (PDL) was introduced to hide launch/setup latency."
+          ],
+          "translation_notes": [
+            "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+            "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+            "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "文章标题在中文语境下缺乏书名号，导致阅读时专有名词与普通文本界限不够清晰。"
+          },
+          {
+            "type": "formatting",
+            "description": "指令 `tcgen05` 未按要求使用行内代码格式。此外，原文中存在冗余/错乱的反引号（如 `ThrID = Layout<1>``），译文直接照搬了这些错乱的格式。"
+          },
+          {
+            "type": "formatting",
+            "description": "译文未将 `cta_group::2`、`2CTA` 和 `tcgen05.mma` 格式化为行内代码。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

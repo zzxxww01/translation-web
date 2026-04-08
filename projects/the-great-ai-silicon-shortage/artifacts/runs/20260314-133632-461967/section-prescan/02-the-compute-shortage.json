@@ -1,0 +1,54 @@
+{
+  "section_id": "02-the-compute-shortage",
+  "new_terms": [
+    {
+      "term": "neocloud",
+      "suggested_translation": "新兴云服务商",
+      "context": "Refers to specialized AI cloud providers like CoreWeave or Lambda.",
+      "confidence": 0.95
+    },
+    {
+      "term": "hyperscaler",
+      "suggested_translation": "超大规模云服务商",
+      "context": "Large-scale cloud providers like Google, AWS, and Azure.",
+      "confidence": 0.98
+    },
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入",
+      "context": "Annual Recurring Revenue, a key financial metric for Anthropic's growth.",
+      "confidence": 0.99
+    },
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "Anthropic's agentic coding platform.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Hoppers",
+      "suggested_translation": "Hopper 架构芯片",
+      "context": "Referring to NVIDIA's H100/H200 GPU series.",
+      "confidence": 0.95
+    },
+    {
+      "term": "AD (After Da launch of ChatGPT)",
+      "suggested_translation": "AD 时代 (ChatGPT 发布后时代)",
+      "context": "A play on 'Anno Domini', used to denote the era following ChatGPT's release.",
+      "confidence": 0.9
+    },
+    {
+      "term": "silicon supply",
+      "suggested_translation": "芯片供应",
+      "context": "General term for the availability of logic and memory chips.",
+      "confidence": 0.92
+    }
+  ],
+  "term_usages": {
+    "token": "token",
+    "agentic workflows": "智能体工作流",
+    "capex": "资本支出"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-14T13:38:27.533111"
+}

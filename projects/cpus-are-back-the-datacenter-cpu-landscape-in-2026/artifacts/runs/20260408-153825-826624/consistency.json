@@ -1,0 +1,2444 @@
+{
+  "report": {
+    "is_consistent": true,
+    "issues": [],
+    "auto_fixable": [],
+    "manual_review": [],
+    "term_stats": {
+      "Context Memory Storage": {
+        "total_count": 4,
+        "translations": {
+          "上下文内存存储": 4
+        },
+        "is_consistent": true,
+        "preferred": "上下文内存存储"
+      },
+      "AMD": {
+        "total_count": 54,
+        "translations": {
+          "AMD": 54
+        },
+        "is_consistent": true,
+        "preferred": "AMD"
+      },
+      "Intel": {
+        "total_count": 83,
+        "translations": {
+          "英特尔": 82
+        },
+        "is_consistent": true,
+        "preferred": "英特尔"
+      },
+      "CPU": {
+        "total_count": 98,
+        "translations": {
+          "CPU": 98
+        },
+        "is_consistent": true,
+        "preferred": "CPU"
+      },
+      "DRAM": {
+        "total_count": 6,
+        "translations": {
+          "DRAM": 6
+        },
+        "is_consistent": true,
+        "preferred": "DRAM"
+      },
+      "Vera": {
+        "total_count": 22,
+        "translations": {
+          "Vera": 16
+        },
+        "is_consistent": true,
+        "preferred": "Vera"
+      },
+      "RL": {
+        "total_count": 23,
+        "translations": {
+          "强化学习 (RL)": 4
+        },
+        "is_consistent": true,
+        "preferred": "强化学习 (RL)"
+      },
+      "ARM": {
+        "total_count": 23,
+        "translations": {
+          "ARM": 23
+        },
+        "is_consistent": true,
+        "preferred": "ARM"
+      },
+      "RAG": {
+        "total_count": 15,
+        "translations": {
+          "检索增强生成 (RAG)": 1
+        },
+        "is_consistent": true,
+        "preferred": "检索增强生成 (RAG)"
+      },
+      "Graviton": {
+        "total_count": 7,
+        "translations": {
+          "Graviton": 7
+        },
+        "is_consistent": true,
+        "preferred": "Graviton"
+      },
+      "Diamond Rapids": {
+        "total_count": 16,
+        "translations": {
+          "Diamond Rapids": 16
+        },
+        "is_consistent": true,
+        "preferred": "Diamond Rapids"
+      },
+      "Venice": {
+        "total_count": 17,
+        "translations": {
+          "Venice": 17
+        },
+        "is_consistent": true,
+        "preferred": "Venice"
+      },
+      "Axion": {
+        "total_count": 6,
+        "translations": {
+          "Axion": 6
+        },
+        "is_consistent": true,
+        "preferred": "Axion"
+      },
+      "Phoenix": {
+        "total_count": 3,
+        "translations": {
+          "Phoenix": 3
+        },
+        "is_consistent": true,
+        "preferred": "Phoenix"
+      },
+      "Venom": {
+        "total_count": 3,
+        "translations": {
+          "Venom": 3
+        },
+        "is_consistent": true,
+        "preferred": "Venom"
+      },
+      "Verano": {
+        "total_count": 3,
+        "translations": {
+          "Verano": 3
+        },
+        "is_consistent": true,
+        "preferred": "Verano"
+      },
+      "Florence": {
+        "total_count": 3,
+        "translations": {
+          "Florence": 3
+        },
+        "is_consistent": true,
+        "preferred": "Florence"
+      },
+      "Coral Rapids": {
+        "total_count": 4,
+        "translations": {
+          "Coral Rapids": 4
+        },
+        "is_consistent": true,
+        "preferred": "Coral Rapids"
+      },
+      "NIC": {
+        "total_count": 26,
+        "translations": {
+          "网卡": 2
+        },
+        "is_consistent": true,
+        "preferred": "网卡"
+      },
+      "ATE": {
+        "total_count": 92,
+        "translations": {
+          "自动测试设备 (ATE)": 1
+        },
+        "is_consistent": true,
+        "preferred": "自动测试设备 (ATE)"
+      },
+      "AI": {
+        "total_count": 96,
+        "translations": {
+          "AI": 31
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "AWS": {
+        "total_count": 60,
+        "translations": {
+          "AWS": 6
+        },
+        "is_consistent": true,
+        "preferred": "AWS"
+      },
+      "Hyperscaler": {
+        "total_count": 7,
+        "translations": {
+          "超大规模云厂商": 4
+        },
+        "is_consistent": true,
+        "preferred": "超大规模云厂商"
+      },
+      "GPU": {
+        "total_count": 20,
+        "translations": {
+          "GPU": 20
+        },
+        "is_consistent": true,
+        "preferred": "GPU"
+      },
+      "inference": {
+        "total_count": 5,
+        "translations": {
+          "推理": 5
+        },
+        "is_consistent": true,
+        "preferred": "推理"
+      },
+      "training": {
+        "total_count": 11,
+        "translations": {
+          "训练": 11
+        },
+        "is_consistent": true,
+        "preferred": "训练"
+      },
+      "revenue": {
+        "total_count": 4,
+        "translations": {
+          "营收": 4
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "neoclouds": {
+        "total_count": 2,
+        "translations": {
+          "新锐云厂商": 2
+        },
+        "is_consistent": true,
+        "preferred": "新锐云厂商"
+      },
+      "ACE": {
+        "total_count": 59,
+        "translations": {
+          "ACE": 1
+        },
+        "is_consistent": true,
+        "preferred": "ACE"
+      },
+      "cloud computing": {
+        "total_count": 4,
+        "translations": {
+          "云计算": 4
+        },
+        "is_consistent": true,
+        "preferred": "云计算"
+      },
+      "performance": {
+        "total_count": 40,
+        "translations": {
+          "性能": 40
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "market share": {
+        "total_count": 1,
+        "translations": {
+          "市场份额": 1
+        },
+        "is_consistent": true,
+        "preferred": "市场份额"
+      },
+      "addressable market": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "可寻址市场 / 潜在目标市场"
+      },
+      "x86": {
+        "total_count": 10,
+        "translations": {
+          "x86": 10
+        },
+        "is_consistent": true,
+        "preferred": "x86"
+      },
+      "AI accelerator": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "AI加速器"
+      },
+      "TIM": {
+        "total_count": 28,
+        "translations": {
+          "热界面材料 (TIM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "热界面材料 (TIM)"
+      },
+      "InFO": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "InFO"
+      },
+      "token": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "token"
+      },
+      "vibe coding": {
+        "total_count": 1,
+        "translations": {
+          "直觉编程 (vibe coding)": 1
+        },
+        "is_consistent": true,
+        "preferred": "直觉编程 (vibe coding)"
+      },
+      "DCAI": {
+        "total_count": 1,
+        "translations": {
+          "数据中心与人工智能事业部 (DCAI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "数据中心与人工智能事业部 (DCAI)"
+      },
+      "foundry": {
+        "total_count": 1,
+        "translations": {
+          "晶圆代工厂": 1
+        },
+        "is_consistent": true,
+        "preferred": "晶圆代工厂"
+      },
+      "wafer": {
+        "total_count": 4,
+        "translations": {
+          "晶圆": 4
+        },
+        "is_consistent": true,
+        "preferred": "晶圆"
+      },
+      "capex": {
+        "total_count": 2,
+        "translations": {
+          "资本支出": 2
+        },
+        "is_consistent": true,
+        "preferred": "资本支出"
+      },
+      "SemiAnalysis": {
+        "total_count": 10,
+        "translations": {
+          "SemiAnalysis": 9
+        },
+        "is_consistent": true,
+        "preferred": "SemiAnalysis"
+      },
+      "Clearwater Forest": {
+        "total_count": 9,
+        "translations": {
+          "Clearwater Forest": 9
+        },
+        "is_consistent": true,
+        "preferred": "Clearwater Forest"
+      },
+      "NVIDIA": {
+        "total_count": 25,
+        "translations": {
+          "英伟达": 25
+        },
+        "is_consistent": true,
+        "preferred": "英伟达"
+      },
+      "Cobalt": {
+        "total_count": 8,
+        "translations": {
+          "Cobalt": 8
+        },
+        "is_consistent": true,
+        "preferred": "Cobalt"
+      },
+      "Grace": {
+        "total_count": 13,
+        "translations": {
+          "Grace": 13
+        },
+        "is_consistent": true,
+        "preferred": "Grace"
+      },
+      "Ampere Computing": {
+        "total_count": 3,
+        "translations": {
+          "Ampere Computing (安培计算)": 1
+        },
+        "is_consistent": true,
+        "preferred": "Ampere Computing (安培计算)"
+      },
+      "SoftBank": {
+        "total_count": 1,
+        "translations": {
+          "软银": 1
+        },
+        "is_consistent": true,
+        "preferred": "软银"
+      },
+      "Huawei": {
+        "total_count": 9,
+        "translations": {
+          "华为": 9
+        },
+        "is_consistent": true,
+        "preferred": "华为"
+      },
+      "Microsoft": {
+        "total_count": 10,
+        "translations": {
+          "微软": 7
+        },
+        "is_consistent": true,
+        "preferred": "微软"
+      },
+      "Google": {
+        "total_count": 10,
+        "translations": {
+          "谷歌": 7
+        },
+        "is_consistent": true,
+        "preferred": "谷歌"
+      },
+      "Qualcomm": {
+        "total_count": 8,
+        "translations": {
+          "高通": 8
+        },
+        "is_consistent": true,
+        "preferred": "高通"
+      },
+      "Bluefield-4": {
+        "total_count": 7,
+        "translations": {
+          "Bluefield-4": 7
+        },
+        "is_consistent": true,
+        "preferred": "Bluefield-4"
+      },
+      "Pentium": {
+        "total_count": 3,
+        "translations": {
+          "奔腾": 3
+        },
+        "is_consistent": true,
+        "preferred": "奔腾"
+      },
+      "mainframe": {
+        "total_count": 2,
+        "translations": {
+          "大型机": 2
+        },
+        "is_consistent": true,
+        "preferred": "大型机"
+      },
+      "workstation": {
+        "total_count": 1,
+        "translations": {
+          "工作站": 1
+        },
+        "is_consistent": true,
+        "preferred": "工作站"
+      },
+      "Multi-Chip Module (MCM)": {
+        "total_count": 1,
+        "translations": {
+          "多芯片模块 (MCM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "多芯片模块 (MCM)"
+      },
+      "co-packaged": {
+        "total_count": 2,
+        "translations": {
+          "共封装": 2
+        },
+        "is_consistent": true,
+        "preferred": "共封装"
+      },
+      "L2 cache": {
+        "total_count": 10,
+        "translations": {
+          "L2缓存": 10
+        },
+        "is_consistent": true,
+        "preferred": "L2缓存"
+      },
+      "DEC": {
+        "total_count": 10,
+        "translations": {
+          "DEC": 1
+        },
+        "is_consistent": true,
+        "preferred": "DEC"
+      },
+      "IBM": {
+        "total_count": 3,
+        "translations": {
+          "IBM": 3
+        },
+        "is_consistent": true,
+        "preferred": "IBM"
+      },
+      "UCC": {
+        "total_count": 8,
+        "translations": {
+          "超高核心数 (UCC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "超高核心数 (UCC)"
+      },
+      "Xeon": {
+        "total_count": 17,
+        "translations": {
+          "至强": 17
+        },
+        "is_consistent": true,
+        "preferred": "至强"
+      },
+      "Dennard scaling": {
+        "total_count": 1,
+        "translations": {
+          "登纳德缩放定律": 1
+        },
+        "is_consistent": true,
+        "preferred": "登纳德缩放定律"
+      },
+      "PCIe": {
+        "total_count": 15,
+        "translations": {
+          "PCIe": 15
+        },
+        "is_consistent": true,
+        "preferred": "PCIe"
+      },
+      "SoC": {
+        "total_count": 29,
+        "translations": {
+          "SoC": 6
+        },
+        "is_consistent": true,
+        "preferred": "SoC"
+      },
+      "Simultaneous Multi-Threading (SMT)": {
+        "total_count": 1,
+        "translations": {
+          "同步多线程 (SMT)": 1
+        },
+        "is_consistent": true,
+        "preferred": "同步多线程 (SMT)"
+      },
+      "Quick Path Interconnect (QPI)": {
+        "total_count": 1,
+        "translations": {
+          "快速通道互联 (QPI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "快速通道互联 (QPI)"
+      },
+      "HyperTransport Direct Connect Architecture": {
+        "total_count": 1,
+        "translations": {
+          "HyperTransport直连架构": 1
+        },
+        "is_consistent": true,
+        "preferred": "HyperTransport直连架构"
+      },
+      "Opteron": {
+        "total_count": 2,
+        "translations": {
+          "皓龙": 2
+        },
+        "is_consistent": true,
+        "preferred": "皓龙"
+      },
+      "multi-socket": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "多路 / 多插槽"
+      },
+      "coherent links": {
+        "total_count": 1,
+        "translations": {
+          "一致性链路": 1
+        },
+        "is_consistent": true,
+        "preferred": "一致性链路"
+      },
+      "opex": {
+        "total_count": 1,
+        "translations": {
+          "运营支出": 1
+        },
+        "is_consistent": true,
+        "preferred": "运营支出"
+      },
+      "scalability": {
+        "total_count": 5,
+        "translations": {
+          "可扩展性": 5
+        },
+        "is_consistent": true,
+        "preferred": "可扩展性"
+      },
+      "compute instances": {
+        "total_count": 1,
+        "translations": {
+          "计算实例": 1
+        },
+        "is_consistent": true,
+        "preferred": "计算实例"
+      },
+      "serverless computing": {
+        "total_count": 1,
+        "translations": {
+          "无服务器计算": 1
+        },
+        "is_consistent": true,
+        "preferred": "无服务器计算"
+      },
+      "ROI": {
+        "total_count": 1,
+        "translations": {
+          "投资回报率 (ROI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "投资回报率 (ROI)"
+      },
+      "virtualization": {
+        "total_count": 4,
+        "translations": {
+          "虚拟化": 4
+        },
+        "is_consistent": true,
+        "preferred": "虚拟化"
+      },
+      "Virtual Machines (VMs)": {
+        "total_count": 1,
+        "translations": {
+          "虚拟机 (VM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "虚拟机 (VM)"
+      },
+      "hypervisor": {
+        "total_count": 1,
+        "translations": {
+          "虚拟机管理程序": 1
+        },
+        "is_consistent": true,
+        "preferred": "虚拟机管理程序"
+      },
+      "branch prediction": {
+        "total_count": 3,
+        "translations": {
+          "分支预测": 3
+        },
+        "is_consistent": true,
+        "preferred": "分支预测"
+      },
+      "Spectre": {
+        "total_count": 2,
+        "translations": {
+          "幽灵 (漏洞)": 2
+        },
+        "is_consistent": true,
+        "preferred": "幽灵 (漏洞)"
+      },
+      "Meltdown": {
+        "total_count": 2,
+        "translations": {
+          "熔断 (漏洞)": 2
+        },
+        "is_consistent": true,
+        "preferred": "熔断 (漏洞)"
+      },
+      "ISA": {
+        "total_count": 14,
+        "translations": {
+          "ISA (指令集架构)": 1
+        },
+        "is_consistent": true,
+        "preferred": "ISA (指令集架构)"
+      },
+      "node": {
+        "total_count": 26,
+        "translations": {
+          "制程节点": 7
+        },
+        "is_consistent": true,
+        "preferred": "制程节点"
+      },
+      "latency": {
+        "total_count": 10,
+        "translations": {
+          "延迟": 10
+        },
+        "is_consistent": true,
+        "preferred": "延迟"
+      },
+      "efficiency": {
+        "total_count": 5,
+        "translations": {
+          "效率": 4
+        },
+        "is_consistent": true,
+        "preferred": "效率"
+      },
+      "Tensor Cores": {
+        "total_count": 1,
+        "translations": {
+          "张量核心 (Tensor Core)": 1
+        },
+        "is_consistent": true,
+        "preferred": "张量核心 (Tensor Core)"
+      },
+      "AVX512": {
+        "total_count": 3,
+        "translations": {
+          "AVX-512": 3
+        },
+        "is_consistent": true,
+        "preferred": "AVX-512"
+      },
+      "AMX": {
+        "total_count": 3,
+        "translations": {
+          "AMX (高级矩阵扩展)": 3
+        },
+        "is_consistent": true,
+        "preferred": "AMX (高级矩阵扩展)"
+      },
+      "Head node": {
+        "total_count": 10,
+        "translations": {
+          "头节点": 10
+        },
+        "is_consistent": true,
+        "preferred": "头节点"
+      },
+      "bandwidth": {
+        "total_count": 11,
+        "translations": {
+          "带宽": 11
+        },
+        "is_consistent": true,
+        "preferred": "带宽"
+      },
+      "Key Value Cache": {
+        "total_count": 1,
+        "translations": {
+          "键值缓存 (KV Cache)": 1
+        },
+        "is_consistent": true,
+        "preferred": "键值缓存 (KV Cache)"
+      },
+      "ALU": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "算术逻辑单元 (ALU)"
+      },
+      "Rubin": {
+        "total_count": 5,
+        "translations": {
+          "Rubin": 5
+        },
+        "is_consistent": true,
+        "preferred": "Rubin"
+      },
+      "superchip": {
+        "total_count": 2,
+        "translations": {
+          "超级芯片": 2
+        },
+        "is_consistent": true,
+        "preferred": "超级芯片"
+      },
+      "compute tray": {
+        "total_count": 3,
+        "translations": {
+          "计算托盘": 3
+        },
+        "is_consistent": true,
+        "preferred": "计算托盘"
+      },
+      "Trainium": {
+        "total_count": 1,
+        "translations": {
+          "Trainium": 1
+        },
+        "is_consistent": true,
+        "preferred": "Trainium"
+      },
+      "TPU": {
+        "total_count": 2,
+        "translations": {
+          "TPU": 2
+        },
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "Cloud-Native": {
+        "total_count": 4,
+        "translations": {
+          "云原生": 4
+        },
+        "is_consistent": true,
+        "preferred": "云原生"
+      },
+      "Socket Consolidation": {
+        "total_count": 3,
+        "translations": {
+          "插槽整合": 3
+        },
+        "is_consistent": true,
+        "preferred": "插槽整合"
+      },
+      "throughput": {
+        "total_count": 6,
+        "translations": {
+          "吞吐量": 6
+        },
+        "is_consistent": true,
+        "preferred": "吞吐量"
+      },
+      "Turin": {
+        "total_count": 12,
+        "translations": {
+          "Turin": 10
+        },
+        "is_consistent": true,
+        "preferred": "Turin"
+      },
+      "Fairwater": {
+        "total_count": 3,
+        "translations": {
+          "Fairwater": 3
+        },
+        "is_consistent": true,
+        "preferred": "Fairwater"
+      },
+      "GPU cluster": {
+        "total_count": 4,
+        "translations": {
+          "GPU集群": 2
+        },
+        "is_consistent": true,
+        "preferred": "GPU集群"
+      },
+      "OpenAI": {
+        "total_count": 3,
+        "translations": {
+          "OpenAI": 3
+        },
+        "is_consistent": true,
+        "preferred": "OpenAI"
+      },
+      "fine-tuning": {
+        "total_count": 1,
+        "translations": {
+          "微调": 1
+        },
+        "is_consistent": true,
+        "preferred": "微调"
+      },
+      "decode": {
+        "total_count": 1,
+        "translations": {
+          "解码": 1
+        },
+        "is_consistent": true,
+        "preferred": "解码"
+      },
+      "RL Environment": {
+        "total_count": 3,
+        "translations": {
+          "RL环境": 2
+        },
+        "is_consistent": true,
+        "preferred": "RL环境"
+      },
+      "Reward Hacking": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "奖励作弊 / 奖励劫持"
+      },
+      "TAM": {
+        "total_count": 1,
+        "translations": {
+          "总潜在市场 (TAM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "总潜在市场 (TAM)"
+      },
+      "Crossbar": {
+        "total_count": 4,
+        "translations": {
+          "交叉开关": 4
+        },
+        "is_consistent": true,
+        "preferred": "交叉开关"
+      },
+      "all-to-all": {
+        "total_count": 1,
+        "translations": {
+          "全互连": 1
+        },
+        "is_consistent": true,
+        "preferred": "全互连"
+      },
+      "fab": {
+        "total_count": 10,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "晶圆厂"
+      },
+      "data fabric": {
+        "total_count": 5,
+        "translations": {
+          "数据网络": 4
+        },
+        "is_consistent": true,
+        "preferred": "数据网络"
+      },
+      "L3 cache": {
+        "total_count": 14,
+        "translations": {
+          "L3缓存": 12
+        },
+        "is_consistent": true,
+        "preferred": "L3缓存"
+      },
+      "Dunnington": {
+        "total_count": 2,
+        "translations": {
+          "Dunnington": 2
+        },
+        "is_consistent": true,
+        "preferred": "Dunnington"
+      },
+      "Istanbul": {
+        "total_count": 2,
+        "translations": {
+          "Istanbul": 2
+        },
+        "is_consistent": true,
+        "preferred": "Istanbul"
+      },
+      "Magny-Cours": {
+        "total_count": 1,
+        "translations": {
+          "Magny-Cours": 1
+        },
+        "is_consistent": true,
+        "preferred": "Magny-Cours"
+      },
+      "Interlagos": {
+        "total_count": 1,
+        "translations": {
+          "Interlagos": 1
+        },
+        "is_consistent": true,
+        "preferred": "Interlagos"
+      },
+      "Bulldozer": {
+        "total_count": 1,
+        "translations": {
+          "推土机": 1
+        },
+        "is_consistent": true,
+        "preferred": "推土机"
+      },
+      "Ring Bus": {
+        "total_count": 5,
+        "translations": {
+          "环形总线": 5
+        },
+        "is_consistent": true,
+        "preferred": "环形总线"
+      },
+      "TOPS": {
+        "total_count": 6,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "TOPS"
+      },
+      "ring stop": {
+        "total_count": 5,
+        "translations": {
+          "环形站点": 4
+        },
+        "is_consistent": true,
+        "preferred": "环形站点"
+      },
+      "memory snooping": {
+        "total_count": 1,
+        "translations": {
+          "内存嗅探": 1
+        },
+        "is_consistent": true,
+        "preferred": "内存嗅探"
+      },
+      "Caching and Home agents": {
+        "total_count": 2,
+        "translations": {
+          "缓存与主代理": 1
+        },
+        "is_consistent": true,
+        "preferred": "缓存与主代理"
+      },
+      "counter rotating rings": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "双向反转环"
+      },
+      "HCC": {
+        "total_count": 4,
+        "translations": {
+          "高核心数 (HCC)": 4
+        },
+        "is_consistent": true,
+        "preferred": "高核心数 (HCC)"
+      },
+      "MCC": {
+        "total_count": 1,
+        "translations": {
+          "中等核心数 (MCC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "中等核心数 (MCC)"
+      },
+      "Non Uniform Memory Access (NUMA)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "非统一内存访问 (NUMA)"
+      },
+      "BIOS": {
+        "total_count": 1,
+        "translations": {
+          "BIOS": 1
+        },
+        "is_consistent": true,
+        "preferred": "BIOS"
+      },
+      "XCC": {
+        "total_count": 3,
+        "translations": {
+          "XCC (极高核心数)": 2
+        },
+        "is_consistent": true,
+        "preferred": "XCC (极高核心数)"
+      },
+      "Mesh Architecture": {
+        "total_count": 3,
+        "translations": {
+          "网格架构": 3
+        },
+        "is_consistent": true,
+        "preferred": "网格架构"
+      },
+      "Sub-NUMA Clustering (SNC)": {
+        "total_count": 2,
+        "translations": {
+          "子NUMA集群 (SNC)": 2
+        },
+        "is_consistent": true,
+        "preferred": "子NUMA集群 (SNC)"
+      },
+      "MCDRAM": {
+        "total_count": 1,
+        "translations": {
+          "MCDRAM": 1
+        },
+        "is_consistent": true,
+        "preferred": "MCDRAM"
+      },
+      "EPYC": {
+        "total_count": 11,
+        "translations": {
+          "霄龙 (EPYC)": 9
+        },
+        "is_consistent": true,
+        "preferred": "霄龙 (EPYC)"
+      },
+      "Sapphire Rapids": {
+        "total_count": 8,
+        "translations": {
+          "Sapphire Rapids": 8
+        },
+        "is_consistent": true,
+        "preferred": "Sapphire Rapids"
+      },
+      "EMIB": {
+        "total_count": 8,
+        "translations": {
+          "EMIB (嵌入式多芯片互连桥接)": 6
+        },
+        "is_consistent": true,
+        "preferred": "EMIB (嵌入式多芯片互连桥接)"
+      },
+      "chiplet": {
+        "total_count": 12,
+        "translations": {
+          "芯粒": 8
+        },
+        "is_consistent": true,
+        "preferred": "芯粒"
+      },
+      "monolithic die": {
+        "total_count": 1,
+        "translations": {
+          "单片裸片": 1
+        },
+        "is_consistent": true,
+        "preferred": "单片裸片"
+      },
+      "packaging": {
+        "total_count": 12,
+        "translations": {
+          "封装": 12
+        },
+        "is_consistent": true,
+        "preferred": "封装"
+      },
+      "Modular Die Fabric": {
+        "total_count": 1,
+        "translations": {
+          "模块化裸片互连结构": 1
+        },
+        "is_consistent": true,
+        "preferred": "模块化裸片互连结构"
+      },
+      "mesh stops": {
+        "total_count": 2,
+        "translations": {
+          "网格站点": 1
+        },
+        "is_consistent": true,
+        "preferred": "网格站点"
+      },
+      "Stepping": {
+        "total_count": 1,
+        "translations": {
+          "步进": 1
+        },
+        "is_consistent": true,
+        "preferred": "步进"
+      },
+      "yield": {
+        "total_count": 13,
+        "translations": {
+          "良率": 11
+        },
+        "is_consistent": true,
+        "preferred": "良率"
+      },
+      "Heterogeneous Disaggregation": {
+        "total_count": 3,
+        "translations": {
+          "异构解耦": 3
+        },
+        "is_consistent": true,
+        "preferred": "异构解耦"
+      },
+      "Granite Rapids": {
+        "total_count": 7,
+        "translations": {
+          "Granite Rapids": 7
+        },
+        "is_consistent": true,
+        "preferred": "Granite Rapids"
+      },
+      "HDCC": {
+        "total_count": 1,
+        "translations": {
+          "HDCC (高密度核心数)": 1
+        },
+        "is_consistent": true,
+        "preferred": "HDCC (高密度核心数)"
+      },
+      "LCC": {
+        "total_count": 2,
+        "translations": {
+          "低核心数 (LCC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "低核心数 (LCC)"
+      },
+      "TCO": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "总拥有成本"
+      },
+      "SKU": {
+        "total_count": 7,
+        "translations": {
+          "SKU": 7
+        },
+        "is_consistent": true,
+        "preferred": "SKU"
+      },
+      "E-cores": {
+        "total_count": 3,
+        "translations": {
+          "E核 (能效核)": 2
+        },
+        "is_consistent": true,
+        "preferred": "E核 (能效核)"
+      },
+      "hybrid bonding": {
+        "total_count": 4,
+        "translations": {
+          "混合键合": 4
+        },
+        "is_consistent": true,
+        "preferred": "混合键合"
+      },
+      "glued-together": {
+        "total_count": 1,
+        "translations": {
+          "胶水拼接": 1
+        },
+        "is_consistent": true,
+        "preferred": "胶水拼接"
+      },
+      "Infinity Fabric": {
+        "total_count": 2,
+        "translations": {
+          "Infinity Fabric": 2
+        },
+        "is_consistent": true,
+        "preferred": "Infinity Fabric"
+      },
+      "Infinity Fabric on Package (IFOP)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "封装内Infinity Fabric (IFOP)"
+      },
+      "Infinity Fabric Inter Socket (IFIS)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "插槽间Infinity Fabric (IFIS)"
+      },
+      "Scalable Data Fabric": {
+        "total_count": 1,
+        "translations": {
+          "可扩展数据网络": 1
+        },
+        "is_consistent": true,
+        "preferred": "可扩展数据网络"
+      },
+      "TSMC": {
+        "total_count": 11,
+        "translations": {
+          "台积电": 11
+        },
+        "is_consistent": true,
+        "preferred": "台积电"
+      },
+      "Global Memory Interconnect (GMI)": {
+        "total_count": 1,
+        "translations": {
+          "全局内存互连 (GMI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "全局内存互连 (GMI)"
+      },
+      "GlobalFoundries": {
+        "total_count": 1,
+        "translations": {
+          "格芯": 1
+        },
+        "is_consistent": true,
+        "preferred": "格芯"
+      },
+      "DDR5": {
+        "total_count": 13,
+        "translations": {
+          "DDR5": 13
+        },
+        "is_consistent": true,
+        "preferred": "DDR5"
+      },
+      "tapeout": {
+        "total_count": 1,
+        "translations": {
+          "流片": 1
+        },
+        "is_consistent": true,
+        "preferred": "流片"
+      },
+      "Core Building Block (CBB)": {
+        "total_count": 1,
+        "translations": {
+          "核心构建块 (CBB)": 1
+        },
+        "is_consistent": true,
+        "preferred": "核心构建块 (CBB)"
+      },
+      "I/O and Memory Hub (IMH)": {
+        "total_count": 1,
+        "translations": {
+          "I/O与内存集线器 (IMH)": 1
+        },
+        "is_consistent": true,
+        "preferred": "I/O与内存集线器 (IMH)"
+      },
+      "Dual Core Modules (DCM)": {
+        "total_count": 1,
+        "translations": {
+          "双核模块 (DCM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "双核模块 (DCM)"
+      },
+      "QAT": {
+        "total_count": 1,
+        "translations": {
+          "QAT": 1
+        },
+        "is_consistent": true,
+        "preferred": "QAT"
+      },
+      "DLB": {
+        "total_count": 1,
+        "translations": {
+          "DLB": 1
+        },
+        "is_consistent": true,
+        "preferred": "DLB"
+      },
+      "IAA": {
+        "total_count": 1,
+        "translations": {
+          "IAA": 1
+        },
+        "is_consistent": true,
+        "preferred": "IAA"
+      },
+      "DSA": {
+        "total_count": 1,
+        "translations": {
+          "DSA": 1
+        },
+        "is_consistent": true,
+        "preferred": "DSA"
+      },
+      "CXL3": {
+        "total_count": 2,
+        "translations": {
+          "CXL3": 2
+        },
+        "is_consistent": true,
+        "preferred": "CXL3"
+      },
+      "CXL": {
+        "total_count": 5,
+        "translations": {
+          "CXL": 5
+        },
+        "is_consistent": true,
+        "preferred": "CXL"
+      },
+      "cross-die hops": {
+        "total_count": 1,
+        "translations": {
+          "跨裸片跳数": 1
+        },
+        "is_consistent": true,
+        "preferred": "跨裸片跳数"
+      },
+      "P-cores": {
+        "total_count": 2,
+        "translations": {
+          "P核 (性能核)": 2
+        },
+        "is_consistent": true,
+        "preferred": "P核 (性能核)"
+      },
+      "HBM": {
+        "total_count": 4,
+        "translations": {
+          "HBM": 4
+        },
+        "is_consistent": true,
+        "preferred": "HBM"
+      },
+      "MRDIMM": {
+        "total_count": 1,
+        "translations": {
+          "多路复用双列直插式内存模块 (MRDIMM)": 1
+        },
+        "is_consistent": true,
+        "preferred": "多路复用双列直插式内存模块 (MRDIMM)"
+      },
+      "shoreline": {
+        "total_count": 1,
+        "translations": {
+          "边缘布线空间 (Shoreline)": 1
+        },
+        "is_consistent": true,
+        "preferred": "边缘布线空间 (Shoreline)"
+      },
+      "DIMM": {
+        "total_count": 2,
+        "translations": {
+          "DIMM": 2
+        },
+        "is_consistent": true,
+        "preferred": "DIMM"
+      },
+      "N2": {
+        "total_count": 4,
+        "translations": {
+          "N2": 4
+        },
+        "is_consistent": true,
+        "preferred": "N2"
+      },
+      "Integrated Passive Devices (IPD)": {
+        "total_count": 1,
+        "translations": {
+          "集成无源器件 (IPD)": 1
+        },
+        "is_consistent": true,
+        "preferred": "集成无源器件 (IPD)"
+      },
+      "fanout": {
+        "total_count": 1,
+        "translations": {
+          "扇出": 1
+        },
+        "is_consistent": true,
+        "preferred": "扇出"
+      },
+      "SP7": {
+        "total_count": 3,
+        "translations": {
+          "SP7 (插槽)": 3
+        },
+        "is_consistent": true,
+        "preferred": "SP7 (插槽)"
+      },
+      "Instructions per Clock (IPC)": {
+        "total_count": 1,
+        "translations": {
+          "每时钟周期指令数 (IPC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "每时钟周期指令数 (IPC)"
+      },
+      "VVNI": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "矢量神经网络指令 (VNNI/VVNI)"
+      },
+      "LLM": {
+        "total_count": 1,
+        "translations": {
+          "LLM": 1
+        },
+        "is_consistent": true,
+        "preferred": "LLM"
+      },
+      "BoM": {
+        "total_count": 5,
+        "translations": {
+          "物料清单": 4
+        },
+        "is_consistent": true,
+        "preferred": "物料清单"
+      },
+      "Bill of Materials": {
+        "total_count": 2,
+        "translations": {
+          "物料清单": 2
+        },
+        "is_consistent": true,
+        "preferred": "物料清单"
+      },
+      "Scalable Coherency Fabric": {
+        "total_count": 1,
+        "translations": {
+          "可扩展一致性网络": 1
+        },
+        "is_consistent": true,
+        "preferred": "可扩展一致性网络"
+      },
+      "HPC": {
+        "total_count": 2,
+        "translations": {
+          "HPC": 2
+        },
+        "is_consistent": true,
+        "preferred": "HPC"
+      },
+      "Blackwell": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "NVLink-C2C": {
+        "total_count": 3,
+        "translations": {
+          "NVLink-C2C": 3
+        },
+        "is_consistent": true,
+        "preferred": "NVLink-C2C"
+      },
+      "Cache Switch Node (CSN)": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "缓存交换节点 (CSN)"
+      },
+      "bisection bandwidth": {
+        "total_count": 2,
+        "translations": {
+          "对分带宽": 2
+        },
+        "is_consistent": true,
+        "preferred": "对分带宽"
+      },
+      "etching": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "蚀刻"
+      },
+      "Branch Target Buffer": {
+        "total_count": 1,
+        "translations": {
+          "分支目标缓冲区": 1
+        },
+        "is_consistent": true,
+        "preferred": "分支目标缓冲区"
+      },
+      "Reticle-sized": {
+        "total_count": 2,
+        "translations": {
+          "光罩极限尺寸": 2
+        },
+        "is_consistent": true,
+        "preferred": "光罩极限尺寸"
+      },
+      "CoWoS": {
+        "total_count": 4,
+        "translations": {
+          "CoWoS": 4
+        },
+        "is_consistent": true,
+        "preferred": "CoWoS"
+      },
+      "SOCAMM": {
+        "total_count": 2,
+        "translations": {
+          "SOCAMM": 2
+        },
+        "is_consistent": true,
+        "preferred": "SOCAMM"
+      },
+      "CoWoS-R": {
+        "total_count": 2,
+        "translations": {
+          "CoWoS-R": 2
+        },
+        "is_consistent": true,
+        "preferred": "CoWoS-R"
+      },
+      "Floorplan": {
+        "total_count": 3,
+        "translations": {
+          "物理布图": 3
+        },
+        "is_consistent": true,
+        "preferred": "物理布图"
+      },
+      "SVE2": {
+        "total_count": 1,
+        "translations": {
+          "SVE2": 1
+        },
+        "is_consistent": true,
+        "preferred": "SVE2"
+      },
+      "FP8": {
+        "total_count": 1,
+        "translations": {
+          "FP8": 1
+        },
+        "is_consistent": true,
+        "preferred": "FP8"
+      },
+      "Athena": {
+        "total_count": 1,
+        "translations": {
+          "Athena": 1
+        },
+        "is_consistent": true,
+        "preferred": "Athena"
+      },
+      "Neoverse V3": {
+        "total_count": 1,
+        "translations": {
+          "Neoverse V3": 1
+        },
+        "is_consistent": true,
+        "preferred": "Neoverse V3"
+      },
+      "Neoverse N2": {
+        "total_count": 1,
+        "translations": {
+          "Neoverse N2": 1
+        },
+        "is_consistent": true,
+        "preferred": "Neoverse N2"
+      },
+      "CMN S3": {
+        "total_count": 1,
+        "translations": {
+          "CMN S3": 1
+        },
+        "is_consistent": true,
+        "preferred": "CMN S3"
+      },
+      "Maia 200": {
+        "total_count": 1,
+        "translations": {
+          "Maia 200": 1
+        },
+        "is_consistent": true,
+        "preferred": "Maia 200"
+      },
+      "rackscale system": {
+        "total_count": 1,
+        "translations": {
+          "机架级系统": 1
+        },
+        "is_consistent": true,
+        "preferred": "机架级系统"
+      },
+      "GCP": {
+        "total_count": 1,
+        "translations": {
+          "GCP (谷歌云平台)": 1
+        },
+        "is_consistent": true,
+        "preferred": "GCP (谷歌云平台)"
+      },
+      "bare metal instances": {
+        "total_count": 1,
+        "translations": {
+          "裸金属实例": 1
+        },
+        "is_consistent": true,
+        "preferred": "裸金属实例"
+      },
+      "scale-out": {
+        "total_count": 2,
+        "translations": {
+          "横向扩展": 2
+        },
+        "is_consistent": true,
+        "preferred": "横向扩展"
+      },
+      "microservices": {
+        "total_count": 1,
+        "translations": {
+          "微服务": 1
+        },
+        "is_consistent": true,
+        "preferred": "微服务"
+      },
+      "volume ramps": {
+        "total_count": 1,
+        "translations": {
+          "产能爬坡": 1
+        },
+        "is_consistent": true,
+        "preferred": "产能爬坡"
+      },
+      "Gemini": {
+        "total_count": 1,
+        "translations": {
+          "Gemini": 1
+        },
+        "is_consistent": true,
+        "preferred": "Gemini"
+      },
+      "Die Shot": {
+        "total_count": 2,
+        "translations": {
+          "裸片图": 2
+        },
+        "is_consistent": true,
+        "preferred": "裸片图"
+      },
+      "interposer": {
+        "total_count": 3,
+        "translations": {
+          "中介层": 3
+        },
+        "is_consistent": true,
+        "preferred": "中介层"
+      },
+      "Oracle": {
+        "total_count": 1,
+        "translations": {
+          "甲骨文 (Oracle)": 1
+        },
+        "is_consistent": true,
+        "preferred": "甲骨文 (Oracle)"
+      },
+      "ASP": {
+        "total_count": 2,
+        "translations": {
+          "平均售价 (ASP)": 1
+        },
+        "is_consistent": true,
+        "preferred": "平均售价 (ASP)"
+      },
+      "SerDes": {
+        "total_count": 2,
+        "translations": {
+          "SerDes (串行器/解串器)": 2
+        },
+        "is_consistent": true,
+        "preferred": "SerDes (串行器/解串器)"
+      },
+      "UALoE": {
+        "total_count": 1,
+        "translations": {
+          "UALoE": 1
+        },
+        "is_consistent": true,
+        "preferred": "UALoE"
+      },
+      "backside power": {
+        "total_count": 1,
+        "translations": {
+          "背面供电": 1
+        },
+        "is_consistent": true,
+        "preferred": "背面供电"
+      },
+      "FRED": {
+        "total_count": 1,
+        "translations": {
+          "FRED (灵活返回与事件交付)": 1
+        },
+        "is_consistent": true,
+        "preferred": "FRED (灵活返回与事件交付)"
+      },
+      "ChkTag": {
+        "total_count": 1,
+        "translations": {
+          "ChkTag": 1
+        },
+        "is_consistent": true,
+        "preferred": "ChkTag"
+      },
+      "APX": {
+        "total_count": 1,
+        "translations": {
+          "APX (高级性能扩展)": 1
+        },
+        "is_consistent": true,
+        "preferred": "APX (高级性能扩展)"
+      },
+      "AVX10": {
+        "total_count": 1,
+        "translations": {
+          "AVX10": 1
+        },
+        "is_consistent": true,
+        "preferred": "AVX10"
+      },
+      "Rouge River Forest": {
+        "total_count": 1,
+        "translations": {
+          "Rouge River Forest": 1
+        },
+        "is_consistent": true,
+        "preferred": "Rouge River Forest"
+      },
+      "DMR-HD": {
+        "total_count": 1,
+        "translations": {
+          "DMR-HD (Diamond Rapids高密度版)": 1
+        },
+        "is_consistent": true,
+        "preferred": "DMR-HD (Diamond Rapids高密度版)"
+      },
+      "Lip-Bu Tan": {
+        "total_count": 1,
+        "translations": {
+          "陈立武": 1
+        },
+        "is_consistent": true,
+        "preferred": "陈立武"
+      },
+      "18A-Ultra": {
+        "total_count": 2,
+        "translations": {
+          "18A-Ultra": 2
+        },
+        "is_consistent": true,
+        "preferred": "18A-Ultra"
+      },
+      "14A-P": {
+        "total_count": 1,
+        "translations": {
+          "14A-P": 1
+        },
+        "is_consistent": true,
+        "preferred": "14A-P"
+      },
+      "P1280": {
+        "total_count": 1,
+        "translations": {
+          "P1280": 1
+        },
+        "is_consistent": true,
+        "preferred": "P1280"
+      },
+      "risk production": {
+        "total_count": 1,
+        "translations": {
+          "风险试产": 1
+        },
+        "is_consistent": true,
+        "preferred": "风险试产"
+      },
+      "Neoverse V4": {
+        "total_count": 1,
+        "translations": {
+          "Neoverse V4": 1
+        },
+        "is_consistent": true,
+        "preferred": "Neoverse V4"
+      },
+      "C1 Ultra": {
+        "total_count": 1,
+        "translations": {
+          "C1 Ultra": 1
+        },
+        "is_consistent": true,
+        "preferred": "C1 Ultra"
+      },
+      "Socionext": {
+        "total_count": 1,
+        "translations": {
+          "索喜科技": 1
+        },
+        "is_consistent": true,
+        "preferred": "索喜科技"
+      },
+      "PCIe Gen 7": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "PCIe 7.0 / 第七代PCIe"
+      },
+      "XPU": {
+        "total_count": 1,
+        "translations": {
+          "XPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "XPU"
+      },
+      "Accelerator Enablement Kit": {
+        "total_count": 1,
+        "translations": {
+          "加速器支持套件": 1
+        },
+        "is_consistent": true,
+        "preferred": "加速器支持套件"
+      },
+      "LPDDR6": {
+        "total_count": 2,
+        "translations": {
+          "LPDDR6": 2
+        },
+        "is_consistent": true,
+        "preferred": "LPDDR6"
+      },
+      "Centriq 2400": {
+        "total_count": 1,
+        "translations": {
+          "Centriq 2400": 1
+        },
+        "is_consistent": true,
+        "preferred": "Centriq 2400"
+      },
+      "Falkor": {
+        "total_count": 1,
+        "translations": {
+          "Falkor": 1
+        },
+        "is_consistent": true,
+        "preferred": "Falkor"
+      },
+      "NUVIA": {
+        "total_count": 2,
+        "translations": {
+          "NUVIA": 2
+        },
+        "is_consistent": true,
+        "preferred": "NUVIA"
+      },
+      "Oryon": {
+        "total_count": 1,
+        "translations": {
+          "Oryon": 1
+        },
+        "is_consistent": true,
+        "preferred": "Oryon"
+      },
+      "Snapdragon X Elite": {
+        "total_count": 1,
+        "translations": {
+          "骁龙 X Elite": 1
+        },
+        "is_consistent": true,
+        "preferred": "骁龙 X Elite"
+      },
+      "NVLink Fusion": {
+        "total_count": 1,
+        "translations": {
+          "NVLink Fusion": 1
+        },
+        "is_consistent": true,
+        "preferred": "NVLink Fusion"
+      },
+      "DPU": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "DPU (数据处理器)"
+      },
+      "BF4": {
+        "total_count": 1,
+        "translations": {
+          "BF4": 1
+        },
+        "is_consistent": true,
+        "preferred": "BF4"
+      },
+      "SmartNIC": {
+        "total_count": 1,
+        "translations": {
+          "智能网卡": 1
+        },
+        "is_consistent": true,
+        "preferred": "智能网卡"
+      },
+      "ConnectX-9": {
+        "total_count": 1,
+        "translations": {
+          "ConnectX-9": 1
+        },
+        "is_consistent": true,
+        "preferred": "ConnectX-9"
+      },
+      "East-West": {
+        "total_count": 1,
+        "translations": {
+          "东西向": 1
+        },
+        "is_consistent": true,
+        "preferred": "东西向"
+      },
+      "North-South": {
+        "total_count": 1,
+        "translations": {
+          "南北向": 1
+        },
+        "is_consistent": true,
+        "preferred": "南北向"
+      },
+      "Granite Rapids-D": {
+        "total_count": 1,
+        "translations": {
+          "Granite Rapids-D": 1
+        },
+        "is_consistent": true,
+        "preferred": "Granite Rapids-D"
+      },
+      "Coreweave": {
+        "total_count": 1,
+        "translations": {
+          "CoreWeave": 1
+        },
+        "is_consistent": true,
+        "preferred": "CoreWeave"
+      },
+      "double ordering": {
+        "total_count": 1,
+        "translations": {
+          "重复下单": 1
+        },
+        "is_consistent": true,
+        "preferred": "重复下单"
+      },
+      "server chassis": {
+        "total_count": 1,
+        "translations": {
+          "服务器机箱": 1
+        },
+        "is_consistent": true,
+        "preferred": "服务器机箱"
+      },
+      "power efficiency": {
+        "total_count": 1,
+        "translations": {
+          "能效": 1
+        },
+        "is_consistent": true,
+        "preferred": "能效"
+      },
+      "JBOM": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "JBOM (一堆HBM)"
+      },
+      "APU": {
+        "total_count": 1,
+        "translations": {
+          "加速处理器 (APU)": 1
+        },
+        "is_consistent": true,
+        "preferred": "加速处理器 (APU)"
+      },
+      "Foveros Direct 3D": {
+        "total_count": 2,
+        "translations": {
+          "Foveros Direct 3D": 2
+        },
+        "is_consistent": true,
+        "preferred": "Foveros Direct 3D"
+      },
+      "Known Good Die": {
+        "total_count": 1,
+        "translations": {
+          "已知良好裸片 (KGD)": 1
+        },
+        "is_consistent": true,
+        "preferred": "已知良好裸片 (KGD)"
+      },
+      "binning": {
+        "total_count": 1,
+        "translations": {
+          "芯片分级 / 筛选": 1
+        },
+        "is_consistent": true,
+        "preferred": "芯片分级 / 筛选"
+      },
+      "SLT": {
+        "total_count": 1,
+        "translations": {
+          "系统级测试 (SLT)": 1
+        },
+        "is_consistent": true,
+        "preferred": "系统级测试 (SLT)"
+      },
+      "TDP": {
+        "total_count": 1,
+        "translations": {
+          "TDP (热设计功耗)": 1
+        },
+        "is_consistent": true,
+        "preferred": "TDP (热设计功耗)"
+      },
+      "UPI": {
+        "total_count": 1,
+        "translations": {
+          "超级通道互联 (UPI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "超级通道互联 (UPI)"
+      },
+      "XGMI": {
+        "total_count": 1,
+        "translations": {
+          "扩展全局内存互连 (XGMI)": 1
+        },
+        "is_consistent": true,
+        "preferred": "扩展全局内存互连 (XGMI)"
+      },
+      "Last Level Cache": {
+        "total_count": 2,
+        "translations": {
+          "末级缓存 (LLC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "末级缓存 (LLC)"
+      }
+    },
+    "style_score": 100.0,
+    "suggestions": []
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "强化学习 (RL) 与智能体应用、上下文内存存储、DRAM 定价影响、CPU 互连演进、AMD Venice 处理器、Verano、Florence、英特尔（Intel）Diamond Rapids 架构、Coral Rapids、ARM Phoenix 与 Venom、Graviton 5、Axion",
+      "作者：Gerald Wong 与 Dylan Patel",
+      "2026 年 2 月 9 日 · 付费专享",
+      "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+      "自 2023 年以来，数据中心的叙事逻辑极其简单：GPU 与网络设备称王。AI 训练与推理的问世及随后的爆发，抽离了原本属于 CPU 的计算需求。这导致服务器 CPU 的主要供应商英特尔，未能乘上这波数据中心建设与支出狂潮的东风。随着超大规模云厂商与新锐云厂商将重心转向 GPU 及数据中心基础设施，服务器 CPU 营收一直停滞不前。",
+      "与此同时，这些超大规模云厂商一直在为其云计算服务自研基于 ARM 架构的数据中心 CPU，直接封死了英特尔一大片可寻址市场。而在自家的 x86 阵地内，英特尔拉垮的执行力，加上面对竞争对手 AMD 时毫无竞争力的性能表现，进一步蚕食了其市场份额。由于拿不出能打的 AI 加速器产品，当整个行业在尽情狂欢时，英特尔只能在原地停滞不前。",
+      "过去六个月里，情况发生了翻天覆地的变化。我们在 Core Research 与 Tokenomics Model 中发布了多份关于 CPU 需求飙升的报告。我们展示并建模分析的主要驱动力，是强化学习 (RL) 与直觉编程 (vibe coding) 对 CPU 产生的惊人需求。我们还报道了多家供应商与 AI 实验室达成的大型 CPU 云服务协议，并建模分析了正在部署的 CPU 数量及类型。",
+      "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+      "英特尔 2025 年第四季度数据中心与人工智能事业部 (DCAI) 营收。来源：英特尔",
+      "然而，英特尔近期的强势反弹以及 2025 年下半年需求信号的转变表明，CPU 如今已重回舞台中心。在最新的第四季度财报中，英特尔发现 2025 年底数据中心 CPU 需求出现意外上扬。为此，他们正在上调 2026 年晶圆代工厂（foundry）设备的资本支出（capex）指引，并将晶圆产能分配从 PC 优先向服务器倾斜，以缓解满足这一新增需求时的供应链瓶颈。这标志着 CPU 在数据中心的角色迎来拐点，AI 模型训练与推理对 CPU 的依赖愈发显著。",
+      "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+      "数据中心 CPU 核心数趋势。来源：SemiAnalysis 预测",
+      "2026 年是数据中心 CPU 令人振奋的一年。在需求激增的背景下，各大供应商都将在今年推出众多新一代产品。因此，本文将为您描绘 2026 年的 CPU 市场格局。我们将首先铺垫背景，回顾数据中心 CPU 的发展史以及不断演变的需求驱动因素，并深入剖析英特尔与 AMD 多年来在数据中心 CPU 架构上的变迁。",
+      "随后，我们将目光转向 2026 年的 CPU 产品，全面拆解英特尔的 Clearwater Forest 与 Diamond Rapids 处理器，以及 AMD 的 Venice 处理器。我们将探讨它们在设计上引人注目的趋同（与分歧）之处，分析其性能差异，并预告我们的 CPU 成本分析。",
+      "接下来，我们将详细阐述 ARM 阵营的竞争态势。这包括英伟达（NVIDIA）的 Grace 与 Vera 架构、亚马逊的 Graviton 系列、微软的 Cobalt、谷歌的 Axion CPU 系列、Ampere Computing 进军商用 ARM 芯片市场的举措及其被软银收购的事件、ARM 自家的 Phoenix CPU 设计，并审视华为自主研发的 Kunpeng CPU 进展。",
+      "面向我们的订阅用户，我们将提供直至 2028 年的数据中心 CPU 路线图，并详细介绍 AMD、英特尔、ARM 与高通（Qualcomm）在 2026 年之后的数据中心 CPU 规划。随后，我们将展望数据中心 CPU 的未来图景，探讨 DRAM 短缺带来的影响，分析英伟达 Bluefield-4 的上下文内存存储平台对通用 CPU 未来的意义，并指出未来 CPU 市场与设计中值得关注的关键趋势。"
+    ],
+    "01-the-role-and-evolution-of-data": [],
+    "02-the-pc-era": [
+      "https://substackcdn.com/image/fetch/$s_!cxhL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91d101af-061a-4c19-8b95-81be8c05e26f_2718x1849.png",
+      "英特尔奔腾 Pro。来源：英特尔",
+      "现代数据中心 CPU 的雏形可追溯至 20 世纪 90 年代。在此前十年间，个人电脑大获成功，让基础计算真正走入千家万户。随着英特尔 i386、i486 和奔腾系列产品的迭代，PC 算力水涨船高。许多原本依赖 DEC 和 IBM 等高级工作站与大型机处理的任务转由 PC 承担，成本仅为前者的零头。面对市场对高性能“大型机替代品”的渴求，英特尔开始推出性能更强、缓存更大的高价位 PC 处理器变体。这一趋势始于 1995 年问世的奔腾 Pro，该处理器采用多芯片模块 (MCM) 技术，将多个 L2缓存裸片与 CPU 共封装。",
+      "至强品牌紧随其后于 1998 年面世，首发产品奔腾 II 至强同样在 CPU 处理器插槽中加入了多个 L2缓存裸片。尽管时至今日，大型机依然活跃于负责银行交易验证等任务的 IBM Z 系列中，但其已退居小众利基市场，本文不再赘述。"
+    ],
+    "03-the-dot-com-era": [
+      "21 世纪初迎来了互联网时代。Web 2.0、电子邮件、电子商务、谷歌搜索以及支持 3G 宽带数据的智能手机相继涌现。随着万物触网，数据中心 CPU 必须承担起处理全球互联网流量的重任，并随之成长为一个价值数十亿美元的细分市场。在设计层面，随着登纳德缩放定律走向终结，“主频大战”偃旗息鼓，业界的注意力转向了多核 CPU 与更高的集成度。AMD 将内存控制器直接集成到 CPU 裸片中，高速 I/O（PCIe）也改为直接由 CPU 提供。多核 CPU 格外契合数据中心工作负载，能让大量任务在不同核心上并行处理。",
+      "我们将在下文的互连架构章节详细剖析多核连接方式的演进历程。AMD 和英特尔也在这一时期引入了同步多线程 (SMT) 技术。该技术将一个物理核心划分为两个逻辑线程，两者在共享大部分核心资源的同时能够独立运行，从而进一步提升了可并行化数据中心工作负载的性能。对性能有更高要求的用户则会转向多路 CPU 服务器。英特尔的快速通道互联 (QPI) 与 AMD 皓龙 CPU 采用的 HyperTransport直连架构，能够在单台服务器中为多达八个插槽提供一致性链路。"
+    ],
+    "04-the-virtualization-and-cloud-c": [
+      "下一个重大转折点出现在 2000 年代末，即云计算的兴起。这也是整个 2010 年代数据中心 CPU 销量增长的核心驱动力。正如如今 GPU 新锐云厂商的运营模式一样，随着客户将资本支出转化为运营支出（opex），计算资源开始向公有云提供商以及诸如 AWS 等超大规模云服务商集中。受经济大衰退的余波冲击，许多企业已无力购买并维护自有服务器来运行其软件和服务。",
+      "云计算提供了一种更易于接受的“按量付费”商业模式。通过租用计算实例并在第三方硬件上运行工作负载，客户支出可随使用量变化而动态调整。这种可扩展性远优于自行采购服务器，因为自有服务器必须时刻保持满负荷运转，才能实现投资回报率 (ROI) 最大化。云技术还催生了更高效便捷的服务，例如 AWS Lambda 等提供的无服务器计算。这类服务能自动为软件分配计算资源，客户在运行特定任务前，无需再费心决定启动多少个实例。由于云厂商在后台包揽了几乎所有工作，计算能力彻底变成了一种商品。",
+      "https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png",
+      "帕特·基辛格（Pat Gelsinger），2012-2021 年任 VMware CEO，2021-2024 年任英特尔 CEO。来源：X @PGelsinger",
+      "构建安全且资源高效的云环境，其核心基石在于 CPU 硬件虚拟化。本质上，虚拟化允许单个 CPU 运行多个独立且安全的虚拟机 (VM) 实例，这些实例由 VMware ESXi 等虚拟机管理程序进行统一调度。多核 CPU 可被灵活划分，将每个虚拟机分配至单个核心或逻辑线程。虚拟机管理程序还能通过网络将实例迁移至不同的核心、插槽或服务器上，以此优化 CPU 利用率，同时确保数据与指令安全，免受同一 CPU 上其他运行实例的干扰。",
+      "云计算对虚拟化的需求，叠加 CPU 设计者为提升性能而引入的 SMT 技术，最终在 2018 年被幽灵 (漏洞) 与熔断 (漏洞) 所利用。当两个实例在同一物理核心的不同线程上运行时，攻击者可利用 CPU 核心的分支预测功能，窥探并拼凑出另一线程的数据。分支预测本是一项性能提升技术，通过在程序运行前提前猜测、提取并执行指令，使 CPU 保持满载状态。面对云端安全可能沦陷的危机，各家提供商紧急禁用 SMT，以彻底切断这一攻击路径。",
+      "尽管后续推出了补丁与硬件修复方案，但禁用 SMT 导致了高达 30% 的性能损失。这一代价成为英特尔挥之不去的阴影，并直接导致其在后续作出了一系列不合时宜的设计决策，我们将在下文对此展开详述。"
+    ],
+    "05-the-ai-gpu-and-cpu-consolidati": [
+      "新冠疫情引发了一波线上红利，Zoom 视频会议激增、电商繁荣以及网民在线时长的大幅增加，共同推高了互联网流量，数据中心 CPU 的出货量也随之创下历史新高。在 2022 年 11 月 ChatGPT 问世前的五年间，英特尔向云厂商和企业级数据中心累计出货了超 1 亿颗至强可扩展 CPU。",
+      "自此以后，AI 模型的训练与推理服务彻底颠覆了 CPU 在数据中心里的地位，并引发了 CPU 部署与设计策略的全面变革。AI 模型计算依赖海量的矩阵乘法，这类运算极易实现并行化，非常适合在 GPU 上大规模执行。GPU 本就配备了庞大的向量单元阵列，这些阵列最初正是为了渲染游戏与可视化 3D 图形而设计的。",
+      "尽管加速器节点依然需要宿主 CPU，但 AI 高度结构化且相对简单的计算需求，根本无法发挥 CPU 运行多分支、对延迟敏感代码的优势。此外，CPU 仅有几十个向量单元，而 GPU 动辄数千个，这导致 CPU 的性能与效率落后了 100 到 1000 倍。尤其是当专为 AI 设计的 GPU 引入了专攻矩阵乘法的张量核心 (Tensor Core) 后，差距更是悬殊。尽管英特尔试图通过翻倍的 AVX-512 端口和专用的 AMX (高级矩阵扩展) 加速引擎来强化向量与矩阵运算支持，CPU 依然在数据中心里沦为了配角。然而，互联网服务仍需维持运转，而数据中心的电力却已优先倾斜给 GPU 计算。在双重驱动下，CPU 顺应时代演进，分化成了两大阵营。",
+      "头节点",
+      "头节点 CPU 的职责是管理挂载的 GPU 并持续为其输送数据。为了尽可能压低长尾延迟，系统需要极高的单核性能、大容量缓存，以及高带宽内存与 IO。像英伟达 Grace 这样的专用设计，专门为 GPU 实现了内存一致性访问，使 GPU 能够将 CPU 内存用作模型上下文的键值缓存 (KV Cache) 扩展，这要求 CPU 与 GPU 之间具备极高的带宽。在每个计算节点中，头节点通常采用 1 颗 CPU 搭配 2 颗或 4 颗 GPU 的配置。典型例子包括：",
+      "每个超级芯片配备 1 颗 Vera CPU 与 2 颗 Rubin GPU",
+      "每个计算托盘配备 1 颗 Venice CPU 与 4 颗 MI455X GPU",
+      "每个计算托盘配备 1 颗 Graviton5 CPU 与 4 颗 Trainium3",
+      "每个节点配备 2 颗 x86 CPU 与 8 颗 TPUv7",
+      "云原生插槽整合",
+      "GPU 疯狂吞噬数据中心功耗预算。为了尽可能高效地处理其余互联网业务，“云原生”CPU 的研发进程全面提速。其核心目标在于：在最优效率（每瓦吞吐量）下，实现单插槽吞吐量与请求处理量的最大化。行业不再一味堆叠新型 CPU 来拉升总吞吐量，而是果断退役低效的老旧服务器，将其替换为数量极少的云原生 CPU。这些新处理器不仅能满足总吞吐量需求，功耗更只有原先的一小部分。这不仅大幅削减了运营成本，更为扩充 GPU 算力腾出了宝贵的功耗预算。",
+      "https://substackcdn.com/image/fetch/$s_!TfPu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe59d15e-c167-4a38-b904-c6f6e4efa593_2821x1421.png",
+      "AMD Turin Dense 处理器 7:1 插槽整合。来源：AMD",
+      "业界现已能实现 10:1 甚至更高的插槽整合率。疫情期间云计算投资狂潮中采购的数百万台英特尔 Cascade Lake 服务器正面临退役。取而代之的是 AMD 与英特尔最新一代 CPU，它们在提供同等性能的同时，功耗还不到老架构的五分之一。",
+      "架构设计上，这些云原生 CPU 采用面积与能效比高的中型核心，主攻超多核路线。相较于传统 CPU，它们适当削减了缓存容量与 IO 扩展能力。英特尔凭借 Sierra Forest 处理器，将 Atom 核心正式引入数据中心。AMD Bergamo 处理器则采用了面积与能效比更高的 Zen4 核心物理布图。具备出色能效的 ARM 架构设计（如 AWS Graviton 处理器）大获成功；Ampere Computing 也顺势推出 Altra 与 AmpereOne 系列产品线，直指云原生计算市场。"
+    ],
+    "06-the-rl-and-agentic-era": [
+      "https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png",
+      "微软 Fairwater GPU 与 CPU 数据中心建筑。来源：Google Earth",
+      "如今，为支持头节点之外的AI训练与推理，CPU的使用量再次激增。微软为 OpenAI 建设的 Fairwater 数据中心便是明证。在这里，一栋48兆瓦（MW）的 CPU 与存储建筑支撑着295兆瓦的主GPU集群（GPU cluster）。这意味着现在需要数以万计的 CPU 来处理和管理由 GPU 产生的 PB 级数据，如果没有 AI，这种庞大需求根本无从谈起。",
+      "AI 计算范式的演进直接推高了 CPU 的使用强度。在预训练与模型微调阶段，CPU 负责对数据进行存储、分片和索引，随后将其输送至 GPU 集群进行矩阵乘法运算。在多模态模型中，CPU 还被用于图像和视频解码，尽管目前已有越来越多的固定功能媒体加速模块被直接集成到 GPU 中。",
+      "https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png",
+      "强化学习 (RL) 训练循环。RL环境（绿色部分）中使用的 CPU。来源：SemiAnalysis",
+      "采用强化学习 (RL) 技术来改进模型，进一步推高了 CPU 需求。正如我们在强化学习 (RL) 深度分析中所指出的，在 RL 训练循环中，“RL环境”需要执行模型生成的动作并计算相应的奖励。在编程和数学等领域，这要求大量 CPU 并行工作，以完成代码编译、验证、解释及工具调用。此外，CPU 还深度参与复杂的物理模拟，并对生成的合成数据进行高精度验证。为进一步扩展模型规模，RL环境日益复杂。这就要求在主 GPU 集群附近部署大型高性能 CPU 集群，以确保 GPU 满载运行，最大限度减少 GPU 空闲时间。",
+      "训练循环对 RL 和 CPU 的依赖愈发显著，正在催生新的瓶颈。由于 AI 加速器的每瓦性能提升速度远超 CPU，这意味着诸如 Rubin 等下一代 GPU，其所需的 CPU 与 GPU 功耗配比，可能会进一步攀升，甚至打破上文 Fairwater 数据中心中 1:6 的比例。",
+      "扩展强化学习：环境、奖励作弊、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+      "在推理端，能够搜索并利用互联网的检索增强生成 (RAG) 模型日益兴起，加之能够调用工具和查询数据库的智能体模型不断涌现，双重驱动下，处理这些请求所需的通用 CPU 算力需求大幅飙升。由于具备向多个数据源发送 API 调用的能力，每个智能体对互联网的使用强度，本质上远超人类进行简单的谷歌搜索。为应对互联网流量的阶梯式跃升，AWS 和 Azure 正在大规模部署其自研的 Graviton 和 Cobalt 系列 CPU，同时采购更多的商用 x86 通用服务器。",
+      "步入 2026 年，数据中心对 CPU 和 DRAM 的需求只会愈发强劲。前沿 AI 实验室的 CPU 已经无法满足其 RL 训练需求，正直接与云服务提供商抢夺商用 x86 CPU 服务器，疯狂争夺 CPU 供货配额。面对 CPU 库存意外告罄的局面，英特尔正计划全面上调其至强系列的价格，同时增加生产设备以提振 CPU 产能。AMD 则一直在提升供货能力，旨在实现增长并抢占服务器 CPU 总潜在市场 (TAM) 份额，其笃定该市场在 2026 年将实现“强劲的双位数”增长。接下来，我们将为订阅者深入探讨 2026 年之后 CPU 市场格局的演变。"
+    ],
+    "08-crossbar-limits": [
+      "随着设计人员试图进一步增加核心数量，他们触及了这些早期互连架构的扩展瓶颈。由于追求极低延迟与一致性，交叉开关（Crossbar）设计采用了全互连模式，即裸片上的每个核心都有一条独立链路与其他所有核心相连。然而，随着核心数量增多，链路数量激增，导致复杂性大幅上升。",
+      "2 个核心：1 条连接",
+      "4 个核心：6 条连接",
+      "6 个核心：15 条连接",
+      "8 个核心：28 条连接",
+      "大多数设计的实际极限止步于 4 个核心，核心数更高的处理器则是通过多芯片模块和双核模块来实现的，这些模块在核心对之间共享L2缓存与数据网络端口。交叉开关布线通常在共享L3缓存上方的金属层中完成，以节省面积。2008 年问世的英特尔 6 核 Dunnington 处理器便采用了三个双核模块，并配备 16MB 共享L3缓存。",
+      "https://substackcdn.com/image/fetch/$s_!6t7R!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F26443b09-cd4f-4635-8189-0a85234e9709_1504x2079.png",
+      "AMD 皓龙 Istanbul 6 核裸片图。来源：AMD",
+      "AMD 于 2009 年发布 6 核 Istanbul 处理器，配备 6 路交叉开关与 6MB L3 缓存。其 2010 年推出的 12 核 Magny-Cours 采用了两块 6 核裸片，而 16 核 Interlagos 则由两块裸片组成，每块裸片包含四个推土机双核模块。"
+    ],
+    "09-intels-ring-bus": [
+      "https://substackcdn.com/image/fetch/$s_!u8AU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4c3bb6f-9b4b-47c6-9b22-a50aecc28ea0_2424x1789.png",
+      "英特尔 Nehalem-EX 环形互连架构。来源：英特尔，Hot Chips 2009",
+      "为了突破这一极限，英特尔于 2010 年在其 Nehalem-EX (Beckton) 至强处理器中引入了环形总线架构，将 8 个核心、集成内存控制器以及跨插槽 QPI 链路整合到了单一裸片中。环形总线早年曾应用于 ATi Radeon GPU 与 IBM Cell 处理器中。该架构将所有节点排布成一个环路，环形站点直接集成在 L3 缓存切片内，布线则走缓存上方的金属层。缓存与归属代理负责处理核心间的内存嗅探，并维护与内存控制器的一致性。",
+      "来自每个环形站点的核心与 L3缓存切片的数据经排队后注入环路，数据每个时钟周期向前推进一个站点，直至抵达目标位置。这意味着核心间的访问延迟不再均衡：相比紧邻的核心，位于环路相对两侧的核心需要等待更多周期。为缓解延迟与拥堵，设计中引入了两个反向旋转的环路，并根据地址与环路负载选择最优传输方向。随着布线复杂度得到有效控制，英特尔得以将 Nehalem-EX 的核心数扩展至 8 个，并在 Westmere-EX 上进一步增至 10 个。然而，若继续沿用单环架构进一步扩充核心，过长的环路必将引发一致性与延迟问题。",
+      "Ivy Bridge-EX 虚拟环",
+      "https://substackcdn.com/image/fetch/$s_!4FIz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0830e24f-4740-4e69-8707-090b48c6ec4c_2332x1803.png",
+      "英特尔 Ivytown 虚拟环。来源：英特尔，Hot Chips 2014",
+      "为了在 Ivy Bridge 世代将核心数扩展至 15 个，英特尔必须在路由拓扑上巧妙布局。核心被排布为 3 列（每列 5 个），并由 3 个“虚拟环”环绕这三列核心。环形站点内的交换机负责控制数据在半环上的传输方向，由此构建出一种“虚拟”的三环架构。",
+      "Haswell 与 Broadwell 双环形总线",
+      "https://substackcdn.com/image/fetch/$s_!gHb0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b1e5413-09bc-46c0-9cd2-64e233a613ab_2987x1679.png",
+      "Haswell 高核心数 (HCC) 双环形总线。来源：英特尔",
+      "2014 年，英特尔在 18 核的 Haswell 高核心数 (HCC) 裸片上再次更改了拓扑结构，引入了双独立反向旋转环形总线，两者通过一对双向缓冲交换机相连。内存控制器被分置于两个环形总线中，其中 8 核的环形总线还容纳了 IO 环形站点。中等核心数 (MCC) 裸片变体则将单个半环自身折返相连。2015 年发布的 Broadwell HCC 将核心数提升至 24 个，配备了双 12 核环形总线。",
+      "将多个环形总线拼接在一起的缺点在于，核心间通信与内存访问的延迟差异增大，当一个环上的核心访问另一个环的内存时尤为明显。对于那些对延迟敏感且核心间交互频繁的程序而言，这种非均匀内存访问 (NUMA) 对系统性能极为不利。",
+      "为了缓解这一问题，英特尔在 BIOS 中提供了一个“片上集群 (CoD)”配置选项，将两个环形总线视为独立的处理器。操作系统会显示 CPU 被拆分为两个 NUMA 节点，每个节点可直接访问一半的本地内存和 L3缓存。在 CoD 模式下的测试表明，每个环内的延迟保持在 50ns 以下，而跨环访问则超过 100ns，这凸显了经过缓冲交换机所带来的延迟惩罚。",
+      "虽然这些方法帮助英特尔将核心数增加到了 24 个，但这既不优雅，也缺乏可扩展性。增加第三个环形总线和另外两组缓冲交换机会过于复杂且不切实际，还会产生过多的 NUMA 集群。要支持更多核心，必须采用全新的互连架构。"
+    ],
+    "10-intels-mesh-architecture": [
+      "https://substackcdn.com/image/fetch/$s_!pozD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F216a402f-a60c-42f3-b7e4-00546356b555_3010x1685.png",
+      "英特尔 Knights Landing 网格互连架构。来源：英特尔，Hot Chips 2016",
+      "为了解决可扩展性问题，英特尔在 2017 年将其 2016 款至强 Phi “Knights Landing” 处理器中使用的网格互连架构，引入到主流的 Skylake-X 至强可扩展 CPU 中，在 XCC (极高核心数) 裸片中集成了 28 个核心。尽管核心数相比 Broadwell 并未大幅增加，但这一设计奠定了未来十年持续扩展核心数的基础。",
+      "在网格架构中，核心呈网格状排列，每行每列通过半环相连，形成 2D 网格阵列。每个网格节点可容纳核心与 L3缓存切片、PCIe IO、IMC 以及加速器。核心间的路由采用环形机制，数据先沿垂直方向传输，再沿水平方向移动。缓存与主代理及其嗅探过滤器如今分布在所有环形节点上，以维持整个网络内的内存一致性。",
+      "在网格网络中，由于多个内存控制器分布在裸片两侧，大型网格的内存访问与核心间延迟差异极大。与早期的片上集群 (CoD) 方法类似，系统提供了几种集群模式，将网格划分为四个象限以实现子NUMA集群 (SNC)。这降低了平均延迟，但代价是将每个处理器视为多个插槽，且每个 NUMA 节点的 L3缓存与内存访问池也相应缩小。",
+      "在 Knights Landing 中，每个网格节点容纳两个核心，并共享 L2缓存。网格阵列规模为 6 列 9 行，顶部和底部行配置了更多的 IO 和 MCDRAM。网格网络运行在独立的时钟频率上，并能动态调整网格时钟以节省功耗。在 Knights Landing 上，网格运行频率为 1.6GHz。",
+      "https://substackcdn.com/image/fetch/$s_!b8mI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffb55424a-5436-4909-83f4-57f750341ca1_1951x1654.png",
+      "Skylake-SP 网格架构图。来源：英特尔",
+      "在 Skylake-X 中，28 个核心排列成 6x6 网格阵列，顶部设有北侧 IO 模块，两侧预留了两个 IMC (集成内存控制器) 位置。核心体积增大导致网格阵列规模缩小。为提升浮点性能，这些核心内部增加了更多的 L2缓存与 AVX-512 扩展。若再增加一行或一列，裸片尺寸必将突破 26 x 33 毫米的光刻掩模版极限。得益于网格规模缩小以及 CPU 频率提升（最高达 4.5GHz），网格时钟频率也随之拉高至 2.4GHz。这使得其平均延迟与 Broadwell 的双环架构不相上下。",
+      "随后的 Cascade Lake 与 Cooper Lake 处理器仅作微调，依然沿用相同的 28 核心布局。顺带一提，面对 AMD 携 EPYC 杀回数据中心市场，英特尔在 Cascade Lake-AP 上推出了 56 核心的双裸片 MCM (多芯片模块)，但随后又砍掉了 Cooper Lake CPX-4 的类似版本。",
+      "https://substackcdn.com/image/fetch/$s_!8h83!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3aeb2086-3dc2-4707-b47a-1b04ce197224_2176x1604.png",
+      "Ice Lake XCC (极高核心数) 40 核心网格架构图。来源：英特尔",
+      "下一代 Ice Lake 受益于制程节点从 14nm 演进至 10nm，核心数得以提升至 40 个，呈 8x7 网格排列。这已是光刻掩模版极限下的最大规模。然而，紧随其后的下一代 Sapphire Rapids 仍将停留在同一制程节点，且需集成更多功能特性。这让英特尔在如何继续堆叠核心数上进退维谷。",
+      "跨 EMIB (嵌入式多芯片互连桥接) 的解耦网格架构",
+      "https://substackcdn.com/image/fetch/$s_!84cW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F224c3b3b-2f89-4983-baa8-ba2dfbf79771_2979x1661.png",
+      "英特尔至强向 Chiplet 演进的解耦之路。来源：英特尔",
+      "https://substackcdn.com/image/fetch/$s_!Jaqc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcd750739-7f96-4cdb-b968-d5fccfcd99c2_2197x1895.png",
+      "Sapphire Rapids XCC 拓扑图。来源：英特尔",
+      "Sapphire Rapids 引入了用于矩阵乘法和 AI 的 AMX (高级矩阵扩展) 引擎，核心面积进一步增大。这意味着单片裸片只能容纳 34 个核心，相比 Ice Lake 反而出现了倒退。为了将核心数提升至 60 个，英特尔别无选择，只能再次将核心拆分到多个裸片上。然而，他们希望在芯片层面保持“逻辑上的单片结构”。这样一来，处理器在系统层面的呈现形态和性能表现就能与单片裸片毫无二致。",
+      "因此，Sapphire Rapids 首次采用了英特尔的 EMIB (嵌入式多芯片互连桥接) 高级封装技术，实现了跨裸片的网格架构。两对镜像对称的 15 核心裸片通过模块化裸片互连结构拼接在一起。这在四个象限和近 1600 平方毫米的硅片上，构建了一个规模庞大得多的 8x12 网格。为了应对 PCIe 5.0 翻倍的吞吐量与全新数据加速器模块之间激增的数据流量，IO 区域必须配备双排网格节点。",
+      "随着跨多裸片的网格规模大幅扩张，核心间的平均延迟从 Skylake 的 47ns 恶化至 59ns。为了尽量避开网格网络，英特尔将每个核心的私有 L2缓存增加到 2MB。这导致裸片上的 L2缓存总量甚至超过了 L3缓存（120MB 对 112.5MB）。此外，官方也更加推荐使用子NUMA集群 (SNC) 模式，将每个裸片视为一个独立的象限。",
+      "尽管这是英特尔首次转向 Chiplet 架构，但 Sapphire Rapids 却因长达数年的延期和频繁的改版而臭名昭著。或许是由于跨 EMIB 运行网格架构时遇到了性能瓶颈，亦或是出于其他执行层面的问题，其最终版本直到修改至E5步进才最终发布。而在最初的路线图中，它的原定发布时间是 2021 年。",
+      "2023 年底推出的后续更新版本 Emerald Rapids 沿用了相同的核心架构和制程节点，但将裸片数量减少到了 2 个。得益于 EMIB 裸片间互连占用的硅片面积减少，英特尔得以将核心数从 60 个提升至 66 个（为保证良率，实际最多启用 64 个）。同时，L3缓存也几乎翻了三倍，达到 320MB。我们曾在此处详细撰文探讨过相关设计决策。",
+      "英特尔 Emerald Rapids 在 Chiplet 路线上的倒退——设计、性能与成本 - Dylan Patel、Gerald Wong 及另外 3 人 · 2023 年 5 月 3 日",
+      "至强 6 上的异构解耦",
+      "https://substackcdn.com/image/fetch/$s_!uuve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb7e1a665-9bf8-4dd2-873a-4de31bd70c7e_2802x1562.png",
+      "至强 6 平台特性。来源：英特尔",
+      "https://substackcdn.com/image/fetch/$s_!5cM1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb4873f4f-99fa-4a9f-9389-b3c1a35f46c6_2510x1047.png",
+      "至强 6 计算与 I/O 裸片图解。来源：英特尔",
+      "采用多裸片芯粒设计，除了能突破光刻掩模版面积限制外，另一大优势在于能够灵活混搭裸片，并在不同的变体和配置中共享设计。在 2024 年推出的下一代至强 6 平台上，英特尔将 I/O 与核心和内存剥离，走向了异构解耦。此举使得 I/O 裸片得以保留在较旧的 Intel 7 制程节点上，而计算裸片则跃升至 Intel 3 制程节点。因此，英特尔能够复用为 Sapphire Rapids 架构开发的 I/O IP；同时，由于 I/O 模块从先进节点中获益有限，这种做法也有效节约了成本。",
+      "与此同时，计算裸片可以与 P 核 Granite Rapids 架构和 E 核 Sierra Forest 架构灵活混搭。在顶配的 Granite Rapids-AP 至强 6900P 系列中，最多可搭载 3 个计算裸片，从而在总计 5 个裸片上构建出一张庞大的 10x19 网格。该网格物理连接了 132 个核心，出于良率考量，实际最多启用 128 个核心。",
+      "https://substackcdn.com/image/fetch/$s_!Omye!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff31bc7da-3964-4e1a-a65c-22d17a7473d4_3102x2196.png",
+      "至强 6 计算裸片拼接图。从左上角顺时针方向依次为：UCC 44核、高核心数 (HCC) 50核、HDCC (高密度核心数) 152核、LCC 20核。来源：英特尔，SemiAnalysis 预估",
+      "在 144 核的 Sierra Forest 上，E 核被划分为 4 核集群并共享一个公共网格节点。这些集群排列成 8x6 的网格，裸片上物理光刻了 152 个核心，最多可激活 144 个。尽管 Sierra Forest 是应超大规模云服务商的要求而打造，旨在提供单核 TCO 更低的“云原生”CPU，但英特尔已承认其市场接受度极其有限。目前，这些云厂商早已转向 AMD 并开始自研基于 ARM 的 CPU，而英特尔传统的企业级客户对此也毫无兴趣。结果就是，双裸片 288 核的 Sierra Forest-AP（至强 6900E）SKU 未能实现全面上市，仅作为路线图之外的低产量产品苟延残喘，专供极少数下了订单的超大规模云客户。",
+      "Clearwater Forest 的失败",
+      "https://substackcdn.com/image/fetch/$s_!-Mf7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9e7b64d4-593a-4b8e-a26c-3ddba7850e97_2543x2621.png",
+      "基于 18A 制程节点的十二个 24 核 Clearwater Forest 计算裸片。来源：英特尔，SemiAnalysis",
+      "这些 I/O 裸片也将被复用于即将推出的至强 6+ Clearwater Forest-AP E 核处理器中。计算裸片首次采用了英特尔的 Foveros Direct 混合键合技术，将 18A 核心裸片堆叠在包含网格、L3缓存和内存接口的基础裸片之上，使核心总数跃升至 288 个。垂直解耦设计使得计算核心能够向最新的 18A 逻辑制程节点演进，同时将微缩效益不佳的网格、缓存和 I/O 模块保留在较旧的英特尔 3 制程节点上。",
+      "https://substackcdn.com/image/fetch/$s_!qVHN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9fc472b-1964-4d8a-9743-0610dd8a10ba_2966x1415.png",
+      "Clearwater Forest 性能预测。来源：英特尔",
+      "然而，英特尔的执行力问题在 Clearwater Forest 上再次暴露，其上市时间从 2025 年下半年推迟至 2026 年上半年。英特尔将延期归咎于 Foveros Direct 的集成难题。考虑到英特尔在摸索混合键合技术时，竟拿如此复杂的服务器芯片作为首发载体，出现这种情况并不令人意外。或许正因如此，这种垂直解耦的互连架构在访问基础裸片的 L3 缓存和网格网络时，带宽相对较低，每个 4 核集群仅有 35GB/s。",
+      "尽管历经两年的时间跨度，并采用了全新的核心微架构、新制程节点、新的先进封装且成本更高，英特尔展示的数据却表明，在同等核心数量下，Clearwater Forest 的性能仅比 Sierra Forest 快 17%。混合键合良率低下导致成本飙升，性能提升却如此有限，难怪英特尔在最新的 2025 年第四季度财报中对 Clearwater Forest 几乎只字未提。我们的判断是，英特尔根本不想大规模量产这些会拖累利润率的芯片，而是宁愿将其作为 Foveros Direct 提升良率的试验载体。"
+    ],
+    "11-amds-zen-interconnect-archite": [
+      "https://substackcdn.com/image/fetch/$s_!sC88!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7520d55a-ba5b-466e-9799-72fe683a1923_2860x1588.png",
+      "AMD 霄龙 (EPYC) CPU 演进历程。来源：AMD",
+      "https://substackcdn.com/image/fetch/$s_!Z99I!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc704a28b-2774-4428-9745-2cfdcf1f1573_2775x1508.png",
+      "英特尔抨击 AMD Naples 处理器。来源：英特尔",
+      "2017 年，AMD 携霄龙 (EPYC) Naples 7001 系列重返数据中心 CPU 市场，在业界引发轩然大波。英特尔嘲讽其设计是“四个胶水拼接的桌面级裸片”，且性能表现参差不齐。现实情况是，AMD 规模不大的设计团队必须精打细算。他们只承担得起流片一款裸片的成本，而这款裸片必须同时兼顾台式 PC、服务器，甚至还要在同一裸片上集成 10Gb 以太网以满足嵌入式需求。",
+      "https://substackcdn.com/image/fetch/$s_!NxBd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff6de7f59-7300-4154-aba5-836eae048878_3025x1693.png",
+      "AMD Zeppelin SoC（系统级芯片）架构。来源：AMD，ISSCC 2018",
+      "Naples 采用了四裸片 MCM（多芯片模块）设计，每个“Zeppelin”裸片包含 8 个核心，这使得 AMD 能够以 32 核规格超越英特尔的 28 核。每个裸片容纳 2 个核心复合体 (CCX)，内部的 4 个核心与 8MB L3 缓存通过交叉开关相连。裸片上的可扩展数据网络实现了 CCX 间的通信。封装内 Infinity Fabric (IFOP) 链路将每个裸片与封装内的其他 3 个裸片相连，而插槽间 Infinity Fabric (IFIS) 链路则用于实现双插槽设计。Infinity Fabric 实现了裸片间的一致性内存共享，该技术源自 AMD 早期的 HyperTransport 技术。",
+      "这种架构意味着没有统一的 L3缓存，且核心间延迟差异巨大。信号从一个裸片上 CCX 内的核心传输到另一个裸片上的核心，需要经过多次跳跃。一台典型的双插槽服务器最终会存在四个 NUMA 域。其通信层级包括：CCX 内部、CCX 之间、MCM 裸片之间、插槽之间。性能表现直接反映了这一点：渲染等高度可并行、极少需要核心间通信和内存访问的任务表现优异；而更依赖核心间通信、对内存和延迟敏感的任务则表现糟糕。此外，由于当时大多数软件并未针对 NUMA 架构进行优化，这让英特尔对 AMD“性能表现不稳定”的抨击显得确有其事。",
+      "霄龙 (EPYC) Rome 的集中式 I/O",
+      "https://substackcdn.com/image/fetch/$s_!qr8U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89034fe0-5221-40fe-9936-7e7e779456d6_2830x1602.png",
+      "Rome 与 Milan SoC 架构。来源：AMD",
+      "2019 年发布的 Rome 处理器彻底重构了裸片布局。AMD 借助异构解耦打造出 64 核产品，将当时仍停留在 28 核的英特尔远远甩在身后。八个 8 核核心计算裸片（CCD）环绕着一个中央 I/O 裸片，后者集成了内存和 PCIe 接口。CCD 升级至最新的台积电 N7 工艺，而 I/O 裸片则继续沿用格芯的 12nm 工艺。CCD 依然由两个 4 核 CCX 组成，但它们之间不再直接通信。相反，所有跨 CCX 的数据流量均通过 I/O 裸片路由，信号通过全局内存互连 (GMI) 链路在基板上传输。这意味着 Rome 在功能上表现为 16 个 4 核 NUMA 节点，但仅有两个 NUMA 域。",
+      "与上一代 Naples 类似，在 Rome 上启动的虚拟机（VM）必须限制在 4 核以内，以免因跨裸片通信造成性能损耗。2021 年发布的 Milan 处理器解决了这一问题。它转向了环形总线架构，将 CCX 规模扩大至 8 核，同时继续复用与 Rome 相同的 I/O 裸片。",
+      "https://substackcdn.com/image/fetch/$s_!yJpR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F053b0db0-b10d-46be-ab7c-6826eeb1b607_2777x1154.png",
+      "AMD Turin-Dense 架构。来源：AMD",
+      "尽管最初计划采用先进封装，AMD 在接下来的两代产品中依然坚守了这一熟悉的架构设计。2022 年发布的 Genoa 处理器扩展至 12 个 CCD，而 2024 年发布的 Turin 处理器（如 128 核的霄龙 (EPYC) 9755）更是搭载了多达 16 个 CCD。这些 CCD 均围绕一个中央 I/O 裸片排列，该 I/O 裸片已升级支持 DDR5 和 PCIe 5.0 接口。",
+      "这种芯粒设计的核心优势在于，仅需一次裸片流片即可实现核心数量的可扩展性。AMD 只需设计单一 CCD，通过组合不同数量的 CCD，就能在整个 SKU 矩阵中提供全系列的核心数量配置。此外，每个 CCD 的裸片面积较小，这不仅有助于提升良率，还能在向新制程节点迁移时加快上市时间。这与网格（mesh）架构设计形成鲜明对比：后者采用接近光刻掩模版极限尺寸的大型裸片，且针对不同核心数量的较小网格配置，必须进行多次流片。在共享同一 I/O 裸片和插槽平台的前提下，AMD 还能灵活替换不同的 CCD 设计。例如，AMD 借助紧凑的 Zen 4c 核心打造了 Bergamo 处理器，并利用 Zen 5c 核心推出了 192 核的 Turin 衍生版本。",
+      "我们此前曾撰文分析过这种专为高效云计算打造的新型核心衍生版本。架构解耦还允许打造更小规模的版本，例如 EPYC 8004 Siena 处理器，该产品在 6 通道内存平台上仅使用了 4 个 Zen 4c CCD。",
+      "Zen 4c：AMD 对超大规模 ARM 与英特尔 Atom 的有力回击 - Dylan Patel 与 Gerald Wong · 2023 年 6 月 5 日"
+    ],
+    "12-intel-diamond-rapids-architect": [
+      "https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png",
+      "Diamond Rapids 架构概览。来源：HEPiX，经由 @InstLatX64",
+      "乍看之下，Diamond Rapids 简直是 AMD 设计的翻版，计算裸片紧紧环绕着中央的 I/O 裸片。看来要在 Granite Rapids 的 10x19 规模之上继续扩展单一网格网络以增加核心数，难度实在太大。这意味着英特尔最终妥协，接受了多 NUMA 节点与多 L3缓存域的架构。四个核心构建块 (CBB) 裸片分布在两侧，将两个 I/O与内存集线器 (IMH) 裸片夹在中间。",
+      "在每个 CBB 内部，32 个基于 Intel 18A-P 工艺的双核模块 (DCM) 被混合键合到基础的 Intel 3-PT 裸片上，该基础裸片包含 L3缓存与本地网格互连。为了减少网格站点数量并降低网络流量，现在每个 DCM 中的两个核心共享一个 L2缓存。这种设计让人不禁联想到 2008 年的 Dunnington 架构。虽然这意味着 Diamond Rapids 总共拥有 256 个核心，但主流 SKU 似乎最多只会启用 192 个核心。受限于较低良率，更高核心数的版本大概率将预留给路线图之外的定制订单。",
+      "IMH 裸片包含 16 通道 DDR5 内存接口、支持 CXL3 的 PCIe6，以及英特尔数据路径加速器（QAT、DLB、IAA、DSA）。",
+      "有趣的是，裸片间互连似乎不再需要 EMIB (嵌入式多芯片互连桥接) 先进封装。封装基板上的长走线将每个 CBB 裸片与两个 IMH 裸片直接相连。这使得每个 CBB 都能直接访问完整的内存与 I/O 接口，无需再额外跳转至另一个 IMH。这也确保了任何 CBB 间的通信仅需 2 次跨裸片跳数。由于放弃了先进封装并将核心拆分到 4 个裸片上，我们预计跨 CBB 的延迟将明显恶化，与同一裸片内的延迟相比将出现巨大落差。",
+      "https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png",
+      "英特尔在其 P核 (性能核) 上移除了 SMT。来源：英特尔",
+      "延迟恶化固然棘手，但 Diamond Rapids 最致命的问题在于砍掉了 SMT。幽灵 (漏洞) 和熔断 (漏洞) 对英特尔的根本性打击远超 AMD，英特尔核心设计团队对此心有余悸，因此从 2024 年客户端 PC 的 Lion Cove 架构开始，他们在设计 P核 (性能核) 时便彻底抛弃了该功能。英特尔当时给出的合理化解释是，移除 SMT 功能所节省的芯片面积能带来更好的效率，代价则是牺牲原始吞吐量。这对 PC 设计来说并无大碍，因为它们同时集成了 E核 (能效核)，足以提振多线程性能。",
+      "然而，最大吞吐量对数据中心 CPU 至关重要，这让 Diamond Rapids 陷入了严重劣势。与当前 128 核、256 线程的 Granite Rapids 相比，我们预计主流的 192 核、192 线程 Diamond Rapids 速度仅能提升约 40%，这将导致英特尔在又一代产品中再次面临性能落后于 AMD 的窘境。",
+      "在产品开发后期，英特尔彻底砍掉了主流的 8 通道 Diamond Rapids-SP 平台，导致其出货量最大的核心市场至少要到 2028 年才会迎来换代产品。尽管这有助于精简英特尔臃肿的 SKU 产品线，但我们认为这是一步错棋，因为用于 AI 工具调用和上下文存储的通用计算，更多依赖于具备良好连接性的主流 CPU，而非追求极致单插槽性能的产品。"
+    ],
+    "13-amd-venice-architecture-change": [
+      "https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png",
+      "AMD Venice 裸片布局。来源：@HighYieldYT",
+      "尽管英特尔放弃了 EMIB (嵌入式多芯片互连桥接)，AMD 却终于在 Venice 处理器上采用了同等的高级封装技术，通过高速短距链路将 CCD 与 I/O 裸片相连。我们在加速器、HBM 与高级封装模型中提供了相关的出货量数据。",
+      "CCD 链路所需的额外边缘布线空间 (Shoreline) 占据了更多宽度，迫使中央 I/O 枢纽必须拆分为两块裸片。这导致在芯片的两半之间通信时，会增加一次裸片间跳转，进而形成了一个英特尔方案所能避免的新 NUMA 域。目前，I/O 裸片总共配备 16 个内存通道，多于 2022 年 Genoa 架构的 12 个。AMD 也终于追平英特尔，开始支持多路复用内存以获取更高带宽；其 16 通道多路复用双列直插式内存模块 (MRDIMM)-12800 可提供 1.64TB/s 的带宽，达到 Turin 的 2.67 倍。",
+      "AMD 还在 CCD 内部转向了 Mesh 网络，采用 4x8 网格布局容纳 32 个 Zen6c 核心，不过可能还会包含一个额外的备用核心以提升良率。8 个台积电 N2 工艺的 CCD 将总核心数提升至 256 个，相比 192 核的 Turin-Dense 3nm 霄龙 (EPYC) 9965 增加了三分之一。Zen6c 为每个核心配备了完整的 4MB L3 缓存 (此前在 Zen5c 上该容量被减半)，从而在每个 CCD 上形成了 128MB 的大容量缓存区。",
+      "针对 AI 头节点优化、核心数较少且主频更高的“-F”系列 SKU，将采用与其消费级桌面和移动 PC 产品线相同的 12 核 Zen6 CCD 设计，通过 8 个 CCD 实现最多 96 个核心。尽管相比 128 核的 Turin-Classic 4nm 霄龙 (EPYC) 9755 出现倒退，但与高频版的 64 核 EPYC 9575F 相比，其核心数依然增加了 50%。",
+      "最后，在 I/O 裸片旁边、DDR5 接口引出处，可以看到 8 个小裸片。这些是集成无源器件 (IPD)，有助于在 I/O 极度密集的区域为芯片平稳供电；在该区域，SP7 (插槽) 的封装布线已被内存通道的扇出完全占满。",
+      "https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png",
+      "AMD Venice 性能声明。来源：AMD",
+      "在性能方面，AMD 声称在 SPECrate®2017_int_base 测试中，顶配 256 核版本的每瓦性能比顶配 192 核 Turin 高出 1.7 倍以上。得益于具备更高每时钟周期指令数 (IPC) 的全新 Zen 6 核心微架构，这意味着其单核性能实现了进一步跃升。Zen 6 还针对 AI 数据类型引入了新指令，包括 AVX-512_FP16、AVX_VNNI_INT8，以及一种全新的 AVX-512_BMM 指令，用于在 CPU 浮点单元上执行位矩阵乘法和位反转操作。",
+      "对于 BMM 指令，FPU 寄存器会存储 16x16 二进制矩阵，并利用 OR（或）与 XOR（异或）运算来计算 BMM 累加结果。二进制矩阵的计算难度远低于浮点矩阵。对于能够利用该特性的软件（如 Verilog 仿真），它能带来大幅效率提升。然而，BMM 缺乏大语言模型 (LLM) 所需的足够精度，因此我们认为该指令的实际采用率将非常有限。",
+      "鉴于 AMD 的单核性能已显著领先于英特尔（96 核 Turin 可匹敌 128 核 Granite Rapids），在 2026 至 2028 年这一代数据中心 CPU 中，AMD Venice 与 Intel Diamond Rapids 之间的性能差距将进一步拉大。得益于全新的裸片间互连技术和更大的核心域，Venice 的核心间延迟预计将优于 Turin。",
+      "在英特尔抽身退出的领域，AMD 正在持续加码。英特尔直接砍掉了其 8 通道处理器，而 AMD 则将推出全新的 8 通道 Venice SP8 平台。该平台将作为低功耗、小插槽 霄龙 (EPYC) 8004 Siena 系列的继任者，同时仍能提供多达 128 个高密度 Zen 6c 核心。借此，AMD 必将在企业级市场这一英特尔的传统腹地中，斩获大量市场份额。"
+    ],
+    "14-2026-cpu-costing-analysis": [
+      "https://substackcdn.com/image/fetch/$s_!hsEy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8c0105ff-d533-4e0b-b724-ed097370cf6f_1065x1901.png",
+      "AMD Venice 物料清单（BoM）成本分析。来源：SemiAnalysis 估算 sales@semianalysis.com",
+      "SemiAnalysis 凭借对供应链的深入了解，提供详尽的物料清单成本分析。若需了解确切的裸片尺寸、配置、拓扑结构、性能估算，以及与超大规模云厂商 ARM CPU 的竞争力对比，请通过 [Sales@SemiAnalysis.com](mailto:Sales@SemiAnalysis.com) 联系我们，获取定制化咨询与竞品分析服务。我们掌握 AMD Turin、Venice，英特尔 Granite Rapids、Diamond Rapids，英伟达 Grace、Vera，以及来自 AWS、微软、谷歌等超大规模云厂商 ARM CPU 的详细成本与拆解数据。"
+    ],
+    "15-nvidia-grace": [
+      "https://substackcdn.com/image/fetch/$s_!Fg1r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56be8f6f-b46d-4a8c-b042-449a59a8fe0c_1999x1018.png",
+      "英伟达 Grace CPU 连接示意图。来源：英伟达",
+      "https://substackcdn.com/image/fetch/$s_!oe6W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e6f2555-0038-48f1-945e-f48bdc05c2f7_1846x1046.png",
+      "英伟达 Grace 可扩展一致性网络。来源：英伟达",
+      "与本文讨论的大多数通用 CPU 不同，英伟达的 CPU 在设计之初就充分考虑了头节点（head nodes）和扩展 GPU 内存的需求，并将 NVLink-C2C 作为其杀手锏。这条 900GB/s（双向）的高速链路允许相连的 Hopper 或 Blackwell GPU 全带宽访问 CPU 内存。每颗 Grace CPU 内存容量高达 480GB，有效缓解了 HBM 内存容量不足的限制。Grace 还采用了移动级 LPDDR5X 内存，在 512 位宽内存总线上维持 500GB/s 高带宽的同时，有效降低了非 GPU 功耗。初代 Grace Hopper 超级芯片为每颗 GPU 搭配 1 颗 Grace，而后续的 Grace Blackwell 世代则让 2 颗 GPU 共享 1 颗 CPU。此外，英伟达还为需要高内存带宽的 HPC 客户提供了双 Grace 超级芯片 CPU。",
+      "在 CPU 核心方面，英伟达采用了高性能的 ARM Neoverse V2 设计，每核心配备 1MB 私有 L2缓存。其 6x7 网格网络容纳了 76 个核心和 117MB 的 L3缓存，为保证良率，最多启用 72 个核心。网格节点上的每个缓存交换节点（CSN）最多连接 2 个核心和 L3缓存切片。英伟达着重强调了该网格网络高达 3.2TB/s 的对分带宽，这表明 Grace 专门侧重于数据流，而非单纯的 CPU 原始性能。",
+      "在性能方面，Grace 存在一个源自 Neoverse V2 核心的古怪微架构瓶颈，导致其运行未经优化的 HPC 代码时速度缓慢。根据英伟达的 Grace 性能调优指南，针对更好的代码局部性来优化大型应用，可带来 50% 的提速。这是因为核心分支预测引擎在提前存储和获取指令方面存在局限。在 Grace 上，指令被组织成 32 个 2MB 的虚拟地址空间。",
+      "当这个分支目标缓冲区填满超过 24 个区域时，性能开始一路陡降。热点代码会霸占缓冲区并加剧指令搅动（instruction churn），从而导致更多的分支预测失误。如果程序超出 32 个区域，整个 64MB 缓冲区将被清空，分支预测器会遗忘所有先前的分支指令，以腾出空间容纳新指令。在失去有效运作的分支预测器后，CPU 核心的前端会成为整个操作的瓶颈，导致 ALU 只能闲置等待指令执行。",
+      "正因如此，目前在 GB200 和 GB300 中，AI 工作负载会被 Grace CPU 拖慢。",
+      "英伟达 Vera",
+      "2026 年，Vera 将在 Rubin 平台上更进一步。其 C2C 带宽翻倍至 1.8TB/s；内存位宽同样翻倍，配备 8 个 128 位宽的 SOCAMM 192GB 模块，提供 1.5TB 内存容量和 1.2TB/s 带宽。网格网络设计得以保留，7x13 的网格容纳了 91 个核心，其中最多激活 88 个。L3缓存增加至 162MB。英伟达现将外围内存和 I/O 区域解耦为独立的芯粒（chiplet），共计 6 颗裸片采用 CoWoS-R 封装（包括 1 颗采用 3nm 工艺并配备 NVLink-C2C 的光罩极限尺寸（Reticle-sized）计算裸片、4 颗 LPDDR5 内存裸片以及 1 颗 PCIe6/CXL3 IO 裸片）。",
+      "https://substackcdn.com/image/fetch/$s_!C8_g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36a84fe6-b848-4374-9c7f-245cc317e0a3_1989x1851.png",
+      "Vera Rubin NVLink C2C 架构图。来源：英伟达",
+      "https://substackcdn.com/image/fetch/$s_!YHta!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febce2cd3-75fb-44fe-aa0b-35a191131a98_3119x1925.png",
+      "Vera CPU 规格。来源：英伟达",
+      "https://substackcdn.com/image/fetch/$s_!CdZY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24ed62c6-9b02-438e-8acb-1868bfd4ee81_3000x3040.jpeg",
+      "Vera 物理布图注释版。来源：英伟达，SemiAnalysis 测算",
+      "或许是吃尽了 ARM Neoverse 内核性能瓶颈的苦头，英伟达重新召回了其定制化 ARM 内核设计团队，推出了支持 SMT 的全新 Olympus 内核，实现了 88 核 176 线程的配置。英伟达上一款定制内核还要追溯到 8 年前，即搭载 10 宽发射 Carmel 内核的 Tegra Xavier SoC。基于 ARMv9.2 架构的 Olympus 内核将浮点单元宽度从 Neoverse V2 的 4 个端口提升至 6 个 128b 宽端口，现已支持 ARM 的 SVE2 FP8 运算。每个内核配备 2MB 私有 L2缓存，容量较 Grace 翻倍。综合来看，英伟达宣称升级至 Vera 后整体性能实现了 2 倍提升。"
+    ],
+    "17-microsoft-cobalt-200": [
+      "https://substackcdn.com/image/fetch/$s_!VLAl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9634fe8d-37d6-4a92-87a5-1b371d9a6a4f_1920x1080.png",
+      "Microsoft Cobalt 200 服务器。来源：Microsoft",
+      "https://substackcdn.com/image/fetch/$s_!nG1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F80839a8f-c1e0-44fe-ab4e-310b4427ccd1_2608x1427.png",
+      "Cobalt 200 SoC 物理布图。来源：Microsoft",
+      "Microsoft 基础设施——AI 与 CPU 定制芯片 Maia 100、Athena、Cobalt 100 - Dylan Patel 与 Myron Xie · 2023 年 11 月 15 日",
+      "继我们在前文探讨过的 2023 年微软首款 Cobalt 100 CPU 之后，Cobalt 200 于 2025 年底发布，并带来了多项升级。虽然核心数量增幅不大（从 128 个微增至 132 个），但与上一代的 Neoverse N2 相比，采用 Neoverse V3 设计的新核心性能大幅提升。每个核心配备高达 3MB 的超大 L2缓存。这些核心分布在两颗台积电 3nm 计算裸片上，通过标准的 ARM Neoverse CMN S3 网格网络连接，裸片之间则采用定制的高带宽互连技术。从架构图来看，每颗裸片采用 8x8 网格布局，配备 6 个 DDR5 通道以及 64 条支持 CXL 的 PCIe6 通道。每 2 个核心共享一个网格节点（mesh stop）。每颗裸片上物理集成了 72 个核心，出于良率考量，实际启用了 66 个。此外，网格网络中还分布着 192MB 的共享 L3缓存。",
+      "凭借这些升级，Cobalt 200 的运行速度较 Cobalt 100 提升了 50%。",
+      "与 Graviton5 不同，Cobalt 200 将仅用于 Azure 的通用 CPU 计算服务，不会被用作 AI 头节点。微软的 Maia 200 机架级系统转而部署了英特尔的 Granite Rapids CPU。"
+    ],
+    "18-google-axion-c4a-n4a": [
+      "https://substackcdn.com/image/fetch/$s_!iUhJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F05f65e22-af68-4a66-8471-20eb13de627b_3005x1594.png",
+      "Axion C4A 晶圆与封装。来源：Hajime Oguri, Google Cloud Next ’24",
+      "https://substackcdn.com/image/fetch/$s_!8nFB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7cca6b00-0503-42dd-b09d-15a595e864d9_1844x1814.png",
+      "Axion N4A CPU。来源：Google",
+      "Axion 产品线于 2024 年发布，并于 2025 年全面上市，标志着谷歌正式为其 GCP (谷歌云平台) 云服务引入定制 CPU 芯片。Axion C4A 实例采用大型单片 5nm 裸片，在标准网格网络上搭载多达 72 个 Neoverse V2 核心，并配备 8 通道 DDR5 与 PCIe5 连接。根据 Google Cloud Next 2024 大会展示的 Axion 晶圆特写图，该裸片似乎以 9x9 网格布局光刻了 81 个核心，预留了 9 个核心供屏蔽以保障良率。因此我们笃定，2025 年底开启预览的 96 核 C4A 裸金属实例必然采用了全新设计的 3nm 裸片。",
+      "针对更具成本效益的横向扩展 Web 与微服务，谷歌目前已推出 Axion N4A 实例预览版。该实例在尺寸大幅缩小的裸片上搭载了 64 个性能较低的 Neoverse N3 核心，为 2026 年全年的大规模产能爬坡铺平了道路。Axion N4A 芯片由谷歌基于台积电 3nm 工艺全定制设计。随着谷歌将内部基础设施向 ARM 架构迁移，Gmail、YouTube、Google Play 等服务将在 Axion 与原有的 x86 架构上并行运行。未来，谷歌将专门设计 Axion CPU，用作驱动 Gemini 的 TPU (张量处理器) 集群的头节点。"
+    ],
+    "21-huawei-kunpeng": [
+      "中国国产 CPU 的研发进程正在快速推进，龙芯和阿里巴巴的倚天系列均提供了本土设计的选项。然而，该市场的头号玩家当属华为，他们凭借 Kunpeng 处理器系列重新调整了数据中心 CPU 路线图。华为海思团队拥有业内顶尖的芯片设计工程师，其定制的 TaiShan CPU 核心与数据互连架构（data fabric）值得密切关注。",
+      "华为最初几代数据中心 CPU 均采用标准的移动端 ARM Cortex 核心。2015 年推出的 Hi1610 搭载了 16 个 A57 核心。2016 年的 Hi1612 将核心数翻倍至 32 个，而 2017 年的 Kunpeng 916 则将核心架构升级为 Cortex-A72。这三代产品均由台积电 16nm 工艺代工。",
+      "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+      "Kunpeng 920 裸片图。来源：万扯淡",
+      "Kunpeng 920 于 2019 年问世，采用了极具野心的多芯粒设计，并搭载 64 个定制核心。两颗基于台积电 7nm 工艺的计算裸片，每颗包含 8 个集群，每个集群拥有 4 个基于 ARM v8.2 指令集架构（ISA）运行的 TaiShan V110 核心。这些集群通过环形总线与同一裸片上的 4 通道 DDR4 内存相连，两颗计算裸片共计提供 8 通道内存。Kunpeng 920 是首款采用台积电 CoWoS-S 先进封装的 CPU。它利用一块大型硅中介层，通过定制的裸片间接口，将两颗计算裸片与一颗 I/O 裸片相连；该 I/O 裸片配备了 40 条 PCIe Gen 4 通道，并集成了双 100G 以太网控制器。",
+      "尽管 Kunpeng 920 集成了多项前沿技术，但美国对华为的制裁切断了其台积电代工渠道，直接打乱了华为的 CPU 路线图，导致下一代 Kunpeng 930 未能在 2021 年如期发布。",
+      "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+      "Kunpeng 920B 裸片图。来源：Kurnal",
+      "取而代之的是，升级版的 Kunpeng 920B 于 2024 年悄然发布，并带来了多项升级。TaiShan V120 核心现已支持 SMT，两颗计算裸片上各有 10 个 4 核集群，共计 80 核 160 线程。核心互连和物理布图与 Kunpeng 920 保持相似，计算裸片上配备 8 通道 DDR5。I/O 裸片现被一分为二，计算裸片置于中间。我们认为，两代 CPU 之间长达 5 年的断档，归咎于美国制裁以及被迫针对中芯国际 N+2 工艺重新设计芯片。",
+      "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+      "华为 Kunpeng CPU 路线图。来源：华为",
+      "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+      "华为 TaiShan 950 SuperPoD。来源：华为",
+      "面向 2026 年，华为将推出 Kunpeng 950 再次更新其 CPU 产品线，并将其配置在 TaiShan 950 SuperPoD 机架中以满足通用计算需求。Kunpeng 950 号称在使用其专有的 GaussDB 多写分布式数据库架构时，其 OLTP 数据库性能较 Kunpeng 920B 实现了 2.9 倍的跃升。为实现这一目标，其核心数量翻了一番以上，飙升至 192 核，并采用了保留 SMT 支持的全新 LinxiCore。此外，华为还将推出一款规模较小的 96 核版本。每个 TaiShan 950 SuperPoD 机架内容纳 16 台双路服务器，配备高达 48TB 的 DDR5 内存，这表明其采用了 12 通道内存设计。这些机架还集成了存储与网络功能，将被甲骨文 (Oracle) 的 Exadata 数据库服务器采用，并广泛应用于中国金融领域。",
+      "该设计很可能采用中芯国际的 N+3 工艺制造，该工艺近期已在 Kirin 9030 智能手机芯片上首发亮相。",
+      "华为的路线图进一步延伸至 2028 年的 Kunpeng 960 系列。这一代顺应了将设计拆分为两大分支的行业趋势。其中，面向 AI 头节点和数据库打造的 96 核 192 线程高性能版本，号称单核性能提升 50% 以上；而面向虚拟化和云计算的高密度版本，则会将核心数量推高至 256 核，甚至可能更多。我们预计，届时华为将在中国超大规模云厂商的 CPU 部署中占据可观的市场份额。",
+      "下文将展示我们直至 2028 年的 CPU 路线图，并详细剖析 2026 年之后数据中心 CPU 的核心特性与架构演进。具体内容涵盖：AMD 的 Verano 与 Florence 处理器；英特尔的 Coral Rapids 及其已被彻底砍掉的 CPU 产品线；ARM 的 Venom 规格参数；以及高通凭借 SD2 重返数据中心 CPU 市场的动向。此外，我们还将英伟达的 Bluefield-4 纳入其中，以此作为未来 CPU 部署演进方向的风向标。随后，我们将探讨 DRAM 短缺对各个数据中心 CPU 细分市场的影响，展望未来的 CPU 发展趋势，并重点解析那些将在未来十年重塑 CPU 格局的关键设计要素。"
+    ],
+    "22-cpu-roadmap": [
+      "https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png",
+      "SemiAnalysis 2017-2028 年 CPU 路线图。来源：SemiAnalysis 预测",
+      "我们的数据中心 CPU 路线图横跨 2017 至 2028 年这 12 年，涵盖了 9 家企业，包括 AMD、英特尔、英伟达、Ampere、AWS、谷歌、微软、ARM 和华为。面向客户的完整版路线图还收录了高通的数据中心 CPU。随着收购案的推进，Ampere Computing (安培计算) 的产品线将面临调整，以期与 OpenAI 产生交集。"
+    ],
+    "23-amd-epyc-verano-florence": [
+      "https://substackcdn.com/image/fetch/$s_!vm-p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa49ab8ae-a31f-4ca0-b522-8bfa4c30a0fc_2671x1489.png",
+      "AMD 机架级 AI 基础设施路线图。来源：AMD",
+      "AMD 下一代 MI500 AI 机架将于 2027 年发布，并搭载全新的霄龙 (EPYC) Verano CPU，距 Venice 问世仅相隔一年。据我们了解，Zen 7 CPU 内核架构赶不上 Verano 的发布节奏，因为内核团队的研发周期约为两年。因此我们认为，Verano 将是 Venice 的变体，继续沿用 Zen 6 内核，且极有可能保持相同的 256 核配置。Verano 的不同之处应在于采用全新的 3nm I/O 裸片，支持 PCIe Gen7 和 200G 以太网 SerDes (串行器/解串器)。这能大幅提升连接 MI500 GPU 的 Infinity Fabric 速度。这也将支持 UALoE。",
+      "代号为 Florence 的真正下一代 Zen 7 霄龙 (EPYC) 预计将于 2028 年问世，采用台积电 A16 工艺并支持背面供电。或者，如果不使用背面供电，AMD 也可以等待台积电 A14 工艺成熟，将其用于 2029 年的产品。我们预计其核心数量将增加至 320 个左右。",
+      "https://substackcdn.com/image/fetch/$s_!otrQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe4a3cd7a-72fe-4414-bcf7-9a1ac1d827f2_3111x1740.png",
+      "AMD Zen CPU 内核路线图。来源：AMD",
+      "在内核微架构方面，AMD 首席技术官 Mark Papermaster 证实，Zen7 引入了全新的专用矩阵乘法引擎以处理本地 AI 计算。该引擎在 x86 咨询小组中被称为 ACE。这与英特尔在 2023 年随 Sapphire Rapids 引入的 AMX (高级矩阵扩展) 引擎极为相似。Zen7 还采用了 AVX10。作为 AVX-512 的演进版本，它在更小位宽下提供了更多功能与更高的指令灵活性。FRED (灵活返回与事件交付) 中的全新中断模型以及 ChkTag 内存标记技术也将在 Zen7 上首度亮相。所有这些特性都将率先在英特尔 Diamond Rapids 上推出。此外，Diamond Rapids 还支持 APX (高级性能扩展)。这种指令集扩展增加了对更多寄存器的访问权限，并提升了通用计算性能。",
+      "Zen7 似乎并未包含该特性。"
+    ],
+    "24-intel-xeon-coral-rapids": [
+      "随着陈立武的加入以及 8 通道 Diamond Rapids-SP 被取消，英特尔希望加速 Coral Rapids 的研发进程，推动其尽早上市。在此之前，英特尔将发布搭载 NVLink-C2C 芯粒的定制版至强 CPU，为英伟达的机架级 GPU 设计提供 x86 架构的替代方案。除此之外，陈立武精简计划还有另一个牺牲品：英特尔 Clearwater Forest 的后续产品已被彻底砍掉。正如前文所述，E核 (能效核) 至强产品线本就停滞不前，该系列在推出仅两代后便将宣告终结。这款后续产品最初代号为 Rouge River Forest，后更名为 DMR-HD (Diamond Rapids高密度版)；其设计复用了 Diamond Rapids 上的 IMH 裸片，并搭配全新的 CBB 裸片，每个 CBB 裸片包含 128 个E核，从而在单插槽中实现高达 512 个核心。",
+      "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+      "英特尔 18A-Ultra 与 14A-P。来源：英特尔",
+      "针对 Coral Rapids，英特尔已意识到此前的失误，并在其 P核架构中重新引入了 SMT 技术。我们认为，该架构最初专为英特尔的 14A 制程节点 (P1280) 设计，但该节点要到 2027 年才会进入风险试产阶段；这意味着产品最早也要到 2028 年底才能发布，甚至可能推迟至 2029 年初。为了加速研发并让 Coral Rapids 尽早上市，英特尔可能不得不将该设计移植到经过改进的 18A-Ultra 制程节点上。"
+    ],
+    "25-arm-venom": [
+      "ARM 继 Phoenix 之后的下一代产品代号为 Venom，将于 2027 年问世。该 CPU 包含 228 个未来的 Neoverse V4 核心，这些核心很可能源自 ARM 的 C1 Ultra 移动端核心。这些核心将采用台积电 N2 制程制造，所有核心均集成在一块光罩极限尺寸的计算裸片上，四周环绕着多个内存和 PCIe 7.0 I/O 裸片，其物理布图与英伟达 Vera CPU 类似。索喜科技参与了部分设计工作，该公司曾于 2023 年与 ARM 和台积电合作，设计了一款基于 N2 制程的 32 核 CPU 芯粒。",
+      "值得注意的是，最大的变化在于其放弃了传统的 DDR5 DIMM，转而采用 LPDDR6 内存，这再次效仿了英伟达的设计路线。此举有助于提升封装密度，并实现与 AI XPU 更紧密的集成。此外，该架构采用基于 PCIe 7.0 的新一代加速器支持套件（AEK），用于连接 XPU 并实现一致性内存扩展。"
+    ],
+    "26-qualcomm-sd2": [
+      "https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png",
+      "高通数据中心 CPU 发布会。来源：高通，ServeTheHome",
+      "高通将于 2027 年重返数据中心 CPU 市场，试图通过数据中心 CPU 和 AI 处理器，摆脱对移动和基带业务的单一依赖，实现多元化发展。早在 2017 年，高通就曾携 Centriq 2400 CPU 初次涉足该领域，这款芯片搭载了 48 个 Falkor ARMv8 核心，并配备 6 通道 DDR4 内存。然而，这款产品生不逢时，当时工作负载尚未从 x86 移植到 ARM 的 ISA (指令集架构) 上，导致其普及受限，最终该项目无疾而终。",
+      "2021 年，高通收购了 NUVIA，将 Gerard Williams III 及苹果的 CPU 设计人才招致麾下，并立即开始研发代号为 SD1 的数据中心 CPU。虽然这款芯片从未投入量产，但我们掌握了它的规格。SD1 基于台积电 N5 工艺，搭载了 80 个 Oryon 核心（该核心现已应用于骁龙 X Elite 和 8 Elite 移动处理器），配备 16 通道 DDR5-5600 内存和 70 条 PCIe Gen 5 通道，采用尺寸高达 98 x 95 毫米的庞大 LGA9470 插槽，并支持双路配置。这款 CPU 最终未能发布，可能与 2022 年 ARM 对高通提起的诉讼有关。",
+      "2025 年，高通正式宣布重返数据中心 CPU 市场，声明将为沙特阿拉伯的 HUMAIN AI 项目研发并供应自家 CPU。我们将这一代 CPU 暂定代号为“SD2”。高通出现在了英伟达 NVLink Fusion 的发布名单中，并确认 SD2 将支持 NVLink Fusion，以此作为连接 AI GPU 的高速一致性互连总线。高通在 2025 年收购 Alphawave Semi，也将进一步巩固其在高速 SerDes (串行器/解串器) 和芯粒互连方面的技术实力。在最新的 2025 财年第四季度财报电话会议上，高通确认 SD2 将于 2027 年出货并贡献营收，并称数据中心 CPU 市场是一个价值数十亿美元的巨大机遇。",
+      "然而，Gerard Williams III 及其他 NUVIA 初创团队成员于 2026 年 1 月决定离开高通，这为高通 CPU 项目的未来蒙上了一层阴影。我们认为，由于核心设计团队已完成全面整合，在 2028 年之前，此举带来的负面影响将十分有限。此外，高通在与 ARM 的诉讼中大获全胜，意味着其将继续保有 ARM 授权，并能继续研发定制 CPU 核心架构。"
+    ],
+    "27-bluefield-4-context-memory-sto": [
+      "https://substackcdn.com/image/fetch/$s_!cMe7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3676208d-dd25-42ba-8f03-cc1359a1076c_2029x1057.png",
+      "英伟达 Bluefield-4 上下文内存存储平台。来源：英伟达 CES 2026",
+      "https://substackcdn.com/image/fetch/$s_!dd72!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd1e305db-6eb6-4ac4-af46-c11eb9b67b29_2506x1673.jpeg",
+      "Bluefield-4 封装渲染图。来源：英伟达，SemiAnalysis 预估",
+      "CPU 在网络栈中的比重日益增加。此前的智能网卡（SmartNIC）和数据处理器（DPU）仅在以太网控制器中加入少量 ARM 内核，用于执行网络内卸载与加速。如今，英伟达凭借最新款 DPU 将这一设计推向了新高度。在 Bluefield-4 DPU 中，英伟达直接将一整颗 Grace CPU 与 ConnectX-9 芯片进行共封装。每个 Rubin 计算托盘均将该 DPU 用作前端网卡；此外，英伟达还在其上下文内存存储平台中配置了 4 颗 BF4，专门用于将 KV-Cache 卸载至高速 NAND 闪存。",
+      "64 个启用的 Grace 内核搭配 128GB LPDDR5 内存，释放出庞大算力。这表明 CPU 正深度介入 AI 数据管理。当前的 AI 网络拓扑包含东西向（用于 GPU集群的横向扩展）和南北向（用于连接存储、外部资源与互联网）。模型 KV-Cache 的卸载与存储，则相当于在现有架构中新增了第三张网络。随着 Bluefield-4 的问世，具备 CPU 算力的网卡与具备网络加速能力的 CPU（如至强 6 SoC Granite Rapids-D）之间的界限愈发模糊。"
+    ],
+    "28-dram-constraints-on-cpu-market": [
+      "到了 2026 年此时，供应链正面临服务器 CPU 与大宗 DDR5 内存双双严重短缺的局面。服务器 CPU 供货配额将优先分配给能证明自身拥有稳定内存供应的客户。这一趋势将加速市场向 OpenAI、CoreWeave 及云服务巨头等大型玩家集中，因为他们拥有庞大的 DRAM 采购量与极强的议价能力。全面袭来的 CPU 涨价潮叠加高昂的内存价格，将对数据中心 CPU 市场的各大细分领域产生截然不同的影响。",
+      "对于单插槽配备 512GB 至 1TB 内存的 AI 头节点而言，内存的成本与供货难度，远超 CPU 及服务器机箱其余组件。未来，若 CPU 供应好转而内存依然紧缺（产能继续被高毛利的 AI 加速器大肆吞噬），该细分市场受到的冲击将最为惨烈。CPU 厂商极度担忧内存重复下单会加剧表象上的内存短缺。为此，他们正严密监控并预测库存水平，力求在持续的内存压力下妥善管控近期 CPU 需求。",
+      "在云计算与虚拟化市场，CPU 的吞吐量与能效是首要考量，且大内存实例的租赁定价更高。由于该细分市场的内存支出占比相对较低，其受内存价格波动的影响也较小。至于存储与边缘服务器，通常采用核心数较少的低端 CPU，CPU 的平均售价 (ASP) 仅占系统总成本的极小部分。短期内，CPU 供货可能会从低端市场抽离。在产能受限的环境下，CPU 厂商势必优先保供高端、高毛利的 SKU，以实现营收最大化。"
+    ],
+    "29-future-cpu-trends": [
+      "随着计算需求随时间推移不断变化，看似不起眼的 CPU 在未来十年仍将持续演进。当前强化学习 (RL) 训练与智能体工具应用的时代，正以前所未有的速度推高 CPU 需求，CPU 设计也开始分化，以适应三大应用场景。",
+      "面向云计算与通用计算，具备高吞吐量的高核心密度、高能效 CPU（如 Graviton5）",
+      "单核性能强劲、具备高内存带宽，且与 AI 加速器紧密集成以实现一致性内存扩展的 CPU（如 Vera）",
+      "具备数据处理与网络能力，用于应对 AI 集群海量数据需求及模型上下文卸载的 CPU 和 DPU（如 Bluefield-4）",
+      "展望未来，我们很可能会看到更高程度的专业化分工。无论哪种场景，CPU 插槽规模与核心数量都在不断增加，内存与 I/O 的速度及位宽也在持续提升，这给 CPU 互连结构与数据网络带来了更大压力。业界将更加依赖片上网络 (NoC) 设计师。他们需要跨越数千平方毫米的硅片面积与多个芯粒边界，打造具备极高对分带宽的设计；同时还要保持与外部设备的完全一致性，并满足远低于 GPU 网络的延迟要求。",
+      "数据中心将继续采用 LPDDR。针对大型 16 通道内存设计，PCB 的层数与复杂度已被推至极限。LPDDR6 SOCAMM 模块能够实现高得多的带宽密度，同时保持比封装内内存更高的容量。",
+      "最终胜出的设计必将拥有最优秀的数据网络。一些设计将采用数 GB 的缓存来隐藏延迟并提升内存受限型性能；而另一些设计则会大举采用 CXL 内存扩展器。我们甚至可能看到 HBM 重返 CPU，这一设计上一次出现还是在 Sapphire Rapids 至强 Max 与 AMD 的 MI300C 中。",
+      "放眼更长远的未来，我们今天所熟知的数据中心 CPU 还会存在吗？下一个计算需求时代可能会转向由 AMD MI300A 开创的加速处理器 (APU) 设计。这类设计集成了 CPU 核心，从而消除了对 CPU 头节点的需求。对于 RL 训练专用加速器而言，APU 也可能成为一种选择。它们可以利用统一内存，在本地运行 RL 环境，从而缩短 RL 任务往返通用 CPU 集群的时间。共封装光学器件、结合 JBOM（Just a Bunch of HBM，海量 HBM 阵列）概念的内存解耦与池化技术，以及 Credo 的 Omniconnect 内存变速器，可能会降低对内存扩展 CPU 的需求，并降低 CPU 配比率（例如每个加速器机架仅配 1 个 CPU）。我们还预见在未来，CPU 最终会作为核心组件，被集成到超过 400T 的巨型交换机中。",
+      "无论如何，CPU 都将继续作为计算机的基础核心存在。",
+      "请联系 sales@semianalysis.com 获取以下数据。",
+      "物料清单 (BOM) 成本分析",
+      "提供一份表格，详细拆解 2026 年 x86 数据中心 CPU 的生产成本。针对每个处理器系列，将提供 SKU 堆栈中不同产品层级的成本数据。",
+      "具体型号包括：采用经典与高密度 CCD 配置的 AMD Venice SP7 (插槽) 和 SP8 变体；英特尔 Diamond Rapids-AP 超高核心数 (UCC) 16 通道版本；以及 Diamond Rapids-SP 高核心数 (HCC) 与低核心数 (LCC) 8 通道版本。",
+      "包含英伟达 Grace 与 Vera 架构 ARM CPU，以及其他已讨论的 ARM CPU 的物料清单成本，作为与上述 x86 CPU 的对比基准。",
+      "成本拆解涵盖：有源硅（包括 CPU、SoC 与 I/O）、先进封装（2.5D 与混合键合）、传统封装成本（包含良率影响），以及产品测试成本。",
+      "有源硅成本综合考量了所有裸片尺寸、工艺技术与金属层数、单片晶圆良品裸片数、晶圆成本以及单封装裸片数。例如，顶配 256 核 AMD Venice SP7 (插槽) 版本的有源硅成本，将基于 8 颗计算裸片的台积电 N2 晶圆成本，加上 2 颗 I/O 裸片的台积电 N6 晶圆成本计算得出。",
+      "先进封装成本考量了封装类型（例如 AMD Venice 采用的 CoWoS-L，英特尔 Diamond Rapids 采用的 EMIB (嵌入式多芯片互连桥接) 和 Foveros Direct 3D）、中介层面积与混合键合尺寸、裸片间互连数量以及已知良好裸片 (KGD) 测试。先进封装工艺造成的良率损失，会导致完好裸片因封装组件失效而被浪费，这部分损失将计入额外的有源硅成本。",
+      "传统封装成本包含基板成本（综合考量材料、层数与面积），以及集成无源器件、热界面材料 (TIM) 和顶盖成本。",
+      "测试成本包含封装级的自动测试设备 (ATE) / 系统级测试 (SLT) 以及老化测试成本。芯片分级 / 筛选过程中的损耗，会推高单封装的平均物料清单成本。",
+      "架构设计与性能分析",
+      "列出 AMD Venice 与英特尔 Diamond Rapids 的完整规格，包括但不限于：核心数、TDP (热设计功耗)、缓存大小、内存带宽、PCIe 与 CXL 的 IO 通道数，以及多插槽互连规格（AMD 的扩展全局内存互连 (XGMI) 与英特尔的超级通道互联 (UPI)）。",
+      "提供 CPU 物理布图与拓扑结构图，涵盖核心与末级缓存 (LLC) 布局、网格互连尺寸、裸片间 PHY 以及 IO PHY。",
+      "分析物理布图与拓扑结构及其在历代 CPU 中的演进，并点评将网格架构扩展至大规模时面临的挑战。",
+      "对比 AMD、英特尔与 ARM 的布局设计，并探讨其对 NUMA 域以及具有多个 LLC 域的核心集群的影响。",
+      "提供先进封装的集成示意图，包括 chiplet 布局、中介层尺寸以及凸点间距。",
+      "探讨先进封装技术的选择 (CoWoS-L (AMD Venice)、CoWoS-R (英伟达 Vera) 与 EMIB (嵌入式多芯片互连桥接)/Foveros Direct 3D (英特尔 Clearwater Forest))，及其对成本、功耗与性能的影响",
+      "详述高核心数 CPU 设计面临的可扩展性挑战，及其对核心间延迟、内存访问一致性与延迟的影响",
+      "提供 AMD Venice 与英特尔 Diamond Rapids 的内部性能预估数据 (如 SPECint2017)，并分析性能随核心数与芯片成本变化的可扩展性"
+    ]
+  }
+}

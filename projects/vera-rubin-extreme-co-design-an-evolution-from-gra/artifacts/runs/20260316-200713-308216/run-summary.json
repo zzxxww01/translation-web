@@ -1,0 +1,157 @@
+{
+  "project_id": "vera-rubin-extreme-co-design-an-evolution-from-gra",
+  "status": "incomplete",
+  "total_sections": 17,
+  "translated_sections": 5,
+  "total_paragraphs": 439,
+  "translated_paragraphs": 222,
+  "error_count": 11,
+  "errors": [
+    {
+      "error": "Failed to translate section 02-rubin-oberon-rack-nvl72-not-n: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3-pro-preview:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-03-16T21:44:47.902855",
+      "section": "02-rubin-oberon-rack-nvl72-not-n"
+    },
+    {
+      "error": "Failed to translate section 03-compute-tray-redesign: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3-pro-preview:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-03-16T21:56:50.630043",
+      "section": "03-compute-tray-redesign"
+    },
+    {
+      "error": "Failed to translate section 04-compute-tray-cableless-design: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-3-pro-preview:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-03-16T22:23:56.853811",
+      "section": "04-compute-tray-cableless-design"
+    },
+    {
+      "error": "Failed to translate section 08-rack-level-infrastructure-the: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:51:02.500971",
+      "section": "08-rack-level-infrastructure-the"
+    },
+    {
+      "error": "Failed to translate section 09-procurement-and-cooling-vendor: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:51:23.494363",
+      "section": "09-procurement-and-cooling-vendor"
+    },
+    {
+      "error": "Failed to translate section 10-rack-level-infrastructure-pow: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:53:20.569319",
+      "section": "10-rack-level-infrastructure-pow"
+    },
+    {
+      "error": "Failed to translate section 11-networking-nvlink-6-rubin-sc: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:54:19.835361",
+      "section": "11-networking-nvlink-6-rubin-sc"
+    },
+    {
+      "error": "Failed to translate section 13-customization: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:55:07.632588",
+      "section": "13-customization"
+    },
+    {
+      "error": "Failed to translate section 14-assembly-automation-and-logist: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:55:20.275125",
+      "section": "14-assembly-automation-and-logist"
+    },
+    {
+      "error": "Failed to translate section 15-vr-nvl72-tco-bom-and-power-bu: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:56:26.676604",
+      "section": "15-vr-nvl72-tco-bom-and-power-bu"
+    },
+    {
+      "error": "Failed to translate section 16-groq-lpu-decode-rack: 429 Client Error: Too Many Requests for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent",
+      "timestamp": "2026-03-16T23:56:40.830122",
+      "section": "16-groq-lpu-decode-rack"
+    }
+  ],
+  "started_at": "2026-03-16T20:07:13.308206",
+  "finished_at": "2026-03-16T23:56:41.043788",
+  "run_id": "20260316-200713-308216",
+  "artifacts_path": "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\artifacts\\runs\\20260316-200713-308216",
+  "export": {
+    "generated_at": "2026-03-16T23:56:40.924999",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\源自 Grace Blackwell Oberon 的演进_zh.md",
+      "generated": true,
+      "bytes": 118622
+    }
+  },
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 28,
+    "auto_fixable_count": 0,
+    "manual_review_count": 28,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称39次, 第三人称67次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 25, 2026",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 2026",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6.0",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 3.5",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3, 35",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 224, 160",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 10,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 32768",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 11,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 25",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

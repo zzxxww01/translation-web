@@ -1,0 +1,60 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GB300",
+      "suggested_translation": "GB300",
+      "context": "Nvidia Blackwell architecture successor/variant GPU",
+      "confidence": 0.95
+    },
+    {
+      "term": "MI355X",
+      "suggested_translation": "MI355X",
+      "context": "AMD Instinct MI355X accelerator",
+      "confidence": 0.95
+    },
+    {
+      "term": "Large Mixture of Experts",
+      "suggested_translation": "大规模混合专家模型",
+      "context": "MoE architecture variant",
+      "confidence": 0.9
+    },
+    {
+      "term": "SGLang",
+      "suggested_translation": "SGLang",
+      "context": "LLM inference framework for structured generation",
+      "confidence": 0.95
+    },
+    {
+      "term": "vLLM",
+      "suggested_translation": "vLLM",
+      "context": "High-throughput LLM serving engine",
+      "confidence": 0.95
+    },
+    {
+      "term": "TRTLLM",
+      "suggested_translation": "TensorRT-LLM (TRTLLM)",
+      "context": "Nvidia's TensorRT-LLM optimization library",
+      "confidence": 0.95
+    },
+    {
+      "term": "B200",
+      "suggested_translation": "B200",
+      "context": "Nvidia Blackwell B200 GPU",
+      "confidence": 0.95
+    },
+    {
+      "term": "H100",
+      "suggested_translation": "H100",
+      "context": "Nvidia Hopper H100 GPU",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disaggregated serving": "分离式服务",
+    "wide expert parallelism (wideep)": "宽专家并行",
+    "nvl72": "NVL72机架级系统"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T19:52:18.288762"
+}

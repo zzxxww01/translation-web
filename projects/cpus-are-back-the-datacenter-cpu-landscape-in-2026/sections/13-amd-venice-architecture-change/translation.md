@@ -1,0 +1,25 @@
+https://substackcdn.com/image/fetch/$s_!hYF-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ccdb80a-accb-4092-90d4-09ebda6b6953_1530x1600.png
+
+AMD Venice 裸片布局。来源：@HighYieldYT
+
+尽管英特尔放弃了 EMIB (嵌入式多芯片互连桥接)，AMD 却终于在 Venice 处理器上采用了同等的高级封装技术，通过高速短距链路将 CCD 与 I/O 裸片相连。我们在加速器、HBM 与高级封装模型中提供了相关的出货量数据。
+
+CCD 链路所需的额外边缘布线空间 (Shoreline) 占据了更多宽度，迫使中央 I/O 枢纽必须拆分为两块裸片。这导致在芯片的两半之间通信时，会增加一次裸片间跳转，进而形成了一个英特尔方案所能避免的新 NUMA 域。目前，I/O 裸片总共配备 16 个内存通道，多于 2022 年 Genoa 架构的 12 个。AMD 也终于追平英特尔，开始支持多路复用内存以获取更高带宽；其 16 通道多路复用双列直插式内存模块 (MRDIMM)-12800 可提供 1.64TB/s 的带宽，达到 Turin 的 2.67 倍。
+
+AMD 还在 CCD 内部转向了 Mesh 网络，采用 4x8 网格布局容纳 32 个 Zen6c 核心，不过可能还会包含一个额外的备用核心以提升良率。8 个台积电 N2 工艺的 CCD 将总核心数提升至 256 个，相比 192 核的 Turin-Dense 3nm 霄龙 (EPYC) 9965 增加了三分之一。Zen6c 为每个核心配备了完整的 4MB L3 缓存 (此前在 Zen5c 上该容量被减半)，从而在每个 CCD 上形成了 128MB 的大容量缓存区。
+
+针对 AI 头节点优化、核心数较少且主频更高的“-F”系列 SKU，将采用与其消费级桌面和移动 PC 产品线相同的 12 核 Zen6 CCD 设计，通过 8 个 CCD 实现最多 96 个核心。尽管相比 128 核的 Turin-Classic 4nm 霄龙 (EPYC) 9755 出现倒退，但与高频版的 64 核 EPYC 9575F 相比，其核心数依然增加了 50%。
+
+最后，在 I/O 裸片旁边、DDR5 接口引出处，可以看到 8 个小裸片。这些是集成无源器件 (IPD)，有助于在 I/O 极度密集的区域为芯片平稳供电；在该区域，SP7 (插槽) 的封装布线已被内存通道的扇出完全占满。
+
+https://substackcdn.com/image/fetch/$s_!0aVL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe982a29b-8dbe-48a8-b2d8-a5a595d09ffe_3053x1668.png
+
+AMD Venice 性能声明。来源：AMD
+
+在性能方面，AMD 声称在 SPECrate®2017_int_base 测试中，顶配 256 核版本的每瓦性能比顶配 192 核 Turin 高出 1.7 倍以上。得益于具备更高每时钟周期指令数 (IPC) 的全新 Zen 6 核心微架构，这意味着其单核性能实现了进一步跃升。Zen 6 还针对 AI 数据类型引入了新指令，包括 AVX-512_FP16、AVX_VNNI_INT8，以及一种全新的 AVX-512_BMM 指令，用于在 CPU 浮点单元上执行位矩阵乘法和位反转操作。
+
+对于 BMM 指令，FPU 寄存器会存储 16x16 二进制矩阵，并利用 OR（或）与 XOR（异或）运算来计算 BMM 累加结果。二进制矩阵的计算难度远低于浮点矩阵。对于能够利用该特性的软件（如 Verilog 仿真），它能带来大幅效率提升。然而，BMM 缺乏大语言模型 (LLM) 所需的足够精度，因此我们认为该指令的实际采用率将非常有限。
+
+鉴于 AMD 的单核性能已显著领先于英特尔（96 核 Turin 可匹敌 128 核 Granite Rapids），在 2026 至 2028 年这一代数据中心 CPU 中，AMD Venice 与 Intel Diamond Rapids 之间的性能差距将进一步拉大。得益于全新的裸片间互连技术和更大的核心域，Venice 的核心间延迟预计将优于 Turin。
+
+在英特尔抽身退出的领域，AMD 正在持续加码。英特尔直接砍掉了其 8 通道处理器，而 AMD 则将推出全新的 8 通道 Venice SP8 平台。该平台将作为低功耗、小插槽 霄龙 (EPYC) 8004 Siena 系列的继任者，同时仍能提供多达 128 个高密度 Zen 6c 核心。借此，AMD 必将在企业级市场这一英特尔的传统腹地中，斩获大量市场份额。

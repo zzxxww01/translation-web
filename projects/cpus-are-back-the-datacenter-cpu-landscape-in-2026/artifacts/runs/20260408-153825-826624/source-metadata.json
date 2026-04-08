@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "source": "By Gerald Wong and Dylan Patel",
+      "translation": "作者：Gerald Wong、Dylan Patel",
+      "tokenized_translation": "作者：[[[LINK_1|Gerald Wong]]]、[[[LINK_2|Dylan Patel]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Feb 09, 2026 · Paid",
+      "translation": "2026 年 2 月 9 日 · 付费文章",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "RL and Agent Usage, Context Memory Storage, DRAM Pricing Impacts, CPU Interconnect Evolution, AMD Venice, Verano, Florence, Intel Diamond Rapids, Coral Rapids, Arm Phoenix + Venom, Graviton 5, Axion",
+      "translation": "RL与Agent应用，上下文内存存储，DRAM价格影响，CPU互连演进，AMD Venice、Verano、Florence，英特尔（Intel）Diamond Rapids、Coral Rapids，Arm Phoenix + Venom，Graviton 5，Axion",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

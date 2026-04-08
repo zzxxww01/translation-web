@@ -1,0 +1,71 @@
+{
+  "section_id": "19-ampereone-softbank-acquisiti",
+  "new_terms": [
+    {
+      "term": "OEM",
+      "suggested_translation": "OEM (原始设备制造商)",
+      "context": "competing directly with AMD and Intel as a 3rd silicon provider for OEM server builds.",
+      "confidence": 1.0
+    },
+    {
+      "term": "DDR4",
+      "suggested_translation": "DDR4",
+      "context": "Accompanying the cores are 8-channels of DDR4",
+      "confidence": 1.0
+    },
+    {
+      "term": "IO",
+      "suggested_translation": "I/O",
+      "context": "disaggregates the IO into separate DDR5 and PCIe dies",
+      "confidence": 1.0
+    },
+    {
+      "term": "interposer",
+      "suggested_translation": "中介层",
+      "context": "an MCM configuration that does not require use of an interposer.",
+      "confidence": 1.0
+    },
+    {
+      "term": "noisy neighbors",
+      "suggested_translation": "吵闹的邻居 (资源抢占者)",
+      "context": "minimize performance penalties from noisy neighbors where other VMs running on adjacent cores hog traffic",
+      "confidence": 0.95
+    },
+    {
+      "term": "SoftBank",
+      "suggested_translation": "软银",
+      "context": "Ampere Computing was acquired by SoftBank in 2025 for $6.5 Billion.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Masayoshi Son",
+      "suggested_translation": "孙正义",
+      "context": "While true that Masayoshi Son wanted Ampere’s CPU design talent",
+      "confidence": 1.0
+    },
+    {
+      "term": "Stargate venture",
+      "suggested_translation": "星际之门项目",
+      "context": "shore up their CPU designs for the Stargate venture",
+      "confidence": 0.95
+    },
+    {
+      "term": "ARM-native",
+      "suggested_translation": "ARM原生",
+      "context": "most software was not ARM-native at the time.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "merchant arm silicon": "商业化ARM芯片",
+    "hyperscaler": "超大规模云厂商",
+    "chiplet": "芯粒",
+    "l2 cache": "二级缓存",
+    "tsmc": "台积电",
+    "x86": "x86",
+    "ddr5": "DDR5",
+    "pcie": "PCIe"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:12:48.400930"
+}

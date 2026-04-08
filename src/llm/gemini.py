@@ -31,7 +31,6 @@ from .base import LLMProvider
 
 logger = logging.getLogger(__name__)
 _genai_module: ModuleType | None = None
-_client_env_lock = Lock()
 
 
 def _load_genai_module() -> ModuleType | None:
@@ -245,22 +244,23 @@ class GeminiProvider(LLMProvider):
         override = os.getenv("GEMINI_USE_REST")
         if override is not None:
             return override.strip().lower() in {"1", "true", "yes", "y"}
+        # In the current Windows + Clash Verge environment, proxied REST calls
+        # are the only path that succeeds consistently across flash/pro/preview.
         return self.proxy_config is not None
 
     def _create_client(self, genai_module: ModuleType, api_key: str):
         try:
             return genai_module.Client(api_key=api_key)
         except TypeError:
-            with _client_env_lock:
-                previous = os.environ.get("GEMINI_API_KEY")
-                os.environ["GEMINI_API_KEY"] = api_key
-                try:
-                    return genai_module.Client()
-                finally:
-                    if previous is None:
-                        os.environ.pop("GEMINI_API_KEY", None)
-                    else:
-                        os.environ["GEMINI_API_KEY"] = previous
+            previous = os.environ.get("GEMINI_API_KEY")
+            os.environ["GEMINI_API_KEY"] = api_key
+            try:
+                return genai_module.Client()
+            finally:
+                if previous is None:
+                    os.environ.pop("GEMINI_API_KEY", None)
+                else:
+                    os.environ["GEMINI_API_KEY"] = previous
 
     def _get_client(self, api_key: str):
         client = self._client_cache.get(api_key)
@@ -328,7 +328,8 @@ class GeminiProvider(LLMProvider):
             timeout=request_timeout,
             proxies=self.proxy_config,
         )
-        response.raise_for_status()
+        if response.status_code >= 400:
+            self._raise_rest_http_error(response, model)
         data = response.json()
         try:
             return data["candidates"][0]["content"]["parts"][0]["text"]
@@ -336,6 +337,35 @@ class GeminiProvider(LLMProvider):
             raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
 
     # ============ 閿欒鍒嗙被鏂规硶 ============
+
+    @staticmethod
+    def _raise_rest_http_error(response: requests.Response, model: str) -> None:
+        detail_parts = [f"Gemini REST {response.status_code} for model={model}"]
+        try:
+            payload = response.json()
+        except Exception:
+            payload = None
+
+        if isinstance(payload, dict):
+            err = payload.get("error", {})
+            if isinstance(err, dict):
+                status = str(err.get("status", "")).strip()
+                message = str(err.get("message", "")).strip()
+                details = err.get("details")
+                if status:
+                    detail_parts.append(f"status={status}")
+                if message:
+                    detail_parts.append(message)
+                if details:
+                    detail_parts.append(f"details={json.dumps(details, ensure_ascii=False)[:500]}")
+
+        body = (response.text or "").strip()
+        if body and not isinstance(payload, dict):
+            detail_parts.append(f"body={body[:500]}")
+
+        error = requests.HTTPError(" | ".join(detail_parts))
+        error.response = response
+        raise error
 
     @staticmethod
     def _is_rate_limited(error_str: str) -> bool:
@@ -967,6 +997,10 @@ class GeminiProvider(LLMProvider):
         prompt = self.prompt_manager.get(
             "longform/auxiliary/title_translate",
             context_block="\n".join(context_lines) if context_lines else "- None",
+            glossary_block=(context or {}).get("glossary_block", "(无命中术语)"),
+            preservation_block=(
+                (context or {}).get("preservation_block", "- 无额外保留项")
+            ),
             title=title,
             subtitle=subtitle or "(无)",
         )
@@ -1206,13 +1240,17 @@ class GeminiProvider(LLMProvider):
         section_content: str,
         existing_terms: Dict[str, str],
     ) -> Dict[str, Any]:
-        """Run section prescan with the Flash model."""
+        """Run section prescan with the preview model.
+
+        `flash` is currently rejected for this environment, so the fast prescan
+        path is backed by `preview` instead of failing the workflow.
+        """
         return self.prescan_section(
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,
             existing_terms=existing_terms,
-            model="flash",
+            model="preview",
         )
 
 

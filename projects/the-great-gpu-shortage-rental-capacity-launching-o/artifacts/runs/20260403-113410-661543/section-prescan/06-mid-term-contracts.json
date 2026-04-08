@@ -1,0 +1,35 @@
+{
+  "section_id": "06-mid-term-contracts",
+  "new_terms": [
+    {
+      "term": "AI Natives",
+      "suggested_translation": "AI原生企业",
+      "context": "AI Natives and smaller AI Labs can be seen mostly in the 1-3y tenors",
+      "confidence": 0.95
+    },
+    {
+      "term": "marginal demand",
+      "suggested_translation": "边际需求",
+      "context": "captures the marginal demand from non-AI lab customers",
+      "confidence": 0.95
+    },
+    {
+      "term": "spillovers",
+      "suggested_translation": "溢出效应",
+      "context": "spillovers from large buyers",
+      "confidence": 0.9
+    },
+    {
+      "term": "lock up compute",
+      "suggested_translation": "锁定算力",
+      "context": "looking to lock up compute by contracting for longer terms",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tenor": "合同期限",
+    "prepay": "预付款"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T12:08:59.905708"
+}

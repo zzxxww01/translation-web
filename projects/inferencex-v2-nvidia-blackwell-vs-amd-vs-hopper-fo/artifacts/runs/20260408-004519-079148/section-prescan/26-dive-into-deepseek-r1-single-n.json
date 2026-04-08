@@ -1,0 +1,53 @@
+{
+  "section_id": "26-dive-into-deepseek-r1-single-n",
+  "new_terms": [
+    {
+      "term": "frontier labs",
+      "suggested_translation": "前沿实验室",
+      "context": "most frontier labs and inference providers are not running FP8",
+      "confidence": 0.95
+    },
+    {
+      "term": "inference providers",
+      "suggested_translation": "推理服务提供商",
+      "context": "most frontier labs and inference providers are not running FP8",
+      "confidence": 0.95
+    },
+    {
+      "term": "single node inference",
+      "suggested_translation": "单节点推理",
+      "context": "are not running FP8 nor single node inference",
+      "confidence": 0.95
+    },
+    {
+      "term": "InferenceXv1",
+      "suggested_translation": "InferenceXv1",
+      "context": "since our initial release of InferenceXv1 last October",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "DeepSeek R1": "DeepSeek-R1",
+    "FP8": "FP8",
+    "1k1k": "1k1k 场景",
+    "MI355X": "MI355X",
+    "B200": "B200",
+    "mogged": "碾压",
+    "FP4": "FP4",
+    "SGLang": "SGLang",
+    "throughput": "吞吐量",
+    "interactivity": "交互速度",
+    "TRT": "TRT",
+    "TCO": "总拥有成本",
+    "AMD": "AMD",
+    "Nvidia": "英伟达",
+    "SemiAnalysis": "SemiAnalysis",
+    "InferenceX": "InferenceX",
+    "InferenceMAX": "InferenceMAX",
+    "H200": "H200",
+    "MI325X": "MI325X",
+    "tok/sec/user": "tok/s/user"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:07:45.513391"
+}

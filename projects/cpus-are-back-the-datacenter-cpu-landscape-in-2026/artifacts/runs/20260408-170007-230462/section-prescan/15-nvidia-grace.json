@@ -1,0 +1,79 @@
+{
+  "section_id": "15-nvidia-grace",
+  "new_terms": [
+    {
+      "term": "Cache Switch Node (CSN)",
+      "suggested_translation": "缓存交换节点 (CSN)",
+      "context": "Each Cache Switch Node (CSN) on the mesh stop connects up to 2 cores and L3 slices.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bisection bandwidth",
+      "suggested_translation": "对分带宽",
+      "context": "NVIDIA emphasizes the high 3.2TB/s bisection bandwidth of the mesh network.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Branch Target Buffer",
+      "suggested_translation": "分支目标缓冲区",
+      "context": "Performance starts to drop off massively when this Branch Target Buffer fills beyond 24 regions.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ALU",
+      "suggested_translation": "算术逻辑单元 (ALU)",
+      "context": "ALUs sit idle awaiting instructions to execute.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOCAMM",
+      "suggested_translation": "SOCAMM",
+      "context": "doubling the memory width with eight 128bit wide SOCAMM 192GB modules",
+      "confidence": 0.9
+    },
+    {
+      "term": "Olympus core",
+      "suggested_translation": "Olympus 核心",
+      "context": "NVIDIA has brought back their custom ARM core design team with a new Olympus core that supports SMT.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SVE2",
+      "suggested_translation": "SVE2 (可伸缩矢量扩展)",
+      "context": "now supporting ARM’s SVE2 FP8 operations.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8 (8位浮点数)",
+      "context": "now supporting ARM’s SVE2 FP8 operations.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "grace": "Grace (代号)",
+    "head node": "头节点",
+    "hbm": "HBM",
+    "superchip": "超级芯片",
+    "hpc": "HPC",
+    "arm": "ARM",
+    "l2 cache": "二级缓存",
+    "l3 cache": "三级缓存",
+    "mesh stop": "网格节点",
+    "yield": "良率",
+    "branch prediction": "分支预测",
+    "vera": "Vera (代号)",
+    "rubin": "Rubin",
+    "chiplet": "芯粒",
+    "cowos": "CoWoS",
+    "reticle-sized": "光罩极限尺寸",
+    "pcie": "PCIe",
+    "cxl3": "CXL3",
+    "floorplan": "物理布图",
+    "soc": "SoC",
+    "fpu": "浮点运算单元 (FPU)",
+    "smt": "同步多线程 (SMT)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:08:45.448950"
+}

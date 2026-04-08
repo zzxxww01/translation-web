@@ -1,0 +1,68 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "perf per TCO",
+      "suggested_translation": "单位 TCO 性能",
+      "context": "competitive perf per TCO results on FP8 MI355X",
+      "confidence": 0.95
+    },
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "聚合式推理",
+      "context": "single node aggregated serving, AMD’s SGLang delivers better perf per TCO",
+      "confidence": 0.9
+    },
+    {
+      "term": "picoJoules per token",
+      "suggested_translation": "每 Token 皮焦耳 (pJ/token)",
+      "context": "much lower all-in provisioned picoJoules of energy per token",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "业界领先 (SOTA)",
+      "context": "enabling just a subset of the SOTA inference optimizations",
+      "confidence": 0.98
+    },
+    {
+      "term": "distributed inferencing",
+      "suggested_translation": "分布式推理",
+      "context": "software composability of FP4+distributed inferencing across their whole software stack",
+      "confidence": 0.95
+    },
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学 (Jensen Math)",
+      "context": "curtail the instances of analysts cracking 'Jensen Math' jokes",
+      "confidence": 0.9
+    },
+    {
+      "term": "Chief Revenue Destroyer",
+      "suggested_translation": "首席营收终结者",
+      "context": "As Jensen said at GTC 2025, he is chief revenue destroyer",
+      "confidence": 0.85
+    },
+    {
+      "term": "GTC",
+      "suggested_translation": "GTC 大会",
+      "context": "As Jensen said at GTC 2025",
+      "confidence": 0.98
+    },
+    {
+      "term": "rack scale",
+      "suggested_translation": "机架级",
+      "context": "rack scale GB200/GB300 NVL72 across both SGLang and TRTLLM",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 Prefill",
+    "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
+    "composability issue": "特性叠加兼容性问题",
+    "framemog": "绝对碾压",
+    "jestermaxxing": "无效瞎折腾"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:23:50.694307"
+}

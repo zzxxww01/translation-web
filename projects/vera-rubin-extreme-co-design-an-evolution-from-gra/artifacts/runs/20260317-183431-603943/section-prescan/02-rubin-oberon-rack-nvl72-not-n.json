@@ -1,0 +1,54 @@
+{
+  "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+  "new_terms": [
+    {
+      "term": "rack scale system",
+      "suggested_translation": "机柜级系统",
+      "context": "Shift from chassis-based servers to integrated rack-level infrastructure.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CPX accelerator",
+      "suggested_translation": "CPX 加速器",
+      "context": "A specialized Rubin-era accelerator optimized for prefill tasks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "compute-bound",
+      "suggested_translation": "计算受限",
+      "context": "Architectural bottleneck where performance is limited by FLOPs rather than memory bandwidth.",
+      "confidence": 0.9
+    },
+    {
+      "term": "bandwidth-bound",
+      "suggested_translation": "带宽受限",
+      "context": "Architectural bottleneck where performance is limited by memory or interconnect bandwidth.",
+      "confidence": 0.9
+    },
+    {
+      "term": "compute die",
+      "suggested_translation": "计算晶粒",
+      "context": "Individual silicon dies within a GPU package (e.g., 2 compute dies per Rubin package).",
+      "confidence": 0.9
+    },
+    {
+      "term": "failure domain",
+      "suggested_translation": "故障域",
+      "context": "The scope of components affected by a single point of failure in a datacenter.",
+      "confidence": 0.85
+    },
+    {
+      "term": "power density",
+      "suggested_translation": "功率密度",
+      "context": "The amount of power consumed per rack unit or rack (e.g., 100KW+).",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "prefill": "预填充",
+    "decode": "解码"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:35:58.984574"
+}

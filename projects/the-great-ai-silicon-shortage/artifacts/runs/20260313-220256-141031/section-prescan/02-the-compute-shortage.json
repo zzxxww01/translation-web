@@ -1,0 +1,60 @@
+{
+  "section_id": "02-the-compute-shortage",
+  "new_terms": [
+    {
+      "term": "Anthropic",
+      "suggested_translation": "Anthropic",
+      "context": "Major AI safety and research company, creator of Claude.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "Anthropic's agentic coding platform mentioned as a driver for token demand.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入",
+      "context": "Annual Recurring Revenue, a key financial metric for SaaS and AI companies.",
+      "confidence": 0.9
+    },
+    {
+      "term": "neocloud",
+      "suggested_translation": "新型云服务商",
+      "context": "Specialized GPU-focused cloud providers like CoreWeave or Lambda, distinct from hyperscalers.",
+      "confidence": 0.85
+    },
+    {
+      "term": "hyperscaler",
+      "suggested_translation": "超大规模云服务商",
+      "context": "Large-scale cloud providers such as AWS, Google Cloud, and Azure.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Hoppers",
+      "suggested_translation": "Hopper系列芯片",
+      "context": "Refers to NVIDIA's Hopper architecture GPUs (e.g., H100, H200).",
+      "confidence": 0.9
+    },
+    {
+      "term": "silicon supply",
+      "suggested_translation": "芯片供应",
+      "context": "The availability of physical semiconductor chips (logic and memory).",
+      "confidence": 0.85
+    },
+    {
+      "term": "consensus estimates",
+      "suggested_translation": "一致预期",
+      "context": "Financial term referring to the average of analysts' expectations for a company's metrics.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "agentic workflows": "智能体工作流",
+    "capex": "资本支出",
+    "token": "token"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-13T22:08:24.664933"
+}

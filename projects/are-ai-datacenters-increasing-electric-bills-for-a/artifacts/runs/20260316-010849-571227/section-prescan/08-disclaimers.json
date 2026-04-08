@@ -1,0 +1,50 @@
+{
+  "section_id": "08-disclaimers",
+  "new_terms": [
+    {
+      "term": "forward-looking statements",
+      "suggested_translation": "前瞻性陈述",
+      "context": "Statements regarding future expectations, projections, or plans.",
+      "confidence": 0.95
+    },
+    {
+      "term": "safe harbor",
+      "suggested_translation": "安全港",
+      "context": "Legal provisions protecting against liability for forward-looking statements.",
+      "confidence": 0.95
+    },
+    {
+      "term": "materially different",
+      "suggested_translation": "重大差异",
+      "context": "Significant variance between actual results and projected outcomes.",
+      "confidence": 0.9
+    },
+    {
+      "term": "pro forma",
+      "suggested_translation": "备考",
+      "context": "Financial statements or metrics based on certain assumptions or adjustments.",
+      "confidence": 0.9
+    },
+    {
+      "term": "non-GAAP",
+      "suggested_translation": "非公认会计准则",
+      "context": "Financial measures not defined by standard accounting principles.",
+      "confidence": 0.95
+    },
+    {
+      "term": "investment advice",
+      "suggested_translation": "投资建议",
+      "context": "Clarification that the content does not constitute financial guidance.",
+      "confidence": 0.9
+    },
+    {
+      "term": "fiduciary duty",
+      "suggested_translation": "受托责任",
+      "context": "Legal or ethical relationship of trust between parties.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:11:41.475957"
+}

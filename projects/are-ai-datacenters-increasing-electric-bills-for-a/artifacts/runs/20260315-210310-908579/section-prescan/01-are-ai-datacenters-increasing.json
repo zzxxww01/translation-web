@@ -1,0 +1,48 @@
+{
+  "section_id": "01-are-ai-datacenters-increasing",
+  "new_terms": [
+    {
+      "term": "ELCC (Effective Load Carrying Capability)",
+      "suggested_translation": "有效载荷能力",
+      "context": "A metric used in energy modeling to estimate the true contribution of a power plant to grid reliability.",
+      "confidence": 0.95
+    },
+    {
+      "term": "interconnection queue",
+      "suggested_translation": "并网队列",
+      "context": "The process and waiting list for new power generation or load facilities to connect to the electrical grid.",
+      "confidence": 0.95
+    },
+    {
+      "term": "IPP (Independent Power Producer)",
+      "suggested_translation": "独立发电商",
+      "context": "Private entities that own and operate power plants to sell electricity to the grid, such as Vistra or Constellation.",
+      "confidence": 0.98
+    },
+    {
+      "term": "power futures",
+      "suggested_translation": "电力期货",
+      "context": "Financial contracts for the future delivery of electricity, used to hedge or speculate on prices.",
+      "confidence": 0.9
+    },
+    {
+      "term": "load growth",
+      "suggested_translation": "负荷增长",
+      "context": "The increase in electrical demand over time, specifically from AI datacenters in this context.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Prefill / Decode",
+      "suggested_translation": "预填充 / 解码",
+      "context": "Specific phases of the LLM inference process mentioned in the 'Power to Prefill, Dirt to Decode' tagline.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "capacity auction": "容量拍卖",
+    "market design": "市场设计",
+    "data center": "数据中心"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T21:09:06.164109"
+}

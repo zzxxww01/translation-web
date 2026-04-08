@@ -1,0 +1,967 @@
+{
+  "section_id": "18-amd-atom-engine",
+  "title": "AMD ATOM Engine",
+  "title_translation": "AMD ATOM 引擎",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "AMD has launched a new inference engine called ATOM. Atom can deliver slightly better single node performance, but it is completely lacking on a lot of features that makes it unusable for real workloads. One such example is that it does not support NVMe or CPU KVCache offloading, tool parsing, wide expert parallelism, or disaggregated serving. This has led to zero customers using it in production. Unlike Nvidia’s TRTLLM which generates billions of tokens per hour globally at companies like TogetherAI, etc and does support tool parsing and other features, there are no token factories currently using ATOM due to the lack of the aforementioned features.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "does support tool parsing and other features",
+          "start": 515,
+          "end": 559,
+          "href": "https://nvidia.github.io/TensorRT-LLM/commands/trtllm-serve/trtllm-serve.html#cmdoption-trtllm-serve-serve-tool_parser",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0215",
+      "parent_block_index": 215,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD has launched a new inference engine called ATOM. Atom can deliver slightly better single node performance, but it is completely lacking on a lot of features that makes it unusable for real workloads. One such example is that it does not support NVMe or CPU KVCache offloading, tool parsing, wide expert parallelism, or disaggregated serving. This has led to zero customers using it in production. Unlike Nvidia’s TRTLLM which generates billions of tokens per hour globally at companies like TogetherAI, etc and [does support tool parsing and other features](https://nvidia.github.io/TensorRT-LLM/commands/trtllm-serve/trtllm-serve.html#cmdoption-trtllm-serve-serve-tool_parser), there are no token factories currently using ATOM due to the lack of the aforementioned features.",
+      "parent_block_plain_text": "AMD has launched a new inference engine called ATOM. Atom can deliver slightly better single node performance, but it is completely lacking on a lot of features that makes it unusable for real workloads. One such example is that it does not support NVMe or CPU KVCache offloading, tool parsing, wide expert parallelism, or disaggregated serving. This has led to zero customers using it in production. Unlike Nvidia’s TRTLLM which generates billions of tokens per hour globally at companies like TogetherAI, etc and does support tool parsing and other features, there are no token factories currently using ATOM due to the lack of the aforementioned features.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "does support tool parsing and other features",
+          "start": 515,
+          "end": 559,
+          "href": "https://nvidia.github.io/TensorRT-LLM/commands/trtllm-serve/trtllm-serve.html#cmdoption-trtllm-serve-serve-tool_parser",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 658,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 推出了一款名为 ATOM 的新推理引擎。ATOM 能提供稍好一点的单节点性能，但严重缺失大量关键特性，导致其根本无法用于实际工作负载。例如，它不支持 NVMe 或 CPU KVCache 卸载、工具解析、宽专家并行以及分离式服务。这导致目前在生产环境中根本没有客户使用它。英伟达的 TRTLLM 在 TogetherAI 等公司全球每小时生成数十亿个 token，并且确实支持工具解析等特性；相比之下，由于缺乏上述特性，目前没有任何 Token 工厂在使用 ATOM。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520205",
+          "tokenized_text": "AMD 推出了一款名为 ATOM 的新推理引擎。ATOM 能提供稍好一点的单节点性能，但严重缺失大量关键特性，导致其根本无法用于实际工作负载。例如，它不支持 NVMe 或 CPU KVCache 卸载、工具解析、宽专家并行以及分离式服务。这导致目前在生产环境中根本没有客户使用它。英伟达的 TRTLLM 在 TogetherAI 等公司全球每小时生成数十亿个 token，并且[[[LINK_1|确实支持工具解析等特性]]]；相比之下，由于缺乏上述特性，目前没有任何 Token 工厂在使用 ATOM。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Furthermore, maintainers of open-source inference engines like vLLM are disappointed in AMD due to a lack of engineering and GPU resources provided by AMD. For example, Simon Mo, lead vLLM maintainer, states in this GitHub RFC that there is still no working MI355X that he can add to vLLM CI, hence the poor user experience. There are currently zero Mi355X tests on vLLM, while NVIDIA’s B200 has many tests on vLLM. Similarly, there are still not enough MI300X CI machines on vLLM. Upstream vLLM needs at least 20 more MI300 machines, 20 more MI325 machines and 20 more MI355X machines to reach the same level of usability as CUDA.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0216",
+      "parent_block_index": 216,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Furthermore, maintainers of open-source inference engines like vLLM are disappointed in AMD due to a lack of engineering and GPU resources provided by AMD. For example, Simon Mo, lead vLLM maintainer, states in this GitHub RFC that there is still no working MI355X that he can add to vLLM CI, hence the poor user experience. There are currently zero Mi355X tests on vLLM, while NVIDIA’s B200 has many tests on vLLM. Similarly, there are still not enough MI300X CI machines on vLLM. Upstream vLLM needs at least 20 more MI300 machines, 20 more MI325 machines and 20 more MI355X machines to reach the same level of usability as CUDA.",
+      "parent_block_plain_text": "Furthermore, maintainers of open-source inference engines like vLLM are disappointed in AMD due to a lack of engineering and GPU resources provided by AMD. For example, Simon Mo, lead vLLM maintainer, states in this GitHub RFC that there is still no working MI355X that he can add to vLLM CI, hence the poor user experience. There are currently zero Mi355X tests on vLLM, while NVIDIA’s B200 has many tests on vLLM. Similarly, there are still not enough MI300X CI machines on vLLM. Upstream vLLM needs at least 20 more MI300 machines, 20 more MI325 machines and 20 more MI355X machines to reach the same level of usability as CUDA.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 631,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，由于 AMD 提供的工程和 GPU 资源匮乏，vLLM 等开源推理引擎的维护者对 AMD 感到失望。例如，vLLM 首席维护者 Simon Mo 在 GitHub 的一份 RFC 中表示，目前仍然没有可用的 MI355X 供他添加到 vLLM 的 CI (持续集成) 中，这直接导致了糟糕的用户体验。目前 vLLM 上针对 MI355X 的测试数量为零，而英伟达的 B200 在 vLLM 上已有大量测试。同样，vLLM 上的 MI300X CI 机器数量依然不足。上游 vLLM 至少还需要 20 台 MI300、20 台 MI325 和 20 台 MI355X 机器，才能达到与 CUDA 同等的易用性水平。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520271",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "We at SemiAnalysis have been trying to get AMD to contribute more compute to vLLM and have had some success on that within the couple weeks. vLLM will start to get a couple of MI355X machines such that they can bring their CI test parity from 0% to non-0%. We will talk more about AMD’s previous lackluster contribution towards vLLM, SGLang, PyTorch CI machine situation & how Anush started to fix it in our upcoming State of AMD article. At SemiAnalysis, we will have internal dashboard to track the # of tests & quality of tests that AMD & NVIDIA runs on vLLM, SGLang, PyTorch, & JAX.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0217",
+      "parent_block_index": 217,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We at SemiAnalysis have been trying to get AMD to contribute more compute to vLLM and have had some success on that within the couple weeks. vLLM will start to get a couple of MI355X machines such that they can bring their CI test parity from 0% to non-0%. We will talk more about AMD’s previous lackluster contribution towards vLLM, SGLang, PyTorch CI machine situation & how Anush started to fix it in our upcoming State of AMD article. At SemiAnalysis, we will have internal dashboard to track the # of tests & quality of tests that AMD & NVIDIA runs on vLLM, SGLang, PyTorch, & JAX.",
+      "parent_block_plain_text": "We at SemiAnalysis have been trying to get AMD to contribute more compute to vLLM and have had some success on that within the couple weeks. vLLM will start to get a couple of MI355X machines such that they can bring their CI test parity from 0% to non-0%. We will talk more about AMD’s previous lackluster contribution towards vLLM, SGLang, PyTorch CI machine situation & how Anush started to fix it in our upcoming State of AMD article. At SemiAnalysis, we will have internal dashboard to track the # of tests & quality of tests that AMD & NVIDIA runs on vLLM, SGLang, PyTorch, & JAX.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 586,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们 SemiAnalysis 一直在敦促 AMD 为 vLLM 贡献更多算力，并在过去几周取得了一些进展。vLLM 将开始获得几台 MI355X 机器，从而将 CI 测试对等度从 0% 提升至非零。在即将发布的《AMD 现状》（State of AMD）文章中，我们将深入探讨 AMD 此前在 vLLM、SGLang、PyTorch CI 机器贡献上的拉胯表现，以及 Anush 是如何着手解决这一问题的。在 SemiAnalysis，我们将建立内部仪表盘，专门追踪 AMD 和英伟达在 vLLM、SGLang、PyTorch 和 JAX 上运行的测试数量及质量。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520289",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Moreover, the vLLM maintainers say that they cannot support day 0 vLLM support for ROCm due to this issue of lack of machine resources. This huge disparity in time to market continues to lead to ROCm lagging behind and leaving a huge opening for Nvidia to continue to charge an insane 75% gross margin (4x markup on cost of goods).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0218",
+      "parent_block_index": 218,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Moreover, the vLLM maintainers say that they cannot support day 0 vLLM support for ROCm due to this issue of lack of machine resources. This huge disparity in time to market continues to lead to ROCm lagging behind and leaving a huge opening for Nvidia to continue to charge an insane 75% gross margin (4x markup on cost of goods).",
+      "parent_block_plain_text": "Moreover, the vLLM maintainers say that they cannot support day 0 vLLM support for ROCm due to this issue of lack of machine resources. This huge disparity in time to market continues to lead to ROCm lagging behind and leaving a huge opening for Nvidia to continue to charge an insane 75% gross margin (4x markup on cost of goods).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 331,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，vLLM 维护者表示，正是由于机器资源匮乏，他们无法为 ROCm 提供 vLLM 的首发 (Day 0) 支持。这种上市时间上的巨大差距导致 ROCm 持续落后，也给英伟达留下了巨大的市场空档，使其得以继续攫取高达 75% 的疯狂毛利率（相当于成本的 4 倍加价）。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520300",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0219",
+      "parent_block_index": 219,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520309",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!1hBL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F96fd0617-347d-49a1-a971-19e42faeab25_1435x1289.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: Github",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Github",
+          "start": 8,
+          "end": 14,
+          "href": "https://github.com/vllm-project/vllm/issues/33478#issuecomment-3844103561",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0220",
+      "parent_block_index": 220,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Github](https://github.com/vllm-project/vllm/issues/33478#issuecomment-3844103561)",
+      "parent_block_plain_text": "Source: Github",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Github",
+          "start": 8,
+          "end": 14,
+          "href": "https://github.com/vllm-project/vllm/issues/33478#issuecomment-3844103561",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Github",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798202",
+          "tokenized_text": "来源：[[[LINK_1|Github]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Github",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520337",
+          "tokenized_text": "来源：[[[LINK_1|Github]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Github",
+      "confirmed_tokenized": "来源：[[[LINK_1|Github]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Lastly, AMD has not had enough committers “who demonstrated sustained upstream engagement through feature shepherding and code ownership” and has a lack of reviewers that can review their own code. This is why the pace of development on ROCm vLLM has been much slower than for CUDA vLLM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0221",
+      "parent_block_index": 221,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, AMD has not had enough committers “who demonstrated sustained upstream engagement through feature shepherding and code ownership” and has a lack of reviewers that can review their own code. This is why the pace of development on ROCm vLLM has been much slower than for CUDA vLLM.",
+      "parent_block_plain_text": "Lastly, AMD has not had enough committers “who demonstrated sustained upstream engagement through feature shepherding and code ownership” and has a lack of reviewers that can review their own code. This is why the pace of development on ROCm vLLM has been much slower than for CUDA vLLM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 287,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后，AMD 缺乏足够多“通过特性护航和代码所有权展现出持续参与上游建设”的代码提交者，同时也缺乏能够审查自家代码的审核员。这就是为什么 ROCm vLLM 的开发节奏远比 CUDA vLLM 慢得多的原因。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520347",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "There are many talented 10x engineers at AMD that work on ATOM and we would encourage AMD management to think about re-deploying these 10x engineers towards working on libraries and frameworks that people actually use, such as vLLM and SGLang.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0222",
+      "parent_block_index": 222,
+      "parent_block_type": "p",
+      "parent_block_markdown": "There are many talented 10x engineers at AMD that work on ATOM and we would encourage AMD management to think about re-deploying these 10x engineers towards working on libraries and frameworks that people actually use, such as vLLM and SGLang.",
+      "parent_block_plain_text": "There are many talented 10x engineers at AMD that work on ATOM and we would encourage AMD management to think about re-deploying these 10x engineers towards working on libraries and frameworks that people actually use, such as vLLM and SGLang.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 243,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 内部有许多才华横溢的 10 倍工程师在开发 ATOM，我们敦促 AMD 管理层考虑重新部署这些 10 倍工程师，让他们去开发人们真正使用的库和框架，比如 vLLM 和 SGLang。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520356",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "As we mentioned earlier, AMD also needs to prioritize addressing composability issues with FP4, wideEP and disaggregated serving as opposed to overly focusing on optimizing FP4 for a single node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0223",
+      "parent_block_index": 223,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we mentioned earlier, AMD also needs to prioritize addressing composability issues with FP4, wideEP and disaggregated serving as opposed to overly focusing on optimizing FP4 for a single node.",
+      "parent_block_plain_text": "As we mentioned earlier, AMD also needs to prioritize addressing composability issues with FP4, wideEP and disaggregated serving as opposed to overly focusing on optimizing FP4 for a single node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 195,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正如前文所述，AMD 也必须优先解决 FP4、WideEP 以及分离式服务 的可组合性问题，而非过度执迷于单节点的 FP4 优化。",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520364",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0224",
+      "parent_block_index": 224,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520373",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!XDqu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda3b4a10-0f65-403d-a9f6-093b86753c02_2120x1258.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0225",
+      "parent_block_index": 225,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427782",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T00:54:14.520395",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.14,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的 'time to market' 在此上下文中指的不仅是硬件发布，更强调硬件发布后软件生态（如 vLLM 首发支持）能让客户真正将产品投入生产的时间。翻译为“上市时间”容易让读者误解为单纯的硬件发售时间。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文直接使用了小写的 'wideEP'，未遵循术语表（Glossary）中关于该词首现或统一的翻译规范。"
+          },
+          {
+            "type": "annotation",
+            "description": "使用了半角括号进行中文注释，且括号外多出了不必要的空格，不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "将 'parity' 翻译为“对等度”略显生硬。这里的 parity 意指与英伟达达到同等测试水平。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

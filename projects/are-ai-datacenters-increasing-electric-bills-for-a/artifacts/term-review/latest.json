@@ -1,0 +1,885 @@
+{
+  "project_id": "are-ai-datacenters-increasing-electric-bills-for-a",
+  "project_title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+  "review_required": true,
+  "generated_at": "2026-03-16T01:08:49.492556",
+  "total_candidates": 23,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "PJM",
+          "suggested_translation": "PJM（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 71,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-are-ai-datacenters-increasing",
+              "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?"
+            },
+            {
+              "section_id": "02-capacity-paying-for-power-pla",
+              "section_title": "Capacity: paying for power plants to sit idle 95% of the time"
+            },
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            },
+            {
+              "section_id": "07-winners-losers-and-the-shift",
+              "section_title": "Winners & losers and the shifting market bottlenecks"
+            },
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Regional transmission organization in the US power market",
+            "A regional transmission organization (RTO) in the United States.",
+            "A regional transmission organization (RTO) in the United States"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "ERCOT",
+          "suggested_translation": "ERCOT（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 48,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-are-ai-datacenters-increasing",
+              "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?"
+            },
+            {
+              "section_id": "02-capacity-paying-for-power-pla",
+              "section_title": "Capacity: paying for power plants to sit idle 95% of the time"
+            },
+            {
+              "section_id": "04-ercot-same-load-growth-no-pr",
+              "section_title": "ERCOT: Same Load Growth, No Price Shock"
+            },
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            },
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Electric Reliability Council of Texas, managing the state's electrical grid",
+            "Electric Reliability Council of Texas, managing the state's electric grid.",
+            "Electric Reliability Council of Texas, the grid operator for Texas"
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.545
+            },
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "capacity prices",
+          "suggested_translation": "容量价格",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Payments to power plants to ensure availability for future demand"
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "grid reliability",
+          "suggested_translation": "电网可靠性",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "The ability of the power system to deliver electricity consistently"
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.593
+            }
+          ]
+        },
+        {
+          "term": "market design",
+          "suggested_translation": "市场设计",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "The regulatory and economic framework of the electricity market"
+          ],
+          "similar_terms": [
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.64
+            },
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.462
+            },
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-are-ai-datacenters-increasing",
+      "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+      "candidates": [
+        {
+          "term": "IPP",
+          "suggested_translation": "独立发电厂",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "01-are-ai-datacenters-increasing",
+          "related_sections": [
+            {
+              "section_id": "01-are-ai-datacenters-increasing",
+              "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?"
+            },
+            {
+              "section_id": "07-winners-losers-and-the-shift",
+              "section_title": "Winners & losers and the shifting market bottlenecks"
+            },
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Independent Power Producers like Vistra or Constellation.",
+            "Independent Power Producers like Vistra and Talen",
+            "Independent Power Producer; entities that own/operate power plants but are not utilities."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "interconnection queue",
+          "suggested_translation": "并网队列",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-are-ai-datacenters-increasing",
+          "related_sections": [
+            {
+              "section_id": "01-are-ai-datacenters-increasing",
+              "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?"
+            },
+            {
+              "section_id": "04-ercot-same-load-growth-no-pr",
+              "section_title": "ERCOT: Same Load Growth, No Price Shock"
+            }
+          ],
+          "contexts": [
+            "The process and waiting list for new power projects to connect to the electrical grid.",
+            "The list of new power generation projects waiting to be connected to the grid."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "load growth",
+          "suggested_translation": "电力负荷增长",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-are-ai-datacenters-increasing",
+          "related_sections": [
+            {
+              "section_id": "01-are-ai-datacenters-increasing",
+              "section_title": "Are AI Datacenters Increasing Electric Bills for American Households?"
+            }
+          ],
+          "contexts": [
+            "The increase in demand for electricity over time."
+          ],
+          "similar_terms": [
+            {
+              "original": "bandwidth",
+              "translation": "带宽",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "02-capacity-paying-for-power-pla",
+      "section_title": "Capacity: paying for power plants to sit idle 95% of the time",
+      "candidates": [
+        {
+          "term": "capacity market",
+          "suggested_translation": "容量市场",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 11,
+          "first_occurrence": "02-capacity-paying-for-power-pla",
+          "related_sections": [
+            {
+              "section_id": "02-capacity-paying-for-power-pla",
+              "section_title": "Capacity: paying for power plants to sit idle 95% of the time"
+            },
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            }
+          ],
+          "contexts": [
+            "A market mechanism to ensure long-term power supply availability",
+            "A market where electricity providers are paid to ensure power is available when needed.",
+            "A market mechanism used to ensure long-term grid reliability by paying providers to be available."
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-pjm-the-16-billion-simulatio",
+      "section_title": "PJM: The $16 Billion Simulation",
+      "candidates": [
+        {
+          "term": "VRR curve",
+          "suggested_translation": "VRR曲线（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            }
+          ],
+          "contexts": [
+            "Variable Resource Requirement curve used to determine capacity prices.",
+            "Variable Resource Requirement curve used in capacity market auctions."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "load forecast",
+          "suggested_translation": "负荷预测",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Estimates of future electricity demand.",
+            "Long-term Load Forecast RPG in ERCOT documents."
+          ],
+          "similar_terms": [
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            },
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "clearing price",
+          "suggested_translation": "出清价格",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            }
+          ],
+          "contexts": [
+            "The price determined in an auction where supply meets demand.",
+            "The price at which the last unit of supply meets demand in a capacity auction."
+          ],
+          "similar_terms": [
+            {
+              "original": "machine learning",
+              "translation": "机器学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            },
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            }
+          ]
+        },
+        {
+          "term": "Base Residual Auction (BRA)",
+          "suggested_translation": "基础剩余拍卖（BRA）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            }
+          ],
+          "contexts": [
+            "PJM's primary auction mechanism for securing forward capacity."
+          ],
+          "similar_terms": [
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.45
+            },
+            {
+              "original": "semiconductor",
+              "translation": "半导体",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.45
+            }
+          ]
+        },
+        {
+          "term": "hyperscaler",
+          "suggested_translation": "超大规模业务商",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            }
+          ],
+          "contexts": [
+            "Large-scale cloud service providers like AWS, Google, and Microsoft.",
+            "Large-scale cloud providers like AWS, Google, or Microsoft."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "load factor",
+          "suggested_translation": "负荷因子",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            }
+          ],
+          "contexts": [
+            "The ratio of average power usage to peak usage over a period."
+          ],
+          "similar_terms": [
+            {
+              "original": "semiconductor",
+              "translation": "半导体",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "peak load",
+          "suggested_translation": "峰值负荷",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-pjm-the-16-billion-simulatio",
+          "related_sections": [
+            {
+              "section_id": "03-pjm-the-16-billion-simulatio",
+              "section_title": "PJM: The $16 Billion Simulation"
+            }
+          ],
+          "contexts": [
+            "The maximum amount of electricity demand occurring in a specific period."
+          ],
+          "similar_terms": [
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-ercot-same-load-growth-no-pr",
+      "section_title": "ERCOT: Same Load Growth, No Price Shock",
+      "candidates": [
+        {
+          "term": "FERC",
+          "suggested_translation": "联邦能源监管委员会（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "04-ercot-same-load-growth-no-pr",
+          "related_sections": [
+            {
+              "section_id": "04-ercot-same-load-growth-no-pr",
+              "section_title": "ERCOT: Same Load Growth, No Price Shock"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            }
+          ],
+          "contexts": [
+            "Federal Energy Regulatory Commission, the US federal agency that regulates interstate electricity.",
+            "Federal Energy Regulatory Commission, the primary regulator for interstate energy."
+          ],
+          "similar_terms": [
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.615
+            }
+          ]
+        },
+        {
+          "term": "scarcity pricing",
+          "suggested_translation": "稀缺定价",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-ercot-same-load-growth-no-pr",
+          "related_sections": [
+            {
+              "section_id": "04-ercot-same-load-growth-no-pr",
+              "section_title": "ERCOT: Same Load Growth, No Price Shock"
+            }
+          ],
+          "contexts": [
+            "A market mechanism where prices spike during supply shortages to incentivize capacity."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "05-winter-storm-fern-paying-for",
+      "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It",
+      "candidates": [
+        {
+          "term": "reserve margin",
+          "suggested_translation": "储备裕度",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "05-winter-storm-fern-paying-for",
+          "related_sections": [
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            },
+            {
+              "section_id": "06-what-comes-next",
+              "section_title": "What Comes Next"
+            }
+          ],
+          "contexts": [
+            "The difference between capacity and peak demand, used to measure grid reliability.",
+            "The amount of extra generation capacity available over and above the predicted peak demand."
+          ],
+          "similar_terms": [
+            {
+              "original": "gross margin",
+              "translation": "毛利率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.692
+            },
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            },
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "datacenter load",
+          "suggested_translation": "数据中心负载",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-winter-storm-fern-paying-for",
+          "related_sections": [
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            }
+          ],
+          "contexts": [
+            "The electrical demand generated by data centers on the power grid."
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.769
+            },
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "winterization",
+          "suggested_translation": "防寒准备",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-winter-storm-fern-paying-for",
+          "related_sections": [
+            {
+              "section_id": "05-winter-storm-fern-paying-for",
+              "section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It"
+            }
+          ],
+          "contexts": [
+            "The process of preparing infrastructure (gas production, power plants) to withstand extreme cold."
+          ],
+          "similar_terms": [
+            {
+              "original": "virtualization",
+              "translation": "虚拟化",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.552
+            },
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.516
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "09-semianalysis-disclaimer",
+      "section_title": "SemiAnalysis Disclaimer",
+      "candidates": [
+        {
+          "term": "onsite gas",
+          "suggested_translation": "现场燃气发电",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "09-semianalysis-disclaimer",
+          "related_sections": [
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Refers to natural gas power generation located at the datacenter site to bypass grid constraints."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "hyperscalers",
+          "suggested_translation": "超大规模云厂商",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-semianalysis-disclaimer",
+          "related_sections": [
+            {
+              "section_id": "09-semianalysis-disclaimer",
+              "section_title": "SemiAnalysis Disclaimer"
+            }
+          ],
+          "contexts": [
+            "Large-scale cloud service providers like AWS, Google, and Microsoft."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

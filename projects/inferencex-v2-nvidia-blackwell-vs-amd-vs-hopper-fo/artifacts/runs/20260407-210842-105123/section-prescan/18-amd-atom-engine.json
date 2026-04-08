@@ -1,0 +1,76 @@
+{
+  "section_id": "18-amd-atom-engine",
+  "new_terms": [
+    {
+      "term": "NVMe",
+      "suggested_translation": "NVMe",
+      "context": "does not support NVMe or CPU KVCache offloading",
+      "confidence": 1.0
+    },
+    {
+      "term": "CI",
+      "suggested_translation": "CI (持续集成)",
+      "context": "there is still no working MI355X that he can add to vLLM CI",
+      "confidence": 1.0
+    },
+    {
+      "term": "RFC",
+      "suggested_translation": "RFC",
+      "context": "states in this GitHub RFC",
+      "confidence": 1.0
+    },
+    {
+      "term": "CUDA",
+      "suggested_translation": "CUDA",
+      "context": "reach the same level of usability as CUDA",
+      "confidence": 1.0
+    },
+    {
+      "term": "JAX",
+      "suggested_translation": "JAX",
+      "context": "tests that AMD & NVIDIA runs on vLLM, SGLang, PyTorch, & JAX",
+      "confidence": 1.0
+    },
+    {
+      "term": "tool parsing",
+      "suggested_translation": "工具解析",
+      "context": "does not support NVMe or CPU KVCache offloading, tool parsing",
+      "confidence": 0.95
+    },
+    {
+      "term": "token factories",
+      "suggested_translation": "Token 工厂",
+      "context": "there are no token factories currently using ATOM",
+      "confidence": 0.9
+    },
+    {
+      "term": "day 0",
+      "suggested_translation": "Day 0 (首发)",
+      "context": "they cannot support day 0 vLLM support for ROCm",
+      "confidence": 0.95
+    },
+    {
+      "term": "feature shepherding",
+      "suggested_translation": "特性护航",
+      "context": "demonstrated sustained upstream engagement through feature shepherding",
+      "confidence": 0.9
+    },
+    {
+      "term": "10x engineers",
+      "suggested_translation": "10倍工程师",
+      "context": "There are many talented 10x engineers at AMD",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "kv cache offloading": "KV Cache 卸载",
+    "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
+    "disaggregated serving": "分离式 Serving",
+    "upstream": "上游",
+    "gross margin": "毛利率",
+    "composability": "可组合性",
+    "single node": "单节点"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:50:34.164441"
+}

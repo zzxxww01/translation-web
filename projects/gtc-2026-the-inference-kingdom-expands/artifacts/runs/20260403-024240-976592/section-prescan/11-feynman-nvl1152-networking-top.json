@@ -1,0 +1,56 @@
+{
+  "section_id": "11-feynman-nvl1152-networking-top",
+  "new_terms": [
+    {
+      "term": "448Gbit/s PAM4 SerDes",
+      "suggested_translation": "448G PAM4 串行器/解串器",
+      "context": "NVIDIA would have to achieve a per lane bandwidth of 448Gbit/s uni-di implemented with PAM4 SerDes.",
+      "confidence": 0.95
+    },
+    {
+      "term": "echo cancellation",
+      "suggested_translation": "回声消除",
+      "context": "implement echo cancellation to achieve bidirectional bandwidth",
+      "confidence": 0.9
+    },
+    {
+      "term": "blind-mated",
+      "suggested_translation": "盲插",
+      "context": "switch blades are blind-mated to the midplane using optical connectors",
+      "confidence": 0.95
+    },
+    {
+      "term": "two-layer CLOS network",
+      "suggested_translation": "两层 CLOS 网络",
+      "context": "The first is a two-layer CLOS network that is similar to the Oberon form factor",
+      "confidence": 0.9
+    },
+    {
+      "term": "reconfigurable dragonfly topology",
+      "suggested_translation": "可重构龙胆花 (Dragonfly) 拓扑",
+      "context": "The second is a reconfigurable dragonfly topology using OCS switches",
+      "confidence": 0.9
+    },
+    {
+      "term": "OCS switches",
+      "suggested_translation": "OCS 光线路交换机",
+      "context": "using OCS switches to connect the 8 racks",
+      "confidence": 0.95
+    },
+    {
+      "term": "switch blades",
+      "suggested_translation": "交换机刀片",
+      "context": "switch blades are blind-mated to the midplane",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "feynman nvl1152": "Feynman NVL1152",
+    "kyber": "Kyber",
+    "midplane": "中板",
+    "flyover cables": "飞线电缆",
+    "oberon": "Oberon"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T03:08:54.432948"
+}

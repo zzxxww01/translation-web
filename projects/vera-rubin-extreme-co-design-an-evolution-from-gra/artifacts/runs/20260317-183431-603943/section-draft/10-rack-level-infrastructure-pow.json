@@ -1,0 +1,310 @@
+{
+  "section_id": "10-rack-level-infrastructure-pow",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "10-rack-level-infrastructure-pow",
+    "section_title": "Rack Level Infrastructure: Power Delivery",
+    "section_title_translation": "机架级基础设施：供电",
+    "section_position": "11/17",
+    "article_theme": "A comprehensive technical and economic deep dive into Nvidia's Rubin (VR NVL72) platform, highlighting its transition to a modular cableless design, 100% liquid cooling, and strategic TCO positioning against AMD and Groq.",
+    "structure_summary": "The article follows a top-down engineering logic: starting with silicon-level specifications (Rubin GPUs, Vera CPUs), moving into the rack-scale architecture (Oberon), then performing a 'tear-down' style analysis of the Compute Tray (cables, thermal, power, mechanical). It concludes with macro-level infrastructure implications (cooling/power vendors), networking evolution (NVLink 6), and a rigorous financial TCO/BoM comparison with competitors.",
+    "target_audience": "Semiconductor industry professionals, hardware engineers, and institutional investors.",
+    "translation_voice": "The Chinese voice should be professional, precise, and 'hardcore' (硬核). It should avoid flowery language, favoring clear logical transitions and accurate technical nomenclature common in the Taiwan/Mainland China tech sectors.",
+    "previous_section_title": "Procurement and Cooling Vendor Implications",
+    "next_section_title": "Networking: NVLink 6, Rubin Scale Out",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "Prioritize technical accuracy over readability for engineering specs (e.g., SerDes counts, pitch measurements).",
+      "Use 'Rack-scale' (机柜级) and 'Chassis' (机箱) consistently to distinguish between the two form factors.",
+      "Maintain the 'SemiAnalysis' brand voice by being direct about 'winners and losers' in the supply chain.",
+      "Keep product code names (Rubin, Vera, Blackwell, Oberon, Strata, Bianca) in English.",
+      "Ensure the distinction between 'Dense' and 'Sparse' PFLOPS is clear, as this is central to the TCO argument.",
+      "Translate 'BoM' as '物料清单' but can keep the acronym in parentheses for the first mention."
+    ],
+    "article_challenges": [
+      {
+        "location": "Networking Section",
+        "issue": "Complex networking hierarchies (leaf, spine, core) and 1.6T connectivity terminology.",
+        "suggestion": "Ensure strict adherence to networking layer terminology and keep SerDes/OSFP terms in English where appropriate."
+      },
+      {
+        "location": "Thermal/Power Delivery",
+        "issue": "Transition between mechanical units (mm, microns) and electrical units (VDC, Amps).",
+        "suggestion": "Maintain precision in units and use standard Chinese engineering terms for 'step-down' (降压) and 'busbar' (母线)."
+      },
+      {
+        "location": "Groq Section",
+        "issue": "Nuance between 'acquisition' and 'licensing agreement'.",
+        "suggestion": "Be extremely careful with the strike-through text (~acquired Groq~) to reflect the author's correction regarding the licensing agreement."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Compute Tray",
+        "term": "Compute Tray",
+        "translation": "算力托盘",
+        "strategy": "translate",
+        "note": "The modular unit within the rack containing GPUs, CPUs, and memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Cableless Design",
+        "term": "Cableless Design",
+        "translation": "无线缆设计",
+        "strategy": "translate",
+        "note": "A design replacing internal flyover cables with board-to-board connectors to simplify assembly.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Flyover Cables",
+        "term": "Flyover Cables",
+        "translation": "架空线缆",
+        "strategy": "first_annotate",
+        "note": "High-speed copper cables that 'fly over' the PCB to reduce signal loss.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Coldplate",
+        "term": "Coldplate",
+        "translation": "冷板",
+        "strategy": "translate",
+        "note": "The liquid-cooled metal plate in direct contact with the silicon.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Quick Disconnect (QD/MQD)",
+        "term": "Quick Disconnect (QD/MQD)",
+        "translation": "快速接头",
+        "strategy": "first_annotate",
+        "note": "Connectors for liquid cooling loops that allow for easy swapping of components without leaks.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Sparsity",
+        "term": "Sparsity",
+        "translation": "稀疏性",
+        "strategy": "translate",
+        "note": "A technique in AI inference to skip zero-value weights to boost performance.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Radix",
+        "term": "Radix",
+        "translation": "吞吐基数",
+        "strategy": "first_annotate",
+        "note": "The number of ports on a network switch.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TCO",
+        "term": "TCO",
+        "translation": "总拥有成本",
+        "strategy": "translate",
+        "note": "Total Cost of Ownership, including capex and opex.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Decode Loop",
+        "term": "Decode Loop",
+        "translation": "Decode 环节",
+        "strategy": "first_annotate",
+        "note": "The iterative process in LLM inference where tokens are generated one by one.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "在 2024 年的 GB200 文章 中，我们讨论了供电架构从节点级电源单元（PSU）向集中式机柜级电源架（Power Shelf）的演进。随着 VR NVL72 的机柜热设计功耗（TDP）从 GB200 和 GB300 的 120kW-140kW 增长到每机柜 180kW-220kW，供电基础设施再次发生了演进。在下文中，我们将讨论 VR NVL72 参考设计的机柜级供电基础设施，以及算力托盘级的供电方案。",
+    "自 GB200 部署以来，供电基础设施演进的主旋律一直是传输效率和功率稳定性。超大规模云厂商（Hyperscalers）正在开发供电基础设施，以应对高密度 AI 服务器机柜带来的挑战，未来几年的路线图已设定为每机柜 1MW。因此，高压直流（HVDC）电源机柜、电池备份单元（BBU）、电容备份单元（CBU）、液冷母线（Busbar）以及固态变压器（SST）正在被开发，以提高传输效率和功率稳定性。这些技术将由客户根据其专有的基础设施设计进行部署。关于这一点的更多细节，我们在本报告中阐述了 AI 训练对电网带来的挑战。",
+    "https://substackcdn.com/image/fetch/$s_!YedG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06dbd2aa-7e3c-4f9a-ab81-60bcc8b26b5c_733x1702.png",
+    "来源：英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型",
+    "对于 VR NVL72 参考设计，机柜级的供电基础设施包括四个 110kW 的电源架。对于 Rubin TDP 为 2300W 的 SKU，VR NVL72 系统的 TDP 高达 220kW。采用四个 110kW 电源架的设计是一种 N+1 冗余方案。每个 110kW 电源架高度为 3U，包含六个 18.3kW 的 PSU，且 PSU 内置了电容器。每个电源架通过两条 100A 的电源线接收三相 415VAC-480VAC 电源。电源架将电压从 415VAC-480VAC 降压至 50VDC 并输送到母线。有趣的是，VR NVL72 的母线额定电流达到 5000A 以上，远高于 Grace Blackwell 的 2900A。考虑到极高的电流以及机柜内缺乏风扇，母线必须采用液冷设计。",
+    "https://substackcdn.com/image/fetch/$s_!mnFo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4bba56-9812-4977-8f9e-201a0cab7ff1_1640x940.png",
+    "来源：TE Connectivity，OCP 2025",
+    "对于超大规模客户，他们可能会选择部署独立的低压直流（LVDC）或高压直流（HVDC）电源机柜。下面我们提供了 VR NVL72 电源机柜部署的两种可能方案。",
+    "https://substackcdn.com/image/fetch/$s_!HQjd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F882952fa-6781-496c-b90a-2bcb9eb0f1bc_3165x2172.png",
+    "来源：英伟达（NVIDIA） VR NVL72 物料清单（BoM）与功耗预算模型",
+    "首先，配备高压直流（HVDC）电源机柜的 VR NVL72 机柜运行电压为 800VDC（英伟达规范）或 +/-400VDC（OCP 规范）。由于 VR NVL72 机柜母线仍运行在 50V，且算力托盘只能接收 50V 输入，因此来自电源机柜的 800VDC 无法直接输送至母线。VR NVL72 机柜中仍需配置 DC-DC 电源架。如下文所示，这些 DC-DC 电源架会将电流电压从 800VDC 降压至 50VDC。",
+    "https://substackcdn.com/image/fetch/$s_!nFTK!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F003855a3-c39f-4c22-a4bc-3783e1b20428_1460x833.png",
+    "来源：OCP、Meta、SemiAnalysis",
+    "其次，部分客户（即 Meta）可能会考虑将其网络交换机机柜与 BBU（电池备份单元）和 CBU（电容备份单元）机架集成，以提高效率并实现削峰填谷（peak shaving）。这可以容纳更多在 GPU 机柜中无法放置的 CBU 和 BBU 容量。BBU/CBU 与交换机机柜将通过 50V 水平母线连接到 GPU 机柜。Meta 将此称为“高功率机柜（high power rack）”，并在 OCP 会议上进行了讨论。",
+    "我们在VR NVL72 物料清单（BoM）与功耗预算模型中提供了更详尽的电力和架构细节。"
+  ]
+}

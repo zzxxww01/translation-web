@@ -1,0 +1,981 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "title": "Key Observations and Results to Highlight",
+  "title_translation": "核心观察与重点结果",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We see competitive perf per TCO results on FP8 MI355X disagg+wideEP SGLang on AMD compared to FP8 B200 disagg+wideEP SGLang, but when compared to widely used Dynamo TRTLLM B200 FP8, TRT continues to framemog. This is amazing news that AMD SGLang Disagg prefill+wideEP for FP8 is able to match NVIDIA’s SGLang performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We see competitive perf per TCO results on FP8 MI355X disagg+wideEP SGLang on AMD compared to FP8 B200 disagg+wideEP SGLang, but when compared to widely used Dynamo TRTLLM B200 FP8, TRT continues to framemog. This is amazing news that AMD SGLang Disagg prefill+wideEP for FP8 is able to match NVIDIA’s SGLang performance.",
+      "parent_block_plain_text": "We see competitive perf per TCO results on FP8 MI355X disagg+wideEP SGLang on AMD compared to FP8 B200 disagg+wideEP SGLang, but when compared to widely used Dynamo TRTLLM B200 FP8, TRT continues to framemog. This is amazing news that AMD SGLang Disagg prefill+wideEP for FP8 is able to match NVIDIA’s SGLang performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 321,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在对比 AMD 平台上采用 FP8 精度、分离式预填充（disagg prefill）加宽专家并行（WideEP）的 SGLang 与英伟达 B200 上同等配置的 SGLang 时，我们发现 MI355X 展现出了极具竞争力的单位 TCO 性能。然而，一旦与广泛使用的 Dynamo TensorRT-LLM (TRTLLM) B200 FP8 配置相比，TRT 依然呈现降维打击之势。即便如此，AMD 的 SGLang 在 FP8 分离式预填充加 WideEP 配置下能够追平英伟达的 SGLang 性能，这依然是个极其振奋人心的消息。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.598258",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We also see that for single node aggregated serving, AMD’s SGLang delivers better perf per TCO than NVIDIA’s SGLang for FP8. It is also great to see that AMD has deprecated their second class fork of vllm to move further upstream and closer to delivering first class experience. Stay tuned for our “State of AMD” article where we talk about the many areas where AMD’s pace of improvement has been rapid & also the areas where the pace of improvement has been lackluster. We recommend that NVIDIA focus even more on SGLang & vLLM ecosystem in addition their TRTLLM engine. Jensen needs to staff more resources & engineers towards contributing open ecosystems like SGLang & vLLM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "It is also great to see that AMD has deprecated their second class fork of vllm to move further upstream and closer to delivering first class experience.",
+          "start": 125,
+          "end": 278,
+          "href": "https://x.com/vllm_project/status/2013928644302033208",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jensen needs to staff more resources & engineers towards contributing open ecosystems like SGLang & vLLM",
+          "start": 572,
+          "end": 676,
+          "href": "https://www.linkedin.com/in/akbarnurlybayev?trk=feed-detail_main-feed-card_feed-actor-image",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We also see that for single node aggregated serving, AMD’s SGLang delivers better perf per TCO than NVIDIA’s SGLang for FP8. [It is also great to see that AMD has deprecated their second class fork of vllm to move further upstream and closer to delivering first class experience.](https://x.com/vllm_project/status/2013928644302033208) Stay tuned for our “State of AMD” article where we talk about the many areas where AMD’s pace of improvement has been rapid & also the areas where the pace of improvement has been lackluster. We recommend that NVIDIA focus even more on SGLang & vLLM ecosystem in addition their TRTLLM engine. [Jensen needs to staff more resources & engineers towards contributing open ecosystems like SGLang & vLLM](https://www.linkedin.com/in/akbarnurlybayev?trk=feed-detail_main-feed-card_feed-actor-image).",
+      "parent_block_plain_text": "We also see that for single node aggregated serving, AMD’s SGLang delivers better perf per TCO than NVIDIA’s SGLang for FP8. It is also great to see that AMD has deprecated their second class fork of vllm to move further upstream and closer to delivering first class experience. Stay tuned for our “State of AMD” article where we talk about the many areas where AMD’s pace of improvement has been rapid & also the areas where the pace of improvement has been lackluster. We recommend that NVIDIA focus even more on SGLang & vLLM ecosystem in addition their TRTLLM engine. Jensen needs to staff more resources & engineers towards contributing open ecosystems like SGLang & vLLM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "It is also great to see that AMD has deprecated their second class fork of vllm to move further upstream and closer to delivering first class experience.",
+          "start": 125,
+          "end": 278,
+          "href": "https://x.com/vllm_project/status/2013928644302033208",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jensen needs to staff more resources & engineers towards contributing open ecosystems like SGLang & vLLM",
+          "start": 572,
+          "end": 676,
+          "href": "https://www.linkedin.com/in/akbarnurlybayev?trk=feed-detail_main-feed-card_feed-actor-image",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 677,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们还发现，在单节点集成式服务场景下，AMD 的 SGLang 在 FP8 精度上提供了比英伟达 SGLang 更优的单位 TCO 性能。令人欣慰的是，AMD 已经废弃了他们那个二流的 vLLM 分支，转而更积极地向上游靠拢，向提供一流体验迈进了一大步。敬请期待我们的《AMD 现状》一文，我们将在其中探讨 AMD 进展神速的诸多领域，以及那些差强人意的短板。我们建议英伟达在 TRTLLM 引擎之外，进一步加码对 SGLang 和 vLLM 生态系统的投入。黄仁勋需要调配更多资源和工程师，为 SGLang 和 vLLM 等开放生态做出贡献。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.598619",
+          "tokenized_text": "我们还发现，在单节点集成式服务场景下，AMD 的 SGLang 在 FP8 精度上提供了比英伟达 SGLang 更优的单位 TCO 性能。[[[LINK_1|令人欣慰的是，AMD 已经废弃了他们那个二流的 vLLM 分支，转而更积极地向上游靠拢，向提供一流体验迈进了一大步。]]]敬请期待我们的《AMD 现状》一文，我们将在其中探讨 AMD 进展神速的诸多领域，以及那些差强人意的短板。我们建议英伟达在 TRTLLM 引擎之外，进一步加码对 SGLang 和 vLLM 生态系统的投入。[[[LINK_2|黄仁勋需要调配更多资源和工程师，为 SGLang 和 vLLM 等开放生态做出贡献]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 161,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis 的 InferenceX 是一款免费开源软件，由读者提供支持。若想接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.598702",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "When it comes to the latest inference techniques that are used by the most prominent frontier large-scale inference services (such as disagg prefill+wideEP+FP4), Nvidia absolutely frame mogs with the B200, B300 and ASU frat leader, rack scale GB200/GB300 NVL72 across both SGLang and TRTLLM. Nvidia GPUs also dominate when it comes to energy efficiency, with much lower all-in provisioned picoJoules of energy per token across all workloads.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "When it comes to the latest inference techniques that are used by the most prominent frontier large-scale inference services (such as disagg prefill+wideEP+FP4), Nvidia absolutely frame mogs with the B200, B300 and ASU frat leader, rack scale GB200/GB300 NVL72 across both SGLang and TRTLLM. Nvidia GPUs also dominate when it comes to energy efficiency, with much lower all-in provisioned picoJoules of energy per token across all workloads.",
+      "parent_block_plain_text": "When it comes to the latest inference techniques that are used by the most prominent frontier large-scale inference services (such as disagg prefill+wideEP+FP4), Nvidia absolutely frame mogs with the B200, B300 and ASU frat leader, rack scale GB200/GB300 NVL72 across both SGLang and TRTLLM. Nvidia GPUs also dominate when it comes to energy efficiency, with much lower all-in provisioned picoJoules of energy per token across all workloads.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 441,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "当谈及最顶尖的前沿大规模推理服务所采用的最新推理技术（如分离式预填充+WideEP+FP4）时，英伟达凭借 B200、B300 以及堪称“ASU 兄弟会老大”（译注：形容其极具统治力）的 GB200/GB300 NVL72 机架级系统，在 SGLang 和 TRTLLM 上均实现了全面的降维打击。英伟达 GPU 在能效方面同样占据统治地位，在所有工作负载下，每个 token 的综合配置能耗（皮焦耳级别）都要低得多。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.598764",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Turning to AMD, we find that the biggest issue with inference on their systems and using their software is [composability](https://en.wikipedia.org/wiki/Composability). That is, many of AMDs inference optimization implementations work well in isolation, but when combined with other optimizations, the result is not as competitive as one would expect. Specifically, the composability of disagg prefill, wideEP and FP4 inference optimizations needs significant improvement.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "[composability](https://en.wikipedia.org/wiki/Composability)",
+          "start": 107,
+          "end": 167,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Turning to AMD, we find that the biggest issue with inference on their systems and using their software is *[composability](https://en.wikipedia.org/wiki/Composability)*. That is, many of AMDs inference optimization implementations work well in isolation, but when combined with other optimizations, the result is not as competitive as one would expect. Specifically, the composability of disagg prefill, wideEP and FP4 inference optimizations needs significant improvement.",
+      "parent_block_plain_text": "Turning to AMD, we find that the biggest issue with inference on their systems and using their software is [composability](https://en.wikipedia.org/wiki/Composability). That is, many of AMDs inference optimization implementations work well in isolation, but when combined with other optimizations, the result is not as competitive as one would expect. Specifically, the composability of disagg prefill, wideEP and FP4 inference optimizations needs significant improvement.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "[composability](https://en.wikipedia.org/wiki/Composability)",
+          "start": 107,
+          "end": 167,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 472,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "反观 AMD，我们发现其系统与软件在推理上面临的最大问题在于[可组合性](https://en.wikipedia.org/wiki/Composability)。也就是说，AMD 的许多推理优化方案在单独运行时表现良好，但与其他优化手段组合使用时，结果却远不如预期那般具备竞争力。具体而言，分离式预填充、WideEP 以及 FP4 推理优化之间的可组合性亟待大幅提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.598942",
+          "tokenized_text": "反观 AMD，我们发现其系统与软件在推理上面临的最大问题在于[[[EM_1|[可组合性](https://en.wikipedia.org/wiki/Composability)]]]。也就是说，AMD 的许多推理优化方案在单独运行时表现良好，但与其他优化手段组合使用时，结果却远不如预期那般具备竞争力。具体而言，分离式预填充、WideEP 以及 FP4 推理优化之间的可组合性亟待大幅提升。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "While performance is competitive on AMD when enabling just a subset of the SOTA inference optimizations, enabling all three major optimizations that labs use, AMD’s performance is currently not competitive with Nvidia’s. We strongly recommend to AMD that they focus heavily on composability of different inference optimizations. We have been told that AMD will start focusing on software composability of FP4+distributed inferencing across their whole software stack. This will happen after Chinese New Year as most of their disagg prefill+wideEP 10x inference engineers are based in China",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While performance is competitive on AMD when enabling just a subset of the SOTA inference optimizations, enabling all three major optimizations that labs use, AMD’s performance is currently not competitive with Nvidia’s. We strongly recommend to AMD that they focus heavily on composability of different inference optimizations. We have been told that AMD will start focusing on software composability of FP4+distributed inferencing across their whole software stack. This will happen after Chinese New Year as most of their disagg prefill+wideEP 10x inference engineers are based in China",
+      "parent_block_plain_text": "While performance is competitive on AMD when enabling just a subset of the SOTA inference optimizations, enabling all three major optimizations that labs use, AMD’s performance is currently not competitive with Nvidia’s. We strongly recommend to AMD that they focus heavily on composability of different inference optimizations. We have been told that AMD will start focusing on software composability of FP4+distributed inferencing across their whole software stack. This will happen after Chinese New Year as most of their disagg prefill+wideEP 10x inference engineers are based in China",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 589,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然在仅开启部分业界领先的推理优化时，AMD 的性能尚具竞争力，但一旦同时开启前沿实验室常用的这三大核心优化，AMD 目前的性能便无法与英伟达抗衡。我们强烈建议 AMD 将重心放在不同推理优化的可组合性上。有消息称，AMD 将开始在整个软件栈层面发力解决 FP4 加分布式推理的软件可组合性问题。这项工作将在农历新年后展开，因为他们大部分负责分离式预填充加 WideEP 的“10倍速”推理工程师都常驻中国。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.599004",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Nvidia’s GB300 NVL72 doesn’t disappoint. It achieves up to 100x on FP8 vs FP4 compared to even a strong H100 disagg+wideEP+MTP baseline and 65x on FP8 vs FP8. On H100 vs GB200 NVL72, we see up to 55x realized performance difference at 75 tok/s/user. Rack scale Blackwell NVL72 is framemogging hopper and makes hopper looks like it is jestermaxxing. As Jensen said at GTC 2025, he is chief revenue destroyer.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "he is chief revenue destroyer.",
+          "start": 377,
+          "end": 407,
+          "href": "https://newsletter.semianalysis.com/i/174558496/ai-total-cost-of-ownership-cost-declines",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia’s GB300 NVL72 doesn’t disappoint. It achieves up to 100x on FP8 vs FP4 compared to even a strong H100 disagg+wideEP+MTP baseline and 65x on FP8 vs FP8. On H100 vs GB200 NVL72, we see up to 55x realized performance difference at 75 tok/s/user. Rack scale Blackwell NVL72 is framemogging hopper and makes hopper looks like it is jestermaxxing. As Jensen said at GTC 2025, [he is chief revenue destroyer.](https://newsletter.semianalysis.com/i/174558496/ai-total-cost-of-ownership-cost-declines)",
+      "parent_block_plain_text": "Nvidia’s GB300 NVL72 doesn’t disappoint. It achieves up to 100x on FP8 vs FP4 compared to even a strong H100 disagg+wideEP+MTP baseline and 65x on FP8 vs FP8. On H100 vs GB200 NVL72, we see up to 55x realized performance difference at 75 tok/s/user. Rack scale Blackwell NVL72 is framemogging hopper and makes hopper looks like it is jestermaxxing. As Jensen said at GTC 2025, he is chief revenue destroyer.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "he is chief revenue destroyer.",
+          "start": 377,
+          "end": 407,
+          "href": "https://newsletter.semianalysis.com/i/174558496/ai-total-cost-of-ownership-cost-declines",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 407,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达的 GB300 NVL72 机架级系统 没有让人失望。即便与强悍的 H100 分离式预填充+WideEP+MTP（多Token预测）基准相比，它在 FP4 精度下相比 H100 的 FP8 精度实现了高达 100 倍的性能飞跃，而在同等 FP8 精度对比中也达到了 65 倍。在 H100 与 GB200 NVL72 机架级系统 的较量中，我们观察到在每秒每用户 75 个 token（tok/s/user）的吞吐量下，实际性能差距高达 55 倍。Blackwell NVL72 机架级系统 正在对 Hopper 架构实施降维打击，衬托得 Hopper 简直像个纯纯小丑。正如黄仁勋在 GTC 2025 大会上所言，他是首席营收毁灭者。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.599191",
+          "tokenized_text": "英伟达的 GB300 NVL72 机架级系统 没有让人失望。即便与强悍的 H100 分离式预填充+WideEP+MTP（多Token预测）基准相比，它在 FP4 精度下相比 H100 的 FP8 精度实现了高达 100 倍的性能飞跃，而在同等 FP8 精度对比中也达到了 65 倍。在 H100 与 GB200 NVL72 机架级系统 的较量中，我们观察到在每秒每用户 75 个 token（tok/s/user）的吞吐量下，实际性能差距高达 55 倍。Blackwell NVL72 机架级系统 正在对 Hopper 架构实施降维打击，衬托得 Hopper 简直像个纯纯小丑。正如黄仁勋在 GTC 2025 大会上所言，[[[LINK_1|他是首席营收毁灭者。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "At GTC 2024, Jensen claimed that Blackwell will deliver up to 30x perf on inference compared to H100, Jensen under promised & overdelivered on Blackwell inference performance. This should curtail the instances of analysts cracking “Jensen Math” jokes for some time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At GTC 2024, Jensen claimed that Blackwell will deliver up to 30x perf on inference compared to H100, Jensen under promised & overdelivered on Blackwell inference performance. This should curtail the instances of analysts cracking “Jensen Math” jokes for some time.",
+      "parent_block_plain_text": "At GTC 2024, Jensen claimed that Blackwell will deliver up to 30x perf on inference compared to H100, Jensen under promised & overdelivered on Blackwell inference performance. This should curtail the instances of analysts cracking “Jensen Math” jokes for some time.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 265,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 GTC 2024 大会上，黄仁勋宣称 Blackwell 的推理性能将比 H100 提升高达 30 倍，而他在 Blackwell 推理性能上显然是低调承诺、超额交付。这应该能让分析师们在未来一段时间内少拿“黄氏数学”开玩笑了。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.599250",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.599302",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!HfJD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2ed3fe4a-93e9-4c47-8fb2-91f17da1b7c5_2392x1418.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386749",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T19:58:46.599431",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.225,
+        "is_excellent": true,
+        "applied_terms": [
+          "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+          "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the core thesis and TL;DR of the entire article regarding the AMD vs. Nvidia competitive landscape.",
+          "relation_to_previous": "Presents the high-level conclusions derived from the InferenceXv2 benchmark introduced in the previous section.",
+          "relation_to_next": "Pauses the technical analysis to establish credibility by acknowledging the hardware providers that made these results possible.",
+          "key_points": [
+            "AMD's MI355X with SGLang (Disagg+WideEP, FP8) matches Nvidia's B200 SGLang performance.",
+            "Nvidia's Dynamo TRTLLM completely dominates (framemogs) AMD's current offerings.",
+            "AMD lacks composability across multiple SOTA inference optimizations, which is a critical weakness they must address."
+          ],
+          "translation_notes": [
+            "The slang 'framemog' (total domination/outperforming) must be localized to equivalent Chinese tech slang, such as '全面碾压' or '降维打击'.",
+            "Translate 'composability' precisely as '可组合性' or '组合能力' in the context of software stack optimizations."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中的 'aggregated serving' 是相对于全文核心概念 'disaggregated serving'（分离式服务）而言的，指的是预填充与解码在同一节点上混合处理的传统服务模式。将其译为“集成式服务”略显生硬，建议改为“一体化服务”以形成更直观、更符合架构语境的对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'10x engineer' 是硅谷非常经典的科技黑话，专指生产力极高、能以一当十的“10倍工程师”或“顶尖工程师”。译文处理为“10倍速”容易引起误解，让读者误以为这是某种提升推理速度的具体技术称呼（如 10x inference speed）。"
+          },
+          {
+            "type": "structure",
+            "description": "在应用术语表将 NVL72 替换为“NVL72机架级系统”后，译文中“系统”一词与其后的中文字符之间遗留了不必要的空格（如“系统 没有”），这不符合中英文混排的空格规范（全中文之间不应有空格）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

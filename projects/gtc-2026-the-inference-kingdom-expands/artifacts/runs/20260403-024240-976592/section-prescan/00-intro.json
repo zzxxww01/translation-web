@@ -1,0 +1,47 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Rubin Ultra NVL576",
+      "suggested_translation": "Rubin Ultra NVL576",
+      "context": "Nvidia's next-generation GPU architecture and multi-rack system following Blackwell.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Feynman NVL1152",
+      "suggested_translation": "Feynman NVL1152",
+      "context": "Nvidia's future GPU architecture and high-density multi-rack system.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Vera ETL256",
+      "suggested_translation": "Vera ETL256",
+      "context": "A new dense system or networking component introduced by Nvidia at GTC 2026.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Kyber",
+      "suggested_translation": "Kyber",
+      "context": "Nvidia's specific rack architecture system.",
+      "confidence": 0.9
+    },
+    {
+      "term": "scale-up networking",
+      "suggested_translation": "纵向扩展网络",
+      "context": "Networking designed to increase the capacity of a single logical system or cluster.",
+      "confidence": 0.85
+    },
+    {
+      "term": "InferenceX",
+      "suggested_translation": "InferenceX",
+      "context": "A specific inference-focused product or platform mentioned by Jensen Huang.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "attention ffn disaggregation (afd)": "注意力与前馈网络解耦",
+    "co-packaged optics (cpo)": "光电共封装"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T02:44:24.932464"
+}

@@ -1,0 +1,1 @@
+One of the main goals of InferenceX is to visualize performance improvements over time. While new chips are released on an O(yearly) cadence, software releases happen on an O(weekly) cadence. Our goal is to constantly update recipes with the latest and greatest software improvements and benchmark the configurations.

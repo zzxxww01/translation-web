@@ -1,0 +1,42 @@
+{
+  "section_id": "06-what-comes-next",
+  "new_terms": [
+    {
+      "term": "Non-Capacity-Backed Load (NCBL)",
+      "suggested_translation": "非容量保障负荷",
+      "context": "A mechanism proposed by PJM to curtail large loads that have not secured their own capacity.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Advance Notice of Proposed Rulemaking (ANOPR)",
+      "suggested_translation": "拟议规则制定预告",
+      "context": "A formal notice issued by FERC signaling increased federal scrutiny and potential future regulations.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Public Utility Commission",
+      "suggested_translation": "公用事业委员会",
+      "context": "State-level regulatory bodies, specifically the Public Utility Commission of Texas in this section.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Regulatory Asymmetry",
+      "suggested_translation": "监管不对称性",
+      "context": "The structural difference in regulatory speed and authority between ERCOT (state-level) and PJM (federal-level).",
+      "confidence": 0.9
+    },
+    {
+      "term": "site-selection",
+      "suggested_translation": "选址",
+      "context": "The process hyperscalers use to decide where to build data centers based on regulatory and price factors.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "price cap": "价格上限",
+    "reserve margin": "储备裕度",
+    "curtailment authority": "削减授权"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:11:15.429039"
+}

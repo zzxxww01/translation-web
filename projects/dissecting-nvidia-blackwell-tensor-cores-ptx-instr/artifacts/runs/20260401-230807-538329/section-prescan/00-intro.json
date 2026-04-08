@@ -1,0 +1,55 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "microbenchmarking",
+      "suggested_translation": "微基准测试",
+      "context": "A study on PTX and SASS instructions to discover hardware throughput limits.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ptx",
+      "suggested_translation": "PTX",
+      "context": "Parallel Thread Execution; Nvidia's intermediate assembly language.",
+      "confidence": 0.98
+    },
+    {
+      "term": "sass",
+      "suggested_translation": "SASS",
+      "context": "Streaming Assembler; the low-level machine code that runs on Nvidia GPUs.",
+      "confidence": 0.98
+    },
+    {
+      "term": "umma",
+      "suggested_translation": "UMMA",
+      "context": "Unified Matrix Multiply-Accumulate; a specific instruction type in the Blackwell architecture.",
+      "confidence": 0.9
+    },
+    {
+      "term": "gpc",
+      "suggested_translation": "图形处理集群 (GPC)",
+      "context": "Graphics Processing Cluster; used in the context of GPC Floorsweeps.",
+      "confidence": 0.95
+    },
+    {
+      "term": "sm",
+      "suggested_translation": "流式多处理器 (SM)",
+      "context": "Streaming Multiprocessor; used in the context of SM Yield.",
+      "confidence": 0.95
+    },
+    {
+      "term": "flashinfer",
+      "suggested_translation": "FlashInfer",
+      "context": "A popular deep learning library for inference kernels.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "floorsweeping": "核心屏蔽",
+    "speed of light": "理论极限性能",
+    "yield": "良率",
+    "distributed shared memory": "分布式共享内存"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:10:58.982158"
+}

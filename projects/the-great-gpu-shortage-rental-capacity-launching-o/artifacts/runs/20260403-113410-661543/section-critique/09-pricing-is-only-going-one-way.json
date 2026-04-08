@@ -1,0 +1,38 @@
+{
+  "section_id": "09-pricing-is-only-going-one-way",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.3,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "tone",
+        "severity": "medium",
+        "original_text": "allowed OEMs to push through outsized margin expansion",
+        "description": "“push through”带有凭借卖方市场优势强行落地、转嫁成本的意味，“outsized”强调超常、超额。原译“大幅扩张利润率”略显平淡，未能完全体现出当时OEM厂商在紧缺市场下的强势姿态。",
+        "why_it_matters": "金融科技分析师的文风通常更具市场博弈的张力，准确传达市场主体的议价能力有助于强化判断力度。",
+        "suggestion": "建议改为“让OEM厂商得以攫取超额利润”或“让OEM厂商得以强势推高利润率”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "capturing immediate margin expansion.",
+        "description": "“实现……扩张”属于典型的翻译腔（虚化动词+抽象名词），在中文金融研报中，通常有更精炼、地道的表达。",
+        "why_it_matters": "消除翻译腔，提升行文的专业度和流畅度。",
+        "suggestion": "建议改为“从而立竿见影地增厚利润”或“从而立即扩大收益空间”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "before requiring reinvestment.",
+        "description": "“进行再投资”中的“进行”是一个多余的动词外壳，略显拖沓。",
+        "why_it_matters": "去除冗余字词，使句子更加洗练紧凑。",
+        "suggestion": "建议精简为“在需要再投资之前”。"
+      }
+    ]
+  }
+}

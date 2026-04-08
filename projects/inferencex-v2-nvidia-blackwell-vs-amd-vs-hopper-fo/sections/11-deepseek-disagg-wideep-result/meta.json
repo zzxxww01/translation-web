@@ -1,0 +1,2108 @@
+{
+  "section_id": "11-deepseek-disagg-wideep-result",
+  "title": "DeepSeek Disagg +WideEP Results Deep Dive",
+  "title_translation": "DeepSeek 分离式推理与 WideEP 结果深度解析",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "At almost all interactivity levels, disagg outperform aggregated inference (grey lines) in terms of total token throughput per GPU. Multi-node disaggregrated prefill framemogs single node aggregrated serving.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At almost all interactivity levels, disagg outperform aggregated inference (grey lines) in terms of total token throughput per GPU. Multi-node disaggregrated prefill framemogs single node aggregrated serving.",
+      "parent_block_plain_text": "At almost all interactivity levels, disagg outperform aggregated inference (grey lines) in terms of total token throughput per GPU. Multi-node disaggregrated prefill framemogs single node aggregrated serving.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 208,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在几乎所有的交互性下，就单卡总 token 吞吐量而言，Disagg (分离) 架构的表现均超越了聚合式推理（灰线）。多节点分离式预填充对单节点聚合式服务实现了全方位的性能碾压。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689530",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689580",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!aeCq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ace6118-029a-44df-b0ef-2e7595e6f388_2032x1339.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-14&i_seq=8k%2F1k&g_runid=22013103756#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-14&i_seq=8k%2F1k&g_runid=22013103756#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-14&i_seq=8k%2F1k&g_runid=22013103756#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386985",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689662",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Nvidia continues to push new updates for B200/GB200 FP8. The latest data on DeepSeek FP8 B200 TRT single node (both MTP enabled/disabled) vs GB200 Dynamo+TRT disagg (both MTP enabled/disabled). This indicates consistent engineering effort to improve rack-scale inference software and wideEP kernels.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia continues to push new updates for B200/GB200 FP8. The latest data on DeepSeek FP8 B200 TRT single node (both MTP enabled/disabled) vs GB200 Dynamo+TRT disagg (both MTP enabled/disabled). This indicates consistent engineering effort to improve rack-scale inference software and wideEP kernels.",
+      "parent_block_plain_text": "Nvidia continues to push new updates for B200/GB200 FP8. The latest data on DeepSeek FP8 B200 TRT single node (both MTP enabled/disabled) vs GB200 Dynamo+TRT disagg (both MTP enabled/disabled). This indicates consistent engineering effort to improve rack-scale inference software and wideEP kernels.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 299,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达仍在持续为 B200/GB200 FP8 推送更新。最新数据对比了 DeepSeek FP8 B200 TRT 单节点（开启/关闭 MTP）与 GB200 Dynamo+TRT Disagg (分离)（开启/关闭 MTP）的性能表现。这表明其在优化机架级推理软件与 WideEP（宽专家并行）算子方面，投入了持之以恒的工程心血。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689683",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689701",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!s0zP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29485790-238d-4e1d-aa48-0559c79c9855_2132x1247.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387012",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689750",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "When comparing MI355X disaggregated inference vs aggregated inference, we noticed a similar pattern. Disaggregated inference only overtakes aggregated inference at low interactivity, high batch sizes. This is true across FP4, and it is likely due to poorly optimized kernels.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "When comparing MI355X disaggregated inference vs aggregated inference, we noticed a similar pattern. Disaggregated inference only overtakes aggregated inference at low interactivity, high batch sizes. This is true across FP4, and it is likely due to poorly optimized kernels.",
+      "parent_block_plain_text": "When comparing MI355X disaggregated inference vs aggregated inference, we noticed a similar pattern. Disaggregated inference only overtakes aggregated inference at low interactivity, high batch sizes. This is true across FP4, and it is likely due to poorly optimized kernels.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 275,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在对比 MI355X 的分离式推理与聚合式推理时，我们观察到了类似的规律。只有在低交互性、大 Batch Size 的场景下，分离式推理才能反超聚合式推理。这一现象在 FP4 精度下依然成立，其罪魁祸首很可能是算子优化严重拉胯。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689770",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689804",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!wwi4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25a7c41e-fa99-4117-8e49-ac121a22bf0f_2092x1241.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387038",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689853",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "When composing disagg prefill+wideEP with FP4 on the MI355X, we observe suffers subpar performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0099",
+      "parent_block_index": 99,
+      "parent_block_type": "p",
+      "parent_block_markdown": "When composing disagg prefill+wideEP with FP4 on the MI355X, we observe suffers subpar performance.",
+      "parent_block_plain_text": "When composing disagg prefill+wideEP with FP4 on the MI355X, we observe suffers subpar performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 99,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 MI355X 上将 Disagg (分离) 预填充与宽专家并行（WideEP）结合并运行 FP4 时，我们发现其性能表现堪忧。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689872",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Although theoretical modeling shows that disagg inference on MI355Xs should perform way better than single node, disagg actually performs worse for higher interactivity levels due to a lack of kernel and collective optimization in the ROCm software stack when composing multiple SOTA inference optimizations together.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although theoretical modeling shows that disagg inference on MI355Xs should perform way better than single node, disagg actually performs worse for higher interactivity levels due to a lack of kernel and collective optimization in the ROCm software stack when composing multiple SOTA inference optimizations together.",
+      "parent_block_plain_text": "Although theoretical modeling shows that disagg inference on MI355Xs should perform way better than single node, disagg actually performs worse for higher interactivity levels due to a lack of kernel and collective optimization in the ROCm software stack when composing multiple SOTA inference optimizations together.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 317,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管理论建模表明，MI355X 上的 Disagg 推理性能理应远超单节点，但在要求更高交互性的场景下，Disagg 的实际表现反而更差。究其原因，当叠加使用多种 SOTA (业界领先) 推理优化技术时，ROCm 软件栈缺乏相应的 Kernel 与集合通信优化。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689892",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689908",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!PqhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2d82d32f-089b-405d-b4ef-94b4956676ed_2078x1233.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387063",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689951",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Nvidia TensorRT LLM and NVL72",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Nvidia TensorRT LLM and NVL72",
+      "parent_block_plain_text": "Nvidia TensorRT LLM and NVL72",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达 TensorRT LLM 与 NVL72",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689971",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "TensorRT LLM already serves billions of tokens per hour globally across providers like TogetherAI and other advanced providers, and it has really allowed the GB200 NVL72 and GB300 NVL72 to shine, delivering more than double the performance at high throughput. MTP boosts these results even further, making use of the chips’ full potential.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0104",
+      "parent_block_index": 104,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TensorRT LLM already serves billions of tokens per hour globally across providers like TogetherAI and other advanced providers, and it has really allowed the GB200 NVL72 and GB300 NVL72 to shine, delivering more than double the performance at high throughput. MTP boosts these results even further, making use of the chips’ full potential.",
+      "parent_block_plain_text": "TensorRT LLM already serves billions of tokens per hour globally across providers like TogetherAI and other advanced providers, and it has really allowed the GB200 NVL72 and GB300 NVL72 to shine, delivering more than double the performance at high throughput. MTP boosts these results even further, making use of the chips’ full potential.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 339,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "TensorRT LLM 已经在 TogetherAI 等全球先进服务商中，每小时处理着数十亿个 Token。它真正让 GB200 NVL72 和 GB300 NVL72 大放异彩，在高吞吐量场景下实现了两倍以上的性能跃升。MTP 则进一步推高了这一成绩，充分榨取了芯片的全部潜能。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.689988",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0105",
+      "parent_block_index": 105,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690005",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NgC9!,w_720,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd4628887-37be-4563-ad68-091282e20ddf_2350x1486.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0106",
+      "parent_block_index": 106,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis InferenceX",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387076",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690023",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "The benefits delivered from the larger world size of the NVL72 family is also evident if we look at cost graphs. At a fixed interactivity level of 60 tok/s/user, each GB200 NVL GPU produces slightly less than triple the number of tokens/s than each B200 does.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0107",
+      "parent_block_index": 107,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The benefits delivered from the larger world size of the NVL72 family is also evident if we look at cost graphs. At a fixed interactivity level of 60 tok/s/user, each GB200 NVL GPU produces slightly less than triple the number of tokens/s than each B200 does.",
+      "parent_block_plain_text": "The benefits delivered from the larger world size of the NVL72 family is also evident if we look at cost graphs. At a fixed interactivity level of 60 tok/s/user, each GB200 NVL GPU produces slightly less than triple the number of tokens/s than each B200 does.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 259,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "观察成本图表，NVL72 系列凭借更大的 World Size 带来的优势同样显而易见。在 60 tok/s/user 的固定交互性下，单张 GB200 NVL GPU 产出的 tokens/s 略低于单张 B200 的三倍。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690042",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0108",
+      "parent_block_index": 108,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis InferenceX 是免费开源软件，由读者提供支持。如需接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690059",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0109",
+      "parent_block_index": 109,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690076",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_KKs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F36087d46-94e1-4629-90cb-4b0dfad1a8c1_1856x827.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387088",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690118",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "This gap shrinks as interactivity increases. At 130 tok/s/user, the GB200 NVL72 has nearly no advantage and is even more expensive on a $/Million tokens basis. At low batch sizes, the inference workload shrinks enough to fit within a single HGX node’s NVLink domain (i.e. 8 GPUs), and the GB200 NVL72’s larger scale-out advantage starts to disappear.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This gap shrinks as interactivity increases. At 130 tok/s/user, the GB200 NVL72 has nearly no advantage and is even more expensive on a $/Million tokens basis. At low batch sizes, the inference workload shrinks enough to fit within a single HGX node’s NVLink domain (i.e. 8 GPUs), and the GB200 NVL72’s larger scale-out advantage starts to disappear.",
+      "parent_block_plain_text": "This gap shrinks as interactivity increases. At 130 tok/s/user, the GB200 NVL72 has nearly no advantage and is even more expensive on a $/Million tokens basis. At low batch sizes, the inference workload shrinks enough to fit within a single HGX node’s NVLink domain (i.e. 8 GPUs), and the GB200 NVL72’s larger scale-out advantage starts to disappear.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 350,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着交互性的提升，这一差距不断缩小。在 130 tok/s/user 时，GB200 NVL72 几乎毫无优势，按每百万 Token 成本计算甚至更为昂贵。在低 Batch Size 下，推理工作负载大幅缩减，足以塞进单个 HGX 节点的 NVLink 域（即 8 张 GPU）内，此时 GB200 NVL72 更大的横向扩展 (Scale-out) 优势便开始消退。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690137",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690154",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!RyLb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3e287d0e-947f-4fd7-9dc8-d697fad9ac7d_1781x822.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387099",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:31:52.690195",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "The term 'kernel' is translated as English 'Kernel' here, but in paragraph 6 ('poorly optimized kernels') it was translated as '算子' ('算子优化严重拉胯'). This creates internal inconsistency."
+          },
+          {
+            "type": "annotation",
+            "description": "The abbreviation 'Disagg' is annotated again as 'Disagg (分离)', even though it was already introduced and annotated in paragraph 0 ('Disagg (分离) 架构'). The same repeated annotation occurs in paragraph 9."
+          },
+          {
+            "type": "terminology",
+            "description": "The term is translated as 'WideEP（宽专家并行）', whereas the glossary specifies '宽专家并行 (WideEP)', and paragraph 9 uses '宽专家并行（WideEP）'."
+          },
+          {
+            "type": "terminology",
+            "description": "The word 'token' is in lowercase ('单卡总 token 吞吐量'), whereas in paragraphs 14 and 21 it is correctly capitalized as 'Token' ('数十亿个 Token', '每百万 Token 成本')."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

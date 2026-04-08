@@ -1,0 +1,42 @@
+{
+  "section_id": "16-groq-lpu-decode-rack",
+  "new_terms": [
+    {
+      "term": "LPU rack",
+      "suggested_translation": "LPU 机柜",
+      "context": "A specific rack-level system designed by Groq for inference tasks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "cost to serve",
+      "suggested_translation": "服务成本",
+      "context": "Financial metric referring to the operational cost of processing inference requests.",
+      "confidence": 0.9
+    },
+    {
+      "term": "tokens per second per user",
+      "suggested_translation": "每用户每秒 token 数",
+      "context": "A performance metric measuring the speed of text generation for an individual user.",
+      "confidence": 0.95
+    },
+    {
+      "term": "interactivity",
+      "suggested_translation": "交互性",
+      "context": "Refers to the latency requirements of inference requests (e.g., real-time vs. batch).",
+      "confidence": 0.85
+    },
+    {
+      "term": "inference pre-fill",
+      "suggested_translation": "推理预填充",
+      "context": "The initial phase of LLM inference where the prompt is processed.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "prefill": "预填充",
+    "decode": "解码",
+    "inference": "推理"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:20:39.564792"
+}

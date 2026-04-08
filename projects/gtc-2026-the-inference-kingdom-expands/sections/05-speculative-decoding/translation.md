@@ -1,0 +1,9 @@
+LPU 改善解码阶段延迟的另一种方式是加速推测解码架构，即我们将草稿模型或多Token预测（MTP）层部署到 LPU 上。
+
+对于上下文包含 N 个 token 的解码步骤，当前向传播期间添加 k 个额外 token（即对 k 个新 token 进行热预填充）时，只要 k << N，延迟仅会略微增加。利用这一特性，推测解码使用小型草稿模型或 MTP 层来预测 k 个新 token；由于小模型每个解码步骤的延迟更低，因此能够节省时间。为了验证这些草稿 token，主模型只需对 k 个新 token 进行一次热预填充，其延迟代价大约相当于单个解码步骤。推测解码通常能将每个解码步骤的输出 token 数量提升 1.5 到 2 个，具体取决于草稿模型或 MTP 的准确率。凭借其低延迟特性，LPU 能够进一步增加节省的延迟并提升吞吐量。
+
+https://substackcdn.com/image/fetch/$s_!cvnL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b9a77e7-dc29-4321-8f63-1c508cebc7e5_1335x671.jpeg
+
+来源：SemiAnalysis
+
+对于 LPU 而言，部署草稿模型或 MTP 层与应用注意力与前馈网络解耦截然不同。FFN 是无状态的，而草稿模型和 MTP 层需要动态KV缓存加载。每个 FFN 的大小约为数百兆字节，而草稿模型和 MTP 层则占用数十吉字节。为了支持这种内存消耗，在 LPX 计算托盘上，LPU 可以通过每个 Fabric扩展逻辑FPGA 访问高达 256 GB 的 DDR5 内存。

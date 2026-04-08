@@ -1,0 +1,38 @@
+{
+  "section_id": "05-speculative-decoding",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "hundreds of megabytes, whereas draft models and MTP layers take up tens of gigabytes",
+        "description": "译文将 megabytes 和 gigabytes 直译为“兆字节”和“吉字节”，在硬核技术文章中显得较为生硬。",
+        "why_it_matters": "不符合目标读者（资深硬件工程师、架构师）的日常阅读习惯，专业语境下通常直接使用 MB 和 GB。",
+        "suggestion": "建议修改为“数百 MB”和“数十 GB”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "further increase the latency savings",
+        "description": "“增加节省的延迟”存在轻微的翻译腔，中文表达略显拗口。",
+        "why_it_matters": "影响段落收尾句的流畅度和分析师的果断语气。",
+        "suggestion": "建议修改为“进一步扩大延迟优势”或“进一步节省延迟时间”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "applying AFD",
+        "description": "原文直接使用缩写 AFD，译文使用了完整中文“应用注意力与前馈网络解耦”。鉴于本节为后半部分，AFD 应在之前已定义，全称显得冗长。",
+        "why_it_matters": "过长的全称会降低句子的阅读效率和紧凑感。",
+        "suggestion": "建议直接修改为“应用 AFD”。"
+      }
+    ]
+  }
+}

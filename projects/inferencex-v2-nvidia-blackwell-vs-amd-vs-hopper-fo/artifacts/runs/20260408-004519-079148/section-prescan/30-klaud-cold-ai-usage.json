@@ -1,0 +1,44 @@
+{
+  "section_id": "30-klaud-cold-ai-usage",
+  "new_terms": [
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "A proper name for an AI tool used in software development for tasks like reviewing PRs and performing sweeps.",
+      "confidence": 1.0
+    },
+    {
+      "term": "run rate",
+      "suggested_translation": "年化支出率",
+      "context": "A financial term used to project annual spending based on current daily spending (e.g., '$6,000/day run rate').",
+      "confidence": 0.9
+    },
+    {
+      "term": "KPI",
+      "suggested_translation": "关键绩效指标 (KPI)",
+      "context": "Abbreviation for Key Performance Indicator. Used here in the context of a goal for AI usage ('contribute towards our KPI').",
+      "confidence": 1.0
+    },
+    {
+      "term": "GitHub Copilot",
+      "suggested_translation": "GitHub Copilot",
+      "context": "A proper name for an AI pair programmer tool, mentioned for comparison purposes.",
+      "confidence": 1.0
+    },
+    {
+      "term": "developer throughput",
+      "suggested_translation": "开发者吞吐量",
+      "context": "A measure of developer productivity or the volume of development work completed in a given time. Similar to 'developer velocity'.",
+      "confidence": 0.9
+    },
+    {
+      "term": "image changelog",
+      "suggested_translation": "镜像变更日志",
+      "context": "Refers to the log of changes for a software image (like a vLLM/SGLang container image), which is parsed to find necessary updates for recipes.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:15:13.433519"
+}

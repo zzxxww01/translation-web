@@ -1,0 +1,2327 @@
+{
+  "section_id": "08-deepseek-r1",
+  "title": "DeepSeek R1",
+  "title_translation": "DeepSeek R1",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The AMD team has significantly improved performance for all configurations of SGLang DeepSeek R1 FP4. For the same interactivity, AMD has almost doubled the amount of throughput in the span of less than 2 months. Moreover, we have pushed AMD to upstream performance enhancing changes from their forked SGLang images into the official SGLang image. From December 2025 to January 2026, AMD’s software was improved up to 2x in performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0050",
+      "parent_block_index": 50,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The AMD team has significantly improved performance for all configurations of SGLang DeepSeek R1 FP4. For the same interactivity, AMD has almost doubled the amount of throughput in the span of less than 2 months. Moreover, we have pushed AMD to upstream performance enhancing changes from their forked SGLang images into the official SGLang image. From December 2025 to January 2026, AMD’s software was improved up to 2x in performance.",
+      "parent_block_plain_text": "The AMD team has significantly improved performance for all configurations of SGLang DeepSeek R1 FP4. For the same interactivity, AMD has almost doubled the amount of throughput in the span of less than 2 months. Moreover, we have pushed AMD to upstream performance enhancing changes from their forked SGLang images into the official SGLang image. From December 2025 to January 2026, AMD’s software was improved up to 2x in performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 436,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 团队已大幅提升了 SGLang DeepSeek R1 FP4 所有配置的性能。在同等交互性下，AMD 仅用不到两个月的时间，就将吞吐量几乎翻了一番。此外，我们还敦促 AMD 将其魔改版 SGLang 镜像中提升性能的改动合入上游官方 SGLang 镜像。从 2025 年 12 月到 2026 年 1 月，AMD 的软件性能实现了高达 2 倍的提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370232",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0051",
+      "parent_block_index": 51,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370553",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-02&g_runid=21577661184&i_seq=8k%2F1k&i_prec=fp4%2Cfp8&i_gpus=mi355x_sglang&i_dstart=2025-12-14&i_dend=2026-01-29&i_hc=1#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0052",
+      "parent_block_index": 52,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-02&g_runid=21577661184&i_seq=8k%2F1k&i_prec=fp4%2Cfp8&i_gpus=mi355x_sglang&i_dstart=2025-12-14&i_dend=2026-01-29&i_hc=1#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-02&g_runid=21577661184&i_seq=8k%2F1k&i_prec=fp4%2Cfp8&i_gpus=mi355x_sglang&i_dstart=2025-12-14&i_dend=2026-01-29&i_hc=1#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386772",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370779",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "In order to continue becoming closer to an first class experience, AMD needs increase their support of vLLM & SGLang maintainers through compute contributions and code contributions & having more reviewers that work for AMD to speed up the review process of AMD PRs into the upstream.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0053",
+      "parent_block_index": 53,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In order to continue becoming closer to an first class experience, AMD needs increase their support of vLLM & SGLang maintainers through compute contributions and code contributions & having more reviewers that work for AMD to speed up the review process of AMD PRs into the upstream.",
+      "parent_block_plain_text": "In order to continue becoming closer to an first class experience, AMD needs increase their support of vLLM & SGLang maintainers through compute contributions and code contributions & having more reviewers that work for AMD to speed up the review process of AMD PRs into the upstream.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 284,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了不断逼近一流的使用体验，AMD 必须加大对 vLLM 和 SGLang 维护者的支持力度，不仅要贡献算力与代码，还要安排更多 AMD 内部审查人员，加速将 AMD 的 PR (Pull Request) 审核并合入上游。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370820",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370850",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0055",
+      "parent_block_index": 55,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387653",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370874",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "On the other hand, Nvidia’s results were more consistent, with minor improvements for B200 SGLang over a similar time period.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0056",
+      "parent_block_index": 56,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the other hand, Nvidia’s results were more consistent, with minor improvements for B200 SGLang over a similar time period.",
+      "parent_block_plain_text": "On the other hand, Nvidia’s results were more consistent, with minor improvements for B200 SGLang over a similar time period.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 125,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "另一方面，英伟达的测试结果则更为稳定，在同期内 B200 SGLang 的性能仅有小幅提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370898",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0057",
+      "parent_block_index": 57,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370925",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0058",
+      "parent_block_index": 58,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386808",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.370992",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Many of the mature SKUs had minimal improvements. For example, H200 TRT single node has not changed in performance in the span of 4 months since October, but this is because Hopper support has been excellent since day 1, and performance has close to peak theoretical for this workload all along, making it hard to deliver incremental performance gains.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0059",
+      "parent_block_index": 59,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Many of the mature SKUs had minimal improvements. For example, H200 TRT single node has not changed in performance in the span of 4 months since October, but this is because Hopper support has been excellent since day 1, and performance has close to peak theoretical for this workload all along, making it hard to deliver incremental performance gains.",
+      "parent_block_plain_text": "Many of the mature SKUs had minimal improvements. For example, H200 TRT single node has not changed in performance in the span of 4 months since October, but this is because Hopper support has been excellent since day 1, and performance has close to peak theoretical for this workload all along, making it hard to deliver incremental performance gains.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 352,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "许多成熟的 SKU 性能提升微乎其微。例如，自 10 月以来的四个月里，H200 TRT 单节点的性能毫无变化。这是因为 Hopper 从发布首日起就获得了极佳的软件支持，其在该工作负载下的性能一直逼近理论峰值，因此很难再挤出额外的性能提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371018",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0060",
+      "parent_block_index": 60,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371042",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0061",
+      "parent_block_index": 61,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386839",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371100",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "MI300X and MI325X have seen some improvements, mainly from the most recent SGLang release. Note that for much of the history of InferenceX, AMD was using “private” ROCm images that were not upstreamed, so runs prior to ~Jan 2026 cannot be compared directly to those that are more recent.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0062",
+      "parent_block_index": 62,
+      "parent_block_type": "p",
+      "parent_block_markdown": "MI300X and MI325X have seen some improvements, mainly from the most recent SGLang release. Note that for much of the history of InferenceX, AMD was using “private” ROCm images that were not upstreamed, so runs prior to ~Jan 2026 cannot be compared directly to those that are more recent.",
+      "parent_block_plain_text": "MI300X and MI325X have seen some improvements, mainly from the most recent SGLang release. Note that for much of the history of InferenceX, AMD was using “private” ROCm images that were not upstreamed, so runs prior to ~Jan 2026 cannot be compared directly to those that are more recent.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 287,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "MI300X 和 MI325X 取得了一些性能提升，这主要归功于最新发布的 SGLang 版本。需要注意的是，在 InferenceX 的大部分历史测试中，AMD 使用的都是未推送到上游的“私有” ROCm 镜像，因此 2026 年 1 月左右之前的测试结果，无法与近期的结果直接对比。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371127",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0063",
+      "parent_block_index": 63,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371153",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-13&g_runid=21976393587&i_seq=8k%2F1k&i_prec=fp8&i_gpus=mi325x_sglang%2Cmi300x_sglang&i_dstart=2026-01-23&i_dend=2026-02-13&i_hc=1#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0064",
+      "parent_block_index": 64,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-13&g_runid=21976393587&i_seq=8k%2F1k&i_prec=fp8&i_gpus=mi325x_sglang%2Cmi300x_sglang&i_dstart=2026-01-23&i_dend=2026-02-13&i_hc=1#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-13&g_runid=21976393587&i_seq=8k%2F1k&i_prec=fp8&i_gpus=mi325x_sglang%2Cmi300x_sglang&i_dstart=2026-01-23&i_dend=2026-02-13&i_hc=1#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386869",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371227",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "GB200 Dynamo TRT-LLM disagg has seen some significant improvements as well, with a 20% increase in max throughput in the span of a little over 1 month. We also see improvements in the middle interactivities, where wide EP is deployed. This is likely due to maturing wide EP kernels on GB200.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0065",
+      "parent_block_index": 65,
+      "parent_block_type": "p",
+      "parent_block_markdown": "GB200 Dynamo TRT-LLM disagg has seen some significant improvements as well, with a 20% increase in max throughput in the span of a little over 1 month. We also see improvements in the middle interactivities, where wide EP is deployed. This is likely due to maturing wide EP kernels on GB200.",
+      "parent_block_plain_text": "GB200 Dynamo TRT-LLM disagg has seen some significant improvements as well, with a 20% increase in max throughput in the span of a little over 1 month. We also see improvements in the middle interactivities, where wide EP is deployed. This is likely due to maturing wide EP kernels on GB200.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 291,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GB200 Dynamo TRT-LLM Disagg (分离) 架构同样取得了显著提升，在短短一个多月的时间里，最大吞吐量飙升了 20%。在部署了宽专家并行（WideEP）的中等交互性场景下，我们也看到了性能改善。这很可能得益于 GB200 上宽专家并行内核的日益成熟。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371252",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0066",
+      "parent_block_index": 66,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371274",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-31&g_runid=21538687343&i_gpus=gb200_dynamo-trt&i_dstart=2025-12-19&i_dend=2026-01-31#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0067",
+      "parent_block_index": 67,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-31&g_runid=21538687343&i_gpus=gb200_dynamo-trt&i_dstart=2025-12-19&i_dend=2026-01-31#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-31&g_runid=21538687343&i_gpus=gb200_dynamo-trt&i_dstart=2025-12-19&i_dend=2026-01-31#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386883",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371327",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "B200 SGLang has seen steady and continuous improvement for both FP4 and FP8 scenarios since our initial launch, with throughput per GPU doubling at some interactivity levels since last October.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "p",
+      "parent_block_markdown": "B200 SGLang has seen steady and continuous improvement for both FP4 and FP8 scenarios since our initial launch, with throughput per GPU doubling at some interactivity levels since last October.",
+      "parent_block_plain_text": "B200 SGLang has seen steady and continuous improvement for both FP4 and FP8 scenarios since our initial launch, with throughput per GPU doubling at some interactivity levels since last October.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 193,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自我们首次发布以来，B200 SGLang 在 FP4 和 FP8 场景下均实现了稳步且持续的提升。自去年十月以来，在特定的交互性水平下，单 GPU 吞吐量已经翻番。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371350",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371373",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386894",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371426",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "For MI355X Disaggregated inference serving, AMD recommends using SGLang with MoRI. MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library built from first principles by AMD’s cracked 10x China-based engineering team. Although MoRI needs much more open CI and testing, we are strong supporters of the direction that MoRI is taking. This is because instead of taking AMD’s historical approach, which was to fork NVIDIA’s NCCL into RCCL, MoRI is built from scratch by taking the lessons from RCCL/NCCL and building an entirely new package from first principles. The use of MoRI has also delivered good speedups in the span of more than a month, with throughput per GPU increasing by more than 20% in the 20-45 tok/s/user interactivity range.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library",
+          "start": 83,
+          "end": 158,
+          "href": "https://github.com/ROCm/mori/tree/main",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For MI355X Disaggregated inference serving, AMD recommends using SGLang with MoRI. [MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library](https://github.com/ROCm/mori/tree/main) built from first principles by AMD’s cracked 10x China-based engineering team. Although MoRI needs much more open CI and testing, we are strong supporters of the direction that MoRI is taking. This is because instead of taking AMD’s historical approach, which was to fork NVIDIA’s NCCL into RCCL, MoRI is built from scratch by taking the lessons from RCCL/NCCL and building an entirely new package from first principles. The use of MoRI has also delivered good speedups in the span of more than a month, with throughput per GPU increasing by more than 20% in the 20-45 tok/s/user interactivity range.",
+      "parent_block_plain_text": "For MI355X Disaggregated inference serving, AMD recommends using SGLang with MoRI. MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library built from first principles by AMD’s cracked 10x China-based engineering team. Although MoRI needs much more open CI and testing, we are strong supporters of the direction that MoRI is taking. This is because instead of taking AMD’s historical approach, which was to fork NVIDIA’s NCCL into RCCL, MoRI is built from scratch by taking the lessons from RCCL/NCCL and building an entirely new package from first principles. The use of MoRI has also delivered good speedups in the span of more than a month, with throughput per GPU increasing by more than 20% in the 20-45 tok/s/user interactivity range.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library",
+          "start": 83,
+          "end": 158,
+          "href": "https://github.com/ROCm/mori/tree/main",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 759,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于 MI355X 分离式推理服务，AMD 推荐搭配 MoRI 使用 SGLang。MoRI 是 AMD 的 MoE (混合专家) 分发/合并集合通信与 KV Cache 传输库，由 AMD 位于中国的一支实力爆表的“十倍工程师”团队基于第一性原理打造。尽管 MoRI 还需要更开放的 CI（持续集成）与测试，但我们极度看好它的发展方向。原因在于，AMD 以往的常规操作是直接把英伟达的 NCCL 分支出来魔改为 RCCL，但这次 MoRI 摒弃了这种做法。它汲取了 RCCL/NCCL 的经验教训，完全基于第一性原理从零构建了一个全新的代码包。在短短一个多月的时间里，MoRI 的应用带来了可观的加速效果：在 20-45 tok/s/user 的交互性区间内，单 GPU 吞吐量提升了 20% 以上。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371510",
+          "tokenized_text": "对于 MI355X 分离式推理服务，AMD 推荐搭配 MoRI 使用 SGLang。[[[LINK_1|MoRI 是 AMD 的 MoE (混合专家) 分发/合并集合通信与 KV Cache 传输库]]]，由 AMD 位于中国的一支实力爆表的“十倍工程师”团队基于第一性原理打造。尽管 MoRI 还需要更开放的 CI（持续集成）与测试，但我们极度看好它的发展方向。原因在于，AMD 以往的常规操作是直接把英伟达的 NCCL 分支出来魔改为 RCCL，但这次 MoRI 摒弃了这种做法。它汲取了 RCCL/NCCL 的经验教训，完全基于第一性原理从零构建了一个全新的代码包。在短短一个多月的时间里，MoRI 的应用带来了可观的加速效果：在 20-45 tok/s/user 的交互性区间内，单 GPU 吞吐量提升了 20% 以上。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371534",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0073",
+      "parent_block_index": 73,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-01-13&g_runid=20972034325&i_gpus=b200_sglang&i_dstart=2025-10-05&i_dend=2026-01-13&i_prec=fp4%2Cfp8&i_dates=2025-10-30%2C2025-12-14#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386906",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:17:53.371584",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.825,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+          "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+          "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+          "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+          "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+          "key_points": [
+            "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+            "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+          ],
+          "translation_notes": [
+            "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+            "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+            "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "将 GPU 计算中的“kernels”翻译成了“内核”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“interactivities”翻译为“交互度”，与前文不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "保留了英文并加注中文“Disaggregated (分离) 推理服务”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

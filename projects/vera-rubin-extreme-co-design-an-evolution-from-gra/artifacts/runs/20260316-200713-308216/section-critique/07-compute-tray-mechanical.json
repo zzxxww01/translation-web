@@ -1,0 +1,29 @@
+{
+  "section_id": "07-compute-tray-mechanical",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 8.8,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "midplane",
+        "description": "术语“midplane”在段落0中译为“中板”，而在段落3中译为“中背板”，前后不一致。",
+        "why_it_matters": "核心硬件组件名称前后不统一，会破坏技术文本的严谨性，可能让读者误以为是两个不同的物理部件。",
+        "suggestion": "建议全文统一为“中背板”，将段落0中的“中板”改为“中背板”。"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "loading mechanism",
+        "description": "将“loading mechanism”译为“加载机构”虽字面无误，但在中文机械语境下，“加载”容易引发与软件加载或电气负载的歧义。",
+        "why_it_matters": "后文明确解释了该机构的作用是“通过对模块施加一定的机械力将其锁定到位”，使用提示词中建议的“压紧机构”或“锁紧机构”能提供更准确、直观的机械画面感。",
+        "suggestion": "将两处“加载机构”替换为“压紧机构”或“锁紧机构”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,638 @@
+{
+  "section_id": "04-the-virtualization-and-cloud-c",
+  "title": "The Virtualization and Cloud Computing Hyperscaler Era",
+  "title_translation": "虚拟化与超大规模云计算时代",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The next major inflection point came with cloud computing in the late 2000s, and was the primary growth driver for datacenter CPU sales throughout the 2010s. Much like how GPU Neoclouds are operating today, computing resources began consolidating toward public cloud providers and hyperscalers such as Amazon’s Web Services (AWS) as customers traded CapEx for OpEx. Spurred by the effects of the Great Recession, many enterprises could not afford to buy and run their own servers to run their software and services.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The next major inflection point came with cloud computing in the late 2000s, and was the primary growth driver for datacenter CPU sales throughout the 2010s. Much like how GPU Neoclouds are operating today, computing resources began consolidating toward public cloud providers and hyperscalers such as Amazon’s Web Services (AWS) as customers traded CapEx for OpEx. Spurred by the effects of the Great Recession, many enterprises could not afford to buy and run their own servers to run their software and services.",
+      "parent_block_plain_text": "The next major inflection point came with cloud computing in the late 2000s, and was the primary growth driver for datacenter CPU sales throughout the 2010s. Much like how GPU Neoclouds are operating today, computing resources began consolidating toward public cloud providers and hyperscalers such as Amazon’s Web Services (AWS) as customers traded CapEx for OpEx. Spurred by the effects of the Great Recession, many enterprises could not afford to buy and run their own servers to run their software and services.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 515,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下一个重大转折点出现在 2000 年代末，即云计算的兴起。这也是整个 2010 年代数据中心 CPU 销量增长的核心驱动力。正如如今 GPU 新锐云厂商的运营模式一样，随着客户将资本支出转化为运营支出（opex），计算资源开始向公有云提供商以及诸如 AWS 等超大规模云服务商集中。受经济大衰退的余波冲击，许多企业已无力购买并维护自有服务器来运行其软件和服务。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.622936",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Cloud computing offered a far more palatable “pay as you use” business model with renting compute instances and running your workloads on 3rd-party hardware, which allowed spending to dynamically adjust with usage that varied over time. This scalability was more favorable than procuring one’s own servers, which needed to be utilized fully at all times to maximize ROI. The Cloud also enabled more streamlined services to emerge, such as serverless computing from the likes of AWS Lambda that automatically allocates software to computing resources, sparing the customer from having to decide on the appropriate number of instances to spin up before running a particular task. With nearly everything handled by them behind the scenes, Clouds turned compute into a commodity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Cloud computing offered a far more palatable “pay as you use” business model with renting compute instances and running your workloads on 3rd-party hardware, which allowed spending to dynamically adjust with usage that varied over time. This scalability was more favorable than procuring one’s own servers, which needed to be utilized fully at all times to maximize ROI. The Cloud also enabled more streamlined services to emerge, such as serverless computing from the likes of AWS Lambda that automatically allocates software to computing resources, sparing the customer from having to decide on the appropriate number of instances to spin up before running a particular task. With nearly everything handled by them behind the scenes, Clouds turned compute into a commodity.",
+      "parent_block_plain_text": "Cloud computing offered a far more palatable “pay as you use” business model with renting compute instances and running your workloads on 3rd-party hardware, which allowed spending to dynamically adjust with usage that varied over time. This scalability was more favorable than procuring one’s own servers, which needed to be utilized fully at all times to maximize ROI. The Cloud also enabled more streamlined services to emerge, such as serverless computing from the likes of AWS Lambda that automatically allocates software to computing resources, sparing the customer from having to decide on the appropriate number of instances to spin up before running a particular task. With nearly everything handled by them behind the scenes, Clouds turned compute into a commodity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 775,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "云计算提供了一种更易于接受的“按量付费”商业模式。通过租用计算实例并在第三方硬件上运行工作负载，客户支出可随使用量变化而动态调整。这种可扩展性远优于自行采购服务器，因为自有服务器必须时刻保持满负荷运转，才能实现投资回报率 (ROI) 最大化。云技术还催生了更高效便捷的服务，例如 AWS Lambda 等提供的无服务器计算。这类服务能自动为软件分配计算资源，客户在运行特定任务前，无需再费心决定启动多少个实例。由于云厂商在后台包揽了几乎所有工作，计算能力彻底变成了一种商品。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623046",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623109",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7ZDt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5e31aa5b-fd56-4674-9895-2576e448e40f_1479x1986.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Pat Gelsinger, VMware CEO 2012-2021, Intel CEO 2021-2024. Source: X @PGelsinger",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Pat Gelsinger, VMware CEO 2012-2021, Intel CEO 2021-2024. Source: X @PGelsinger",
+          "start": 0,
+          "end": 79,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0028",
+      "parent_block_index": 28,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Pat Gelsinger, VMware CEO 2012-2021, Intel CEO 2021-2024. Source: X @PGelsinger*",
+      "parent_block_plain_text": "Pat Gelsinger, VMware CEO 2012-2021, Intel CEO 2021-2024. Source: X @PGelsinger",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Pat Gelsinger, VMware CEO 2012-2021, Intel CEO 2021-2024. Source: X @PGelsinger",
+          "start": 0,
+          "end": 79,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 79,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "帕特·基辛格（Pat Gelsinger），2012-2021 年任 VMware CEO，2021-2024 年任英特尔 CEO。来源：X @PGelsinger",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623316",
+          "tokenized_text": "[[[EM_1|帕特·基辛格（Pat Gelsinger），2012-2021 年任 VMware CEO，2021-2024 年任英特尔 CEO。来源：X @PGelsinger]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The key feature for a secure and resource efficient Cloud to work at all is CPU hardware virtualization. In essence, virtualization allows a single CPU to run multiple independent and secure instances of Virtual Machines (VMs) orchestrated through hypervisors such as VMware ESXi. Multi-core CPUs could be partitioned such that each VM would be assigned to a single core or logical thread, with the hypervisor able to migrate instances onto different cores, sockets or servers over the network to optimize for CPU utilization while keeping data and instructions secured from other instances operating on the same CPU.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key feature for a secure and resource efficient Cloud to work at all is CPU hardware virtualization. In essence, virtualization allows a single CPU to run multiple independent and secure instances of Virtual Machines (VMs) orchestrated through hypervisors such as VMware ESXi. Multi-core CPUs could be partitioned such that each VM would be assigned to a single core or logical thread, with the hypervisor able to migrate instances onto different cores, sockets or servers over the network to optimize for CPU utilization while keeping data and instructions secured from other instances operating on the same CPU.",
+      "parent_block_plain_text": "The key feature for a secure and resource efficient Cloud to work at all is CPU hardware virtualization. In essence, virtualization allows a single CPU to run multiple independent and secure instances of Virtual Machines (VMs) orchestrated through hypervisors such as VMware ESXi. Multi-core CPUs could be partitioned such that each VM would be assigned to a single core or logical thread, with the hypervisor able to migrate instances onto different cores, sockets or servers over the network to optimize for CPU utilization while keeping data and instructions secured from other instances operating on the same CPU.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 617,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "构建安全且资源高效的云环境，其核心基石在于 CPU 硬件虚拟化。本质上，虚拟化允许单个 CPU 运行多个独立且安全的虚拟机 (VM) 实例，这些实例由 VMware ESXi 等虚拟机管理程序进行统一调度。多核 CPU 可被灵活划分，将每个虚拟机分配至单个核心或逻辑线程。虚拟机管理程序还能通过网络将实例迁移至不同的核心、插槽或服务器上，以此优化 CPU 利用率，同时确保数据与指令安全，免受同一 CPU 上其他运行实例的干扰。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623388",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The need for virtualization for the cloud, combined with CPU designers implementing SMT to boost performance was eventually exploited with the Spectre and Meltdown vulnerabilities in 2018. When two instances ran on threads running on the same physical core, it was possible for an attacker to snoop and piece together data from the other thread using the CPU cores branch prediction functions, a performance boosting technique that guessed, fetched and executed instructions ahead of the running program to keep the CPU busy. With security in the cloud potentially compromised, providers rushed to disable SMT to stop the attack vector.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The need for virtualization for the cloud, combined with CPU designers implementing SMT to boost performance was eventually exploited with the Spectre and Meltdown vulnerabilities in 2018. When two instances ran on threads running on the same physical core, it was possible for an attacker to snoop and piece together data from the other thread using the CPU cores branch prediction functions, a performance boosting technique that guessed, fetched and executed instructions ahead of the running program to keep the CPU busy. With security in the cloud potentially compromised, providers rushed to disable SMT to stop the attack vector. Despite patches and hardware fixes, the performance loss of up to 30% without SMT would haunt Intel and show up in untimely design decisions down the road which we detail below.",
+      "parent_block_plain_text": "The need for virtualization for the cloud, combined with CPU designers implementing SMT to boost performance was eventually exploited with the Spectre and Meltdown vulnerabilities in 2018. When two instances ran on threads running on the same physical core, it was possible for an attacker to snoop and piece together data from the other thread using the CPU cores branch prediction functions, a performance boosting technique that guessed, fetched and executed instructions ahead of the running program to keep the CPU busy. With security in the cloud potentially compromised, providers rushed to disable SMT to stop the attack vector. Despite patches and hardware fixes, the performance loss of up to 30% without SMT would haunt Intel and show up in untimely design decisions down the road which we detail below.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 636,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "云计算对虚拟化的需求，叠加 CPU 设计者为提升性能而引入的 SMT 技术，最终在 2018 年被幽灵 (漏洞) 与熔断 (漏洞) 所利用。当两个实例在同一物理核心的不同线程上运行时，攻击者可利用 CPU 核心的分支预测功能，窥探并拼凑出另一线程的数据。分支预测本是一项性能提升技术，通过在程序运行前提前猜测、提取并执行指令，使 CPU 保持满载状态。面对云端安全可能沦陷的危机，各家提供商紧急禁用 SMT，以彻底切断这一攻击路径。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623441",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Despite patches and hardware fixes, the performance loss of up to 30% without SMT would haunt Intel and show up in untimely design decisions down the road which we detail below.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The need for virtualization for the cloud, combined with CPU designers implementing SMT to boost performance was eventually exploited with the Spectre and Meltdown vulnerabilities in 2018. When two instances ran on threads running on the same physical core, it was possible for an attacker to snoop and piece together data from the other thread using the CPU cores branch prediction functions, a performance boosting technique that guessed, fetched and executed instructions ahead of the running program to keep the CPU busy. With security in the cloud potentially compromised, providers rushed to disable SMT to stop the attack vector. Despite patches and hardware fixes, the performance loss of up to 30% without SMT would haunt Intel and show up in untimely design decisions down the road which we detail below.",
+      "parent_block_plain_text": "The need for virtualization for the cloud, combined with CPU designers implementing SMT to boost performance was eventually exploited with the Spectre and Meltdown vulnerabilities in 2018. When two instances ran on threads running on the same physical core, it was possible for an attacker to snoop and piece together data from the other thread using the CPU cores branch prediction functions, a performance boosting technique that guessed, fetched and executed instructions ahead of the running program to keep the CPU busy. With security in the cloud potentially compromised, providers rushed to disable SMT to stop the attack vector. Despite patches and hardware fixes, the performance loss of up to 30% without SMT would haunt Intel and show up in untimely design decisions down the road which we detail below.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 637,
+      "segment_end": 814,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管后续推出了补丁与硬件修复方案，但禁用 SMT 导致了高达 30% 的性能损失。这一代价成为英特尔挥之不去的阴影，并直接导致其在后续作出了一系列不合时宜的设计决策，我们将在下文对此展开详述。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:47:51.623487",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+          "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+          "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the hyperscaler revolution and the business shift from CapEx to OpEx, while highlighting critical architectural vulnerabilities that impacted performance.",
+          "relation_to_previous": "Evolves the multi-core dot-com servers into consolidated, virtualized resource pools managed by hyperscalers.",
+          "relation_to_next": "Contrasts the CPU-dominant cloud era with the impending AI era where GPUs challenge CPU dominance.",
+          "key_points": [
+            "Cloud computing consolidated resources toward hyperscalers, fundamentally changing server buying patterns from enterprise CapEx to OpEx.",
+            "Security flaws and the resulting patches severely degraded SMT performance, haunting Intel's future architectural decisions."
+          ],
+          "translation_notes": [
+            "Translate 'traded CapEx for OpEx' cleanly (将资本支出转化为运营支出).",
+            "Use 'Hyperscalers' (超大规模云服务商) consistently.",
+            "Carefully manage the tone regarding Intel's 'untimely design decisions' to maintain objective, analytical framing."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文“将资本支出转化为运营支出（opex）”中保留了小写的英文缩写 opex。由于前半句的 CapEx 并未加注英文，仅对 OpEx 加注显得不对称，且“运营支出”已是标准且清晰的译法，无需额外加注。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译文“被幽灵 (漏洞) 与熔断 (漏洞) 所利用”中，使用括号单切“漏洞”二字在中文排版上显得非常生硬。对于这种业内著名的专有名词，首现时更适合保留英文原名对照，并把“漏洞”作为后缀统称。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“在程序运行前提前猜测”中，“运行前”与“提前”存在轻微的语义重复。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

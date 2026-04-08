@@ -1,0 +1,63 @@
+{
+  "section_id": "13-throughput",
+  "new_terms": [
+    {
+      "term": "datapath",
+      "suggested_translation": "数据通路",
+      "context": "utilizing half of the datapath",
+      "confidence": 0.95
+    },
+    {
+      "term": "AB layout",
+      "suggested_translation": "AB 布局",
+      "context": "MMA supports two different AB layouts",
+      "confidence": 0.95
+    },
+    {
+      "term": "SS mode",
+      "suggested_translation": "SS 模式",
+      "context": "Both input matrices stored in SMEM (SS)",
+      "confidence": 0.95
+    },
+    {
+      "term": "TS mode",
+      "suggested_translation": "TS 模式",
+      "context": "matrix A stored in TMEM and matrix B stored in SMEM (TS)",
+      "confidence": 0.95
+    },
+    {
+      "term": "roofline",
+      "suggested_translation": "Roofline 模型",
+      "context": "plot the roofline for all shapes",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory-bounded",
+      "suggested_translation": "访存受限的",
+      "context": "N < 256 is at the memory-bounded region",
+      "confidence": 0.95
+    },
+    {
+      "term": "math limited",
+      "suggested_translation": "计算受限的",
+      "context": "find we are finally Math limited starting from the N=128 instruction",
+      "confidence": 0.95
+    },
+    {
+      "term": "tile size",
+      "suggested_translation": "Tile 大小",
+      "context": "given SMEM tile size",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "throughput": "吞吐量",
+    "weak scaling": "弱扩展性",
+    "smem": "共享内存 (SMEM)",
+    "tmem": "张量内存 (TMEM)",
+    "mma": "矩阵乘累加 (MMA)",
+    "micro-scaling": "微缩放"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:30:39.896072"
+}

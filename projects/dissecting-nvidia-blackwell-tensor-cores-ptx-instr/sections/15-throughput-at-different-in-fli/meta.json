@@ -1,0 +1,415 @@
+{
+  "section_id": "15-throughput-at-different-in-fli",
+  "title": "Throughput at Different In-Flight Instruction Count",
+  "title_translation": "不同在途指令数下的吞吐量",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "In our throughput benchmark, we set high numbers of in-flight instructions to amortize instruction issuing and commit wait overheads, ranging from 256 to 1024. However, kernels typically use 1 to 4 in-flight MMA instructions. We benchmarked the throughput at 1 to 10 in-flight instructions, and we discuss the changes in throughput here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0140",
+      "parent_block_index": 140,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In our throughput benchmark, we set high numbers of in-flight instructions to amortize instruction issuing and commit wait overheads, ranging from 256 to 1024. However, kernels typically use 1 to 4 in-flight MMA instructions. We benchmarked the throughput at 1 to 10 in-flight instructions, and we discuss the changes in throughput here.",
+      "parent_block_plain_text": "In our throughput benchmark, we set high numbers of in-flight instructions to amortize instruction issuing and commit wait overheads, ranging from 256 to 1024. However, kernels typically use 1 to 4 in-flight MMA instructions. We benchmarked the throughput at 1 to 10 in-flight instructions, and we discuss the changes in throughput here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 337,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在我们的吞吐量基准测试中，我们设置了大量的飞行中指令，数量在 256 到 1024 之间，以此来摊销指令发射与提交等待的开销。然而，实际内核通常仅使用 1 到 4 条飞行中 MMA 指令。因此，我们对 1 到 10 条飞行中指令的吞吐量进行了基准测试，并在此探讨其吞吐量的变化规律。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816840",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Across all configurations, we see the same N and in-flight MMAs achieve similar percentages of Speed-of-Light (SoL). Notably, only the largest N reaches 90% SoL, while the smallest N achieves only about 70%. Comparing 1SM and 2SM MMA, we see 1SM achieves around 5% higher SoL throughput than its 2SM counterpart. For the same data format and CTA group MMA, the throughput for larger N is always higher than smaller N sizes. Finally, we observe that the throughput SoL percentages for 4 in-flight MMAs caps out at 78% - 80%.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0141",
+      "parent_block_index": 141,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Across all configurations, we see the same N and in-flight MMAs achieve similar percentages of Speed-of-Light (SoL). Notably, only the largest N reaches 90% SoL, while the smallest N achieves only about 70%. Comparing 1SM and 2SM MMA, we see 1SM achieves around 5% higher SoL throughput than its 2SM counterpart. For the same data format and CTA group MMA, the throughput for larger N is always higher than smaller N sizes. Finally, we observe that the throughput SoL percentages for 4 in-flight MMAs caps out at 78% - 80%.",
+      "parent_block_plain_text": "Across all configurations, we see the same N and in-flight MMAs achieve similar percentages of Speed-of-Light (SoL). Notably, only the largest N reaches 90% SoL, while the smallest N achieves only about 70%. Comparing 1SM and 2SM MMA, we see 1SM achieves around 5% higher SoL throughput than its 2SM counterpart. For the same data format and CTA group MMA, the throughput for larger N is always higher than smaller N sizes. Finally, we observe that the throughput SoL percentages for 4 in-flight MMAs caps out at 78% - 80%.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 523,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在所有配置下，我们发现相同的 N 维度与飞行中 MMA 指令数能够达到相似的理论极限性能 (Speed of Light, SoL) 百分比。值得注意的是，只有在 N 取最大值时才能达到 90% 的 SoL，而在 N 取最小值时仅能达到约 70%。对比 1SM 与 2SM MMA，我们发现 1SM 的 SoL 吞吐量比 2SM 高出约 5%。对于相同的数据格式和协作线程阵列 (CTA) 组 MMA，较大 N 维度的吞吐量始终高于较小的 N 维度。最后，我们观察到 4 条飞行中 MMA 指令的吞吐量 SoL 百分比最高仅能达到 78% 至 80%。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816912",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0142",
+      "parent_block_index": 142,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816935",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0143",
+      "parent_block_index": 143,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816953",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0144",
+      "parent_block_index": 144,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816972",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Below we discuss real-world use cases with kernel writing library CUTLASS. We also discuss throughput, multi-cast, and floorplans.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0145",
+      "parent_block_index": 145,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Below we discuss real-world use cases with kernel writing library CUTLASS. We also discuss throughput, multi-cast, and floorplans.",
+      "parent_block_plain_text": "Below we discuss real-world use cases with kernel writing library CUTLASS. We also discuss throughput, multi-cast, and floorplans.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 130,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下文我们将讨论基于内核编写库 CUTLASS 的实际用例。此外，我们还将探讨吞吐量、多播 (multi-cast) 以及物理布局 (floorplans)。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:36:17.816985",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.725,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中存在双重括号标注的严重格式错误，如 `理论极限性能 (Speed of Light, SoL)（Speed of Light (SoL)）` 和 `协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`。同时，SoL 词汇在段落中出现了 4 次，但在首现后并未遵循使用缩写 (SoL) 的原则，导致文本极度臃肿。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

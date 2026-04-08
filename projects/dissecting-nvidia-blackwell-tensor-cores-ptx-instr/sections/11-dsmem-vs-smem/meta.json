@@ -1,0 +1,708 @@
+{
+  "section_id": "11-dsmem-vs-smem",
+  "title": "DSMEM vs. SMEM",
+  "title_translation": "DSMEM 与 SMEM 对比",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "NVIDIA introduced distributed shared memory (DSMEM) in the Hopper architecture. DSMEM allows CTAs within a cluster to access each other’s shared memory. This is useful for patterns like inter-CTA reductions. Reading peer-CTA memory through DSMEM has significantly lower throughput than SMEM’s 128 bytes per clock cycle.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA introduced distributed shared memory (DSMEM) in the Hopper architecture. DSMEM allows CTAs within a cluster to access each other’s shared memory. This is useful for patterns like inter-CTA reductions. Reading peer-CTA memory through DSMEM has significantly lower throughput than SMEM’s 128 bytes per clock cycle.",
+      "parent_block_plain_text": "NVIDIA introduced distributed shared memory (DSMEM) in the Hopper architecture. DSMEM allows CTAs within a cluster to access each other’s shared memory. This is useful for patterns like inter-CTA reductions. Reading peer-CTA memory through DSMEM has significantly lower throughput than SMEM’s 128 bytes per clock cycle.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 319,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达在 Hopper 架构中引入了分布式共享内存 (DSMEM)。DSMEM 允许一个集群内的协作线程阵列 (CTA) 访问彼此的共享内存 (SMEM)。这对于 CTA间归约等模式非常有用。通过 DSMEM 读取对等 CTA 内存的吞吐量，显著低于共享内存 (SMEM) 每时钟周期 128 字节的吞吐量。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:29:19.764517",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+          "Translate 'emit' in the compiler context as '生成' or '发射'.",
+          "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+          "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+          "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+          "key_points": [
+            "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+            "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+          ],
+          "translation_notes": [
+            "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+            "Translate 'emit' in the compiler context as '生成' or '发射'.",
+            "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。"
+          },
+          {
+            "type": "structure",
+            "description": "同上，段落中的多处指令未采用内联代码格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We experimented with a few different PTX patterns for interacting with DSMEM. An important difference when writing code for DSMEM vs. SMEM is that DSMEM loads are packetized similar to global loads, so the optimal access pattern looks nothing like the interleaved accesses that avoid bank conflicts in local SMEM, and more like a typical coalesced access to contiguous locations in GMEM. Additionally, we observed that in order to get the full 128B/cycle for local SMEM, ld.shared must be used without ::cluster. This was a pitfall we ran into when we wrote a benchmark which simply used ld.shared::cluster to local and remote SMEM addresses.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 471,
+          "end": 480,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "::cluster",
+          "start": 502,
+          "end": 511,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 588,
+          "end": 606,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_3"
+        }
+      ],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We experimented with a few different PTX patterns for interacting with DSMEM. An important difference when writing code for DSMEM vs. SMEM is that DSMEM loads are packetized similar to global loads, so the optimal access pattern looks nothing like the interleaved accesses that avoid bank conflicts in local SMEM, and more like a typical coalesced access to contiguous locations in GMEM. Additionally, we observed that in order to get the full 128B/cycle for local SMEM, `ld.shared` must be used without `::cluster`. This was a pitfall we ran into when we wrote a benchmark which simply used `ld.shared::cluster` to local and remote SMEM addresses. With `ld.shared`, the compiler emits `LDS` instead of a generic `LD` emitted with `ld.shared::cluster` which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with `ld.shared::cluster`, and only achieved slightly higher throughput through DSMEM after switching to `cp.async.bulk`(PTX) / `UBLKCP`(SASS) to move higher volume of data per instruction.",
+      "parent_block_plain_text": "We experimented with a few different PTX patterns for interacting with DSMEM. An important difference when writing code for DSMEM vs. SMEM is that DSMEM loads are packetized similar to global loads, so the optimal access pattern looks nothing like the interleaved accesses that avoid bank conflicts in local SMEM, and more like a typical coalesced access to contiguous locations in GMEM. Additionally, we observed that in order to get the full 128B/cycle for local SMEM, ld.shared must be used without ::cluster. This was a pitfall we ran into when we wrote a benchmark which simply used ld.shared::cluster to local and remote SMEM addresses. With ld.shared, the compiler emits LDS instead of a generic LD emitted with ld.shared::cluster which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with ld.shared::cluster, and only achieved slightly higher throughput through DSMEM after switching to cp.async.bulk(PTX) / UBLKCP(SASS) to move higher volume of data per instruction.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 471,
+          "end": 480,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "::cluster",
+          "start": 502,
+          "end": 511,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 588,
+          "end": 606,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_3"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 648,
+          "end": 657,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_4"
+        },
+        {
+          "type": "code",
+          "text": "LDS",
+          "start": 678,
+          "end": 681,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_5"
+        },
+        {
+          "type": "code",
+          "text": "LD",
+          "start": 703,
+          "end": 705,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_6"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 719,
+          "end": 737,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_7"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 875,
+          "end": 893,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_8"
+        },
+        {
+          "type": "code",
+          "text": "cp.async.bulk",
+          "start": 973,
+          "end": 986,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_9"
+        },
+        {
+          "type": "code",
+          "text": "UBLKCP",
+          "start": 994,
+          "end": 1000,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_10"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 642,
+      "expected_tokens": [
+        "CODE_1",
+        "CODE_2",
+        "CODE_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们测试了几种与 DSMEM 交互的不同 PTX 模式。为 DSMEM 编写代码与为共享内存 (SMEM) 编写代码的一个重要区别在于，DSMEM 加载与全局加载类似，采用数据包化传输；因此，其最优访问模式完全不同于本地共享内存 (SMEM) 中避免 bank 冲突的交错访问，而更像全局内存 (GMEM) 中对连续地址的典型合并访问。此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 ld.shared 而不带 ::cluster 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 ld.shared::cluster。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:29:19.764669",
+          "tokenized_text": "我们测试了几种与 DSMEM 交互的不同 PTX 模式。为 DSMEM 编写代码与为共享内存 (SMEM) 编写代码的一个重要区别在于，DSMEM 加载与全局加载类似，采用数据包化传输；因此，其最优访问模式完全不同于本地共享内存 (SMEM) 中避免 bank 冲突的交错访问，而更像全局内存 (GMEM) 中对连续地址的典型合并访问。此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 [[[CODE_1|ld.shared]]] 而不带 [[[CODE_2|::cluster]]] 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 [[[CODE_3|ld.shared::cluster]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+          "Translate 'emit' in the compiler context as '生成' or '发射'.",
+          "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+          "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+          "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+          "key_points": [
+            "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+            "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+          ],
+          "translation_notes": [
+            "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+            "Translate 'emit' in the compiler context as '生成' or '发射'.",
+            "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。"
+          },
+          {
+            "type": "structure",
+            "description": "同上，段落中的多处指令未采用内联代码格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "With ld.shared, the compiler emits LDS instead of a generic LD emitted with ld.shared::cluster which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with ld.shared::cluster, and only achieved slightly higher throughput through DSMEM after switching to cp.async.bulk(PTX) / UBLKCP(SASS) to move higher volume of data per instruction.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 5,
+          "end": 14,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_4"
+        },
+        {
+          "type": "code",
+          "text": "LDS",
+          "start": 35,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_5"
+        },
+        {
+          "type": "code",
+          "text": "LD",
+          "start": 60,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_6"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 76,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_7"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 232,
+          "end": 250,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_8"
+        },
+        {
+          "type": "code",
+          "text": "cp.async.bulk",
+          "start": 330,
+          "end": 343,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_9"
+        },
+        {
+          "type": "code",
+          "text": "UBLKCP",
+          "start": 351,
+          "end": 357,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_10"
+        }
+      ],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We experimented with a few different PTX patterns for interacting with DSMEM. An important difference when writing code for DSMEM vs. SMEM is that DSMEM loads are packetized similar to global loads, so the optimal access pattern looks nothing like the interleaved accesses that avoid bank conflicts in local SMEM, and more like a typical coalesced access to contiguous locations in GMEM. Additionally, we observed that in order to get the full 128B/cycle for local SMEM, `ld.shared` must be used without `::cluster`. This was a pitfall we ran into when we wrote a benchmark which simply used `ld.shared::cluster` to local and remote SMEM addresses. With `ld.shared`, the compiler emits `LDS` instead of a generic `LD` emitted with `ld.shared::cluster` which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with `ld.shared::cluster`, and only achieved slightly higher throughput through DSMEM after switching to `cp.async.bulk`(PTX) / `UBLKCP`(SASS) to move higher volume of data per instruction.",
+      "parent_block_plain_text": "We experimented with a few different PTX patterns for interacting with DSMEM. An important difference when writing code for DSMEM vs. SMEM is that DSMEM loads are packetized similar to global loads, so the optimal access pattern looks nothing like the interleaved accesses that avoid bank conflicts in local SMEM, and more like a typical coalesced access to contiguous locations in GMEM. Additionally, we observed that in order to get the full 128B/cycle for local SMEM, ld.shared must be used without ::cluster. This was a pitfall we ran into when we wrote a benchmark which simply used ld.shared::cluster to local and remote SMEM addresses. With ld.shared, the compiler emits LDS instead of a generic LD emitted with ld.shared::cluster which does not seem to be able to achieve peak throughput for local SMEM. We also struggled to push the achieved throughput further with ld.shared::cluster, and only achieved slightly higher throughput through DSMEM after switching to cp.async.bulk(PTX) / UBLKCP(SASS) to move higher volume of data per instruction.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 471,
+          "end": 480,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "::cluster",
+          "start": 502,
+          "end": 511,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 588,
+          "end": 606,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_3"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared",
+          "start": 648,
+          "end": 657,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_4"
+        },
+        {
+          "type": "code",
+          "text": "LDS",
+          "start": 678,
+          "end": 681,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_5"
+        },
+        {
+          "type": "code",
+          "text": "LD",
+          "start": 703,
+          "end": 705,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_6"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 719,
+          "end": 737,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_7"
+        },
+        {
+          "type": "code",
+          "text": "ld.shared::cluster",
+          "start": 875,
+          "end": 893,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_8"
+        },
+        {
+          "type": "code",
+          "text": "cp.async.bulk",
+          "start": 973,
+          "end": 986,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_9"
+        },
+        {
+          "type": "code",
+          "text": "UBLKCP",
+          "start": 994,
+          "end": 1000,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_10"
+        }
+      ],
+      "segment_start": 643,
+      "segment_end": 1053,
+      "expected_tokens": [
+        "CODE_4",
+        "CODE_5",
+        "CODE_6",
+        "CODE_7",
+        "CODE_8",
+        "CODE_9",
+        "CODE_10"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "使用 ld.shared 时，编译器会生成 LDS 指令，而不是像使用 ld.shared::cluster 时那样生成通用的 LD 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 ld.shared::cluster 的实际吞吐量，直到切换为使用 cp.async.bulk(PTX) / UBLKCP(SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:29:19.764802",
+          "tokenized_text": "使用 [[[CODE_4|ld.shared]]] 时，编译器会生成 [[[CODE_5|LDS]]] 指令，而不是像使用 [[[CODE_7|ld.shared::cluster]]] 时那样生成通用的 [[[CODE_6|LD]]] 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 [[[CODE_8|ld.shared::cluster]]] 的实际吞吐量，直到切换为使用 [[[CODE_9|cp.async.bulk]]](PTX) / [[[CODE_10|UBLKCP]]](SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+          "Translate 'emit' in the compiler context as '生成' or '发射'.",
+          "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+          "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+          "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+          "key_points": [
+            "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+            "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+          ],
+          "translation_notes": [
+            "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+            "Translate 'emit' in the compiler context as '生成' or '发射'.",
+            "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。"
+          },
+          {
+            "type": "structure",
+            "description": "同上，段落中的多处指令未采用内联代码格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The peak throughput we achieved when using each PTX pattern is below, expressed as bytes per clock cycle (B/clk) to align with the known max achievable in SM-local SMEM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The peak throughput we achieved when using each PTX pattern is below, expressed as bytes per clock cycle (B/clk) to align with the known max achievable in SM-local SMEM.",
+      "parent_block_plain_text": "The peak throughput we achieved when using each PTX pattern is below, expressed as bytes per clock cycle (B/clk) to align with the known max achievable in SM-local SMEM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 169,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们使用每种 PTX 模式时达到的峰值吞吐量如下所示，单位统一表示为每时钟周期字节数 (B/clk)，以便与 SM 本地共享内存 (SMEM) 已知的最大可达吞吐量进行对比。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:29:19.764824",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+          "Translate 'emit' in the compiler context as '生成' or '发射'.",
+          "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+          "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+          "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+          "key_points": [
+            "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+            "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+          ],
+          "translation_notes": [
+            "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+            "Translate 'emit' in the compiler context as '生成' or '发射'.",
+            "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。"
+          },
+          {
+            "type": "structure",
+            "description": "同上，段落中的多处指令未采用内联代码格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:29:19.764843",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+          "Translate 'emit' in the compiler context as '生成' or '发射'.",
+          "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+          "relation_to_previous": "Moves the data movement analysis from loading global memory (TMA) to sharing data between CTAs within a cluster.",
+          "relation_to_next": "Concludes the memory subsystem analysis, teeing up the final section on the Tensor Cores which consume this data.",
+          "key_points": [
+            "DSMEM enables inter-CTA reductions but operates at a significantly lower throughput than local SMEM.",
+            "Compiler emission choices (LDS vs. generic LD) heavily impact the ability to achieve peak throughput, requiring workarounds like UBLKCP."
+          ],
+          "translation_notes": [
+            "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+            "Translate 'emit' in the compiler context as '生成' or '发射'.",
+            "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文未遵循 Guidelines 中关于“将 PTX 和 SASS 指令格式化为内联代码 (inline code)”的建议。虽然翻译本身准确，但缺少反引号包裹会降低技术文档的规范性和可读性。"
+          },
+          {
+            "type": "structure",
+            "description": "同上，段落中的多处指令未采用内联代码格式化。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

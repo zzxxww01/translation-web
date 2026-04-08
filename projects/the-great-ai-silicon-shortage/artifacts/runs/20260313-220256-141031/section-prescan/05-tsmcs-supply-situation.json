@@ -1,0 +1,43 @@
+{
+  "section_id": "05-tsmcs-supply-situation",
+  "new_terms": [
+    {
+      "term": "wafer starts",
+      "suggested_translation": "晶圆投片量",
+      "context": "Why can’t TSMC simply add more N3 wafer starts?",
+      "confidence": 0.95
+    },
+    {
+      "term": "cleanroom space",
+      "suggested_translation": "无尘室空间",
+      "context": "TSMC is constrained by available cleanroom space.",
+      "confidence": 0.95
+    },
+    {
+      "term": "process layers",
+      "suggested_translation": "工艺层",
+      "context": "shifting certain process layers to other fabs to free up incremental N3 capacity",
+      "confidence": 0.9
+    },
+    {
+      "term": "effective utilization",
+      "suggested_translation": "有效利用率",
+      "context": "effective N3 utilization is expected to exceed 100% in the second half of 2026",
+      "confidence": 0.9
+    },
+    {
+      "term": "usable fab area",
+      "suggested_translation": "可用厂房面积",
+      "context": "Additional usable fab area must first be built before equipment can be installed",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "n3": "N3制程",
+    "nameplate capacity": "铭牌产能",
+    "allocation": "产能分配",
+    "wafer": "晶圆"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-13T22:39:34.708937"
+}

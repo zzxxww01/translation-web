@@ -1,0 +1,42 @@
+{
+  "section_id": "10-disaggregated-inference-framew",
+  "new_terms": [
+    {
+      "term": "disaggregated inference",
+      "suggested_translation": "分离式推理",
+      "context": "NVIDIA uses Dynamo for its disaggregated inference setup.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Mooncake",
+      "suggested_translation": "Mooncake",
+      "context": "we use SGLang with two different KV cache transfer frameworks: MoRI and Mooncake.",
+      "confidence": 1.0
+    },
+    {
+      "term": "RDMA",
+      "suggested_translation": "RDMA",
+      "context": "a high-performance communication interface focusing on RDMA and GPU integration",
+      "confidence": 1.0
+    },
+    {
+      "term": "PyTorch",
+      "suggested_translation": "PyTorch",
+      "context": "Mooncake, which recently joined the PyTorch ecosystem",
+      "confidence": 1.0
+    },
+    {
+      "term": "request routing",
+      "suggested_translation": "请求路由",
+      "context": "featuring techniques such as prefill-decode disaggregation, request routing, and KV cache offloading.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "TRT LLM": "TRTLLM",
+    "prefill-decode disaggregation": "Prefill-Decode 分离",
+    "network collective operations": "网络集合通信操作"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:21:06.022436"
+}

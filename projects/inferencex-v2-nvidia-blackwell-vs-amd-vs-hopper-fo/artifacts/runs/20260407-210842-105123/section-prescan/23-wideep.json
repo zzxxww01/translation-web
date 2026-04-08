@@ -1,0 +1,62 @@
+{
+  "section_id": "23-wideep",
+  "new_terms": [
+    {
+      "term": "routed experts",
+      "suggested_translation": "路由专家",
+      "context": "DeepSeek R1 has 256 routed experts (and 1 shared expert)",
+      "confidence": 0.95
+    },
+    {
+      "term": "shared expert",
+      "suggested_translation": "共享专家",
+      "context": "DeepSeek R1 has 256 routed experts (and 1 shared expert)",
+      "confidence": 0.95
+    },
+    {
+      "term": "non-expert weights",
+      "suggested_translation": "非专家权重",
+      "context": "a full replica of the non-expert weights (attention projections, embeddings, normalization, and the shared expert)",
+      "confidence": 0.95
+    },
+    {
+      "term": "arithmetic intensity",
+      "suggested_translation": "算术强度",
+      "context": "the reduction dims of the GEMM is smaller leading to lower arithmetic intensity",
+      "confidence": 0.95
+    },
+    {
+      "term": "DEP",
+      "suggested_translation": "DEP (DP+EP)",
+      "context": "The above configurations use only DP+EP (also known as DEP)",
+      "confidence": 0.9
+    },
+    {
+      "term": "MNNVL",
+      "suggested_translation": "MNNVL",
+      "context": "where NVLink or MNNVL provides high-bandwidth interconnect",
+      "confidence": 0.9
+    },
+    {
+      "term": "LM head",
+      "suggested_translation": "LM Head",
+      "context": "attention along with other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.)",
+      "confidence": 0.95
+    },
+    {
+      "term": "RMSNorm",
+      "suggested_translation": "RMSNorm",
+      "context": "attention along with other non-expert weights (shared expert, gating network, RMSNorm, LM head, etc.)",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "moe": "Mixture of Experts (MoE)",
+    "expert parallel (ep)": "expert parallelism (EP)",
+    "tensor parallel (tp)": "tensor parallelism (TP)",
+    "wide expert parallelism (wideep)": "Wide expert parallelism (WideEP)",
+    "pareto frontier curve": "Pareto frontier"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T22:11:06.182909"
+}

@@ -1,0 +1,19 @@
+前文介绍的将 TPC 划分到 GPC 的方式属于逻辑分组。它们代表了软件视角下的 GPC，并未提供每个 GPC 中 20 个实际物理 SM 到底有哪些被启用，也没有指明每个物理 GPC 在两个裸片（Die）上的具体位置。实际上，具有相同逻辑配置的 B200 芯片，其每个 GPC 中实际产出的物理 SM 未必完全相同。对于在软件视角下看似相同的 GPU，这可能成为导致性能非确定性的潜在原因。此外，将 SM 划分到 GPC 的逻辑分组方式，也无法说明 B200 封装内的两个裸片上分别承载了哪些 GPC。
+
+为了探究有关 SM 物理布局的更多信息，我们让每个 SM 遍历一个填满 L2 缓存的指针追踪数组，并测量每次加载的延迟。针对每个地址，我们将各个 SM 观察到的延迟与其他所有 SM 观察到的延迟进行对比，从而生成一个 SM<->SM 距离矩阵。X 轴和 Y 轴均为 SM ID。
+
+https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png
+
+我们可以看到两组界线分明的 SM，它们访问 L2 缓存的平均延迟相差超过 300 个周期；这必然是跨裸片 (die-to-die) 通信所致。我们还根据上一节确定的逻辑 GPC 分组对这些 SM 进行了标注；有趣的是，在此基准测试中，那些零散的 TPC 彼此距离很近，并且似乎与 GPC0 表现出很强的相关性，因此可以推测这些 TPC 在物理上位于 GPC0 内。
+
+基于这些信息，我们可以进一步细化每个 GPC 中实际产出的 TPC 列表，尽管其中的“5+3”组合仍然只是推测。
+
+Die A: [10, 10, 10, 9]
+
+Die B: [9, 9, 9, 5+3]
+
+此外，尽管过程有些间接，但我们可以得出结论：跨裸片通信的延迟开销约为 300 个周期。观察该基准测试中单个 SM 的延迟分布（其中也包含了大量 L2 拥塞），这一点同样显而易见：
+
+https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png
+
+我们在此感谢 Decart AI 的 Orian 为本次基准测试提供灵感。

@@ -1,0 +1,21 @@
+{
+  "section_id": "00-intro",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "Wide Expert Parallelism",
+        "description": "译文将“Wide Expert Parallelism”译为“宽泛专家并行”，而根据提供的术语表（Glossary），应统一译为“宽专家并行”。",
+        "why_it_matters": "在硬核技术文章中，专用名词的统一性和准确性至关重要，多余的“泛”字会显得不够专业且偏离既定术语规范。",
+        "suggestion": "将“宽泛专家并行”修改为“宽专家并行”。"
+      }
+    ]
+  }
+}

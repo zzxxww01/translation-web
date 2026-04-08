@@ -1,0 +1,59 @@
+{
+  "section_id": "08-rack-level-infrastructure-the",
+  "new_terms": [
+    {
+      "term": "CDU (Cooling Distribution Unit)",
+      "suggested_translation": "冷量分配单元",
+      "context": "A unit used to manage and distribute coolant within a liquid cooling system.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TCS (Technology Cooling System)",
+      "suggested_translation": "技术冷却系统",
+      "context": "The secondary cooling loop that circulates coolant directly to the compute equipment.",
+      "confidence": 0.9
+    },
+    {
+      "term": "facility water loop",
+      "suggested_translation": "设施水回路",
+      "context": "The primary water loop provided by the data center facility to remove heat from the CDU.",
+      "confidence": 0.9
+    },
+    {
+      "term": "economizer",
+      "suggested_translation": "节能器",
+      "context": "A system that uses outdoor air or water to cool the data center without mechanical refrigeration.",
+      "confidence": 0.85
+    },
+    {
+      "term": "pressure head",
+      "suggested_translation": "压头",
+      "context": "The pressure provided by a pump in a hydraulic system, often measured in height or psi.",
+      "confidence": 0.9
+    },
+    {
+      "term": "inlet temperature",
+      "suggested_translation": "进水温度",
+      "context": "The temperature of the coolant as it enters the compute tray or cooling system.",
+      "confidence": 0.95
+    },
+    {
+      "term": "outlet temperature",
+      "suggested_translation": "出水温度",
+      "context": "The temperature of the coolant as it leaves the compute tray after absorbing heat.",
+      "confidence": 0.95
+    },
+    {
+      "term": "delta-T",
+      "suggested_translation": "温差",
+      "context": "The difference between the inlet and outlet temperatures in a cooling loop.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "vera rubin": "维拉",
+    "uqd / mqd": "快速接头"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:37:02.673146"
+}

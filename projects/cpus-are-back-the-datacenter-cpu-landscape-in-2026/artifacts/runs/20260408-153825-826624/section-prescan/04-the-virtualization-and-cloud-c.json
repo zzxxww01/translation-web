@@ -1,0 +1,74 @@
+{
+  "section_id": "04-the-virtualization-and-cloud-c",
+  "new_terms": [
+    {
+      "term": "compute instances",
+      "suggested_translation": "计算实例",
+      "context": "renting compute instances and running your workloads on 3rd-party hardware",
+      "confidence": 0.95
+    },
+    {
+      "term": "serverless computing",
+      "suggested_translation": "无服务器计算",
+      "context": "serverless computing from the likes of AWS Lambda",
+      "confidence": 0.95
+    },
+    {
+      "term": "Virtual Machines (VMs)",
+      "suggested_translation": "虚拟机 (VM)",
+      "context": "run multiple independent and secure instances of Virtual Machines (VMs)",
+      "confidence": 0.95
+    },
+    {
+      "term": "hypervisor",
+      "suggested_translation": "虚拟机管理程序",
+      "context": "orchestrated through hypervisors such as VMware ESXi",
+      "confidence": 0.95
+    },
+    {
+      "term": "branch prediction",
+      "suggested_translation": "分支预测",
+      "context": "using the CPU cores branch prediction functions",
+      "confidence": 0.95
+    },
+    {
+      "term": "Spectre",
+      "suggested_translation": "幽灵 (漏洞)",
+      "context": "exploited with the Spectre and Meltdown vulnerabilities in 2018",
+      "confidence": 0.95
+    },
+    {
+      "term": "Meltdown",
+      "suggested_translation": "熔断 (漏洞)",
+      "context": "exploited with the Spectre and Meltdown vulnerabilities in 2018",
+      "confidence": 0.95
+    },
+    {
+      "term": "ROI",
+      "suggested_translation": "投资回报率 (ROI)",
+      "context": "utilized fully at all times to maximize ROI",
+      "confidence": 0.9
+    },
+    {
+      "term": "AWS",
+      "suggested_translation": "AWS",
+      "context": "Amazon’s Web Services (AWS)",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "cloud computing": "云计算",
+    "hyperscaler": "超大规模云厂商",
+    "neoclouds": "新锐云厂商",
+    "capex": "资本支出",
+    "opex": "运营支出",
+    "scalability": "可扩展性",
+    "virtualization": "虚拟化",
+    "simultaneous multi-threading (smt)": "SMT",
+    "intel": "英特尔",
+    "cpu": "CPU",
+    "gpu": "GPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:46:34.114140"
+}

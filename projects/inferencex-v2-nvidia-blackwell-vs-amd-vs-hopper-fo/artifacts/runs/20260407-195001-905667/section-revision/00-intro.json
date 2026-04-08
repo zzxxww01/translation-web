@@ -1,0 +1,21 @@
+{
+  "section_id": "00-intro",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.375,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.0,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "GB300 NVL72、MI355X、B200、H100、分离式服务、宽泛专家并行、大规模混合专家模型、SGLang、vLLM、TensorRT-LLM (TRTLLM)",
+    "作者：Dylan Patel、Cam Quilici、Bryan Shan 等 4 人",
+    "2026 年 2 月 16 日 · 付费文章"
+  ]
+}

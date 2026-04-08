@@ -1,0 +1,114 @@
+{
+  "project_id": "the-great-gpu-shortage-rental-capacity-launching-o",
+  "status": "completed",
+  "total_sections": 10,
+  "translated_sections": 10,
+  "total_paragraphs": 90,
+  "translated_paragraphs": 90,
+  "error_count": 1,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "NVIDIA's latest GPU architecture succeeding Hopper.",
+      "section_id": "01-surge-pricing-comes-to-the-gpu",
+      "timestamp": "2026-04-03T11:38:45.564257"
+    }
+  ],
+  "started_at": "2026-04-03T11:34:10.661527",
+  "finished_at": "2026-04-03T12:13:16.905305",
+  "run_id": "20260403-113410-661543",
+  "artifacts_path": "projects\\the-great-gpu-shortage-rental-capacity-launching-o\\artifacts\\runs\\20260403-113410-661543",
+  "export": {
+    "generated_at": "2026-04-03T12:13:16.883223",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\the-great-gpu-shortage-rental-capacity-launching-o\\发布H100一年期租赁价格指数_zh.md",
+      "generated": true,
+      "bytes": 26580
+    }
+  },
+  "api_calls": 45,
+  "elapsed_seconds": 2346.3,
+  "consistency": {
+    "is_consistent": false,
+    "total_issues": 22,
+    "auto_fixable_count": 0,
+    "manual_review_count": 22,
+    "issues": [
+      {
+        "section_id": "02-gpu-rental-prices-the-comeba",
+        "paragraph_index": 1,
+        "issue_type": "style",
+        "description": "发现口语化表达，可能影响专业性",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称89次, 第三人称35次",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 40",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026, 02",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 3",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2026",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 13,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 5, 1, 2023",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 16,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false
+      },
+      {
+        "section_id": "01-surge-pricing-comes-to-the-gpu",
+        "paragraph_index": 3,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3",
+        "auto_fixable": false
+      }
+    ]
+  }
+}

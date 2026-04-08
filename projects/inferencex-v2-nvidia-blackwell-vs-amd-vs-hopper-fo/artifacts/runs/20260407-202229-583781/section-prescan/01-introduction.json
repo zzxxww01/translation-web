@@ -1,0 +1,66 @@
+{
+  "section_id": "01-introduction",
+  "new_terms": [
+    {
+      "term": "InferenceXv2",
+      "suggested_translation": "InferenceXv2",
+      "context": "The new version of the inference benchmark suite, formerly InferenceMAX.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Blackwell Ultra",
+      "suggested_translation": "Blackwell Ultra",
+      "context": "NVIDIA's high-end GPU architecture refresh.",
+      "confidence": 1.0
+    },
+    {
+      "term": "pareto frontier curve",
+      "suggested_translation": "帕累托前沿曲线",
+      "context": "Optimization term used to describe the set of optimal trade-offs between performance and cost/latency.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FP4",
+      "suggested_translation": "FP4",
+      "context": "4-bit floating point data format supported by Blackwell architecture.",
+      "confidence": 1.0
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8",
+      "context": "8-bit floating point data format.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Claude Code Fast mode",
+      "suggested_translation": "Claude Code Fast 模式",
+      "context": "A specific feature of Anthropic's Claude Code tool.",
+      "confidence": 0.9
+    },
+    {
+      "term": "TPUv7 Ironwood",
+      "suggested_translation": "TPUv7 Ironwood",
+      "context": "Google's next-generation Tensor Processing Unit codename.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Trainium3",
+      "suggested_translation": "Trainium3",
+      "context": "AWS's third-generation custom AI training chip.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SKU",
+      "suggested_translation": "SKU",
+      "context": "Stock Keeping Unit, referring to specific GPU models.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 Prefill",
+    "disagg": "分离式 Prefill",
+    "wide expert parallelism": "宽专家并行 (WideEP)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:24:21.513080"
+}

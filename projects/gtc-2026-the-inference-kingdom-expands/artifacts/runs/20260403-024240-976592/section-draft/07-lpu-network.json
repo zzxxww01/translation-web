@@ -1,0 +1,323 @@
+{
+  "section_id": "07-lpu-network",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "07-lpu-network",
+    "section_title": "LPU Network",
+    "section_title_translation": "LPU 网络",
+    "section_position": "8/13",
+    "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+    "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+    "target_audience": "Senior hardware engineers, AI infrastructure architects, semiconductor supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-analyst Chinese. The voice should be objective and rigorous, using precise semiconductor, networking, and AI terminology while maintaining the investigative edge of the original text.",
+    "previous_section_title": "LPX Rack System",
+    "next_section_title": "Nvidia’s CPO Roadmap",
+    "section_role": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+    "translation_notes": [
+      "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+      "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+    ],
+    "key_points": [
+      "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+      "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+      "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+    ],
+    "guidelines": [
+      "Sentence Restructuring for Flow: Actively break down lengthy English sentences with multiple relative clauses into shorter, cohesive Chinese sentences. Use appropriate logical connectors (因此, 相比之下, 此外) to ensure a native, fluid paragraph structure.",
+      "Domain-Specific Precision: Strictly adhere to the provided terminology. Differentiate clearly between networking terms (scale-up vs. scale-out), semiconductor terms (tapeout, reticle size), and AI modeling terms (stateful, draft models).",
+      "Preserve Technical Notation: Keep all mathematical formulas, bandwidth specifications (e.g., 448Gbit/s uni-di, 112G), node names (TSMC N3P, SF4), and connector types (80DP Paladin, OSFP) exactly as they appear in the source.",
+      "Handle Acronyms Consistently: For newly introduced concepts (AFD, MBOM, CPO), provide the full Chinese translation followed by the English acronym in parentheses on the first occurrence. Use the acronym or the Chinese term consistently thereafter.",
+      "Maintain Analyst Tone: Preserve the investigative and authoritative tone of SemiAnalysis (e.g., 'Behind the paywall, we will reveal...'). Translate these directly but with professional phrasing (e.g., '在付费内容中，我们将揭晓...').",
+      "Title Translation: Ensure the translated title captures all key subjects mentioned in the original title (Groq LP30, LPX Rack, AFD, etc.) without dropping any semantic components, using standard separator punctuation (e.g., spaces or ' | ')."
+    ],
+    "article_challenges": [
+      {
+        "location": "LPU Network / Feynman NVL1152 Networking Topologies",
+        "issue": "Dense mathematical and topological descriptions (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+        "suggestion": "Do not alter the formulas. Ensure the surrounding text precisely explains the variables (e.g., lanes, Gbps, directions). Use clear spatial language for topologies (e.g., '菊链配置' for daisy chain, '全互联' for all-to-all)."
+      },
+      {
+        "location": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+        "issue": "Intersection of LLM software architecture (Attention, FFN, token routing, KV cache) and hardware mapping.",
+        "suggestion": "Strictly use standard Chinese AI terms (注意力机制, 前馈网络, 动态KV缓存加载). Ensure the logical causality (why stateful goes to GPU and stateless goes to LPU) is flawlessly translated."
+      },
+      {
+        "location": "GTC 2026 Supply Chain Implications",
+        "issue": "Long, clause-heavy sentences detailing corporate strategy and hardware teardowns (e.g., 'This design has effectively taken key pluggable transceiver items...').",
+        "suggestion": "Break these sentences down. Translate 'taken... and put them on...' into a sequence of actions in Chinese to maintain readability."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Attention FFN Disaggregation (AFD)",
+        "term": "Attention FFN Disaggregation (AFD)",
+        "translation": "注意力与前馈网络解耦",
+        "strategy": "first_annotate",
+        "note": "Separating the computation of attention mechanisms (mapped to GPUs) and feed-forward networks (mapped to LPUs) to optimize inference.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Co-Packaged Optics (CPO)",
+        "term": "Co-Packaged Optics (CPO)",
+        "translation": "光电共封装",
+        "strategy": "first_annotate",
+        "note": "Integration of optical transceivers and switch ASICs on the same package to reduce power and increase bandwidth.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "world size",
+        "term": "world size",
+        "translation": "集群并行规模",
+        "strategy": "translate",
+        "note": "The total number of processes or GPUs participating in a distributed training or inference cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "belly-to-belly",
+        "term": "belly-to-belly",
+        "translation": "正反面贴装",
+        "strategy": "translate",
+        "note": "Mounting components on both the top and bottom sides of a PCB directly opposite each other to minimize trace length.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "scratchpad SRAM",
+        "term": "scratchpad SRAM",
+        "translation": "暂存SRAM",
+        "strategy": "translate",
+        "note": "High-speed internal memory used for temporary storage of calculations, data, and other work in progress.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "stateful / stateless",
+        "term": "stateful / stateless",
+        "translation": "有状态 / 无状态",
+        "strategy": "translate",
+        "note": "Whether an operation depends on stored dynamic data (like KV cache) or only on the immediate input.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "draft models",
+        "term": "draft models",
+        "translation": "草稿模型",
+        "strategy": "translate",
+        "note": "Smaller models used in speculative decoding to quickly generate candidate tokens for a larger model to verify.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Midboard Optical Module (MBOM)",
+        "term": "Midboard Optical Module (MBOM)",
+        "translation": "板载光模块",
+        "strategy": "first_annotate",
+        "note": "Optical modules placed in the middle of the PCB rather than on the edge (pluggables), reducing electrical trace lengths.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "reticle size",
+        "term": "reticle size",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "uni-di",
+        "term": "uni-di",
+        "translation": "单向",
+        "strategy": "translate",
+        "note": "Uni-directional data transmission over a lane.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Maps the complex networking topology required to interconnect LPUs at scale and integrate them with Nvidia GPUs.",
+    "relation_to_previous": "Expands directly on the physical OSFP cages and switch connections introduced in the rack system description.",
+    "relation_to_next": "Transitions the article from LPU-specific networking to Nvidia's broader optical networking and CPO roadmap.",
+    "key_points": [
+      "The LPU network is divided into scale-up (C2C) and scale-out (Spectrum-X) networks.",
+      "Intra-rack scale-up bandwidth hits 645TB/s, utilizing the full 112G line rate.",
+      "Inter-rack C2C utilizes massive fan-out configurations via OSFP cages to connect multiple LPUs across racks."
+    ],
+    "translation_notes": [
+      "Distinguish clearly between 'scale-up' (向上扩展/纵向扩展) and 'scale-out' (向外扩展/横向扩展).",
+      "Translate 'fan out' as '扇出'. Pay strict attention to bandwidth math to avoid transcription errors."
+    ]
+  },
+  "translations": [
+    "LPU 网络可分为纵向扩展的“C2C”网络，以及通过 Spectrum-X 与英伟达 GPU 交互的横向扩展网络。首先探讨纵向扩展网络，该网络可分为三部分：节点内、节点间/机架内、机架间。针对机架内的 C2C 连接，英伟达宣布单机架纵向扩展总带宽为 640TB/s，具体计算如下：256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s。请注意，英伟达采用的是 112G 的线路速率，而非 100G 的有效数据速率。",
+    "托盘内拓扑",
+    "https://substackcdn.com/image/fetch/$s_!i4Vn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff5b18381-6c96-4d0f-912e-e7978cc30446_1414x1617.png",
+    "来源：SemiAnalysis 网络模型",
+    "在每个托盘或节点内，所有 16 个 LPU 均以全互联网状拓扑相互连接。每个 LPU 模块通过 4x100G 的 C2C 带宽与节点内的其他 15 个 LPU 相连。需要注意的是，这里的“C2C”与 NVLink 无关，而是 Groq 自有的纵向扩展互联架构。这些连接全部通过 PCB 走线实现，因此需要规格极高的 PCB 来支持如此庞大的布线密度。这也正是采用正反面贴装的原因：它缩短了所有 LPU 之间在“X”和“Y”轴上的距离，转而利用“Z”轴空间进行布线。",
+    "此外，每个 LPU 还有 1x100G 链路连接至一个 FPGA，而每个 FPGA 负责与 8 个 LPU 对接。这两个 FPGA 各自通过 8x PCIe Gen 5 链路连接至 CPU。由于 LPU 没有用于直接通信的 PCIe PHY，因此必须经过 FPGA 才能与 CPU 对接。",
+    "节点间/机架内",
+    "https://substackcdn.com/image/fetch/$s_!xA-t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F25d7c5ea-dce9-4703-9d95-eda3887a2e72_1066x1155.png",
+    "来源：SemiAnalysis 网络模型",
+    "每个 LPU 连接到服务器中其他 15 个节点各一个 LPU。每条节点间链路的带宽为 2x100G，因此每个 LPU 引出 15x2x100G 的节点间链路。这些节点间链路通过铜缆背板实现连接。此外，每个 FPGA 也与其他每个节点中的一个 FPGA 相连，单条链路带宽为 25G 或 50G，总计 15x25G/50G。这同样通过背板进行路由。这意味着每个节点拥有 16 x 15 x 2 条用于节点间 C2C 的通道（lane），以及 2 x 15 条用于节点间 FPGA 的通道，总计 510 条通道，即 1020 对差分对（分别用于接收 Rx 和发送 Tx）。因此，背板共有 16 x 1020/2 = 8,160 对差分对——这里除以 2，是因为一个设备的发送（Tx）通道正好对应另一个设备的接收（Rx）通道。",
+    "机架间",
+    "https://substackcdn.com/image/fetch/$s_!Wn2b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feaf1f2a7-972d-4d67-b1e8-aa596dcca070_3060x4100.png",
+    "来源：SemiAnalysis 网络模型",
+    "最后是机架间 C2C 连接。每个 LPU 拥有 4x100G 通道，这些通道连接至 OSFP 笼（cages），用于跨 4 个机架连接 LPU。这种机架间向上扩展（scale-up）可以采用多种配置。一种方案是，每个 LPU 的 4x100G 通道接入同一个 OSFP 笼，每个 OSFP 接口引出来自 2 个 LPU 的 800G C2C 带宽。然而，为了实现更大的扇出（fan out），首选配置似乎是将 LPU 的每条 100G 通道分别接入 4 个独立的 OSFP 笼，每个 OSFP 笼引出来自 8 个 LPU 的 800G C2C 带宽。至于机架之间的网络连接方式，似乎采用了菊链配置（daisy chain configuration），每个 Node 0 分别连接到另外两个 Node 0。这些连接完全可以在 100G AEC（有源电缆）的传输距离内实现，当然，如有必要也可以使用光模块。"
+  ]
+}

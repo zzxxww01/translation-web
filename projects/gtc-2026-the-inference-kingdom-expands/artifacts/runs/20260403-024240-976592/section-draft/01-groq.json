@@ -1,0 +1,310 @@
+{
+  "section_id": "01-groq",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "01-groq",
+    "section_title": "Groq",
+    "section_title_translation": "Groq",
+    "section_position": "2/13",
+    "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+    "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+    "target_audience": "Senior hardware engineers, AI infrastructure architects, semiconductor supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-analyst Chinese. The voice should be objective and rigorous, using precise semiconductor, networking, and AI terminology while maintaining the investigative edge of the original text.",
+    "previous_section_title": "Introduction",
+    "next_section_title": "LPU chip",
+    "section_role": "Explains the strategic and business context of Nvidia's $20B 'pseudo-acquisition' of Groq and justifies its rapid integration into Nvidia's ecosystem.",
+    "translation_notes": [
+      "Translate 'pseudo-acquisition' or 'functions almost as an acquisition' carefully (e.g., 变相收购/类收购) to reflect the legal nuance of bypassing antitrust regulators."
+    ],
+    "key_points": [
+      "Nvidia structured the $20B Groq deal as a licensing/hiring agreement to bypass regulatory hurdles.",
+      "Groq's technology has been rapidly integrated into the Vera Rubin inference stack.",
+      "Standalone LPUs are not economical for scale, but hold immense value in fast token serving for disaggregated decode systems."
+    ],
+    "guidelines": [
+      "Sentence Restructuring for Flow: Actively break down lengthy English sentences with multiple relative clauses into shorter, cohesive Chinese sentences. Use appropriate logical connectors (因此, 相比之下, 此外) to ensure a native, fluid paragraph structure.",
+      "Domain-Specific Precision: Strictly adhere to the provided terminology. Differentiate clearly between networking terms (scale-up vs. scale-out), semiconductor terms (tapeout, reticle size), and AI modeling terms (stateful, draft models).",
+      "Preserve Technical Notation: Keep all mathematical formulas, bandwidth specifications (e.g., 448Gbit/s uni-di, 112G), node names (TSMC N3P, SF4), and connector types (80DP Paladin, OSFP) exactly as they appear in the source.",
+      "Handle Acronyms Consistently: For newly introduced concepts (AFD, MBOM, CPO), provide the full Chinese translation followed by the English acronym in parentheses on the first occurrence. Use the acronym or the Chinese term consistently thereafter.",
+      "Maintain Analyst Tone: Preserve the investigative and authoritative tone of SemiAnalysis (e.g., 'Behind the paywall, we will reveal...'). Translate these directly but with professional phrasing (e.g., '在付费内容中，我们将揭晓...').",
+      "Title Translation: Ensure the translated title captures all key subjects mentioned in the original title (Groq LP30, LPX Rack, AFD, etc.) without dropping any semantic components, using standard separator punctuation (e.g., spaces or ' | ')."
+    ],
+    "article_challenges": [
+      {
+        "location": "LPU Network / Feynman NVL1152 Networking Topologies",
+        "issue": "Dense mathematical and topological descriptions (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+        "suggestion": "Do not alter the formulas. Ensure the surrounding text precisely explains the variables (e.g., lanes, Gbps, directions). Use clear spatial language for topologies (e.g., '菊链配置' for daisy chain, '全互联' for all-to-all)."
+      },
+      {
+        "location": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+        "issue": "Intersection of LLM software architecture (Attention, FFN, token routing, KV cache) and hardware mapping.",
+        "suggestion": "Strictly use standard Chinese AI terms (注意力机制, 前馈网络, 动态KV缓存加载). Ensure the logical causality (why stateful goes to GPU and stateless goes to LPU) is flawlessly translated."
+      },
+      {
+        "location": "GTC 2026 Supply Chain Implications",
+        "issue": "Long, clause-heavy sentences detailing corporate strategy and hardware teardowns (e.g., 'This design has effectively taken key pluggable transceiver items...').",
+        "suggestion": "Break these sentences down. Translate 'taken... and put them on...' into a sequence of actions in Chinese to maintain readability."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Attention FFN Disaggregation (AFD)",
+        "term": "Attention FFN Disaggregation (AFD)",
+        "translation": "注意力与前馈网络解耦",
+        "strategy": "first_annotate",
+        "note": "Separating the computation of attention mechanisms (mapped to GPUs) and feed-forward networks (mapped to LPUs) to optimize inference.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Co-Packaged Optics (CPO)",
+        "term": "Co-Packaged Optics (CPO)",
+        "translation": "光电共封装",
+        "strategy": "first_annotate",
+        "note": "Integration of optical transceivers and switch ASICs on the same package to reduce power and increase bandwidth.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "world size",
+        "term": "world size",
+        "translation": "集群并行规模",
+        "strategy": "translate",
+        "note": "The total number of processes or GPUs participating in a distributed training or inference cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "belly-to-belly",
+        "term": "belly-to-belly",
+        "translation": "正反面贴装",
+        "strategy": "translate",
+        "note": "Mounting components on both the top and bottom sides of a PCB directly opposite each other to minimize trace length.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "scratchpad SRAM",
+        "term": "scratchpad SRAM",
+        "translation": "暂存SRAM",
+        "strategy": "translate",
+        "note": "High-speed internal memory used for temporary storage of calculations, data, and other work in progress.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "stateful / stateless",
+        "term": "stateful / stateless",
+        "translation": "有状态 / 无状态",
+        "strategy": "translate",
+        "note": "Whether an operation depends on stored dynamic data (like KV cache) or only on the immediate input.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "draft models",
+        "term": "draft models",
+        "translation": "草稿模型",
+        "strategy": "translate",
+        "note": "Smaller models used in speculative decoding to quickly generate candidate tokens for a larger model to verify.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Midboard Optical Module (MBOM)",
+        "term": "Midboard Optical Module (MBOM)",
+        "translation": "板载光模块",
+        "strategy": "first_annotate",
+        "note": "Optical modules placed in the middle of the PCB rather than on the edge (pluggables), reducing electrical trace lengths.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "reticle size",
+        "term": "reticle size",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "uni-di",
+        "term": "uni-di",
+        "translation": "单向",
+        "strategy": "translate",
+        "note": "Uni-directional data transmission over a lane.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Explains the strategic and business context of Nvidia's $20B 'pseudo-acquisition' of Groq and justifies its rapid integration into Nvidia's ecosystem.",
+    "relation_to_previous": "Delivers on the introduction's promise to tackle the Groq topic first.",
+    "relation_to_next": "Provides the business foundation before diving into the deep technical architecture of the acquired LPU chip in the next section.",
+    "key_points": [
+      "Nvidia structured the $20B Groq deal as a licensing/hiring agreement to bypass regulatory hurdles.",
+      "Groq's technology has been rapidly integrated into the Vera Rubin inference stack.",
+      "Standalone LPUs are not economical for scale, but hold immense value in fast token serving for disaggregated decode systems."
+    ],
+    "translation_notes": [
+      "Translate 'pseudo-acquisition' or 'functions almost as an acquisition' carefully (e.g., 变相收购/类收购) to reflect the legal nuance of bypassing antitrust regulators."
+    ]
+  },
+  "translations": [
+    "首先来看 Groq LPU。近期 AI 基础设施领域最重大的事件之一，莫过于英伟达“收购” Groq。严格来说，英伟达斥资 200 亿美元获得了 Groq 的 IP 授权，并吸纳了其绝大部分团队。此举在实质上无异于收购，但其交易结构在法律层面上并未达到收购的标准，从而简化甚至规避了监管审批。鉴于英伟达的市场份额，如果该交易以全面收购的形式进行并接受反垄断审查，大概率会被否决。这种变相收购的另一大优势在于避免了漫长的交易交割流程，使英伟达得以立即接手 Groq 的知识产权与人才团队。",
+    "正因如此，在该交易宣布后不到四个月，英伟达就已经拿出了系统概念设计，并正将其整合至 Vera Rubin 推理堆栈中。",
+    "现在我们来回顾一下 LPU 架构，看看 Groq 的 LPU 如何与英伟达的 GPU 形成互补。更多细节请参阅我们此前关于 Groq 的分析文章。该文章的核心前提依然成立：使用独立的 Groq LPU 系统进行大规模 token 推理服务缺乏经济性，但其生成 token 的速度极快，从而能够享有极高的市场溢价。这正是 LPU 能够融入解耦解码系统背后的核心逻辑。"
+  ]
+}

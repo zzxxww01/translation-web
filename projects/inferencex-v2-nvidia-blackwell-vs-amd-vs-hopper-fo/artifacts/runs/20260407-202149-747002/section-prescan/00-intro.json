@@ -1,0 +1,59 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GB300 NVL72",
+      "suggested_translation": "GB300 NVL72",
+      "context": "NVIDIA Blackwell architecture rack-scale system",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI355X",
+      "suggested_translation": "MI355X",
+      "context": "AMD Instinct series GPU",
+      "confidence": 1.0
+    },
+    {
+      "term": "Large Mixture of Experts",
+      "suggested_translation": "大规模专家混合模型 (LMoE)",
+      "context": "Advanced MoE architecture scaling",
+      "confidence": 0.9
+    },
+    {
+      "term": "SGLang",
+      "suggested_translation": "SGLang",
+      "context": "High-performance LLM serving framework",
+      "confidence": 1.0
+    },
+    {
+      "term": "vLLM",
+      "suggested_translation": "vLLM",
+      "context": "Open-source LLM inference and serving library",
+      "confidence": 1.0
+    },
+    {
+      "term": "TRTLLM",
+      "suggested_translation": "TRTLLM",
+      "context": "NVIDIA TensorRT-LLM framework",
+      "confidence": 1.0
+    },
+    {
+      "term": "B200",
+      "suggested_translation": "B200",
+      "context": "NVIDIA Blackwell GPU",
+      "confidence": 1.0
+    },
+    {
+      "term": "H100",
+      "suggested_translation": "H100",
+      "context": "NVIDIA Hopper GPU",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "disaggregated serving": "分离式推理",
+    "wide expert parallelism": "宽专家并行"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:23:26.588123"
+}

@@ -1,0 +1,61 @@
+{
+  "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+  "new_terms": [
+    {
+      "term": "Oberon",
+      "suggested_translation": "奥伯伦",
+      "context": "Nvidia's rack-scale server architecture name, following the HGX form factor",
+      "confidence": 0.95
+    },
+    {
+      "term": "CPX",
+      "suggested_translation": "CPX",
+      "context": "Nvidia's specialized accelerator rack/module optimized for inference prefill",
+      "confidence": 0.95
+    },
+    {
+      "term": "GDDR7",
+      "suggested_translation": "GDDR7",
+      "context": "Next-generation graphics memory technology used as an alternative to HBM in CPX",
+      "confidence": 0.95
+    },
+    {
+      "term": "compute-bound",
+      "suggested_translation": "计算受限",
+      "context": "A state where performance is limited by processing power (FLOPs) rather than bandwidth",
+      "confidence": 0.9
+    },
+    {
+      "term": "bandwidth-bound",
+      "suggested_translation": "带宽受限",
+      "context": "A state where performance is limited by memory or data transfer speeds",
+      "confidence": 0.9
+    },
+    {
+      "term": "failure domain",
+      "suggested_translation": "故障域",
+      "context": "The scope of system components that can be affected by a single point of failure",
+      "confidence": 0.85
+    },
+    {
+      "term": "disaggregation",
+      "suggested_translation": "架构解耦",
+      "context": "The architectural separation of compute resources (e.g., prefill and decode) into independent units",
+      "confidence": 0.9
+    },
+    {
+      "term": "HGX",
+      "suggested_translation": "HGX",
+      "context": "Nvidia's standard 8-GPU baseboard/node form factor",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "rack scale": "机架级",
+    "prefill": "预填充",
+    "decode": "解码",
+    "compute tray": "计算托盘"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T21:31:39.973051"
+}

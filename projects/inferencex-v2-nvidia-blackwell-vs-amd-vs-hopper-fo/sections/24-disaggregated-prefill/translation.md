@@ -1,0 +1,19 @@
+分离式 Prefill（Disaggregated Prefill），有时也称为预填充-解码 (PD) 分离，是指在不同节点上分别执行 LLM 推理的预填充与解码阶段。预填充发生在请求首次被处理时，系统会一次性对所有 token 计算前向传播，从而为该请求“预填充” KV 缓存。由于所有 token 并行输入前向传播，这是一项计算密集型操作。随后，token 被逐一生成或“解码”，每个解码步骤都会从 HBM 加载 KV 缓存。由于不断增长的 KV 缓存需要被频繁加载，这便成了一个内存密集型过程。
+
+在传统的单节点推理中，推理引擎在同一批 GPU 上交替执行预填充与解码。新涌入的预填充请求会阻塞正在处理的解码批次，导致首个 Token 延迟 (TTFT) 和 Token 间延迟双双飙升。分块 Prefill 通过将长预填充拆分为更小的块来缓解这一问题，但底层的资源争用依然存在。分离式 Prefill 则将这一痛点彻底根除！
+
+https://substackcdn.com/image/fetch/$s_!FTlO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc87a96-aa31-4b37-99c6-603c98f332f3_1318x733.png
+
+来源：DistServe
+
+分离架构还允许对各个阶段进行独立扩展与优化。借助独立的节点，每个阶段都能独立调优：采用不同的并行策略、不同的批处理大小以及不同的内存分配比例。预填充与解码节点的比例也能与工作负载的输入输出长度比相匹配。例如，以预填充为主的工作负载（长输入、短输出，如摘要生成、RAG、大上下文窗口的智能体编程）可分配更多预填充实例。而以解码为主的工作负载（短输入、长输出，如思维链推理、长文本生成）则可分配更多解码实例。
+
+具有高缓存命中率的工作负载也更倾向于分配更多解码实例，因为来自共享系统提示词或多轮对话历史的复用 KV 缓存条目会完全跳过预填充阶段。
+
+分离架构的核心成本在于 KV 缓存传输。预填充完成后，必须将该请求的完整 KV 缓存从预填充节点传输至解码节点，随后才能生成首个解码 token。对于像 DeepSeek R1 这样拥有 61 层且采用 FP8 KV 缓存的模型，8192 个 token 的预填充会产生约 500MB 必须跨网络传输的 KV 数据，这会直接推高首个 Token 延迟 (TTFT)。此传输通过 RDMA（通常是 RoCE 或 InfiniBand）进行，采用零拷贝的 GPU 到 GPU 数据移动，全程无需 CPU 介入。诸如 NIXL（英伟达推理传输库）等库将数据移动层抽象为一个统一的异步 API，并为 UCX、GPUDirect Storage 等传输协议提供可插拔的后端。
+
+这使得推理引擎与任何特定的传输协议解耦，并实现了跨异构硬件的分离部署，让预填充与解码实例能够横跨不同的设备类型或互连网络。
+
+https://substackcdn.com/image/fetch/$s_!knfc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b56d901-ef89-43c9-8d11-c18062f1b7b9_1165x1165.png
+
+来源：Github

@@ -1,0 +1,66 @@
+{
+  "section_id": "13-unpacking-inference-providers",
+  "new_terms": [
+    {
+      "term": "OpenRouter",
+      "suggested_translation": "OpenRouter",
+      "context": "Below is a list on OpenRouter of all inference providers that serve DeepSeek R1",
+      "confidence": 1.0
+    },
+    {
+      "term": "speculative decoding",
+      "suggested_translation": "投机解码",
+      "context": "it becomes necessary to employ speculative decoding techniques like MTP",
+      "confidence": 0.95
+    },
+    {
+      "term": "InfiniBand",
+      "suggested_translation": "InfiniBand",
+      "context": "usually using InfiniBand or Ethernet as the networking protocol",
+      "confidence": 1.0
+    },
+    {
+      "term": "RoCEv2",
+      "suggested_translation": "RoCEv2",
+      "context": "InfiniBand/RoCEv2 Ethernet (outside of the NVL72 rack)",
+      "confidence": 1.0
+    },
+    {
+      "term": "GEMM",
+      "suggested_translation": "通用矩阵乘法 (GEMM)",
+      "context": "one after the column-parallel GEMM, one after the row-parallel GEMM",
+      "confidence": 0.95
+    },
+    {
+      "term": "TTFT",
+      "suggested_translation": "首个 Token 延迟 (TTFT)",
+      "context": "disaggregrated it leading to better TTFT performance",
+      "confidence": 0.95
+    },
+    {
+      "term": "cost of goods sold",
+      "suggested_translation": "销货成本 (COGS)",
+      "context": "depreciation counted in cost of goods sold",
+      "confidence": 0.9
+    },
+    {
+      "term": "DEP32",
+      "suggested_translation": "DEP32",
+      "context": "With wide EP (e.g., DEP32), 32 GPUs collectively hold and load the 670B weights once",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互速度",
+    "tco": "总拥有成本",
+    "mtp": "多 Token 预测 (MTP)",
+    "gross margin": "毛利率",
+    "tp": "张量并行 (TP)",
+    "ep": "专家并行 (EP)",
+    "dp": "数据并行 (DP)",
+    "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
+    "tok/s/user": "tok/s/user"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:50:56.708878"
+}

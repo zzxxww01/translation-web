@@ -1,0 +1,42 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入",
+      "context": "Anthropic’s ARR has nearly tripled in just a single quarter",
+      "confidence": 0.95
+    },
+    {
+      "term": "colocation",
+      "suggested_translation": "托管",
+      "context": "supply chain, from DRAM and NAND memory to fiber optic cables, datacenter colocation and gas turbines",
+      "confidence": 0.9
+    },
+    {
+      "term": "on-demand",
+      "suggested_translation": "按需",
+      "context": "On-Demand GPU rental capacity is sold out across all GPU types",
+      "confidence": 0.95
+    },
+    {
+      "term": "term structure",
+      "suggested_translation": "期限结构",
+      "context": "Access to the full-term structure and rental pricing across all other major GPU types",
+      "confidence": 0.85
+    },
+    {
+      "term": "inflection point",
+      "suggested_translation": "拐点",
+      "context": "Claude Code is the Inflection Point - this inflection point means that demand has spiked",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "neocloud": "新兴算力云厂商",
+    "hyperscaler": "超大规模云厂商",
+    "tco": "总拥有成本"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T11:36:31.828001"
+}

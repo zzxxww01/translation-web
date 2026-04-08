@@ -1,0 +1,177 @@
+{
+  "section_id": "07-winners-losers-and-the-shift",
+  "title": "Winners & losers and the shifting market bottlenecks",
+  "title_translation": "赢家、输家与不断转移的市场瓶颈",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "This takes us to the next section: winners and losers. A key issue in PJM’s forecast is their inability to see the big picture. Below, we discuss the shifting constraints, what it means for equipment vendors of onsite gas solutions like GEV, CAT and Bloom Energy, equipment suppliers like Vertiv, IPPs like Vistra and Talen, and datacenter developers & cryptominers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0131",
+      "parent_block_index": 131,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This takes us to the next section: winners and losers. A key issue in PJM’s forecast is their inability to see the big picture. Below, we discuss the shifting constraints, what it means for equipment vendors of onsite gas solutions like GEV, CAT and Bloom Energy, equipment suppliers like Vertiv, IPPs like Vistra and Talen, and datacenter developers & cryptominers.",
+      "parent_block_plain_text": "This takes us to the next section: winners and losers. A key issue in PJM’s forecast is their inability to see the big picture. Below, we discuss the shifting constraints, what it means for equipment vendors of onsite gas solutions like GEV, CAT and Bloom Energy, equipment suppliers like Vertiv, IPPs like Vistra and Talen, and datacenter developers & cryptominers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 366,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这就引出了我们的下一部分：赢家与输家。PJM预测中的一个关键问题在于其缺乏全局视野。下文我们将探讨不断转移的市场瓶颈，以及这对于GE Vernova、卡特彼勒 (Caterpillar)和Bloom Energy等现场燃气解决方案设备供应商，维谛技术 (Vertiv)等设备供应商，Vistra和Talen Energy等独立发电商 (IPPs)，以及数据中心开发商与加密货币矿工究竟意味着什么。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:54:18.851197",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "这就引出了我们的下一部分：赢家与输家。PJM预测中的一个关键问题在于其缺乏全局视野。下文我们将探讨不断转移的市场瓶颈，以及这对于GE Vernova、卡特彼勒 (Caterpillar)和Bloom Energy等现场燃气解决方案设备供应商，维谛技术 (Vertiv)等设备供应商，Vistra和Talen Energy等独立发电商 (IPPs)，以及数据中心开发商与加密货币矿工究竟意味着什么。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.375843",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这就引出了我们的下一部分：赢家与输家。PJM预测中的一个关键问题在于其缺乏全局视野。下文我们将探讨不断转移的市场瓶颈，以及这对于GE Vernova、卡特彼勒 (Caterpillar)和Bloom Energy等现场燃气解决方案设备供应商，维谛技术 (Vertiv)等设备供应商，Vistra和Talen Energy等独立发电商 (IPPs)，以及数据中心开发商与加密货币矿工究竟意味着什么。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:06:07.682665",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这就引出了我们的下一部分：赢家与输家。PJM预测中的一个关键问题在于其缺乏全局视野。下文我们将探讨不断转移的市场瓶颈，以及这对于GE Vernova、卡特彼勒 (Caterpillar)和Bloom Energy等现场燃气解决方案设备供应商，维谛技术 (Vertiv)等设备供应商，Vistra和Talen Energy等独立发电商 (IPPs)，以及数据中心开发商与加密货币矿工究竟意味着什么。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure financial acronyms are standard: 'IPPs' (独立发电商 - Independent Power Producers).",
+          "Translate 'shifting market bottlenecks' (不断转移的市场瓶颈) clearly to reflect supply chain and grid constraints."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the actionable financial takeaway, categorizing market players based on the structural grid shifts discussed.",
+          "relation_to_previous": "Translates the regulatory and market divergence established in the previous section into specific stock and sector impacts.",
+          "relation_to_next": "Acts as the paywall boundary, transitioning the reader from the free editorial content to the gated investment thesis and legal disclaimers.",
+          "key_points": [
+            "PJM's inability to see the big picture creates shifting constraints in the market.",
+            "Specific sectors (onsite gas solutions, equipment suppliers, IPPs, cryptominers) are directly impacted as either winners or losers."
+          ],
+          "translation_notes": [
+            "Ensure financial acronyms are standard: 'IPPs' (独立发电商 - Independent Power Producers).",
+            "Translate 'shifting market bottlenecks' (不断转移的市场瓶颈) clearly to reflect supply chain and grid constraints."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Paid subscribers can scroll down below the disclaimers to access the rest of the report.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0132",
+      "parent_block_index": 132,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Paid subscribers can scroll down below the disclaimers to access the rest of the report.",
+      "parent_block_plain_text": "Paid subscribers can scroll down below the disclaimers to access the rest of the report.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 88,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "付费订阅者可向下滚动至免责声明下方，阅读本报告的其余部分。",
+          "model": "pro",
+          "created_at": "2026-03-15T22:54:18.851247",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "gemini_refined": {
+          "text": "付费订阅者可向下滚动至免责声明下方，阅读本报告的其余部分。",
+          "model": "gemini_refined",
+          "created_at": "2026-03-16T01:18:10.375872",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "付费订阅者可向下滚动至免责声明下方，阅读本报告的其余部分。",
+          "model": "manual",
+          "created_at": "2026-03-16T01:06:09.129289",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "付费订阅者可向下滚动至免责声明下方，阅读本报告的其余部分。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure financial acronyms are standard: 'IPPs' (独立发电商 - Independent Power Producers).",
+          "Translate 'shifting market bottlenecks' (不断转移的市场瓶颈) clearly to reflect supply chain and grid constraints."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Delivers the actionable financial takeaway, categorizing market players based on the structural grid shifts discussed.",
+          "relation_to_previous": "Translates the regulatory and market divergence established in the previous section into specific stock and sector impacts.",
+          "relation_to_next": "Acts as the paywall boundary, transitioning the reader from the free editorial content to the gated investment thesis and legal disclaimers.",
+          "key_points": [
+            "PJM's inability to see the big picture creates shifting constraints in the market.",
+            "Specific sectors (onsite gas solutions, equipment suppliers, IPPs, cryptominers) are directly impacted as either winners or losers."
+          ],
+          "translation_notes": [
+            "Ensure financial acronyms are standard: 'IPPs' (独立发电商 - Independent Power Producers).",
+            "Translate 'shifting market bottlenecks' (不断转移的市场瓶颈) clearly to reflect supply chain and grid constraints."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

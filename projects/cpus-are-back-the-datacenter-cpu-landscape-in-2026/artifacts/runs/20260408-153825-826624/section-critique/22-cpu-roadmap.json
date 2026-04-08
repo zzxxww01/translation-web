@@ -1,0 +1,30 @@
+{
+  "section_id": "22-cpu-roadmap",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "Ampere Computing’s lineup",
+        "description": "译文使用了半角括号 `(安培计算)`，在中文排版中，包含中文的括号通常建议使用全角括号 `（）` 以保持视觉协调。",
+        "why_it_matters": "细节排版规范影响专业内容的整体质感。",
+        "suggestion": "将 `Ampere Computing (安培计算)` 修改为 `Ampere Computing（安培计算）`。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "try to intersect with OpenAI",
+        "description": "“产生交集”属于直译，在商业和技术语境下，intersect with 更多指产品路线图“与……的需求相契合”或“与……形成业务协同”。",
+        "why_it_matters": "优化表达能更精准地传达出公司调整产品线的商业动机。",
+        "suggestion": "可考虑将“以期与 OpenAI 产生交集”优化为“以期与 OpenAI 的需求相契合”或“以期与 OpenAI 形成业务协同”。"
+      }
+    ]
+  }
+}

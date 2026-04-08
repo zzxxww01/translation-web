@@ -1,0 +1,329 @@
+{
+  "section_id": "08-nvidias-cpo-roadmap",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "08-nvidias-cpo-roadmap",
+    "section_title": "Nvidia’s CPO Roadmap",
+    "section_title_translation": "英伟达 CPO 路线图",
+    "section_position": "9/13",
+    "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+    "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+    "target_audience": "Senior hardware engineers, AI infrastructure architects, semiconductor supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-analyst Chinese. The voice should be objective and rigorous, using precise semiconductor, networking, and AI terminology while maintaining the investigative edge of the original text.",
+    "previous_section_title": "LPU Network",
+    "next_section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+    "section_role": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+    "translation_notes": [
+      "Translate 'CPO' as '共封装光学' but retain the acronym.",
+      "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+    ],
+    "key_points": [
+      "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+      "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+    ],
+    "guidelines": [
+      "Sentence Restructuring for Flow: Actively break down lengthy English sentences with multiple relative clauses into shorter, cohesive Chinese sentences. Use appropriate logical connectors (因此, 相比之下, 此外) to ensure a native, fluid paragraph structure.",
+      "Domain-Specific Precision: Strictly adhere to the provided terminology. Differentiate clearly between networking terms (scale-up vs. scale-out), semiconductor terms (tapeout, reticle size), and AI modeling terms (stateful, draft models).",
+      "Preserve Technical Notation: Keep all mathematical formulas, bandwidth specifications (e.g., 448Gbit/s uni-di, 112G), node names (TSMC N3P, SF4), and connector types (80DP Paladin, OSFP) exactly as they appear in the source.",
+      "Handle Acronyms Consistently: For newly introduced concepts (AFD, MBOM, CPO), provide the full Chinese translation followed by the English acronym in parentheses on the first occurrence. Use the acronym or the Chinese term consistently thereafter.",
+      "Maintain Analyst Tone: Preserve the investigative and authoritative tone of SemiAnalysis (e.g., 'Behind the paywall, we will reveal...'). Translate these directly but with professional phrasing (e.g., '在付费内容中，我们将揭晓...').",
+      "Title Translation: Ensure the translated title captures all key subjects mentioned in the original title (Groq LP30, LPX Rack, AFD, etc.) without dropping any semantic components, using standard separator punctuation (e.g., spaces or ' | ')."
+    ],
+    "article_challenges": [
+      {
+        "location": "LPU Network / Feynman NVL1152 Networking Topologies",
+        "issue": "Dense mathematical and topological descriptions (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+        "suggestion": "Do not alter the formulas. Ensure the surrounding text precisely explains the variables (e.g., lanes, Gbps, directions). Use clear spatial language for topologies (e.g., '菊链配置' for daisy chain, '全互联' for all-to-all)."
+      },
+      {
+        "location": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+        "issue": "Intersection of LLM software architecture (Attention, FFN, token routing, KV cache) and hardware mapping.",
+        "suggestion": "Strictly use standard Chinese AI terms (注意力机制, 前馈网络, 动态KV缓存加载). Ensure the logical causality (why stateful goes to GPU and stateless goes to LPU) is flawlessly translated."
+      },
+      {
+        "location": "GTC 2026 Supply Chain Implications",
+        "issue": "Long, clause-heavy sentences detailing corporate strategy and hardware teardowns (e.g., 'This design has effectively taken key pluggable transceiver items...').",
+        "suggestion": "Break these sentences down. Translate 'taken... and put them on...' into a sequence of actions in Chinese to maintain readability."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Attention FFN Disaggregation (AFD)",
+        "term": "Attention FFN Disaggregation (AFD)",
+        "translation": "注意力与前馈网络解耦",
+        "strategy": "first_annotate",
+        "note": "Separating the computation of attention mechanisms (mapped to GPUs) and feed-forward networks (mapped to LPUs) to optimize inference.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Co-Packaged Optics (CPO)",
+        "term": "Co-Packaged Optics (CPO)",
+        "translation": "光电共封装",
+        "strategy": "first_annotate",
+        "note": "Integration of optical transceivers and switch ASICs on the same package to reduce power and increase bandwidth.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "world size",
+        "term": "world size",
+        "translation": "集群并行规模",
+        "strategy": "translate",
+        "note": "The total number of processes or GPUs participating in a distributed training or inference cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "belly-to-belly",
+        "term": "belly-to-belly",
+        "translation": "正反面贴装",
+        "strategy": "translate",
+        "note": "Mounting components on both the top and bottom sides of a PCB directly opposite each other to minimize trace length.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "scratchpad SRAM",
+        "term": "scratchpad SRAM",
+        "translation": "暂存SRAM",
+        "strategy": "translate",
+        "note": "High-speed internal memory used for temporary storage of calculations, data, and other work in progress.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "stateful / stateless",
+        "term": "stateful / stateless",
+        "translation": "有状态 / 无状态",
+        "strategy": "translate",
+        "note": "Whether an operation depends on stored dynamic data (like KV cache) or only on the immediate input.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "draft models",
+        "term": "draft models",
+        "translation": "草稿模型",
+        "strategy": "translate",
+        "note": "Smaller models used in speculative decoding to quickly generate candidate tokens for a larger model to verify.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Midboard Optical Module (MBOM)",
+        "term": "Midboard Optical Module (MBOM)",
+        "translation": "板载光模块",
+        "strategy": "first_annotate",
+        "note": "Optical modules placed in the middle of the PCB rather than on the edge (pluggables), reducing electrical trace lengths.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "reticle size",
+        "term": "reticle size",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "uni-di",
+        "term": "uni-di",
+        "translation": "单向",
+        "strategy": "translate",
+        "note": "Uni-directional data transmission over a lane.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+    "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+    "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+    "key_points": [
+      "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+      "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+    ],
+    "translation_notes": [
+      "Translate 'CPO' as '共封装光学' but retain the acronym.",
+      "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+    ]
+  },
+  "translations": [
+    "英伟达在 GTC 2026 主题演讲中公布了其光电共封装（Co-Packaged Optics (CPO)）路线图，随后黄仁勋在次日举行的财务分析师问答会议上作了补充说明。尽管许多人曾期望光电共封装能用于 Rubin Ultra Kyber 机架内的向上扩展（scale-up），但英伟达的重点实际上是利用光电共封装来实现更大集群并行规模的计算系统。",
+    "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+    "来源：SemiAnalysis AI 网络模型，英伟达",
+    "在 Rubin 世代，英伟达将提供采用全铜向上扩展网络的 Oberon NVL72 形态的 Rubin GPU。对于 Rubin Ultra，正如我们预期的那样，在 Oberon 和 Kyber 机架形态中，Rubin Ultra 将仅提供基于铜缆的向上扩展选项。Rubin Ultra 还将提供更大集群并行规模的系统版本，该系统将 8 个配备 72 颗 Rubin Ultra GPU 的 Oberon 机架连接起来，形成所谓的 NVL576。光电共封装的向上扩展将用于构建这种更大的集群并行规模，在机架之间通过两层全互联（all-to-all）网络进行连接，不过机架内部的向上扩展仍将基于铜缆。",
+    "到了 Feynman 世代，光电共封装的应用范围将通过另一个大集群并行规模机架 NVL1152 进一步扩大，该机架由 8 个 Kyber 机架组合而成。虽然概述机架配置路线图的英伟达技术博客指出，“英伟达 Kyber 将使用类似的直接光学互连进行机架间向上扩展，从而向上扩展为庞大的全互联 NVL1152 超级计算机”，但黄仁勋在财务分析师问答环节中确实表示，Feynman 世代的 NVL1152 将是“全光电共封装（all CPO）”。关于机架内的向上扩展是继续使用铜缆还是由光电共封装取代铜缆，目前仍存在一些分歧。",
+    "英伟达的策略一直是：能用铜缆的地方就用铜缆，必须用光学互连的地方才用光学互连。Feynman 世代 NVL1152 的架构也将遵循同样的原则。显然，NVL1152 将采用光电共封装进行机架间连接，但从 GPU 到 NVLink 交换机的连接目前在计划记录（POR）中仍是铜缆。英伟达无法实现电通道速率从 224Gbit/s 双向再次翻倍至 448Gbit/s 单向，这意味着带宽表现并没有那么惊人。",
+    "尽管与采用裸片间（die-to-die）连接至光学引擎相比，448G 高速 SerDes 在芯片边缘面积（shoreline）、传输距离和功耗方面面临巨大挑战，但考虑到 Feynman 在制造难度、成本和可靠性上的综合考量，连接至交换机的链路依然必须使用铜缆。",
+    "话虽如此，NVL1152 SKU 距离问世还有数年时间，路线图极有可能发生变化。目前，我们的基准预测仍是机架内部使用铜缆、机架之间使用光电共封装，但这很容易发生改变。",
+    "目前，我们对英伟达光电共封装路线图的最佳预测如下：",
+    "Rubin：",
+    "NVL72 —— Oberon 全铜向上扩展",
+    "Rubin Ultra：",
+    "NVL72 —— Oberon 全铜向上扩展",
+    "NVL144 —— Kyber 机架全铜向上扩展",
+    "NVL288 —— Kyber 机架全铜向上扩展，通过铜缆将 2 个机架连接在一起",
+    "NVL576 —— 8 个 Oberon 机架，机架内部采用铜缆向上扩展，机架间的交换机采用光电共封装，构成两层全互联拓扑。该配置产量较低，主要用于测试目的。",
+    "Feynman：",
+    "NVL72 —— Oberon 机架 —— 全铜",
+    "NVL144 —— Kyber 机架 —— 全铜",
+    "NVL1152 —— 8 个 Kyber 机架 —— 机架内部采用铜缆，机架间的交换机采用光电共封装",
+    "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+    "来源：SemiAnalysis，英伟达"
+  ]
+}

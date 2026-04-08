@@ -1,0 +1,64 @@
+{
+  "section_id": "27-bluefield-4-context-memory-sto",
+  "new_terms": [
+    {
+      "term": "Bluefield-4",
+      "suggested_translation": "Bluefield-4",
+      "context": "NVIDIA takes this to the next level with their latest DPU... Bluefield-4 DPU",
+      "confidence": 1.0
+    },
+    {
+      "term": "BF4",
+      "suggested_translation": "BF4",
+      "context": "putting four BF4s in their Context Memory Storage Platform for KV-Cache offload",
+      "confidence": 1.0
+    },
+    {
+      "term": "SmartNIC",
+      "suggested_translation": "智能网卡",
+      "context": "While previous SmartNICs and Data Processing Units (DPUs) added some ARM cores...",
+      "confidence": 0.95
+    },
+    {
+      "term": "ConnectX-9",
+      "suggested_translation": "ConnectX-9",
+      "context": "co-packaging an entire Grace CPU alongside a ConnectX-9 chip",
+      "confidence": 1.0
+    },
+    {
+      "term": "NIC",
+      "suggested_translation": "网卡",
+      "context": "used in each Rubin compute tray for the frontend NIC",
+      "confidence": 0.95
+    },
+    {
+      "term": "East-West",
+      "suggested_translation": "东西向",
+      "context": "current AI network topology of East-West (Scale-out GPU cluster scaling)",
+      "confidence": 0.95
+    },
+    {
+      "term": "North-South",
+      "suggested_translation": "南北向",
+      "context": "and North-South (connection to storage, external resources and the Internet)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Granite Rapids-D",
+      "suggested_translation": "Granite Rapids-D",
+      "context": "a CPU with networking acceleration (such as Xeon 6 SoC Granite Rapids-D)",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "dpu": "DPU",
+    "context memory storage": "Context Memory Storage",
+    "compute tray": "compute tray",
+    "scale-out": "Scale-out",
+    "grace": "Grace",
+    "rubin": "Rubin",
+    "key value cache": "KV-Cache"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:50:11.895914"
+}

@@ -1,0 +1,40 @@
+{
+  "section_id": "12-nvidia-versus-amd-disagg-prefi",
+  "assessment": {
+    "passed": true,
+    "overall_score": 8.934999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.2,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "随着今日 InferenceXv2 的发布，ML (机器学习) 社区首次得以一览开源 MI355X 分布式推理的完整帕累托前沿。我们展示了 B200 与 MI355X 在开启和关闭 MTP 时的帕累托曲线。",
+    "在 FP8 分离式 Prefill 方面，MI355X（MoRI SGLang）展现出了足以与 B200（Dynamo SGLang）相匹敌的竞争力。这两种配置均未使用宽专家并行 (WideEP)，因为所有预填充/解码实例最高仅在 EP8 下运行。在吞吐量与交互速度帕累托前沿的两端，MI355X 均略微落后于 B200。但在曲线中段的特定交互速度下，MI355X 分离式配置略占优势。B200 与 MI355X 都能从 MTP 中获益，且在开启 MTP 时，两款芯片实现了相同的相对性能提升。",
+    "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png",
+    "来源：SemiAnalysis InferenceX",
+    "然而，若仅衡量输出（解码）Token 吞吐量，就会发现在较低的交互速度下，B200 的输出 Token 吞吐量远高于 MI355X。需要注意的是，在考察分离式推理配置的纯输出 Token 吞吐量时，我们始终按解码 GPU 数量（而非 GPU 总数）进行归一化处理。在 B200 与 MI355X 上运行推理任务时，用于输出的 GPU 数量可能存在差异，但核心结论不变：无论解码跑在什么配置上，B200 完成解码任务的速度都更快。",
+    "SemiAnalysis 是免费开源软件，由读者提供支持。如需接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+    "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png",
+    "来源：SemiAnalysis InferenceX",
+    "尽管 MI355X 在 FP8 Disagg (分离) 场景下具备竞争力，但其 FP4 性能却饱受可组合性问题困扰。AMD 单节点 FP4 性能尚可，但若将 AMD 的 FP4 Disagg (分离) 预填充与英伟达对比，其性能表现就显得差强人意，MI355X 更是被英伟达的 B200 全方位碾压。在 1k1k 场景下，开启 MTP 的 MI355X（MoRI SGLang）才勉强击败未开启 MTP 的 B200（Dynamo SGLang）。",
+    "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png",
+    "来源：SemiAnalysis InferenceX",
+    "一旦将 Dynamo TRTLLM 纳入考量，B200 的性能会进一步飙升，以至于即使开启 MTP，MI355X 也无法匹敌同样开启 MTP 且搭配 Dynamo TRTLLM 的 B200。MI355X 只有在开启 MTP 的情况下，才能在性能上追平未开启 MTP 的 B200，且这仅限于交互速度在约 60 Token/秒/用户到约 120 Token/秒/用户之间的区间。",
+    "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png",
+    "来源：SemiAnalysis InferenceX",
+    "在对比 Dynamo TRTLLM B200 与 SGLang MoRI MI355 的 Disagg (分离) 预填充时，由于 TRTLLM 对 Disagg (分离) 预填充的实现更为成熟，AMD 遭遇了全方位的性能碾压。",
+    "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png",
+    "来源：SemiAnalysis InferenceX",
+    "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png",
+    "来源：Dwarkesh Podcast 与 SemiAnalysis",
+    "下图展示了构成 MI355X（MoRI SGLang）帕累托前沿的各种并行配置。需要注意，目前没有任何数据点采用宽专家并行 (WideEP)（即 EP 为 16、32 等配置）。",
+    "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

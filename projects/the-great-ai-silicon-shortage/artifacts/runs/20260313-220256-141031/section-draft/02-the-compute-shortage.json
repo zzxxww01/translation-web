@@ -1,0 +1,318 @@
+{
+  "section_id": "02-the-compute-shortage",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "02-the-compute-shortage",
+    "section_title": "The Compute Shortage",
+    "section_title_translation": "算力短缺",
+    "section_position": "3/11",
+    "article_theme": "The primary bottleneck for AI compute has structurally shifted from datacenter power to semiconductor supply chain constraints—specifically TSMC N3 wafer capacity and HBM—with Nvidia best positioned to dominate due to its superior supply chain control.",
+    "structure_summary": "The article establishes the soaring demand for AI compute before diving into the primary bottleneck: TSMC's N3 capacity constraints and the shift from consumer to AI demand. It then evaluates secondary constraints (memory/HBM, CoWoS) and macro industry shifts (power to silicon bottlenecks), concluding with a strategic assessment of Nvidia's dominant supply chain positioning.",
+    "target_audience": "Semiconductor industry professionals, AI infrastructure investors, and tech-savvy readers.",
+    "translation_voice": "Professional financial and tech industry Chinese. Precise terminology, objective phrasing, but retaining the punchy, assertive conclusions of the original.",
+    "previous_section_title": "SemiAnalysis x Fluidstack Hackathon",
+    "next_section_title": "The TSMC N3 Shortage",
+    "section_role": "Establishes the foundational premise of the article: the explosive and accelerating demand for AI compute.",
+    "translation_notes": [
+      "Translate 'agentic workflows' accurately as '智能体工作流' or '代理工作流'.",
+      "Ensure 'ARR' is correctly rendered as '年度经常性收入'.",
+      "Preserve the emphatic tone of words like 'staggering' and 'skyrocketing'."
+    ],
+    "key_points": [
+      "Token demand is skyrocketing due to model capability improvements and agentic workflows.",
+      "Anthropic generated an unprecedented $6B ARR in February alone.",
+      "Demand for compute vastly outstrips the current infrastructure buildout."
+    ],
+    "guidelines": [
+      "Maintain all specific company names, chip models (e.g., MI400, TPU v8AX), and process nodes (e.g., N3E, 4NP) in English to ensure industry accuracy.",
+      "Translate semiconductor manufacturing terms strictly according to industry standards (e.g., 'front-end' as 前道工序, 'wafer-in' as 晶圆投片, 'yield' as 良率).",
+      "Use professional financial and business terminology for market dynamics (e.g., 'ARR' as 年度经常性收入, 'softness' as 需求疲软, 'crowding out' as 挤出效应).",
+      "Preserve the assertive and insider-like tone of the original; avoid overly academic phrasing, keeping it sharp and investor-focused.",
+      "When translating 'agentic workflows,' use '智能体工作流', which is the current standard AI industry consensus in Chinese.",
+      "For complex data-driven sentences, prioritize logical flow in Chinese over strict literal translation, splitting long sentences if necessary to clearly highlight the cause-and-effect of supply and demand."
+    ],
+    "article_challenges": [
+      {
+        "location": "Section: Smartphones as the Front-End Release Valve?",
+        "issue": "The term 'release valve' in this context is metaphorical, referring to how dropping smartphone demand frees up capacity.",
+        "suggestion": "Translate as '前道产能的释放阀' or '缓解前道产能压力的突破口' to convey the industrial metaphor accurately."
+      },
+      {
+        "location": "Section: Memory The Next Biggest Constraint",
+        "issue": "Dense analytical sentences regarding bit shipments, margin profiles, and crowding out commodity DRAM.",
+        "suggestion": "Break down complex sentences into clear cause-and-effect clauses. Use financial terms like '挤出效应' (crowding out) and '利润率倒挂' (margin dynamics reversed) to match the analyst tone."
+      },
+      {
+        "location": "Section: The TSMC N3 Shortage",
+        "issue": "Alphabet soup of nodes and chip models (4NP, 3NP, N3P, N3E, MI350X, TPU v7).",
+        "suggestion": "Do not translate any node or chip names. Keep them exactly as written to prevent technical inaccuracies."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "N3 / N3B / N3E / N3P",
+        "term": "N3 / N3B / N3E / N3P",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "TSMC's 3-nanometer class process nodes and their variants.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic workflows",
+        "term": "Agentic workflows",
+        "translation": "智能体工作流",
+        "strategy": "translate",
+        "note": "Workflows driven by autonomous AI agents completing multi-step tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Wafer-in",
+        "term": "Wafer-in",
+        "translation": "晶圆投片",
+        "strategy": "translate",
+        "note": "The beginning of the semiconductor manufacturing process where raw wafers are introduced into the fabrication line.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "OSATs",
+        "term": "OSATs",
+        "translation": "外包封测代工厂",
+        "strategy": "first_annotate",
+        "note": "Outsourced Semiconductor Assembly and Test companies (like ASE/SPIL and Amkor).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Front-end / Back-end",
+        "term": "Front-end / Back-end",
+        "translation": "前道工序 / 后道工序",
+        "strategy": "translate",
+        "note": "Front-end refers to wafer fabrication; back-end refers to packaging and testing.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Nameplate capacity",
+        "term": "Nameplate capacity",
+        "translation": "铭牌产能",
+        "strategy": "translate",
+        "note": "The theoretical maximum designed output of a semiconductor fab.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "12-Hi stacks",
+        "term": "12-Hi stacks",
+        "translation": "12层堆叠",
+        "strategy": "translate",
+        "note": "12-layer stacked High Bandwidth Memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip on Wafer on Substrate",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "process",
+        "term": "process",
+        "translation": "工艺",
+        "strategy": "translate",
+        "note": "指芯片制造工艺",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Establishes the foundational premise of the article: the explosive and accelerating demand for AI compute.",
+    "relation_to_previous": "Moves past the promotion to begin the core narrative.",
+    "relation_to_next": "Contrasts the massive demand established here with the severe supply constraints detailed in the following section.",
+    "key_points": [
+      "Token demand is skyrocketing due to model capability improvements and agentic workflows.",
+      "Anthropic generated an unprecedented $6B ARR in February alone.",
+      "Demand for compute vastly outstrips the current infrastructure buildout."
+    ],
+    "translation_notes": [
+      "Translate 'agentic workflows' accurately as '智能体工作流' or '代理工作流'.",
+      "Ensure 'ARR' is correctly rendered as '年度经常性收入'.",
+      "Preserve the emphatic tone of words like 'staggering' and 'skyrocketing'."
+    ]
+  },
+  "translations": [
+    "token需求正在飙升，对AI算力的需求持续加速。模型能力的提升与智能体工作流的迅速涌现相叠加，推动了用户采用率和总token需求的激增。在智能体编程平台Claude Code被广泛采用的推动下，仅在2月份单月，Anthropic就新增了惊人的60亿美元年度经常性收入；如果Anthropic拥有更多算力，这一数字还会更高。尽管过去几年AI基础设施建设规模庞大，但可用算力依然稀缺。按需GPU的价格持续上涨，甚至连已经落后近两代的Hopper系列芯片也不例外。",
+    "就我们自身的经历而言，我们联系了所认识的每一家新型云服务商，询问是否有可用的小型集群，但所有资源早已被牢牢锁定。这种紧张的供应环境，解释了为何超大规模云服务商的资本支出计划会出现大幅重置。市场一致预期已全面大幅上调，其中谷歌是最极端的例子：受数据中心和服务器支出的主要驱动，其2026年的资本支出预期较此前翻了约一倍。",
+    "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+    "资料来源：公司财报、彭博",
+    "这是极其庞大的支出规模，如果条件允许，超大规模云服务商甚至愿意投入更多资金，但他们受制于一个关键因素：芯片供应。现有的先进逻辑与存储芯片的晶圆厂产能，根本不足以支撑当前的算力部署节奏。尽管在ChatGPT发布后的时代，行业一直饱受CoWoS封装和数据中心电力等各种瓶颈的困扰，但如今我们已确凿无疑地步入了芯片短缺阶段。",
+    "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+    "来源：SemiAnalysis 加速器模型"
+  ]
+}

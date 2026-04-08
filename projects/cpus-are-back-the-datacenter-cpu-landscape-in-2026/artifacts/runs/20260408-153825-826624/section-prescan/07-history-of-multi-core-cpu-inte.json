@@ -1,0 +1,51 @@
+{
+  "section_id": "07-history-of-multi-core-cpu-inte",
+  "new_terms": [
+    {
+      "term": "integrated memory controller (IMC)",
+      "suggested_translation": "集成内存控制器 (IMC)",
+      "context": "two cores and an integrated memory controller (IMC) on the same die",
+      "confidence": 0.99
+    },
+    {
+      "term": "Network on Chip (NoC)",
+      "suggested_translation": "片上网络 (NoC)",
+      "context": "through on-die NoC (Network on Chip) data fabrics",
+      "confidence": 0.99
+    },
+    {
+      "term": "data fabric",
+      "suggested_translation": "数据网络",
+      "context": "functions as an on-die core to core data fabric",
+      "confidence": 0.9
+    },
+    {
+      "term": "Northbridge",
+      "suggested_translation": "北桥",
+      "context": "to a Northbridge chip that also housed the memory controllers",
+      "confidence": 0.99
+    },
+    {
+      "term": "L3 cache",
+      "suggested_translation": "L3缓存",
+      "context": "included 16MB of L3 cache shared between the two cores",
+      "confidence": 0.99
+    },
+    {
+      "term": "Athlon 64 X2",
+      "suggested_translation": "速龙64 X2",
+      "context": "AMD’s Athlon 64 X2, also in 2005",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "front side bus (fsb)": "前端总线 (FSB)",
+    "die shot": "裸片图",
+    "xeon": "至强",
+    "pentium": "奔腾",
+    "intel": "英特尔",
+    "amd": "AMD"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:52:33.255776"
+}

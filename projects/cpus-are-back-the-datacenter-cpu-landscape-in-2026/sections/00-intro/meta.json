@@ -1,0 +1,1498 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "RL and Agent Usage, Context Memory Storage, DRAM Pricing Impacts, CPU Interconnect Evolution, AMD Venice, Verano, Florence, Intel Diamond Rapids, Coral Rapids, Arm Phoenix + Venom, Graviton 5, Axion",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### RL and Agent Usage, Context Memory Storage, DRAM Pricing Impacts, CPU Interconnect Evolution, AMD Venice, Verano, Florence, Intel Diamond Rapids, Coral Rapids, Arm Phoenix + Venom, Graviton 5, Axion",
+      "parent_block_plain_text": "RL and Agent Usage, Context Memory Storage, DRAM Pricing Impacts, CPU Interconnect Evolution, AMD Venice, Verano, Florence, Intel Diamond Rapids, Coral Rapids, Arm Phoenix + Venom, Graviton 5, Axion",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 198,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "subtitle",
+      "translations": {
+        "source_metadata": {
+          "text": "RL与Agent应用，上下文内存存储，DRAM价格影响，CPU互连演进，AMD Venice、Verano、Florence，英特尔（Intel）Diamond Rapids、Coral Rapids，Arm Phoenix + Venom，Graviton 5，Axion",
+          "model": "source_metadata",
+          "created_at": "2026-04-08T15:40:44.560965",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "强化学习 (RL) 与智能体应用、上下文内存存储、DRAM 定价影响、CPU 互连演进、AMD Venice 处理器、Verano、Florence、英特尔（Intel）Diamond Rapids 架构、Coral Rapids、ARM Phoenix 与 Venom、Graviton 5、Axion",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.307685",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "RL与Agent应用，上下文内存存储，DRAM价格影响，CPU互连演进，AMD Venice、Verano、Florence，英特尔（Intel）Diamond Rapids、Coral Rapids，Arm Phoenix + Venom，Graviton 5，Axion",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Gerald Wong and Dylan Patel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Gerald Wong",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@geraldwong116502",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 19,
+          "end": 30,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Gerald Wong](https://substack.com/@geraldwong116502) and [Dylan Patel](https://substack.com/@semianalysis)",
+      "parent_block_plain_text": "By Gerald Wong and Dylan Patel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Gerald Wong",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@geraldwong116502",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 19,
+          "end": 30,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "byline",
+      "translations": {
+        "source_metadata": {
+          "text": "作者：Gerald Wong、Dylan Patel",
+          "model": "source_metadata",
+          "created_at": "2026-04-08T15:40:44.561233",
+          "tokenized_text": "作者：[[[LINK_1|Gerald Wong]]]、[[[LINK_2|Dylan Patel]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "作者：Gerald Wong 与 Dylan Patel",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308026",
+          "tokenized_text": "作者：[[[LINK_1|Gerald Wong]]] 与 [[[LINK_2|Dylan Patel]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Gerald Wong、Dylan Patel",
+      "confirmed_tokenized": "作者：[[[LINK_1|Gerald Wong]]]、[[[LINK_2|Dylan Patel]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Feb 09, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feb 09, 2026 · Paid",
+      "parent_block_plain_text": "Feb 09, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "date_access",
+      "translations": {
+        "source_metadata": {
+          "text": "2026 年 2 月 9 日 · 付费文章",
+          "model": "source_metadata",
+          "created_at": "2026-04-08T15:40:44.561346",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "2026 年 2 月 9 日 · 付费专享",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308100",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026 年 2 月 9 日 · 付费文章",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308140",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Since 2023, the datacenter story has been simple. GPUs and networking are king. The arrival and subsequent explosion of AI Training and Inference have shifted compute demands away from the CPU. This meant that Intel, the primary supplier of server CPUs, failed to ride the wave of datacenter buildout and spending. Server CPU revenue remained relatively stagnant as hyperscalers and neoclouds focused on GPUs and datacenter infrastructure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since 2023, the datacenter story has been simple. GPUs and networking are king. The arrival and subsequent explosion of AI Training and Inference have shifted compute demands away from the CPU. This meant that Intel, the primary supplier of server CPUs, failed to ride the wave of datacenter buildout and spending. Server CPU revenue remained relatively stagnant as hyperscalers and neoclouds focused on GPUs and datacenter infrastructure.",
+      "parent_block_plain_text": "Since 2023, the datacenter story has been simple. GPUs and networking are king. The arrival and subsequent explosion of AI Training and Inference have shifted compute demands away from the CPU. This meant that Intel, the primary supplier of server CPUs, failed to ride the wave of datacenter buildout and spending. Server CPU revenue remained relatively stagnant as hyperscalers and neoclouds focused on GPUs and datacenter infrastructure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 439,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 2023 年以来，数据中心的叙事逻辑极其简单：GPU 与网络设备称王。AI 训练与推理的问世及随后的爆发，抽离了原本属于 CPU 的计算需求。这导致服务器 CPU 的主要供应商英特尔，未能乘上这波数据中心建设与支出狂潮的东风。随着超大规模云厂商与新锐云厂商将重心转向 GPU 及数据中心基础设施，服务器 CPU 营收一直停滞不前。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308171",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "At the same time, the same hyperscalers have been rolling their own ARM-based datacenter CPUs for their cloud computing services, closing off a significant addressable market for Intel. And within their own x86 turf, Intel’s lackluster execution and uncompetitive performance to rival AMD has further eroded market share. Without a competent AI accelerator offering, Intel was left to tread water while the rest of the industry feasted.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At the same time, the same hyperscalers have been rolling their own ARM-based datacenter CPUs for their cloud computing services, closing off a significant addressable market for Intel. And within their own x86 turf, Intel’s lackluster execution and uncompetitive performance to rival AMD has further eroded market share. Without a competent AI accelerator offering, Intel was left to tread water while the rest of the industry feasted.",
+      "parent_block_plain_text": "At the same time, the same hyperscalers have been rolling their own ARM-based datacenter CPUs for their cloud computing services, closing off a significant addressable market for Intel. And within their own x86 turf, Intel’s lackluster execution and uncompetitive performance to rival AMD has further eroded market share. Without a competent AI accelerator offering, Intel was left to tread water while the rest of the industry feasted.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 436,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与此同时，这些超大规模云厂商一直在为其云计算服务自研基于 ARM 架构的数据中心 CPU，直接封死了英特尔一大片可寻址市场。而在自家的 x86 阵地内，英特尔拉垮的执行力，加上面对竞争对手 AMD 时毫无竞争力的性能表现，进一步蚕食了其市场份额。由于拿不出能打的 AI 加速器产品，当整个行业在尽情狂欢时，英特尔只能在原地停滞不前。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Over the last 6 months this has changed massively. We have posted multiple reports to Core Research and the Tokenomics Model about soaring CPU demand. The primary drivers we have shown and modeled are reinforcement learning and vibe coding’s incredible demand on CPUs. We have also covered major CPU cloud deals by multiple vendors with AI labs. We also have modeling of how many CPUs of what types are being deployed.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Core Research",
+          "start": 86,
+          "end": 99,
+          "href": "https://semianalysis.com/core-research/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Tokenomics Model",
+          "start": 108,
+          "end": 124,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Over the last 6 months this has changed massively. We have posted multiple reports to [Core Research](https://semianalysis.com/core-research/) and the [Tokenomics Model](https://semianalysis.com/tokenomics-model/) about soaring CPU demand. The primary drivers we have shown and modeled are reinforcement learning and vibe coding’s incredible demand on CPUs. We have also covered major CPU cloud deals by multiple vendors with AI labs. We also have modeling of how many CPUs of what types are being deployed.",
+      "parent_block_plain_text": "Over the last 6 months this has changed massively. We have posted multiple reports to Core Research and the Tokenomics Model about soaring CPU demand. The primary drivers we have shown and modeled are reinforcement learning and vibe coding’s incredible demand on CPUs. We have also covered major CPU cloud deals by multiple vendors with AI labs. We also have modeling of how many CPUs of what types are being deployed.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Core Research",
+          "start": 86,
+          "end": 99,
+          "href": "https://semianalysis.com/core-research/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Tokenomics Model",
+          "start": 108,
+          "end": 124,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 418,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "过去六个月里，情况发生了翻天覆地的变化。我们在 Core Research 与 Tokenomics Model 中发布了多份关于 CPU 需求飙升的报告。我们展示并建模分析的主要驱动力，是强化学习 (RL) 与直觉编程 (vibe coding) 对 CPU 产生的惊人需求。我们还报道了多家供应商与 AI 实验室达成的大型 CPU 云服务协议，并建模分析了正在部署的 CPU 数量及类型。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308356",
+          "tokenized_text": "过去六个月里，情况发生了翻天覆地的变化。我们在 [[[LINK_1|Core Research]]] 与 [[[LINK_2|Tokenomics Model]]] 中发布了多份关于 CPU 需求飙升的报告。我们展示并建模分析的主要驱动力，是强化学习 (RL) 与直觉编程 (vibe coding) 对 CPU 产生的惊人需求。我们还报道了多家供应商与 AI 实验室达成的大型 CPU 云服务协议，并建模分析了正在部署的 CPU 数量及类型。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308396",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Intel Q4’25 DCAI Revenue. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Q4’25 DCAI Revenue. Source: Intel",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Q4’25 DCAI Revenue. Source: Intel*",
+      "parent_block_plain_text": "Intel Q4’25 DCAI Revenue. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Q4’25 DCAI Revenue. Source: Intel",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 39,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 2025 年第四季度数据中心与人工智能事业部 (DCAI) 营收。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308488",
+          "tokenized_text": "[[[EM_1|英特尔 2025 年第四季度数据中心与人工智能事业部 (DCAI) 营收。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "However, Intel’s recent rallies and changing demand signals in the latter part of 2025 have shown that CPUs are now relevant again. In their latest Q4 earnings, Intel saw an unexpected uptick in datacenter CPU demand in late 2025 and are increasing 2026 capex guidance on foundry tools and prioritizing wafers to server from PC to alleviate supply constraints in serving this new demand. This marks an inflection point in the role of CPUs in the datacenter, with AI model training and inference using CPUs more intensively.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, Intel’s recent rallies and changing demand signals in the latter part of 2025 have shown that CPUs are now relevant again. In their latest Q4 earnings, Intel saw an unexpected uptick in datacenter CPU demand in late 2025 and are increasing 2026 capex guidance on foundry tools and prioritizing wafers to server from PC to alleviate supply constraints in serving this new demand. This marks an inflection point in the role of CPUs in the datacenter, with AI model training and inference using CPUs more intensively.",
+      "parent_block_plain_text": "However, Intel’s recent rallies and changing demand signals in the latter part of 2025 have shown that CPUs are now relevant again. In their latest Q4 earnings, Intel saw an unexpected uptick in datacenter CPU demand in late 2025 and are increasing 2026 capex guidance on foundry tools and prioritizing wafers to server from PC to alleviate supply constraints in serving this new demand. This marks an inflection point in the role of CPUs in the datacenter, with AI model training and inference using CPUs more intensively.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 523,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，英特尔近期的强势反弹以及 2025 年下半年需求信号的转变表明，CPU 如今已重回舞台中心。在最新的第四季度财报中，英特尔发现 2025 年底数据中心 CPU 需求出现意外上扬。为此，他们正在上调 2026 年晶圆代工厂（foundry）设备的资本支出（capex）指引，并将晶圆产能分配从 PC 优先向服务器倾斜，以缓解满足这一新增需求时的供应链瓶颈。这标志着 CPU 在数据中心的角色迎来拐点，AI 模型训练与推理对 CPU 的依赖愈发显著。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308524",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308555",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Datacenter CPU Core Count Trend. Source: SemiAnalysis Estimates",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Datacenter CPU Core Count Trend. Source: SemiAnalysis Estimates",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Datacenter CPU Core Count Trend. Source: SemiAnalysis Estimates*",
+      "parent_block_plain_text": "Datacenter CPU Core Count Trend. Source: SemiAnalysis Estimates",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Datacenter CPU Core Count Trend. Source: SemiAnalysis Estimates",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 63,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "数据中心 CPU 核心数趋势。来源：SemiAnalysis 预测",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308639",
+          "tokenized_text": "[[[EM_1|数据中心 CPU 核心数趋势。来源：SemiAnalysis 预测]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "2026 is an exciting year for the datacenter CPU, with many new generations launching this year from all vendors amid the boom in demand. As such, this piece serves to paint the CPU landscape in 2026. We lay the groundwork, covering the history of the datacenter CPU and the evolving demand drivers, with deep dives on datacenter CPU architecture changes from Intel and AMD over the years.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "2026 is an exciting year for the datacenter CPU, with many new generations launching this year from all vendors amid the boom in demand. As such, this piece serves to paint the CPU landscape in 2026. We lay the groundwork, covering the history of the datacenter CPU and the evolving demand drivers, with deep dives on datacenter CPU architecture changes from Intel and AMD over the years.",
+      "parent_block_plain_text": "2026 is an exciting year for the datacenter CPU, with many new generations launching this year from all vendors amid the boom in demand. As such, this piece serves to paint the CPU landscape in 2026. We lay the groundwork, covering the history of the datacenter CPU and the evolving demand drivers, with deep dives on datacenter CPU architecture changes from Intel and AMD over the years.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 388,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026 年是数据中心 CPU 令人振奋的一年。在需求激增的背景下，各大供应商都将在今年推出众多新一代产品。因此，本文将为您描绘 2026 年的 CPU 市场格局。我们将首先铺垫背景，回顾数据中心 CPU 的发展史以及不断演变的需求驱动因素，并深入剖析英特尔与 AMD 多年来在数据中心 CPU 架构上的变迁。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308672",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "We then focus on the 2026 CPUs, with comprehensive breakdowns on Intel’s Clearwater Forest, Diamond Rapids and AMD’s Venice and their interesting convergence (and divergence) in design, discussing the performance differences and previewing our CPU costing analysis.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We then focus on the 2026 CPUs, with comprehensive breakdowns on Intel’s Clearwater Forest, Diamond Rapids and AMD’s Venice and their interesting convergence (and divergence) in design, discussing the performance differences and previewing our CPU costing analysis.",
+      "parent_block_plain_text": "We then focus on the 2026 CPUs, with comprehensive breakdowns on Intel’s Clearwater Forest, Diamond Rapids and AMD’s Venice and their interesting convergence (and divergence) in design, discussing the performance differences and previewing our CPU costing analysis.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 265,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随后，我们将目光转向 2026 年的 CPU 产品，全面拆解英特尔的 Clearwater Forest 与 Diamond Rapids 处理器，以及 AMD 的 Venice 处理器。我们将探讨它们在设计上引人注目的趋同（与分歧）之处，分析其性能差异，并预告我们的 CPU 成本分析。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308701",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Next, we detail the ARM competition, including NVIDIA’s Grace and Vera, Amazon’s Graviton line, Microsoft’s Cobalt, Google’s Axion CPU lines, Ampere Computing’s merchant ARM silicon bid and their acquisition by Softbank, ARM’s own Phoenix CPU design and look at Huawei’s home grown Kunpeng CPU efforts.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Next, we detail the ARM competition, including NVIDIA’s Grace and Vera, Amazon’s Graviton line, Microsoft’s Cobalt, Google’s Axion CPU lines, Ampere Computing’s merchant ARM silicon bid and their acquisition by Softbank, ARM’s own Phoenix CPU design and look at Huawei’s home grown Kunpeng CPU efforts.",
+      "parent_block_plain_text": "Next, we detail the ARM competition, including NVIDIA’s Grace and Vera, Amazon’s Graviton line, Microsoft’s Cobalt, Google’s Axion CPU lines, Ampere Computing’s merchant ARM silicon bid and their acquisition by Softbank, ARM’s own Phoenix CPU design and look at Huawei’s home grown Kunpeng CPU efforts.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 302,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "接下来，我们将详细阐述 ARM 阵营的竞争态势。这包括英伟达（NVIDIA）的 Grace 与 Vera 架构、亚马逊的 Graviton 系列、微软的 Cobalt、谷歌的 Axion CPU 系列、Ampere Computing 进军商用 ARM 芯片市场的举措及其被软银收购的事件、ARM 自家的 Phoenix CPU 设计，并审视华为自主研发的 Kunpeng CPU 进展。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308729",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "For our subscribers, we provide our datacenter CPU roadmap to 2028 and detail the datacenter CPUs beyond 2026 from AMD, Intel, ARM and Qualcomm. We then look ahead to what the future looks like for datacenter CPUs, discuss the effects of the DRAM shortage, what NVIDIA’s Bluefield-4 Context Memory Storage platform means for the future of general purpose CPUs, and the key trends to look out for in the CPU market and CPU designs going forward.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For our subscribers, we provide our datacenter CPU roadmap to 2028 and detail the datacenter CPUs beyond 2026 from AMD, Intel, ARM and Qualcomm. We then look ahead to what the future looks like for datacenter CPUs, discuss the effects of the DRAM shortage, what NVIDIA’s Bluefield-4 Context Memory Storage platform means for the future of general purpose CPUs, and the key trends to look out for in the CPU market and CPU designs going forward.",
+      "parent_block_plain_text": "For our subscribers, we provide our datacenter CPU roadmap to 2028 and detail the datacenter CPUs beyond 2026 from AMD, Intel, ARM and Qualcomm. We then look ahead to what the future looks like for datacenter CPUs, discuss the effects of the DRAM shortage, what NVIDIA’s Bluefield-4 Context Memory Storage platform means for the future of general purpose CPUs, and the key trends to look out for in the CPU market and CPU designs going forward.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 444,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "面向我们的订阅用户，我们将提供直至 2028 年的数据中心 CPU 路线图，并详细介绍 AMD、英特尔、ARM 与高通（Qualcomm）在 2026 年之后的数据中心 CPU 规划。随后，我们将展望数据中心 CPU 的未来图景，探讨 DRAM 短缺带来的影响，分析英伟达 Bluefield-4 的上下文内存存储平台对通用 CPU 未来的意义，并指出未来 CPU 市场与设计中值得关注的关键趋势。",
+          "model": "pro",
+          "created_at": "2026-04-08T15:43:27.308756",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.45,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+          "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+          "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+          "relation_to_previous": "N/A",
+          "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+          "key_points": [
+            "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+            "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+            "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+          ],
+          "translation_notes": [
+            "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+            "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+            "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "“arrival”被翻译为“问世”。考虑到AI训练与推理技术实际上已经存在了数十年，只是在近期才大规模进入公众和算力市场的视野，使用“问世”（通常指某物首次被发明或创造出来）略显不妥。"
+          },
+          {
+            "type": "readability",
+            "description": "翻译保留了英文拼写“Kunpeng”。虽然Prompt指引中提到尽量保留代号英文，但由于“鲲鹏”是华为的本土品牌，且在中文科技语境中极少使用拼音形式，直接使用中文更能拉近与中文读者的距离。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,1319 @@
+{
+  "section_id": "21-huawei-kunpeng",
+  "title": "Huawei Kunpeng",
+  "title_translation": "华为鲲鹏",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "China’s home grown CPU efforts are continuing apace, with both Loongson and Alibaba’s Yitian line offering locally designed options. However, the biggest player in the market is Huawei, who have refocused their datacenter CPU roadmap with their Kunpeng processor series. Huawei has some of the most capable design engineers from their HiSilicon team, with custom TaiShan CPU cores and data fabrics that are worth keeping an eye on.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0256",
+      "parent_block_index": 256,
+      "parent_block_type": "p",
+      "parent_block_markdown": "China’s home grown CPU efforts are continuing apace, with both Loongson and Alibaba’s Yitian line offering locally designed options. However, the biggest player in the market is Huawei, who have refocused their datacenter CPU roadmap with their Kunpeng processor series. Huawei has some of the most capable design engineers from their HiSilicon team, with custom TaiShan CPU cores and data fabrics that are worth keeping an eye on.",
+      "parent_block_plain_text": "China’s home grown CPU efforts are continuing apace, with both Loongson and Alibaba’s Yitian line offering locally designed options. However, the biggest player in the market is Huawei, who have refocused their datacenter CPU roadmap with their Kunpeng processor series. Huawei has some of the most capable design engineers from their HiSilicon team, with custom TaiShan CPU cores and data fabrics that are worth keeping an eye on.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 431,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "中国国产 CPU 的研发进程正在快速推进，龙芯和阿里巴巴的倚天系列均提供了本土设计的选项。然而，该市场的头号玩家当属华为，他们凭借 Kunpeng 处理器系列重新调整了数据中心 CPU 路线图。华为海思团队拥有业内顶尖的芯片设计工程师，其定制的 TaiShan CPU 核心与数据互连架构（data fabric）值得密切关注。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804244",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Huawei’s first few generations of datacenter CPUs used the standard mobile ARM Cortex cores. The 2015 Hi1610 featured 16 A57 cores. 2016’s Hi1612 doubled core counts to 32, while the Kunpeng 916 in 2017 updated the core architecture to Cortex-A72. All three generations were fabbed on TSMC 16nm.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0257",
+      "parent_block_index": 257,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Huawei’s first few generations of datacenter CPUs used the standard mobile ARM Cortex cores. The 2015 Hi1610 featured 16 A57 cores. 2016’s Hi1612 doubled core counts to 32, while the Kunpeng 916 in 2017 updated the core architecture to Cortex-A72. All three generations were fabbed on TSMC 16nm.",
+      "parent_block_plain_text": "Huawei’s first few generations of datacenter CPUs used the standard mobile ARM Cortex cores. The 2015 Hi1610 featured 16 A57 cores. 2016’s Hi1612 doubled core counts to 32, while the Kunpeng 916 in 2017 updated the core architecture to Cortex-A72. All three generations were fabbed on TSMC 16nm.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "华为最初几代数据中心 CPU 均采用标准的移动端 ARM Cortex 核心。2015 年推出的 Hi1610 搭载了 16 个 A57 核心。2016 年的 Hi1612 将核心数翻倍至 32 个，而 2017 年的 Kunpeng 916 则将核心架构升级为 Cortex-A72。这三代产品均由台积电 16nm 工艺代工。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804342",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0258",
+      "parent_block_index": 258,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804388",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!nuLP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9050cd76-7b26-4fa8-b999-8b5a81a3a501_1306x2336.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Kunpeng 920 Die Shots. Source: 万扯淡",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Kunpeng 920 Die Shots. Source: 万扯淡",
+          "start": 0,
+          "end": 34,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0259",
+      "parent_block_index": 259,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Kunpeng 920 Die Shots. Source: 万扯淡*",
+      "parent_block_plain_text": "Kunpeng 920 Die Shots. Source: 万扯淡",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Kunpeng 920 Die Shots. Source: 万扯淡",
+          "start": 0,
+          "end": 34,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Kunpeng 920 裸片图。来源：万扯淡",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804553",
+          "tokenized_text": "[[[EM_1|Kunpeng 920 裸片图。来源：万扯淡]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The Kunpeng 920 arrived in 2019 with an ambitious multi-chiplet design and 64 custom cores. Two compute dies on TSMC 7nm each contained 8 clusters of 4 TaiShan V110 cores running on the ARM v8.2 ISA. The clusters are connected with a ring bus to four channels of DDR4 on the same die totaling 8-channels across the two compute dies. Kunpeng 920 was the first CPU to adopt TSMC’s CoWoS-S advanced packaging, with a large silicon interposer connecting 2 compute dies to an I/O die with 40 PCIe Gen 4 lanes and dual integrated 100 Gigabit Ethernet controllers using a custom die to die interface.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0260",
+      "parent_block_index": 260,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Kunpeng 920 arrived in 2019 with an ambitious multi-chiplet design and 64 custom cores. Two compute dies on TSMC 7nm each contained 8 clusters of 4 TaiShan V110 cores running on the ARM v8.2 ISA. The clusters are connected with a ring bus to four channels of DDR4 on the same die totaling 8-channels across the two compute dies. Kunpeng 920 was the first CPU to adopt TSMC’s CoWoS-S advanced packaging, with a large silicon interposer connecting 2 compute dies to an I/O die with 40 PCIe Gen 4 lanes and dual integrated 100 Gigabit Ethernet controllers using a custom die to die interface. While Kunpeng 920 integrated many novel technologies, the US sanction on Huawei which curtailed their supply of TSMC had disrupted their CPU roadmap, as the next Kunpeng 930 generation failed to release in 2021.",
+      "parent_block_plain_text": "The Kunpeng 920 arrived in 2019 with an ambitious multi-chiplet design and 64 custom cores. Two compute dies on TSMC 7nm each contained 8 clusters of 4 TaiShan V110 cores running on the ARM v8.2 ISA. The clusters are connected with a ring bus to four channels of DDR4 on the same die totaling 8-channels across the two compute dies. Kunpeng 920 was the first CPU to adopt TSMC’s CoWoS-S advanced packaging, with a large silicon interposer connecting 2 compute dies to an I/O die with 40 PCIe Gen 4 lanes and dual integrated 100 Gigabit Ethernet controllers using a custom die to die interface. While Kunpeng 920 integrated many novel technologies, the US sanction on Huawei which curtailed their supply of TSMC had disrupted their CPU roadmap, as the next Kunpeng 930 generation failed to release in 2021.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 593,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Kunpeng 920 于 2019 年问世，采用了极具野心的多芯粒设计，并搭载 64 个定制核心。两颗基于台积电 7nm 工艺的计算裸片，每颗包含 8 个集群，每个集群拥有 4 个基于 ARM v8.2 指令集架构（ISA）运行的 TaiShan V110 核心。这些集群通过环形总线与同一裸片上的 4 通道 DDR4 内存相连，两颗计算裸片共计提供 8 通道内存。Kunpeng 920 是首款采用台积电 CoWoS-S 先进封装的 CPU。它利用一块大型硅中介层，通过定制的裸片间接口，将两颗计算裸片与一颗 I/O 裸片相连；该 I/O 裸片配备了 40 条 PCIe Gen 4 通道，并集成了双 100G 以太网控制器。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804594",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "While Kunpeng 920 integrated many novel technologies, the US sanction on Huawei which curtailed their supply of TSMC had disrupted their CPU roadmap, as the next Kunpeng 930 generation failed to release in 2021.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0260",
+      "parent_block_index": 260,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Kunpeng 920 arrived in 2019 with an ambitious multi-chiplet design and 64 custom cores. Two compute dies on TSMC 7nm each contained 8 clusters of 4 TaiShan V110 cores running on the ARM v8.2 ISA. The clusters are connected with a ring bus to four channels of DDR4 on the same die totaling 8-channels across the two compute dies. Kunpeng 920 was the first CPU to adopt TSMC’s CoWoS-S advanced packaging, with a large silicon interposer connecting 2 compute dies to an I/O die with 40 PCIe Gen 4 lanes and dual integrated 100 Gigabit Ethernet controllers using a custom die to die interface. While Kunpeng 920 integrated many novel technologies, the US sanction on Huawei which curtailed their supply of TSMC had disrupted their CPU roadmap, as the next Kunpeng 930 generation failed to release in 2021.",
+      "parent_block_plain_text": "The Kunpeng 920 arrived in 2019 with an ambitious multi-chiplet design and 64 custom cores. Two compute dies on TSMC 7nm each contained 8 clusters of 4 TaiShan V110 cores running on the ARM v8.2 ISA. The clusters are connected with a ring bus to four channels of DDR4 on the same die totaling 8-channels across the two compute dies. Kunpeng 920 was the first CPU to adopt TSMC’s CoWoS-S advanced packaging, with a large silicon interposer connecting 2 compute dies to an I/O die with 40 PCIe Gen 4 lanes and dual integrated 100 Gigabit Ethernet controllers using a custom die to die interface. While Kunpeng 920 integrated many novel technologies, the US sanction on Huawei which curtailed their supply of TSMC had disrupted their CPU roadmap, as the next Kunpeng 930 generation failed to release in 2021.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 594,
+      "segment_end": 805,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管 Kunpeng 920 集成了多项前沿技术，但美国对华为的制裁切断了其台积电代工渠道，直接打乱了华为的 CPU 路线图，导致下一代 Kunpeng 930 未能在 2021 年如期发布。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804625",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0261",
+      "parent_block_index": 261,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804658",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!J5oo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc84b6c66-8fe3-4f33-812d-aa3ddfd7c144_1300x1833.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Kunpeng 920B Die Shots. Source: Kurnal",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Kunpeng 920B Die Shots. Source: Kurnal",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0262",
+      "parent_block_index": 262,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Kunpeng 920B Die Shots. Source: Kurnal*",
+      "parent_block_plain_text": "Kunpeng 920B Die Shots. Source: Kurnal",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Kunpeng 920B Die Shots. Source: Kurnal",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Kunpeng 920B 裸片图。来源：Kurnal",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804752",
+          "tokenized_text": "[[[EM_1|Kunpeng 920B 裸片图。来源：Kurnal]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Instead, an updated Kunpeng 920B was quietly released in 2024 with several upgrades. The TaiShan V120 cores now support SMT, with 10 clusters of 4 on each of the two compute dies for 80 cores and 160 threads. Core interconnect and layout remained similar to the Kunpeng 920 with 8 channels of DDR5 on the compute dies. The I/O die is now split into halves with the compute dies in the middle. We believe the 5 year gap between CPU generations were the result of US sanctions and having to redesign the chip for the SMIC N+2 process.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0263",
+      "parent_block_index": 263,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Instead, an updated Kunpeng 920B was quietly released in 2024 with several upgrades. The TaiShan V120 cores now support SMT, with 10 clusters of 4 on each of the two compute dies for 80 cores and 160 threads. Core interconnect and layout remained similar to the Kunpeng 920 with 8 channels of DDR5 on the compute dies. The I/O die is now split into halves with the compute dies in the middle. We believe the 5 year gap between CPU generations were the result of US sanctions and having to redesign the chip for the SMIC N+2 process.",
+      "parent_block_plain_text": "Instead, an updated Kunpeng 920B was quietly released in 2024 with several upgrades. The TaiShan V120 cores now support SMT, with 10 clusters of 4 on each of the two compute dies for 80 cores and 160 threads. Core interconnect and layout remained similar to the Kunpeng 920 with 8 channels of DDR5 on the compute dies. The I/O die is now split into halves with the compute dies in the middle. We believe the 5 year gap between CPU generations were the result of US sanctions and having to redesign the chip for the SMIC N+2 process.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 532,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "取而代之的是，升级版的 Kunpeng 920B 于 2024 年悄然发布，并带来了多项升级。TaiShan V120 核心现已支持 SMT，两颗计算裸片上各有 10 个 4 核集群，共计 80 核 160 线程。核心互连和物理布图与 Kunpeng 920 保持相似，计算裸片上配备 8 通道 DDR5。I/O 裸片现被一分为二，计算裸片置于中间。我们认为，两代 CPU 之间长达 5 年的断档，归咎于美国制裁以及被迫针对中芯国际 N+2 工艺重新设计芯片。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804788",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0264",
+      "parent_block_index": 264,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804821",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ZzDl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36c618-5da3-4cc3-9235-a3b4f5322892_3035x1034.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Huawei Kunpeng CPU Roadmap. Source: Huawei",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Huawei Kunpeng CPU Roadmap. Source: Huawei",
+          "start": 0,
+          "end": 42,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0265",
+      "parent_block_index": 265,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Huawei Kunpeng CPU Roadmap. Source: Huawei*",
+      "parent_block_plain_text": "Huawei Kunpeng CPU Roadmap. Source: Huawei",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Huawei Kunpeng CPU Roadmap. Source: Huawei",
+          "start": 0,
+          "end": 42,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 42,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "华为 Kunpeng CPU 路线图。来源：华为",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804914",
+          "tokenized_text": "[[[EM_1|华为 Kunpeng CPU 路线图。来源：华为]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0266",
+      "parent_block_index": 266,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.804950",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!r1Rj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F651c2acf-e470-4797-b124-9cdd060ca65d_3065x778.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Huawei TaiShan 950 SuperPoD. Source: Huawei",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Huawei TaiShan 950 SuperPoD. Source: Huawei",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0267",
+      "parent_block_index": 267,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Huawei TaiShan 950 SuperPoD. Source: Huawei*",
+      "parent_block_plain_text": "Huawei TaiShan 950 SuperPoD. Source: Huawei",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Huawei TaiShan 950 SuperPoD. Source: Huawei",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 43,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "华为 TaiShan 950 SuperPoD。来源：华为",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.805028",
+          "tokenized_text": "[[[EM_1|华为 TaiShan 950 SuperPoD。来源：华为]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "For 2026, Huawei is updating its CPU line again with the Kunpeng 950 and configuring them in TaiShan 950 SuperPoD racks for general purpose compute. Kunpeng 950 promises a 2.9x speedup on OLTP database performance over the Kunpeng 920B using their proprietary GaussDB Multi-Write distributed database architecture. To achieve this, core counts more than doubled to 192 using a new LinxiCore that retains SMT support. A smaller 96 core version will also be produced. 16 dual-socket servers go into each TaiShan 950 SuperPoD rack with up to 48TB of DDR5 memory, indicating a 12-channel memory design. These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0268",
+      "parent_block_index": 268,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For 2026, Huawei is updating its CPU line again with the Kunpeng 950 and configuring them in TaiShan 950 SuperPoD racks for general purpose compute. Kunpeng 950 promises a 2.9x speedup on OLTP database performance over the Kunpeng 920B using their proprietary GaussDB Multi-Write distributed database architecture. To achieve this, core counts more than doubled to 192 using a new LinxiCore that retains SMT support. A smaller 96 core version will also be produced. 16 dual-socket servers go into each TaiShan 950 SuperPoD rack with up to 48TB of DDR5 memory, indicating a 12-channel memory design. These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector. The design will likely be produced on SMIC’s N+3 process that recently debuted in the Kirin 9030 smartphone chip.",
+      "parent_block_plain_text": "For 2026, Huawei is updating its CPU line again with the Kunpeng 950 and configuring them in TaiShan 950 SuperPoD racks for general purpose compute. Kunpeng 950 promises a 2.9x speedup on OLTP database performance over the Kunpeng 920B using their proprietary GaussDB Multi-Write distributed database architecture. To achieve this, core counts more than doubled to 192 using a new LinxiCore that retains SMT support. A smaller 96 core version will also be produced. 16 dual-socket servers go into each TaiShan 950 SuperPoD rack with up to 48TB of DDR5 memory, indicating a 12-channel memory design. These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector. The design will likely be produced on SMIC’s N+3 process that recently debuted in the Kirin 9030 smartphone chip.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 742,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "面向 2026 年，华为将推出 Kunpeng 950 再次更新其 CPU 产品线，并将其配置在 TaiShan 950 SuperPoD 机架中以满足通用计算需求。Kunpeng 950 号称在使用其专有的 GaussDB 多写分布式数据库架构时，其 OLTP 数据库性能较 Kunpeng 920B 实现了 2.9 倍的跃升。为实现这一目标，其核心数量翻了一番以上，飙升至 192 核，并采用了保留 SMT 支持的全新 LinxiCore。此外，华为还将推出一款规模较小的 96 核版本。每个 TaiShan 950 SuperPoD 机架内容纳 16 台双路服务器，配备高达 48TB 的 DDR5 内存，这表明其采用了 12 通道内存设计。这些机架还集成了存储与网络功能，将被甲骨文 (Oracle) 的 Exadata 数据库服务器采用，并广泛应用于中国金融领域。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.805059",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "The design will likely be produced on SMIC’s N+3 process that recently debuted in the Kirin 9030 smartphone chip.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0268",
+      "parent_block_index": 268,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For 2026, Huawei is updating its CPU line again with the Kunpeng 950 and configuring them in TaiShan 950 SuperPoD racks for general purpose compute. Kunpeng 950 promises a 2.9x speedup on OLTP database performance over the Kunpeng 920B using their proprietary GaussDB Multi-Write distributed database architecture. To achieve this, core counts more than doubled to 192 using a new LinxiCore that retains SMT support. A smaller 96 core version will also be produced. 16 dual-socket servers go into each TaiShan 950 SuperPoD rack with up to 48TB of DDR5 memory, indicating a 12-channel memory design. These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector. The design will likely be produced on SMIC’s N+3 process that recently debuted in the Kirin 9030 smartphone chip.",
+      "parent_block_plain_text": "For 2026, Huawei is updating its CPU line again with the Kunpeng 950 and configuring them in TaiShan 950 SuperPoD racks for general purpose compute. Kunpeng 950 promises a 2.9x speedup on OLTP database performance over the Kunpeng 920B using their proprietary GaussDB Multi-Write distributed database architecture. To achieve this, core counts more than doubled to 192 using a new LinxiCore that retains SMT support. A smaller 96 core version will also be produced. 16 dual-socket servers go into each TaiShan 950 SuperPoD rack with up to 48TB of DDR5 memory, indicating a 12-channel memory design. These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector. The design will likely be produced on SMIC’s N+3 process that recently debuted in the Kirin 9030 smartphone chip.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 743,
+      "segment_end": 856,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "该设计很可能采用中芯国际的 N+3 工艺制造，该工艺近期已在 Kirin 9030 智能手机芯片上首发亮相。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.805087",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Huawei’s roadmap continues into 2028 with the Kunpeng 960 series. This generation follows the trend of splitting the design into two variants. A 96 core, 192 thread high performance version will be made for AI head nodes and databases that promises a 50%+ improvement in per core performance, while a high-density model for virtualization and cloud compute will increase core counts to 256 and possibly beyond. By then, we expect Huawei to take significant share in Chinese hyperscaler CPU deployments.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0269",
+      "parent_block_index": 269,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Huawei’s roadmap continues into 2028 with the Kunpeng 960 series. This generation follows the trend of splitting the design into two variants. A 96 core, 192 thread high performance version will be made for AI head nodes and databases that promises a 50%+ improvement in per core performance, while a high-density model for virtualization and cloud compute will increase core counts to 256 and possibly beyond. By then, we expect Huawei to take significant share in Chinese hyperscaler CPU deployments.",
+      "parent_block_plain_text": "Huawei’s roadmap continues into 2028 with the Kunpeng 960 series. This generation follows the trend of splitting the design into two variants. A 96 core, 192 thread high performance version will be made for AI head nodes and databases that promises a 50%+ improvement in per core performance, while a high-density model for virtualization and cloud compute will increase core counts to 256 and possibly beyond. By then, we expect Huawei to take significant share in Chinese hyperscaler CPU deployments.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 502,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "华为的路线图进一步延伸至 2028 年的 Kunpeng 960 系列。这一代顺应了将设计拆分为两大分支的行业趋势。其中，面向 AI 头节点和数据库打造的 96 核 192 线程高性能版本，号称单核性能提升 50% 以上；而面向虚拟化和云计算的高密度版本，则会将核心数量推高至 256 核，甚至可能更多。我们预计，届时华为将在中国超大规模云厂商的 CPU 部署中占据可观的市场份额。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.805116",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Below we present our CPU roadmap to 2028, and detail the key features and architectural changes of the datacenter CPUs beyond 2026, including AMD’s Verano and Florence, Intel’s Coral Rapids and cancelled CPU lines, ARM’s Venom specifications, Qualcomm’s return to the datacenter CPU market with SD2, and include NVIDIA’s Bluefield-4 as a sign of how CPU deployments are evolving going forward. We then discuss the impacts of the DRAM shortage on each datacenter CPU segment and look at future CPU trends, highlighting crucial design aspects that will shape CPUs in the next decade.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0270",
+      "parent_block_index": 270,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Below we present our CPU roadmap to 2028, and detail the key features and architectural changes of the datacenter CPUs beyond 2026, including AMD’s Verano and Florence, Intel’s Coral Rapids and cancelled CPU lines, ARM’s Venom specifications, Qualcomm’s return to the datacenter CPU market with SD2, and include NVIDIA’s Bluefield-4 as a sign of how CPU deployments are evolving going forward. We then discuss the impacts of the DRAM shortage on each datacenter CPU segment and look at future CPU trends, highlighting crucial design aspects that will shape CPUs in the next decade.",
+      "parent_block_plain_text": "Below we present our CPU roadmap to 2028, and detail the key features and architectural changes of the datacenter CPUs beyond 2026, including AMD’s Verano and Florence, Intel’s Coral Rapids and cancelled CPU lines, ARM’s Venom specifications, Qualcomm’s return to the datacenter CPU market with SD2, and include NVIDIA’s Bluefield-4 as a sign of how CPU deployments are evolving going forward. We then discuss the impacts of the DRAM shortage on each datacenter CPU segment and look at future CPU trends, highlighting crucial design aspects that will shape CPUs in the next decade.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 581,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下文将展示我们直至 2028 年的 CPU 路线图，并详细剖析 2026 年之后数据中心 CPU 的核心特性与架构演进。具体内容涵盖：AMD 的 Verano 与 Florence 处理器；英特尔的 Coral Rapids 及其已被彻底砍掉的 CPU 产品线；ARM 的 Venom 规格参数；以及高通凭借 SD2 重返数据中心 CPU 市场的动向。此外，我们还将英伟达的 Bluefield-4 纳入其中，以此作为未来 CPU 部署演进方向的风向标。随后，我们将探讨 DRAM 短缺对各个数据中心 CPU 细分市场的影响，展望未来的 CPU 发展趋势，并重点解析那些将在未来十年重塑 CPU 格局的关键设计要素。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:42:46.805146",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.024999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|logic",
+            "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

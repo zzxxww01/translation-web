@@ -1,0 +1,1117 @@
+{
+  "section_id": "03-introducing-the-semianalysis-1",
+  "title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+  "title_translation": "引入SemiAnalysis一年期H100合同价格指数",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Today, we are making our SemiAnalysis H100 1-year rental contract price index freely available to create greater awareness and transparency around trends in the GPU rental market.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0045",
+      "parent_block_index": 45,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Today, we are making our SemiAnalysis H100 1-year rental contract price index freely available to create greater awareness and transparency around trends in the GPU rental market.",
+      "parent_block_plain_text": "Today, we are making our SemiAnalysis H100 1-year rental contract price index freely available to create greater awareness and transparency around trends in the GPU rental market.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 179,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今天，我们将免费开放 SemiAnalysis H100 一年期租赁合同价格指数，以提升市场对 GPU 租赁趋势的认知与透明度。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100830",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 98,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0046",
+      "parent_block_index": 46,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 98,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 98,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "[点击此处访问我们的 GPU 租赁指数仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100919",
+          "tokenized_text": "[[[STRONG_1|[点击此处访问我们的 GPU 租赁指数仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Our index is constructed from direct survey data across a pool of 100+ market participants including Neocloud providers, buyers and sellers of compute that is captured every month to determine a representative range (25th to 75th percentile) for GPU rental contracts. We validate these pricing levels with transaction data as well as by arranging a few transactions ourselves, connecting buyers and sellers of compute within our network.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0047",
+      "parent_block_index": 47,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our index is constructed from direct survey data across a pool of 100+ market participants including Neocloud providers, buyers and sellers of compute that is captured every month to determine a representative range (25th to 75th percentile) for GPU rental contracts. We validate these pricing levels with transaction data as well as by arranging a few transactions ourselves, connecting buyers and sellers of compute within our network.",
+      "parent_block_plain_text": "Our index is constructed from direct survey data across a pool of 100+ market participants including Neocloud providers, buyers and sellers of compute that is captured every month to determine a representative range (25th to 75th percentile) for GPU rental contracts. We validate these pricing levels with transaction data as well as by arranging a few transactions ourselves, connecting buyers and sellers of compute within our network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 437,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的指数基于对 100 多家市场参与者（包括新兴算力云厂商、算力买方和卖方）的直接调查数据构建。我们每月采集这些数据，以确定 GPU 租赁合同的代表性价格区间（第 25 至第 75 百分位数）。我们不仅通过交易数据验证这些定价水平，还在我们的网络内撮合算力买卖双方，亲自促成部分交易以进行交叉验证。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100932",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0048",
+      "parent_block_index": 48,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100941",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-weE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce338975-724e-457b-88e7-bcfb33e869e6_977x561.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0049",
+      "parent_block_index": 49,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 94,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556240",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100968",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "confirmed_tokenized": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Since 2023, we have tracked the contract market price across 3m to 5y tenors for the H100, H200, B200, B300, GB200, GB300, and we have selected data available for the AMD complex as well (MI300, MI325, MI355).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0050",
+      "parent_block_index": 50,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since 2023, we have tracked the contract market price across 3m to 5y tenors for the H100, H200, B200, B300, GB200, GB300, and we have selected data available for the AMD complex as well (MI300, MI325, MI355).",
+      "parent_block_plain_text": "Since 2023, we have tracked the contract market price across 3m to 5y tenors for the H100, H200, B200, B300, GB200, GB300, and we have selected data available for the AMD complex as well (MI300, MI325, MI355).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 209,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 2023 年以来，我们持续追踪 H100、H200、B200、B300、GB200 和 GB300 在 3 个月至 5 年不同合同期限下的合约市场价格，并精选了 AMD 系列（MI300、MI325、MI355）的可用数据。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100977",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The SemiAnalysis H100 1-year contract price index is additive to currently available GPU indices for a few different reasons:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0051",
+      "parent_block_index": 51,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The SemiAnalysis H100 1-year contract price index is additive to currently available GPU indices for a few different reasons:",
+      "parent_block_plain_text": "The SemiAnalysis H100 1-year contract price index is additive to currently available GPU indices for a few different reasons:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 125,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis H100 一年期合同价格指数能够对现有 GPU 指数形成有力补充，原因如下：",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100984",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Many GPU rental indices are derived from spot/on-demand listings or posted pricing, but most of the GPU rental market is transacted on a long-term basis with contracts of at least 6mths and longer. These prices are negotiated on a bilateral basis and such quotes and transactions prices are not typically posted to any freely available online databases. Most large Neoclouds have a preference to rent out capacity on at least a 1-year term with 2 or 3 year terms preferred – even better if they can land 5y large offtake agreements. The SemiAnalysis H100 1-year rental contract price index specifically targets the contract market, where most of the rental volume is transacted. The index references a specific tenor, making it easier for users to understand what market segment it addresses and allowing users to validate these trends against what they may be seeing.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0052",
+      "parent_block_index": 52,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Many GPU rental indices are derived from spot/on-demand listings or posted pricing, but most of the GPU rental market is transacted on a long-term basis with contracts of at least 6mths and longer. These prices are negotiated on a bilateral basis and such quotes and transactions prices are not typically posted to any freely available online databases. Most large Neoclouds have a preference to rent out capacity on at least a 1-year term with 2 or 3 year terms preferred – even better if they can land 5y large offtake agreements. The SemiAnalysis H100 1-year rental contract price index specifically targets the contract market, where most of the rental volume is transacted. The index references a specific tenor, making it easier for users to understand what market segment it addresses and allowing users to validate these trends against what they may be seeing.",
+      "parent_block_plain_text": "Many GPU rental indices are derived from spot/on-demand listings or posted pricing, but most of the GPU rental market is transacted on a long-term basis with contracts of at least 6mths and longer. These prices are negotiated on a bilateral basis and such quotes and transactions prices are not typically posted to any freely available online databases. Most large Neoclouds have a preference to rent out capacity on at least a 1-year term with 2 or 3 year terms preferred – even better if they can land 5y large offtake agreements. The SemiAnalysis H100 1-year rental contract price index specifically targets the contract market, where most of the rental volume is transacted. The index references a specific tenor, making it easier for users to understand what market segment it addresses and allowing users to validate these trends against what they may be seeing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 868,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "许多 GPU 租赁指数源于竞价/按需实例的挂牌价或公开报价，但 GPU 租赁市场的大部分交易都是基于长期合同（至少 6 个月或更长）。这些价格通过双边协商敲定，相关的报价和交易价格通常不会发布在任何免费的在线数据库中。大多数大型新兴算力云厂商倾向于出租至少 1 年期的算力，2 年或 3 年期更佳——如果能拿下 5 年期的大型包销协议则最为理想。SemiAnalysis H100 一年期租赁合同价格指数专门针对这一占据绝大部分租赁交易量的合约市场。该指数锚定特定的合同期限，不仅让用户更容易理解其所反映的细分市场，还能帮助用户将这些趋势与他们观察到的实际情况进行交叉验证。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.100992",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "There is no guarantee that buyers of compute are actually transacting at prices publicly posted by Hyperscalers and Neoclouds. These posted prices may shift around, giving a helpful directional signal for how GPU rental prices are trending but look at these shifts cannot provide an accurate estimate for actual transaction prices. Often times, these publicly posted prices only adjust after the contract market has shifted, lagging actual trends in compute demand. In particular, the on-demand operates by fixing price at a constant level with take-up rates or utilization rates the variable. This pricing is only adjusted on an ad-hoc basis as needed. More on how this market operates later in the article.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0053",
+      "parent_block_index": 53,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* There is no guarantee that buyers of compute are actually transacting at prices publicly posted by Hyperscalers and Neoclouds. These posted prices may shift around, giving a helpful directional signal for how GPU rental prices are trending but look at these shifts cannot provide an accurate estimate for actual transaction prices. Often times, these publicly posted prices only adjust after the contract market has shifted, lagging actual trends in compute demand. In particular, the on-demand operates by fixing price at a constant level with take-up rates or utilization rates the variable. This pricing is only adjusted on an ad-hoc basis as needed. More on how this market operates later in the article.",
+      "parent_block_plain_text": "There is no guarantee that buyers of compute are actually transacting at prices publicly posted by Hyperscalers and Neoclouds. These posted prices may shift around, giving a helpful directional signal for how GPU rental prices are trending but look at these shifts cannot provide an accurate estimate for actual transaction prices. Often times, these publicly posted prices only adjust after the contract market has shifted, lagging actual trends in compute demand. In particular, the on-demand operates by fixing price at a constant level with take-up rates or utilization rates the variable. This pricing is only adjusted on an ad-hoc basis as needed. More on how this market operates later in the article.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 708,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "算力买家的实际交易价格，未必就是超大规模云厂商和新兴算力云厂商公开的挂牌价。这些挂牌价的波动固然能为 GPU 租赁价格走势提供有价值的方向性信号，但仅凭这些变动，无法准确估算实际的交易价格。通常情况下，这些公开挂牌价往往在合同市场发生转变之后才会调整，滞后于算力需求的实际趋势。特别是按需市场，其运作逻辑是将价格维持在固定水平，而将采用率或利用率作为变量。这种定价仅在必要时才会进行临时调整。关于该市场的运作机制，我们将在后文详细探讨。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101000",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "There are many indices that are adept at digesting great volumes of quote, price and transaction data and these can also be great tools for analyzing market trends. By its nature – our approach involves direct interaction with market participants and the people behind these pricing and purchase decisions. There is a story behind every quote and every transaction, and we aim to convey the qualitative and quantitative trends in play as well as anecdotes that are helpful to holistically understanding the GPU rental market.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* There are many indices that are adept at digesting great volumes of quote, price and transaction data and these can also be great tools for analyzing market trends. By its nature – our approach involves direct interaction with market participants and the people behind these pricing and purchase decisions. There is a story behind every quote and every transaction, and we aim to convey the qualitative and quantitative trends in play as well as anecdotes that are helpful to holistically understanding the GPU rental market.",
+      "parent_block_plain_text": "There are many indices that are adept at digesting great volumes of quote, price and transaction data and these can also be great tools for analyzing market trends. By its nature – our approach involves direct interaction with market participants and the people behind these pricing and purchase decisions. There is a story behind every quote and every transaction, and we aim to convey the qualitative and quantitative trends in play as well as anecdotes that are helpful to holistically understanding the GPU rental market.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 525,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "市场上有许多指数擅长处理海量的报价、价格和交易数据，它们同样是分析市场趋势的绝佳工具。但从本质上讲，我们的方法侧重于与市场参与者，以及那些制定定价和采购决策的幕后人员进行直接交流。每一次报价和每一笔交易背后都大有文章。我们旨在揭示其中起作用的定性与定量趋势，并分享业内轶事，帮助大家全面透视 GPU 租赁市场。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101010",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Institutional subscribers have access to the full term structure across almost all currently active GPU rental markets.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0055",
+      "parent_block_index": 55,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Institutional subscribers have access to the full term structure across almost all currently active GPU rental markets.",
+      "parent_block_plain_text": "Institutional subscribers have access to the full term structure across almost all currently active GPU rental markets.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 119,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "机构订阅用户可以获取当前几乎所有活跃 GPU 租赁市场的完整期限结构数据。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101019",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0056",
+      "parent_block_index": 56,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101027",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!LgHk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4bbf76a1-5409-4a66-a10c-a8fc43f0fd99_1818x1092.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0057",
+      "parent_block_index": 57,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 94,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556246",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101050",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "confirmed_tokenized": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Alongside the public release of our H100 1Y contract price tracker, we have launched the SemiAnalysis Tokenomics Dashboard for our institutional Tokenomics model subscribers – a tool for tracking and understanding the frontier AI model landscape. The dashboard lets users build custom benchmarking comparisons across coding, reasoning, math and agentic evals, compare API pricing across leading models and providers, and view key disclosures from major AI labs including token volumes, revenue, valuations and customer counts.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Dashboard",
+          "start": 89,
+          "end": 122,
+          "href": "https://semianalysis.com/institutional/tokenomics-dashboard/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0058",
+      "parent_block_index": 58,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Alongside the public release of our H100 1Y contract price tracker, we have launched the [SemiAnalysis Tokenomics Dashboard](https://semianalysis.com/institutional/tokenomics-dashboard/) for our institutional Tokenomics model subscribers – a tool for tracking and understanding the frontier AI model landscape. The dashboard lets users build custom benchmarking comparisons across coding, reasoning, math and agentic evals, compare API pricing across leading models and providers, and view key disclosures from major AI labs including token volumes, revenue, valuations and customer counts.",
+      "parent_block_plain_text": "Alongside the public release of our H100 1Y contract price tracker, we have launched the SemiAnalysis Tokenomics Dashboard for our institutional Tokenomics model subscribers – a tool for tracking and understanding the frontier AI model landscape. The dashboard lets users build custom benchmarking comparisons across coding, reasoning, math and agentic evals, compare API pricing across leading models and providers, and view key disclosures from major AI labs including token volumes, revenue, valuations and customer counts.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Dashboard",
+          "start": 89,
+          "end": 122,
+          "href": "https://semianalysis.com/institutional/tokenomics-dashboard/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在公开发布 H100 一年期合同价格追踪工具的同时，我们也向 Token经济学模型机构订阅用户推出了 SemiAnalysis Token经济学仪表板——这是一款用于追踪和解析前沿 AI 模型竞争格局的利器。该仪表板允许用户在代码编写、逻辑推理、数学计算以及智能体评估等维度构建自定义基准对比，横向比较头部模型与供应商的 API 定价，并查看各大 AI 实验室披露的关键数据，包括 Token 消耗量、营收、估值以及客户规模。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:06:39.101195",
+          "tokenized_text": "在公开发布 H100 一年期合同价格追踪工具的同时，我们也向 Token经济学模型机构订阅用户推出了 [[[LINK_1|SemiAnalysis Token经济学仪表板]]]——这是一款用于追踪和解析前沿 AI 模型竞争格局的利器。该仪表板允许用户在代码编写、逻辑推理、数学计算以及智能体评估等维度构建自定义基准对比，横向比较头部模型与供应商的 API 定价，并查看各大 AI 实验室披露的关键数据，包括 Token 消耗量、营收、估值以及客户规模。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.54,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+          "Maintain a promotional yet highly analytical tone for the product launch."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+          "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+          "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+          "key_points": [
+            "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+            "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+            "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+          ],
+          "translation_notes": [
+            "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+            "Maintain a promotional yet highly analytical tone for the product launch."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
+      "history": []
+    }
+  ]
+}

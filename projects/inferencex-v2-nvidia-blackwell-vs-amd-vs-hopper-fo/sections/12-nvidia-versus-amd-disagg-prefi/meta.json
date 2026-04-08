@@ -1,0 +1,1948 @@
+{
+  "section_id": "12-nvidia-versus-amd-disagg-prefi",
+  "title": "Nvidia versus AMD Disagg Prefill",
+  "title_translation": "英伟达与 AMD 分离式 Prefill 对比",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "With today’s release of InferenceXv2, for the first time the ML community is able to see a full Pareto frontier for open-source MI355X distributed inference. We show Pareto curves for the B200 and MI355X with and without enabling MTP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With today’s release of InferenceXv2, for the first time the ML community is able to see a full Pareto frontier for open-source MI355X distributed inference. We show Pareto curves for the B200 and MI355X with and without enabling MTP.",
+      "parent_block_plain_text": "With today’s release of InferenceXv2, for the first time the ML community is able to see a full Pareto frontier for open-source MI355X distributed inference. We show Pareto curves for the B200 and MI355X with and without enabling MTP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 234,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着今日 InferenceXv2 的发布，ML (机器学习) 社区首次得以一览开源 MI355X 分布式推理的完整帕累托前沿。我们展示了 B200 与 MI355X 在开启和关闭 MTP 时的帕累托曲线。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138759",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "For FP8 disagg prefill, MI355X (MoRI SGLang) is quite competitive with B200 (Dynamo SGLang). Wide EP is not used for either of these configs as all prefill/decode instances run using EP8 at the most. At both ends of the throughput versus interactivity Pareto frontier, MI355X falls behind the B200 slightly. However, MI355X disagg has a slight advantage for certain levels of interactivity in the middle of the curve. Both the B200 and the MI355X benefit from employing MTP, and we observe the same relative performance improvement for both chips when using MTP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For FP8 disagg prefill, MI355X (MoRI SGLang) is quite competitive with B200 (Dynamo SGLang). Wide EP is not used for either of these configs as all prefill/decode instances run using EP8 at the most. At both ends of the throughput versus interactivity Pareto frontier, MI355X falls behind the B200 slightly. However, MI355X disagg has a slight advantage for certain levels of interactivity in the middle of the curve. Both the B200 and the MI355X benefit from employing MTP, and we observe the same relative performance improvement for both chips when using MTP.",
+      "parent_block_plain_text": "For FP8 disagg prefill, MI355X (MoRI SGLang) is quite competitive with B200 (Dynamo SGLang). Wide EP is not used for either of these configs as all prefill/decode instances run using EP8 at the most. At both ends of the throughput versus interactivity Pareto frontier, MI355X falls behind the B200 slightly. However, MI355X disagg has a slight advantage for certain levels of interactivity in the middle of the curve. Both the B200 and the MI355X benefit from employing MTP, and we observe the same relative performance improvement for both chips when using MTP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 562,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 FP8 分离式 Prefill 方面，MI355X（MoRI SGLang）展现出了足以与 B200（Dynamo SGLang）相匹敌的竞争力。这两种配置均未使用宽专家并行 (WideEP)，因为所有预填充/解码实例最高仅在 EP8 下运行。在吞吐量与交互性帕累托前沿的两端，MI355X 均略微落后于 B200。但在曲线中段的特定交互性下，MI355X 分离式配置略占优势。B200 与 MI355X 都能从 MTP 中获益，且在开启 MTP 时，两款芯片实现了相同的相对性能提升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138814",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138840",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_OWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99728443-e697-49cc-8416-7a380c60ad12_2147x1249.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387110",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138934",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "However, if we were to only measure output (decode) token throughput, we see that output token throughput is much higher for the B200 than for the MI355X at lower interactivity levels. Note that when looking at output token only throughput for disaggregated inference configurations, we normalize throughout by the number of decode GPUs, not total GPUs. It is possible that different numbers of GPUs are used for output when running inference jobs on the B200 and MI355X, but the bottom line is that whatever configuration decode is run on, B200 gets the decode job done faster.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, if we were to only measure output (decode) token throughput, we see that output token throughput is much higher for the B200 than for the MI355X at lower interactivity levels. Note that when looking at output token only throughput for disaggregated inference configurations, we normalize throughout by the number of decode GPUs, not total GPUs. It is possible that different numbers of GPUs are used for output when running inference jobs on the B200 and MI355X, but the bottom line is that whatever configuration decode is run on, B200 gets the decode job done faster.",
+      "parent_block_plain_text": "However, if we were to only measure output (decode) token throughput, we see that output token throughput is much higher for the B200 than for the MI355X at lower interactivity levels. Note that when looking at output token only throughput for disaggregated inference configurations, we normalize throughout by the number of decode GPUs, not total GPUs. It is possible that different numbers of GPUs are used for output when running inference jobs on the B200 and MI355X, but the bottom line is that whatever configuration decode is run on, B200 gets the decode job done faster.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 578,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，若仅衡量输出（解码）Token 吞吐量，就会发现在较低的交互性下，B200 的输出 Token 吞吐量远高于 MI355X。需要注意的是，在考察分离式推理配置的纯输出 Token 吞吐量时，我们始终按解码 GPU 数量（而非 GPU 总数）进行归一化处理。在 B200 与 MI355X 上运行推理任务时，用于输出的 GPU 数量可能存在差异，但核心结论不变：无论解码跑在什么配置上，B200 完成解码任务的速度都更快。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138962",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0120",
+      "parent_block_index": 120,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 151,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis 是免费开源软件，由读者提供支持。如需接收最新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.138984",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139005",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!RrVb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff67a92c3-b159-4b2a-bf87-ecbb7002b23c_2118x1306.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0122",
+      "parent_block_index": 122,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387122",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139225",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Despite the MI355X being competitive in FP8 disagg, its FP4 performance suffers from composability issues. AMD single node FP4 performance is decent, but when we compare AMD FP4 disagg prefill to Nvidia, performance is subpar and the MI355X gets absolutely mogged by Nvidia’s B200. In a 1k1k scenario, the MI355X (MoRI SGLang) with MTP barely manages to beat the B200 (Dynamo SGLang) without MTP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Despite the MI355X being competitive in FP8 disagg, its FP4 performance suffers from composability issues. AMD single node FP4 performance is decent, but when we compare AMD FP4 disagg prefill to Nvidia, performance is subpar and the MI355X gets absolutely mogged by Nvidia’s B200. In a 1k1k scenario, the MI355X (MoRI SGLang) with MTP barely manages to beat the B200 (Dynamo SGLang) without MTP.",
+      "parent_block_plain_text": "Despite the MI355X being competitive in FP8 disagg, its FP4 performance suffers from composability issues. AMD single node FP4 performance is decent, but when we compare AMD FP4 disagg prefill to Nvidia, performance is subpar and the MI355X gets absolutely mogged by Nvidia’s B200. In a 1k1k scenario, the MI355X (MoRI SGLang) with MTP barely manages to beat the B200 (Dynamo SGLang) without MTP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 396,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管 MI355X 在 FP8 Disagg (分离) 场景下具备竞争力，但其 FP4 性能却饱受可组合性问题困扰。AMD 单节点 FP4 性能尚可，但若将 AMD 的 FP4 Disagg (分离) 预填充与英伟达对比，其性能表现就显得差强人意，MI355X 更是被英伟达的 B200 全方位碾压。在 1k1k 场景下，开启 MTP 的 MI355X（MoRI SGLang）才勉强击败未开启 MTP 的 B200（Dynamo SGLang）。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139269",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139296",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!pdWn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b9e7bc-c484-4400-9ffe-96ed4bbfb70f_2138x1236.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387132",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139363",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Once we bring Dynamo TRT-LLM into the equation, the B200’s performance is boosted even more to the point that the MI355X even with MTP can’t match the B200’s performance with Dynamo TRT-LLM and MTP. The MI355X can only match the B200 (without MTP) in performance by using MTP, and only for a range of interactivities from ~60 tok/s/user through ~120 tok/s/user.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Once we bring Dynamo TRT-LLM into the equation, the B200’s performance is boosted even more to the point that the MI355X even with MTP can’t match the B200’s performance with Dynamo TRT-LLM and MTP. The MI355X can only match the B200 (without MTP) in performance by using MTP, and only for a range of interactivities from ~60 tok/s/user through ~120 tok/s/user.",
+      "parent_block_plain_text": "Once we bring Dynamo TRT-LLM into the equation, the B200’s performance is boosted even more to the point that the MI355X even with MTP can’t match the B200’s performance with Dynamo TRT-LLM and MTP. The MI355X can only match the B200 (without MTP) in performance by using MTP, and only for a range of interactivities from ~60 tok/s/user through ~120 tok/s/user.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 361,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "一旦将 Dynamo TRTLLM 纳入考量，B200 的性能会进一步飙升，以至于即使开启 MTP，MI355X 也无法匹敌同样开启 MTP 且搭配 Dynamo TRTLLM 的 B200。MI355X 只有在开启 MTP 的情况下，才能在性能上追平未开启 MTP 的 B200，且这仅限于交互性在约 60 Token/秒/用户到约 120 Token/秒/用户之间的区间。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139387",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139410",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!BIqJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0be8b8f5-b627-4dc9-938b-4a407ef19c34_2103x1233.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387149",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139469",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "When comparing Dynamo TRTLLM B200 disagg prefill to SGLang MoRI MI355 disagg prefill, AMD gets framemogged due to the more mature implementation of disagg prefill on TRTLLM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "p",
+      "parent_block_markdown": "When comparing Dynamo TRTLLM B200 disagg prefill to SGLang MoRI MI355 disagg prefill, AMD gets framemogged due to the more mature implementation of disagg prefill on TRTLLM.",
+      "parent_block_plain_text": "When comparing Dynamo TRTLLM B200 disagg prefill to SGLang MoRI MI355 disagg prefill, AMD gets framemogged due to the more mature implementation of disagg prefill on TRTLLM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 173,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在对比 Dynamo TRTLLM B200 与 SGLang MoRI MI355 的 Disagg (分离) 预填充时，由于 TRTLLM 对 Disagg (分离) 预填充的实现更为成熟，AMD 遭遇了全方位的性能碾压。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139490",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0130",
+      "parent_block_index": 130,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139510",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!V0OR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F89827e17-6cfd-42f1-b250-d7f07cbe6a09_2120x1242.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0131",
+      "parent_block_index": 131,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387174",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139561",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0132",
+      "parent_block_index": 132,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139583",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qzCm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc53a37b8-dd9f-4142-b114-60e6e2c7f3e7_3446x1946.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Source: Dwarkesh Podcast and SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0133",
+      "parent_block_index": 133,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Dwarkesh Podcast and SemiAnalysis",
+      "parent_block_plain_text": "Source: Dwarkesh Podcast and SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 41,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Dwarkesh Podcast 和 SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387675",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Dwarkesh Podcast 与 SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139796",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Dwarkesh Podcast 和 SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "The diagram below shows us the various parallelism configurations that form up the MI355X (MoRI SGLang) Pareto frontier. Note that currently, wide EP is not employed for any points (i.e., configurations with EP 16, 32, etc.).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0134",
+      "parent_block_index": 134,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The diagram below shows us the various parallelism configurations that form up the MI355X (MoRI SGLang) Pareto frontier. Note that currently, wide EP is not employed for any points (i.e., configurations with EP 16, 32, etc.).",
+      "parent_block_plain_text": "The diagram below shows us the various parallelism configurations that form up the MI355X (MoRI SGLang) Pareto frontier. Note that currently, wide EP is not employed for any points (i.e., configurations with EP 16, 32, etc.).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 225,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下图展示了构成 MI355X（MoRI SGLang）帕累托前沿的各种并行配置。需要注意，目前没有任何数据点采用宽专家并行 (WideEP)（即 EP 为 16、32 等配置）。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139866",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0135",
+      "parent_block_index": 135,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.139916",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!IcWw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1b62a52-bd6a-4cd1-82e7-65b6903d82ac_2996x1774.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0136",
+      "parent_block_index": 136,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387201",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:35:28.140094",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "翻译违背了提供的术语表（Disaggregated Prefill → 分离式 Prefill）。使用“Disagg (分离) 预填充”这种中英混排加括号的形式不仅视觉上显得杂乱，也打断了阅读的流畅感。同样的问题也出现在第 8 和第 14 段。"
+          },
+          {
+            "type": "accuracy|tone",
+            "description": "“A 与 B 极具竞争力”在中文里容易产生歧义，听起来像是“A 和 B 两者都在市场上极具竞争力”，而原文表达的是“A 具备与 B 抗衡/匹敌的实力”。"
+          },
+          {
+            "type": "terminology",
+            "description": "正文中对“Token”的大小写处理不一致（第 11 段使用了大写的 Token）。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表规定为“宽专家并行 (WideEP)”，译文中 Wide 和 EP 之间多了一个空格，且在第 1 段中也存在类似情况。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "section_id": "10-rack-level-infrastructure-pow",
+  "new_terms": [
+    {
+      "term": "psu",
+      "suggested_translation": "电源供应单元",
+      "context": "Power supply unit, evolving from node level to centralized rack level.",
+      "confidence": 0.95
+    },
+    {
+      "term": "power shelf",
+      "suggested_translation": "电源层",
+      "context": "A centralized power delivery component in a rack, often containing multiple PSUs.",
+      "confidence": 0.9
+    },
+    {
+      "term": "hvdc",
+      "suggested_translation": "高压直流",
+      "context": "High voltage direct current power racks used for transmission efficiency.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bbu",
+      "suggested_translation": "电池备份单元",
+      "context": "Battery backup units for power stability in AI server racks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "cbu",
+      "suggested_translation": "电容备份单元",
+      "context": "Capacitor backup units used for short-term power stability and peak shaving.",
+      "confidence": 0.9
+    },
+    {
+      "term": "sst",
+      "suggested_translation": "固态变压器",
+      "context": "Solid state transformers being developed to increase transmission efficiency.",
+      "confidence": 0.95
+    },
+    {
+      "term": "peak shaving",
+      "suggested_translation": "削峰填谷",
+      "context": "A strategy to manage power demand by using BBU/CBU during peak loads.",
+      "confidence": 0.9
+    },
+    {
+      "term": "whips",
+      "suggested_translation": "电源馈线",
+      "context": "Cables providing power from the facility to the power shelves (e.g., 100A whips).",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "busbar": "汇流排",
+    "compute tray": "计算托盘",
+    "rack scale": "机架级",
+    "tdp": "热设计功耗"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:51:34.381421"
+}

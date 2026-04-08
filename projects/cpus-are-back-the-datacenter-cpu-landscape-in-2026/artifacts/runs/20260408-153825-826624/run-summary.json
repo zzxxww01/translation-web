@@ -1,0 +1,83 @@
+{
+  "project_id": "cpus-are-back-the-datacenter-cpu-landscape-in-2026",
+  "status": "incomplete",
+  "total_sections": 30,
+  "translated_sections": 25,
+  "total_paragraphs": 320,
+  "translated_paragraphs": 286,
+  "error_count": 7,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Rubin",
+      "existing": "",
+      "new": "Rubin",
+      "existing_note": "英伟达架构",
+      "new_note": "meaning a future GPU generation such as Rubin may require an even higher ratio",
+      "section_id": "06-the-rl-and-agentic-era",
+      "timestamp": "2026-04-08T15:50:32.407893"
+    },
+    {
+      "error": "Failed to translate section 07-history-of-multi-core-cpu-inte: 400 Client Error: Bad Request for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent",
+      "timestamp": "2026-04-08T15:53:54.949212",
+      "section": "07-history-of-multi-core-cpu-inte"
+    },
+    {
+      "type": "term_conflict",
+      "term": "Vera",
+      "existing": "",
+      "new": "Vera",
+      "existing_note": "英伟达的架构",
+      "new_note": "NVIDIA Grace, Vera",
+      "section_id": "14-2026-cpu-costing-analysis",
+      "timestamp": "2026-04-08T16:23:05.609031"
+    },
+    {
+      "error": "Failed to translate section 16-aws-graviton5: 400 Client Error: Bad Request for url: https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent",
+      "timestamp": "2026-04-08T16:32:12.805460",
+      "section": "16-aws-graviton5"
+    },
+    {
+      "error": "Failed to translate section 19-ampereone-softbank-acquisiti: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-08T16:37:55.935935",
+      "section": "19-ampereone-softbank-acquisiti"
+    },
+    {
+      "error": "Failed to translate section 20-arm-phoenix: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Read timed out. (read timeout=15.0)",
+      "timestamp": "2026-04-08T16:39:14.842163",
+      "section": "20-arm-phoenix"
+    },
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+      "section_id": "22-cpu-roadmap",
+      "timestamp": "2026-04-08T16:43:01.660285"
+    }
+  ],
+  "started_at": "2026-04-08T15:38:25.826604",
+  "finished_at": "2026-04-08T16:59:14.504033",
+  "run_id": "20260408-153825-826624",
+  "artifacts_path": "projects\\cpus-are-back-the-datacenter-cpu-landscape-in-2026\\artifacts\\runs\\20260408-153825-826624",
+  "export": {
+    "generated_at": "2026-04-08T16:59:14.268920",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\cpus-are-back-the-datacenter-cpu-landscape-in-2026\\2026年数据中心CPU全景图_zh.md",
+      "generated": true,
+      "bytes": 95745
+    }
+  },
+  "api_calls": 153,
+  "elapsed_seconds": 4848.8,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

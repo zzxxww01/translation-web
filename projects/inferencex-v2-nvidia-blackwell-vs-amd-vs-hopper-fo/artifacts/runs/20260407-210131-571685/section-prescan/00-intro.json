@@ -1,0 +1,52 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GB300 NVL72",
+      "suggested_translation": "GB300 NVL72",
+      "context": "Nvidia rack-scale system product name",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI355X",
+      "suggested_translation": "MI355X",
+      "context": "AMD AI accelerator product name",
+      "confidence": 1.0
+    },
+    {
+      "term": "Disaggregated Serving",
+      "suggested_translation": "分离式推理服务",
+      "context": "LLM inference architecture, related to disaggregated prefill",
+      "confidence": 0.95
+    },
+    {
+      "term": "Large Mixture of Experts",
+      "suggested_translation": "大规模混合专家",
+      "context": "Model architecture scaling",
+      "confidence": 0.95
+    },
+    {
+      "term": "SGLang",
+      "suggested_translation": "SGLang",
+      "context": "LLM inference engine/framework",
+      "confidence": 1.0
+    },
+    {
+      "term": "vLLM",
+      "suggested_translation": "vLLM",
+      "context": "LLM inference engine/framework",
+      "confidence": 1.0
+    },
+    {
+      "term": "TRTLLM",
+      "suggested_translation": "TRTLLM",
+      "context": "Nvidia TensorRT-LLM inference framework",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "wide expert parallelism": "宽专家并行 (WideEP)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:04:02.717230"
+}

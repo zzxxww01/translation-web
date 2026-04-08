@@ -1,0 +1,67 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "Dynamo",
+      "suggested_translation": "PyTorch Dynamo",
+      "context": "widely used Dynamo TRTLLM B200 FP8",
+      "confidence": 0.95
+    },
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "聚合推理服务",
+      "context": "for single node aggregated serving, AMD’s SGLang delivers better perf per TCO",
+      "confidence": 0.9
+    },
+    {
+      "term": "rack scale",
+      "suggested_translation": "机架级",
+      "context": "rack scale GB200/GB300 NVL72 across both SGLang and TRTLLM",
+      "confidence": 0.95
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "SOTA (最先进)",
+      "context": "enabling just a subset of the SOTA inference optimizations",
+      "confidence": 0.95
+    },
+    {
+      "term": "Hopper",
+      "suggested_translation": "Hopper架构",
+      "context": "framemogging hopper and makes hopper looks like it is jestermaxxing",
+      "confidence": 0.95
+    },
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学",
+      "context": "curtail the instances of analysts cracking “Jensen Math” jokes",
+      "confidence": 0.95
+    },
+    {
+      "term": "TRT",
+      "suggested_translation": "TensorRT",
+      "context": "TRT continues to framemog",
+      "confidence": 0.95
+    },
+    {
+      "term": "GTC",
+      "suggested_translation": "GTC大会",
+      "context": "At GTC 2024, Jensen claimed that Blackwell will deliver",
+      "confidence": 0.95
+    },
+    {
+      "term": "ASU frat leader",
+      "suggested_translation": "ASU兄弟会大佬 (代指体型庞大、性能强悍的NVL72机架)",
+      "context": "Nvidia absolutely frame mogs with the B200, B300 and ASU frat leader, rack scale GB200/GB300 NVL72",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "framemog": "性能碾压 / 降维打击 (appears as 'frame mogs' and 'framemogging')",
+    "jestermaxing": "无脑跑测 / 徒劳折腾 (appears as 'jestermaxxing')",
+    "tco": "总拥有成本 (TCO) (appears as 'perf per TCO')",
+    "composability": "可组合性"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:05:13.027919"
+}

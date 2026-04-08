@@ -1,0 +1,2754 @@
+{
+  "project_id": "vera-rubin-extreme-co-design-an-evolution-from-gra",
+  "project_title": "Vera Rubin – Extreme Co-Design: An Evolution from Grace Blackwell Oberon",
+  "review_required": true,
+  "generated_at": "2026-03-16T20:07:13.213563",
+  "total_candidates": 78,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "Rubin",
+          "suggested_translation": "[保持原文] Rubin",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 49,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+              "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36"
+            },
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "14-assembly-automation-and-logist",
+              "section_title": "Assembly Automation and Logistics"
+            }
+          ],
+          "contexts": [
+            "Nvidia's next-generation GPU architecture and platform succeeding Blackwell.",
+            "NVIDIA's next-generation platform following Blackwell.",
+            "Nvidia's next-generation GPU architecture succeeding Blackwell"
+          ],
+          "similar_terms": [
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "compute tray",
+          "suggested_translation": "计算托盘",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 38,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+              "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36"
+            },
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "05-compute-tray-thermal",
+              "section_title": "Compute Tray: Thermal"
+            },
+            {
+              "section_id": "07-compute-tray-mechanical",
+              "section_title": "Compute Tray: Mechanical"
+            },
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            },
+            {
+              "section_id": "14-assembly-automation-and-logist",
+              "section_title": "Assembly Automation and Logistics"
+            }
+          ],
+          "contexts": [
+            "The modular hardware unit within a rack system containing CPUs and GPUs.",
+            "The modular hardware unit within a rack containing processors",
+            "The modular hardware unit within the rack containing GPUs and CPUs."
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "VR NVL72",
+          "suggested_translation": "[保持原文] VR NVL72",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 29,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            }
+          ],
+          "contexts": [
+            "The specific rack-scale system configuration for the Vera Rubin platform.",
+            "Nvidia's next-generation rack-scale system architecture redesign."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "TCO",
+          "suggested_translation": "总拥有成本（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 17,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Total Cost of Ownership, a key metric for data center efficiency.",
+            "Total Cost of Ownership analysis for GPU clusters over a 4-year useful life."
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "BoM",
+          "suggested_translation": "物料清单（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 16,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            },
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Bill of Materials, used for cost and component analysis of the system.",
+            "Bill of Materials, used in the context of cost and power budget models.",
+            "Refers to the Bill of Materials for the VR NVL72 rack system."
+          ],
+          "similar_terms": [
+            {
+              "original": "HBM",
+              "translation": "HBM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高带宽内存 (High Bandwidth Memory)",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "Vera",
+          "suggested_translation": "[保持原文] Vera",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+              "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36"
+            }
+          ],
+          "contexts": [
+            "Nvidia's new purpose-designed CPU for the Rubin platform.",
+            "Nvidia's next-generation CPU designed to pair with Rubin GPUs"
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "SOCAMM",
+          "suggested_translation": "[保持原文] SOCAMM",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "A new memory module standard (likely Compression Attached Memory Module variant) used in the Rubin platform.",
+            "A specific type of memory module (Serviceable Compression Attached Memory Module) used in the Vera CPU.",
+            "A socketed memory module form factor for LPDDR5X used in the Vera CPU."
+          ],
+          "similar_terms": [
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.667
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.6
+            },
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "co-design",
+          "suggested_translation": "协同设计",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Nvidia's strategy of integrated hardware and software optimization (e.g., extreme co-design)."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.533
+            },
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            },
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-extreme-co-design-6-silicon-p",
+      "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications",
+      "candidates": [
+        {
+          "term": "Blackwell",
+          "suggested_translation": "[保持原文] Blackwell",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 24,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+              "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36"
+            },
+            {
+              "section_id": "08-rack-level-infrastructure-the",
+              "section_title": "Rack Level Infrastructure: Thermal"
+            },
+            {
+              "section_id": "14-assembly-automation-and-logist",
+              "section_title": "Assembly Automation and Logistics"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's GPU architecture preceding Rubin.",
+            "Nvidia's GPU architecture preceding Rubin",
+            "NVIDIA's current high-performance computing and AI accelerator architecture."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "scale-out",
+          "suggested_translation": "横向扩展",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 21,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Increasing system capacity by adding more nodes or networking interfaces.",
+            "Networking between multiple nodes or racks to expand cluster size."
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "semiconductor",
+              "translation": "半导体",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "SerDes",
+          "suggested_translation": "[保持原文] SerDes",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 16,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Serializer/Deserializer components used for high-speed communication links like NVLink.",
+            "Serializer/Deserializer, high-speed communication technology used in NVLink switches."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "heat spreader",
+          "suggested_translation": "均热盖",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "A component in the Rubin package to distribute heat and provide mechanical support."
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            }
+          ]
+        },
+        {
+          "term": "radix",
+          "suggested_translation": "基数（Radix）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Refers to the number of ports or connectivity density in a network switch",
+            "2048-radix 409.6T multi-plane CPO switch; high-radix 102.4T CPO switch"
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.571
+            },
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.5
+            },
+            {
+              "original": "R&D",
+              "translation": "研发",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "Research and Development",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "structured sparsity",
+          "suggested_translation": "结构化稀疏",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "A technique to skip zero-value computations, specifically 2:4 structured sparsity."
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.486
+            }
+          ]
+        },
+        {
+          "term": "Max-P / Max-Q",
+          "suggested_translation": "[保持原文] Max-P / Max-Q",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            },
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Power profiles for GPUs; Max-P for maximum performance, Max-Q for efficiency.",
+            "Refers to Maximum Performance vs. Efficiency-optimized power configurations."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "reticle-sized",
+          "suggested_translation": "掩模版尺寸",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "Refers to a die size that reaches the maximum exposure limit of a lithography machine."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "stiffener",
+          "suggested_translation": "加强件",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "An additional structural component in the Rubin package to prevent warpage."
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.556
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Tensor Core",
+          "suggested_translation": "[保持原文] Tensor Core",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "Specialized hardware in NVIDIA GPUs for deep learning and matrix operations."
+          ],
+          "similar_terms": [
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.545
+            },
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "Transformer Engine",
+          "suggested_translation": "[保持原文] Transformer Engine",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-extreme-co-design-6-silicon-p",
+          "related_sections": [
+            {
+              "section_id": "01-extreme-co-design-6-silicon-p",
+              "section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications"
+            }
+          ],
+          "contexts": [
+            "A software/hardware feature to accelerate Transformer model processing."
+          ],
+          "similar_terms": [
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.759
+            },
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            },
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.516
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+      "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+      "candidates": [
+        {
+          "term": "CPX",
+          "suggested_translation": "[保持原文] CPX",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 15,
+          "first_occurrence": "02-rubin-oberon-rack-nvl72-not-n",
+          "related_sections": [
+            {
+              "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+              "section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36"
+            },
+            {
+              "section_id": "16-groq-lpu-decode-rack",
+              "section_title": "Groq LPU Decode Rack"
+            }
+          ],
+          "contexts": [
+            "Nvidia's specialized accelerator rack/module optimized for inference prefill",
+            "A specific hardware architecture or system mentioned for inference pre-fill."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.75
+            },
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-compute-tray-redesign",
+      "section_title": "Compute Tray Redesign",
+      "candidates": [
+        {
+          "term": "Vera Rubin",
+          "suggested_translation": "[保持原文] Vera Rubin",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 21,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "08-rack-level-infrastructure-the",
+              "section_title": "Rack Level Infrastructure: Thermal"
+            },
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Nvidia's next-generation architecture following Blackwell.",
+            "NVIDIA's next-generation platform following the Blackwell architecture.",
+            "NVIDIA's next-generation GPU architecture following Blackwell."
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.5
+            },
+            {
+              "original": "gross margin",
+              "translation": "毛利率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "midplane",
+          "suggested_translation": "中板",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 19,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            },
+            {
+              "section_id": "07-compute-tray-mechanical",
+              "section_title": "Compute Tray: Mechanical"
+            }
+          ],
+          "contexts": [
+            "A vertical circuit board acting as a signal bridge between front and rear modules.",
+            "The signal is routed through a PCB midplane sitting in the middle of the chassis.",
+            "The midplane and the internal manifolds are shipped together"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            },
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "DPU",
+          "suggested_translation": "DPU（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "13-customization",
+              "section_title": "Customization"
+            }
+          ],
+          "contexts": [
+            "Data Processing Unit, specifically referring to BlueField-4 in this section.",
+            "Data Processing Unit, specifically referring to Bluefield or in-house alternatives."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "DUV",
+              "translation": "DUV",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "深紫外光刻 (Deep Ultraviolet)",
+              "similarity": 0.667
+            },
+            {
+              "original": "GPU",
+              "translation": "GPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "图形处理器",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "cableless design",
+          "suggested_translation": "免线缆设计",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            },
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "A design approach eliminating internal cables to simplify assembly and reduce failure points.",
+            "The VR NVL72 compute tray is designed around the cableless concept to reduce points of failure."
+          ],
+          "similar_terms": [
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.522
+            },
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.483
+            }
+          ]
+        },
+        {
+          "term": "KV cache",
+          "suggested_translation": "KV 缓存",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            }
+          ],
+          "contexts": [
+            "Key-Value cache used in LLM inference, growing linearly with sequence length."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Paladin HD2",
+          "suggested_translation": "[保持原文] Paladin HD2",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            }
+          ],
+          "contexts": [
+            "High-density board-to-board connectors used to eliminate internal cabling."
+          ],
+          "similar_terms": [
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "C2C",
+          "suggested_translation": "[保持原文] C2C",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            }
+          ],
+          "contexts": [
+            "Chip-to-Chip connection, specifically between Grace CPU and Blackwell/Rubin GPUs."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Midplane module",
+          "suggested_translation": "中板模块",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-compute-tray-redesign",
+          "related_sections": [
+            {
+              "section_id": "03-compute-tray-redesign",
+              "section_title": "Compute Tray Redesign"
+            }
+          ],
+          "contexts": [
+            "A new component in the compute tray used to eliminate internal cables."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.476
+            },
+            {
+              "original": "machine learning",
+              "translation": "机器学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-compute-tray-cableless-design",
+      "section_title": "Compute Tray Cableless Design",
+      "candidates": [
+        {
+          "term": "insertion loss",
+          "suggested_translation": "插入损耗",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 13,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "High-speed channels are constrained by insertion loss introduced by PCB traces and vias."
+          ],
+          "similar_terms": [
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.538
+            },
+            {
+              "original": "fine-tuning",
+              "translation": "微调",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            }
+          ]
+        },
+        {
+          "term": "CCL",
+          "suggested_translation": "覆铜板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Copper Clad Laminate, the base material for PCBs."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Amphenol",
+          "suggested_translation": "安费诺（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "The most valuable cable is exclusively supplied by Amphenol."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "dielectric constant",
+          "suggested_translation": "介电常数",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "A key electrical property of CCL materials affecting signal performance."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "flyover cables",
+          "suggested_translation": "Flyover 电缆",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            },
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Flyover cables present multiple points of failure as they can be damaged during assembly.",
+            "Internal high-speed cables used to bypass PCB traces to reduce signal loss."
+          ],
+          "similar_terms": [
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "dielectric loss",
+          "suggested_translation": "介质损耗",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Dielectric loss from laminate absorption is a mechanism contributing to signal power loss."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Quartz cloth",
+          "suggested_translation": "石英布（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Next generation reinforcing material for CCL to lower dielectric constant."
+          ],
+          "similar_terms": [
+            {
+              "original": "Qualcomm",
+              "translation": "高通",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "fly over cables",
+          "suggested_translation": "架空线缆",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "An alternative to PCB traces for high-speed signaling to reduce loss."
+          ],
+          "similar_terms": [
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.545
+            }
+          ]
+        },
+        {
+          "term": "Orchid board",
+          "suggested_translation": "Orchid 板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "A specific high-end PCB board component within the VR NVL72 architecture."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "skin effect",
+          "suggested_translation": "趋肤效应",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Conductor loss from skin effect and copper surface roughness contributes to insertion loss."
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "efficiency",
+              "translation": "效率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "board-to-board connectors",
+          "suggested_translation": "板对板连接器",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Replacing internal cables with board-to-board (B2B) connectors in the compute tray."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "cross-talk",
+          "suggested_translation": "串扰",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Signal interference between neighboring copper traces."
+          ],
+          "similar_terms": [
+            {
+              "original": "gross margin",
+              "translation": "毛利率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "HVLP",
+          "suggested_translation": "[保持原文] HVLP",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-compute-tray-cableless-design",
+          "related_sections": [
+            {
+              "section_id": "04-compute-tray-cableless-design",
+              "section_title": "Compute Tray Cableless Design"
+            }
+          ],
+          "contexts": [
+            "Stands for Ultra-Low Profile copper foil, used to reduce conductor loss."
+          ],
+          "similar_terms": [
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-compute-tray-thermal",
+      "section_title": "Compute Tray: Thermal",
+      "candidates": [
+        {
+          "term": "cold plate",
+          "suggested_translation": "冷板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 14,
+          "first_occurrence": "05-compute-tray-thermal",
+          "related_sections": [
+            {
+              "section_id": "05-compute-tray-thermal",
+              "section_title": "Compute Tray: Thermal"
+            }
+          ],
+          "contexts": [
+            "A liquid cooling component that sits directly on top of chips to dissipate heat."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.5
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "manifold",
+          "suggested_translation": "分液管",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "05-compute-tray-thermal",
+          "related_sections": [
+            {
+              "section_id": "05-compute-tray-thermal",
+              "section_title": "Compute Tray: Thermal"
+            },
+            {
+              "section_id": "08-rack-level-infrastructure-the",
+              "section_title": "Rack Level Infrastructure: Thermal"
+            }
+          ],
+          "contexts": [
+            "An internal distribution system for inlet and outlet coolant within the chassis.",
+            "The distribution pipe assembly that routes coolant to individual server trays in a rack."
+          ],
+          "similar_terms": [
+            {
+              "original": "InFO",
+              "translation": "InFO",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Integrated Fan-Out",
+              "similarity": 0.5
+            },
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.5
+            },
+            {
+              "original": "bandwidth",
+              "translation": "带宽",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-compute-tray-power-delivery",
+      "section_title": "Compute Tray: Power Delivery",
+      "candidates": [
+        {
+          "term": "busbar",
+          "suggested_translation": "汇流排",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 13,
+          "first_occurrence": "06-compute-tray-power-delivery",
+          "related_sections": [
+            {
+              "section_id": "06-compute-tray-power-delivery",
+              "section_title": "Compute Tray: Power Delivery"
+            },
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "Power enters the compute tray via the busbar clips and cables.",
+            "A metallic strip or bar that conducts electricity within a power distribution system."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "PDB",
+          "suggested_translation": "电源分配板（PDB）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "06-compute-tray-power-delivery",
+          "related_sections": [
+            {
+              "section_id": "06-compute-tray-power-delivery",
+              "section_title": "Compute Tray: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "Power distribution board that feeds 12VDC to all boards in the compute tray."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Strata Board",
+          "suggested_translation": "Strata 板卡",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "06-compute-tray-power-delivery",
+          "related_sections": [
+            {
+              "section_id": "06-compute-tray-power-delivery",
+              "section_title": "Compute Tray: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "The internal busbar cable feeds 50VDC power to the Strata Board directly."
+          ],
+          "similar_terms": [
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-compute-tray-mechanical",
+      "section_title": "Compute Tray: Mechanical",
+      "candidates": [
+        {
+          "term": "internal manifolds",
+          "suggested_translation": "内部歧管",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "07-compute-tray-mechanical",
+          "related_sections": [
+            {
+              "section_id": "07-compute-tray-mechanical",
+              "section_title": "Compute Tray: Mechanical"
+            }
+          ],
+          "contexts": [
+            "guides the modules to a blind mate process with the ... internal manifolds"
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-rack-level-infrastructure-the",
+      "section_title": "Rack Level Infrastructure: Thermal",
+      "candidates": [
+        {
+          "term": "CDU",
+          "suggested_translation": "冷液分配单元（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "08-rack-level-infrastructure-the",
+          "related_sections": [
+            {
+              "section_id": "08-rack-level-infrastructure-the",
+              "section_title": "Rack Level Infrastructure: Thermal"
+            },
+            {
+              "section_id": "09-procurement-and-cooling-vendor",
+              "section_title": "Procurement and Cooling Vendor Implications"
+            }
+          ],
+          "contexts": [
+            "Cooling Distribution Unit; manages coolant circulation and heat exchange between loops.",
+            "Cooling Distribution Unit, the core component managing liquid cooling distribution to racks."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "DUV",
+              "translation": "DUV",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "深紫外光刻 (Deep Ultraviolet)",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "Delta-T",
+          "suggested_translation": "温差 (delta-T)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "08-rack-level-infrastructure-the",
+          "related_sections": [
+            {
+              "section_id": "08-rack-level-infrastructure-the",
+              "section_title": "Rack Level Infrastructure: Thermal"
+            }
+          ],
+          "contexts": [
+            "The temperature difference between the supply (inlet) and return (outlet) coolant."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "09-procurement-and-cooling-vendor",
+      "section_title": "Procurement and Cooling Vendor Implications",
+      "candidates": [
+        {
+          "term": "TCS",
+          "suggested_translation": "技术冷却系统（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-procurement-and-cooling-vendor",
+          "related_sections": [
+            {
+              "section_id": "09-procurement-and-cooling-vendor",
+              "section_title": "Procurement and Cooling Vendor Implications"
+            }
+          ],
+          "contexts": [
+            "Technology Cooling System, the secondary loop in data center cooling."
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "10-rack-level-infrastructure-pow",
+      "section_title": "Rack Level Infrastructure: Power Delivery",
+      "candidates": [
+        {
+          "term": "BBU",
+          "suggested_translation": "电池备份单元",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "10-rack-level-infrastructure-pow",
+          "related_sections": [
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "Battery back up units used for power stability in data centers."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "CBU",
+          "suggested_translation": "电容备份单元",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "10-rack-level-infrastructure-pow",
+          "related_sections": [
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "Capacitor backup units used for short-term power stability."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "HVDC",
+          "suggested_translation": "高压直流",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "10-rack-level-infrastructure-pow",
+          "related_sections": [
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "High voltage direct current power delivery systems."
+          ],
+          "similar_terms": [
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "power shelf",
+          "suggested_translation": "电源机架",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "10-rack-level-infrastructure-pow",
+          "related_sections": [
+            {
+              "section_id": "10-rack-level-infrastructure-pow",
+              "section_title": "Rack Level Infrastructure: Power Delivery"
+            }
+          ],
+          "contexts": [
+            "Centralized rack level power delivery component in AI server racks."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "11-networking-nvlink-6-rubin-sc",
+      "section_title": "Networking: NVLink 6, Rubin Scale Out",
+      "candidates": [
+        {
+          "term": "NVLink",
+          "suggested_translation": "[保持原文] NVLink",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 32,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's proprietary high-speed interconnect technology."
+          ],
+          "similar_terms": [
+            {
+              "original": "NVIDIA",
+              "translation": "英伟达",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "CPO",
+          "suggested_translation": "[保持原文] CPO（共封装光学）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 17,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "SN6800, a 4 ASIC, 2048-radix 409.6T multi-plane CPO switch"
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "scale-up",
+          "suggested_translation": "纵向扩展（Scale-up）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 15,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Networking within a single node or rack to increase compute power."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "multi-plane",
+          "suggested_translation": "多平面",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 14,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "A network topology where traffic is split across parallel independent switching planes."
+          ],
+          "similar_terms": [
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            }
+          ]
+        },
+        {
+          "term": "NIC",
+          "suggested_translation": "[保持原文] NIC",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 11,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            },
+            {
+              "section_id": "13-customization",
+              "section_title": "Customization"
+            }
+          ],
+          "contexts": [
+            "Network Interface Card, the connection point for GPUs to the network.",
+            "Network Interface Card, such as ConnectX-8."
+          ],
+          "similar_terms": [
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "ASIC",
+          "suggested_translation": "[保持原文] ASIC",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            },
+            {
+              "section_id": "12-hyperscaler-customization-and",
+              "section_title": "Hyperscaler Customization and Assembly Logistics"
+            }
+          ],
+          "contexts": [
+            "SN6800 switch box consists of four ASICs, each with its own switch plane",
+            "Application-Specific Integrated Circuit, a key component in hyperscaler customization."
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.667
+            },
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.571
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "transceiver",
+          "suggested_translation": "光模块",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "eliminating most of the transceiver content; 800G DR4 optical transceiver"
+          ],
+          "similar_terms": [
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.636
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            }
+          ]
+        },
+        {
+          "term": "copper backplane",
+          "suggested_translation": "铜缆背板",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "The physical interconnect structure in a rack using copper cables for high-speed signaling."
+          ],
+          "similar_terms": [
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            }
+          ]
+        },
+        {
+          "term": "fiber shuffle",
+          "suggested_translation": "光纤交叉连接",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "integrated fiber shuffle and can simplify the installation and maintenance"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "bi-directional SerDes",
+          "suggested_translation": "双向 SerDes",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Technology allowing simultaneous two-way data transmission over a single electrical lane."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "echo cancellation",
+          "suggested_translation": "回声消除",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "A signal processing technique used to separate local transmit signals from receive signals in bi-directional links."
+          ],
+          "similar_terms": [
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.467
+            },
+            {
+              "original": "self-attention",
+              "translation": "自注意力机制",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            },
+            {
+              "original": "virtualization",
+              "translation": "虚拟化",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        },
+        {
+          "term": "high-radix",
+          "suggested_translation": "高基数",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "11-networking-nvlink-6-rubin-sc",
+          "related_sections": [
+            {
+              "section_id": "11-networking-nvlink-6-rubin-sc",
+              "section_title": "Networking: NVLink 6, Rubin Scale Out"
+            }
+          ],
+          "contexts": [
+            "Switch architectures with a high number of ports/connections."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "12-hyperscaler-customization-and",
+      "section_title": "Hyperscaler Customization and Assembly Logistics",
+      "candidates": [
+        {
+          "term": "Hyperscaler",
+          "suggested_translation": "超大规模云服务商（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "12-hyperscaler-customization-and",
+          "related_sections": [
+            {
+              "section_id": "12-hyperscaler-customization-and",
+              "section_title": "Hyperscaler Customization and Assembly Logistics"
+            },
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Refers to large-scale cloud providers like AWS, Azure, and Google Cloud.",
+            "Large cloud providers like Arista, AWS, or Google mentioned in the TCO model."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "13-customization",
+      "section_title": "Customization",
+      "candidates": [
+        {
+          "term": "form factor",
+          "suggested_translation": "外形规格",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "13-customization",
+          "related_sections": [
+            {
+              "section_id": "13-customization",
+              "section_title": "Customization"
+            }
+          ],
+          "contexts": [
+            "Physical dimensions and layout constraints of hardware modules."
+          ],
+          "similar_terms": [
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "hyperscalers",
+          "suggested_translation": "超大规模云服务商",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "13-customization",
+          "related_sections": [
+            {
+              "section_id": "13-customization",
+              "section_title": "Customization"
+            }
+          ],
+          "contexts": [
+            "Refers to large cloud providers like Amazon, Google, etc., customizing hardware."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Amazon",
+          "suggested_translation": "亚马逊（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "13-customization",
+          "related_sections": [
+            {
+              "section_id": "13-customization",
+              "section_title": "Customization"
+            }
+          ],
+          "contexts": [
+            "Specific hyperscaler mentioned in the context of customization."
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "14-assembly-automation-and-logist",
+      "section_title": "Assembly Automation and Logistics",
+      "candidates": [
+        {
+          "term": "Foxconn",
+          "suggested_translation": "富士康（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "14-assembly-automation-and-logist",
+          "related_sections": [
+            {
+              "section_id": "14-assembly-automation-and-logist",
+              "section_title": "Assembly Automation and Logistics"
+            }
+          ],
+          "contexts": [
+            "Key manufacturing partner for NVIDIA Rubin platform"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Wistron",
+          "suggested_translation": "纬创（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "14-assembly-automation-and-logist",
+          "related_sections": [
+            {
+              "section_id": "14-assembly-automation-and-logist",
+              "section_title": "Assembly Automation and Logistics"
+            }
+          ],
+          "contexts": [
+            "Key manufacturing partner for NVIDIA Rubin platform"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.615
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.5
+            },
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+      "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+      "candidates": [
+        {
+          "term": "MFU",
+          "suggested_translation": "模型算力利用率（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "15-vr-nvl72-tco-bom-and-power-bu",
+          "related_sections": [
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Model Flops Utilization % used to measure real-world chip throughput."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "B300",
+          "suggested_translation": "[保持原文] B300",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-vr-nvl72-tco-bom-and-power-bu",
+          "related_sections": [
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's Blackwell architecture refresh chip."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "InferenceX",
+          "suggested_translation": "[保持原文] InferenceX",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-vr-nvl72-tco-bom-and-power-bu",
+          "related_sections": [
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "SemiAnalysis's proprietary benchmark suite for measuring token throughput."
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.947
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "sparsity",
+          "suggested_translation": "稀疏性",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-vr-nvl72-tco-bom-and-power-bu",
+          "related_sections": [
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "A feature in FP4 marketing where sparse performance is compared to dense performance."
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            },
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "TDP",
+          "suggested_translation": "热设计功耗",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "15-vr-nvl72-tco-bom-and-power-bu",
+          "related_sections": [
+            {
+              "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+              "section_title": "VR NVL72 TCO: BoM and Power Budget Analysis"
+            }
+          ],
+          "contexts": [
+            "Thermal Design Power used to compare operating costs of VR and MI4XX chips."
+          ],
+          "similar_terms": [
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "16-groq-lpu-decode-rack",
+      "section_title": "Groq LPU Decode Rack",
+      "candidates": [
+        {
+          "term": "LPU",
+          "suggested_translation": "[保持原文] LPU",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "16-groq-lpu-decode-rack",
+          "related_sections": [
+            {
+              "section_id": "16-groq-lpu-decode-rack",
+              "section_title": "Groq LPU Decode Rack"
+            }
+          ],
+          "contexts": [
+            "Language Processing Unit, Groq's specialized hardware for LLM inference."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "GPU",
+              "translation": "GPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "图形处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "NPU",
+              "translation": "NPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "神经网络处理器",
+              "similarity": 0.667
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

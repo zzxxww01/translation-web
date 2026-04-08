@@ -1,0 +1,69 @@
+{
+  "section_id": "24-disaggregated-prefill",
+  "new_terms": [
+    {
+      "term": "Chunked prefill",
+      "suggested_translation": "分块 Prefill",
+      "context": "Chunked prefill mitigates this by breaking long prefills into smaller pieces",
+      "confidence": 0.95
+    },
+    {
+      "term": "inter-token latency",
+      "suggested_translation": "Token 间延迟",
+      "context": "increasing both time-to-first-token and inter-token latency.",
+      "confidence": 0.95
+    },
+    {
+      "term": "RAG",
+      "suggested_translation": "RAG",
+      "context": "summarization, RAG, agentic coding with large context windows",
+      "confidence": 0.95
+    },
+    {
+      "term": "chain-of-thought reasoning",
+      "suggested_translation": "思维链推理",
+      "context": "Decode-dominated workloads (short input, long output e.g., chain-of-thought reasoning...)",
+      "confidence": 0.95
+    },
+    {
+      "term": "zero-copy",
+      "suggested_translation": "零拷贝",
+      "context": "using zero-copy GPU-to-GPU data movement without CPU involvement.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NIXL",
+      "suggested_translation": "NIXL",
+      "context": "Libraries like NIXL (NVIDIA Inference Transfer Library) abstract the data movement layer",
+      "confidence": 0.95
+    },
+    {
+      "term": "UCX",
+      "suggested_translation": "UCX",
+      "context": "pluggable backends for UCX, GPUDirect Storage, and other transports.",
+      "confidence": 0.9
+    },
+    {
+      "term": "GPUDirect Storage",
+      "suggested_translation": "GPUDirect Storage",
+      "context": "pluggable backends for UCX, GPUDirect Storage, and other transports.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DistServe",
+      "suggested_translation": "DistServe",
+      "context": "Source: DistServe",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 Prefill",
+    "forward pass": "前向传播",
+    "hbm": "HBM",
+    "rdma": "RDMA",
+    "fp8": "FP8",
+    "infiniband": "InfiniBand"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:01:43.688166"
+}

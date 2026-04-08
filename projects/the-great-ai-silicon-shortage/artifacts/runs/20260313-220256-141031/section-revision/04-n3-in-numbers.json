@@ -1,0 +1,29 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "assessment": {
+    "passed": false,
+    "overall_score": 9.225,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.0,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [
+      "critical_errors (3 > 0)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "现在，让我们来看看产能究竟有多紧张。贯穿今年全年，N3制程加速器的晶圆需求将迅猛攀升。核心驱动力在于英伟达的Rubin产能爬坡，目前该公司正从基于4NP的Blackwell架构向基于N3P的Rubin架构过渡。然而，得益于更高的平台与供应链成熟度，今年Blackwell的出货量仍将高于Rubin。谷歌与博通的TPU在导入N3制程的进度上领先于英伟达和亚马逊，其TPUv7芯片在2025年便已投入量产。这一强劲势头在今年得以延续，在谷歌内部需求以及Anthropic等外部需求的共同推动下，TPU的出货量迎来了激增。与此同时，向下一代TPUv8变体的过渡也将启动，该系列将继续采用N3制程节点。",
+    "另一个关键变量是，基于N3P制程的Trainium3将从2026年初开始晶圆投片，以迎接下半年产能的大幅爬坡。",
+    "因此，与AI相关的需求（加速器、主机CPU以及网络芯片对N3制程的需求）最终将占据今年N3制程产量略低于60%的份额。剩余的40%主要用于智能手机和CPU。这些需求完全吃透了N3制程的全部产能，使得台积电几乎无力再扩充更多产能。即使台积电增加N3制程产能，这种供需紧张的局面在2027年也会变得更加严峻。我们的模型预测，2027年AI需求将占到N3制程晶圆产量的86%，几乎完全挤出智能手机和CPU的晶圆份额。这种转变部分是由于智能手机的规划路线图正向N2制程过渡，但N3制程产能的紧缺无疑也加速了这一进程。对于继续停留在N3制程的产品线而言，其需求将很难得到完全满足。",
+    "https://substackcdn.com/image/fetch/$s_!bywn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5b707af9-3845-4437-9c68-561f36658df4_1868x1104.png",
+    "资料来源：SemiAnalysis晶圆代工厂模型，SemiAnalysis加速器模型",
+    "https://substackcdn.com/image/fetch/$s_!tcQC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0183a621-85de-4e9b-b829-6e6d90fddaa6_2092x1186.png",
+    "来源：SemiAnalysis加速器模型",
+    "在各家客户争夺有限的N3制程产能分配时，台积电最终扮演着造王者的角色。展望2026年，AI基础设施客户的优先级已明显高于消费电子客户。AI加速器的设计通常具有更大的裸片尺寸和更复杂的封装要求，这直接转化为更高的平均售价。更重要的是，AI驱动的需求已成为台积电目前绝对的核心增长引擎。终端客户愿意不惜一切代价来部署更多算力，而各大AI实验室对算力投入的坚定承诺带来了长达数年的需求可见度，为这一趋势提供了坚实支撑。",
+    "这与目前已高度饱和的移动和客户端市场形成鲜明对比，后者无论在出货量还是单机半导体价值量增长方面，所能提供的空间都已十分有限。这使得AI加速器客户在锁定先进制程产能时具备了相对优势。其他细分市场中无法锁定充足N3制程产能的客户，可能将被迫延长现有产品周期，或者直接迁移至N2平台。"
+  ]
+}

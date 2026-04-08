@@ -1,0 +1,208 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "TSMC N3 Wafer Shortages, Memory Constraints, Datacenter Bottlenecks, Supply Chain Wars Winner",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### TSMC N3 Wafer Shortages, Memory Constraints, Datacenter Bottlenecks, Supply Chain Wars Winner",
+      "parent_block_plain_text": "TSMC N3 Wafer Shortages, Memory Constraints, Datacenter Bottlenecks, Supply Chain Wars Winner",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 93,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N3制程晶圆短缺、存储产能限制、数据中心瓶颈与供应链之争的赢家",
+          "model": "pro",
+          "created_at": "2026-03-13T22:07:26.387262",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "台积电N3（3纳米制程工艺）制程晶圆短缺、存储产能限制、数据中心瓶颈与供应链之争的赢家",
+          "model": "manual",
+          "created_at": "2026-03-14T21:22:51.706069",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "台积电N3（3纳米制程工艺）制程晶圆短缺、存储产能限制、数据中心瓶颈与供应链之争的赢家",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Ivan Chiam, Myron Xie, Ray Wang, and 3 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Ivan Chiam",
+          "start": 3,
+          "end": 13,
+          "href": "https://substack.com/@ivanchiam",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 15,
+          "end": 24,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Ray Wang",
+          "start": 26,
+          "end": 34,
+          "href": "https://substack.com/@rwang07semis",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Ivan Chiam](https://substack.com/@ivanchiam), [Myron Xie](https://substack.com/@myronxie), [Ray Wang](https://substack.com/@rwang07semis), and 3 others",
+      "parent_block_plain_text": "By Ivan Chiam, Myron Xie, Ray Wang, and 3 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Ivan Chiam",
+          "start": 3,
+          "end": 13,
+          "href": "https://substack.com/@ivanchiam",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Myron Xie",
+          "start": 15,
+          "end": 24,
+          "href": "https://substack.com/@myronxie",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Ray Wang",
+          "start": 26,
+          "end": 34,
+          "href": "https://substack.com/@rwang07semis",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 48,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作者：Ivan Chiam、Myron Xie、Ray Wang等3人",
+          "model": "pro",
+          "created_at": "2026-03-13T22:07:26.387430",
+          "tokenized_text": "作者：[[[LINK_1|Ivan Chiam]]]、[[[LINK_2|Myron Xie]]]、[[[LINK_3|Ray Wang]]]等3人",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "作者：Ivan Chiam、Myron Xie、Ray Wang等3人",
+          "model": "manual",
+          "created_at": "2026-03-14T21:22:53.484161",
+          "tokenized_text": "作者：[[[LINK_1|Ivan Chiam]]]、[[[LINK_2|Myron Xie]]]、[[[LINK_3|Ray Wang]]]等3人",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Ivan Chiam、Myron Xie、Ray Wang等3人",
+      "confirmed_tokenized": "作者：[[[LINK_1|Ivan Chiam]]]、[[[LINK_2|Myron Xie]]]、[[[LINK_3|Ray Wang]]]等3人",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Mar 12, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Mar 12, 2026 · Paid",
+      "parent_block_plain_text": "Mar 12, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026年3月12日 · 付费文章",
+          "model": "pro",
+          "created_at": "2026-03-13T22:07:26.387448",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "2026年3月12日",
+          "model": "manual",
+          "created_at": "2026-03-14T21:23:03.009615",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026年3月12日",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

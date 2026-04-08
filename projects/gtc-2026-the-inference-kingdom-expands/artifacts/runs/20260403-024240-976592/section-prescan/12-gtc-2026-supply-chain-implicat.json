@@ -1,0 +1,61 @@
+{
+  "section_id": "12-gtc-2026-supply-chain-implicat",
+  "new_terms": [
+    {
+      "term": "Victory Giant",
+      "suggested_translation": "胜宏科技",
+      "context": "PCB supplier for the LPX compute tray main board.",
+      "confidence": 0.95
+    },
+    {
+      "term": "WUS",
+      "suggested_translation": "沪士电子",
+      "context": "PCB supplier for the LPX compute tray main board.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FIT",
+      "suggested_translation": "鸿腾精密",
+      "context": "Foxconn Interconnect Technology, a key supplier for backplane cable cartridges and connectors.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Paladin connectors",
+      "suggested_translation": "Paladin 连接器",
+      "context": "High-speed backplane connectors manufactured by Amphenol and licensed to FIT.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Voronoi",
+      "suggested_translation": "Voronoi 连接器规格",
+      "context": "Nvidia's proprietary connector specification for the Kyber midplane.",
+      "confidence": 0.9
+    },
+    {
+      "term": "MPO ports",
+      "suggested_translation": "MPO 接口",
+      "context": "Multi-fiber Push-On ports used for scale-out networking in the Kyber design.",
+      "confidence": 0.9
+    },
+    {
+      "term": "LGA socket",
+      "suggested_translation": "LGA 插槽",
+      "context": "Land Grid Array socket used to connect the Midboard Optical Module (MBOM) to the PCB.",
+      "confidence": 0.9
+    },
+    {
+      "term": "backplane cable cartridge",
+      "suggested_translation": "背板电缆盒",
+      "context": "A modular component for managing high-density cabling in NVL racks.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "scale-up networking": "纵向扩展网络",
+    "backplane": "背板",
+    "midplane": "中板",
+    "cableless": "无缆化"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-03T03:10:42.661385"
+}

@@ -1,0 +1,56 @@
+{
+  "section_id": "13-customization",
+  "new_terms": [
+    {
+      "term": "GB300",
+      "suggested_translation": "GB300",
+      "context": "Nvidia's next-generation Blackwell-based platform mentioned alongside GB200/NVL72.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ConnectX-8",
+      "suggested_translation": "ConnectX-8",
+      "context": "The next generation of Nvidia's network interface cards (NICs).",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bluefield-3",
+      "suggested_translation": "BlueField-3",
+      "context": "Nvidia's current generation DPU used for frontend networking.",
+      "confidence": 0.95
+    },
+    {
+      "term": "in-house DPU",
+      "suggested_translation": "自研 DPU",
+      "context": "Custom DPUs developed by hyperscalers like Amazon or Google to replace standard vendor parts.",
+      "confidence": 0.9
+    },
+    {
+      "term": "form factor",
+      "suggested_translation": "外形规格",
+      "context": "Physical dimensions and layout constraints for hardware modules in the chassis.",
+      "confidence": 0.9
+    },
+    {
+      "term": "JBOK / Nitro Box NIC",
+      "suggested_translation": "JBOK / Nitro Box 网卡",
+      "context": "Amazon's specific hardware configuration for networking in the GB300/NVL72 racks.",
+      "confidence": 0.85
+    },
+    {
+      "term": "front half",
+      "suggested_translation": "前半部分",
+      "context": "Refers to the customizable section of the server chassis containing networking and power modules.",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "hyperscaler": "超大规模云服务商",
+    "dpu": "DPU",
+    "bluefield-4": "BlueField-4",
+    "management module": "管理模块",
+    "power delivery module": "供电模块"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:55:02.897542"
+}

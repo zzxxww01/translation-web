@@ -1,0 +1,318 @@
+{
+  "section_id": "03-sram-and-memory-hierarchy",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "03-sram-and-memory-hierarchy",
+    "section_title": "SRAM and Memory Hierarchy",
+    "section_title_translation": "SRAM 与存储层级",
+    "section_position": "4/13",
+    "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+    "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+    "target_audience": "Senior hardware engineers, AI infrastructure architects, semiconductor supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-analyst Chinese. The voice should be objective and rigorous, using precise semiconductor, networking, and AI terminology while maintaining the investigative edge of the original text.",
+    "previous_section_title": "LPU chip",
+    "next_section_title": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+    "section_role": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+    "translation_notes": [
+      "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+    ],
+    "key_points": [
+      "SRAM offers extremely low latency and high bandwidth.",
+      "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+    ],
+    "guidelines": [
+      "Sentence Restructuring for Flow: Actively break down lengthy English sentences with multiple relative clauses into shorter, cohesive Chinese sentences. Use appropriate logical connectors (因此, 相比之下, 此外) to ensure a native, fluid paragraph structure.",
+      "Domain-Specific Precision: Strictly adhere to the provided terminology. Differentiate clearly between networking terms (scale-up vs. scale-out), semiconductor terms (tapeout, reticle size), and AI modeling terms (stateful, draft models).",
+      "Preserve Technical Notation: Keep all mathematical formulas, bandwidth specifications (e.g., 448Gbit/s uni-di, 112G), node names (TSMC N3P, SF4), and connector types (80DP Paladin, OSFP) exactly as they appear in the source.",
+      "Handle Acronyms Consistently: For newly introduced concepts (AFD, MBOM, CPO), provide the full Chinese translation followed by the English acronym in parentheses on the first occurrence. Use the acronym or the Chinese term consistently thereafter.",
+      "Maintain Analyst Tone: Preserve the investigative and authoritative tone of SemiAnalysis (e.g., 'Behind the paywall, we will reveal...'). Translate these directly but with professional phrasing (e.g., '在付费内容中，我们将揭晓...').",
+      "Title Translation: Ensure the translated title captures all key subjects mentioned in the original title (Groq LP30, LPX Rack, AFD, etc.) without dropping any semantic components, using standard separator punctuation (e.g., spaces or ' | ')."
+    ],
+    "article_challenges": [
+      {
+        "location": "LPU Network / Feynman NVL1152 Networking Topologies",
+        "issue": "Dense mathematical and topological descriptions (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+        "suggestion": "Do not alter the formulas. Ensure the surrounding text precisely explains the variables (e.g., lanes, Gbps, directions). Use clear spatial language for topologies (e.g., '菊链配置' for daisy chain, '全互联' for all-to-all)."
+      },
+      {
+        "location": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+        "issue": "Intersection of LLM software architecture (Attention, FFN, token routing, KV cache) and hardware mapping.",
+        "suggestion": "Strictly use standard Chinese AI terms (注意力机制, 前馈网络, 动态KV缓存加载). Ensure the logical causality (why stateful goes to GPU and stateless goes to LPU) is flawlessly translated."
+      },
+      {
+        "location": "GTC 2026 Supply Chain Implications",
+        "issue": "Long, clause-heavy sentences detailing corporate strategy and hardware teardowns (e.g., 'This design has effectively taken key pluggable transceiver items...').",
+        "suggestion": "Break these sentences down. Translate 'taken... and put them on...' into a sequence of actions in Chinese to maintain readability."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Attention FFN Disaggregation (AFD)",
+        "term": "Attention FFN Disaggregation (AFD)",
+        "translation": "注意力与前馈网络解耦",
+        "strategy": "first_annotate",
+        "note": "Separating the computation of attention mechanisms (mapped to GPUs) and feed-forward networks (mapped to LPUs) to optimize inference.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Co-Packaged Optics (CPO)",
+        "term": "Co-Packaged Optics (CPO)",
+        "translation": "光电共封装",
+        "strategy": "first_annotate",
+        "note": "Integration of optical transceivers and switch ASICs on the same package to reduce power and increase bandwidth.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "world size",
+        "term": "world size",
+        "translation": "集群并行规模",
+        "strategy": "translate",
+        "note": "The total number of processes or GPUs participating in a distributed training or inference cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "belly-to-belly",
+        "term": "belly-to-belly",
+        "translation": "正反面贴装",
+        "strategy": "translate",
+        "note": "Mounting components on both the top and bottom sides of a PCB directly opposite each other to minimize trace length.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "scratchpad SRAM",
+        "term": "scratchpad SRAM",
+        "translation": "暂存SRAM",
+        "strategy": "translate",
+        "note": "High-speed internal memory used for temporary storage of calculations, data, and other work in progress.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "stateful / stateless",
+        "term": "stateful / stateless",
+        "translation": "有状态 / 无状态",
+        "strategy": "translate",
+        "note": "Whether an operation depends on stored dynamic data (like KV cache) or only on the immediate input.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "draft models",
+        "term": "draft models",
+        "translation": "草稿模型",
+        "strategy": "translate",
+        "note": "Smaller models used in speculative decoding to quickly generate candidate tokens for a larger model to verify.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Midboard Optical Module (MBOM)",
+        "term": "Midboard Optical Module (MBOM)",
+        "translation": "板载光模块",
+        "strategy": "first_annotate",
+        "note": "Optical modules placed in the middle of the PCB rather than on the edge (pluggables), reducing electrical trace lengths.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "reticle size",
+        "term": "reticle size",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "uni-di",
+        "term": "uni-di",
+        "translation": "单向",
+        "strategy": "translate",
+        "note": "Uni-directional data transmission over a lane.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Explains the physical trade-offs of SRAM to justify Groq's architectural choices and highlight its limitations for massive LLMs.",
+    "relation_to_previous": "Expands on the LPU's reliance on scratchpad SRAM introduced in the previous section.",
+    "relation_to_next": "Establishes the memory constraints that make standalone LPUs unviable for LLMs, perfectly setting up the AFD (GPU-LPU integration) solution.",
+    "key_points": [
+      "SRAM offers extremely low latency and high bandwidth.",
+      "SRAM severely lacks density and is highly expensive, limiting its capacity for large-scale models."
+    ],
+    "translation_notes": [
+      "Do not translate SRAM; retain the English acronym. Use standard memory hierarchy terms for latency, bandwidth, and density."
+    ]
+  },
+  "translations": [
+    "我们之前曾撰文探讨过 SRAM 在存储层级中的作用，简而言之，SRAM 速度极快（低延迟且高带宽），但这是以牺牲密度为代价的，因此成本高昂。",
+    "因此，像 Groq 的 LPU 这样的 SRAM 机器能够实现极快的首个 token 生成时间和每用户每秒 token 数，但这以牺牲总吞吐量为代价。因为它们有限的 SRAM 容量很快就会被权重占满，几乎没有剩余空间留给随着批处理用户增多而不断增长的 KVcache。正如我们所展示的，GPU 在吞吐量和成本方面胜出。这就是为什么英伟达决定将这两种架构结合以实现优势互补：在像 LPU 这样低延迟、搭载大量 SRAM 的芯片上，加速那些对延迟更敏感且内存需求不大的解码部分；而将极其消耗内存的注意力机制交由配备大量快速（尽管不及 SRAM 快）内存容量的 GPU 来执行。",
+    "https://substackcdn.com/image/fetch/$s_!6Cix!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa939a961-40da-4762-b7d2-1ebb2423e9a2_2188x350.png",
+    "来源：SemiAnalysis",
+    "这就引出了 Groq 3 LPU 或 LP30，而第二代 LPU 则被直接跳过。这款芯片没有英伟达的设计参与。影响第二代的 SerDes 问题似乎已得到修复。在付费内容中，我们将揭晓 SerDes IP 供应商，这可能会让人感到意外。英伟达还发布了 LP35，这是 LP30 的小幅更新版本，它将继续采用 SF4，并需要重新流片。它将集成 NVFP4 数值格式，但考虑到英伟达目前优先保证上市时间，我们预计不会有其他重大的设计变更。",
+    "https://substackcdn.com/image/fetch/$s_!iPH0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39025ad5-927c-4619-b929-88d5555be853_1590x860.jpeg",
+    "来源：英伟达",
+    "LPU 3 接近光罩极限尺寸的裸片布局与 LPU 1 非常相似。很大一部分面积被 500MB 的片上 SRAM 占据，只有极少部分面积分配给提供 1.2 PFLOPs FP8 算力的 MatMul 核心——这仅为英伟达 GPU 算力的一小部分。相比之下，LPU 1 拥有 230MB 的 SRAM 和 750 TFLOPs 的 INT8 算力，性能的提升主要得益于从 GF16 到 SF4 的制程节点迁移。由于采用单片式裸片设计，因此不需要先进封装。",
+    "依赖 SF4 的好处之一是它不会像台积电的 N3 制程那样受到产能限制，这种限制给加速器产量设定了上限，也是整个行业仍然面临算力瓶颈的关键原因。此外，该设计也不需要使用同样受限于产能的 HBM。这使得英伟达能够扩大 LPU 的生产规模，而无需牺牲或挤占其宝贵的台积电或 HBM 产能配额。这代表了其他任何人都无法获取的真正增量收入与产能。",
+    "既然英伟达已经接手，下一代 LP40 将采用台积电 N3P 制程制造并使用 CoWoS-R 封装。英伟达将注入更多自有 IP，例如支持 NVLink 协议而非 Groq 的 C2C。这将是首款与 Feynman 平台进行深度协同设计的 LPU。Groq 原计划的第四代 LPU 同样由台积电代工，并由 Alchip 作为后端设计合作伙伴。由于英伟达能够自行完成后端设计，Alchip 的参与现已显得多余。计划中的一项技术创新是采用混合键合 DRAM 来扩展片上内存，与 SRAM 相比，其延迟和带宽仅有轻微下降，但性能远高于传统 DRAM。SK海力士已被选定为用于 3D 堆叠的 DRAM 供应商。",
+    "所有这些以及更多细节，早在此前的加速器模型中就已有详述。",
+    "https://substackcdn.com/image/fetch/$s_!4-mW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbf0a9df3-57f3-43b2-a090-67f9dbdee3d9_2218x1215.png",
+    "来源：英伟达，SemiAnalysis 加速器模型"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "section_id": "10-disaggregated-inference-framew",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.055,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.5,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "英伟达在其分离式推理架构中采用了 Dynamo。Dynamo 是一款专为多节点分布式推理设计的推理框架，集成了 Prefill-Decode 分离、请求路由以及 KV Cache 卸载等技术。该框架不绑定特定的推理引擎，因此我们在基准测试中能够将 SGLang 和 TRTLLM 作为后端。在 AMD 平台方面，我们采用 SGLang 搭配两种不同的 KV Cache 传输框架：MoRI 和 Mooncake。MoRI 是一种专注于 RDMA 与 GPU 深度融合的高性能通信接口，支持网络集合通信操作与专家并行算子等应用。而最近刚加入 PyTorch 生态系统的 Mooncake，不仅支持 Prefill-Decode 分离，还具备丰富的多节点容错特性。"
+  ]
+}

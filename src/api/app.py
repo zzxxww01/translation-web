@@ -2,6 +2,9 @@
 
 from dotenv import load_dotenv
 
+
+# Keep the runtime env aligned with `.env`, including proxy variables.
+# Gemini transport selection depends on whether the process sees a proxy.
 load_dotenv()
 
 import subprocess

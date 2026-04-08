@@ -1,0 +1,1811 @@
+{
+  "section_id": "07-asynchronous-copy",
+  "title": "Asynchronous Copy",
+  "title_translation": "异步拷贝",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Async copy (PTX: cp.async , SASS: LDGSTS) was introduced in the Ampere generation, and the instruction moves data from global memory to shared memory asynchronously. Async copy is non-blocking, allowing memory loads to overlap with computation. It also writes directly to shared memory without going through registers, reducing register pressure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "cp.async",
+          "start": 17,
+          "end": 25,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 34,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        }
+      ],
+      "parent_block_id": "b0054",
+      "parent_block_index": 54,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Async copy (PTX: `cp.async` , SASS: `LDGSTS`) was introduced in the Ampere generation, and the instruction moves data from global memory to shared memory asynchronously. Async copy is non-blocking, allowing memory loads to overlap with computation. It also writes directly to shared memory without going through registers, reducing register pressure.",
+      "parent_block_plain_text": "Async copy (PTX: cp.async , SASS: LDGSTS) was introduced in the Ampere generation, and the instruction moves data from global memory to shared memory asynchronously. Async copy is non-blocking, allowing memory loads to overlap with computation. It also writes directly to shared memory without going through registers, reducing register pressure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "cp.async",
+          "start": 17,
+          "end": 25,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 34,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 346,
+      "expected_tokens": [
+        "CODE_1",
+        "CODE_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "异步拷贝（PTX：cp.async，SASS：LDGSTS）于 Ampere 架构首次引入，该指令负责将数据从全局内存异步搬运至共享内存 (SMEM)。异步拷贝具有非阻塞特性，能够实现内存加载与计算的重叠。此外，该指令将数据直接写入共享内存 (SMEM) 而无需经过寄存器，从而有效降低了寄存器压力。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428588",
+          "tokenized_text": "异步拷贝（PTX：[[[CODE_1|cp.async]]]，SASS：[[[CODE_2|LDGSTS]]]）于 Ampere 架构首次引入，该指令负责将数据从全局内存异步搬运至共享内存 (SMEM)。异步拷贝具有非阻塞特性，能够实现内存加载与计算的重叠。此外，该指令将数据直接写入共享内存 (SMEM) 而无需经过寄存器，从而有效降低了寄存器压力。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Referencing FlashInfer Multi-head attention (MHA) kernels, we benchmark async copy with the following configuration:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0055",
+      "parent_block_index": 55,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Referencing FlashInfer Multi-head attention (MHA) kernels, we benchmark async copy with the following configuration:",
+      "parent_block_plain_text": "Referencing FlashInfer Multi-head attention (MHA) kernels, we benchmark async copy with the following configuration:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 116,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "参考 FlashInfer 的多头注意力 (MHA) 内核，我们采用以下配置对异步拷贝进行基准测试：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428637",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "CTAs per SM: 1, 2, 3, 4",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0056",
+      "parent_block_index": 56,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* CTAs per SM: 1, 2, 3, 4",
+      "parent_block_plain_text": "CTAs per SM: 1, 2, 3, 4",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 SM 的协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）数量：1, 2, 3, 4",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428661",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Number of Stages: 1, 2, 4",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0057",
+      "parent_block_index": 57,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Number of Stages: 1, 2, 4",
+      "parent_block_plain_text": "Number of Stages: 1, 2, 4",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 25,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "流水线级数 (Stages)：1, 2, 4",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428683",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Threads per CTA: 64, 128, 256",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0058",
+      "parent_block_index": 58,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Threads per CTA: 64, 128, 256",
+      "parent_block_plain_text": "Threads per CTA: 64, 128, 256",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个协作线程阵列 (CTA) 的线程数：64, 128, 256",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428702",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Load Size: 4B, 8B, 16B",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0059",
+      "parent_block_index": 59,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Load Size: 4B, 8B, 16B",
+      "parent_block_plain_text": "Load Size: 4B, 8B, 16B",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "加载尺寸：4B, 8B, 16B",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428724",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "We plot throughput versus bytes-in-flight per SM, the total number of bytes concurrent memory loading instructions are loading.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0060",
+      "parent_block_index": 60,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We plot throughput versus bytes-in-flight per SM, the total number of bytes concurrent memory loading instructions are loading.",
+      "parent_block_plain_text": "We plot throughput versus bytes-in-flight per SM, the total number of bytes concurrent memory loading instructions are loading.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们绘制了吞吐量与每个 SM 的飞行中字节数 (bytes-in-flight) 的关系曲线，飞行中字节数即并发内存加载指令正在加载的总字节数。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428755",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Although different load sizes converge to similar throughput at the same bytes-in-flight, we prefer 16-byte loads. 16-byte loads achieve slightly higher throughput at similar bytes-in-flight while using less execution resources. For example, at 32 KiB in flight, 8B load uses 4 stages, while 16B load uses 2 stages. This saves the memory space for 2 memory barrier objects and reduces instruction issue pressure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0061",
+      "parent_block_index": 61,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although different load sizes converge to similar throughput at the same bytes-in-flight, we prefer 16-byte loads. 16-byte loads achieve slightly higher throughput at similar bytes-in-flight while using less execution resources. For example, at 32 KiB in flight, 8B load uses 4 stages, while 16B load uses 2 stages. This saves the memory space for 2 memory barrier objects and reduces instruction issue pressure.",
+      "parent_block_plain_text": "Although different load sizes converge to similar throughput at the same bytes-in-flight, we prefer 16-byte loads. 16-byte loads achieve slightly higher throughput at similar bytes-in-flight while using less execution resources. For example, at 32 KiB in flight, 8B load uses 4 stages, while 16B load uses 2 stages. This saves the memory space for 2 memory barrier objects and reduces instruction issue pressure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 412,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管在相同的飞行中字节数下，不同的加载尺寸最终会收敛至相似的吞吐量，但我们更倾向于使用 16 字节加载。在飞行中字节数相近的情况下，16 字节加载不仅能实现略高的吞吐量，占用的执行资源也更少。例如，当飞行中字节数为 32 KiB 时，8B 加载需要 4 个流水线级数，而 16B 加载仅需 2 个。这不仅节省了 2 个内存屏障对象所需的内存空间，还降低了指令发射压力。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428778",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0062",
+      "parent_block_index": 62,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428797",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Overall, we see memory throughput with LDGSTS saturating at around 6.6 TB/s at 32 KiB in flight.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 39,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0063",
+      "parent_block_index": 63,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Overall, we see memory throughput with `LDGSTS` saturating at around 6.6 TB/s at 32 KiB in flight.",
+      "parent_block_plain_text": "Overall, we see memory throughput with LDGSTS saturating at around 6.6 TB/s at 32 KiB in flight.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 39,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 96,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "整体来看，当飞行中字节数达到 32 KiB 时，使用 LDGSTS 的内存吞吐量达到饱和，约为 6.6 TB/s。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428853",
+          "tokenized_text": "整体来看，当飞行中字节数达到 32 KiB 时，使用 [[[CODE_1|LDGSTS]]] 的内存吞吐量达到饱和，约为 6.6 TB/s。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "We also benchmark config space multi-latent attention (MLA) kernels use:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0064",
+      "parent_block_index": 64,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We also benchmark config space multi-latent attention (MLA) kernels use:",
+      "parent_block_plain_text": "We also benchmark config space multi-latent attention (MLA) kernels use:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 72,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们还对多潜在注意力 (MLA) 内核所使用的配置空间进行了基准测试：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428875",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "1 CTA per SM",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0065",
+      "parent_block_index": 65,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 1 CTA per SM",
+      "parent_block_plain_text": "1 CTA per SM",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 12,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 SM 1 个 CTA",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428895",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "16B loads",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0066",
+      "parent_block_index": 66,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* 16B loads",
+      "parent_block_plain_text": "16B loads",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 9,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "16B 加载",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428913",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Threads per CTA: 64, 128, 256",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0067",
+      "parent_block_index": 67,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Threads per CTA: 64, 128, 256",
+      "parent_block_plain_text": "Threads per CTA: 64, 128, 256",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个协作线程阵列 (CTA) 的线程数：64, 128, 256",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428931",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Number of Stages: 4, 8, 12, 16",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* Number of Stages: 4, 8, 12, 16",
+      "parent_block_plain_text": "Number of Stages: 4, 8, 12, 16",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "流水线级数 (Stages)：4, 8, 12, 16",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428949",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Our experiments show that increasing the number of stages achieves higher throughput at higher bytes-in-flight, and that increasing threads per CTA strictly improves performance across all configurations. Interestingly, MLA uses 2 warps and 12 stages, landing at about 2.2 TB/s . We believe this is due to softmax warps needing the most registers, and increasing warp count reduces register allocation per thread.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our experiments show that increasing the number of stages achieves higher throughput at higher bytes-in-flight, and that increasing threads per CTA strictly improves performance across all configurations. Interestingly, MLA uses 2 warps and 12 stages, landing at about 2.2 TB/s . We believe this is due to softmax warps needing the most registers, and increasing warp count reduces register allocation per thread.",
+      "parent_block_plain_text": "Our experiments show that increasing the number of stages achieves higher throughput at higher bytes-in-flight, and that increasing threads per CTA strictly improves performance across all configurations. Interestingly, MLA uses 2 warps and 12 stages, landing at about 2.2 TB/s . We believe this is due to softmax warps needing the most registers, and increasing warp count reduces register allocation per thread.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 413,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "实验表明，增加流水线级数可以在更高的飞行中字节数下实现更高的吞吐量，且在所有配置中，增加每个 CTA 的线程数均能严格提升性能。有趣的是，MLA 采用了 2 个 warp 和 12 级流水线的配置，吞吐量约为 2.2 TB/s。我们认为，这是由于 softmax warp 需要占用最多的寄存器，而增加 warp 数量会减少每个线程的寄存器分配量。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428966",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.428984",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "We benchmarked the latency of the same set of configurations. We see that LDGSTS has a baseline latency of ~600 nanoseconds and nearly doubles after 8 KiB in flight. This is because we need to use a large number of threads for LDGSTS to achieve high bytes in flight, leading to a high number of warps stalled due to MIO (memory input output) throttle.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 74,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 227,
+          "end": 233,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        }
+      ],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We benchmarked the latency of the same set of configurations. We see that `LDGSTS` has a baseline latency of ~600 nanoseconds and nearly doubles after 8 KiB in flight. This is because we need to use a large number of threads for `LDGSTS` to achieve high bytes in flight, leading to a high number of warps stalled due to MIO (memory input output) throttle.",
+      "parent_block_plain_text": "We benchmarked the latency of the same set of configurations. We see that LDGSTS has a baseline latency of ~600 nanoseconds and nearly doubles after 8 KiB in flight. This is because we need to use a large number of threads for LDGSTS to achieve high bytes in flight, leading to a high number of warps stalled due to MIO (memory input output) throttle.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 74,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        },
+        {
+          "type": "code",
+          "text": "LDGSTS",
+          "start": 227,
+          "end": 233,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 351,
+      "expected_tokens": [
+        "CODE_1",
+        "CODE_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们对同一组配置的延迟进行了基准测试。结果显示，LDGSTS 的基准延迟约为 600 纳秒，且在飞行中字节数达到 8 KiB 后几乎翻倍。这是因为要让 LDGSTS 实现较高的飞行中字节数，就必须使用大量线程，进而导致大量 warp 因 MIO（内存输入输出）节流而发生停滞。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.429056",
+          "tokenized_text": "我们对同一组配置的延迟进行了基准测试。结果显示，[[[CODE_1|LDGSTS]]] 的基准延迟约为 600 纳秒，且在飞行中字节数达到 8 KiB 后几乎翻倍。这是因为要让 [[[CODE_2|LDGSTS]]] 实现较高的飞行中字节数，就必须使用大量线程，进而导致大量 warp 因 MIO（内存输入输出）节流而发生停滞。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.429077",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0073",
+      "parent_block_index": 73,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:23:54.429094",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'register pressure' as '寄存器压力'.",
+          "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+          "relation_to_previous": "Executes the first half of the promise made in section 06 by detailing the older/simpler async copy mechanism.",
+          "relation_to_next": "Provides the baseline performance and use-case profile needed to contrast with TMA in section 08.",
+          "key_points": [
+            "Async copy (LDGSTS) is non-blocking and writes directly to shared memory, bypassing registers to reduce register pressure.",
+            "It is highly effective for specific modern AI kernels, such as multi-latent attention (MLA)."
+          ],
+          "translation_notes": [
+            "Translate 'register pressure' as '寄存器压力'.",
+            "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。"
+          },
+          {
+            "type": "readability",
+            "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。"
+          },
+          {
+            "type": "structure",
+            "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

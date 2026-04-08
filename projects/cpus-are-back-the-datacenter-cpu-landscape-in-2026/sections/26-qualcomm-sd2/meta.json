@@ -1,0 +1,401 @@
+{
+  "section_id": "26-qualcomm-sd2",
+  "title": "Qualcomm SD2",
+  "title_translation": "高通SD2",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0292",
+      "parent_block_index": 292,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010126",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!InJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffd673fa-3259-4f81-837b-7359bb7a1fb9_1920x755.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Qualcomm Datacenter CPU Announcement. Source: Qualcomm, ServeTheHome",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Qualcomm Datacenter CPU Announcement. Source: Qualcomm, ServeTheHome",
+          "start": 0,
+          "end": 68,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0293",
+      "parent_block_index": 293,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Qualcomm Datacenter CPU Announcement. Source: Qualcomm, ServeTheHome*",
+      "parent_block_plain_text": "Qualcomm Datacenter CPU Announcement. Source: Qualcomm, ServeTheHome",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Qualcomm Datacenter CPU Announcement. Source: Qualcomm, ServeTheHome",
+          "start": 0,
+          "end": 68,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 68,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "高通数据中心 CPU 发布会。来源：高通，ServeTheHome",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010288",
+          "tokenized_text": "[[[EM_1|高通数据中心 CPU 发布会。来源：高通，ServeTheHome]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Qualcomm re-enters the Datacenter CPU Market from 2027 as they look to diversify from their mobile and modem business with datacenter CPUs and AI processors. Qualcomm did have an initial foray in 2017 with their Centriq 2400 CPU that had 48 Falkor ARMv8 cores paired with 6 channels of DDR4. However, this arrived too early, before workloads were ported over to ARM’s ISA from x86, limiting popularity and resulting in the end of the project.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0294",
+      "parent_block_index": 294,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Qualcomm re-enters the Datacenter CPU Market from 2027 as they look to diversify from their mobile and modem business with datacenter CPUs and AI processors. Qualcomm did have an initial foray in 2017 with their Centriq 2400 CPU that had 48 Falkor ARMv8 cores paired with 6 channels of DDR4. However, this arrived too early, before workloads were ported over to ARM’s ISA from x86, limiting popularity and resulting in the end of the project.",
+      "parent_block_plain_text": "Qualcomm re-enters the Datacenter CPU Market from 2027 as they look to diversify from their mobile and modem business with datacenter CPUs and AI processors. Qualcomm did have an initial foray in 2017 with their Centriq 2400 CPU that had 48 Falkor ARMv8 cores paired with 6 channels of DDR4. However, this arrived too early, before workloads were ported over to ARM’s ISA from x86, limiting popularity and resulting in the end of the project.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 442,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "高通将于 2027 年重返数据中心 CPU 市场，试图通过数据中心 CPU 和 AI 处理器，摆脱对移动和基带业务的单一依赖，实现多元化发展。早在 2017 年，高通就曾携 Centriq 2400 CPU 初次涉足该领域，这款芯片搭载了 48 个 Falkor ARMv8 核心，并配备 6 通道 DDR4 内存。然而，这款产品生不逢时，当时工作负载尚未从 x86 移植到 ARM 的 ISA (指令集架构) 上，导致其普及受限，最终该项目无疾而终。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010326",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Qualcomm acquired NUVIA in 2021, taking Gerard Williams III and Apple’s CPU design talents, and immediately began developing a datacenter CPU codenamed SD1. While this was never productized, we do know the specifications. SD1 contained 80 Oryon cores (that are now in the Snapdragon X Elite and 8 Elite mobile processors) on TSMC N5, 16 channels of DDR5-5600 and 70 lanes of PCIe Gen 5 on a massive 98 x 95mm LGA9470 socket with dual-socket support. This CPU might not have launched due to ARM’s lawsuit with Qualcomm in 2022.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0295",
+      "parent_block_index": 295,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Qualcomm acquired NUVIA in 2021, taking Gerard Williams III and Apple’s CPU design talents, and immediately began developing a datacenter CPU codenamed SD1. While this was never productized, we do know the specifications. SD1 contained 80 Oryon cores (that are now in the Snapdragon X Elite and 8 Elite mobile processors) on TSMC N5, 16 channels of DDR5-5600 and 70 lanes of PCIe Gen 5 on a massive 98 x 95mm LGA9470 socket with dual-socket support. This CPU might not have launched due to ARM’s lawsuit with Qualcomm in 2022.",
+      "parent_block_plain_text": "Qualcomm acquired NUVIA in 2021, taking Gerard Williams III and Apple’s CPU design talents, and immediately began developing a datacenter CPU codenamed SD1. While this was never productized, we do know the specifications. SD1 contained 80 Oryon cores (that are now in the Snapdragon X Elite and 8 Elite mobile processors) on TSMC N5, 16 channels of DDR5-5600 and 70 lanes of PCIe Gen 5 on a massive 98 x 95mm LGA9470 socket with dual-socket support. This CPU might not have launched due to ARM’s lawsuit with Qualcomm in 2022.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2021 年，高通收购了 NUVIA，将 Gerard Williams III 及苹果的 CPU 设计人才招致麾下，并立即开始研发代号为 SD1 的数据中心 CPU。虽然这款芯片从未投入量产，但我们掌握了它的规格。SD1 基于台积电 N5 工艺，搭载了 80 个 Oryon 核心（该核心现已应用于骁龙 X Elite 和 8 Elite 移动处理器），配备 16 通道 DDR5-5600 内存和 70 条 PCIe Gen 5 通道，采用尺寸高达 98 x 95 毫米的庞大 LGA9470 插槽，并支持双路配置。这款 CPU 最终未能发布，可能与 2022 年 ARM 对高通提起的诉讼有关。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010354",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "In 2025, Qualcomm officially announced their return to the datacenter CPU market in an announcement to develop and supply Saudi Arabia’s HUMAIN AI project with their own CPUs. We shall use “SD2” as the working name for this CPU generation. Qualcomm was featured in Nvidia’s NVLink Fusion release and confirmed that SD2 will support NVLink Fusion as a high-speed coherent interconnect to AI GPUs. Qualcomm’s acquisition of Alphawave Semi in 2025 will also shore up their high-speed SerDes and chiplet interconnect capabilities. In their latest Q4 2025 earnings call, Qualcomm confirmed that SD2 will ship for revenue in 2027, and called the datacenter CPU market a multi-billion dollar opportunity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0296",
+      "parent_block_index": 296,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In 2025, Qualcomm officially announced their return to the datacenter CPU market in an announcement to develop and supply Saudi Arabia’s HUMAIN AI project with their own CPUs. We shall use “SD2” as the working name for this CPU generation. Qualcomm was featured in Nvidia’s NVLink Fusion release and confirmed that SD2 will support NVLink Fusion as a high-speed coherent interconnect to AI GPUs. Qualcomm’s acquisition of Alphawave Semi in 2025 will also shore up their high-speed SerDes and chiplet interconnect capabilities. In their latest Q4 2025 earnings call, Qualcomm confirmed that SD2 will ship for revenue in 2027, and called the datacenter CPU market a multi-billion dollar opportunity.",
+      "parent_block_plain_text": "In 2025, Qualcomm officially announced their return to the datacenter CPU market in an announcement to develop and supply Saudi Arabia’s HUMAIN AI project with their own CPUs. We shall use “SD2” as the working name for this CPU generation. Qualcomm was featured in Nvidia’s NVLink Fusion release and confirmed that SD2 will support NVLink Fusion as a high-speed coherent interconnect to AI GPUs. Qualcomm’s acquisition of Alphawave Semi in 2025 will also shore up their high-speed SerDes and chiplet interconnect capabilities. In their latest Q4 2025 earnings call, Qualcomm confirmed that SD2 will ship for revenue in 2027, and called the datacenter CPU market a multi-billion dollar opportunity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 697,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2025 年，高通正式宣布重返数据中心 CPU 市场，声明将为沙特阿拉伯的 HUMAIN AI 项目研发并供应自家 CPU。我们将这一代 CPU 暂定代号为“SD2”。高通出现在了英伟达 NVLink Fusion 的发布名单中，并确认 SD2 将支持 NVLink Fusion，以此作为连接 AI GPU 的高速一致性互连总线。高通在 2025 年收购 Alphawave Semi，也将进一步巩固其在高速 SerDes (串行器/解串器) 和芯粒互连方面的技术实力。在最新的 2025 财年第四季度财报电话会议上，高通确认 SD2 将于 2027 年出货并贡献营收，并称数据中心 CPU 市场是一个价值数十亿美元的巨大机遇。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010380",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "However, Gerard Williams III and others from the original Nuvia team decided to leave Qualcomm in January 2026, casting a shadow over the future of their CPU program. We believe the impact will be limited until beyond 2028 as the core design team has been fully integrated. Qualcomm’s complete victory over ARM’s lawsuit also means their ARM license will be maintained, and they can continue to develop their custom CPU core architectures.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0297",
+      "parent_block_index": 297,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, Gerard Williams III and others from the original Nuvia team decided to leave Qualcomm in January 2026, casting a shadow over the future of their CPU program. We believe the impact will be limited until beyond 2028 as the core design team has been fully integrated. Qualcomm’s complete victory over ARM’s lawsuit also means their ARM license will be maintained, and they can continue to develop their custom CPU core architectures.",
+      "parent_block_plain_text": "However, Gerard Williams III and others from the original Nuvia team decided to leave Qualcomm in January 2026, casting a shadow over the future of their CPU program. We believe the impact will be limited until beyond 2028 as the core design team has been fully integrated. Qualcomm’s complete victory over ARM’s lawsuit also means their ARM license will be maintained, and they can continue to develop their custom CPU core architectures.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 439,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，Gerard Williams III 及其他 NUVIA 初创团队成员于 2026 年 1 月决定离开高通，这为高通 CPU 项目的未来蒙上了一层阴影。我们认为，由于核心设计团队已完成全面整合，在 2028 年之前，此举带来的负面影响将十分有限。此外，高通在与 ARM 的诉讼中大获全胜，意味着其将继续保有 ARM 授权，并能继续研发定制 CPU 核心架构。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:49:48.010405",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,342 @@
+{
+  "section_id": "08-deepseek-r1",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "08-deepseek-r1",
+    "section_title": "DeepSeek R1",
+    "section_title_translation": "DeepSeek R1",
+    "section_position": "9/36",
+    "article_theme": "An in-depth analysis of AI inference performance and economics across Nvidia and AMD hardware, highlighting how software maturity, specifically in advanced techniques like Disaggregated Prefill and Wide Expert Parallelism, dictates real-world dominance.",
+    "structure_summary": "The article opens by introducing InferenceXv2 and thanking hardware partners. It transitions into a technical primer on inference concepts (Interactivity vs Throughput, TP/EP/DP). The core of the piece analyzes benchmarking results for DeepSeek R1 and GPT-OSS, comparing AMD and Nvidia across various hardware and software configurations (Disagg Prefill, WideEP). It then unpacks the unit economics and software ecosystem limitations (e.g., AMD's ATOM vs Nvidia's TRTLLM) before concluding with repo updates, AI-assisted development anecdotes, and the future roadmap for InferenceX.",
+    "target_audience": "AI infrastructure engineers, GPU investors, ML researchers, and advanced tech enthusiasts.",
+    "translation_voice": "A highly competent, insider tech analyst who deeply understands GPU architecture but isn't afraid to use sharp, internet-native language to mock corporate marketing or highlight stark performance gaps.",
+    "previous_section_title": "Tracking Improvements Over Time",
+    "next_section_title": "GPT-OSS 120B",
+    "section_role": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+    "translation_notes": [
+      "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+      "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+      "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+    ],
+    "key_points": [
+      "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+      "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+    ],
+    "guidelines": [
+      "1. Preserve the edgy, insider tone. Do not sanitize slang like 'framemog' or 'jestermaxxing' into dry academic prose; use equivalent Chinese internet/tech community slang (e.g., '性能碾压', '瞎折腾').",
+      "2. Restructure dense comparative sentences. When the text compares throughput vs. interactivity across multiple hardware SKUs, break the English sentence into smaller Chinese clauses. Use bullet points mentally to structure the logic before writing the sentence.",
+      "3. Keep all framework names (SGLang, vLLM, TRTLLM, Dynamo, MoRI, Mooncake) and hardware SKUs (MI355X, GB200 NVL72) in English to maintain technical accuracy.",
+      "4. For domain-specific AI/GPU concepts (e.g., 'Disaggregated Prefill', 'Wide Expert Parallelism', 'All-to-all'), use the provided standardized translations and include a brief parenthetical explanation on first occurrence if it aids the reader.",
+      "5. Handle metaphors and cultural references natively. For the 'GitHub unicorn' and 'touch some grass' references, ensure the Chinese phrasing captures both the technical frustration (server outages) and the internet humor.",
+      "6. Maintain strict distinction between 'Interactivity' (tok/s/user) and 'Throughput' (tok/s). Mistranslating these will destroy the core technical argument regarding the Pareto frontier."
+    ],
+    "article_challenges": [
+      {
+        "location": "Key Observations and Results to Highlight / Nvidia versus AMD Disagg Prefill",
+        "issue": "Use of slang 'framemog' / 'framemogged'. 'Mog' is internet slang for dominating or being physically superior. Here it means overwhelming performance dominance.",
+        "suggestion": "Translate as '性能碾压' or '全方位碾压'. Do not translate literally as '帧率碾压' unless specifically talking about video games; here it's about token throughput.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Jensen Under Promising and Overdelivering",
+        "issue": "Use of '-maxxing' slang ('classic marketing lookmaxxing', 'jestermaxxing'). This is Gen Z internet slang meaning to maximize a specific trait.",
+        "suggestion": "Translate 'marketing lookmaxxing' as '极致的营销包装' or '营销拉满'. Translate 'jestermaxxing' as '纯纯的小丑行为' or '瞎折腾'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "GitHub Actions",
+        "issue": "'We have seen more unicorns lately than any other animal! But maybe it’s time for us to touch some grass.'",
+        "suggestion": "The 'unicorn' refers to GitHub's iconic error page (the angry unicorn) during outages. 'Touch some grass' means to go outside and disconnect from the internet. Translate with a brief note or adapt natively: '最近我们看到（GitHub宕机时的）独角兽的次数比什么动物都多！或许我们真该下线去碰碰草（接触下大自然）了。'",
+        "type": "accuracy"
+      },
+      {
+        "location": "Interactivity vs Throughput Tradeoff",
+        "issue": "'riding a metro bus vs a race car'",
+        "suggestion": "Keep the metaphor: '这就像是乘坐公交车与驾驶赛车的区别。公交车能服务众多乘客，但频繁停靠会增加时间（分摊成本）；而赛车速度极快，但只服务单人。'",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Disaggregated Prefill",
+        "term": "Disaggregated Prefill",
+        "translation": "分离式 Prefill",
+        "strategy": "translate",
+        "note": "Separating the compute-heavy prefill phase and memory-heavy decode phase of LLM inference onto different nodes.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Wide Expert Parallelism (WideEP)",
+        "term": "Wide Expert Parallelism (WideEP)",
+        "translation": "宽专家并行 (WideEP)",
+        "strategy": "translate",
+        "note": "Distributing expert weights of an MoE model across a large number of GPUs.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Interactivity",
+        "term": "Interactivity",
+        "translation": "交互速度",
+        "strategy": "translate",
+        "note": "Tokens per second per user (tok/s/user), representing the responsiveness of the model to an individual user.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Throughput",
+        "term": "Throughput",
+        "translation": "吞吐量",
+        "strategy": "translate",
+        "note": "Total tokens generated by the system across all users per second (tok/s).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Time per output token (TPOT)",
+        "term": "Time per output token (TPOT)",
+        "translation": "单输出 Token 耗时 (TPOT)",
+        "strategy": "translate",
+        "note": "The inverse of interactivity; how long it takes to generate a single token.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "All-reduce",
+        "term": "All-reduce",
+        "translation": "全归约 (All-reduce)",
+        "strategy": "translate",
+        "note": "A collective communication operation where all nodes share data and receive the reduced (e.g., summed) result.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "All-to-all",
+        "term": "All-to-all",
+        "translation": "全对全 (All-to-all)",
+        "strategy": "translate",
+        "note": "A collective communication operation where every node sends distinct data to every other node, heavily used in MoE.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Multi Token Prediction (MTP)",
+        "term": "Multi Token Prediction (MTP)",
+        "translation": "多 Token 预测 (MTP)",
+        "strategy": "translate",
+        "note": "A speculative decoding technique predicting multiple future tokens in a single forward pass.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "KV Cache offloading",
+        "term": "KV Cache offloading",
+        "translation": "KV Cache 卸载",
+        "strategy": "translate",
+        "note": "Moving the Key-Value cache from GPU HBM to CPU RAM or NVMe storage to save memory.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "SGLang",
+        "term": "SGLang",
+        "translation": "SGLang",
+        "strategy": "preserve",
+        "note": "An open-source fast serving framework for LLMs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TRTLLM",
+        "term": "TRTLLM",
+        "translation": "TRTLLM",
+        "strategy": "preserve",
+        "note": "Nvidia's TensorRT-LLM inference framework.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Provides a specific, empirical case study of AMD's rapid software evolution and the benchmark's role in pushing industry standards.",
+    "relation_to_previous": "Serves as direct evidence for the 'weekly software improvements' claim made in the previous section.",
+    "relation_to_next": "Leads into further specific benchmark analyses and ecosystem comparisons (implied by the overall structure).",
+    "key_points": [
+      "AMD doubled throughput for DeepSeek R1 FP4 at the same interactivity level in under two months.",
+      "The InferenceX team actively pushed AMD to merge their proprietary/forked optimizations into the official, open-source SGLang repository."
+    ],
+    "translation_notes": [
+      "Translate 'upstream' (used as a verb) accurately in open-source context: '推送到上游' or '合入官方主分支'.",
+      "Translate 'forked SGLang images' as '分支镜像' or '魔改版镜像'.",
+      "Maintain the authoritative tone showing the authors' influence over AMD's engineering decisions."
+    ]
+  },
+  "translations": [
+    "AMD 团队已大幅提升了 SGLang DeepSeek R1 FP4 所有配置的性能。在同等交互速度（Interactivity）下，AMD 仅用不到两个月的时间，就将吞吐量几乎翻了一番。此外，我们还敦促 AMD 将其魔改版 SGLang 镜像中提升性能的改动合入上游官方 SGLang 镜像。从 2025 年 12 月到 2026 年 1 月，AMD 的软件性能实现了高达 2 倍的提升。",
+    "https://substackcdn.com/image/fetch/$s_!Jjej!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd0bd5df8-c675-4dce-a853-dfa6f4d381af_1498x1102.png",
+    "来源：SemiAnalysis InferenceX",
+    "为了不断逼近一流的使用体验，AMD 必须加大对 vLLM 和 SGLang 维护者的支持力度，不仅要贡献算力与代码，还要安排更多 AMD 内部审查人员，加速将 AMD 的 PR (Pull Request) 审核并合入上游。",
+    "https://substackcdn.com/image/fetch/$s_!lFtH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff7fc9e49-b04b-41b0-b0ec-df0d912c0a3c_800x434.jpeg",
+    "来源：SemiAnalysis",
+    "另一方面，英伟达的测试结果则更为稳定，在同期内 B200 SGLang 的性能仅有小幅提升。",
+    "https://substackcdn.com/image/fetch/$s_!nuP1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F19e48a4c-0c1b-4681-b180-03ef0c8c2ce3_2346x1340.png",
+    "来源：SemiAnalysis InferenceX",
+    "许多成熟的 SKU 性能提升微乎其微。例如，自 10 月以来的四个月里，H200 TRT 单节点的性能毫无变化。这是因为 Hopper 从发布首日起就获得了极佳的软件支持，其在该工作负载下的性能一直逼近理论峰值，因此很难再挤出额外的性能提升。",
+    "https://substackcdn.com/image/fetch/$s_!_wVx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fca0fbb96-36c4-4040-a022-49f2185b661a_2074x1224.png",
+    "来源：SemiAnalysis InferenceX",
+    "MI300X 和 MI325X 取得了一些性能提升，这主要归功于最新发布的 SGLang 版本。需要注意的是，在 InferenceX 的大部分历史测试中，AMD 使用的都是未推送到上游的“私有” ROCm 镜像，因此 2026 年 1 月左右之前的测试结果，无法与近期的结果直接对比。",
+    "https://substackcdn.com/image/fetch/$s_!-eGZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4b8c3b9b-7536-4cba-8b85-854d25169864_1922x1726.png",
+    "来源：SemiAnalysis InferenceX",
+    "GB200 Dynamo TRT-LLM Disagg (分离) 架构同样取得了显著提升，在短短一个多月的时间里，最大吞吐量飙升了 20%。在部署了宽专家并行（wide EP）的中等交互度场景下，我们也看到了性能改善。这很可能得益于 GB200 上宽专家并行内核的日益成熟。",
+    "https://substackcdn.com/image/fetch/$s_!7v-Z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb4fa8dc-176c-4224-9ab5-6ebfe8f6af9c_1493x1280.png",
+    "来源：SemiAnalysis InferenceX",
+    "自我们首次发布以来，B200 SGLang 在 FP4 和 FP8 场景下均实现了稳步且持续的提升。自去年十月以来，在特定的交互速度水平下，单 GPU 吞吐量已经翻番。",
+    "https://substackcdn.com/image/fetch/$s_!a06J!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1d5636b8-69d8-4676-9c3c-823da8d03514_2638x1840.png",
+    "来源：SemiAnalysis InferenceX",
+    "对于 MI355X Disaggregated (分离) 推理服务，AMD 推荐搭配 MoRI 使用 SGLang。MoRI 是 AMD 的 MoE (混合专家) 分发/合并集合通信与 KV Cache 传输库，由 AMD 位于中国的一支实力爆表的“十倍工程师”团队基于第一性原理打造。尽管 MoRI 还需要更开放的 CI（持续集成）与测试，但我们极度看好它的发展方向。原因在于，AMD 以往的常规操作是直接把英伟达的 NCCL 分支出来魔改为 RCCL，但这次 MoRI 摒弃了这种做法。它汲取了 RCCL/NCCL 的经验教训，完全基于第一性原理从零构建了一个全新的代码包。在短短一个多月的时间里，MoRI 的应用带来了可观的加速效果：在 20-45 tok/s/user 的交互速度区间内，单 GPU 吞吐量提升了 20% 以上。",
+    "https://substackcdn.com/image/fetch/$s_!J5Il!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b0d71aa-e6aa-425f-bbcc-25e2c1de2f4d_1900x1744.png",
+    "来源：SemiAnalysis InferenceX"
+  ]
+}

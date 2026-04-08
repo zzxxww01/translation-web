@@ -1,0 +1,20 @@
+{
+  "section_id": "03-sram-and-memory-hierarchy",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 7,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "die layout",
+        "description": "在半导体和集成电路设计领域，'layout' 的标准专业术语是“版图”而非“布局”。",
+        "why_it_matters": "使用“版图”能更好地体现文章的专业性和硬核技术分析基调，符合半导体行业目标读者的阅读习惯。",
+        "suggestion": "将“裸片布局”修改为“裸片版图”。"
+      }
+    ]
+  }
+}

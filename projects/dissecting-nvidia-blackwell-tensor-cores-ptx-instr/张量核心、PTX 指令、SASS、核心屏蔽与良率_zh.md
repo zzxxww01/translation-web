@@ -1,0 +1,333 @@
+# 张量核心、PTX 指令、SASS、核心屏蔽与良率
+
+## 引言
+
+### 微基准测试、tcgen05、2SM MMA、UMMA、TMA、LDGSTS、UBLKCP、理论极限性能 (Speed of Light, SoL)、分布式共享内存 (DSMEM)、GPC 核心屏蔽 (Floorsweeping)、SM 良率
+
+作者：[Kimbo Chen](https://substack.com/@kimbobachen) 与 [Dylan Patel](https://substack.com/@semianalysis)
+
+2026年3月31日 · 付费文章
+
+英伟达（NVIDIA）的数据中心 Blackwell GPU (SM100) 代表了这一代 GPU 微架构最重大的变革之一，但目前尚无详细的官方白皮书。时至今日，市面上仍没有任何针对数据中心 Blackwell 架构的公开微基准测试研究，能够专门针对 AI 负载并深入到 PTX 和 SASS 指令级别（如 UMMA 和 TMA）。
+
+继发布深度长文 [《英伟达 Tensor Core 演进史：从 Volta 到 Blackwell》](https://newsletter.semianalysis.com/p/nvidia-tensor-core-evolution-from-volta-to-blackwell) 之后，SemiAnalysis 投入了数月的工程时间深度剖析 Blackwell 架构，测量底层 PTX 指令性能，确立了严格的实际性能上限，并将其与理论峰值进行对比。此举旨在揭示单元级和指令级的硬件吞吐量与延迟极限，从而为机器学习系统与内核开发提供极具价值的性能特征分析。我们重点关注深度学习负载配置，例如对主流深度学习库 FlashInfer 中使用的异步内存拷贝机制进行基准测试。
+
+我们已在 [此处](https://github.com/SemiAnalysisAI/microbench-blackwell) 开源了 Blackwell 微架构级基准测试代码库。如果觉得有帮助，请给项目点个 Star。
+
+## 致谢
+
+感谢 Nebius 和 Verda 提供用于微基准测试的 B200 节点。这些节点启用了正确的硬件计数器，使得 NCU性能分析成为可能。对于所用云服务商未启用 NCU 的用户，可以参考 GPU Mode 的 Mark Saroufim 建议的[替代方案](https://x.com/marksaroufim/status/2018739807363674373)。此外，我们还要感谢[《通过微基准测试与多层次分析剖析 NVIDIA Hopper 架构》](https://github.com/HPMLL/NVIDIA-Hopper-Benchmark)与[《tcgen05 入门指南》](https://github.com/gau-nernst/learn-cuda/tree/main/02e_matmul_sm100)的作者，我们的代码正是基于他们的工作成果编写而成。
+
+最后，我们要感谢所有的审稿人与外部协作者：
+
+- Kilian Haefeli - Cohere
+
+- Benjamin Spector - Flappy Airplanes 与 Stanford
+
+- Neil Movva - Sail Research
+
+- Orian Leitersdorf - Decart AI
+
+- Hardik Bishnoi - Arcee AI
+
+- 以及众多匿名审稿人
+
+![](https://substackcdn.com/image/fetch/$s_!eHLl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e5c8ca9-ca65-4217-94fb-3c5fd9946bc1_200x200.png)
+
+![](https://substackcdn.com/image/fetch/$s_!ibuq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44d04885-53a0-4567-bd9f-d2ebb5a712c8_200x200.png)
+
+## 未来工作
+
+本文是探索 AI 加速器底层汇编与内核代码系列文章的开篇之作。在后续文章中，我们将扩大测试范围，对更多 Blackwell 和 Blackwell Ultra 的 PTX 指令进行基准测试，包括 EXP2 和 TensorMap 的更新延迟。此外，我们已制定具体计划，将对 TPU Pallas 内核、Trainium NKI 内核以及 AMD CDNA4 汇编代码展开基准测试。特别是针对 AMD CDNA4，由于[许多指令已有详尽的文档说明](https://www.amd.com/content/dam/amd/en/documents/instinct-tech-docs/instruction-set-architectures/amd-instinct-cdna4-instruction-set-architecture.pdf)，我们在短期内即可启动相关的基准测试工作。
+
+如果你渴望参与底层基准测试、ClusterMAX、推理模拟器或其他极具挑战的技术工作，欢迎加入我们。请将简历发送至[letsgo@semianalysis.com](mailto:letsgo@semianalysis.com)，并列出 5 个能证明你卓越工程能力的核心亮点。请随信附上 GitHub 仓库链接、YouTube 演示视频、个人网站或博客等材料，以佐证你的核心亮点。
+
+## Blackwell 特性
+
+从 Hopper 到 Blackwell，英伟达对架构进行了多项渐进式改进，并调整了 MMA 相关指令的 PTX 抽象。我们在[英伟达 Tensor Core 演进](https://newsletter.semianalysis.com/i/174558646/blackwell)一文中详细探讨了大部分改进。主要显著变化如下：
+
+- 引入张量内存 (TMEM) 用于存储 MMA 累加器。线程不再隐式持有 MMA 运算结果，而是由软件在 MMA 作用域内对 TMEM 进行显式管理。
+
+- `tcgen05` 操作现在由单一线程代表整个协作线程阵列 (CTA) 发出，而不再像前几代那样在 warp 或 warpgroup 作用域内发出。这一点体现在 CuTe MMA atom 的设计中，它现在使用 `ThrID = Layout`<*1>`` [在 Blackwell 架构中](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma*traits*sm100.hpp#L1045)，而不是 `ThrID = Layout`<*128>``，后者常见于 [Hopper 的 warpgroup 作用域 MMA](https://github.com/NVIDIA/cutlass/blob/main/include/cute/atom/mma_traits_sm90_gmma.hpp#L491) 中。
+
+- 支持在成对的协作 CTA 之间执行 TPC 作用域的张量内存加速器 (TMA) 和 MMA 操作，这在 PTX 中体现为 `cta_group::2`，在 SASS 中体现为 `2CTA`。构成一个 TPC 的两个 SM 可以在共享操作数上执行 `tcgen05.mma`，通过降低每个 CTA 的共享内存 (SMEM) 带宽需求，从而能够执行更高计算访存比的 MMA 指令。后文我们将证明，这种操作数共享机制对于充分利用现有的 MMA 吞吐量是必不可少的。
+
+- 原生支持带微缩放 (micro-scaling) 的子字节数据类型。
+
+- [集群启动控制 (CLC)](https://docs.nvidia.com/cutlass/latest/media/docs/cpp/blackwell_cluster_launch_control.html) 为持久化 CTA 内核中的动态工作调度提供硬件支持（将在后续文章中详细探讨）。
+
+- Hopper 架构中引入的[可编程依赖启动 (PDL)](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/programmatic-dependent-launch.html)，用于隐藏连续 (back-to-back) 执行内核时的启动与设置延迟（将在后续文章中详细探讨）。
+
+## 集群、GPC 与核心屏蔽
+
+自 Hopper 架构以来，英伟达数据中心 GPU 开始支持一项可选特性。该特性有多种称呼，如“线程块集群”、“CTA 集群”和“协作网格阵列 (CGA)”，它们指代的都是同一功能。集群是 CTA 的逻辑分组，其形状和大小可以针对每个内核进行静态或动态指定。集群在编程模型中有几种实用的可见方式，其中之一是允许向同一集群内的多个 CTA 执行多播加载；我们将在后文探讨 TMA 多播时详细讨论这一点。
+
+重要的是，系统保证同一集群内的 CTA 会被协同调度到同一个 GPC 上。在 Blackwell 架构中，采用“每个 SM 分配 1 个 CTA”的“持久化 CTA”风格内核时，这会带来一个重要后果：如果集群大小不能整除 GPC 中的 SM 数量，部分 SM 将处于闲置状态。这种行为可能会让内核开发者感到困惑——由于 GPC 的相关文档较少，他们往往会在启用集群的情况下，直接启动与 SM 数量相等的持久化 CTA，从而导致部分 CTA 被串行执行。
+
+每个 GPC 中良率合格的 SM 数量并非固定不变，同一芯片上不同 GPC 之间的数量也不相同，甚至在同一个封装内的不同裸片 (die) 之间也可能不对称。半导体制造过程中不可避免地会产生缺陷，而这些缺陷可能随机分布在芯片各处。因此，英伟达必须在芯片设计上采取措施，确保这些良率合格的单元仍能以相对统一的方式对软件可见。
+
+我们让 Claude 编写了一个测试工具，通过启动不同大小的集群并使用 PTX `%%smid` 记录哪些 SM 出现在同一个 GPC 中，以此反向推导 SM 到 GPC 的映射关系。测试结果是一份将 TPC 划分至 GPC 的逻辑分组列表。由于某些 TPC 似乎占据了独立的逻辑 GPC，且从不与其他任何 TPC 协同调度，因此该列表的长度超过了 Hopper/Blackwell 架构中实际存在的 8 个 GPC。
+
+![](https://substackcdn.com/image/fetch/$s_!VqPc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4647ae85-dc9e-4c79-a203-47909a997e1b_1184x268.png)
+
+从 SM100 开始，英伟达针对这种整数划分问题提供了解决方案，使得内核既能利用大集群的优势，又能充分调用所有可用的 SM。内核在启动时可以指定两个集群大小：首选集群大小和后备集群大小。通常情况下，为了跑满整个 GPU，后备集群的大小应设为 2 或 1。
+
+参考资料：
+
+- [Cluster API](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-host-programming.html#launching-with-clusters-using-cudalaunchkernelex)
+
+- [协作组 API](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/cooperative-groups.html)
+
+- `CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`
+
+- [CUTLASS 示例 73](https://github.com/NVIDIA/cutlass/blob/main/examples/73_blackwell_gemm_preferred_cluster/blackwell_gemm_preferred_cluster.cu)
+
+## 逻辑 GPC 与物理 GPC
+
+前文介绍的将 TPC 划分到 GPC 的方式属于*逻辑*分组。它们代表了软件视角下的 GPC，并未提供每个 GPC 中 20 个实际物理 SM 到底有哪些被启用，也没有指明每个物理 GPC 在两个裸片（Die）上的具体位置。实际上，具有相同逻辑配置的 B200 芯片，其每个 GPC 中实际产出的物理 SM 未必完全相同。对于在软件视角下看似相同的 GPU，这可能成为导致性能非确定性的潜在原因。此外，将 SM 划分到 GPC 的逻辑分组方式，也无法说明 B200 封装内的两个裸片上分别承载了哪些 GPC。
+
+为了探究有关 SM 物理布局的更多信息，我们让每个 SM 遍历一个填满 L2 缓存的指针追踪数组，并测量每次加载的延迟。针对每个地址，我们将各个 SM 观察到的延迟与其他所有 SM 观察到的延迟进行对比，从而生成一个 SM`<->`SM 距离矩阵。X 轴和 Y 轴均为 SM ID。
+
+![](https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png)
+
+我们可以看到两组界线分明的 SM，它们访问 L2 缓存的平均延迟相差超过 300 个周期；这必然是跨裸片 (die-to-die) 通信所致。我们还根据上一节确定的逻辑 GPC 分组对这些 SM 进行了标注；有趣的是，在此基准测试中，那些零散的 TPC 彼此距离很近，并且似乎与 GPC0 表现出很强的相关性，因此可以推测这些 TPC 在物理上位于 GPC0 内。
+
+基于这些信息，我们可以进一步细化每个 GPC 中实际产出的 TPC 列表，尽管其中的“5+3”组合仍然只是推测。
+
+**Die A**: [10, 10, 10, 9]
+
+**Die B**: [9, 9, 9, 5+3]
+
+此外，尽管过程有些间接，但我们可以得出结论：跨裸片通信的延迟开销约为 300 个周期。观察该基准测试中单个 SM 的延迟分布（其中也包含了大量 L2 拥塞），这一点同样显而易见：
+
+![](https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png)
+
+我们在此感谢 Decart AI 的 Orian 为本次基准测试提供灵感。
+
+## 内存子系统
+
+本节将探讨内存子系统，即负责在计算单元之间搬运数据的硬件单元。内存拷贝指令负责调用内存子系统执行操作，而新一代架构引入了异步拷贝指令（阅读[上一篇文章](https://newsletter.semianalysis.com/i/174558646/asynchronous-execution)以了解异步机制的演进）。本文将重点分析异步拷贝指令的两种变体：`LDGSTS` 与张量内存加速器 (`TMA`)。
+
+## 异步拷贝
+
+异步拷贝（PTX：`cp.async`，SASS：`LDGSTS`）于 Ampere 架构首次引入，该指令负责将数据从全局内存异步搬运至共享内存 (SMEM)。异步拷贝具有非阻塞特性，能够实现内存加载与计算的重叠。此外，该指令将数据直接写入共享内存 (SMEM) 而无需经过寄存器，从而有效降低了寄存器压力。
+
+参考 FlashInfer 的多头注意力 (MHA) 内核，我们采用以下配置对异步拷贝进行基准测试：
+
+- 每个 SM 的协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）数量：1, 2, 3, 4
+
+- 流水线级数 (Stages)：1, 2, 4
+
+- 每个协作线程阵列 (CTA) 的线程数：64, 128, 256
+
+- 加载尺寸：4B, 8B, 16B
+
+我们绘制了吞吐量与每个 SM 的飞行中字节数 (bytes-in-flight) 的关系曲线，飞行中字节数即并发内存加载指令正在加载的总字节数。
+
+尽管在相同的飞行中字节数下，不同的加载尺寸最终会收敛至相似的吞吐量，但我们更倾向于使用 16 字节加载。在飞行中字节数相近的情况下，16 字节加载不仅能实现略高的吞吐量，占用的执行资源也更少。例如，当飞行中字节数为 32 KiB 时，8B 加载需要 4 个流水线级数，而 16B 加载仅需 2 个。这不仅节省了 2 个内存屏障对象所需的内存空间，还降低了指令发射压力。
+
+![](https://substackcdn.com/image/fetch/$s_!wD4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F763336d2-7438-44f3-879b-f3116360c0ac_1600x1033.png)
+
+整体来看，当飞行中字节数达到 32 KiB 时，使用 `LDGSTS` 的内存吞吐量达到饱和，约为 6.6 TB/s。
+
+我们还对多潜在注意力 (MLA) 内核所使用的配置空间进行了基准测试：
+
+- 每个 SM 1 个 CTA
+
+- 16B 加载
+
+- 每个协作线程阵列 (CTA) 的线程数：64, 128, 256
+
+- 流水线级数 (Stages)：4, 8, 12, 16
+
+实验表明，增加流水线级数可以在更高的飞行中字节数下实现更高的吞吐量，且在所有配置中，增加每个 CTA 的线程数均能严格提升性能。有趣的是，MLA 采用了 2 个 warp 和 12 级流水线的配置，吞吐量约为 2.2 TB/s。我们认为，这是由于 softmax warp 需要占用最多的寄存器，而增加 warp 数量会减少每个线程的寄存器分配量。
+
+![](https://substackcdn.com/image/fetch/$s_!Lvbe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F337b9825-d13a-44ed-85f5-df0aec71ba9b_1600x684.png)
+
+我们对同一组配置的延迟进行了基准测试。结果显示，`LDGSTS` 的基准延迟约为 600 纳秒，且在飞行中字节数达到 8 KiB 后几乎翻倍。这是因为要让 `LDGSTS` 实现较高的飞行中字节数，就必须使用大量线程，进而导致大量 warp 因 MIO（内存输入输出）节流而发生停滞。
+
+![](https://substackcdn.com/image/fetch/$s_!pE_H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9381e20a-0318-4284-af11-d1cf13a4c450_1600x977.png)
+
+![](https://substackcdn.com/image/fetch/$s_!tjkZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7888d3c1-270d-4d5e-a940-301c70813f89_1544x206.png)
+
+## 张量内存加速器 (TMA)
+
+张量内存加速器 (TMA)（Tensor Memory Accelerator (TMA)）（PTX 指令：`cp.async.bulk.tensor`，SASS 指令：`UTMALDG`）是 Hopper 架构引入的异步数据拷贝引擎，专门用于将大量数据从全局内存搬移至共享内存 (SMEM)。单个线程即可启动 TMA 执行地址生成、地址重组与越界处理，从而释放其他线程去执行独立任务。在此，我们对 2D 张量版本 (cp.async.bulk.tensor.2d) 进行基准测试，以代表典型的 TMA 用法。
+
+参考 FlashInfer 注意力算子，我们对 TMA 进行了基准测试：每个 SM 仅分配 1 个 CTA，但每个 CTA 启用 1 到 4 个 warp，并从中各取 1 个线程来发射不同 box 尺寸的 TMA 指令。下图展示了在不同飞行中字节数下的最佳吞吐量。
+
+我们使用以下配置对 TMA 进行基准测试：
+
+- 每个 SM 的 CTA 数量：1
+
+- 每个 CTA 的线程数：128（4 个 warp）
+
+- TMA box 尺寸：2D 形状，从 32x8 递增至 128x128
+
+![](https://substackcdn.com/image/fetch/$s_!IhCY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a47a042-7c59-4cc1-8459-665852a23321_1600x720.png)
+
+与 `LDGSTS` 相比，TMA 需要大得多的数据量才能达到峰值吞吐量。
+
+## 异步拷贝与 TMA 对比
+
+FlashInfer 等深度学习内核库在加载数据时会同时使用 TMA 和 async copy。TMA 和 async copy 具有不同的性能特征：TMA 擅长处理具有规则访存模式的大数据量加载，但延迟较高；而 async copy 能够处理不规则的访存模式，但存在数据量限制。我们将说明在何种条件下应如何取舍。在此，我们对 FlashInfer 在 MHA 和 MLA 内核中使用的配置进行了基准测试。
+
+从吞吐量来看，当飞行中数据量小于 32 字节时，async copy 略微优于 TMA，但 TMA 随后便会赶上，并能继续扩展至 128 KiB。从延迟来看，在飞行中数据量达到 12 KiB 之前，async copy 的延迟略低于 TMA，但超过该数据量后，TMA 的延迟会大幅增加。
+
+![](https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png)
+
+![](https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png)
+
+在实际应用中，Blackwell MLA 内核使用 async copy 进行动态页面加载，而其 MHA 内核仅使用 TMA。FlashInfer 的 Blackwell MHA 内核大多由 TRT-LLM 贡献，因此我们只能通过分析二进制文件来推测这些内核的具体行为。我们发现，与 Hopper 类似，所有 Blackwell TRT-LLM 内核均使用 TMA。我们推测，在动态页面加载方面，这些内核沿用了 Hopper 内核的机制：使用 4D TMA 并将页面索引作为最后一个维度，在需要时对 `TensorMap` 对象进行索引。为了明确这些内核的确切运行机制，我们呼吁英伟达开源 FlashInfer TRT-LLM 内核，以造福社区。
+
+## TMA 多播
+
+TMA 支持多播模式。在该模式下，单次加载操作即可将数据复制到由 CTA 掩码指定的多个 SM 的共享内存 (SMEM) 中。多播通常用于类似 GEMM 的模式，此时处理不同输出分块的 SM 需要共享输入分块。例如，多播非常适合 SwiGLU 激活函数，该函数采用双GEMM模式，即两个 GEMM 操作共享同一个输入矩阵。其主要优势在于减少了 HBM 的加载次数，从而降低了实际的带宽消耗。此外，由于多个 CTA 对共享数据的请求被合并为单一请求，它还能显著减少 L2 缓存的流量。
+
+根据 NCU 的分析，负责处理 TMA 多播请求的硬件单元称为 L2 请求合并器 (LRC)：
+
+L2 请求合并器 (LRC) 负责处理发往 L2 的请求，并尝试在将读取请求转发至 L2 缓存前对其进行合并。它还负责处理来自 SM 的编程式多播请求，并支持写入压缩。
+
+这表明即使没有显式请求，硬件也可能提供某种多播行为（类似于未命中状态保持寄存器）。我们通过运行相同的 TMA 多播基准测试来验证这一点。唯一的区别在于：此次并非由单个 CTA 发起多播加载，而是所有 CTA 均向同一数据发起独立的 TMA 加载。
+
+在此，我们对比三种情况：
+
+1. 每个 SM 加载不同的数据（基准测试）；2. TMA 多播（显式）——每个集群中的一个 CTA 向该集群内的所有 CTA 发起多播加载；3. TMA 多播（隐式）——每个集群内的所有 CTA 均向同一数据发起普通的 TMA 加载。
+
+即使数据尚未驻留在 L2 缓存中，TMA 多播也能提供极高的加载带宽来填充共享内存 (SMEM) 缓冲区。对于已知的流量模式，显式的 TMA 多播指令能够完美消除冗余的 L2 流量，使每字节共享内存 (SMEM) 对应的 L2 传输量达到理想的“1 / cluster_size”比例。我们还观察到，在这个简单的基准测试中，显式和隐式多播均能实现几乎相同的共享内存 (SMEM) 填充吞吐量。然而，LRC 并非完美无缺；在隐式多播情况下，L2 缓存接收到的流量略高，且这种现象随着总数据量的增加而愈发明显。
+
+![](https://substackcdn.com/image/fetch/$s_!Kl4E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b833880-e9f9-4018-b7cf-d8f8cc9f95c7_1600x1309.png)
+
+*就有效内存吞吐量而言，隐式多播与显式多播性能持平。但在降低 L2 缓存流量方面，一旦在途数据超过 64 字节，隐式多播便会失去效果。*
+
+## DSMEM 与 SMEM 对比
+
+英伟达在 Hopper 架构中引入了分布式共享内存 (DSMEM)。DSMEM 允许一个集群内的协作线程阵列 (CTA) 访问彼此的共享内存 (SMEM)。这对于 CTA间归约等模式非常有用。通过 DSMEM 读取对等 CTA 内存的吞吐量，显著低于共享内存 (SMEM) 每时钟周期 128 字节的吞吐量。
+
+我们测试了几种与 DSMEM 交互的不同 PTX 模式。为 DSMEM 编写代码与为共享内存 (SMEM) 编写代码的一个重要区别在于，DSMEM 加载与全局加载类似，采用数据包化传输；因此，其最优访问模式完全不同于本地共享内存 (SMEM) 中避免 bank 冲突的交错访问，而更像全局内存 (GMEM) 中对连续地址的典型合并访问。此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 `ld.shared` 而不带 `::cluster` 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 `ld.shared::cluster`。 使用 `ld.shared` 时，编译器会生成 `LDS` 指令，而不是像使用 `ld.shared::cluster` 时那样生成通用的 `LD` 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 `ld.shared::cluster` 的实际吞吐量，直到切换为使用 `cp.async.bulk`(PTX) / `UBLKCP`(SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。
+
+我们使用每种 PTX 模式时达到的峰值吞吐量如下所示，单位统一表示为每时钟周期字节数 (B/clk)，以便与 SM 本地共享内存 (SMEM) 已知的最大可达吞吐量进行对比。
+
+![](https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png)
+
+## 第五代 Tensor Core MMA
+
+MMA 指令是执行矩阵乘法的核心操作。从 Hopper 到 Blackwell 架构，MMA 的性能变得越来越高度依赖矩阵形状。在此，我们对这一现象展开深入研究，通过遍历不同的矩阵形状和数据类型，来量化这些性能差异。
+
+Blackwell 引入了 2SM MMA，这是一种新型 MMA 指令（`.cta_group::2`）。在该指令下，一对协作线程阵列 (CTA) 跨两个 SM 协同执行一次 MMA 操作。具体而言，输入矩阵 A 会被复制，而矩阵 B 和矩阵 D 则分片分布在这两个 SM 上，并且这对 CTA 能够访问彼此的共享内存 (SMEM)。这使得支持更大尺寸的 MMA 矩阵形状成为可能。我们研究了 2SM MMA 是表现出弱扩展性、强扩展性，还是兼而有之。
+
+我们基于以下配置空间对 MMA 性能进行了基准测试：
+
+![](https://substackcdn.com/image/fetch/$s_!Vi8a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b115c81-e5c1-4904-a640-9d239536fbd1_1342x412.png)
+
+## 吞吐量
+
+英伟达公布了针对不同输入数据类型的特定吞吐量性能。在此，我们展示其针对每种配置（数据格式与 CTA 组）的官方标称值，并将其与实际可达到的最大吞吐量进行对比。结果表明，UMMA 在所有数据格式和 CTA 组配置下均能达到接近峰值的吞吐量；即使在可能存在协同开销的 2SM 版本上，其表现依然如此。
+
+![](https://substackcdn.com/image/fetch/$s_!gMEj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd489809c-16d0-40d2-a3a5-030760568f0f_1600x800.png)
+
+对于所有 N 尺寸下的 1SM MMA，我们观察到较小的 M=64 配置最高仅达到 50% 的理论峰值吞吐量，而较大的 M=128 配置则接近 100%。这证实了 M=64 仅利用了一半的数据通路。对于 2SM MMA，M=128 的吞吐量在 N=64 时起步于 90% 的峰值，而在所有其他 N 尺寸下均接近 100%。因此，M128N64 的吞吐量必然受限于其他硬件单元（如张量内存 (TMEM)、L2 缓存、共享内存 (SMEM) 等）。同时，M=256 在所有配置下均能维持接近 100% 的峰值吞吐量，这是因为 M=256 相当于每个 SM 分配 M=128，从而能够完全利用数据通路。我们还注意到，在相同数据类型位宽下，不同格式的吞吐量完全一致，且微缩放 (micro-scaling) 数据类型几乎没有额外开销。
+
+![](https://substackcdn.com/image/fetch/$s_!7P-g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F17602e21-9606-451d-a8bc-3899ae442688_1600x695.png)
+
+MMA 支持两种不同的 AB 矩阵布局：两个输入矩阵均存储在共享内存 (SMEM) 中（简称 SS），以及矩阵 A 存储在张量内存 (TMEM) 中而矩阵 B 存储在共享内存 (SMEM) 中（简称 TS）。我们观察到，在 M=128 时，虽然 ABLayout=TS 能够达到接近峰值的吞吐量，但 ABLayout=SS 在较小的 N 尺寸下性能表现不佳，直到 N=128 时才追平前者。
+
+![](https://substackcdn.com/image/fetch/$s_!V8NQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F314106a3-52a8-427e-9fcf-8be00badccc9_1600x617.png)
+
+我们可以证明，这是因为在 SS 模式下，当 N 小于 128 时，指令本身会受限于共享内存 (SMEM) 带宽。例如，对于 FP16 数据类型，我们已知硬件在每个 SM 上每周期可执行 8192 次 MMA FLOPs，而共享内存 (SMEM) 带宽为 128 B/周期（每个 SM）。因此，对于 M=128、N=64、K=16 的配置，我们有：
+
+`A_bytes = 2*M*K = 4096; B_bytes = 2*N*K = 2048;`
+
+`FLOPs = 2*M*N*K = 262144`
+
+`SMEM Cycles = (A_bytes + B_bytes) / (128 B/clk) = 48 cycles`
+
+`Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles`
+
+我们针对不断增大的 N 值进行计算，发现从 N=128 的指令开始，性能最终受限于算力。
+
+![](https://substackcdn.com/image/fetch/$s_!xHgb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3700253d-db8b-462b-bdaa-6b03e9c1578d_1188x562.png)
+
+其他数据类型的情况也是如此——当两个操作数均存储在共享内存 (SMEM) 中时，若 N 小于 128，MMA 指令会受限于共享内存 (SMEM) 带宽。
+
+为了进一步说明这一点，我们绘制了所有形状的 FP8 1SM MMA 的 Roofline 模型图。可以清楚地看到，当 N < 256 时，指令处于内存受限区域，其斜率约为 128 字节/周期，这正是共享内存 (SMEM) 的带宽。
+
+![](https://substackcdn.com/image/fetch/$s_!-agO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2b6f6282-c294-432c-97fe-6646a3b9bacd_1517x948.png)
+
+2SM MMA 在所有数据格式和形状上均实现了完美的弱扩展性，在使用两倍于 1SM MMA 的计算资源时，达到了 2 倍的加速比。在 ABLayout=SS 的较小形状中，我们观察到了超过 2 倍的加速比，这同样是因为当 N < 128 时，SS 模式下的指令受限于共享内存 (SMEM) 带宽，而 2SM 版本将操作数 B 分摊到了两个 SM 之间。
+
+![](https://substackcdn.com/image/fetch/$s_!pG8O!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc143b70f-f950-4e8f-a9de-7ce2d956f605_1600x1020.png)
+
+*SS 模式：由于受限于共享内存 (SMEM) 带宽，在 N < 128 时加速比超过 2 倍*
+
+![](https://substackcdn.com/image/fetch/$s_!CSsj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F76693f90-cbc0-428e-a2fd-84e872810fa8_1600x1020.png)
+
+*TS 模式：近乎完美的 2 倍加速比*
+
+这些实验表明，对于给定的共享内存 (SMEM) 分块大小，应始终使用可用的最大指令形状，以获得最大吞吐量。
+
+## 延迟
+
+我们对单条 MMA 指令的延迟进行了基准测试，并将对比结果绘制如下。在所有配置中，延迟在 N=64 到 128 之间均呈线性增长；N=256 时的延迟激增，很可能是由于 N 值从 128 直接跨越到 256 造成的。具体到各个协作线程阵列 (CTA) 组的 MMA，在 1SM MMA 中，无论 N 值大小，M=64 和 M=128 的延迟都非常接近；而在 2SM MMA 中，M=256 的延迟增长速度略快于 M=128，这与我们的理论估算相符。对比不同数据类型可以发现，1SM MMA 在数据类型间的延迟差异微乎其微，但 2SM MMA 则表现出明显的分化。
+
+![](https://substackcdn.com/image/fetch/$s_!21tK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6a0575f8-c15a-4688-943c-2331a0a753ce_1600x695.png)
+
+我们注意到，各类数据类型的延迟排序呈现出一个微小但高度一致的规律：
+
+> S8 < BF16 = E4M3 = F4 < MXF8 = MXF4
+
+我们认为，整数运算具备更高的能效，因此 S8 的速度最快；而比例因子计算则给 MXF8 和 MXF4 带来了少量的额外开销。
+
+![](https://substackcdn.com/image/fetch/$s_!8pOu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4812fa68-0ae7-40d9-920c-2eb1f55b2d51_1600x1020.png)
+
+## 不同在途指令数下的吞吐量
+
+在我们的吞吐量基准测试中，我们设置了大量的飞行中指令，数量在 256 到 1024 之间，以此来摊销指令发射与提交等待的开销。然而，实际内核通常仅使用 1 到 4 条飞行中 MMA 指令。因此，我们对 1 到 10 条飞行中指令的吞吐量进行了基准测试，并在此探讨其吞吐量的变化规律。
+
+在所有配置下，我们发现相同的 N 维度与飞行中 MMA 指令数能够达到相似的理论极限性能 (Speed of Light, SoL) 百分比。值得注意的是，只有在 N 取最大值时才能达到 90% 的 SoL，而在 N 取最小值时仅能达到约 70%。对比 1SM 与 2SM MMA，我们发现 1SM 的 SoL 吞吐量比 2SM 高出约 5%。对于相同的数据格式和协作线程阵列 (CTA) 组 MMA，较大 N 维度的吞吐量始终高于较小的 N 维度。最后，我们观察到 4 条飞行中 MMA 指令的吞吐量 SoL 百分比最高仅能达到 78% 至 80%。
+
+![](https://substackcdn.com/image/fetch/$s_!zi4B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa662dd8a-5747-43e1-8fc4-8e0a73599bcf_1600x635.png)
+
+![](https://substackcdn.com/image/fetch/$s_!bQr2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1c7ae14b-4955-43db-a8b2-5673ff661d72_1600x635.png)
+
+![](https://substackcdn.com/image/fetch/$s_!hvag!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb1f518e0-ccbe-48de-ace9-1dd5264df6d5_1600x635.png)
+
+下文我们将讨论基于内核编写库 CUTLASS 的实际用例。此外，我们还将探讨吞吐量、多播 (multi-cast) 以及物理布局 (floorplans)。
+
+## 实际应用案例：CUTLASS
+
+接下来我们探讨一个实际用例：分块 GEMM 内循环模式，即沿着内部维度 K 连续加载分块，从而计算出输出矩阵的单个分块。
+
+首先，我们使用英伟达 CUTLASS 库实例化一个内核，该内核包含一个持久化的协作线程阵列 (CTA)，用于计算单个输出分块。我们改变 DMA->Math 流水线中的加载阶段（load stages）数量，随着阶段数的增加，内核会占用更多的共享内存 (SMEM)，同时实现更好的延迟隐藏。我们将 K 维度设置得非常大，以便在软件流水线的稳态模式下测量实际达到的数学计算吞吐量，并将其换算为硬件理论极限性能 (SoL) 数学吞吐量的百分比。
+
+对于选定的分块大小，可以使用更多的共享内存 (SMEM) 来增加阶段数并隐藏更多延迟。对于给定的流水线深度 N，如果有一个阶段正在执行 MMA，那么最多可以有 N-1 个阶段的 A 和 B 缓冲区处于飞行中（in-flight）状态。换个角度来看，给定加载阶段的延迟在 (N-1)*M 的范围内仍能被完全隐藏，其中 M 是单个阶段执行 MMA 所需的时间。因此，在分块大小固定的情况下，延迟隐藏能力会随着阶段数的增加而严格提升。
+
+然而，如果 GEMM 的 Epilogue（收尾操作）消耗了共享内存 (SMEM)，主循环可用的容量就会减少，因此必须降低使用的阶段数。在这里，我们使用不消耗共享内存 (SMEM) 的 Epilogue，因此，当阶段缓冲区消耗的总共享内存 (SMEM) 达到每个 SM 的最大容量时，曲线会在 X 轴方向上终止。
+
+![](https://substackcdn.com/image/fetch/$s_!ZJVd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4595a83a-3bc4-4208-86b1-c09748633651_1600x700.png)
+
+因此，共享内存 (SMEM) 的使用量以及由此决定的阶段数是基于以下因素[计算](https://github.com/NVIDIA/cutlass/blob/main/include/cutlass/gemm/collective/builders/sm100_umma_builder.inl#L84)的：
+
+- 操作数共享内存 (SMEM) 分块（A 和 B）
+
+- 屏障 (Barrier) 存储
+
+- Epilogue 共享内存 (SMEM) 使用量
+
+## 吞吐量与多播
+
+前文我们探讨了单条指令的可达吞吐量；我们发现某些指令可能天生受限于共享内存 (SMEM) 带宽，但在测量每种指令形状的峰值性能时，我们并未将内存系统纳入考量。在本节中，我们采用相同的单协作线程阵列 (CTA) CUTLASS 基准测试，并将其扩展为使用尺寸大于 1x1 的集群 (cluster)。此外，对于任何 M 维度为偶数的集群形状，我们均使用 2SM MMA 原子指令 (atoms)。
+
+图表中展示了部分测试结果。在每张图表中，我们保持每个协作线程阵列 (CTA) 的分块 (tile) 大小不变，并分别针对 1SM 和 2SM 改变集群大小。需要注意的是，对于 128x128 的单协作线程阵列 (CTA) 分块形状，当将集群的 N 维度从 1 扩展到 2 (2SM) 或从 2 扩展到 4 (1SM) 时，集群引入的多播 (multicast) 机制带来了显著的性能收益。因此我们可以得出结论：小于该尺寸的分块形状受限于内存子系统/L2 带宽。
+
+![](https://substackcdn.com/image/fetch/$s_!PF7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F219aa10e-cce7-4fd5-896f-ab39146dd54a_1600x1143.png)
+
+## 芯片布局
+
+Blackwell 的芯片布局 (floorplan) 与 Blackwell Ultra 相似，如下图所示。正如我们在上一节中所讨论的，我们可以看到 8 个 GPC、L2 缓存段以及裸片间互连通道。
+
+![](https://substackcdn.com/image/fetch/$s_!rL3o!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F035faa60-56a9-4b77-86eb-d1383b4bc50d_1600x1041.png)
+
+来源：[探秘英伟达（NVIDIA）Blackwell Ultra：驱动 AI 工厂时代的芯片](https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/)
+
+我们正在获取 Blackwell 芯片的裸片照片 (die shots)，以收集更多芯片底层信息，包括功能模块面积、PHY 带宽密度，以及 GPC 和 SM 的详细布局。如需了解更多信息，请联系 [sales@semianalysis.com](mailto:sales@semianalysis.com)。

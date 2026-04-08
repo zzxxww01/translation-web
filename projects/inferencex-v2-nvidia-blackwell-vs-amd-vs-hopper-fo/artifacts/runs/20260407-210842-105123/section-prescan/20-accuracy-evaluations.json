@@ -1,0 +1,65 @@
+{
+  "section_id": "20-accuracy-evaluations",
+  "new_terms": [
+    {
+      "term": "QAT",
+      "suggested_translation": "量化感知训练 (QAT)",
+      "context": "often during QAT/PAT it is calibrated to common popular GSM8k",
+      "confidence": 0.95
+    },
+    {
+      "term": "PAT",
+      "suggested_translation": "PAT",
+      "context": "often during QAT/PAT it is calibrated to common popular GSM8k",
+      "confidence": 0.8
+    },
+    {
+      "term": "GSM8k",
+      "suggested_translation": "GSM8k",
+      "context": "Currently we are only using GSM8k, but being a very easy benchmark...",
+      "confidence": 1.0
+    },
+    {
+      "term": "GPQA",
+      "suggested_translation": "GPQA",
+      "context": "expand towards harder ones in the future, such as GPQA, HLE, MATH-500",
+      "confidence": 1.0
+    },
+    {
+      "term": "HLE",
+      "suggested_translation": "HLE",
+      "context": "expand towards harder ones in the future, such as GPQA, HLE, MATH-500",
+      "confidence": 1.0
+    },
+    {
+      "term": "quantization",
+      "suggested_translation": "量化",
+      "context": "Another form of performance-accuracy tradeoff is quantization.",
+      "confidence": 1.0
+    },
+    {
+      "term": "acceptance rates",
+      "suggested_translation": "接受率",
+      "context": "e.g. via aggressively relaxed acceptance rates, decoding tweaks",
+      "confidence": 0.9
+    },
+    {
+      "term": "evals",
+      "suggested_translation": "评测",
+      "context": "Without evals, a misconfigured server... can still produce great throughput numbers",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "throughput": "吞吐量",
+    "benchmark": "基准测试",
+    "deepseekr1": "DeepSeek R1",
+    "fp8": "FP8",
+    "fp4": "FP4",
+    "gpt-oss": "GPT-OSS",
+    "semianalysis": "SemiAnalysis",
+    "inferencex": "InferenceX"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:55:24.092123"
+}

@@ -1,0 +1,54 @@
+{
+  "section_id": "27-gpt-oss-120b-single-node",
+  "new_terms": [
+    {
+      "term": "compute die",
+      "suggested_translation": "计算裸片",
+      "context": "While B200 and GB200 share the same Blackwell compute die...",
+      "confidence": 0.95
+    },
+    {
+      "term": "serving stack",
+      "suggested_translation": "Serving 栈",
+      "context": "because the platform and serving stack reduce non-compute bottlenecks at scale",
+      "confidence": 0.9
+    },
+    {
+      "term": "scale-up domain",
+      "suggested_translation": "Scale-up 域",
+      "context": "showing the impact of the NVL72’s larger scale up domain.",
+      "confidence": 0.9
+    },
+    {
+      "term": "throughput vs interactivity plot",
+      "suggested_translation": "吞吐量-交互速度曲线图",
+      "context": "group in the lower-left of the throughput vs interactivity plot",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "MI300X": "MI300X",
+    "MI325X": "MI325X",
+    "H200": "H200",
+    "H100": "H100",
+    "throughput": "吞吐量",
+    "interactivity": "交互速度",
+    "nvidia": "Nvidia",
+    "MI355X": "MI355X",
+    "token": "token",
+    "gpu": "GPU",
+    "atom": "ATOM",
+    "B200": "B200",
+    "GB200": "GB200",
+    "blackwell": "Blackwell",
+    "cpu": "CPU",
+    "scale-out": "横向扩展 (Scale-out)",
+    "semianalysis": "SemiAnalysis",
+    "inferencex": "InferenceX",
+    "gb200 nvl72": "GB200 NVL72",
+    "world size": "world size",
+    "tok/s/user": "tok/s/user"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:09:25.653504"
+}

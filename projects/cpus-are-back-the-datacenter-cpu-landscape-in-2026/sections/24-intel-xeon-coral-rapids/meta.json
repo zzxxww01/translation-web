@@ -1,0 +1,301 @@
+{
+  "section_id": "24-intel-xeon-coral-rapids",
+  "title": "Intel Xeon Coral Rapids",
+  "title_translation": "英特尔至强Coral Rapids",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "With the arrival of Lip-Bu Tan and the cancellation of the 8-channel Diamond Rapids-SP, Intel hopes to accelerate the development of Coral Rapids and bring it to market earlier. Before this, Intel will release their custom Xeon CPU with an NVLink-C2C chiplet to provide an x86 alternative to NVIDIA rackscale GPU designs. Other than that, there is another victim of Lip-Bu’s streamlining. Intel’s Clearwater Forest successor is dead. The E-core Xeon line was already treading water as we detailed above, and the series will end with just 2 generations. Originally codenamed Rouge River Forest, then DMR-HD (Diamond Rapids High Density), the design reused the IMH dies on Diamond Rapids with new CBB dies each with 128 E-cores, enabling 512 cores in a single socket.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0284",
+      "parent_block_index": 284,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With the arrival of Lip-Bu Tan and the cancellation of the 8-channel Diamond Rapids-SP, Intel hopes to accelerate the development of Coral Rapids and bring it to market earlier. Before this, Intel will release their custom Xeon CPU with an NVLink-C2C chiplet to provide an x86 alternative to NVIDIA rackscale GPU designs. Other than that, there is another victim of Lip-Bu’s streamlining. Intel’s Clearwater Forest successor is dead. The E-core Xeon line was already treading water as we detailed above, and the series will end with just 2 generations. Originally codenamed Rouge River Forest, then DMR-HD (Diamond Rapids High Density), the design reused the IMH dies on Diamond Rapids with new CBB dies each with 128 E-cores, enabling 512 cores in a single socket.",
+      "parent_block_plain_text": "With the arrival of Lip-Bu Tan and the cancellation of the 8-channel Diamond Rapids-SP, Intel hopes to accelerate the development of Coral Rapids and bring it to market earlier. Before this, Intel will release their custom Xeon CPU with an NVLink-C2C chiplet to provide an x86 alternative to NVIDIA rackscale GPU designs. Other than that, there is another victim of Lip-Bu’s streamlining. Intel’s Clearwater Forest successor is dead. The E-core Xeon line was already treading water as we detailed above, and the series will end with just 2 generations. Originally codenamed Rouge River Forest, then DMR-HD (Diamond Rapids High Density), the design reused the IMH dies on Diamond Rapids with new CBB dies each with 128 E-cores, enabling 512 cores in a single socket.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 765,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着陈立武的加入以及 8 通道 Diamond Rapids-SP 被取消，英特尔希望加速 Coral Rapids 的研发进程，推动其尽早上市。在此之前，英特尔将发布搭载 NVLink-C2C 芯粒的定制版至强 CPU，为英伟达的机架级 GPU 设计提供 x86 架构的替代方案。除此之外，陈立武精简计划还有另一个牺牲品：英特尔 Clearwater Forest 的后续产品已被彻底砍掉。正如前文所述，E核 (能效核) 至强产品线本就停滞不前，该系列在推出仅两代后便将宣告终结。这款后续产品最初代号为 Rouge River Forest，后更名为 DMR-HD (Diamond Rapids高密度版)；其设计复用了 Diamond Rapids 上的 IMH 裸片，并搭配全新的 CBB 裸片，每个 CBB 裸片包含 128 个E核，从而在单插槽中实现高达 512 个核心。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:47:09.138630",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.355,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文存在中英文排版细节瑕疵。首先，括号使用了带有前置空格的半角小括号，在中文语境下，建议使用全角括号以保持排版一致性；其次，“128 个E核”和“Diamond Rapids高密度版”中，中文字符与英文字母之间缺失了标准空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0285",
+      "parent_block_index": 285,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:47:09.138690",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.355,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文存在中英文排版细节瑕疵。首先，括号使用了带有前置空格的半角小括号，在中文语境下，建议使用全角括号以保持排版一致性；其次，“128 个E核”和“Diamond Rapids高密度版”中，中文字符与英文字母之间缺失了标准空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Intel 18A-Ultra and 14A-P. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel 18A-Ultra and 14A-P. Source: Intel",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0286",
+      "parent_block_index": 286,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel 18A-Ultra and 14A-P. Source: Intel*",
+      "parent_block_plain_text": "Intel 18A-Ultra and 14A-P. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel 18A-Ultra and 14A-P. Source: Intel",
+          "start": 0,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 18A-Ultra 与 14A-P。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:47:09.138801",
+          "tokenized_text": "[[[EM_1|英特尔 18A-Ultra 与 14A-P。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.355,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文存在中英文排版细节瑕疵。首先，括号使用了带有前置空格的半角小括号，在中文语境下，建议使用全角括号以保持排版一致性；其次，“128 个E核”和“Diamond Rapids高密度版”中，中文字符与英文字母之间缺失了标准空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "For Coral Rapids, Intel has realized their mistake and returns SMT back to their P-core architecture. We believe it was originally designed for Intel’s 14A process (P1280), which would only be entering risk production in 2027, meaning a product launch in late 2028 at the earliest, if not early 2029. For Intel to accelerate and bring Coral Rapids to market earlier, Intel may have to port the design to a refined 18A-Ultra node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0287",
+      "parent_block_index": 287,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For Coral Rapids, Intel has realized their mistake and returns SMT back to their P-core architecture. We believe it was originally designed for Intel’s 14A process (P1280), which would only be entering risk production in 2027, meaning a product launch in late 2028 at the earliest, if not early 2029. For Intel to accelerate and bring Coral Rapids to market earlier, Intel may have to port the design to a refined 18A-Ultra node.",
+      "parent_block_plain_text": "For Coral Rapids, Intel has realized their mistake and returns SMT back to their P-core architecture. We believe it was originally designed for Intel’s 14A process (P1280), which would only be entering risk production in 2027, meaning a product launch in late 2028 at the earliest, if not early 2029. For Intel to accelerate and bring Coral Rapids to market earlier, Intel may have to port the design to a refined 18A-Ultra node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 429,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "针对 Coral Rapids，英特尔已意识到此前的失误，并在其 P核架构中重新引入了 SMT 技术。我们认为，该架构最初专为英特尔的 14A 制程节点 (P1280) 设计，但该节点要到 2027 年才会进入风险试产阶段；这意味着产品最早也要到 2028 年底才能发布，甚至可能推迟至 2029 年初。为了加速研发并让 Coral Rapids 尽早上市，英特尔可能不得不将该设计移植到经过改进的 18A-Ultra 制程节点上。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:47:09.138830",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.355,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文存在中英文排版细节瑕疵。首先，括号使用了带有前置空格的半角小括号，在中文语境下，建议使用全角括号以保持排版一致性；其次，“128 个E核”和“Diamond Rapids高密度版”中，中文字符与英文字母之间缺失了标准空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

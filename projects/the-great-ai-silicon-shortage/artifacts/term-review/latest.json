@@ -1,0 +1,690 @@
+{
+  "project_id": "the-great-ai-silicon-shortage",
+  "project_title": "The Great AI Silicon Shortage",
+  "review_required": true,
+  "generated_at": "2026-03-13T22:02:56.086442",
+  "total_candidates": 17,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "N3",
+          "suggested_translation": "[保持原文] N3",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "05-tsmcs-supply-situation",
+              "section_title": "TSMC’s Supply Situation"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            },
+            {
+              "section_id": "08-cowos-tight-but-easing",
+              "section_title": "CoWoS – Tight but Easing"
+            }
+          ],
+          "contexts": [
+            "TSMC's specific 3nm process node generation",
+            "Effective N3 utilization is expected to exceed 100%.",
+            "Refers to TSMC's 3nm process node."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "memory constraints",
+          "suggested_translation": "存储限制",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "System or market limitations caused by memory availability or performance"
+          ],
+          "similar_terms": [
+            {
+              "original": "memory chip",
+              "translation": "存储芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.621
+            },
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.452
+            },
+            {
+              "original": "semiconductor",
+              "translation": "半导体",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        },
+        {
+          "term": "Supply Chain Wars",
+          "suggested_translation": "供应链战争",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Intense geopolitical and corporate competition over semiconductor resources"
+          ],
+          "similar_terms": [
+            {
+              "original": "supply chain",
+              "translation": "供应链",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.828
+            },
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.211
+            }
+          ]
+        },
+        {
+          "term": "wafer shortages",
+          "suggested_translation": "晶圆短缺",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Supply deficit in semiconductor manufacturing capacity"
+          ],
+          "similar_terms": [
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            },
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-semianalysis-x-fluidstack-hack",
+      "section_title": "SemiAnalysis x Fluidstack Hackathon",
+      "candidates": [
+        {
+          "term": "Fluidstack",
+          "suggested_translation": "[保持原文] Fluidstack",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "01-semianalysis-x-fluidstack-hack",
+          "related_sections": [
+            {
+              "section_id": "01-semianalysis-x-fluidstack-hack",
+              "section_title": "SemiAnalysis x Fluidstack Hackathon"
+            }
+          ],
+          "contexts": [
+            "Cloud infrastructure provider and hackathon partner"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "hackathon",
+          "suggested_translation": "黑客松（首次标注原文）",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "01-semianalysis-x-fluidstack-hack",
+          "related_sections": [
+            {
+              "section_id": "01-semianalysis-x-fluidstack-hack",
+              "section_title": "SemiAnalysis x Fluidstack Hackathon"
+            }
+          ],
+          "contexts": [
+            "Collaborative programming event mentioned in the section title and content"
+          ],
+          "similar_terms": [
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.556
+            },
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-the-tsmc-n3-shortage",
+      "section_title": "The TSMC N3 Shortage",
+      "candidates": [
+        {
+          "term": "XPU",
+          "suggested_translation": "[保持原文] XPU",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "03-the-tsmc-n3-shortage",
+          "related_sections": [
+            {
+              "section_id": "03-the-tsmc-n3-shortage",
+              "section_title": "The TSMC N3 Shortage"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            }
+          ],
+          "contexts": [
+            "A collective term for various processing units (CPU, GPU, NPU, etc.).",
+            "A generic term for various types of processing units (GPU, TPU, etc.)."
+          ],
+          "similar_terms": [
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "GPU",
+              "translation": "GPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "图形处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "NPU",
+              "translation": "NPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "神经网络处理器",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "AI accelerator",
+          "suggested_translation": "AI加速器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-the-tsmc-n3-shortage",
+          "related_sections": [
+            {
+              "section_id": "03-the-tsmc-n3-shortage",
+              "section_title": "The TSMC N3 Shortage"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            }
+          ],
+          "contexts": [
+            "Refers to hardware like Blackwell, Rubin, and TPUs transitioning to N3.",
+            "Specialized hardware designed to accelerate AI workloads."
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-n3-in-numbers",
+      "section_title": "N3 in numbers",
+      "candidates": [
+        {
+          "term": "accelerator",
+          "suggested_translation": "加速器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "04-n3-in-numbers",
+          "related_sections": [
+            {
+              "section_id": "04-n3-in-numbers",
+              "section_title": "N3 in numbers"
+            }
+          ],
+          "contexts": [
+            "N3 accelerator wafer demand ramps aggressively throughout this year"
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "Rubin",
+          "suggested_translation": "[保持原文] Rubin",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "04-n3-in-numbers",
+          "related_sections": [
+            {
+              "section_id": "04-n3-in-numbers",
+              "section_title": "N3 in numbers"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            }
+          ],
+          "contexts": [
+            "The primary driver is Nvidia’s Rubin production ramp",
+            "NVIDIA's next-generation GPU architecture following Blackwell."
+          ],
+          "similar_terms": [
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "ASP",
+          "suggested_translation": "平均售价（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-n3-in-numbers",
+          "related_sections": [
+            {
+              "section_id": "04-n3-in-numbers",
+              "section_title": "N3 in numbers"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            }
+          ],
+          "contexts": [
+            "complex packaging requirements, which translate to higher ASPs",
+            "Average Selling Price of consumer devices."
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Blackwell",
+          "suggested_translation": "[保持原文] Blackwell",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-n3-in-numbers",
+          "related_sections": [
+            {
+              "section_id": "04-n3-in-numbers",
+              "section_title": "N3 in numbers"
+            }
+          ],
+          "contexts": [
+            "Nvidia’s transition from 4NP-based Blackwell to the N3P-based Rubin generation"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "05-tsmcs-supply-situation",
+      "section_title": "TSMC’s Supply Situation",
+      "candidates": [
+        {
+          "term": "wafer starts",
+          "suggested_translation": "晶圆投片量",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "05-tsmcs-supply-situation",
+          "related_sections": [
+            {
+              "section_id": "05-tsmcs-supply-situation",
+              "section_title": "TSMC’s Supply Situation"
+            },
+            {
+              "section_id": "06-smartphones-as-the-front-end-r",
+              "section_title": "Smartphones as the Front-End Release Valve?"
+            }
+          ],
+          "contexts": [
+            "Why can’t TSMC simply add more N3 wafer starts?",
+            "The number of wafers that begin the manufacturing process in a given period."
+          ],
+          "similar_terms": [
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.588
+            },
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-memory-the-next-biggest-constr",
+      "section_title": "Memory The Next Biggest Constraint",
+      "candidates": [
+        {
+          "term": "commodity DRAM",
+          "suggested_translation": "通用型 DRAM",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "07-memory-the-next-biggest-constr",
+          "related_sections": [
+            {
+              "section_id": "07-memory-the-next-biggest-constr",
+              "section_title": "Memory The Next Biggest Constraint"
+            }
+          ],
+          "contexts": [
+            "Standard, non-specialized DRAM being crowded out by HBM production."
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.444
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-cowos-tight-but-easing",
+      "section_title": "CoWoS – Tight but Easing",
+      "candidates": [
+        {
+          "term": "Amkor",
+          "suggested_translation": "安靠（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-cowos-tight-but-easing",
+          "related_sections": [
+            {
+              "section_id": "08-cowos-tight-but-easing",
+              "section_title": "CoWoS – Tight but Easing"
+            }
+          ],
+          "contexts": [
+            "A leading OSAT provider mentioned as an alternative to TSMC for CoWoS-like packaging."
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Trainium",
+          "suggested_translation": "[保持原文] Trainium",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-cowos-tight-but-easing",
+          "related_sections": [
+            {
+              "section_id": "08-cowos-tight-but-easing",
+              "section_title": "CoWoS – Tight but Easing"
+            },
+            {
+              "section_id": "10-supply-chain-control-matters-m",
+              "section_title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared"
+            }
+          ],
+          "contexts": [
+            "AWS's custom AI training chip.",
+            "driven in part by Anthropic’s heavy use of TPUs and Trainium"
+          ],
+          "similar_terms": [
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.75
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.526
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "10-supply-chain-control-matters-m",
+      "section_title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared",
+      "candidates": [
+        {
+          "term": "compute",
+          "suggested_translation": "算力",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "10-supply-chain-control-matters-m",
+          "related_sections": [
+            {
+              "section_id": "10-supply-chain-control-matters-m",
+              "section_title": "Supply-Chain Control Matters Most: Nvidia The Most Prepared"
+            }
+          ],
+          "contexts": [
+            "With compute in short supply but DC power available"
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.6
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.6
+            },
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

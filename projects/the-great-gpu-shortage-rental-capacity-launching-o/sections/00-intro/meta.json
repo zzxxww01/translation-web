@@ -1,0 +1,1777 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "H100 Rental Prices up 40%, GPU Rental Pricing Dashboard Launch, Compute Rental Market Structure, Will Rental Prices keep going up?",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### H100 Rental Prices up 40%, GPU Rental Pricing Dashboard Launch, Compute Rental Market Structure, Will Rental Prices keep going up?",
+      "parent_block_plain_text": "H100 Rental Prices up 40%, GPU Rental Pricing Dashboard Launch, Compute Rental Market Structure, Will Rental Prices keep going up?",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 130,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "H100租赁价格飙升40%，GPU租赁定价仪表盘上线，算力租赁市场结构解析，租赁价格还会继续上涨吗？",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.739900",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Dylan Patel, Daniel Nishball, Jordan Nanos, and 2 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 16,
+          "end": 31,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Jordan Nanos",
+          "start": 33,
+          "end": 45,
+          "href": "https://substack.com/@jnanos",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Dylan Patel](https://substack.com/@semianalysis), [Daniel Nishball](https://substack.com/@danielnishball730869), [Jordan Nanos](https://substack.com/@jnanos), and 2 others",
+      "parent_block_plain_text": "By Dylan Patel, Daniel Nishball, Jordan Nanos, and 2 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 3,
+          "end": 14,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 16,
+          "end": 31,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Jordan Nanos",
+          "start": 33,
+          "end": 45,
+          "href": "https://substack.com/@jnanos",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 59,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作者：Dylan Patel、Daniel Nishball、Jordan Nanos 等2人",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740038",
+          "tokenized_text": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Daniel Nishball]]]、[[[LINK_3|Jordan Nanos]]] 等2人",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Apr 02, 2026 · Free",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apr 02, 2026 · Free",
+      "parent_block_plain_text": "Apr 02, 2026 · Free",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026年4月2日 · 免费",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740053",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Anthropic’s Claude 4.6 Opus and Claude Code have soared in demand. Anthropic’s ARR has nearly tripled in just a single quarter from $9B at the end of last year to over $25B today. Open models such as GLM and Kimi K2.5 caused open model use cases to soar. Capital raises by firms like Anthropic, OpenAI, and various Neolabs also demand GPUs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Anthropic’s Claude 4.6 Opus and Claude Code have soared in demand. Anthropic’s ARR has nearly tripled in just a single quarter from $9B at the end of last year to over $25B today. Open models such as GLM and Kimi K2.5 caused open model use cases to soar. Capital raises by firms like Anthropic, OpenAI, and various Neolabs also demand GPUs.",
+      "parent_block_plain_text": "Anthropic’s Claude 4.6 Opus and Claude Code have soared in demand. Anthropic’s ARR has nearly tripled in just a single quarter from $9B at the end of last year to over $25B today. Open models such as GLM and Kimi K2.5 caused open model use cases to soar. Capital raises by firms like Anthropic, OpenAI, and various Neolabs also demand GPUs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 340,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Anthropic 的 Claude 4.6 Opus 和 Claude Code 需求激增。短短一个季度内，Anthropic 的年度经常性收入（ARR）几乎翻了三倍，从去年底的 90 亿美元飙升至如今的 250 亿美元以上。GLM 和 Kimi K2.5 等开源模型也推动了开源模型应用场景的暴涨。此外，Anthropic、OpenAI 以及各类新兴 AI 实验室（Neolab）完成融资后，同样产生了对 GPU 的庞大需求。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740063",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Claude Code is the Inflection Point - Doug O'Laughlin, Jeremie Eliahou Ontiveros, and 3 others · Feb 5",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Claude Code is the Inflection Point",
+          "start": 0,
+          "end": 35,
+          "href": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Claude Code is the Inflection Point](https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point) - Doug O'Laughlin, Jeremie Eliahou Ontiveros, and 3 others · Feb 5",
+      "parent_block_plain_text": "Claude Code is the Inflection Point - Doug O'Laughlin, Jeremie Eliahou Ontiveros, and 3 others · Feb 5",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Claude Code is the Inflection Point",
+          "start": 0,
+          "end": 35,
+          "href": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 102,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Claude Code 是行业拐点 - Doug O'Laughlin、Jeremie Eliahou Ontiveros 等3人 · 2月5日",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740095",
+          "tokenized_text": "[[[LINK_1|Claude Code 是行业拐点]]] - Doug O'Laughlin、Jeremie Eliahou Ontiveros 等3人 · 2月5日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "This inflection point means that demand has spiked and there’s been a run on GPUs at the hyperscalers and Neoclouds.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This inflection point means that demand has spiked and there’s been a run on GPUs at the hyperscalers and Neoclouds.",
+      "parent_block_plain_text": "This inflection point means that demand has spiked and there’s been a run on GPUs at the hyperscalers and Neoclouds.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 116,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一拐点意味着需求已然暴增，超大规模云厂商和新兴算力云厂商（Neocloud）的 GPU 遭遇抢购潮。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740106",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "This new source of demand has spiked pricing for products and services across the supply chain, from DRAM and NAND memory to fiber optic cables, datacenter colocation and gas turbines.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This new source of demand has spiked pricing for products and services across the supply chain, from DRAM and NAND memory to fiber optic cables, datacenter colocation and gas turbines.",
+      "parent_block_plain_text": "This new source of demand has spiked pricing for products and services across the supply chain, from DRAM and NAND memory to fiber optic cables, datacenter colocation and gas turbines.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 184,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这股新增需求推高了整个供应链的产品与服务定价，从 DRAM 和 NAND 存储器，到光纤线缆、数据中心托管乃至燃气轮机，无一幸免。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740114",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "GPU Rental Pricing is the latest of many compute related products and services to see a dramatic tightness in supply and resulting jump in pricing. H100 1-year GPU rental contract pricing has shot up almost 40% from a low of $1.70/hr/GPU in October 2025 to $2.35/hr/GPU by March 2026.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "p",
+      "parent_block_markdown": "GPU Rental Pricing is the latest of many compute related products and services to see a dramatic tightness in supply and resulting jump in pricing. H100 1-year GPU rental contract pricing has shot up almost 40% from a low of $1.70/hr/GPU in October 2025 to $2.35/hr/GPU by March 2026.",
+      "parent_block_plain_text": "GPU Rental Pricing is the latest of many compute related products and services to see a dramatic tightness in supply and resulting jump in pricing. H100 1-year GPU rental contract pricing has shot up almost 40% from a low of $1.70/hr/GPU in October 2025 to $2.35/hr/GPU by March 2026.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 284,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在众多算力相关的产品与服务中，GPU 租赁是最新一个因供应极度紧张而导致价格跳涨的领域。H100 的 1 年期 GPU 租赁合同价格已从 2025 年 10 月 1.70 美元/小时/GPU 的低点，暴涨近 40%，至 2026 年 3 月的 2.35 美元/小时/GPU。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740122",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "On-Demand GPU rental capacity is sold out across all GPU types – those that have locked up on-demand instances are not willing to relinquish this capacity back into the pool despite recent price hikes. Trying to find GPU compute in early 2026 has been like trying to book airplane tickets on the last flight out, high prices, and almost no availability. That’s the PC analogy, but the more accurate analogy is that trying to rent a cluster is actually like trying to buy drugs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "actually like trying to buy drugs",
+          "start": 443,
+          "end": 476,
+          "href": "https://x.com/a16z/status/1970119070247985420",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On-Demand GPU rental capacity is sold out across all GPU types – those that have locked up on-demand instances are not willing to relinquish this capacity back into the pool despite recent price hikes. Trying to find GPU compute in early 2026 has been like trying to book airplane tickets on the last flight out, high prices, and almost no availability. That’s the PC analogy, but the more accurate analogy is that trying to rent a cluster is [actually like trying to buy drugs](https://x.com/a16z/status/1970119070247985420).",
+      "parent_block_plain_text": "On-Demand GPU rental capacity is sold out across all GPU types – those that have locked up on-demand instances are not willing to relinquish this capacity back into the pool despite recent price hikes. Trying to find GPU compute in early 2026 has been like trying to book airplane tickets on the last flight out, high prices, and almost no availability. That’s the PC analogy, but the more accurate analogy is that trying to rent a cluster is actually like trying to buy drugs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "actually like trying to buy drugs",
+          "start": 443,
+          "end": 476,
+          "href": "https://x.com/a16z/status/1970119070247985420",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 477,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "所有型号的按需 GPU 租赁算力均已售罄——那些已经锁定按需实例的客户，尽管面临近期价格跳涨，也不愿将这些算力释放回资源池。在2026年初寻找 GPU 算力，就像试图预订最后一班航班的机票一样：价格高昂，且几乎一票难求。这还是个体面的比喻，更准确的说法是，现在想租一个集群简直像在买毒品一样。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740150",
+          "tokenized_text": "所有型号的按需 GPU 租赁算力均已售罄——那些已经锁定按需实例的客户，尽管面临近期价格跳涨，也不愿将这些算力释放回资源池。在2026年初寻找 GPU 算力，就像试图预订最后一班航班的机票一样：价格高昂，且几乎一票难求。这还是个体面的比喻，更准确的说法是，现在想租一个集群[[[LINK_1|简直像在买毒品一样]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740159",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!8k4U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2425f27f-7411-46a2-ae85-96e169f134f6_977x561.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 94,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556211",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740188",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "confirmed_tokenized": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "At SemiAnalysis, we have been deeply involved in tracking trends and topics including GPU rental pricing within the Neocloud and Hyperscale ecosystem thanks to our work on ClusterMAX, InferenceX and AI Cloud Total Cost of Ownership.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "ClusterMAX",
+          "start": 172,
+          "end": 182,
+          "href": "https://www.clustermax.ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "InferenceX",
+          "start": 184,
+          "end": 194,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "AI Cloud Total Cost of Ownership",
+          "start": 199,
+          "end": 231,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At SemiAnalysis, we have been deeply involved in tracking trends and topics including GPU rental pricing within the Neocloud and Hyperscale ecosystem thanks to our work on [ClusterMAX](https://www.clustermax.ai/), [InferenceX](https://inferencex.semianalysis.com/) and [AI Cloud Total Cost of Ownership](https://semianalysis.com/ai-cloud-tco-model/).",
+      "parent_block_plain_text": "At SemiAnalysis, we have been deeply involved in tracking trends and topics including GPU rental pricing within the Neocloud and Hyperscale ecosystem thanks to our work on ClusterMAX, InferenceX and AI Cloud Total Cost of Ownership.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "ClusterMAX",
+          "start": 172,
+          "end": 182,
+          "href": "https://www.clustermax.ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "InferenceX",
+          "start": 184,
+          "end": 194,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "AI Cloud Total Cost of Ownership",
+          "start": 199,
+          "end": 231,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 232,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "得益于我们在ClusterMAX、InferenceX以及AI 云总拥有成本方面的工作，SemiAnalysis 一直在深入追踪新兴算力云厂商和超大规模云厂商生态内的 GPU 租赁定价等趋势与议题。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740230",
+          "tokenized_text": "得益于我们在[[[LINK_1|ClusterMAX]]]、[[[LINK_2|InferenceX]]]以及[[[LINK_3|AI 云总拥有成本]]]方面的工作，SemiAnalysis 一直在深入追踪新兴算力云厂商和超大规模云厂商生态内的 GPU 租赁定价等趋势与议题。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "We also spend a good amount of time helping AI Labs connect with Neoclouds and find GPU rentals in the market and have been actively discussing GPU rental price trends with nearly everyone in the ecosystem.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We also spend a good amount of time helping AI Labs connect with Neoclouds and find GPU rentals in the market and have been actively discussing GPU rental price trends with nearly everyone in the ecosystem.",
+      "parent_block_plain_text": "We also spend a good amount of time helping AI Labs connect with Neoclouds and find GPU rentals in the market and have been actively discussing GPU rental price trends with nearly everyone in the ecosystem.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 206,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们还投入大量时间协助 AI 实验室对接新兴算力云厂商，在市场上寻找 GPU 租赁资源，并与生态内的几乎所有参与者积极探讨 GPU 租赁价格趋势。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740239",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Since 2023, for our clients, we have maintained GPU rental price indices tracking pricing for most major GPU types (H100, H200, B200, B300, GB200, GB300, MI300, MI325, MI355) across all key rental terms, from on-demand and 1 month all the way to 5 years. Our index is constructed using survey data polling many Neoclouds and buyers of compute which is also validated by transaction data as well as by negotiations and transactions we ourselves are facilitating.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "GPU rental price indices",
+          "start": 48,
+          "end": 72,
+          "href": "https://semianalysis.com/gpu-pricing-index/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since 2023, for our clients, we have maintained [GPU rental price indices](https://semianalysis.com/gpu-pricing-index/) tracking pricing for most major GPU types (H100, H200, B200, B300, GB200, GB300, MI300, MI325, MI355) across all key rental terms, from on-demand and 1 month all the way to 5 years. Our index is constructed using survey data polling many Neoclouds and buyers of compute which is also validated by transaction data as well as by negotiations and transactions we ourselves are facilitating.",
+      "parent_block_plain_text": "Since 2023, for our clients, we have maintained GPU rental price indices tracking pricing for most major GPU types (H100, H200, B200, B300, GB200, GB300, MI300, MI325, MI355) across all key rental terms, from on-demand and 1 month all the way to 5 years. Our index is constructed using survey data polling many Neoclouds and buyers of compute which is also validated by transaction data as well as by negotiations and transactions we ourselves are facilitating.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "GPU rental price indices",
+          "start": 48,
+          "end": 72,
+          "href": "https://semianalysis.com/gpu-pricing-index/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 461,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自2023年以来，我们一直为客户维护着GPU 租赁价格指数，追踪大多数主流 GPU 型号（H100、H200、B200、B300、GB200、GB300、MI300、MI325、MI355）在所有关键合同期限下的定价，涵盖从按需、1个月一直到5年的各类期限。我们的指数基于对众多新兴算力云厂商和算力买家的调研数据构建，并通过实际交易数据，以及我们亲自促成的谈判与交易进行了交叉验证。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740267",
+          "tokenized_text": "自2023年以来，我们一直为客户维护着[[[LINK_1|GPU 租赁价格指数]]]，追踪大多数主流 GPU 型号（H100、H200、B200、B300、GB200、GB300、MI300、MI325、MI355）在所有关键合同期限下的定价，涵盖从按需、1个月一直到5年的各类期限。我们的指数基于对众多新兴算力云厂商和算力买家的调研数据构建，并通过实际交易数据，以及我们亲自促成的谈判与交易进行了交叉验证。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740275",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!KadM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd70abc4b-4d23-4236-816c-bdc5eb0f7193_1818x1092.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Source: [SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 94,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556232",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740299",
+          "tokenized_text": "[[[STRONG_1|来源：[SemiAnalysis GPU Rental Price Dashboard](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)",
+      "confirmed_tokenized": "[[[STRONG_1|来源：[SemiAnalysis GPU 租赁价格仪表板](https://semianalysis.com/gpu-pricing-index/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Today, we are making our H100 1 year GPU rental index publicly available to provide additional data and insights to the community. We update the index monthly and will be providing commentary on the latest trends and anecdotes via our social media pages on X and LinkedIn. Access to the full-term structure and rental pricing across all other major GPU types is available to institutional subscribers to any of our models or products.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "available to institutional subscribers",
+          "start": 362,
+          "end": 400,
+          "href": "mailto:sales@semianalysis.com",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Today, we are making our H100 1 year GPU rental index publicly available to provide additional data and insights to the community. We update the index monthly and will be providing commentary on the latest trends and anecdotes via our social media pages on X and LinkedIn. Access to the full-term structure and rental pricing across all other major GPU types is [available to institutional subscribers](mailto:sales@semianalysis.com) to any of our models or products.",
+      "parent_block_plain_text": "Today, we are making our H100 1 year GPU rental index publicly available to provide additional data and insights to the community. We update the index monthly and will be providing commentary on the latest trends and anecdotes via our social media pages on X and LinkedIn. Access to the full-term structure and rental pricing across all other major GPU types is available to institutional subscribers to any of our models or products.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "available to institutional subscribers",
+          "start": 362,
+          "end": 400,
+          "href": "mailto:sales@semianalysis.com",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 434,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今天，我们将公开发布 H100 一年期 GPU 租赁指数，为行业提供更多数据与洞察。我们每月更新该指数，并将通过 X 和 LinkedIn 官方账号点评最新趋势与市场动态。至于其他所有主流 GPU 型号的全期限结构与租赁定价数据，则向订阅了我们任意模型或产品的机构客户开放。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740366",
+          "tokenized_text": "今天，我们将公开发布 H100 一年期 GPU 租赁指数，为行业提供更多数据与洞察。我们每月更新该指数，并将通过 X 和 LinkedIn 官方账号点评最新趋势与市场动态。至于其他所有主流 GPU 型号的全期限结构与租赁定价数据，则[[[LINK_1|向订阅了我们任意模型或产品的机构客户开放]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 98,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)**",
+      "parent_block_plain_text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "[Click here to access our GPU Rental Index Dashboard](https://semianalysis.com/gpu-pricing-index/)",
+          "start": 0,
+          "end": 98,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 98,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "[点击此处访问我们的 GPU 租赁指数仪表盘](https://semianalysis.com/gpu-pricing-index/)",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740528",
+          "tokenized_text": "[[[STRONG_1|[点击此处访问我们的 GPU 租赁指数仪表盘](https://semianalysis.com/gpu-pricing-index/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "This report will discuss the latest trends, anecdotes and data points regarding the GPU rental market, explain how we analyze the broader GPU Rental market structure and touch on what the future may hold for rental pricing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This report will discuss the latest trends, anecdotes and data points regarding the GPU rental market, explain how we analyze the broader GPU Rental market structure and touch on what the future may hold for rental pricing.",
+      "parent_block_plain_text": "This report will discuss the latest trends, anecdotes and data points regarding the GPU rental market, explain how we analyze the broader GPU Rental market structure and touch on what the future may hold for rental pricing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本报告将探讨 GPU 租赁市场的最新趋势、市场动态与核心数据点，阐述我们如何剖析更宏观的 GPU 租赁市场结构，并前瞻租赁定价的未来走向。",
+          "model": "pro",
+          "created_at": "2026-04-03T11:38:34.740558",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.63,
+        "is_excellent": true,
+        "applied_terms": [
+          "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+          "Maintain a professional, authoritative tone suitable for an executive summary."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+          "key_points": [
+            "H100 rental prices have surged by 40%.",
+            "A structural shift in the compute rental market requires new tracking tools.",
+            "The report will analyze market structure and project future pricing trends."
+          ],
+          "translation_notes": [
+            "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+            "Maintain a professional, authoritative tone suitable for an executive summary."
+          ]
+        },
+        "scores": {
+          "readability": 9.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文中“AI Cloud Total Cost of Ownership”与 ClusterMAX、InferenceX 并列，是 SemiAnalysis 的专有模型/产品名称。直接译为一般概念的“AI 云总拥有成本”削弱了其作为专有产品的属性，且排版上缺少中英文间的空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

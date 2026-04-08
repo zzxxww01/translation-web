@@ -1,0 +1,64 @@
+{
+  "section_id": "04-compute-tray-cableless-design",
+  "new_terms": [
+    {
+      "term": "DensiLink OverPass cable",
+      "suggested_translation": "DensiLink OverPass 线缆",
+      "context": "Amphenol's internal cable set within the compute tray for Ethernet connections.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CCL (Copper Clad Laminate)",
+      "suggested_translation": "覆铜板",
+      "context": "The base material for PCBs, categorized by grades like M7, M8, and M9 in the text.",
+      "confidence": 0.98
+    },
+    {
+      "term": "HVLP (Ultra-Low Profile Copper Foil)",
+      "suggested_translation": "超低轮廓铜箔",
+      "context": "High-grade copper foil (e.g., HVLP4) used to reduce surface roughness and signal loss.",
+      "confidence": 0.95
+    },
+    {
+      "term": "insertion loss",
+      "suggested_translation": "插入损耗",
+      "context": "The signal power lost as it travels through an interconnect channel.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Quartz cloth / Q glass",
+      "suggested_translation": "石英纤维布 / Q 玻纤",
+      "context": "A high-end reinforcing material for CCL to achieve lower dielectric constants.",
+      "confidence": 0.92
+    },
+    {
+      "term": "skin effect",
+      "suggested_translation": "趋肤效应",
+      "context": "The tendency of high-frequency current to flow near the surface of a conductor.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Bianca board",
+      "suggested_translation": "Bianca 板卡",
+      "context": "The specific compute board used in the Grace Blackwell (GB200/300) architecture.",
+      "confidence": 0.9
+    },
+    {
+      "term": "dielectric constant (Dk)",
+      "suggested_translation": "介电常数 (Dk)",
+      "context": "A material property affecting signal speed and integrity in PCBs.",
+      "confidence": 0.98
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "cableless design": "无线缆设计",
+    "flyover cables": "架空线缆",
+    "board-to-board connector": "板对板连接器",
+    "midplane": "中板",
+    "strata module": "Strata 模块",
+    "orchid module": "Orchid 模块"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:46:43.517270"
+}

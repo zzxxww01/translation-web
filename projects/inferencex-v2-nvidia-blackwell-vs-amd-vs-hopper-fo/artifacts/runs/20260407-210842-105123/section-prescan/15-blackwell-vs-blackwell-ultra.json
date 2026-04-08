@@ -1,0 +1,27 @@
+{
+  "section_id": "15-blackwell-vs-blackwell-ultra",
+  "new_terms": [
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "Source: SemiAnalysis InferenceX",
+      "confidence": 1.0
+    },
+    {
+      "term": "memory bandwidth",
+      "suggested_translation": "内存带宽",
+      "context": "has the same memory bandwidth as Blackwell",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "blackwell ultra": "Blackwell Ultra",
+    "blackwell": "Blackwell",
+    "fp8": "FP8",
+    "fp4": "FP4",
+    "gpu": "GPU",
+    "inferencex": "InferenceX"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:46:30.286445"
+}

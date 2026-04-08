@@ -41,6 +41,8 @@ class ArticleMetadata(BaseModel):
     """文章元信息（作者、日期等）"""
 
     authors: List[str] = Field(default_factory=list)
+    byline_markdown: Optional[str] = None
+    access_text: Optional[str] = None
     published_date: Optional[str] = None
     subtitle: Optional[str] = None
     publication: Optional[str] = None

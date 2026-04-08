@@ -1,0 +1,398 @@
+{
+  "section_id": "20-accuracy-evaluations",
+  "title": "Accuracy Evaluations",
+  "title_translation": "准确率评估",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Throughput optimizations can sometimes quietly trade off accuracy (e.g. via aggressively relaxed acceptance rates, decoding tweaks, numerically unstable kernels, or endpoint misconfiguration). Without evals, a misconfigured server (truncation, bad decoding, wrong endpoint params) can still produce great throughput numbers but deliver garbage answers. For example, this additional layer of checks has helped us discover issues with some DP attention implementation for GPT-OSS.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0248",
+      "parent_block_index": 248,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Throughput optimizations can sometimes quietly trade off accuracy (e.g. via aggressively relaxed acceptance rates, decoding tweaks, numerically unstable kernels, or endpoint misconfiguration). Without evals, a misconfigured server (truncation, bad decoding, wrong endpoint params) can still produce great throughput numbers but deliver garbage answers. For example, this additional layer of checks has helped us discover issues with some DP attention implementation for GPT-OSS.",
+      "parent_block_plain_text": "Throughput optimizations can sometimes quietly trade off accuracy (e.g. via aggressively relaxed acceptance rates, decoding tweaks, numerically unstable kernels, or endpoint misconfiguration). Without evals, a misconfigured server (truncation, bad decoding, wrong endpoint params) can still produce great throughput numbers but deliver garbage answers. For example, this additional layer of checks has helped us discover issues with some DP attention implementation for GPT-OSS.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 478,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "吞吐量优化有时会暗中牺牲准确性（例如激进放宽接受率、微调解码、使用数值不稳定的算子，或错误配置端点）。若缺乏评测，配置错误的服务器（如发生截断、解码错误、端点参数错误）依然能跑出华丽的吞吐量数据，但输出的纯属垃圾回答。例如，正是借助这层额外的检查，我们才揪出了 GPT-OSS 中某些 DP 注意力机制实现存在的缺陷。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:58:43.051816",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "逻辑关系轻微误译。原文的“a larger delta with respect to numerical accuracy”指的是“因为数值准确性差异而导致的（评测分数）差距更大”，而译文“数值准确性的差异可能会被显著放大”将主体变成了“数值准确性本身的差异”，偏离了前文讨论的分数波动（evaluation scores may not change much）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Each representative throughput config now has an associated numerical accuracy check. Currently we are only using GSM8k, but being a very easy benchmark, the evaluation scores may not change much from differences in numerical calculation, and a harder benchmark may have a larger delta with respect to numerical accuracy. Thus, we plan to expand towards harder ones in the future, such as GPQA, HLE, MATH-500, SWE-Bench verified.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0249",
+      "parent_block_index": 249,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each representative throughput config now has an associated numerical accuracy check. Currently we are only using GSM8k, but being a very easy benchmark, the evaluation scores may not change much from differences in numerical calculation, and a harder benchmark may have a larger delta with respect to numerical accuracy. Thus, we plan to expand towards harder ones in the future, such as GPQA, HLE, MATH-500, SWE-Bench verified.",
+      "parent_block_plain_text": "Each representative throughput config now has an associated numerical accuracy check. Currently we are only using GSM8k, but being a very easy benchmark, the evaluation scores may not change much from differences in numerical calculation, and a harder benchmark may have a larger delta with respect to numerical accuracy. Thus, we plan to expand towards harder ones in the future, such as GPQA, HLE, MATH-500, SWE-Bench verified.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 429,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如今，每种典型的吞吐量配置都已绑定相应的数值准确性检查。目前我们仅使用 GSM8k。但该基准测试过于简单，数值计算差异未必会引起评测分数的明显波动；而在更高难度的基准测试中，数值计算精度不同所带来的评测分数落差可能会更大。因此，我们计划未来引入更高难度的基准测试，如 GPQA、HLE、MATH-500 以及 SWE-Bench verified。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:58:43.051918",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "逻辑关系轻微误译。原文的“a larger delta with respect to numerical accuracy”指的是“因为数值准确性差异而导致的（评测分数）差距更大”，而译文“数值准确性的差异可能会被显著放大”将主体变成了“数值准确性本身的差异”，偏离了前文讨论的分数波动（evaluation scores may not change much）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Another form of performance-accuracy tradeoff is quantization. Serving models at lower precision may result in worse model outputs. For DeepSeek R1, FP8 runs have very slightly higher evaluation scores than FP4. Note that GSM8k evals are saturated and often during QAT/PAT it is calibrated to common popular GSM8k, MATH-500, etc, leading to sometimes evals showing great results while real world end user evaluation being subpar. If we want to be part of the team to figure out how to properly evaluate inference engine accuracy, apply to join the mission here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "apply to join the mission here",
+          "start": 530,
+          "end": 560,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0250",
+      "parent_block_index": 250,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another form of performance-accuracy tradeoff is quantization. Serving models at lower precision may result in worse model outputs. For DeepSeek R1, FP8 runs have very slightly higher evaluation scores than FP4. Note that GSM8k evals are saturated and often during QAT/PAT it is calibrated to common popular GSM8k, MATH-500, etc, leading to sometimes evals showing great results while real world end user evaluation being subpar. If we want to be part of the team to figure out how to properly evaluate inference engine accuracy, [apply to join the mission here](https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1).",
+      "parent_block_plain_text": "Another form of performance-accuracy tradeoff is quantization. Serving models at lower precision may result in worse model outputs. For DeepSeek R1, FP8 runs have very slightly higher evaluation scores than FP4. Note that GSM8k evals are saturated and often during QAT/PAT it is calibrated to common popular GSM8k, MATH-500, etc, leading to sometimes evals showing great results while real world end user evaluation being subpar. If we want to be part of the team to figure out how to properly evaluate inference engine accuracy, apply to join the mission here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "apply to join the mission here",
+          "start": 530,
+          "end": 560,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 561,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "量化是性能与准确性博弈的另一种体现。降低模型服务精度往往会导致输出质量下降。在 DeepSeek R1 的测试中，FP8 版本的评测分数微幅领先于 FP4。需要注意的是，GSM8k 评测指标现已饱和。在进行量化感知训练 (QAT)/PAT 时，模型通常会针对主流的 GSM8k、MATH-500 等数据集进行专门校准。这就导致跑分数据看起来光鲜亮丽，而真实终端用户的实际体验却大打折扣。如果你想加入团队，共同探索如何正确评估推理引擎的准确性，请在此申请加入这项任务。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:58:43.052146",
+          "tokenized_text": "量化是性能与准确性博弈的另一种体现。降低模型服务精度往往会导致输出质量下降。在 DeepSeek R1 的测试中，FP8 版本的评测分数微幅领先于 FP4。需要注意的是，GSM8k 评测指标现已饱和。在进行量化感知训练 (QAT)/PAT 时，模型通常会针对主流的 GSM8k、MATH-500 等数据集进行专门校准。这就导致跑分数据看起来光鲜亮丽，而真实终端用户的实际体验却大打折扣。如果你想加入团队，共同探索如何正确评估推理引擎的准确性，[[[LINK_1|请在此申请加入这项任务]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "逻辑关系轻微误译。原文的“a larger delta with respect to numerical accuracy”指的是“因为数值准确性差异而导致的（评测分数）差距更大”，而译文“数值准确性的差异可能会被显著放大”将主体变成了“数值准确性本身的差异”，偏离了前文讨论的分数波动（evaluation scores may not change much）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0251",
+      "parent_block_index": 251,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:58:43.052213",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!UHSQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe58e6323-b5d1-4221-9c51-ff39b44d1f98_1779x1180.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "逻辑关系轻微误译。原文的“a larger delta with respect to numerical accuracy”指的是“因为数值准确性差异而导致的（评测分数）差距更大”，而译文“数值准确性的差异可能会被显著放大”将主体变成了“数值准确性本身的差异”，偏离了前文讨论的分数波动（evaluation scores may not change much）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0252",
+      "parent_block_index": 252,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427854",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:58:43.052281",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.2,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "逻辑关系轻微误译。原文的“a larger delta with respect to numerical accuracy”指的是“因为数值准确性差异而导致的（评测分数）差距更大”，而译文“数值准确性的差异可能会被显著放大”将主体变成了“数值准确性本身的差异”，偏离了前文讨论的分数波动（evaluation scores may not change much）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

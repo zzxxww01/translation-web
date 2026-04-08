@@ -1,0 +1,54 @@
+{
+  "section_id": "09-procurement-and-cooling-vendor",
+  "new_terms": [
+    {
+      "term": "L2A / L2L",
+      "suggested_translation": "液对气 / 液对液",
+      "context": "Refers to Liquid-to-Air and Liquid-to-Liquid cooling heat exchange methods.",
+      "confidence": 0.95
+    },
+    {
+      "term": "FWS (Facility Water System)",
+      "suggested_translation": "设施水系统",
+      "context": "The primary water loop in a data center that connects to the TCS.",
+      "confidence": 0.95
+    },
+    {
+      "term": "dry cooler",
+      "suggested_translation": "干冷器",
+      "context": "A cooling device that uses ambient air to cool a fluid, often replacing chillers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "adiabatic tower",
+      "suggested_translation": "绝热冷却塔",
+      "context": "A cooling tower using evaporation to pre-cool air before it passes over a heat exchanger.",
+      "confidence": 0.9
+    },
+    {
+      "term": "white-space cooling",
+      "suggested_translation": "白区冷却",
+      "context": "Cooling infrastructure located within the IT equipment area (white space) of a data center.",
+      "confidence": 0.85
+    },
+    {
+      "term": "rack-to-CDU ratio",
+      "suggested_translation": "机柜与 CDU 配比",
+      "context": "The number of server racks supported by a single Cooling Distribution Unit.",
+      "confidence": 0.9
+    },
+    {
+      "term": "in-row CDU",
+      "suggested_translation": "列间 CDU",
+      "context": "CDU units placed within the server rows rather than at the facility level.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "cdu": "冷量分配单元",
+    "tcs": "技术冷却系统",
+    "quick disconnect (qd/mqd)": "快速接头"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:56:43.225651"
+}

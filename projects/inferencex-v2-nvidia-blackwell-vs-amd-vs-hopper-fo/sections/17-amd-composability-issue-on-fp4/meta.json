@@ -1,0 +1,603 @@
+{
+  "section_id": "17-amd-composability-issue-on-fp4",
+  "title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+  "title_translation": "AMD 在 FP4、分布式推理与宽专家并行上的可组合性问题",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "While AMD performs somewhat decently on single node FP4 and performs competitively to B200 SGLang on FP8 distributed inferencing, the issue with the current AMD open source inferencing stack is that, while individual inference optimizations perform well, real customers deploy with multiple optimizations composed together. Top tier AI labs are all using FP4 with disaggregated inferencing with wide expert parallelism all enabled at the same time, and this is where the issue occurs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "with",
+          "start": 359,
+          "end": 363,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "with",
+          "start": 390,
+          "end": 394,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0208",
+      "parent_block_index": 208,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While AMD performs somewhat decently on single node FP4 and performs competitively to B200 SGLang on FP8 distributed inferencing, the issue with the current AMD open source inferencing stack is that, while individual inference optimizations perform well, real customers deploy with multiple optimizations composed together. Top tier AI labs are all using FP4 **with** disaggregated inferencing **with** wide expert parallelism all enabled at the same time, and this is where the issue occurs.",
+      "parent_block_plain_text": "While AMD performs somewhat decently on single node FP4 and performs competitively to B200 SGLang on FP8 distributed inferencing, the issue with the current AMD open source inferencing stack is that, while individual inference optimizations perform well, real customers deploy with multiple optimizations composed together. Top tier AI labs are all using FP4 with disaggregated inferencing with wide expert parallelism all enabled at the same time, and this is where the issue occurs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "with",
+          "start": 359,
+          "end": 363,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "with",
+          "start": 390,
+          "end": 394,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 484,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管 AMD 在单节点 FP4 上的表现还算过得去，在 FP8 分布式推理上也与运行 SGLang 的 B200 有一战之力，但目前 AMD 开源推理软件栈的症结在于：虽然各项独立的推理优化跑起来不错，但真实客户在部署时往往会将多种优化组合使用。顶尖 AI 实验室都在同时启用 FP4、分离式推理以及宽专家并行，而这正是 AMD 翻车的地方。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415086",
+          "tokenized_text": "尽管 AMD 在单节点 FP4 上的表现还算过得去，在 FP8 分布式推理上也与运行 SGLang 的 B200 有一战之力，但目前 AMD 开源推理软件栈的症结在于：虽然各项独立的推理优化跑起来不错，但真实客户在部署时往往会将多种优化组合使用。顶尖 AI 实验室都在同时启用 FP4[[[STRONG_1|、]]]分离式推理[[[STRONG_2|以及]]]宽专家并行，而这正是 AMD 翻车的地方。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0209",
+      "parent_block_index": 209,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 151,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis 是一款免费开源软件且由读者支持。为了接收新文章并支持我们的工作，请考虑成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415146",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0210",
+      "parent_block_index": 210,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4. The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.",
+      "parent_block_plain_text": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4. The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 693,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AMD 的软件依然不达标。SemiAnalysis 和 AMD 内部的理论极限性能建模 (Speed of Light) 均表明，在 FP4 精度下，结合宽专家并行的分离式推理，其性能理应优于 MI355X 的单节点推理。遗憾的是，软件依然是掣肘 AMD GPU 的巨大瓶颈。AMD 管理层必须进一步优化工程人才的资源配置，例如，把工程资源从 ATOM 这种根本没人用的单节点自嗨项目中撤出，转而集中精力解决上述分离式推理、宽专家并行与 FP4 之间推理优化的可组合性问题。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415174",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0210",
+      "parent_block_index": 210,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4. The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.",
+      "parent_block_plain_text": "AMD software is still not meeting the mark, and the theoretical speed of light modelling at SemiAnalysis and at AMD show that for FP4, disaggregated inferencing with wide expert parallelism should perform better than inference on a single node of MI355X. Unfortunately, Software continues to be a massive bottleneck for AMD GPUs. AMD management needs to continue to sharpen resource allocation of their engineering talent, for instance, re-allocate their engineering resources away from pet single node projects that nobody uses like ATOM towards fixing the aforementioned issues with composability of inference optimizations between disaggregated inferencing, wide expert parallelism and FP4. The current subpar software is due to lack of focus and incorrect prioritization of where the industry already is at. All top tier labs are already using disaggregated inferencing and wide expert parallelism; AMD needs to stop focusing on single node and heavily invest focus into multi node inferencing for open source solutions.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 694,
+      "segment_end": 1024,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前软件表现拉胯，归咎于缺乏重点，以及未能准确把握行业现状而导致优先级错乱。所有顶尖实验室都已用上了分离式推理和宽专家并行；AMD 必须停止死磕单节点，将核心精力重仓投入到开源解决方案的多节点推理上。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415197",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "AMD is more than six months behind on open source distributed inferencing and wide expert parallelism and FP4 composability as shown by Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago",
+          "start": 136,
+          "end": 221,
+          "href": "https://lmsys.org/blog/2025-09-25-gb200-part-2/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0211",
+      "parent_block_index": 211,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AMD is more than six months behind on open source distributed inferencing and wide expert parallelism and FP4 composability as shown by [Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago](https://lmsys.org/blog/2025-09-25-gb200-part-2/).",
+      "parent_block_plain_text": "AMD is more than six months behind on open source distributed inferencing and wide expert parallelism and FP4 composability as shown by Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia and SGLang team showing off their NVFP4 performance on DeepSeek six months ago",
+          "start": 136,
+          "end": 221,
+          "href": "https://lmsys.org/blog/2025-09-25-gb200-part-2/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在开源分布式推理、宽专家并行以及 FP4 的可组合性方面，AMD 已经落后了半年多。这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415265",
+          "tokenized_text": "在开源分布式推理、宽专家并行以及 FP4 的可组合性方面，AMD 已经落后了半年多。这点从[[[LINK_1|英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能]]]中便可见一斑。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0212",
+      "parent_block_index": 212,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415289",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!IGhQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feddd9541-ed5a-4e49-aab2-291d49fd7e68_2132x1252.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0213",
+      "parent_block_index": 213,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387374",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:50:03.415340",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.42,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“这点从英伟达和 SGLang 团队在六个月前就已大秀其在 DeepSeek 上的 NVFP4 性能中便可见一斑”将动词短语（大秀）塞入了“从……中”的介词宾语结构里，读起来略显冗长拗口。"
+          },
+          {
+            "type": "readability",
+            "description": "“且由读者支持”略带翻译腔，显得有些生硬。（注：原文作者将自己的 Newsletter 戏称为 free open source software，译文保留字面翻译是正确的。）"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

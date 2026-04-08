@@ -1,0 +1,39 @@
+{
+  "section_id": "12-intel-diamond-rapids-architect",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 8,
+        "issue_type": "terminology|readability",
+        "severity": "medium",
+        "original_text": "Spooked by the Spectre and Meltdown vulnerabilities... designing P-cores without it... integrated E-cores...",
+        "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。",
+        "why_it_matters": "影响硬核技术文章的专业感与阅读流畅度。",
+        "suggestion": "改为“Spectre（幽灵）和 Meltdown（熔断）漏洞”；将“P核 (性能核)”、“E核 (能效核)”改为“P 核（性能核）”、“E 核（能效核）”（注意增加空格并使用全角括号）。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "L3 domains... I/O and Memory Hub",
+        "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。",
+        "why_it_matters": "违反了中英文混排的排版规范（CJK-Latin spacing），降低了文本的专业排版质感。",
+        "suggestion": "全局统一补充中英文之间的空格，改为“L3 缓存域”、“I/O 与内存集线器”、“L3 缓存”、“L2 缓存”等。"
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "In a late move, Intel has cancelled...",
+        "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。",
+        "why_it_matters": "稍微偏离了原文侧重描述“决策时机较晚”的语境。",
+        "suggestion": "建议改为“作为一项后期调整，英特尔彻底砍掉了...”或“在近期的一项后期决策中，英特尔彻底砍掉了...”。"
+      }
+    ]
+  }
+}

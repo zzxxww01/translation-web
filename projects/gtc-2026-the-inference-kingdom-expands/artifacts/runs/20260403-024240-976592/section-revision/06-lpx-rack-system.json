@@ -1,0 +1,32 @@
+{
+  "section_id": "06-lpx-rack-system",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.675,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "让我们来看看 LPX 机架系统，其中包含一些值得关注的细节。英伟达展示了一个包含 32 个 1U LPU 计算托盘和 2 台 Spectrum-X 交换机的 LPX 机架。英伟达在 GTC 上展示的这个 32 托盘 1U 版本，与 Groq 被收购前的原始服务器设计非常接近。我们认为，该服务器配置并非第三季度出货的版本，英伟达正在对其进行修改。在此，我们将详细介绍目前所知的实际量产版本。这在加速器模型中已有详细说明。",
+    "https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png",
+    "来源：SemiAnalysis 加速器模型",
+    "LPX 计算托盘",
+    "每个 LPX 计算托盘或节点包含 16 个 LPU、2 个 Altera FPGA、1 个英特尔（Intel）Granite Rapids 主机 CPU 和 1 个 BlueField-4 前端模块。与其他英伟达系统一样，超大规模云服务商客户可以且将会使用其自选的前端网卡，而不是花钱购买英伟达的 BlueField。",
+    "https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png",
+    "来源：SemiAnalysis 加速器模型",
+    "LPU 模块在 PCB 上采用正反面贴装，即 PCB 顶面安装 8 个 LP30 模块，底面安装另外 8 个 LP30 模块。LPU 引出的所有连接均通过 PCB 走线实现，考虑到节点内连接采用密集的全互联拓扑，这需要极高规格的 PCB 来支持布线。采用正反面贴装是为了缩短在“X”和“Y”维度上的 PCB 走线长度。",
+    "https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png",
+    "来源：SemiAnalysis 网络模型",
+    "该系统的一个有趣之处在于 FPGA 扮演了重要角色。英伟达将这些 FPGA 称为“Fabric Expansion Logic”，具备多种用途。首先，它们充当网卡（NIC），将 LPU 的 C2C 协议转换为以太网协议，以接入基于 Spectrum-X 的以太网横向扩展（scale-out）网络。LPU 正是通过该横向扩展网络连接至解码系统中的 GPU。",
+    "其次，LPU 也通过 FPGA 访问主机 CPU，在此过程中，FPGA 负责将 C2C 协议转换为 PCIe 协议与 CPU 通信。",
+    "第三，FPGA 连接至背板以与节点内的其他 FPGA 通信，我们认为这有助于管理所有 LPU 的控制流与时序。此外，每个 FPGA 还提供高达 256GB 的额外系统 DRAM。如果用户希望由 LPX 处理整个解码过程，这部分内存池可用于 KV 缓存（KVCache）。",
+    "前面板设有 8 个 OSFP 接口（cages），用于跨机架 C2C 连接；同时还有 2 个接口（可能是 QSFP-DD）连接至 Spectrum 交换机，用于在解耦的解码系统中连接 LPU 与 GPU。我们将在介绍网络部分时分享更多相关细节。"
+  ]
+}

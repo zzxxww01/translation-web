@@ -1,0 +1,74 @@
+{
+  "section_id": "21-huawei-kunpeng",
+  "new_terms": [
+    {
+      "term": "Loongson",
+      "suggested_translation": "龙芯",
+      "context": "China’s home grown CPU efforts are continuing apace, with both Loongson and Alibaba’s Yitian line",
+      "confidence": 1.0
+    },
+    {
+      "term": "Yitian",
+      "suggested_translation": "倚天",
+      "context": "Alibaba’s Yitian line offering locally designed options",
+      "confidence": 1.0
+    },
+    {
+      "term": "HiSilicon",
+      "suggested_translation": "海思",
+      "context": "Huawei has some of the most capable design engineers from their HiSilicon team",
+      "confidence": 1.0
+    },
+    {
+      "term": "TaiShan",
+      "suggested_translation": "泰山",
+      "context": "with custom TaiShan CPU cores and data fabrics",
+      "confidence": 1.0
+    },
+    {
+      "term": "ISA",
+      "suggested_translation": "指令集架构 (ISA)",
+      "context": "running on the ARM v8.2 ISA",
+      "confidence": 1.0
+    },
+    {
+      "term": "SMIC",
+      "suggested_translation": "中芯国际 (SMIC)",
+      "context": "having to redesign the chip for the SMIC N+2 process",
+      "confidence": 1.0
+    },
+    {
+      "term": "OLTP",
+      "suggested_translation": "联机事务处理 (OLTP)",
+      "context": "Kunpeng 950 promises a 2.9x speedup on OLTP database performance",
+      "confidence": 0.95
+    },
+    {
+      "term": "GaussDB",
+      "suggested_translation": "高斯数据库 (GaussDB)",
+      "context": "using their proprietary GaussDB Multi-Write distributed database architecture",
+      "confidence": 1.0
+    },
+    {
+      "term": "LinxiCore",
+      "suggested_translation": "灵犀核心",
+      "context": "core counts more than doubled to 192 using a new LinxiCore",
+      "confidence": 0.9
+    },
+    {
+      "term": "Kirin",
+      "suggested_translation": "麒麟",
+      "context": "debuted in the Kirin 9030 smartphone chip",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "kunpeng": "鲲鹏",
+    "die shot": "裸片图",
+    "ring bus": "环形总线",
+    "head node": "头节点",
+    "hyperscaler": "超大规模云厂商"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:17:50.217254"
+}

@@ -1,0 +1,294 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "section_title": "N3 in numbers",
+  "section_title_translation": "数据看 N3",
+  "section_position": "5/11",
+  "article_theme": "The primary bottleneck for AI compute has structurally shifted from datacenter power to semiconductor supply chain constraints—specifically TSMC's N3 wafer capacity and HBM memory—with Nvidia best positioned to win due to its aggressive supply chain mastery.",
+  "structure_summary": "The article follows a problem-analysis-conclusion flow. It opens by establishing the surging demand for AI compute. It then systematically dissects the supply chain bottlenecks, starting with the most critical (TSMC N3 wafers) and exploring potential relief (smartphone demand softening). It then transitions to the secondary constraint (Memory/HBM) before dismissing former constraints (CoWoS and Power). It concludes by emphasizing that supply chain mastery, exemplified by Nvidia, is the ultimate determinant of market success.",
+  "target_audience": "Semiconductor industry professionals, AI infrastructure investors, and hardcore tech enthusiasts.",
+  "translation_voice": "Professional Chinese tech-finance analyst. Direct and precise, using established industry jargon naturally without over-explaining standard terms, while ensuring complex logical relationships are clearly articulated.",
+  "previous_section_title": "The TSMC N3 Shortage",
+  "next_section_title": "TSMC’s Supply Situation",
+  "section_role": "Quantifies the N3 shortage and outlines the competitive landscape of companies fighting for capacity.",
+  "translation_notes": [
+    "In semiconductor contexts, 'content growth' means silicon content per device (单机硅含量), not media content.",
+    "Maintain clear distinctions between node variants (4NP, N3P, N3B, N3E)."
+  ],
+  "key_points": [
+    "Nvidia's transition to the N3P-based Rubin generation is the primary driver of aggressive N3 ramp.",
+    "Google and Broadcom beat Nvidia to N3 with TPUv7.",
+    "AI accelerators have a procurement advantage over saturated mobile/client markets."
+  ],
+  "guidelines": [
+    "Maintain English acronyms for established semiconductor nodes, companies, and technologies (e.g., N3, N3E, HBM, CoWoS, TPU, OSAT, ARR) without forcing Chinese translations.",
+    "Accurately utilize standard Chinese semiconductor manufacturing jargon (e.g., 'front-end' -> 前道, 'wafer-in' -> 投片, 'nameplate capacity' -> 设计产能/名义产能).",
+    "Adapt financial and market analysis shorthand into fluent Chinese business phrasing (e.g., 'output ramp' -> 产能爬坡/产量拉升, 'dual-tracked' -> 双供应商策略).",
+    "Handle English idioms and metaphors contextually rather than literally to preserve the professional analyst tone (e.g., 'brownie points' -> 政治加分).",
+    "Keep the tone objective and authoritative. Avoid overly emotional phrasing when translating words like 'staggering' or 'skyrocketing'—use professional terms like '惊人' or '激增'.",
+    "Ensure logical flow in dense sentences by breaking them down if necessary, especially when describing complex causality between memory margins, capacity allocation, and accelerator demand."
+  ],
+  "article_challenges": [
+    {
+      "location": "Section 4: 'earn brownie points from the US government'",
+      "issue": "Idiomatic expression that sounds informal if translated literally.",
+      "suggestion": "Translate contextually as '赢得美国政府的青睐' or '获得美国政府的政治加分' to maintain the analyst tone."
+    },
+    {
+      "location": "Section 5: 'wafer-in from early 2026 for a big second half output ramp'",
+      "issue": "Dense tech-finance shorthand combining multiple manufacturing concepts.",
+      "suggestion": "Unpack for clarity: '从2026年初开始投片，以迎接下半年的产量大爬坡'."
+    },
+    {
+      "location": "Section 7: 'Smartphones as the Front-End Release Valve?'",
+      "issue": "Mixing manufacturing jargon (Front-End) with a metaphor (Release Valve).",
+      "suggestion": "Translate as '智能手机会成为前道产能的泄压阀吗？' to preserve both the technical specificity and the metaphor."
+    },
+    {
+      "location": "Section 8: 'margin dynamics have reversed'",
+      "issue": "Financial shorthand referring to the relative profitability of DDR vs. HBM.",
+      "suggestion": "Translate as '利润率动态已发生逆转' or '利润率优势发生反转', ensuring the context of DDR margins surpassing HBM is clear."
+    }
+  ],
+  "terminology": [
+    {
+      "original": "N3 / N3B / N3E / N3P",
+      "term": "N3 / N3B / N3E / N3P",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "TSMC's 3nm-class process nodes and their specific variants.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "CoWoS",
+      "term": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "note": "Chip on Wafer on Substrate",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "HBM",
+      "term": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "note": "高带宽内存 (High Bandwidth Memory)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "agentic workflows",
+      "term": "agentic workflows",
+      "translation": "智能体工作流",
+      "strategy": "translate",
+      "note": "AI workflows driven by autonomous agents rather than simple prompting.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "wafer-in",
+      "term": "wafer-in",
+      "translation": "投片",
+      "strategy": "translate",
+      "note": "The start of the wafer fabrication process (putting raw wafers into the production line).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "nameplate capacity",
+      "term": "nameplate capacity",
+      "translation": "设计产能 / 名义产能",
+      "strategy": "translate",
+      "note": "The theoretical maximum production capacity of a fab.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "front-end",
+      "term": "front-end",
+      "translation": "前道制造 / 前道工序",
+      "strategy": "translate",
+      "note": "Front-end semiconductor manufacturing (wafer fabrication), as opposed to back-end (packaging/testing).",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "12-Hi stacks",
+      "term": "12-Hi stacks",
+      "translation": "12层堆叠",
+      "strategy": "translate",
+      "note": "12-layer stacked HBM memory.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "dual-tracked",
+      "term": "dual-tracked",
+      "translation": "双重采购 / 双供应商策略",
+      "strategy": "translate",
+      "note": "Sourcing a component from two different suppliers simultaneously to reduce risk.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "release valve",
+      "term": "release valve",
+      "translation": "泄压阀",
+      "strategy": "translate",
+      "note": "A mechanism to relieve pressure; here, referring to dropping smartphone demand freeing up N3 capacity.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "process",
+      "term": "process",
+      "translation": "工艺",
+      "strategy": "translate",
+      "note": "指芯片制造工艺",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "etching",
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    }
+  ]
+}

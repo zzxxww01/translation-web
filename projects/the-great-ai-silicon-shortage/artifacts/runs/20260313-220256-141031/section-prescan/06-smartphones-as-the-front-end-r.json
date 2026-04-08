@@ -1,0 +1,49 @@
+{
+  "section_id": "06-smartphones-as-the-front-end-r",
+  "new_terms": [
+    {
+      "term": "XPU",
+      "suggested_translation": "专用处理器",
+      "context": "A collective term for AI/HPC accelerators like GPUs, TPUs, and NPUs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "BOM costs",
+      "suggested_translation": "物料清单成本",
+      "context": "Handset Bill of Materials costs affected by rising memory prices.",
+      "confidence": 0.98
+    },
+    {
+      "term": "AI accelerators",
+      "suggested_translation": "AI加速器",
+      "context": "General category for chips like Rubin GPUs or TPUs used for AI workloads.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TPU v7",
+      "suggested_translation": "TPU v7",
+      "context": "Specific next-generation Google Tensor Processing Unit version.",
+      "confidence": 1.0
+    },
+    {
+      "term": "unit growth",
+      "suggested_translation": "出货量增长",
+      "context": "Refers to the growth in the number of physical smartphone units sold.",
+      "confidence": 0.9
+    },
+    {
+      "term": "wafer demand",
+      "suggested_translation": "晶圆需求",
+      "context": "The volume of wafers required by specific market segments like smartphones or AI.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "wafer starts": "晶圆投片量",
+    "asp": "平均售价",
+    "n3": "N3制程",
+    "advanced packaging": "先进封装"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-13T22:45:03.127296"
+}

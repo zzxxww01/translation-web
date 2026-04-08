@@ -1,0 +1,1341 @@
+{
+  "report": {
+    "is_consistent": false,
+    "issues": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称39次, 第三人称67次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 25, 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6.0",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 3.5",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3, 35",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 224, 160",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 10,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 32768",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 11,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 25",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 12,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 4, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 13,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 14,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 60, 336",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 18,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 20,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 35, 10, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 21,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 22,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 1000, 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 23,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 31,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 1, 72",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 32,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 227",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 36,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "05-compute-tray-thermal",
+        "paragraph_index": 6,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 100, 150",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "06-compute-tray-power-delivery",
+        "paragraph_index": 5,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 96",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Vera' 处理不一致: {'翻译': 8, '保留原文': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Rubin' 处理不一致: {'翻译': 21, '保留原文': 4}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 7,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Grace Blackwell' 处理不一致: {'保留原文': 4, '翻译': 1}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "06-compute-tray-power-delivery",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Strata Board' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "auto_fixable": [],
+    "manual_review": [
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "style",
+        "description": "人称使用不统一: 第一人称39次, 第三人称67次",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一使用一种人称表述"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 25, 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 2026",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 6.0",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 2,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 3.5",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 8,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 3, 35",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 9,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 224, 160",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 10,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 32768",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 11,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1, 2, 25",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 12,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 4, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 13,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 14,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 17,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 60, 336",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 18,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 4, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 20,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 35, 10, 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 21,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 50",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 22,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 1000, 1",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 23,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 31,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 1, 72",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 32,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2, 227",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 36,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 2",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "05-compute-tray-thermal",
+        "paragraph_index": 6,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 100, 150",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "06-compute-tray-power-delivery",
+        "paragraph_index": 5,
+        "issue_type": "data",
+        "description": "译文中可能遗漏了数字: 96",
+        "auto_fixable": false,
+        "fix_suggestion": null
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Vera' 处理不一致: {'翻译': 8, '保留原文': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Rubin' 处理不一致: {'翻译': 21, '保留原文': 4}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "00-intro",
+        "paragraph_index": 7,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Grace Blackwell' 处理不一致: {'保留原文': 4, '翻译': 1}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      },
+      {
+        "section_id": "06-compute-tray-power-delivery",
+        "paragraph_index": 0,
+        "issue_type": "proper_noun",
+        "description": "专有名词 'Strata Board' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "auto_fixable": false,
+        "fix_suggestion": "建议统一保留原文或统一翻译"
+      }
+    ],
+    "term_stats": {
+      "Rubin": {
+        "total_count": 24,
+        "translations": {
+          "鲁宾": 22
+        },
+        "is_consistent": true,
+        "preferred": "鲁宾"
+      },
+      "Vera": {
+        "total_count": 15,
+        "translations": {
+          "维拉": 9
+        },
+        "is_consistent": true,
+        "preferred": "维拉"
+      },
+      "VR NVL72": {
+        "total_count": 23,
+        "translations": {
+          "VR NVL72": 23
+        },
+        "is_consistent": true,
+        "preferred": "VR NVL72"
+      },
+      "Compute tray": {
+        "total_count": 8,
+        "translations": {
+          "计算托盘": 8
+        },
+        "is_consistent": true,
+        "preferred": "计算托盘"
+      },
+      "TCO": {
+        "total_count": 2,
+        "translations": {
+          "总拥有成本": 2
+        },
+        "is_consistent": true,
+        "preferred": "总拥有成本"
+      },
+      "BoM": {
+        "total_count": 17,
+        "translations": {
+          "物料清单": 17
+        },
+        "is_consistent": true,
+        "preferred": "物料清单"
+      },
+      "BlueField-4": {
+        "total_count": 7,
+        "translations": {
+          "BlueField-4": 7
+        },
+        "is_consistent": true,
+        "preferred": "BlueField-4"
+      },
+      "AI": {
+        "total_count": 19,
+        "translations": {
+          "AI": 1
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "NVIDIA": {
+        "total_count": 36,
+        "translations": {
+          "英伟达": 36
+        },
+        "is_consistent": true,
+        "preferred": "英伟达"
+      },
+      "AMD": {
+        "total_count": 3,
+        "translations": {
+          "AMD": 3
+        },
+        "is_consistent": true,
+        "preferred": "AMD"
+      },
+      "GPU": {
+        "total_count": 9,
+        "translations": {
+          "GPU": 9
+        },
+        "is_consistent": true,
+        "preferred": "GPU"
+      },
+      "CPU": {
+        "total_count": 10,
+        "translations": {
+          "CPU": 10
+        },
+        "is_consistent": true,
+        "preferred": "CPU"
+      },
+      "TPU": {
+        "total_count": 1,
+        "translations": {
+          "TPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "Extreme co-design": {
+        "total_count": 2,
+        "translations": {
+          "极致协同设计": 2
+        },
+        "is_consistent": true,
+        "preferred": "极致协同设计"
+      },
+      "Rack scale": {
+        "total_count": 2,
+        "translations": {
+          "机架级": 2
+        },
+        "is_consistent": true,
+        "preferred": "机架级"
+      },
+      "Oberon": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "奥伯伦"
+      },
+      "Helios": {
+        "total_count": 1,
+        "translations": {
+          "Helios": 1
+        },
+        "is_consistent": true,
+        "preferred": "Helios"
+      },
+      "throughput": {
+        "total_count": 1,
+        "translations": {
+          "吞吐量": 1
+        },
+        "is_consistent": true,
+        "preferred": "吞吐量"
+      },
+      "efficiency": {
+        "total_count": 4,
+        "translations": {
+          "效率": 4
+        },
+        "is_consistent": true,
+        "preferred": "效率"
+      },
+      "Blackwell": {
+        "total_count": 12,
+        "translations": {
+          "布莱克威尔": 8
+        },
+        "is_consistent": true,
+        "preferred": "布莱克威尔"
+      },
+      "Grace Blackwell": {
+        "total_count": 5,
+        "translations": {
+          "Grace Blackwell": 4
+        },
+        "is_consistent": true,
+        "preferred": "Grace Blackwell"
+      },
+      "hyperscaler": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "超大规模云服务商"
+      },
+      "Samsung": {
+        "total_count": 2,
+        "translations": {
+          "三星": 2
+        },
+        "is_consistent": true,
+        "preferred": "三星"
+      },
+      "SK Hynix": {
+        "total_count": 2,
+        "translations": {
+          "SK海力士": 2
+        },
+        "is_consistent": true,
+        "preferred": "SK海力士"
+      },
+      "Micron": {
+        "total_count": 3,
+        "translations": {
+          "美光": 2
+        },
+        "is_consistent": true,
+        "preferred": "美光"
+      },
+      "HBM": {
+        "total_count": 5,
+        "translations": {
+          "HBM": 5
+        },
+        "is_consistent": true,
+        "preferred": "HBM"
+      },
+      "SoC": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "SoC"
+      },
+      "SOCAMM": {
+        "total_count": 3,
+        "translations": {
+          "SOCAMM": 3
+        },
+        "is_consistent": true,
+        "preferred": "SOCAMM"
+      },
+      "Strata Module": {
+        "total_count": 3,
+        "translations": {
+          "Strata 模块": 3
+        },
+        "is_consistent": true,
+        "preferred": "Strata 模块"
+      },
+      "ccl": {
+        "total_count": 1,
+        "translations": {
+          "覆铜板": 1
+        },
+        "is_consistent": true,
+        "preferred": "覆铜板"
+      },
+      "Paladin HD2": {
+        "total_count": 2,
+        "translations": {
+          "Paladin HD2": 2
+        },
+        "is_consistent": true,
+        "preferred": "Paladin HD2"
+      },
+      "Busbar": {
+        "total_count": 3,
+        "translations": {
+          "汇流排": 2
+        },
+        "is_consistent": true,
+        "preferred": "汇流排"
+      },
+      "vrm": {
+        "total_count": 5,
+        "translations": {
+          "电压调节模块": 4
+        },
+        "is_consistent": true,
+        "preferred": "电压调节模块"
+      },
+      "SM": {
+        "total_count": 8,
+        "translations": {
+          "流式多处理器": 2
+        },
+        "is_consistent": true,
+        "preferred": "流式多处理器"
+      },
+      "loading mechanism": {
+        "total_count": 2,
+        "translations": {
+          "加载机构": 1
+        },
+        "is_consistent": true,
+        "preferred": "加载机构"
+      },
+      "CX-9": {
+        "total_count": 4,
+        "translations": {
+          "ConnectX-9": 2
+        },
+        "is_consistent": true,
+        "preferred": "ConnectX-9"
+      },
+      "SemiAnalysis": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "bandwidth": {
+        "total_count": 8,
+        "translations": {
+          "带宽": 8
+        },
+        "is_consistent": true,
+        "preferred": "带宽"
+      },
+      "FLOPS": {
+        "total_count": 6,
+        "translations": {
+          "FLOPS": 6
+        },
+        "is_consistent": true,
+        "preferred": "FLOPS"
+      },
+      "GB300": {
+        "total_count": 6,
+        "translations": {
+          "GB300": 6
+        },
+        "is_consistent": true,
+        "preferred": "GB300"
+      },
+      "b300": {
+        "total_count": 7,
+        "translations": {
+          "B300": 7
+        },
+        "is_consistent": true,
+        "preferred": "B300"
+      },
+      "chiplet": {
+        "total_count": 4,
+        "translations": {
+          "芯粒": 4
+        },
+        "is_consistent": true,
+        "preferred": "芯粒"
+      },
+      "reticle-sized die": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "光罩尺寸裸片"
+      },
+      "reticle-sized": {
+        "total_count": 2,
+        "translations": {
+          "光罩极限尺寸的": 1
+        },
+        "is_consistent": true,
+        "preferred": "光罩极限尺寸的"
+      },
+      "transformer": {
+        "total_count": 2,
+        "translations": {
+          "Transformer": 2
+        },
+        "is_consistent": true,
+        "preferred": "Transformer"
+      },
+      "performance": {
+        "total_count": 7,
+        "translations": {
+          "性能": 7
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "Transformer Engine": {
+        "total_count": 2,
+        "translations": {
+          "Transformer引擎": 2
+        },
+        "is_consistent": true,
+        "preferred": "Transformer引擎"
+      },
+      "2:4 structured sparsity": {
+        "total_count": 2,
+        "translations": {
+          "2:4结构化稀疏": 2
+        },
+        "is_consistent": true,
+        "preferred": "2:4结构化稀疏"
+      },
+      "inference": {
+        "total_count": 4,
+        "translations": {
+          "推理": 4
+        },
+        "is_consistent": true,
+        "preferred": "推理"
+      },
+      "training": {
+        "total_count": 3,
+        "translations": {
+          "训练": 3
+        },
+        "is_consistent": true,
+        "preferred": "训练"
+      },
+      "DRAM": {
+        "total_count": 1,
+        "translations": {
+          "DRAM": 1
+        },
+        "is_consistent": true,
+        "preferred": "DRAM"
+      },
+      "NVLink-C2C": {
+        "total_count": 2,
+        "translations": {
+          "NVLink-C2C": 2
+        },
+        "is_consistent": true,
+        "preferred": "NVLink-C2C"
+      },
+      "SerDes": {
+        "total_count": 4,
+        "translations": {
+          "SerDes": 4
+        },
+        "is_consistent": true,
+        "preferred": "SerDes"
+      },
+      "transistor": {
+        "total_count": 2,
+        "translations": {
+          "晶体管": 2
+        },
+        "is_consistent": true,
+        "preferred": "晶体管"
+      },
+      "sparse FP4": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "稀疏 FP4"
+      },
+      "mi355": {
+        "total_count": 1,
+        "translations": {
+          "MI355": 1
+        },
+        "is_consistent": true,
+        "preferred": "MI355"
+      },
+      "adaptive compression engine": {
+        "total_count": 1,
+        "translations": {
+          "自适应压缩引擎": 1
+        },
+        "is_consistent": true,
+        "preferred": "自适应压缩引擎"
+      },
+      "TDP": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "热设计功耗"
+      },
+      "heat spreader": {
+        "total_count": 2,
+        "translations": {
+          "均热盖": 2
+        },
+        "is_consistent": true,
+        "preferred": "均热盖"
+      },
+      "stiffener": {
+        "total_count": 2,
+        "translations": {
+          "加强筋": 1
+        },
+        "is_consistent": true,
+        "preferred": "加强筋"
+      },
+      "TIM2": {
+        "total_count": 2,
+        "translations": {
+          "第二层热界面材料": 1
+        },
+        "is_consistent": true,
+        "preferred": "第二层热界面材料"
+      },
+      "cold plate": {
+        "total_count": 5,
+        "translations": {
+          "冷板": 5
+        },
+        "is_consistent": true,
+        "preferred": "冷板"
+      },
+      "yield": {
+        "total_count": 1,
+        "translations": {
+          "良率": 1
+        },
+        "is_consistent": true,
+        "preferred": "良率"
+      },
+      "SHARP": {
+        "total_count": 1,
+        "translations": {
+          "SHARP": 1
+        },
+        "is_consistent": true,
+        "preferred": "SHARP"
+      },
+      "Scale-out": {
+        "total_count": 2,
+        "translations": {
+          "横向扩展": 2
+        },
+        "is_consistent": true,
+        "preferred": "横向扩展"
+      },
+      "Scale-out bandwidth": {
+        "total_count": 1,
+        "translations": {
+          "横向扩展带宽": 1
+        },
+        "is_consistent": true,
+        "preferred": "横向扩展带宽"
+      },
+      "ConnectX-8": {
+        "total_count": 1,
+        "translations": {
+          "ConnectX-8": 1
+        },
+        "is_consistent": true,
+        "preferred": "ConnectX-8"
+      },
+      "DPU": {
+        "total_count": 1,
+        "translations": {
+          "DPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "DPU"
+      },
+      "Bluefield-3": {
+        "total_count": 1,
+        "translations": {
+          "BlueField-3": 1
+        },
+        "is_consistent": true,
+        "preferred": "BlueField-3"
+      },
+      "Spectrum-6 CPO": {
+        "total_count": 1,
+        "translations": {
+          "Spectrum-6 CPO": 1
+        },
+        "is_consistent": true,
+        "preferred": "Spectrum-6 CPO"
+      },
+      "Radix": {
+        "total_count": 1,
+        "translations": {
+          "基数": 1
+        },
+        "is_consistent": true,
+        "preferred": "基数"
+      },
+      "Optical engine": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "光学引擎"
+      },
+      "OSFP cage": {
+        "total_count": 1,
+        "translations": {
+          "OSFP 笼子": 1
+        },
+        "is_consistent": true,
+        "preferred": "OSFP 笼子"
+      },
+      "internal manifold": {
+        "total_count": 4,
+        "translations": {
+          "内部歧管": 4
+        },
+        "is_consistent": true,
+        "preferred": "内部歧管"
+      },
+      "form factor": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "外形规格"
+      },
+      "front half": {
+        "total_count": 1,
+        "translations": {
+          "前半部分": 1
+        },
+        "is_consistent": true,
+        "preferred": "前半部分"
+      },
+      "liquid metal Indium": {
+        "total_count": 1,
+        "translations": {
+          "液态金属铟": 1
+        },
+        "is_consistent": true,
+        "preferred": "液态金属铟"
+      },
+      "Orchid Module": {
+        "total_count": 2,
+        "translations": {
+          "Orchid 模块": 2
+        },
+        "is_consistent": true,
+        "preferred": "Orchid 模块"
+      },
+      "PCBA": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "印刷电路板组装"
+      },
+      "PDB": {
+        "total_count": 4,
+        "translations": {
+          "电源分配板": 4
+        },
+        "is_consistent": true,
+        "preferred": "电源分配板"
+      },
+      "busbar clips": {
+        "total_count": 1,
+        "translations": {
+          "汇流排夹": 1
+        },
+        "is_consistent": true,
+        "preferred": "汇流排夹"
+      },
+      "Bianca board": {
+        "total_count": 1,
+        "translations": {
+          "Bianca 板卡": 1
+        },
+        "is_consistent": true,
+        "preferred": "Bianca 板卡"
+      },
+      "IBC module": {
+        "total_count": 1,
+        "translations": {
+          "IBC 模块": 1
+        },
+        "is_consistent": true,
+        "preferred": "IBC 模块"
+      },
+      "ASP": {
+        "total_count": 1,
+        "translations": {
+          "平均售价": 1
+        },
+        "is_consistent": true,
+        "preferred": "平均售价"
+      },
+      "power sloshing": {
+        "total_count": 1,
+        "translations": {
+          "功率动态分配": 1
+        },
+        "is_consistent": true,
+        "preferred": "功率动态分配"
+      },
+      "blind mate": {
+        "total_count": 1,
+        "translations": {
+          "盲插": 1
+        },
+        "is_consistent": true,
+        "preferred": "盲插"
+      },
+      "CTE": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "热膨胀系数"
+      }
+    },
+    "style_score": 90.0,
+    "suggestions": [
+      {
+        "issue_type": "proper_noun",
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "description": "专有名词 'Vera' 处理不一致: {'翻译': 8, '保留原文': 2}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "proper_noun",
+        "section_id": "00-intro",
+        "paragraph_index": 0,
+        "description": "专有名词 'Rubin' 处理不一致: {'翻译': 21, '保留原文': 4}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "proper_noun",
+        "section_id": "00-intro",
+        "paragraph_index": 7,
+        "description": "专有名词 'Grace Blackwell' 处理不一致: {'保留原文': 4, '翻译': 1}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "proper_noun",
+        "section_id": "06-compute-tray-power-delivery",
+        "paragraph_index": 0,
+        "description": "专有名词 'Strata Board' 处理不一致: {'保留原文': 2, '翻译': 2}",
+        "action": "建议统一保留原文或统一翻译",
+        "auto_fixable": false,
+        "priority": 2
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 2,
+        "description": "译文中可能遗漏了数字: 25, 2026",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 4,
+        "description": "译文中可能遗漏了数字: 4, 2026",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 9,
+        "description": "译文中可能遗漏了数字: 6",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "00-intro",
+        "paragraph_index": 17,
+        "description": "译文中可能遗漏了数字: 6.0",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 2,
+        "description": "译文中可能遗漏了数字: 1, 2, 3.5",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      },
+      {
+        "issue_type": "data",
+        "section_id": "01-extreme-co-design-6-silicon-p",
+        "paragraph_index": 8,
+        "description": "译文中可能遗漏了数字: 2, 3, 35",
+        "action": "需要人工审核",
+        "auto_fixable": false,
+        "priority": 3
+      }
+    ]
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "维拉、鲁宾、NVLink 6 交换机、ConnectX-9、BlueField-4、Spectrum-6、无缝无缆计算托盘设计、供电机架、VR NVL72 总拥有成本与物料清单",
+      "作者：Wega Chu、Dylan Patel、Daniel Nishball 及其他 8 人",
+      "2026年2月25日 · 付费",
+      "https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png",
+      "在2026年CES上，英伟达正式详细公布了鲁宾平台的全部6款产品：鲁宾GPU、维拉CPU、NVLink 6交换机、ConnectX-9、BlueField-4和Spectrum-6。VR NVL72作为英伟达第二代机架级Oberon架构正式登场。随着竞争对手在机架级赛道上迎头赶上——包括Gen2 UltraServer中的Trainium 3、AMD MI450X Helios机架，以及甚至在GB200之前就已实现机架级部署的谷歌TPU——英伟达以“极致协同设计”的统治力予以回击。凭借极致协同设计，英伟达将机架级集成推向了新的高度。机架系统化身为一个计算单元、一个单一的分布式加速器，而英伟达包揽了整个系统的设计。",
+      "https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png",
+      "资料来源：英伟达",
+      "在维拉鲁宾平台中，英伟达正在进一步强化对系统和机架级设计的掌控力。随着每个组件都被推向极限，同时还要兼顾成本效率的优化，机架级的集成与组装正变得愈发困难。为了提升集成效率与吞吐量，与Grace Blackwell相比，VR NVL72采用了模块化方案，其整体设计更具全局性。",
+      "凭借在极致协同设计上的统治力，英伟达的竞争力正在进一步增强。在由英伟达引领的AI服务器系统设计中，它是唯一一家在所有主要芯片组件上都能提供同类最佳或接近同类最佳产品的厂商。英伟达提供了最顶级的加速器、最先进的纵向扩展交换机、最好的网卡、最出色的以太网交换机之一，以及一款大幅改进的专用CPU。没有任何其他竞争对手拥有如此完整的集成芯片产品矩阵。",
+      "在下文中，我们将深入芯片层面，剖析维拉鲁宾平台的6款芯片产品。随后，我们将从设计视角探讨机架与计算托盘从Grace Blackwell向维拉鲁宾的演进，并分析其对线缆、连接器、PCB、散热、机械结构与供电等组件的影响。",
+      "接下来，我们将探讨 VR NVL72 系统的主要网络架构，即纵向扩展的 NVLink 6 网络与后端的横向扩展网络。此外，我们还将分析超大规模云厂商定制化空间大幅受限对供应链与交付带来的影响，以及组装供应商的竞争格局。",
+      "最后，本报告将在结尾处探讨 VR NVL72 系统的总拥有成本，并提供支撑该总拥有成本分析的物料清单与功耗预算估算。在付费专区，我们还将为读者深度剖析英伟达针对其 Groq IP 的未来规划。此外，我们也会分析美光、SK海力士以及三星在 HBM 产能爬坡过程中所面临的挑战。",
+      "今天，我们还将正式推出VR NVL72 组件物料清单与功耗预算模型。该模型针对本文所探讨的 VR NVL72 系统，提供了系统级的物料清单与功耗预算分析。这一分析至关重要，因为在规模高达 5000 亿美元的鲁宾基础设施扩建浪潮中，各大供应商及其在子组件中的市场份额，将直接决定他们究竟是赢家还是输家。其产生的下游影响与市场洗牌效应将极为深远。该模型涵盖的内容包括：",
+      "英伟达计算托盘组件：搭载鲁宾 GPU、维拉 CPU 和 SOCAMM 内存的 Strata 模块；BlueField-4；ConnectX-9",
+      "NVLink 系统：NVSwitch、NVLink 背板与线缆、配套连接器、主机 CPU 管理模块",
+      "液冷组件：冷板、快插接头、分水器",
+      "PCB、载板及材料组件：关键系统板、ABF载板、覆铜板用量",
+      "连接器：Paladin HD2板对板连接器、Paladin HD2 NVLink 6.0连接器",
+      "供电组件：电源插箱、母线排、VRM、供电模块",
+      "机械结构：机箱、装载机构、导轨套件、机柜框架",
+      "管理模块：BMC",
+      "网络：光模块、CX-9",
+      "https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "请访问此自助服务门户购买该模型。如对该产品有任何疑问，请联系 sales@semianalysis.com。"
+    ],
+    "01-extreme-co-design-6-silicon-p": [
+      "https://substackcdn.com/image/fetch/$s_!ZQyU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7cdeb372-67f9-4140-889e-2f8f493cda0a_1984x1141.png",
+      "资料来源：SemiAnalysis，英伟达",
+      "相较于GB200，鲁宾的密集FP4和FP8 FLOPS提升了约3.5倍，而FP16 FLOPS的增长则较为温和，约为1.6倍，这突显出英伟达继续将FP4/FP8作为主要的扩展路径。在内存方面，其HBM容量与GB300持平，而HBM带宽的提升则更为激进，达到约2.8倍。总体而言，该架构优先侧重于带宽与低精度计算。",
+      "https://substackcdn.com/image/fetch/$s_!m2IG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e9330b4-7407-4dcb-8a2b-fb323371ffba_2218x1210.png",
+      "资料来源：SemiAnalysis，英伟达",
+      "鲁宾",
+      "https://substackcdn.com/image/fetch/$s_!u2L6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe50555c-6427-42ca-b58e-97716f2558c9_4800x2700.png",
+      "资料来源：英伟达",
+      "鲁宾的设计是布莱克威尔合乎逻辑的演进，它转向了3纳米工艺，并将I/O拆分为芯粒，同时保留了两颗光罩极限尺寸（reticle-sized）裸片搭配8栈HBM的相同基本结构。其35 PFLOPS的密集FP4算力相比布莱克威尔GB200提升了3.5倍，具体通过以下方式实现：",
+      "将流式多处理器数量从160个增加至224个",
+      "将流式多处理器中的张量核心宽度翻倍，达到每时钟周期32768个FP4 MAC",
+      "将时钟频率提升25%，从1.90GHz增至2.38GHz",
+      "此外，英伟达声称，通过采用更新的第三代Transformer引擎（取代了前几代架构中的2:4结构化稀疏），其FP4有效性能最高可达50 PFLOPS。我们将在下文详细剖析鲁宾的这一架构特性。",
+      "值得注意的是，张量核心宽度的翻倍仅适用于 FP4 和 FP8，而 BF16 和 TF32 的规格与布莱克威尔保持一致，这导致其性能仅提升至布莱克威尔的 1.6 倍。这一架构决策反映了英伟达的判断：大多数训练和推理工作负载将从 TF32 和 BF16 转向 FP8 和 FP4。",
+      "在内存方面，升级至 HBM4 意味着每个堆叠的总线宽度翻倍，运行速率达到 10.8 GT/s，从而实现 22TB/s 的总带宽；在与 GB300 保持相同 288GB 容量的情况下，其带宽达到了布莱克威尔的 2.75 倍。相比 GTC 2025 上最初公布的 13TB/s，内存带宽已得到显著提升。为了追赶 AMD MI450 的内存带宽，英伟达向 DRAM 供应商提出了更高的 HBM4 引脚速率要求，这远超 JEDEC 规范中的 HBM4 速率标准。",
+      "尽管英伟达的目标是 22TB/s，但据我们了解，内存供应商在满足英伟达的要求时正面临挑战，因此我们认为首批出货的带宽很可能会略低一些，更接近 20TB/s。我们已经向加速器与 HBM 模型的订阅用户深入探讨了这对SK海力士、三星和美光的影响。美光已远远落后于三星和SK海力士，我们认为他们实际上已在鲁宾 HBM4 的竞争中出局。我们在加速器与 HBM 模型中提供了关于验证测试和引脚速率的更多细节。",
+      "NVLink-C2C 芯粒内置了用于连接维拉 CPU 的 SerDes，其带宽翻倍至 1.8TB/s；而在芯片的另一端，尺寸更大的 NVLink 6 芯粒则配备了 36 条定制的“400G”SerDes 链路，为所有 72 颗鲁宾 GPU 提供翻倍的 NVLink 带宽。",
+      "晶体管数量攀升了60%，达到3360亿。",
+      "值得注意的是，鲁宾并未提及稀疏FLOPS。在前几代产品中，2:4结构化稀疏曾被用来让营销宣传中的FLOPS数值翻倍。然而，该技术的实际采用率极低，尤其是在低精度运算下，因为这种僵化的稀疏结构会强制将一半的数值归零，从而导致精度损失。程序员基本上无视了结构化稀疏，因为它缺乏实用性，这也进而促使硬件设计发生了转变。布莱克威尔Ultra GB300将密集FP4算力提升了50%，同时保持稀疏FP4 FLOPS不变；而AMD的MI355X则为了节省芯片面积，停止在MXFP8、MXFP6和MXFP4格式上支持结构化稀疏。",
+      "鲁宾架构改进版Transformer引擎中的自适应压缩引擎是一项关键特性。它能够在运算过程中实时动态计算稀疏性，剔除数据流中的零值而不强行将非零值归零，从而重新提升天然具备较高稀疏度的推理性能，在保持模型精度的同时实现性能提升。这一过程在基于布莱克威尔架构构建的现有模型上可自动实现，无需引入新的编程模型或进行特定优化。尽管采用训练后量化或量化感知训练的模型可以通过微调来最大化自适应压缩的加速效果，但这并非享受动态压缩红利的硬性前提。",
+      "这意味着工作负载越稀疏，性能就越接近宣传的50 PFLOPS峰值性能。因此，英伟达将50 PFLOPS这一数字宣传为FP4推理性能，而35 PFLOPS的FP4训练数据则对应密集型工作负载。由于精度得以保持，这让营销团队能够宣称鲁宾的FLOPS达到了GB200的5倍——这是将50 PFLOPS的动态压缩FP4与10 PFLOPS的密集FP4进行对比得出的结论。实际的GEMM性能能否达到50 PFLOPS，取决于张量中包含多少个零值。零值越多，性能就越接近该峰值；张量中的零值越少，加速幅度就越小。总的来说，得益于自动化实现的优势，我们预计鲁宾的自适应稀疏压缩将比结构化稀疏获得高得多的实际采用率。",
+      "话虽如此，许多机器学习系统工程师仍对这种新型稀疏性能否取得良好效果持怀疑态度，并且英伟达宣称的50 PFLOPS极有可能像前几代产品一样，纯粹是营销噱头。",
+      "鲁宾的芯片级TDP最高增至2300W，而布莱克威尔为1000至1400W。供应链传闻称，存在两款功耗与性能规格不同的“SKU”：2300W的Max-P版本和1800W的Max-Q版本。然而，这并非两款不同的硬件SKU，而是英伟达根据用户的工作负载需求提供的两种默认功耗配置。英伟达认为，Max-Q能提供最佳的每瓦性能。Max-P则能提供最高的绝对性能，但这会带来效率损失。运行Max-P设置会导致机架功耗增加20%，但性能提升幅度却远不及这20%的功耗增幅。",
+      "这些功耗配置均由软件管理。用户还可以根据自身需求，任意设定最大功耗（只要单颗GPU不超过2300W即可），这一点在历代GPU中也一向如此。多家超大规模云厂商和实验室已选择在较低功耗下运行其GPU，以此来优化每瓦性能，并兼顾供电能力的限制。",
+      "https://substackcdn.com/image/fetch/$s_!tbcG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61396626-3359-4a08-8dfa-58f7ed911443_2012x1118.png",
+      "资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "在鲁宾封装的机械结构方面也进行了升级，加入了升级版的均热盖与加强环。相比之下，布莱克威尔B200和B300封装仅配备了均热盖。均热盖能够让散出封装的热量分布得更加均匀，同时也能为封装提供机械支撑，从而防止发生翘曲。",
+      "对于鲁宾而言，其均热盖是一个由两块独立盖板组成的模块。除了均热盖之外，封装结构中还加入了加强筋，以提供更强的机械支撑，从而避免发生翘曲。均热盖的表面还将覆盖一层电镀金。此举旨在防止液态金属第二层热界面材料引发腐蚀，该材料位于均热盖与冷板之间。",
+      "维拉",
+      "https://substackcdn.com/image/fetch/$s_!XgXK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb0795695-2bda-4134-a982-12e59acc76f9_3000x3040.jpeg",
+      "资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "英伟达在CPU领域采取了激进的策略，维拉的性能较Grace实现翻倍，这得益于其采用了3纳米光罩极限尺寸的计算裸片，并将内存控制器与I/O拆分为独立的芯粒。核心数量从72个增加至88个，裸片上实际光刻了91个核心，旨在通过预留冗余来提升良率。这些核心标志着英伟达定制化ARM CPU设计的回归，其“Olympus”核心现已支持SMT多线程技术，总处理线程数达到176个。L3缓存容量也提升了40%，达到162MB。内存总线位宽翻倍至1024-bit，速率提升至9600MT/s，从而实现了2.5倍的带宽；同时，借助8个SOCAMM模块，最大内存容量增至三倍，达到1.5TB。与鲁宾GPU相连的NVLink-C2C带宽同样实现翻倍，达到1.8TB/s。此外，该架构现已支持PCIe6与CXL3.1标准。",
+      "这一切使得晶体管数量增至原来的2.2倍，达到2270亿个。",
+      "NVLink 6 交换机",
+      "https://substackcdn.com/image/fetch/$s_!p8aL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F722c91c0-0b9e-43c6-9ca6-76714eb7fa70_3000x3048.jpeg",
+      "资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "尽管机架级交换带宽翻了一番，但每个机架内的 NVLink 交换机芯片数量也随之翻倍至 36 颗，如今每个交换机托盘可容纳 4 颗交换机芯片。这意味着全新的 NVLink 6 交换机芯片与 NVLink 5 交换机一样，维持了 28.8T 的总带宽，其端口数量减半，但得益于采用“400G”双向 SerDes，单端口速率实现了翻倍。这种方案使得高带宽交换机能够继续维持单片裸片设计，从而降低了设计复杂度。芯片布局与英伟达此前的交换机保持一致：两侧为 I/O 接口，中央逻辑区域则是交叉开关以及算力达 3.6 TFlop 的 SHARP 网内计算加速模块。",
+      "ConnectX-9",
+      "https://substackcdn.com/image/fetch/$s_!so7W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcb34a228-9fff-45eb-8851-68a1d54acf66_1781x1780.jpeg",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "ConnectX-9 主要是 ConnectX-8 的迭代升级，保留了相同的 800G 网络带宽和 48 通道 PCIe6 交换能力。不过，CX-9 现在采用 4x200G PAM4 SerDes 来支持 800G 以太网，而此前的 CX-8 仅在 InfiniBand 架构下支持该速率。在鲁宾平台上，英伟达将单颗 GPU 配置的网卡数量翻倍，从而实现了两倍的横向扩展带宽。",
+      "BlueField-4",
+      "https://substackcdn.com/image/fetch/$s_!Wfwi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F60828488-61bb-416d-a9c8-df3e8fe3c284_2506x1673.jpeg",
+      "资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "BlueField-4 的设计路线与 BlueField-3 截然不同。英伟达并未选择将计算与网络功能集成进行定制流片，而是直接复用其大型 Grace CPU 裸片，将其与 ConnectX-9 裸片进行共封装，从而打造出一款具备海量算力的 800G DPU。128GB 的 LPDDR5 内存为该 Grace CPU 提供数据，其带宽为标准版 Grace 的一半。这一内存容量达到了 BlueField-3 的 4 倍。此外，BlueField-4 还可兼作存储控制器，每个上下文内存存储系统中均配备了四颗 BF-4 芯片。",
+      "Spectrum-6",
+      "https://substackcdn.com/image/fetch/$s_!qbIl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2e1932aa-e7cf-438e-bc2a-984a03d9cd25_3000x2983.jpeg",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "尽管 Spectrum-6 CPO 并非鲁宾 NVL72 机架的一部分，但它凭借翻倍的基数，能够支持更大规模的横向扩展集群。该设计保留了与 Spectrum-5 相同的特性，由 8 个 IO 芯粒环绕主交换芯片构成。通过 512 个 200G SerDes 实现了 102.4T 的交换带宽。封装上的 32 个 3.2T 光引擎将这些电信号转换为光链路，每个引擎均配有可拆卸的光纤连接器。SN6810 搭载了一颗该芯片，而 SN6800 则内置四颗，通过多路复用构建出一个 409.6T 的交换机盒。此外，SN6600 还将提供一款带有可插拔 OSFP 笼子的非 CPO 版本。在我们看来，非 CPO 版本将会更为普及。"
+    ],
+    "05-compute-tray-thermal": [
+      "VR NVL72 将液冷技术推向了新高度。VR NVL72 计算托盘实现了 100% 液冷，而 GB200 和 GB300 计算托盘则采用 85% 液冷与 15% 风冷的混合散热方案。因此，计算托盘彻底移除了风扇，并扩大了冷板的覆盖范围，以带走机箱前半部分的热量。机箱中部将设置内部歧管，用于向各个模块分配进水冷却液，并收集回水冷却液。计算托盘内的每个模块均将贴附冷板模块。各冷板模块通过 MQD（英伟达针对计算托盘内紧凑空间应用而制定的较小尺寸快速接头规范标准）与内部歧管相连。",
+      "https://substackcdn.com/image/fetch/$s_!Ra3T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2397b285-cb78-4081-8813-51a223db97bb_1354x2343.png",
+      "资料来源：英伟达 VR NVL72 组件物料清单及功耗预算模型",
+      "冷却液从机箱左后侧通过 UQD 快速接头进入计算托盘。随后，冷却液经由管道进入内部歧管，并在此被分配至所有模块。冷却液在吸收不同模块的热量后，重新流回内部歧管。最后，冷却液从机箱右后侧通过 UQD 快速接头流出计算托盘。",
+      "https://substackcdn.com/image/fetch/$s_!DhHR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce22913e-61af-49e3-9487-fad91f7a8af7_2012x722.png",
+      "资料来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "VR NVL72的冷板也进行了多项升级。对于每个Strata 模块，冷板将作为单一模块提供，覆盖整块Strata主板，包括两颗 Rubin GPU、一颗 Vera CPU、SOCAMM以及各种电压调节模块组件。Rubin GPU 的冷板升级为“微通道冷板”（MCCP）。本质上，冷板内部通道的间距从150微米缩小至100微米。这增加了表面积，从而提升了冷板的散热能力。此外，在与 Rubin GPU 接触的表面将镀有一层金。这样做的原因是防止液态金属铟（TIM2）对铜造成腐蚀。",
+      "https://substackcdn.com/image/fetch/$s_!P-4a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F78fa8a53-ba67-4917-96be-3d5da6051095_1876x584.png",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "除了 Strata 模块，机箱前端的模块也将安装冷板模块。每个 Orchid 模块都将配备一个冷板模块，以覆盖 CX-9、E1.S SSD、光模块笼以及各类电压调节模块。由于两个 Orchid 模块在 1U 机箱内上下堆叠，其冷板与电路板的总高度将不到 0.5U。每对 Orchid 模块仅共享来自歧管的一对快速接头。系统内还会设置另一组歧管，负责将冷却液分配至这对 Orchid 模块的顶部与底部冷板。在我们的 VR NVL72 组件物料清单与功耗预算模型 中，我们详细列出了所有散热组件的具体内容，包括冷板模块、歧管以及快速接头。",
+      "https://substackcdn.com/image/fetch/$s_!Z-zU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8e1b96be-6742-4679-8180-275aaad0521d_3164x999.png",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "此前，冷板通常在L10级组装阶段进行安装，即在该阶段将各类组件装配至机箱内。鉴于目前的模块化设计，冷板需要与模块本身实现更紧密的集成。因此，冷板将在PCBA流程之后的L6级组装阶段直接进行安装。这提升了整体的组装效率，因为L10级组装由此被简化为只需将成品模块插入对应的连接器与快速接头即可。"
+    ],
+    "06-compute-tray-power-delivery": [
+      "在计算托盘层级，50VDC电力通过机箱后部的汇流排夹进入计算托盘。随后，电力通过内部汇流排线缆传输至机箱中部。从内部汇流排线缆开始，供电路径被分流至三个目的地。第一和第二条路径分别通向左右两侧的Strata Board，由内部汇流排线缆直接向其输入50VDC电力。第三条路径则通向机箱前部的配电模块。内部汇流排线缆会将50VDC电力输送至一个走线于PCB中板下方的汇流排装置，进而连接至PCB中板另一侧的电源分配板（PDB）。这与Grace 布莱克威尔的设计不同，后者的50VDC电力是直接输入PDB的。",
+      "随后，电源分配板向计算托盘内的所有板卡输送12VDC电力。",
+      "https://substackcdn.com/image/fetch/$s_!waXS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc71c2bc-25a1-4ac8-93e1-e880143cdcee_1148x2332.png",
+      "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+      "50VDC 通过 Strata 板卡两侧的 50V 电源连接器之一进入板卡。接着，50VDC 由 Strata 板卡底部的 IBC 模块降压至 12VDC。随后，在馈入 Rubin GPU 和 Vera CPU 之前，12VDC 会由电压调节模块进一步降压至 1VDC。Strata 直接接收 50VDC，而 Grace Blackwell 的 Bianca 板卡则从电源分配板接收 12VDC。由于 Strata 板卡的功耗约为 4800W（相当于半个普通服务器机架的 TDP），而 Bianca 仅为 3000W，因此必须以更高的电压向板卡供电。将 50VDC 至 12VDC 的转换环节移至更近的位置，其优势在于能够降低电流并提升传输效率。",
+      "由于功率损耗与电流之间存在平方关系，50V、96A 条件下的功率损耗仅为 12V、400A 时的 1/17。",
+      "我们在 VR NVL72 组件物料清单与功率预算模型 中，列出了各类电压调节模块所需的所有功率半导体的用量与平均售价。",
+      "英伟达的圣诞礼物：GB300 与 B300——推理（Reasoning）与推断、亚马逊、内存与供应链 - Dylan Patel、Myron Xie 与 Daniel Nishball · 2024 年 12 月 25 日",
+      "维拉与鲁宾之间的功率动态分配依然存在，这一特性延续自我们上文报道过的 GB300。通过在 GPU 和 CPU 之间共享总计 4800W 的功率，该特性实现了更高效的电源规划。在对 GPU 需求极高的负载下，每个 GPU 会分配到 2300W 功率，剩余的 200W 留给 CPU。当 GPU 的功耗需求下降时，维拉便可动态提升至更高功率，从而在避免过度配置电源的同时，最大限度地减少 GPU 的空闲时间。",
+      "对于机箱前端的模块——ConnectX-9、BlueField-4 以及管理模块——电源分配板会向每个模块提供 12VDC 的电源。50VDC 直流电在电源分配板处降压至 12VDC，随后电源分配板通过铜制汇流排装置，将 12VDC 电源输送给相邻模块。ConnectX-9 的电源连接器位于模块顶部，紧邻 Paladin HD2。"
+    ],
+    "07-compute-tray-mechanical": [
+      "VR NVL72 计算托盘的机械组件比 Grace Blackwell 略显复杂。机箱前端设有一个机械结构，将前部划分为三个区域：左右两侧用于容纳 Orchid 模块，中间区域则用于安装 BlueField-4、供电模块以及管理模块。每个模块也都配有一个小型金属机箱。该机械结构提供了一套简单的导向机构，能够引导模块与中板及内部歧管完成盲插对接。",
+      "https://substackcdn.com/image/fetch/$s_!dCVe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fac48da42-8603-43a2-a4b7-f852c1c09c5a_1460x922.png",
+      "资料来源：英伟达，SemiAnalysis",
+      "中背板与内部歧管作为一个整体模块出货。该模块的机械设计如上图所示。图中高亮显示的机械部件充当了各模块的加载机构。这些加载机构通过对模块施加一定的机械力将其锁定到位，从而确保模块与Paladin连接器及分水器快速接头实现紧密连接。"
+    ],
+    "12-hyperscaler-customization-and": []
+  }
+}

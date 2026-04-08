@@ -1,0 +1,44 @@
+{
+  "section_id": "10-disaggregated-inference-framew",
+  "new_terms": [
+    {
+      "term": "disaggregated inference",
+      "suggested_translation": "分离式推理",
+      "context": "Dynamo is an inference framework designed for multi-node distributed inference",
+      "confidence": 0.95
+    },
+    {
+      "term": "Mooncake",
+      "suggested_translation": "Mooncake",
+      "context": "two different KV cache transfer frameworks: MoRI and Mooncake",
+      "confidence": 0.95
+    },
+    {
+      "term": "RDMA",
+      "suggested_translation": "RDMA",
+      "context": "high-performance communication interface focusing on RDMA and GPU integration",
+      "confidence": 0.95
+    },
+    {
+      "term": "request routing",
+      "suggested_translation": "请求路由",
+      "context": "featuring techniques such as prefill-decode disaggregation, request routing",
+      "confidence": 0.9
+    },
+    {
+      "term": "PyTorch",
+      "suggested_translation": "PyTorch",
+      "context": "Mooncake, which recently joined the PyTorch ecosystem",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "trtllm": "TRTLLM",
+    "kv cache offloading": "KV Cache 卸载",
+    "mori": "MoRI",
+    "sglang": "SGLang",
+    "dynamo": "Dynamo"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:49:42.764331"
+}

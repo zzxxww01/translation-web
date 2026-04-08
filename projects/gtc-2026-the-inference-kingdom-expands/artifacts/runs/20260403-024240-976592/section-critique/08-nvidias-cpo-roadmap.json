@@ -1,0 +1,38 @@
+{
+  "section_id": "08-nvidias-cpo-roadmap",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 8.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "annotation",
+        "severity": "medium",
+        "original_text": "英伟达在 GTC 2026 主题演讲中公布了其光电共封装（Co-Packaged Optics (CPO)）路线图",
+        "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。",
+        "why_it_matters": "嵌套括号会打断读者的阅读节奏，且在硬核技术文章中，反复使用四字中文术语不如直接使用行业通用的缩写（CPO）显得干练。",
+        "suggestion": "将此处改为“光电共封装（CPO）”，并在后文（段落3、4、5、7、15、19）将“光电共封装”直接替换为“CPO”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "光电共封装的应用范围将通过另一个大集群并行规模机架 NVL1152 进一步扩大",
+        "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。",
+        "why_it_matters": "在长句中堆叠定语会降低中文的流畅度，增加读者的认知负担。",
+        "suggestion": "建议增加适当的结构词，改为“另一个具备大集群并行规模的机架 NVL1152”。"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "但从 GPU 到 NVLink 交换机的连接目前在计划记录（POR）中仍是铜缆。",
+        "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。",
+        "why_it_matters": "准确的行业黑话翻译能显著提升文章的权威感和目标读者（硬件工程师、分析师）的认同感。",
+        "suggestion": "改为“目前的既定方案（POR）仍是采用铜缆”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,965 @@
+{
+  "theme": "The contrasting market designs of PJM and ERCOT demonstrate how AI datacenter load growth exposes the costly flaws of centralized capacity forecasting versus the efficiency of real-time scarcity pricing.",
+  "key_arguments": [
+    "AI datacenters are driving massive electrical load growth, leading to public scrutiny over rising household electric bills.",
+    "PJM's capacity market relies on central forecasting, where methodological changes and forecasting errors lead to massive, unwarranted price spikes passed on to consumers.",
+    "ERCOT operates an energy-only market relying on real-time scarcity pricing, successfully absorbing similar AI datacenter growth without forward price shocks.",
+    "Winter Storm Fern served as a real-world stress test, exposing PJM's expensive capacity market as unreliable while validating ERCOT's market discipline.",
+    "ERCOT's regulatory agility (being a single-state entity outside FERC jurisdiction) gives it a durable structural advantage over PJM, influencing hyperscaler site selection."
+  ],
+  "structure_summary": "The article begins by introducing the controversy over AI datacenters raising power bills, then structurally contrasts the two largest US energy markets: PJM (focusing on its flawed, expensive capacity market) and ERCOT (highlighting its efficient, energy-only real-time market). It uses Winter Storm Fern as a comparative case study to prove its thesis, and concludes with future regulatory outlooks and investment implications for specific market players.",
+  "terminology": [
+    {
+      "term": "PJM",
+      "context_meaning": "PJM Interconnection, a regional transmission organization (RTO) coordinating the movement of wholesale electricity in all or parts of 13 states and Washington, D.C.",
+      "translation": "PJM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "PJM is an industry-standard acronym. Translating it to its full Chinese name is unnecessary and clunky, but a brief annotation (e.g., 美国最大区域电网运营商PJM) helps lay readers."
+    },
+    {
+      "term": "ERCOT",
+      "context_meaning": "Electric Reliability Council of Texas, the organization that operates Texas's electrical grid.",
+      "translation": "ERCOT",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Similar to PJM, ERCOT is universally used in energy/tech sectors. Annotate as 德州电网运营商ERCOT on first mention."
+    },
+    {
+      "term": "Capacity market",
+      "context_meaning": "A market that pays power plants to be available to generate electricity when needed (often sitting idle), distinct from paying for actual electricity generated.",
+      "translation": "容量市场",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard financial/energy terminology. Crucial to contrast with 'energy-only market'."
+    },
+    {
+      "term": "Energy-only market",
+      "context_meaning": "A market design where power generators are only paid for the electricity they actually produce and sell, without separate capacity payments.",
+      "translation": "纯电量市场",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard terminology. '纯电量市场' or '单一电量市场' accurately captures the structural difference from PJM's dual-market system."
+    },
+    {
+      "term": "Scarcity pricing",
+      "context_meaning": "A mechanism in ERCOT where the price of electricity spikes significantly during periods of high demand and low supply to incentivize generation.",
+      "translation": "稀缺定价",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard economic and energy market term."
+    },
+    {
+      "term": "Base Residual Auction (BRA)",
+      "context_meaning": "PJM's primary capacity market auction held annually to secure power supply commitments three years in advance.",
+      "translation": "基本剩余拍卖 (BRA)",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Highly specific PJM terminology. Provide the Chinese translation followed by the English acronym in parentheses to maintain technical rigor."
+    },
+    {
+      "term": "FERC",
+      "context_meaning": "Federal Energy Regulatory Commission, the US federal agency that regulates the transmission and wholesale sale of electricity.",
+      "translation": "联邦能源管理委员会 (FERC)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Needs Chinese translation for context, but the acronym FERC should be retained as it's a key regulatory body mentioned frequently."
+    },
+    {
+      "term": "Hyperscalers",
+      "context_meaning": "Large cloud service providers and tech giants (like Google, Meta, Amazon, Microsoft) building massive AI datacenters.",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Industry-standard Chinese translation for hyperscalers in the context of cloud computing and datacenters."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bottleneck",
+      "context_meaning": "",
+      "translation": "瓶颈",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "5G",
+      "context_meaning": "第五代移动通信技术",
+      "translation": "5G",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Moore's Law",
+      "context_meaning": "",
+      "translation": "摩尔定律",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, analytical, data-driven, and highly critical of bureaucratic inefficiencies.",
+    "target_audience": "Institutional investors, energy market analysts, datacenter developers, and tech executives.",
+    "translation_voice": "Professional financial and technical research report. The Chinese text should be dense, precise, and objective, yet retain the sharp, critical edge of the original English when discussing PJM's forecasting errors and market design."
+  },
+  "challenges": [
+    {
+      "location": "Throughout the text",
+      "issue": "Conflating 'Capacity' (容量) and 'Energy/Power' (电量/电力).",
+      "suggestion": "Strictly distinguish between the two. 'Capacity prices' (容量价格) refer to the cost of availability, while 'Energy prices' (电价/电量价格) refer to the cost of actual electricity used. Mixing these up will destroy the article's core thesis."
+    },
+    {
+      "location": "Section: PJM: The $16 Billion Simulation",
+      "issue": "Complex financial and regulatory mechanics (e.g., 'unrestricted VRR curve', 'IMM').",
+      "suggestion": "Keep translations highly literal but grammatically fluid in Chinese. Use parenthetical English acronyms for obscure metrics so bilingual analysts can reference the original concepts."
+    },
+    {
+      "location": "Section: SemiAnalysis Disclaimer",
+      "issue": "Legal and financial compliance language.",
+      "suggestion": "Use standard Chinese legal/financial disclaimer boilerplate phrasing (e.g., '不构成投资建议', '独立研究机构'). Accuracy is paramount here to avoid regulatory liabilities."
+    }
+  ],
+  "guidelines": [
+    "Strictly differentiate between 'capacity' (容量) and 'energy' (电量/能源) as they represent fundamentally different market mechanisms in this article.",
+    "Retain English acronyms for regulatory bodies and grid operators (PJM, ERCOT, FERC, IMM) but provide a brief, natural Chinese annotation on their first appearance (e.g., 德州电网运营商ERCOT).",
+    "Translate 'load' as '负荷' (not 负载) when referring to electrical grid demand, as this is the standard terminology in the Chinese power industry.",
+    "Maintain the sharp, analytical tone of a premium financial research newsletter. Do not soften the criticisms of PJM's market design.",
+    "For the disclaimer section, prioritize strict legal and financial terminology over stylistic flair. Use standard Chinese brokerage disclaimer language.",
+    "Ensure the translation of 'Hyperscalers' is consistently '超大规模云厂商' or '科技巨头', avoiding literal translations that sound unnatural in a tech context."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Sets the analytical stage and introduces the core thesis comparing PJM's flawed capacity design with ERCOT's efficiency.",
+      "relation_to_previous": "N/A - This is the opening section.",
+      "relation_to_next": "Transitions from high-level market design flaws to the specific public controversy regarding AI datacenters raising electricity bills.",
+      "key_points": [
+        "Public misconceptions exist about why power prices are rising.",
+        "PJM's market design is fundamentally flawed, leading to a 9.3x growth in capacity prices.",
+        "ERCOT demonstrates superior grid reliability and expansion capabilities compared to PJM."
+      ],
+      "translation_notes": [
+        "Ensure clear distinction between 'capacity prices' (容量价格) and general 'power prices' (电价).",
+        "Maintain an authoritative, analytical tone suitable for institutional investors."
+      ]
+    },
+    "01-are-ai-datacenters-increasing": {
+      "role_in_article": "Hooks the reader by addressing the mainstream narrative blaming AI datacenters for bill hikes, while contextualizing the geographic overlap of AI hubs and PJM.",
+      "relation_to_previous": "Contextualizes the introductory claims about rising power prices by examining the prime suspect: AI datacenter load growth.",
+      "relation_to_next": "Sets up the technical explanation of electricity bills to prove that the market structure, not just the AI load, is the real culprit.",
+      "key_points": [
+        "The public is blaming AI datacenters for rising bills, which is understandable given the massive load.",
+        "PJM's territory heavily overlaps with major AI infrastructure hubs, including Northern Virginia and massive projects by Google, Meta, and Amazon.",
+        "The report is backed by institutional expertise through collaboration with ADMIS."
+      ],
+      "translation_notes": [
+        "Translate 'finger-pointing' idiomatically (e.g., 互相指责 / 甩锅) while keeping the professional context.",
+        "Ensure accurate translation of financial terms like 'futures brokerage and clearing firm' (期货经纪与清算公司)."
+      ]
+    },
+    "02-capacity-paying-for-power-pla": {
+      "role_in_article": "Provides the foundational technical education on market structures, contrasting capacity markets with energy-only markets.",
+      "relation_to_previous": "Answers the question posed in the previous section by breaking down what actually constitutes a monthly electric bill.",
+      "relation_to_next": "Applies this theoretical framework directly to PJM to explain its specific multi-billion dollar failure.",
+      "key_points": [
+        "Household bills are heavily driven by capacity charges, which pay plants to exist even when idle.",
+        "ERCOT operates as an 'energy-only' market, relying on real-time pricing signals to determine scarcity.",
+        "The fundamental difference is ERCOT's absence of a centralized annual capacity auction."
+      ],
+      "translation_notes": [
+        "Crucial terminology: 'energy-only market' (单一电量市场 / 仅电能市场) vs. 'capacity auction' (容量拍卖).",
+        "Ensure 'real-time pricing signals determine scarcity' is translated to emphasize market mechanics (实时价格信号决定稀缺性)."
+      ]
+    },
+    "03-pjm-the-16-billion-simulatio": {
+      "role_in_article": "Critiques PJM's centralized forecasting model, quantifying the financial damage caused by its structural flaws.",
+      "relation_to_previous": "Takes the concept of the capacity market explained previously and shows its catastrophic financial results in PJM.",
+      "relation_to_next": "Provides the negative baseline (PJM's $16B cost) to contrast with ERCOT's success in the subsequent section.",
+      "key_points": [
+        "PJM acts as a central planner, and its forecasting errors lead directly to unwarranted consumer spending.",
+        "The 2025-26 auction resulted in a $16 billion cost burden spread across PJM residents and businesses."
+      ],
+      "translation_notes": [
+        "Translate 'central planner' carefully (集中规划者 / 中央调度机构) to fit grid operations rather than macro-communism.",
+        "The title '$16 Billion Simulation' implies artificial, model-driven costs; preserve this nuance (160亿美元的模拟游戏 / 模拟测算)."
+      ]
+    },
+    "04-ercot-same-load-growth-no-pr": {
+      "role_in_article": "Presents ERCOT as the successful control group, proving that rapid load growth does not necessitate price shocks if the market design is correct.",
+      "relation_to_previous": "Directly contrasts ERCOT's stability with PJM's $16 billion price shock under similar AI load growth conditions.",
+      "relation_to_next": "Establishes ERCOT's theoretical agility before testing both grids in a real-world physical crisis (Winter Storm Fern).",
+      "key_points": [
+        "ERCOT uses a unified mechanism balancing supply and demand in real-time, avoiding flawed centralized forecasts.",
+        "ERCOT benefits from being a single-state entity free from FERC jurisdiction, allowing it to move much faster than PJM's 13-state bureaucracy."
+      ],
+      "translation_notes": [
+        "Accurate acronyms: 'FERC jurisdiction' (联邦能源管理委员会管辖权).",
+        "'Unified market mechanism' should be translated as 统一市场机制."
+      ]
+    },
+    "05-winter-storm-fern-paying-for": {
+      "role_in_article": "Serves as the empirical case study, stress-testing both market designs under extreme weather to prove the thesis.",
+      "relation_to_previous": "Moves the argument from financial costs and market theory to physical grid reliability and operational reality.",
+      "relation_to_next": "Uses the lessons from the storm—particularly the untapped potential of datacenters—to forecast future regulatory shifts.",
+      "key_points": [
+        "PJM's expensive capacity market failed to deliver reliability during Winter Storm Fern.",
+        "The DOE had to use emergency orders to access 35 GW of datacenter/industrial backup power that PJM's capacity market ignored.",
+        "Datacenters can function as massive, untapped grid reliability buffers when properly integrated."
+      ],
+      "translation_notes": [
+        "Annotate or accurately translate 'BRA' (Base Residual Auction - 基础剩余拍卖).",
+        "Legal precision required for 'Section 202(c) of the Federal Power Act' (《联邦电力法》第202(c)条)."
+      ]
+    },
+    "06-what-comes-next": {
+      "role_in_article": "Analyzes the political and regulatory aftermath, projecting long-term structural advantages for ERCOT.",
+      "relation_to_previous": "Extrapolates from the Winter Storm Fern failures to explain why PJM cannot easily fix its systems due to regulatory inertia.",
+      "relation_to_next": "Narrows the focus from macro-regulatory trends down to micro-investment implications for specific companies.",
+      "key_points": [
+        "PJM's attempts to reform (like NCBL rules) face fierce pushback and stakeholder condemnation.",
+        "FERC rulemaking is slow and heavily scrutinized, meaning PJM's structural issues will persist for years.",
+        "ERCOT's regulatory agility creates a durable, investable asymmetry that hyperscalers will factor into 10-year site selection decisions."
+      ],
+      "translation_notes": [
+        "Translate 'Non-Capacity-Backed Load (NCBL)' as 无容量支持负荷, and 'ANOPR' as 拟议规则制定预先通知.",
+        "Preserve the investment-focused tone of 'structural asymmetry is durable and investable' (结构性不对称是持久的且具有投资价值)."
+      ]
+    },
+    "07-winners-losers-and-the-shift": {
+      "role_in_article": "Monetizes the thesis for the paid tier by identifying specific equities, vendors, and developers positioned to benefit or suffer.",
+      "relation_to_previous": "Translates the macro market and regulatory analysis into actionable intelligence for investors.",
+      "relation_to_next": "Concludes the analytical portion of the article, leading into the mandatory legal disclaimers.",
+      "key_points": [
+        "PJM's forecasting failures create shifting market constraints.",
+        "Specific equipment vendors (onsite gas, cooling/infrastructure) and IPPs will see distinct impacts based on these bottlenecks.",
+        "Datacenter developers and cryptominers must navigate these specific market limitations."
+      ],
+      "translation_notes": [
+        "Ensure 'IPPs' is translated as 独立发电商 (Independent Power Producers).",
+        "Translate 'shifting constraints/bottlenecks' accurately in a supply-chain and grid context (不断变化的约束/瓶颈)."
+      ]
+    },
+    "08-disclaimers": {
+      "role_in_article": "Provides a structural header separating the editorial content from legal boilerplate.",
+      "relation_to_previous": "Marks the end of the paid investment analysis.",
+      "relation_to_next": "Introduces the specific SemiAnalysis legal text.",
+      "key_points": [
+        "Standard demarcation for legal text."
+      ],
+      "translation_notes": [
+        "Translate simply as 免责声明."
+      ]
+    },
+    "09-semianalysis-disclaimer": {
+      "role_in_article": "Protects the authors and publishers from financial liability and certifies research independence.",
+      "relation_to_previous": "Follows the disclaimer header to provide the actual legal terms.",
+      "relation_to_next": "N/A - End of document.",
+      "key_points": [
+        "Analysts' views are independent and accurately reflect their personal views.",
+        "No compensation is tied to the specific recommendations in the report."
+      ],
+      "translation_notes": [
+        "Use precise financial/legal boilerplate translation for 'Analyst Certifications and Independence of Research' (分析师认证与研究独立性)."
+      ]
+    }
+  },
+  "section_count": 10,
+  "paragraph_count": 169,
+  "word_count": 5393
+}

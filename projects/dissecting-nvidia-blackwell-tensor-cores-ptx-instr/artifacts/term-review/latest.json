@@ -1,0 +1,1496 @@
+{
+  "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+  "project_title": "Dissecting Nvidia Blackwell - Tensor Cores, PTX Instructions, SASS, Floorsweep, Yield",
+  "review_required": true,
+  "generated_at": "2026-04-01T23:08:07.490106",
+  "total_candidates": 38,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "TMA",
+          "suggested_translation": "[保持原文] TMA",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 23,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "06-memory-subsystem",
+              "section_title": "Memory Subsystem"
+            },
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            },
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            }
+          ],
+          "contexts": [
+            "Tensor Memory Accelerator, a hardware feature for efficient data movement.",
+            "Tensor Memory Accelerator; a hardware unit for efficient data movement.",
+            "a variant of asynchronous copy instructions"
+          ],
+          "similar_terms": [
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "PTX",
+          "suggested_translation": "[保持原文] PTX",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "11-dsmem-vs-smem",
+              "section_title": "DSMEM vs. SMEM"
+            }
+          ],
+          "contexts": [
+            "Parallel Thread Execution, NVIDIA's intermediate instruction set architecture.",
+            "Parallel Thread Execution, NVIDIA's low-level virtual machine and instruction set"
+          ],
+          "similar_terms": [
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.571
+            },
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Microbenchmarking",
+          "suggested_translation": "微基准测试",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-acknowledgement",
+              "section_title": "Acknowledgement"
+            }
+          ],
+          "contexts": [
+            "Measuring raw performance of specific hardware instructions or units.",
+            "Providing B200 nodes for microbenchmarking"
+          ],
+          "similar_terms": [
+            {
+              "original": "benchmark",
+              "translation": "基准测试",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "只有表示大模型等的评测方式时翻译成基准测试",
+              "similarity": 0.692
+            },
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "GPC Floorsweeps",
+          "suggested_translation": "GPC 降级片",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "GPU dies where some Graphics Processing Clusters are disabled to improve yield."
+          ],
+          "similar_terms": [
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Speed of Light",
+          "suggested_translation": "极限性能 (SoL)",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "NVIDIA profiling terminology referring to the theoretical maximum hardware throughput."
+          ],
+          "similar_terms": [
+            {
+              "original": "weights",
+              "translation": "权重",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-acknowledgement",
+      "section_title": "Acknowledgement",
+      "candidates": [
+        {
+          "term": "B200",
+          "suggested_translation": "[保持原文] B200",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-acknowledgement",
+          "related_sections": [
+            {
+              "section_id": "01-acknowledgement",
+              "section_title": "Acknowledgement"
+            }
+          ],
+          "contexts": [
+            "NVIDIA Blackwell B200 GPU nodes for benchmarking"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "02-future-work",
+      "section_title": "Future Work",
+      "candidates": [
+        {
+          "term": "AMD CDNA4",
+          "suggested_translation": "[保持原文] AMD CDNA4",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-future-work",
+          "related_sections": [
+            {
+              "section_id": "02-future-work",
+              "section_title": "Future Work"
+            }
+          ],
+          "contexts": [
+            "AMD's next-generation data center GPU architecture."
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "kernel",
+          "suggested_translation": "算子（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-future-work",
+          "related_sections": [
+            {
+              "section_id": "02-future-work",
+              "section_title": "Future Work"
+            },
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "Specific code executed on AI accelerators (e.g., TPU Pallas kernels).",
+            "Specialized functions designed to run on GPU hardware for specific deep learning operations"
+          ],
+          "similar_terms": [
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.545
+            },
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            }
+          ]
+        },
+        {
+          "term": "TensorMap",
+          "suggested_translation": "[保持原文] TensorMap",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-future-work",
+          "related_sections": [
+            {
+              "section_id": "02-future-work",
+              "section_title": "Future Work"
+            },
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "A hardware-accelerated data structure for memory management in Blackwell architecture.",
+            "An opaque data structure used by TMA to define tensor layouts and tiling parameters in memory"
+          ],
+          "similar_terms": [
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.6
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-blackwell-features",
+      "section_title": "Blackwell Features",
+      "candidates": [
+        {
+          "term": "Hopper",
+          "suggested_translation": "[保持原文] Hopper",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "03-blackwell-features",
+          "related_sections": [
+            {
+              "section_id": "03-blackwell-features",
+              "section_title": "Blackwell Features"
+            },
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            },
+            {
+              "section_id": "11-dsmem-vs-smem",
+              "section_title": "DSMEM vs. SMEM"
+            },
+            {
+              "section_id": "12-tensor-core-5th-generation-mma",
+              "section_title": "Tensor Core 5th Generation MMA"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's previous generation GPU architecture mentioned as a baseline",
+            "Nvidia GPU architecture generation preceding Blackwell.",
+            "NVIDIA's GPU architecture (e.g., H100) preceding the Blackwell architecture"
+          ],
+          "similar_terms": [
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.6
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "tcgen05",
+          "suggested_translation": "[保持原文] tcgen05",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-blackwell-features",
+          "related_sections": [
+            {
+              "section_id": "03-blackwell-features",
+              "section_title": "Blackwell Features"
+            }
+          ],
+          "contexts": [
+            "The hardware unit/instruction generation for MMA in Blackwell"
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-clusters-gpcs-and-floorsweep",
+      "section_title": "Clusters, GPCs, and Floorsweeping",
+      "candidates": [
+        {
+          "term": "CTA",
+          "suggested_translation": "[保持原文] CTA",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 21,
+          "first_occurrence": "04-clusters-gpcs-and-floorsweep",
+          "related_sections": [
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "08-tensor-memory-accelerator-tma",
+              "section_title": "Tensor Memory Accelerator (TMA)"
+            },
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            },
+            {
+              "section_id": "11-dsmem-vs-smem",
+              "section_title": "DSMEM vs. SMEM"
+            },
+            {
+              "section_id": "12-tensor-core-5th-generation-mma",
+              "section_title": "Tensor Core 5th Generation MMA"
+            },
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            },
+            {
+              "section_id": "14-latency",
+              "section_title": "Latency"
+            },
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            },
+            {
+              "section_id": "17-throughput-and-multicast",
+              "section_title": "Throughput and Multicast"
+            }
+          ],
+          "contexts": [
+            "Cooperative Thread Array; the CUDA programming model's term for a thread block.",
+            "assigning only one CTA per SM",
+            "Cooperative Thread Array, the CUDA programming model's term for a thread block"
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "SM",
+          "suggested_translation": "[保持原文] SM",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 18,
+          "first_occurrence": "04-clusters-gpcs-and-floorsweep",
+          "related_sections": [
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "05-logical-vs-physical-gpc",
+              "section_title": "Logical vs. Physical GPC"
+            },
+            {
+              "section_id": "08-tensor-memory-accelerator-tma",
+              "section_title": "Tensor Memory Accelerator (TMA)"
+            },
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            },
+            {
+              "section_id": "12-tensor-core-5th-generation-mma",
+              "section_title": "Tensor Core 5th Generation MMA"
+            },
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            },
+            {
+              "section_id": "14-latency",
+              "section_title": "Latency"
+            },
+            {
+              "section_id": "18-floorplan",
+              "section_title": "Floorplan"
+            }
+          ],
+          "contexts": [
+            "Streaming Multiprocessor; the fundamental compute unit in Nvidia GPUs.",
+            "Streaming Multiprocessor; the fundamental compute unit in NVIDIA GPUs.",
+            "assigning only one CTA per SM"
+          ],
+          "similar_terms": [
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.667
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "GPC",
+          "suggested_translation": "图形处理集群（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "04-clusters-gpcs-and-floorsweep",
+          "related_sections": [
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "05-logical-vs-physical-gpc",
+              "section_title": "Logical vs. Physical GPC"
+            },
+            {
+              "section_id": "18-floorplan",
+              "section_title": "Floorplan"
+            }
+          ],
+          "contexts": [
+            "Graphics Processing Cluster; a high-level hardware block in Nvidia GPUs.",
+            "Graphics Processing Cluster; logical vs. physical groupings in NVIDIA architecture.",
+            "we see 8 GPCs"
+          ],
+          "similar_terms": [
+            {
+              "original": "GPU",
+              "translation": "GPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "图形处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "TPC",
+          "suggested_translation": "纹理处理集群（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "04-clusters-gpcs-and-floorsweep",
+          "related_sections": [
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            },
+            {
+              "section_id": "05-logical-vs-physical-gpc",
+              "section_title": "Logical vs. Physical GPC"
+            }
+          ],
+          "contexts": [
+            "Texture Processing Cluster; a hardware grouping containing SMs.",
+            "Texture Processing Cluster; a sub-unit of the GPC."
+          ],
+          "similar_terms": [
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "floorsweeping",
+          "suggested_translation": "残次单元屏蔽（首次标注原文）",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "04-clusters-gpcs-and-floorsweep",
+          "related_sections": [
+            {
+              "section_id": "04-clusters-gpcs-and-floorsweep",
+              "section_title": "Clusters, GPCs, and Floorsweeping"
+            }
+          ],
+          "contexts": [
+            "The practice of disabling defective hardware units (like SMs) to salvage a chip."
+          ],
+          "similar_terms": [
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-memory-subsystem",
+      "section_title": "Memory Subsystem",
+      "candidates": [
+        {
+          "term": "asynchronous copy instructions",
+          "suggested_translation": "异步拷贝指令",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-memory-subsystem",
+          "related_sections": [
+            {
+              "section_id": "06-memory-subsystem",
+              "section_title": "Memory Subsystem"
+            }
+          ],
+          "contexts": [
+            "newer generations feature asynchronous copy instructions"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "LDGSTS",
+          "suggested_translation": "[保持原文] LDGSTS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-memory-subsystem",
+          "related_sections": [
+            {
+              "section_id": "06-memory-subsystem",
+              "section_title": "Memory Subsystem"
+            },
+            {
+              "section_id": "08-tensor-memory-accelerator-tma",
+              "section_title": "Tensor Memory Accelerator (TMA)"
+            }
+          ],
+          "contexts": [
+            "a variant of asynchronous copy instructions",
+            "Peak throughput is reached far later than LDGSTS"
+          ],
+          "similar_terms": [
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.462
+            },
+            {
+              "original": "weights",
+              "translation": "权重",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "memory subsystem",
+          "suggested_translation": "内存子系统",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-memory-subsystem",
+          "related_sections": [
+            {
+              "section_id": "06-memory-subsystem",
+              "section_title": "Memory Subsystem"
+            }
+          ],
+          "contexts": [
+            "hardware units that move data between computation units"
+          ],
+          "similar_terms": [
+            {
+              "original": "memory chip",
+              "translation": "存储芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.519
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-asynchronous-copy",
+      "section_title": "Asynchronous Copy",
+      "candidates": [
+        {
+          "term": "Async copy",
+          "suggested_translation": "异步拷贝（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "07-asynchronous-copy",
+          "related_sections": [
+            {
+              "section_id": "07-asynchronous-copy",
+              "section_title": "Asynchronous Copy"
+            },
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "Instruction moving data from global to shared memory asynchronously in Ampere+ GPUs.",
+            "Asynchronous memory copy mechanism used in CUDA kernels to overlap data movement with computation"
+          ],
+          "similar_terms": [
+            {
+              "original": "analog chip",
+              "translation": "模拟芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "bytes-in-flight",
+          "suggested_translation": "在途字节数",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "07-asynchronous-copy",
+          "related_sections": [
+            {
+              "section_id": "07-asynchronous-copy",
+              "section_title": "Asynchronous Copy"
+            },
+            {
+              "section_id": "08-tensor-memory-accelerator-tma",
+              "section_title": "Tensor Memory Accelerator (TMA)"
+            }
+          ],
+          "contexts": [
+            "The total number of bytes concurrent memory loading instructions are loading.",
+            "best-case throughput for each bytes-in-flight"
+          ],
+          "similar_terms": [
+            {
+              "original": "weights",
+              "translation": "权重",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-tensor-memory-accelerator-tma",
+      "section_title": "Tensor Memory Accelerator (TMA)",
+      "candidates": [
+        {
+          "term": "Tensor Memory Accelerator",
+          "suggested_translation": "张量内存加速器（首次标注原文TMA）",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "08-tensor-memory-accelerator-tma",
+          "related_sections": [
+            {
+              "section_id": "08-tensor-memory-accelerator-tma",
+              "section_title": "Tensor Memory Accelerator (TMA)"
+            }
+          ],
+          "contexts": [
+            "asynchronous data copy engine introduced in the Hopper generation"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "09-async-copy-vs-tma-comparison",
+      "section_title": "Async Copy vs. TMA Comparison",
+      "candidates": [
+        {
+          "term": "MHA",
+          "suggested_translation": "[保持原文] MHA（多头注意力机制）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "09-async-copy-vs-tma-comparison",
+          "related_sections": [
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "Multi-Head Attention, a standard component in Transformer-based neural networks"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "TRT-LLM",
+          "suggested_translation": "[保持原文] TRT-LLM",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "09-async-copy-vs-tma-comparison",
+          "related_sections": [
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "NVIDIA TensorRT-LLM, an open-source library for optimizing Large Language Model inference"
+          ],
+          "similar_terms": [
+            {
+              "original": "LLM",
+              "translation": "LLM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "大语言模型 (Large Language Model)",
+              "similarity": 0.6
+            }
+          ]
+        },
+        {
+          "term": "MLA",
+          "suggested_translation": "[保持原文] MLA（多头潜在注意力机制）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-async-copy-vs-tma-comparison",
+          "related_sections": [
+            {
+              "section_id": "09-async-copy-vs-tma-comparison",
+              "section_title": "Async Copy vs. TMA Comparison"
+            }
+          ],
+          "contexts": [
+            "Multi-head Latent Attention, an optimized attention mechanism introduced in architectures like DeepSeek-V2"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "10-tma-multicast",
+      "section_title": "TMA Multicast",
+      "candidates": [
+        {
+          "term": "SMEM",
+          "suggested_translation": "[保持原文] SMEM",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 32,
+          "first_occurrence": "10-tma-multicast",
+          "related_sections": [
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            },
+            {
+              "section_id": "11-dsmem-vs-smem",
+              "section_title": "DSMEM vs. SMEM"
+            },
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            },
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            },
+            {
+              "section_id": "17-throughput-and-multicast",
+              "section_title": "Throughput and Multicast"
+            }
+          ],
+          "contexts": [
+            "Shared Memory, the high-speed on-chip memory within a Streaming Multiprocessor",
+            "Shared Memory within a GPU Streaming Multiprocessor",
+            "Shared Memory, on-chip memory shared within an SM."
+          ],
+          "similar_terms": [
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "multicast",
+          "suggested_translation": "多播（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 16,
+          "first_occurrence": "10-tma-multicast",
+          "related_sections": [
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            },
+            {
+              "section_id": "17-throughput-and-multicast",
+              "section_title": "Throughput and Multicast"
+            }
+          ],
+          "contexts": [
+            "A hardware mode where a single load copies data to multiple SMs simultaneously",
+            "marked benefit from the multicast introduced by clustering"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "GEMM",
+          "suggested_translation": "通用矩阵乘法（首次标注原文）",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "10-tma-multicast",
+          "related_sections": [
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            },
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            }
+          ],
+          "contexts": [
+            "General Matrix Multiply, a fundamental operation for neural network workloads",
+            "General Matrix Multiply, the fundamental operation in deep learning workloads."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "L2 Request Coalescer (LRC)",
+          "suggested_translation": "L2请求合并器（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tma-multicast",
+          "related_sections": [
+            {
+              "section_id": "10-tma-multicast",
+              "section_title": "TMA Multicast"
+            }
+          ],
+          "contexts": [
+            "A hardware unit in the GPU responsible for merging and serving L2 cache requests"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "11-dsmem-vs-smem",
+      "section_title": "DSMEM vs. SMEM",
+      "candidates": [
+        {
+          "term": "DSMEM",
+          "suggested_translation": "分布式共享内存（首次标注原文）",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "11-dsmem-vs-smem",
+          "related_sections": [
+            {
+              "section_id": "11-dsmem-vs-smem",
+              "section_title": "DSMEM vs. SMEM"
+            }
+          ],
+          "contexts": [
+            "Distributed Shared Memory introduced in Hopper architecture"
+          ],
+          "similar_terms": [
+            {
+              "original": "IDM",
+              "translation": "IDM",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "12-tensor-core-5th-generation-mma",
+      "section_title": "Tensor Core 5th Generation MMA",
+      "candidates": [
+        {
+          "term": "MMA",
+          "suggested_translation": "[保持原文] MMA",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 22,
+          "first_occurrence": "12-tensor-core-5th-generation-mma",
+          "related_sections": [
+            {
+              "section_id": "12-tensor-core-5th-generation-mma",
+              "section_title": "Tensor Core 5th Generation MMA"
+            },
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            },
+            {
+              "section_id": "14-latency",
+              "section_title": "Latency"
+            },
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            },
+            {
+              "section_id": "17-throughput-and-multicast",
+              "section_title": "Throughput and Multicast"
+            }
+          ],
+          "contexts": [
+            "Matrix Multiply-Accumulate instruction, the core operation for matrix multiplication.",
+            "Matrix Multiply-Accumulate, the core instruction for tensor operations in NVIDIA GPUs.",
+            "Matrix Multiply-Accumulate instruction latency benchmarking"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "weak scaling",
+          "suggested_translation": "弱扩展性",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "12-tensor-core-5th-generation-mma",
+          "related_sections": [
+            {
+              "section_id": "12-tensor-core-5th-generation-mma",
+              "section_title": "Tensor Core 5th Generation MMA"
+            },
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            }
+          ],
+          "contexts": [
+            "Performance scaling where the problem size per processor is kept constant.",
+            "A measure of how performance scales as both the problem size and the number of processors increase."
+          ],
+          "similar_terms": [
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            },
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.48
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "13-throughput",
+      "section_title": "Throughput",
+      "candidates": [
+        {
+          "term": "Datapath",
+          "suggested_translation": "数据路径",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "13-throughput",
+          "related_sections": [
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            }
+          ],
+          "contexts": [
+            "The hardware components that perform data processing operations."
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            }
+          ]
+        },
+        {
+          "term": "TMEM",
+          "suggested_translation": "TMEM（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "13-throughput",
+          "related_sections": [
+            {
+              "section_id": "13-throughput",
+              "section_title": "Throughput"
+            }
+          ],
+          "contexts": [
+            "Tensor Memory, a new memory tier introduced in recent NVIDIA architectures like Blackwell."
+          ],
+          "similar_terms": [
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "15-throughput-at-different-in-fli",
+      "section_title": "Throughput at Different In-Flight Instruction Count",
+      "candidates": [
+        {
+          "term": "CUTLASS",
+          "suggested_translation": "[保持原文] CUTLASS",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-throughput-at-different-in-fli",
+          "related_sections": [
+            {
+              "section_id": "15-throughput-at-different-in-fli",
+              "section_title": "Throughput at Different In-Flight Instruction Count"
+            },
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            },
+            {
+              "section_id": "17-throughput-and-multicast",
+              "section_title": "Throughput and Multicast"
+            }
+          ],
+          "contexts": [
+            "real-world use cases with kernel writing library CUTLASS",
+            "Nvidia's library for high-performance GEMM operations.",
+            "NVIDIA's library for CUDA C++ template abstractions"
+          ],
+          "similar_terms": [
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "floorplan",
+          "suggested_translation": "芯片布局",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-throughput-at-different-in-fli",
+          "related_sections": [
+            {
+              "section_id": "15-throughput-at-different-in-fli",
+              "section_title": "Throughput at Different In-Flight Instruction Count"
+            },
+            {
+              "section_id": "18-floorplan",
+              "section_title": "Floorplan"
+            }
+          ],
+          "contexts": [
+            "We also discuss throughput, multi-cast, and floorplans",
+            "Blackwell shares a similar floorplan as Blackwell Ultra"
+          ],
+          "similar_terms": [
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.571
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "in-flight instructions",
+          "suggested_translation": "在途指令",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "15-throughput-at-different-in-fli",
+          "related_sections": [
+            {
+              "section_id": "15-throughput-at-different-in-fli",
+              "section_title": "Throughput at Different In-Flight Instruction Count"
+            }
+          ],
+          "contexts": [
+            "set high numbers of in-flight instructions to amortize instruction issuing"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "16-real-world-use-case-cutlass",
+      "section_title": "Real-world Use Case: CUTLASS",
+      "candidates": [
+        {
+          "term": "Epilogue",
+          "suggested_translation": "尾部处理（首次标注原文）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "16-real-world-use-case-cutlass",
+          "related_sections": [
+            {
+              "section_id": "16-real-world-use-case-cutlass",
+              "section_title": "Real-world Use Case: CUTLASS"
+            }
+          ],
+          "contexts": [
+            "The final phase of a GEMM kernel that handles post-processing like activation or bias."
+          ],
+          "similar_terms": []
+        }
+      ]
+    }
+  ]
+}

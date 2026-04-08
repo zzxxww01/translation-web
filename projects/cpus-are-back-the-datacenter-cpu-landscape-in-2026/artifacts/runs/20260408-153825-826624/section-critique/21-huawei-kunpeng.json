@@ -1,0 +1,30 @@
+{
+  "section_id": "21-huawei-kunpeng",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 8.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 13,
+        "issue_type": "accuracy|logic",
+        "severity": "high",
+        "original_text": "These racks also integrate storage and networking, and will be adopted by Oracle’s Exadata database servers and used by China’s finance sector.",
+        "description": "原文中“will be adopted by Oracle’s Exadata database servers”存在明显的常识性/逻辑性笔误。甲骨文的 Exadata 是基于 x86 架构的一体机，不可能去“采用”华为的 TaiShan 机架。结合中国金融行业推进“信创”和“去 IOE”的背景，原作者的真实意图大概率是“作为甲骨文 Exadata 的替代方案被采用”。译文虽然忠实于原文的字面意思，但这会导致懂行的读者感到荒谬。",
+        "why_it_matters": "字面直译保留了原文的逻辑硬伤，会严重影响文章在专业读者眼中的权威性与合理性。",
+        "suggestion": "建议意译以修正原文的逻辑漏洞，可改为：“这些机架还集成了存储与网络功能，将作为甲骨文 (Oracle) Exadata 数据库服务器的替代方案，广泛应用于中国金融领域。”或添加译者注说明原文本意。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "The clusters are connected with a ring bus to four channels of DDR4 on the same die...",
+        "description": "译文“与同一裸片上的 4 通道 DDR4 内存相连”虽然可以理解，但在芯片架构语境下，裸片内部总线连接的实际上是“内存控制器（memory controller）”而非直接连接内存本身（内存是外部组件）。",
+        "why_it_matters": "增加“控制器”一词能提升硬件描述的严谨度和专业度，符合芯片工程师的阅读习惯。",
+        "suggestion": "建议微调为：“这些集群通过环形总线与同一裸片上的 4 通道 DDR4 内存控制器相连……”"
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "section_id": "12-tensor-core-5th-generation-mma",
+  "new_terms": [
+    {
+      "term": "2SM MMA",
+      "suggested_translation": "2SM MMA",
+      "context": "A new type of MMA instruction in Blackwell where a CTA pair executes across 2 SMs.",
+      "confidence": 0.95
+    },
+    {
+      "term": ".cta_group::2",
+      "suggested_translation": ".cta_group::2",
+      "context": "The specific instruction suffix for Blackwell's 2SM MMA.",
+      "confidence": 1.0
+    },
+    {
+      "term": "sharded",
+      "suggested_translation": "分片 (Sharded)",
+      "context": "Describes matrix B and D being distributed across multiple SMs in 2SM MMA.",
+      "confidence": 0.9
+    },
+    {
+      "term": "weak scaling",
+      "suggested_translation": "弱扩展性 (Weak Scaling)",
+      "context": "Performance scaling where problem size increases with the number of processors.",
+      "confidence": 0.95
+    },
+    {
+      "term": "strong scaling",
+      "suggested_translation": "强扩展性 (Strong Scaling)",
+      "context": "Performance scaling for a fixed total problem size as processors are added.",
+      "confidence": 0.95
+    },
+    {
+      "term": "shape-dependent",
+      "suggested_translation": "形状依赖的",
+      "context": "Refers to MMA performance varying based on the dimensions of the input matrices.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "mma (matrix multiply-accumulate)": "MMA",
+    "cooperative thread array (cta)": "CTA",
+    "sm": "SM",
+    "blackwell": "Blackwell",
+    "hopper architecture": "Hopper"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:29:27.031770"
+}

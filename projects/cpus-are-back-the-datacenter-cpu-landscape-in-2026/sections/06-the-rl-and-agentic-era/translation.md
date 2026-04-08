@@ -1,0 +1,21 @@
+https://substackcdn.com/image/fetch/$s_!Dbd7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ad2959c-94f2-4096-a61c-c40e46ee0dff_3092x949.png
+
+微软 Fairwater GPU 与 CPU 数据中心建筑。来源：Google Earth
+
+如今，为支持头节点之外的AI训练与推理，CPU的使用量再次激增。微软为 OpenAI 建设的 Fairwater 数据中心便是明证。在这里，一栋48兆瓦（MW）的 CPU 与存储建筑支撑着295兆瓦的主GPU集群（GPU cluster）。这意味着现在需要数以万计的 CPU 来处理和管理由 GPU 产生的 PB 级数据，如果没有 AI，这种庞大需求根本无从谈起。
+
+AI 计算范式的演进直接推高了 CPU 的使用强度。在预训练与模型微调阶段，CPU 负责对数据进行存储、分片和索引，随后将其输送至 GPU 集群进行矩阵乘法运算。在多模态模型中，CPU 还被用于图像和视频解码，尽管目前已有越来越多的固定功能媒体加速模块被直接集成到 GPU 中。
+
+https://substackcdn.com/image/fetch/$s_!QDm6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4658580c-c8cb-4753-b21a-a39831d9a3a8_2052x1554.png
+
+强化学习 (RL) 训练循环。RL环境（绿色部分）中使用的 CPU。来源：SemiAnalysis
+
+采用强化学习 (RL) 技术来改进模型，进一步推高了 CPU 需求。正如我们在强化学习 (RL) 深度分析中所指出的，在 RL 训练循环中，“RL环境”需要执行模型生成的动作并计算相应的奖励。在编程和数学等领域，这要求大量 CPU 并行工作，以完成代码编译、验证、解释及工具调用。此外，CPU 还深度参与复杂的物理模拟，并对生成的合成数据进行高精度验证。为进一步扩展模型规模，RL环境日益复杂。这就要求在主 GPU 集群附近部署大型高性能 CPU 集群，以确保 GPU 满载运行，最大限度减少 GPU 空闲时间。
+
+训练循环对 RL 和 CPU 的依赖愈发显著，正在催生新的瓶颈。由于 AI 加速器的每瓦性能提升速度远超 CPU，这意味着诸如 Rubin 等下一代 GPU，其所需的 CPU 与 GPU 功耗配比，可能会进一步攀升，甚至打破上文 Fairwater 数据中心中 1:6 的比例。
+
+- 扩展强化学习：环境、奖励作弊、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日
+
+在推理端，能够搜索并利用互联网的检索增强生成 (RAG) 模型日益兴起，加之能够调用工具和查询数据库的智能体模型不断涌现，双重驱动下，处理这些请求所需的通用 CPU 算力需求大幅飙升。由于具备向多个数据源发送 API 调用的能力，每个智能体对互联网的使用强度，本质上远超人类进行简单的谷歌搜索。为应对互联网流量的阶梯式跃升，AWS 和 Azure 正在大规模部署其自研的 Graviton 和 Cobalt 系列 CPU，同时采购更多的商用 x86 通用服务器。
+
+步入 2026 年，数据中心对 CPU 和 DRAM 的需求只会愈发强劲。前沿 AI 实验室的 CPU 已经无法满足其 RL 训练需求，正直接与云服务提供商抢夺商用 x86 CPU 服务器，疯狂争夺 CPU 供货配额。面对 CPU 库存意外告罄的局面，英特尔正计划全面上调其至强系列的价格，同时增加生产设备以提振 CPU 产能。AMD 则一直在提升供货能力，旨在实现增长并抢占服务器 CPU 总潜在市场 (TAM) 份额，其笃定该市场在 2026 年将实现“强劲的双位数”增长。接下来，我们将为订阅者深入探讨 2026 年之后 CPU 市场格局的演变。

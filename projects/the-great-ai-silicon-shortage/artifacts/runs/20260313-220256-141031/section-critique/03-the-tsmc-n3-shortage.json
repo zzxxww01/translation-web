@@ -1,0 +1,47 @@
+{
+  "section_id": "03-the-tsmc-n3-shortage",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 8.8,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 7,
+        "issue_type": "accuracy",
+        "severity": "critical",
+        "original_text": "The Vera CPU used in VR racks uses N3P for all its silicon.",
+        "description": "译文将“VR racks”直译为“VR机架”，极易让读者误解为“虚拟现实（Virtual Reality）”。在英伟达AI加速器的语境中，结合前文提到的Vera CPU和后文的Rubin GPU，“VR”实际上是Vera Rubin架构的缩写。",
+        "why_it_matters": "将AI算力机架误译为虚拟现实机架属于严重的行业常识性错误，会极大损害文章的专业可信度。",
+        "suggestion": "改为“用于VR（Vera Rubin）机架的Vera CPU”或直接译为“用于Vera Rubin机架的Vera CPU”。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "Key smartphone and PC customers include Apple, which uses N3 variants for its M3 to M5 Mac chips and A17 to A19 iPhone processors, Qualcomm for its Snapdragon 8 Elite series, MediaTek for its Dimensity smartphone SoCs as well as select automotive and PC chips, and Intel for its Lunar Lake and Arrow Lake client processors.",
+        "description": "译文使用了长定语前置的机械并列（“将...的苹果；将其用于...的高通；将其用于...的联发科；以及将其用于...的英特尔”），导致句式冗长且重复，英文语法投影较重。",
+        "why_it_matters": "不符合中文行业文章的阅读习惯，降低了密集信息的获取效率。",
+        "suggestion": "建议使用括号或更简洁的补充说明结构来处理：\n“在智能手机和PC领域，其核心客户包括：苹果（将N3各版本用于M3至M5系列Mac芯片及A17至A19系列iPhone处理器）、高通（用于骁龙8至尊版系列）、联发科（用于Dimensity系列智能手机SoC及部分汽车和PC芯片），以及英特尔（用于Lunar Lake和Arrow Lake客户端处理器）。”"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "Rubin kicks off the adoption of 3nm 200G optical DSPs.",
+        "description": "译文将“optical DSPs”译为全称“光学数字信号处理器”，虽然字面无误，但在半导体和光通信行业中通常直接简称为“光DSP”。",
+        "why_it_matters": "全称显得过于学术化和生硬，不符合行业内资深读者的阅读习惯及分析师的行文口吻。",
+        "suggestion": "将“光学数字信号处理器”改为“光DSP”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "AMD, typically the earlier adopter of new nodes, has already adopted N3 for MI350X and will stay on N3 for the AID and MID tiles for MI400",
+        "description": "原文的主语是“AMD”，而译文将其转换成了“AMD的MI350X已采用...，其MI400的...将继续沿用”，导致前后句主语发生偏移，语势略显割裂。",
+        "why_it_matters": "保持原句以公司为主语的结构，能使句子气势更连贯，更突出科技巨头在供应链上的战略动作。",
+        "suggestion": "改为：“作为新制程节点一贯的早期采用者，AMD已在MI350X上采用N3制程，并在MI400的AID和MID芯粒上继续沿用N3制程（XCD则采用N2）。”"
+      }
+    ]
+  }
+}

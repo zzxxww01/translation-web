@@ -1,0 +1,55 @@
+{
+  "section_id": "05-compute-tray-thermal",
+  "new_terms": [
+    {
+      "term": "internal manifold",
+      "suggested_translation": "内部歧管",
+      "context": "Distributes inlet coolant to modules and collects outlet coolant within the chassis.",
+      "confidence": 0.95
+    },
+    {
+      "term": "UQD",
+      "suggested_translation": "通用快速接头",
+      "context": "Universal Quick Disconnect; used for coolant entry/exit at the chassis level.",
+      "confidence": 0.95
+    },
+    {
+      "term": "micro-channel cold plate (MCCP)",
+      "suggested_translation": "微通道冷板",
+      "context": "Upgraded cold plate for Rubin GPU with reduced channel pitch for better thermal dissipation.",
+      "confidence": 0.98
+    },
+    {
+      "term": "L10 / L6 assembly level",
+      "suggested_translation": "L10 / L6 组装级别",
+      "context": "Manufacturing stages; shifting cold plate attachment from system integration (L10) to board-level (L6).",
+      "confidence": 0.9
+    },
+    {
+      "term": "VRM (Voltage Regulator Module)",
+      "suggested_translation": "电压调节模块",
+      "context": "Power components on the board that require cooling via the cold plate.",
+      "confidence": 0.95
+    },
+    {
+      "term": "transceiver cages",
+      "suggested_translation": "光模块笼子",
+      "context": "Housing for optical transceivers on the Orchid module covered by the cold plate.",
+      "confidence": 0.85
+    },
+    {
+      "term": "Rubin GPU / Vera CPU",
+      "suggested_translation": "Rubin GPU / Vera CPU",
+      "context": "Next-generation Nvidia hardware components mentioned in the thermal design.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "coldplate": "冷板",
+    "quick disconnect (qd/mqd)": "快速接头",
+    "compute tray": "算力托盘",
+    "liquid metal tim2": "液态金属 TIM2"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:54:42.471092"
+}

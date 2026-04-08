@@ -61,7 +61,12 @@ echo(
 set "FRONTEND_DIR=web\frontend"
 set "FRONTEND_DIST=%FRONTEND_DIR%\dist"
 set "FRONTEND_STAMP=%FRONTEND_DIST%\.buildstamp"
+set "STARTUP_LOG_DIR=%~dp0artifacts\startup-logs"
+set "FRONTEND_INSTALL_LOG=%STARTUP_LOG_DIR%\frontend-install.log"
+set "FRONTEND_BUILD_LOG=%STARTUP_LOG_DIR%\frontend-build.log"
 set "NEED_BUILD=0"
+
+if not exist "%STARTUP_LOG_DIR%" mkdir "%STARTUP_LOG_DIR%" >nul 2>&1
 
 if "%FORCE_BUILD%"=="1" (
     echo [INFO] Force rebuild requested.
@@ -109,17 +114,28 @@ if "%FORCE_BUILD%"=="1" (
 
 if "%NEED_BUILD%"=="1" (
     echo [INFO] Frontend changed. Building...
-    cd %FRONTEND_DIR%
+    pushd %FRONTEND_DIR%
     if not exist "node_modules" (
         echo [INFO] Installing frontend dependencies...
-        call npm install
+        call npm install > "%FRONTEND_INSTALL_LOG%" 2>&1
+        if errorlevel 1 (
+            echo [ERROR] Frontend dependency installation failed.
+            echo [INFO] Install log: %FRONTEND_INSTALL_LOG%
+            powershell -NoProfile -Command "if(Test-Path '%FRONTEND_INSTALL_LOG%'){ Get-Content '%FRONTEND_INSTALL_LOG%' -Tail 40 }"
+            popd
+            exit /b 1
+        )
     )
-    call npm run build
+    echo [INFO] Frontend build log: %FRONTEND_BUILD_LOG%
+    call npm run build > "%FRONTEND_BUILD_LOG%" 2>&1
     if errorlevel 1 (
         echo [ERROR] Frontend build failed.
+        echo [INFO] Build log: %FRONTEND_BUILD_LOG%
+        powershell -NoProfile -Command "if(Test-Path '%FRONTEND_BUILD_LOG%'){ Get-Content '%FRONTEND_BUILD_LOG%' -Tail 60 }"
+        popd
         exit /b 1
     )
-    cd ..\..
+    popd
     powershell -NoProfile -Command "New-Item -ItemType File -Force -Path 'web\\frontend\\dist\\.buildstamp' | Out-Null"
     echo(
 ) else (
@@ -152,6 +168,11 @@ for /f "tokens=2" %%a in ('tasklist /fi "imagename eq python.exe" /fo table /nh 
         powershell -NoProfile -Command "try { Stop-Process -Id %%a -Force -ErrorAction SilentlyContinue } catch {}" >nul 2>&1
     )
 )
+
+rem Method 2b: kill stale uvicorn processes for the same app/port even if they are not listening
+powershell -NoProfile -Command ^
+    "$procs = Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'python.exe' -and $_.CommandLine -match 'src\.api\.app:app' -and $_.CommandLine -match '--port %PORT%' };" ^
+    "foreach($p in $procs){ try { Stop-Process -Id $p.ProcessId -Force -ErrorAction SilentlyContinue } catch {} }" >nul 2>&1
 
 rem Method 3: netsh reset (requires admin)
 netsh int ipv4 reset >nul 2>&1

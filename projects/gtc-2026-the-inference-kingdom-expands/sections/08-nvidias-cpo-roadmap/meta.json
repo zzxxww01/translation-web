@@ -1,0 +1,1976 @@
+{
+  "section_id": "08-nvidias-cpo-roadmap",
+  "title": "Nvidia’s CPO Roadmap",
+  "title_translation": "英伟达 CPO 路线图",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "NVIDIA revealed its CPO Roadmap at the GTC Keynote 2026, with Jensen following up with additional commentary in the Financial Analyst Q+A meeting held the following day. Though many had their hopes up for CPO to be used for scale-up within the rack for Rubin Ultra Kyber, Nvidia’s focus was instead on using CPO to enable larger world size compute systems.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA revealed its CPO Roadmap at the GTC Keynote 2026, with Jensen following up with additional commentary in the Financial Analyst Q+A meeting held the following day. Though many had their hopes up for CPO to be used for scale-up within the rack for Rubin Ultra Kyber, Nvidia’s focus was instead on using CPO to enable larger world size compute systems.",
+      "parent_block_plain_text": "NVIDIA revealed its CPO Roadmap at the GTC Keynote 2026, with Jensen following up with additional commentary in the Financial Analyst Q+A meeting held the following day. Though many had their hopes up for CPO to be used for scale-up within the rack for Rubin Ultra Kyber, Nvidia’s focus was instead on using CPO to enable larger world size compute systems.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 356,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达在 GTC 2026 主题演讲中公布了其光电共封装（Co-Packaged Optics (CPO)）路线图，随后黄仁勋在次日举行的财务分析师问答会议上作了补充说明。尽管许多人曾期望光电共封装能用于 Rubin Ultra Kyber 机架内的向上扩展（scale-up），但英伟达的重点实际上是利用光电共封装来实现更大集群并行规模的计算系统。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722366",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0099",
+      "parent_block_index": 99,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722428",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7CeZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d80c4f7-60e6-41ea-859b-f4ad8ddbf5ea_2064x397.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis AI Networking Model, Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI Networking Model",
+          "start": 8,
+          "end": 40,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI Networking Model](https://semianalysis.com/ai-networking-model/), Nvidia",
+      "parent_block_plain_text": "Source: SemiAnalysis AI Networking Model, Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI Networking Model",
+          "start": 8,
+          "end": 40,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 48,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI网络模型，英伟达（NVIDIA）",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881882",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI网络模型]]]，英伟达（NVIDIA）",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis AI 网络模型，英伟达",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722592",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI 网络模型]]]，英伟达",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI网络模型，英伟达（NVIDIA）",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI网络模型]]]，英伟达（NVIDIA）",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "In the Rubin Generation, Nvidia will offer the Rubin GPU in an Oberon NVL72 form factor with an all-copper scale-up network. For Rubin Ultra, as we expected, there will only be a copper scale-up option for Rubin Ultra in the Oberon and Kyber Rack form factor. Rubin Ultra will also be offered in a larger world size system that connects 8 Oberon Racks of 72 Rubin Ultra GPUs to form what will be referred to as NVL576. CPO scale-up will be used to build the larger world size, connecting between the racks in a two-tier all to all network, though scale-up inside the racks will remain copper-based.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "In the Rubin Generation",
+          "start": 0,
+          "end": 23,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**In the Rubin Generation**, Nvidia will offer the Rubin GPU in an Oberon NVL72 form factor with an all-copper scale-up network. For Rubin Ultra, as we expected, there will only be a copper scale-up option for Rubin Ultra in the Oberon and Kyber Rack form factor. Rubin Ultra will also be offered in a larger world size system that connects 8 Oberon Racks of 72 Rubin Ultra GPUs to form what will be referred to as NVL576. CPO scale-up will be used to build the larger world size, connecting between the racks in a two-tier all to all network, though scale-up inside the racks will remain copper-based.",
+      "parent_block_plain_text": "In the Rubin Generation, Nvidia will offer the Rubin GPU in an Oberon NVL72 form factor with an all-copper scale-up network. For Rubin Ultra, as we expected, there will only be a copper scale-up option for Rubin Ultra in the Oberon and Kyber Rack form factor. Rubin Ultra will also be offered in a larger world size system that connects 8 Oberon Racks of 72 Rubin Ultra GPUs to form what will be referred to as NVL576. CPO scale-up will be used to build the larger world size, connecting between the racks in a two-tier all to all network, though scale-up inside the racks will remain copper-based.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "In the Rubin Generation",
+          "start": 0,
+          "end": 23,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 598,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 Rubin 世代，英伟达将提供采用全铜向上扩展网络的 Oberon NVL72 形态的 Rubin GPU。对于 Rubin Ultra，正如我们预期的那样，在 Oberon 和 Kyber 机架形态中，Rubin Ultra 将仅提供基于铜缆的向上扩展选项。Rubin Ultra 还将提供更大集群并行规模的系统版本，该系统将 8 个配备 72 颗 Rubin Ultra GPU 的 Oberon 机架连接起来，形成所谓的 NVL576。光电共封装的向上扩展将用于构建这种更大的集群并行规模，在机架之间通过两层全互联（all-to-all）网络进行连接，不过机架内部的向上扩展仍将基于铜缆。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722670",
+          "tokenized_text": "[[[STRONG_1|在 Rubin 世代]]]，英伟达将提供采用全铜向上扩展网络的 Oberon NVL72 形态的 Rubin GPU。对于 Rubin Ultra，正如我们预期的那样，在 Oberon 和 Kyber 机架形态中，Rubin Ultra 将仅提供基于铜缆的向上扩展选项。Rubin Ultra 还将提供更大集群并行规模的系统版本，该系统将 8 个配备 72 颗 Rubin Ultra GPU 的 Oberon 机架连接起来，形成所谓的 NVL576。光电共封装的向上扩展将用于构建这种更大的集群并行规模，在机架之间通过两层全互联（all-to-all）网络进行连接，不过机架内部的向上扩展仍将基于铜缆。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "When we reach the Feynman Generation, CPO usage will expand via another large world size rack, the NVL1152 which is formed by combining 8 Kyber racks. While the Nvidia Technical Blog that outlines the rack configuration roadmap states that “NVIDIA Kyber will scale up into a massive all-to-all NVL1152 supercomputer using similar direct optical interconnects for rack-to-rack scale-up”, Jensen Huang in a Financial Analyst Q+A session did say that NVL1152 in Feynman would be “all CPO”. There is some disagreement on whether copper will still be used for scale-up within the rack or whether CPO will replace copper.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "When we reach the Feynman Generation",
+          "start": 0,
+          "end": 36,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": "Nvidia Technical Blog",
+          "start": 161,
+          "end": 182,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**When we reach the Feynman Generation**, CPO usage will expand via another large world size rack, the NVL1152 which is formed by combining 8 Kyber racks. While the [Nvidia Technical Blog](https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/) that outlines the rack configuration roadmap states that “NVIDIA Kyber will scale up into a massive all-to-all NVL1152 supercomputer using similar direct optical interconnects for rack-to-rack scale-up”, Jensen Huang in a Financial Analyst Q+A session did say that NVL1152 in Feynman would be “all CPO”. There is some disagreement on whether copper will still be used for scale-up within the rack or whether CPO will replace copper.",
+      "parent_block_plain_text": "When we reach the Feynman Generation, CPO usage will expand via another large world size rack, the NVL1152 which is formed by combining 8 Kyber racks. While the Nvidia Technical Blog that outlines the rack configuration roadmap states that “NVIDIA Kyber will scale up into a massive all-to-all NVL1152 supercomputer using similar direct optical interconnects for rack-to-rack scale-up”, Jensen Huang in a Financial Analyst Q+A session did say that NVL1152 in Feynman would be “all CPO”. There is some disagreement on whether copper will still be used for scale-up within the rack or whether CPO will replace copper.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "When we reach the Feynman Generation",
+          "start": 0,
+          "end": 36,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "link",
+          "text": "Nvidia Technical Blog",
+          "start": 161,
+          "end": 182,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 615,
+      "expected_tokens": [
+        "STRONG_1",
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "到了 Feynman 世代，光电共封装的应用范围将通过另一个大集群并行规模机架 NVL1152 进一步扩大，该机架由 8 个 Kyber 机架组合而成。虽然概述机架配置路线图的英伟达技术博客指出，“英伟达 Kyber 将使用类似的直接光学互连进行机架间向上扩展，从而向上扩展为庞大的全互联 NVL1152 超级计算机”，但黄仁勋在财务分析师问答环节中确实表示，Feynman 世代的 NVL1152 将是“全光电共封装（all CPO）”。关于机架内的向上扩展是继续使用铜缆还是由光电共封装取代铜缆，目前仍存在一些分歧。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722754",
+          "tokenized_text": "[[[STRONG_1|到了 Feynman 世代]]]，光电共封装的应用范围将通过另一个大集群并行规模机架 NVL1152 进一步扩大，该机架由 8 个 Kyber 机架组合而成。虽然概述机架配置路线图的[[[LINK_1|英伟达技术博客]]]指出，“英伟达 Kyber 将使用类似的直接光学互连进行机架间向上扩展，从而向上扩展为庞大的全互联 NVL1152 超级计算机”，但黄仁勋在财务分析师问答环节中确实表示，Feynman 世代的 NVL1152 将是“全光电共封装（all CPO）”。关于机架内的向上扩展是继续使用铜缆还是由光电共封装取代铜缆，目前仍存在一些分歧。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Nvidia’s approach has been to use copper where they can, and optics where they must. The architecture of NVL1152 in the Feynman generation will follow the same principle. It is clear that the NVL1152 will adopt CPO to connect between racks, but from GPUs to NVLink Switches is currently copper POR. Nvidia is unable to achieve another doubling of electrical lane speed from 224Gbit/s bi-di to 448Gbit/s uni-di means bandwidth isn’t that amazing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia’s approach has been to use copper where they can, and optics where they must. The architecture of NVL1152 in the Feynman generation will follow the same principle. It is clear that the NVL1152 will adopt CPO to connect between racks, but from GPUs to NVLink Switches is currently copper POR. Nvidia is unable to achieve another doubling of electrical lane speed from 224Gbit/s bi-di to 448Gbit/s uni-di means bandwidth isn’t that amazing.",
+      "parent_block_plain_text": "Nvidia’s approach has been to use copper where they can, and optics where they must. The architecture of NVL1152 in the Feynman generation will follow the same principle. It is clear that the NVL1152 will adopt CPO to connect between racks, but from GPUs to NVLink Switches is currently copper POR. Nvidia is unable to achieve another doubling of electrical lane speed from 224Gbit/s bi-di to 448Gbit/s uni-di means bandwidth isn’t that amazing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 445,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达的策略一直是：能用铜缆的地方就用铜缆，必须用光学互连的地方才用光学互连。Feynman 世代 NVL1152 的架构也将遵循同样的原则。显然，NVL1152 将采用光电共封装进行机架间连接，但从 GPU 到 NVLink 交换机的连接目前在计划记录（POR）中仍是铜缆。英伟达无法实现电通道速率从 224Gbit/s 双向再次翻倍至 448Gbit/s 单向，这意味着带宽表现并没有那么惊人。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722805",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "While 448G high speed SerDes have big challenges for shoreline, reach, and power versus using a die-to-die connection to an optical engine, the manufacturing challenges, cost, and reliability for Feynman necessitate using copper to the Switch.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0104",
+      "parent_block_index": 104,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While 448G high speed SerDes have big challenges for shoreline, reach, and power versus using a die-to-die connection to an optical engine, the manufacturing challenges, cost, and reliability for Feynman necessitate using copper to the Switch.",
+      "parent_block_plain_text": "While 448G high speed SerDes have big challenges for shoreline, reach, and power versus using a die-to-die connection to an optical engine, the manufacturing challenges, cost, and reliability for Feynman necessitate using copper to the Switch.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 243,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管与采用裸片间（die-to-die）连接至光学引擎相比，448G 高速 SerDes 在芯片边缘面积（shoreline）、传输距离和功耗方面面临巨大挑战，但考虑到 Feynman 在制造难度、成本和可靠性上的综合考量，连接至交换机的链路依然必须使用铜缆。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722827",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "With that said, the NVL1152 SKU is years out – and the roadmap is highly likely to shift. For now, our base case stands at copper being used within each rack and CPO between the racks, but this could easily change.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0105",
+      "parent_block_index": 105,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With that said, the NVL1152 SKU is years out – and the roadmap is highly likely to shift. For now, our base case stands at copper being used within each rack and CPO between the racks, but this could easily change.",
+      "parent_block_plain_text": "With that said, the NVL1152 SKU is years out – and the roadmap is highly likely to shift. For now, our base case stands at copper being used within each rack and CPO between the racks, but this could easily change.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 214,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "话虽如此，NVL1152 SKU 距离问世还有数年时间，路线图极有可能发生变化。目前，我们的基准预测仍是机架内部使用铜缆、机架之间使用光电共封装，但这很容易发生改变。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722903",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "For now – our best estimate of Nvidia’s CPO roadmap is as follows:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0106",
+      "parent_block_index": 106,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For now – our best estimate of Nvidia’s CPO roadmap is as follows:",
+      "parent_block_plain_text": "For now – our best estimate of Nvidia’s CPO roadmap is as follows:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前，我们对英伟达光电共封装路线图的最佳预测如下：",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722948",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Rubin:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0107",
+      "parent_block_index": 107,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rubin:",
+      "parent_block_plain_text": "Rubin:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 6,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin：",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.722988",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "NVL72 – Oberon all copper scale up",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0108",
+      "parent_block_index": 108,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL72 – Oberon all copper scale up",
+      "parent_block_plain_text": "NVL72 – Oberon all copper scale up",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL72 —— Oberon 全铜向上扩展",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723013",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Rubin Ultra:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0109",
+      "parent_block_index": 109,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rubin Ultra:",
+      "parent_block_plain_text": "Rubin Ultra:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 12,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin Ultra：",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723032",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "NVL72 – Oberon all copper scale up",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL72 – Oberon all copper scale up",
+      "parent_block_plain_text": "NVL72 – Oberon all copper scale up",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL72 —— Oberon 全铜向上扩展",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723074",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "NVL144 – Kyber rack all copper scale up",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL144 – Kyber rack all copper scale up",
+      "parent_block_plain_text": "NVL144 – Kyber rack all copper scale up",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 39,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL144 —— Kyber 机架全铜向上扩展",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723094",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "NVL288 – Kyber rack all copper scale up with copper connecting 2 racks together",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL288 – Kyber rack all copper scale up with copper connecting 2 racks together",
+      "parent_block_plain_text": "NVL288 – Kyber rack all copper scale up with copper connecting 2 racks together",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 79,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL288 —— Kyber 机架全铜向上扩展，通过铜缆将 2 个机架连接在一起",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723115",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "NVL576 – 8x Oberon Racks copper scale up within rack and CPO on switch between racks in a two tier all to all topology. This would be low volume for test purposes",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL576 – 8x Oberon Racks copper scale up within rack and CPO on switch between racks in a two tier all to all topology. This would be low volume for test purposes",
+      "parent_block_plain_text": "NVL576 – 8x Oberon Racks copper scale up within rack and CPO on switch between racks in a two tier all to all topology. This would be low volume for test purposes",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL576 —— 8 个 Oberon 机架，机架内部采用铜缆向上扩展，机架间的交换机采用光电共封装，构成两层全互联拓扑。该配置产量较低，主要用于测试目的。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723135",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Feynman:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0114",
+      "parent_block_index": 114,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feynman:",
+      "parent_block_plain_text": "Feynman:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 8,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Feynman：",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723172",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "NVL72 – Oberon Rack – All Copper",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL72 – Oberon Rack – All Copper",
+      "parent_block_plain_text": "NVL72 – Oberon Rack – All Copper",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL72 —— Oberon 机架 —— 全铜",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723195",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "NVL144 – Kyber Rack – All Copper",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL144 – Kyber Rack – All Copper",
+      "parent_block_plain_text": "NVL144 – Kyber Rack – All Copper",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL144 —— Kyber 机架 —— 全铜",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723213",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "NVL1152 – 8xKyber Rack – Copper within rack and CPO on the switch between racks",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVL1152 – 8xKyber Rack – Copper within rack and CPO on the switch between racks",
+      "parent_block_plain_text": "NVL1152 – 8xKyber Rack – Copper within rack and CPO on the switch between racks",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 79,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVL1152 —— 8 个 Kyber 机架 —— 机架内部采用铜缆，机架间的交换机采用光电共封装",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723230",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723248",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NjAg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F10cf337a-41ad-4a0e-b9a3-bd2f11c911f0_2389x905.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Source: SemiAnalysis, Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Nvidia",
+      "parent_block_plain_text": "Source: SemiAnalysis, Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881906",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，英伟达",
+          "model": "pro",
+          "created_at": "2026-04-03T02:58:45.723298",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，英伟达",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.025,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'CPO' as '共封装光学' but retain the acronym.",
+          "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Outlines Nvidia's strategic shift in optical networking, clarifying misconceptions about where Co-Packaged Optics (CPO) will be deployed.",
+          "relation_to_previous": "Broadens the scope from the specific Groq/LPU network to Nvidia's overarching datacenter networking future.",
+          "relation_to_next": "Provides the foundational networking and cluster-size context needed to understand the updated Kyber and Oberon rack architectures.",
+          "key_points": [
+            "Nvidia's CPO roadmap focuses on enabling larger 'world size' compute systems.",
+            "Contrary to expectations, CPO is not being prioritized for in-rack scale-up for Rubin Ultra Kyber."
+          ],
+          "translation_notes": [
+            "Translate 'CPO' as '共封装光学' but retain the acronym.",
+            "Translate 'world size compute systems' as '全局计算规模' or '超大规模集群系统'; do not use a literal translation like '世界大小'."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "首次出现术语时，括号内同时包含了英文全称和缩写，导致嵌套括号，违反了“缩写卫生（abbreviation hygiene）”原则。此外，根据翻译提示“retain the acronym”，首现后应尽量使用 CPO 以提高行文的专业度与简洁性，而译文在后续段落（如段落3、4、5、7等）中反复使用了较长的“光电共封装”。"
+          },
+          {
+            "type": "readability",
+            "description": "“大集群并行规模机架”是对“large world size rack”的直译拼接，形成了轻微的机械名词串，读起来略显生硬。"
+          },
+          {
+            "type": "terminology",
+            "description": "POR（Plan of Record）在硬件工程和半导体供应链中，通常翻译为“既定方案”、“产品路线图计划”或“官方计划”，“计划记录”是字面直译，缺乏行业语境。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

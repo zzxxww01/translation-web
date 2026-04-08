@@ -1,0 +1,9 @@
+英伟达在 Hopper 架构中引入了分布式共享内存 (DSMEM)。DSMEM 允许一个集群内的协作线程阵列 (CTA) 访问彼此的共享内存 (SMEM)。这对于 CTA间归约等模式非常有用。通过 DSMEM 读取对等 CTA 内存的吞吐量，显著低于共享内存 (SMEM) 每时钟周期 128 字节的吞吐量。
+
+我们测试了几种与 DSMEM 交互的不同 PTX 模式。为 DSMEM 编写代码与为共享内存 (SMEM) 编写代码的一个重要区别在于，DSMEM 加载与全局加载类似，采用数据包化传输；因此，其最优访问模式完全不同于本地共享内存 (SMEM) 中避免 bank 冲突的交错访问，而更像全局内存 (GMEM) 中对连续地址的典型合并访问。此外我们观察到，为了在本地共享内存 (SMEM) 中获得完整的 128 字节/周期吞吐量，必须使用 ld.shared 而不带 ::cluster 修饰符。我们在编写基准测试时曾陷入一个误区，即对本地和远程共享内存 (SMEM) 地址都简单地使用了 ld.shared::cluster。
+
+使用 ld.shared 时，编译器会生成 LDS 指令，而不是像使用 ld.shared::cluster 时那样生成通用的 LD 指令，后者似乎无法实现本地共享内存 (SMEM) 的峰值吞吐量。我们也发现很难进一步提升 ld.shared::cluster 的实际吞吐量，直到切换为使用 cp.async.bulk(PTX) / UBLKCP(SASS) 来让每条指令搬运更大量的数据后，才在 DSMEM 上实现了略高一点的吞吐量。
+
+我们使用每种 PTX 模式时达到的峰值吞吐量如下所示，单位统一表示为每时钟周期字节数 (B/clk)，以便与 SM 本地共享内存 (SMEM) 已知的最大可达吞吐量进行对比。
+
+https://substackcdn.com/image/fetch/$s_!eyO7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd6c7444e-7004-4e9a-ab21-c0d92e2cbbe7_1512x284.png

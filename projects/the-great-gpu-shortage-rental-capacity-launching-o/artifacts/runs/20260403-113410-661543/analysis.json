@@ -1,0 +1,1004 @@
+{
+  "theme": "Driven by explosive demand from advanced AI models and tightening supply, GPU rental prices are surging across all contract terms, prompting the introduction of a new contract price index to track this structural market shift.",
+  "key_arguments": [
+    "Advancements in AI models (like Claude Code) have drastically increased the ROI of compute, driving massive demand and pushing H100 1-year rental prices up by 40%.",
+    "Supply is severely constrained across the board, from Hopper renewals to new Blackwell deployments, exacerbated by broader silicon and memory shortages.",
+    "The GPU rental market is structurally divided into short-term (spot/on-demand), mid-term (1-3 years), and long-term (4-5 year offtakes), with the 1-year contract being the best indicator of marginal demand.",
+    "There is a stark disconnect between the physically tight compute market (where prices are rising) and bearish public market sentiment towards Neocloud providers.",
+    "Future pricing trends will depend on the race between token demand scaling and the ramping of new GB300 megaclusters in 2026, with prices currently likely to keep rising."
+  ],
+  "structure_summary": "The article introduces the recent 40% surge in H100 rental prices, contrasting current tight supply with past bearish expectations ('The Comeback Kid'). It then introduces the SemiAnalysis 1Y H100 contract price index to better track the market. The core of the piece breaks down the rental market structure into short, mid, and long-term segments, explaining the dynamics of each. Finally, it projects future trends based on supply chain bottlenecks, tokenomics, and new cluster deployments, concluding that prices will continue to rise.",
+  "terminology": [
+    {
+      "term": "Neocloud",
+      "context_meaning": "Emerging cloud providers specializing primarily in AI compute and GPU rentals (e.g., CoreWeave, Lambda, Nebius).",
+      "translation": "新兴算力云厂商",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Distinguishes them from traditional Hyperscalers (like AWS/Azure). Adding '算力' (compute) clarifies their specific niche for Chinese readers."
+    },
+    {
+      "term": "Hyperscaler",
+      "context_meaning": "Major traditional cloud providers like AWS, Google Cloud, and Microsoft Azure.",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry translation for hyperscale cloud providers."
+    },
+    {
+      "term": "Offtake",
+      "context_meaning": "Long-term agreements (usually 4-5 years) where AI labs commit to buying massive amounts of compute capacity.",
+      "translation": "包销协议",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "A financial/commodity term adapted to compute; '包销' accurately conveys the commitment to purchase bulk capacity over a long period."
+    },
+    {
+      "term": "Spot instance",
+      "context_meaning": "Spare compute capacity offered at variable, often cheaper rates, but can be interrupted.",
+      "translation": "竞价实例",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard AWS/cloud terminology in Chinese."
+    },
+    {
+      "term": "Bare metal",
+      "context_meaning": "Physical servers rented without virtualization layers, allowing AI labs to customize the tech stack.",
+      "translation": "裸金属",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard IT infrastructure term in Chinese."
+    },
+    {
+      "term": "Tenor",
+      "context_meaning": "The length or duration of a rental contract (e.g., 1-year, 5-year).",
+      "translation": "合同期限",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Financial term used here to describe the length of the lease/rental agreement."
+    },
+    {
+      "term": "Sweating fixed compute assets",
+      "context_meaning": "Extracting the maximum possible value and utilization out of existing hardware before it becomes obsolete.",
+      "translation": "最大化压榨固定算力资产价值",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Captures the vivid, colloquial business sense of 'sweating an asset' in a natural Chinese phrasing."
+    },
+    {
+      "term": "Tokenomics",
+      "context_meaning": "The economics of AI model usage, specifically tracking token generation volumes, costs, and revenues.",
+      "translation": "Token经济学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard translation in the AI industry for the economics surrounding LLM tokens."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Analytical, authoritative, commercially astute, and slightly conversational.",
+    "target_audience": "Institutional investors, AI lab executives, cloud infrastructure planners, and semiconductor analysts.",
+    "translation_voice": "A top-tier financial and tech analyst. The Chinese should be dense with accurate industry jargon but flow naturally, balancing formal financial analysis with engaging, punchy market commentary."
+  },
+  "challenges": [
+    {
+      "location": "Section Heading: Where The Puck is Going",
+      "issue": "Idiomatic expression (from Wayne Gretzky) meaning anticipating the future, which doesn't translate literally.",
+      "suggestion": "Translate conceptually as '趋势前瞻' or '行业未来走向' to maintain the professional analytical tone."
+    },
+    {
+      "location": "Section Heading: The Comeback Kid",
+      "issue": "Idiomatic phrase referring to someone/something that recovers from a disadvantageous situation.",
+      "suggestion": "Translate as '触底反弹' or '绝地反击' to capture the unexpected recovery of GPU rental prices."
+    },
+    {
+      "location": "Paragraph starting 'Customers are fighting to pay...'",
+      "issue": "High density of technical specs (p6-b200, 8 nodes/64 GPUs) mixed with market actions.",
+      "suggestion": "Break the sentence into clear, parallel clauses in Chinese to maintain readability without losing the sense of market frenzy."
+    }
+  ],
+  "guidelines": [
+    "Maintain the authoritative yet slightly colloquial tone of a top-tier tech/finance analyst. Use professional financial/tech jargon (e.g., '边际需求', '投资回报率', '产能爬坡') while capturing the punchy style of the original.",
+    "Ensure precise translation of cloud infrastructure and financial terms. Pay special attention to 'offtake' (包销), 'tenor' (期限), and 'bare metal' (裸金属).",
+    "Restructure long English sentences into concise Chinese clauses, especially when describing complex market dynamics. Use a 'topic-comment' structure where appropriate to improve Chinese-native paragraph flow.",
+    "For terms like 'Neocloud', consistently use '新兴算力云厂商' to clearly distinguish them from traditional 'Hyperscalers' (超大规模云厂商).",
+    "Pay special attention to timeframes, pricing units, and hardware specs (e.g., '$1.70/hr/GPU', '1Q26', 'p6-b200'). Ensure they are formatted correctly and unambiguously in Chinese.",
+    "When translating idiomatic section headers ('Where The Puck is Going', 'The Comeback Kid'), prioritize the underlying business meaning over literal translation to maintain the professional analytical voice.",
+    "The article title translation must preserve all semantic components of the original title. Do not drop subject phrases even if they seem long."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Hooks the reader with the dramatic 40% price surge, sets the analytical agenda, and outlines the report's scope.",
+      "relation_to_previous": "N/A - Opening section.",
+      "relation_to_next": "Sets up the premise that is immediately substantiated with concrete market anecdotes and data in the next section.",
+      "key_points": [
+        "H100 rental prices have surged by 40%.",
+        "A structural shift in the compute rental market requires new tracking tools.",
+        "The report will analyze market structure and project future pricing trends."
+      ],
+      "translation_notes": [
+        "Ensure 'Compute Rental Market Structure' is translated with standard industry terminology (e.g., 算力租赁市场结构).",
+        "Maintain a professional, authoritative tone suitable for an executive summary."
+      ]
+    },
+    "01-surge-pricing-comes-to-the-gpu": {
+      "role_in_article": "Provides empirical and anecdotal evidence of the severe supply-demand imbalance driving the price surge.",
+      "relation_to_previous": "Delivers the specific, ground-level data behind the 40% surge mentioned in the intro.",
+      "relation_to_next": "Prompts the historical context in the following section by showing how extreme current market conditions have become.",
+      "key_points": [
+        "Fierce bidding wars are pushing spot instances to $14/hr.",
+        "Zero capacity is coming off contracts as renewals happen at 2-3 year old rates.",
+        "Blackwell availability is severely constrained, with capacity booked through late 2026."
+      ],
+      "translation_notes": [
+        "Translate 'Surge Pricing' to capture dynamic, demand-driven spikes (e.g., 激增定价/动态加价).",
+        "Accurately render 'Neocloud Giants' (新兴云巨头) and 'open-weight models' (开放权重模型)."
+      ]
+    },
+    "02-gpu-rental-prices-the-comeba": {
+      "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+      "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+      "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+      "key_points": [
+        "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+        "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+        "High ROI will sustain demand, putting upward pressure on component and rental costs."
+      ],
+      "translation_notes": [
+        "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+        "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+      ]
+    },
+    "03-introducing-the-semianalysis-1": {
+      "role_in_article": "Introduces proprietary tracking tools as the solution to the opacity of the GPU rental market.",
+      "relation_to_previous": "Answers the need for better market tracking established by the rapid, unexpected market reversal discussed previously.",
+      "relation_to_next": "Provides the methodological foundation and data source for the market segmentation breakdown that follows.",
+      "key_points": [
+        "Most GPU transactions are long-term and opaque, making public spot indices unreliable.",
+        "The new 1Y H100 contract price index provides transparency for bilateral contract pricing.",
+        "The Tokenomics Dashboard connects frontier AI model performance with compute economics."
+      ],
+      "translation_notes": [
+        "Translate 'bilateral basis' accurately as over-the-counter/private negotiations (双边协商/场外交易).",
+        "Maintain a promotional yet highly analytical tone for the product launch."
+      ]
+    },
+    "04-gpu-rental-market-structure-to": {
+      "role_in_article": "Establishes a structural framework for understanding the GPU rental market by dividing it into three temporal segments.",
+      "relation_to_previous": "Moves from the introduction of the tracking tool to the actual structural analysis the tool facilitates.",
+      "relation_to_next": "Acts as an umbrella introduction for the detailed segment-by-segment breakdowns in the next three sections.",
+      "key_points": [
+        "The market was competitive before late 2025, with operators prioritizing high utilization.",
+        "The market is structurally divided into short-term, mid-term, and long-term contract segments."
+      ],
+      "translation_notes": [
+        "Translate 'sweating fixed compute assets' as maximizing utilization/extracting value (充分压榨固定算力资产价值).",
+        "'Tenor' in this financial/contractual context should be translated as 期限."
+      ]
+    },
+    "05-short-term-rental-on-demand": {
+      "role_in_article": "Analyzes the short-term rental segment, explaining its rigid, step-function pricing mechanics driven by utilization.",
+      "relation_to_previous": "Details the first of the three market segments introduced in the structural overview.",
+      "relation_to_next": "Contrasts the rigid, utilization-based short-term market with the more economically sensitive mid-term market.",
+      "key_points": [
+        "Short-term rentals often represent residual capacity.",
+        "Pricing adjusts in step-functions based strictly on utilization thresholds rather than continuous market clearing.",
+        "Utilization is the best high-frequency indicator for this specific segment."
+      ],
+      "translation_notes": [
+        "Ensure 'step-function' is translated accurately (阶跃函数/跳跃式变化).",
+        "Translate 'gapping up or down' using standard financial market terminology (跳空上涨或下跌)."
+      ]
+    },
+    "06-mid-term-contracts": {
+      "role_in_article": "Highlights the mid-term (1-3y) market as the core economic indicator for marginal demand and tightening supply.",
+      "relation_to_previous": "Shifts focus from short-term residual capacity to the primary, economically relevant contract market.",
+      "relation_to_next": "Bridges the gap between smaller AI labs and the massive hyperscaler deals detailed in the long-term section.",
+      "key_points": [
+        "The 1-year segment captures marginal demand and spillovers, making it highly sensitive to tightening conditions.",
+        "Most GPU rentals by value occur in this mid-term segment.",
+        "AI Natives are increasingly seeking longer lock-ups to secure compute."
+      ],
+      "translation_notes": [
+        "Accurately translate 'marginal demand' (边际需求) and 'spillovers' (溢出需求).",
+        "Use standard industry phrasing for 'AI Natives' (AI原生企业)."
+      ]
+    },
+    "07-long-term-offtakes": {
+      "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+      "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+      "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+      "key_points": [
+        "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+        "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+        "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+      ],
+      "translation_notes": [
+        "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+        "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+      ]
+    },
+    "08-where-the-puck-is-going": {
+      "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+      "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+      "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+      "key_points": [
+        "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+        "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+        "AI lab ARR scaling is the ultimate indicator of end demand."
+      ],
+      "translation_notes": [
+        "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+        "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+      ]
+    },
+    "09-pricing-is-only-going-one-way": {
+      "role_in_article": "Delivers the definitive conclusion that prices will structurally rise, supported by high ROIC and faster repricing cycles.",
+      "relation_to_previous": "Concludes the forward-looking analysis with a firm prediction based on the established data.",
+      "relation_to_next": "N/A - Conclusion.",
+      "key_points": [
+        "GPU rental pricing is structurally forced upward.",
+        "Shorter duration contracts lead to faster repricing in a supply-constrained market.",
+        "High Return on Invested Capital (ROIC) justifies and sustains the rising costs."
+      ],
+      "translation_notes": [
+        "'Jinxing it' should capture the colloquial superstition (乌鸦嘴/毒奶).",
+        "'This Time Might Be Different' is a notoriously dangerous phrase in finance; preserve its ironic, weighty undertone (这次可能真的不一样)."
+      ]
+    }
+  },
+  "section_count": 10,
+  "paragraph_count": 90,
+  "word_count": 3745
+}

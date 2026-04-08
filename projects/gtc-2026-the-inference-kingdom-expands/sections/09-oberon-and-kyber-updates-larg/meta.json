@@ -1,0 +1,4136 @@
+{
+  "section_id": "09-oberon-and-kyber-updates-larg",
+  "title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+  "title_translation": "Oberon 与 Kyber 更新：引入更大集群规模及更多网络更新",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Nvidia provided a long-awaited update on its Kyber rack form factor, the latest addition to the lineup after Oberon having first been previewed as a prototype at GTC 2025. As a prototype, the rack architecture has continued to evolve, and we notice some changes. First, each compute blade has densified, with 4x Rubin Ultra GPU and 2x Vera each. There are a total of 2 canisters of 18 compute blades which amounts to 36 compute blades total for 144 GPUs in a rack. The initial Kyber design featured 2 GPUs and 2 Vera CPUs in one compute blade, with a total of 4 canisters of 18 compute blades each.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia provided a long-awaited update on its Kyber rack form factor, the latest addition to the lineup after Oberon having first been previewed as a prototype at GTC 2025. As a prototype, the rack architecture has continued to evolve, and we notice some changes. First, each compute blade has densified, with 4x Rubin Ultra GPU and 2x Vera each. There are a total of 2 canisters of 18 compute blades which amounts to 36 compute blades total for 144 GPUs in a rack. The initial Kyber design featured 2 GPUs and 2 Vera CPUs in one compute blade, with a total of 4 canisters of 18 compute blades each.",
+      "parent_block_plain_text": "Nvidia provided a long-awaited update on its Kyber rack form factor, the latest addition to the lineup after Oberon having first been previewed as a prototype at GTC 2025. As a prototype, the rack architecture has continued to evolve, and we notice some changes. First, each compute blade has densified, with 4x Rubin Ultra GPU and 2x Vera each. There are a total of 2 canisters of 18 compute blades which amounts to 36 compute blades total for 144 GPUs in a rack. The initial Kyber design featured 2 GPUs and 2 Vera CPUs in one compute blade, with a total of 4 canisters of 18 compute blades each.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 598,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达对其 Kyber 机架形态进行了期待已久的更新，这是继 Oberon 之后产品线的最新成员，其原型曾在 GTC 2025 上首次预览。作为原型，该机架架构不断演进，我们注意到了一些变化。首先，每个计算刀片的密度提升，分别配备 4 个 Rubin Ultra GPU 和 2 个 Vera CPU。共有 2 个机箱（canister），每个机箱包含 18 个计算刀片，即总共 36 个计算刀片，单机架共计 144 个 GPU。最初的 Kyber 设计在单个计算刀片中配备 2 个 GPU 和 2 个 Vera CPU，共有 4 个机箱，每个机箱 18 个计算刀片。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064684",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The details below are based on the Rubin Kyber prototypes, but Rubin Ultra will be redone.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0122",
+      "parent_block_index": 122,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The details below are based on the Rubin Kyber prototypes, but Rubin Ultra will be redone.",
+      "parent_block_plain_text": "The details below are based on the Rubin Kyber prototypes, but Rubin Ultra will be redone.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 90,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "以下细节基于 Rubin Kyber 原型，但 Rubin Ultra 版本将被重新设计。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064736",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064748",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!57WO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6e91ff96-9d44-4d04-8a1f-eeb1575b235d_3000x4000.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881366",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064757",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Each switch blade is also double in height vs the GTC 2025 prototype, with 6 NVLink 7 switches per switch blade, and 12 switch blades per rack, amounting to a total of 72 NVLink 7 switches per Kyber rack. The GPUs are connected all-to-all to the switch blades via 2 PCB midplanes or 1 midplane per canister.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each switch blade is also double in height vs the GTC 2025 prototype, with 6 NVLink 7 switches per switch blade, and 12 switch blades per rack, amounting to a total of 72 NVLink 7 switches per Kyber rack. The GPUs are connected all-to-all to the switch blades via 2 PCB midplanes or 1 midplane per canister.",
+      "parent_block_plain_text": "Each switch blade is also double in height vs the GTC 2025 prototype, with 6 NVLink 7 switches per switch blade, and 12 switch blades per rack, amounting to a total of 72 NVLink 7 switches per Kyber rack. The GPUs are connected all-to-all to the switch blades via 2 PCB midplanes or 1 midplane per canister.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 307,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与 GTC 2025 上的原型相比，每个交换机刀片的高度也增加了一倍，每个交换机刀片配备 6 个 NVLink 7 交换机，每个机架配备 12 个交换机刀片，每个 Kyber 机架总计 72 个 NVLink 7 交换机。GPU 通过 2 块 PCB 中板（即每个机箱 1 块中板）与交换机刀片实现全互联。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064766",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064776",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!lj22!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c5a1ad2-cfca-47a0-be02-f39b150e8df4_3000x4000.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Kyber midplane PCB (GPU side). Source: Nvidia, SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Kyber midplane PCB (GPU side). Source: Nvidia, SemiAnalysis",
+          "start": 0,
+          "end": 59,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Kyber midplane PCB (GPU side). Source: Nvidia, SemiAnalysis*",
+      "parent_block_plain_text": "Kyber midplane PCB (GPU side). Source: Nvidia, SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Kyber midplane PCB (GPU side). Source: Nvidia, SemiAnalysis",
+          "start": 0,
+          "end": 59,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 59,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Kyber 中板 PCB（GPU 侧）。来源：英伟达，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064826",
+          "tokenized_text": "[[[EM_1|Kyber 中板 PCB（GPU 侧）。来源：英伟达，SemiAnalysis]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "For Rubin Ultra NVL144 Kyber, there will be no CPO used for scale up as we have told clients multiple times, despite rumors from other analysts suggesting scale-up CPO introduction for Kyber. However, optics for NVLink are coming and will be progressively phased in. Scale-up CPO will first be used for the Rubin Ultra NVL 576 system to connect between 8 Oberon form factor racks, forming a two-layer all-to-all network. A copper backplane will still be used for scale-up networking within the racks however. This is still for low volume / testing purposes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "there will be no CPO used for scale up as we have told clients multiple times",
+          "start": 30,
+          "end": 107,
+          "href": "https://semianalysis.com/institutional/multi-vertical-note-kyber-cpo-sku-will-be-a-low-volume-test-rack/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For Rubin Ultra NVL144 Kyber, [there will be no CPO used for scale up as we have told clients multiple times](https://semianalysis.com/institutional/multi-vertical-note-kyber-cpo-sku-will-be-a-low-volume-test-rack/), despite rumors from other analysts suggesting scale-up CPO introduction for Kyber. However, optics for NVLink are coming and will be progressively phased in. Scale-up CPO will first be used for the Rubin Ultra NVL 576 system to connect between 8 Oberon form factor racks, forming a two-layer all-to-all network. A copper backplane will still be used for scale-up networking within the racks however. This is still for low volume / testing purposes.",
+      "parent_block_plain_text": "For Rubin Ultra NVL144 Kyber, there will be no CPO used for scale up as we have told clients multiple times, despite rumors from other analysts suggesting scale-up CPO introduction for Kyber. However, optics for NVLink are coming and will be progressively phased in. Scale-up CPO will first be used for the Rubin Ultra NVL 576 system to connect between 8 Oberon form factor racks, forming a two-layer all-to-all network. A copper backplane will still be used for scale-up networking within the racks however. This is still for low volume / testing purposes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "there will be no CPO used for scale up as we have told clients multiple times",
+          "start": 30,
+          "end": 107,
+          "href": "https://semianalysis.com/institutional/multi-vertical-note-kyber-cpo-sku-will-be-a-low-volume-test-rack/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 557,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于 Rubin Ultra NVL144 Kyber，正如我们多次告知客户的那样，向上扩展网络不会使用光电共封装，尽管其他分析师有传言称 Kyber 将引入用于向上扩展的光电共封装。然而，用于 NVLink 的光器件即将到来，并将逐步引入。向上扩展的光电共封装将首先用于 Rubin Ultra NVL 576 系统，以连接 8 个 Oberon 形态的机架，形成两层全互联网络。不过，机架内部的向上扩展网络仍将使用铜缆背板。这目前仍用于小批量生产或测试目的。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064863",
+          "tokenized_text": "对于 Rubin Ultra NVL144 Kyber，[[[LINK_1|正如我们多次告知客户的那样，向上扩展网络不会使用光电共封装]]]，尽管其他分析师有传言称 Kyber 将引入用于向上扩展的光电共封装。然而，用于 NVLink 的光器件即将到来，并将逐步引入。向上扩展的光电共封装将首先用于 Rubin Ultra NVL 576 系统，以连接 8 个 Oberon 形态的机架，形成两层全互联网络。不过，机架内部的向上扩展网络仍将使用铜缆背板。这目前仍用于小批量生产或测试目的。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Moving back to the Kyber Rack, each Rubin Ultra logical GPU offers 14.4Tbit/s uni-di of scale-up bandwidth, using an 80DP connector (72 DPs used x 200Gbit/s bi-di channel = 14.4Tbit/s) per GPU for connectivity to the midplane board. Connecting all 144 GPUs in an all-to-all network will require 72 NVLink 7.0 Switch Chips running at 28.8Tbit/s uni-di of aggregate bandwidth each.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Moving back to the Kyber Rack, each Rubin Ultra logical GPU offers 14.4Tbit/s uni-di of scale-up bandwidth, using an 80DP connector (72 DPs used x 200Gbit/s bi-di channel = 14.4Tbit/s) per GPU for connectivity to the midplane board. Connecting all 144 GPUs in an all-to-all network will require 72 NVLink 7.0 Switch Chips running at 28.8Tbit/s uni-di of aggregate bandwidth each.",
+      "parent_block_plain_text": "Moving back to the Kyber Rack, each Rubin Ultra logical GPU offers 14.4Tbit/s uni-di of scale-up bandwidth, using an 80DP connector (72 DPs used x 200Gbit/s bi-di channel = 14.4Tbit/s) per GPU for connectivity to the midplane board. Connecting all 144 GPUs in an all-to-all network will require 72 NVLink 7.0 Switch Chips running at 28.8Tbit/s uni-di of aggregate bandwidth each.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 379,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "回到 Kyber 机架，每个 Rubin Ultra 逻辑 GPU 提供 14.4Tbit/s 的单向向上扩展带宽，每个 GPU 使用一个 80DP 连接器（使用 72 个 DP x 200Gbit/s 双向通道 = 14.4Tbit/s）连接至中板。在全互联网络中连接所有 144 个 GPU，需要 72 颗 NVLink 7.0 交换芯片，每颗芯片的单向聚合带宽为 28.8Tbit/s。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064873",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0130",
+      "parent_block_index": 130,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064882",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!028i!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa6507cbc-367c-4f8e-9f8a-6fcbccf61aa3_1513x655.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0131",
+      "parent_block_index": 131,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881389",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064891",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "In the Kyber Switch Blade picture below, we can see that there are 2 separate PCBs carrying 3 Switches each. The switch blade should have 6 152DP connectors, 3 connectors serving each midplane board. The picture is a prototype blade using less dense connectors, which is why there are 12 connectors instead of the 6 that we expect in the production version.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0132",
+      "parent_block_index": 132,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In the Kyber Switch Blade picture below, we can see that there are 2 separate PCBs carrying 3 Switches each. The switch blade should have 6 152DP connectors, 3 connectors serving each midplane board. The picture is a prototype blade using less dense connectors, which is why there are 12 connectors instead of the 6 that we expect in the production version.",
+      "parent_block_plain_text": "In the Kyber Switch Blade picture below, we can see that there are 2 separate PCBs carrying 3 Switches each. The switch blade should have 6 152DP connectors, 3 connectors serving each midplane board. The picture is a prototype blade using less dense connectors, which is why there are 12 connectors instead of the 6 that we expect in the production version.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 357,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在下方的 Kyber 交换机刀片图片中，我们可以看到有两个独立的 PCB，每个 PCB 搭载 3 颗交换芯片。该交换机刀片应有 6 个 152DP 连接器，每 3 个连接器服务于一块中板。图片展示的是采用较低密度连接器的原型刀片，因此配备了 12 个连接器，而非量产版本预期的 6 个。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064900",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0133",
+      "parent_block_index": 133,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064909",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ET6V!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bef24fc-b8ed-4652-a928-7abd4cf2d496_4000x3000.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: Nvidia, SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0134",
+      "parent_block_index": 134,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia, SemiAnalysis",
+      "parent_block_plain_text": "Source: Nvidia, SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 28,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达，SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881929",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：英伟达，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064918",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达，SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Each 28.8T NVLink Switch has 144 lanes of 200G (simultaneous bi-directional) which means each Switch has 24 lanes of 200G going to each connector. Copper flyover cables are used to connect each switch to the midplane, as the distances involved are too long for PCB traces. This is also why the switches are further away from the midplane, to provide space for the routing of the flyover cables.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0135",
+      "parent_block_index": 135,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each 28.8T NVLink Switch has 144 lanes of 200G (simultaneous bi-directional) which means each Switch has 24 lanes of 200G going to each connector. Copper flyover cables are used to connect each switch to the midplane, as the distances involved are too long for PCB traces. This is also why the switches are further away from the midplane, to provide space for the routing of the flyover cables.",
+      "parent_block_plain_text": "Each 28.8T NVLink Switch has 144 lanes of 200G (simultaneous bi-directional) which means each Switch has 24 lanes of 200G going to each connector. Copper flyover cables are used to connect each switch to the midplane, as the distances involved are too long for PCB traces. This is also why the switches are further away from the midplane, to provide space for the routing of the flyover cables.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 394,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每颗 28.8T NVLink 交换芯片拥有 144 条 200G 通道（同时双向传输），这意味着每颗交换芯片有 24 条 200G 通道接入各个连接器。由于物理距离对 PCB 走线而言过长，因此采用铜质飞线电缆将每颗交换芯片连接至中板。这也是交换芯片远离中板的原因，为飞线电缆的布线提供空间。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064926",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0136",
+      "parent_block_index": 136,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064935",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-biX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F376fc839-5860-4555-a18c-3b591ec13156_1582x1372.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis Networking Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0137",
+      "parent_block_index": 137,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Networking Model](https://semianalysis.com/ai-networking-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Networking Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881859",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 网络模型",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064960",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|网络模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Networking 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Each NVLink Switch Chip connects via flyover cables to the connector (144 DPs used x 200 Gbit/s bi-di channel = 28.8Tbit/s) connectors at the edge of the switch blade, and these connectors plug into the midplane board. Nvidia is looking into using co-packaged Copper to reduce loss further, in case NPC doesn’t work. As far as we know the Nvidia is telling supply chain to go for fully co-packaged copper.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0138",
+      "parent_block_index": 138,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each NVLink Switch Chip connects via flyover cables to the connector (144 DPs used x 200 Gbit/s bi-di channel = 28.8Tbit/s) connectors at the edge of the switch blade, and these connectors plug into the midplane board. Nvidia is looking into using co-packaged Copper to reduce loss further, in case NPC doesn’t work. As far as we know the Nvidia is telling supply chain to go for fully co-packaged copper.",
+      "parent_block_plain_text": "Each NVLink Switch Chip connects via flyover cables to the connector (144 DPs used x 200 Gbit/s bi-di channel = 28.8Tbit/s) connectors at the edge of the switch blade, and these connectors plug into the midplane board. Nvidia is looking into using co-packaged Copper to reduce loss further, in case NPC doesn’t work. As far as we know the Nvidia is telling supply chain to go for fully co-packaged copper.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 405,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每颗 NVLink 交换芯片通过 Flyover 线缆连接到交换机刀片边缘的连接器（使用 144 个 DP x 200 Gbit/s 双向通道 = 28.8Tbit/s），这些连接器随后插入中板。英伟达正在研究使用共封装铜缆来进一步降低损耗，以防 NPC 方案不可行。据我们所知，英伟达正指示供应链全面转向共封装铜缆。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064968",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Rubin Ultra NVL288",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0139",
+      "parent_block_index": 139,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Rubin Ultra NVL288",
+      "parent_block_plain_text": "Rubin Ultra NVL288",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 18,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin Ultra NVL288",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064976",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Though not officially discussed by Nvidia at GTC 2026, an NVL288 concept has been explored within the supply chain. This would entail two NVL144 Kyber racks placed adjacent to each other, with a rack-to-rack copper backplane used to connect the two racks. One possibility is that all 288 GPUs are connected all to all, but this would require higher radix switches than the current NVLink 7 switches which only offer a maximum radix of 144 ports of 200G.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0140",
+      "parent_block_index": 140,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Though not officially discussed by Nvidia at GTC 2026, an NVL288 concept has been explored within the supply chain. This would entail two NVL144 Kyber racks placed adjacent to each other, with a rack-to-rack copper backplane used to connect the two racks. One possibility is that all 288 GPUs are connected all to all, but this would require higher radix switches than the current NVLink 7 switches which only offer a maximum radix of 144 ports of 200G.",
+      "parent_block_plain_text": "Though not officially discussed by Nvidia at GTC 2026, an NVL288 concept has been explored within the supply chain. This would entail two NVL144 Kyber racks placed adjacent to each other, with a rack-to-rack copper backplane used to connect the two racks. One possibility is that all 288 GPUs are connected all to all, but this would require higher radix switches than the current NVLink 7 switches which only offer a maximum radix of 144 ports of 200G.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 453,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管英伟达在 GTC 2026 上并未正式讨论，但供应链内部已经对 NVL288 概念进行了探索。该方案需要将两个 NVL144 Kyber 机架相邻放置，并使用机架间的铜背板将两者连接。一种可能性是所有 288 颗 GPU 实现全互联，但这将需要比当前 NVLink 7 交换芯片更高端口数的交换机，目前的 NVLink 7 交换芯片最多仅提供 144 个 200G 端口。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064984",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "If Rubin Ultra NVL288 is deployed, each Rubin Ultra GPU will have a scale-up bandwidth of 14.4Tbit/s uni-di, requiring 144 DPs of cables to connect the NVLink 7 switches. 72 DPs per GPU times 288 GPUs means a total of 20,736 additional DPs required to connect this larger world size domain. This entails a lot of cables, so it is an upper bound of how much cable content could be used.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0141",
+      "parent_block_index": 141,
+      "parent_block_type": "p",
+      "parent_block_markdown": "If Rubin Ultra NVL288 is deployed, each Rubin Ultra GPU will have a scale-up bandwidth of 14.4Tbit/s uni-di, requiring 144 DPs of cables to connect the NVLink 7 switches. 72 DPs per GPU times 288 GPUs means a total of 20,736 additional DPs required to connect this larger world size domain. This entails a lot of cables, so it is an upper bound of how much cable content could be used.",
+      "parent_block_plain_text": "If Rubin Ultra NVL288 is deployed, each Rubin Ultra GPU will have a scale-up bandwidth of 14.4Tbit/s uni-di, requiring 144 DPs of cables to connect the NVLink 7 switches. 72 DPs per GPU times 288 GPUs means a total of 20,736 additional DPs required to connect this larger world size domain. This entails a lot of cables, so it is an upper bound of how much cable content could be used.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 385,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如果部署 Rubin Ultra NVL288，每颗 Rubin Ultra GPU 将拥有 14.4Tbit/s 单向的 scale-up 带宽，需要 144 个 DP 的线缆来连接 NVLink 7 交换芯片。每颗 GPU 72 个 DP 乘以 288 颗 GPU，意味着连接这个更大的集群并行规模域总共需要额外 20,736 个 DP。这涉及大量的线缆，因此它代表了线缆用量的上限。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.064991",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "The radix of the 28.8T NVLink Switch limits the number of GPUs that each switch can connect while still providing for cross-rack connectivity. Either a higher radix switch will have to be used - or there will have to be a degree of oversubscription in this architecture while potentially adopting a dragonfly-like network topology. This would also require fewer DPs worth of copper cables.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0142",
+      "parent_block_index": 142,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The radix of the 28.8T NVLink Switch limits the number of GPUs that each switch can connect while still providing for cross-rack connectivity. Either a higher radix switch will have to be used - or there will have to be a degree of oversubscription in this architecture while potentially adopting a dragonfly-like network topology. This would also require fewer DPs worth of copper cables.",
+      "parent_block_plain_text": "The radix of the 28.8T NVLink Switch limits the number of GPUs that each switch can connect while still providing for cross-rack connectivity. Either a higher radix switch will have to be used - or there will have to be a degree of oversubscription in this architecture while potentially adopting a dragonfly-like network topology. This would also require fewer DPs worth of copper cables.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 389,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "28.8T NVLink 交换芯片的端口数限制了每颗交换芯片在保证跨机架连接的同时所能连接的 GPU 数量。要么必须使用更高端口数的交换机，要么该架构必须引入一定程度的超订，并可能采用类似 Dragonfly 的网络拓扑。这也将减少所需的铜缆 DP 数量。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065000",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0143",
+      "parent_block_index": 143,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065009",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YbDc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Faddf00bd-ed41-47b8-864e-35e96b6768c1_1613x1158.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0144",
+      "parent_block_index": 144,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881413",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065017",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "All current evidence in the supply chain points to NVSwitch 7 being the same bandwidth as NVSwitch 6, but that is seems a bit illogical to be frank. Our belief is that NVSwitch 7 is actually 2x the bandwidth and radix of NVSwitch 6, so all-to-all can be done, and architecturally that makes the most sense from a systems perspective.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0145",
+      "parent_block_index": 145,
+      "parent_block_type": "p",
+      "parent_block_markdown": "All current evidence in the supply chain points to NVSwitch 7 being the same bandwidth as NVSwitch 6, but that is seems a bit illogical to be frank. Our belief is that NVSwitch 7 is actually 2x the bandwidth and radix of NVSwitch 6, so all-to-all can be done, and architecturally that makes the most sense from a systems perspective.",
+      "parent_block_plain_text": "All current evidence in the supply chain points to NVSwitch 7 being the same bandwidth as NVSwitch 6, but that is seems a bit illogical to be frank. Our belief is that NVSwitch 7 is actually 2x the bandwidth and radix of NVSwitch 6, so all-to-all can be done, and architecturally that makes the most sense from a systems perspective.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 333,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前供应链中的所有证据均表明，NVSwitch 7 的带宽与 NVSwitch 6 相同，但坦率地说，这似乎有些不合逻辑。我们认为，NVSwitch 7 的带宽和端口数实际上是 NVSwitch 6 的 2 倍，从而能够实现全互联（all-to-all）。从系统角度来看，这在架构上是最合理的。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065025",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "Rubin Ultra NVL576",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0146",
+      "parent_block_index": 146,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Rubin Ultra NVL576",
+      "parent_block_plain_text": "Rubin Ultra NVL576",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 18,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rubin Ultra NVL576",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065033",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "To push the scale up world size beyond 144 GPUs and across multiple racks, optics are needed as we are approaching the maximum compute density that is within the reach of copper. Rubin Ultra NVL576 is now on the roadmap with 8 racks of lower density Oberon.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0147",
+      "parent_block_index": 147,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To push the scale up world size beyond 144 GPUs and across multiple racks, optics are needed as we are approaching the maximum compute density that is within the reach of copper. Rubin Ultra NVL576 is now on the roadmap with 8 racks of lower density Oberon.",
+      "parent_block_plain_text": "To push the scale up world size beyond 144 GPUs and across multiple racks, optics are needed as we are approaching the maximum compute density that is within the reach of copper. Rubin Ultra NVL576 is now on the roadmap with 8 racks of lower density Oberon.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 257,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了将 scale-up 集群并行规模扩展至 144 颗 GPU 以上并跨越多个机架，必须引入光学器件，因为我们正在逼近铜缆互联所能支撑的最大计算密度极限。Rubin Ultra NVL576 现已列入路线图，该方案包含 8 个密度较低的 Oberon 机架。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065041",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0148",
+      "parent_block_index": 148,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065049",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!kVKx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee215fef-65ff-41ce-be3d-1a54c3af2334_2449x1037.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p028",
+      "index": 28,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881439",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065057",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p029",
+      "index": 29,
+      "source": "Optics will be required for the inter-rack connections, though strictly speaking it isn’t confirmed whether this will be with pluggable optics or with CPO, though CPO seems much more likely. The current Blackwell NVL576 prototype “Polyphe” uses pluggable optics.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Optics will be required for the inter-rack connections, though strictly speaking it isn’t confirmed whether this will be with pluggable optics or with CPO, though CPO seems much more likely. The current Blackwell NVL576 prototype “Polyphe” uses pluggable optics.",
+      "parent_block_plain_text": "Optics will be required for the inter-rack connections, though strictly speaking it isn’t confirmed whether this will be with pluggable optics or with CPO, though CPO seems much more likely. The current Blackwell NVL576 prototype “Polyphe” uses pluggable optics.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 262,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "机架间连接必须使用光学器件。尽管严格来说，目前尚未确认是采用可插拔光模块还是光电共封装（Co-Packaged Optics (CPO)），但采用 CPO 的可能性显然大得多。目前的 Blackwell NVL576 原型机“Polyphe”使用的是可插拔光模块。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065065",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p030",
+      "index": 30,
+      "source": "We have shown a concept of NVL576 for GB200 previously with pluggable optics to interconnect the second layer of NVLink switches. The use of pluggables contributed to an enormous increase in BOM cost that made the system untenable from a TCO perspective for a switched all-to-all. However, it is plausible that Rubin Ultra NVL576 will be rolled out in test volumes before Feynman NVL 1,152, where we will see actual volume ramp of scale-up CPO.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "shown a concept of NVL576 for GB200 previously",
+          "start": 8,
+          "end": 54,
+          "href": "https://newsletter.semianalysis.com/i/175661160/gb200-nvl576",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0151",
+      "parent_block_index": 151,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have [shown a concept of NVL576 for GB200 previously](https://newsletter.semianalysis.com/i/175661160/gb200-nvl576) with pluggable optics to interconnect the second layer of NVLink switches. The use of pluggables contributed to an enormous increase in BOM cost that made the system untenable from a TCO perspective for a switched all-to-all. However, it is plausible that Rubin Ultra NVL576 will be rolled out in test volumes before Feynman NVL 1,152, where we will see actual volume ramp of scale-up CPO.",
+      "parent_block_plain_text": "We have shown a concept of NVL576 for GB200 previously with pluggable optics to interconnect the second layer of NVLink switches. The use of pluggables contributed to an enormous increase in BOM cost that made the system untenable from a TCO perspective for a switched all-to-all. However, it is plausible that Rubin Ultra NVL576 will be rolled out in test volumes before Feynman NVL 1,152, where we will see actual volume ramp of scale-up CPO.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "shown a concept of NVL576 for GB200 previously",
+          "start": 8,
+          "end": 54,
+          "href": "https://newsletter.semianalysis.com/i/175661160/gb200-nvl576",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 444,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们此前已经 展示过针对 GB200 的 NVL576 概念方案，该方案使用可插拔光模块来互连第二层 NVLink 交换芯片。采用可插拔光模块会导致 BOM 成本激增，从 TCO 的角度来看，这使得构建交换全互联系统的方案变得不可行。然而，Rubin Ultra NVL576 很有可能会在 Feynman NVL 1,152 之前进行测试性的小批量生产，而在后者上，我们将看到 scale-up CPO 的实际规模化量产。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065092",
+          "tokenized_text": "我们此前已经 [[[LINK_1|展示过针对 GB200 的 NVL576 概念方案]]]，该方案使用可插拔光模块来互连第二层 NVLink 交换芯片。采用可插拔光模块会导致 BOM 成本激增，从 TCO 的角度来看，这使得构建交换全互联系统的方案变得不可行。然而，Rubin Ultra NVL576 很有可能会在 Feynman NVL 1,152 之前进行测试性的小批量生产，而在后者上，我们将看到 scale-up CPO 的实际规模化量产。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p031",
+      "index": 31,
+      "source": "The downstream implications of this are exposed in our institutional research, trusted by all major hyperscalers, semiconductor companies, and AI Labs, at sales@semianalysis.com",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The downstream implications of this are exposed in our institutional research, trusted by all major hyperscalers, semiconductor companies, and AI Labs, at sales@semianalysis.com",
+      "parent_block_plain_text": "The downstream implications of this are exposed in our institutional research, trusted by all major hyperscalers, semiconductor companies, and AI Labs, at sales@semianalysis.com",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 177,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这对下游供应链的深远影响已在我们的机构研究报告中予以揭示，我们的研究深受各大超大规模云服务商、半导体公司及 AI 实验室的信赖，详情请联系 sales@semianalysis.com。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065101",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p032",
+      "index": 32,
+      "source": "Feynman",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### Feynman",
+      "parent_block_plain_text": "Feynman",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 7,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Feynman",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065110",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p033",
+      "index": 33,
+      "source": "While not much is known about Feynman, the Keynote sneak peek was enough to tell us Feynman will be exciting, with three major technical innovations all being pushed in a single platform: Hybrid bonding/SoIC, A16, CPO, and custom HBM.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Hybrid bonding/SoIC",
+          "start": 188,
+          "end": 207,
+          "href": "https://newsletter.semianalysis.com/p/hybrid-bonding-process-flow-advanced?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "CPO",
+          "start": 214,
+          "end": 217,
+          "href": "https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "custom HBM",
+          "start": 223,
+          "end": 233,
+          "href": "https://newsletter.semianalysis.com/i/174558655/custom-base-die",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0154",
+      "parent_block_index": 154,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While not much is known about Feynman, the Keynote sneak peek was enough to tell us Feynman will be exciting, with three major technical innovations all being pushed in a single platform: [Hybrid bonding/SoIC](https://newsletter.semianalysis.com/p/hybrid-bonding-process-flow-advanced?utm_source=publication-search), A16, [CPO](https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling?utm_source=publication-search), and [custom HBM](https://newsletter.semianalysis.com/i/174558655/custom-base-die).",
+      "parent_block_plain_text": "While not much is known about Feynman, the Keynote sneak peek was enough to tell us Feynman will be exciting, with three major technical innovations all being pushed in a single platform: Hybrid bonding/SoIC, A16, CPO, and custom HBM.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Hybrid bonding/SoIC",
+          "start": 188,
+          "end": 207,
+          "href": "https://newsletter.semianalysis.com/p/hybrid-bonding-process-flow-advanced?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "CPO",
+          "start": 214,
+          "end": 217,
+          "href": "https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling?utm_source=publication-search",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "custom HBM",
+          "start": 223,
+          "end": 233,
+          "href": "https://newsletter.semianalysis.com/i/174558655/custom-base-die",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 234,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然关于 Feynman 的已知信息不多，但主题演讲中的惊鸿一瞥足以让我们确认 Feynman 将令人振奋，它在单一平台上同时推进了三项重大技术创新：混合键合/SoIC、A16、光电共封装以及定制HBM。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065149",
+          "tokenized_text": "虽然关于 Feynman 的已知信息不多，但主题演讲中的惊鸿一瞥足以让我们确认 Feynman 将令人振奋，它在单一平台上同时推进了三项重大技术创新：[[[LINK_1|混合键合/SoIC]]]、A16、[[[LINK_2|光电共封装]]]以及[[[LINK_3|定制HBM]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p034",
+      "index": 34,
+      "source": "While Feynman adopting CPO is on the roadmap, the question is to what extent? Will in-rack interconnectivity be copper based or optical? We will show possible configurations behind the Paywall. Vera ETL256",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Vera ETL256",
+          "start": 194,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While Feynman adopting CPO is on the roadmap, the question is to what extent? Will in-rack interconnectivity be copper based or optical? We will show possible configurations behind the Paywall. **Vera ETL256**",
+      "parent_block_plain_text": "While Feynman adopting CPO is on the roadmap, the question is to what extent? Will in-rack interconnectivity be copper based or optical? We will show possible configurations behind the Paywall. Vera ETL256",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Vera ETL256",
+          "start": 194,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 205,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然 Feynman 采用光电共封装已在路线图上，但问题在于采用的程度如何？机架内互连将基于铜缆还是光学器件？我们将在付费墙后展示可能的配置。Vera ETL256",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065173",
+          "tokenized_text": "虽然 Feynman 采用光电共封装已在路线图上，但问题在于采用的程度如何？机架内互连将基于铜缆还是光学器件？我们将在付费墙后展示可能的配置。[[[STRONG_1|Vera ETL256]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p035",
+      "index": 35,
+      "source": "CPU demand is rising as AI workloads require more data handling, preprocessing, and orchestration beyond GPU compute. Reinforcement learning further increases demand, with CPUs running simulations, executing code, and verifying outputs in parallel. As GPUs scale faster than CPUs, larger CPU clusters are needed to keep them fully utilized, making CPUs a growing bottleneck.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0156",
+      "parent_block_index": 156,
+      "parent_block_type": "p",
+      "parent_block_markdown": "CPU demand is rising as AI workloads require more data handling, preprocessing, and orchestration beyond GPU compute. Reinforcement learning further increases demand, with CPUs running simulations, executing code, and verifying outputs in parallel. As GPUs scale faster than CPUs, larger CPU clusters are needed to keep them fully utilized, making CPUs a growing bottleneck.",
+      "parent_block_plain_text": "CPU demand is rising as AI workloads require more data handling, preprocessing, and orchestration beyond GPU compute. Reinforcement learning further increases demand, with CPUs running simulations, executing code, and verifying outputs in parallel. As GPUs scale faster than CPUs, larger CPU clusters are needed to keep them fully utilized, making CPUs a growing bottleneck.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 374,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着 AI 工作负载在 GPU 计算之外需要更多的数据处理、预处理和编排，对 CPU 的需求正在上升。强化学习进一步推高了这一需求，因为 CPU 需要并行运行模拟、执行代码并验证输出。由于 GPU 的扩展速度快于 CPU，因此需要更大的 CPU 集群来保持 GPU 的充分利用，这使得 CPU 日益成为瓶颈。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065182",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p036",
+      "index": 36,
+      "source": "The Vera standalone rack addresses this directly, achieving unprecedented density by fitting 256 CPUs into a single rack — a feat that necessitates liquid cooling. The underlying rationale mirrors the NVL rack design philosophy: pack compute tightly enough that copper interconnects can reach everything within the rack, eliminating the need for optical transceivers on the spine. The cost savings from copper more than offset the additional cooling overhead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Vera standalone rack addresses this directly, achieving unprecedented density by fitting 256 CPUs into a single rack — a feat that necessitates liquid cooling. The underlying rationale mirrors the NVL rack design philosophy: pack compute tightly enough that copper interconnects can reach everything within the rack, eliminating the need for optical transceivers on the spine. The cost savings from copper more than offset the additional cooling overhead.",
+      "parent_block_plain_text": "The Vera standalone rack addresses this directly, achieving unprecedented density by fitting 256 CPUs into a single rack — a feat that necessitates liquid cooling. The underlying rationale mirrors the NVL rack design philosophy: pack compute tightly enough that copper interconnects can reach everything within the rack, eliminating the need for optical transceivers on the spine. The cost savings from copper more than offset the additional cooling overhead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 459,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Vera 独立机架直接解决了这一问题，通过将 256 个 CPU 容纳在单个机架中实现了前所未有的密度——这一壮举必须采用液冷技术。其底层逻辑与 NVL 机架的设计理念如出一辙：将计算组件进行高密度化封装，使得铜缆互连能够覆盖机架内的所有组件，从而消除在主干网络上使用光模块的需求。铜缆带来的成本节约足以抵消额外的散热开销。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065191",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p037",
+      "index": 37,
+      "source": "https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065200",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!KfPw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9e8a2b9-8417-41bc-aa32-1072b2e68fc0_3000x4000.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p038",
+      "index": 38,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881463",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065208",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p039",
+      "index": 39,
+      "source": "Each Vera ETL rack consists of 32 compute trays, 16 above and 16 below, arranged symmetrically around four 1U MGX ETL switch trays (based on Spectrum-6) in the middle. The symmetric split is deliberate: it minimizes cable length variance between compute trays and the spine, keeping all connections within copper reach. From each switch tray, rear-facing ports connect to that copper spine for intra-rack communication, while 32 front-facing OSFP cages provide optical connectivity to the rest of the POD.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0160",
+      "parent_block_index": 160,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each Vera ETL rack consists of 32 compute trays, 16 above and 16 below, arranged symmetrically around four 1U MGX ETL switch trays (based on Spectrum-6) in the middle. The symmetric split is deliberate: it minimizes cable length variance between compute trays and the spine, keeping all connections within copper reach. From each switch tray, rear-facing ports connect to that copper spine for intra-rack communication, while 32 front-facing OSFP cages provide optical connectivity to the rest of the POD.",
+      "parent_block_plain_text": "Each Vera ETL rack consists of 32 compute trays, 16 above and 16 below, arranged symmetrically around four 1U MGX ETL switch trays (based on Spectrum-6) in the middle. The symmetric split is deliberate: it minimizes cable length variance between compute trays and the spine, keeping all connections within copper reach. From each switch tray, rear-facing ports connect to that copper spine for intra-rack communication, while 32 front-facing OSFP cages provide optical connectivity to the rest of the POD.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 505,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 Vera ETL 机架包含 32 个计算托盘（上下各 16 个），对称排列在中间的 4 个 1U MGX ETL 交换机托盘（基于 Spectrum-6）周围。这种对称布局是经过深思熟虑的：它最大限度地减少了计算托盘与主干之间的线缆长度差异，确保所有连接都在铜缆的覆盖范围内。在每个交换机托盘上，后置端口连接到该铜缆主干以实现机架内通信，而 32 个前置 OSFP 接口则为 POD 的其余部分提供光学连接。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065215",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p040",
+      "index": 40,
+      "source": "Networking within the rack uses a Spectrum-X multiplane topology, distributing 200 Gb/s lanes across the four switches to achieve full all-to-all connectivity while maintaining a single network tier. With each compute tray housing 8 Vera CPUs, the result is 256 CPUs per rack, all interconnected over Ethernet through a single, flat network.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0161",
+      "parent_block_index": 161,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Networking within the rack uses a Spectrum-X multiplane topology, distributing 200 Gb/s lanes across the four switches to achieve full all-to-all connectivity while maintaining a single network tier. With each compute tray housing 8 Vera CPUs, the result is 256 CPUs per rack, all interconnected over Ethernet through a single, flat network.",
+      "parent_block_plain_text": "Networking within the rack uses a Spectrum-X multiplane topology, distributing 200 Gb/s lanes across the four switches to achieve full all-to-all connectivity while maintaining a single network tier. With each compute tray housing 8 Vera CPUs, the result is 256 CPUs per rack, all interconnected over Ethernet through a single, flat network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 341,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "机架内网络采用 Spectrum-X 多平面拓扑，将 200 Gb/s 通道分布于四台交换机中，在保持单一网络层级的同时实现完整的全互联。每个计算托盘容纳 8 个 Vera CPU，单个机架总计 256 个 CPU，所有 CPU 均通过单一扁平网络经以太网互联。",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065223",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p041",
+      "index": 41,
+      "source": "https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0162",
+      "parent_block_index": 162,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065231",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!UMo8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31febbf5-a0ec-4218-b2d0-e95e40704213_4000x3000.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p042",
+      "index": 42,
+      "source": "Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0163",
+      "parent_block_index": 163,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis",
+      "parent_block_plain_text": "Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 20,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881486",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065238",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p043",
+      "index": 43,
+      "source": "https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0164",
+      "parent_block_index": 164,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065246",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!At98!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91ab19c1-1ceb-4b0b-a13e-6de00121eebd_1427x199.webp",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p044",
+      "index": 44,
+      "source": "Source: Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia",
+          "start": 8,
+          "end": 14,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0165",
+      "parent_block_index": 165,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia](https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/)",
+      "parent_block_plain_text": "Source: Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia",
+          "start": 8,
+          "end": 14,
+          "href": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881234",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        },
+        "pro": {
+          "text": "来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-04-03T03:07:05.065268",
+          "tokenized_text": "来源：[[[LINK_1|英伟达]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'densified' as '密度提升' or '高密度化'.",
+          "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Details the physical and architectural updates to Nvidia's mainstream GPU racks to support larger cluster sizes.",
+          "relation_to_previous": "Applies the networking roadmap (larger world sizes) to the actual physical design of the flagship GPU racks.",
+          "relation_to_next": "Moves from compute and networking racks to the final piece of the datacenter puzzle: storage racks.",
+          "key_points": [
+            "Kyber rack designs have been densified compared to early prototypes.",
+            "Each compute blade now houses 4x Rubin Ultra GPUs and 2x Vera CPUs.",
+            "A single rack contains 36 compute blades, totaling 144 GPUs, supporting massive new world sizes."
+          ],
+          "translation_notes": [
+            "Translate 'densified' as '密度提升' or '高密度化'.",
+            "Ensure the hardware counts (4x, 2x, 36, 144) are strictly preserved."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中“已经”与“展示过”之间存在多余的空格（“已经 展示过”），轻微影响阅读流畅度。"
+          },
+          {
+            "type": "structure",
+            "description": "原文中的“Vera ETL256”实际上是下一节的小标题，因源文本格式解析问题被错误并入了段尾。译文直接将其附在句末，导致逻辑突兀。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“more than offset”译为“足以抵消”略微削弱了原文的语气。原文强调的是不仅能抵消，甚至还能省下更多。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "extreme co-design",
+      "suggested_translation": "极致协同设计",
+      "context": "Nvidia's strategy for rack-scale integration where hardware and software are designed together to the limit.",
+      "confidence": 0.95
+    },
+    {
+      "term": "VR NVL72",
+      "suggested_translation": "VR NVL72",
+      "context": "The specific rack-scale system configuration for the Vera Rubin platform.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SOCAMM",
+      "suggested_translation": "SOCAMM 内存",
+      "context": "A specific memory module type (likely LPDDR-based) used in the Vera Rubin compute tray.",
+      "confidence": 0.9
+    },
+    {
+      "term": "BoM",
+      "suggested_translation": "物料清单",
+      "context": "Bill of Materials, used extensively in the financial and component analysis of the system.",
+      "confidence": 1.0
+    },
+    {
+      "term": "scale up / scale out",
+      "suggested_translation": "纵向扩展 / 横向扩展",
+      "context": "Refers to the NVLink network (scale up) versus the backend Ethernet/InfiniBand network (scale out).",
+      "confidence": 0.95
+    },
+    {
+      "term": "Oberon architecture",
+      "suggested_translation": "Oberon 架构",
+      "context": "The rack-scale architecture name preceding or related to the Rubin generation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "power shelf",
+      "suggested_translation": "电源机框",
+      "context": "A component in the power delivery system of the rack.",
+      "confidence": 0.85
+    },
+    {
+      "term": "busbar",
+      "suggested_translation": "汇流排",
+      "context": "A heavy-duty conductor used for power distribution within the rack.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "tco": "总拥有成本",
+    "hbm": "HBM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:35:39.063230"
+}

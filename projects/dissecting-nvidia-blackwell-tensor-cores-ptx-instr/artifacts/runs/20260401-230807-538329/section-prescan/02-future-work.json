@@ -1,0 +1,54 @@
+{
+  "section_id": "02-future-work",
+  "new_terms": [
+    {
+      "term": "Blackwell",
+      "suggested_translation": "Blackwell 架构",
+      "context": "NVIDIA's latest GPU architecture following Hopper.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Blackwell Ultra",
+      "suggested_translation": "Blackwell Ultra",
+      "context": "An iterative update to the Blackwell GPU architecture.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TensorMap",
+      "suggested_translation": "TensorMap",
+      "context": "A data structure used by NVIDIA's Tensor Memory Accelerator (TMA) to define multi-dimensional layouts.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Pallas",
+      "suggested_translation": "Pallas",
+      "context": "The kernel programming language/model for Google TPUs.",
+      "confidence": 0.9
+    },
+    {
+      "term": "NKI",
+      "suggested_translation": "NKI (Neuron Kernel Interface)",
+      "context": "AWS's low-level programming interface for Trainium and Inferentia accelerators.",
+      "confidence": 0.9
+    },
+    {
+      "term": "CDNA4",
+      "suggested_translation": "CDNA4 架构",
+      "context": "AMD's next-generation data center GPU architecture.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ClusterMAX",
+      "suggested_translation": "ClusterMAX",
+      "context": "A specific technical project or tool mentioned for low-level benchmarking.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "ptx": "PTX",
+    "tpu": "TPU",
+    "amd": "AMD"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:13:56.821054"
+}

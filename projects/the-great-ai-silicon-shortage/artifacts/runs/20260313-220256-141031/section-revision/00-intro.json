@@ -1,0 +1,23 @@
+{
+  "section_id": "00-intro",
+  "assessment": {
+    "passed": false,
+    "overall_score": 9.6,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [
+      "critical_errors (1 > 0)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "台积电N3制程晶圆短缺、存储产能限制、数据中心瓶颈与供应链之争的赢家",
+    "作者：Ivan Chiam、Myron Xie、Ray Wang等3人",
+    "2026年3月12日 · 付费文章"
+  ]
+}

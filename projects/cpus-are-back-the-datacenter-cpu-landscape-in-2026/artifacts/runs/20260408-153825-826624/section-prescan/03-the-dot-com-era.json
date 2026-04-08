@@ -1,0 +1,60 @@
+{
+  "section_id": "03-the-dot-com-era",
+  "new_terms": [
+    {
+      "term": "Dennard scaling",
+      "suggested_translation": "登纳德缩放定律",
+      "context": "after the GHz wars were over with the end of Dennard scaling",
+      "confidence": 0.95
+    },
+    {
+      "term": "PCIe",
+      "suggested_translation": "PCIe",
+      "context": "high-speed IO (PCIe) came directly from the CPU as well",
+      "confidence": 1.0
+    },
+    {
+      "term": "Simultaneous Multi-Threading (SMT)",
+      "suggested_translation": "同步多线程 (SMT)",
+      "context": "Simultaneous Multi-Threading (SMT) was also introduced in this time by both AMD and Intel",
+      "confidence": 0.95
+    },
+    {
+      "term": "Quick Path Interconnect (QPI)",
+      "suggested_translation": "快速通道互联 (QPI)",
+      "context": "Intel’s Quick Path Interconnect (QPI)",
+      "confidence": 0.95
+    },
+    {
+      "term": "HyperTransport Direct Connect Architecture",
+      "suggested_translation": "HyperTransport直连架构",
+      "context": "AMD’s HyperTransport Direct Connect Architecture in their Opteron CPUs",
+      "confidence": 0.9
+    },
+    {
+      "term": "Opteron",
+      "suggested_translation": "皓龙",
+      "context": "in their Opteron CPUs providing coherent links",
+      "confidence": 0.95
+    },
+    {
+      "term": "multi-socket",
+      "suggested_translation": "多路 / 多插槽",
+      "context": "Those looking for more performance would turn to Multi-socket CPU servers",
+      "confidence": 0.9
+    },
+    {
+      "term": "coherent links",
+      "suggested_translation": "一致性链路",
+      "context": "providing coherent links between up to eight sockets per server",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "cpu": "CPU",
+    "amd": "AMD",
+    "intel": "英特尔"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T15:45:17.891728"
+}

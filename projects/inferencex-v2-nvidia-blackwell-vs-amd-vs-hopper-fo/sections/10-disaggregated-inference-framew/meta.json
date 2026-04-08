@@ -1,0 +1,143 @@
+{
+  "section_id": "10-disaggregated-inference-framew",
+  "title": "Disaggregated Inference Frameworks",
+  "title_translation": "分离式推理框架",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "NVIDIA uses Dynamo for its disaggregated inference setup. Dynamo is an inference framework designed for multi-node distributed inference, featuring techniques such as prefill-decode disaggregation, request routing, and KV cache offloading. It is inference-engine agnostic, allowing us to use SGLang and TRT LLM as backends in our benchmark. For AMD, we use SGLang with two different KV cache transfer frameworks: MoRI and Mooncake. MoRI is a high-performance communication interface focusing on RDMA and GPU integration, offering applications such as network collective operations and expert parallel kernels. Mooncake, which recently joined the PyTorch ecosystem, supports prefill-decode disaggregation and many fault tolerant multi-node features.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Dynamo",
+          "start": 58,
+          "end": 64,
+          "href": "https://docs.nvidia.com/dynamo/design-docs/overall-architecture",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "MoRI",
+          "start": 432,
+          "end": 436,
+          "href": "https://github.com/rocm/mori",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "recently joined the PyTorch ecosystem",
+          "start": 626,
+          "end": 663,
+          "href": "https://pytorch.org/blog/mooncake-joins-pytorch-ecosystem/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA uses Dynamo for its disaggregated inference setup. [Dynamo](https://docs.nvidia.com/dynamo/design-docs/overall-architecture) is an inference framework designed for multi-node distributed inference, featuring techniques such as prefill-decode disaggregation, request routing, and KV cache offloading. It is inference-engine agnostic, allowing us to use SGLang and TRT LLM as backends in our benchmark. For AMD, we use SGLang with two different KV cache transfer frameworks: MoRI and Mooncake. [MoRI](https://github.com/rocm/mori) is a high-performance communication interface focusing on RDMA and GPU integration, offering applications such as network collective operations and expert parallel kernels. Mooncake, which [recently joined the PyTorch ecosystem](https://pytorch.org/blog/mooncake-joins-pytorch-ecosystem/), supports prefill-decode disaggregation and many fault tolerant multi-node features.",
+      "parent_block_plain_text": "NVIDIA uses Dynamo for its disaggregated inference setup. Dynamo is an inference framework designed for multi-node distributed inference, featuring techniques such as prefill-decode disaggregation, request routing, and KV cache offloading. It is inference-engine agnostic, allowing us to use SGLang and TRT LLM as backends in our benchmark. For AMD, we use SGLang with two different KV cache transfer frameworks: MoRI and Mooncake. MoRI is a high-performance communication interface focusing on RDMA and GPU integration, offering applications such as network collective operations and expert parallel kernels. Mooncake, which recently joined the PyTorch ecosystem, supports prefill-decode disaggregation and many fault tolerant multi-node features.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Dynamo",
+          "start": 58,
+          "end": 64,
+          "href": "https://docs.nvidia.com/dynamo/design-docs/overall-architecture",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "MoRI",
+          "start": 432,
+          "end": 436,
+          "href": "https://github.com/rocm/mori",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "recently joined the PyTorch ecosystem",
+          "start": 626,
+          "end": 663,
+          "href": "https://pytorch.org/blog/mooncake-joins-pytorch-ecosystem/",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 748,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达在其分离式推理架构中采用了 Dynamo。Dynamo 是一款专为多节点分布式推理设计的推理框架，集成了 Prefill-Decode 分离、请求路由以及 KV Cache 卸载等技术。该框架不绑定特定的推理引擎，因此我们在基准测试中能够将 SGLang 和 TRTLLM 作为后端。在 AMD 平台方面，我们采用 SGLang 搭配两种不同的 KV Cache 传输框架：MoRI 和 Mooncake。MoRI 是一种专注于 RDMA 与 GPU 深度融合的高性能通信接口，支持网络集合通信操作与专家并行算子等应用。而最近刚加入 PyTorch 生态系统的 Mooncake，不仅支持 Prefill-Decode 分离，还具备丰富的多节点容错特性。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:22:20.508032",
+          "tokenized_text": "英伟达在其分离式推理架构中采用了 Dynamo。[[[LINK_1|Dynamo]]] 是一款专为多节点分布式推理设计的推理框架，集成了 Prefill-Decode 分离、请求路由以及 KV Cache 卸载等技术。该框架不绑定特定的推理引擎，因此我们在基准测试中能够将 SGLang 和 TRTLLM 作为后端。在 AMD 平台方面，我们采用 SGLang 搭配两种不同的 KV Cache 传输框架：MoRI 和 Mooncake。[[[LINK_2|MoRI]]] 是一种专注于 RDMA 与 GPU 深度融合的高性能通信接口，支持网络集合通信操作与专家并行算子等应用。而[[[LINK_3|最近刚加入 PyTorch 生态系统]]]的 Mooncake，不仅支持 Prefill-Decode 分离，还具备丰富的多节点容错特性。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文两次将其翻译为“预填充-解码分离”。根据术语表对“Disaggregated Prefill”的标准译法（分离式 Prefill），为保持行业习惯与术语一致性，建议直接保留 Prefill 的英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中出现了不必要的空格：“而 最近刚加入 PyTorch 生态系统 的 Mooncake”，破坏了中文排版的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文为“TRT LLM”，译文照搬。但在提示词背景信息中提及的是“TRTLLM”，且行业内通常写为“TRT-LLM”或“TRTLLM”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

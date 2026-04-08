@@ -1,0 +1,20 @@
+{
+  "section_id": "18-floorplan",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "the L2 cache segments",
+        "description": "译文将 'L2 cache segments' 翻译为 'L2 缓存段'。在 GPU 架构语境中，'segments' 或 'slices' 通常更习惯被译为 'L2 缓存切片' 或 'L2 缓存分区'。",
+        "why_it_matters": "使用更贴合硬件架构师习惯的行业术语可以提升文章的专业度。",
+        "suggestion": "建议改为 'L2 缓存切片' 或 'L2 缓存分区'。"
+      }
+    ]
+  }
+}

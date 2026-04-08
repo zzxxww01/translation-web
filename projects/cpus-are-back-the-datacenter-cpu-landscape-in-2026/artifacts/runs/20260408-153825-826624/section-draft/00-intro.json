@@ -1,0 +1,336 @@
+{
+  "section_id": "00-intro",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "00-intro",
+    "section_title": "Introduction",
+    "section_title_translation": "引言",
+    "section_position": "1/30",
+    "article_theme": "The architectural evolution of datacenter CPUs from the PC era to the AI-driven Reinforcement Learning (RL) and Agentic era, highlighting the shift in interconnect topologies, the explosion of custom silicon, and the constraints of DRAM supply on future roadmaps.",
+    "structure_summary": "The article begins with a chronological history of datacenter CPUs (PC era to RL/Agentic era), transitions into a deeply technical analysis of multi-core interconnect evolution (Crossbar, Ring, Mesh), provides a comprehensive vendor-by-vendor breakdown of 2026+ CPU architectures and roadmaps, and concludes with market dynamics regarding BoM costs, DRAM constraints, and future design trends.",
+    "target_audience": "Semiconductor engineers, hyperscaler system architects, AI hardware researchers, and tech-focused institutional investors.",
+    "translation_voice": "Professional tech-industry Chinese vernacular. Use precise engineering terms while maintaining the sharp, opinionated analyst voice when discussing product delays or market failures.",
+    "previous_section_title": "",
+    "next_section_title": "The Role and Evolution of Datacenter CPUs",
+    "section_role": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+    "translation_notes": [
+      "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+      "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+      "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+    ],
+    "key_points": [
+      "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+      "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+      "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+    ],
+    "guidelines": [
+      "Sentence Restructuring: The original text frequently uses long, heavily modified sentences (e.g., 'The incoming price hikes for CPUs across the board, combined with high memory prices, will affect...'). Break these down into shorter, logically sequenced Chinese clauses to ensure native paragraph flow.",
+      "Codename Handling: Keep all CPU/Architecture codenames (e.g., Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Vera, Phoenix, Venom) in English. On their first mention, append a descriptive noun if it aids readability (e.g., 'AMD Venice 处理器', 'Intel Diamond Rapids 架构').",
+      "Semiconductor Precision: Strictly adhere to the provided semiconductor terminology (e.g., 步进 for stepping, 物理布图 for floorplan, 裸片 for die). Do not use generic software or consumer electronics translations for these hardware engineering terms.",
+      "Analyst Tone Preservation: SemiAnalysis is known for its blunt, unvarnished critiques of corporate execution (e.g., delays, canceled roadmaps). Do not sanitize or 'corporate-wash' terms like 'dead', 'infamous', or 'treading water'. Translate them with equivalent impact in Chinese.",
+      "Image Captions: Translate image captions concisely. For source attribution (e.g., 'Source: AMD'), use '来源：AMD'. For technical descriptions (e.g., 'Vera Floorplan Annotated'), use 'Vera 物理布图注释版'.",
+      "Acronyms: Keep standard acronyms (RL, CPU, GPU, CXL, PCIe, BoM, OpEx, CapEx) in English unless a widely accepted Chinese equivalent is more natural in the specific sentence structure. 'BoM' can be translated as 'BOM成本' or '物料清单'."
+    ],
+    "article_challenges": [
+      {
+        "location": "DRAM Constraints on CPU Market",
+        "issue": "The word 'allocation' in 'Server CPU allocation will be prioritized' refers to supply chain distribution, not memory allocation in software.",
+        "suggestion": "Translate as '供货配额' or '产能分配' to reflect the supply chain context.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel’s Mesh Architecture",
+        "issue": "Phrases like 'infamous for its multi-year delay' and 'made it all the way to stepping E5 before release' carry a highly critical tone regarding Intel's execution.",
+        "suggestion": "Do not soften the critique. Use '因长达数年的延期而臭名昭著' and '直到修改至E5步进才最终发布' to capture the frustration.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Intel Xeon Coral Rapids",
+        "issue": "Phrases like 'victim of Lip-Bu’s streamlining', 'dead', and 'treading water'.",
+        "suggestion": "Translate 'dead' bluntly as '已被彻底砍掉'. Translate 'treading water' as '停滞不前' or '勉强维持'. Translate 'victim of...' as 'Lip-Bu精简计划的牺牲品'.",
+        "type": "accuracy"
+      },
+      {
+        "location": "AMD Turin Dense 7:1 Socket Consolidation",
+        "issue": "'Socket Consolidation' in server hardware refers to replacing multiple older servers/sockets with fewer new ones.",
+        "suggestion": "Translate as '插槽整合' or '单插槽替换率', explaining the ratio of old hardware replaced by new hardware.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Large-scale cloud service providers (e.g., AWS, Google, Microsoft).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Agentic Era",
+        "term": "Agentic Era",
+        "translation": "智能体时代",
+        "strategy": "translate",
+        "note": "The era of AI where autonomous agents perform complex tasks.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Crossbar",
+        "term": "Crossbar",
+        "translation": "交叉开关",
+        "strategy": "translate",
+        "note": "An interconnect topology where every core has a discrete link to all other cores.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Ring Bus",
+        "term": "Ring Bus",
+        "translation": "环形总线",
+        "strategy": "translate",
+        "note": "A CPU interconnect topology using a ring structure to connect cores and caches.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mesh Architecture",
+        "term": "Mesh Architecture",
+        "translation": "网格架构",
+        "strategy": "translate",
+        "note": "A 2D grid interconnect topology used in high-core-count CPUs.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Die Shot",
+        "term": "Die Shot",
+        "translation": "裸片图",
+        "strategy": "translate",
+        "note": "A photograph of a semiconductor die, often annotated.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Floorplan",
+        "term": "Floorplan",
+        "translation": "物理布图",
+        "strategy": "translate",
+        "note": "The physical layout of functional blocks on a semiconductor die.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Stepping",
+        "term": "Stepping",
+        "translation": "步进",
+        "strategy": "translate",
+        "note": "A hardware version or revision of a semiconductor chip (e.g., stepping E5).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Reticle-sized",
+        "term": "Reticle-sized",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "A die that takes up the maximum allowable area on a lithography reticle/mask.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Head node",
+        "term": "Head node",
+        "translation": "头节点",
+        "strategy": "translate",
+        "note": "The CPU node that manages and feeds data to AI accelerators/GPUs in a cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Context Memory Storage",
+        "term": "Context Memory Storage",
+        "translation": "上下文内存存储",
+        "strategy": "translate",
+        "note": "A specific architecture platform for storing AI context windows (e.g., Bluefield-4).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Front Side Bus (FSB)",
+        "term": "Front Side Bus (FSB)",
+        "translation": "前端总线 (FSB)",
+        "strategy": "translate",
+        "note": "Early Intel computer communication interface.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Hooks the reader by outlining the current datacenter landscape, introducing the shift to RL/Agentic workloads, DRAM constraints, and teasing the comprehensive 2026+ vendor roadmaps.",
+    "relation_to_previous": "N/A",
+    "relation_to_next": "Establishes the overarching themes (AI bottlenecks, interconnects, DRAM) before zooming out to provide the historical context that led to this point.",
+    "key_points": [
+      "The datacenter CPU market is fundamentally shifting due to Reinforcement Learning and Agentic AI workloads.",
+      "DRAM pricing and supply shortages are actively constraining future CPU roadmaps.",
+      "Next-generation CPU architectures (e.g., AMD Venice, Intel Diamond Rapids) require new interconnect paradigms to survive these bottlenecks."
+    ],
+    "translation_notes": [
+      "Ensure codenames (Venice, Verano, Florence, Diamond Rapids, Coral Rapids, Phoenix, Venom) are kept in English or use standard industry transliterations.",
+      "Maintain the premium, insider tone of the paywall teaser ('For our subscribers...').",
+      "Translate 'Context Memory Storage' precisely, as it is a specific technical paradigm introduced by NVIDIA's Bluefield-4."
+    ]
+  },
+  "translations": [
+    "强化学习 (RL) 与智能体应用、上下文内存存储、DRAM 定价影响、CPU 互连演进、AMD Venice 处理器、Verano、Florence、英特尔（Intel）Diamond Rapids 架构、Coral Rapids、ARM Phoenix 与 Venom、Graviton 5、Axion",
+    "作者：Gerald Wong 与 Dylan Patel",
+    "2026 年 2 月 9 日 · 付费专享",
+    "https://substackcdn.com/image/fetch/$s_!Qsru!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3f9507d8-140b-4db8-9fd6-2ac28050a1ea_2016x1344.png",
+    "自 2023 年以来，数据中心的叙事逻辑极其简单：GPU 与网络设备称王。AI 训练与推理的问世及随后的爆发，抽离了原本属于 CPU 的计算需求。这导致服务器 CPU 的主要供应商英特尔，未能乘上这波数据中心建设与支出狂潮的东风。随着超大规模云厂商与新锐云厂商将重心转向 GPU 及数据中心基础设施，服务器 CPU 营收一直停滞不前。",
+    "与此同时，这些超大规模云厂商一直在为其云计算服务自研基于 ARM 架构的数据中心 CPU，直接封死了英特尔一大片可寻址市场。而在自家的 x86 阵地内，英特尔拉垮的执行力，加上面对竞争对手 AMD 时毫无竞争力的性能表现，进一步蚕食了其市场份额。由于拿不出能打的 AI 加速器产品，当整个行业在尽情狂欢时，英特尔只能在原地停滞不前。",
+    "过去六个月里，情况发生了翻天覆地的变化。我们在 Core Research 与 Tokenomics Model 中发布了多份关于 CPU 需求飙升的报告。我们展示并建模分析的主要驱动力，是强化学习 (RL) 与直觉编程 (vibe coding) 对 CPU 产生的惊人需求。我们还报道了多家供应商与 AI 实验室达成的大型 CPU 云服务协议，并建模分析了正在部署的 CPU 数量及类型。",
+    "https://substackcdn.com/image/fetch/$s_!5yS5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c9e56be-fcab-4b4a-9a66-0ead1858e8d9_1648x1629.png",
+    "英特尔 2025 年第四季度数据中心与人工智能事业部 (DCAI) 营收。来源：英特尔",
+    "然而，英特尔近期的强势反弹以及 2025 年下半年需求信号的转变表明，CPU 如今已重回舞台中心。在最新的第四季度财报中，英特尔发现 2025 年底数据中心 CPU 需求出现意外上扬。为此，他们正在上调 2026 年晶圆代工厂（foundry）设备的资本支出（capex）指引，并将晶圆产能分配从 PC 优先向服务器倾斜，以缓解满足这一新增需求时的供应链瓶颈。这标志着 CPU 在数据中心的角色迎来拐点，AI 模型训练与推理对 CPU 的依赖愈发显著。",
+    "https://substackcdn.com/image/fetch/$s_!AFjW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F066448fc-f72e-4159-aa67-e0192e2ff2ea_3023x1461.png",
+    "数据中心 CPU 核心数趋势。来源：SemiAnalysis 预测",
+    "2026 年是数据中心 CPU 令人振奋的一年。在需求激增的背景下，各大供应商都将在今年推出众多新一代产品。因此，本文将为您描绘 2026 年的 CPU 市场格局。我们将首先铺垫背景，回顾数据中心 CPU 的发展史以及不断演变的需求驱动因素，并深入剖析英特尔与 AMD 多年来在数据中心 CPU 架构上的变迁。",
+    "随后，我们将目光转向 2026 年的 CPU 产品，全面拆解英特尔的 Clearwater Forest 与 Diamond Rapids 处理器，以及 AMD 的 Venice 处理器。我们将探讨它们在设计上引人注目的趋同（与分歧）之处，分析其性能差异，并预告我们的 CPU 成本分析。",
+    "接下来，我们将详细阐述 ARM 阵营的竞争态势。这包括英伟达（NVIDIA）的 Grace 与 Vera 架构、亚马逊的 Graviton 系列、微软的 Cobalt、谷歌的 Axion CPU 系列、Ampere Computing 进军商用 ARM 芯片市场的举措及其被软银收购的事件、ARM 自家的 Phoenix CPU 设计，并审视华为自主研发的 Kunpeng CPU 进展。",
+    "面向我们的订阅用户，我们将提供直至 2028 年的数据中心 CPU 路线图，并详细介绍 AMD、英特尔、ARM 与高通（Qualcomm）在 2026 年之后的数据中心 CPU 规划。随后，我们将展望数据中心 CPU 的未来图景，探讨 DRAM 短缺带来的影响，分析英伟达 Bluefield-4 的上下文内存存储平台对通用 CPU 未来的意义，并指出未来 CPU 市场与设计中值得关注的关键趋势。"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "section_id": "23-wideep",
+  "new_terms": [
+    {
+      "term": "active parameters",
+      "suggested_translation": "激活参数",
+      "context": "DeepSeek R1 has 671B total parameters, but only 37B active parameters.",
+      "confidence": 0.95
+    },
+    {
+      "term": "routed experts",
+      "suggested_translation": "路由专家",
+      "context": "DeepSeek R1 has 256 routed experts (and 1 shared expert)",
+      "confidence": 0.95
+    },
+    {
+      "term": "shared expert",
+      "suggested_translation": "共享专家",
+      "context": "DeepSeek R1 has 256 routed experts (and 1 shared expert)",
+      "confidence": 0.95
+    },
+    {
+      "term": "arithmetic intensity",
+      "suggested_translation": "算术强度",
+      "context": "raising arithmetic intensity (more FLOPs per byte of weights loaded)",
+      "confidence": 0.95
+    },
+    {
+      "term": "non-expert weights",
+      "suggested_translation": "非专家权重",
+      "context": "a full replica of the non-expert weights (attention projections, embeddings...)",
+      "confidence": 0.95
+    },
+    {
+      "term": "MNNVL",
+      "suggested_translation": "MNNVL",
+      "context": "where NVLink or MNNVL provides high-bandwidth interconnect",
+      "confidence": 0.9
+    },
+    {
+      "term": "RMSNorm",
+      "suggested_translation": "RMSNorm",
+      "context": "shared expert, gating network, RMSNorm, LM head, etc.",
+      "confidence": 0.95
+    },
+    {
+      "term": "LM head",
+      "suggested_translation": "LM Head",
+      "context": "shared expert, gating network, RMSNorm, LM head, etc.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "moe": "混合专家 (MoE)",
+    "tp": "张量并行 (TP)",
+    "ep": "专家并行 (EP)",
+    "wideep": "宽专家并行 (WideEP)",
+    "all-reduce": "全归约 (All-reduce)",
+    "all-to-all": "全对全 (All-to-all)",
+    "forward pass": "前向传播",
+    "hbm": "HBM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:56:21.228194"
+}

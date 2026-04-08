@@ -1,0 +1,48 @@
+{
+  "section_id": "14-assembly-automation-and-logist",
+  "new_terms": [
+    {
+      "term": "Foxconn",
+      "suggested_translation": "富士康",
+      "context": "One of the three L10 level compute tray assembly partners for Rubin.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Quanta",
+      "suggested_translation": "广达",
+      "context": "One of the three L10 level compute tray assembly partners for Rubin.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Wistron",
+      "suggested_translation": "纬创",
+      "context": "Main supplier of Blackwell and Rubin at L6 board level PCBA.",
+      "confidence": 0.95
+    },
+    {
+      "term": "PCBA",
+      "suggested_translation": "印刷电路板组装",
+      "context": "Refers to L6 board level assembly process.",
+      "confidence": 0.9
+    },
+    {
+      "term": "OEM",
+      "suggested_translation": "原始设备制造商",
+      "context": "Mentioned alongside ODMs regarding compute tray assembly and rack integration.",
+      "confidence": 0.9
+    },
+    {
+      "term": "seamless modular design",
+      "suggested_translation": "无缝模块化设计",
+      "context": "Design feature of Rubin that simplifies compute tray assembly.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "l6 / l10 assembly": "L6 / L10 级组装",
+    "odm": "原始设计制造商",
+    "compute tray": "计算托盘"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:55:15.708708"
+}

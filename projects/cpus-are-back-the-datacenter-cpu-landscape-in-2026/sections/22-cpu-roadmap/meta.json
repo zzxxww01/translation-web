@@ -1,0 +1,245 @@
+{
+  "section_id": "22-cpu-roadmap",
+  "title": "CPU Roadmap",
+  "title_translation": "CPU路线图",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0272",
+      "parent_block_index": 272,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:43:35.076421",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!2Qiq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ca1ac7-cb64-4cc9-a9aa-ddf489ab4537_7534x1911.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文使用了半角括号 `(安培计算)`，在中文排版中，包含中文的括号通常建议使用全角括号 `（）` 以保持视觉协调。"
+          },
+          {
+            "type": "readability",
+            "description": "“产生交集”属于直译，在商业和技术语境下，intersect with 更多指产品路线图“与……的需求相契合”或“与……形成业务协同”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0273",
+      "parent_block_index": 273,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates*",
+      "parent_block_plain_text": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis CPU Roadmap 2017-2028. Source: SemiAnalysis Estimates",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis 2017-2028 年 CPU 路线图。来源：SemiAnalysis 预测",
+          "model": "pro",
+          "created_at": "2026-04-08T16:43:35.076604",
+          "tokenized_text": "[[[EM_1|SemiAnalysis 2017-2028 年 CPU 路线图。来源：SemiAnalysis 预测]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文使用了半角括号 `(安培计算)`，在中文排版中，包含中文的括号通常建议使用全角括号 `（）` 以保持视觉协调。"
+          },
+          {
+            "type": "readability",
+            "description": "“产生交集”属于直译，在商业和技术语境下，intersect with 更多指产品路线图“与……的需求相契合”或“与……形成业务协同”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Our datacenter CPU roadmap features 9 companies over 12 years from 2017 to 2028 including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei. The roadmap for clients also feature Qualcomm’s datacenter CPUs. With the acquisition, Ampere Computing’s lineup will be changed to try to intersect with OpenAI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0274",
+      "parent_block_index": 274,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our datacenter CPU roadmap features 9 companies over 12 years from 2017 to 2028 including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei. The roadmap for clients also feature Qualcomm’s datacenter CPUs. With the acquisition, Ampere Computing’s lineup will be changed to try to intersect with OpenAI.",
+      "parent_block_plain_text": "Our datacenter CPU roadmap features 9 companies over 12 years from 2017 to 2028 including AMD, Intel, Nvidia, Ampere, AWS, Google, Microsoft, ARM and Huawei. The roadmap for clients also feature Qualcomm’s datacenter CPUs. With the acquisition, Ampere Computing’s lineup will be changed to try to intersect with OpenAI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 319,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的数据中心 CPU 路线图横跨 2017 至 2028 年这 12 年，涵盖了 9 家企业，包括 AMD、英特尔、英伟达、Ampere、AWS、谷歌、微软、ARM 和华为。面向客户的完整版路线图还收录了高通的数据中心 CPU。随着收购案的推进，Ampere Computing (安培计算) 的产品线将面临调整，以期与 OpenAI 产生交集。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:43:35.076655",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "structure",
+            "description": "译文使用了半角括号 `(安培计算)`，在中文排版中，包含中文的括号通常建议使用全角括号 `（）` 以保持视觉协调。"
+          },
+          {
+            "type": "readability",
+            "description": "“产生交集”属于直译，在商业和技术语境下，intersect with 更多指产品路线图“与……的需求相契合”或“与……形成业务协同”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

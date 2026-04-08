@@ -15,12 +15,14 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button-extended';
+import { ConsistencyReportView } from './components/ConsistencyReportView';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
 import { SectionView } from './components/SectionView';
 import { WelcomeScreen } from './components/WelcomeScreen';
 import { useFullTranslate, useProject, useSection } from './hooks';
+import type { ConsistencyIssue } from './api';
 import { fullTranslationService } from './services/fullTranslationService';
 import type { TermConflictData } from './services/fullTranslationService';
 
@@ -36,7 +38,7 @@ const TerminologyReviewPage = lazy(() =>
   }))
 );
 
-type DocumentView = 'glossary' | 'term-review' | null;
+type DocumentView = 'glossary' | 'term-review' | 'consistency' | null;
 
 interface PendingTranslationRequest {
   method: TranslationMethod;
@@ -70,6 +72,10 @@ export function DocumentFeature() {
   const [pendingTermReview, setPendingTermReview] = useState<TermReviewPayload | null>(null);
   const [pendingTranslationRequest, setPendingTranslationRequest] =
     useState<PendingTranslationRequest | null>(null);
+  const [pendingIssueTarget, setPendingIssueTarget] = useState<{
+    sectionId: string;
+    paragraphIndex: number;
+  } | null>(null);
   const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
   const [isPreparingFullTranslate, setIsPreparingFullTranslate] = useState(false);
 
@@ -120,9 +126,40 @@ export function DocumentFeature() {
     [searchParams, setSearchParams]
   );
 
+  const updateRouteParams = useCallback(
+    ({
+      view,
+      immersive,
+    }: {
+      view?: DocumentView;
+      immersive?: boolean;
+    }) => {
+      const next = new URLSearchParams(searchParams);
+      if (view === undefined) {
+        // keep current view
+      } else if (view) {
+        next.set('view', view);
+      } else {
+        next.delete('view');
+      }
+
+      if (immersive === undefined) {
+        // keep current immersive state
+      } else if (immersive) {
+        next.set('immersive', '1');
+      } else {
+        next.delete('immersive');
+      }
+
+      setSearchParams(next);
+    },
+    [searchParams, setSearchParams]
+  );
+
   useEffect(() => {
     setPendingTermReview(null);
     setPendingTranslationRequest(null);
+    setPendingIssueTarget(null);
     setIsPreparingFullTranslate(false);
   }, [currentProject?.id]);
 
@@ -167,15 +204,9 @@ export function DocumentFeature() {
 
   const setImmersiveMode = useCallback(
     (enabled: boolean) => {
-      const next = new URLSearchParams(searchParams);
-      if (enabled) {
-        next.set('immersive', '1');
-      } else {
-        next.delete('immersive');
-      }
-      setSearchParams(next);
+      updateRouteParams({ immersive: enabled });
     },
-    [searchParams, setSearchParams]
+    [updateRouteParams]
   );
 
   const handleSelectSection = useCallback(
@@ -183,12 +214,13 @@ export function DocumentFeature() {
       setSelectedSectionId(section.section_id);
       setCurrentSection(section);
       setCurrentParagraph(null);
-      setImmersiveMode(false);
       if (activeView) {
-        setView(null);
+        updateRouteParams({ view: null, immersive: false });
+      } else {
+        updateRouteParams({ immersive: false });
       }
     },
-    [activeView, setCurrentParagraph, setCurrentSection, setImmersiveMode, setView]
+    [activeView, setCurrentParagraph, setCurrentSection, updateRouteParams]
   );
 
   const handleSelectSectionById = useCallback(
@@ -208,6 +240,29 @@ export function DocumentFeature() {
     [setCurrentParagraph]
   );
 
+  const handleOpenConsistency = useCallback(() => {
+    updateRouteParams({ view: 'consistency', immersive: false });
+  }, [updateRouteParams]);
+
+  const handleLocateConsistencyIssue = useCallback(
+    (issue: ConsistencyIssue) => {
+      const targetSection = sections.find(section => section.section_id === issue.section_id) ?? null;
+
+      updateRouteParams({ view: null, immersive: false });
+      setSelectedSectionId(issue.section_id);
+      setCurrentParagraph(null);
+      setPendingIssueTarget({
+        sectionId: issue.section_id,
+        paragraphIndex: issue.paragraph_index,
+      });
+
+      if (targetSection) {
+        setCurrentSection(targetSection);
+      }
+    },
+    [sections, setCurrentParagraph, setCurrentSection, updateRouteParams]
+  );
+
   const handleEnterImmersive = useCallback(() => {
     if (displaySection) {
       setSelectedSectionId(displaySection.section_id);
@@ -222,6 +277,29 @@ export function DocumentFeature() {
     setImmersiveTargetParagraphId(null);
     setImmersiveMode(false);
   }, [setImmersiveMode]);
+
+  useEffect(() => {
+    if (!pendingIssueTarget || !displaySection?.paragraphs) {
+      return;
+    }
+
+    if (displaySection.section_id !== pendingIssueTarget.sectionId) {
+      return;
+    }
+
+    const targetParagraph = displaySection.paragraphs.find(
+      paragraph => paragraph.index === pendingIssueTarget.paragraphIndex
+    );
+
+    if (!targetParagraph) {
+      toast.warning(`未找到段落 ${pendingIssueTarget.paragraphIndex}，请检查报告定位信息`);
+      setPendingIssueTarget(null);
+      return;
+    }
+
+    setCurrentParagraph(targetParagraph);
+    setPendingIssueTarget(null);
+  }, [displaySection, pendingIssueTarget, setCurrentParagraph]);
 
   const getCurrentParagraphIndex = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return -1;
@@ -401,6 +479,16 @@ export function DocumentFeature() {
       );
     }
 
+    if (activeView === 'consistency') {
+      return (
+        <ConsistencyReportView
+          projectId={currentProject.id}
+          projectTitle={currentProject.title}
+          onLocateIssue={handleLocateConsistencyIssue}
+        />
+      );
+    }
+
     if (!activeSectionId) {
       return (
         <div className="mx-auto max-w-3xl py-8">
@@ -462,6 +550,7 @@ export function DocumentFeature() {
         isPreparingFullTranslate={isPreparingFullTranslate}
         fullTranslateProgress={fullTranslateProgress}
         currentStep={currentStep}
+        onOpenConsistency={handleOpenConsistency}
         projectId={currentProject?.id}
       />
 

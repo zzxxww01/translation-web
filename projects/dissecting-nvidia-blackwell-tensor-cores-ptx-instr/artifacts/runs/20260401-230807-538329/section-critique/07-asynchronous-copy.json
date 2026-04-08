@@ -1,0 +1,38 @@
+{
+  "section_id": "07-asynchronous-copy",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "CTAs per SM: 1, 2, 3, 4",
+        "description": "译文中出现了重复的英文缩写和全称展开（`协作线程阵列 (CTA)（Cooperative Thread Array (CTA)）`），导致阅读体验不佳且显得累赘。",
+        "why_it_matters": "过度加注会打断读者的阅读节奏，不符合中文技术文档的简洁性要求。",
+        "suggestion": "修改为：“每个 SM 的协作线程阵列 (CTA) 数量：1, 2, 3, 4”"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Threads per CTA: 64, 128, 256",
+        "description": "由于在段落 2 中已经对 CTA 进行了全称解释，此处无需再次展开为“协作线程阵列 (CTA)”。",
+        "why_it_matters": "保持术语首现加注、后续使用缩写的原则，有助于提升行文的紧凑感和专业度。",
+        "suggestion": "修改为：“每个 CTA 的线程数：64, 128, 256”"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "Async copy (PTX: cp.async , SASS: LDGSTS) was introduced in the Ampere generation...",
+        "description": "根据翻译规范，PTX 和 SASS 指令名称应尽可能使用反引号（inline code）进行格式化。",
+        "why_it_matters": "代码格式化能有效区分正文文本与底层指令，提升技术文档的专业度和可读性。",
+        "suggestion": "修改为：“异步拷贝（PTX：`cp.async`，SASS：`LDGSTS`）于 Ampere 架构首次引入……”"
+      }
+    ]
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "article_theme": "A comprehensive technical and economic deep dive into Nvidia's Rubin (VR NVL72) platform, highlighting its transition to a modular cableless design, 100% liquid cooling, and strategic TCO positioning against AMD and Groq.",
+  "structure_summary": "The article follows a top-down engineering logic: starting with silicon-level specifications (Rubin GPUs, Vera CPUs), moving into the rack-scale architecture (Oberon), then performing a 'tear-down' style analysis of the Compute Tray (cables, thermal, power, mechanical). It concludes with macro-level infrastructure implications (cooling/power vendors), networking evolution (NVLink 6), and a rigorous financial TCO/BoM comparison with competitors.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/17",
+      "paragraph_count": 25,
+      "previous_section_title": "",
+      "next_section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications",
+      "section_role": "Establishes the high-stakes financial and technical scope of the Rubin platform while introducing the proprietary BoM/Power model as a value proposition.",
+      "translation_notes": [
+        "Preserve the authoritative, market-moving tone of SemiAnalysis",
+        "Terms like 'BoM' (Bill of Materials) and 'TCO' (Total Cost of Ownership) should be used with their English abbreviations alongside Chinese",
+        "Ensure 'dislocations' is translated to reflect market disruption, not just physical displacement"
+      ]
+    },
+    {
+      "section_id": "01-extreme-co-design-6-silicon-p",
+      "title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications",
+      "position": "2/17",
+      "paragraph_count": 49,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+      "section_role": "Provides the 'atomic' level technical foundation by detailing the silicon floorplans and I/O capabilities.",
+      "translation_notes": [
+        "Technical accuracy for 'radix' (基数/分叉数) and 'SerDes' is non-negotiable",
+        "CPO (Co-Packaged Optics) is a critical industry term; do not confuse with standard pluggables",
+        "Avoid softening the performance metrics (e.g., 'achieved with' vs 'claims to have')"
+      ]
+    },
+    {
+      "section_id": "02-rubin-oberon-rack-nvl72-not-n",
+      "title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+      "position": "3/17",
+      "paragraph_count": 23,
+      "previous_section_title": "Extreme Co-design: 6 Silicon Product Offerings under the Rubin Platform - Chip Floorplans & Specifications",
+      "next_section_title": "Compute Tray Redesign",
+      "section_role": "Argues for the paradigm shift from individual server chassis to integrated rack-scale systems (Oberon).",
+      "translation_notes": [
+        "The distinction between 'Chassis' (机箱) and 'Rack' (机架) must be consistent",
+        "'Memory economics' should be translated to reflect the financial strategy, not just cost",
+        "Ensure 'pre-fill' and 'decode' (LLM inference phases) are translated using standard AI engineering terminology"
+      ]
+    },
+    {
+      "section_id": "03-compute-tray-redesign",
+      "title": "Compute Tray Redesign",
+      "position": "4/17",
+      "paragraph_count": 55,
+      "previous_section_title": "Rubin Oberon Rack: NVL72 not NVL144 nor NVL36",
+      "next_section_title": "Compute Tray Cableless Design",
+      "section_role": "Introduces the central engineering thesis: modularity and the elimination of cables for reliability.",
+      "translation_notes": [
+        "'Cableless' (无电缆化/去线缆化) is the core marketing/tech claim; keep it punchy",
+        "'Point of failure' (故障点) is a standard engineering term",
+        "Maintain the contrast between 'Node-bound' host DRAM and aggregate footprint"
+      ]
+    },
+    {
+      "section_id": "04-compute-tray-cableless-design",
+      "title": "Compute Tray Cableless Design",
+      "position": "5/17",
+      "paragraph_count": 50,
+      "previous_section_title": "Compute Tray Redesign",
+      "next_section_title": "Compute Tray: Thermal",
+      "section_role": "Explains the signal integrity (SI) physics that justify the move to high-end PCBs and connectors.",
+      "translation_notes": [
+        "Precise translation of SI terms: 'Insertion loss' (插入损耗), 'Geometry loss' (几何损耗), 'Vias' (过孔)",
+        "Do not weaken the 'highway' analogy; it is meant to make complex physics accessible",
+        "'CCL' is a specific supply chain term that should remain in English or be properly glossed"
+      ]
+    },
+    {
+      "section_id": "05-compute-tray-thermal",
+      "title": "Compute Tray: Thermal",
+      "position": "6/17",
+      "paragraph_count": 13,
+      "previous_section_title": "Compute Tray Cableless Design",
+      "next_section_title": "Compute Tray: Power Delivery",
+      "section_role": "Details the transition to 100% liquid cooling and the resulting manufacturing shifts.",
+      "translation_notes": [
+        "Distinguish between L6 and L10 assembly levels (industry standard levels of integration)",
+        "'Pitch' (间距) in the context of cold plate channels is a critical spec",
+        "Ensure 'Quick disconnects' is translated as '快接头' or '快速断开接头'"
+      ]
+    },
+    {
+      "section_id": "06-compute-tray-power-delivery",
+      "title": "Compute Tray: Power Delivery",
+      "position": "7/17",
+      "paragraph_count": 10,
+      "previous_section_title": "Compute Tray: Thermal",
+      "next_section_title": "Compute Tray: Mechanical",
+      "section_role": "Analyzes the shift to 50VDC power architecture to minimize efficiency losses.",
+      "translation_notes": [
+        "'Busbar' (母线/汇流排) is a key term here",
+        "The 'quadratic relationship' (平方关系) between loss and current is a core engineering argument; do not obscure it",
+        "Clarify 'step down' (降压) mechanics for non-electrical readers"
+      ]
+    },
+    {
+      "section_id": "07-compute-tray-mechanical",
+      "title": "Compute Tray: Mechanical",
+      "position": "8/17",
+      "paragraph_count": 4,
+      "previous_section_title": "Compute Tray: Power Delivery",
+      "next_section_title": "Rack Level Infrastructure: Thermal",
+      "section_role": "Describes the physical housing and blind-mate mechanisms that enable the modular assembly.",
+      "translation_notes": [
+        "'Blind-mate' or 'loading mechanism' should be translated to emphasize precision alignment",
+        "Ensure names like 'Orchid' and 'Paladin' are treated as specific product/component code names",
+        "The concept of 'force locking' components in place is central to the 'cableless' reliability argument"
+      ]
+    },
+    {
+      "section_id": "08-rack-level-infrastructure-the",
+      "title": "Rack Level Infrastructure: Thermal",
+      "position": "9/17",
+      "paragraph_count": 18,
+      "previous_section_title": "Compute Tray: Mechanical",
+      "next_section_title": "Procurement and Cooling Vendor Implications",
+      "section_role": "Concludes with the macro-scale implications for data center operators and cooling vendors.",
+      "translation_notes": [
+        "'Inlet temperature' (进水温度) is the crucial metric for data center efficiency",
+        "'Chiller' (冷水机组) vs. 'Chiller-less' operation is the main economic takeaway",
+        "The tone should reflect a 'contrarian' view against 'Mr. Market'"
+      ]
+    },
+    {
+      "section_id": "09-procurement-and-cooling-vendor",
+      "title": "Procurement and Cooling Vendor Implications",
+      "position": "10/17",
+      "paragraph_count": 7,
+      "previous_section_title": "Rack Level Infrastructure: Thermal",
+      "next_section_title": "Rack Level Infrastructure: Power Delivery",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-rack-level-infrastructure-pow",
+      "title": "Rack Level Infrastructure: Power Delivery",
+      "position": "11/17",
+      "paragraph_count": 15,
+      "previous_section_title": "Procurement and Cooling Vendor Implications",
+      "next_section_title": "Networking: NVLink 6, Rubin Scale Out",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-networking-nvlink-6-rubin-sc",
+      "title": "Networking: NVLink 6, Rubin Scale Out",
+      "position": "12/17",
+      "paragraph_count": 122,
+      "previous_section_title": "Rack Level Infrastructure: Power Delivery",
+      "next_section_title": "Hyperscaler Customization and Assembly Logistics",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-hyperscaler-customization-and",
+      "title": "Hyperscaler Customization and Assembly Logistics",
+      "position": "13/17",
+      "paragraph_count": 0,
+      "previous_section_title": "Networking: NVLink 6, Rubin Scale Out",
+      "next_section_title": "Customization",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "13-customization",
+      "title": "Customization",
+      "position": "14/17",
+      "paragraph_count": 6,
+      "previous_section_title": "Hyperscaler Customization and Assembly Logistics",
+      "next_section_title": "Assembly Automation and Logistics",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-assembly-automation-and-logist",
+      "title": "Assembly Automation and Logistics",
+      "position": "15/17",
+      "paragraph_count": 4,
+      "previous_section_title": "Customization",
+      "next_section_title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+      "title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+      "position": "16/17",
+      "paragraph_count": 34,
+      "previous_section_title": "Assembly Automation and Logistics",
+      "next_section_title": "Groq LPU Decode Rack",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-groq-lpu-decode-rack",
+      "title": "Groq LPU Decode Rack",
+      "position": "17/17",
+      "paragraph_count": 4,
+      "previous_section_title": "VR NVL72 TCO: BoM and Power Budget Analysis",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

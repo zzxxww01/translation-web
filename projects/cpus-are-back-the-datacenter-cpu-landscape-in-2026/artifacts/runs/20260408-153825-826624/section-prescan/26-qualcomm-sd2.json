@@ -1,0 +1,65 @@
+{
+  "section_id": "26-qualcomm-sd2",
+  "new_terms": [
+    {
+      "term": "Centriq 2400",
+      "suggested_translation": "Centriq 2400",
+      "context": "Qualcomm did have an initial foray in 2017 with their Centriq 2400 CPU",
+      "confidence": 1.0
+    },
+    {
+      "term": "Falkor",
+      "suggested_translation": "Falkor",
+      "context": "had 48 Falkor ARMv8 cores paired with 6 channels of DDR4",
+      "confidence": 1.0
+    },
+    {
+      "term": "ISA",
+      "suggested_translation": "ISA (指令集架构)",
+      "context": "before workloads were ported over to ARM’s ISA from x86",
+      "confidence": 0.95
+    },
+    {
+      "term": "NUVIA",
+      "suggested_translation": "NUVIA",
+      "context": "Qualcomm acquired NUVIA in 2021",
+      "confidence": 1.0
+    },
+    {
+      "term": "Oryon",
+      "suggested_translation": "Oryon",
+      "context": "SD1 contained 80 Oryon cores",
+      "confidence": 1.0
+    },
+    {
+      "term": "Snapdragon X Elite",
+      "suggested_translation": "骁龙 X Elite",
+      "context": "that are now in the Snapdragon X Elite and 8 Elite mobile processors",
+      "confidence": 1.0
+    },
+    {
+      "term": "Snapdragon 8 Elite",
+      "suggested_translation": "骁龙 8 Elite",
+      "context": "that are now in the Snapdragon X Elite and 8 Elite mobile processors",
+      "confidence": 1.0
+    },
+    {
+      "term": "NVLink Fusion",
+      "suggested_translation": "NVLink Fusion",
+      "context": "Qualcomm was featured in Nvidia’s NVLink Fusion release",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "qualcomm": "高通",
+    "cpu": "CPU",
+    "arm": "ARM",
+    "x86": "x86",
+    "tsmc": "台积电",
+    "nvidia": "英伟达",
+    "chiplet": "芯粒",
+    "serdes": "SerDes (串行器/解串器)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:48:52.211238"
+}

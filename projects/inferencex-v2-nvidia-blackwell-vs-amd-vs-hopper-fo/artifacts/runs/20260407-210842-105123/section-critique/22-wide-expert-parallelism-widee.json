@@ -1,0 +1,30 @@
+{
+  "section_id": "22-wide-expert-parallelism-widee",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "explain what wide expert parallelism is. We will then explain the idea of Disaggregated Prefill, how it is different from WideEP",
+        "description": "译文在首次提到“宽专家并行”时，未按约定或常规做法引入其缩写 (WideEP)，导致下一句直接使用“WideEP”时缺乏连贯的术语铺垫。",
+        "why_it_matters": "对于硬核技术文章，首现时规范标注中英文及缩写能降低读者的认知摩擦，确保前后术语指代清晰。",
+        "suggestion": "将“何谓宽专家并行”修改为“何谓宽专家并行 (WideEP)”。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "achieve SOTA performance",
+        "description": "对 SOTA 进行了“(业界领先)”的中文释义加注。考虑到目标读者是 AI 基础设施工程师和 ML 研究员，SOTA 已是极高频的基础词汇，此处的加注略显多余。",
+        "why_it_matters": "避免对目标圈层内极其常见的术语进行过度加注，保持行文的干练与“内行”基调。",
+        "suggestion": "直接使用“SOTA 性能”或“业界 SOTA 性能”，去掉括号加注。"
+      }
+    ]
+  }
+}

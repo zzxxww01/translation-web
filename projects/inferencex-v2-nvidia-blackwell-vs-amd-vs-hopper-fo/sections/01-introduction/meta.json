@@ -1,0 +1,994 @@
+{
+  "section_id": "01-introduction",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "InferenceXv2 (formerly InferenceMAX) builds on the foundation established by InferenceMAXv1, our open-source, continuously updated inference benchmark that has set a new standard for AI inference performance and economics. InferenceMAXv1 moved beyond static, point-in-time benchmarks by running continuous tests across hundreds of chips and popular open-source frameworks. Free dashboard available here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "our open-source, continuously updated inference benchmark",
+          "start": 93,
+          "end": 150,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Free dashboard available here.",
+          "start": 373,
+          "end": 403,
+          "href": "https://inferencemax.ai/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "InferenceXv2 (formerly InferenceMAX) builds on the foundation established by InferenceMAXv1, [our open-source, continuously updated inference benchmark](https://github.com/SemiAnalysisAI/InferenceX) that has set a new standard for AI inference performance and economics. InferenceMAXv1 moved beyond static, point-in-time benchmarks by running continuous tests across hundreds of chips and popular open-source frameworks. [Free dashboard available here.](https://inferencemax.ai/)",
+      "parent_block_plain_text": "InferenceXv2 (formerly InferenceMAX) builds on the foundation established by InferenceMAXv1, our open-source, continuously updated inference benchmark that has set a new standard for AI inference performance and economics. InferenceMAXv1 moved beyond static, point-in-time benchmarks by running continuous tests across hundreds of chips and popular open-source frameworks. Free dashboard available here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "our open-source, continuously updated inference benchmark",
+          "start": 93,
+          "end": 150,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Free dashboard available here.",
+          "start": 373,
+          "end": 403,
+          "href": "https://inferencemax.ai/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 403,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "InferenceXv2（前身为 InferenceMAX）在 InferenceMAXv1 奠定的基础上构建，后者是我们开源且持续更新的推理基准测试（benchmark），为 AI 推理性能与经济性树立了新标杆。InferenceMAXv1 摒弃了静态、特定时间点的基准测试，转而对数百款芯片和主流开源框架进行持续测试。点击此处查看免费数据看板。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971165",
+          "tokenized_text": "InferenceXv2（前身为 InferenceMAX）在 InferenceMAXv1 奠定的基础上构建，后者是[[[LINK_1|我们开源且持续更新的推理基准测试（benchmark）]]]，为 AI 推理性能与经济性树立了新标杆。InferenceMAXv1 摒弃了静态、特定时间点的基准测试，转而对数百款芯片和主流开源框架进行持续测试。[[[LINK_2|点击此处查看免费数据看板。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer of compute from Google Cloud to Microsoft Azure to Oracle, OpenAI, and many more.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer",
+          "start": 0,
+          "end": 96,
+          "href": "https://inferencemax.semianalysis.com/quotes",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Google Cloud",
+          "start": 113,
+          "end": 125,
+          "href": "https://cloud.google.com/blog/products/compute/scaling-moe-inference-with-nvidia-dynamo-on-google-cloud-a4x",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Microsoft Azure",
+          "start": 129,
+          "end": 144,
+          "href": "https://blog.aks.azure.com/2025/10/24/dynamo-on-aks#enterprise-scale-inference-experiments--dynamo-with-gb200-running-on-aks",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "Oracle, OpenAI",
+          "start": 148,
+          "end": 162,
+          "href": "https://inferencemax.semianalysis.com/quotes",
+          "title": null,
+          "span_id": "LINK_4"
+        }
+      ],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "p",
+      "parent_block_markdown": "[Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer](https://inferencemax.semianalysis.com/quotes) of compute from [Google Cloud](https://cloud.google.com/blog/products/compute/scaling-moe-inference-with-nvidia-dynamo-on-google-cloud-a4x) to [Microsoft Azure](https://blog.aks.azure.com/2025/10/24/dynamo-on-aks#enterprise-scale-inference-experiments--dynamo-with-gb200-running-on-aks) to [Oracle, OpenAI](https://inferencemax.semianalysis.com/quotes), and many more.",
+      "parent_block_plain_text": "Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer of compute from Google Cloud to Microsoft Azure to Oracle, OpenAI, and many more.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Our benchmark has been widely reproduced, validated and/or supported by almost every major buyer",
+          "start": 0,
+          "end": 96,
+          "href": "https://inferencemax.semianalysis.com/quotes",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Google Cloud",
+          "start": 113,
+          "end": 125,
+          "href": "https://cloud.google.com/blog/products/compute/scaling-moe-inference-with-nvidia-dynamo-on-google-cloud-a4x",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Microsoft Azure",
+          "start": 129,
+          "end": 144,
+          "href": "https://blog.aks.azure.com/2025/10/24/dynamo-on-aks#enterprise-scale-inference-experiments--dynamo-with-gb200-running-on-aks",
+          "title": null,
+          "span_id": "LINK_3"
+        },
+        {
+          "type": "link",
+          "text": "Oracle, OpenAI",
+          "start": 148,
+          "end": 162,
+          "href": "https://inferencemax.semianalysis.com/quotes",
+          "title": null,
+          "span_id": "LINK_4"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 178,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3",
+        "LINK_4"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的基准测试已被几乎所有主要算力买家广泛复现、验证或支持，涵盖从 Google Cloud、Microsoft Azure 到 Oracle、OpenAI 等众多头部企业。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971278",
+          "tokenized_text": "[[[LINK_1|我们的基准测试已被几乎所有主要算力买家广泛复现、验证或支持]]]，涵盖从 [[[LINK_2|Google Cloud]]]、[[[LINK_3|Microsoft Azure]]] 到 [[[LINK_4|Oracle、OpenAI]]] 等众多头部企业。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "InferenceXv2 builds on this foundation. It expands coverage to include large scale DeepSeek MoE disaggregated inference (disagg prefill, or simply “disagg”) with wide expert parallelism (wideEP) optimization to all 6 NVIDIA western GPU SKUs from the past 4 years as well as to every single AMD western GPU SKU released in the past 3 years – in total InferenceXv2 utilizes close to 1000 frontier GPUs for a full benchmark run across all SKUs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "all 6 NVIDIA western GPU SKUs from the past 4 years",
+          "start": 211,
+          "end": 262,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "InferenceXv2 builds on this foundation. It expands coverage to include large scale DeepSeek MoE disaggregated inference (disagg prefill, or simply “disagg”) with wide expert parallelism (wideEP) optimization to **all 6 NVIDIA western GPU SKUs from the past 4 years** as well as to every single AMD western GPU SKU released in the past 3 years – in total InferenceXv2 utilizes close to 1000 frontier GPUs for a full benchmark run across all SKUs.",
+      "parent_block_plain_text": "InferenceXv2 builds on this foundation. It expands coverage to include large scale DeepSeek MoE disaggregated inference (disagg prefill, or simply “disagg”) with wide expert parallelism (wideEP) optimization to all 6 NVIDIA western GPU SKUs from the past 4 years as well as to every single AMD western GPU SKU released in the past 3 years – in total InferenceXv2 utilizes close to 1000 frontier GPUs for a full benchmark run across all SKUs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "all 6 NVIDIA western GPU SKUs from the past 4 years",
+          "start": 211,
+          "end": 262,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 441,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "InferenceXv2 正是建立在这一基础之上。它扩大了测试范围，纳入了采用宽专家并行（WideEP）优化的大规模 DeepSeek 混合专家模型（MoE）分离式推理（分离式预填充，简称“分离式”），覆盖了过去 4 年英伟达面向西方市场推出的全部 6 款 GPU SKU (库存单位/型号)，以及过去 3 年 AMD 面向西方市场发布的每一款 GPU SKU。总体而言，InferenceXv2 调用了近 1000 张前沿 GPU，以完成跨所有 SKU 的完整基准测试运行。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971343",
+          "tokenized_text": "InferenceXv2 正是建立在这一基础之上。它扩大了测试范围，纳入了采用宽专家并行（WideEP）优化的大规模 DeepSeek 混合专家模型（MoE）分离式推理（分离式预填充，简称“分离式”），覆盖了[[[STRONG_1|过去 4 年英伟达面向西方市场推出的全部 6 款 GPU SKU (库存单位/型号)]]]，以及过去 3 年 AMD 面向西方市场发布的每一款 GPU SKU。总体而言，InferenceXv2 调用了近 1000 张前沿 GPU，以完成跨所有 SKU 的完整基准测试运行。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "With today’s release, InferenceXv2 is now the first suite to benchmark the Blackwell Ultra GB300 NVL72 and B300 across the whole pareto frontier curve, and it is the first third party benchmark to test disagg+wideEP multi-node FP4 and FP8 MI355X performance. In future iterations of InferenceX, we will continue to focus heavily on disaggregated serving with wide expert parallelism as that is what is deployed in production at Frontier AI Labs like OpenAI, Anthropic, xAI, Google Deepmind, DeepSeek as well as advanced API providers like TogetherAI, Baseten, and Fireworks. In this article, we will also break down the system engineering principles and economics in play around the latest Claude Code Fast mode feature.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "latest Claude Code Fast mode feature",
+          "start": 683,
+          "end": 719,
+          "href": "https://code.claude.com/docs/en/fast-mode",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With today’s release, InferenceXv2 is now the first suite to benchmark the Blackwell Ultra GB300 NVL72 and B300 across the whole pareto frontier curve, and it is the first third party benchmark to test disagg+wideEP multi-node FP4 and FP8 MI355X performance. In future iterations of InferenceX, we will continue to focus heavily on disaggregated serving with wide expert parallelism as that is what is deployed in production at Frontier AI Labs like OpenAI, Anthropic, xAI, Google Deepmind, DeepSeek as well as advanced API providers like TogetherAI, Baseten, and Fireworks. In this article, we will also break down the system engineering principles and economics in play around the [latest Claude Code Fast mode feature](https://code.claude.com/docs/en/fast-mode).",
+      "parent_block_plain_text": "With today’s release, InferenceXv2 is now the first suite to benchmark the Blackwell Ultra GB300 NVL72 and B300 across the whole pareto frontier curve, and it is the first third party benchmark to test disagg+wideEP multi-node FP4 and FP8 MI355X performance. In future iterations of InferenceX, we will continue to focus heavily on disaggregated serving with wide expert parallelism as that is what is deployed in production at Frontier AI Labs like OpenAI, Anthropic, xAI, Google Deepmind, DeepSeek as well as advanced API providers like TogetherAI, Baseten, and Fireworks. In this article, we will also break down the system engineering principles and economics in play around the latest Claude Code Fast mode feature.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "latest Claude Code Fast mode feature",
+          "start": 683,
+          "end": 719,
+          "href": "https://code.claude.com/docs/en/fast-mode",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 720,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着今日发布，InferenceXv2 成为首个跨越整条帕累托前沿曲线对 Blackwell Ultra GB300 NVL72 机架级系统和 B300 进行基准测试的套件；同时，它也是首个测试在 MI355X 上组合使用 FP4 与 FP8、分离式架构以及宽专家并行时多节点性能的第三方基准测试。在 InferenceX 的未来迭代中，我们将继续重兵投入采用宽专家并行的分离式服务，因为这正是 OpenAI、Anthropic、xAI、Google Deepmind、DeepSeek 等前沿 AI 实验室，以及 TogetherAI、Baseten 和 Fireworks 等先进 API 提供商在生产环境中实际部署的方案。在本文中，我们还将深入剖析围绕最新的 Claude Code 快速模式功能所涉及的系统工程原理与经济学逻辑。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971409",
+          "tokenized_text": "随着今日发布，InferenceXv2 成为首个跨越整条帕累托前沿曲线对 Blackwell Ultra GB300 NVL72 机架级系统和 B300 进行基准测试的套件；同时，它也是首个测试在 MI355X 上组合使用 FP4 与 FP8、分离式架构以及宽专家并行时多节点性能的第三方基准测试。在 InferenceX 的未来迭代中，我们将继续重兵投入采用宽专家并行的分离式服务，因为这正是 OpenAI、Anthropic、xAI、Google Deepmind、DeepSeek 等前沿 AI 实验室，以及 TogetherAI、Baseten 和 Fireworks 等先进 API 提供商在生产环境中实际部署的方案。在本文中，我们还将深入剖析围绕[[[LINK_1|最新的 Claude Code 快速模式功能]]]所涉及的系统工程原理与经济学逻辑。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Our benchmark is completely open-source under Apache 2.0 – this means that we are able to move at the same rapid speed at which the AI software ecosystem is advancing. If you like our work and would like to show us some support, please drop a star on our GitHub! We also provide a free data visualizer at https://inferencex.com for everyone in the ML community to explore the complete dataset themselves.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "please drop a star on our GitHub",
+          "start": 229,
+          "end": 261,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "https://inferencex.com",
+          "start": 305,
+          "end": 327,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our benchmark is completely open-source under Apache 2.0 – this means that we are able to move at the same rapid speed at which the AI software ecosystem is advancing. If you like our work and would like to show us some support, [please drop a star on our GitHub](https://github.com/SemiAnalysisAI/InferenceX)! We also provide a free data visualizer at [https://inferencex.com](https://inferencex.semianalysis.com/) for everyone in the ML community to explore the complete dataset themselves.",
+      "parent_block_plain_text": "Our benchmark is completely open-source under Apache 2.0 – this means that we are able to move at the same rapid speed at which the AI software ecosystem is advancing. If you like our work and would like to show us some support, please drop a star on our GitHub! We also provide a free data visualizer at https://inferencex.com for everyone in the ML community to explore the complete dataset themselves.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "please drop a star on our GitHub",
+          "start": 229,
+          "end": 261,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "https://inferencex.com",
+          "start": 305,
+          "end": 327,
+          "href": "https://inferencex.semianalysis.com/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 404,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的基准测试在 Apache 2.0 协议下完全开源——这意味着我们能够与 AI 软件生态系统的演进保持同样的高速迭代。如果你认可我们的工作并希望提供支持，请在我们的 GitHub 上点个 Star！我们还在 https://inferencex.com 提供了免费的数据可视化工具，供机器学习社区的所有人自行探索完整数据集。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971472",
+          "tokenized_text": "我们的基准测试在 Apache 2.0 协议下完全开源——这意味着我们能够与 AI 软件生态系统的演进保持同样的高速迭代。如果你认可我们的工作并希望提供支持，[[[LINK_1|请在我们的 GitHub 上点个 Star]]]！我们还在 [[[LINK_2|https://inferencex.com]]] 提供了免费的数据可视化工具，供机器学习社区的所有人自行探索完整数据集。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "We will add DeepSeekv4 and other popular Chinese frontier models with day 0 support as over the past 6 months, we now have cleaned up a lot of tech debt and are able to move fast with stable infrastructure. We will also be adding TPUv7 Ironwood and Trainium3 to InferenceX later this year! If you want to contribute to our impactful mission while earning a competitive compensation, consider applying here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "move fast with stable infrastructure",
+          "start": 169,
+          "end": 205,
+          "href": "https://www.cnet.com/tech/mobile/zuckerberg-move-fast-and-break-things-isnt-how-we-operate-anymore/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "consider applying here",
+          "start": 383,
+          "end": 405,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We will add DeepSeekv4 and other popular Chinese frontier models with day 0 support as over the past 6 months, we now have cleaned up a lot of tech debt and are able to [move fast with stable infrastructure](https://www.cnet.com/tech/mobile/zuckerberg-move-fast-and-break-things-isnt-how-we-operate-anymore/). We will also be adding TPUv7 Ironwood and Trainium3 to InferenceX later this year! If you want to contribute to our impactful mission while earning a competitive compensation, [consider applying here](https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1).",
+      "parent_block_plain_text": "We will add DeepSeekv4 and other popular Chinese frontier models with day 0 support as over the past 6 months, we now have cleaned up a lot of tech debt and are able to move fast with stable infrastructure. We will also be adding TPUv7 Ironwood and Trainium3 to InferenceX later this year! If you want to contribute to our impactful mission while earning a competitive compensation, consider applying here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "move fast with stable infrastructure",
+          "start": 169,
+          "end": 205,
+          "href": "https://www.cnet.com/tech/mobile/zuckerberg-move-fast-and-break-things-isnt-how-we-operate-anymore/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "consider applying here",
+          "start": 383,
+          "end": 405,
+          "href": "https://app.dover.com/apply/semianalysis/2a9c8da5-6d59-4ac8-8302-3877345dbce1",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 406,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们将在首日（day 0）即刻支持并加入 DeepSeekv4 及其他热门的中国前沿模型，因为在过去 6 个月里，我们已经清理了大量技术债，如今能够在稳定的基础设施上快速迭代。今年晚些时候，我们还将把 TPUv7 Ironwood 和 Trainium3 纳入 InferenceX！如果你渴望参与这项极具影响力的使命，同时获得极具竞争力的薪酬，欢迎在此申请加入我们。",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971535",
+          "tokenized_text": "我们将在首日（day 0）即刻支持并加入 DeepSeekv4 及其他热门的中国前沿模型，因为在过去 6 个月里，我们已经清理了大量技术债，如今能够[[[LINK_1|在稳定的基础设施上快速迭代]]]。今年晚些时候，我们还将把 TPUv7 Ironwood 和 Trainium3 纳入 InferenceX！如果你渴望参与这项极具影响力的使命，同时获得极具竞争力的薪酬，[[[LINK_2|欢迎在此申请加入我们]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971555",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!CCx-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1e9a8353-ca83-4bd3-ab4a-3541132f6665_1680x1175.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Source: InferenceMAX GitHub",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceMAX GitHub",
+          "start": 8,
+          "end": 27,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [InferenceMAX GitHub](https://github.com/SemiAnalysisAI/InferenceX)",
+      "parent_block_plain_text": "Source: InferenceMAX GitHub",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "InferenceMAX GitHub",
+          "start": 8,
+          "end": 27,
+          "href": "https://github.com/SemiAnalysisAI/InferenceX",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 27,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：InferenceMAX GitHub",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.386668",
+          "tokenized_text": "来源：[[[LINK_1|InferenceMAX GitHub]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：InferenceMAX GitHub",
+          "model": "pro",
+          "created_at": "2026-04-07T19:54:38.971597",
+          "tokenized_text": "来源：[[[LINK_1|InferenceMAX GitHub]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：InferenceMAX GitHub",
+      "confirmed_tokenized": "来源：[[[LINK_1|InferenceMAX GitHub]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.275,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+          "Maintain an authoritative yet community-oriented tone."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Introduces the InferenceXv2 benchmark framework, emphasizing its open-source, continuous nature compared to traditional benchmarks.",
+          "relation_to_previous": "Expands on the introductory keywords by explaining the tool used to generate the upcoming data.",
+          "relation_to_next": "Transitions from explaining the 'tool' to revealing the 'results' (Key Observations).",
+          "key_points": [
+            "InferenceXv2 is a continuous, Apache 2.0 open-source benchmark, moving away from static, point-in-time testing.",
+            "The framework adapts at the rapid speed of the AI software ecosystem."
+          ],
+          "translation_notes": [
+            "Translate 'point-in-time benchmarks' accurately as '静态/特定时间点的基准测试' to contrast with 'continuous tests'.",
+            "Maintain an authoritative yet community-oriented tone."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "The translation uses nested parentheses '宽专家并行（Wide Expert Parallelism (WideEP)）', which is visually cluttered and grammatically awkward in Chinese."
+          },
+          {
+            "type": "tone",
+            "description": "The term 'SKU' is annotated with '(库存单位/型号)'."
+          },
+          {
+            "type": "typography",
+            "description": "Missing a space between the Latin alphanumeric string 'NVL72' and the Chinese characters '机架级系统'."
+          },
+          {
+            "type": "readability",
+            "description": "The translation '在 InferenceMAXv1 奠定的基础上构建' carries a slight translationese flavor due to the passive/stiff structure."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

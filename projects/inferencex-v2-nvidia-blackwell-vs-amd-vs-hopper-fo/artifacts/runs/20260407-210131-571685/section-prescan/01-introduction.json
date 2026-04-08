@@ -1,0 +1,61 @@
+{
+  "section_id": "01-introduction",
+  "new_terms": [
+    {
+      "term": "InferenceXv2",
+      "suggested_translation": "InferenceXv2",
+      "context": "Name of the updated open-source inference benchmark suite.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Blackwell Ultra",
+      "suggested_translation": "Blackwell Ultra",
+      "context": "NVIDIA's architecture/product line, mentioned alongside GB300 NVL72.",
+      "confidence": 1.0
+    },
+    {
+      "term": "pareto frontier curve",
+      "suggested_translation": "帕累托前沿曲线",
+      "context": "Used to describe benchmarking across the optimal trade-off curve of performance and cost.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TPUv7 Ironwood",
+      "suggested_translation": "TPUv7 Ironwood",
+      "context": "Upcoming Google AI accelerator hardware.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Trainium3",
+      "suggested_translation": "Trainium3",
+      "context": "Upcoming AWS AI accelerator hardware.",
+      "confidence": 1.0
+    },
+    {
+      "term": "FP4",
+      "suggested_translation": "FP4",
+      "context": "4-bit floating point data format used in multi-node performance testing.",
+      "confidence": 1.0
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8",
+      "context": "8-bit floating point data format used in multi-node performance testing.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SKU",
+      "suggested_translation": "SKU (库存量单位/产品型号)",
+      "context": "Refers to specific GPU models (e.g., western GPU SKUs).",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "disagg prefill / disagg",
+    "gb300 nvl72": "GB300 NVL72",
+    "mi355x": "MI355X",
+    "disaggregated serving": "disaggregated serving"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:04:36.548406"
+}

@@ -1,0 +1,10 @@
+{
+  "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+  "title": "Dissecting Nvidia Blackwell - Tensor Cores, PTX Instructions, SASS, Floorsweep, Yield",
+  "title_translation": null,
+  "source_file": "source.html",
+  "workflow_mode": "four_step",
+  "section_count": 19,
+  "paragraph_count": 148,
+  "generated_at": "2026-04-01T23:08:07.539585"
+}

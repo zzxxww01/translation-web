@@ -1,0 +1,57 @@
+{
+  "section_id": "33-migration-to-multi-turn-real-m",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 8.6,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "accuracy|tone",
+        "severity": "high",
+        "original_text": "此外，目前我们观察到 AMD 在 CPU 卸载方面的软件表现相当糟糕，这必将在此类场景下拖累性能。",
+        "description": "Tone inflation. The source text uses 'may negatively affect' (可能会产生负面影响), but the translation escalates this to '必将...拖累' (will definitely drag down). This alters the analyst's carefully calibrated level of certainty.",
+        "why_it_matters": "In technical and investment analysis, the distinction between a potential risk ('may') and a guaranteed outcome ('will definitely') is critical for accuracy and credibility.",
+        "suggestion": "修改为：这可能会在此类场景下拖累性能。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability|structure",
+        "severity": "medium",
+        "original_text": "随后，我们在 [ISL*0.8, ISL] 的分布范围内均匀调整输入序列长度 (Input Sequence Length)，输出序列长度 (Output Sequence Length) 亦是如此。",
+        "description": "The acronym 'ISL' is used in the mathematical formula `[ISL*0.8, ISL]` before it is defined as 'Input Sequence Length' later in the sentence. This forces the reader to parse the abbreviation retroactively.",
+        "why_it_matters": "Proper term introduction improves cognitive flow, especially when mathematical notations are involved.",
+        "suggestion": "调整语序先定义后使用：随后，我们均匀调整输入序列长度（ISL），使其服从 [ISL*0.8, ISL] 的分布，输出序列长度（OSL）亦是如此。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability|terminology",
+        "severity": "medium",
+        "original_text": "力求最精准地捕获开源模型在各款芯片上运行此类智能体编程场景的真实性能。",
+        "description": "Translationese. 'Capture the performance' is translated literally as '捕获...性能'. While '捕获数据' (capture data) is natural in Chinese, '捕获性能' is an awkward English calque.",
+        "why_it_matters": "Using native Chinese verb-noun pairings maintains the professional polish of the article.",
+        "suggestion": "将“捕获”改为更符合中文表达习惯的“测算”、“评估”或“反映”：力求最精准地测算/反映开源模型在各款芯片上运行此类智能体编程场景的真实性能。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "我们还将开启 KV 缓存 CPU 卸载（CPU offloading）",
+        "description": "Inconsistent with the provided glossary which dictates 'KV Cache offloading → KV Cache 卸载'. The translation over-translates 'Cache' to '缓存' and unnecessarily retains the English in parentheses.",
+        "why_it_matters": "Adhering strictly to the glossary ensures terminology consistency across the entire long-form piece.",
+        "suggestion": "修改为：我们还将开启 KV Cache CPU 卸载，..."
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "检验更多 SOTA (最先进) 推理引擎特性",
+        "description": "Over-annotation and formatting issue. For the target audience (AI engineers, ML researchers), 'SOTA' is standard vernacular and does not require translation. Additionally, the half-width parenthesis with a leading space breaks Chinese typographic conventions.",
+        "why_it_matters": "Over-explaining basic industry terms can dilute the 'insider' tone requested by the persona. Incorrect punctuation spacing looks unpolished.",
+        "suggestion": "直接去掉括注，保留英文缩写：检验更多 SOTA 推理引擎特性"
+      }
+    ]
+  }
+}

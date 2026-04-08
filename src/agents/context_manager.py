@@ -13,6 +13,7 @@ from typing import List, Dict, Optional, Tuple
 
 from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
 from ..core.longform_context import build_translation_guidelines
+from ..core.glossary_prompt import select_prompt_terms_for_text
 from ..core.models import (
     Section, Paragraph,
     ArticleAnalysis, EnhancedTerm,
@@ -405,8 +406,7 @@ class LayeredContextManager:
             if key not in seen_keys:
                 all_terms.append(enhanced)
 
-        para_lower = paragraph_text.lower() if paragraph_text else ""
-        relevant = []
+        relevant: List[EnhancedTerm] = []
 
         for term in all_terms:
             # 检查是否已使用过，用 .lower() 统一查询
@@ -416,15 +416,13 @@ class LayeredContextManager:
                     term = term.model_copy()
                     term.translation = used_trans
 
-            # 段落级过滤：有段落文本时只保留出现在段落中的术语
-            if para_lower and term.term.lower() not in para_lower:
-                continue
-
             relevant.append(term)
-            if len(relevant) >= MAX_GLOSSARY_TERMS_IN_PROMPT:
-                break
-
-        return relevant
+        selected = select_prompt_terms_for_text(
+            relevant,
+            paragraph_text,
+            max_terms=MAX_GLOSSARY_TERMS_IN_PROMPT,
+        )
+        return [term for term in selected if isinstance(term, EnhancedTerm)]
 
     def _get_previous_paragraphs(
         self,

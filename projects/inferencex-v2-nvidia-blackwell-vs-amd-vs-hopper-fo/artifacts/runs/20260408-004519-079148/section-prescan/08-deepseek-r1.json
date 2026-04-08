@@ -1,0 +1,77 @@
+{
+  "section_id": "08-deepseek-r1",
+  "new_terms": [
+    {
+      "term": "ROCm",
+      "suggested_translation": "ROCm",
+      "context": "AMD was using “private” ROCm images that were not upstreamed",
+      "confidence": 1.0
+    },
+    {
+      "term": "MoRI",
+      "suggested_translation": "MoRI",
+      "context": "MoRI is AMD’s MoE dispatch/combine collective and KV Cache transfer library",
+      "confidence": 1.0
+    },
+    {
+      "term": "NCCL",
+      "suggested_translation": "NCCL",
+      "context": "instead of taking AMD’s historical approach, which was to fork NVIDIA’s NCCL",
+      "confidence": 1.0
+    },
+    {
+      "term": "RCCL",
+      "suggested_translation": "RCCL",
+      "context": "fork NVIDIA’s NCCL into RCCL",
+      "confidence": 1.0
+    },
+    {
+      "term": "H200",
+      "suggested_translation": "H200",
+      "context": "H200 TRT single node has not changed in performance",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI300X",
+      "suggested_translation": "MI300X",
+      "context": "MI300X and MI325X have seen some improvements",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI325X",
+      "suggested_translation": "MI325X",
+      "context": "MI300X and MI325X have seen some improvements",
+      "confidence": 1.0
+    },
+    {
+      "term": "CI",
+      "suggested_translation": "CI (持续集成)",
+      "context": "Although MoRI needs much more open CI and testing",
+      "confidence": 0.95
+    },
+    {
+      "term": "PRs",
+      "suggested_translation": "PR (Pull Request)",
+      "context": "speed up the review process of AMD PRs into the upstream",
+      "confidence": 0.9
+    },
+    {
+      "term": "tok/s/user",
+      "suggested_translation": "tok/s/user",
+      "context": "increasing by more than 20% in the 20-45 tok/s/user interactivity range",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "interactivity": "交互速度",
+    "throughput": "吞吐量",
+    "disagg": "分离 (Disagg)",
+    "wide EP": "宽专家并行 (WideEP)",
+    "TRT-LLM": "TensorRT-LLM",
+    "SGLang": "SGLang",
+    "vLLM": "vLLM",
+    "MoE": "混合专家 (MoE)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T00:48:50.271607"
+}

@@ -1,0 +1,135 @@
+{
+  "article_theme": "The contrasting market designs of PJM and ERCOT demonstrate how AI datacenter load growth exposes the costly flaws of centralized capacity forecasting versus the efficiency of real-time scarcity pricing.",
+  "structure_summary": "The article begins by introducing the controversy over AI datacenters raising power bills, then structurally contrasts the two largest US energy markets: PJM (focusing on its flawed, expensive capacity market) and ERCOT (highlighting its efficient, energy-only real-time market). It uses Winter Storm Fern as a comparative case study to prove its thesis, and concludes with future regulatory outlooks and investment implications for specific market players.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/10",
+      "paragraph_count": 3,
+      "previous_section_title": "",
+      "next_section_title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+      "section_role": "Sets the analytical stage and introduces the core thesis comparing PJM's flawed capacity design with ERCOT's efficiency.",
+      "translation_notes": [
+        "Ensure clear distinction between 'capacity prices' (容量价格) and general 'power prices' (电价).",
+        "Maintain an authoritative, analytical tone suitable for institutional investors."
+      ]
+    },
+    {
+      "section_id": "01-are-ai-datacenters-increasing",
+      "title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+      "position": "2/10",
+      "paragraph_count": 17,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Capacity: paying for power plants to sit idle 95% of the time",
+      "section_role": "Hooks the reader by addressing the mainstream narrative blaming AI datacenters for bill hikes, while contextualizing the geographic overlap of AI hubs and PJM.",
+      "translation_notes": [
+        "Translate 'finger-pointing' idiomatically (e.g., 互相指责 / 甩锅) while keeping the professional context.",
+        "Ensure accurate translation of financial terms like 'futures brokerage and clearing firm' (期货经纪与清算公司)."
+      ]
+    },
+    {
+      "section_id": "02-capacity-paying-for-power-pla",
+      "title": "Capacity: paying for power plants to sit idle 95% of the time",
+      "position": "3/10",
+      "paragraph_count": 11,
+      "previous_section_title": "Are AI Datacenters Increasing Electric Bills for American Households?",
+      "next_section_title": "PJM: The $16 Billion Simulation",
+      "section_role": "Provides the foundational technical education on market structures, contrasting capacity markets with energy-only markets.",
+      "translation_notes": [
+        "Crucial terminology: 'energy-only market' (单一电量市场 / 仅电能市场) vs. 'capacity auction' (容量拍卖).",
+        "Ensure 'real-time pricing signals determine scarcity' is translated to emphasize market mechanics (实时价格信号决定稀缺性)."
+      ]
+    },
+    {
+      "section_id": "03-pjm-the-16-billion-simulatio",
+      "title": "PJM: The $16 Billion Simulation",
+      "position": "4/10",
+      "paragraph_count": 47,
+      "previous_section_title": "Capacity: paying for power plants to sit idle 95% of the time",
+      "next_section_title": "ERCOT: Same Load Growth, No Price Shock",
+      "section_role": "Critiques PJM's centralized forecasting model, quantifying the financial damage caused by its structural flaws.",
+      "translation_notes": [
+        "Translate 'central planner' carefully (集中规划者 / 中央调度机构) to fit grid operations rather than macro-communism.",
+        "The title '$16 Billion Simulation' implies artificial, model-driven costs; preserve this nuance (160亿美元的模拟游戏 / 模拟测算)."
+      ]
+    },
+    {
+      "section_id": "04-ercot-same-load-growth-no-pr",
+      "title": "ERCOT: Same Load Growth, No Price Shock",
+      "position": "5/10",
+      "paragraph_count": 25,
+      "previous_section_title": "PJM: The $16 Billion Simulation",
+      "next_section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It",
+      "section_role": "Presents ERCOT as the successful control group, proving that rapid load growth does not necessitate price shocks if the market design is correct.",
+      "translation_notes": [
+        "Accurate acronyms: 'FERC jurisdiction' (联邦能源管理委员会管辖权).",
+        "'Unified market mechanism' should be translated as 统一市场机制."
+      ]
+    },
+    {
+      "section_id": "05-winter-storm-fern-paying-for",
+      "title": "Winter Storm Fern: Paying for Reliability vs. Delivering It",
+      "position": "6/10",
+      "paragraph_count": 14,
+      "previous_section_title": "ERCOT: Same Load Growth, No Price Shock",
+      "next_section_title": "What Comes Next",
+      "section_role": "Serves as the empirical case study, stress-testing both market designs under extreme weather to prove the thesis.",
+      "translation_notes": [
+        "Annotate or accurately translate 'BRA' (Base Residual Auction - 基础剩余拍卖).",
+        "Legal precision required for 'Section 202(c) of the Federal Power Act' (《联邦电力法》第202(c)条)."
+      ]
+    },
+    {
+      "section_id": "06-what-comes-next",
+      "title": "What Comes Next",
+      "position": "7/10",
+      "paragraph_count": 7,
+      "previous_section_title": "Winter Storm Fern: Paying for Reliability vs. Delivering It",
+      "next_section_title": "Winners & losers and the shifting market bottlenecks",
+      "section_role": "Analyzes the political and regulatory aftermath, projecting long-term structural advantages for ERCOT.",
+      "translation_notes": [
+        "Translate 'Non-Capacity-Backed Load (NCBL)' as 无容量支持负荷, and 'ANOPR' as 拟议规则制定预先通知.",
+        "Preserve the investment-focused tone of 'structural asymmetry is durable and investable' (结构性不对称是持久的且具有投资价值)."
+      ]
+    },
+    {
+      "section_id": "07-winners-losers-and-the-shift",
+      "title": "Winners & losers and the shifting market bottlenecks",
+      "position": "8/10",
+      "paragraph_count": 2,
+      "previous_section_title": "What Comes Next",
+      "next_section_title": "Disclaimers",
+      "section_role": "Monetizes the thesis for the paid tier by identifying specific equities, vendors, and developers positioned to benefit or suffer.",
+      "translation_notes": [
+        "Ensure 'IPPs' is translated as 独立发电商 (Independent Power Producers).",
+        "Translate 'shifting constraints/bottlenecks' accurately in a supply-chain and grid context (不断变化的约束/瓶颈)."
+      ]
+    },
+    {
+      "section_id": "08-disclaimers",
+      "title": "Disclaimers",
+      "position": "9/10",
+      "paragraph_count": 0,
+      "previous_section_title": "Winners & losers and the shifting market bottlenecks",
+      "next_section_title": "SemiAnalysis Disclaimer",
+      "section_role": "Provides a structural header separating the editorial content from legal boilerplate.",
+      "translation_notes": [
+        "Translate simply as 免责声明."
+      ]
+    },
+    {
+      "section_id": "09-semianalysis-disclaimer",
+      "title": "SemiAnalysis Disclaimer",
+      "position": "10/10",
+      "paragraph_count": 43,
+      "previous_section_title": "Disclaimers",
+      "next_section_title": "",
+      "section_role": "Protects the authors and publishers from financial liability and certifies research independence.",
+      "translation_notes": [
+        "Use precise financial/legal boilerplate translation for 'Analyst Certifications and Independence of Research' (分析师认证与研究独立性)."
+      ]
+    }
+  ]
+}

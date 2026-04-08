@@ -1,0 +1,1007 @@
+{
+  "theme": "The primary bottleneck for AI compute has structurally shifted from datacenter power to semiconductor supply chain constraints—specifically TSMC's N3 wafer capacity and HBM memory—with Nvidia best positioned to win due to its aggressive supply chain mastery.",
+  "key_arguments": [
+    "AI compute demand is severely outstripping supply, driven by the rapid adoption of agentic workflows and skyrocketing token demand.",
+    "TSMC's N3 logic wafer capacity is the most critical bottleneck, as AI accelerator demand aggressively crowds out consumer electronics (smartphones and PCs) for advanced node allocation.",
+    "Memory (specifically HBM) is the next major constraint, with HBM production crowding out commodity DRAM and flipping traditional margin dynamics.",
+    "Previously dominant bottlenecks like advanced packaging (CoWoS) and datacenter power capacity are easing relative to front-end silicon supply.",
+    "In a heavily constrained silicon market, supply chain control is the ultimate competitive advantage, making Nvidia the primary beneficiary due to its proactive procurement strategies."
+  ],
+  "structure_summary": "The article follows a problem-analysis-conclusion flow. It opens by establishing the surging demand for AI compute. It then systematically dissects the supply chain bottlenecks, starting with the most critical (TSMC N3 wafers) and exploring potential relief (smartphone demand softening). It then transitions to the secondary constraint (Memory/HBM) before dismissing former constraints (CoWoS and Power). It concludes by emphasizing that supply chain mastery, exemplified by Nvidia, is the ultimate determinant of market success.",
+  "terminology": [
+    {
+      "term": "N3 / N3B / N3E / N3P",
+      "context_meaning": "TSMC's 3nm-class process nodes and their specific variants.",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "Standard semiconductor industry nomenclature. Translating to Chinese (e.g., 3纳米工艺) is unnecessary for the target audience."
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "agentic workflows",
+      "context_meaning": "AI workflows driven by autonomous agents rather than simple prompting.",
+      "translation": "智能体工作流",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard Chinese translation for this emerging AI concept."
+    },
+    {
+      "term": "wafer-in",
+      "context_meaning": "The start of the wafer fabrication process (putting raw wafers into the production line).",
+      "translation": "投片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard Chinese semiconductor manufacturing jargon. Literal translations like '晶圆进入' would sound amateurish."
+    },
+    {
+      "term": "nameplate capacity",
+      "context_meaning": "The theoretical maximum production capacity of a fab.",
+      "translation": "设计产能 / 名义产能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Financial/industrial jargon that requires the precise Chinese equivalent."
+    },
+    {
+      "term": "front-end",
+      "context_meaning": "Front-end semiconductor manufacturing (wafer fabrication), as opposed to back-end (packaging/testing).",
+      "translation": "前道制造 / 前道工序",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Crucial distinction in semiconductor manufacturing. Must use the standard industry term '前道'."
+    },
+    {
+      "term": "12-Hi stacks",
+      "context_meaning": "12-layer stacked HBM memory.",
+      "translation": "12层堆叠",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Clearer in Chinese when translated."
+    },
+    {
+      "term": "dual-tracked",
+      "context_meaning": "Sourcing a component from two different suppliers simultaneously to reduce risk.",
+      "translation": "双重采购 / 双供应商策略",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Business strategy jargon; translating contextually ensures clarity."
+    },
+    {
+      "term": "release valve",
+      "context_meaning": "A mechanism to relieve pressure; here, referring to dropping smartphone demand freeing up N3 capacity.",
+      "translation": "泄压阀",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Preserves the mechanical metaphor which fits well in an engineering/supply chain context."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "process",
+      "context_meaning": "指芯片制造工艺",
+      "translation": "工艺",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "attention",
+      "context_meaning": "",
+      "translation": "注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "model architecture",
+      "context_meaning": "",
+      "translation": "模型架构",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "supply chain",
+      "context_meaning": "",
+      "translation": "供应链",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bottleneck",
+      "context_meaning": "",
+      "translation": "瓶颈",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "lead time",
+      "context_meaning": "",
+      "translation": "交货周期",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "5G",
+      "context_meaning": "第五代移动通信技术",
+      "translation": "5G",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Moore's Law",
+      "context_meaning": "",
+      "translation": "摩尔定律",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, analytical, objective, and data-driven.",
+    "target_audience": "Semiconductor industry professionals, AI infrastructure investors, and hardcore tech enthusiasts.",
+    "translation_voice": "Professional Chinese tech-finance analyst. Direct and precise, using established industry jargon naturally without over-explaining standard terms, while ensuring complex logical relationships are clearly articulated."
+  },
+  "challenges": [
+    {
+      "location": "Section 4: 'earn brownie points from the US government'",
+      "issue": "Idiomatic expression that sounds informal if translated literally.",
+      "suggestion": "Translate contextually as '赢得美国政府的青睐' or '获得美国政府的政治加分' to maintain the analyst tone."
+    },
+    {
+      "location": "Section 5: 'wafer-in from early 2026 for a big second half output ramp'",
+      "issue": "Dense tech-finance shorthand combining multiple manufacturing concepts.",
+      "suggestion": "Unpack for clarity: '从2026年初开始投片，以迎接下半年的产量大爬坡'."
+    },
+    {
+      "location": "Section 7: 'Smartphones as the Front-End Release Valve?'",
+      "issue": "Mixing manufacturing jargon (Front-End) with a metaphor (Release Valve).",
+      "suggestion": "Translate as '智能手机会成为前道产能的泄压阀吗？' to preserve both the technical specificity and the metaphor."
+    },
+    {
+      "location": "Section 8: 'margin dynamics have reversed'",
+      "issue": "Financial shorthand referring to the relative profitability of DDR vs. HBM.",
+      "suggestion": "Translate as '利润率动态已发生逆转' or '利润率优势发生反转', ensuring the context of DDR margins surpassing HBM is clear."
+    }
+  ],
+  "guidelines": [
+    "Maintain English acronyms for established semiconductor nodes, companies, and technologies (e.g., N3, N3E, HBM, CoWoS, TPU, OSAT, ARR) without forcing Chinese translations.",
+    "Accurately utilize standard Chinese semiconductor manufacturing jargon (e.g., 'front-end' -> 前道, 'wafer-in' -> 投片, 'nameplate capacity' -> 设计产能/名义产能).",
+    "Adapt financial and market analysis shorthand into fluent Chinese business phrasing (e.g., 'output ramp' -> 产能爬坡/产量拉升, 'dual-tracked' -> 双供应商策略).",
+    "Handle English idioms and metaphors contextually rather than literally to preserve the professional analyst tone (e.g., 'brownie points' -> 政治加分).",
+    "Keep the tone objective and authoritative. Avoid overly emotional phrasing when translating words like 'staggering' or 'skyrocketing'—use professional terms like '惊人' or '激增'.",
+    "Ensure logical flow in dense sentences by breaking them down if necessary, especially when describing complex causality between memory margins, capacity allocation, and accelerator demand."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Establishes the core thesis and provides metadata for the publication.",
+      "relation_to_previous": "N/A",
+      "relation_to_next": "Briefly interrupted by a promotional section before diving into the main argument.",
+      "key_points": [
+        "The primary AI bottlenecks are TSMC N3 wafer shortages and memory constraints, not datacenters.",
+        "The ultimate winner is determined by supply chain mastery."
+      ],
+      "translation_notes": [
+        "Ensure 'Supply Chain Wars Winner' carries a decisive, high-stakes tone (e.g., 供应链之战的最终赢家).",
+        "Keep metadata formatting clean and standard for Chinese tech newsletters."
+      ]
+    },
+    "01-semianalysis-x-fluidstack-hack": {
+      "role_in_article": "Serves as a promotional insertion for an upcoming community event.",
+      "relation_to_previous": "Follows the introduction metadata.",
+      "relation_to_next": "Transitions back into the formal analytical essay.",
+      "key_points": [
+        "SemiAnalysis is hosting a hackathon with Fluidstack prior to GTC."
+      ],
+      "translation_notes": [
+        "Adopt an inviting, community-focused tone.",
+        "Ensure URLs are preserved exactly as written without localized punctuation breaking the links."
+      ]
+    },
+    "02-the-compute-shortage": {
+      "role_in_article": "Establishes the demand-side context, illustrating the explosive need for AI compute that triggers the supply crisis.",
+      "relation_to_previous": "Resumes the main article flow after the promotional break.",
+      "relation_to_next": "Sets up a stark contrast: skyrocketing demand will immediately hit the supply wall detailed in the next section.",
+      "key_points": [
+        "Agentic workflows are driving a massive surge in aggregate token demand.",
+        "Anthropic's $6B ARR addition in February proves demand is currently only limited by available compute."
+      ],
+      "translation_notes": [
+        "Translate 'agentic workflows' precisely as '智能体工作流' or '代理工作流'.",
+        "Ensure 'ARR' is correctly understood as Annual Recurring Revenue (年度经常性收入)."
+      ]
+    },
+    "03-the-tsmc-n3-shortage": {
+      "role_in_article": "Identifies and explains the primary structural bottleneck in the AI industry.",
+      "relation_to_previous": "Answers the demand surge established previously with the ultimate supply-side constraint.",
+      "relation_to_next": "Paves the way for the quantitative breakdown of N3 capacity in the following section.",
+      "key_points": [
+        "TSMC's N3 logic wafer capacity is the industry's biggest constraint.",
+        "N3E has driven greater adoption due to lower costs and fewer EUV layers compared to N3B.",
+        "Severe capacity constraints may force customers to diversify to Intel or Samsung foundries."
+      ],
+      "translation_notes": [
+        "Translate 'logic wafer capacity' technically as '逻辑晶圆产能'.",
+        "Localize 'earn brownie points' to an equivalent political/business idiom like '获得政治加分' or '博得好感'."
+      ]
+    },
+    "04-n3-in-numbers": {
+      "role_in_article": "Quantifies the N3 shortage and outlines the competitive landscape of companies fighting for capacity.",
+      "relation_to_previous": "Provides hard data and specific corporate examples to back up the qualitative claims of the previous section.",
+      "relation_to_next": "Transitions from the demand pressure on N3 to TSMC's operational response and limitations.",
+      "key_points": [
+        "Nvidia's transition to the N3P-based Rubin generation is the primary driver of aggressive N3 ramp.",
+        "Google and Broadcom beat Nvidia to N3 with TPUv7.",
+        "AI accelerators have a procurement advantage over saturated mobile/client markets."
+      ],
+      "translation_notes": [
+        "In semiconductor contexts, 'content growth' means silicon content per device (单机硅含量), not media content.",
+        "Maintain clear distinctions between node variants (4NP, N3P, N3B, N3E)."
+      ]
+    },
+    "05-tsmcs-supply-situation": {
+      "role_in_article": "Highlights TSMC's operational limits and the extremity of the supply crisis.",
+      "relation_to_previous": "Shows why the high demand detailed previously cannot be met organically by TSMC's current capacity.",
+      "relation_to_next": "Introduces the necessity of a demand relief valve, leading into the smartphone market analysis.",
+      "key_points": [
+        "TSMC's effective N3 utilization will exceed 100% in the second half of 2026.",
+        "TSMC is extracting maximum yield from nameplate capacity and shifting process layers to free up N3."
+      ],
+      "translation_notes": [
+        "Translate 'nameplate capacity' as '名义产能' or '设计产能'.",
+        "Ensure 'extracting every possible wafer' conveys the operational strain (e.g., 榨干每一片晶圆产能)."
+      ]
+    },
+    "06-smartphones-as-the-front-end-r": {
+      "role_in_article": "Explores a potential mitigating factor for the N3 shortage.",
+      "relation_to_previous": "Offers a slight reprieve to the dire >100% utilization issue just discussed.",
+      "relation_to_next": "Closes the discussion on the primary bottleneck (logic/N3) and shifts to the secondary bottleneck (memory).",
+      "key_points": [
+        "Softening smartphone demand is the most likely avenue to free up N3 capacity for AI (XPU) wafers.",
+        "Major mobile players (Apple, MediaTek, Qualcomm) are only projecting low single-digit growth."
+      ],
+      "translation_notes": [
+        "Translate 'Release Valve' metaphorically as '泄压阀' or '缓冲阀'.",
+        "Keep 'XPU wafers' as XPU or clarify as 'AI加速器晶圆' depending on target audience technical level."
+      ]
+    },
+    "07-memory-the-next-biggest-constr": {
+      "role_in_article": "Identifies the secondary structural bottleneck, completing the dual-constraint thesis.",
+      "relation_to_previous": "Pivots from front-end logic constraints to memory constraints.",
+      "relation_to_next": "Having established the real constraints (N3 and Memory), it sets up the debunking of false/former constraints.",
+      "key_points": [
+        "HBM production is absorbing incremental capacity and crowding out commodity DRAM.",
+        "Memory suppliers have already priced in a 10-15% downside in consumer end markets."
+      ],
+      "translation_notes": [
+        "Translate 'crowding out' as '挤出效应'.",
+        "Translate 'commodity DRAM' as '大宗DRAM' or '通用DRAM'.",
+        "Translate 'downside shipment scenario' as '出货量下行预期'."
+      ]
+    },
+    "08-cowos-tight-but-easing": {
+      "role_in_article": "Dismisses advanced packaging as the primary bottleneck to sharpen the focus on front-end logic and memory.",
+      "relation_to_previous": "Contrasts easing packaging constraints with the severe logic/memory constraints just analyzed.",
+      "relation_to_next": "Serves as the first of two debunkings, leading into the final debunking (power) behind the paywall.",
+      "key_points": [
+        "CoWoS is no longer the dominant bottleneck; front-end capacity is.",
+        "TSMC won't over-invest in CoWoS without front-end wafers to support it.",
+        "OSATs like Amkor and ASE provide viable alternative packaging capacity."
+      ],
+      "translation_notes": [
+        "Translate 'Front-end capacity' as '前道产能'.",
+        "Ensure OSATs is translated as '外包半导体封装测试厂商' or kept as OSAT with a parenthetical explanation."
+      ]
+    },
+    "09-from-power-constrained-to-acce": {
+      "role_in_article": "Debunks the prevailing industry narrative that datacenter power is the ultimate AI bottleneck.",
+      "relation_to_previous": "Continues the pattern of dismissing older constraints, following the CoWoS argument.",
+      "relation_to_next": "Sets up the ultimate conclusion: if silicon is the true bottleneck, supply chain control is the winning metric.",
+      "key_points": [
+        "Datacenter power supply will soon exceed AI compute demand due to lagging wafer fabrication.",
+        "Accelerator silicon supply, not power, is the binding constraint."
+      ],
+      "translation_notes": [
+        "Translate 'binding constraint' as '刚性约束' or '核心瓶颈'.",
+        "Correct the source typo 'inginuiuty' mentally and translate as '人类的聪明才智' or '创新能力'."
+      ]
+    },
+    "10-supply-chain-control-matters-m": {
+      "role_in_article": "Concludes the article by crowning the market winner based on the established bottleneck thesis.",
+      "relation_to_previous": "Answers the 'so what?' of the silicon bottleneck—it makes procurement the ultimate competitive advantage.",
+      "relation_to_next": "N/A",
+      "key_points": [
+        "Nvidia is the primary beneficiary because it aggressively locked in logic, memory, and component supply.",
+        "Silicon supply procurement dictates deployed compute leadership, overshadowing architectural debates (GPUs vs ASICs)."
+      ],
+      "translation_notes": [
+        "Preserve the humor in 'Jensen’s trips to Asia weren’t just for going to night markets' (黄仁勋的亚洲之行可不只是为了逛夜市).",
+        "Translate 'deployed compute' accurately as '实际部署的算力'."
+      ]
+    }
+  },
+  "section_count": 11,
+  "paragraph_count": 80,
+  "word_count": 2992
+}

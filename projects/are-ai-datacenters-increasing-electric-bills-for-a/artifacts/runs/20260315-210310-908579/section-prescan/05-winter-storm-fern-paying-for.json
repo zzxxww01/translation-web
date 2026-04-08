@@ -1,0 +1,43 @@
+{
+  "section_id": "05-winter-storm-fern-paying-for",
+  "new_terms": [
+    {
+      "term": "winterization",
+      "suggested_translation": "冬季防寒改造",
+      "context": "Refers to mandatory upgrades to gas production and generation facilities to withstand extreme cold.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Section 202(c) of the Federal Power Act",
+      "suggested_translation": "《联邦电力法》第 202(c) 条",
+      "context": "Legal authority used by the DOE to issue emergency orders to bypass environmental limits.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Dominion zone",
+      "suggested_translation": "Dominion 电力区",
+      "context": "A specific, datacenter-heavy pricing zone within the PJM market located in Virginia.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Weather Watch",
+      "suggested_translation": "天气预警",
+      "context": "A specific precautionary alert level issued by ERCOT.",
+      "confidence": 0.85
+    },
+    {
+      "term": "backup generation",
+      "suggested_translation": "备用发电",
+      "context": "On-site power capacity at datacenters used as a grid resource during emergencies.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "capacity market": "容量市场",
+    "clearing prices": "出清价格",
+    "datacenter": "数据中心",
+    "real-time electricity prices": "实时电价"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-15T22:31:15.003095"
+}

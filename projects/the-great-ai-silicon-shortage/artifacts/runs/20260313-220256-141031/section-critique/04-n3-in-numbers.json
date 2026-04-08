@@ -1,0 +1,38 @@
+{
+  "section_id": "04-n3-in-numbers",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.5,
+    "accuracy_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "accuracy",
+        "severity": "medium",
+        "original_text": "...which gives TSMC little chance of being able to add more capacity. This tightness gets even more severe in 2027, even with TSMC adding N3 capacity.",
+        "description": "译文将前句的'add more capacity'译为'扩充更多产能'，与紧接着的下一句'即使台积电增加N3制程产能'在字面上产生了直接的逻辑矛盾。原文前句意在表达'当前已被吃透，难以再挤出额外可用产能给其他需求'，而后句指的是'物理产线的实质性扩产'。",
+        "why_it_matters": "相邻两句话在字面逻辑上产生冲突，会削弱研报的严谨性与说服力。",
+        "suggestion": "将'使得台积电几乎无力再扩充更多产能'修改为'使得台积电几乎无法再挤出额外产能'或'难以提供更多可用产能'。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "TPUv8 variants",
+        "description": "将'variants'直译为'变体'在芯片硬件语境下略显生硬（该词多用于生物学或软件病毒）。在半导体领域，基于同一架构衍生出的不同型号通常有更地道的表达。",
+        "why_it_matters": "优化术语翻译可以进一步提升文章的行业内行感（Insider Tone）。",
+        "suggestion": "建议修改为'TPUv8衍生型号'或'TPUv8系列版本'。"
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "client market",
+        "description": "译为'客户端市场'虽然字面准确，但在半导体语境下（Server vs. Client），'Client'通常特指PC及消费终端设备。",
+        "why_it_matters": "中文语境下，'客户端'容易被误解为软件层面的Client端，而非硬件终端。",
+        "suggestion": "建议修改为'PC/终端市场'或'消费终端市场'，以更贴合硬件分析师的中文表达习惯。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1124 @@
+{
+  "section_id": "06-lpx-rack-system",
+  "title": "LPX Rack System",
+  "title_translation": "LPX 机架系统",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Let’s look at the LPX rack system, which has interesting details. Nvidia has displayed an LPX rack with 32 1U LPU compute trays with 2 Spectrum-X switches. This 32 tray 1U version that Nvidia has shown off at GTC is very close to Groq’s original server design before the acquisition. We believe that this server configuration is not the version that will be shipped in 3Q, with Nvidia implementing changes. Here, we will detail what we know about the actual production version. This was already detailed in the Accelerator model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator model",
+          "start": 511,
+          "end": 528,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0068",
+      "parent_block_index": 68,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Let’s look at the LPX rack system, which has interesting details. Nvidia has displayed an LPX rack with 32 1U LPU compute trays with 2 Spectrum-X switches. This 32 tray 1U version that Nvidia has shown off at GTC is very close to Groq’s original server design before the acquisition. We believe that this server configuration is not the version that will be shipped in 3Q, with Nvidia implementing changes. Here, we will detail what we know about the actual production version. This was already detailed in the [Accelerator model](https://semianalysis.com/accelerator-hbm-model/).",
+      "parent_block_plain_text": "Let’s look at the LPX rack system, which has interesting details. Nvidia has displayed an LPX rack with 32 1U LPU compute trays with 2 Spectrum-X switches. This 32 tray 1U version that Nvidia has shown off at GTC is very close to Groq’s original server design before the acquisition. We believe that this server configuration is not the version that will be shipped in 3Q, with Nvidia implementing changes. Here, we will detail what we know about the actual production version. This was already detailed in the Accelerator model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator model",
+          "start": 511,
+          "end": 528,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 529,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "让我们来看看 LPX 机架系统，其中包含一些值得关注的细节。英伟达展示了一个包含 32 个 1U LPU 计算托盘和 2 台 Spectrum-X 交换机的 LPX 机架。英伟达在 GTC 上展示的这个 32 托盘 1U 版本，与 Groq 被收购前的原始服务器设计非常接近。我们认为，该服务器配置并非第三季度出货的版本，英伟达正在对其进行修改。在此，我们将详细介绍目前所知的实际量产版本。这在加速器模型中已有详细说明。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.334994",
+          "tokenized_text": "让我们来看看 LPX 机架系统，其中包含一些值得关注的细节。英伟达展示了一个包含 32 个 1U LPU 计算托盘和 2 台 Spectrum-X 交换机的 LPX 机架。英伟达在 GTC 上展示的这个 32 托盘 1U 版本，与 Groq 被收购前的原始服务器设计非常接近。我们认为，该服务器配置并非第三季度出货的版本，英伟达正在对其进行修改。在此，我们将详细介绍目前所知的实际量产版本。这在[[[LINK_1|加速器模型]]]中已有详细说明。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0069",
+      "parent_block_index": 69,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335092",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_fd4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F105f4b85-95b2-49c0-ad0a-7afa73fddff1_434x860.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator Model",
+          "start": 21,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator Model",
+          "start": 21,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Accelerator 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881712",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Accelerator 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 加速器模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335200",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|加速器模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Accelerator 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Accelerator 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "LPX Compute Tray",
+      "source_html": null,
+      "element_type": "h4",
+      "inline_elements": [],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "h4",
+      "parent_block_markdown": "#### LPX Compute Tray",
+      "parent_block_plain_text": "LPX Compute Tray",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 16,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 4,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "LPX 计算托盘",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335240",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Each LPX compute tray or node has 16 LPUs with 2 Altera FPGAs, 1 Intel Granite Rapids host CPU and 1 BlueField-4 front-end module. As with other Nvidia systems, hyperscalers customers can and will use their own Front-end NIC of choice rather than paying for Nvidia’s BlueField.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each LPX compute tray or node has 16 LPUs with 2 Altera FPGAs, 1 Intel Granite Rapids host CPU and 1 BlueField-4 front-end module. As with other Nvidia systems, hyperscalers customers can and will use their own Front-end NIC of choice rather than paying for Nvidia’s BlueField.",
+      "parent_block_plain_text": "Each LPX compute tray or node has 16 LPUs with 2 Altera FPGAs, 1 Intel Granite Rapids host CPU and 1 BlueField-4 front-end module. As with other Nvidia systems, hyperscalers customers can and will use their own Front-end NIC of choice rather than paying for Nvidia’s BlueField.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 277,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个 LPX 计算托盘或节点包含 16 个 LPU、2 个 Altera FPGA、1 个英特尔（Intel）Granite Rapids 主机 CPU 和 1 个 BlueField-4 前端模块。与其他英伟达系统一样，超大规模云服务商客户可以且将会使用其自选的前端网卡，而不是花钱购买英伟达的 BlueField。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335264",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0073",
+      "parent_block_index": 73,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335390",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6E50!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45fbdc52-ed59-45e7-b666-5315c454d94b_1354x1851.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator Model",
+          "start": 21,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0074",
+      "parent_block_index": 74,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator Model",
+          "start": 21,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Accelerator 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881741",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Accelerator 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 加速器模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335518",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|加速器模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Accelerator 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Accelerator 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "The LPU modules are mounted in a belly-to-belly on the PCB, meaning 8 LP30 modules on the top side of the PCB and the other 8 LP30 modules on the bottom. All of the connectivity that comes out of the LPU are via PCB traces and given the dense all-to-all mesh for intra-node connections this requires a very high spec PCB to support the routing. The belly-to-belly mounting is used to reduce PCB trace lengths across the ‘X’ and ‘Y’ dimensions.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The LPU modules are mounted in a belly-to-belly on the PCB, meaning 8 LP30 modules on the top side of the PCB and the other 8 LP30 modules on the bottom. All of the connectivity that comes out of the LPU are via PCB traces and given the dense all-to-all mesh for intra-node connections this requires a very high spec PCB to support the routing. The belly-to-belly mounting is used to reduce PCB trace lengths across the ‘X’ and ‘Y’ dimensions.",
+      "parent_block_plain_text": "The LPU modules are mounted in a belly-to-belly on the PCB, meaning 8 LP30 modules on the top side of the PCB and the other 8 LP30 modules on the bottom. All of the connectivity that comes out of the LPU are via PCB traces and given the dense all-to-all mesh for intra-node connections this requires a very high spec PCB to support the routing. The belly-to-belly mounting is used to reduce PCB trace lengths across the ‘X’ and ‘Y’ dimensions.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 443,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "LPU 模块在 PCB 上采用正反面贴装，即 PCB 顶面安装 8 个 LP30 模块，底面安装另外 8 个 LP30 模块。LPU 引出的所有连接均通过 PCB 走线实现，考虑到节点内连接采用密集的全互联拓扑，这需要极高规格的 PCB 来支持布线。采用正反面贴装是为了缩短在“X”和“Y”维度上的 PCB 走线长度。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335561",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335612",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!RBl1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F57bb1916-27a0-42d5-85c7-0f81c305cb3c_1839x399.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis Networking Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Networking Model](https://semianalysis.com/ai-networking-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Networking Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Networking Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/ai-networking-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-02T22:05:14.881765",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 网络模型",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335702",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|网络模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Networking 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Networking 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Something interesting about the system is the important role the FPGAs play. Nvidia refers to the FPGAs as “Fabric Expansion Logic” which serves multiple purposes. First, they act as a NIC which converts the LPU’s C2C protocol into Ethernet to connect to the Spectrum-X based ethernet scale-out fabric. It is this scale-out fabric through which the LPUs connect to GPUs in the decode system.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Something interesting about the system is the important role the FPGAs play. Nvidia refers to the FPGAs as “Fabric Expansion Logic” which serves multiple purposes. First, they act as a NIC which converts the LPU’s C2C protocol into Ethernet to connect to the Spectrum-X based ethernet scale-out fabric. It is this scale-out fabric through which the LPUs connect to GPUs in the decode system.",
+      "parent_block_plain_text": "Something interesting about the system is the important role the FPGAs play. Nvidia refers to the FPGAs as “Fabric Expansion Logic” which serves multiple purposes. First, they act as a NIC which converts the LPU’s C2C protocol into Ethernet to connect to the Spectrum-X based ethernet scale-out fabric. It is this scale-out fabric through which the LPUs connect to GPUs in the decode system.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 391,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "该系统的一个有趣之处在于 FPGA 扮演了重要角色。英伟达将这些 FPGA 称为“Fabric Expansion Logic”，具备多种用途。首先，它们充当网卡（NIC），将 LPU 的 C2C 协议转换为以太网协议，以接入基于 Spectrum-X 的以太网横向扩展（scale-out）网络。LPU 正是通过该横向扩展网络连接至解码系统中的 GPU。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335747",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Second, the LPUs also traverse through the FPGAs to reach the host CPU, with the FPGAs converting C2C to PCIe to the CPU.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Second, the LPUs also traverse through the FPGAs to reach the host CPU, with the FPGAs converting C2C to PCIe to the CPU.",
+      "parent_block_plain_text": "Second, the LPUs also traverse through the FPGAs to reach the host CPU, with the FPGAs converting C2C to PCIe to the CPU.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 121,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "其次，LPU 也通过 FPGA 访问主机 CPU，在此过程中，FPGA 负责将 C2C 协议转换为 PCIe 协议与 CPU 通信。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335780",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Third, the FPGAs are connected to the backplane to talk to other FPGAs in the node, we believe this is to help manage control flow and timing of all the LPUs. The FPGAs also bring extra system DRAM of up to 256GB each. This pool of memory can be used for KVCache if the user wants the entire decode process served by the LPX.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Third, the FPGAs are connected to the backplane to talk to other FPGAs in the node, we believe this is to help manage control flow and timing of all the LPUs. The FPGAs also bring extra system DRAM of up to 256GB each. This pool of memory can be used for KVCache if the user wants the entire decode process served by the LPX.",
+      "parent_block_plain_text": "Third, the FPGAs are connected to the backplane to talk to other FPGAs in the node, we believe this is to help manage control flow and timing of all the LPUs. The FPGAs also bring extra system DRAM of up to 256GB each. This pool of memory can be used for KVCache if the user wants the entire decode process served by the LPX.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 325,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "第三，FPGA 连接至背板以与节点内的其他 FPGA 通信，我们认为这有助于管理所有 LPU 的控制流与时序。此外，每个 FPGA 还提供高达 256GB 的额外系统 DRAM。如果用户希望由 LPX 处理整个解码过程，这部分内存池可用于 KV 缓存（KVCache）。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335823",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "On the front panel there are 8 x OSFP cages for cross-rack C2C, while there will be 2 cages (likely QSFP-DD) that goes to the Spectrum-switches that is used to connect the LPUs and the GPUs for the disaggregated decode system. We will share more about this when we describe the network.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the front panel there are 8 x OSFP cages for cross-rack C2C, while there will be 2 cages (likely QSFP-DD) that goes to the Spectrum-switches that is used to connect the LPUs and the GPUs for the disaggregated decode system. We will share more about this when we describe the network.",
+      "parent_block_plain_text": "On the front panel there are 8 x OSFP cages for cross-rack C2C, while there will be 2 cages (likely QSFP-DD) that goes to the Spectrum-switches that is used to connect the LPUs and the GPUs for the disaggregated decode system. We will share more about this when we describe the network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 286,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "前面板设有 8 个 OSFP 接口（cages），用于跨机架 C2C 连接；同时还有 2 个接口（可能是 QSFP-DD）连接至 Spectrum 交换机，用于在解耦的解码系统中连接 LPU 与 GPU。我们将在介绍网络部分时分享更多相关细节。",
+          "model": "pro",
+          "created_at": "2026-04-03T02:54:48.335853",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+          "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts from chip architecture and algorithmic theory to the physical engineering and PCB layout of the LPX server rack.",
+          "relation_to_previous": "Provides the physical realization of the hardware required to run the AFD and speculative decoding setups previously discussed.",
+          "relation_to_next": "The mention of OSFP cages and Spectrum-X switches on the front panel directly sets up the deep dive into LPU networking topology.",
+          "key_points": [
+            "Nvidia's production LPX rack features 32 1U LPU compute trays.",
+            "LPU modules use a belly-to-belly PCB mounting to minimize trace lengths for the dense all-to-all mesh.",
+            "Front panels feature OSFP cages for cross-rack C2C and connections to Spectrum-X switches for GPU integration."
+          ],
+          "translation_notes": [
+            "Translate 'belly-to-belly' in a PCB context as '正反贴装' or '双面背靠背贴装' to avoid awkward literal translations.",
+            "Ensure 'escape' in the networking context is translated as '引出' or '输出'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,2300 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Vera, Rubin, NVLink 6 Switch, ConnectX-9, BlueField-4, Spectrum-6, Seamless Cableless Compute Tray Design, Power Rack, VR NVL72 TCO and BoM",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Vera, Rubin, NVLink 6 Switch, ConnectX-9, BlueField-4, Spectrum-6, Seamless Cableless Compute Tray Design, Power Rack, VR NVL72 TCO and BoM",
+      "parent_block_plain_text": "Vera, Rubin, NVLink 6 Switch, ConnectX-9, BlueField-4, Spectrum-6, Seamless Cableless Compute Tray Design, Power Rack, VR NVL72 TCO and BoM",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 139,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "维拉、鲁宾、NVLink 6 交换机、ConnectX-9、BlueField-4、Spectrum-6、无缝无缆计算托盘设计、供电机架、VR NVL72 总拥有成本与物料清单",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.820263",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Wega Chu, Dylan Patel, Daniel Nishball, and 8 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Wega Chu",
+          "start": 3,
+          "end": 11,
+          "href": "https://substack.com/@wegachu",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 13,
+          "end": 24,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 26,
+          "end": 41,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Wega Chu](https://substack.com/@wegachu), [Dylan Patel](https://substack.com/@semianalysis), [Daniel Nishball](https://substack.com/@danielnishball730869), and 8 others",
+      "parent_block_plain_text": "By Wega Chu, Dylan Patel, Daniel Nishball, and 8 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Wega Chu",
+          "start": 3,
+          "end": 11,
+          "href": "https://substack.com/@wegachu",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 13,
+          "end": 24,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Daniel Nishball",
+          "start": 26,
+          "end": 41,
+          "href": "https://substack.com/@danielnishball730869",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 55,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作者：Wega Chu、Dylan Patel、Daniel Nishball 及其他 8 人",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828562",
+          "tokenized_text": "作者：[[[LINK_1|Wega Chu]]]、[[[LINK_2|Dylan Patel]]]、[[[LINK_3|Daniel Nishball]]] 及其他 8 人",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Feb 25, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feb 25, 2026 · Paid",
+      "parent_block_plain_text": "Feb 25, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026年2月25日 · 付费",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828631",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828660",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "At CES 2026, Nvidia officially announced in detail all 6 Rubin platform products: the Rubin GPU, Vera CPU, NVLink 6 Switch, ConnectX-9, BlueField-4, and Spectrum-6. VR NVL72 is the second generation of Nvidia’s rack scale Oberon architecture that takes the stage. With competition catching up on rack scale game, Trainium 3 in the Gen2 UltraServer, AMD MI450X Helios Racks, and Google’s TPU which was at rack scale even before GB200, Nvidia answers with “extreme co-design” supremacy. With extreme co-design, Nvidia takes rack scale integration to the next level. Rack system becomes a unit of compute, a single distributed accelerator, and Nvidia designs the system.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Google’s TPU which was at rack scale even before GB200",
+          "start": 378,
+          "end": 432,
+          "href": "https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At CES 2026, Nvidia officially announced in detail all 6 Rubin platform products: the Rubin GPU, Vera CPU, NVLink 6 Switch, ConnectX-9, BlueField-4, and Spectrum-6. VR NVL72 is the second generation of Nvidia’s rack scale Oberon architecture that takes the stage. With competition catching up on rack scale game, Trainium 3 in the Gen2 UltraServer, AMD MI450X Helios Racks, and [Google’s TPU which was at rack scale even before GB200](https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the), Nvidia answers with “extreme co-design” supremacy. With extreme co-design, Nvidia takes rack scale integration to the next level. Rack system becomes a unit of compute, a single distributed accelerator, and Nvidia designs the system.",
+      "parent_block_plain_text": "At CES 2026, Nvidia officially announced in detail all 6 Rubin platform products: the Rubin GPU, Vera CPU, NVLink 6 Switch, ConnectX-9, BlueField-4, and Spectrum-6. VR NVL72 is the second generation of Nvidia’s rack scale Oberon architecture that takes the stage. With competition catching up on rack scale game, Trainium 3 in the Gen2 UltraServer, AMD MI450X Helios Racks, and Google’s TPU which was at rack scale even before GB200, Nvidia answers with “extreme co-design” supremacy. With extreme co-design, Nvidia takes rack scale integration to the next level. Rack system becomes a unit of compute, a single distributed accelerator, and Nvidia designs the system.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Google’s TPU which was at rack scale even before GB200",
+          "start": 378,
+          "end": 432,
+          "href": "https://newsletter.semianalysis.com/p/tpuv7-google-takes-a-swing-at-the",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 667,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在2026年CES上，英伟达正式详细公布了鲁宾平台的全部6款产品：鲁宾GPU、维拉CPU、NVLink 6交换机、ConnectX-9、BlueField-4和Spectrum-6。VR NVL72作为英伟达第二代机架级Oberon架构正式登场。随着竞争对手在机架级赛道上迎头赶上——包括Gen2 UltraServer中的Trainium 3、AMD MI450X Helios机架，以及甚至在GB200之前就已实现机架级部署的谷歌TPU——英伟达以“极致协同设计”的统治力予以回击。凭借极致协同设计，英伟达将机架级集成推向了新的高度。机架系统化身为一个计算单元、一个单一的分布式加速器，而英伟达包揽了整个系统的设计。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828738",
+          "tokenized_text": "在2026年CES上，英伟达正式详细公布了鲁宾平台的全部6款产品：鲁宾GPU、维拉CPU、NVLink 6交换机、ConnectX-9、BlueField-4和Spectrum-6。VR NVL72作为英伟达第二代机架级Oberon架构正式登场。随着竞争对手在机架级赛道上迎头赶上——包括Gen2 UltraServer中的Trainium 3、AMD MI450X Helios机架，以及[[[LINK_1|甚至在GB200之前就已实现机架级部署的谷歌TPU]]]——英伟达以“极致协同设计”的统治力予以回击。凭借极致协同设计，英伟达将机架级集成推向了新的高度。机架系统化身为一个计算单元、一个单一的分布式加速器，而英伟达包揽了整个系统的设计。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828782",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: Nvidia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Nvidia",
+      "parent_block_plain_text": "Source: Nvidia",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 14,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：英伟达",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828825",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "For the Vera Rubin platform, Nvidia is asserting even more control over the system and rack level design. Rack scale integration and assembly have become more challenging, as every component is being pushed to the limit, whilst also optimizing for cost efficiency. VR NVL72 has a much more holistic design with a modular approach compared to Grace Blackwell for the purpose of integration efficiency and throughput.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For the Vera Rubin platform, Nvidia is asserting even more control over the system and rack level design. Rack scale integration and assembly have become more challenging, as every component is being pushed to the limit, whilst also optimizing for cost efficiency. VR NVL72 has a much more holistic design with a modular approach compared to Grace Blackwell for the purpose of integration efficiency and throughput.",
+      "parent_block_plain_text": "For the Vera Rubin platform, Nvidia is asserting even more control over the system and rack level design. Rack scale integration and assembly have become more challenging, as every component is being pushed to the limit, whilst also optimizing for cost efficiency. VR NVL72 has a much more holistic design with a modular approach compared to Grace Blackwell for the purpose of integration efficiency and throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 415,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在维拉鲁宾平台中，英伟达正在进一步强化对系统和机架级设计的掌控力。随着每个组件都被推向极限，同时还要兼顾成本效率的优化，机架级的集成与组装正变得愈发困难。为了提升集成效率与吞吐量，与Grace Blackwell相比，VR NVL72采用了模块化方案，其整体设计更具全局性。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828845",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Nvidia’s competitiveness strengthens with its extreme co-design supremacy. It is the only player with the best in class or close to the best in class silicon product offerings for all the major silicon contents in an Nvidia trail-blazed AI server system design. Nvidia offers the best accelerator, a SOTA scale up switch, the best NIC, and one of the best Ethernet networking switch, and a much improved purpose-designed CPU. No other competitors have such a complete suite of integrated silicon products.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "a much improved purpose-designed CPU",
+          "start": 388,
+          "end": 424,
+          "href": "https://newsletter.semianalysis.com/i/187132686/nvidia-vera",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Nvidia’s competitiveness strengthens with its extreme co-design supremacy. It is the only player with the best in class or close to the best in class silicon product offerings for all the major silicon contents in an Nvidia trail-blazed AI server system design. Nvidia offers the best accelerator, a SOTA scale up switch, the best NIC, and one of the best Ethernet networking switch, and [a much improved purpose-designed CPU](https://newsletter.semianalysis.com/i/187132686/nvidia-vera). No other competitors have such a complete suite of integrated silicon products.",
+      "parent_block_plain_text": "Nvidia’s competitiveness strengthens with its extreme co-design supremacy. It is the only player with the best in class or close to the best in class silicon product offerings for all the major silicon contents in an Nvidia trail-blazed AI server system design. Nvidia offers the best accelerator, a SOTA scale up switch, the best NIC, and one of the best Ethernet networking switch, and a much improved purpose-designed CPU. No other competitors have such a complete suite of integrated silicon products.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "a much improved purpose-designed CPU",
+          "start": 388,
+          "end": 424,
+          "href": "https://newsletter.semianalysis.com/i/187132686/nvidia-vera",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 505,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "凭借在极致协同设计上的统治力，英伟达的竞争力正在进一步增强。在由英伟达引领的AI服务器系统设计中，它是唯一一家在所有主要芯片组件上都能提供同类最佳或接近同类最佳产品的厂商。英伟达提供了最顶级的加速器、最先进的纵向扩展交换机、最好的网卡、最出色的以太网交换机之一，以及一款大幅改进的专用CPU。没有任何其他竞争对手拥有如此完整的集成芯片产品矩阵。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828918",
+          "tokenized_text": "凭借在极致协同设计上的统治力，英伟达的竞争力正在进一步增强。在由英伟达引领的AI服务器系统设计中，它是唯一一家在所有主要芯片组件上都能提供同类最佳或接近同类最佳产品的厂商。英伟达提供了最顶级的加速器、最先进的纵向扩展交换机、最好的网卡、最出色的以太网交换机之一，以及[[[LINK_1|一款大幅改进的专用CPU]]]。没有任何其他竞争对手拥有如此完整的集成芯片产品矩阵。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "In the sections below, we will discuss the 6 silicon products of the Vera Rubin platform at the silicon level. Then, we will discuss the rack and compute tray evolution from Grace Blackwell to Vera Rubin from the design perspective and the implication to components: cables, connectors, PCB, thermal, mechanical, and power.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In the sections below, we will discuss the 6 silicon products of the Vera Rubin platform at the silicon level. Then, we will discuss the rack and compute tray evolution from Grace Blackwell to Vera Rubin from the design perspective and the implication to components: cables, connectors, PCB, thermal, mechanical, and power.",
+      "parent_block_plain_text": "In the sections below, we will discuss the 6 silicon products of the Vera Rubin platform at the silicon level. Then, we will discuss the rack and compute tray evolution from Grace Blackwell to Vera Rubin from the design perspective and the implication to components: cables, connectors, PCB, thermal, mechanical, and power.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 323,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在下文中，我们将深入芯片层面，剖析维拉鲁宾平台的6款芯片产品。随后，我们将从设计视角探讨机架与计算托盘从Grace Blackwell向维拉鲁宾的演进，并分析其对线缆、连接器、PCB、散热、机械结构与供电等组件的影响。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828938",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Next, we will discuss the major networks of the VR NVL72 system, namely the scale up NVLink 6 network and the backend scale out network. We will discuss the logistical implications of much more limited hyperscaler customisation and the assembly supplier landscape.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Next, we will discuss the major networks of the VR NVL72 system, namely the scale up NVLink 6 network and the backend scale out network. We will discuss the logistical implications of much more limited hyperscaler customisation and the assembly supplier landscape.",
+      "parent_block_plain_text": "Next, we will discuss the major networks of the VR NVL72 system, namely the scale up NVLink 6 network and the backend scale out network. We will discuss the logistical implications of much more limited hyperscaler customisation and the assembly supplier landscape.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 264,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "接下来，我们将探讨 VR NVL72 系统的主要网络架构，即纵向扩展的 NVLink 6 网络与后端的横向扩展网络。此外，我们还将分析超大规模云厂商定制化空间大幅受限对供应链与交付带来的影响，以及组装供应商的竞争格局。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828975",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Lastly, the report ends with a discussion on the TCO of the VR NVL72 system as well as the BoM and Power Budget estimate supporting the TCO analysis. Behind the paywall, we also provide readers with insight into Nvidia’s plans for their Groq IP. We will also cover some of the challenges with regards to HBM ramp for Micron, SK Hynix, and Samsung.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, the report ends with a discussion on the TCO of the VR NVL72 system as well as the BoM and Power Budget estimate supporting the TCO analysis. Behind the paywall, we also provide readers with insight into Nvidia’s plans for their Groq IP. We will also cover some of the challenges with regards to HBM ramp for Micron, SK Hynix, and Samsung.",
+      "parent_block_plain_text": "Lastly, the report ends with a discussion on the TCO of the VR NVL72 system as well as the BoM and Power Budget estimate supporting the TCO analysis. Behind the paywall, we also provide readers with insight into Nvidia’s plans for their Groq IP. We will also cover some of the challenges with regards to HBM ramp for Micron, SK Hynix, and Samsung.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 347,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后，本报告将在结尾处探讨 VR NVL72 系统的总拥有成本，并提供支撑该总拥有成本分析的物料清单与功耗预算估算。在付费专区，我们还将为读者深度剖析英伟达针对其 Groq IP 的未来规划。此外，我们也会分析美光、SK海力士以及三星在 HBM 产能爬坡过程中所面临的挑战。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.828995",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Today we are also launching the VR NVL72 Component BoM and Power Budget Model. It provides a system-level bill of materials and power budget analysis for the VR NVL72 system covered in this article. This is important because various vendors and their shares of the subcomponents will drive whether they are winners or losers in the $500B Rubin buildout. The downstream impacts and dislocations in the market are large. The model covers:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 32,
+          "end": 77,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Today we are also launching the [VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/). It provides a system-level bill of materials and power budget analysis for the VR NVL72 system covered in this article. This is important because various vendors and their shares of the subcomponents will drive whether they are winners or losers in the $500B Rubin buildout. The downstream impacts and dislocations in the market are large. The model covers:",
+      "parent_block_plain_text": "Today we are also launching the VR NVL72 Component BoM and Power Budget Model. It provides a system-level bill of materials and power budget analysis for the VR NVL72 system covered in this article. This is important because various vendors and their shares of the subcomponents will drive whether they are winners or losers in the $500B Rubin buildout. The downstream impacts and dislocations in the market are large. The model covers:",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "VR NVL72 Component BoM and Power Budget Model",
+          "start": 32,
+          "end": 77,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 436,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今天，我们还将正式推出VR NVL72 组件物料清单与功耗预算模型。该模型针对本文所探讨的 VR NVL72 系统，提供了系统级的物料清单与功耗预算分析。这一分析至关重要，因为在规模高达 5000 亿美元的鲁宾基础设施扩建浪潮中，各大供应商及其在子组件中的市场份额，将直接决定他们究竟是赢家还是输家。其产生的下游影响与市场洗牌效应将极为深远。该模型涵盖的内容包括：",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829074",
+          "tokenized_text": "今天，我们还将正式推出[[[LINK_1|VR NVL72 组件物料清单与功耗预算模型]]]。该模型针对本文所探讨的 VR NVL72 系统，提供了系统级的物料清单与功耗预算分析。这一分析至关重要，因为在规模高达 5000 亿美元的鲁宾基础设施扩建浪潮中，各大供应商及其在子组件中的市场份额，将直接决定他们究竟是赢家还是输家。其产生的下游影响与市场洗牌效应将极为深远。该模型涵盖的内容包括：",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Nvidia Compute Tray Content: Strata module with Rubin GPU, Vera CPU, SOCAMM memory; BlueField-4; ConnectX-9",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Nvidia Compute Tray Content:",
+          "start": 0,
+          "end": 28,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Nvidia Compute Tray Content:** Strata module with Rubin GPU, Vera CPU, SOCAMM memory; BlueField-4; ConnectX-9",
+      "parent_block_plain_text": "Nvidia Compute Tray Content: Strata module with Rubin GPU, Vera CPU, SOCAMM memory; BlueField-4; ConnectX-9",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Nvidia Compute Tray Content:",
+          "start": 0,
+          "end": 28,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 107,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达计算托盘组件：搭载鲁宾 GPU、维拉 CPU 和 SOCAMM 内存的 Strata 模块；BlueField-4；ConnectX-9",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829149",
+          "tokenized_text": "[[[STRONG_1|英伟达计算托盘组件：]]]搭载鲁宾 GPU、维拉 CPU 和 SOCAMM 内存的 Strata 模块；BlueField-4；ConnectX-9",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "NVLink System: NVSwitch, NVLink backplane and cabling, associated connectors, host CPU management module",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "NVLink System:",
+          "start": 0,
+          "end": 14,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **NVLink System:** NVSwitch, NVLink backplane and cabling, associated connectors, host CPU management module",
+      "parent_block_plain_text": "NVLink System: NVSwitch, NVLink backplane and cabling, associated connectors, host CPU management module",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "NVLink System:",
+          "start": 0,
+          "end": 14,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 104,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVLink 系统：NVSwitch、NVLink 背板与线缆、配套连接器、主机 CPU 管理模块",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829195",
+          "tokenized_text": "[[[STRONG_1|NVLink 系统：]]]NVSwitch、NVLink 背板与线缆、配套连接器、主机 CPU 管理模块",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Liquid Cooling Content: Coldplates, QDs, Manifolds",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Liquid Cooling Content: Coldplates, QDs, Manifolds",
+          "start": 0,
+          "end": 50,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Liquid Cooling Content: Coldplates, QDs, Manifolds**",
+      "parent_block_plain_text": "Liquid Cooling Content: Coldplates, QDs, Manifolds",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Liquid Cooling Content: Coldplates, QDs, Manifolds",
+          "start": 0,
+          "end": 50,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 50,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "液冷组件：冷板、快插接头、分水器",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829243",
+          "tokenized_text": "[[[STRONG_1|液冷组件：冷板、快插接头、分水器]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "PCB, Substrate, and Materials Content: key system boards, ABF substrates, CCL content",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "PCB, Substrate, and Materials Content:",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **PCB, Substrate, and Materials Content:** key system boards, ABF substrates, CCL content",
+      "parent_block_plain_text": "PCB, Substrate, and Materials Content: key system boards, ABF substrates, CCL content",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "PCB, Substrate, and Materials Content:",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 85,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "PCB、载板及材料组件：关键系统板、ABF载板、覆铜板用量",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829306",
+          "tokenized_text": "[[[STRONG_1|PCB、载板及材料组件：]]]关键系统板、ABF载板、覆铜板用量",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Connectors: Paladin HD2 Board to Board Connectors, Paladin HD2 NVLink 6.0 Connectors",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Connectors",
+          "start": 0,
+          "end": 10,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Connectors**: Paladin HD2 Board to Board Connectors, Paladin HD2 NVLink 6.0 Connectors",
+      "parent_block_plain_text": "Connectors: Paladin HD2 Board to Board Connectors, Paladin HD2 NVLink 6.0 Connectors",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Connectors",
+          "start": 0,
+          "end": 10,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 84,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "连接器：Paladin HD2板对板连接器、Paladin HD2 NVLink 6.0连接器",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829373",
+          "tokenized_text": "[[[STRONG_1|连接器]]]：Paladin HD2板对板连接器、Paladin HD2 NVLink 6.0连接器",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Power Delivery Content: power shelves, busbars, VRMs, power delivery modules",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Power Delivery Content",
+          "start": 0,
+          "end": 22,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Power Delivery Content**: power shelves, busbars, VRMs, power delivery modules",
+      "parent_block_plain_text": "Power Delivery Content: power shelves, busbars, VRMs, power delivery modules",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Power Delivery Content",
+          "start": 0,
+          "end": 22,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "供电组件：电源插箱、母线排、VRM、供电模块",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829899",
+          "tokenized_text": "[[[STRONG_1|供电组件]]]：电源插箱、母线排、VRM、供电模块",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Mechanical Structure: chassis, loading mechanism, railkits, rack chassis",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Mechanical Structure",
+          "start": 0,
+          "end": 20,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Mechanical Structure**: chassis, loading mechanism, railkits, rack chassis",
+      "parent_block_plain_text": "Mechanical Structure: chassis, loading mechanism, railkits, rack chassis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Mechanical Structure",
+          "start": 0,
+          "end": 20,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 72,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "机械结构：机箱、装载机构、导轨套件、机柜框架",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.829956",
+          "tokenized_text": "[[[STRONG_1|机械结构]]]：机箱、装载机构、导轨套件、机柜框架",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Management modules: BMC",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Management modules",
+          "start": 0,
+          "end": 18,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Management modules**: BMC",
+      "parent_block_plain_text": "Management modules: BMC",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Management modules",
+          "start": 0,
+          "end": 18,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 23,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "管理模块：BMC",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.830010",
+          "tokenized_text": "[[[STRONG_1|管理模块]]]：BMC",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Networking: Transceivers, CX-9",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Networking",
+          "start": 0,
+          "end": 10,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* **Networking**: Transceivers, CX-9",
+      "parent_block_plain_text": "Networking: Transceivers, CX-9",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Networking",
+          "start": 0,
+          "end": 10,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "网络：光模块、CX-9",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.830118",
+          "tokenized_text": "[[[STRONG_1|网络]]]：光模块、CX-9",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.830142",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Nvidia VR NVL72 Component BoM and Power Budget Model](https://semianalysis.com/vr-nvl72-model/)",
+      "parent_block_plain_text": "Source: Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Nvidia VR NVL72 Component BoM and Power Budget Model",
+          "start": 8,
+          "end": 60,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 60,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：英伟达 VR NVL72 组件物料清单与功耗预算模型",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.831413",
+          "tokenized_text": "来源：[[[LINK_1|英伟达 VR NVL72 组件物料清单与功耗预算模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Nvidia VR NVL72 Component BoM and Power Budget Model",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "Please visit this self service portal to purchase the model. Contact sales@semianalysis.com for any questions regarding the product.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "self service portal",
+          "start": 18,
+          "end": 37,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Please visit this [self service portal](https://semianalysis.com/vr-nvl72-model/) to purchase the model. Contact sales@semianalysis.com for any questions regarding the product.",
+      "parent_block_plain_text": "Please visit this self service portal to purchase the model. Contact sales@semianalysis.com for any questions regarding the product.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "self service portal",
+          "start": 18,
+          "end": 37,
+          "href": "https://semianalysis.com/vr-nvl72-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 132,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "请访问此自助服务门户购买该模型。如对该产品有任何疑问，请联系 sales@semianalysis.com。",
+          "model": "pro",
+          "created_at": "2026-03-16T20:32:49.831517",
+          "tokenized_text": "请访问此[[[LINK_1|自助服务门户]]]购买该模型。如对该产品有任何疑问，请联系 sales@semianalysis.com。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.149999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+          "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+          "relation_to_previous": "None. Serves as the article's opening.",
+          "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+          "key_points": [
+            "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+            "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+          ],
+          "translation_notes": [
+            "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+            "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Vera 和 Rubin 纯音译为“维拉”和“鲁宾”，但在第7段中对于上一代架构又保留了英文“Grace Blackwell”，导致前后代产品命名方式不一致。此外，本章翻译注意点中也明确要求保留 Vera, Rubin 的英文或使用既定的双语惯例。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

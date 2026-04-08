@@ -1,0 +1,55 @@
+{
+  "section_id": "03-compute-tray-redesign",
+  "new_terms": [
+    {
+      "term": "Strata Module",
+      "suggested_translation": "Strata 模块",
+      "context": "The equivalent of the Bianca board in VR NVL72, housing Rubin GPUs and Vera CPUs.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Orchid Module",
+      "suggested_translation": "Orchid 模块",
+      "context": "Front-side module housing ConnectX-9 NICs and transceiver cages.",
+      "confidence": 0.95
+    },
+    {
+      "term": "ICMS / CMX",
+      "suggested_translation": "推理上下文存储 (ICMS / CMX)",
+      "context": "Inference Context Memory Storage; a platform/fabric dedicated to KV cache traffic.",
+      "confidence": 0.9
+    },
+    {
+      "term": "KV cache fabric",
+      "suggested_translation": "KV 缓存织网",
+      "context": "A purpose-built network tier optimized for ephemeral, recomputable KV cache.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Astra",
+      "suggested_translation": "Astra 架构",
+      "context": "Advanced Secure Trusted Resource Architecture for unified management of front-end and back-end networks.",
+      "confidence": 0.85
+    },
+    {
+      "term": "board-to-board connector",
+      "suggested_translation": "板对板连接器",
+      "context": "Connectors like Paladin HD2 used to eliminate internal cables in the compute tray.",
+      "confidence": 0.95
+    },
+    {
+      "term": "midplane",
+      "suggested_translation": "中板",
+      "context": "A vertical bridge for PCIe signals between the front and back modules of the chassis.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "compute tray": "算力托盘",
+    "cableless design": "无线缆设计",
+    "socamm": "SOCAMM 内存",
+    "decode loop": "Decode 环节"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:38:05.221896"
+}

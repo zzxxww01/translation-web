@@ -1,0 +1,1115 @@
+{
+  "section_id": "19-ampereone-softbank-acquisiti",
+  "title": "AmpereOne & SoftBank Acquisition",
+  "title_translation": "AmpereOne与软银收购案",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0233",
+      "parent_block_index": 233,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.935735",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!2wN-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fae88cb59-dfc9-4ef0-82db-daeb13090a11_2774x1467.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AmpereOne 2024 Roadmap. Source: Ampere Computing",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AmpereOne 2024 Roadmap. Source: Ampere Computing",
+          "start": 0,
+          "end": 48,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0234",
+      "parent_block_index": 234,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AmpereOne 2024 Roadmap. Source: Ampere Computing*",
+      "parent_block_plain_text": "AmpereOne 2024 Roadmap. Source: Ampere Computing",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AmpereOne 2024 Roadmap. Source: Ampere Computing",
+          "start": 0,
+          "end": 48,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 48,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AmpereOne 2024 年路线图。来源：Ampere Computing",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.935888",
+          "tokenized_text": "[[[EM_1|AmpereOne 2024 年路线图。来源：Ampere Computing]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0235",
+      "parent_block_index": 235,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.935921",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!tg4g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9bd4b346-265c-417c-8de2-3bb02f84db2d_2618x1683.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Ampere Altra Max (Left) and Altra (Right). Source: Ampere Computing",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Ampere Altra Max (Left) and Altra (Right). Source: Ampere Computing",
+          "start": 0,
+          "end": 67,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0236",
+      "parent_block_index": 236,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Ampere Altra Max (Left) and Altra (Right). Source: Ampere Computing*",
+      "parent_block_plain_text": "Ampere Altra Max (Left) and Altra (Right). Source: Ampere Computing",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Ampere Altra Max (Left) and Altra (Right). Source: Ampere Computing",
+          "start": 0,
+          "end": 67,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 67,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Ampere Altra Max（左）与 Altra（右）。来源：Ampere Computing",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.935993",
+          "tokenized_text": "[[[EM_1|Ampere Altra Max（左）与 Altra（右）。来源：Ampere Computing]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0237",
+      "parent_block_index": 237,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936019",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!67XG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F14200e92-bb26-47b1-89d4-c52dc20cccd8_1500x1852.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Delidded AmpereOne CPU. Source: Brendan Crain, Wikimedia",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Delidded AmpereOne CPU. Source: Brendan Crain, Wikimedia",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0238",
+      "parent_block_index": 238,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Delidded AmpereOne CPU. Source: Brendan Crain, Wikimedia*",
+      "parent_block_plain_text": "Delidded AmpereOne CPU. Source: Brendan Crain, Wikimedia",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Delidded AmpereOne CPU. Source: Brendan Crain, Wikimedia",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "开盖的 AmpereOne CPU。来源：Brendan Crain，Wikimedia",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936082",
+          "tokenized_text": "[[[EM_1|开盖的 AmpereOne CPU。来源：Brendan Crain，Wikimedia]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0239",
+      "parent_block_index": 239,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936108",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!DWkM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c471082-f099-457c-bc01-5aa2deb081cb_2923x1573.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "AmpereOne Mesh Architecture. Source: Ampere Computing, Hot Chips 2024",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "AmpereOne Mesh Architecture. Source: Ampere Computing, Hot Chips 2024",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0240",
+      "parent_block_index": 240,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*AmpereOne Mesh Architecture. Source: Ampere Computing, Hot Chips 2024*",
+      "parent_block_plain_text": "AmpereOne Mesh Architecture. Source: Ampere Computing, Hot Chips 2024",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "AmpereOne Mesh Architecture. Source: Ampere Computing, Hot Chips 2024",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 69,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AmpereOne 网格架构。来源：Ampere Computing，Hot Chips 2024",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936168",
+          "tokenized_text": "[[[EM_1|AmpereOne 网格架构。来源：Ampere Computing，Hot Chips 2024]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Ampere Computing was the original champion for merchant ARM silicon, competing directly with AMD and Intel as a 3rd silicon provider for OEM server builds. With a strong partnership with Oracle, Ampere delivered their 80-core Altra and 128-core Altra Max line of CPUs with great fanfare, promising to disrupt the x86 CPU duopoly with cost effective ARM CPUs. Ampere Altra employed the Neoverse N1 core with their own mesh interconnect with cores grouped into 4-core clusters. Accompanying the cores are 8-channels of DDR4 and 128 PCIe4 lanes on a single TSMC 7nm die.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0241",
+      "parent_block_index": 241,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Ampere Computing was the original champion for merchant ARM silicon, competing directly with AMD and Intel as a 3rd silicon provider for OEM server builds. With a strong partnership with Oracle, Ampere delivered their 80-core Altra and 128-core Altra Max line of CPUs with great fanfare, promising to disrupt the x86 CPU duopoly with cost effective ARM CPUs. Ampere Altra employed the Neoverse N1 core with their own mesh interconnect with cores grouped into 4-core clusters. Accompanying the cores are 8-channels of DDR4 and 128 PCIe4 lanes on a single TSMC 7nm die.",
+      "parent_block_plain_text": "Ampere Computing was the original champion for merchant ARM silicon, competing directly with AMD and Intel as a 3rd silicon provider for OEM server builds. With a strong partnership with Oracle, Ampere delivered their 80-core Altra and 128-core Altra Max line of CPUs with great fanfare, promising to disrupt the x86 CPU duopoly with cost effective ARM CPUs. Ampere Altra employed the Neoverse N1 core with their own mesh interconnect with cores grouped into 4-core clusters. Accompanying the cores are 8-channels of DDR4 and 128 PCIe4 lanes on a single TSMC 7nm die.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 567,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Ampere Computing 是商业化 ARM 芯片最初的领军者，作为 OEM（原始设备制造商）服务器构建的第三方芯片供应商，直接与 AMD 和英特尔展开竞争。凭借与 Oracle 的紧密合作，Ampere 大张旗鼓地推出了 80 核的 Altra 与 128 核的 Altra Max 系列 CPU，承诺用高性价比的 ARM CPU 打破 x86 CPU 的双头垄断。Ampere Altra 采用 Neoverse N1 内核与自研网格互连架构，将内核划分为多个 4 核集群。与内核配套的是单颗台积电 7nm 裸片上的 8 通道 DDR4 和 128 条 PCIe 4 通道。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936193",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "The next generation AmpereOne CPUs brought core counts up to 192, thanks to a move to a 5nm process and a novel chiplet design that disaggregates the IO into separate DDR5 and PCIe dies in an MCM configuration that does not require use of an interposer. Ampere also moved to a custom ARM core, designed for core density rather than outright performance, paired with an oversized 2MB L2 cache to minimize performance penalties from noisy neighbors where other VMs running on adjacent cores hog traffic on the shared mesh interconnect. A similar 4-core cluster is implemented on a 9x8 mesh network. In total, integer performance was doubled over Altra Max.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0242",
+      "parent_block_index": 242,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The next generation AmpereOne CPUs brought core counts up to 192, thanks to a move to a 5nm process and a novel chiplet design that disaggregates the IO into separate DDR5 and PCIe dies in an MCM configuration that does not require use of an interposer. Ampere also moved to a custom ARM core, designed for core density rather than outright performance, paired with an oversized 2MB L2 cache to minimize performance penalties from noisy neighbors where other VMs running on adjacent cores hog traffic on the shared mesh interconnect. A similar 4-core cluster is implemented on a 9x8 mesh network. In total, integer performance was doubled over Altra Max.",
+      "parent_block_plain_text": "The next generation AmpereOne CPUs brought core counts up to 192, thanks to a move to a 5nm process and a novel chiplet design that disaggregates the IO into separate DDR5 and PCIe dies in an MCM configuration that does not require use of an interposer. Ampere also moved to a custom ARM core, designed for core density rather than outright performance, paired with an oversized 2MB L2 cache to minimize performance penalties from noisy neighbors where other VMs running on adjacent cores hog traffic on the shared mesh interconnect. A similar 4-core cluster is implemented on a 9x8 mesh network. In total, integer performance was doubled over Altra Max.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 654,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "得益于转向 5nm 工艺以及新颖的芯粒设计，下一代 AmpereOne CPU 将核心数量提升至 192 个。该设计将 I/O 解耦为独立的 DDR5 和 PCIe 裸片，采用无需使用中介层的 MCM 配置。Ampere 还转向了定制 ARM 内核，该内核追求核心密度而非极致性能，并搭配超大容量的 2MB 二级缓存，以尽量减少来自“吵闹的邻居 (资源抢占者)”的性能损失——即运行在相邻内核上的其他虚拟机抢占共享网格互连流量的问题。类似的 4 核集群被部署在 9x8 网格网络上。总体而言，其整数性能比 Altra Max 翻了一番。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936216",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "The chiplet design allows the same compute die to be reused in other variants, with the 12-channel AmpereOne-M adding 2 more memory controller dies. The future AmpereOne-MX reuses the same I/O chiplets but swaps in a 3nm compute die with 256 cores. Their 2024 roadmap also detailed a future AmpereOne Aurora chip with 512 cores and AI Training and Inference capabilities.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0243",
+      "parent_block_index": 243,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The chiplet design allows the same compute die to be reused in other variants, with the 12-channel AmpereOne-M adding 2 more memory controller dies. The future AmpereOne-MX reuses the same I/O chiplets but swaps in a 3nm compute die with 256 cores. Their 2024 roadmap also detailed a future AmpereOne Aurora chip with 512 cores and AI Training and Inference capabilities.",
+      "parent_block_plain_text": "The chiplet design allows the same compute die to be reused in other variants, with the 12-channel AmpereOne-M adding 2 more memory controller dies. The future AmpereOne-MX reuses the same I/O chiplets but swaps in a 3nm compute die with 256 cores. Their 2024 roadmap also detailed a future AmpereOne Aurora chip with 512 cores and AI Training and Inference capabilities.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 371,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种芯粒设计允许同一计算裸片在其他变体中重复使用，例如 12 通道的 AmpereOne-M 就增加了 2 颗内存控制器裸片。未来的 AmpereOne-MX 复用了相同的 I/O 芯粒，但替换为拥有 256 个核心的 3nm 计算裸片。其 2024 年路线图还详细介绍了一款未来的 AmpereOne Aurora 芯片，该芯片拥有 512 个核心，并具备 AI 训练和推理能力。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936240",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "However, this roadmap is no longer valid once Ampere Computing was acquired by SoftBank in 2025 for $6.5 Billion. While true that Masayoshi Son wanted Ampere’s CPU design talent to shore up their CPU designs for the Stargate venture, the acquisition was also spurred by Oracle wanting to divest itself from a poorly performing business. Ampere’s CPUs never ramped into significantly high enough volumes due to timing and execution issues.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0244",
+      "parent_block_index": 244,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, this roadmap is no longer valid once Ampere Computing was acquired by SoftBank in 2025 for $6.5 Billion. While true that Masayoshi Son wanted Ampere’s CPU design talent to shore up their CPU designs for the Stargate venture, the acquisition was also spurred by Oracle wanting to divest itself from a poorly performing business. Ampere’s CPUs never ramped into significantly high enough volumes due to timing and execution issues.",
+      "parent_block_plain_text": "However, this roadmap is no longer valid once Ampere Computing was acquired by SoftBank in 2025 for $6.5 Billion. While true that Masayoshi Son wanted Ampere’s CPU design talent to shore up their CPU designs for the Stargate venture, the acquisition was also spurred by Oracle wanting to divest itself from a poorly performing business. Ampere’s CPUs never ramped into significantly high enough volumes due to timing and execution issues.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 438,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，随着 Ampere Computing 在 2025 年被软银以 65 亿美元收购，这份路线图已彻底作废。尽管孙正义确实希望利用 Ampere 的 CPU 设计人才来加强其“星际之门项目”的 CPU 设计，但促成此次收购的另一大动因是 Oracle 急于剥离这项表现不佳的业务。由于时机把握与执行层面的双重问题，Ampere 的 CPU 出货量始终未能实现真正意义上的规模化。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936262",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The Altra generation was their first major market entry, but arrived too early for mass adoption as most software was not ARM-native at the time. Unlike hyperscalers who could quickly adapt their internal workloads for their own ARM silicon, the general purpose and enterprise CPU markets are much slower to move. Following that, the AmpereOne generation faced many delays, with Oracle Cloud A2 and CPU availability arriving in the second half of 2024. By then, the hyperscaler ARM CPU projects are in full swing, and AMD could match Ampere’s 192 cores but with 3-4 times higher per core performance. Despite Oracle promoting Ampere instances with halved per-core licensing costs, the CPUs were not popular enough, and the order book dried up.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0245",
+      "parent_block_index": 245,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Altra generation was their first major market entry, but arrived too early for mass adoption as most software was not ARM-native at the time. Unlike hyperscalers who could quickly adapt their internal workloads for their own ARM silicon, the general purpose and enterprise CPU markets are much slower to move. Following that, the AmpereOne generation faced many delays, with Oracle Cloud A2 and CPU availability arriving in the second half of 2024. By then, the hyperscaler ARM CPU projects are in full swing, and AMD could match Ampere’s 192 cores but with 3-4 times higher per core performance. Despite Oracle promoting Ampere instances with halved per-core licensing costs, the CPUs were not popular enough, and the order book dried up. Oracle never used up their full pre-payment for Ampere CPUs, with their Ampere CPU purchases dwindling from $48M in fiscal 2023 to $3M in 2024 and $3.7M in 2025.",
+      "parent_block_plain_text": "The Altra generation was their first major market entry, but arrived too early for mass adoption as most software was not ARM-native at the time. Unlike hyperscalers who could quickly adapt their internal workloads for their own ARM silicon, the general purpose and enterprise CPU markets are much slower to move. Following that, the AmpereOne generation faced many delays, with Oracle Cloud A2 and CPU availability arriving in the second half of 2024. By then, the hyperscaler ARM CPU projects are in full swing, and AMD could match Ampere’s 192 cores but with 3-4 times higher per core performance. Despite Oracle promoting Ampere instances with halved per-core licensing costs, the CPUs were not popular enough, and the order book dried up. Oracle never used up their full pre-payment for Ampere CPUs, with their Ampere CPU purchases dwindling from $48M in fiscal 2023 to $3M in 2024 and $3.7M in 2025.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 743,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Altra 代产品是他们首次大规模进军市场之作，但由于当时大多数软件并非 ARM 原生，其问世时间对大规模普及而言为时尚早。超大规模云厂商可以迅速调整内部工作负载以适配自研 ARM 芯片，但通用与企业级 CPU 市场的转型步伐要缓慢得多。紧接着，AmpereOne 代产品遭遇多次延期，直到 2024 年下半年 Oracle Cloud A2 实例和 CPU 才姗姗来迟。到那时，超大规模云厂商的 ARM CPU 项目已全面铺开，且 AMD 也能追平 Ampere 的 192 核配置，单核性能更是高出 3 到 4 倍。尽管 Oracle 极力推销单核授权费减半的 Ampere 实例，但这些 CPU 依然无人问津，订单也随之枯竭。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936286",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Oracle never used up their full pre-payment for Ampere CPUs, with their Ampere CPU purchases dwindling from $48M in fiscal 2023 to $3M in 2024 and $3.7M in 2025.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0245",
+      "parent_block_index": 245,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Altra generation was their first major market entry, but arrived too early for mass adoption as most software was not ARM-native at the time. Unlike hyperscalers who could quickly adapt their internal workloads for their own ARM silicon, the general purpose and enterprise CPU markets are much slower to move. Following that, the AmpereOne generation faced many delays, with Oracle Cloud A2 and CPU availability arriving in the second half of 2024. By then, the hyperscaler ARM CPU projects are in full swing, and AMD could match Ampere’s 192 cores but with 3-4 times higher per core performance. Despite Oracle promoting Ampere instances with halved per-core licensing costs, the CPUs were not popular enough, and the order book dried up. Oracle never used up their full pre-payment for Ampere CPUs, with their Ampere CPU purchases dwindling from $48M in fiscal 2023 to $3M in 2024 and $3.7M in 2025.",
+      "parent_block_plain_text": "The Altra generation was their first major market entry, but arrived too early for mass adoption as most software was not ARM-native at the time. Unlike hyperscalers who could quickly adapt their internal workloads for their own ARM silicon, the general purpose and enterprise CPU markets are much slower to move. Following that, the AmpereOne generation faced many delays, with Oracle Cloud A2 and CPU availability arriving in the second half of 2024. By then, the hyperscaler ARM CPU projects are in full swing, and AMD could match Ampere’s 192 cores but with 3-4 times higher per core performance. Despite Oracle promoting Ampere instances with halved per-core licensing costs, the CPUs were not popular enough, and the order book dried up. Oracle never used up their full pre-payment for Ampere CPUs, with their Ampere CPU purchases dwindling from $48M in fiscal 2023 to $3M in 2024 and $3.7M in 2025.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 744,
+      "segment_end": 905,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Oracle 从未用完他们购买 Ampere CPU 的全额预付款，其 Ampere CPU 采购额从 2023 财年的 4800 万美元一路陡降至 2024 年的 300 万美元，2025 年也仅为 370 万美元。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936310",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Ampere is now working on AI chips as well as CPUs under the Softbank umbrella.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0246",
+      "parent_block_index": 246,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Ampere is now working on AI chips as well as CPUs under the Softbank umbrella.",
+      "parent_block_plain_text": "Ampere is now working on AI chips as well as CPUs under the Softbank umbrella.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 78,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "归入软银麾下后，Ampere 目前正同时研发 AI 芯片与 CPU。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:14:34.936334",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.29,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文的“3rd silicon provider”指的是继 Intel 和 AMD 之后的“第三家芯片供应商”或“第三种选择”，而非商业合同中常用的“第三方（third-party）”。译为“第三方”容易引起语义偏差。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

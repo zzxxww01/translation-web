@@ -1,0 +1,519 @@
+{
+  "section_id": "08-where-the-puck-is-going",
+  "title": "Where The Puck is Going",
+  "title_translation": "市场走向何方",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "What is most striking is the disconnect between these underlying dynamics and broader market sentiment. Despite clear evidence of tightening supply and rising prices - conditions that should directly benefit Neocloud providers through margin expansion and stronger arguments for higher useful lives - public market sentiment has turned increasingly negative on names like CoreWeave, Nebius, IREN, and these companies’ share prices are currently at the low end of the 6-12mth trading range.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "p",
+      "parent_block_markdown": "What is most striking is the disconnect between these underlying dynamics and broader market sentiment. Despite clear evidence of tightening supply and rising prices - conditions that should directly benefit Neocloud providers through margin expansion and stronger arguments for higher useful lives - public market sentiment has turned increasingly negative on names like CoreWeave, Nebius, IREN, and these companies’ share prices are currently at the low end of the 6-12mth trading range.",
+      "parent_block_plain_text": "What is most striking is the disconnect between these underlying dynamics and broader market sentiment. Despite clear evidence of tightening supply and rising prices - conditions that should directly benefit Neocloud providers through margin expansion and stronger arguments for higher useful lives - public market sentiment has turned increasingly negative on names like CoreWeave, Nebius, IREN, and these companies’ share prices are currently at the low end of the 6-12mth trading range.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 489,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最引人注目的是，这些底层基本面与整体市场情绪之间存在严重背离。尽管有确凿证据表明供应趋紧且价格上涨——这些利好本应通过利润率扩张以及更有力地支撑延长资产折旧年限的逻辑，直接让新兴算力云厂商受益——但二级市场对CoreWeave、Nebius、IREN等标的的情绪却日益悲观，这些公司的股价目前正处于过去6至12个月交易区间的底部。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887596",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The market is still anchored to a narrative of eventual oversupply and commoditization, and the developments described above have done little to assuage concerns on GPU terminal value. While, the reality on the ground points to sustained scarcity and pricing power across all Neocloud providers, that suggest that all compute will be in-demand - no matter the relative performance given such an aggressive shortage.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The market is still anchored to a narrative of eventual oversupply and commoditization, and the developments described above have done little to assuage concerns on GPU terminal value. While, the reality on the ground points to sustained scarcity and pricing power across all Neocloud providers, that suggest that all compute will be in-demand - no matter the relative performance given such an aggressive shortage.",
+      "parent_block_plain_text": "The market is still anchored to a narrative of eventual oversupply and commoditization, and the developments described above have done little to assuage concerns on GPU terminal value. While, the reality on the ground points to sustained scarcity and pricing power across all Neocloud providers, that suggest that all compute will be in-demand - no matter the relative performance given such an aggressive shortage.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 415,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "市场依然受制于算力最终将供过于求并走向商品化的惯性叙事，前文所述的行业进展几乎未能缓解市场对GPU残值的担忧。然而，一线市场的实际情况却指向了持续的稀缺性，以及所有新兴算力云厂商普遍具备的定价权；这意味着在如此严重的短缺面前，所有算力都将供不应求——无论其相对性能如何。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887644",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Looking forward, there are three check points to monitor to determine if GPU rental prices will continue to remain elevated.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Looking forward, there are three check points to monitor to determine if GPU rental prices will continue to remain elevated.",
+      "parent_block_plain_text": "Looking forward, there are three check points to monitor to determine if GPU rental prices will continue to remain elevated.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 124,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "展望未来，要判断GPU租金能否继续维持高位，有三个核心观测点值得关注：",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887654",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "GB300 clusters will ramp throughout 2026. We will monitor the extent to which additional compute capacity and thus token volumes coming market ameliorates the ongoing compute crunch or whether token demand will outpace these additions. This will determine the extent to which AI Labs will participate in the sub 4-year market and therefore where pricing trends go for this segment.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* GB300 clusters will ramp throughout 2026. We will monitor the extent to which additional compute capacity and thus token volumes coming market ameliorates the ongoing compute crunch or whether token demand will outpace these additions. This will determine the extent to which AI Labs will participate in the sub 4-year market and therefore where pricing trends go for this segment.",
+      "parent_block_plain_text": "GB300 clusters will ramp throughout 2026. We will monitor the extent to which additional compute capacity and thus token volumes coming market ameliorates the ongoing compute crunch or whether token demand will outpace these additions. This will determine the extent to which AI Labs will participate in the sub 4-year market and therefore where pricing trends go for this segment.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 381,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GB300集群将在整个2026年持续爬坡。我们将密切关注新增算力及随之涌入市场的Token吞吐量，究竟能在多大程度上缓解当前的算力紧缺，还是说Token需求的增长会反超这些新增供给。这将决定AI实验室在4年期以下租赁市场的参与深度，进而决定该细分市场的价格走势。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887664",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The extent to which the ongoing silicon shortage worsens. We recently wrote about the great AI Silicon shortage, calling out tightness in TSMC’s N3 logic wafer capacity and HBM, DRAM and NAND memory among others. This can always get worse as execution hiccups can always arise for any of these complicated manufacturing processes.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "the great AI Silicon shortage",
+          "start": 82,
+          "end": 111,
+          "href": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* The extent to which the ongoing silicon shortage worsens. We recently wrote about [the great AI Silicon shortage](https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage), calling out tightness in TSMC’s N3 logic wafer capacity and HBM, DRAM and NAND memory among others. This can always get worse as execution hiccups can always arise for any of these complicated manufacturing processes.",
+      "parent_block_plain_text": "The extent to which the ongoing silicon shortage worsens. We recently wrote about the great AI Silicon shortage, calling out tightness in TSMC’s N3 logic wafer capacity and HBM, DRAM and NAND memory among others. This can always get worse as execution hiccups can always arise for any of these complicated manufacturing processes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "the great AI Silicon shortage",
+          "start": 82,
+          "end": 111,
+          "href": "https://newsletter.semianalysis.com/p/the-great-ai-silicon-shortage",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 330,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "当前芯片短缺的恶化程度。我们近期在AI芯片大短缺一文中，明确提示了台积电（TSMC）N3逻辑晶圆产能以及HBM、DRAM和NAND存储器等环节的供应紧张。鉴于这些复杂的制造工艺随时可能出现执行层面的波折，短缺状况完全可能进一步恶化。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887721",
+          "tokenized_text": "当前芯片短缺的恶化程度。我们近期在[[[LINK_1|AI芯片大短缺]]]一文中，明确提示了台积电（TSMC）N3逻辑晶圆产能以及HBM、DRAM和NAND存储器等环节的供应紧张。鉴于这些复杂的制造工艺随时可能出现执行层面的波折，短缺状况完全可能进一步恶化。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "How ARR for AI labs continues to scale – and the rate at which adoption spreads and token consumption continues to grow. Our AI Tokenomics model is squarely focused on this and analyzes key demand and usage signals to track end demand.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "AI Tokenomics model",
+          "start": 125,
+          "end": 144,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* How ARR for AI labs continues to scale – and the rate at which adoption spreads and token consumption continues to grow. Our [AI Tokenomics model](https://semianalysis.com/tokenomics-model/) is squarely focused on this and analyzes key demand and usage signals to track end demand.",
+      "parent_block_plain_text": "How ARR for AI labs continues to scale – and the rate at which adoption spreads and token consumption continues to grow. Our AI Tokenomics model is squarely focused on this and analyzes key demand and usage signals to track end demand.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "AI Tokenomics model",
+          "start": 125,
+          "end": 144,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 235,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AI实验室年度经常性收入（ARR）的规模扩张情况——以及应用普及和Token消耗量持续增长的速度。我们的AI Token经济学模型正是聚焦于此，通过分析关键的需求与使用信号来追踪终端需求。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:12:09.887751",
+          "tokenized_text": "AI实验室年度经常性收入（ARR）的规模扩张情况——以及应用普及和Token消耗量持续增长的速度。我们的[[[LINK_1|AI Token经济学模型]]]正是聚焦于此，通过分析关键的需求与使用信号来追踪终端需求。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+          "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Contrasts tight physical market realities with bearish public stock sentiment, and outlines future supply/demand catalysts.",
+          "relation_to_previous": "Synthesizes the tight market dynamics from previous sections to point out a glaring inefficiency in public equities.",
+          "relation_to_next": "Sets up the definitive conclusion on pricing by establishing the future variables (GB300, ARR) that will drive it.",
+          "key_points": [
+            "Public markets are irrationally punishing Neocloud stocks despite clear evidence of margin expansion and longer useful lives.",
+            "The GB300 ramp in 2026 will test whether new compute capacity can outpace accelerating token demand.",
+            "AI lab ARR scaling is the ultimate indicator of end demand."
+          ],
+          "translation_notes": [
+            "'Where The Puck is Going' is a Wayne Gretzky idiom meaning anticipating future trends; translate conceptually (预判未来趋势/球将飞向何方).",
+            "Ensure 'ameliorates the ongoing compute crunch' sounds professional (缓解当前的算力紧缺)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "原文的 'token volumes coming [to] market' 指的是新增算力带来的 Token 供给规模。译文使用“Token吞吐量”虽然在技术上说得通，但在经济学和市场供需语境下，“Token供应量”或“Token产出规模”更能准确传达 'coming to market'（涌入市场）的供给侧意味。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

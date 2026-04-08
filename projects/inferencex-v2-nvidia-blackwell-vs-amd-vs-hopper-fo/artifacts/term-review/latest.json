@@ -1,0 +1,3062 @@
+{
+  "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+  "project_title": "InferenceX v2: NVIDIA Blackwell Vs AMD vs Hopper - Formerly InferenceMAX",
+  "review_required": true,
+  "generated_at": "2026-04-07T18:44:49.128643",
+  "total_candidates": 74,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "SGLang",
+          "suggested_translation": "SGLang",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 44,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            },
+            {
+              "section_id": "30-klaud-cold-ai-usage",
+              "section_title": "Klaud Cold AI Usage"
+            }
+          ],
+          "contexts": [
+            "High-performance LLM serving framework/language",
+            "An open-source inference framework for LLMs, often compared with TRTLLM.",
+            "A structured generation language/framework for LLMs designed for high-performance serving."
+          ],
+          "similar_terms": [
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.615
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "vLLM",
+          "suggested_translation": "vLLM",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 31,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "30-klaud-cold-ai-usage",
+              "section_title": "Klaud Cold AI Usage"
+            }
+          ],
+          "contexts": [
+            "Open-source LLM inference and serving engine",
+            "A high-throughput and memory-efficient inference and serving engine for LLMs.",
+            "An open-source LLM inference and serving engine mentioned throughout the benchmarks."
+          ],
+          "similar_terms": [
+            {
+              "original": "LLM",
+              "translation": "LLM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "大语言模型 (Large Language Model)",
+              "similarity": 0.857
+            }
+          ]
+        },
+        {
+          "term": "MI355X",
+          "suggested_translation": "MI355X",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 24,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            },
+            {
+              "section_id": "32-future-of-inferencex",
+              "section_title": "Future of InferenceX"
+            }
+          ],
+          "contexts": [
+            "AMD Instinct MI350 series GPU",
+            "AMD's high-performance AI accelerator mentioned as a competitor to Nvidia's B200.",
+            "AMD Instinct GPU model name"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Wide Expert Parallelism",
+          "suggested_translation": "宽专家并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 10,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "22-wide-expert-parallelism-widee",
+              "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill"
+            }
+          ],
+          "contexts": [
+            "A parallelism strategy for Mixture of Experts (MoE) models",
+            "Abbreviated as wideEP, an optimization for MoE models",
+            "A parallelism strategy for Mixture of Experts (MoE) models where experts are distributed across many nodes."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Disaggregated Serving",
+          "suggested_translation": "解耦式推理服务",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            }
+          ],
+          "contexts": [
+            "Inference architecture that separates prefill and decode phases into different instances",
+            "An architecture that separates the prefill and decoding phases of LLM inference into different nodes.",
+            "Optimizing Inference with Wide EP + Disaggregated Serving"
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.513
+            }
+          ]
+        },
+        {
+          "term": "TRTLLM",
+          "suggested_translation": "TRT-LLM",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            }
+          ],
+          "contexts": [
+            "NVIDIA TensorRT-LLM library for optimized inference",
+            "NVIDIA's specialized library for optimizing large language model inference."
+          ],
+          "similar_terms": [
+            {
+              "original": "LLM",
+              "translation": "LLM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "大语言模型 (Large Language Model)",
+              "similarity": 0.667
+            },
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "GB300 NVL72",
+          "suggested_translation": "GB300 NVL72",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            }
+          ],
+          "contexts": [
+            "NVIDIA Blackwell Ultra rack-scale system configuration",
+            "Specific Nvidia Blackwell-based rack-scale system configuration."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Large Mixture of Experts",
+          "suggested_translation": "大规模混合专家模型",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Scaling architecture for MoE models (LMoE)"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "01-introduction",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "FP4",
+          "suggested_translation": "FP4",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 25,
+          "first_occurrence": "01-introduction",
+          "related_sections": [
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            },
+            {
+              "section_id": "14-jensen-under-promising-and-ove",
+              "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72"
+            },
+            {
+              "section_id": "15-blackwell-vs-blackwell-ultra",
+              "section_title": "Blackwell vs Blackwell Ultra"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            }
+          ],
+          "contexts": [
+            "4-bit floating point precision format used in Blackwell and MI355X",
+            "A 4-bit floating-point data format introduced in Blackwell architecture.",
+            "A 4-bit floating-point data format used for model quantization and inference."
+          ],
+          "similar_terms": [
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "FP8",
+          "suggested_translation": "FP8",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "01-introduction",
+          "related_sections": [
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "15-blackwell-vs-blackwell-ultra",
+              "section_title": "Blackwell vs Blackwell Ultra"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "20-accuracy-evaluations",
+              "section_title": "Accuracy Evaluations"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            }
+          ],
+          "contexts": [
+            "8-bit floating point precision format",
+            "8-bit floating point format used for AI training and inference performance scaling.",
+            "8-bit floating point data format"
+          ],
+          "similar_terms": [
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "disaggregated inference",
+          "suggested_translation": "解耦推理",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "01-introduction",
+          "related_sections": [
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            }
+          ],
+          "contexts": [
+            "Also referred to as 'disagg' or 'disagg prefill', separating prefill and decode phases",
+            "An architecture where prefill and decode phases are handled by separate compute resources.",
+            "An architectural approach where prefill and decode phases are handled by different nodes"
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.562
+            },
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.537
+            }
+          ]
+        },
+        {
+          "term": "MoE",
+          "suggested_translation": "混合专家模型",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "01-introduction",
+          "related_sections": [
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            },
+            {
+              "section_id": "14-jensen-under-promising-and-ove",
+              "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72"
+            }
+          ],
+          "contexts": [
+            "DeepSeek MoE disaggregated inference; Mixture of Experts architecture",
+            "Mixture of Experts; used in the context of EP and sparsity",
+            "Mixture of Experts, a neural network architecture used in Blackwell performance testing."
+          ],
+          "similar_terms": [
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.571
+            },
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.571
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "SKU",
+          "suggested_translation": "SKU",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "01-introduction",
+          "related_sections": [
+            {
+              "section_id": "01-introduction",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            }
+          ],
+          "contexts": [
+            "Stock Keeping Unit, referring to specific hardware models/versions",
+            "Stock Keeping Unit, referring to specific product models or versions of GPUs.",
+            "Stock Keeping Unit, referring to specific hardware models"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "02-key-observations-and-results-t",
+      "section_title": "Key Observations and Results to Highlight",
+      "candidates": [
+        {
+          "term": "MTP",
+          "suggested_translation": "多 token 预测",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 23,
+          "first_occurrence": "02-key-observations-and-results-t",
+          "related_sections": [
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            },
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            },
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "Multi-Token Prediction; a technique to improve inference throughput.",
+            "Multi-Token Prediction; a feature that can be enabled or disabled in inference benchmarks.",
+            "Abbreviation for Multi-Token Prediction, a technique used to improve inference performance."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "wideEP",
+          "suggested_translation": "WideEP",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 13,
+          "first_occurrence": "02-key-observations-and-results-t",
+          "related_sections": [
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            },
+            {
+              "section_id": "22-wide-expert-parallelism-widee",
+              "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill"
+            },
+            {
+              "section_id": "23-wideep",
+              "section_title": "WideEP"
+            }
+          ],
+          "contexts": [
+            "Wide Expert Parallelism; a technique used in MoE models to scale inference across nodes.",
+            "Refers to Wide Expert Parallelism, a specific kernel optimization mentioned in the DeepSeek context.",
+            "Abbreviation for Wide Expert Parallelism, a core concept in the section."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "disagg prefill",
+          "suggested_translation": "解构预填充",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "02-key-observations-and-results-t",
+          "related_sections": [
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            }
+          ],
+          "contexts": [
+            "An inference technique that separates the prefill and decode phases onto different nodes.",
+            "Short for disaggregated prefill, where prefill and decode phases are handled by separate GPU instances."
+          ],
+          "similar_terms": [
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "NVL72",
+          "suggested_translation": "NVL72",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "02-key-observations-and-results-t",
+          "related_sections": [
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            },
+            {
+              "section_id": "35-total-cost-of-ownership-nvl72",
+              "section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's rack-scale design (e.g., GB200 NVL72) featuring 72 GPUs in a single domain.",
+            "NVIDIA's rack-scale configuration for GB200, featuring 72 GPUs in a single scale-up domain.",
+            "NVIDIA's rack-level configuration interconnecting 72 Blackwell GPUs."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "composability",
+          "suggested_translation": "可组合性",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "02-key-observations-and-results-t",
+          "related_sections": [
+            {
+              "section_id": "02-key-observations-and-results-t",
+              "section_title": "Key Observations and Results to Highlight"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            }
+          ],
+          "contexts": [
+            "The ability of different software optimizations to work effectively when combined.",
+            "The ability to combine multiple software optimizations or features (like FP4 and distributed inference) effectively."
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-acknowledgments-and-inferencex",
+      "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters",
+      "candidates": [
+        {
+          "term": "InferenceX",
+          "suggested_translation": "InferenceX",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 26,
+          "first_occurrence": "03-acknowledgments-and-inferencex",
+          "related_sections": [
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "07-tracking-improvements-over-tim",
+              "section_title": "Tracking Improvements Over Time"
+            },
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            },
+            {
+              "section_id": "15-blackwell-vs-blackwell-ultra",
+              "section_title": "Blackwell vs Blackwell Ultra"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            },
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            },
+            {
+              "section_id": "28-core-inferencex-repo-updates",
+              "section_title": "Core InferenceX Repo Updates"
+            },
+            {
+              "section_id": "30-klaud-cold-ai-usage",
+              "section_title": "Klaud Cold AI Usage"
+            },
+            {
+              "section_id": "31-github-actions",
+              "section_title": "GitHub Actions"
+            },
+            {
+              "section_id": "32-future-of-inferencex",
+              "section_title": "Future of InferenceX"
+            }
+          ],
+          "contexts": [
+            "The initiative name (formerly InferenceMAX) for benchmarking and optimization.",
+            "Product name for the performance visualization tool",
+            "SemiAnalysis's proprietary or open-source inference benchmarking software."
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.947
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "Hopper",
+          "suggested_translation": "Hopper",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "03-acknowledgments-and-inferencex",
+          "related_sections": [
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            },
+            {
+              "section_id": "14-jensen-under-promising-and-ove",
+              "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72"
+            }
+          ],
+          "contexts": [
+            "Nvidia's GPU architecture preceding Blackwell (e.g., H100, H200).",
+            "NVIDIA's GPU architecture preceding Blackwell.",
+            "NVIDIA's previous generation GPU architecture (H100/H200)."
+          ],
+          "similar_terms": [
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.6
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Pareto Frontier",
+          "suggested_translation": "帕累托前沿",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "03-acknowledgments-and-inferencex",
+          "related_sections": [
+            {
+              "section_id": "03-acknowledgments-and-inferencex",
+              "section_title": "Acknowledgments and InferenceX™ (formerly InferenceMAX) Initiative Supporters"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            }
+          ],
+          "contexts": [
+            "Optimization term referring to the set of optimal trade-offs between competing objectives (e.g., latency vs. throughput).",
+            "A curve representing the optimal trade-off between throughput and interactivity/latency.",
+            "Understand what parallelism strategies fall on what parts of the Pareto frontier for single-node configurations."
+          ],
+          "similar_terms": [
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.583
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-interactivity-vs-throughput-tr",
+      "section_title": "Interactivity vs Throughput Tradeoff",
+      "candidates": [
+        {
+          "term": "interactivity",
+          "suggested_translation": "交互性",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 40,
+          "first_occurrence": "05-interactivity-vs-throughput-tr",
+          "related_sections": [
+            {
+              "section_id": "05-interactivity-vs-throughput-tr",
+              "section_title": "Interactivity vs Throughput Tradeoff"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            },
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            },
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            },
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            }
+          ],
+          "contexts": [
+            "Describes how fast each user receives tokens (tok/s/user), the inverse of TPOT.",
+            "Measured in tokens/s/user; a key metric for user experience in LLM serving.",
+            "Measured in tokens per second per user (tok/s/user)."
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.645
+            },
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "KV cache",
+          "suggested_translation": "KV 缓存",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 10,
+          "first_occurrence": "05-interactivity-vs-throughput-tr",
+          "related_sections": [
+            {
+              "section_id": "05-interactivity-vs-throughput-tr",
+              "section_title": "Interactivity vs Throughput Tradeoff"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "24-disaggregated-prefill",
+              "section_title": "Disaggregated Prefill"
+            }
+          ],
+          "contexts": [
+            "Key-Value cache used to store sequence state during LLM inference.",
+            "Key-Value Cache used to store intermediate states in transformer-based models to speed up inference.",
+            "thereby 'prefilling' the KV cache for this request"
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "disaggregated prefill",
+          "suggested_translation": "解耦预填充",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "05-interactivity-vs-throughput-tr",
+          "related_sections": [
+            {
+              "section_id": "05-interactivity-vs-throughput-tr",
+              "section_title": "Interactivity vs Throughput Tradeoff"
+            },
+            {
+              "section_id": "22-wide-expert-parallelism-widee",
+              "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill"
+            },
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "The practice of separating prefill and decode phases across separate GPU pools.",
+            "An architectural approach that separates the prefill and decoding phases of inference.",
+            "An architectural optimization where the prefill and decode phases are handled separately."
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.513
+            },
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "forward pass",
+          "suggested_translation": "前向传播",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-interactivity-vs-throughput-tr",
+          "related_sections": [
+            {
+              "section_id": "05-interactivity-vs-throughput-tr",
+              "section_title": "Interactivity vs Throughput Tradeoff"
+            }
+          ],
+          "contexts": [
+            "A single pass through the neural network layers."
+          ],
+          "similar_terms": [
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.471
+            },
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-tensor-parallel-expert-parall",
+      "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)",
+      "candidates": [
+        {
+          "term": "EP",
+          "suggested_translation": "专家并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 34,
+          "first_occurrence": "06-tensor-parallel-expert-parall",
+          "related_sections": [
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            },
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            },
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            },
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "Expert Parallel; shards experts, exploiting MoE sparsity",
+            "Abbreviation for Expert Parallelism, used in MoE model training and inference.",
+            "Abbreviation for Expert Parallelism (e.g., EP8, EP16) used in MoE model inference."
+          ],
+          "similar_terms": [
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.333
+            },
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.267
+            }
+          ]
+        },
+        {
+          "term": "TP",
+          "suggested_translation": "张量并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 14,
+          "first_occurrence": "06-tensor-parallel-expert-parall",
+          "related_sections": [
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            },
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            },
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            },
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "Tensor Parallel; allows for maximize interactivity at small batch sizes",
+            "Tensor Parallelism, sharding weight matrices across multiple GPUs.",
+            "At the highest interactivity levels, pure TP outperforms any configuration involving EP."
+          ],
+          "similar_terms": [
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.8
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "all-to-all",
+          "suggested_translation": "All-to-all",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "06-tensor-parallel-expert-parall",
+          "related_sections": [
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            },
+            {
+              "section_id": "23-wideep",
+              "section_title": "WideEP"
+            }
+          ],
+          "contexts": [
+            "A collective communication primitive used for MoE layers in EP",
+            "A collective communication pattern used to dispatch tokens to appropriate experts in MoE."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "all-reduce",
+          "suggested_translation": "All-reduce",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-tensor-parallel-expert-parall",
+          "related_sections": [
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            }
+          ],
+          "contexts": [
+            "A collective communication primitive used in TP"
+          ],
+          "similar_terms": [
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "DP",
+          "suggested_translation": "数据并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-tensor-parallel-expert-parall",
+          "related_sections": [
+            {
+              "section_id": "06-tensor-parallel-expert-parall",
+              "section_title": "Tensor Parallel, Expert Parallel, Data Parallel (TP, EP, DP)"
+            },
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "Data Parallel; replicates the entire model on multiple groups of GPUs",
+            "Data Parallelism, a standard training/inference scaling technique."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "07-tracking-improvements-over-tim",
+      "section_title": "Tracking Improvements Over Time",
+      "candidates": [
+        {
+          "term": "cadence",
+          "suggested_translation": "节奏",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "07-tracking-improvements-over-tim",
+          "related_sections": [
+            {
+              "section_id": "07-tracking-improvements-over-tim",
+              "section_title": "Tracking Improvements Over Time"
+            }
+          ],
+          "contexts": [
+            "Used to describe the frequency of hardware/software release cycles (e.g., yearly cadence)"
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.615
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-deepseek-r1",
+      "section_title": "DeepSeek R1",
+      "candidates": [
+        {
+          "term": "ROCm",
+          "suggested_translation": "ROCm",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "08-deepseek-r1",
+          "related_sections": [
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            },
+            {
+              "section_id": "11-deepseek-disagg-wideep-result",
+              "section_title": "DeepSeek Disagg +WideEP Results Deep Dive"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            }
+          ],
+          "contexts": [
+            "AMD's open-source software stack for GPU programming.",
+            "AMD's open software platform for GPU-accelerated computing.",
+            "AMD's open-source software stack for GPU computing, equivalent to NVIDIA's CUDA."
+          ],
+          "similar_terms": [
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.571
+            },
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "MoRI",
+          "suggested_translation": "MoRI",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "08-deepseek-r1",
+          "related_sections": [
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            }
+          ],
+          "contexts": [
+            "AMD's library for MoE dispatch/combine collective and KV Cache transfer.",
+            "AMD's high-performance communication interface for RDMA and GPU integration"
+          ],
+          "similar_terms": [
+            {
+              "original": "memory chip",
+              "translation": "存储芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            }
+          ]
+        },
+        {
+          "term": "TRT-LLM",
+          "suggested_translation": "TRT-LLM",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "08-deepseek-r1",
+          "related_sections": [
+            {
+              "section_id": "08-deepseek-r1",
+              "section_title": "DeepSeek R1"
+            },
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            },
+            {
+              "section_id": "12-nvidia-versus-amd-disagg-prefi",
+              "section_title": "Nvidia versus AMD Disagg Prefill"
+            },
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's TensorRT-LLM library for optimizing LLM inference.",
+            "NVIDIA TensorRT-LLM, an open-source library for optimizing LLM inference.",
+            "Nvidia's specialized library for optimizing LLM inference."
+          ],
+          "similar_terms": [
+            {
+              "original": "LLM",
+              "translation": "LLM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "大语言模型 (Large Language Model)",
+              "similarity": 0.6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "09-gpt-oss-120b",
+      "section_title": "GPT-OSS 120B",
+      "candidates": [
+        {
+          "term": "fork",
+          "suggested_translation": "分叉版本",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-gpt-oss-120b",
+          "related_sections": [
+            {
+              "section_id": "09-gpt-oss-120b",
+              "section_title": "GPT-OSS 120B"
+            }
+          ],
+          "contexts": [
+            "A copy of a software project's codebase that undergoes separate development."
+          ],
+          "similar_terms": [
+            {
+              "original": "foundry",
+              "translation": "晶圆代工厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "后续可简称'代工厂'",
+              "similarity": 0.545
+            },
+            {
+              "original": "InFO",
+              "translation": "InFO",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Integrated Fan-Out",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "10-disaggregated-inference-framew",
+      "section_title": "Disaggregated Inference Frameworks",
+      "candidates": [
+        {
+          "term": "Dynamo",
+          "suggested_translation": "Dynamo",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-disaggregated-inference-framew",
+          "related_sections": [
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            }
+          ],
+          "contexts": [
+            "NVIDIA's inference framework for multi-node distributed inference"
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.6
+            }
+          ]
+        },
+        {
+          "term": "Mooncake",
+          "suggested_translation": "Mooncake",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-disaggregated-inference-framew",
+          "related_sections": [
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            }
+          ],
+          "contexts": [
+            "A KV cache transfer framework (developed by Moonshot AI/Kimi)"
+          ],
+          "similar_terms": [
+            {
+              "original": "benchmark",
+              "translation": "基准测试",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "只有表示大模型等的评测方式时翻译成基准测试",
+              "similarity": 0.471
+            },
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.462
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "prefill-decode disaggregation",
+          "suggested_translation": "预填充-解码分离",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-disaggregated-inference-framew",
+          "related_sections": [
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            }
+          ],
+          "contexts": [
+            "A technique to separate the compute-heavy prefill and memory-heavy decode stages"
+          ],
+          "similar_terms": [
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.389
+            },
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.343
+            }
+          ]
+        },
+        {
+          "term": "RDMA",
+          "suggested_translation": "RDMA",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-disaggregated-inference-framew",
+          "related_sections": [
+            {
+              "section_id": "10-disaggregated-inference-framew",
+              "section_title": "Disaggregated Inference Frameworks"
+            },
+            {
+              "section_id": "24-disaggregated-prefill",
+              "section_title": "Disaggregated Prefill"
+            }
+          ],
+          "contexts": [
+            "Remote Direct Memory Access, used for low-latency networking",
+            "This transfer is performed over RDMA (typically RoCE or InfiniBand)"
+          ],
+          "similar_terms": [
+            {
+              "original": "IDM",
+              "translation": "IDM",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+              "similarity": 0.571
+            },
+            {
+              "original": "R&D",
+              "translation": "研发",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "Research and Development",
+              "similarity": 0.571
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "13-unpacking-inference-providers",
+      "section_title": "Unpacking Inference Providers’ Unit Economics",
+      "candidates": [
+        {
+          "term": "NVLink",
+          "suggested_translation": "NVLink",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "13-unpacking-inference-providers",
+          "related_sections": [
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            }
+          ],
+          "contexts": [
+            "Nvidia's high-bandwidth scale-up interconnect."
+          ],
+          "similar_terms": [
+            {
+              "original": "NVIDIA",
+              "translation": "英伟达",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "IB",
+          "suggested_translation": "InfiniBand",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "13-unpacking-inference-providers",
+          "related_sections": [
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            }
+          ],
+          "contexts": [
+            "High-performance networking protocol used in scale-out domains."
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "TTFT",
+          "suggested_translation": "首 token 延迟",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "13-unpacking-inference-providers",
+          "related_sections": [
+            {
+              "section_id": "13-unpacking-inference-providers",
+              "section_title": "Unpacking Inference Providers’ Unit Economics"
+            },
+            {
+              "section_id": "24-disaggregated-prefill",
+              "section_title": "Disaggregated Prefill"
+            }
+          ],
+          "contexts": [
+            "Time to First Token, a key latency metric for LLM inference.",
+            "increasing both time-to-first-token and inter-token latency"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "14-jensen-under-promising-and-ove",
+      "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72",
+      "candidates": [
+        {
+          "term": "scale-up network",
+          "suggested_translation": "纵向扩展网络",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "14-jensen-under-promising-and-ove",
+          "related_sections": [
+            {
+              "section_id": "14-jensen-under-promising-and-ove",
+              "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72"
+            }
+          ],
+          "contexts": [
+            "High-bandwidth interconnect within a rack or node (e.g., NVLink) for GPU communication."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "UALoE72",
+          "suggested_translation": "UALoE72",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "14-jensen-under-promising-and-ove",
+          "related_sections": [
+            {
+              "section_id": "14-jensen-under-promising-and-ove",
+              "section_title": "Jensen Under Promising and Overdelivering - Hopper vs Blackwell vs Rack Scale NVL72"
+            }
+          ],
+          "contexts": [
+            "AMD's rack-scale system architecture (Ultra Accelerator Link over Ethernet) for MI455X."
+          ],
+          "similar_terms": [
+            {
+              "original": "Qualcomm",
+              "translation": "高通",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "15-blackwell-vs-blackwell-ultra",
+      "section_title": "Blackwell vs Blackwell Ultra",
+      "candidates": [
+        {
+          "term": "Blackwell Ultra",
+          "suggested_translation": "Blackwell Ultra",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "15-blackwell-vs-blackwell-ultra",
+          "related_sections": [
+            {
+              "section_id": "15-blackwell-vs-blackwell-ultra",
+              "section_title": "Blackwell vs Blackwell Ultra"
+            }
+          ],
+          "contexts": [
+            "A specific high-performance variant of the Blackwell GPU architecture."
+          ],
+          "similar_terms": [
+            {
+              "original": "Blackwell",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达的显卡",
+              "similarity": 0.75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+      "section_title": "MI355X vs MI325X vs MI300X",
+      "candidates": [
+        {
+          "term": "MI325X",
+          "suggested_translation": "MI325X",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "16-mi355x-vs-mi325x-vs-mi300x",
+          "related_sections": [
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            }
+          ],
+          "contexts": [
+            "AMD Instinct GPU model name",
+            "AMD GPU model compared against H200"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Disaggregated Inferencing",
+          "suggested_translation": "解耦推理",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "16-mi355x-vs-mi325x-vs-mi300x",
+          "related_sections": [
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            }
+          ],
+          "contexts": [
+            "Inference architecture separating prefill and decode stages",
+            "An architecture where different phases of inference (prefill and decode) are split across different compute resources."
+          ],
+          "similar_terms": [
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            },
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.465
+            }
+          ]
+        },
+        {
+          "term": "MI300X",
+          "suggested_translation": "MI300X",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "16-mi355x-vs-mi325x-vs-mi300x",
+          "related_sections": [
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "35-total-cost-of-ownership-nvl72",
+              "section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)"
+            }
+          ],
+          "contexts": [
+            "AMD Instinct GPU model name",
+            "AMD's high-end AI accelerator product name."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "DeepSeek",
+          "suggested_translation": "DeepSeek",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "16-mi355x-vs-mi325x-vs-mi300x",
+          "related_sections": [
+            {
+              "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+              "section_title": "MI355X vs MI325X vs MI300X"
+            },
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            }
+          ],
+          "contexts": [
+            "AI model family and company (深度求索)",
+            "A top-tier AI research lab and model developer."
+          ],
+          "similar_terms": [
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "17-amd-composability-issue-on-fp4",
+      "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism",
+      "candidates": [
+        {
+          "term": "ATOM",
+          "suggested_translation": "ATOM",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "17-amd-composability-issue-on-fp4",
+          "related_sections": [
+            {
+              "section_id": "17-amd-composability-issue-on-fp4",
+              "section_title": "AMD Composability Issue on FP4, Distributed Inferencing and Wide Expert Parallelism"
+            },
+            {
+              "section_id": "18-amd-atom-engine",
+              "section_title": "AMD ATOM Engine"
+            },
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            }
+          ],
+          "contexts": [
+            "A specific AMD internal project or software optimization mentioned in the text.",
+            "AMD's new inference engine mentioned as a competitor to TRTLLM.",
+            "A specific feature or architectural mode within AMD's MI355X that prioritizes peak throughput."
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.571
+            },
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "20-accuracy-evaluations",
+      "section_title": "Accuracy Evaluations",
+      "candidates": [
+        {
+          "term": "GSM8k",
+          "suggested_translation": "GSM8k",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "20-accuracy-evaluations",
+          "related_sections": [
+            {
+              "section_id": "20-accuracy-evaluations",
+              "section_title": "Accuracy Evaluations"
+            }
+          ],
+          "contexts": [
+            "Currently we are only using GSM8k, but being a very easy benchmark..."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "21-anthropic-fast-mode-inferencin",
+      "section_title": "Anthropic Fast Mode Inferencing Explained",
+      "candidates": [
+        {
+          "term": "fast mode",
+          "suggested_translation": "快速模式",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "21-anthropic-fast-mode-inferencin",
+          "related_sections": [
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            }
+          ],
+          "contexts": [
+            "Anthropic's high-speed, high-cost inference option for Opus 4.6"
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.5
+            },
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "CPMT",
+          "suggested_translation": "每百万 token 成本",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "21-anthropic-fast-mode-inferencin",
+          "related_sections": [
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            }
+          ],
+          "contexts": [
+            "Cost Per Million Tokens, a standard pricing metric for LLM inference"
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.571
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.571
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            }
+          ]
+        },
+        {
+          "term": "Trainium",
+          "suggested_translation": "Trainium",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "21-anthropic-fast-mode-inferencin",
+          "related_sections": [
+            {
+              "section_id": "21-anthropic-fast-mode-inferencin",
+              "section_title": "Anthropic Fast Mode Inferencing Explained"
+            },
+            {
+              "section_id": "34-adding-tpu-trainium-and-more",
+              "section_title": "Adding TPU, Trainium and More Models"
+            }
+          ],
+          "contexts": [
+            "AWS's custom AI training and inference chip used by Anthropic",
+            "AWS custom AI training chip mentioned alongside TPU"
+          ],
+          "similar_terms": [
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.75
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.526
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "22-wide-expert-parallelism-widee",
+      "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill",
+      "candidates": [
+        {
+          "term": "SOTA",
+          "suggested_translation": "SOTA",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "22-wide-expert-parallelism-widee",
+          "related_sections": [
+            {
+              "section_id": "22-wide-expert-parallelism-widee",
+              "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill"
+            },
+            {
+              "section_id": "32-future-of-inferencex",
+              "section_title": "Future of InferenceX"
+            },
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "State-of-the-art; used to describe industry-leading performance.",
+            "State-of-the-Art, referring to the most advanced inference optimizations",
+            "real-world multiturn datasets test more SOTA inference engine features"
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.571
+            },
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.571
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Expert Parallelism",
+          "suggested_translation": "专家并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "22-wide-expert-parallelism-widee",
+          "related_sections": [
+            {
+              "section_id": "22-wide-expert-parallelism-widee",
+              "section_title": "Wide Expert Parallelism (WideEP) and Disaggregated Prefill"
+            }
+          ],
+          "contexts": [
+            "A technique in Mixture-of-Experts (MoE) models to distribute experts across different devices."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "23-wideep",
+      "section_title": "WideEP",
+      "candidates": [
+        {
+          "term": "arithmetic intensity",
+          "suggested_translation": "计算强度",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "23-wideep",
+          "related_sections": [
+            {
+              "section_id": "23-wideep",
+              "section_title": "WideEP"
+            }
+          ],
+          "contexts": [
+            "The ratio of floating-point operations (FLOPs) to memory bytes accessed."
+          ],
+          "similar_terms": [
+            {
+              "original": "efficiency",
+              "translation": "效率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.467
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "25-optimizing-inference-with-wide",
+      "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving",
+      "candidates": [
+        {
+          "term": "DEP",
+          "suggested_translation": "数据-专家并行",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "25-optimizing-inference-with-wide",
+          "related_sections": [
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            }
+          ],
+          "contexts": [
+            "Configurations shift to full DEP: attention weights are fully replicated across all GPUs as independent data-parallel ranks."
+          ],
+          "similar_terms": [
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.571
+            },
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Wide EP",
+          "suggested_translation": "宽专家并行",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "25-optimizing-inference-with-wide",
+          "related_sections": [
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            }
+          ],
+          "contexts": [
+            "Wide EP and disaggregated prefill are separate techniques used together to achieve Pareto optimal performance."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "TEP",
+          "suggested_translation": "张量-专家并行",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "25-optimizing-inference-with-wide",
+          "related_sections": [
+            {
+              "section_id": "25-optimizing-inference-with-wide",
+              "section_title": "Optimizing Inference with Wide EP + Disaggregated Serving"
+            }
+          ],
+          "contexts": [
+            "Configurations in this range use TEP: tensor parallelism for attention, expert parallelism for MoE layers."
+          ],
+          "similar_terms": [
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "26-dive-into-deepseek-r1-single-n",
+      "section_title": "Dive into DeepSeek R1 Single Node Results",
+      "candidates": [
+        {
+          "term": "B200",
+          "suggested_translation": "B200",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 10,
+          "first_occurrence": "26-dive-into-deepseek-r1-single-n",
+          "related_sections": [
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            },
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            }
+          ],
+          "contexts": [
+            "NVIDIA Blackwell architecture GPU model",
+            "NVIDIA Blackwell architecture GPU model."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "H200",
+          "suggested_translation": "H200",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "26-dive-into-deepseek-r1-single-n",
+          "related_sections": [
+            {
+              "section_id": "26-dive-into-deepseek-r1-single-n",
+              "section_title": "Dive into DeepSeek R1 Single Node Results"
+            }
+          ],
+          "contexts": [
+            "NVIDIA Hopper architecture GPU model"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "27-gpt-oss-120b-single-node",
+      "section_title": "GPT-OSS 120B Single Node",
+      "candidates": [
+        {
+          "term": "GB200",
+          "suggested_translation": "GB200",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "27-gpt-oss-120b-single-node",
+          "related_sections": [
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            }
+          ],
+          "contexts": [
+            "NVIDIA Grace Blackwell superchip combining CPU and GPU."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "scale-up world size",
+          "suggested_translation": "Scale-up 通信域大小",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "27-gpt-oss-120b-single-node",
+          "related_sections": [
+            {
+              "section_id": "27-gpt-oss-120b-single-node",
+              "section_title": "GPT-OSS 120B Single Node"
+            }
+          ],
+          "contexts": [
+            "The number of GPUs that can communicate over high-speed interconnects as a single logical unit."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "29-core-changes-since-inferencexv",
+      "section_title": "Core Changes Since InferenceXv1",
+      "candidates": [
+        {
+          "term": "sweep",
+          "suggested_translation": "扫描",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "29-core-changes-since-inferencexv",
+          "related_sections": [
+            {
+              "section_id": "29-core-changes-since-inferencexv",
+              "section_title": "Core Changes Since InferenceXv1"
+            }
+          ],
+          "contexts": [
+            "Refers to a parameter sweep or benchmarking run over multiple configurations."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "30-klaud-cold-ai-usage",
+      "section_title": "Klaud Cold AI Usage",
+      "candidates": [
+        {
+          "term": "Claude Code",
+          "suggested_translation": "Claude Code",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "30-klaud-cold-ai-usage",
+          "related_sections": [
+            {
+              "section_id": "30-klaud-cold-ai-usage",
+              "section_title": "Klaud Cold AI Usage"
+            }
+          ],
+          "contexts": [
+            "decided to embrace Claude Code and begin absorbing intelligence"
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.706
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.538
+            },
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "31-github-actions",
+      "section_title": "GitHub Actions",
+      "candidates": [
+        {
+          "term": "GitHub Actions",
+          "suggested_translation": "GitHub Actions",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "31-github-actions",
+          "related_sections": [
+            {
+              "section_id": "31-github-actions",
+              "section_title": "GitHub Actions"
+            }
+          ],
+          "contexts": [
+            "CI/CD platform used for running benchmarks and workflows"
+          ],
+          "similar_terms": [
+            {
+              "original": "virtualization",
+              "translation": "虚拟化",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "32-future-of-inferencex",
+      "section_title": "Future of InferenceX",
+      "candidates": [
+        {
+          "term": "agentic coding",
+          "suggested_translation": "智能体编程",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "32-future-of-inferencex",
+          "related_sections": [
+            {
+              "section_id": "32-future-of-inferencex",
+              "section_title": "Future of InferenceX"
+            },
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "Refers to benchmarks involving AI agents performing software development tasks",
+            "benchmark performance in agentic coding scenarios; include extremely long context conversations as well as tool use"
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "logic chip",
+              "translation": "逻辑芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "33-migration-to-multi-turn-real-m",
+      "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets",
+      "candidates": [
+        {
+          "term": "ISL",
+          "suggested_translation": "输入序列长度",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "33-migration-to-multi-turn-real-m",
+          "related_sections": [
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "Input Sequence Length; vary the ISL/OSL uniformly subject to the distribution"
+          ],
+          "similar_terms": [
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "yield",
+              "translation": "良率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "multi-turn",
+          "suggested_translation": "多轮",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "33-migration-to-multi-turn-real-m",
+          "related_sections": [
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "Migration to Multi Turn Real Multi-Turn Chat; captures real users’ multi-turn conversations"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "fine-tuning",
+              "translation": "微调",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "OSL",
+          "suggested_translation": "输出序列长度",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "33-migration-to-multi-turn-real-m",
+          "related_sections": [
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "Output Sequence Length; vary the ISL/OSL uniformly subject to the distribution"
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            },
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "prefix caching",
+          "suggested_translation": "前缀缓存",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "33-migration-to-multi-turn-real-m",
+          "related_sections": [
+            {
+              "section_id": "33-migration-to-multi-turn-real-m",
+              "section_title": "Migration to Multi Turn Real Multi-Turn Chat and Agentic Coding Datasets"
+            }
+          ],
+          "contexts": [
+            "disable prefix caching in all our benchmarks, as the expected value of a prefix cache hit rate is 0%"
+          ],
+          "similar_terms": [
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "RF chip",
+              "translation": "射频芯片",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Radio Frequency",
+              "similarity": 0.571
+            },
+            {
+              "original": "packaging",
+              "translation": "封装",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "35-total-cost-of-ownership-nvl72",
+      "section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)",
+      "candidates": [
+        {
+          "term": "compute tray",
+          "suggested_translation": "计算托盘",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "35-total-cost-of-ownership-nvl72",
+          "related_sections": [
+            {
+              "section_id": "35-total-cost-of-ownership-nvl72",
+              "section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)"
+            }
+          ],
+          "contexts": [
+            "Refers to the modular unit in a server rack containing processors and memory."
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "TDP",
+          "suggested_translation": "TDP",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "35-total-cost-of-ownership-nvl72",
+          "related_sections": [
+            {
+              "section_id": "35-total-cost-of-ownership-nvl72",
+              "section_title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)"
+            }
+          ],
+          "contexts": [
+            "Thermal Design Power; mentioned as the dominant driver of operating costs."
+          ],
+          "similar_terms": [
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.667
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

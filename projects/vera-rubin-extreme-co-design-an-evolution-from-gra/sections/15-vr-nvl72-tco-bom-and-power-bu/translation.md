@@ -1,0 +1,67 @@
+VR NVL72 组件物料清单（BoM）与功耗预算模型 提供了关于该机柜系统物料清单 (BoM) 和功耗预算的详细分析。
+
+https://substackcdn.com/image/fetch/$s_!79G7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7a435ee7-a40f-4df2-a84a-9d37041115d5_3379x755.png
+
+来源： VR NVL72 Component BoM and Power Budget Model
+
+以单 GPU 资本支出成本计算，VR NVL72 价格更高，由于单 GPU 服务器成本上升，其比 GB300s 高出约 45%，比 MI4XX 高出约 14-15%。这导致了更高的资本总拥有成本（TCO）。例如，在 4 年的使用寿命内，VR NVL72 超大规模计算厂商 Arista 的单 GPU 每小时资本成本为 3.28 美元，而 MI4XX 超大规模计算厂商则为 2.86 美元。为了反映保守的商业案例，我们的总拥有成本模型在计算每小时资本成本时采用了 4 年使用寿命，但大多数新型云服务商 (Neoclouds) 和超大规模计算厂商会使用 5-6 年的折旧期，我们认为使用这一折旧期来观察息税前利润 (EBIT) 率最为合适。我们首选的衡量标准是项目内部收益率 (Project IRR)，它与所选的折旧期无关。
+
+然而，英伟达（NVIDIA） VR SOCAMM 方案的一个优势在于，英伟达直接采购内存，这使其能够与内存供应商谈判长期协议、大客户优惠条款，以及最重要的 VVIP 定价。正如我们在 AI 服务器启示录报告 中所述，我们认为这将保护终端客户免受内存成本飙升的影响，也是英伟达 作为 AI 中央银行 如何有效地为所有客户对冲 DRAM 价格的又一例证。
+
+相比之下，AMD 对 DRAM 价格上涨的风险敞口要大得多，因为其 DRAM 用量大约是英伟达的两倍，每机柜配备约 55 TB 的 LPDDR5 和 55 TB 的 DDR5。对于 AMD 的 Helios 机柜级系统，AMD 销售 GPU/板卡并确实采购 LPDDR5 内存，但它并不为机柜算力托盘采购 DDR5 DRAM；机柜组装商/ODM 负责采购并集成 DDR5 内存。这使得 AMD 机柜的买家面临更大的风险，因为 AMD 只能通过长期合同潜在地“对冲” LPDDR5 部分，而让 DDR5 部分完全暴露在风险中。DRAM 含量翻倍也意味着整体风险敞口几乎翻倍。
+
+Helios 的内存成本更有可能被组装商转嫁或重新定价，因此在内存上行周期中会表现出更大的涨幅。因此，在下文中，我们为 VR 和 GB 设定的内存价格涨幅低于 MI4XX。我们对 MI400 机柜的假设反映了 AMD 的 LPDDR 价格为 8.70 美元/GB，而英伟达为 6.77 美元/GB，这虽然包含了相对于 10.63 美元/GB 市场合同价的批量折扣结构，但也反映了其与英伟达相比在规模经济上的差距。
+
+我们的 AI 内存模型 预计 LPDDR5 和 DDR5 的合同价格在 2026 年第二季度及以后将大幅上涨，我们预计将进一步上调服务器总资本支出预测。
+
+英伟达（NVIDIA）的 2300W 配置代表了 Max-P 配置，而针对能效优化的 Max-Q 配置运行功率为 1800W。无论采用哪种配置，英伟达都声称两者都能达到相同的峰值频率，从而实现其宣传的 50 PFLOPS FP4 性能。虽然底层硬件相同，但总拥有成本的影响主要源于不同功耗水平带来的运营成本差异。
+
+下面我们分享了有关服务器、存储、网络等成本的详细数据，以及英伟达针对 Groq 的应对策略。
+
+https://substackcdn.com/image/fetch/$s_!WlUw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9cef854e-8f7c-4f45-bd8a-a17c095ea191_3034x1194.png
+
+来源： SemiAnalysis AI TCO Model
+
+https://substackcdn.com/image/fetch/$s_!TZYu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67acd953-f548-45ed-94cd-93728716d2dd_3212x1126.png
+
+来源： SemiAnalysis AI TCO Model
+
+考虑到芯片 TDP 相当，且大多数运营成本随 IT 功耗需求而变化，VR Max-P 与 MI4XX 的运营成本相似。
+
+另一方面，由于芯片 TDP 较低，VR Max-Q 的运营成本低于 MI4XX。例如，在采用 Arista 网络配置的超大规模云厂商处部署的 VR NVL72 集群，每 GPU 每小时的运营成本为 0.75 美元，相比在相同 Arista 网络环境下部署的 MI4XX，其成本降低了约 20%。这突显了 Max-Q 配置的优势，特别是从运营成本的角度来看，较低的 TDP 降低了机柜级功率密度，从而随着时间的推移实现显著的成本节约。
+
+https://substackcdn.com/image/fetch/$s_!8ntQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1735f7d-dafc-4ef1-87bb-b079122d1880_3048x1164.png
+
+来源： SemiAnalysis AI TCO Model
+
+https://substackcdn.com/image/fetch/$s_!NWHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9763a7ed-6c8f-49a1-af11-8d34b6244424_3214x1080.png
+
+来源： SemiAnalysis AI TCO Model
+
+目前，基于官方公布的稠密（dense）FLOPS，MI4XX 相较于 VR 在单位总拥有成本（TCO）性能上具有优势。与 MI4XX 相比，VR 的单 GPU TCO 更高，但其官方公布的 PFLOPS 却低于 MI4XX，导致 VR 在单位 PFLOP 的 TCO 方面处于劣势。
+
+英伟达（NVIDIA）为 FP4 提供了稀疏性（sparsity）支持，宣称其 FP4 性能可达 50 PFLOPS；而 AMD 自 CDNA4 架构起，已选择在推理数据类型中移除稀疏性支持。如果能利用 50 PFLOPS 的稀疏性能而非 35 PFLOPS 的稠密性能，那么以“每小时每官方 PFLOP 成本”衡量的单位性能成本将下降 35% —— 如果 AI 实验室确实能在 VR NVL72 上成功利用稀疏 FP4，这一对比就是有效的。
+
+一如既往，需要说明的是，此番对比是基于官方公布的稠密 PFLOP 数据。有效稠密 PFLOP（即芯片在真实世界中的吞吐量）会因模型算力利用率（MFU）的不同而有所差异。通常情况下，我们观察到英伟达芯片的 MFU 高于 AMD 芯片，这表明如果基于有效稠密 PFLOP 计算，英伟达系统的单位 TCO 性能可能优于 AMD。然而，MFU 取决于实际工作负载，并没有一个通用的 MFU 百分比能始终适用于这两类系统。
+
+事实上，在真实场景中使用 FP4 稀疏性可能无法达到 50 PFLOPS，但其提供的有效 FLOPS 很可能高于 FP4 稠密性能，不过我们尚需评估其实际表现。在 1800W 功耗下运行 VR NVL72，其 FP4 稀疏 FLOPS 可能会低于在 2300W 下运行的表现。
+
+https://substackcdn.com/image/fetch/$s_!js3P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3423fa8-92cd-4d15-8e8e-a205bff85e4d_1123x513.png
+
+来源： SemiAnalysis AI TCO Model
+
+https://substackcdn.com/image/fetch/$s_!39Xv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc85a7bc2-9a3c-4b70-b9e5-6e3ef0424ee0_1374x572.png
+
+来源： SemiAnalysis AI TCO Model
+
+推理吞吐量也可能与官方宣传的峰值 FLOPS 存在实质性差异，这意味着规格表上的算力并不能直接转化为现实世界中的 Token 生成性能。虽然 B300 的额定性能为 4,500 Dense FP8 TFLOPs，而 MI355 为 5,000 Dense FP8 TFLOPs，这意味着 B300 在理论算力上存在 10% 的劣势，且两者宣传的显存带宽均为 8TB/s；但根据我们 InferenceX 基准测试测得的推理 Token 吞吐量显示，在处理 Deepseek R1 模型、使用 8k 输入 Token 和 1k 输出 Token 且交互性（interactivity）为 100 的情况下，B300 提供的性能大约是后者的 6.3 倍。
+
+考虑到总拥有成本（TCO）仅高出 1.75 倍，尽管官方宣传数据较为保守，B300 依然展现出更优越的单位总拥有成本（TCO）性能表现。尽管规格非常相似，但结果却大相径庭，这凸显了现实世界的性能并非仅由峰值 FLOPS 或显存带宽决定。软件和网络能力也是影响实际工作负载中训练和 Token 吞吐量的主要因素。
+
+Rubin 和 MI4XX 将采用全新的微架构，如果没有像我们通过 InferenceX 进行的基准测试，现实世界的性能将极难预测。
+
+值得注意的是，两种运行模式的显存带宽规格均为 8TB/s。然而，尽管显存带宽相同，推理性能仍存在实质性差异。
+
+https://substackcdn.com/image/fetch/$s_!0kLF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F61dc18ea-4e59-48f6-bf35-b938b7d0671d_2484x1424.png
+
+来源： SemiAnalysis InferenceX

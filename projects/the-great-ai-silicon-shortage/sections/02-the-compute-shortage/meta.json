@@ -1,0 +1,360 @@
+{
+  "section_id": "02-the-compute-shortage",
+  "title": "The Compute Shortage",
+  "title_translation": "算力短缺",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Token demand is skyrocketing and the need for AI compute continues to accelerate. The improvement in model capabilities combined with the rapid emergence of agentic workflows has driven a surge in user adoption and aggregate token demand. Anthropic added a staggering $6B of ARR in the single month of February alone driven by broad adoption of agentic coding platform Claude Code, and if Anthropic had more compute they would have added more. Despite a huge AI infrastructure buildout over the past few years, available compute is scarce. On-demand GPU prices continue to go up even for Hoppers which are almost 2 generations old.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Token demand is skyrocketing and the need for AI compute continues to accelerate. The improvement in model capabilities combined with the rapid emergence of agentic workflows has driven a surge in user adoption and aggregate token demand. Anthropic added a staggering $6B of ARR in the single month of February alone driven by broad adoption of agentic coding platform Claude Code, and if Anthropic had more compute they would have added more. Despite a huge AI infrastructure buildout over the past few years, available compute is scarce. On-demand GPU prices continue to go up even for Hoppers which are almost 2 generations old.",
+      "parent_block_plain_text": "Token demand is skyrocketing and the need for AI compute continues to accelerate. The improvement in model capabilities combined with the rapid emergence of agentic workflows has driven a surge in user adoption and aggregate token demand. Anthropic added a staggering $6B of ARR in the single month of February alone driven by broad adoption of agentic coding platform Claude Code, and if Anthropic had more compute they would have added more. Despite a huge AI infrastructure buildout over the past few years, available compute is scarce. On-demand GPU prices continue to go up even for Hoppers which are almost 2 generations old.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 631,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "token需求正在飙升，对AI算力的需求持续加速。模型能力的提升与智能体工作流的迅速涌现相叠加，推动了用户采用率和总token需求的激增。在智能体编程平台Claude Code被广泛采用的推动下，仅在2月份单月，Anthropic就新增了惊人的60亿美元年度经常性收入；如果Anthropic拥有更多算力，这一数字还会更高。尽管过去几年AI基础设施建设规模庞大，但可用算力依然稀缺。按需GPU的价格持续上涨，甚至连已经落后近两代的Hopper系列芯片也不例外。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421537",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "token需求正在飙升，对AI算力的需求持续加速。模型能力的提升与智能体工作流的迅速涌现相叠加，推动了用户采用率和总token需求的激增。在智能体编程平台Claude Code被广泛采用的推动下，仅在2月份单月，Anthropic就新增了惊人的60亿美元ARR（年度经常性收入）；如果Anthropic拥有更多算力，这一数字还会更高。尽管过去几年AI基础设施建设规模庞大，但可用算力依然稀缺。按需GPU的价格持续上涨，甚至连已经落后近两代的Hopper系列芯片也不例外。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:25:37.626851",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "token需求正在飙升，对AI算力的需求持续加速。模型能力的提升与智能体工作流的迅速涌现相叠加，推动了用户采用率和总token需求的激增。在智能体编程平台Claude Code被广泛采用的推动下，仅在2月份单月，Anthropic就新增了惊人的60亿美元ARR（年度经常性收入）；如果Anthropic拥有更多算力，这一数字还会更高。尽管过去几年AI基础设施建设规模庞大，但可用算力依然稀缺。按需GPU的价格持续上涨，甚至连已经落后近两代的Hopper系列芯片也不例外。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "From our own experiences, we have reached out to every neocloud we know asking if they have small clusters available, but everything is already firmly locked up. This tight supply environment explains the sharp reset in hyperscaler capex plans. Consensus estimates have moved materially higher across the board, with Google standing out as the most extreme example, where 2026 capex expectations have roughly doubled versus prior expectations, primarily driven by datacenter and server spend.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "From our own experiences, we have reached out to every neocloud we know asking if they have small clusters available, but everything is already firmly locked up. This tight supply environment explains the sharp reset in hyperscaler capex plans. Consensus estimates have moved materially higher across the board, with Google standing out as the most extreme example, where 2026 capex expectations have roughly doubled versus prior expectations, primarily driven by datacenter and server spend.",
+      "parent_block_plain_text": "From our own experiences, we have reached out to every neocloud we know asking if they have small clusters available, but everything is already firmly locked up. This tight supply environment explains the sharp reset in hyperscaler capex plans. Consensus estimates have moved materially higher across the board, with Google standing out as the most extreme example, where 2026 capex expectations have roughly doubled versus prior expectations, primarily driven by datacenter and server spend.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 492,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "就我们自身的经历而言，我们联系了所认识的每一家新型云服务商，询问是否有可用的小型集群，但所有资源早已被牢牢锁定。这种紧张的供应环境，解释了为何超大规模云服务商的资本支出计划会出现大幅重置。市场一致预期已全面大幅上调，其中谷歌是最极端的例子：受数据中心和服务器支出的主要驱动，其2026年的资本支出预期较此前翻了约一倍。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421561",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "就我们自身的经历而言，我们联系了所认识的每一家新兴云厂商，询问是否有可用的小型集群，但所有资源都早已被牢牢锁定。这种紧张的供应环境，解释了为何超大规模云服务商的资本支出计划会出现大幅重置。市场一致预期已全面大幅上调，其中谷歌是最极端的例子：受数据中心和服务器支出的主要驱动，其2026年的资本支出预期较此前翻了约一倍。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:28:07.818922",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "就我们自身的经历而言，我们联系了所认识的每一家新兴云厂商，询问是否有可用的小型集群，但所有资源都早已被牢牢锁定。这种紧张的供应环境，解释了为何超大规模云服务商的资本支出计划会出现大幅重置。市场一致预期已全面大幅上调，其中谷歌是最极端的例子：受数据中心和服务器支出的主要驱动，其2026年的资本支出预期较此前翻了约一倍。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421572",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:28:08.814824",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!InA2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F685652e0-3bff-448a-a33f-f1f16feb6b61_1844x1038.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: Company Earnings, Bloomberg",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Company Earnings, Bloomberg",
+      "parent_block_plain_text": "Source: Company Earnings, Bloomberg",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 35,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "资料来源：公司财报、彭博",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421582",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： Company Earnings, Bloomberg",
+          "model": "manual",
+          "created_at": "2026-03-14T21:28:09.747540",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源： Company Earnings, Bloomberg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "This is a tremendous level of spending, and hyperscalers would deploy even more capital if they could, but they are constrained by one critical factor: silicon supply. There is simply not enough advanced logic and memory fabrication capacity to support the pace of compute deployments. While the AD (After Da launch of ChatGPT) era has been riddled with various constraints such as CoWoS packaging and datacenter power, we are now firmly in the silicon shortage phase.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is a tremendous level of spending, and hyperscalers would deploy even more capital if they could, but they are constrained by one critical factor: silicon supply. There is simply not enough advanced logic and memory fabrication capacity to support the pace of compute deployments. While the AD (After Da launch of ChatGPT) era has been riddled with various constraints such as CoWoS packaging and datacenter power, we are now firmly in the silicon shortage phase.",
+      "parent_block_plain_text": "This is a tremendous level of spending, and hyperscalers would deploy even more capital if they could, but they are constrained by one critical factor: silicon supply. There is simply not enough advanced logic and memory fabrication capacity to support the pace of compute deployments. While the AD (After Da launch of ChatGPT) era has been riddled with various constraints such as CoWoS packaging and datacenter power, we are now firmly in the silicon shortage phase.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 468,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是极其庞大的支出规模，如果条件允许，超大规模云服务商甚至愿意投入更多资金，但他们受制于一个关键因素：芯片供应。现有的先进逻辑与存储芯片的晶圆厂产能，根本不足以支撑当前的算力部署节奏。尽管在ChatGPT发布后的时代，行业一直饱受CoWoS封装和数据中心电力等各种瓶颈的困扰，但如今我们已确凿无疑地步入了芯片短缺阶段。",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421591",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这是极其庞大的支出规模，如果条件允许，超大规模云厂商甚至愿意投入更多资金，但他们受制于一个关键因素：芯片供应。现有的先进逻辑与存储芯片的晶圆厂产能，根本不足以支撑当前的算力部署节奏。尽管在ChatGPT发布后的时代，行业一直饱受CoWoS封装和数据中心电力等各种瓶颈的困扰，但如今我们已确凿无疑地步入了芯片短缺阶段。",
+          "model": "manual",
+          "created_at": "2026-03-14T21:29:13.009224",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "这是极其庞大的支出规模，如果条件允许，超大规模云厂商甚至愿意投入更多资金，但他们受制于一个关键因素：芯片供应。现有的先进逻辑与存储芯片的晶圆厂产能，根本不足以支撑当前的算力部署节奏。尽管在ChatGPT发布后的时代，行业一直饱受CoWoS封装和数据中心电力等各种瓶颈的困扰，但如今我们已确凿无疑地步入了芯片短缺阶段。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421600",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+          "model": "manual",
+          "created_at": "2026-03-14T21:29:13.760150",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!f-w8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdb3eb393-a811-44e0-b4f3-7c5ebf1b7f87_2030x1076.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis Accelerator Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Accelerator Model](https://semianalysis.com/accelerator-hbm-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Accelerator Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Accelerator Model",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/accelerator-hbm-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "pro": {
+          "text": "来源：SemiAnalysis 加速器模型",
+          "model": "pro",
+          "created_at": "2026-03-13T22:14:48.421668",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 加速器模型]]]",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "来源： SemiAnalysis Accelerator Model",
+          "model": "manual",
+          "created_at": "2026-03-14T21:29:14.357613",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源： SemiAnalysis Accelerator Model",
+      "confirmed_tokenized": "来源： [[[LINK_1|SemiAnalysis Accelerator Model]]]",
+      "confirmed_format_issues": [],
+      "status": "approved",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

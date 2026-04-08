@@ -1,0 +1,3693 @@
+{
+  "section_id": "13-unpacking-inference-providers",
+  "title": "Unpacking Inference Providers’ Unit Economics",
+  "title_translation": "拆解推理服务商的单位经济效益",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Below is a list on OpenRouter of all inference providers that serve DeepSeek R1 0528 FP8 along with their cost per million input/output tokens and average interactivity listed on. Disregarding Chutes, the middle of the pack provider serves at an interactivity of around 35 tok/s/user.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0138",
+      "parent_block_index": 138,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Below is a list on OpenRouter of all inference providers that serve DeepSeek R1 0528 FP8 along with their cost per million input/output tokens and average interactivity listed on. Disregarding Chutes, the middle of the pack provider serves at an interactivity of around 35 tok/s/user.",
+      "parent_block_plain_text": "Below is a list on OpenRouter of all inference providers that serve DeepSeek R1 0528 FP8 along with their cost per million input/output tokens and average interactivity listed on. Disregarding Chutes, the middle of the pack provider serves at an interactivity of around 35 tok/s/user.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 284,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下表列出了 OpenRouter 上所有提供 DeepSeek R1 0528 FP8 服务的推理提供商，并附上了其每百万输入/输出 Token 的成本及平均交互性。撇开 Chutes 不谈，中游提供商的交互性大约在 35 Token/秒/用户。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0139",
+      "parent_block_index": 139,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695465",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!b5bS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fce79108c-8341-4100-86de-943d8ca3c34e_916x1190.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: OpenRouter",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "OpenRouter",
+          "start": 8,
+          "end": 18,
+          "href": "https://openrouter.ai/deepseek/deepseek-r1-0528/performance",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0140",
+      "parent_block_index": 140,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [OpenRouter](https://openrouter.ai/deepseek/deepseek-r1-0528/performance)",
+      "parent_block_plain_text": "Source: OpenRouter",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "OpenRouter",
+          "start": 8,
+          "end": 18,
+          "href": "https://openrouter.ai/deepseek/deepseek-r1-0528/performance",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 18,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：OpenRouter",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387687",
+          "tokenized_text": "来源：[[[LINK_1|OpenRouter]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：OpenRouter",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695545",
+          "tokenized_text": "来源：[[[LINK_1|OpenRouter]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：OpenRouter",
+      "confirmed_tokenized": "来源：[[[LINK_1|OpenRouter]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "We can then use real InferenceX data to interpolate the cost per million input/output tokens at an interactivity level of 35 tok/sec/user, which is a reasonable interactivity level given the data above.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0141",
+      "parent_block_index": 141,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We can then use real InferenceX data to interpolate the cost per million input/output tokens at an interactivity level of 35 tok/sec/user, which is a reasonable interactivity level given the data above.",
+      "parent_block_plain_text": "We can then use real InferenceX data to interpolate the cost per million input/output tokens at an interactivity level of 35 tok/sec/user, which is a reasonable interactivity level given the data above.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 202,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "基于上述数据，35 Token/秒/用户是一个合理的交互性水平。据此，我们可以利用真实的 InferenceX 数据进行插值计算，得出在该交互性下每百万输入/输出 Token 的成本。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695566",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "As we mention later in the article, this is best understood as baseline data and not completely representative of real-world inference, mainly because InferenceX benchmarks on random data and disables prefix caching. In other words, performance/cost will be at least this good. It is also important to note that there are not data points for each GPU at each interactivity level. Thus we cannot make exact comparisons at each degree of interactivity. We nevertheless think the bar chart comparisons presented below are (very) reasonable interpolations in lieu of using exact data points.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "baseline",
+          "start": 63,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "at least",
+          "start": 258,
+          "end": 266,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "em",
+          "text": "each GPU",
+          "start": 342,
+          "end": 350,
+          "href": null,
+          "title": null,
+          "span_id": "EM_3"
+        },
+        {
+          "type": "em",
+          "text": "each",
+          "start": 354,
+          "end": 358,
+          "href": null,
+          "title": null,
+          "span_id": "EM_4"
+        },
+        {
+          "type": "em",
+          "text": "exact",
+          "start": 400,
+          "end": 405,
+          "href": null,
+          "title": null,
+          "span_id": "EM_5"
+        }
+      ],
+      "parent_block_id": "b0142",
+      "parent_block_index": 142,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As we mention later in the article, this is best understood as *baseline* data and not completely representative of real-world inference, mainly because InferenceX benchmarks on random data and disables prefix caching. In other words, performance/cost will be *at least* this good. It is also important to note that there are not data points for *each GPU* at *each* interactivity level. Thus we cannot make *exact* comparisons at each degree of interactivity. We nevertheless think the bar chart comparisons presented below are (very) reasonable interpolations in lieu of using exact data points.",
+      "parent_block_plain_text": "As we mention later in the article, this is best understood as baseline data and not completely representative of real-world inference, mainly because InferenceX benchmarks on random data and disables prefix caching. In other words, performance/cost will be at least this good. It is also important to note that there are not data points for each GPU at each interactivity level. Thus we cannot make exact comparisons at each degree of interactivity. We nevertheless think the bar chart comparisons presented below are (very) reasonable interpolations in lieu of using exact data points.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "baseline",
+          "start": 63,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "em",
+          "text": "at least",
+          "start": 258,
+          "end": 266,
+          "href": null,
+          "title": null,
+          "span_id": "EM_2"
+        },
+        {
+          "type": "em",
+          "text": "each GPU",
+          "start": 342,
+          "end": 350,
+          "href": null,
+          "title": null,
+          "span_id": "EM_3"
+        },
+        {
+          "type": "em",
+          "text": "each",
+          "start": 354,
+          "end": 358,
+          "href": null,
+          "title": null,
+          "span_id": "EM_4"
+        },
+        {
+          "type": "em",
+          "text": "exact",
+          "start": 400,
+          "end": 405,
+          "href": null,
+          "title": null,
+          "span_id": "EM_5"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 587,
+      "expected_tokens": [
+        "EM_1",
+        "EM_2",
+        "EM_3",
+        "EM_4",
+        "EM_5"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正如后文所述，这最好被视作基准数据，无法完全代表真实的生产环境推理。原因在于 InferenceX 采用随机数据进行基准测试，并且禁用了前缀缓存。换言之，实际的性能/成本比至少会达到这个水平。另外需要强调的是，并非每款 GPU 在每一个交互性下都有对应的数据点，因此我们无法在所有交互性维度上进行绝对精确的对比。尽管如此，在缺乏精确数据点的情况下，我们依然认为下方的条形图对比提供了（非常）合理的插值参考。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695675",
+          "tokenized_text": "正如后文所述，这最好被视作[[[EM_1|基准]]]数据，无法完全代表真实的生产环境推理。原因在于 InferenceX 采用随机数据进行基准测试，并且禁用了前缀缓存。换言之，实际的性能/成本比[[[EM_2|至少]]]会达到这个水平。另外需要强调的是，并非[[[EM_3|每款 GPU]]] 在[[[EM_4|每一个]]]交互性下都有对应的数据点，因此我们无法在所有交互性维度上进行[[[EM_5|绝对精确]]]的对比。尽管如此，在缺乏精确数据点的情况下，我们依然认为下方的条形图对比提供了（非常）合理的插值参考。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Comparing disagg+wideEP configs at this interactivity level, we see just how effective distributed inference techniques are when it comes to both perf/TCO and overall throughput. We also see how large scale up domains (like GB300 and GB200 NVL72) absolutely dominate in total throughput per GPU.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0143",
+      "parent_block_index": 143,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Comparing disagg+wideEP configs at this interactivity level, we see just how effective distributed inference techniques are when it comes to both perf/TCO and overall throughput. We also see how large scale up domains (like GB300 and GB200 NVL72) absolutely dominate in total throughput per GPU.",
+      "parent_block_plain_text": "Comparing disagg+wideEP configs at this interactivity level, we see just how effective distributed inference techniques are when it comes to both perf/TCO and overall throughput. We also see how large scale up domains (like GB300 and GB200 NVL72) absolutely dominate in total throughput per GPU.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在该交互性下对比 Disagg (分离) + WideEP 配置，我们能清晰看到分布式推理技术在提升性能/TCO 与整体吞吐量方面的显著成效。同时，大规模 Scale-up 架构（如 GB300 和 GB200 NVL72）在单 GPU 总吞吐量上展现出了绝对的统治力。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695694",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "It is interesting to note that at this interactivity level (on an 8k1k workload type), the B200 can achieve the best perf/TCO when MTP is enabled. Below we also list the Total Cost of Ownership (TCO) (Owning – Hyperscaler) for each GPU:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0144",
+      "parent_block_index": 144,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It is interesting to note that at this interactivity level (on an 8k1k workload type), the B200 can achieve the best perf/TCO when MTP is enabled. Below we also list the Total Cost of Ownership (TCO) (Owning – Hyperscaler) for each GPU:",
+      "parent_block_plain_text": "It is interesting to note that at this interactivity level (on an 8k1k workload type), the B200 can achieve the best perf/TCO when MTP is enabled. Below we also list the Total Cost of Ownership (TCO) (Owning – Hyperscaler) for each GPU:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 236,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，在该交互性下（针对 8k1k 工作负载类型），B200 在启用 MTP 时能够实现最佳的性能/TCO。下方我们还列出了各款 GPU 的 TCO（自购模式 —— 超大规模云厂商）：",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695713",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0145",
+      "parent_block_index": 145,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695731",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ZFIh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff200bfa6-02b5-464f-a4ea-ffe88cb6ed49_2520x81.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis TCO Model",
+          "start": 8,
+          "end": 30,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0146",
+      "parent_block_index": 146,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis TCO Model",
+          "start": 8,
+          "end": 30,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 30,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis TCO 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387699",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis TCO 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis TCO 模型",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695774",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis TCO 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis TCO 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis TCO 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0147",
+      "parent_block_index": 147,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695792",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!WB-s!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffd2a22ee-c300-4fbd-a782-bdf5ac918c02_1882x1776.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0148",
+      "parent_block_index": 148,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis InferenceX",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387222",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695811",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Let’s use the findings above to dig deeper into the unit economics of serving LLMs at scale. From the OpenRouter data above, we see that Crusoe serves at 36 tok/sec/user at $1.35/M input tokens and $5.40/M output tokens. If we assume no cache hits and that Crusoe is using at least H200s with SOTA inference techniques like MTP, disagg, and wide EP, the data above suggests they incur a cost of no more than $0.226$/M input tokens and $2.955/M output tokens for a profit margin of up to 83% gross margin (depreciation counted in cost of goods sold) on input tokens and 45% gross margin on output tokens.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "no more than",
+          "start": 395,
+          "end": 407,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Let’s use the findings above to dig deeper into the unit economics of serving LLMs at scale. From the OpenRouter data above, we see that Crusoe serves at 36 tok/sec/user at $1.35/M input tokens and $5.40/M output tokens. If we assume no cache hits and that Crusoe is using at least H200s with SOTA inference techniques like MTP, disagg, and wide EP, the data above suggests they incur a cost of *no more than* $0.226$/M input tokens and $2.955/M output tokens for a profit margin of up to 83% gross margin (depreciation counted in cost of goods sold) on input tokens and 45% gross margin on output tokens.",
+      "parent_block_plain_text": "Let’s use the findings above to dig deeper into the unit economics of serving LLMs at scale. From the OpenRouter data above, we see that Crusoe serves at 36 tok/sec/user at $1.35/M input tokens and $5.40/M output tokens. If we assume no cache hits and that Crusoe is using at least H200s with SOTA inference techniques like MTP, disagg, and wide EP, the data above suggests they incur a cost of no more than $0.226$/M input tokens and $2.955/M output tokens for a profit margin of up to 83% gross margin (depreciation counted in cost of goods sold) on input tokens and 45% gross margin on output tokens.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "no more than",
+          "start": 395,
+          "end": 407,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 603,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "基于上述发现，我们来深挖大规模部署 LLM 的单位经济效益。从上文的 OpenRouter 数据可以看出，Crusoe 提供的交互性为 36 Token/秒/用户，定价为每百万输入 Token 1.35 美元、每百万输出 Token 5.40 美元。假设在没有缓存命中的情况下，且 Crusoe 至少使用了 H200 GPU，并结合了 MTP、Disagg 以及 WideEP 等 SOTA (业界领先) 推理技术。那么上述数据表明，其成本绝不超过每百万输入 Token 0.226 美元与每百万输出 Token 2.955 美元。这意味着，其输入 Token 的毛利率最高可达 83%（折旧已计入销货成本），输出 Token 的毛利率可达 45%。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695870",
+          "tokenized_text": "基于上述发现，我们来深挖大规模部署 LLM 的单位经济效益。从上文的 OpenRouter 数据可以看出，Crusoe 提供的交互性为 36 Token/秒/用户，定价为每百万输入 Token 1.35 美元、每百万输出 Token 5.40 美元。假设在没有缓存命中的情况下，且 Crusoe 至少使用了 H200 GPU，并结合了 MTP、Disagg 以及 WideEP 等 SOTA (业界领先) 推理技术。那么上述数据表明，其成本[[[EM_1|绝不超过]]]每百万输入 Token 0.226 美元与每百万输出 Token 2.955 美元。这意味着，其输入 Token 的毛利率最高可达 83%（折旧已计入销货成本），输出 Token 的毛利率可达 45%。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis InferenceX 是一款免费的开源软件，离不开广大读者的支持。如需获取最新文章并支持我们的工作，欢迎考虑成为免费或付费订阅者。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695888",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Of course, these assumptions may not be exactly correct and these calculations don’t account for downtime or underutilization, but this gives an idea of some cool math you can do with InferenceX data. More analysis on the economics of inference can be found in the SemiAnalysis Tokenomics Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "exactly",
+          "start": 40,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model",
+          "start": 265,
+          "end": 294,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0151",
+      "parent_block_index": 151,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Of course, these assumptions may not be *exactly* correct and these calculations don’t account for downtime or underutilization, but this gives an idea of some cool math you can do with InferenceX data. More analysis on the economics of inference can be found in the [SemiAnalysis Tokenomics Model](https://semianalysis.com/tokenomics-model/).",
+      "parent_block_plain_text": "Of course, these assumptions may not be exactly correct and these calculations don’t account for downtime or underutilization, but this gives an idea of some cool math you can do with InferenceX data. More analysis on the economics of inference can be found in the SemiAnalysis Tokenomics Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "exactly",
+          "start": 40,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        },
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model",
+          "start": 265,
+          "end": 294,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [
+        "EM_1",
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "当然，这些假设未必完全准确，上述计算也未将停机时间或利用率不足的情况纳入考量。但这足以展示，利用 InferenceX 数据能推演出多么精妙的测算。关于推理经济学的更多分析，详见 SemiAnalysis Tokenomics 模型。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695946",
+          "tokenized_text": "当然，这些假设未必[[[EM_1|完全]]]准确，上述计算也未将停机时间或利用率不足的情况纳入考量。但这足以展示，利用 InferenceX 数据能推演出多么精妙的测算。关于推理经济学的更多分析，详见 [[[LINK_1|SemiAnalysis Tokenomics 模型]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "The OpenRouter data also shows Nebius AI Studio (Fast) serving DeepSeek FP4 at 167 tok/sec/user at $2/M input, $6/M output tokens. Adjusting the interactivity level in InferenceX accordingly and we see the following data.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The OpenRouter data also shows Nebius AI Studio (Fast) serving DeepSeek FP4 at 167 tok/sec/user at $2/M input, $6/M output tokens. Adjusting the interactivity level in InferenceX accordingly and we see the following data.",
+      "parent_block_plain_text": "The OpenRouter data also shows Nebius AI Studio (Fast) serving DeepSeek FP4 at 167 tok/sec/user at $2/M input, $6/M output tokens. Adjusting the interactivity level in InferenceX accordingly and we see the following data.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "OpenRouter 数据还显示，Nebius AI Studio (Fast) 提供 DeepSeek FP4 服务的交互性为 167 Token/秒/用户，定价为每百万输入 Token 2 美元、每百万输出 Token 6 美元。在 InferenceX 中对交互性进行相应调整后，我们得到了以下数据。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695964",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695982",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!28az!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff41d237c-16c2-4a9d-b681-a6668b01f62b_2398x1526.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0154",
+      "parent_block_index": 154,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis InferenceX",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387235",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.695997",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "At this high of interactivity, it becomes necessary to employ speculative decoding techniques like MTP to achieve high enough throughput to make inference economical. Luckily, MTP can increase throughput with relatively low risk to overall model accuracy. We will go on to talk more about MTP, and how it can be applied to increase throughput / decrease cost, in later sections of this article.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At this high of interactivity, it becomes necessary to employ speculative decoding techniques like MTP to achieve high enough throughput to make inference economical. Luckily, MTP can increase throughput with relatively low risk to overall model accuracy. We will go on to talk more about MTP, and how it can be applied to increase throughput / decrease cost, in later sections of this article.",
+      "parent_block_plain_text": "At this high of interactivity, it becomes necessary to employ speculative decoding techniques like MTP to achieve high enough throughput to make inference economical. Luckily, MTP can increase throughput with relatively low risk to overall model accuracy. We will go on to talk more about MTP, and how it can be applied to increase throughput / decrease cost, in later sections of this article.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 394,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在如此高的交互性下，必须采用 MTP 等投机解码技术来实现足够高的吞吐量，从而使推理具备经济效益。幸运的是，MTP 能够提升吞吐量，且对模型整体准确率的风险相对较低。在本文后续章节中，我们将进一步探讨 MTP，并分析如何应用该技术来提升吞吐量并降低成本。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696012",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "Lastly, we show one more chart of an FP8 DeepSeek workload served at 125 tok/s/user. This is another low latency workload where MTP considerably improves economic viability. As with the previous example, we note that at these higher ranges of interactivity, the cheapest configs all use MTP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0156",
+      "parent_block_index": 156,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, we show one more chart of an FP8 DeepSeek workload served at 125 tok/s/user. This is another low latency workload where MTP considerably improves economic viability. As with the previous example, we note that at these higher ranges of interactivity, the cheapest configs all use MTP.",
+      "parent_block_plain_text": "Lastly, we show one more chart of an FP8 DeepSeek workload served at 125 tok/s/user. This is another low latency workload where MTP considerably improves economic viability. As with the previous example, we note that at these higher ranges of interactivity, the cheapest configs all use MTP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 291,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后，我们再展示一张图表，呈现交互性为 125 Token/秒/用户的 FP8 DeepSeek 工作负载。这是另一个低延迟工作负载，其中 MTP 大幅提升了经济可行性。与前一个例子类似，我们注意到，在这些较高的交互性区间内，成本最低的配置均采用了 MTP。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696028",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696044",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!E0-S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccabb1a5-220a-4623-a615-245053808f24_2086x1738.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387246",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696084",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Nvidia Disagg Prefill and WideEP",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Nvidia Disagg Prefill and WideEP",
+      "parent_block_plain_text": "Nvidia Disagg Prefill and WideEP",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 32,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达分离式 Prefill 与 WideEP",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696101",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "EP requires all-to-all communication, where every GPU needs to send tokens to every other GPU. This is extremely bandwidth hungry. Recall that Nvidia’s servers have two separate networking domains – the scale-up NVLink domain, and the Scale-out Domain, usually using InfiniBand or Ethernet as the networking protocol.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0160",
+      "parent_block_index": 160,
+      "parent_block_type": "p",
+      "parent_block_markdown": "EP requires all-to-all communication, where every GPU needs to send tokens to every other GPU. This is extremely bandwidth hungry. Recall that Nvidia’s servers have two separate networking domains – the scale-up NVLink domain, and the Scale-out Domain, usually using InfiniBand or Ethernet as the networking protocol.",
+      "parent_block_plain_text": "EP requires all-to-all communication, where every GPU needs to send tokens to every other GPU. This is extremely bandwidth hungry. Recall that Nvidia’s servers have two separate networking domains – the scale-up NVLink domain, and the Scale-out Domain, usually using InfiniBand or Ethernet as the networking protocol.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 317,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "EP 需要全对全 (All-to-all) 通信，即每张 GPU 都需要向其他所有 GPU 发送 Token。这对带宽的消耗极大。回顾一下，英伟达服务器拥有两个独立的网络域：纵向扩展的 NVLink 域，以及通常采用 InfiniBand 或以太网协议的横向扩展 (Scale-out) 域。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696118",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "NVLink domain (within the NVL72 rack): 72 GPUs connected via NVLink with 900 GB/s uni-directional bandwidth per GPU. This is roughly 7-10x the bandwidth of the InfiniBand/Ethernet based scale-out network.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0161",
+      "parent_block_index": 161,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* NVLink domain (within the NVL72 rack): 72 GPUs connected via NVLink with 900 GB/s uni-directional bandwidth per GPU. This is roughly 7-10x the bandwidth of the InfiniBand/Ethernet based scale-out network.",
+      "parent_block_plain_text": "NVLink domain (within the NVL72 rack): 72 GPUs connected via NVLink with 900 GB/s uni-directional bandwidth per GPU. This is roughly 7-10x the bandwidth of the InfiniBand/Ethernet based scale-out network.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 204,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NVLink 域（NVL72 机架内）：72 张 GPU 通过 NVLink 连接，每张 GPU 的单向带宽高达 900 GB/s。这大约是基于 InfiniBand 或以太网的横向扩展 (Scale-out) 网络带宽的七到十倍。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696136",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "InfiniBand/RoCEv2 Ethernet (outside of the NVL72 rack): Typically 400-800 Gbit/s per GPU uni-directional (50-100 GB/s). Note that all our testing for Nvidia was conducted on InfiniBand based clusters.",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [],
+      "parent_block_id": "b0162",
+      "parent_block_index": 162,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* InfiniBand/RoCEv2 Ethernet (outside of the NVL72 rack): Typically 400-800 Gbit/s per GPU uni-directional (50-100 GB/s). Note that all our testing for Nvidia was conducted on InfiniBand based clusters.",
+      "parent_block_plain_text": "InfiniBand/RoCEv2 Ethernet (outside of the NVL72 rack): Typically 400-800 Gbit/s per GPU uni-directional (50-100 GB/s). Note that all our testing for Nvidia was conducted on InfiniBand based clusters.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 200,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "InfiniBand/RoCEv2 以太网（NVL72 机架外）：每张 GPU 单向带宽通常为 400-800 Gbit/s（50-100 GB/s）。需要注意的是，我们针对英伟达的所有测试均在基于 InfiniBand 的集群上进行。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696152",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "TP shards every layer’s weight matrices across GPUs. This means that every single token at every single layer requires up to two all-reduce communications (one after the column-parallel GEMM, one after the row-parallel GEMM). For EP, all-to-all is done only at MoE layers. Each GPU sends only the tokens routed to each expert. This means cheaper comms across all layers for EP vs TP.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0163",
+      "parent_block_index": 163,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TP shards every layer’s weight matrices across GPUs. This means that every single token at every single layer requires up to two all-reduce communications (one after the column-parallel GEMM, one after the row-parallel GEMM). For EP, all-to-all is done only at MoE layers. Each GPU sends only the tokens routed to each expert. This means cheaper comms across all layers for EP vs TP.",
+      "parent_block_plain_text": "TP shards every layer’s weight matrices across GPUs. This means that every single token at every single layer requires up to two all-reduce communications (one after the column-parallel GEMM, one after the row-parallel GEMM). For EP, all-to-all is done only at MoE layers. Each GPU sends only the tokens routed to each expert. This means cheaper comms across all layers for EP vs TP.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 383,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "TP 将每一层的权重矩阵分片至多张 GPU。这意味着在每一层，每个 token 最多需要两次全归约 (All-reduce) 通信（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM 后）。而 EP 仅在 MoE (混合专家) 层执行全对全 (All-to-all)。每张 GPU 只发送路由至各专家的 token。因此，与 TP 相比，EP 在所有层面的通信成本都更低。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696167",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "Because EP’s all-to-all communication bandwidth requirements scale with the number of participants, staying within the high-bandwidth NVLink domain before having to cross the slower IB/Eth fabric is better. With NVL72, EP across 72 GPUs is possible without ever leaving NVLink, whereas previous generations (with only 8-GPU NVLink domains) could only do EP across 8 GPUs at NVLink speed before hitting the slower IB/Eth networks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0164",
+      "parent_block_index": 164,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Because EP’s all-to-all communication bandwidth requirements scale with the number of participants, staying within the high-bandwidth NVLink domain before having to cross the slower IB/Eth fabric is better. With NVL72, EP across 72 GPUs is possible without ever leaving NVLink, whereas previous generations (with only 8-GPU NVLink domains) could only do EP across 8 GPUs at NVLink speed before hitting the slower IB/Eth networks.",
+      "parent_block_plain_text": "Because EP’s all-to-all communication bandwidth requirements scale with the number of participants, staying within the high-bandwidth NVLink domain before having to cross the slower IB/Eth fabric is better. With NVL72, EP across 72 GPUs is possible without ever leaving NVLink, whereas previous generations (with only 8-GPU NVLink domains) could only do EP across 8 GPUs at NVLink speed before hitting the slower IB/Eth networks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 429,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "EP 的全对全 (All-to-all) 通信带宽需求随参与节点数成比例增长。因此，在被迫跨越较慢的 IB/以太网架构前，将通信维持在高带宽的 NVLink 域内显然更优。借助 NVL72，系统无需离开 NVLink 即可跨 72 张 GPU 实现 EP；相比之下，前代产品（仅具备 8 卡 NVLink 域）只能在 8 张 GPU 范围内维持 NVLink 速度的 EP，随后便会撞上较慢的 IB/以太网瓶颈。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696183",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0165",
+      "parent_block_index": 165,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_block_plain_text": "SemiAnalysis InferenceX is free open source software and reader-supported. To receive new posts and support our work, consider becoming a free or paid subscriber.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 162,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis InferenceX 是免费的开源软件，依靠读者支持运营。欢迎成为免费或付费订阅者，获取最新文章并支持我们的工作。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696198",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p028",
+      "index": 28,
+      "source": "Wide EP also has a major advantage in weight loading efficiency. For a model like DeepSeek R1, decode is memory-bandwidth-bound: the bottleneck is how fast GPUs can load weights from HBM. With wide EP (e.g., DEP32), 32 GPUs collectively hold and load the 670B weights once, each loading only its shard (~21B). The total HBM bandwidth of all 32 chips is applied to loading a single copy of the model. By contrast, with narrower EP and more DP replicas (e.g., 5xDEP8), each of the 5 replicas needs its own full copy of the 670B weights, that’s 5×670B = 3.35T of redundant weight loading across the system. EP amortizes weights across chips; DP replicates them. This is why wider EP, enabled by high-bandwidth interconnects like NVLink, delivers significantly better throughput per GPU.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0166",
+      "parent_block_index": 166,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Wide EP also has a major advantage in weight loading efficiency. For a model like DeepSeek R1, decode is memory-bandwidth-bound: the bottleneck is how fast GPUs can load weights from HBM. With wide EP (e.g., DEP32), 32 GPUs collectively hold and load the 670B weights once, each loading only its shard (~21B). The total HBM bandwidth of all 32 chips is applied to loading a single copy of the model. By contrast, with narrower EP and more DP replicas (e.g., 5xDEP8), each of the 5 replicas needs its own full copy of the 670B weights, that’s 5×670B = 3.35T of redundant weight loading across the system. EP amortizes weights across chips; DP replicates them. This is why wider EP, enabled by high-bandwidth interconnects like NVLink, delivers significantly better throughput per GPU.",
+      "parent_block_plain_text": "Wide EP also has a major advantage in weight loading efficiency. For a model like DeepSeek R1, decode is memory-bandwidth-bound: the bottleneck is how fast GPUs can load weights from HBM. With wide EP (e.g., DEP32), 32 GPUs collectively hold and load the 670B weights once, each loading only its shard (~21B). The total HBM bandwidth of all 32 chips is applied to loading a single copy of the model. By contrast, with narrower EP and more DP replicas (e.g., 5xDEP8), each of the 5 replicas needs its own full copy of the 670B weights, that’s 5×670B = 3.35T of redundant weight loading across the system. EP amortizes weights across chips; DP replicates them. This is why wider EP, enabled by high-bandwidth interconnects like NVLink, delivers significantly better throughput per GPU.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 783,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "WideEP 在权重加载效率上也具备重大优势。对于 DeepSeek R1 这类模型，解码阶段受限于内存带宽瓶颈：核心制约因素是 GPU 从 HBM 加载权重的速度。采用 WideEP（如 DEP32）时，32 张 GPU 共同承载并一次性加载 670B 权重，每张卡仅需加载专属分片（约 21B）。这 32 颗芯片的 HBM 总带宽被全部用于加载单份模型副本。相比之下，若采用较窄的 EP 配合更多 DP（数据并行）副本（如 5xDEP8），5 个副本各自都需要一份完整的 670B 权重，导致系统层面出现 5×670B = 3.35T 的冗余权重加载。EP 在多芯片间分摊权重，而 DP 则是复制权重。正因如此，在 NVLink 等高带宽互连技术的加持下，更宽的 EP 能够带来单 GPU 吞吐量的显著跃升。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696213",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p029",
+      "index": 29,
+      "source": "https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0167",
+      "parent_block_index": 167,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696229",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7EhO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ed2a472-3511-4b29-afbd-0c593795085a_2434x1430.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p030",
+      "index": 30,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0168",
+      "parent_block_index": 168,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387259",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696268",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p031",
+      "index": 31,
+      "source": "Generally, TP is preferred at lower concurrencies due to load balancing. At small batch sizes, EP suffers from uneven token-to-expert routing, leaving some GPUs underutilized while others are overloaded. TP avoids this since each GPU holds a slice of every expert and always gets an equal share of work. At lower concurrency, the cost of this load imbalance outweighs TP’s additional communication overhead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0169",
+      "parent_block_index": 169,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Generally, TP is preferred at lower concurrencies due to load balancing. At small batch sizes, EP suffers from uneven token-to-expert routing, leaving some GPUs underutilized while others are overloaded. TP avoids this since each GPU holds a slice of every expert and always gets an equal share of work. At lower concurrency, the cost of this load imbalance outweighs TP’s additional communication overhead.",
+      "parent_block_plain_text": "Generally, TP is preferred at lower concurrencies due to load balancing. At small batch sizes, EP suffers from uneven token-to-expert routing, leaving some GPUs underutilized while others are overloaded. TP avoids this since each GPU holds a slice of every expert and always gets an equal share of work. At lower concurrency, the cost of this load imbalance outweighs TP’s additional communication overhead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 407,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "通常情况下，由于负载均衡的考量，低并发场景下更倾向于使用 TP。在小 Batch Size 时，EP 容易陷入 token 到专家路由不均的困境，导致部分 GPU 闲置吃灰，而另一部分则严重超载。TP 则巧妙避开了这一问题，因为每张 GPU 都持有每个专家的一块切片，始终能分到同等的工作量。在低并发场景下，这种负载不均带来的性能损耗，远超 TP 增加的通信开销。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696285",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p032",
+      "index": 32,
+      "source": "At higher concurrencies, this tradeoff changes. Expert activation becomes more evenly distributed across larger batch sizes, and EP’s communication and weight-loading advantages dominate over TP’s expensive per-layer all-reduce. In the middle of the curve, hybrid TP+EP configurations balance both concerns using small TP groups within each expert for load balancing while EP is used across the wider set of GPUs to amortize weights and reduce communication.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0170",
+      "parent_block_index": 170,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At higher concurrencies, this tradeoff changes. Expert activation becomes more evenly distributed across larger batch sizes, and EP’s communication and weight-loading advantages dominate over TP’s expensive per-layer all-reduce. In the middle of the curve, hybrid TP+EP configurations balance both concerns using small TP groups within each expert for load balancing while EP is used across the wider set of GPUs to amortize weights and reduce communication.",
+      "parent_block_plain_text": "At higher concurrencies, this tradeoff changes. Expert activation becomes more evenly distributed across larger batch sizes, and EP’s communication and weight-loading advantages dominate over TP’s expensive per-layer all-reduce. In the middle of the curve, hybrid TP+EP configurations balance both concerns using small TP groups within each expert for load balancing while EP is used across the wider set of GPUs to amortize weights and reduce communication.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 458,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在更高并发下，这种权衡会发生反转。随着 Batch Size 增大，专家激活分布变得更加均匀，此时 EP 在通信和权重加载上的优势，便全面压倒了 TP 昂贵的逐层全归约 (All-reduce)。在曲线中段，TP+EP 混合配置能兼顾双重考量：在每个专家内部划定小规模 TP 组以确保负载均衡，同时在更广泛的 GPU 集群上拉满 EP，从而充分分摊权重并削减通信开销。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696302",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p033",
+      "index": 33,
+      "source": "For higher interactivity levels (low batch size), large scale-up world sizes tend not to deliver stronger performance. B300 disagg over IB has the same performance as GB300 with NVL72, since the workload is latency-bound, not bandwidth-bound. The massive NVLink bandwidth advantage of NVL72 doesn’t matter because not even the much slower IB link is saturated by the tiny batches of tokens in flight.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0171",
+      "parent_block_index": 171,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For higher interactivity levels (low batch size), large scale-up world sizes tend not to deliver stronger performance. B300 disagg over IB has the same performance as GB300 with NVL72, since the workload is latency-bound, not bandwidth-bound. The massive NVLink bandwidth advantage of NVL72 doesn’t matter because not even the much slower IB link is saturated by the tiny batches of tokens in flight.",
+      "parent_block_plain_text": "For higher interactivity levels (low batch size), large scale-up world sizes tend not to deliver stronger performance. B300 disagg over IB has the same performance as GB300 with NVL72, since the workload is latency-bound, not bandwidth-bound. The massive NVLink bandwidth advantage of NVL72 doesn’t matter because not even the much slower IB link is saturated by the tiny batches of tokens in flight.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 400,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "对于追求更高交互性（低 Batch Size）的场景，一味做大向上扩展 (Scale-up) 规模往往无法带来更强的性能。基于 IB 网络的 B300 Disagg (分离) 架构与采用 NVL72 的 GB300 性能相当，因为此时的工作负载受限于延迟瓶颈，而非带宽瓶颈。NVL72 庞大的 NVLink 带宽优势毫无用武之地——毕竟传输中那点微小的 token 批次，连慢得多的 IB 链路都塞不满。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696318",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p034",
+      "index": 34,
+      "source": "Prefill/decode disaggregation also plays a role. Prefill is compute-heavy and bursty; decode is memory-bandwidth-bound and steady-state. When they share the same GPUs, they interfere with each other, causing latency jitter and wasted capacity. Separating them onto dedicated GPU pools lets each run a workload matched to its characteristics, improving effective utilization. This is why disaggregated B200 configs outperform single-node B200 in the middle of the throughput-interactivity curve. PD separation combined with wider EP across more GPUs over IB amortizes weights more efficiently than cramming both phases onto a single 8-GPU node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0172",
+      "parent_block_index": 172,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Prefill/decode disaggregation also plays a role. Prefill is compute-heavy and bursty; decode is memory-bandwidth-bound and steady-state. When they share the same GPUs, they interfere with each other, causing latency jitter and wasted capacity. Separating them onto dedicated GPU pools lets each run a workload matched to its characteristics, improving effective utilization. This is why disaggregated B200 configs outperform single-node B200 in the middle of the throughput-interactivity curve. PD separation combined with wider EP across more GPUs over IB amortizes weights more efficiently than cramming both phases onto a single 8-GPU node.",
+      "parent_block_plain_text": "Prefill/decode disaggregation also plays a role. Prefill is compute-heavy and bursty; decode is memory-bandwidth-bound and steady-state. When they share the same GPUs, they interfere with each other, causing latency jitter and wasted capacity. Separating them onto dedicated GPU pools lets each run a workload matched to its characteristics, improving effective utilization. This is why disaggregated B200 configs outperform single-node B200 in the middle of the throughput-interactivity curve. PD separation combined with wider EP across more GPUs over IB amortizes weights more efficiently than cramming both phases onto a single 8-GPU node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 643,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "预填充与解码分离同样发挥着关键作用。预填充阶段计算密集且呈突发性；解码阶段则处于内存带宽瓶颈且呈稳态。当两者共享同一批 GPU 时，势必相互干扰，进而导致延迟抖动与算力浪费。将它们剥离到专属的 GPU 资源池中，能让各自运行与其特性相匹配的工作负载，从而提升有效利用率。正因如此，在吞吐量-交互性曲线的中段，采用 Disagg (分离) 配置的 B200 击败了单节点 B200。相比于把两个阶段硬塞进单个 8-GPU 节点，预填充与解码分离结合跨越更多 IB 互联 GPU 的更宽泛 EP，能更高效地分摊权重。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696335",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p035",
+      "index": 35,
+      "source": "Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different from the following turns prefill’s and disaggregrated it leading to better TTFT performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different from the following turns prefill’s and disaggregrated it leading to better TTFT performance.",
+          "start": 0,
+          "end": 250,
+          "href": "https://www.together.ai/blog/cache-aware-disaggregated-inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0173",
+      "parent_block_index": 173,
+      "parent_block_type": "p",
+      "parent_block_markdown": "[Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different from the following turns prefill’s and disaggregrated it leading to better TTFT performance.](https://www.together.ai/blog/cache-aware-disaggregated-inference)",
+      "parent_block_plain_text": "Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different from the following turns prefill’s and disaggregrated it leading to better TTFT performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Side Note: the 10x inference engineers at TogetherAI noticed an pattern for multi-turn traffic where the requirements of first turn prefill is much different from the following turns prefill’s and disaggregrated it leading to better TTFT performance.",
+          "start": 0,
+          "end": 250,
+          "href": "https://www.together.ai/blog/cache-aware-disaggregated-inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 250,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "补充说明：TogetherAI 的 10x 推理工程师们在多轮对话流量中发现了一个规律——首轮预填充的需求与后续轮次截然不同。他们顺势将其分离，从而实现了更优的 TTFT (首个 Token 延迟) 性能。",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696383",
+          "tokenized_text": "[[[LINK_1|补充说明：TogetherAI 的 10x 推理工程师们在多轮对话流量中发现了一个规律——首轮预填充的需求与后续轮次截然不同。他们顺势将其分离，从而实现了更优的 TTFT (首个 Token 延迟) 性能。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p036",
+      "index": 36,
+      "source": "https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0174",
+      "parent_block_index": 174,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696401",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_Tls!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbfdcb99e-dc02-4468-bd72-b25a7be6c15d_2380x1386.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p037",
+      "index": 37,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0175",
+      "parent_block_index": 175,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T18:20:03.387271",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-07T21:42:34.696441",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文中出现了重复的英文括注“全对全 (All-to-all)（All-to-all）通信”。"
+          },
+          {
+            "type": "terminology",
+            "description": "将“Disagg Prefill”翻译为“Disagg (分离) 预填充”，未遵守提供的术语表。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“wasted capacity”翻译为“产能浪费”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文将其断句为“……必须采用 MTP 等投机解码技术。只有实现足够高的吞吐量，推理才具备经济效益。”"
+          },
+          {
+            "type": "annotation",
+            "description": "译文为“（一次在列并行 GEMM (通用矩阵乘法) 后，一次在行并行 GEMM (通用矩阵乘法) 后）”。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“并非每款 GPU在每一个交互速度下”中，英文缩写与中文字符之间缺少空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

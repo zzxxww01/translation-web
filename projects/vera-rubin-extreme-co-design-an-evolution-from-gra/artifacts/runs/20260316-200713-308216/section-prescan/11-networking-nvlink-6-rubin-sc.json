@@ -1,0 +1,215 @@
+{
+  "section_id": "11-networking-nvlink-6-rubin-sc",
+  "new_terms": [
+    {
+      "term": "bi-directional signaling",
+      "suggested_translation": "双向信号传输",
+      "context": "NVLink 6 doubles bandwidth by implementing bi-directional signaling over the same number of copper cables.",
+      "confidence": 0.95
+    },
+    {
+      "term": "copper backplane",
+      "suggested_translation": "铜质背板",
+      "context": "Using a simultaneous bi-directional SerDes for the copper backplane instead of increasing the modulation.",
+      "confidence": 0.95
+    },
+    {
+      "term": "echo cancellation",
+      "suggested_translation": "回声消除",
+      "context": "An inverted copy of the local TX must be generated at the local RX for proper echo cancellation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "differential pair",
+      "suggested_translation": "差分对",
+      "context": "Each electrical lane is one differential pair (DP) consisting of two conductors.",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-up",
+      "suggested_translation": "纵向扩展",
+      "context": "The evolution of scale-up and scale-out networking speeds.",
+      "confidence": 0.9
+    },
+    {
+      "term": "rail-optimized",
+      "suggested_translation": "导轨优化",
+      "context": "The scale-up network continues to be rail-optimized with all-to-all connectivity.",
+      "confidence": 0.85
+    },
+    {
+      "term": "SMM (System Management Module)",
+      "suggested_translation": "系统管理模块",
+      "context": "A module that acts as a host to the switch tray and manages system functions.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Scale-up bandwidth",
+      "suggested_translation": "纵向扩展带宽",
+      "context": "Bandwidth used for internal rack communication, typically via NVLink.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Scale-out bandwidth",
+      "suggested_translation": "横向扩展带宽",
+      "context": "Bandwidth used for inter-node or cluster-level communication, typically via InfiniBand or Ethernet.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Bidirectional signaling",
+      "suggested_translation": "双向信号传输",
+      "context": "A signaling method used in NVLink 6 that requires higher PCB material quality due to lower insertion loss tolerance.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Backplane copper cables",
+      "suggested_translation": "背板铜缆",
+      "context": "Passive copper connections used to link GPU trays and switch trays in the NVL72 rack.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DP (Data Path)",
+      "suggested_translation": "数据通路",
+      "context": "Refers to the number of data paths per lane or connector in the NVLink switch architecture.",
+      "confidence": 0.85
+    },
+    {
+      "term": "LDK2 glass fiber cloth",
+      "suggested_translation": "LDK2 玻璃纤维布",
+      "context": "A specific grade of low dielectric constant glass fiber cloth used in high-speed PCB manufacturing.",
+      "confidence": 0.9
+    },
+    {
+      "term": "AEC",
+      "suggested_translation": "有源电缆",
+      "context": "Active Electrical Cables used for NIC-to-TOR and switch-to-switch connections.",
+      "confidence": 0.95
+    },
+    {
+      "term": "multi-plane",
+      "suggested_translation": "多平面",
+      "context": "A networking architecture that splits traffic across multiple independent switch fabrics.",
+      "confidence": 0.95
+    },
+    {
+      "term": "multi-rail",
+      "suggested_translation": "多轨",
+      "context": "A networking topology where each GPU has a dedicated path (rail) to the network.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Neoclouds",
+      "suggested_translation": "新型云服务商",
+      "context": "Specialized cloud providers focused on AI and GPU infrastructure, distinct from hyperscalers.",
+      "confidence": 0.9
+    },
+    {
+      "term": "backend network",
+      "suggested_translation": "后端网络",
+      "context": "The scale-out network used for GPU-to-GPU communication in a cluster.",
+      "confidence": 0.95
+    },
+    {
+      "term": "pluggable optics",
+      "suggested_translation": "可插拔光模块",
+      "context": "Traditional transceiver modules as opposed to Co-Packaged Optics (CPO).",
+      "confidence": 0.95
+    },
+    {
+      "term": "Quantum X800",
+      "suggested_translation": "Quantum X800",
+      "context": "NVIDIA's next-generation InfiniBand switch series.",
+      "confidence": 1.0
+    },
+    {
+      "term": "integrated fiber shuffle",
+      "suggested_translation": "集成光纤交叉连接",
+      "context": "A hardware feature in SN6800 switches to manage internal fiber routing for multi-plane architectures.",
+      "confidence": 0.9
+    },
+    {
+      "term": "link flaps",
+      "suggested_translation": "链路抖动",
+      "context": "A condition where a network interface on a router/switch goes up and down repeatedly.",
+      "confidence": 0.95
+    },
+    {
+      "term": "external light source (ELS)",
+      "suggested_translation": "外部光源",
+      "context": "A component used in co-packaged optics (CPO) to provide the laser for optical engines.",
+      "confidence": 0.95
+    },
+    {
+      "term": "multi-plane network architecture",
+      "suggested_translation": "多平面网络架构",
+      "context": "A network design where traffic is split across multiple independent switch planes to increase scale.",
+      "confidence": 0.95
+    },
+    {
+      "term": "LinkX",
+      "suggested_translation": "LinkX",
+      "context": "NVIDIA's brand for its interconnect products, including cables and transceivers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "aggregate bandwidth",
+      "suggested_translation": "总聚合带宽",
+      "context": "The total throughput capacity of a switch or network system.",
+      "confidence": 0.9
+    },
+    {
+      "term": "fiber shuffle",
+      "suggested_translation": "光纤混洗",
+      "context": "Physical fiber management used to fan out optical signals to different logical ports or switch boxes.",
+      "confidence": 0.9
+    },
+    {
+      "term": "octopus cables",
+      "suggested_translation": "章鱼线",
+      "context": "Multi-headed cables used to connect a single high-bandwidth port to multiple lower-bandwidth ports.",
+      "confidence": 0.95
+    },
+    {
+      "term": "non-scheduled fabric (nsf)",
+      "suggested_translation": "非调度织网",
+      "context": "A type of network fabric architecture used by Meta, typically based on Ethernet rather than scheduled protocols like InfiniBand.",
+      "confidence": 0.85
+    },
+    {
+      "term": "aec (active electrical cable)",
+      "suggested_translation": "有源电缆",
+      "context": "High-speed copper cables with active circuitry to improve signal integrity, used for NIC-to-TOR connections.",
+      "confidence": 0.95
+    },
+    {
+      "term": "gearbox",
+      "suggested_translation": "速率转换芯片",
+      "context": "A component used to convert between different SerDes speeds, such as 200G per lane to 100G per lane.",
+      "confidence": 0.9
+    },
+    {
+      "term": "tor (top of rack)",
+      "suggested_translation": "机架顶端交换机",
+      "context": "The switch located at the top of a server rack connecting the nodes within the rack to the rest of the network.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "scale-out": "横向扩展",
+    "serdes": "SerDes",
+    "rubin": "鲁宾",
+    "blackwell": "布莱克威尔",
+    "flyover cables": "flyover cables",
+    "cold plate": "cold plate",
+    "insertion loss": "insertion loss",
+    "ccl": "CCL",
+    "osfp cage": "OSFP cages",
+    "vera": "维拉",
+    "spectrum-6 cpo": "Spectrum-6 CPO",
+    "cpo": "CPO",
+    "radix": "基数",
+    "optical engine": "光学引擎"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T23:54:15.002251"
+}

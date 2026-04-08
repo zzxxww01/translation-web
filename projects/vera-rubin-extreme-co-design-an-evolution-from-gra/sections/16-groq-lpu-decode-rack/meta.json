@@ -1,0 +1,339 @@
+{
+  "section_id": "16-groq-lpu-decode-rack",
+  "title": "Groq LPU Decode Rack",
+  "title_translation": "Groq LPU 解码机架",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Since Nvidia ~~acquired Groq~~ entered into a licensing agreement for Groq’s technology and hired Groq’s key people December 2025, speculation has brewed on how exactly Nvidia will implement Groq’s technology. We believe that Nvidia will introduce a new LPU rack at GTC 2026. The LPU rack is designed to be used alongside Nvidia GPUs for inference.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0439",
+      "parent_block_index": 439,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since Nvidia ~~acquired Groq~~ entered into a licensing agreement for Groq’s technology and hired Groq’s key people December 2025, speculation has brewed on how exactly Nvidia will implement Groq’s technology. We believe that Nvidia will introduce a new LPU rack at GTC 2026. The LPU rack is designed to be used alongside Nvidia GPUs for inference.",
+      "parent_block_plain_text": "Since Nvidia ~~acquired Groq~~ entered into a licensing agreement for Groq’s technology and hired Groq’s key people December 2025, speculation has brewed on how exactly Nvidia will implement Groq’s technology. We believe that Nvidia will introduce a new LPU rack at GTC 2026. The LPU rack is designed to be used alongside Nvidia GPUs for inference.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 348,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自从英伟达（NVIDIA）在 2025 年 12 月~~收购了 Groq~~ 与 Groq 签署了技术授权协议并聘用了其核心人员以来，关于英伟达将如何具体应用 Groq 技术的猜测便层出不穷。我们认为，英伟达将在 GTC 2026 上推出一款全新的 LPU 机柜。该 LPU 机柜旨在与英伟达 GPU 配合使用，共同进行推理。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:21:04.641858",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.205,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Decode 环节翻译为 'Decode 环节（Decode Loop）'，虽然准确，但考虑到全文硬核背景，Decode 环节在 LLM 推理语境下通常指代 Token 生成阶段，建议在首现处保留英文或使用更具工程感的 'Decode 阶段'。"
+          },
+          {
+            "type": "tone",
+            "description": "译文使用了 '并行运行'，但在机柜级（Rack-scale）架构语境下，'sit alongside' 更多指物理上的协同部署或在同一集群内互补。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "With CPX being designed specifically for inference pre-fill, the LPU system is designed for inference decode given the LPU’s emphasis on higher bandwidth SRAM. This comes at the expense of total throughput so this LPU decode system could be positioned at serving requests that require very high tokens per second per user, with the user paying much higher $/token to compensate for higher cost to serve.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0440",
+      "parent_block_index": 440,
+      "parent_block_type": "p",
+      "parent_block_markdown": "With CPX being designed specifically for inference pre-fill, the LPU system is designed for inference decode given the LPU’s emphasis on higher bandwidth SRAM. This comes at the expense of total throughput so this LPU decode system could be positioned at serving requests that require very high tokens per second per user, with the user paying much higher $/token to compensate for higher cost to serve.",
+      "parent_block_plain_text": "With CPX being designed specifically for inference pre-fill, the LPU system is designed for inference decode given the LPU’s emphasis on higher bandwidth SRAM. This comes at the expense of total throughput so this LPU decode system could be positioned at serving requests that require very high tokens per second per user, with the user paying much higher $/token to compensate for higher cost to serve.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 403,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "鉴于 CPX 专为推理 Pre-fill 环节设计，而 LPU 强调更高带宽的 SRAM，因此 LPU 系统是针对推理 Decode 环节（Decode Loop）设计的。这是以牺牲总吞吐量为代价的，因此该 LPU Decode 系统可能被定位为服务那些对“每用户每秒 Token 数”要求极高的请求，而用户则需支付更高的单位 Token 价格，以补偿更高的服务成本。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:21:04.641909",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.205,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Decode 环节翻译为 'Decode 环节（Decode Loop）'，虽然准确，但考虑到全文硬核背景，Decode 环节在 LLM 推理语境下通常指代 Token 生成阶段，建议在首现处保留英文或使用更具工程感的 'Decode 阶段'。"
+          },
+          {
+            "type": "tone",
+            "description": "译文使用了 '并行运行'，但在机柜级（Rack-scale）架构语境下，'sit alongside' 更多指物理上的协同部署或在同一集群内互补。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "It will be designed to sit alongside Nvidia GPUs that handle decode for lower interactivity requests. We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary",
+          "start": 102,
+          "end": 267,
+          "href": "https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0441",
+      "parent_block_index": 441,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It will be designed to sit alongside Nvidia GPUs that handle decode for lower interactivity requests. [We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary](https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/).",
+      "parent_block_plain_text": "It will be designed to sit alongside Nvidia GPUs that handle decode for lower interactivity requests. We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "We have shared more details of the system specification to Accelerator Model clients, where we highlight one part of the supply chain that could be a big beneficiary",
+          "start": 102,
+          "end": 267,
+          "href": "https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 268,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "它将被设计为与处理低交互性请求 Decode 任务的英伟达 GPU 并行运行。我们已向 Accelerator Model 客户分享了更多系统规格细节，并重点强调了供应链中可能成为巨大受益者的一个环节。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:21:04.641972",
+          "tokenized_text": "它将被设计为与处理低交互性请求 Decode 任务的英伟达 GPU 并行运行。[[[LINK_1|我们已向 Accelerator Model 客户分享了更多系统规格细节，并重点强调了供应链中可能成为巨大受益者的一个环节]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.205,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Decode 环节翻译为 'Decode 环节（Decode Loop）'，虽然准确，但考虑到全文硬核背景，Decode 环节在 LLM 推理语境下通常指代 Token 生成阶段，建议在首现处保留英文或使用更具工程感的 'Decode 阶段'。"
+          },
+          {
+            "type": "tone",
+            "description": "译文使用了 '并行运行'，但在机柜级（Rack-scale）架构语境下，'sit alongside' 更多指物理上的协同部署或在同一集群内互补。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Some details we will share here is that there are 256 LPUs per rack and it is the 3rd generation Groq chip on Samsung 4nm (the 2nd generation is being skipped). We share an important supply chain detail that has an impact on growth and market share as well as topology in the Accelerator Model note.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "in the Accelerator Model note.",
+          "start": 269,
+          "end": 299,
+          "href": "https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0442",
+      "parent_block_index": 442,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Some details we will share here is that there are 256 LPUs per rack and it is the 3rd generation Groq chip on Samsung 4nm (the 2nd generation is being skipped). We share an important supply chain detail that has an impact on growth and market share as well as topology [in the Accelerator Model note.](https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/)",
+      "parent_block_plain_text": "Some details we will share here is that there are 256 LPUs per rack and it is the 3rd generation Groq chip on Samsung 4nm (the 2nd generation is being skipped). We share an important supply chain detail that has an impact on growth and market share as well as topology in the Accelerator Model note.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "in the Accelerator Model note.",
+          "start": 269,
+          "end": 299,
+          "href": "https://semianalysis.com/institutional/new-groq-lpu-rack-details-hbm4-and-rubin-ramp/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 299,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们在此分享的部分细节包括：每个机柜包含 256 个 LPU，且采用的是基于三星（Samsung）4 纳米制程节点的第三代 Groq 芯片（跳过了第二代）。我们在 Accelerator Model 简报中 分享了一个对增长、市场份额以及拓扑结构产生影响的重要供应链细节。",
+          "model": "pro",
+          "created_at": "2026-03-17T19:21:04.642008",
+          "tokenized_text": "我们在此分享的部分细节包括：每个机柜包含 256 个 LPU，且采用的是基于三星（Samsung）4 纳米制程节点的第三代 Groq 芯片（跳过了第二代）。我们在 [[[LINK_1|Accelerator Model 简报中]]] 分享了一个对增长、市场份额以及拓扑结构产生影响的重要供应链细节。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.205,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 Decode 环节翻译为 'Decode 环节（Decode Loop）'，虽然准确，但考虑到全文硬核背景，Decode 环节在 LLM 推理语境下通常指代 Token 生成阶段，建议在首现处保留英文或使用更具工程感的 'Decode 阶段'。"
+          },
+          {
+            "type": "tone",
+            "description": "译文使用了 '并行运行'，但在机柜级（Rack-scale）架构语境下，'sit alongside' 更多指物理上的协同部署或在同一集群内互补。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

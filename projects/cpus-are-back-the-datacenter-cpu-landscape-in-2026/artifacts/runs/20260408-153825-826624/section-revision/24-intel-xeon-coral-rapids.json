@@ -1,0 +1,22 @@
+{
+  "section_id": "24-intel-xeon-coral-rapids",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.355,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "随着陈立武的加入以及 8 通道 Diamond Rapids-SP 被取消，英特尔希望加速 Coral Rapids 的研发进程，推动其尽早上市。在此之前，英特尔将发布搭载 NVLink-C2C 芯粒的定制版至强 CPU，为英伟达的机架级 GPU 设计提供 x86 架构的替代方案。除此之外，陈立武精简计划还有另一个牺牲品：英特尔 Clearwater Forest 的后续产品已被彻底砍掉。正如前文所述，E核 (能效核) 至强产品线本就停滞不前，该系列在推出仅两代后便将宣告终结。这款后续产品最初代号为 Rouge River Forest，后更名为 DMR-HD (Diamond Rapids高密度版)；其设计复用了 Diamond Rapids 上的 IMH 裸片，并搭配全新的 CBB 裸片，每个 CBB 裸片包含 128 个E核，从而在单插槽中实现高达 512 个核心。",
+    "https://substackcdn.com/image/fetch/$s_!iJ7C!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc3f607a-592a-41cd-980f-ef5692a9247a_1920x1003.png",
+    "英特尔 18A-Ultra 与 14A-P。来源：英特尔",
+    "针对 Coral Rapids，英特尔已意识到此前的失误，并在其 P核架构中重新引入了 SMT 技术。我们认为，该架构最初专为英特尔的 14A 制程节点 (P1280) 设计，但该节点要到 2027 年才会进入风险试产阶段；这意味着产品最早也要到 2028 年底才能发布，甚至可能推迟至 2029 年初。为了加速研发并让 Coral Rapids 尽早上市，英特尔可能不得不将该设计移植到经过改进的 18A-Ultra 制程节点上。"
+  ]
+}

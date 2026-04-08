@@ -1,0 +1,56 @@
+{
+  "section_id": "03-blackwell-features",
+  "new_terms": [
+    {
+      "term": "tcgen05",
+      "suggested_translation": "tcgen05",
+      "context": "Blackwell generation hardware unit/instruction for generating tensor core operations",
+      "confidence": 0.95
+    },
+    {
+      "term": "micro-scaling",
+      "suggested_translation": "微缩放 (Micro-scaling)",
+      "context": "Hardware support for sub-byte datatypes like FP4/FP6 using scaling factors",
+      "confidence": 0.9
+    },
+    {
+      "term": "Cluster Launch Control (CLC)",
+      "suggested_translation": "集群启动控制 (CLC)",
+      "context": "Hardware support for dynamic work scheduling in persistent-CTA kernels",
+      "confidence": 0.9
+    },
+    {
+      "term": "Programmatic dependent launch (PDL)",
+      "suggested_translation": "编程依赖启动 (PDL)",
+      "context": "Feature to hide launch and setup latency in back-to-back kernels",
+      "confidence": 0.9
+    },
+    {
+      "term": "TPC (Texture Processing Cluster)",
+      "suggested_translation": "纹理处理集群 (TPC)",
+      "context": "Hardware hierarchy level containing pairs of SMs in NVIDIA GPUs",
+      "confidence": 0.95
+    },
+    {
+      "term": "MMA (Matrix Multiply-Accumulate)",
+      "suggested_translation": "矩阵乘累加 (MMA)",
+      "context": "The core operation performed by Tensor Cores",
+      "confidence": 0.95
+    },
+    {
+      "term": "warpgroup",
+      "suggested_translation": "线程束组 (Warpgroup)",
+      "context": "A scheduling unit consisting of multiple warps (usually 4)",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "blackwell": "Blackwell 架构",
+    "ptx": "PTX",
+    "sass": "SASS",
+    "cta": "协作线程阵列 (CTA)",
+    "tmem": "张量内存 (TMEM)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:15:00.728498"
+}

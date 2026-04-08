@@ -1,0 +1,39 @@
+{
+  "section_id": "18-google-axion-c4a-n4a",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.0,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "generally available in 2025",
+        "description": "将“generally available”翻译为“全面上市”。",
+        "why_it_matters": "在云计算和企业级软件语境中，GA（Generally Available）的标准行业术语是“正式商用”或“全面可用”。“上市”通常用于消费级硬件产品或企业公开发行股票，用在此处不够准确。",
+        "suggestion": "建议改为“并于 2025 年正式商用”或“全面可用”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "large monolithic 5nm die",
+        "description": "将“monolithic”翻译为“单片”。",
+        "why_it_matters": "在半导体架构领域，与 Chiplet（小芯片）相对的“monolithic”设计，更专业且常见的中文对应词是“单体”，即“单体裸片”。“单片”容易与简单的数量词混淆。",
+        "suggestion": "建议改为“大型单体 5nm 裸片”。"
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "TPU clusters",
+        "description": "将“TPU”翻译并加注为“TPU (张量处理器)”。",
+        "why_it_matters": "文章的目标读者为半导体工程师、超大规模云厂商系统架构师及 AI 硬件研究人员。在此专业背景下，TPU 是极其基础且广为人知的术语，增加中文全称括注属于过度解释，反而降低了极客感和阅读流畅度。",
+        "suggestion": "建议删除括注，直接保留“TPU 集群”即可。"
+      }
+    ]
+  }
+}

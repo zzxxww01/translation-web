@@ -1,0 +1,57 @@
+{
+  "section_id": "19-multi-token-prediction-mtp",
+  "new_terms": [
+    {
+      "term": "draft model",
+      "suggested_translation": "草稿模型",
+      "context": "using a small, inexpensive draft model to propose several tokens ahead",
+      "confidence": 0.95
+    },
+    {
+      "term": "autoregressive generation",
+      "suggested_translation": "自回归生成",
+      "context": "Speculative decoding reduces the cost of autoregressive generation",
+      "confidence": 0.95
+    },
+    {
+      "term": "dense models",
+      "suggested_translation": "稠密模型",
+      "context": "This assumption... is strongest for dense models because batched verification can reuse the same weight stream",
+      "confidence": 0.95
+    },
+    {
+      "term": "auxiliary prediction heads",
+      "suggested_translation": "辅助预测头",
+      "context": "Auxiliary prediction heads are added to the model architecture",
+      "confidence": 0.9
+    },
+    {
+      "term": "EAGLE",
+      "suggested_translation": "EAGLE",
+      "context": "As shown in the Mixtral 8x7B Instruct model results in the EAGLE paper",
+      "confidence": 0.95
+    },
+    {
+      "term": "MTBench",
+      "suggested_translation": "MTBench",
+      "context": "comparing MTP acceptance behavior between MTBench and our 1k1k benchmark",
+      "confidence": 0.95
+    },
+    {
+      "term": "logits",
+      "suggested_translation": "Logits",
+      "context": "By making use of the typically unused logits to verify the extra tokens",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "speculative decoding": "投机解码",
+    "forward pass": "前向传播",
+    "prefill": "预填充",
+    "interactivity": "交互速度",
+    "memory-bandwidth bound": "内存带宽瓶颈",
+    "batch size": "Batch Size"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:52:55.207473"
+}

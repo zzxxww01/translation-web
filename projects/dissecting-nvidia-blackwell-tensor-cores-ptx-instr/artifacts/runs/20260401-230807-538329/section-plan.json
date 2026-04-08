@@ -1,0 +1,243 @@
+{
+  "article_theme": "An in-depth microbenchmarking analysis of Nvidia's Blackwell GPU architecture, revealing the performance characteristics of its new memory subsystems, cluster configurations, and 5th-generation Tensor Core MMA instructions for AI workloads.",
+  "structure_summary": "The article begins with an introduction and acknowledgments, setting the context of Blackwell's microarchitecture. It then details high-level architectural features (Clusters, GPCs, Floorsweeping) before diving deep into the memory subsystem (Async Copy, TMA, DSMEM). The core of the article analyzes computation instructions (5th Gen MMA, throughput, latency), and concludes by tying these microbenchmarking findings to real-world use cases (CUTLASS, Multicast) and the physical chip floorplan.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/19",
+      "paragraph_count": 6,
+      "previous_section_title": "",
+      "next_section_title": "Acknowledgement",
+      "section_role": "Establishes the novelty and necessity of the article by declaring it the first public microbenchmarking of Blackwell SM100 at the PTX/SASS level.",
+      "translation_notes": [
+        "Translate 'Speed of Light' as '极限性能' or 'SOL' (context: performance upper bound), not literal speed of light.",
+        "Translate 'Floorsweeps' as '次品屏蔽' or '降级利用' (semiconductor yield harvesting).",
+        "Keep instruction names like 'tcgen05', 'UMMA', 'TMA', 'LDGSTS' in English."
+      ]
+    },
+    {
+      "section_id": "01-acknowledgement",
+      "title": "Acknowledgement",
+      "position": "2/19",
+      "paragraph_count": 10,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Future Work",
+      "section_role": "Credits the hardware providers and foundational research, establishing the methodological credibility of the benchmarks.",
+      "translation_notes": [
+        "Ensure 'hardware counters' is translated as '硬件计数器' and 'NCU profiling' as 'NCU性能分析'.",
+        "Do not translate names of researchers or companies (e.g., Nebius, Verda, Mark Saroufim)."
+      ]
+    },
+    {
+      "section_id": "02-future-work",
+      "title": "Future Work",
+      "position": "3/19",
+      "paragraph_count": 2,
+      "previous_section_title": "Acknowledgement",
+      "next_section_title": "Blackwell Features",
+      "section_role": "Frames the article as the first installment of a broader, ongoing research series and serves as a recruitment call for low-level engineers.",
+      "translation_notes": [
+        "Maintain a professional yet enticing tone for the recruitment call.",
+        "Translate 'bullet points' as '核心亮点' or '关键要点' rather than a literal '子弹点'.",
+        "Keep 'ClusterMAX' as a proper noun."
+      ]
+    },
+    {
+      "section_id": "03-blackwell-features",
+      "title": "Blackwell Features",
+      "position": "4/19",
+      "paragraph_count": 7,
+      "previous_section_title": "Future Work",
+      "next_section_title": "Clusters, GPCs, and Floorsweeping",
+      "section_role": "Provides a high-level summary of the most critical architectural and PTX abstraction changes from Hopper to Blackwell.",
+      "translation_notes": [
+        "Translate 'operational intensity' accurately as '计算访存比' or '运算强度'.",
+        "Translate 'Programmatic dependent launch' as '可编程依赖启动'.",
+        "Ensure 'cta_group::2' and '2CTA' remain exactly as written, as they are specific PTX/SASS syntax."
+      ]
+    },
+    {
+      "section_id": "04-clusters-gpcs-and-floorsweep",
+      "title": "Clusters, GPCs, and Floorsweeping",
+      "position": "5/19",
+      "paragraph_count": 11,
+      "previous_section_title": "Blackwell Features",
+      "next_section_title": "Logical vs. Physical GPC",
+      "section_role": "Explains the logical grouping of CTAs into clusters and how Blackwell addresses SM utilization inefficiencies (quantization).",
+      "translation_notes": [
+        "Translate 'quantization issue' contextually as '整数划分问题' or '量化分配问题' (referring to grid/block scheduling, not INT8 quantization).",
+        "Translate 'thread block clusters' as '线程块集群'."
+      ]
+    },
+    {
+      "section_id": "05-logical-vs-physical-gpc",
+      "title": "Logical vs. Physical GPC",
+      "position": "6/19",
+      "paragraph_count": 10,
+      "previous_section_title": "Clusters, GPCs, and Floorsweeping",
+      "next_section_title": "Memory Subsystem",
+      "section_role": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+      "translation_notes": [
+        "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+        "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+      ]
+    },
+    {
+      "section_id": "06-memory-subsystem",
+      "title": "Memory Subsystem",
+      "position": "7/19",
+      "paragraph_count": 1,
+      "previous_section_title": "Logical vs. Physical GPC",
+      "next_section_title": "Asynchronous Copy",
+      "section_role": "Acts as an umbrella introduction for the data movement hardware, specifically focusing on asynchronous copy instructions.",
+      "translation_notes": [
+        "Translate 'memory copy instructions' as '内存拷贝指令'.",
+        "Translate 'asynchrony evolution' as '异步机制的演进'."
+      ]
+    },
+    {
+      "section_id": "07-asynchronous-copy",
+      "title": "Asynchronous Copy",
+      "position": "8/19",
+      "paragraph_count": 20,
+      "previous_section_title": "Memory Subsystem",
+      "next_section_title": "Tensor Memory Accelerator (TMA)",
+      "section_role": "Analyzes the LDGSTS instruction, its architectural benefits, and its specific application in modern AI workloads like MLA.",
+      "translation_notes": [
+        "Translate 'register pressure' as '寄存器压力'.",
+        "Keep 'multi-latent attention (MLA)' as '多潜在注意力 (MLA)' or simply use the acronym, ensuring the AI context is clear."
+      ]
+    },
+    {
+      "section_id": "08-tensor-memory-accelerator-tma",
+      "title": "Tensor Memory Accelerator (TMA)",
+      "position": "9/19",
+      "paragraph_count": 8,
+      "previous_section_title": "Asynchronous Copy",
+      "next_section_title": "Async Copy vs. TMA Comparison",
+      "section_role": "Details the hardware capabilities and benchmarking profile of the TMA engine, a specialized bulk data movement tool.",
+      "translation_notes": [
+        "Translate 'memory swizzling' as '内存交错' or '地址重组'.",
+        "Translate 'out-of-bounds handling' as '越界处理'.",
+        "Translate 'Peak throughput is reached far later' accurately to reflect that it requires larger data sizes to saturate bandwidth."
+      ]
+    },
+    {
+      "section_id": "09-async-copy-vs-tma-comparison",
+      "title": "Async Copy vs. TMA Comparison",
+      "position": "10/19",
+      "paragraph_count": 5,
+      "previous_section_title": "Tensor Memory Accelerator (TMA)",
+      "next_section_title": "TMA Multicast",
+      "section_role": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+      "translation_notes": [
+        "Translate 'regular access patterns' as '规则访存模式'.",
+        "Translate 'dynamic page loading' as '动态页面加载'.",
+        "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+      ]
+    },
+    {
+      "section_id": "10-tma-multicast",
+      "title": "TMA Multicast",
+      "position": "11/19",
+      "paragraph_count": 9,
+      "previous_section_title": "Async Copy vs. TMA Comparison",
+      "next_section_title": "DSMEM vs. SMEM",
+      "section_role": "Explores TMA's multicast capabilities, quantifying its impact on HBM bandwidth and L2 cache traffic for GEMM patterns.",
+      "translation_notes": [
+        "Translate 'multicast mode' as '多播模式'.",
+        "Translate 'dual-GEMM pattern' as '双GEMM模式'.",
+        "Translate 'in-flight' as '在途' or '执行中' (context: memory requests in flight)."
+      ]
+    },
+    {
+      "section_id": "11-dsmem-vs-smem",
+      "title": "DSMEM vs. SMEM",
+      "position": "12/19",
+      "paragraph_count": 5,
+      "previous_section_title": "TMA Multicast",
+      "next_section_title": "Tensor Core 5th Generation MMA",
+      "section_role": "Compares the throughput of local Shared Memory (SMEM) against Distributed Shared Memory (DSMEM) across clusters.",
+      "translation_notes": [
+        "Translate 'inter-CTA reductions' as 'CTA间归约'.",
+        "Translate 'emit' in the compiler context as '生成' or '发射'.",
+        "Maintain strict distinction between PTX instructions (`ld.shared`, `ld.shared::cluster`) and SASS instructions (`LDS`, `LD`)."
+      ]
+    },
+    {
+      "section_id": "12-tensor-core-5th-generation-mma",
+      "title": "Tensor Core 5th Generation MMA",
+      "position": "13/19",
+      "paragraph_count": 4,
+      "previous_section_title": "DSMEM vs. SMEM",
+      "next_section_title": "Throughput",
+      "section_role": "Analyzes the core computation instructions (MMA) of Blackwell, focusing on how performance varies by matrix shape and data type.",
+      "translation_notes": [
+        "Translate 'shape-dependent' as '高度依赖矩阵形状'.",
+        "Translate 'sweeping through' as '遍历' or '参数扫描' (in the context of benchmarking different configurations)."
+      ]
+    },
+    {
+      "section_id": "13-throughput",
+      "title": "Throughput",
+      "position": "14/19",
+      "paragraph_count": 22,
+      "previous_section_title": "Tensor Core 5th Generation MMA",
+      "next_section_title": "Latency",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-latency",
+      "title": "Latency",
+      "position": "15/19",
+      "paragraph_count": 6,
+      "previous_section_title": "Throughput",
+      "next_section_title": "Throughput at Different In-Flight Instruction Count",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-throughput-at-different-in-fli",
+      "title": "Throughput at Different In-Flight Instruction Count",
+      "position": "16/19",
+      "paragraph_count": 6,
+      "previous_section_title": "Latency",
+      "next_section_title": "Real-world Use Case: CUTLASS",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-real-world-use-case-cutlass",
+      "title": "Real-world Use Case: CUTLASS",
+      "position": "17/19",
+      "paragraph_count": 9,
+      "previous_section_title": "Throughput at Different In-Flight Instruction Count",
+      "next_section_title": "Throughput and Multicast",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "17-throughput-and-multicast",
+      "title": "Throughput and Multicast",
+      "position": "18/19",
+      "paragraph_count": 3,
+      "previous_section_title": "Real-world Use Case: CUTLASS",
+      "next_section_title": "Floorplan",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "18-floorplan",
+      "title": "Floorplan",
+      "position": "19/19",
+      "paragraph_count": 4,
+      "previous_section_title": "Throughput and Multicast",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

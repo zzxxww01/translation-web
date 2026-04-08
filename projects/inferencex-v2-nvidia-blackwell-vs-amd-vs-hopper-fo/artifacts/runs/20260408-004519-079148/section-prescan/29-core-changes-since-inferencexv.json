@@ -1,0 +1,50 @@
+{
+  "section_id": "29-core-changes-since-inferencexv",
+  "new_terms": [
+    {
+      "term": "sweep",
+      "suggested_translation": "遍历测试",
+      "context": "perform a full sweep over each configuration nightly",
+      "confidence": 0.9
+    },
+    {
+      "term": "ISL",
+      "suggested_translation": "输入序列长度 (Input Sequence Length)",
+      "context": "core settings like ISL/OSL, EP, TP, DP, MTP",
+      "confidence": 0.95
+    },
+    {
+      "term": "OSL",
+      "suggested_translation": "输出序列长度 (Output Sequence Length)",
+      "context": "core settings like ISL/OSL, EP, TP, DP, MTP",
+      "confidence": 0.95
+    },
+    {
+      "term": "GitHub Actions",
+      "suggested_translation": "GitHub Actions",
+      "context": "fans them out as individual GitHub Actions jobs",
+      "confidence": 1.0
+    },
+    {
+      "term": "artifacts",
+      "suggested_translation": "构建产物",
+      "context": "upload the results as artifacts",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "分离式 Prefill",
+    "jestermaxxing": "彻底沦为笑柄",
+    "benchmark": "基准测试",
+    "recipe": "配置方案 (或配方)",
+    "repository": "代码仓库",
+    "ep": "专家并行 (EP)",
+    "tp": "张量并行 (TP)",
+    "dp": "数据并行 (DP)",
+    "multi token prediction (mtp)": "多 Token 预测 (MTP)",
+    "prs": "PR (Pull Request)",
+    "inferencex": "InferenceX"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:11:51.202028"
+}

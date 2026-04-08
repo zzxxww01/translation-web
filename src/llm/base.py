@@ -399,23 +399,27 @@ class LLMProvider(ABC):
         section_content: str,
         existing_terms: Dict[str, str],
     ) -> Dict[str, Any]:
-        """Prescan one section using the flash model for speed."""
+        """Prescan one section using the preview model.
+
+        The current Gemini setup rejects `flash` for this environment, while
+        `preview` remains available and provides equal-or-better quality.
+        """
         return self.prescan_section(
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,
             existing_terms=existing_terms,
-            model="flash",
+            model="preview",
         )
 
     # ============ Prompt Building Methods ============
 
     def _build_deep_analysis_prompt(self, text: str, sections_outline: str) -> str:
-        """构建深度分析 Prompt（方案 C：增加到 30000 字符）"""
+        """构建深度分析 Prompt。"""
         return self.prompt_manager.get(
             "longform/analysis/article_analysis",
             sections_outline=sections_outline,
-            text=text[:30000],
+            text=text[:18000],
         )
 
     def _build_reflection_prompt(

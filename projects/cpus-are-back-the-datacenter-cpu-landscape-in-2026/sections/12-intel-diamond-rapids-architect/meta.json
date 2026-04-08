@@ -1,0 +1,887 @@
+{
+  "section_id": "12-intel-diamond-rapids-architect",
+  "title": "Intel Diamond Rapids Architecture Changes",
+  "title_translation": "英特尔Diamond Rapids架构变革",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161028",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ZcsD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F73fc256f-03cf-47b4-9ac5-a6240b0c9de0_2786x1606.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Diamond Rapids Overview. Source: HEPiX via @InstLatX64",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Diamond Rapids Overview. Source: HEPiX via @InstLatX64",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Diamond Rapids Overview. Source: HEPiX via @InstLatX64*",
+      "parent_block_plain_text": "Diamond Rapids Overview. Source: HEPiX via @InstLatX64",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Diamond Rapids Overview. Source: HEPiX via @InstLatX64",
+          "start": 0,
+          "end": 54,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 54,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Diamond Rapids 架构概览。来源：HEPiX，经由 @InstLatX64",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161232",
+          "tokenized_text": "[[[EM_1|Diamond Rapids 架构概览。来源：HEPiX，经由 @InstLatX64]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "At first glance, Diamond Rapids almost looks like a copy of AMD’s designs, with compute dies surrounding a central I/O die. It seems that it was too difficult to grow a single mesh network beyond the 10x19 on Granite Rapids to further increase core count, meaning Intel finally succumbs to having multiple NUMA nodes and L3 domains. Four Core Building Block (CBB) dies flank two I/O and Memory Hub (IMH) dies in the middle.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0154",
+      "parent_block_index": 154,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At first glance, Diamond Rapids almost looks like a copy of AMD’s designs, with compute dies surrounding a central I/O die. It seems that it was too difficult to grow a single mesh network beyond the 10x19 on Granite Rapids to further increase core count, meaning Intel finally succumbs to having multiple NUMA nodes and L3 domains. Four Core Building Block (CBB) dies flank two I/O and Memory Hub (IMH) dies in the middle.",
+      "parent_block_plain_text": "At first glance, Diamond Rapids almost looks like a copy of AMD’s designs, with compute dies surrounding a central I/O die. It seems that it was too difficult to grow a single mesh network beyond the 10x19 on Granite Rapids to further increase core count, meaning Intel finally succumbs to having multiple NUMA nodes and L3 domains. Four Core Building Block (CBB) dies flank two I/O and Memory Hub (IMH) dies in the middle.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 423,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "乍看之下，Diamond Rapids 简直是 AMD 设计的翻版，计算裸片紧紧环绕着中央的 I/O 裸片。看来要在 Granite Rapids 的 10x19 规模之上继续扩展单一网格网络以增加核心数，难度实在太大。这意味着英特尔最终妥协，接受了多 NUMA 节点与多 L3缓存域的架构。四个核心构建块 (CBB) 裸片分布在两侧，将两个 I/O与内存集线器 (IMH) 裸片夹在中间。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161284",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Within each CBB, 32 Dual Core Modules (DCM) on Intel 18A-P are hybrid bonded onto a base Intel 3-PT die containing the L3 cache and local mesh interconnect. To reduce the number of mesh stops and reduce network traffic, two cores now share a common L2 cache in each DCM, a design reminiscent of the Dunnington generation from 2008. While this means Diamond Rapids has 256 cores in total, it seems only up to 192 cores will be enabled for the mainline SKUs, with higher core counts presumably reserved for off-roadmap orders due to lower yields.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Within each CBB, 32 Dual Core Modules (DCM) on Intel 18A-P are hybrid bonded onto a base Intel 3-PT die containing the L3 cache and local mesh interconnect. To reduce the number of mesh stops and reduce network traffic, two cores now share a common L2 cache in each DCM, a design reminiscent of the Dunnington generation from 2008. While this means Diamond Rapids has 256 cores in total, it seems only up to 192 cores will be enabled for the mainline SKUs, with higher core counts presumably reserved for off-roadmap orders due to lower yields.",
+      "parent_block_plain_text": "Within each CBB, 32 Dual Core Modules (DCM) on Intel 18A-P are hybrid bonded onto a base Intel 3-PT die containing the L3 cache and local mesh interconnect. To reduce the number of mesh stops and reduce network traffic, two cores now share a common L2 cache in each DCM, a design reminiscent of the Dunnington generation from 2008. While this means Diamond Rapids has 256 cores in total, it seems only up to 192 cores will be enabled for the mainline SKUs, with higher core counts presumably reserved for off-roadmap orders due to lower yields.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 544,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在每个 CBB 内部，32 个基于 Intel 18A-P 工艺的双核模块 (DCM) 被混合键合到基础的 Intel 3-PT 裸片上，该基础裸片包含 L3缓存与本地网格互连。为了减少网格站点数量并降低网络流量，现在每个 DCM 中的两个核心共享一个 L2缓存。这种设计让人不禁联想到 2008 年的 Dunnington 架构。虽然这意味着 Diamond Rapids 总共拥有 256 个核心，但主流 SKU 似乎最多只会启用 192 个核心。受限于较低良率，更高核心数的版本大概率将预留给路线图之外的定制订单。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161324",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The IMH dies contain the 16-channel DDR5 memory interfaces, PCIe6 with CXL3 support, and Intel datapath Accelerators (QAT, DLB, IAA, DSA).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0156",
+      "parent_block_index": 156,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The IMH dies contain the 16-channel DDR5 memory interfaces, PCIe6 with CXL3 support, and Intel datapath Accelerators (QAT, DLB, IAA, DSA).",
+      "parent_block_plain_text": "The IMH dies contain the 16-channel DDR5 memory interfaces, PCIe6 with CXL3 support, and Intel datapath Accelerators (QAT, DLB, IAA, DSA).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 138,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "IMH 裸片包含 16 通道 DDR5 内存接口、支持 CXL3 的 PCIe6，以及英特尔数据路径加速器（QAT、DLB、IAA、DSA）。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161363",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Interestingly, it seems that the die to die interconnect no longer requires EMIB advanced packaging, with long traces across the package substrate connecting each CBB die to both IMH dies, allowing each CBB direct access to the entire memory and IO interface without needing a second extra hop to the other IMH. This also ensures that only 2 cross-die hops are needed for any inter-CBB communication. As a result of moving away from advanced packaging and splitting the cores across 4 dies, we expect cross-CBB latencies to be appreciably worse off, with a large difference in latency compared to staying within the same die.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Interestingly, it seems that the die to die interconnect no longer requires EMIB advanced packaging, with long traces across the package substrate connecting each CBB die to both IMH dies, allowing each CBB direct access to the entire memory and IO interface without needing a second extra hop to the other IMH. This also ensures that only 2 cross-die hops are needed for any inter-CBB communication. As a result of moving away from advanced packaging and splitting the cores across 4 dies, we expect cross-CBB latencies to be appreciably worse off, with a large difference in latency compared to staying within the same die.",
+      "parent_block_plain_text": "Interestingly, it seems that the die to die interconnect no longer requires EMIB advanced packaging, with long traces across the package substrate connecting each CBB die to both IMH dies, allowing each CBB direct access to the entire memory and IO interface without needing a second extra hop to the other IMH. This also ensures that only 2 cross-die hops are needed for any inter-CBB communication. As a result of moving away from advanced packaging and splitting the cores across 4 dies, we expect cross-CBB latencies to be appreciably worse off, with a large difference in latency compared to staying within the same die.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 625,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "有趣的是，裸片间互连似乎不再需要 EMIB (嵌入式多芯片互连桥接) 先进封装。封装基板上的长走线将每个 CBB 裸片与两个 IMH 裸片直接相连。这使得每个 CBB 都能直接访问完整的内存与 I/O 接口，无需再额外跳转至另一个 IMH。这也确保了任何 CBB 间的通信仅需 2 次跨裸片跳数。由于放弃了先进封装并将核心拆分到 4 个裸片上，我们预计跨 CBB 的延迟将明显恶化，与同一裸片内的延迟相比将出现巨大落差。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161403",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161441",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!v88S!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe49ef13f-5a91-465a-af7e-3caabc9c651a_2942x1627.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Intel removes SMT on their P-cores. Source: Intel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel removes SMT on their P-cores. Source: Intel",
+          "start": 0,
+          "end": 49,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel removes SMT on their P-cores. Source: Intel*",
+      "parent_block_plain_text": "Intel removes SMT on their P-cores. Source: Intel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel removes SMT on their P-cores. Source: Intel",
+          "start": 0,
+          "end": 49,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 49,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔在其 P核 (性能核) 上移除了 SMT。来源：英特尔",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161537",
+          "tokenized_text": "[[[EM_1|英特尔在其 P核 (性能核) 上移除了 SMT。来源：英特尔]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Though worse latencies are problematic, the worst issue with Diamond Rapids is the lack of SMT. Spooked by the Spectre and Meltdown vulnerabilities that fundamentally affected Intel more than AMD, their core design team began designing P-cores without it, starting with Lion Cove in the 2024 client PC. Intel rationalized it at the time by claiming the area saved by removing SMT functionality would give better efficiency at the expense of raw throughput. This was fine for PC designs as they had integrated E-cores alongside that would help bolster multi-threaded performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0160",
+      "parent_block_index": 160,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Though worse latencies are problematic, the worst issue with Diamond Rapids is the lack of SMT. Spooked by the Spectre and Meltdown vulnerabilities that fundamentally affected Intel more than AMD, their core design team began designing P-cores without it, starting with Lion Cove in the 2024 client PC. Intel rationalized it at the time by claiming the area saved by removing SMT functionality would give better efficiency at the expense of raw throughput. This was fine for PC designs as they had integrated E-cores alongside that would help bolster multi-threaded performance.",
+      "parent_block_plain_text": "Though worse latencies are problematic, the worst issue with Diamond Rapids is the lack of SMT. Spooked by the Spectre and Meltdown vulnerabilities that fundamentally affected Intel more than AMD, their core design team began designing P-cores without it, starting with Lion Cove in the 2024 client PC. Intel rationalized it at the time by claiming the area saved by removing SMT functionality would give better efficiency at the expense of raw throughput. This was fine for PC designs as they had integrated E-cores alongside that would help bolster multi-threaded performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 578,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "延迟恶化固然棘手，但 Diamond Rapids 最致命的问题在于砍掉了 SMT。幽灵 (漏洞) 和熔断 (漏洞) 对英特尔的根本性打击远超 AMD，英特尔核心设计团队对此心有余悸，因此从 2024 年客户端 PC 的 Lion Cove 架构开始，他们在设计 P核 (性能核) 时便彻底抛弃了该功能。英特尔当时给出的合理化解释是，移除 SMT 功能所节省的芯片面积能带来更好的效率，代价则是牺牲原始吞吐量。这对 PC 设计来说并无大碍，因为它们同时集成了 E核 (能效核)，足以提振多线程性能。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161562",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "However, maximum throughput matters for datacenter CPUs, severely handicapping Diamond Rapids. Compared to the current 128 core, 256 thread Granite Rapids, we expect the main 192 core, 192 thread Diamond Rapids to be only around 40% faster, exposing Intel for another generation with lower performance than AMD.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0161",
+      "parent_block_index": 161,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, maximum throughput matters for datacenter CPUs, severely handicapping Diamond Rapids. Compared to the current 128 core, 256 thread Granite Rapids, we expect the main 192 core, 192 thread Diamond Rapids to be only around 40% faster, exposing Intel for another generation with lower performance than AMD.",
+      "parent_block_plain_text": "However, maximum throughput matters for datacenter CPUs, severely handicapping Diamond Rapids. Compared to the current 128 core, 256 thread Granite Rapids, we expect the main 192 core, 192 thread Diamond Rapids to be only around 40% faster, exposing Intel for another generation with lower performance than AMD.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 311,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，最大吞吐量对数据中心 CPU 至关重要，这让 Diamond Rapids 陷入了严重劣势。与当前 128 核、256 线程的 Granite Rapids 相比，我们预计主流的 192 核、192 线程 Diamond Rapids 速度仅能提升约 40%，这将导致英特尔在又一代产品中再次面临性能落后于 AMD 的窘境。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161606",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "In a late move, Intel has cancelled the mainstream 8-channel Diamond Rapids-SP platform entirely, leaving their highest volume core market without a new generation into at least 2028. While this helps streamline Intel’s bloated SKU stack, we feel this is the wrong move as general purpose compute for AI tool use and context storage uses more mainstream CPUs with good connectivity as opposed to massive performance per socket options.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0162",
+      "parent_block_index": 162,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In a late move, Intel has cancelled the mainstream 8-channel Diamond Rapids-SP platform entirely, leaving their highest volume core market without a new generation into at least 2028. While this helps streamline Intel’s bloated SKU stack, we feel this is the wrong move as general purpose compute for AI tool use and context storage uses more mainstream CPUs with good connectivity as opposed to massive performance per socket options.",
+      "parent_block_plain_text": "In a late move, Intel has cancelled the mainstream 8-channel Diamond Rapids-SP platform entirely, leaving their highest volume core market without a new generation into at least 2028. While this helps streamline Intel’s bloated SKU stack, we feel this is the wrong move as general purpose compute for AI tool use and context storage uses more mainstream CPUs with good connectivity as opposed to massive performance per socket options.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 435,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在产品开发后期，英特尔彻底砍掉了主流的 8 通道 Diamond Rapids-SP 平台，导致其出货量最大的核心市场至少要到 2028 年才会迎来换代产品。尽管这有助于精简英特尔臃肿的 SKU 产品线，但我们认为这是一步错棋，因为用于 AI 工具调用和上下文存储的通用计算，更多依赖于具备良好连接性的主流 CPU，而非追求极致单插槽性能的产品。",
+          "model": "pro",
+          "created_at": "2026-04-08T16:16:30.161630",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.425,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "漏洞名称生译为“幽灵 (漏洞) 和熔断 (漏洞)”略显生硬且括号用法不标准；对于硬核技术受众，保留英文原名并辅以中文释义更为地道。同时，“P核 (性能核)”等处的半角括号及缺失空格不符合中文排版规范。"
+          },
+          {
+            "type": "readability",
+            "description": "译文中的“L3缓存域”、“I/O与内存集线器”在英文数字/字母与中文汉字之间缺少必要的空格。同理，第 3 段中的“L3缓存”、“L2缓存”也存在此排版问题。"
+          },
+          {
+            "type": "accuracy",
+            "description": "将“In a late move”译为“在产品开发后期”略有过度诠释之嫌，原意更侧重于这是英特尔在路线图推进到较晚阶段才做出的“近期/后期动作”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

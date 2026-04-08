@@ -1,0 +1,805 @@
+{
+  "section_id": "05-logical-vs-physical-gpc",
+  "title": "Logical vs. Physical GPC",
+  "title_translation": "逻辑 GPC 与物理 GPC",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The groupings of TPCs into GPCs we presented above are logical groupings. They represent software’s view of the GPCs, with no information about which of the 20 actual physical SMs in each GPC are enabled, or where each physical GPC is located on the two dies. In reality, B200 chips with the same logical configuration need not have exactly the same physical SMs yielded in each GPC. This can be a potential source of performance non-determinism between GPUs which otherwise might look the same from the view of software. Additionally, the logical groupings of SMs into GPCs tells us nothing about which GPC is on each of the two dies in the B200 package.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "logical",
+          "start": 55,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The groupings of TPCs into GPCs we presented above are *logical* groupings. They represent software’s view of the GPCs, with no information about which of the 20 actual physical SMs in each GPC are enabled, or where each physical GPC is located on the two dies. In reality, B200 chips with the same logical configuration need not have exactly the same physical SMs yielded in each GPC. This can be a potential source of performance non-determinism between GPUs which otherwise might look the same from the view of software. Additionally, the logical groupings of SMs into GPCs tells us nothing about which GPC is on each of the two dies in the B200 package.",
+      "parent_block_plain_text": "The groupings of TPCs into GPCs we presented above are logical groupings. They represent software’s view of the GPCs, with no information about which of the 20 actual physical SMs in each GPC are enabled, or where each physical GPC is located on the two dies. In reality, B200 chips with the same logical configuration need not have exactly the same physical SMs yielded in each GPC. This can be a potential source of performance non-determinism between GPUs which otherwise might look the same from the view of software. Additionally, the logical groupings of SMs into GPCs tells us nothing about which GPC is on each of the two dies in the B200 package.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "logical",
+          "start": 55,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 655,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "前文介绍的将 TPC 划分到 GPC 的方式属于逻辑分组。它们代表了软件视角下的 GPC，并未提供每个 GPC 中 20 个实际物理 SM 到底有哪些被启用，也没有指明每个物理 GPC 在两个裸片（Die）上的具体位置。实际上，具有相同逻辑配置的 B200 芯片，其每个 GPC 中实际产出的物理 SM 未必完全相同。对于在软件视角下看似相同的 GPU，这可能成为导致性能非确定性的潜在原因。此外，将 SM 划分到 GPC 的逻辑分组方式，也无法说明 B200 封装内的两个裸片上分别承载了哪些 GPC。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897437",
+          "tokenized_text": "前文介绍的将 TPC 划分到 GPC 的方式属于[[[EM_1|逻辑]]]分组。它们代表了软件视角下的 GPC，并未提供每个 GPC 中 20 个实际物理 SM 到底有哪些被启用，也没有指明每个物理 GPC 在两个裸片（Die）上的具体位置。实际上，具有相同逻辑配置的 B200 芯片，其每个 GPC 中实际产出的物理 SM 未必完全相同。对于在软件视角下看似相同的 GPU，这可能成为导致性能非确定性的潜在原因。此外，将 SM 划分到 GPC 的逻辑分组方式，也无法说明 B200 封装内的两个裸片上分别承载了哪些 GPC。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "To discover more information about the physical layout of the SMs, we have every SM traverse a pointer-chase array that fills L2 cache, measuring the latency of each load. For each address, we compare the latency seen from each SM to the latency seen by every other SM, to produce an SM<->SM distance matrix. X and Y axes are SM ID.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "<->",
+          "start": 286,
+          "end": 289,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To discover more information about the physical layout of the SMs, we have every SM traverse a pointer-chase array that fills L2 cache, measuring the latency of each load. For each address, we compare the latency seen from each SM to the latency seen by every other SM, to produce an SM`<->`SM distance matrix. X and Y axes are SM ID.",
+      "parent_block_plain_text": "To discover more information about the physical layout of the SMs, we have every SM traverse a pointer-chase array that fills L2 cache, measuring the latency of each load. For each address, we compare the latency seen from each SM to the latency seen by every other SM, to produce an SM<->SM distance matrix. X and Y axes are SM ID.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "<->",
+          "start": 286,
+          "end": 289,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 332,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了探究有关 SM 物理布局的更多信息，我们让每个 SM 遍历一个填满 L2 缓存的指针追踪数组，并测量每次加载的延迟。针对每个地址，我们将各个 SM 观察到的延迟与其他所有 SM 观察到的延迟进行对比，从而生成一个 SM<->SM 距离矩阵。X 轴和 Y 轴均为 SM ID。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897618",
+          "tokenized_text": "为了探究有关 SM 物理布局的更多信息，我们让每个 SM 遍历一个填满 L2 缓存的指针追踪数组，并测量每次加载的延迟。针对每个地址，我们将各个 SM 观察到的延迟与其他所有 SM 观察到的延迟进行对比，从而生成一个 SM[[[CODE_1|<->]]]SM 距离矩阵。X 轴和 Y 轴均为 SM ID。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897658",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!1JbI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F59a90c5b-7a40-4984-9872-717122402fe0_1600x1353.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "We can see two clear sets of SMs, separated by >300 cycles average distance to L2; this must be the die-to-die crossing. We’ve also labeled the SMs with their logical GPC groupings as identified in the last section; interestingly, the singleton TPCs are close together and seem to correlate well with GPC0 in this benchmark, so one might guess that those TPCs physically reside on GPC0.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0044",
+      "parent_block_index": 44,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We can see two clear sets of SMs, separated by >300 cycles average distance to L2; this must be the die-to-die crossing. We’ve also labeled the SMs with their logical GPC groupings as identified in the last section; interestingly, the singleton TPCs are close together and seem to correlate well with GPC0 in this benchmark, so one might guess that those TPCs physically reside on GPC0.",
+      "parent_block_plain_text": "We can see two clear sets of SMs, separated by >300 cycles average distance to L2; this must be the die-to-die crossing. We’ve also labeled the SMs with their logical GPC groupings as identified in the last section; interestingly, the singleton TPCs are close together and seem to correlate well with GPC0 in this benchmark, so one might guess that those TPCs physically reside on GPC0.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 386,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们可以看到两组界线分明的 SM，它们访问 L2 缓存的平均延迟相差超过 300 个周期；这必然是跨裸片 (die-to-die) 通信所致。我们还根据上一节确定的逻辑 GPC 分组对这些 SM 进行了标注；有趣的是，在此基准测试中，那些零散的 TPC 彼此距离很近，并且似乎与 GPC0 表现出很强的相关性，因此可以推测这些 TPC 在物理上位于 GPC0 内。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897684",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Based on this information, we can refine the list of yielded TPCs for each GPC, though the 5+3 is still just a guess.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0045",
+      "parent_block_index": 45,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Based on this information, we can refine the list of yielded TPCs for each GPC, though the 5+3 is still just a guess.",
+      "parent_block_plain_text": "Based on this information, we can refine the list of yielded TPCs for each GPC, though the 5+3 is still just a guess.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 117,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "基于这些信息，我们可以进一步细化每个 GPC 中实际产出的 TPC 列表，尽管其中的“5+3”组合仍然只是推测。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897707",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Die A: [10, 10, 10, 9]",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Die A",
+          "start": 0,
+          "end": 5,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0046",
+      "parent_block_index": 46,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Die A**: [10, 10, 10, 9]",
+      "parent_block_plain_text": "Die A: [10, 10, 10, 9]",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Die A",
+          "start": 0,
+          "end": 5,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Die A: [10, 10, 10, 9]",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897784",
+          "tokenized_text": "[[[STRONG_1|Die A]]]: [10, 10, 10, 9]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Die B: [9, 9, 9, 5+3]",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Die B",
+          "start": 0,
+          "end": 5,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0047",
+      "parent_block_index": 47,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Die B**: [9, 9, 9, 5+3]",
+      "parent_block_plain_text": "Die B: [9, 9, 9, 5+3]",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Die B",
+          "start": 0,
+          "end": 5,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 21,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Die B: [9, 9, 9, 5+3]",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897848",
+          "tokenized_text": "[[[STRONG_1|Die B]]]: [9, 9, 9, 5+3]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Additionally, though in a roundabout way, we can conclude that the die-to-die latency penalty is roughly 300 cycles. This is also evident when looking at the latency profile for a singular SM from the benchmark (which also includes a lot of L2 congestion):",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0048",
+      "parent_block_index": 48,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Additionally, though in a roundabout way, we can conclude that the die-to-die latency penalty is roughly 300 cycles. This is also evident when looking at the latency profile for a singular SM from the benchmark (which also includes a lot of L2 congestion):",
+      "parent_block_plain_text": "Additionally, though in a roundabout way, we can conclude that the die-to-die latency penalty is roughly 300 cycles. This is also evident when looking at the latency profile for a singular SM from the benchmark (which also includes a lot of L2 congestion):",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 256,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，尽管过程有些间接，但我们可以得出结论：跨裸片通信的延迟开销约为 300 个周期。观察该基准测试中单个 SM 的延迟分布（其中也包含了大量 L2 拥塞），这一点同样显而易见：",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897874",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0049",
+      "parent_block_index": 49,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897898",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!U0jj!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbec3b195-e042-4f89-b7b7-52e79a20d31b_2048x1015.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "We would like to thank Orian from Decart AI for the benchmark inspiration.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0050",
+      "parent_block_index": 50,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We would like to thank Orian from Decart AI for the benchmark inspiration.",
+      "parent_block_plain_text": "We would like to thank Orian from Decart AI for the benchmark inspiration.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 74,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们在此感谢 Decart AI 的 Orian 为本次基准测试提供灵感。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:20:08.897919",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+          "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Highlights the discrepancy between software-visible logical GPCs and physical SM yields, identifying a source of performance non-determinism.",
+          "relation_to_previous": "Directly contrasts the clean, logical scheduling model presented in section 04 with the messy, physical reality of chip manufacturing.",
+          "relation_to_next": "Concludes the execution-unit architecture discussion, clearing the way to discuss the memory subsystem that feeds these units.",
+          "key_points": [
+            "Physical SM yields within GPCs vary between individual B200 chips despite having the same logical configuration.",
+            "This physical variance is a root cause of performance non-determinism across ostensibly identical GPUs."
+          ],
+          "translation_notes": [
+            "Translate 'yielded' in this context as '良率合格的' or '实际产出的' (semiconductor manufacturing context).",
+            "Translate 'performance non-determinism' as '性能非确定性' or '性能波动'."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

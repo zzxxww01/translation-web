@@ -1,0 +1,62 @@
+{
+  "section_id": "10-intels-mesh-architecture",
+  "new_terms": [
+    {
+      "term": "EMIB",
+      "suggested_translation": "EMIB (嵌入式多芯片互连桥接)",
+      "context": "Sapphire Rapids debuted Intel’s EMIB advanced packaging technology to carry the mesh architecture across dies.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Sub-NUMA Clustering (SNC)",
+      "suggested_translation": "子NUMA集群 (SNC)",
+      "context": "several clustering modes were offered that split the mesh into quadrants for Sub-NUMA Clustering (SNC)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Modular Die Fabric",
+      "suggested_translation": "模块化裸片互连结构",
+      "context": "Two pairs of mirrored 15-core dies were stitched together with a Modular Die Fabric",
+      "confidence": 0.9
+    },
+    {
+      "term": "Heterogeneous Disaggregation",
+      "suggested_translation": "异构解耦",
+      "context": "Intel went for heterogeneous disaggregation by partitioning the I/O away from the core and memory.",
+      "confidence": 0.95
+    },
+    {
+      "term": "hybrid bonding",
+      "suggested_translation": "混合键合",
+      "context": "The compute dies debut Intel’s Foveros Direct hybrid bonding technology",
+      "confidence": 0.95
+    },
+    {
+      "term": "XCC",
+      "suggested_translation": "XCC (极高核心数)",
+      "context": "bringing 28 cores in the XCC die.",
+      "confidence": 0.9
+    },
+    {
+      "term": "HDCC",
+      "suggested_translation": "HDCC (高密度核心数)",
+      "context": "Xeon 6 Compute Die Mosaic. Clockwise from Top Left: UCC 44c, HCC 50c, HDCC 152c, LCC 20c.",
+      "confidence": 0.9
+    },
+    {
+      "term": "MCDRAM",
+      "suggested_translation": "MCDRAM",
+      "context": "The mesh grid is 6 columns by 9 rows in size, with top and bottom rows more IO and MCDRAM.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "mesh architecture": "网格架构",
+    "hyperscalers": "超大规模云厂商",
+    "tco": "总拥有成本",
+    "yield": "良率",
+    "cluster on die": "片上集群 (CoD)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T16:00:38.030534"
+}

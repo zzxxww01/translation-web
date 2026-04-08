@@ -1,0 +1,11 @@
+https://substackcdn.com/image/fetch/$s_!cMe7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3676208d-dd25-42ba-8f03-cc1359a1076c_2029x1057.png
+
+英伟达 Bluefield-4 上下文内存存储平台。来源：英伟达 CES 2026
+
+https://substackcdn.com/image/fetch/$s_!dd72!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd1e305db-6eb6-4ac4-af46-c11eb9b67b29_2506x1673.jpeg
+
+Bluefield-4 封装渲染图。来源：英伟达，SemiAnalysis 预估
+
+CPU 在网络栈中的比重日益增加。此前的智能网卡（SmartNIC）和数据处理器（DPU）仅在以太网控制器中加入少量 ARM 内核，用于执行网络内卸载与加速。如今，英伟达凭借最新款 DPU 将这一设计推向了新高度。在 Bluefield-4 DPU 中，英伟达直接将一整颗 Grace CPU 与 ConnectX-9 芯片进行共封装。每个 Rubin 计算托盘均将该 DPU 用作前端网卡；此外，英伟达还在其上下文内存存储平台中配置了 4 颗 BF4，专门用于将 KV-Cache 卸载至高速 NAND 闪存。
+
+64 个启用的 Grace 内核搭配 128GB LPDDR5 内存，释放出庞大算力。这表明 CPU 正深度介入 AI 数据管理。当前的 AI 网络拓扑包含东西向（用于 GPU集群的横向扩展）和南北向（用于连接存储、外部资源与互联网）。模型 KV-Cache 的卸载与存储，则相当于在现有架构中新增了第三张网络。随着 Bluefield-4 的问世，具备 CPU 算力的网卡与具备网络加速能力的 CPU（如至强 6 SoC Granite Rapids-D）之间的界限愈发模糊。

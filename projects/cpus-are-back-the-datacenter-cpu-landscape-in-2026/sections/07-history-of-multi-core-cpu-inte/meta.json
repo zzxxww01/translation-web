@@ -1,0 +1,454 @@
+{
+  "section_id": "07-history-of-multi-core-cpu-inte",
+  "title": "History of Multi-Core CPU Interconnects",
+  "title_translation": "多核CPU互联架构演进史",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "To appreciate the design changes and philosophies of the 2026 CPUs, we have to understand how multi-core CPUs work and the evolution of interconnects as core counts grew. With multiple cores comes the need to connect those cores together. Early dual-core designs such as Intel’s Pentium D and Xeon Paxville in 2005 simply consisted of two independent single cores, with core-to-core communication done off-package via the Front Side Bus (FSB) to a Northbridge chip that also housed the memory controllers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0059",
+      "parent_block_index": 59,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To appreciate the design changes and philosophies of the 2026 CPUs, we have to understand how multi-core CPUs work and the evolution of interconnects as core counts grew. With multiple cores comes the need to connect those cores together. Early dual-core designs such as Intel’s Pentium D and Xeon Paxville in 2005 simply consisted of two independent single cores, with core-to-core communication done off-package via the Front Side Bus (FSB) to a Northbridge chip that also housed the memory controllers. AMD’s Athlon 64 X2, also in 2005, could be considered a true dual-core processor with two cores and an integrated memory controller (IMC) on the same die, allowing the cores to communicate with each other and to memory and IO controllers directly within the silicon through on-die NoC (Network on Chip) data fabrics.",
+      "parent_block_plain_text": "To appreciate the design changes and philosophies of the 2026 CPUs, we have to understand how multi-core CPUs work and the evolution of interconnects as core counts grew. With multiple cores comes the need to connect those cores together. Early dual-core designs such as Intel’s Pentium D and Xeon Paxville in 2005 simply consisted of two independent single cores, with core-to-core communication done off-package via the Front Side Bus (FSB) to a Northbridge chip that also housed the memory controllers. AMD’s Athlon 64 X2, also in 2005, could be considered a true dual-core processor with two cores and an integrated memory controller (IMC) on the same die, allowing the cores to communicate with each other and to memory and IO controllers directly within the silicon through on-die NoC (Network on Chip) data fabrics.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 505,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "要理解 2026 年 CPU 的设计变革与理念，必须先弄清多核 CPU 的工作原理，以及互连架构随核心数量增长的演进历程。既然有多个核心，自然需要将它们连接起来。2005 年问世的早期双核设计（如英特尔的奔腾 D 和至强 Paxville）仅仅是两个独立的单核。核心间通信必须在封装外部进行，数据通过前端总线 (FSB) 传至北桥芯片，而北桥芯片同时也搭载了内存控制器。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:04:26.365173",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.19,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+          "Avoid translating 'core' as anything other than '核心' in this context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+          "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+          "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+          "key_points": [
+            "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+            "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+          ],
+          "translation_notes": [
+            "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+            "Avoid translating 'core' as anything other than '核心' in this context."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。"
+          },
+          {
+            "type": "tone",
+            "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AMD’s Athlon 64 X2, also in 2005, could be considered a true dual-core processor with two cores and an integrated memory controller (IMC) on the same die, allowing the cores to communicate with each other and to memory and IO controllers directly within the silicon through on-die NoC (Network on Chip) data fabrics.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0059",
+      "parent_block_index": 59,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To appreciate the design changes and philosophies of the 2026 CPUs, we have to understand how multi-core CPUs work and the evolution of interconnects as core counts grew. With multiple cores comes the need to connect those cores together. Early dual-core designs such as Intel’s Pentium D and Xeon Paxville in 2005 simply consisted of two independent single cores, with core-to-core communication done off-package via the Front Side Bus (FSB) to a Northbridge chip that also housed the memory controllers. AMD’s Athlon 64 X2, also in 2005, could be considered a true dual-core processor with two cores and an integrated memory controller (IMC) on the same die, allowing the cores to communicate with each other and to memory and IO controllers directly within the silicon through on-die NoC (Network on Chip) data fabrics.",
+      "parent_block_plain_text": "To appreciate the design changes and philosophies of the 2026 CPUs, we have to understand how multi-core CPUs work and the evolution of interconnects as core counts grew. With multiple cores comes the need to connect those cores together. Early dual-core designs such as Intel’s Pentium D and Xeon Paxville in 2005 simply consisted of two independent single cores, with core-to-core communication done off-package via the Front Side Bus (FSB) to a Northbridge chip that also housed the memory controllers. AMD’s Athlon 64 X2, also in 2005, could be considered a true dual-core processor with two cores and an integrated memory controller (IMC) on the same die, allowing the cores to communicate with each other and to memory and IO controllers directly within the silicon through on-die NoC (Network on Chip) data fabrics.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 506,
+      "segment_end": 822,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "同样在 2005 年推出的 AMD 速龙 64 X2 则算得上是真正的双核处理器。它将两个核心与集成内存控制器 (IMC) 集成在了同一块裸片上。这使得核心之间、核心与内存及 IO 控制器之间，能够通过片上 NoC（片上网络）数据网络直接在芯片内部进行通信。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:04:26.365272",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.19,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+          "Avoid translating 'core' as anything other than '核心' in this context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+          "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+          "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+          "key_points": [
+            "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+            "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+          ],
+          "translation_notes": [
+            "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+            "Avoid translating 'core' as anything other than '核心' in this context."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。"
+          },
+          {
+            "type": "tone",
+            "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0060",
+      "parent_block_index": 60,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png",
+          "model": "pro",
+          "created_at": "2026-04-08T17:04:26.365323",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!BLWt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3fc1fbd3-39c1-4650-ab74-54f841f233fc_2329x1801.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.19,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+          "Avoid translating 'core' as anything other than '核心' in this context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+          "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+          "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+          "key_points": [
+            "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+            "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+          ],
+          "translation_notes": [
+            "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+            "Avoid translating 'core' as anything other than '核心' in this context."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。"
+          },
+          {
+            "type": "tone",
+            "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Intel Tulsa Die Shot. Source: Intel, Hot Chips 2006",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Tulsa Die Shot. Source: Intel, Hot Chips 2006",
+          "start": 0,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0061",
+      "parent_block_index": 61,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel Tulsa Die Shot. Source: Intel, Hot Chips 2006*",
+      "parent_block_plain_text": "Intel Tulsa Die Shot. Source: Intel, Hot Chips 2006",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel Tulsa Die Shot. Source: Intel, Hot Chips 2006",
+          "start": 0,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 51,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 Tulsa 裸片图。来源：英特尔，Hot Chips 2006",
+          "model": "pro",
+          "created_at": "2026-04-08T17:04:26.365489",
+          "tokenized_text": "[[[EM_1|英特尔 Tulsa 裸片图。来源：英特尔，Hot Chips 2006]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.19,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+          "Avoid translating 'core' as anything other than '核心' in this context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+          "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+          "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+          "key_points": [
+            "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+            "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+          ],
+          "translation_notes": [
+            "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+            "Avoid translating 'core' as anything other than '核心' in this context."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。"
+          },
+          {
+            "type": "tone",
+            "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Intel’s subsequent Tulsa generation included 16MB of L3 cache shared between the two cores and functions as an on-die core to core data fabric. As we will see later, these on-die data fabrics will become a crucial factor in datacenter CPU design as core counts grow in the hundreds.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0062",
+      "parent_block_index": 62,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Intel’s subsequent Tulsa generation included 16MB of L3 cache shared between the two cores and functions as an on-die core to core data fabric. As we will see later, these on-die data fabrics will become a crucial factor in datacenter CPU design as core counts grow in the hundreds.",
+      "parent_block_plain_text": "Intel’s subsequent Tulsa generation included 16MB of L3 cache shared between the two cores and functions as an on-die core to core data fabric. As we will see later, these on-die data fabrics will become a crucial factor in datacenter CPU design as core counts grow in the hundreds.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 282,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔随后的 Tulsa 处理器配备了由两个核心共享的 16MB 三级缓存，该缓存同时充当片上的核心间数据网络。后文将会看到，随着核心数量飙升至数百个，这些片上数据网络将成为数据中心 CPU 设计的关键因素。",
+          "model": "pro",
+          "created_at": "2026-04-08T17:04:26.365539",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.19,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+          "Avoid translating 'core' as anything other than '核心' in this context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Shifts the focus from market history to deep technical architecture, explaining how cores communicate on a die.",
+          "relation_to_previous": "Uses the massive compute demands established in the RL era to justify a deep dive into the physical limitations of core scaling.",
+          "relation_to_next": "Lays the mandatory technical groundwork for the upcoming vendor-by-vendor breakdown of 2026+ CPU architectures.",
+          "key_points": [
+            "Understanding the future of datacenter CPUs requires a deep understanding of multi-core interconnect topologies.",
+            "As core counts explode to meet AI demands, the evolution from Crossbar to Ring to Mesh interconnects becomes the primary architectural bottleneck."
+          ],
+          "translation_notes": [
+            "Hardware terminology must be strictly accurate: 'Interconnects' (互连架构), 'Crossbar' (交叉开关), 'Ring' (环形互连), 'Mesh' (网格互连).",
+            "Avoid translating 'core' as anything other than '核心' in this context."
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文“consisted of”意为“由……组成”或“包含”，译文直接表述为“仅仅是两个独立的单核”略显生硬，丢失了“组成/包含”的动作语义。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“片上 NoC（片上网络）数据网络”中出现了“网络……网络”的词语重复，读起来略显累赘。在硬件架构语境中，data fabric 通常被译为“数据总线”或“数据互连”。"
+          },
+          {
+            "type": "tone",
+            "description": "原文的“grow”是描述技术长期演进的客观中性词，译文使用了“飙升”一词，在描述跨越十余年的技术发展史时显得情绪色彩过重（Tone inflation）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

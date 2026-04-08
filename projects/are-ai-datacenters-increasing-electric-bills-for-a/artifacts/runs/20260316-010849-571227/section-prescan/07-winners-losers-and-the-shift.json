@@ -1,0 +1,59 @@
+{
+  "section_id": "07-winners-losers-and-the-shift",
+  "new_terms": [
+    {
+      "term": "GEV",
+      "suggested_translation": "GE Vernova",
+      "context": "Equipment vendor for onsite gas solutions",
+      "confidence": 0.95
+    },
+    {
+      "term": "CAT",
+      "suggested_translation": "卡特彼勒 (Caterpillar)",
+      "context": "Equipment vendor for onsite gas solutions",
+      "confidence": 0.95
+    },
+    {
+      "term": "Bloom Energy",
+      "suggested_translation": "Bloom Energy",
+      "context": "Equipment vendor for onsite gas solutions",
+      "confidence": 0.95
+    },
+    {
+      "term": "Vertiv",
+      "suggested_translation": "维谛技术 (Vertiv)",
+      "context": "Equipment supplier for data center infrastructure",
+      "confidence": 0.95
+    },
+    {
+      "term": "Vistra",
+      "suggested_translation": "Vistra",
+      "context": "Independent Power Producer (IPP)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Talen",
+      "suggested_translation": "Talen Energy",
+      "context": "Independent Power Producer (IPP)",
+      "confidence": 0.95
+    },
+    {
+      "term": "cryptominers",
+      "suggested_translation": "加密货币矿工",
+      "context": "Market participant alongside datacenter developers",
+      "confidence": 0.9
+    },
+    {
+      "term": "onsite gas solutions",
+      "suggested_translation": "现场燃气解决方案",
+      "context": "Power generation solutions located at the site of consumption",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "ipps": "独立发电商",
+    "data center": "数据中心"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-16T01:11:28.879068"
+}

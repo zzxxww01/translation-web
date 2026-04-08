@@ -1,0 +1,7 @@
+MMA 指令是执行矩阵乘法的核心操作。从 Hopper 到 Blackwell 架构，MMA 的性能变得越来越高度依赖矩阵形状。在此，我们对这一现象展开深入研究，通过遍历不同的矩阵形状和数据类型，来量化这些性能差异。
+
+Blackwell 引入了 2SM MMA，这是一种新型 MMA 指令（.cta_group::2）。在该指令下，一对协作线程阵列 (CTA) 跨两个 SM 协同执行一次 MMA 操作。具体而言，输入矩阵 A 会被复制，而矩阵 B 和矩阵 D 则分片分布在这两个 SM 上，并且这对 CTA 能够访问彼此的共享内存 (SMEM)。这使得支持更大尺寸的 MMA 矩阵形状成为可能。我们研究了 2SM MMA 是表现出弱扩展性、强扩展性，还是兼而有之。
+
+我们基于以下配置空间对 MMA 性能进行了基准测试：
+
+https://substackcdn.com/image/fetch/$s_!Vi8a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b115c81-e5c1-4904-a640-9d239536fbd1_1342x412.png

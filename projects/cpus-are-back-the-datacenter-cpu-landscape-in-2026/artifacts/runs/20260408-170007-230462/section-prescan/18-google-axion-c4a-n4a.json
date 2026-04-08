@@ -1,0 +1,71 @@
+{
+  "section_id": "18-google-axion-c4a-n4a",
+  "new_terms": [
+    {
+      "term": "Axion",
+      "suggested_translation": "Axion",
+      "context": "Google's custom silicon CPU line for cloud services",
+      "confidence": 1.0
+    },
+    {
+      "term": "GCP",
+      "suggested_translation": "GCP (谷歌云)",
+      "context": "Google Cloud Platform, where Axion CPUs are deployed",
+      "confidence": 1.0
+    },
+    {
+      "term": "bare metal instances",
+      "suggested_translation": "裸金属实例",
+      "context": "96-core C4A bare metal instances that went into preview",
+      "confidence": 1.0
+    },
+    {
+      "term": "scale-out",
+      "suggested_translation": "横向扩展",
+      "context": "cost-effective scale-out web and microservices",
+      "confidence": 0.95
+    },
+    {
+      "term": "microservices",
+      "suggested_translation": "微服务",
+      "context": "cost-effective scale-out web and microservices",
+      "confidence": 1.0
+    },
+    {
+      "term": "Neoverse V2",
+      "suggested_translation": "Neoverse V2",
+      "context": "ARM core architecture used in Axion C4A",
+      "confidence": 1.0
+    },
+    {
+      "term": "Neoverse N3",
+      "suggested_translation": "Neoverse N3",
+      "context": "ARM core architecture used in Axion N4A",
+      "confidence": 1.0
+    },
+    {
+      "term": "Gemini",
+      "suggested_translation": "Gemini",
+      "context": "Google's AI model powered by TPU clusters",
+      "confidence": 1.0
+    },
+    {
+      "term": "x86",
+      "suggested_translation": "x86",
+      "context": "Legacy architecture running alongside Axion",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "wafer": "晶圆",
+    "cpu": "CPU",
+    "ddr5": "DDR5",
+    "yield": "良率",
+    "tsmc": "台积电",
+    "arm": "ARM",
+    "head node": "头节点",
+    "tpu": "TPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:12:21.177954"
+}

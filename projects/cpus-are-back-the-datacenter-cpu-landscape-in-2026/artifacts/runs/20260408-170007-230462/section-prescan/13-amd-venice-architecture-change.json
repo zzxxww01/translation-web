@@ -1,0 +1,63 @@
+{
+  "section_id": "13-amd-venice-architecture-change",
+  "new_terms": [
+    {
+      "term": "shoreline",
+      "suggested_translation": "海岸线 (裸片边缘互连边界)",
+      "context": "The additional shoreline required for the CCD links takes up additional width",
+      "confidence": 0.95
+    },
+    {
+      "term": "MRDIMM",
+      "suggested_translation": "多路复用双列直插式内存模块 (MRDIMM)",
+      "context": "16-channel MRDIMM-12800 gives 1.64TB/s",
+      "confidence": 0.95
+    },
+    {
+      "term": "Integrated Passive Devices (IPD)",
+      "suggested_translation": "集成无源器件 (IPD)",
+      "context": "These are Integrated Passive Devices (IPD) that help smooth power delivery to the chip",
+      "confidence": 0.98
+    },
+    {
+      "term": "Instructions per Clock (IPC)",
+      "suggested_translation": "每时钟周期指令数 (IPC)",
+      "context": "new Zen 6 core microarchitecture with higher Instructions per Clock (IPC)",
+      "confidence": 0.98
+    },
+    {
+      "term": "Bit Matrix Multiplication (BMM)",
+      "suggested_translation": "位矩阵乘法 (BMM)",
+      "context": "a new AVX512_BMM instruction for Bit Matrix Multiplication",
+      "confidence": 0.98
+    },
+    {
+      "term": "FPU",
+      "suggested_translation": "浮点运算单元 (FPU)",
+      "context": "For BMM, the FPU registers store 16x16 binary matrices",
+      "confidence": 0.95
+    },
+    {
+      "term": "Turin",
+      "suggested_translation": "Turin (代号)",
+      "context": "a one-third increase from the 192-core Turin-Dense 3nm EPYC 9965",
+      "confidence": 0.95
+    },
+    {
+      "term": "Granite Rapids",
+      "suggested_translation": "Granite Rapids (代号)",
+      "context": "96c Turin matches 128c Granite Rapids",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "emib": "EMIB",
+    "numa": "NUMA",
+    "core compute dies (ccd)": "CCD",
+    "epyc": "EPYC",
+    "llm": "LLM",
+    "avx512": "AVX512"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:07:55.494013"
+}

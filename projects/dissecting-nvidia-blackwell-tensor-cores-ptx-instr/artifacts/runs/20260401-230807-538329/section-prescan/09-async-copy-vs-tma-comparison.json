@@ -1,0 +1,42 @@
+{
+  "section_id": "09-async-copy-vs-tma-comparison",
+  "new_terms": [
+    {
+      "term": "mha",
+      "suggested_translation": "多头注意力机制 (MHA)",
+      "context": "Used in comparison with MLA kernels for performance benchmarking.",
+      "confidence": 0.95
+    },
+    {
+      "term": "trt-llm",
+      "suggested_translation": "TensorRT-LLM",
+      "context": "NVIDIA's library for LLM inference, mentioned as the source of Blackwell kernels.",
+      "confidence": 0.95
+    },
+    {
+      "term": "dynamic page loading",
+      "suggested_translation": "动态页面加载",
+      "context": "A technique used in Blackwell MLA kernels for memory management.",
+      "confidence": 0.9
+    },
+    {
+      "term": "4d tma",
+      "suggested_translation": "4D TMA",
+      "context": "A specific configuration of the Tensor Memory Accelerator using 4 dimensions.",
+      "confidence": 0.9
+    },
+    {
+      "term": "page index",
+      "suggested_translation": "页面索引",
+      "context": "Used as a dimension in TMA for dynamic page loading.",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "async copy": "异步拷贝",
+    "multi-latent attention (mla)": "多潜变量注意力机制 (MLA)",
+    "tensor memory accelerator (tma)": "张量内存加速器 (TMA)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-01T23:25:16.458051"
+}

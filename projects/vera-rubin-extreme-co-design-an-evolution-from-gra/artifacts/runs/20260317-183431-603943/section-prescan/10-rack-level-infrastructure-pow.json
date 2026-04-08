@@ -1,0 +1,62 @@
+{
+  "section_id": "10-rack-level-infrastructure-pow",
+  "new_terms": [
+    {
+      "term": "HVDC (high voltage direct current)",
+      "suggested_translation": "高压直流",
+      "context": "Power delivery infrastructure evolution for high-density AI server racks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "BBU (battery back up units)",
+      "suggested_translation": "电池备用单元",
+      "context": "Energy storage components used for power stability in hyperscale data centers.",
+      "confidence": 0.95
+    },
+    {
+      "term": "CBU (capacitor backup units)",
+      "suggested_translation": "电容备用单元",
+      "context": "Used for peak shaving and short-term power stability in high-power racks.",
+      "confidence": 0.9
+    },
+    {
+      "term": "SST (solid state transformers)",
+      "suggested_translation": "固态变压器",
+      "context": "Advanced power conversion technology used to increase transmission efficiency.",
+      "confidence": 0.9
+    },
+    {
+      "term": "peak shaving",
+      "suggested_translation": "削峰填谷",
+      "context": "The practice of using BBU/CBU capacity to manage peak power demand.",
+      "confidence": 0.95
+    },
+    {
+      "term": "whips",
+      "suggested_translation": "电源馈线",
+      "context": "Cables delivering high-ampere three-phase power (e.g., 100A whips) to the rack.",
+      "confidence": 0.85
+    },
+    {
+      "term": "liquid cooled busbar",
+      "suggested_translation": "液冷汇流排",
+      "context": "Busbar design for VR NVL72 to handle high current without fan-based cooling.",
+      "confidence": 0.95
+    },
+    {
+      "term": "PSU (power supply unit)",
+      "suggested_translation": "电源供应单元",
+      "context": "Individual units within the power shelf that convert AC to DC.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "power shelf": "电源机框",
+    "busbar": "汇流排",
+    "compute tray": "算力托盘",
+    "vr nvl72": "VR NVL72",
+    "grace blackwell": "Grace Blackwell"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T18:59:16.986652"
+}

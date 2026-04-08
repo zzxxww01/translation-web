@@ -1,0 +1,328 @@
+{
+  "section_id": "10-cmx-and-stx",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "10-cmx-and-stx",
+    "section_title": "CMX and STX",
+    "section_title_translation": "CMX 与 STX",
+    "section_position": "11/13",
+    "article_theme": "Nvidia's speculative GTC 2026 announcements reveal deep integration of Groq's LPU for disaggregated inference (AFD), alongside aggressive advancements in CPO networking, rack architectures, and storage systems, profoundly reshaping the AI hardware supply chain.",
+    "structure_summary": "The article opens with an overview of Nvidia's GTC 2026 hardware announcements, then deep-dives into the Groq LPU architecture and its specific role in disaggregated LLM inference (AFD and Speculative Decoding). It subsequently details the physical LPX rack system and networking topologies before mapping out Nvidia's broader rack (Kyber/Oberon/Feynman) and CPO roadmaps. The piece concludes with new storage reference designs (STX/CMX) and exclusive supply chain implications.",
+    "target_audience": "Senior hardware engineers, AI infrastructure architects, semiconductor supply chain analysts, and tech investors.",
+    "translation_voice": "Professional tech-analyst Chinese. The voice should be objective and rigorous, using precise semiconductor, networking, and AI terminology while maintaining the investigative edge of the original text.",
+    "previous_section_title": "Oberon and Kyber Updates, Larger World Sizes Introduced, More Networking Updates",
+    "next_section_title": "Feynman NVL1152 Networking Topologies",
+    "section_role": "Concludes the technical hardware breakdown by introducing the storage architectures designed to feed these massive compute clusters, and teases the paywall.",
+    "translation_notes": [
+      "Translate 'reference rack architecture' as '参考机架架构'.",
+      "Translate 'behind the paywall' naturally (e.g., 在付费内容中/在付费墙后).",
+      "Retain all acronyms (CMX, STX, VR, BF-4, CX-9) in English."
+    ],
+    "key_points": [
+      "Nvidia introduced the STX reference storage rack architecture to complement Vera Rubin compute racks.",
+      "STX specifies the exact integration of BF-4 DPUs, CX-9 NICs, and Spectrum-X switches.",
+      "The paywalled section will cover supply chain beneficiaries of the LPX and Kyber systems."
+    ],
+    "guidelines": [
+      "Sentence Restructuring for Flow: Actively break down lengthy English sentences with multiple relative clauses into shorter, cohesive Chinese sentences. Use appropriate logical connectors (因此, 相比之下, 此外) to ensure a native, fluid paragraph structure.",
+      "Domain-Specific Precision: Strictly adhere to the provided terminology. Differentiate clearly between networking terms (scale-up vs. scale-out), semiconductor terms (tapeout, reticle size), and AI modeling terms (stateful, draft models).",
+      "Preserve Technical Notation: Keep all mathematical formulas, bandwidth specifications (e.g., 448Gbit/s uni-di, 112G), node names (TSMC N3P, SF4), and connector types (80DP Paladin, OSFP) exactly as they appear in the source.",
+      "Handle Acronyms Consistently: For newly introduced concepts (AFD, MBOM, CPO), provide the full Chinese translation followed by the English acronym in parentheses on the first occurrence. Use the acronym or the Chinese term consistently thereafter.",
+      "Maintain Analyst Tone: Preserve the investigative and authoritative tone of SemiAnalysis (e.g., 'Behind the paywall, we will reveal...'). Translate these directly but with professional phrasing (e.g., '在付费内容中，我们将揭晓...').",
+      "Title Translation: Ensure the translated title captures all key subjects mentioned in the original title (Groq LP30, LPX Rack, AFD, etc.) without dropping any semantic components, using standard separator punctuation (e.g., spaces or ' | ')."
+    ],
+    "article_challenges": [
+      {
+        "location": "LPU Network / Feynman NVL1152 Networking Topologies",
+        "issue": "Dense mathematical and topological descriptions (e.g., '256 LPUs x 90 lanes x 112Gbps/8 x 2 directions = 645TB/s').",
+        "suggestion": "Do not alter the formulas. Ensure the surrounding text precisely explains the variables (e.g., lanes, Gbps, directions). Use clear spatial language for topologies (e.g., '菊链配置' for daisy chain, '全互联' for all-to-all)."
+      },
+      {
+        "location": "GPU and LPU Integration: Attention FFN Disaggregation (AFD)",
+        "issue": "Intersection of LLM software architecture (Attention, FFN, token routing, KV cache) and hardware mapping.",
+        "suggestion": "Strictly use standard Chinese AI terms (注意力机制, 前馈网络, 动态KV缓存加载). Ensure the logical causality (why stateful goes to GPU and stateless goes to LPU) is flawlessly translated."
+      },
+      {
+        "location": "GTC 2026 Supply Chain Implications",
+        "issue": "Long, clause-heavy sentences detailing corporate strategy and hardware teardowns (e.g., 'This design has effectively taken key pluggable transceiver items...').",
+        "suggestion": "Break these sentences down. Translate 'taken... and put them on...' into a sequence of actions in Chinese to maintain readability."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Attention FFN Disaggregation (AFD)",
+        "term": "Attention FFN Disaggregation (AFD)",
+        "translation": "注意力与前馈网络解耦",
+        "strategy": "first_annotate",
+        "note": "Separating the computation of attention mechanisms (mapped to GPUs) and feed-forward networks (mapped to LPUs) to optimize inference.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Co-Packaged Optics (CPO)",
+        "term": "Co-Packaged Optics (CPO)",
+        "translation": "光电共封装",
+        "strategy": "first_annotate",
+        "note": "Integration of optical transceivers and switch ASICs on the same package to reduce power and increase bandwidth.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "world size",
+        "term": "world size",
+        "translation": "集群并行规模",
+        "strategy": "translate",
+        "note": "The total number of processes or GPUs participating in a distributed training or inference cluster.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "belly-to-belly",
+        "term": "belly-to-belly",
+        "translation": "正反面贴装",
+        "strategy": "translate",
+        "note": "Mounting components on both the top and bottom sides of a PCB directly opposite each other to minimize trace length.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "scratchpad SRAM",
+        "term": "scratchpad SRAM",
+        "translation": "暂存SRAM",
+        "strategy": "translate",
+        "note": "High-speed internal memory used for temporary storage of calculations, data, and other work in progress.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "stateful / stateless",
+        "term": "stateful / stateless",
+        "translation": "有状态 / 无状态",
+        "strategy": "translate",
+        "note": "Whether an operation depends on stored dynamic data (like KV cache) or only on the immediate input.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "draft models",
+        "term": "draft models",
+        "translation": "草稿模型",
+        "strategy": "translate",
+        "note": "Smaller models used in speculative decoding to quickly generate candidate tokens for a larger model to verify.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Midboard Optical Module (MBOM)",
+        "term": "Midboard Optical Module (MBOM)",
+        "translation": "板载光模块",
+        "strategy": "first_annotate",
+        "note": "Optical modules placed in the middle of the PCB rather than on the edge (pluggables), reducing electrical trace lengths.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "reticle size",
+        "term": "reticle size",
+        "translation": "光罩极限尺寸",
+        "strategy": "translate",
+        "note": "The maximum area that a semiconductor lithography tool can expose in a single step.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "uni-di",
+        "term": "uni-di",
+        "translation": "单向",
+        "strategy": "translate",
+        "note": "Uni-directional data transmission over a lane.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Concludes the technical hardware breakdown by introducing the storage architectures designed to feed these massive compute clusters, and teases the paywall.",
+    "relation_to_previous": "Completes the datacenter ecosystem picture (Compute -> Network -> Storage) following the Kyber/Oberon updates.",
+    "relation_to_next": "Acts as the transition to the paywalled section regarding supply chain implications.",
+    "key_points": [
+      "Nvidia introduced the STX reference storage rack architecture to complement Vera Rubin compute racks.",
+      "STX specifies the exact integration of BF-4 DPUs, CX-9 NICs, and Spectrum-X switches.",
+      "The paywalled section will cover supply chain beneficiaries of the LPX and Kyber systems."
+    ],
+    "translation_notes": [
+      "Translate 'reference rack architecture' as '参考机架架构'.",
+      "Translate 'behind the paywall' naturally (e.g., 在付费内容中/在付费墙后).",
+      "Retain all acronyms (CMX, STX, VR, BF-4, CX-9) in English."
+    ]
+  },
+  "translations": [
+    "我们在上一篇关于 Rubin 的文章以及内存模型中，已经对英伟达的 CMX（即 ICMS 平台）进行了详尽的探讨。英伟达此次推出了 STX 参考存储机架架构。",
+    "CMX",
+    "CMX 是英伟达的上下文内存存储平台。CMX 解决了现代推理基础设施中日益凸显的瓶颈：即为了支持长上下文和智能体工作负载（agentic workloads），所需的 KV Cache 正在快速膨胀。",
+    "KV 缓存随输入序列长度和用户数量呈线性增长，也是影响预填充性能（首个 Token 生成时间）时的主要权衡因素。在大规模场景下，设备端 HBM 的容量往往捉襟见肘。主机 DRAM 作为额外的缓存层，虽然扩展了 HBM 之外的容量，但同样会触及单节点总容量、内存带宽以及网络带宽的极限。这就需要引入 NVMe 存储来进行额外的 KV 缓存卸载。",
+    "英伟达在今年 1 月的 CES 上，为推理内存层级引入了一个“全新”的中间存储层“G3.5 层”。G3.5 层 NVMe 介于 G3 层 DRAM 与 G4 层共享存储（同样为 NVMe，或 SATA/SAS SSD，或 HDD）之间。它此前被称为 ICMS（推理上下文内存存储），如今被重新命名为 CMX 平台，这本质上只是将通过 Bluefield 网卡连接至计算服务器的存储服务器进行了又一次品牌重塑。其与传统 NVMe 架构的唯一区别，仅仅是将 Connect-X 网卡替换为了 Bluefield 网卡。",
+    "https://substackcdn.com/image/fetch/$s_!wa5A!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb3a0a186-dbca-4e82-b477-f41c8148e2f3_1336x1258.jpeg",
+    "来源：2026 年 1 月的英伟达 ICMS 原始博客——于 2026 年 3 月 16 日更新并重新发布 https://developer.nvidia.com/blog/introducing-nvidia-bluefield-4-powered-inference-context-memory-storage-platform-for-the-next-frontier-of-ai/",
+    "STX",
+    "为了拓展 CMX 的应用范围，英伟达还推出了 STX。STX 是一种参考机架架构，采用英伟达基于 BF-4 的存储解决方案，作为 VR 计算机架的补充。该参考架构精确规定了特定集群所需的驱动器、Vera CPU、BF-4 DPU、CX-9 NIC 以及 Spectrum-X 交换机的确切数量。",
+    "https://substackcdn.com/image/fetch/$s_!p_Sv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fddb9b036-0027-4510-975b-9c707ca486c4_3000x4000.jpeg",
+    "STX 中的 BF-4。来源：英伟达，SemiAnalysis",
+    "VR NVL72 中的 BF-4 由单颗 Grace CPU 和单张 CX-9 NIC 组成。相比之下，STX 参考设计中的 BF-4 则包含单颗 Vera CPU、两张 CX-9 NIC 以及两个 SOCAMM 模块。每个 STX 机箱内置两个 BF-4 单元，共计两颗 Vera CPU、四张 CX-9 NIC 和四个 SOCAMM 模块。整个 STX 机架共包含 16 个机箱，即总共配备 32 颗 Vera CPU、64 张 CX-9 NIC 和 64 个 SOCAMM 模块。",
+    "https://substackcdn.com/image/fetch/$s_!N7af!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31ef2de0-8f01-45f0-bea0-0fca1c8744ee_878x1030.png",
+    "STX 机架（左）。来源：英伟达，SemiAnalysis",
+    "在发布 STX 时，英伟达进行了典型的实力展示，宣布所有主流存储供应商均支持 STX，其中包括 AIC、Cloudian、DDN、Dell Technologies、Everpure、Hitachi Vantara、HPE、IBM、MinIO、NetApp、Nutanix、Supermicro、Quanta Cloud Technology (QCT)、VAST Data 和 WEKA。",
+    "综合来看，BlueField-4、CMX 和 STX 体现了英伟达致力于在存储层面对集群设计进行标准化的宏大布局。英伟达已经主导了计算和网络层，并正逐步向存储、软件以及基础设施运营层积极扩张。",
+    "接下来在付费内容中，我们将分享更多关于这一切将如何影响供应链的细节，包括 LPX 系统以及更新版 Kyber 机架的受益厂商。我们还将揭晓一款英伟达尚未公布的机架概念。"
+  ]
+}

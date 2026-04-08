@@ -1,0 +1,35 @@
+{
+  "section_id": "16-mi355x-vs-mi325x-vs-mi300x",
+  "new_terms": [
+    {
+      "term": "DeepSeek",
+      "suggested_translation": "DeepSeek",
+      "context": "DeepSeek SGLang Disaggregated Inferencing",
+      "confidence": 1.0
+    },
+    {
+      "term": "DeepSeekR1",
+      "suggested_translation": "DeepSeek-R1",
+      "context": "for DeepSeekR1 on FP8",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "amd": "AMD",
+    "sku": "SKU",
+    "mi355x": "MI355X",
+    "mi300x": "MI300X",
+    "mi325x": "MI325X",
+    "sglang": "SGLang",
+    "disaggregated inference": "分离式推理",
+    "semianalysis": "SemiAnalysis",
+    "inferencex": "InferenceX",
+    "fp8": "FP8",
+    "interactivity": "交互速度",
+    "tok/s/user": "Token/秒/用户",
+    "throughput": "吞吐量",
+    "gpu": "GPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:47:36.538545"
+}

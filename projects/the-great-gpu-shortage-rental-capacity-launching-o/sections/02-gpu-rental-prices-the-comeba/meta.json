@@ -1,0 +1,1573 @@
+{
+  "section_id": "02-gpu-rental-prices-the-comeba",
+  "title": "GPU Rental Prices – The Comeback Kid",
+  "title_translation": "GPU租赁价格：强势回归",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "But how did the market come to this point? Only six months ago, most market observers were skeptical on GPU terminal value and assumed an inexorably steep fall in GPU rental rates over time. Financial analysts chastised any Neocloud or Hyperscaler that used a 6-year depreciation period for its GPU compute assets. Let’s quickly recap the story so far before we discuss how trends could evolve in the future.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But how did the market come to this point? Only six months ago, most market observers were skeptical on GPU terminal value and assumed an inexorably steep fall in GPU rental rates over time. Financial analysts chastised any Neocloud or Hyperscaler that used a 6-year depreciation period for its GPU compute assets. Let’s quickly recap the story so far before we discuss how trends could evolve in the future.",
+      "parent_block_plain_text": "But how did the market come to this point? Only six months ago, most market observers were skeptical on GPU terminal value and assumed an inexorably steep fall in GPU rental rates over time. Financial analysts chastised any Neocloud or Hyperscaler that used a 6-year depreciation period for its GPU compute assets. Let’s quickly recap the story so far before we discuss how trends could evolve in the future.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 408,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "市场究竟是如何走到这一步的？仅仅六个月前，大多数市场观察人士还在质疑 GPU 的残值，认定 GPU 租赁费率势必将面临断崖式下跌。金融分析师更是对任何将 GPU 算力资产折旧期设为 6 年的新兴算力云厂商或超大规模云厂商予以猛烈抨击。在探讨未来趋势走向之前，我们先快速回顾一下此前的市场演变。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.196142",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Before late 2025, the prevailing expectation across the ecosystem was that Hopper (i.e. H100 and H200) rental prices would drop considerably as Blackwell deployments ramped given the latter’s much lower cost of compute. Instead, the opposite happened in late 2025: demand for H100s was holding firm, and in many cases, strengthening. The rapid adoption of open-weight models and accelerating inference demand at that time was the first sign of the insatiable wave of compute demand coming to market.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "strengthening",
+          "start": 319,
+          "end": 332,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0028",
+      "parent_block_index": 28,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Before late 2025, the prevailing expectation across the ecosystem was that Hopper (i.e. H100 and H200) rental prices would drop considerably as Blackwell deployments ramped given the latter’s much lower cost of compute. Instead, the opposite happened in late 2025: demand for H100s was holding firm, and in many cases, *strengthening*. The rapid adoption of open-weight models and accelerating inference demand at that time was the first sign of the insatiable wave of compute demand coming to market.",
+      "parent_block_plain_text": "Before late 2025, the prevailing expectation across the ecosystem was that Hopper (i.e. H100 and H200) rental prices would drop considerably as Blackwell deployments ramped given the latter’s much lower cost of compute. Instead, the opposite happened in late 2025: demand for H100s was holding firm, and in many cases, strengthening. The rapid adoption of open-weight models and accelerating inference demand at that time was the first sign of the insatiable wave of compute demand coming to market.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "strengthening",
+          "start": 319,
+          "end": 332,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 499,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 2025 年底之前，整个生态系统的普遍预期是，鉴于 Blackwell 的算力成本大幅降低，随着其部署规模的扩大，Hopper（即 H100 和 H200）的租赁价格将出现大幅下跌。然而，2025 年底的实际情况却截然相反：市场对 H100 的需求依然坚挺，甚至在许多场景下还在不断走强。当时开放权重模型的快速普及和推理需求的加速爆发，正是市场即将迎来算力需求无底洞狂潮的初步端倪。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.196243",
+          "tokenized_text": "在 2025 年底之前，整个生态系统的普遍预期是，鉴于 Blackwell 的算力成本大幅降低，随着其部署规模的扩大，Hopper（即 H100 和 H200）的租赁价格将出现大幅下跌。然而，2025 年底的实际情况却截然相反：市场对 H100 的需求依然坚挺，甚至在许多场景下还在[[[EM_1|不断走强]]]。当时开放权重模型的快速普及和推理需求的加速爆发，正是市场即将迎来算力需求无底洞狂潮的初步端倪。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "January was the next inflection point for compute when memory pricing, across both DRAM and NAND pricing, went from rising aggressively for several quarters, to going completely parabolic, with LPDDR5 and DDR5 contract prices tracking toward ~4x and ~5x year-on-year increases respectively in 1Q26 based on our Memory Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Model",
+          "start": 311,
+          "end": 323,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "p",
+      "parent_block_markdown": "January was the next inflection point for compute when memory pricing, across both DRAM and NAND pricing, went from rising aggressively for several quarters, to going completely parabolic, with LPDDR5 and DDR5 contract prices tracking toward ~4x and ~5x year-on-year increases respectively in 1Q26 based on our [Memory Model](https://semianalysis.com/memory-model/).",
+      "parent_block_plain_text": "January was the next inflection point for compute when memory pricing, across both DRAM and NAND pricing, went from rising aggressively for several quarters, to going completely parabolic, with LPDDR5 and DDR5 contract prices tracking toward ~4x and ~5x year-on-year increases respectively in 1Q26 based on our Memory Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Model",
+          "start": 311,
+          "end": 323,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 324,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "1 月份成为了算力市场的下一个拐点。当时，存储器价格（包括 DRAM 和 NAND）在连续数个季度猛涨之后，开始呈现抛物线式暴涨。根据我们的存储器模型，LPDDR5 和 DDR5 的合同价格在 2026 年第一季度预计将分别实现约 4 倍和 5 倍的同比增长。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.196276",
+          "tokenized_text": "1 月份成为了算力市场的下一个拐点。当时，存储器价格（包括 DRAM 和 NAND）在连续数个季度猛涨之后，开始呈现抛物线式暴涨。根据我们的[[[LINK_1|存储器模型]]]，LPDDR5 和 DDR5 的合同价格在 2026 年第一季度预计将分别实现约 4 倍和 5 倍的同比增长。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "To manage margin risk stemming from this rapid hike in component costs, OEMs began repricing AI servers at levels that significantly exceeded the underlying increase in component costs. This complicated the cluster capital investment processes as higher server acquisition costs compressed prospective project returns, forcing some operators to slow-roll or abandon deployments. In effect, supply that would have otherwise come online was being withheld, tightening the rental market further.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To manage margin risk stemming from this rapid hike in component costs, OEMs began repricing AI servers at levels that significantly exceeded the underlying increase in component costs. This complicated the cluster capital investment processes as higher server acquisition costs compressed prospective project returns, forcing some operators to slow-roll or abandon deployments. In effect, supply that would have otherwise come online was being withheld, tightening the rental market further.",
+      "parent_block_plain_text": "To manage margin risk stemming from this rapid hike in component costs, OEMs began repricing AI servers at levels that significantly exceeded the underlying increase in component costs. This complicated the cluster capital investment processes as higher server acquisition costs compressed prospective project returns, forcing some operators to slow-roll or abandon deployments. In effect, supply that would have otherwise come online was being withheld, tightening the rental market further.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 492,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为了应对组件成本飙升带来的利润率风险，OEM 厂商开始对 AI 服务器重新定价，且提价幅度远超底层组件成本的实际上涨幅度。这让集群资本投资决策变得更加棘手，因为高昂的服务器采购成本压缩了项目的预期投资回报率，迫使部分运营商放缓甚至放弃部署计划。这实际上导致原本应上线的算力供应遭到搁置，进一步加剧了租赁市场的紧缺态势。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.198954",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.198976",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!9C0b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Feef5eb94-8f3d-4a6e-b718-f1a44fb1d051_1821x783.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556254",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199050",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI TCO 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Amid the server procurement disarray cause by this AI Server Pricing Apocalypse, GPU rental demand was clearly accelerating, with most remaining spare capacity taken up completely during January and February. By March – it became increasingly impossible to find any H100s, H200s or B200 rental capacity for any term. Rental pricing broke above $2/hr/GPU for a 1y contract by late January, and then shot up 15-20% by mid-to-late February vs end January and is set to rise another 15-20% month-on-month by the end of March.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Amid the server procurement disarray cause by this AI Server Pricing Apocalypse, GPU rental demand was clearly accelerating, with most remaining spare capacity taken up completely during January and February. By March – it became increasingly impossible to find any H100s, H200s or B200 rental capacity for any term. Rental pricing broke above $2/hr/GPU for a 1y contract by late January, and then shot up 15-20% by mid-to-late February vs end January and is set to rise another 15-20% month-on-month by the end of March.",
+      "parent_block_plain_text": "Amid the server procurement disarray cause by this AI Server Pricing Apocalypse, GPU rental demand was clearly accelerating, with most remaining spare capacity taken up completely during January and February. By March – it became increasingly impossible to find any H100s, H200s or B200 rental capacity for any term. Rental pricing broke above $2/hr/GPU for a 1y contract by late January, and then shot up 15-20% by mid-to-late February vs end January and is set to rise another 15-20% month-on-month by the end of March.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 521,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在这场“AI 服务器定价末日”引发的采购乱局中，GPU 租赁需求显著加速，大部分剩余的闲置算力在 1 月和 2 月被抢购一空。到了 3 月，无论合同期限长短，想要找到任何 H100、H200 或 B200 的租赁算力已经变得几乎不可能。1 年期合同的租赁价格在 1 月下旬突破了每小时每卡 2 美元的大关，随后在 2 月中下旬较 1 月底飙升了 15-20%，并预计到 3 月底还将实现 15-20% 的环比上涨。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199074",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "A major driver of demand early this year arose from native media generation - Seedance and Nano Banana are driving massive increases in token throughput as users generate and refine images and video at scale. But the most visible driver of demand is the emergence of multi-agent workloads executing multi-step workflows, operating at high concurrency and iterating continuously, leading to parabolic growth in token and compute consumption.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0034",
+      "parent_block_index": 34,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A major driver of demand early this year arose from native media generation - Seedance and Nano Banana are driving massive increases in token throughput as users generate and refine images and video at scale. But the most visible driver of demand is the emergence of multi-agent workloads executing multi-step workflows, operating at high concurrency and iterating continuously, leading to parabolic growth in token and compute consumption.",
+      "parent_block_plain_text": "A major driver of demand early this year arose from native media generation - Seedance and Nano Banana are driving massive increases in token throughput as users generate and refine images and video at scale. But the most visible driver of demand is the emergence of multi-agent workloads executing multi-step workflows, operating at high concurrency and iterating continuously, leading to parabolic growth in token and compute consumption.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 440,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今年年初，原生媒体生成构成了需求的一大核心驱动力——随着用户大规模生成并精修图像与视频，Seedance 和 Nano Banana 正推动 Token 吞吐量激增。然而，最显性的需求引擎则是多智能体工作负载的崛起：这些智能体执行多步工作流，在高并发状态下运行并持续迭代，最终导致 Token 与算力消耗呈抛物线式暴增。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199096",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Look no further than the trends regarding Claude Code that we have already called out in many articles. SemiAnalysis as a company has, over the past 7 days, consumed billions of tokens costing around ~$5/M tok on average, but the return on time saved and expansion of workflows and capabilities far exceeds that cost. SemiAnalysis now deploys a suite of AI tools across workflows beyond simple search and summarization – notably dashboarding, automated scraping, large-scale data wrangling and agentic financial modelling.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "trends regarding Claude Code that we have already called out",
+          "start": 25,
+          "end": 85,
+          "href": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Look no further than the [trends regarding Claude Code that we have already called out](https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point) in many articles. SemiAnalysis as a company has, over the past 7 days, consumed billions of tokens costing around ~$5/M tok on average, but the return on time saved and expansion of workflows and capabilities far exceeds that cost. SemiAnalysis now deploys a suite of AI tools across workflows beyond simple search and summarization – notably dashboarding, automated scraping, large-scale data wrangling and agentic financial modelling.",
+      "parent_block_plain_text": "Look no further than the trends regarding Claude Code that we have already called out in many articles. SemiAnalysis as a company has, over the past 7 days, consumed billions of tokens costing around ~$5/M tok on average, but the return on time saved and expansion of workflows and capabilities far exceeds that cost. SemiAnalysis now deploys a suite of AI tools across workflows beyond simple search and summarization – notably dashboarding, automated scraping, large-scale data wrangling and agentic financial modelling.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "trends regarding Claude Code that we have already called out",
+          "start": 25,
+          "end": 85,
+          "href": "https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 522,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "看看我们在多篇文章中已经指出的关于 Claude Code 的趋势就知道了。过去 7 天里，SemiAnalysis 作为一家公司消耗了数十亿个 Token，平均成本约为 5 美元/百万 Token，但在节省时间、拓展工作流和提升能力方面带来的回报，远远超过了这一成本。SemiAnalysis 目前已在各项工作流中部署了一套 AI 工具，应用范围远超简单的搜索和摘要——尤其是在仪表盘制作、自动化抓取、大规模数据清洗以及基于智能体的财务建模等方面。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199145",
+          "tokenized_text": "看看我们在多篇文章中[[[LINK_1|已经指出的关于 Claude Code 的趋势]]]就知道了。过去 7 天里，SemiAnalysis 作为一家公司消耗了数十亿个 Token，平均成本约为 5 美元/百万 Token，但在节省时间、拓展工作流和提升能力方面带来的回报，远远超过了这一成本。SemiAnalysis 目前已在各项工作流中部署了一套 AI 工具，应用范围远超简单的搜索和摘要——尤其是在仪表盘制作、自动化抓取、大规模数据清洗以及基于智能体的财务建模等方面。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "We are tracking the overwhelming demand through proxies like Claude Commits Daily. At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development. Institutional clients who are interested in the data set can reach out to our API documentation team.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Claude Commits Daily",
+          "start": 61,
+          "end": 81,
+          "href": "https://semianalysis.com/institutional/claude-commits-daily/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "API documentation team",
+          "start": 330,
+          "end": 352,
+          "href": "https://semianalysis.com/institutional/api-documentation/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We are tracking the overwhelming demand through proxies like [Claude Commits Daily](https://semianalysis.com/institutional/claude-commits-daily/). At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development. Institutional clients who are interested in the data set can reach out to our [API documentation team](https://semianalysis.com/institutional/api-documentation/).",
+      "parent_block_plain_text": "We are tracking the overwhelming demand through proxies like Claude Commits Daily. At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development. Institutional clients who are interested in the data set can reach out to our API documentation team.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Claude Commits Daily",
+          "start": 61,
+          "end": 81,
+          "href": "https://semianalysis.com/institutional/claude-commits-daily/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "API documentation team",
+          "start": 330,
+          "end": 352,
+          "href": "https://semianalysis.com/institutional/api-documentation/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 353,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们正通过每日 Claude 提交量等替代指标来追踪这种压倒性的需求。按照目前的发展轨迹，我们认为到 2026 年底，Claude Code 将占所有每日代码提交量的 20% 以上。就在你眨眼之间，AI 已经吞噬了整个软件开发领域。对该数据集感兴趣的机构客户可以联系我们的API 文档团队。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199198",
+          "tokenized_text": "我们正通过[[[LINK_1|每日 Claude 提交量]]]等替代指标来追踪这种压倒性的需求。按照目前的发展轨迹，我们认为到 2026 年底，Claude Code 将占所有每日代码提交量的 20% 以上。就在你眨眼之间，AI 已经吞噬了整个软件开发领域。对该数据集感兴趣的机构客户可以联系我们的[[[LINK_2|API 文档团队]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0037",
+      "parent_block_index": 37,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199209",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NBsi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9aaf29c7-7e4d-4ffe-a4b5-f3a20b77c99c_2761x1579.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis Tokenomics Dashboard",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Tokenomics Dashboard",
+          "start": 21,
+          "end": 41,
+          "href": "https://semianalysis.com/institutional/tokenomics-dashboard/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Tokenomics Dashboard](https://semianalysis.com/institutional/tokenomics-dashboard/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Tokenomics Dashboard",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Tokenomics Dashboard",
+          "start": 21,
+          "end": 41,
+          "href": "https://semianalysis.com/institutional/tokenomics-dashboard/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 41,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis 代币经济学仪表板",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556269",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|代币经济学仪表板]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis Token经济学仪表盘",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199232",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Token经济学仪表盘]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis 代币经济学仪表板",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|代币经济学仪表板]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "It seems that almost everyone in our circle is an avid user of Claude Code – yet we recognize that our circle of contacts are immersed in everything AI and Semiconductors, and thus they are just the tip of the spear. For many Fortune 500 companies and to the broader world, Claude Code and the Agentic world are but a quirky side story that may come up on their Facebook feeds or their favorite NPR podcasts. They are completely unaware of the tidal wave of productivity and upheaval that the agentic world is about to unleash upon the world.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It seems that almost everyone in our circle is an avid user of Claude Code – yet we recognize that our circle of contacts are immersed in everything AI and Semiconductors, and thus they are just the tip of the spear. For many Fortune 500 companies and to the broader world, Claude Code and the Agentic world are but a quirky side story that may come up on their Facebook feeds or their favorite NPR podcasts. They are completely unaware of the tidal wave of productivity and upheaval that the agentic world is about to unleash upon the world.",
+      "parent_block_plain_text": "It seems that almost everyone in our circle is an avid user of Claude Code – yet we recognize that our circle of contacts are immersed in everything AI and Semiconductors, and thus they are just the tip of the spear. For many Fortune 500 companies and to the broader world, Claude Code and the Agentic world are but a quirky side story that may come up on their Facebook feeds or their favorite NPR podcasts. They are completely unaware of the tidal wave of productivity and upheaval that the agentic world is about to unleash upon the world.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 542,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "似乎我们圈子里的几乎每个人都是 Claude Code 的狂热用户——但我们也认识到，我们的联系人圈子完全沉浸在 AI 和半导体的方方面面，因此他们只是先头部队。对于许多财富 500 强企业和更广泛的大众而言，Claude Code 和智能体（Agentic）世界只不过是偶尔出现在 Facebook 动态或最喜欢的 NPR 播客里的奇闻轶事。他们完全没有意识到，智能体世界即将向全球释放一场生产力狂潮与颠覆性变革。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199243",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0040",
+      "parent_block_index": 40,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199261",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!yIvt!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F39c3c02b-9b11-4133-b28d-36a107865030_1024x683.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Source: SemiAnalysis, Generated by Google Gemini",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Generated by Google Gemini",
+      "parent_block_plain_text": "Source: SemiAnalysis, Generated by Google Gemini",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 48,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，由 Google Gemini 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556276",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，由 Google Gemini 生成",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199270",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，由 Google Gemini 生成",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "As those in the broader economy that recognize the amazing return on investment from using AI Tools join us in surfing this tidal wave, there will continue to be a step shift higher in token consumption over time. The debate on the true return of using AI is now a settled question – the use of AI tools can deliver value an order of magnitude greater than the cost of using the tools. The shift up and to the right in the demand curve for tokens is providing a powerful and relatively inelastic (for now) force driving up GPU rental pricing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As those in the broader economy that recognize the amazing return on investment from using AI Tools join us in surfing this tidal wave, there will continue to be a step shift higher in token consumption over time. The debate on the true return of using AI is now a settled question – the use of AI tools can deliver value an order of magnitude greater than the cost of using the tools. The shift up and to the right in the demand curve for tokens is providing a powerful and relatively inelastic (for now) force driving up GPU rental pricing.",
+      "parent_block_plain_text": "As those in the broader economy that recognize the amazing return on investment from using AI Tools join us in surfing this tidal wave, there will continue to be a step shift higher in token consumption over time. The debate on the true return of using AI is now a settled question – the use of AI tools can deliver value an order of magnitude greater than the cost of using the tools. The shift up and to the right in the demand curve for tokens is providing a powerful and relatively inelastic (for now) force driving up GPU rental pricing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 542,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着更广泛经济领域中那些认识到 AI 工具惊人投资回报率的人加入我们，共同驾驭这股浪潮，Token 消耗量将随着时间的推移继续实现阶跃式增长。关于使用 AI 真实回报的争论如今已尘埃落定——使用 AI 工具所创造的价值，比其使用成本高出一个数量级。Token 需求曲线向右上方的移动，正形成一股强大且（目前）相对缺乏弹性的力量，持续推高 GPU 租赁价格。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199284",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Put simply – if the return on investment from using AI tools is 5-10x, then there is clearly a long way to go in GPU rental pricing before prices rise enough to curtail demand. It would not surprise us for the increases in rental pricing to exert further upward pressure on server and component costs.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Put simply – if the return on investment from using AI tools is 5-10x, then there is clearly a long way to go in GPU rental pricing before prices rise enough to curtail demand. It would not surprise us for the increases in rental pricing to exert further upward pressure on server and component costs.",
+      "parent_block_plain_text": "Put simply – if the return on investment from using AI tools is 5-10x, then there is clearly a long way to go in GPU rental pricing before prices rise enough to curtail demand. It would not surprise us for the increases in rental pricing to exert further upward pressure on server and component costs.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 301,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "简而言之——如果使用 AI 工具的投资回报率高达 5 到 10 倍，那么在价格涨至足以遏制需求之前，GPU 租赁定价显然还有很大的上行空间。若租赁价格的上涨进一步推高服务器及零部件成本，我们也不会感到意外。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:05:06.199293",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.9,
+        "is_excellent": false,
+        "applied_terms": [
+          "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+          "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the fundamental driver of the price surge (high AI ROI) while contrasting it with past bearish market sentiment.",
+          "relation_to_previous": "Explains the 'why' behind the extreme shortage and price spikes described in the previous section.",
+          "relation_to_next": "Transitions from analyzing the causes of the price surge to introducing a tool to measure it.",
+          "key_points": [
+            "Past financial skepticism about GPU terminal value and depreciation periods was incorrect.",
+            "The 5-10x ROI from AI tools (like Claude Code) easily justifies current high compute costs.",
+            "High ROI will sustain demand, putting upward pressure on component and rental costs."
+          ],
+          "translation_notes": [
+            "'The Comeback Kid' requires a culturally resonant equivalent (e.g., 王者归来/绝地反击).",
+            "'Chastised' and 'inexorably steep fall' need strong, vivid Chinese verbs and adjectives to capture the past bearish intensity."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "金融术语“terminal value”在资产折旧语境下意为“终值”或“残值”，此处被字面直译为“终端价值”。结合后文“6年折旧期”的语境，“终端价值”极易被误解为面向终端用户的业务价值，偏离了原文的财务估值视角。"
+          },
+          {
+            "type": "terminology",
+            "description": "在中文半导体行业术语中，“内存”严格来说专指 DRAM 等主存，而 NAND 属于“闪存”。英文的“memory”作为两者的统称时应译为“存储器”。译文“DRAM 和 NAND 的内存价格”在中文语境下存在分类从属的逻辑冲突。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

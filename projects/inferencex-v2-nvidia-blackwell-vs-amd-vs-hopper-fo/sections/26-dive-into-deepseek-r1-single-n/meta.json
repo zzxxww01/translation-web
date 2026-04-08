@@ -1,0 +1,1131 @@
+{
+  "section_id": "26-dive-into-deepseek-r1-single-n",
+  "title": "Dive into DeepSeek R1 Single Node Results",
+  "title_translation": "DeepSeek R1 单节点结果深度解析",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "On DeepSeek R1 FP8 1k1k, we see that MI355X is competitive with its counterpart B200 on single node scenarios, despite getting mogged on FP4 multi node scenarios. MI355X (SGLang) even beats B200 (SGLang) in throughput performance at lower interactivity levels. Moreover, MI355X (SGLang) beats B200 (TRT and SGLang) in most cases from a perf/TCO perspective.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0321",
+      "parent_block_index": 321,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On DeepSeek R1 FP8 1k1k, we see that MI355X is competitive with its counterpart B200 on single node scenarios, despite getting mogged on FP4 multi node scenarios. MI355X (SGLang) even beats B200 (SGLang) in throughput performance at lower interactivity levels. Moreover, MI355X (SGLang) beats B200 (TRT and SGLang) in most cases from a perf/TCO perspective.",
+      "parent_block_plain_text": "On DeepSeek R1 FP8 1k1k, we see that MI355X is competitive with its counterpart B200 on single node scenarios, despite getting mogged on FP4 multi node scenarios. MI355X (SGLang) even beats B200 (SGLang) in throughput performance at lower interactivity levels. Moreover, MI355X (SGLang) beats B200 (TRT and SGLang) in most cases from a perf/TCO perspective.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 357,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 DeepSeek R1 FP8 1k1k 负载下，我们发现 MI355X 在单节点场景中与竞品 B200 旗鼓相当，尽管其在 FP4 多节点场景下被全方位碾压。在较低的交互性下，MI355X (SGLang) 的吞吐量性能甚至反超了 B200 (SGLang)。此外，从性能与 TCO 的维度来看，MI355X (SGLang) 在大多数情况下都击败了 B200（无论是运行 TRT 还是 SGLang）。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553324",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Unfortunately, the year is 2026, and most frontier labs and inference providers are not running FP8 nor single node inference.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0322",
+      "parent_block_index": 322,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Unfortunately, the year is 2026, and most frontier labs and inference providers are not running FP8 nor single node inference.",
+      "parent_block_plain_text": "Unfortunately, the year is 2026, and most frontier labs and inference providers are not running FP8 nor single node inference.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 126,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "遗憾的是，现在已经是 2026 年了，大多数前沿实验室和推理服务提供商既不运行 FP8，也不搞单节点推理。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553383",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "This result goes to show that AMDs chips are great and can be extremely competitive with Nvidia if only they could move faster on the software front. Speed is the moat.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0323",
+      "parent_block_index": 323,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This result goes to show that AMDs chips are great and can be extremely competitive with Nvidia if only they could move faster on the software front. Speed is the moat.",
+      "parent_block_plain_text": "This result goes to show that AMDs chips are great and can be extremely competitive with Nvidia if only they could move faster on the software front. Speed is the moat.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 168,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一结果充分说明，AMD 的芯片非常出色，只要他们在软件层面能迭代得更快，就完全具备与英伟达一较高下的绝对实力。速度就是护城河。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553405",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0324",
+      "parent_block_index": 324,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553424",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!F-j0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa4e8da6f-c4ee-4d39-96ae-9143459d3ea9_2102x1236.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0325",
+      "parent_block_index": 325,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.427985",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553507",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0326",
+      "parent_block_index": 326,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553525",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!w0x6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ce2b96f-840d-411b-9c6c-2f821219fba5_2130x1444.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis InferenceMAX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceMAX",
+          "start": 8,
+          "end": 33,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0327",
+      "parent_block_index": 327,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceMAX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceMAX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceMAX",
+          "start": 8,
+          "end": 33,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceMAX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798257",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceMAX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceMAX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553569",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceMAX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceMAX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceMAX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "To that end, we see MI355X fall well behind B200 in performance on FP4:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0328",
+      "parent_block_index": 328,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To that end, we see MI355X fall well behind B200 in performance on FP4:",
+      "parent_block_plain_text": "To that end, we see MI355X fall well behind B200 in performance on FP4:",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正因如此，我们看到 MI355X 在 FP4 性能上被 B200 远远甩在身后：",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553585",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0329",
+      "parent_block_index": 329,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553602",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!O75w!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdbc1dd2c-e15c-45b7-acf7-508d38ad1913_2406x1430.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0330",
+      "parent_block_index": 330,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?i_seq=8k%2F1k&g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21928999802&i_metric=y_outputTputPerGpu#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.428004",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553639",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "In comparing DeepSeek R1 FP8 perf between H200 (SGLang) and MI325X (SGLang), not much has changed since our initial release of InferenceXv1 last October. The MI325X data was captured on Feb 12th, 2026 with SGLang 0.5.8 whereas the B200 data was captured Jan 23, 2026 with SGLang 0.5.7.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0331",
+      "parent_block_index": 331,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In comparing DeepSeek R1 FP8 perf between H200 (SGLang) and MI325X (SGLang), not much has changed since our initial release of InferenceXv1 last October. The MI325X data was captured on Feb 12th, 2026 with SGLang 0.5.8 whereas the B200 data was captured Jan 23, 2026 with SGLang 0.5.7.",
+      "parent_block_plain_text": "In comparing DeepSeek R1 FP8 perf between H200 (SGLang) and MI325X (SGLang), not much has changed since our initial release of InferenceXv1 last October. The MI325X data was captured on Feb 12th, 2026 with SGLang 0.5.8 whereas the B200 data was captured Jan 23, 2026 with SGLang 0.5.7.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 285,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在对比 H200（SGLang）与 MI325X（SGLang）运行 DeepSeek R1 FP8 的性能时，我们发现，自去年 10 月首次发布 InferenceXv1 以来，整体格局并无太大变化。MI325X 的数据采集于 2026 年 2 月 12 日（使用 SGLang 0.5.8），而 B200 的数据采集于 2026 年 1 月 23 日（使用 SGLang 0.5.7）。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553654",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "One thing we note is the considerably smaller interactivity range for MI325X than H200, with H200 ranging from 30-90 tok/sec/user whereas MI325X ranges from only 13-35 tok/sec/user. This is problematic for providers who would like to serve users at a broader range of interactivity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0332",
+      "parent_block_index": 332,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One thing we note is the considerably smaller interactivity range for MI325X than H200, with H200 ranging from 30-90 tok/sec/user whereas MI325X ranges from only 13-35 tok/sec/user. This is problematic for providers who would like to serve users at a broader range of interactivity.",
+      "parent_block_plain_text": "One thing we note is the considerably smaller interactivity range for MI325X than H200, with H200 ranging from 30-90 tok/sec/user whereas MI325X ranges from only 13-35 tok/sec/user. This is problematic for providers who would like to serve users at a broader range of interactivity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 282,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，MI325X 的交互性区间比 H200 窄得多：H200 的交互性在 30 到 90 tok/s/user 之间，而 MI325X 仅有 13 到 35 tok/s/user。对于希望在更宽泛的交互性区间内为用户提供服务的供应商而言，这无疑是个棘手的难题。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553667",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0333",
+      "parent_block_index": 333,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553684",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!SI_q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3ba43db-8f65-4b28-a4a2-66282670449f_2117x1236.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Source: SemiAnalysis InferenceX",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21957492333&i_seq=8k%2F1k&i_prec=fp8#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0334",
+      "parent_block_index": 334,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis InferenceX](https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21957492333&i_seq=8k%2F1k&i_prec=fp8#inference)",
+      "parent_block_plain_text": "Source: SemiAnalysis InferenceX",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis InferenceX",
+          "start": 8,
+          "end": 31,
+          "href": "https://inferencemax.semianalysis.com/?g_model=DeepSeek-R1-0528&g_rundate=2026-02-12&g_runid=21957492333&i_seq=8k%2F1k&i_prec=fp8#inference",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 31,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:51:54.428011",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis InferenceX",
+          "model": "pro",
+          "created_at": "2026-04-08T01:09:06.553721",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis InferenceX",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis InferenceX]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文的“perf/TCO”指的是性能与总拥有成本的比值（即单位成本带来的性能，或广义的性价比），而译文“性能与 TCO 的维度”容易被理解为“性能”和“TCO”两个独立的考量维度，削弱了该指标的复合比例属性。"
+          },
+          {
+            "type": "accuracy|data",
+            "description": "上一句对比的是 H200 与 MI325X，下一句却突然给出了 MI325X 和 B200 的数据采集时间。这极大概率是原文作者的笔误（将 H200 误写成了 B200）。译文虽然忠实于原文，但可能会让硬核读者产生困惑。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

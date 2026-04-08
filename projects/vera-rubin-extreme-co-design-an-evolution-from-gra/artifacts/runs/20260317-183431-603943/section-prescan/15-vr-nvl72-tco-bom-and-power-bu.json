@@ -1,0 +1,55 @@
+{
+  "section_id": "15-vr-nvl72-tco-bom-and-power-bu",
+  "new_terms": [
+    {
+      "term": "MI4XX",
+      "suggested_translation": "MI4XX",
+      "context": "AMD's next-generation GPU architecture mentioned as a competitor to VR NVL72.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Helios",
+      "suggested_translation": "Helios 机柜级系统",
+      "context": "AMD's rack-scale system architecture, equivalent to NVIDIA's NVL series.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Model Flops Utilization (MFU)",
+      "suggested_translation": "模型算力利用率",
+      "context": "A metric representing the ratio of observed throughput to the theoretical peak throughput of a chip.",
+      "confidence": 0.98
+    },
+    {
+      "term": "InferenceX",
+      "suggested_translation": "InferenceX 基准测试",
+      "context": "A specific benchmarking suite used to measure real-world inference token throughput.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Project IRR",
+      "suggested_translation": "项目内部收益率",
+      "context": "A financial metric used to evaluate the profitability of potential investments, agnostic to depreciation periods.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dense FLOPS",
+      "suggested_translation": "稠密算力",
+      "context": "Computing performance measured without the use of sparsity optimizations.",
+      "confidence": 0.98
+    },
+    {
+      "term": "Useful life",
+      "suggested_translation": "使用寿命",
+      "context": "The estimated duration over which an asset is expected to be productive for TCO calculations.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tco": "总拥有成本 (TCO)",
+    "max-p / max-q": "Max-P / Max-Q 功耗模式",
+    "sparsity": "稀疏性",
+    "bom": "物料清单 (BoM)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-03-17T19:15:54.118048"
+}

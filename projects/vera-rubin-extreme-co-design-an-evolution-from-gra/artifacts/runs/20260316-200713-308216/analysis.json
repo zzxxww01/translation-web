@@ -1,0 +1,930 @@
+{
+  "theme": "",
+  "key_arguments": [],
+  "structure_summary": "",
+  "terminology": [
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bottleneck",
+      "context_meaning": "",
+      "translation": "瓶颈",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "5G",
+      "context_meaning": "第五代移动通信技术",
+      "translation": "5G",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Moore's Law",
+      "context_meaning": "",
+      "translation": "摩尔定律",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "professional",
+    "target_audience": "",
+    "translation_voice": ""
+  },
+  "challenges": [],
+  "guidelines": [],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Sets the commercial and technical stakes of the Vera Rubin NVL72 system and pitches the proprietary BoM and Power Budget Model.",
+      "relation_to_previous": "None. Serves as the article's opening.",
+      "relation_to_next": "Transitions from high-level market impact ($500B buildout) to the specific foundational silicon components that drive the system.",
+      "key_points": [
+        "The VR NVL72 introduces major new hardware components including Spectrum-6, ConnectX-9, and BlueField-4.",
+        "Vendor market share in this $500B buildout will create massive market dislocations, making component-level BoM analysis critical."
+      ],
+      "translation_notes": [
+        "Maintain the assertive, commercial urgency of the sales pitch in the final paragraph.",
+        "Ensure trademarked names (Vera, Rubin, NVLink, ConnectX-9, Spectrum-6) are kept in English or use established bilingual conventions."
+      ]
+    },
+    "01-extreme-co-design-6-silicon-p": {
+      "role_in_article": "Details the core silicon and networking innovations that form the foundation of the Rubin platform's massive scale-out capabilities.",
+      "relation_to_previous": "Delivers on the intro's promise by providing the first deep-dive technical specs on the silicon components.",
+      "relation_to_next": "Moves from individual chip and switch specifications to how these chips are integrated at the macro rack level (Oberon NVL72).",
+      "key_points": [
+        "Spectrum-6 CPO enables larger scale-out clusters via doubled radix.",
+        "Achieves 102.4T switching bandwidth using 512x 200G SerDes and 32 on-package 3.2T optical engines."
+      ],
+      "translation_notes": [
+        "Highly technical networking terms require precise industry-standard Chinese equivalents: 'radix' (端口基数/基数), 'SerDes' (串行解串器), 'CPO' (光电共封装).",
+        "Ensure 'optical engines' is translated as 光引擎."
+      ]
+    },
+    "02-rubin-oberon-rack-nvl72-not-n": {
+      "role_in_article": "Explains the macro architectural shift to the NVL72 rack scale form factor and the underlying memory economics driving this change.",
+      "relation_to_previous": "Zooms out from the silicon level to the rack-scale integration (Oberon vs HGX).",
+      "relation_to_next": "Narrows the focus from the whole rack down to the newly redesigned compute tray within that rack.",
+      "key_points": [
+        "The AI server paradigm has shifted from chassis-level to rack-scale (Oberon/NVL72) as the primary form factor.",
+        "Rising DDR pricing compresses the premium of HBM, eliminating the cost benefits of GDDR and driving the shift in memory architecture."
+      ],
+      "translation_notes": [
+        "Translate 'memory economics' as 存储经济学 or 内存经济学.",
+        "Carefully translate 'premium compresses' (溢价收窄/溢价压缩) to accurately reflect the financial argument regarding DDR vs HBM pricing."
+      ]
+    },
+    "03-compute-tray-redesign": {
+      "role_in_article": "Introduces the most significant mechanical and architectural change in the system: the cableless, modular compute tray.",
+      "relation_to_previous": "Zooms in from the macro rack level to the specific, critical subsystem (the compute tray).",
+      "relation_to_next": "Sets up the deep dive into the electrical and material engineering required to make the cableless design function.",
+      "key_points": [
+        "Eliminating internal cables reduces compute tray assembly time from 2 hours to 5 minutes.",
+        "Adopts a modular design using board-to-board connectors and a new midplane module.",
+        "KV cache capacity demands are driving memory architecture beyond what single tiers of memory can support."
+      ],
+      "translation_notes": [
+        "Translate 'compute tray' consistently as 计算托盘.",
+        "Ensure 'KV cache' remains KV Cache or KV缓存.",
+        "Preserve the stark contrast in Jensen's assembly time claim (2 hours to 5 minutes) without softening the metric."
+      ]
+    },
+    "04-compute-tray-cableless-design": {
+      "role_in_article": "Explains the electrical, signal integrity, and material engineering challenges overcome to enable the cableless tray.",
+      "relation_to_previous": "Elaborates on the 'how' and 'why' of the cableless design introduced in the previous section.",
+      "relation_to_next": "Shifts from electrical and signal integrity challenges to the thermal challenges of this highly dense tray.",
+      "key_points": [
+        "The cableless design relies heavily on advanced PCBs and copper foil upgrades.",
+        "Geometry loss (from vias and layer swaps) and insertion loss are major hurdles in real-world PCB channels.",
+        "The shift drives significant value increases in high-end CCL and PCB content."
+      ],
+      "translation_notes": [
+        "Translate 'insertion loss' as 插入损耗 and 'geometry loss' as 几何损耗.",
+        "The metaphor 'bumps in a highway' should be translated fluidly (e.g., 就像高速公路上的减速带) to maintain the explanatory tone.",
+        "Ensure 'CCL' is translated as 覆铜板 (Copper Clad Laminate)."
+      ]
+    },
+    "05-compute-tray-thermal": {
+      "role_in_article": "Details the 100% liquid cooling architecture required by the dense, fanless compute tray and the resulting changes to assembly processes.",
+      "relation_to_previous": "Addresses the thermal consequences of the dense, cableless PCB design discussed previously.",
+      "relation_to_next": "Transitions from thermal management to power delivery, the other critical infrastructure pillar of the tray.",
+      "key_points": [
+        "The tray is 100% liquid-cooled and fanless, utilizing an internal manifold.",
+        "The micro-channel cold plate (MCCP) pitch is reduced to 100 microns to increase surface area and cooling capacity.",
+        "Cold plates are now attached at the L6 assembly level rather than L10, increasing overall assembly efficiency."
+      ],
+      "translation_notes": [
+        "Clearly distinguish 'L6 assembly' (L6级组装) and 'L10 assembly' (L10级组装).",
+        "Translate 'micro-channel cold plate (MCCP)' as 微通道冷板.",
+        "Translate 'quick disconnects' as 快速接头 or 盲插快速接头 depending on exact context."
+      ]
+    },
+    "06-compute-tray-power-delivery": {
+      "role_in_article": "Explains the power routing, voltage step-downs, and efficiency improvements within the compute tray.",
+      "relation_to_previous": "Parallels the thermal section by explaining the power infrastructure of the exact same tray.",
+      "relation_to_next": "Completes the electrical and thermal picture before moving to the physical mechanical structures holding the tray together.",
+      "key_points": [
+        "50VDC power is delivered via internal busbars to Strata boards and the power distribution module (PDB).",
+        "Using 50V at 96A reduces power loss by 17x compared to 12V at 400A due to the quadratic relationship between power loss and current.",
+        "The PDB steps power down to 12VDC for specific front-chassis modules like CX-9 and BlueField-4."
+      ],
+      "translation_notes": [
+        "Ensure the physics concept 'quadratic relationship' is translated accurately as 二次方关系 or 平方关系.",
+        "Translate 'busbar clips' as 母排夹 or 汇流排夹.",
+        "Translate 'power distribution module (PDB)' as 配电模块."
+      ]
+    },
+    "07-compute-tray-mechanical": {
+      "role_in_article": "Describes the physical chassis, guiding mechanisms, and locking structures that physically enable the modular, cableless design.",
+      "relation_to_previous": "Grounds the thermal and power delivery systems in the physical, mechanical constraints of the tray.",
+      "relation_to_next": "Zooms back out from the compute tray's internal mechanicals to the macro rack-level facility infrastructure.",
+      "key_points": [
+        "Mechanical structures divide the front chassis to house Orchid, BlueField, and PDB modules.",
+        "Loading mechanisms apply necessary force to lock modules into Paladin connectors and MQDs, ensuring secure connections."
+      ],
+      "translation_notes": [
+        "Translate 'MQD' (Manifold Quick Disconnect) as 分水器快速接头 or 盲插快速接头.",
+        "Translate 'loading mechanism' as 加载机构, 压紧机构, or 锁紧机构.",
+        "Keep mechanical descriptions highly visual and precise to aid technical comprehension."
+      ]
+    },
+    "08-rack-level-infrastructure-the": {
+      "role_in_article": "Analyzes the macro-level cooling implications of the new architecture and its disruptive impact on the broader data center cooling ecosystem.",
+      "relation_to_previous": "Zooms out from the tray-level mechanicals and cooling to the facility and rack-level cooling ecosystem.",
+      "relation_to_next": "Concludes the current technical deep dive, leaving the reader with a major market takeaway regarding infrastructure suppliers.",
+      "key_points": [
+        "Vera Rubin can operate with 45C inlet temperatures, potentially eliminating the need for mechanical compressor-based chillers.",
+        "This capability is a massive surprise to the market and represents a major disruption to the existing cooling supplier ecosystem."
+      ],
+      "translation_notes": [
+        "Translate 'Mr. Market' as 市场先生 (a standard finance personification).",
+        "Translate 'mechanical compressor-based chillers' as 基于机械压缩机的冷水机组.",
+        "Preserve the contrarian, analytical tone regarding market expectations and ecosystem disruption."
+      ]
+    },
+    "09-procurement-and-cooling-vendor": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "10-rack-level-infrastructure-pow": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "11-networking-nvlink-6-rubin-sc": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-hyperscaler-customization-and": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "13-customization": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "14-assembly-automation-and-logist": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "15-vr-nvl72-tco-bom-and-power-bu": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "16-groq-lpu-decode-rack": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 17,
+  "paragraph_count": 439,
+  "word_count": 15260
+}

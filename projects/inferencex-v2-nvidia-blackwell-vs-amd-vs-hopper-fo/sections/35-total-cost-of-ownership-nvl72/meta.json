@@ -1,0 +1,597 @@
+{
+  "section_id": "35-total-cost-of-ownership-nvl72",
+  "title": "Total Cost of Ownership (NVL72, Blackwell, Blackwell Ultra, MI355, Hopper, MI325, MI300)",
+  "title_translation": "总拥有成本（NVL72、Blackwell、Blackwell Ultra、MI355、Hopper、MI325、MI300）",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Looking at capital costs across comparable generations, Nvidia systems tend to have higher capital cost than AMD systems. This is driven mostly by higher compute tray content which is driven by higher GPU pricing – it is well known from their financials that Nvidia enjoys higher margins on their GPUs than other vendors. As an example, MI300X compute tray content sits at ~$138K versus ~$170K for H100 SXM, and the gap widens further in later generations. MI355X is at ~$197K, while B200 rises to ~$264K and B300 to ~$344K. That incremental silicon content flows directly into higher server cost, and ultimately higher all-in cluster capex per server.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0377",
+      "parent_block_index": 377,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Looking at capital costs across comparable generations, Nvidia systems tend to have higher capital cost than AMD systems. This is driven mostly by higher compute tray content which is driven by higher GPU pricing – it is well known from their financials that Nvidia enjoys higher margins on their GPUs than other vendors. As an example, MI300X compute tray content sits at ~$138K versus ~$170K for H100 SXM, and the gap widens further in later generations. MI355X is at ~$197K, while B200 rises to ~$264K and B300 to ~$344K. That incremental silicon content flows directly into higher server cost, and ultimately higher all-in cluster capex per server.",
+      "parent_block_plain_text": "Looking at capital costs across comparable generations, Nvidia systems tend to have higher capital cost than AMD systems. This is driven mostly by higher compute tray content which is driven by higher GPU pricing – it is well known from their financials that Nvidia enjoys higher margins on their GPUs than other vendors. As an example, MI300X compute tray content sits at ~$138K versus ~$170K for H100 SXM, and the gap widens further in later generations. MI355X is at ~$197K, while B200 rises to ~$264K and B300 to ~$344K. That incremental silicon content flows directly into higher server cost, and ultimately higher all-in cluster capex per server.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 652,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "横向对比同代产品，英伟达系统的资本成本通常高于 AMD 系统。这主要是因为其计算托盘的组件成本更高，而这又源于更高的 GPU 定价——众所周知，从财报来看，英伟达 GPU 的利润率远高于其他厂商。举例来说，MI300X 计算托盘的组件成本约为 13.8 万美元，而 H100 SXM 则约为 17 万美元，到了后几代产品，这一差距进一步拉大。MI355X 约为 19.7 万美元，B200 增至约 26.4 万美元，B300 则高达约 34.4 万美元。这些增加的芯片组件成本直接推高了服务器成本，并最终导致每台服务器的集群总资本支出水涨船高。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.104970",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "This similar dynamic carries over into the Blackwell generation, where an increase in GPU content drives rising total Server cost, in turn driving higher total upfront cluster capex per server, resulting in higher capital cost of ownership.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0378",
+      "parent_block_index": 378,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This similar dynamic carries over into the Blackwell generation, where an increase in GPU content drives rising total Server cost, in turn driving higher total upfront cluster capex per server, resulting in higher capital cost of ownership.",
+      "parent_block_plain_text": "This similar dynamic carries over into the Blackwell generation, where an increase in GPU content drives rising total Server cost, in turn driving higher total upfront cluster capex per server, resulting in higher capital cost of ownership.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 240,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一动态在 Blackwell 这一代产品中得以延续：GPU 组件成本的增加推高了服务器总成本，进而抬高了单台服务器的前期集群资本支出，最终导致了更高的资本拥有成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105024",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0379",
+      "parent_block_index": 379,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105051",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!L152!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9d3c7c27-27ab-4a12-a1ac-b22996a4df53_2145x971.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0380",
+      "parent_block_index": 380,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798276",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105144",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI TCO 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Across comparable generations, operating costs per GPU are broadly similar because chip TDP is the dominant driver of TCO for operating costs. This goes up as you move from H100s to GB300s, given chip TDP double, driving up operating costs per hour per GPU",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0381",
+      "parent_block_index": 381,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Across comparable generations, operating costs per GPU are broadly similar because chip TDP is the dominant driver of TCO for operating costs. This goes up as you move from H100s to GB300s, given chip TDP double, driving up operating costs per hour per GPU",
+      "parent_block_plain_text": "Across comparable generations, operating costs per GPU are broadly similar because chip TDP is the dominant driver of TCO for operating costs. This goes up as you move from H100s to GB300s, given chip TDP double, driving up operating costs per hour per GPU",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 256,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在同代产品中，每块 GPU 的运营成本大致相当，因为芯片的 TDP (热设计功耗) 是决定 TCO 中运营成本的主导因素。从 H100 升级到 GB300，这一成本随之上升，因为芯片 TDP 翻了一番，从而推高了每块 GPU 的每小时运营成本。",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105169",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0382",
+      "parent_block_index": 382,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105191",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!tU5P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0679819d-cf11-4a22-bd5c-cf95554b77e8_2145x971.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0383",
+      "parent_block_index": 383,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-07T19:52:09.798283",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "pro",
+          "created_at": "2026-04-08T01:27:05.105252",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI TCO 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文“从英伟达的财报中可以清楚地看到，其 GPU 的利润率远高于其他厂商，这已是人尽皆知”略显冗长，且句式有些头重脚轻。“人尽皆知”放在句末不如将“众所周知”前置更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在同代产品中”未能完全传达出“横向对比（Nvidia 与 AMD 的）同级代际产品”的比较意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文“运营成本 TCO”略显语义重复（TCO 已经包含成本之意）。原文意为“TCO 中的运营成本部分”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "section_id": "11-amds-zen-interconnect-archite",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 8,
+        "issue_type": "accuracy|structure",
+        "severity": "high",
+        "original_text": "A typical dual socket server ended having four NUMA domains. Intra-CCX, Inter-CCX, Die-to-die MCM, Inter-Socket.",
+        "description": "译文使用了冒号“：”将“四个 NUMA 域”与“CCX 内部、CCX 之间、MCM 裸片之间、插槽之间”直接画上等号。实际上，这四个项目代表的是四个不同层级的通信边界/延迟层级（levels of latency），而非 NUMA 域的名称。原作者用句号将它们分开，译文的冒号强行关联导致了技术逻辑错误。",
+        "why_it_matters": "强行关联会向读者传递错误的硬件架构概念，使读者误以为这四个通信层级就是 NUMA 域。",
+        "suggestion": "将冒号改为句号，并补充主语以理顺逻辑，例如：“一台典型的双插槽服务器最终会存在四个 NUMA 域。其通信层级（或延迟梯度）包括：CCX 内部、CCX 之间、MCM 裸片之间、插槽之间。”"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "formatting",
+        "severity": "low",
+        "original_text": "Infinity Fabric on Package (IFOP) ... Infinity Fabric Inter Socket (IFIS)",
+        "description": "中文字符与英文字母之间缺少空格（“封装内Infinity Fabric”、“插槽间Infinity Fabric”）。同理，第 8 段中的“L3缓存”也缺少空格。",
+        "why_it_matters": "不符合中英文混排的排版规范（CJK-Latin spacing），影响阅读体验。",
+        "suggestion": "在中文和英文之间添加空格，改为“封装内 Infinity Fabric (IFOP)”、“插槽间 Infinity Fabric (IFIS)”以及“L3 缓存”。"
+      }
+    ]
+  }
+}

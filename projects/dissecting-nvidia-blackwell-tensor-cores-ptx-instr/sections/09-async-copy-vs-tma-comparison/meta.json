@@ -1,0 +1,424 @@
+{
+  "section_id": "09-async-copy-vs-tma-comparison",
+  "title": "Async Copy vs. TMA Comparison",
+  "title_translation": "异步拷贝与 TMA 对比",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Deep learning kernel libraries like FlashInfer use both TMA and async copy for loading data. TMA and async copy have different performance characteristics: TMA is good for large loads with regular access patterns but has higher latency, while async copy can handle irregular memory access patterns but has size limits. We explain under what conditions we should pick one over the other. Here we benchmark the configurations FlashInfer uses for MHA and MLA kernels.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Deep learning kernel libraries like FlashInfer use both TMA and async copy for loading data. TMA and async copy have different performance characteristics: TMA is good for large loads with regular access patterns but has higher latency, while async copy can handle irregular memory access patterns but has size limits. We explain under what conditions we should pick one over the other. Here we benchmark the configurations FlashInfer uses for MHA and MLA kernels.",
+      "parent_block_plain_text": "Deep learning kernel libraries like FlashInfer use both TMA and async copy for loading data. TMA and async copy have different performance characteristics: TMA is good for large loads with regular access patterns but has higher latency, while async copy can handle irregular memory access patterns but has size limits. We explain under what conditions we should pick one over the other. Here we benchmark the configurations FlashInfer uses for MHA and MLA kernels.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 464,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "FlashInfer 等深度学习内核库在加载数据时会同时使用 TMA 和 async copy。TMA 和 async copy 具有不同的性能特征：TMA 擅长处理具有规则访存模式的大数据量加载，但延迟较高；而 async copy 能够处理不规则的访存模式，但存在数据量限制。我们将说明在何种条件下应如何取舍。在此，我们对 FlashInfer 在 MHA 和 MLA 内核中使用的配置进行了基准测试。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:26:17.778954",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'regular access patterns' as '规则访存模式'.",
+          "Translate 'dynamic page loading' as '动态页面加载'.",
+          "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+          "relation_to_previous": "Directly compares the two memory movement mechanisms detailed in sections 07 and 08.",
+          "relation_to_next": "Narrows the memory discussion from general bulk movement to a specific advanced TMA feature (multicast) in the next section.",
+          "key_points": [
+            "TMA excels at large loads with regular access patterns (e.g., MHA), while async copy is better for irregular patterns and dynamic page loading (e.g., MLA).",
+            "Production libraries like TRT-LLM rely heavily on TMA, likely using 4D TMA with page indices for dynamic loading."
+          ],
+          "translation_notes": [
+            "Translate 'regular access patterns' as '规则访存模式'.",
+            "Translate 'dynamic page loading' as '动态页面加载'.",
+            "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The phrase 'index into the TensorMap object' is translated as '对 TensorMap 对象进行索引'. In Chinese programming terminology, '对……进行索引' usually implies *creating* an index for a data structure (like indexing a database). The English 'index into' means using an index to *access* an element within that data structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We see that throughput-wise, async copy slightly outperforms TMA at less than 32 bytes in flight, but TMA catches up after that and can continue scaling to 128 KiB. Latency-wise, we see async copy having slightly lower latency than TMA before 12 KiB in flight, but TMA latency greatly increases after that.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We see that throughput-wise, async copy slightly outperforms TMA at less than 32 bytes in flight, but TMA catches up after that and can continue scaling to 128 KiB. Latency-wise, we see async copy having slightly lower latency than TMA before 12 KiB in flight, but TMA latency greatly increases after that.",
+      "parent_block_plain_text": "We see that throughput-wise, async copy slightly outperforms TMA at less than 32 bytes in flight, but TMA catches up after that and can continue scaling to 128 KiB. Latency-wise, we see async copy having slightly lower latency than TMA before 12 KiB in flight, but TMA latency greatly increases after that.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 306,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从吞吐量来看，当飞行中数据量小于 32 字节时，async copy 略微优于 TMA，但 TMA 随后便会赶上，并能继续扩展至 128 KiB。从延迟来看，在飞行中数据量达到 12 KiB 之前，async copy 的延迟略低于 TMA，但超过该数据量后，TMA 的延迟会大幅增加。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:26:17.779046",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'regular access patterns' as '规则访存模式'.",
+          "Translate 'dynamic page loading' as '动态页面加载'.",
+          "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+          "relation_to_previous": "Directly compares the two memory movement mechanisms detailed in sections 07 and 08.",
+          "relation_to_next": "Narrows the memory discussion from general bulk movement to a specific advanced TMA feature (multicast) in the next section.",
+          "key_points": [
+            "TMA excels at large loads with regular access patterns (e.g., MHA), while async copy is better for irregular patterns and dynamic page loading (e.g., MLA).",
+            "Production libraries like TRT-LLM rely heavily on TMA, likely using 4D TMA with page indices for dynamic loading."
+          ],
+          "translation_notes": [
+            "Translate 'regular access patterns' as '规则访存模式'.",
+            "Translate 'dynamic page loading' as '动态页面加载'.",
+            "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The phrase 'index into the TensorMap object' is translated as '对 TensorMap 对象进行索引'. In Chinese programming terminology, '对……进行索引' usually implies *creating* an index for a data structure (like indexing a database). The English 'index into' means using an index to *access* an element within that data structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:26:17.779092",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'regular access patterns' as '规则访存模式'.",
+          "Translate 'dynamic page loading' as '动态页面加载'.",
+          "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+          "relation_to_previous": "Directly compares the two memory movement mechanisms detailed in sections 07 and 08.",
+          "relation_to_next": "Narrows the memory discussion from general bulk movement to a specific advanced TMA feature (multicast) in the next section.",
+          "key_points": [
+            "TMA excels at large loads with regular access patterns (e.g., MHA), while async copy is better for irregular patterns and dynamic page loading (e.g., MLA).",
+            "Production libraries like TRT-LLM rely heavily on TMA, likely using 4D TMA with page indices for dynamic loading."
+          ],
+          "translation_notes": [
+            "Translate 'regular access patterns' as '规则访存模式'.",
+            "Translate 'dynamic page loading' as '动态页面加载'.",
+            "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The phrase 'index into the TensorMap object' is translated as '对 TensorMap 对象进行索引'. In Chinese programming terminology, '对……进行索引' usually implies *creating* an index for a data structure (like indexing a database). The English 'index into' means using an index to *access* an element within that data structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png",
+          "model": "pro",
+          "created_at": "2026-04-01T23:26:17.779131",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'regular access patterns' as '规则访存模式'.",
+          "Translate 'dynamic page loading' as '动态页面加载'.",
+          "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+          "relation_to_previous": "Directly compares the two memory movement mechanisms detailed in sections 07 and 08.",
+          "relation_to_next": "Narrows the memory discussion from general bulk movement to a specific advanced TMA feature (multicast) in the next section.",
+          "key_points": [
+            "TMA excels at large loads with regular access patterns (e.g., MHA), while async copy is better for irregular patterns and dynamic page loading (e.g., MLA).",
+            "Production libraries like TRT-LLM rely heavily on TMA, likely using 4D TMA with page indices for dynamic loading."
+          ],
+          "translation_notes": [
+            "Translate 'regular access patterns' as '规则访存模式'.",
+            "Translate 'dynamic page loading' as '动态页面加载'.",
+            "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The phrase 'index into the TensorMap object' is translated as '对 TensorMap 对象进行索引'. In Chinese programming terminology, '对……进行索引' usually implies *creating* an index for a data structure (like indexing a database). The English 'index into' means using an index to *access* an element within that data structure."
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "In reality, Blackwell MLA kernels use async copy for dynamically loading pages, while its MHA kernels use only TMA. Most of FlashInfer’s Blackwell MHA kernels are contributed by TRT-LLM, so we can only speculate what the kernels do by investigating the binaries. We found that similar to Hopper, all Blackwell TRT-LLM kernels use TMA. We suspect that for dynamic page loading, those kernels follow Hopper kernels, where they use 4D TMA with page index as the last dimension and index into the TensorMap object when needed. To understand the exact mechanics of the kernels, we urge NVIDIA to open source the FlashInfer TRT-LLM kernels for the benefit of the community.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "code",
+          "text": "TensorMap",
+          "start": 493,
+          "end": 502,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In reality, Blackwell MLA kernels use async copy for dynamically loading pages, while its MHA kernels use only TMA. Most of FlashInfer’s Blackwell MHA kernels are contributed by TRT-LLM, so we can only speculate what the kernels do by investigating the binaries. We found that similar to Hopper, all Blackwell TRT-LLM kernels use TMA. We suspect that for dynamic page loading, those kernels follow Hopper kernels, where they use 4D TMA with page index as the last dimension and index into the `TensorMap` object when needed. To understand the exact mechanics of the kernels, we urge NVIDIA to open source the FlashInfer TRT-LLM kernels for the benefit of the community.",
+      "parent_block_plain_text": "In reality, Blackwell MLA kernels use async copy for dynamically loading pages, while its MHA kernels use only TMA. Most of FlashInfer’s Blackwell MHA kernels are contributed by TRT-LLM, so we can only speculate what the kernels do by investigating the binaries. We found that similar to Hopper, all Blackwell TRT-LLM kernels use TMA. We suspect that for dynamic page loading, those kernels follow Hopper kernels, where they use 4D TMA with page index as the last dimension and index into the TensorMap object when needed. To understand the exact mechanics of the kernels, we urge NVIDIA to open source the FlashInfer TRT-LLM kernels for the benefit of the community.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "code",
+          "text": "TensorMap",
+          "start": 493,
+          "end": 502,
+          "href": null,
+          "title": null,
+          "span_id": "CODE_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 667,
+      "expected_tokens": [
+        "CODE_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在实际应用中，Blackwell MLA 内核使用 async copy 进行动态页面加载，而其 MHA 内核仅使用 TMA。FlashInfer 的 Blackwell MHA 内核大多由 TRT-LLM 贡献，因此我们只能通过分析二进制文件来推测这些内核的具体行为。我们发现，与 Hopper 类似，所有 Blackwell TRT-LLM 内核均使用 TMA。我们推测，在动态页面加载方面，这些内核沿用了 Hopper 内核的机制：使用 4D TMA 并将页面索引作为最后一个维度，在需要时对 TensorMap 对象进行索引。为了明确这些内核的确切运行机制，我们呼吁英伟达开源 FlashInfer TRT-LLM 内核，以造福社区。",
+          "model": "pro",
+          "created_at": "2026-04-01T23:26:17.779311",
+          "tokenized_text": "在实际应用中，Blackwell MLA 内核使用 async copy 进行动态页面加载，而其 MHA 内核仅使用 TMA。FlashInfer 的 Blackwell MHA 内核大多由 TRT-LLM 贡献，因此我们只能通过分析二进制文件来推测这些内核的具体行为。我们发现，与 Hopper 类似，所有 Blackwell TRT-LLM 内核均使用 TMA。我们推测，在动态页面加载方面，这些内核沿用了 Hopper 内核的机制：使用 4D TMA 并将页面索引作为最后一个维度，在需要时对 [[[CODE_1|TensorMap]]] 对象进行索引。为了明确这些内核的确切运行机制，我们呼吁英伟达开源 FlashInfer TRT-LLM 内核，以造福社区。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.524999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'regular access patterns' as '规则访存模式'.",
+          "Translate 'dynamic page loading' as '动态页面加载'.",
+          "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Synthesizes the previous sections to provide actionable engineering advice on when to use LDGSTS versus TMA, grounded in real-world libraries.",
+          "relation_to_previous": "Directly compares the two memory movement mechanisms detailed in sections 07 and 08.",
+          "relation_to_next": "Narrows the memory discussion from general bulk movement to a specific advanced TMA feature (multicast) in the next section.",
+          "key_points": [
+            "TMA excels at large loads with regular access patterns (e.g., MHA), while async copy is better for irregular patterns and dynamic page loading (e.g., MLA).",
+            "Production libraries like TRT-LLM rely heavily on TMA, likely using 4D TMA with page indices for dynamic loading."
+          ],
+          "translation_notes": [
+            "Translate 'regular access patterns' as '规则访存模式'.",
+            "Translate 'dynamic page loading' as '动态页面加载'.",
+            "Ensure library names (FlashInfer, TRT-LLM) are not translated."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "The phrase 'index into the TensorMap object' is translated as '对 TensorMap 对象进行索引'. In Chinese programming terminology, '对……进行索引' usually implies *creating* an index for a data structure (like indexing a database). The English 'index into' means using an index to *access* an element within that data structure."
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

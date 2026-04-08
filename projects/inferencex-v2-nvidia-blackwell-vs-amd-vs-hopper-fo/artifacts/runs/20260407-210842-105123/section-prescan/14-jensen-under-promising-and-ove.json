@@ -1,0 +1,54 @@
+{
+  "section_id": "14-jensen-under-promising-and-ove",
+  "new_terms": [
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学",
+      "context": "crack more Jensen Math jokes",
+      "confidence": 0.95
+    },
+    {
+      "term": "reality distortion field",
+      "suggested_translation": "现实扭曲力场",
+      "context": "perceived use of a reality distortion field",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-up network",
+      "suggested_translation": "纵向扩展网络 (Scale-up 网络)",
+      "context": "connect at most 8 GPUs using the 900GByte/s/GPU NVLink scale-up network",
+      "confidence": 0.9
+    },
+    {
+      "term": "InfiniBand XDR",
+      "suggested_translation": "InfiniBand XDR",
+      "context": "falls back to the lower InfiniBand XDR scale-out network",
+      "confidence": 0.95
+    },
+    {
+      "term": "uni-di",
+      "suggested_translation": "单向 (Uni-directional)",
+      "context": "featuring 800Gbit/s (uni-di) per GPU of bandwidth",
+      "confidence": 0.95
+    },
+    {
+      "term": "MI455X UALoE72",
+      "suggested_translation": "MI455X UALoE72",
+      "context": "AMD’s first rack scale MI455X UALoE72 system",
+      "confidence": 0.95
+    },
+    {
+      "term": "mass production ramp",
+      "suggested_translation": "量产爬坡",
+      "context": "due to manufacturing delays, the mass production ramp...",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tok/s/user": "Token/秒/用户",
+    "rack scale": "机架级",
+    "scale-out": "横向扩展 (Scale-out)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:43:04.468403"
+}

@@ -1,0 +1,67 @@
+{
+  "section_id": "24-intel-xeon-coral-rapids",
+  "new_terms": [
+    {
+      "term": "Lip-Bu Tan",
+      "suggested_translation": "陈立武",
+      "context": "With the arrival of Lip-Bu Tan and the cancellation of the 8-channel Diamond Rapids-SP...",
+      "confidence": 1.0
+    },
+    {
+      "term": "Coral Rapids",
+      "suggested_translation": "Coral Rapids",
+      "context": "Intel hopes to accelerate the development of Coral Rapids and bring it to market earlier.",
+      "confidence": 1.0
+    },
+    {
+      "term": "NVLink-C2C",
+      "suggested_translation": "NVLink-C2C",
+      "context": "Intel will release their custom Xeon CPU with an NVLink-C2C chiplet...",
+      "confidence": 1.0
+    },
+    {
+      "term": "Clearwater Forest",
+      "suggested_translation": "Clearwater Forest",
+      "context": "Intel’s Clearwater Forest successor is dead.",
+      "confidence": 1.0
+    },
+    {
+      "term": "E-core",
+      "suggested_translation": "E核 (能效核)",
+      "context": "The E-core Xeon line was already treading water...",
+      "confidence": 1.0
+    },
+    {
+      "term": "Rouge River Forest",
+      "suggested_translation": "Rouge River Forest",
+      "context": "Originally codenamed Rouge River Forest, then DMR-HD...",
+      "confidence": 1.0
+    },
+    {
+      "term": "DMR-HD",
+      "suggested_translation": "DMR-HD (Diamond Rapids High Density)",
+      "context": "then DMR-HD (Diamond Rapids High Density), the design reused the IMH dies...",
+      "confidence": 1.0
+    },
+    {
+      "term": "risk production",
+      "suggested_translation": "风险试产",
+      "context": "which would only be entering risk production in 2027...",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "intel": "英特尔",
+    "xeon": "至强",
+    "diamond rapids": "Diamond Rapids",
+    "nvidia": "英伟达",
+    "chiplet": "芯粒",
+    "x86": "x86",
+    "i/o and memory hub (imh)": "IMH",
+    "core building block (cbb)": "CBB",
+    "p-cores": "P核",
+    "simultaneous multi-threading (smt)": "SMT"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T17:18:55.451190"
+}

@@ -1,0 +1,311 @@
+{
+  "section_id": "04-gpu-rental-market-structure-to",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "04-gpu-rental-market-structure-to",
+    "section_title": "GPU Rental Market Structure Today",
+    "section_title_translation": "当前GPU租赁市场结构",
+    "section_position": "5/10",
+    "article_theme": "Driven by explosive demand from advanced AI models and tightening supply, GPU rental prices are surging across all contract terms, prompting the introduction of a new contract price index to track this structural market shift.",
+    "structure_summary": "The article introduces the recent 40% surge in H100 rental prices, contrasting current tight supply with past bearish expectations ('The Comeback Kid'). It then introduces the SemiAnalysis 1Y H100 contract price index to better track the market. The core of the piece breaks down the rental market structure into short, mid, and long-term segments, explaining the dynamics of each. Finally, it projects future trends based on supply chain bottlenecks, tokenomics, and new cluster deployments, concluding that prices will continue to rise.",
+    "target_audience": "Institutional investors, AI lab executives, cloud infrastructure planners, and semiconductor analysts.",
+    "translation_voice": "A top-tier financial and tech analyst. The Chinese should be dense with accurate industry jargon but flow naturally, balancing formal financial analysis with engaging, punchy market commentary.",
+    "previous_section_title": "Introducing the SemiAnalysis 1Y H100 contract price index",
+    "next_section_title": "Short-term Rental: On-Demand, Spot, Less than 3-Month Contracts",
+    "section_role": "Establishes a structural framework for understanding the GPU rental market by dividing it into three temporal segments.",
+    "translation_notes": [
+      "Translate 'sweating fixed compute assets' as maximizing utilization/extracting value (充分压榨固定算力资产价值).",
+      "'Tenor' in this financial/contractual context should be translated as 期限."
+    ],
+    "key_points": [
+      "The market was competitive before late 2025, with operators prioritizing high utilization.",
+      "The market is structurally divided into short-term, mid-term, and long-term contract segments."
+    ],
+    "guidelines": [
+      "Maintain the authoritative yet slightly colloquial tone of a top-tier tech/finance analyst. Use professional financial/tech jargon (e.g., '边际需求', '投资回报率', '产能爬坡') while capturing the punchy style of the original.",
+      "Ensure precise translation of cloud infrastructure and financial terms. Pay special attention to 'offtake' (包销), 'tenor' (期限), and 'bare metal' (裸金属).",
+      "Restructure long English sentences into concise Chinese clauses, especially when describing complex market dynamics. Use a 'topic-comment' structure where appropriate to improve Chinese-native paragraph flow.",
+      "For terms like 'Neocloud', consistently use '新兴算力云厂商' to clearly distinguish them from traditional 'Hyperscalers' (超大规模云厂商).",
+      "Pay special attention to timeframes, pricing units, and hardware specs (e.g., '$1.70/hr/GPU', '1Q26', 'p6-b200'). Ensure they are formatted correctly and unambiguously in Chinese.",
+      "When translating idiomatic section headers ('Where The Puck is Going', 'The Comeback Kid'), prioritize the underlying business meaning over literal translation to maintain the professional analytical voice."
+    ],
+    "article_challenges": [
+      {
+        "location": "Section Heading: Where The Puck is Going",
+        "issue": "Idiomatic expression (from Wayne Gretzky) meaning anticipating the future, which doesn't translate literally.",
+        "suggestion": "Translate conceptually as '趋势前瞻' or '行业未来走向' to maintain the professional analytical tone."
+      },
+      {
+        "location": "Section Heading: The Comeback Kid",
+        "issue": "Idiomatic phrase referring to someone/something that recovers from a disadvantageous situation.",
+        "suggestion": "Translate as '触底反弹' or '绝地反击' to capture the unexpected recovery of GPU rental prices."
+      },
+      {
+        "location": "Paragraph starting 'Customers are fighting to pay...'",
+        "issue": "High density of technical specs (p6-b200, 8 nodes/64 GPUs) mixed with market actions.",
+        "suggestion": "Break the sentence into clear, parallel clauses in Chinese to maintain readability without losing the sense of market frenzy."
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Neocloud",
+        "term": "Neocloud",
+        "translation": "新兴算力云厂商",
+        "strategy": "translate",
+        "note": "Emerging cloud providers specializing primarily in AI compute and GPU rentals (e.g., CoreWeave, Lambda, Nebius).",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Hyperscaler",
+        "term": "Hyperscaler",
+        "translation": "超大规模云厂商",
+        "strategy": "translate",
+        "note": "Major traditional cloud providers like AWS, Google Cloud, and Microsoft Azure.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Offtake",
+        "term": "Offtake",
+        "translation": "包销协议",
+        "strategy": "translate",
+        "note": "Long-term agreements (usually 4-5 years) where AI labs commit to buying massive amounts of compute capacity.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Spot instance",
+        "term": "Spot instance",
+        "translation": "竞价实例",
+        "strategy": "translate",
+        "note": "Spare compute capacity offered at variable, often cheaper rates, but can be interrupted.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Bare metal",
+        "term": "Bare metal",
+        "translation": "裸金属",
+        "strategy": "translate",
+        "note": "Physical servers rented without virtualization layers, allowing AI labs to customize the tech stack.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tenor",
+        "term": "Tenor",
+        "translation": "合同期限",
+        "strategy": "translate",
+        "note": "The length or duration of a rental contract (e.g., 1-year, 5-year).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Sweating fixed compute assets",
+        "term": "Sweating fixed compute assets",
+        "translation": "最大化压榨固定算力资产价值",
+        "strategy": "translate",
+        "note": "Extracting the maximum possible value and utilization out of existing hardware before it becomes obsolete.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tokenomics",
+        "term": "Tokenomics",
+        "translation": "Token经济学",
+        "strategy": "translate",
+        "note": "The economics of AI model usage, specifically tracking token generation volumes, costs, and revenues.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SoC",
+        "term": "SoC",
+        "translation": "SoC",
+        "strategy": "first_annotate",
+        "note": "系统级芯片 (System on Chip)",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Establishes a structural framework for understanding the GPU rental market by dividing it into three temporal segments.",
+    "relation_to_previous": "Moves from the introduction of the tracking tool to the actual structural analysis the tool facilitates.",
+    "relation_to_next": "Acts as an umbrella introduction for the detailed segment-by-segment breakdowns in the next three sections.",
+    "key_points": [
+      "The market was competitive before late 2025, with operators prioritizing high utilization.",
+      "The market is structurally divided into short-term, mid-term, and long-term contract segments."
+    ],
+    "translation_notes": [
+      "Translate 'sweating fixed compute assets' as maximizing utilization/extracting value (充分压榨固定算力资产价值).",
+      "'Tenor' in this financial/contractual context should be translated as 期限."
+    ]
+  },
+  "translations": [
+    "在2025年底之前，GPU租赁市场的定价竞争更为激烈。当时运营商手中握有大量GPU库存，而终端需求才刚刚开始实质性加速。报价环节竞争激烈，多家新兴算力云厂商都能开出极具竞争力的价格。这些运营商将出租率放在首位，力求在下一轮GPU更新周期可能对现有GPU服务器价格造成冲击之前，牢牢抓住机会，最大化压榨固定算力资产价值。",
+    "自那以后，GPU租赁供应商的策略发生了180度大转弯。如今，新兴算力云厂商与超大规模云厂商已完全掌握主动权——他们能够争取到更有利的条款，例如更高的预付款比例、更优的定价以及更长的合同期限，甚至可以根据自身的库存情况，从容挑选合同的起止日期。时间也站到了新兴算力云厂商这一边：他们能够按照自己的节奏规划部署，并利用价格不断上涨的大环境，逐步为特定算力集群构建最优的客户组合。",
+    "深入理解GPU租赁市场结构的最佳方式，是将其划分为三个主要的细分市场，每个细分市场通常服务于不同类型的客户：",
+    "1. 短期租赁：按需实例、竞价实例以及短于3个月的合同 2. 中期合同：从3个月一直延伸至3年以上的合同。 3. 长期包销协议：4到5年的合同，其中5年是最主流的合同期限。"
+  ]
+}

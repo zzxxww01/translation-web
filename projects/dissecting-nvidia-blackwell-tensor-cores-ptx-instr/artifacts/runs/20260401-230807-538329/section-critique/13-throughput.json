@@ -1,0 +1,38 @@
+{
+  "section_id": "13-throughput",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "annotation",
+        "severity": "medium",
+        "original_text": "共享内存 (SMEM) / 张量内存 (TMEM)",
+        "description": "译文在全文多处（段落 4、6、13、14、16、18、21）重复使用了“共享内存 (SMEM)”和“张量内存 (TMEM)”的中英文双重括注形式。根据翻译指南的“首次提及策略”，仅需在术语首现时括注，后续应避免过度加注。",
+        "why_it_matters": "反复添加中英文括注会打断硬核技术读者的阅读节奏，显得不够利落，且违反了术语首次括注后统一使用的规范。",
+        "suggestion": "仅在首次提及（段落 2）时保留“共享内存 (SMEM)”和“张量内存 (TMEM)”，后续所有段落中建议直接使用“SMEM”和“TMEM”以保持版面简洁与专业感。"
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "data",
+        "severity": "low",
+        "original_text": "Math Cycles = FLOPs / (16384 FLOPs/clk) = 32 cycles",
+        "description": "原文此处存在明显的计算笔误。根据段落 6 的设定“8192 MMA FLOPs per cycle per SM”，且计算结果 262144 / 32 = 8192，此处的除数应为 8192 而非 16384。",
+        "why_it_matters": "虽然译文忠实于原文，但保留原文的明显数据错误会给仔细推演公式的读者带来困惑。作为专业技术内容，适度修正或标注原文错误能显著提升内容的权威性。",
+        "suggestion": "建议直接修正为正确的数值，或添加译者注说明原文笔误：`Math Cycles = FLOPs / (8192 FLOPs/clk) = 32 cycles`。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "对于所有 N 尺寸下的 1SM MMA，我们观察到较小的 M=64 配置最高仅达到 50% 的理论峰值吞吐量",
+        "description": "“对于所有 N 尺寸下的 1SM MMA”略显英文句法投影（For 1SM MMA across all N sizes），用“所有 N 尺寸下”作为定语修饰“1SM MMA”在中文表达中不够自然。",
+        "why_it_matters": "稍微影响了长句开头的流畅度，调整语序可以使表达更符合中文技术文档的习惯。",
+        "suggestion": "建议调整状语位置：“对于 1SM MMA，在所有 N 尺寸下，我们观察到……”或“在 1SM MMA 的所有 N 尺寸配置中，我们观察到……”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+### 维拉、鲁宾、NVLink 6 交换机、ConnectX-9、BlueField-4、Spectrum-6、无缝无缆计算托盘设计、供电机架、VR NVL72 总拥有成本与物料清单
+
+作者：Wega Chu、Dylan Patel、Daniel Nishball 及其他 8 人
+
+2026年2月25日 · 付费
+
+https://substackcdn.com/image/fetch/$s_!NB4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7257cc0c-a57b-4aa2-b03b-1ead3d930e8c_4800x2700.png
+
+在2026年CES上，英伟达正式详细公布了鲁宾平台的全部6款产品：鲁宾GPU、维拉CPU、NVLink 6交换机、ConnectX-9、BlueField-4和Spectrum-6。VR NVL72作为英伟达第二代机架级Oberon架构正式登场。随着竞争对手在机架级赛道上迎头赶上——包括Gen2 UltraServer中的Trainium 3、AMD MI450X Helios机架，以及甚至在GB200之前就已实现机架级部署的谷歌TPU——英伟达以“极致协同设计”的统治力予以回击。凭借极致协同设计，英伟达将机架级集成推向了新的高度。机架系统化身为一个计算单元、一个单一的分布式加速器，而英伟达包揽了整个系统的设计。
+
+https://substackcdn.com/image/fetch/$s_!mG2N!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d3419ee-609e-490d-999f-2454ec532c80_2683x1577.png
+
+来源： Nvidia
+
+在维拉鲁宾平台中，英伟达正在进一步强化对系统和机架级设计的掌控力。随着每个组件都被推向极限，同时还要兼顾成本效率的优化，机架级的集成与组装正变得愈发困难。为了提升集成效率与吞吐量，与Grace Blackwell相比，VR NVL72采用了模块化方案，其整体设计更具全局性。
+
+凭借在极致协同设计上的统治力，英伟达的竞争力正在进一步增强。在由英伟达引领的AI服务器系统设计中，它是唯一一家在所有主要芯片组件上都能提供同类最佳或接近同类最佳产品的厂商。英伟达提供了最顶级的加速器、最先进的纵向扩展交换机、最好的网卡、最出色的以太网交换机之一，以及一款大幅改进的专用CPU。没有任何其他竞争对手拥有如此完整的集成芯片产品矩阵。
+
+在下文中，我们将深入芯片层面，剖析维拉鲁宾平台的6款芯片产品。随后，我们将从设计视角探讨机架与计算托盘从Grace Blackwell向维拉鲁宾的演进，并分析其对线缆、连接器、PCB、散热、机械结构与供电等组件的影响。
+
+接下来，我们将探讨 VR NVL72 系统的主要网络架构，即纵向扩展的 NVLink 6 网络与后端的横向扩展网络。此外，我们还将分析超大规模云厂商定制化空间大幅受限对供应链与交付带来的影响，以及组装供应商的竞争格局。
+
+最后，本报告将在结尾处探讨 VR NVL72 系统的总拥有成本，并提供支撑该总拥有成本分析的物料清单与功耗预算估算。在付费专区，我们还将为读者深度剖析英伟达针对其 Groq IP 的未来规划。此外，我们也会分析美光、SK海力士以及三星在 HBM 产能爬坡过程中所面临的挑战。
+
+今天，我们还将正式推出VR NVL72 组件物料清单与功耗预算模型。该模型针对本文所探讨的 VR NVL72 系统，提供了系统级的物料清单与功耗预算分析。这一分析至关重要，因为在规模高达 5000 亿美元的鲁宾基础设施扩建浪潮中，各大供应商及其在子组件中的市场份额，将直接决定他们究竟是赢家还是输家。其产生的下游影响与市场洗牌效应将极为深远。该模型涵盖的内容包括：
+
+- 英伟达计算托盘组件：搭载鲁宾 GPU、维拉 CPU 和 SOCAMM 内存的 Strata 模块；BlueField-4；ConnectX-9
+
+- NVLink 系统：NVSwitch、NVLink 背板与线缆、配套连接器、主机 CPU 管理模块
+
+- 液冷组件：冷板、快插接头、分水器
+
+- PCB、载板及材料组件：关键系统板、ABF载板、覆铜板用量
+
+- 连接器：Paladin HD2板对板连接器、Paladin HD2 NVLink 6.0连接器
+
+- 供电组件：电源插箱、母线排、VRM、供电模块
+
+- 机械结构：机箱、装载机构、导轨套件、机柜框架
+
+- 管理模块：BMC
+
+- 网络：光模块、CX-9
+
+https://substackcdn.com/image/fetch/$s_!FRrs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7563ee69-3f02-47f8-944f-a7ac5b62cf0a_3362x844.png
+
+来源： Nvidia VR NVL72 Component BoM and Power Budget Model
+
+请访问此自助服务门户购买该模型。如对该产品有任何疑问，请联系 sales@semianalysis.com。

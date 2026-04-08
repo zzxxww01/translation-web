@@ -1,0 +1,32 @@
+{
+  "section_id": "03-the-tsmc-n3-shortage",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.89,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 8.8,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [
+      "critical_errors (2 > 0)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "台积电N3制程的逻辑晶圆产能是最大的制约因素之一，甚至可能就是最大的瓶颈所在。台积电的N3制程系列于2023年开始出货贡献营收，其初期需求主要由智能手机和PC驱动。N3制程的开局可谓步履维艰，其首个版本“N3B”不仅存在良率问题，且相对于其带来的密度提升而言，成本过于高昂。随着改进版N3E工艺的推出，该制程才迎来了更广泛的采用。N3E是一个放宽了设计规则的版本，大幅减少了EUV光刻层数，从而降低了成本。在智能手机和PC领域，其核心客户包括：苹果（将N3制程各版本用于M3至M5系列Mac芯片及A17至A19系列iPhone处理器）、高通（用于骁龙8至尊版系列）、联发科（用于Dimensity系列智能手机SoC以及部分汽车和PC芯片），以及英特尔（用于Lunar Lake和Arrow Lake客户端处理器）。",
+    "https://substackcdn.com/image/fetch/$s_!lpP7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe6a510f-f4ee-4ee8-9267-22ccd427f99c_1860x1038.png",
+    "来源：SemiAnalysis 晶圆代工厂模型",
+    "时至今日，N3制程的需求仍主要由消费电子驱动。到2026年，所有主流AI加速器系列都将向N3制程过渡；在向N2及更先进制程演进之前，AI将占据N3制程的绝大部分需求。",
+    "从下表可以看出，在迈向2026年之际，整个行业正向台积电的N3制程家族集中，使其成为AI加速器的领先制程节点。英伟达正从Blackwell的4NP过渡至Rubin的3NP。作为新制程节点一贯的早期采用者，AMD已在MI350X上采用N3制程，并在MI400的AID和MID芯粒上继续沿用N3制程（XCD则采用N2）。谷歌的TPU路线图从TPU v7起全面转向N3E，且今年TPU项目的规划产量大幅上调。AWS的Trainium3也将过渡至N3P。Meta的MTIA也遵循类似的发展路径，尽管其产量规模要小得多。",
+    "https://substackcdn.com/image/fetch/$s_!F7JO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0129d5ef-d8c3-46a8-a8f5-e69d5e4a84b5_1896x1180.png",
+    "来源：SemiAnalysis 加速器模型",
+    "这种转变并不局限于XPU芯片。用于VR（Vera Rubin）机架的Vera CPU，其所有芯片均采用N3P制程。此外还有网络芯片，如NVLink 6交换机，以及Tomahawk 6和Spectrum 6等横向扩展交换机。随着Rubin为每个GPU提供1.6T的横向扩展网络带宽，Rubin开启了3nm 200G光DSP的应用。",
+    "这种突然集中采用N3制程的趋势，叠加AI算力需求的持续增长，对N3制程晶圆产能造成了巨大的需求冲击。台积电对此猝不及防，其晶圆产能的扩张速度未能跟上激增的AI需求。这究竟是如何发生的？尽管史上最大规模的算力建设始于2022年底，但台积电的资本支出直到2025年才突破前期峰值。今年，台积电将大幅刷新去年的资本支出纪录，因为他们已经意识到，客户需求已远远超出其现有产能。",
+    "https://substackcdn.com/image/fetch/$s_!siy0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6fd015f7-6e9e-4a42-b5c9-2c359d65dd59_1424x742.png",
+    "资料来源：公司公告",
+    "尽管台积电相对于其仅有的竞争对手英特尔和三星保持着明显的技术领先优势，但如果客户无法获得充足的晶圆供应来支撑其业务，这种优势的意义就会大打折扣。因此，产能限制可能会促使客户进一步探索代工厂多元化。例如，英特尔拥有美国政府的背书，任何将订单外包给英特尔晶圆代工厂的举动，都将博得美国政府的政治加分。与此同时，随着近期赢得设计订单，三星晶圆代工厂也开始积聚动能。首先，三星已经拿下了特斯拉的部分芯片项目（如 AI5 和 AI6），尽管这些项目采取了与台积电双轨并行的策略。三星晶圆代工厂也已打入英伟达的数据中心供应链，我们在之前的晶圆代工厂模型中探讨过这一进展。"
+  ]
+}

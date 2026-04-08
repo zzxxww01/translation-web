@@ -1,0 +1,44 @@
+{
+  "section_id": "35-total-cost-of-ownership-nvl72",
+  "new_terms": [
+    {
+      "term": "compute tray",
+      "suggested_translation": "计算托盘",
+      "context": "driven mostly by higher compute tray content which is driven by higher GPU pricing",
+      "confidence": 0.9
+    },
+    {
+      "term": "SXM",
+      "suggested_translation": "SXM",
+      "context": "versus ~$170K for H100 SXM",
+      "confidence": 1.0
+    },
+    {
+      "term": "silicon content",
+      "suggested_translation": "芯片组件 (或硅含量)",
+      "context": "That incremental silicon content flows directly into higher server cost",
+      "confidence": 0.85
+    },
+    {
+      "term": "TDP",
+      "suggested_translation": "TDP (热设计功耗)",
+      "context": "chip TDP is the dominant driver of TCO for operating costs",
+      "confidence": 1.0
+    },
+    {
+      "term": "capital cost",
+      "suggested_translation": "资本成本",
+      "context": "Nvidia systems tend to have higher capital cost than AMD systems",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "nvidia": "英伟达",
+    "capex": "资本支出",
+    "tco": "总拥有成本",
+    "semianalysis": "SemiAnalysis",
+    "blackwell": "Blackwell"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-08T01:25:19.072934"
+}

@@ -1,0 +1,9 @@
+Deep learning kernel libraries like FlashInfer use both TMA and async copy for loading data. TMA and async copy have different performance characteristics: TMA is good for large loads with regular access patterns but has higher latency, while async copy can handle irregular memory access patterns but has size limits. We explain under what conditions we should pick one over the other. Here we benchmark the configurations FlashInfer uses for MHA and MLA kernels.
+
+We see that throughput-wise, async copy slightly outperforms TMA at less than 32 bytes in flight, but TMA catches up after that and can continue scaling to 128 KiB. Latency-wise, we see async copy having slightly lower latency than TMA before 12 KiB in flight, but TMA latency greatly increases after that.
+
+![](https://substackcdn.com/image/fetch/$s_!mtqT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F74e024c1-60ab-44e4-8acb-69760e4fcba2_1600x678.png)
+
+![](https://substackcdn.com/image/fetch/$s_!ax25!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F838e8420-6671-4ffe-afdd-66c2581ada03_1600x677.png)
+
+In reality, Blackwell MLA kernels use async copy for dynamically loading pages, while its MHA kernels use only TMA. Most of FlashInfer’s Blackwell MHA kernels are contributed by TRT-LLM, so we can only speculate what the kernels do by investigating the binaries. We found that similar to Hopper, all Blackwell TRT-LLM kernels use TMA. We suspect that for dynamic page loading, those kernels follow Hopper kernels, where they use 4D TMA with page index as the last dimension and index into the `TensorMap` object when needed. To understand the exact mechanics of the kernels, we urge NVIDIA to open source the FlashInfer TRT-LLM kernels for the benefit of the community.

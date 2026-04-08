@@ -1,0 +1,47 @@
+{
+  "section_id": "03-acknowledgments-and-inferencex",
+  "new_terms": [
+    {
+      "term": "InferenceMAX",
+      "suggested_translation": "InferenceMAX",
+      "context": "formerly InferenceMAX; the previous name for the InferenceX initiative",
+      "confidence": 0.9
+    },
+    {
+      "term": "Blackwell",
+      "suggested_translation": "Blackwell",
+      "context": "Nvidia's latest GPU architecture following Hopper",
+      "confidence": 1.0
+    },
+    {
+      "term": "Hopper",
+      "suggested_translation": "Hopper",
+      "context": "Nvidia's GPU architecture preceding Blackwell (e.g., H100)",
+      "confidence": 1.0
+    },
+    {
+      "term": "GB200",
+      "suggested_translation": "GB200",
+      "context": "Nvidia Grace Blackwell Superchip",
+      "confidence": 1.0
+    },
+    {
+      "term": "GPT-OSS",
+      "suggested_translation": "GPT-OSS",
+      "context": "Refers to GPT Open Source Software performance optimizations",
+      "confidence": 0.8
+    },
+    {
+      "term": "ML",
+      "suggested_translation": "机器学习 (ML)",
+      "context": "members of the ML community",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "trtllm": "TensorRT-LLM",
+    "inferencex": "InferenceX"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:36:47.987933"
+}

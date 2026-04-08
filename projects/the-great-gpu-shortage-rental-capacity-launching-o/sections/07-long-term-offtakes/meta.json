@@ -1,0 +1,612 @@
+{
+  "section_id": "07-long-term-offtakes",
+  "title": "Long-Term Offtakes",
+  "title_translation": "长期承购",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Lastly, the 4–5 year segment is dominated by AI labs locking in huge quantities of capacity early. These deals involve large clusters of 50MW or 100MW or even larger – equivalent to about ~24,000 to 48,000 GB300 NVL72 GPUs. In aggregate – these deals represent a very large proportion of the overall Neocloud GPU rental market.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0074",
+      "parent_block_index": 74,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Lastly, the 4–5 year segment is dominated by AI labs locking in huge quantities of capacity early. These deals involve large clusters of 50MW or 100MW or even larger – equivalent to about ~24,000 to 48,000 GB300 NVL72 GPUs. In aggregate – these deals represent a very large proportion of the overall Neocloud GPU rental market.",
+      "parent_block_plain_text": "Lastly, the 4–5 year segment is dominated by AI labs locking in huge quantities of capacity early. These deals involve large clusters of 50MW or 100MW or even larger – equivalent to about ~24,000 to 48,000 GB300 NVL72 GPUs. In aggregate – these deals represent a very large proportion of the overall Neocloud GPU rental market.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 327,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "最后，4至5年期市场由提前锁定海量算力的AI实验室主导。这些交易涉及50MW、100MW甚至更大规模的大型集群——相当于约24,000至48,000张GB300 NVL72 GPU。整体而言，这些交易在新兴算力云厂商的GPU租赁市场总盘子中占据了极大比例。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.845950",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "AI Labs like these contracts as they can lock in a huge amounts of compute in one go to cater to rapidly accelerating end demand. The AI Labs also have considerable influence on the cluster design, making decisions regarding storage, networking, CPU compute and more. These are very often bare metal deals as AI Labs have the engineering expertise to customize more layers of the tech stack and extract the highest performance per TCO possible.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "AI Labs like these contracts as they can lock in a huge amounts of compute in one go to cater to rapidly accelerating end demand. The AI Labs also have considerable influence on the cluster design, making decisions regarding storage, networking, CPU compute and more. These are very often bare metal deals as AI Labs have the engineering expertise to customize more layers of the tech stack and extract the highest performance per TCO possible.",
+      "parent_block_plain_text": "AI Labs like these contracts as they can lock in a huge amounts of compute in one go to cater to rapidly accelerating end demand. The AI Labs also have considerable influence on the cluster design, making decisions regarding storage, networking, CPU compute and more. These are very often bare metal deals as AI Labs have the engineering expertise to customize more layers of the tech stack and extract the highest performance per TCO possible.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 444,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AI实验室青睐这类合同，因为能够一次性锁定海量算力，以应对急剧增长的终端需求。此外，AI实验室对集群设计拥有极大的话语权，能够主导存储、网络、CPU算力等方面的决策。这类交易通常以裸金属形式交付，因为AI实验室具备深厚的工程能力，能够深度定制各层技术栈，最大化单位TCO的性能产出。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.845989",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab. This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.",
+      "parent_block_plain_text": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab. This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 646,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "新兴算力云厂商同样青睐这类交易，因为他们可以将销售资源集中在少数几笔大型包销协议上，而无需耗费精力去跟进数十笔才能凑够同等营收的小单。长期合同对新兴算力云厂商还有一大优势：他们可以凭借这些合同，以优惠条件获得与合同期限相匹配的债务融资，从而基本消除久期错配和GPU租金波动的风险，并在大多数情况下锁定10%至20%区间的项目IRR。此外，超大规模云厂商为这类交易兜底的情况也屡见不鲜——他们先作为直接包销方向新兴算力云厂商采购，随后再将算力转售给AI实验室。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846000",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab. This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.",
+      "parent_block_plain_text": "Neoclouds like these deals as they can focus their sales resources on just a few large offtake deals rather than dozens of smaller deals which would end up generating the same amount of revenue. Longer-term contracts are also great for Neoclouds as they can then use these contracts to arrange debt financing on favorable terms that will match the tenor of the contract, removing most duration and GPU rental price risk from the equation and locking in a teens project IRR in most cases. It is also common to see Hyperscalers backstop these deals – serving as the direct offtaker from these Neoclouds but then on-selling the compute to an AI Lab. This structure is a win-win for everyone involved – Neoclouds can lend on very favorable terms since their offtaker is a AAA rated Hypercaler, while Hyperscalers can collect a slice of the project revenue by offering the backstop of their balance sheet without actually expanding the balance sheet.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 647,
+      "segment_end": 945,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种交易结构实现了多方共赢：由于包销方是拥有AAA信用评级的超大规模云厂商，新兴算力云厂商能够获得极具优势的融资条件；而超大规模云厂商只需依托自身资产负债表提供兜底，无需实际扩表，即可从中分得一杯羹。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846008",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "The below table shows a number of large offtake deals we have been tracking. We analyze these deals closely to calculate the implied pricing in $/hr/GPU and profitability metrics like Project IRR, EBIT Margins, etc.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The below table shows a number of large offtake deals we have been tracking. We analyze these deals closely to calculate the implied pricing in $/hr/GPU and profitability metrics like Project IRR, EBIT Margins, etc.",
+      "parent_block_plain_text": "The below table shows a number of large offtake deals we have been tracking. We analyze these deals closely to calculate the implied pricing in $/hr/GPU and profitability metrics like Project IRR, EBIT Margins, etc.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 215,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "下表展示了我们持续追踪的多笔大型包销协议。我们对这些交易进行了深入分析，以测算其隐含的单卡小时租金（$/hr/GPU），以及项目IRR、EBIT利润率等盈利指标。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846017",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846025",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!iBvg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa85a3263-86b2-4cf4-bd16-6bb8eac7430c_1898x893.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: SemiAnalysis AI TCO Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis AI TCO Model](https://semianalysis.com/ai-cloud-tco-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis AI TCO Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis AI TCO Model",
+          "start": 8,
+          "end": 33,
+          "href": "https://semianalysis.com/ai-cloud-tco-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI TCO 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-03T11:36:24.556262",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：SemiAnalysis AI TCO模型",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846082",
+          "tokenized_text": "资料来源：[[[LINK_1|SemiAnalysis AI TCO模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI TCO 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI TCO 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "In today’s market climate, most of the large AI Clusters that are ramping are captive to AI Labs, who nonetheless have been dipping into the sub 4y market to supplement existing capacity ramps. They are also preventing supply from re-entering the sub 4y contract market by simply renewing their existing H100 and H200 clusters, indirectly playing in these markets. It will be interesting to see how supply-demand dynamics play out in the 1-3y contract market as AI Labs ramp their GB200 and GB300 megaclusters.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In today’s market climate, most of the large AI Clusters that are ramping are captive to AI Labs, who nonetheless have been dipping into the sub 4y market to supplement existing capacity ramps. They are also preventing supply from re-entering the sub 4y contract market by simply renewing their existing H100 and H200 clusters, indirectly playing in these markets. It will be interesting to see how supply-demand dynamics play out in the 1-3y contract market as AI Labs ramp their GB200 and GB300 megaclusters.",
+      "parent_block_plain_text": "In today’s market climate, most of the large AI Clusters that are ramping are captive to AI Labs, who nonetheless have been dipping into the sub 4y market to supplement existing capacity ramps. They are also preventing supply from re-entering the sub 4y contract market by simply renewing their existing H100 and H200 clusters, indirectly playing in these markets. It will be interesting to see how supply-demand dynamics play out in the 1-3y contract market as AI Labs ramp their GB200 and GB300 megaclusters.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 510,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在当下的市场环境中，大多数处于爬坡阶段的大型AI集群均被AI实验室独占。尽管如此，这些实验室依然在向4年期以下市场出手，以填补现有算力爬坡期的缺口。同时，他们直接续签现有的H100和H200集群，截断了原本可能回流至4年期以下合同市场的算力供给，从而间接影响了该细分市场的格局。随着AI实验室逐步推进GB200和GB300巨型集群的部署，1至3年期合同市场的供需动态将如何演变，势必成为一大看点。",
+          "model": "pro",
+          "created_at": "2026-04-03T12:10:52.846092",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+          "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Describes the massive, long-term (4-5y) deals that lock up the majority of capacity and dictate macro supply dynamics.",
+          "relation_to_previous": "Completes the market structure analysis by covering the largest and longest tier.",
+          "relation_to_next": "Uses the reality of these massive physical capacity lock-ups to highlight the irrationality of public market sentiment in the next section.",
+          "key_points": [
+            "The 4-5 year segment is dominated by massive AI lab clusters (50-100MW).",
+            "AI labs are hoarding supply by renewing existing clusters, preventing supply from re-entering the sub-4y market.",
+            "These dynamics force smaller players to compete fiercely for remaining mid-term capacity."
+          ],
+          "translation_notes": [
+            "'Offtakes' should be translated as long-term purchase agreements or capacity lock-ups (包销协议/长期承购协议).",
+            "'Captive to AI Labs' means exclusively bound or dedicated to them (被AI实验室独占/绑定)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "section_id": "02-key-observations-and-results-t",
+  "new_terms": [
+    {
+      "term": "aggregated serving",
+      "suggested_translation": "聚合式服务",
+      "context": "single node aggregated serving vs disaggregated serving",
+      "confidence": 0.9
+    },
+    {
+      "term": "SOTA",
+      "suggested_translation": "SOTA (顶尖水平)",
+      "context": "enabling just a subset of the SOTA inference optimizations",
+      "confidence": 0.95
+    },
+    {
+      "term": "MTP",
+      "suggested_translation": "MTP (多 token 预测)",
+      "context": "H100 disagg+wideEP+MTP baseline",
+      "confidence": 0.85
+    },
+    {
+      "term": "GTC",
+      "suggested_translation": "GTC 大会",
+      "context": "As Jensen said at GTC 2025, he is chief revenue destroyer",
+      "confidence": 0.95
+    },
+    {
+      "term": "Jensen Math",
+      "suggested_translation": "黄氏数学 (Jensen Math)",
+      "context": "curtail the instances of analysts cracking 'Jensen Math' jokes",
+      "confidence": 0.9
+    },
+    {
+      "term": "picoJoules per token",
+      "suggested_translation": "每 token 皮焦耳 (pJ/token)",
+      "context": "much lower all-in provisioned picoJoules of energy per token",
+      "confidence": 0.9
+    },
+    {
+      "term": "perf per TCO",
+      "suggested_translation": "单位 TCO 性能",
+      "context": "competitive perf per TCO results on FP8 MI355X",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "disaggregated prefill": "disagg prefill",
+    "wide expert parallelism (wideep)": "wideEP",
+    "trtllm": "TRTLLM",
+    "tco": "TCO"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T20:24:42.636764"
+}

@@ -1,0 +1,64 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GB300 NVL72",
+      "suggested_translation": "GB300 NVL72",
+      "context": "GB300 NVL72, MI355X, B200, H100",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI355X",
+      "suggested_translation": "MI355X",
+      "context": "GB300 NVL72, MI355X, B200",
+      "confidence": 1.0
+    },
+    {
+      "term": "B200",
+      "suggested_translation": "B200",
+      "context": "MI355X, B200, H100",
+      "confidence": 1.0
+    },
+    {
+      "term": "H100",
+      "suggested_translation": "H100",
+      "context": "B200, H100, Disaggregated Serving",
+      "confidence": 1.0
+    },
+    {
+      "term": "Disaggregated Serving",
+      "suggested_translation": "分离式 Serving",
+      "context": "H100, Disaggregated Serving, Wide Expert Parallelism",
+      "confidence": 0.95
+    },
+    {
+      "term": "Large Mixture of Experts",
+      "suggested_translation": "大型混合专家模型",
+      "context": "Wide Expert Parallelism, Large Mixture of Experts, SGLang",
+      "confidence": 0.95
+    },
+    {
+      "term": "SGLang",
+      "suggested_translation": "SGLang",
+      "context": "Large Mixture of Experts, SGLang, vLLM",
+      "confidence": 1.0
+    },
+    {
+      "term": "vLLM",
+      "suggested_translation": "vLLM",
+      "context": "SGLang, vLLM, TRTLLM",
+      "confidence": 1.0
+    },
+    {
+      "term": "TRTLLM",
+      "suggested_translation": "TRTLLM",
+      "context": "vLLM, TRTLLM",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "wide expert parallelism (wideep)": "宽专家并行"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-07T21:11:02.598440"
+}
