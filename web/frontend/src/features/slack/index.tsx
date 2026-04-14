@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import type { SlackReplyVariant } from '@/shared/types';
 import { copyToClipboard, detectLanguage } from '@/shared/utils';
 import { ReplySuggestions } from './components/ReplySuggestions';
+import { ConversationHistory } from './components/ConversationHistory';
 import { useComposeReply, useGenerateReply } from './hooks';
 import { useSlackWorkspaceStore } from './store';
 
@@ -17,8 +18,10 @@ export function SlackFeature() {
   const {
     incomingText, incomingTranslation, incomingSuggestions,
     draftText, draftVersions,
+    conversationMessages, isHistoryCollapsed,
     setIncomingText, setIncomingResult, clearIncoming,
     setDraftText, setDraftVersions, clearDraft,
+    addMessage, addMessages, removeMessage, updateMessage, clearConversation, toggleHistoryCollapse,
   } = useSlackWorkspaceStore();
 
   const draftLanguage = useMemo(() => detectLanguage(draftText.trim()), [draftText]);
@@ -32,9 +35,18 @@ export function SlackFeature() {
   const handleAnalyze = async () => {
     const content = incomingText.trim();
     if (!content || analyzeMutation.isPending) return;
+
+    const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
+
     try {
-      const result = await analyzeMutation.mutateAsync({ message: content });
+      const result = await analyzeMutation.mutateAsync({
+        message: lines[lines.length - 1],
+        conversation_history: conversationMessages,
+      });
+
+      addMessages('them', lines);
       setIncomingResult(result.translation, result.suggested_replies ?? []);
+      setIncomingText('');
     } catch { /* handled */ }
   };
 
@@ -46,7 +58,10 @@ export function SlackFeature() {
       return;
     }
     try {
-      const result = await composeMutation.mutateAsync({ content });
+      const result = await composeMutation.mutateAsync({
+        content,
+        conversation_history: conversationMessages,
+      });
       setDraftVersions(
         result.versions.map((v: SlackReplyVariant) => ({ ...v, chinese: v.chinese || content }))
       );
@@ -55,6 +70,15 @@ export function SlackFeature() {
 
   return (
     <div className="mx-auto grid h-full w-full max-w-7xl gap-6 p-6 xl:grid-cols-2">
+      <ConversationHistory
+        messages={conversationMessages}
+        isCollapsed={isHistoryCollapsed}
+        onToggleCollapse={toggleHistoryCollapse}
+        onRemoveMessage={removeMessage}
+        onUpdateMessage={updateMessage}
+        onClearAll={clearConversation}
+      />
+
       {/* Incoming panel */}
       <Card className="flex flex-col">
         <CardHeader>
@@ -111,7 +135,11 @@ export function SlackFeature() {
                 title="建议回复"
                 options={incomingSuggestions}
                 confirmLabel="复制这个版本"
-                onSelectReply={en => copyEnglish(en, '建议回复已复制')}
+                onSelectReply={async (en) => {
+                  await copyEnglish(en, '建议回复已复制');
+                  addMessage('me', en);
+                  toast.success('已复制并加入对话历史');
+                }}
                 onClose={() => setIncomingResult(incomingTranslation, [])}
               />
             </div>
@@ -167,7 +195,12 @@ export function SlackFeature() {
               title="英文版本"
               options={draftVersions}
               confirmLabel="复制这个版本"
-              onSelectReply={en => copyEnglish(en, '英文版本已复制')}
+              onSelectReply={async (en) => {
+                await copyEnglish(en, '英文版本已复制');
+                addMessage('me', en);
+                setDraftText('');
+                toast.success('已复制并加入对话历史');
+              }}
               onClose={() => setDraftVersions([])}
             />
           )}
