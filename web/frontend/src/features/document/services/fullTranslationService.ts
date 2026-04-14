@@ -76,7 +76,8 @@ class FullTranslationService {
     projectId: string,
     onProgress: TranslationProgressCallback,
     onComplete: TranslationCompleteCallback,
-    method: TranslationMethodType = 'four-step'
+    method: TranslationMethodType = 'four-step',
+    model?: string
   ): Promise<void> {
     if (this.state.isTranslating && this.state.projectId === projectId) {
       return;
@@ -110,7 +111,7 @@ class FullTranslationService {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify({ model }),
         signal: controller.signal,
       });
 

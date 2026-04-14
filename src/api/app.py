@@ -20,6 +20,7 @@ from .routers import (
     confirmation,
     consistency,
     glossary,
+    models,
     project_glossary,
     projects,
     quality_report,
@@ -43,6 +44,7 @@ register_error_handlers(app)
 
 
 app.include_router(translate.router, prefix="/api", tags=["translate"])
+app.include_router(models.router, prefix="/api", tags=["models"])
 app.include_router(glossary.router, prefix="/api", tags=["glossary"])
 app.include_router(project_glossary.router, prefix="/api", tags=["projects"])
 app.include_router(confirmation.router, prefix="/api", tags=["confirmation"])

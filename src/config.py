@@ -19,6 +19,14 @@ class Settings(BaseSettings):
 
     # LLM
     llm_provider: str = "gemini"
+    llm_default_model: str = "pro-official"  # Default model alias for all tasks
+
+    # Task-specific default models (can override llm_default_model)
+    llm_model_longform: str = "deepseek-relay"  # Long-form translation
+    llm_model_post: str = "flash-official"      # Post translation
+    llm_model_analysis: str = "pro-official"    # Text analysis
+    llm_model_title: str = "flash-official"     # Title translation
+    llm_model_metadata: str = "flash-official"  # Metadata translation
 
     # Server
     api_host: str = "127.0.0.1"
@@ -45,6 +53,15 @@ class Settings(BaseSettings):
     gemini_retry_count: int = 3
     gemini_retry_delay: float = 1.0
     gemini_timeout: int = 120
+
+    # VectorEngine (OpenAI-compatible relay)
+    vectorengine_api_key: str = ""
+    vectorengine_base_url: str = "https://api.vectorengine.ai/v1"
+    vectorengine_default_model: str = "deepseek-v3.2"
+    vectorengine_temperature: float = 0.7
+    vectorengine_max_tokens: int = 8192
+    vectorengine_timeout: int = 120
+    vectorengine_max_retries: int = 3
 
     # Storage
     projects_path: str = "projects"
@@ -92,6 +109,16 @@ class Settings(BaseSettings):
                 "retry_delay": self.gemini_retry_delay,
                 "timeout": self.gemini_timeout,
             }
+        elif resolved_provider == "vectorengine":
+            return {
+                "api_key": self.vectorengine_api_key,
+                "base_url": self.vectorengine_base_url,
+                "default_model": self.vectorengine_default_model,
+                "temperature": self.vectorengine_temperature,
+                "max_tokens": self.vectorengine_max_tokens,
+                "timeout": self.vectorengine_timeout,
+                "max_retries": self.vectorengine_max_retries,
+            }
         raise ValueError(f"Unsupported LLM provider: {resolved_provider}")
 
     def validate_required_settings(self):
@@ -102,6 +129,11 @@ class Settings(BaseSettings):
             if not (self.gemini_api_key or self.gemini_backup_api_key):
                 errors.append(
                     "Gemini requires GEMINI_API_KEY or GEMINI_BACKUP_API_KEY in .env."
+                )
+        elif provider == "vectorengine":
+            if not self.vectorengine_api_key:
+                errors.append(
+                    "VectorEngine requires VECTORENGINE_API_KEY in .env."
                 )
 
         if errors:

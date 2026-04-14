@@ -3,25 +3,33 @@ LLM provider factory and registry.
 
 Keeps provider selection centralized so new model vendors can be
 added without touching API/service call sites.
+
+Supports both legacy (env-based) and new (YAML config-based) configuration.
 """
 
 from __future__ import annotations
 
 import logging
-from typing import Callable
+from typing import Callable, Optional, Tuple
 
 from src.config import settings
 
 from .base import LLMProvider
 from .gemini import create_gemini_provider
+from .vectorengine import create_vectorengine_provider
+from .models import resolve_model_alias, get_model_provider
 
 
 logger = logging.getLogger(__name__)
+
+# Flag to enable new config system
+USE_NEW_CONFIG = True
 
 LLMProviderFactory = Callable[..., LLMProvider]
 
 _PROVIDER_FACTORIES: dict[str, LLMProviderFactory] = {
     "gemini": create_gemini_provider,
+    "vectorengine": create_vectorengine_provider,
 }
 
 
@@ -49,9 +57,120 @@ def resolve_llm_provider_name(provider: str | None = None) -> str:
     return provider_name
 
 
-def create_llm_provider(provider: str | None = None, **kwargs) -> LLMProvider:
-    """Create an LLM provider instance."""
-    provider_name = resolve_llm_provider_name(provider)
-    logger.info("[LLM Factory] creating provider=%s", provider_name)
-    factory = _PROVIDER_FACTORIES[provider_name]
+def get_llm_provider_for_task(task_type: str) -> LLMProvider:
+    """Get LLM provider configured for a specific task type.
+
+    Args:
+        task_type: Task type (longform, post, analysis, title, metadata)
+
+    Returns:
+        LLMProvider instance with the appropriate model
+
+    Examples:
+        >>> provider = get_llm_provider_for_task("longform")  # Uses deepseek-relay
+        >>> provider = get_llm_provider_for_task("post")      # Uses flash-official
+    """
+    # Try new config system first
+    if USE_NEW_CONFIG:
+        try:
+            from .config_loader import get_config_loader
+
+            config_loader = get_config_loader()
+            llm_config = config_loader.load()
+            model_alias = llm_config.task_defaults.get(task_type)
+
+            if model_alias:
+                logger.info(
+                    "[LLM Factory] task=%s → model_alias=%s (from YAML config)",
+                    task_type,
+                    model_alias,
+                )
+                return create_llm_provider(model_alias)
+        except Exception as e:
+            logger.warning(f"[LLM Factory] New config system failed for task, falling back to legacy: {e}")
+
+    # Legacy system
+    task_model_map = {
+        "longform": settings.llm_model_longform,
+        "post": settings.llm_model_post,
+        "analysis": settings.llm_model_analysis,
+        "title": settings.llm_model_title,
+        "metadata": settings.llm_model_metadata,
+    }
+
+    model_alias = task_model_map.get(task_type, settings.llm_default_model)
+
+    logger.info(
+        "[LLM Factory] task=%s → model_alias=%s (from env)",
+        task_type,
+        model_alias,
+    )
+
+    # Pass the model alias directly to create_llm_provider
+    # It will resolve the provider and model internally
+    return create_llm_provider(model_alias)
+
+
+def create_llm_provider(provider: str | None = None, model: str | None = None, **kwargs) -> LLMProvider:
+    """Create an LLM provider instance.
+
+    Args:
+        provider: Provider name or model alias (e.g., "gemini", "vectorengine", "deepseek-relay")
+        model: Optional model name to pass to the provider
+        **kwargs: Additional arguments passed to provider factory
+
+    Returns:
+        LLMProvider instance
+
+    Examples:
+        >>> create_llm_provider("gemini")  # Direct provider name
+        >>> create_llm_provider("deepseek-relay")  # Model alias → routes to vectorengine
+        >>> create_llm_provider("pro-official")  # Model alias → routes to gemini
+        >>> create_llm_provider("vectorengine", model="deepseek-v3.2")  # Explicit model
+    """
+    # Try new config system first
+    if USE_NEW_CONFIG:
+        try:
+            from .provider_adapter import create_provider_from_config
+
+            # If provider looks like a model alias, use new config system
+            if provider and not provider.lower() in _PROVIDER_FACTORIES:
+                logger.info(f"[LLM Factory] Using new config system for model alias: {provider}")
+                return create_provider_from_config(provider)
+        except Exception as e:
+            logger.warning(f"[LLM Factory] New config system failed, falling back to legacy: {e}")
+
+    # Legacy system
+    # Try to resolve as model alias first
+    resolved_provider = None
+    resolved_model = model
+
+    if provider:
+        try:
+            # Check if it's a model alias
+            alias_provider = get_model_provider(provider)
+            if alias_provider in _PROVIDER_FACTORIES:
+                resolved_provider = alias_provider
+                # Get the real model name from the alias
+                from .models import get_real_model_name
+                resolved_model = get_real_model_name(provider)
+        except:
+            pass
+
+    # Fall back to direct provider name resolution
+    if not resolved_provider or resolved_provider not in _PROVIDER_FACTORIES:
+        resolved_provider = resolve_llm_provider_name(provider)
+
+    logger.info(
+        "[LLM Factory] creating provider=%s (from input=%s, model=%s)",
+        resolved_provider,
+        provider,
+        resolved_model,
+    )
+
+    # Pass model to provider if specified
+    if resolved_model:
+        kwargs["model"] = resolved_model
+
+    factory = _PROVIDER_FACTORIES[resolved_provider]
     return factory(**kwargs)

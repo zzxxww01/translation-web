@@ -177,6 +177,11 @@ async def translate_full_document(
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
+    # 如果指定了模型，创建新的 provider
+    if request.model:
+        from src.api.utils.llm_factory import create_llm_provider
+        llm = create_llm_provider(provider=request.model)
+
     async def generate_progress():
         try:
             sections = pm.get_sections(project_id)
@@ -327,6 +332,11 @@ async def translate_with_four_steps(
     """
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
+
+    # 如果指定了模型，创建新的 provider
+    if _body.model:
+        from src.api.utils.llm_factory import create_llm_provider
+        llm = create_llm_provider(provider=_body.model)
 
     from src.services.batch_translation_service import BatchTranslationService
 

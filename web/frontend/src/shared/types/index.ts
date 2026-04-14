@@ -105,6 +105,7 @@ export interface TranslationVersion {
 
 export interface TranslatePostDto {
   content: string;
+  model?: string;
 }
 
 export interface TranslatePostResult {
@@ -117,6 +118,7 @@ export interface OptimizePostDto {
   instruction?: string;
   option_id?: string;
   conversation_history?: Array<{ role: string; content: string }>;
+  model?: string;
 }
 
 export interface OptimizePostResult {
@@ -126,6 +128,7 @@ export interface OptimizePostResult {
 export interface GenerateTitleDto {
   content: string;
   instruction?: string;
+  model?: string;
 }
 
 export interface GenerateTitleResult {
@@ -209,4 +212,39 @@ export interface SelectOption<T = string> {
   label: string;
   value: T;
   disabled?: boolean;
+}
+
+// ============ LLM Model Types ============
+
+export interface ModelInfo {
+  alias: string;
+  name: string;
+  description: string;
+  supports_thinking: boolean;
+  priority: number;
+  available: boolean;
+}
+
+export interface ProviderInfo {
+  id: string;
+  name: string;
+  description: string;
+  models: ModelInfo[];
+}
+
+export interface ModelListResponse {
+  providers: ProviderInfo[];
+}
+
+// Legacy flat model list (for backward compatibility)
+export interface LegacyModelInfo {
+  alias: string;
+  provider: string;
+  real_model: string;
+  description: string;
+  supports_thinking: boolean;
+}
+
+export interface LegacyModelListResponse {
+  models: LegacyModelInfo[];
 }

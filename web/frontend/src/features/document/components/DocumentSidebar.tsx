@@ -17,13 +17,14 @@ import type { Section } from '@/shared/types';
 import { useExportProject } from '../hooks';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
+import { ModelSelector } from '@/components/ModelSelector';
 
 interface DocumentSidebarProps {
   sections: Section[];
   activeSectionId: string | null;
   onSectionSelect: (sectionId: string) => void;
   onNewProject: () => void;
-  onFullTranslate?: (method?: TranslationMethod) => void;
+  onFullTranslate?: (method?: TranslationMethod, model?: string) => void;
   onOpenConsistency?: () => void;
   isFullTranslating?: boolean;
   isPreparingFullTranslate?: boolean;
@@ -49,6 +50,7 @@ export function DocumentSidebar({
   const [selectedMethod, setSelectedMethod] = useState<TranslationMethod>(
     DEFAULT_TRANSLATION_METHOD
   );
+  const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
   const exportMutation = useExportProject();
@@ -132,7 +134,7 @@ export function DocumentSidebar({
               <Button
                 variant="default"
                 size="default"
-                onClick={() => onFullTranslate(selectedMethod)}
+                onClick={() => onFullTranslate(selectedMethod, selectedModel || undefined)}
                 disabled={isTranslateBusy}
                 leftIcon={<Zap className="h-5 w-5" />}
                 className="w-full"
@@ -152,24 +154,33 @@ export function DocumentSidebar({
                   </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <div className="mt-1 flex items-center gap-1.5">
-                    <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
-                    <Select
-                      value={selectedMethod}
-                      onValueChange={(value) => setSelectedMethod(value as TranslationMethod)}
+                  <div className="space-y-2 mt-1">
+                    <div className="flex items-center gap-1.5">
+                      <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
+                      <Select
+                        value={selectedMethod}
+                        onValueChange={(value) => setSelectedMethod(value as TranslationMethod)}
+                        disabled={isTranslateBusy}
+                      >
+                        <SelectTrigger className="h-8 flex-1 text-xs">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {TRANSLATION_METHOD_OPTIONS.map(method => (
+                            <SelectItem key={method.id} value={method.id}>
+                              {method.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="text-xs text-text-muted mb-1">选择模型</div>
+                    <ModelSelector
+                      value={selectedModel || undefined}
+                      onChange={(model) => setSelectedModel(model || null)}
+                      className="h-8 text-xs"
                       disabled={isTranslateBusy}
-                    >
-                      <SelectTrigger className="h-8 flex-1 text-xs">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {TRANSLATION_METHOD_OPTIONS.map(method => (
-                          <SelectItem key={method.id} value={method.id}>
-                            {method.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    />
                   </div>
                 </CollapsibleContent>
               </Collapsible>

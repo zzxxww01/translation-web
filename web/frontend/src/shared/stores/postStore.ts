@@ -19,6 +19,8 @@ interface PostState {
   editedContent: string;
   // 是否正在加载
   isLoading: boolean;
+  // 选中的模型
+  selectedModel: string | undefined;
 }
 
 interface PostActions {
@@ -32,6 +34,7 @@ interface PostActions {
   clear: () => void;
   setLoading: (isLoading: boolean) => void;
   getCurrentVersion: () => TranslationVersion | null;
+  setSelectedModel: (model: string | undefined) => void;
 }
 
 type PostStore = PostState & PostActions;
@@ -43,6 +46,7 @@ const initialState: PostState = {
   isEdited: false,
   editedContent: '',
   isLoading: false,
+  selectedModel: undefined,
 };
 
 export const usePostStore = create<PostStore>()(
@@ -146,6 +150,8 @@ export const usePostStore = create<PostStore>()(
         const state = get();
         return state.versions.find(v => v.id === state.currentVersionId) || null;
       },
+
+      setSelectedModel: model => set({ selectedModel: model }),
     }),
     { name: 'PostStore' }
   )

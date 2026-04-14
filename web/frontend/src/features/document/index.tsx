@@ -83,6 +83,7 @@ export function DocumentFeature() {
   const [showStopDialog, setShowStopDialog] = useState(false);
   const [showStartDialog, setShowStartDialog] = useState(false);
   const [pendingStartMethod, setPendingStartMethod] = useState<TranslationMethod>(TranslationMethod.FOUR_STEP);
+  const [pendingStartModel, setPendingStartModel] = useState<string | undefined>(undefined);
 
   // 术语冲突对话框状态
   const [conflictDialogOpen, setConflictDialogOpen] = useState(false);
@@ -328,7 +329,7 @@ export function DocumentFeature() {
   }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
 
   const runFullTranslate = useCallback(
-    async (method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
+    async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
       if (!currentProject) return;
 
       const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
@@ -345,7 +346,8 @@ export function DocumentFeature() {
             refetchSection();
           }
         },
-        methodType
+        methodType,
+        model
       );
     },
     [activeSectionId, currentProject, refetchSection, startTranslation]
@@ -375,7 +377,7 @@ export function DocumentFeature() {
   );
 
   const handleFullTranslate = useCallback(
-    async (method?: TranslationMethod) => {
+    async (method?: TranslationMethod, model?: string) => {
       if (!currentProject) return;
 
       if (isPreparingFullTranslate) {
@@ -390,6 +392,7 @@ export function DocumentFeature() {
 
       const selectedMethod = method ?? TranslationMethod.FOUR_STEP;
       setPendingStartMethod(selectedMethod);
+      setPendingStartModel(model);
       setShowStartDialog(true);
     },
     [
@@ -702,7 +705,7 @@ export function DocumentFeature() {
                 const intercepted = await prepareTermReviewIfNeeded(pendingStartMethod);
                 setIsPreparingFullTranslate(false);
                 if (intercepted) { setCurrentStep(null); return; }
-                await runFullTranslate(pendingStartMethod);
+                await runFullTranslate(pendingStartMethod, pendingStartModel);
               } catch (error) {
                 console.error('Failed to start full translation:', error);
                 toast.error('启动全文翻译失败，请重试');

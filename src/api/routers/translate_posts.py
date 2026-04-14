@@ -105,7 +105,7 @@ async def translate_post(request: PostTranslateRequest):
     )
     try:
         translation = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt),
+            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
             timeout=timeout_s,
         )
         return PostTranslateResponse(translation=translation.strip())
@@ -144,7 +144,7 @@ async def optimize_post_translation(request: PostOptimizeRequest):
     )
     try:
         optimized = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt),
+            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
             timeout=timeout_s,
         )
         return PostOptimizeResponse(optimized_translation=optimized.strip())
@@ -173,7 +173,7 @@ async def generate_title(request: GenerateTitleRequest):
     timeout_s = int(os.getenv("POST_TITLE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "30")))
     try:
         result = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt),
+            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
             timeout=timeout_s,
         )
         data = parse_llm_json_response(result)

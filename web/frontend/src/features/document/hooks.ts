@@ -345,7 +345,8 @@ export function useFullTranslate() {
       message?: string;
     }) => void,
     onComplete: () => void,
-    method: TranslationMethodType = 'four-step'
+    method: TranslationMethodType = 'four-step',
+    model?: string
   ) => {
     // 开始翻译，设置初始状态
     setFullTranslateProjectId(projectId);
@@ -415,7 +416,8 @@ export function useFullTranslate() {
           endFullTranslate();
           onComplete();
         },
-        method
+        method,
+        model
       );
     } catch (error) {
       handleError(error, '全文翻译失败');

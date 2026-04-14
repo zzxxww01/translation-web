@@ -15,6 +15,10 @@ env/
 .env.*
 !.env.example
 
+# LLM provider configuration (contains API keys)
+config/llm_providers.yaml
+config/*.local.yaml
+
 # ----------------------------
 # Runtime data (DO NOT publish)
 # ----------------------------

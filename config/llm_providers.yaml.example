@@ -1,0 +1,115 @@
+providers:
+  # Gemini 官方 API（组优先级：1）
+  gemini-official:
+    type: gemini
+    name: "Gemini 官方 API"
+    description: "Google 官方 API，稳定可靠"
+    group_priority: 1
+    api_keys:
+      - key: "${GEMINI_API_KEY}"
+        priority: 1
+        name: "主 Key"
+      - key: "${GEMINI_BACKUP_API_KEY}"
+        priority: 2
+        name: "备用 Key"
+    models:
+      - alias: "gemini-flash"
+        real_model: "gemini-flash-latest"
+        name: "Gemini Flash"
+        description: "快速低成本"
+        priority: 2
+        supports_thinking: false
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 60
+      - alias: "gemini-pro"
+        real_model: "gemini-2.5-pro"
+        name: "Gemini Pro"
+        description: "平衡质量与成本"
+        priority: 2
+        supports_thinking: true
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 120
+      - alias: "gemini-preview"
+        real_model: "gemini-3.1-pro-preview"
+        name: "Gemini Preview"
+        description: "预览版更强能力"
+        priority: 2
+        supports_thinking: true
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 120
+    retry_config:
+      max_retries: 5
+      base_delay: 0.5
+      max_delay: 16.0
+      exponential_backoff: true
+
+  # VectorEngine 中转 API（组优先级：2）
+  vectorengine-relay:
+    type: vectorengine
+    name: "VectorEngine 中转"
+    description: "高性价比中转服务"
+    group_priority: 2
+    api_keys:
+      - key: "${VECTORENGINE_API_KEY}"
+        priority: 1
+        name: "主 Key"
+      - key: ""
+        priority: 2
+        name: "备用 Key"
+    base_url: "https://api.vectorengine.ai/v1"
+    models:
+      - alias: "deepseek-v3"
+        real_model: "deepseek-v3.2"
+        name: "DeepSeek v3.2"
+        description: "高性价比推理模型"
+        priority: 1
+        supports_thinking: true
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 120
+      - alias: "qwen-plus"
+        real_model: "qwen3.6-plus"
+        name: "Qwen 3.6 Plus"
+        description: "阿里通义千问高性能模型"
+        priority: 2
+        supports_thinking: false
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 120
+    retry_config:
+      max_retries: 3
+      base_delay: 1.0
+      max_delay: 10.0
+      exponential_backoff: true
+
+# 故障转移规则
+fallback_rules:
+  # 规则优先级：1. 同组内 Key 切换 2. 同组内模型切换 3. 跨组模型切换
+
+  # 同组内故障转移（自动）
+  within_provider:
+    enabled: true
+    strategy: "key_first"  # 先尝试所有 Key，再切换模型
+
+  # 跨组故障转移（自动，基于组优先级和模型名称匹配）
+  cross_provider:
+    enabled: true
+    # 组优先级：gemini-official(1) > vectorengine-relay(2)
+    # 模型优先级（部分匹配）：claude > gemini > gpt > deepseek > kimi > doubao > qwen
+    model_priority_keywords: ["claude", "gemini", "gpt", "deepseek", "kimi", "doubao", "qwen"]
+
+# 任务类型默认模型
+task_defaults:
+  longform: "deepseek-v3"
+  post: "gemini-flash"
+  analysis: "gemini-pro"
+  title: "gemini-flash"
+  metadata: "gemini-flash"

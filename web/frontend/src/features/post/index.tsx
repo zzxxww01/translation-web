@@ -7,12 +7,14 @@ import { SourceInput } from './components/SourceInput';
 import { TranslationOutput } from './components/TranslationOutput';
 import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
+import { ModelSelector } from '@/components/ModelSelector';
 
 export function PostFeature() {
   const {
     originalText, versions, currentVersionId, isEdited, editedContent, isLoading,
+    selectedModel,
     setOriginalText, addVersion, setCurrentVersion, setEditedContent,
-    saveEdit, discardEdit, clear, setLoading,
+    saveEdit, discardEdit, clear, setLoading, setSelectedModel,
   } = usePostStore();
 
   const translateMutation = useTranslatePost();
@@ -26,7 +28,10 @@ export function PostFeature() {
     if (!originalText.trim()) return;
     setLoading(true);
     try {
-      const result = await translateMutation.mutateAsync({ content: originalText });
+      const result = await translateMutation.mutateAsync({
+        content: originalText,
+        model: selectedModel,
+      });
       if (!result.translation?.trim()) {
         toast.error('翻译失败：服务器返回了空内容');
         return;
@@ -37,7 +42,7 @@ export function PostFeature() {
     } finally {
       setLoading(false);
     }
-  }, [originalText, setLoading, translateMutation, addVersion]);
+  }, [originalText, selectedModel, setLoading, translateMutation, addVersion]);
 
   const handleOptimize = useCallback(async (options: { instruction?: string; optionId?: string }) => {
     if (!originalText) return;
@@ -55,6 +60,7 @@ export function PostFeature() {
         option_id: options.optionId,
         conversation_history: versions.filter(v => v.instruction).slice(-3)
           .map(v => ({ role: 'user', content: v.instruction || '' })),
+        model: selectedModel,
       });
       if (!result.optimized_translation?.trim()) {
         toast.error('优化失败：服务器返回了空内容');
@@ -70,7 +76,7 @@ export function PostFeature() {
     } finally {
       setLoading(false);
     }
-  }, [originalText, versions, currentVersionId, setLoading, optimizeMutation, addVersion]);
+  }, [originalText, versions, currentVersionId, selectedModel, setLoading, optimizeMutation, addVersion]);
 
   const handleGenerateTitle = useCallback(async (instruction?: string): Promise<string[]> => {
     const currentVersion = versions.find(v => v.id === currentVersionId);
@@ -81,12 +87,13 @@ export function PostFeature() {
       const result = await generateTitleMutation.mutateAsync({
         content,
         instruction: instruction || undefined,
+        model: selectedModel,
       });
       return result.title.split('\n').filter((t: string) => t.trim()).slice(0, 8);
     } finally {
       setLoading(false);
     }
-  }, [versions, currentVersionId, editedContent, originalText, setLoading, generateTitleMutation]);
+  }, [versions, currentVersionId, editedContent, originalText, selectedModel, setLoading, generateTitleMutation]);
 
   const handleClear = () => {
     setOriginalText('');
@@ -129,6 +136,16 @@ export function PostFeature() {
         <div className="mb-6">
           <h2 className="text-xl font-semibold">帖子翻译</h2>
           <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">选择模型</label>
+          <ModelSelector
+            value={selectedModel}
+            onChange={setSelectedModel}
+            className="w-full max-w-md px-3 py-2 border rounded-md"
+            disabled={isLoading}
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[calc(100vh-200px)]">

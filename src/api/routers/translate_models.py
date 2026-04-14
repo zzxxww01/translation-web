@@ -11,6 +11,7 @@ class PostTranslateRequest(BaseModel):
     content: str
     preserve_tone: bool = True
     custom_prompt: Optional[str] = None
+    model: Optional[str] = None
 
 
 class PostTranslateResponse(BaseModel):
@@ -20,6 +21,7 @@ class PostTranslateResponse(BaseModel):
 class GenerateTitleRequest(BaseModel):
     content: str
     instruction: Optional[str] = None
+    model: Optional[str] = None
 
 
 class GenerateTitleResponse(BaseModel):
@@ -43,6 +45,7 @@ class PostOptimizeRequest(BaseModel):
     instruction: Optional[str] = None
     option_id: Optional[str] = None
     conversation_history: Optional[list[dict]] = None
+    model: Optional[str] = None
 
 
 class PostOptimizeResponse(BaseModel):
@@ -50,7 +53,7 @@ class PostOptimizeResponse(BaseModel):
 
 
 class FullTranslateRequest(BaseModel):
-    pass
+    model: Optional[str] = None
 
 
 class ResolveConflictRequest(BaseModel):
